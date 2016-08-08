@@ -1,6 +1,7 @@
 package com.rongyi.easy.rmmm.param.commission;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
 /**
@@ -16,7 +17,7 @@ public class CommissionDiscountParam extends BaseParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String phone;//手机号码
 	private String inviteCode;//邀请码
-	private Integer type;// 邀请对象: 1 容易逛用户   2 摩店导购  3摩店买手  4摩店用户
+	private List<Integer> typeList;// 邀请对象: 1 容易逛用户   2 摩店买手  3摩店导购  4摩店用户
 	public String getPhone() {
 		return phone;
 	}
@@ -29,11 +30,12 @@ public class CommissionDiscountParam extends BaseParam implements Serializable{
 	public void setInviteCode(String inviteCode) {
 		this.inviteCode = inviteCode;
 	}
-	public Integer getType() {
-		return type;
+	public List<Integer> getTypeList() {
+		return typeList;
 	}
-	public void setType(Integer type) {
-		this.type = type;
+	public void setTypeList(List<Integer> typeList) {
+		this.typeList = typeList;
 	}
+	
 	
 }
