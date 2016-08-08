@@ -318,4 +318,6 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommodityPriceAndStatus(String id, Double price, List<Double> currentPriceList,Integer status);
 
+	boolean updateCommodityById(String id, Map<String, Object> params);
+
 }
