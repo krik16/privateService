@@ -73,6 +73,7 @@ public class UserInfo implements Serializable{
     
     private String jsessionid ;//摩店登录标识	
 	private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
+    private Integer isOrdering;  //是否接单中  0是  1否
     public String getStopReason() {
 		return stopReason;
 	}
@@ -341,4 +342,13 @@ public class UserInfo implements Serializable{
 
 	public void setIsEdit(Integer isEdit) {
 		this.isEdit = isEdit;
-	}}
+	}
+
+    public Integer getIsOrdering() {
+        return isOrdering;
+    }
+
+    public void setIsOrdering(Integer isOrdering) {
+        this.isOrdering = isOrdering;
+    }
+}

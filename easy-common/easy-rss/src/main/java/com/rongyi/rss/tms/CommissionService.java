@@ -54,7 +54,7 @@ public interface CommissionService {
 
     /**
      * 根据身份和被邀请人对象 查询返佣结果
-     * @param inviteType  邀请人类型 1导购;2买手
+     * @param inviteType  （4、5 查询导购数据  6查询买手数据）
      * @param registerType 被邀请人类型 1:容易逛,2:摩店买手,3:摩店导购,4:摩店全部
      * @return
      */
