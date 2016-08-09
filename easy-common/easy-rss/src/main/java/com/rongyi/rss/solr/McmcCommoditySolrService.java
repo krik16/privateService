@@ -318,4 +318,6 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommodityPriceAndStatus(String id, Double price, List<Double> currentPriceList,Integer status);
 
+	public void cleanCommoditiesLiveId(List<String> commodityIds) throws Exception;
+
 }
