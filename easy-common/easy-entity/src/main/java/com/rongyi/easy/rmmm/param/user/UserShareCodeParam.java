@@ -1,7 +1,6 @@
 package com.rongyi.easy.rmmm.param.user;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
 
@@ -14,6 +13,7 @@ public class UserShareCodeParam extends BaseParam implements Serializable{
 	
 	private String userId;
 	private Integer type;//1容易逛用户   2摩店用户
+	private String openId;//H5传过来的openId
 	public String getUserId() {
 		return userId;
 	}
@@ -26,6 +26,11 @@ public class UserShareCodeParam extends BaseParam implements Serializable{
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 	
 }
