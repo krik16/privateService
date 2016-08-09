@@ -284,7 +284,7 @@ public class CommissionServiceImpl implements CommissionService {
 
     private CommissionAppVo buildCommissionAppVo(Integer identity){
         CommissionAppVo commissAppVo = new CommissionAppVo();
-        Map paramMap = new HashMap();
+        Map<String,Object> paramMap = new HashMap<>();
         //identity 为6查询买手返佣配置
         paramMap.put("inviteType",identity.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
         //查询启用状态的
@@ -293,7 +293,7 @@ public class CommissionServiceImpl implements CommissionService {
 
         List<CommissionConfigAppVo> configList =  commissionConfigService.selectAppList(paramMap);
         //保存邀请类型为导购的配置
-        List<CommissionConfigAppVo> massageShopConfigList = new ArrayList<CommissionConfigAppVo>();
+        List<CommissionConfigAppVo> massageShopConfigList = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(configList)){
             for(CommissionConfigAppVo config : configList){
                 //容易逛配置只会有一条
@@ -311,13 +311,12 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Override
     public List<CommissionConfigAppVo> getCommissConfigList(Integer inviteType, Integer registerType) {
-        LOGGER.info("=====根据邀请人和被邀请人类型查询推广返佣记录=====");
-        LOGGER.info("inviteType:{},registerType{}");
-        Map paramMap = new HashMap();
+        LOGGER.info("根据邀请人和被邀请人类型查询推广返佣记录inviteType:{},registerType{}",inviteType,registerType);
+        Map<String,Object> paramMap = new HashMap<>();
         paramMap.put("status",ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte());
         paramMap.put("type",ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeStr());
         paramMap.put("inviteType",inviteType.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
-        List<Integer> registerTypeList = new ArrayList<Integer>();
+        List<Integer> registerTypeList = new ArrayList<>();
         registerTypeList.add(registerType);
         if(registerType.equals(ConstantEnum.REGISTER_TYPE_2.getCode())||registerType.equals(ConstantEnum.REGISTER_TYPE_3.getCode())){
             registerTypeList.add(ConstantEnum.REGISTER_TYPE_4.getCodeInt());
