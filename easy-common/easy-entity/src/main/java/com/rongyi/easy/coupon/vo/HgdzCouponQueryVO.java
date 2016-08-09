@@ -30,7 +30,6 @@ public class HgdzCouponQueryVO implements Serializable {
      */
     HgdzCouponQueryEntity coupon;
 
-    @XmlElementWrapper(name = "coupon")
     public HgdzCouponQueryEntity getCoupon() {
         return coupon;
     }

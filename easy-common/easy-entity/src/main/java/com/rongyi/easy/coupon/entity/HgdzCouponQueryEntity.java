@@ -20,6 +20,9 @@ public class HgdzCouponQueryEntity extends SimpleCouponEntity {
      */
     private String shop;
 
+    // 交易id
+    private String dealId;
+
     public String getSeller() {
         return seller;
     }
@@ -44,11 +47,20 @@ public class HgdzCouponQueryEntity extends SimpleCouponEntity {
         this.statusChangeTime = statusChangeTime;
     }
 
+    public String getDealId() {
+        return dealId;
+    }
+
+    public void setDealId(String dealId) {
+        this.dealId = dealId;
+    }
+
     @Override
     public String toString() {
         return "HgdzCouponQueryEntity{" +
-                "seller='" + seller + '\'' +
+                "dealId='" + dealId + '\'' +
                 ", statusChangeTime='" + statusChangeTime + '\'' +
+                ", seller='" + seller + '\'' +
                 ", shop='" + shop + '\'' +
                 "} " + super.toString();
     }
