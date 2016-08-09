@@ -1,7 +1,6 @@
 package com.rongyi.easy.rmmm.param.user;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
 
@@ -26,6 +25,5 @@ public class UserShareCodeParam extends BaseParam implements Serializable{
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	
 	
 }
