@@ -35,6 +35,12 @@ public class TaskInfo implements Serializable{
 
     private String updateUser; //修改者用户名
 
+    private Integer stopBy;    //终止操作者ID
+
+    private String stopUser ;   //终止操作者用户名
+
+    private Date stopAt;       //终止时间
+
     public Integer getId() {
         return id;
     }
@@ -157,5 +163,29 @@ public class TaskInfo implements Serializable{
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public Integer getStopBy() {
+        return stopBy;
+    }
+
+    public void setStopBy(Integer stopBy) {
+        this.stopBy = stopBy;
+    }
+
+    public String getStopUser() {
+        return stopUser;
+    }
+
+    public void setStopUser(String stopUser) {
+        this.stopUser = stopUser;
+    }
+
+    public Date getStopAt() {
+        return stopAt;
+    }
+
+    public void setStopAt(Date stopAt) {
+        this.stopAt = stopAt;
     }
 }

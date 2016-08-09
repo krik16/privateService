@@ -51,9 +51,10 @@ public interface ITaskInfoService {
      * 终止任务
      * @param id 任务ID
      * @param stopReason 终止理由
+     * @param optId  操作者ID
      * @return
      */
-    public int stopTaskById(Integer id,String stopReason);
+    public int stopTaskById(Integer id,String stopReason,Integer optId);
 
     /**
      * 删除任务（逻辑）
