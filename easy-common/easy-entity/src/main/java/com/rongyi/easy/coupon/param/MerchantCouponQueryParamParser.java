@@ -18,6 +18,10 @@ import java.util.List;
  * Created at 2015/8/20 14:14.
  */
 public class MerchantCouponQueryParamParser {
+    public static QueryParam parserParms(String params) {
+        return parserParms(params, true);
+    }
+
     public static QueryParam parserParms(String params,boolean activityStatus) {
         try {
             QueryParam queryParam=new QueryParam();
