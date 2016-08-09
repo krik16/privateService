@@ -71,8 +71,16 @@ public class UserinfoVO implements Serializable{
 
 	String userMsg;//导购 买手禁用提示信息
 	private int inviteObject;//1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
+	private String rsaUserId;//加密之后的用户id
 	
 	
+	public String getRsaUserId() {
+		return rsaUserId;
+	}
+
+	public void setRsaUserId(String rsaUserId) {
+		this.rsaUserId = rsaUserId;
+	}
 
 	public int getInviteObject() {
 		return inviteObject;

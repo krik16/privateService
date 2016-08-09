@@ -32,5 +32,5 @@ public interface ROAUserInviteCodeRelationService {
      * 将用户关联的邀请码设置为禁用状态
      * @param phone
      */
-	public void updateUserInviteCodeRelation(String phone) throws Exception;
+    public void updateUserInviteCodeRelationToDisable(String phone,Integer type) throws Exception;
 }

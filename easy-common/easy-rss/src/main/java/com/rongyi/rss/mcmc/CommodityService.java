@@ -191,7 +191,7 @@ public interface CommodityService {
      * @param type
      * @return
      */
-    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+    ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
     /**
      * 获取商品直播的地址和品牌
      * @param commodityIds

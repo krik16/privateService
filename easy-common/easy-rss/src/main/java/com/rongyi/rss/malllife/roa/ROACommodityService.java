@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.vo.*;
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 
 import org.bson.types.ObjectId;
@@ -24,10 +25,6 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
-import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
-import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
@@ -131,7 +128,7 @@ public interface ROACommodityService {
 	 */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
-	public ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+	public ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
 
 	/**
 	 * 获取商品邮费

@@ -396,6 +396,16 @@ public interface Constants {
         		};
 
     }
+    interface SHARE_USER_TYPE{
+    	/**容易逛用户*/
+    	Integer MALLLIFE = 1;
+    	/**导购*/
+    	Integer MALL_GUIDE = 2;
+    	/**买手*/
+    	Integer MALL_BUYER = 3;
+    	/**摩店用户*/
+    	Integer MALLSHOP = 4;
+    }
 }
 
 
