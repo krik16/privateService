@@ -57,7 +57,8 @@ public enum MallShopErrorCode {
     ERROR_PHONE_APP_EXIST(1076003,"您已是容易逛用户哦"),
     ERROR_PHONE_MALLSHOP_EXIST(1076004,"您已是摩店用户哦"),
     ERROR_INVITE_USER_NOT_EXIST(1076005,"邀请对象不符合要求"),
-    ERROR_REPEAT_RECEIVE(1076006,"你已领取过，请不要重复领取")
+    ERROR_REPEAT_RECEIVE(1076006,"你已领取过，请不要重复领取"),
+    ERROR_OPENID(1076007,"openId为空")
     ;
 
     /**
