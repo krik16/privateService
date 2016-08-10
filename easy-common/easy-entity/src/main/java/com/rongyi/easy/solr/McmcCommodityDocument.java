@@ -463,6 +463,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityShopId(commodity.getShopId());
 		this.setPublic_start(new Date());
 		this.setSold(0);
+		this.setType(CommodityType.GUIDE.getValue());
 		this.setPrice(commodity.getPrice());
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
