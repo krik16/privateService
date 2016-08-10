@@ -370,5 +370,12 @@ public interface IUserService {
      * @throws Exception
      */
     public boolean updateIsOrdering(Boolean isOrdering, Integer userId) throws Exception;
+    /**
+     * 查询所有摩店接单用户
+     * @param paraMap
+     * @return
+     * @throws Exception
+     */
+    public List<RmmmUserInfoEntity> getAllOrderingUserInfo(Map<String, Object> paraMap) throws Exception;
 
 }
