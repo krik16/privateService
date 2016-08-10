@@ -9,6 +9,8 @@ public class TaskInfo implements Serializable{
 
     private String name;
 
+    private Integer type ;//任务类型 0商品返佣 1交易返佣 2推广返佣
+
     private Date startAt;
 
     private Date endAt;
@@ -187,5 +189,13 @@ public class TaskInfo implements Serializable{
 
     public void setStopAt(Date stopAt) {
         this.stopAt = stopAt;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
