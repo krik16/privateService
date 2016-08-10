@@ -860,6 +860,8 @@ public interface Constants {
     	/** 给用户推送消息的标题 */
     	String PUSH_TITLE = "任务通知";
     	/** 在默认时间前一天给用户推送的消息 */
-    	String PUSH_MSG = "您已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+    	String PUSH_MSG_BULL = "您的买手账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+    	/** 在默认时间前一天给用户推送的消息 */
+    	String PUSH_MSG_SHOP = "您的店铺账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
     }
 }
