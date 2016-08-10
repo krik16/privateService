@@ -852,7 +852,7 @@ public interface Constants {
     /***/
     interface PUBLISH_COMMODITY_DATE{
     	/** 检测摩店用户发布商品并修改接单状态的默认时间 */
-    	Integer PUBLISH_DEFAULT_TIME = 4;
+    	Integer PUBLISH_DEFAULT_TIME = 2;//
     	/**发布商品给用户推送消息的时间限制*/
     	Long LIMIT_TIME = (PUBLISH_DEFAULT_TIME - 1)*24*60*60*1000L;
     	/**发布商品修改用户接单状态的时间限制*/
