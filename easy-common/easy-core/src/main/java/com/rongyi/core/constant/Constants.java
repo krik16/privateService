@@ -852,7 +852,7 @@ public interface Constants {
     /***/
     interface PUBLISH_COMMODITY_DATE{
     	/** 检测摩店用户发布商品并修改接单状态的默认时间 */
-    	Integer PUBLISH_DEFAULT_TIME = 4;
+    	Integer PUBLISH_DEFAULT_TIME = 2;//
     	/**发布商品给用户推送消息的时间限制*/
     	Long LIMIT_TIME = (PUBLISH_DEFAULT_TIME - 1)*24*60*60*1000L;
     	/**发布商品修改用户接单状态的时间限制*/
@@ -860,6 +860,8 @@ public interface Constants {
     	/** 给用户推送消息的标题 */
     	String PUSH_TITLE = "任务通知";
     	/** 在默认时间前一天给用户推送的消息 */
-    	String PUSH_MSG = "您已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+    	String PUSH_MSG_BULL = "您的买手账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+    	/** 在默认时间前一天给用户推送的消息 */
+    	String PUSH_MSG_SHOP = "您的店铺账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
     }
 }
