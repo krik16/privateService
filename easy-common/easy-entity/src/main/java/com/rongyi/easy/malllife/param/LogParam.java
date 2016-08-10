@@ -52,9 +52,18 @@ public class LogParam implements Serializable {
     private String opType;//操作功能类型 createShopCart 创建，操作购物车 orderShopCart 生成购物车订单
     //邀请码分享  H5
     private String openId;
-
+    private String phone;//用户领取时输入的手机号
     
-    public String getOpenId() {
+    
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getOpenId() {
 		return openId;
 	}
 
