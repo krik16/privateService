@@ -96,4 +96,28 @@ public interface ValidCodeService {
      * @return
      */
     public BizzValidHistoryVO queryGiftValidList(BizzValidHistoryParam param, String mallId, String shopId);
+
+    /**
+     * 获取活动奖品验证记录
+     * @param param
+     * @param sessionUserInfo
+     * @return
+     */
+    public BizzValidHistoryVO queryEventGiftValidList(BizzValidHistoryParam param, SessionUserInfo sessionUserInfo);
+
+    /**
+     * 查询活动奖品码的信息
+     * @param code
+     * @param mallMid
+     * @return
+     */
+    ValidCouponVO validSearchEventGift(String code, String mallMid);
+
+    /**
+     * 验证活动奖品码
+     * @param code
+     * @param sessionUserInfo
+     * @return
+     */
+    public boolean validEventGiftCode(String code, SessionUserInfo sessionUserInfo);
 }
