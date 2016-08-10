@@ -858,7 +858,7 @@ public interface Constants {
     	/**发布商品修改用户接单状态的时间限制*/
     	Long PUBLISH_LIMIT_TIME = PUBLISH_DEFAULT_TIME*24*60*60*1000L;
     	/** 给用户推送消息的标题 */
-    	String PUSH_TITLE = "";
+    	String PUSH_TITLE = "任务通知";
     	/** 在默认时间前一天给用户推送的消息 */
     	String PUSH_MSG = "您已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
     }
