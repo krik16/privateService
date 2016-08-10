@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Desc: communal facility vo
@@ -19,8 +20,44 @@ public class CommunalFacilityVO implements Serializable {
     private String    tag;
     private Integer   status;
     private String    organize;
+    private String    operator;
+    private String    createAt;
+    private String    updateAt;
+    private String    updator;
 
-    public Long getId() {
+    public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	public String getUpdator() {
+		return updator;
+	}
+
+	public void setUpdator(String updator) {
+		this.updator = updator;
+	}
+
+	public Long getId() {
         return id;
     }
 

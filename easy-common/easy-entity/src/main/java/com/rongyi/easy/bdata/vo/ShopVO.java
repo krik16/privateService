@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.bdata.dto.CustomCategoryDto;
+
 public class ShopVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
-	private String iconUrl;
+	private String iconUrl;            //主品牌logo
 	private String shopType;
 	private String shopNature;
 	private String status;
@@ -17,11 +19,12 @@ public class ShopVO implements Serializable {
 	private ShopPositionVO position;
 	private String address;
 	private String telephone;
-	private String averageConsumption;
+	private String averageConsumption;   //平均消费
 	private String businessHours;
 	private String description;
 	private String brandId;
 	private String brandName;
+	private String brandEname;
 	private List<BrandsCategoryVO> categories;
 	private List<String> terminalImgs;
 	private List<Double> location;
@@ -34,7 +37,51 @@ public class ShopVO implements Serializable {
 	private Date createdAt;
 	private Date updateAt;
 	private String qrcodePic;
+	private String valiReason;
+	private Integer businessStatus;
+	private List<CustomCategoryDto> customCategorys ;
+	private String filialeName ; //分公司名称
+	private List<BrandVO> brands ; //兼营品牌
+	private Date openAt ; //开业时间
+	private List<String> appImgs ; //app店铺图片
+	private String icon ;        //店铺自定义Logo
+	private String businessStatusReason;
+	private String operatorUser;  //创建者
+	private String updateUser ;   //最后修改者
+
+	public String getBusinessStatusReason() {
+		return businessStatusReason;
+	}
+
+	public void setBusinessStatusReason(String businessStatusReason) {
+		this.businessStatusReason = businessStatusReason;
+	}
 	
+	
+	public Integer getBusinessStatus() {
+		return businessStatus;
+	}
+
+	public void setBusinessStatus(Integer businessStatus) {
+		this.businessStatus = businessStatus;
+	}
+
+	public String getValiReason() {
+		return valiReason;
+	}
+
+	public void setValiReason(String valiReason) {
+		this.valiReason = valiReason;
+	}
+
+	public String getBrandEname() {
+		return brandEname;
+	}
+
+	public void setBrandEname(String brandEname) {
+		this.brandEname = brandEname;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -258,18 +305,68 @@ public class ShopVO implements Serializable {
 	public void setQrcodePic(String qrcodePic) {
 		this.qrcodePic = qrcodePic;
 	}
-	
-	@Override
-	public String toString() {
-		return "ShopVO [id=" + id + ", name=" + name + ", iconUrl=" + iconUrl + ", shopType=" + shopType
-				+ ", shopNature=" + shopNature + ", status=" + status + ", recommend=" + recommend + ", valid=" + valid
-				+ ", position=" + position + ", address=" + address + ", telephone=" + telephone
-				+ ", averageConsumption=" + averageConsumption + ", businessHours=" + businessHours + ", description="
-				+ description + ", brandId=" + brandId + ", brandName=" + brandName + ", categories=" + categories
-				+ ", terminalImgs=" + terminalImgs + ", location=" + location + ", filialeId=" + filialeId
-				+ ", customCateIds=" + customCateIds + ", coordinate=" + coordinate + ", doorCoordinate="
-				+ doorCoordinate + ", slug=" + slug + ", tags=" + tags + ", createdAt=" + createdAt + ", updateAt="
-				+ updateAt + ", qrcodePic=" + qrcodePic + "]";
+
+	public List<CustomCategoryDto> getCustomCategorys() {
+		return customCategorys;
 	}
-	
+
+	public void setCustomCategorys(List<CustomCategoryDto> customCategorys) {
+		this.customCategorys = customCategorys;
+	}
+
+	public String getFilialeName() {
+		return filialeName;
+	}
+
+	public void setFilialeName(String filialeName) {
+		this.filialeName = filialeName;
+	}
+
+	public List<BrandVO> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(List<BrandVO> brands) {
+		this.brands = brands;
+	}
+
+	public Date getOpenAt() {
+		return openAt;
+	}
+
+	public void setOpenAt(Date openAt) {
+		this.openAt = openAt;
+	}
+
+	public List<String> getAppImgs() {
+		return appImgs;
+	}
+
+	public void setAppImgs(List<String> appImgs) {
+		this.appImgs = appImgs;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getOperatorUser() {
+		return operatorUser;
+	}
+
+	public void setOperatorUser(String operatorUser) {
+		this.operatorUser = operatorUser;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
 }

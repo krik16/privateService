@@ -35,7 +35,7 @@ public interface ROAShopSolrService {
 	 * @throws Exception
 	 */
 	public List<String> getShops(Map params) throws Exception;
-
+	
 	List<ObjectId> sortShopByLocation(List<ObjectId> idList, List<Double> position);
 
 }

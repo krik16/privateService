@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityStatus;
+import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
@@ -655,9 +658,9 @@ public class Commodity implements  Serializable,Cloneable{
 				'}';
 	}
 
-	public void wrapCommodityInfo(CommodityVO vo) {
-		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
-		if(CollectionUtils.isEmpty(specVoList)) {
+	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
+								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
+		if(specMap == null) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
 			this.setOriginalPrice(vo.getCommodityOriginalPrice());
 			this.setCurrentPrice((vo.getCommodityCurrentPrice() != null
@@ -669,6 +672,16 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setoPriceMin(this.getOriginalPrice());
 			this.setcPriceMax(this.getCurrentPrice());
 			this.setcPriceMin(this.getCurrentPrice());
+		} else {
+			this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
+			this.setStock((Integer) specMap.get("specStock"));
+			this.setOriginalPrice(specMap.get("oMin").toString());
+			this.setCurrentPrice(specMap.get("lowest").toString());
+			this.setPrice(Double.valueOf(specMap.get("lowest").toString()));
+			this.setoPriceMax(specMap.get("oMax").toString());
+			this.setoPriceMin(specMap.get("oMin").toString());
+			this.setcPriceMin(specMap.get("lowest").toString());
+			this.setcPriceMax(specMap.get("cMax").toString());
 		}
 
 		this.setCode(vo.getCommodityCode());
@@ -681,13 +694,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setRegisterAt(vo.getRegisterAt());
 		this.setSoldOutAt(vo.getSoldOutAt());
 		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
+		this.setType(CommodityType.GUIDE.getValue());
 
 		if(this.getSource() == 2) {
 			this.setRegisterAt(new Date());//设置默认上下架时间
 			this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
 		}
 		this.setSold(0);
-		if(this.getStock() <= 0) {
+		if(this.getStock() == null || this.getStock() <= 0) {
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
@@ -700,7 +714,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 		this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
 		this.setGoodsParam(vo.getGoodsParam()); //商品参数
-		this.setIdentity(vo.getIdentity()); //增加商品身份
+		this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
 		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
@@ -736,5 +750,47 @@ public class Commodity implements  Serializable,Cloneable{
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		this.setDiscount(this.getDiscount());
+
+		this.setBrandName(brandName);
+		if(shopInfo != null) {
+			this.setBrandMid(shopInfo.getBrandMid());
+			this.setShopMid(shopInfo.getShopMid());
+		}
+
+		this.setBrandId(String.valueOf(brandId));
+		this.setMallId(String.valueOf(mallId));
+		this.setMallMid(mallMid);
+		this.setShopNum(shopNum);
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+
+		// 买手&非现货 商品 临时状态: -1
+		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
+			//魔店买手发布的商品，上架终端默认只有容易逛
+			if(2 == this.getSource()) {
+				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_1);
+			} else {
+				this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_1);
+			}
+
+			if(vo.getIsSpot() == 1) {
+				this.setSpot(true);
+				if(this.getStock() <= 0) {
+					this.setStatus(0);
+				} else {
+					//APP端发布商品时，把商品状态更改为已删除，等待图片上传成功后，把商品状态更改为上架
+					if((vo.getSource()==null||vo.getSource()==2) && CollectionUtils.isEmpty(vo.getCommodityPicList())){
+						this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+					} else {
+						this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+					}
+				}
+			} else {
+				this.setSpot(false);
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
+			}
+			this.setType(CommodityType.BULL.getValue());
+			this.setBrandMid(brandMid);
+			this.setShopMid(vo.getShopMid());
+		}
 	}
 }

@@ -292,8 +292,20 @@ public class StringUtil {
 			return null;
 		}
 	}
-
-	/**
+	public static boolean isNotEmpty(Object obj){
+		if(obj==null||"".equals(obj)||"null".equals(obj)){
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isEmpty(Object obj){
+		if(obj==null||"".equals(obj)||"null".equals(obj)){
+			return true;
+		}
+		return false;
+	}
+  /**
 	 * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
 	 *
 	 * @param params

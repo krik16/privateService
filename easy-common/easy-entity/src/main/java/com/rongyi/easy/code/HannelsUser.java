@@ -13,6 +13,16 @@ public class HannelsUser {
 
     private Integer identity;//用户类型  4:店长；5：导购
 
+    /**
+     * 0:指定到人；1：指定到店铺；2：指定到商场
+     */
+    private Integer type;
+
+    private String assignId;
+
+    private String assignName;
+
+
     public Integer getId() {
         return id;
     }
@@ -61,15 +71,43 @@ public class HannelsUser {
         this.identity = identity;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getAssignId() {
+        return assignId;
+    }
+
+    public void setAssignId(String assignId) {
+        this.assignId = assignId;
+    }
+
+    public String getAssignName() {
+        return assignName;
+    }
+
+    public void setAssignName(String assignName) {
+        this.assignName = assignName;
+    }
+
     @Override
     public String toString() {
-        return "HannelsUser{" +
-                "id=" + id +
-                ", hannelsId=" + hannelsId +
-                ", userId=" + userId +
-                ", userAccount='" + userAccount + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", identity=" + identity +
-                '}';
+        final StringBuffer sb = new StringBuffer("HannelsUser{");
+        sb.append("id=").append(id);
+        sb.append(", hannelsId=").append(hannelsId);
+        sb.append(", userId=").append(userId);
+        sb.append(", userAccount='").append(userAccount).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", identity=").append(identity);
+        sb.append(", type=").append(type);
+        sb.append(", assignId='").append(assignId).append('\'');
+        sb.append(", assignName='").append(assignName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
