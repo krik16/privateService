@@ -255,6 +255,7 @@ public enum CodeEnum {
 	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
 
     ERROR_EXIST_PASSWORD("1300000", "虚拟账户未设置提现密码"),
+    SUCCESS_EXIST_PASSWORD("1300001", "虚拟账户已设置提现密码"),
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
 
     private String code; 
