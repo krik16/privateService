@@ -1,9 +1,15 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInviteCodeRelationEntity {
-    /** 表id */
+public class UserInviteCodeRelationEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 表id */
     private Integer id;
 
     /** 手机号 */

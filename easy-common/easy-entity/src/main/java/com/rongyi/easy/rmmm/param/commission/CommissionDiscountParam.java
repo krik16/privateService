@@ -18,6 +18,7 @@ public class CommissionDiscountParam extends BaseParam implements Serializable{
 	private String phone;//手机号码
 	private String inviteCode;//邀请码
 	private List<Integer> typeList;// 邀请对象: 1 容易逛用户   2 摩店买手  3摩店导购  4摩店用户
+	private String openId;//H5传过来的openId
 	public String getPhone() {
 		return phone;
 	}
@@ -35,6 +36,12 @@ public class CommissionDiscountParam extends BaseParam implements Serializable{
 	}
 	public void setTypeList(List<Integer> typeList) {
 		this.typeList = typeList;
+	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 	
 	
