@@ -110,6 +110,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	private String secKillSign;
 
+	private String extend;
+
 	public Double getPrice() {
 		return price;
 	}
@@ -451,6 +453,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public Date getUpdateAt() {
 		return updateAt;
+	}
+
+	public String getExtend() {
+		return extend;
+	}
+
+	public void setExtend(String extend) {
+		this.extend = extend;
 	}
 
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
