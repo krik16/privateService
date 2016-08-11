@@ -74,6 +74,7 @@ public class UserInfo implements Serializable{
     private String jsessionid ;//摩店登录标识	
 	private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
     private Integer isOrdering;  //是否接单中  0是  1否
+    private Date updateOrderingAt;//更新接单状态的时间
     public String getStopReason() {
 		return stopReason;
 	}
@@ -350,5 +351,13 @@ public class UserInfo implements Serializable{
 
     public void setIsOrdering(Integer isOrdering) {
         this.isOrdering = isOrdering;
+    }
+
+    public Date getUpdateOrderingAt() {
+        return updateOrderingAt;
+    }
+
+    public void setUpdateOrderingAt(Date updateOrderingAt) {
+        this.updateOrderingAt = updateOrderingAt;
     }
 }
