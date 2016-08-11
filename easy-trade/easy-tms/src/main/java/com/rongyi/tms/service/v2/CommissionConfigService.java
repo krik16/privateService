@@ -49,7 +49,7 @@ public interface CommissionConfigService {
      * @param paramMap
      *           status  状态
      *           inviteType 邀请人类型
-     * @return
+     * @return 结果集
      */
     List<CommissionConfigAppVo> selectAppList(Map paramMap);
 
