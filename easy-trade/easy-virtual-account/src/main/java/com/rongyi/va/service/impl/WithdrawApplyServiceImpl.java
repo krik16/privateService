@@ -150,7 +150,8 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 
             } else if (permission == 1) {
                 result.setCode(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getActionCode());
-                result.setMessage(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getMessage());
+                //result.setMessage(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getMessage());
+                result.setMessage("每天只能成功提现"+drawCountMax+"次哦，明天再来吧~");
                 result.setSuccess(false);
             } else if (permission == 2) {
                 result.setCode(CodeEnum.ERROR_ACCOUNT_INSUFFICIENT_BALANCE.getActionCode());
