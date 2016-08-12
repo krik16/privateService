@@ -44,7 +44,7 @@ public enum MallShopErrorCode {
 
 
     /** 订单相关  后4位区间  3001---4000*/
-
+    ERROR_EXPRESS(3001,"物流单号和公司编码重复"),
 
     /** 首页相关  后4位区间  4001---5000*/
     
