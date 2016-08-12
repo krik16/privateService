@@ -474,6 +474,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setPublic_start(new Date());
 		this.setSold(0);
 		this.setType(CommodityType.GUIDE.getValue());
+		this.setCreateBy(commodity.getCreate_by());
 		this.setPrice(commodity.getPrice());
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
@@ -512,7 +513,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 		if(commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
-			this.setCreateBy(commodity.getCreate_by());
 			this.setSpot(commodity.isSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
 			this.setTerminalType(commodity.getTerminalType());
