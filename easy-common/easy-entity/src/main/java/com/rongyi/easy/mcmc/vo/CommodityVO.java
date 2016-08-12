@@ -82,7 +82,7 @@ public class CommodityVO  implements  Serializable {
 	private List<String> goodsParam;//商品参数
 	private Integer activityId;//活动id
 	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
-
+	private long pubDateForSort;
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -483,6 +483,14 @@ public class CommodityVO  implements  Serializable {
 
 	public void setActivityPrice(double activityPrice) {
 		this.activityPrice = activityPrice;
+	}
+
+	public long getPubDateForSort() {
+		return pubDateForSort;
+	}
+
+	public void setPubDateForSort(long pubDateForSort) {
+		this.pubDateForSort = pubDateForSort;
 	}
 
 	public CommodityVO(){
