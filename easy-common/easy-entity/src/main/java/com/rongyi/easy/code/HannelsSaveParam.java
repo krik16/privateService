@@ -19,6 +19,10 @@ public class HannelsSaveParam implements Serializable {
     private String useLimit;//每个用户使用个数
     private String remark;//备注
     private List<HannelsUser> hannelsUserList;//关联的导购,买手数据
+    private Integer userType;
+    private Integer isAllUser;//0:不是；1：全部用户
+    private Integer allotType;//分配类型。0：店员；1：店长；2：商场；3：第三方渠道
+
     public String getId() {
         return id;
     }
@@ -107,20 +111,48 @@ public class HannelsSaveParam implements Serializable {
         this.hannelsUserList = hannelsUserList;
     }
 
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public Integer getIsAllUser() {
+        return isAllUser;
+    }
+
+    public void setIsAllUser(Integer isAllUser) {
+        this.isAllUser = isAllUser;
+    }
+
+    public Integer getAllotType() {
+        return allotType;
+    }
+
+    public void setAllotType(Integer allotType) {
+        this.allotType = allotType;
+    }
+
     @Override
     public String toString() {
-        return "HannelsSaveParam{" +
-                "id='" + id + '\'' +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", hannelsCouponList=" + hannelsCouponList +
-                ", validStartAt='" + validStartAt + '\'' +
-                ", validEndAt='" + validEndAt + '\'' +
-                ", channelId='" + channelId + '\'' +
-                ", count='" + count + '\'' +
-                ", useLimit='" + useLimit + '\'' +
-                ", remark='" + remark + '\'' +
-                ", hannelsUserList=" + hannelsUserList +
-                '}';
+        final StringBuffer sb = new StringBuffer("HannelsSaveParam{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", type='").append(type).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", hannelsCouponList=").append(hannelsCouponList);
+        sb.append(", validStartAt='").append(validStartAt).append('\'');
+        sb.append(", validEndAt='").append(validEndAt).append('\'');
+        sb.append(", channelId='").append(channelId).append('\'');
+        sb.append(", count='").append(count).append('\'');
+        sb.append(", useLimit='").append(useLimit).append('\'');
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append(", hannelsUserList=").append(hannelsUserList);
+        sb.append(", userType=").append(userType);
+        sb.append(", isAllUser=").append(isAllUser);
+        sb.append(", allotType=").append(allotType);
+        sb.append('}');
+        return sb.toString();
     }
 }
