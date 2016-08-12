@@ -25,6 +25,8 @@ public class CouponCommodityParam implements Serializable{
     private Integer currentPage;
     private List<String> shopMids;
     private Integer type;
+    private Float begDiscount;
+    private Float endDiscount;
 
     @Override
     public String toString() {
@@ -40,8 +42,26 @@ public class CouponCommodityParam implements Serializable{
         sb.append(", currentPage=").append(currentPage);
         sb.append(", shopMids=").append(shopMids);
         sb.append(", type=").append(type);
+        sb.append(", begDiscount=").append(begDiscount);
+        sb.append(", endDiscount=").append(endDiscount);
         sb.append('}');
         return sb.toString();
+    }
+
+    public Float getBegDiscount() {
+        return begDiscount;
+    }
+
+    public void setBegDiscount(Float begDiscount) {
+        this.begDiscount = begDiscount;
+    }
+
+    public Float getEndDiscount() {
+        return endDiscount;
+    }
+
+    public void setEndDiscount(Float endDiscount) {
+        this.endDiscount = endDiscount;
     }
 
     public Integer getType() {
