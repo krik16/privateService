@@ -75,6 +75,26 @@ public class TradeUserCode implements Serializable {
 
     private Byte couponShowType;
 
+    // 卡券密码
+    private String couponPassword;
+    // 扩展券码
+    private String couponCodeExt;
+
+    public String getCouponCodeExt() {
+        return couponCodeExt;
+    }
+
+    public void setCouponCodeExt(String couponCodeExt) {
+        this.couponCodeExt = couponCodeExt;
+    }
+
+    public String getCouponPassword() {
+        return couponPassword;
+    }
+
+    public void setCouponPassword(String couponPassword) {
+        this.couponPassword = couponPassword;
+    }
 
     public Double getOrigPrice_Y() {
         return new BigDecimal(this.origPrice).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
