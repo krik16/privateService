@@ -108,6 +108,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("updateAt")
 	private Date updateAt;
 
+	@Field("shopName")
+	private String shopName; ///< 店铺名称
+	@Field("mallName")
+	private String mallName;  ///< 商场名称
+	@Field("hotAreaName")
+	private String hotAreaName; ///< 商圈名称
+
 	private String secKillSign;
 
 	private String extend;
@@ -461,6 +468,30 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setExtend(String extend) {
 		this.extend = extend;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getHotAreaName() {
+		return hotAreaName;
+	}
+
+	public void setHotAreaName(String hotAreaName) {
+		this.hotAreaName = hotAreaName;
 	}
 
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
