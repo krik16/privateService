@@ -378,4 +378,11 @@ public interface IUserService {
      */
     public List<RmmmUserInfoEntity> getAllOrderingUserInfo(Map<String, Object> paraMap) throws Exception;
 
+    /**
+     * 清空非当前登录用户重复pushId
+     * @param pushId
+     * @param userId
+     * @return
+     */
+    int cleanUserPushId(String pushId, Integer userId);
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class PushUpdateParam implements Serializable {
     private String pushId;
-
+    private String jsessionid;
     public String getPushId() {
         return pushId;
     }
@@ -16,10 +16,19 @@ public class PushUpdateParam implements Serializable {
         this.pushId = pushId;
     }
 
+    public String getJsessionid() {
+        return jsessionid;
+    }
+
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
+    }
+
     @Override
     public String toString() {
         return "PushUpdateParam{" +
                 "pushId='" + pushId + '\'' +
+                ", jsessionid='" + jsessionid + '\'' +
                 '}';
     }
 }
