@@ -54,6 +54,8 @@ public class CategoriesVO implements Serializable {
 	 * 父级id
 	 */
 	private String parentId;
+
+	private String ename ;  //英文名称
 	
 	
 	private List<CategoriesVO> nextLevel;
@@ -123,5 +125,13 @@ public class CategoriesVO implements Serializable {
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 }
