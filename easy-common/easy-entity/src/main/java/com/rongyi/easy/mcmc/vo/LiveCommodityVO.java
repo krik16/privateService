@@ -28,6 +28,8 @@ public class LiveCommodityVO implements Serializable {
 	public String commoditySold;//商品销量
 	public String commodityStock;//商品库存
 	public String commodityPubDate;//商品发布日期
+	private long pubDateForSort;
+
 	private Integer sort;
 
 	public String getCommodityId() {
@@ -108,5 +110,13 @@ public class LiveCommodityVO implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public long getPubDateForSort() {
+		return pubDateForSort;
+	}
+
+	public void setPubDateForSort(long pubDateForSort) {
+		this.pubDateForSort = pubDateForSort;
 	}
 }
