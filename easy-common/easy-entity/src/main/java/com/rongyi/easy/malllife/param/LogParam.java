@@ -53,9 +53,36 @@ public class LogParam implements Serializable {
     //邀请码分享  H5
     private String openId;
     private String phone;//用户领取时输入的手机号
+    private Integer downloadNum;//邀请分享页面容易逛用户点击立即下载的次数
+    private Integer browseNumber;//打开邀请分享的浏览次数
+    private Integer uniqueVisitorsNum;//打开邀请分享的独立访问数（按openId统计）
     
     
-    public String getPhone() {
+    public Integer getBrowseNumber() {
+		return browseNumber;
+	}
+
+	public void setBrowseNumber(Integer browseNumber) {
+		this.browseNumber = browseNumber;
+	}
+
+	public Integer getUniqueVisitorsNum() {
+		return uniqueVisitorsNum;
+	}
+
+	public void setUniqueVisitorsNum(Integer uniqueVisitorsNum) {
+		this.uniqueVisitorsNum = uniqueVisitorsNum;
+	}
+
+	public Integer getDownloadNum() {
+		return downloadNum;
+	}
+
+	public void setDownloadNum(Integer downloadNum) {
+		this.downloadNum = downloadNum;
+	}
+
+	public String getPhone() {
 		return phone;
 	}
 
