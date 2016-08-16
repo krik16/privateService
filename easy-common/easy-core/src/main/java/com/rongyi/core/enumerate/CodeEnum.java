@@ -79,6 +79,9 @@ public enum CodeEnum {
     ERROR_NO_USERINFO("-1133","该用户已不提供服务"),
     ERROR_IDENTITY_LENGTH("-1134","身份证号码有误"),
     ERROR_PHONE_VALID("-1135","输入的手机号码有误"),
+    ERROR_PHONE_REGIST("-1136","此手机号未注册过"),
+    LIMIT_EXCEPTION_MSG("-1137","亲你的手机,今天发送短信已达到上限,请明天再试!"),
+    ERROR_PHONE_ACCOUT("-1138","您输入的手机号需要与账号一致哦~"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
