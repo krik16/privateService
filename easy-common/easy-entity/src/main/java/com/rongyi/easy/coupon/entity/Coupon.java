@@ -275,6 +275,10 @@ public class Coupon implements Serializable {
 		return listCouponCategorys;
 	}
 
+    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+        this.listCouponCategorys = listCouponCategorys;
+    }
+
 
 	/**
      * 代金券关联的集团
