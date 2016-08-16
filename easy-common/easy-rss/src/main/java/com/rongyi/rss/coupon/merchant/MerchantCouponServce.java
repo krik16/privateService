@@ -52,7 +52,7 @@ public interface MerchantCouponServce {
      * 商家卡券统计接口
      *
      * @param queryParam    查询参数
-     * @param UserInfoVo
+     * @param userInfoVo
      * @return
      */
     public int getCountByParam(QueryParam queryParam, UserInfoVo userInfoVo);
@@ -161,5 +161,7 @@ public interface MerchantCouponServce {
      * @return
      */
     public List<ShopCouponsVO> shopsCouponsCount(List<String> shopIds);
+
+    
 }
  
