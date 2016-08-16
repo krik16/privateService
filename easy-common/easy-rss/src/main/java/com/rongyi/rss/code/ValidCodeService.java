@@ -103,15 +103,7 @@ public interface ValidCodeService {
      * @param sessionUserInfo
      * @return
      */
-    public BizzValidHistoryVO queryEventGiftValidList(BizzValidHistoryParam param, SessionUserInfo sessionUserInfo);
-
-    /**
-     * 查询活动奖品码的信息
-     * @param code
-     * @param mallMid
-     * @return
-     */
-    ValidCouponVO validSearchEventGift(String code, String mallMid);
+    BizzValidHistoryVO queryEventGiftValidList(BizzValidHistoryParam param, SessionUserInfo sessionUserInfo);
 
     /**
      * 验证活动奖品码
@@ -120,4 +112,12 @@ public interface ValidCodeService {
      * @return
      */
     public boolean validEventGiftCode(String code, SessionUserInfo sessionUserInfo);
+
+    /**
+     * 查询活动奖品码的信息
+     * @param code
+     * @param mallMid
+     * @return
+     */
+    ValidCouponVO validSearchEventGift(String code, String mallMid);
 }

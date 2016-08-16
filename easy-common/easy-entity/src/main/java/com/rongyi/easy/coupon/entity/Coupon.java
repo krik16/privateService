@@ -182,7 +182,7 @@ public class Coupon implements Serializable {
     private String synTarget;
 
     /**
-     * 卡券发布渠道：大运营平台[0], 商家管理后台[1],摩店管理平台[2]
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
      */
     private Integer publishChannel;
 
@@ -261,24 +261,23 @@ public class Coupon implements Serializable {
      */
     private String showChannel;
 
-
     /**
      * 代金券分类
      */
     private CouponCategory couponCategory;
     private List<CouponCategory> listCouponCategorys;
 
+    
 
+	public List<CouponCategory> getListCouponCategorys() {
+		return listCouponCategorys;
+	}
 
     public List<CouponCategory> getListCouponCategorys() {
         return listCouponCategorys;
     }
 
-    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
-        this.listCouponCategorys = listCouponCategorys;
-    }
-
-    /**
+	/**
      * 代金券关联的集团
      */
     private CouponGroup couponGroup;
@@ -288,21 +287,22 @@ public class Coupon implements Serializable {
      */
     private CouponBrand couponBrand;
     private List<CouponBrand> couponBrands;
-
+    
 
     /**
      * 代金券关联的商场
      */
-    //    private CouponMall couponMall;
+//    private CouponMall couponMall;
+
     public List<CouponBrand> getCouponBrands() {
-        return couponBrands;
-    }
+		return couponBrands;
+	}
 
-    public void setCouponBrands(List<CouponBrand> couponBrands) {
-        this.couponBrands = couponBrands;
-    }
+	public void setCouponBrands(List<CouponBrand> couponBrands) {
+		this.couponBrands = couponBrands;
+	}
 
-    /**
+	/**
      * 代金券关联的店铺
      */
     private List<CouponShop> couponShops;
@@ -482,7 +482,6 @@ public class Coupon implements Serializable {
     public String getDisplayRegion() {
         return displayRegion;
     }
-
     /**
      * 卡券是否活动展示区域
      *
@@ -490,8 +489,7 @@ public class Coupon implements Serializable {
      */
     public boolean isActivityDisplayRegion() {
         boolean val = false;
-        if (StringUtils.isNotBlank(displayRegion)
-            && Coupon.DISPLAY_REGION_ACTIVITY.equals(displayRegion)) {
+        if (StringUtils.isNotBlank(displayRegion) && Coupon.DISPLAY_REGION_ACTIVITY.equals(displayRegion)) {
             val = true;
         }
         return val;
@@ -686,12 +684,10 @@ public class Coupon implements Serializable {
     }
 
     public Integer getPublishStatus() {
-        if (publishStartAt != null && publishEndAt != null
-            && Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
+        if (publishStartAt != null && publishEndAt != null && Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
             if (!isOffStock && new Date().before(publishStartAt)) {
                 return CouponEnum.UNPUBLISH.getValue();
-            } else if (!isOffStock && new Date().after(publishStartAt)
-                && new Date().before(publishEndAt)) {
+            } else if (!isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
                 return CouponEnum.PROCEEING.getValue();
             } else if (!isOffStock && new Date().after(publishEndAt)) {
                 return CouponEnum.ENDED.getValue();
@@ -806,13 +802,13 @@ public class Coupon implements Serializable {
         this.couponBrand = couponBrand;
     }
 
-    //    public CouponMall getCouponMall() {
-    //        return couponMall;
-    //    }
-    //
-    //    public void setCouponMall(CouponMall couponMall) {
-    //        this.couponMall = couponMall;
-    //    }
+//    public CouponMall getCouponMall() {
+//        return couponMall;
+//    }
+//
+//    public void setCouponMall(CouponMall couponMall) {
+//        this.couponMall = couponMall;
+//    }
 
     public List<CouponShop> getCouponShops() {
         return couponShops;
@@ -895,7 +891,7 @@ public class Coupon implements Serializable {
         if (stockCount == null) {
             stockCount = totalCount;
         }
-        if (totalCount == null || totalCount == 0)
+        if(totalCount==null||totalCount==0)
             return 0;
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
@@ -981,16 +977,88 @@ public class Coupon implements Serializable {
         this.couponCommodityCategories = couponCommodityCategories;
     }
 
+    public String getThirdCouponType() {
+        return thirdCouponType;
+    }
+
+    public void setThirdCouponType(String thirdCouponType) {
+        this.thirdCouponType = thirdCouponType;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("name", name).append("couponType", couponType).append("validateType", validateType).append("totalCount", totalCount).append("stockCount", stockCount).append("origPrice", origPrice).append("currPrice", currPrice).append("discount", discount).append("displayRegion", displayRegion).append("afterSaleService", afterSaleService).append("publishStartAt", publishStartAt).append("publishEndAt", publishEndAt).append("saleStartAt", saleStartAt).append("saleEndAt", saleEndAt).append("validStartAt", validStartAt).append("validEndAt", validEndAt).append("limitDesc", limitDesc).append("usageDesc", usageDesc).append("recommend", recommend).append("remark", remark).append("listPicUrl", listPicUrl).append("detailPicUrl", detailPicUrl).append("relatedType", relatedType).append("limitCount", limitCount).append("limitUseCount", limitUseCount).append("limitPublishCount", limitPublishCount).append("synTarget", synTarget).append("publishChannel", publishChannel).append("status", status).append("inChannel", inChannel).append("inChannelName", inChannelName).append("outChannel", outChannel).append("outChannelName", outChannelName).append("codeShowType", codeShowType).append("sourceName", sourceName).append("createUser", createUser).append("createAt", createAt).append("updateUser", updateUser).append("updateAt", updateAt).append("isThird", isThird).append("isOffStock", isOffStock).append("isDeleted", isDeleted).append("couponCategory", couponCategory).append("couponGroup", couponGroup).append("couponBrand", couponBrand).append("couponShops", couponShops).append("couponMalls", couponMalls).append("preferentialType", preferentialType).append("couponCommodities", couponCommodities).append("purchaseType", purchaseType).append("visitedCount", visitedCount).append("isGeneral", isGeneral).append("isRelatedAll", isRelatedAll).append("type", type).append("applyObject", applyObject).append("applyGoods", applyGoods).append("validDays", validDays).append("listCouponVouchers", listCouponVouchers).append("couponCommodityCategories", couponCommodityCategories).append("couponBrands", couponBrands).append("activityStatus", activityStatus).toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("couponType", couponType)
+                .append("validateType", validateType)
+                .append("totalCount", totalCount)
+                .append("stockCount", stockCount)
+                .append("origPrice", origPrice)
+                .append("currPrice", currPrice)
+                .append("discount", discount)
+                .append("displayRegion", displayRegion)
+                .append("afterSaleService", afterSaleService)
+                .append("publishStartAt", publishStartAt)
+                .append("publishEndAt", publishEndAt)
+                .append("saleStartAt", saleStartAt)
+                .append("saleEndAt", saleEndAt)
+                .append("validStartAt", validStartAt)
+                .append("validEndAt", validEndAt)
+                .append("limitDesc", limitDesc)
+                .append("usageDesc", usageDesc)
+                .append("recommend", recommend)
+                .append("remark", remark)
+                .append("listPicUrl", listPicUrl)
+                .append("detailPicUrl", detailPicUrl)
+                .append("relatedType", relatedType)
+                .append("limitCount", limitCount)
+                .append("limitUseCount", limitUseCount)
+                .append("limitPublishCount", limitPublishCount)
+                .append("synTarget", synTarget)
+                .append("publishChannel", publishChannel)
+                .append("status", status)
+                .append("inChannel", inChannel)
+                .append("inChannelName", inChannelName)
+                .append("outChannel", outChannel)
+                .append("outChannelName", outChannelName)
+                .append("codeShowType", codeShowType)
+                .append("sourceName", sourceName)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("isThird", isThird)
+                .append("isOffStock", isOffStock)
+                .append("isDeleted", isDeleted)
+                .append("couponCategory", couponCategory)
+                .append("couponGroup", couponGroup)
+                .append("couponBrand", couponBrand)
+                .append("couponShops", couponShops)
+                .append("couponMalls", couponMalls)
+                .append("preferentialType", preferentialType)
+                .append("couponCommodities", couponCommodities)
+                .append("purchaseType", purchaseType)
+                .append("visitedCount", visitedCount)
+                .append("isGeneral", isGeneral)
+                .append("isRelatedAll", isRelatedAll)
+                .append("type", type)
+                .append("applyObject", applyObject)
+                .append("applyGoods", applyGoods)
+                .append("validDays", validDays)
+                .append("listCouponVouchers", listCouponVouchers)
+                .append("couponCommodityCategories", couponCommodityCategories)
+                .append("couponBrands", couponBrands)
+                .append("activityStatus", activityStatus)
+                .append("thirdCouponType", thirdCouponType)
+                .toString();
     }
 
-    public List<CouponVoucher> getListCouponVouchers() {
-        return listCouponVouchers;
-    }
+	public List<CouponVoucher> getListCouponVouchers() {
+		return listCouponVouchers;
+	}
 
-    public void setListCouponVouchers(List<CouponVoucher> listCouponVouchers) {
-        this.listCouponVouchers = listCouponVouchers;
-    }
+	public void setListCouponVouchers(List<CouponVoucher> listCouponVouchers) {
+		this.listCouponVouchers = listCouponVouchers;
+	}
 }
