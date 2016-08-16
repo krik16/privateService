@@ -39,6 +39,13 @@ public interface RedisService {
     public String set(String key,String value);
 
     /**
+     * set key value
+     * @param key
+     * @param value
+     * @return
+     */
+    public String setObject(String key,Object value);
+    /**
      * 批量插入
      * @param keys
      * @param values
