@@ -261,6 +261,8 @@ public class Coupon implements Serializable {
      */
     private String showChannel;
 
+    private String thirdCouponType;
+
     /**
      * 代金券分类
      */
@@ -273,9 +275,6 @@ public class Coupon implements Serializable {
 		return listCouponCategorys;
 	}
 
-    public List<CouponCategory> getListCouponCategorys() {
-        return listCouponCategorys;
-    }
 
 	/**
      * 代金券关联的集团
