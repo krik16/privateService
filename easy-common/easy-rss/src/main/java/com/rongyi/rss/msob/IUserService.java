@@ -381,8 +381,8 @@ public interface IUserService {
     /**
      * 清空非当前登录用户重复pushId
      * @param pushId
-     * @param userId
+     * @param userPhone
      * @return
      */
-    int cleanUserPushId(String pushId, Integer userId);
+    int cleanUserPushId(String pushId, String userPhone);
 }
