@@ -83,6 +83,7 @@ public enum CodeEnum {
     LIMIT_EXCEPTION_MSG("-1137","亲你的手机,今天发送短信已达到上限,请明天再试!"),
     ERROR_PHONE_ACCOUT("-1138","您输入的手机号需要与账号一致哦~"),
     ERROR_EXCEPTION_SMS("-1139","发送短信异常!"),
+    ERROR_EXCEPTION_REQUEST("-1140","非法请求!"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
