@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.easy.bdata.vo.AdvertNewVo;
 import com.rongyi.easy.ryoms.advert.entity.AdvertEntity;
+import com.rongyi.easy.ryoms.advert.param.AdMaterialParam;
 import com.rongyi.easy.ryoms.advert.param.AdvertParam;
 import com.rongyi.easy.ryoms.advert.vo.AdvertVo;
 
@@ -14,7 +15,7 @@ public interface AdvertService {
 
 	public int count(AdvertParam advertParam);
 
-	public void save(AdvertEntity entity, String mallIds, String string);
+	public void save(AdvertEntity entity, String mallIds, String string,List<AdMaterialParam> material_id);
 
 	public AdvertVo info(Integer id);
 	
