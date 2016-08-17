@@ -85,7 +85,7 @@ public interface IOperateRedisService {
      * @return
      * @throws Exception
      */
-    public Boolean batchDel(String key)throws Exception;
+    //public Boolean batchDel(String key)throws Exception;
 
 
 
