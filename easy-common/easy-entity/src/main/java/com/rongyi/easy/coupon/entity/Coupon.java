@@ -263,7 +263,8 @@ public class Coupon implements Serializable {
     private CouponCategory couponCategory;
     private List<CouponCategory> listCouponCategorys;
 
-    
+    // 第三方卡券对应的卡券类型
+    private String thirdCouponType;
 
 	public List<CouponCategory> getListCouponCategorys() {
 		return listCouponCategorys;
@@ -966,6 +967,14 @@ public class Coupon implements Serializable {
         this.couponCommodityCategories = couponCommodityCategories;
     }
 
+    public String getThirdCouponType() {
+        return thirdCouponType;
+    }
+
+    public void setThirdCouponType(String thirdCouponType) {
+        this.thirdCouponType = thirdCouponType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -1031,6 +1040,7 @@ public class Coupon implements Serializable {
                 .append("couponCommodityCategories", couponCommodityCategories)
                 .append("couponBrands", couponBrands)
                 .append("activityStatus", activityStatus)
+                .append("thirdCouponType", thirdCouponType)
                 .toString();
     }
 

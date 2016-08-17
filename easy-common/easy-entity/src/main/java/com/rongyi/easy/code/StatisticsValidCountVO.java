@@ -16,6 +16,7 @@ public class StatisticsValidCountVO implements Serializable {
     private Integer parkings;
     private Integer coupons;
     private Integer activities;
+    private Integer eventGifts;//活动奖品
 
     public Integer getTotal() {
         return total;
@@ -65,6 +66,14 @@ public class StatisticsValidCountVO implements Serializable {
         this.activities = activities;
     }
 
+    public Integer getEventGifts() {
+        return eventGifts;
+    }
+
+    public void setEventGifts(Integer eventGifts) {
+        this.eventGifts = eventGifts;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("StatisticsValidCountVO{");
@@ -74,6 +83,7 @@ public class StatisticsValidCountVO implements Serializable {
         sb.append(", parkings=").append(parkings);
         sb.append(", coupons=").append(coupons);
         sb.append(", activities=").append(activities);
+        sb.append(", eventGifts=").append(eventGifts);
         sb.append('}');
         return sb.toString();
     }
