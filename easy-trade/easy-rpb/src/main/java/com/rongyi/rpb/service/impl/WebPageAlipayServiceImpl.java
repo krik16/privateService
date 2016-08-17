@@ -11,6 +11,7 @@ import com.rongyi.rpb.common.pay.ali.util.UtilDate;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.service.WebPageAlipayService;
 import com.rongyi.rpb.unit.TimeExpireUnit;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 		sParaTempToken.put("format", ConstantUtil.ZhiFuBaoWebPage.FORMAT);
 		sParaTempToken.put("v", ConstantUtil.ZhiFuBaoWebPage.VERSION);
 		sParaTempToken.put("req_id", UtilDate.getOrderNum());
-		sParaTempToken.put("req_data", getRequestDataToken(paymentEntityVO.getPayNo(), paymentEntityVO.getAmountMoney().toString(), paymentEntityVO.getTitle(),itBPay));
+		sParaTempToken.put("req_data", getRequestDataToken(paymentEntityVO.getPayNo(), paymentEntityVO.getAmountMoney().toString(), paymentEntityVO.getTitle(),itBPay,paymentEntityVO.getCallBackUrl()));
 		try {
 			// 建立请求
 			String sHtmlTextToken = AlipaySubmit.buildRequest(ConstantUtil.ZhiFuBaoWebPage.ALIPAY_GATEWAY_NEW, "", "", sParaTempToken);
@@ -94,8 +95,9 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 	 * 构造请求令牌所需要的数据 （获得token所需的工具类）
 	 * 
 	 * @param orderId String
+	 * @param callBackUrl 同步通知地址，未给值调用默认通知地址
 	 */
-	private String getRequestDataToken(String orderId, String totalFee, String itemName,String itBPay) {
+	private String getRequestDataToken(String orderId, String totalFee, String itemName,String itBPay,String callBackUrl) {
 
 		StringBuilder reqDataToken = new StringBuilder();
 
@@ -106,7 +108,11 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 		reqDataToken.append("</notify_url>");
 
 		reqDataToken.append("<call_back_url>");
-		reqDataToken.append(ConstantUtil.PayNetAdress.CALL_BACK_URL_WEB);
+		if(StringUtils.isNotEmpty(callBackUrl)){
+			reqDataToken.append(callBackUrl);
+		}else{
+			reqDataToken.append(ConstantUtil.PayNetAdress.CALL_BACK_URL_WEB);
+		}
 		reqDataToken.append("</call_back_url>");
 
 		reqDataToken.append("<merchant_url>");
