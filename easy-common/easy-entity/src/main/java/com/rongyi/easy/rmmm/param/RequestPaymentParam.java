@@ -27,6 +27,7 @@ public class RequestPaymentParam implements Serializable{
 	 * 0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)
 	 */
 	private String weixinPayType;
+	private String callBackUrl;//申请支付时前端传过来的页面路径
 	public List<String> getOrderNums() {
 		return orderNums;
 	}
@@ -66,13 +67,22 @@ public class RequestPaymentParam implements Serializable{
 	public void setWeixinPayType(String weixinPayType) {
 		this.weixinPayType = weixinPayType;
 	}
+	
+	public String getCallBackUrl() {
+		return callBackUrl;
+	}
+
+	public void setCallBackUrl(String callBackUrl) {
+		this.callBackUrl = callBackUrl;
+	}
 
 	@Override
 	public String toString() {
 		return "RequestPaymentParam [orderNums=" + orderNums
 				+ ", paymentEventType=" + paymentEventType + ", appId=" + appId
 				+ ", openId=" + openId + ", weixinPayType=" + weixinPayType
-				+ "]";
+				+ ", callBackUrl=" + callBackUrl + "]";
 	}
+
 	
 }
