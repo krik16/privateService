@@ -52,4 +52,6 @@ public interface FloorService {
 	
 	public List<CommunalFacilityVO> getFloorCommunalFacilitiesType(Map map);
 	
+	public void delFloorAndShop(List<BdataFloor> floors);
+	
 }
