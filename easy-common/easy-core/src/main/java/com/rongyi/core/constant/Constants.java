@@ -251,6 +251,11 @@ public interface Constants {
      */
     interface ShowChannel {
         /**
+         * 三个端都不展示
+         */
+        String NONE = "0";
+
+        /**
          * 互动屏、APP
          */
         String TERMINAL_APP = "1";
