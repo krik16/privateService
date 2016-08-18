@@ -27,6 +27,11 @@ public class WechatPaySignParam implements Serializable{
 	 * 0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)
 	 */
 	private String weixinPayType;
+
+	/**
+	 * 支付宝网页支付同步回调地址
+	 */
+	private String callBackUrl;
 	public String getOrderNo() {
 		return orderNo;
 	}
@@ -57,11 +62,20 @@ public class WechatPaySignParam implements Serializable{
 	public void setWeixinPayType(String weixinPayType) {
 		this.weixinPayType = weixinPayType;
 	}
+
+	public String getCallBackUrl() {
+		return callBackUrl;
+	}
+
+	public void setCallBackUrl(String callBackUrl) {
+		this.callBackUrl = callBackUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "WechatPaySignParam [orderNo=" + orderNo + ", payType="
 				+ payType + ", appId=" + appId + ", openId=" + openId
-				+ ", weixinPayType=" + weixinPayType + "]";
+				+ ", weixinPayType=" + weixinPayType +  ", callBackUrl=" + callBackUrl + "]";
 	}
 	
 }
