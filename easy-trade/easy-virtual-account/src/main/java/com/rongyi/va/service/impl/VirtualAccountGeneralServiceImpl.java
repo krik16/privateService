@@ -61,7 +61,7 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 		vaVO.setIsSuspended(virtualAccountEntity.getIsSuspended());
 		vaVO.setStopAt(virtualAccountEntity.getStopAt());
 		vaVO.setStopReason(virtualAccountEntity.getStopReason());
-
+		vaVO.setDrawPassword(virtualAccountEntity.getDrawPassword());
 		// 获取账号明细合计
 		VirtualAccountQuerySumVO sumVO = virtualAccountDetailService.selectAccountSumByUserId(userId);
 		logger.info("sumVO={}",sumVO);
@@ -114,5 +114,16 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 	@Override
 	public VirtualAccountEntity selectByUserId(String userId) {
 		return virtualAccountService.selectByUserId(userId);
+	}
+
+	/**
+	 * 保存提现密码
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	@Override
+	public int saveDrawPassword(String userId, String password) throws Exception {
+		return virtualAccountService.saveDrawPassword(userId,password);
 	}
 }

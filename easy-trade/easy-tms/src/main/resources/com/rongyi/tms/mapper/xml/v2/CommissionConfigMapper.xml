@@ -38,7 +38,26 @@
     <if test="type != null and type != ''">
       and type = #{type,jdbcType=TINYINT}
     </if>
+    <if test="inviteType != null and inviteType!=''">
+      and invite_type =  #{inviteType,jdbcType=TINYINT}
+    </if>
+    <if test="registerTypeList != null and registerTypeList!=''">
+      and register_type in
+      <foreach collection="registerTypeList" index="index" item="item"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
   </sql>
+
+  <!-- 查询返佣列表 （摩店）  -->
+  <select id="selectAppList" parameterType="java.util.Map" resultType="com.rongyi.easy.tms.vo.v2.CommissionConfigAppVo">
+     select id , invite_type as inviteType, register_type as registerType ,comm_amount as commAmount , comm_threshold as commThreshold
+    from commission_config
+    <where>
+      <include refid="list_where_clause" />
+    </where>
+  </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select

@@ -213,7 +213,7 @@
                 refund_rejected = #{refundRejected,jdbcType=INTEGER},
             </if>
             <if test="weixinMchId != null">
-                refund_rejected = #{weixinMchId,jdbcType=INTEGER}
+                weixin_mch_id = #{weixinMchId,jdbcType=INTEGER}
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
