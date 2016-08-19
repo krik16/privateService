@@ -38,6 +38,7 @@ public class BuyerInfoVo implements Serializable {
     private int liveCount; //买手直播场次
     private int commodityCount; //买手手持商品总数
     private int fansCount; //粉丝数
+    private Boolean isOrdering;//是否接单中  true是 false否
 
     public Integer getId() {
         return id;
@@ -134,4 +135,13 @@ public class BuyerInfoVo implements Serializable {
     public void setFansCount(int fansCount) {
         this.fansCount = fansCount;
     }
+
+	public Boolean getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+    
 }
