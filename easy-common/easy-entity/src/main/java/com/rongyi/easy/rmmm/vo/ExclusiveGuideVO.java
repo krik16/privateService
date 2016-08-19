@@ -16,6 +16,7 @@ public class ExclusiveGuideVO implements Serializable{
 	private String userPhone;//导购电话号码
 	private Integer shopId;//店铺id
 	private Integer isDisabled;//状态  0 正常 1禁用
+	private Integer isOrdering;//是否接单中  0:是, 1:否
 	public Integer getId() {
 		return id;
 	}
@@ -57,6 +58,12 @@ public class ExclusiveGuideVO implements Serializable{
 	}
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	public Integer getIsOrdering() {
+		return isOrdering;
+	}
+	public void setIsOrdering(Integer isOrdering) {
+		this.isOrdering = isOrdering;
 	}
 	
 }

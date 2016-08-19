@@ -1,7 +1,10 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.coupon.entity.CouponCode;
+import com.rongyi.easy.coupon.entity.SimpleCouponEntity;
+import com.rongyi.easy.coupon.entity.HgdzCouponQueryEntity;
 import com.rongyi.easy.coupon.vo.CouponHistoryVO;
 
 import java.util.List;
@@ -149,6 +152,7 @@ public interface RoaCouponCodeService {
 
     /**
      * 根据couponId 生成券码
+     *
      * @param couponId
      * @param count
      */
@@ -156,9 +160,27 @@ public interface RoaCouponCodeService {
 
     /**
      * 根据券码获取该券的价格
+     *
      * @param couponCode
      * @return
      */
     public Integer getCurrentPriceFromCode(String couponCode);
 
+    /**
+     * 获取卡券
+     *
+     * @param orderId
+     * @param couponId
+     * @param count
+     * @return
+     */
+    public List<SimpleCouponEntity> getHgdzCodeSn(String orderId, String couponId, int count) throws RYServiceException;
+
+    /**
+     * 查询卡券状态
+     *
+     * @param codeSn
+     * @return
+     */
+    public HgdzCouponQueryEntity queryHgdzCodeSn(String codeSn) throws RYServiceException;
 }
