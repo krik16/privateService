@@ -15,7 +15,7 @@
 	<sql id="Custom_Column_List">
 		id, user_id, user_name, shop_id, shop_name, balance,
 		alipay_account,
-		is_authenticated, is_suspended, stop_reason, stop_at
+		is_authenticated, is_suspended, stop_reason, stop_at,draw_password
 	</sql>
 
 	<insert id="insertAndGetId" parameterType="com.rongyi.easy.va.entity.VirtualAccountEntity"
@@ -112,4 +112,11 @@
 		as result
 	</select>
 
+	<update id="saveDrawPassword" parameterType="java.util.Map">
+		update
+		virtual_account
+		set
+		draw_password = #{drawPassword}
+		where user_id = #{userId};
+	</update>
 </mapper>

@@ -150,6 +150,9 @@ public enum ConstantEnum {
     REGISTER_TYPE_3(3,"摩店导购"),
     REGISTER_TYPE_4(4,"摩店全部"),
 
+    INVITE_TYPE_1(1,"导购"),
+    INVITE_TYPE_2(2,"买手"),
+
     FIAL_USER_PARAMS_PAYMENT("1019401", "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
     FIAL_NO_AUTHORITY_PAYMENT("1019403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 
@@ -166,6 +169,7 @@ public enum ConstantEnum {
     LIST_QUERY_EXCEPTION("1019210","列表查询失败"),
     DETAIL_QUERY_EXCEPTION("1019211","详情查询失败"),
     EXCEPTION_LIMIT_COUNT("1019212","报表导出数据超出上限,请重新过滤后再选择导出"),
+    LIST_QUERY_PARAM("1019215","参数错误"),
 
     RESULT_IS_EMPTY("1019213","查询结果为空"),
     EXCEPTION_INTERFACE("1019214","接口异常"),
