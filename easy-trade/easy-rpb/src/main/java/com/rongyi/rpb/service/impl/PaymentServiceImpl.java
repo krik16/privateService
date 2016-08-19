@@ -165,8 +165,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("weixinPayType") != null && !"null".equals(bodyMap.get("weixinPayType").toString())) {
             paymentEntityVO.setWeixinPayType(Integer.valueOf(bodyMap.get("weixinPayType").toString()));
         }
-        if (bodyMap.get("callBackUrl") != null && !"null".equals(bodyMap.get("callBackUrl").toString()))
+        if (bodyMap.get("callBackUrl") != null && !"null".equals(bodyMap.get("callBackUrl").toString())) {
             paymentEntityVO.setCallBackUrl(bodyMap.get("callBackUrl").toString());
+        }
+        if (bodyMap.get("merchantUrl") != null && !"null".equals(bodyMap.get("merchantUrl").toString())) {
+            paymentEntityVO.setMerchantUrl(bodyMap.get("merchantUrl").toString());
+        }
 
         return paymentEntityVO;
     }
@@ -309,12 +313,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     paymentEntity.setAmountMoney(paymentEntityVO.getAmountMoney());
                     paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                     //公众号支付
-                    if(StringUtils.isNotBlank(paymentEntityVO.getAppId()) && !"null".equals(paymentEntityVO.getAppId())) {
+                    if (StringUtils.isNotBlank(paymentEntityVO.getAppId()) && !"null".equals(paymentEntityVO.getAppId())) {
                         WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
                         if (weixinMch != null) {
                             paymentEntity.setWeixinMchId(weixinMch.getId());
                         }
-                    }else{//app支付
+                    } else {//app支付
                         paymentEntity.setWeixinMchId(0);
                     }
                     updateByPrimaryKeySelective(paymentEntity);
