@@ -71,7 +71,7 @@ public class AccessServiceImpl implements AccessService {
                 return ResponseData.failure(ConstantEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), ConstantEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
             }
             RyUserInfo ryUserInfo = (RyUserInfo) user.get("userInfo");
-            request.getSession().setAttribute("userName", ryUserInfo.getName());
+            request.getSession().setAttribute("userName", ryUserInfo.getUsername());
         } else {
             user = userInfoService.getSessionUser(bsst, true);
             if (user == null || !user.containsKey("userInfo")) {

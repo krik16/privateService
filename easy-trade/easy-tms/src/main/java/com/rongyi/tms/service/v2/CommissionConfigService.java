@@ -2,6 +2,7 @@ package com.rongyi.tms.service.v2;
 
 import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
+import com.rongyi.easy.tms.vo.v2.CommissionConfigAppVo;
 
 import java.util.Date;
 import java.util.List;
@@ -42,5 +43,14 @@ public interface CommissionConfigService {
      * @return boolean
      */
     boolean validateIsExist(byte type,byte inviteType,byte registerType, Date effectStartTime,Date effectEndTime);
+
+    /**
+     * 查询摩店推广返佣规则
+     * @param paramMap
+     *           status  状态
+     *           inviteType 邀请人类型
+     * @return 结果集
+     */
+    List<CommissionConfigAppVo> selectAppList(Map paramMap);
 
 }

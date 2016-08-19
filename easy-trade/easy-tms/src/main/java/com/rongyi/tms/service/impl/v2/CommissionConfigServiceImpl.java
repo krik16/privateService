@@ -3,6 +3,7 @@ package com.rongyi.tms.service.impl.v2;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
+import com.rongyi.easy.tms.vo.v2.CommissionConfigAppVo;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.v2.CommissionConfigLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
@@ -115,5 +116,11 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
         LOGGER.info("validateIsExist end:map={}",map);
         CommissionConfig commissionConfig = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
         return commissionConfig != null;
+    }
+
+    @Override
+    public List<CommissionConfigAppVo> selectAppList(Map paramMap) {
+        LOGGER.info("selectAppList 查询摩店用户推广返佣规则 Map:{}",paramMap);
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectAppList", paramMap);
     }
 }

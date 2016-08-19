@@ -167,4 +167,17 @@ public class VirtualAccountService extends BaseServiceImpl {
 		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".deleteByDrawNo", params);
 	}
 
+	/**
+	 * 保存提现密码
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	public int saveDrawPassword(String userId, String password) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", userId);
+		params.put("drawPassword", password);
+		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".saveDrawPassword", params);
+	}
+
 }
