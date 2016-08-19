@@ -320,5 +320,27 @@ public interface ROAUserService {
      * @throws MallShopException
      */
     public List<RmmmUserInfoEntity> selectAllBuyer(Integer type)throws MallShopException;
+    /**
+     * 用户更新是否接单状态
+     * @param isOrdering
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public boolean updateIsOrdering(Boolean isOrdering, Integer userId) throws Exception;
+    /**
+     * 查询所有摩店接单用户
+     * @param paraMap
+     * @return
+     * @throws Exception
+     */
+    public List<RmmmUserInfoEntity> getAllOrderingUserInfo(Map<String, Object> paraMap) throws Exception;
 
+    /**
+     * 清空非当前登录用户重复pushId
+     * @param pushId
+     * @param userPhone
+     * @return
+     */
+    int cleanUserPushId(String pushId, String userPhone);
 }

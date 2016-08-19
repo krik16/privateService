@@ -55,15 +55,7 @@ public class UserinfoVO implements Serializable{
 	private String sharCode;//邀请码
 	private String downUrl; //容易逛下载地址
 	private String mallShopDownUrl; //摩店下载地址
-
-	public String getMallShopDownUrl() {
-		return mallShopDownUrl;
-	}
-
-	public void setMallShopDownUrl(String mallShopDownUrl) {
-		this.mallShopDownUrl = mallShopDownUrl;
-	}
-
+	private Boolean isOrdering;//是否接单中  true是  false否
 	List<Integer> identityType; //角色列表
 	String currentId;//当前角色状态
 
@@ -78,8 +70,41 @@ public class UserinfoVO implements Serializable{
 	private String telPhone;//客服电话
 
 	String userMsg;//导购 买手禁用提示信息
-
+	private int inviteObject;//1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
+	private String rsaUserId;//加密之后的用户id
 	
+	
+	public String getRsaUserId() {
+		return rsaUserId;
+	}
+
+	public void setRsaUserId(String rsaUserId) {
+		this.rsaUserId = rsaUserId;
+	}
+
+	public int getInviteObject() {
+		return inviteObject;
+	}
+
+	public void setInviteObject(int inviteObject) {
+		this.inviteObject = inviteObject;
+	}
+
+	public Boolean getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+
+	public String getMallShopDownUrl() {
+		return mallShopDownUrl;
+	}
+
+	public void setMallShopDownUrl(String mallShopDownUrl) {
+		this.mallShopDownUrl = mallShopDownUrl;
+	}
 	public Integer getIfAttention() {
 		return ifAttention;
 	}

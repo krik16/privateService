@@ -52,4 +52,12 @@ public interface VirtualAccountGeneralService {
 	 **/
 	public VirtualAccountEntity selectByUserId(String userId);
 
+	/**
+	 * 保存提现密码
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	public int saveDrawPassword(String userId,String password)throws Exception;
+
 }

@@ -2,7 +2,9 @@ package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
 
-public class SalerDeliveryParam implements Serializable {
+import com.rongyi.easy.rmmm.base.BaseParam;
+
+public class SalerDeliveryParam extends BaseParam implements Serializable {
 
 
 	/**
