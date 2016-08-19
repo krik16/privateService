@@ -15,7 +15,7 @@ import java.util.Map;
  * hebo
  */
 @Service("ConfigShopService")
-public class ConfigShopServiceImpl implements ConfigShopService{
+public class ConfigShopServiceImpl implements ConfigShopService {
 //    private static final String NAMESPACE = "com.rongyi.settle.mapper.ConfigShopMapper";
 
     @Autowired
@@ -43,13 +43,18 @@ public class ConfigShopServiceImpl implements ConfigShopService{
 
     @Override
     public void update(ConfigShop configShop) {
-         mapper.updateByPrimaryKeySelective(configShop);
+        mapper.updateByPrimaryKeySelective(configShop);
     }
 
     @Override
     public boolean deleteConfigShopByConfigId(Integer configId) {
-        if (configId==null)
+        if (configId == null)
             return false;
-        return mapper.deleteConfigShopByConfigId(configId)>0;
+        return mapper.deleteConfigShopByConfigId(configId) > 0;
+    }
+
+    @Override
+    public List<String> getConfigShopIdsByConfigId(Integer configId) {
+        return mapper.getConfigShopIdsByConfigId(configId);
     }
 }

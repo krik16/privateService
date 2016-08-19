@@ -1,11 +1,14 @@
 package com.rongyi.settle.service.impl;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.rss.settle.PaymentStatementGenerateService;
+import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
+import com.rongyi.settle.service.ConfigShopService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
@@ -40,24 +43,27 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
     @Autowired
     private OrderNoGenService orderNoGenService;
 
+    @Autowired
+    ConfigShopService configShopService;
+
     /**
      * 定时任务执行生成对账单操作的入口，分为两种生成模式
      * <p> <p>
-     *  第一种模式：指定日期间隔出账单，例如每隔3天出账单、账单有效期为2016-02-01 ~ 2016-03-01
-     *  <p>
-     *      那么在02-04凌晨会生成 02-01 00:00:00 至 02-03 23:59:59期间完成的交易的对账单数据
-     *      <p>
-     *      以此类推02-07凌晨会生成 02-04 00:00:00 至 02-06 23:59:59期间完成的交易的对账单数据
-     *      <p>
-     *  第二种模式：固定day of month生成对账单，例如每月5、15 、25日出账单，账单有效期为2016-02-01 ~ 2016-03-01
-     *  <p>
-     *      那么在02-05凌晨会生成 02-01 00:00:00 至 02-04 23:59:59期间完成的交易的对账单数据
-     *       <p>
-     *      以此类推02-15凌晨会生成 02-05 00:00:00 至 02-14 23:59:59期间完成的交易的对账单数据
-     *       <p>
-     *      以此类推02-25凌晨会生成 02-15 00:00:00 至 02-24 23:59:59期间完成的交易的对账单数据
-     *      <p>
-     *      最后，请注意，03-05凌晨会生成 02-25 00:00:00 至 03-01 23:59:59期间完成的交易的对账单数据
+     * 第一种模式：指定日期间隔出账单，例如每隔3天出账单、账单有效期为2016-02-01 ~ 2016-03-01
+     * <p/>
+     * 那么在02-04凌晨会生成 02-01 00:00:00 至 02-03 23:59:59期间完成的交易的对账单数据
+     * <p/>
+     * 以此类推02-07凌晨会生成 02-04 00:00:00 至 02-06 23:59:59期间完成的交易的对账单数据
+     * <p/>
+     * 第二种模式：固定day of month生成对账单，例如每月5、15 、25日出账单，账单有效期为2016-02-01 ~ 2016-03-01
+     * <p/>
+     * 那么在02-05凌晨会生成 02-01 00:00:00 至 02-04 23:59:59期间完成的交易的对账单数据
+     * <p/>
+     * 以此类推02-15凌晨会生成 02-05 00:00:00 至 02-14 23:59:59期间完成的交易的对账单数据
+     * <p/>
+     * 以此类推02-25凌晨会生成 02-15 00:00:00 至 02-24 23:59:59期间完成的交易的对账单数据
+     * <p/>
+     * 最后，请注意，03-05凌晨会生成 02-25 00:00:00 至 03-01 23:59:59期间完成的交易的对账单数据
      *
      * @throws Exception
      */
@@ -67,6 +73,10 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         //第一种模式
         List<StatementConfig> statementConfigList = statementConfigService.selectForScheduleSpacing();
         for (StatementConfig statementConfig : statementConfigList) {
+            //验证是否有最新店铺未加入对账单
+            if(ConstantEnum.BIZ_TYPE1.getCodeByte().equals(statementConfig.getBussinessType()) && ConstantEnum.LINK_TYPE_0.getCodeByte().equals(statementConfig.getLinkType())){
+                this.addMallNewShopConfig(statementConfig.getBussinessId(),statementConfig.getId());
+            }
             try {
                 // 从配置中取时间间隔
                 Integer spacingDays = statementConfig.getCycleDay();
@@ -129,6 +139,10 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         List<StatementConfig> statementConfigJumpingList = statementConfigService.selectForScheduleJumping();
         outer:
         for (StatementConfig statementConfig : statementConfigJumpingList) {
+            //验证是否有最新店铺未加入对账单
+            if(ConstantEnum.BIZ_TYPE1.getCodeByte().equals(statementConfig.getBussinessType()) && ConstantEnum.LINK_TYPE_0.getCodeByte().equals(statementConfig.getLinkType())){
+                this.addMallNewShopConfig(statementConfig.getBussinessId(),statementConfig.getId());
+            }
             try {
                 // 先从配置中取出生成账单的固定日期串，比如"5&15&25"
                 List<String> regularDays = Arrays.asList(statementConfig.getCycleRegularDay().split("&"));
@@ -212,6 +226,30 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                 logger.error("定时任务-执行对账单配置出错。id=" + statementConfig.getId());
             }
         }
+    }
+
+    /**
+     * 商场对账单配置为所有的时候去获取该商场下所有店铺，防止后续新增店铺未加在配置中
+     * @param mallId 商场id
+     * @param configId 配置id
+     * @throws Exception
+     */
+    private void addMallNewShopConfig(String mallId, Integer configId){
+        try {
+            List<String> shopIdList = statementConfigService.findAllShopByMallId(mallId);
+            List<String> configShopList = configShopService.getConfigShopIdsByConfigId(configId);
+            for (String shopId : shopIdList) {
+                if(!configShopList.contains(shopId)){
+                    ConfigShop configShop = new ConfigShop();
+                    configShop.setConfigId(configId);
+                    configShop.setShopId(shopId);
+                    configShopService.insert(configShop);
+                }
+            }
+        }catch (Exception e){
+            logger.warn("检查商场下最新店铺数据出错,忽略此次店铺信息更新,继续结算,errMsg={}",e.getMessage());
+        }
+
     }
 
     public static void main(String[] args) {

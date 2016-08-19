@@ -111,4 +111,9 @@
     delete from config_shop
     where config_id = #{configId,jdbcType=INTEGER}
   </delete>
+
+  <select id="getConfigShopIdsByConfigId" parameterType="int" resultType="java.lang.String">
+    select shop_id as shopId
+    from config_shop where config_id=#{configId, jdbcType=INTEGER}
+  </select>
 </mapper>

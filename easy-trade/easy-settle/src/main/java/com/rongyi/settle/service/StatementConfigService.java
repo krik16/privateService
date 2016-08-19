@@ -8,15 +8,15 @@
 
 package com.rongyi.settle.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
+
+import java.util.List;
+import java.util.Map;
 
 /**	
  * @Author:  柯军
@@ -184,4 +184,9 @@ public interface StatementConfigService {
 	 * @return
 	 */
 	List<Integer> getUserIdByConfigId(Integer configId);
+
+	/**
+	 * 根据商场id查询出所有店铺id集合
+	 */
+	List<String> findAllShopByMallId(String mallId) throws Exception;
 }
