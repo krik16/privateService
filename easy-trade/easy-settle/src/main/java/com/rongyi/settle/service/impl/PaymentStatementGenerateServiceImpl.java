@@ -232,7 +232,6 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
      * 商场对账单配置为所有的时候去获取该商场下所有店铺，防止后续新增店铺未加在配置中
      * @param mallId 商场id
      * @param configId 配置id
-     * @throws Exception
      */
     private void addMallNewShopConfig(String mallId, Integer configId){
         try {
@@ -250,13 +249,6 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
             logger.warn("检查商场下最新店铺数据出错,忽略此次店铺信息更新,继续结算,errMsg={}",e.getMessage());
         }
 
-    }
-
-    public static void main(String[] args) {
-
-        DateTime currentTime = new DateTime(new Date());
-        currentTime = currentTime.plusDays(3);
-        System.out.println(currentTime.toString());
     }
 
 }
