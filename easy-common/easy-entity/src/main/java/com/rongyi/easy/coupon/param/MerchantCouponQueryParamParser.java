@@ -84,16 +84,27 @@ public class MerchantCouponQueryParamParser {
             filter.setName(array[0]);
             filter.setType(FilterType.toType(array[1]));
             filter.setValueType(ValueType.toType(array[2]));
-            if (array[2].equals("VARCHAR")) {
-                filter.setValue(array[3]);
-            } else if (array[2].equals("TIMESTAMP")) {
-            	if(array[3].contains("/")){
-                filter.setValue(DateTool.string2Date(array[3],"yyyy/MM/dd HH:mm:ss"));
-            	}else if(array[3].contains("-")){
-            		filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
-            	}
-            } else {
-                filter.setValue(Integer.parseInt(array[3]));
+            if (array[1].equals("IN")) {
+                List<String> valueList = new ArrayList<>();
+                String valueArray[] = array[3].split(";");
+                if (valueArray.length > 0) {
+                    for (String va : valueArray) {
+                        valueList.add(va);
+                    }
+                }
+                filter.setValue(valueList);
+            }else {
+                if (array[2].equals("VARCHAR")) {
+                    filter.setValue(array[3]);
+                } else if (array[2].equals("TIMESTAMP")) {
+                    if (array[3].contains("/")) {
+                        filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
+                    } else if (array[3].contains("-")) {
+                        filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
+                    }
+                } else {
+                    filter.setValue(Integer.parseInt(array[3]));
+                }
             }
             filter.setFilterRelation(array[4]);
             return filter;
