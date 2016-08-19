@@ -126,7 +126,8 @@ public interface Constants {
         int MALLLIFE_USERLOGIN_BINDPHONE_KEY=60*15;//MALLLIFE 绑定手机号
         int MALLLIFE_USERLOGIN_WECHAT_KEY=60*15;//MALLLIFE 微信绑定手机号
         int MALLLIFE_QRCODE_KEY=60*15;//MALLLIFE 登录码
-
+        int MALLSHOP_WITHDRAWCASH_KEY=60*15;//MALLSHOP 摩店设置 提现密码
+        int MALLSHOP_WITHDRAWRADOM_KEY=60*15;//MALLSHOP 摩店设置 修改保存密码随机码
         int SESSION_REGIST_TIME = 30 * 60;//注册时的验证码有效期为30分钟
         int SESSION_LEFT_TIME = 60 * 60 * 24 * 30;//一个月的时间吧
     }
@@ -394,6 +395,16 @@ public interface Constants {
                 new PropertyDate("1", "v1.0.0"),
         		};
 
+    }
+    interface SHARE_USER_TYPE{
+    	/**容易逛用户*/
+    	Integer MALLLIFE = 1;
+    	/**导购*/
+    	Integer MALL_GUIDE = 2;
+    	/**买手*/
+    	Integer MALL_BUYER = 3;
+    	/**摩店用户*/
+    	Integer MALLSHOP = 4;
     }
 }
 

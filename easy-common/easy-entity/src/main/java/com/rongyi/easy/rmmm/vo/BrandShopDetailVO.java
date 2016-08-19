@@ -30,7 +30,8 @@ public class BrandShopDetailVO implements Serializable{
 	private String shopMid;// shop mongoId
 	private int guideNum;//店铺导购数量
 	private String rankAvg;//店铺评分
-
+	private Boolean isOrdering;//是否接单中   true是  false否
+	
 	public String getShopLogo() {
 		return shopLogo;
 	}
@@ -213,6 +214,14 @@ public class BrandShopDetailVO implements Serializable{
 
 	public void setRankAvg(String rankAvg) {
 		this.rankAvg = rankAvg;
+	}
+
+	public Boolean getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
 	}
 	
 }
