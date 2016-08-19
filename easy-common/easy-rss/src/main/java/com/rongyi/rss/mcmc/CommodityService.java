@@ -191,7 +191,7 @@ public interface CommodityService {
      * @param type
      * @return
      */
-    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+    ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
     /**
      * 获取商品直播的地址和品牌
      * @param commodityIds
@@ -248,4 +248,6 @@ public interface CommodityService {
     public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
 
     public  ResponseVO selectSpecById(String categoryId);
+
+    public Long selectOnlineCommodityCountByuser(String createId);
 }
