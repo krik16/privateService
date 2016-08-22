@@ -44,13 +44,21 @@ public enum MallShopErrorCode {
 
 
     /** 订单相关  后4位区间  3001---4000*/
-
+    ERROR_EXPRESS(3001,"物流单号和公司编码重复"),
 
     /** 首页相关  后4位区间  4001---5000*/
     
     /** 代金券相关  后4位区间  5001---6000*/
     ERROR_COUPON_PUBLISH_CHANNEL(1075001,"亲，活动券你不能管理哦"),
-
+    
+    /** 邀请下载   后4位区间  6001---7000 */
+    ERROR_PHONE_NULL(1076001,"您还未输入手机号哦"),
+    ERROR_PHONE_FORMAT(1076002,"您输入手机号格式不正确"),
+    ERROR_PHONE_APP_EXIST(1076003,"您已是容易逛用户哦"),
+    ERROR_PHONE_MALLSHOP_EXIST(1076004,"您已是摩店用户哦"),
+    ERROR_INVITE_USER_NOT_EXIST(1076005,"邀请对象不符合要求"),
+    ERROR_REPEAT_RECEIVE(1076006,"你已领取过，请不要重复领取"),
+    ERROR_OPENID(1076007,"openId为空")
     ;
 
     /**

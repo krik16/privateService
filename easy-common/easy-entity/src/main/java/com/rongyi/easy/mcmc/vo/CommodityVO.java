@@ -82,7 +82,7 @@ public class CommodityVO  implements  Serializable {
 	private List<String> goodsParam;//商品参数
 	private Integer activityId;//活动id
 	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
-
+	private Long updateAt;
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -485,6 +485,14 @@ public class CommodityVO  implements  Serializable {
 		this.activityPrice = activityPrice;
 	}
 
+	public Long getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(Long updateAt) {
+		this.updateAt = updateAt;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -578,6 +586,7 @@ public class CommodityVO  implements  Serializable {
 		this.update_by = commodity.getUpdate_by();//修改人
 		this.commodityModelNo = commodity.getCommodityModelNo();//商品款号
 		this.goodsParam = commodity.getGoodsParam();//商品参数
+		this.updateAt=commodity.getUpdateAt().getTime();
 	}
 	@Override
 	public String toString() {

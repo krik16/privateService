@@ -28,7 +28,7 @@ public class UserGuideChatEntity {
     /** 店铺mysqlId */
     private Integer shopId;
     
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
