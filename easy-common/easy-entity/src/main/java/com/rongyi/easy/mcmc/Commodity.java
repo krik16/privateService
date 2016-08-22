@@ -379,6 +379,9 @@ public class Commodity implements  Serializable,Cloneable{
 		this.stockStatus = stockStatus;
 	}
 	public Double getDiscount() {
+		if (discount != null){
+			return discount;
+		}
 		try {
 			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
 				BigDecimal currentPrice = new BigDecimal(this.currentPrice);
