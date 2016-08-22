@@ -11,21 +11,12 @@ import java.util.List;
 public class OldItemVO {
 
     private String itemName;//订单项name
-    private String couponId;//卡券id
     private String thumbnail;//缩略图
     private Double orderPrice;//订单总价
     private Integer orderNum;//下单总数量
     private Integer outDateFlag;//是否已过销售时间：0-未过  1-已过
     private Integer orderDetailId;//订单项主键Id
     private List<OldUserCode> myActivityList;
-    
-    public String getCouponId() {
-		return couponId;
-	}
-
-	public void setCouponId(String couponId) {
-		this.couponId = couponId;
-	}
 
 	public String getItemName() {
         return itemName;
