@@ -114,6 +114,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String mallName;  ///< 商场名称
 	@Field("hotAreaName")
 	private String hotAreaName; ///< 商圈名称
+	@Field("top")
+	private Integer top; ///< 置顶排序
 
 	private String secKillSign;
 
@@ -492,6 +494,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setHotAreaName(String hotAreaName) {
 		this.hotAreaName = hotAreaName;
+	}
+
+	public Integer getTop() {
+		return top;
+	}
+
+	public void setTop(Integer top) {
+		this.top = top;
 	}
 
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
