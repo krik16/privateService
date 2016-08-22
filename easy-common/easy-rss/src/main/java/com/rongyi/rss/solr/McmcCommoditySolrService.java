@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.mcmc.vo.CommoditySortVo;
 import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
@@ -321,5 +323,13 @@ public interface McmcCommoditySolrService {
 	boolean updateCommodityById(String id, Map<String, Object> params);
 
 	public void cleanCommoditiesLiveId(List<String> commodityIds) throws Exception;
+
+	/**
+	 * 设置商品优先排序
+	 *
+	 * @param list
+	 * @throws RYServiceException
+	 */
+	public void setCommoditySort(List<CommoditySortVo> list) throws RYServiceException;
 
 }
