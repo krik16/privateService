@@ -49,6 +49,15 @@ public interface MerchantCouponServce {
     public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam, UserInfoVo UserInfoVo, Boolean requiredCount);
 
     /**
+     * 商家卡券统计接口
+     *
+     * @param queryParam    查询参数
+     * @param userInfoVo
+     * @return
+     */
+    public int getCountByParam(QueryParam queryParam, UserInfoVo userInfoVo);
+
+    /**
      * 商家卡券通用查询接口
      *
      * @param queryParam 查询参数
@@ -64,6 +73,14 @@ public interface MerchantCouponServce {
      * @return
      */
     public Boolean updateCoupon(Coupon coupon, UserInfoVo userInfoVo) throws Exception;
+
+    /**
+     * 卡券普通修改字段
+     *
+     * @param coupon
+     * @return
+     */
+    public Boolean update(Coupon coupon) throws Exception;
 
     /**
      * 商家卡券活动券的创建
@@ -119,6 +136,8 @@ public interface MerchantCouponServce {
 
     public Coupon selectByPrimaryKey(String couponId);
 
+    public Coupon getCouponById(String couponId);
+
 
     /**
      * 批量插入商场通用券、活动券 通用店铺列表
@@ -142,5 +161,7 @@ public interface MerchantCouponServce {
      * @return
      */
     public List<ShopCouponsVO> shopsCouponsCount(List<String> shopIds);
+
+    
 }
  

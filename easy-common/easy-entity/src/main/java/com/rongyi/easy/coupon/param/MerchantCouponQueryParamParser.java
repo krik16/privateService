@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class MerchantCouponQueryParamParser {
     public static QueryParam parserParms(String params) {
+        return parserParms(params, true);
+    }
+
+    public static QueryParam parserParms(String params,boolean activityStatus) {
         try {
             QueryParam queryParam=new QueryParam();
             if(StringUtils.isNotBlank(params)) {
@@ -47,12 +51,14 @@ public class MerchantCouponQueryParamParser {
                         queryParam.setQueryOrders(queryOrderList);
                     }
                 }
-                List<JoinFilter> joinFilters = new ArrayList<>();
-                List<QueryFilter> joinQueryFilters = new ArrayList<>();
-                joinQueryFilters.add(new QueryFilter("coupon.id",FilterType.BEQ,ValueType.VARCHAR,"activity_goods.goods_id",QueryParam.RELATION_AND));
-                joinQueryFilters.add(new QueryFilter("activity_goods.type",FilterType.EQUALS,ValueType.INTEGER, ActivityConstants.GoodsLabelType.ACTIVITYCOUPON,QueryParam.RELATION_AND));
-                joinFilters.add(new JoinFilter(0,"activity_goods",joinQueryFilters));
-                queryParam.setJoinFilters(joinFilters);
+                if(activityStatus) {
+                    List<JoinFilter> joinFilters = new ArrayList<>();
+                    List<QueryFilter> joinQueryFilters = new ArrayList<>();
+                    joinQueryFilters.add(new QueryFilter("coupon.id", FilterType.BEQ, ValueType.VARCHAR, "activity_goods.goods_id", QueryParam.RELATION_AND));
+                    joinQueryFilters.add(new QueryFilter("activity_goods.type", FilterType.EQUALS, ValueType.INTEGER, ActivityConstants.GoodsLabelType.ACTIVITYCOUPON, QueryParam.RELATION_AND));
+                    joinFilters.add(new JoinFilter(0, "activity_goods", joinQueryFilters));
+                    queryParam.setJoinFilters(joinFilters);
+                }
                 if(jsonObject.get("pageNo")!=null){
                     Integer pageno=jsonObject.getInt("pageNo");
                     queryParam.setCurrentPage(pageno);
@@ -78,16 +84,27 @@ public class MerchantCouponQueryParamParser {
             filter.setName(array[0]);
             filter.setType(FilterType.toType(array[1]));
             filter.setValueType(ValueType.toType(array[2]));
-            if (array[2].equals("VARCHAR")) {
-                filter.setValue(array[3]);
-            } else if (array[2].equals("TIMESTAMP")) {
-            	if(array[3].contains("/")){
-                filter.setValue(DateTool.string2Date(array[3],"yyyy/MM/dd HH:mm:ss"));
-            	}else if(array[3].contains("-")){
-            		filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
-            	}
-            } else {
-                filter.setValue(Integer.parseInt(array[3]));
+            if (array[1].equals("IN")) {
+                List<String> valueList = new ArrayList<>();
+                String valueArray[] = array[3].split(";");
+                if (valueArray.length > 0) {
+                    for (String va : valueArray) {
+                        valueList.add(va);
+                    }
+                }
+                filter.setValue(valueList);
+            }else {
+                if (array[2].equals("VARCHAR")) {
+                    filter.setValue(array[3]);
+                } else if (array[2].equals("TIMESTAMP")) {
+                    if (array[3].contains("/")) {
+                        filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
+                    } else if (array[3].contains("-")) {
+                        filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
+                    }
+                } else {
+                    filter.setValue(Integer.parseInt(array[3]));
+                }
             }
             filter.setFilterRelation(array[4]);
             return filter;
