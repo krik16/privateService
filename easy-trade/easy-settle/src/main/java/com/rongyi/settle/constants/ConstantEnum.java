@@ -65,6 +65,10 @@ public enum ConstantEnum {
     IS_ONESELF(1,"关联自身"),
     NOT_ONESELF(0,"非关联自身"),
 
+    LINK_TYPE_0(0,"所有"),
+    LINK_TYPE_1(1,"自身"),
+    LINK_TYPE_2(2,"部分"),
+
 	PAGE_SIZE(10,"分页条数"),
 	
 	CURRENT_PAGE(1,"默认页数");

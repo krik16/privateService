@@ -22,4 +22,6 @@ public interface ConfigShopService {
     void update(ConfigShop configShop);
 
     boolean deleteConfigShopByConfigId(Integer configId);
+
+    List<String> getConfigShopIdsByConfigId(Integer configId);
 }

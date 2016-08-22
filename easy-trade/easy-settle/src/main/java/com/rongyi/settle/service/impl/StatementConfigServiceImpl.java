@@ -79,16 +79,15 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
         List<StatementConfigVO> list = this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
-        if (CollectionUtils.isNotEmpty(list))
-        {
-            for (StatementConfigVO vo : list){
-                if (vo.getStatus()!=null && vo.getStatus().byteValue()==ConstantEnum.STATUS_2.getCodeByte()){
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (StatementConfigVO vo : list) {
+                if (vo.getStatus() != null && vo.getStatus().byteValue() == ConstantEnum.STATUS_2.getCodeByte()) {
                     Map<String, Object> paramsMap = new HashMap<>();
                     paramsMap.put("opId", vo.getId());
                     paramsMap.put("opType", ConstantEnum.STATUS_2.getCodeInt());
                     paramsMap.put("opModel", ConstantEnum.OP_MODEL_0.getCodeInt());
                     OperationLog opLog = operationLogMapper.getOpByMap(paramsMap);
-                    if (opLog!=null)
+                    if (opLog != null)
                         vo.setVerifyDesc(opLog.getDesc());
                 }
             }
@@ -140,15 +139,15 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             bussinessInfoService.updateByConfigId(bussinessInfo);
             configShopService.deleteConfigShopByConfigId(statementConfig.getId());
         }
-        insertShopConfigNysn(shopConfigs,statementConfig.getId());
-        if (statementConfig.getStatus()==null) {
+        insertShopConfigNysn(shopConfigs, statementConfig.getId());
+        if (statementConfig.getStatus() == null) {
             statementConfig.setStatus((byte) 0);
         }
         saveOperationLog(statementConfig.getId(), statementConfig.getStatus().intValue(), desc, statementConfig.getCreateBy());
     }
 
-    public void insertShopConfigNysn(final List<ConfigShop> shopConfigs,final Integer configId) {
-        logger.info("异步更新店铺配置信息开始,configId={}",configId);
+    public void insertShopConfigNysn(final List<ConfigShop> shopConfigs, final Integer configId) {
+        logger.info("异步更新店铺配置信息开始,configId={}", configId);
         final Thread thread = new Thread() {
             @Override
             public void run() {
@@ -159,7 +158,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         logger.info("异步更新店铺配置信息结束,configId={}", configId);
                     }
                 } catch (Exception e) {
-                    logger.error("异步更新店铺配置信息失败,configId={}",configId);
+                    logger.error("异步更新店铺配置信息失败,configId={}", configId);
                     e.printStackTrace();
                 }
 
@@ -219,43 +218,43 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return oldShopConfigs != null && oldShopConfigs.size() == shopConfigs.size() && oldShopConfigs.containsAll(shopConfigs);
     }
 
-	/* (non-Javadoc)
-	 * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleDaily()
-	 */
-	@Override
-	public List<StatementConfig> selectForScheduleDaily() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("currentTime", new Date());
-		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
-	}
+    /* (non-Javadoc)
+     * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleDaily()
+     */
+    @Override
+    public List<StatementConfig> selectForScheduleDaily() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("currentTime", new Date());
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
+    }
 
-	/* (non-Javadoc)
-	 * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleSpacing()
-	 */
-	@Override
-	public List<StatementConfig> selectForScheduleSpacing() {
+    /* (non-Javadoc)
+     * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleSpacing()
+     */
+    @Override
+    public List<StatementConfig> selectForScheduleSpacing() {
         Map<String, Object> map = new HashMap<>();
         map.put("currentTime", new Date());
         map.put("cycleType", SettleConstant.CountCycleType.DAY);
         return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForScheduleSpacing", map);
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleJumping()
-	 */
-	@Override
-	public List<StatementConfig> selectForScheduleJumping() {
-		Map<String, Object> map = new HashMap<>();
+    }
 
-		Calendar cal = Calendar.getInstance();
-		// 对账单是第二天凌晨生成前一天的数据，所以要减一天再判断是否在配置的时间段内
-		cal.add(Calendar.DATE, -1);
+    /* (non-Javadoc)
+     * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleJumping()
+     */
+    @Override
+    public List<StatementConfig> selectForScheduleJumping() {
+        Map<String, Object> map = new HashMap<>();
 
-		map.put("currentTime", cal.getTime());
+        Calendar cal = Calendar.getInstance();
+        // 对账单是第二天凌晨生成前一天的数据，所以要减一天再判断是否在配置的时间段内
+        cal.add(Calendar.DATE, -1);
+
+        map.put("currentTime", cal.getTime());
         map.put("cycleType", SettleConstant.CountCycleType.OTHER);
-		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForScheduleJumping", map);
-	}
-	
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForScheduleJumping", map);
+    }
+
     @Override
     public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId) {
         boolean result = false;
@@ -311,7 +310,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             Map<String, Object> map = new HashMap<>();
             map.put("id", id);
             statementConfigVO = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
-            if (statementConfigVO!=null && statementConfigVO.getLinkType()!=0) {
+            if (statementConfigVO != null && statementConfigVO.getLinkType() != 0) {
                 map.clear();
                 map.put("configId", id);
                 statementConfigVO.setConfigShops(selectConfigShopsPage(map, 1, 10000));
@@ -360,7 +359,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         map.put("effectStartTime", statementConfig.getEffectStartTime());
         map.put("effectEndTime", statementConfig.getEffectEndTime());
         if (statementConfig.getId() != null) {
-            map.put("excludeId", statementConfig.getId() );//excludeId: 修改时需要排除的配置id
+            map.put("excludeId", statementConfig.getId());//excludeId: 修改时需要排除的配置id
         }
         List<ConfigShop> shopConfigs = new ArrayList<>();
         if (lintType == null) {
@@ -382,7 +381,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     for (ShopVO shopVO : shopVOs) {
                         linkShopList.add(shopVO.getId());
                     }
-                    map.put("linkShopIds",linkShopList);
+                    map.put("linkShopIds", linkShopList);
                     if (checkConfigExist(map, shopConfigs)) {
                         ReMap.put("result", true);
                         return ReMap;
@@ -403,7 +402,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         return ReMap;
                     }
                     if (linkShopIds != null) {
-                        map.put("linkShopIds",Arrays.asList(linkShopIds));
+                        map.put("linkShopIds", Arrays.asList(linkShopIds));
                         if (checkConfigExist(map, shopConfigs)) {
                             ReMap.put("result", true);
                             return ReMap;
@@ -426,7 +425,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 if (linkShopIds != null) {
 //                    List<String> linkShopList = new ArrayList<>();
 //                    linkShopList.toArray(linkShopIds);
-                    map.put("linkShopIds",Arrays.asList(linkShopIds));
+                    map.put("linkShopIds", Arrays.asList(linkShopIds));
                     if (checkConfigExist(map, shopConfigs)) {
                         ReMap.put("result", true);
                         return ReMap;
@@ -455,68 +454,65 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
     /**
      * 根据配置id查询该配置下配置的所有账号id
+     *
      * @param configId
      * @return
      */
-    public List<Integer> getUserIdByConfigId(Integer configId){
-        if (configId==null){
+    public List<Integer> getUserIdByConfigId(Integer configId) {
+        if (configId == null) {
             return null;
         }
         logger.info("getUserAccountByConfigId start configId = {}", configId);
         List<Integer> result = new ArrayList<>();
         try {
             StatementConfigVO config = selectConfigInfoById(configId);
-            if (config!=null)
-            {
+            if (config != null) {
                 List<UserInfoVo> userInfoVos = new ArrayList<>();
-                if (config.getLinkType()!=null && config.getLinkType()==0)//全部
+                if (config.getLinkType() != null && config.getLinkType() == 0)//全部
                 {
                     List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
-                    if(CollectionUtils.isNotEmpty(selfUsers)) {
+                    if (CollectionUtils.isNotEmpty(selfUsers)) {
                         userInfoVos.addAll(selfUsers);
                     }
                     List<ShopVO> shops = getShopIdByParam(config.getBussinessType(), config.getBussinessId());
-                    for (ShopVO shop : shops){//getAccountInfoByParam(isOneself, null, 1, businessId, null);
+                    for (ShopVO shop : shops) {//getAccountInfoByParam(isOneself, null, 1, businessId, null);
                         List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shop.getId(), null);
-                        if(CollectionUtils.isNotEmpty(shopUsers))
+                        if (CollectionUtils.isNotEmpty(shopUsers))
                             userInfoVos.addAll(shopUsers);
                     }
-                }
-                else if (config.getLinkType()!=null && (config.getLinkType()==1|| config.getLinkType()==2))//自身 or 部分
+                } else if (config.getLinkType() != null && (config.getLinkType() == 1 || config.getLinkType() == 2))//自身 or 部分
                 {
-                    if (config.getConfigShops()!=null)
-                    {
+                    if (config.getConfigShops() != null) {
                         List<String> shopIds = new ArrayList<>();
                         List<String> realShopIds = new ArrayList<>();
-                        for(ConfigShopVO configShop : config.getConfigShops()){
-                            if (StringUtils.isNotBlank(configShop.getShopId())){
+                        for (ConfigShopVO configShop : config.getConfigShops()) {
+                            if (StringUtils.isNotBlank(configShop.getShopId())) {
                                 shopIds.add(configShop.getShopId());
                             }
                         }
-                        if (config.getLinkShopOp()==0)
+                        if (config.getLinkShopOp() == 0)
                             realShopIds = shopIds;
                         else {
                             List<ShopVO> shops = getShopIdByParam(config.getBussinessType(), config.getBussinessId());
-                            for (ShopVO shop : shops){
+                            for (ShopVO shop : shops) {
                                 realShopIds.add(shop.getId());
                             }
                             realShopIds.removeAll(shopIds);
                         }
-                        for (String shopId : realShopIds){
+                        for (String shopId : realShopIds) {
                             List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shopId, null);
-                            if(CollectionUtils.isNotEmpty(shopUsers))
+                            if (CollectionUtils.isNotEmpty(shopUsers))
                                 userInfoVos.addAll(shopUsers);
                         }
                     }
-                    if (config.getLinkType()==1)
-                    {
+                    if (config.getLinkType() == 1) {
                         List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
-                        if(CollectionUtils.isNotEmpty(selfUsers)) {
+                        if (CollectionUtils.isNotEmpty(selfUsers)) {
                             userInfoVos.addAll(selfUsers);
                         }
                     }
                 }
-                for (UserInfoVo userInfoVo : userInfoVos){
+                for (UserInfoVo userInfoVo : userInfoVos) {
                     result.add(userInfoVo.getId());
                 }
             }
@@ -550,23 +546,34 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      * 判断对账配置是否存在
      *
      * @param paramsMap
-     * @param configShops  配置中间表
+     * @param configShops 配置中间表
      * @return
      */
     private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
-        logger.info("linkShopIds={}",paramsMap.get("linkShopIds"));
+        logger.info("linkShopIds={}", paramsMap.get("linkShopIds"));
 
-        if (paramsMap.get("linkShopIds") != null){
-            List<String> linkShopIds = (List<String>)paramsMap.get("linkShopIds");
-            for(String shopId : linkShopIds){
+        if (paramsMap.get("linkShopIds") != null) {
+            List<String> linkShopIds = (List<String>) paramsMap.get("linkShopIds");
+            for (String shopId : linkShopIds) {
                 ConfigShop configShop = new ConfigShop();
                 configShop.setShopId(shopId);
                 configShops.add(configShop);
             }
         }
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", paramsMap);
-        logger.info("校验完成count={}",count);
+        logger.info("校验完成count={}", count);
         return count > 0;
+    }
+
+
+    @Override
+    public List<String> findAllShopByMallId(String mallId) throws Exception {
+        List<String> linkShopIdList = new ArrayList<>();
+        List<ShopVO> shopVOs = getShopIdByParam(ConstantEnum.BIZ_TYPE1.getCodeByte(), mallId);
+        for (ShopVO shopVO : shopVOs) {
+            linkShopIdList.add(shopVO.getId());
+        }
+        return linkShopIdList;
     }
 
     private List<ShopVO> getShopIdByParam(byte bussinessType, String bussinessId) throws Exception {
@@ -627,11 +634,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
     /**
      * 查询账户
-     * @param isOneself: 1：自身账号    0：非自身账号
-     * @param type   商户类型
+     *
+     * @param isOneself:  1：自身账号    0：非自身账号
+     * @param type        商户类型
      * @param guideType   导购类型
-     * @param id   商户id
-     * @param userAccount   账号（查询条件用）
+     * @param id          商户id
+     * @param userAccount 账号（查询条件用）
      * @return
      */
     @Override
