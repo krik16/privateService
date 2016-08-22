@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rongyi</groupId>
     <artifactId>easy-common</artifactId>
-    <version>3.9.2-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <version>4.0.5-SNAPSHOT</version>
+   <packaging>pom</packaging>
     <modules>
         <module>easy-entity</module>
         <module>easy-core</module>
