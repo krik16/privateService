@@ -688,6 +688,7 @@ public class Commodity implements  Serializable,Cloneable{
 				",shopName=" + shopName +
 				",mallName=" + mallName +
 				",hotAreaName=" + hotAreaName +
+				",discount=" + discount +
 				'}';
 	}
 
