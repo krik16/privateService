@@ -22,6 +22,7 @@ public class MSCouponQueryVO extends PageVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	List<MSCouponVO> msCouponVOList;
+	private Integer validCount;//上线卡券数量
 
 	public List<MSCouponVO> getRmmmCouponQueryVoList() {
 		return msCouponVOList;
@@ -30,5 +31,21 @@ public class MSCouponQueryVO extends PageVO implements Serializable{
 	public void setRmmmCouponQueryVoList(
 			List<MSCouponVO> msCouponVOList) {
 		this.msCouponVOList = msCouponVOList;
+	}
+
+	public Integer getValidCount() {
+		return validCount;
+	}
+
+	public void setValidCount(Integer validCount) {
+		this.validCount = validCount;
+	}
+
+	@Override
+	public String toString() {
+		return "MSCouponQueryVO{" +
+				"msCouponVOList=" + msCouponVOList +
+				", validCount=" + validCount +
+				'}';
 	}
 }

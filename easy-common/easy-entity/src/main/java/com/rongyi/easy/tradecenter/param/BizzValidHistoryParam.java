@@ -23,7 +23,7 @@ public class BizzValidHistoryParam implements Serializable{
     private Date useTimeEnd;//验证结束时间
     private List<String> couponIds;
     /**
-     * 0:代金券；1：活动券；2：礼品；3：停车券类
+     * 0:代金券；1：活动券；2：礼品；3：停车券类  4营销类（活动礼品）
      */
     private Integer type;
 

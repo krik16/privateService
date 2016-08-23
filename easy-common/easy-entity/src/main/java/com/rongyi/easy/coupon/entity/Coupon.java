@@ -256,6 +256,12 @@ public class Coupon implements Serializable {
      */
     private Boolean isDeleted;
 
+    /**
+     * 第一位表示微信，第二位表示终端。0：不能操作是否显示；1：隐藏；2：显示
+     */
+    private String showChannel;
+
+    private String thirdCouponType;
 
     /**
      * 代金券分类
@@ -263,16 +269,16 @@ public class Coupon implements Serializable {
     private CouponCategory couponCategory;
     private List<CouponCategory> listCouponCategorys;
 
-    // 第三方卡券对应的卡券类型
-    private String thirdCouponType;
+    
 
 	public List<CouponCategory> getListCouponCategorys() {
 		return listCouponCategorys;
 	}
 
-	public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
-		this.listCouponCategorys = listCouponCategorys;
-	}
+    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+        this.listCouponCategorys = listCouponCategorys;
+    }
+
 
 	/**
      * 代金券关联的集团
@@ -591,6 +597,13 @@ public class Coupon implements Serializable {
     }
 
 
+    public String getShowChannel() {
+        return showChannel;
+    }
+
+    public void setShowChannel(String showChannel) {
+        this.showChannel = showChannel;
+    }
 
     public List<String> getDetailPicUrls() {
         List<String> list = ListUtils.EMPTY_LIST;

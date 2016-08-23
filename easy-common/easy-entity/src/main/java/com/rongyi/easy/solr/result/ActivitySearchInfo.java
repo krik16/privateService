@@ -7,7 +7,7 @@ import java.util.List;
 public class ActivitySearchInfo implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 5991538172808720465L;
 
@@ -18,7 +18,7 @@ public class ActivitySearchInfo implements Serializable {
 	private List<Double> location; //坐标
 	private String description; //描述
 	private String city_name; //城市名
-	private String shop_own; //店铺所属名  
+	private String shop_own; //店铺所属名
 	private String title; //标题
 	private Date start_time; //开始时间
 	private Date end_time; //结束时间
@@ -45,13 +45,15 @@ public class ActivitySearchInfo implements Serializable {
 	private Integer payDownTime; //支付剩余时间(单位是秒)
 	private List<String	> customCategoryIds; //卡券对应店铺的自定义分类
 	private Integer apply_shops_count; // 卡券支持的店铺数量
-	
+
 	private int activityStatus = 0; 	//活动状态[0其他(不参与逻辑) 未开始1 正常2 结束3]
 	private String workTime = "9:30~18:30（周一至周五）\n法定假日除外";
-	
+
 	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
 
 	private List<String> shopIdList = null;
+
+	private Integer publishChannel;//发布渠道(0:大运营；1：商家后台；2:摩店)
 
 	public List<String> getShopIdList() {
 		return shopIdList;
@@ -385,13 +387,21 @@ public class ActivitySearchInfo implements Serializable {
 	public void setActivityStatus(int activityStatus) {
 		this.activityStatus = activityStatus;
 	}
-	
+
 	public String getActivityType() {
 		return activityType;
 	}
 
 	public void setActivityType(String activityType) {
 		this.activityType = activityType;
+	}
+
+	public Integer getPublishChannel() {
+		return publishChannel;
+	}
+
+	public void setPublishChannel(Integer publishChannel) {
+		this.publishChannel = publishChannel;
 	}
 
 	@Override
@@ -436,6 +446,7 @@ public class ActivitySearchInfo implements Serializable {
 				", limitDesc='" + limitDesc + '\'' +
 				", usageDesc='" + usageDesc + '\'' +
 				", remark='" + remark + '\'' +
+				", publishChannel='" + publishChannel + '\'' +
 				'}';
 	}
 

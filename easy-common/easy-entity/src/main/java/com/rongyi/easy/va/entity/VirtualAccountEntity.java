@@ -36,6 +36,7 @@ public class VirtualAccountEntity implements Serializable {
 	private String stopReason;// false (0)未冻结
 	/** 冻结时间 */
 	private Date stopAt;// false (0)未冻结
+	private String drawPassword;//提现密码
 
 	public Integer getId() {
 		return id;
@@ -125,6 +126,14 @@ public class VirtualAccountEntity implements Serializable {
 		this.stopAt = stopAt;
 	}
 
+	public String getDrawPassword() {
+		return drawPassword;
+	}
+
+	public void setDrawPassword(String drawPassword) {
+		this.drawPassword = drawPassword;
+	}
+
 	@Override
 	public String toString() {
 		return "VirtualAccountEntity{" +
@@ -139,6 +148,7 @@ public class VirtualAccountEntity implements Serializable {
 				", isSuspended=" + isSuspended +
 				", stopReason='" + stopReason + '\'' +
 				", stopAt=" + stopAt +
+				", drawPassword='" + drawPassword + '\'' +
 				'}';
 	}
 }
