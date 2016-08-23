@@ -1,6 +1,7 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.roa.entity.CouponEntity;
 import com.rongyi.easy.solr.ActivityDocument;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public interface CouponSynSolrService {
      */
     public List<ActivityDocument> getActivityDocumentList(int skip,int pageSize) throws Exception;
 
+    public CouponEntity getActivityById(String id) throws Exception;
+    	
     public ActivityDocument getActivityDocument(String activityMid);
     
     /**

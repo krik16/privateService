@@ -840,4 +840,10 @@ public interface Constants {
         Integer MD_MANAGEMENT = 3;
     }
 
+    interface INDEX_CORE_STAT {//0更新成功  1更新中  2更新失败
+        String SUCCESS = "success";
+        String FAILED = "failed";
+        String PROGRESS = "progress";
+        String PERPROGRESS = "perprogress";
+    }
 }
