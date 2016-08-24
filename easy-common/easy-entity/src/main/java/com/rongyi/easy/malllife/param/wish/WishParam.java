@@ -15,10 +15,18 @@ public class WishParam extends MalllifeBaseParam implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer id;//心愿id
 	private String name;//商品名称
 	private String brandName;//品牌名称
 	private String comment;//备注
 	private List<String> picList;//图片集合
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
