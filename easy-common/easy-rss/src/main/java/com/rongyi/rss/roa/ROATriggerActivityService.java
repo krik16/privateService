@@ -2,6 +2,8 @@ package com.rongyi.rss.roa;
 
 import java.sql.Timestamp;
 
+import com.rongyi.easy.coupon.entity.OldCoupon;
+import com.rongyi.easy.messagemanage.entity.TriggerActivityVo;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
 
 public interface ROATriggerActivityService {
@@ -35,6 +37,10 @@ public interface ROATriggerActivityService {
      */
     public int getRegisteCoupons(TriggerActivityParam param);
 
-
+    /**
+     * 查询有效的老推新红包
+     * @return
+     */
+    public TriggerActivityVo findTriggerActivityVO(int pushCondition);
 
 }
