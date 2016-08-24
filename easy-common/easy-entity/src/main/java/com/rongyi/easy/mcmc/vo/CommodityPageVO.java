@@ -6,13 +6,14 @@ import java.util.List;
 public class CommodityPageVO  implements  Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2927430452258911558L;
 
 	private int totalPage;
 	private int pageSize;
 	private int currentPage;
+	private int totalCount;
 	private List<CommodityVO> commodityList;
 	public int getTotalPage() {
 		return totalPage;
@@ -32,11 +33,20 @@ public class CommodityPageVO  implements  Serializable{
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
 	public List<CommodityVO> getCommodityList() {
 		return commodityList;
 	}
 	public void setCommodityList(List<CommodityVO> commodityList) {
 		this.commodityList = commodityList;
 	}
-	
+
 }

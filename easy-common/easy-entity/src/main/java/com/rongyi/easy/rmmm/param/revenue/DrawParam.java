@@ -19,7 +19,8 @@ public class DrawParam implements Serializable {
 	private String accountName;
 	/** 提现账号类型  (0：支付宝，1：银行卡) */
 	private String accountType;
-	
+
+	private String drawPassword;//提现密码
 	/** 提现金额 */
 	public BigDecimal getDrawAmount() {
 		return drawAmount;
@@ -52,10 +53,23 @@ public class DrawParam implements Serializable {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
+
+	public String getDrawPassword() {
+		return drawPassword;
+	}
+
+	public void setDrawPassword(String drawPassword) {
+		this.drawPassword = drawPassword;
+	}
+
 	@Override
 	public String toString() {
-		return "DrawParam [drawAmount=" + drawAmount + ", accountNo=" + accountNo + ", accountName=" + accountName
-				+ ", accountType=" + accountType + "]";
+		return "DrawParam{" +
+				"drawAmount=" + drawAmount +
+				", accountNo='" + accountNo + '\'' +
+				", accountName='" + accountName + '\'' +
+				", accountType='" + accountType + '\'' +
+				", drawPassword='" + drawPassword + '\'' +
+				'}';
 	}
-	
 }

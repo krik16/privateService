@@ -43,6 +43,7 @@ public enum CodeEnum {
     ERROR_TELEPHONEEXISIT("-1109","电话号码不能为空"),
     ERROR_PHONEEXISIT("-1110","手机号码已存在"),
     ERROR_USERSTATUS("-1111", SmsConfig.SERVER_TELPHONE),
+    ERROR_USER_IN_SERVICE("-1112","摩店客服在每周一到周天9:30~18:30等待你呼叫~"),
     
     /**扫码错误信息*/
     ERROR_RECEIVECOUPONMSG("-1125","亲，手慢了，奖品被抢光了……"),
@@ -76,11 +77,20 @@ public enum CodeEnum {
     ERROR_INSERT_MALL("-1131","插入商场信息出错"),
     ERROR_INSERT_SHOP("-1132","插入店铺信息出错"),
     ERROR_NO_USERINFO("-1133","该用户已不提供服务"),
+    ERROR_IDENTITY_LENGTH("-1134","身份证号码有误"),
+    ERROR_PHONE_VALID("-1135","输入的手机号码有误"),
+    ERROR_PHONE_REGIST("-1136","此手机号未注册过"),
+    LIMIT_EXCEPTION_MSG("-1137","亲你的手机,今天发送短信已达到上限,请明天再试!"),
+    ERROR_PHONE_ACCOUT("-1138","您输入的手机号需要与账号一致哦~"),
+    ERROR_EXCEPTION_SMS("-1139","发送短信异常!"),
+    ERROR_EXCEPTION_REQUEST("-1140","非法请求!"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
     ERROR_EXCEED_RESTRICTION("-1214", "同一天找回密码次数超限制"),
-  
+    ERROR_SAME_PASSOWRD("-1215", "新密码和原密码相同,无须修改"),
+    ERROR_DRAW_PASSOWRD("-1216", "交易密码输入错误，请重试"),
+    ERROR_DRAW_RADOMWRD("-1217", "随机码校验失败"),
     /** 版本更新 */
     SUCCESS_UNNECESSARIES_UPDATE("-1310","当前版本不需要更新"),
     
@@ -248,7 +258,9 @@ public enum CodeEnum {
 	ERROR_ROLE_BO_EDIT("1201101", "你无权限操作，如需修改请联系分公司管理员"),
 	ERROR_ROLE_SG_EDIT("1201102", "你无权限操作，如需修改请联系导购"),
 	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
-	
+
+    ERROR_EXIST_PASSWORD("1300000", "虚拟账户未设置提现密码"),
+    SUCCESS_EXIST_PASSWORD("1300001", "虚拟账户已设置提现密码"),
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
 
     private String code; 

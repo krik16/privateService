@@ -46,6 +46,7 @@ public class CouponVO implements Serializable {
 
     private String status;
 
+    private Integer publishChannel; //0:大运营平台;1:商家后台；2：摩店APP
 
     private List<ObjectId> shopIds;
 
@@ -751,6 +752,14 @@ public class CouponVO implements Serializable {
 
     public void setUsageDesc(String usageDesc) {
         this.usageDesc = usageDesc;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
     }
 
     public String getRemark() {
