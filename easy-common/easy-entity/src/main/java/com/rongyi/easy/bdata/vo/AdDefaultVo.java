@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class AdDefaultVo implements Serializable {
 	/** 
@@ -16,11 +17,11 @@ public class AdDefaultVo implements Serializable {
 	// 广告位置名称
 	private String position_name = "";
 	// 模板ID
-	private int moduleId = 0;
+	//private int moduleId = 0;
 	// 模板内容
-	private String content_url = "";
+	//private String content_url = "";
 	// 素材的类型
-	private int content_type = 0;
+	//private int content_type = 0;
 	// 排序
 	private int seq = 0;
 	private String create_by;//记录创建人名称
@@ -30,6 +31,7 @@ public class AdDefaultVo implements Serializable {
 	private Integer status;//状态 1 有效 0 无效
 	private String sub_type;//全屏为空，330_home_a,330_home_d,318_home_b,318_home_d
 	private Integer module_type;//素材模板类型 素材模板 11 全屏模板-A 21 首页Banner-A 31 内页广告模板 12 全屏模板B-浮窗
+	private List<MaterialNewVo> materials;
 	/**
 	 * @return the defaultId
 	 */
@@ -77,42 +79,6 @@ public class AdDefaultVo implements Serializable {
 	 */
 	public void setPosition_name(String position_name) {
 		this.position_name = position_name;
-	}
-	/**
-	 * @return the moduleId
-	 */
-	public int getModuleId() {
-		return moduleId;
-	}
-	/**
-	 * @param moduleId the moduleId to set
-	 */
-	public void setModuleId(int moduleId) {
-		this.moduleId = moduleId;
-	}
-	/**
-	 * @return the content_url
-	 */
-	public String getContent_url() {
-		return content_url;
-	}
-	/**
-	 * @param content_url the content_url to set
-	 */
-	public void setContent_url(String content_url) {
-		this.content_url = content_url;
-	}
-	/**
-	 * @return the content_type
-	 */
-	public int getContent_type() {
-		return content_type;
-	}
-	/**
-	 * @param content_type the content_type to set
-	 */
-	public void setContent_type(int content_type) {
-		this.content_type = content_type;
 	}
 	/**
 	 * @return the seq
@@ -207,20 +173,30 @@ public class AdDefaultVo implements Serializable {
 		this.module_type = module_type;
 	}
 
-	/**
-	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @return    设定文件 
-	* @author shaozhou
-	* @date 2016年4月1日 下午6:56:10
-	* @throws 
-	*/
+	public List<MaterialNewVo> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<MaterialNewVo> materials) {
+		this.materials = materials;
+	}
+
 	@Override
 	public String toString() {
-		return "AdDefaultVo [defaultId=" + defaultId + ", name=" + name + ", position_id=" + position_id
-				+ ", position_name=" + position_name + ", moduleId=" + moduleId + ", content_url=" + content_url
-				+ ", content_type=" + content_type + ", seq=" + seq + ", create_by=" + create_by + ", create_at="
-				+ create_at + ", update_by=" + update_by + ", update_at=" + update_at + ", status=" + status
-				+ ", sub_type=" + sub_type + "]";
+		return "AdDefaultVo{" +
+				"defaultId=" + defaultId +
+				", name='" + name + '\'' +
+				", position_id=" + position_id +
+				", position_name='" + position_name + '\'' +
+				", seq=" + seq +
+				", create_by='" + create_by + '\'' +
+				", create_at=" + create_at +
+				", update_by='" + update_by + '\'' +
+				", update_at=" + update_at +
+				", status=" + status +
+				", sub_type='" + sub_type + '\'' +
+				", module_type=" + module_type +
+				", materials=" + materials +
+				'}';
 	}
 }

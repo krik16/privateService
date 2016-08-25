@@ -12,8 +12,8 @@ public class AdvertNewVo implements Serializable {
 	private Integer position;//广告位置，参考ad_option中定义 1:全屏 2:首页banner
 	private Integer adtime;//播放时长
 	private Integer module_type;//素材模板 11 全屏模板-A 22 首页Banner-A
-	private String content;//素材内容
-	private Integer content_type;//素材类型 1:图片,2:视频
+	//private String content;//素材内容
+	//private Integer content_type;//素材类型 1:图片,2:视频
 	private Integer status;//广告状态 1待审核, 2审核未通过, 3待发布,4进行中,5已结束,6已下线, 7已删除
 	private String status_detail;//状态描述
 	private Long publish_start;//发布开始时间
@@ -32,6 +32,7 @@ public class AdvertNewVo implements Serializable {
 	private String relation_url;
 	private Integer relation_status;
 	private List<String> mall_ids;
+	private List<MaterialNewVo> materials;
 	/**
 	 * @return the id
 	 */
@@ -79,30 +80,6 @@ public class AdvertNewVo implements Serializable {
 	 */
 	public void setModule_type(Integer module_type) {
 		this.module_type = module_type;
-	}
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
-	}
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
-	}
-	/**
-	 * @return the content_type
-	 */
-	public Integer getContent_type() {
-		return content_type;
-	}
-	/**
-	 * @param content_type the content_type to set
-	 */
-	public void setContent_type(Integer content_type) {
-		this.content_type = content_type;
 	}
 	/**
 	 * @return the status
@@ -320,23 +297,41 @@ public class AdvertNewVo implements Serializable {
 	public void setRelation_status(Integer relation_status) {
 		this.relation_status = relation_status;
 	}
-	/** 
-	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @return    设定文件 
-	* @author shaozhou
-	* @date 2016年3月23日 下午5:17:38
-	* @throws 
-	*/
+
+	public List<MaterialNewVo> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<MaterialNewVo> materials) {
+		this.materials = materials;
+	}
+
 	@Override
 	public String toString() {
-		return "AdvertNewVo [id=" + id + ", position=" + position + ", adtime=" + adtime + ", module_type="
-				+ module_type + ", content=" + content + ", content_type=" + content_type + ", status=" + status
-				+ ", status_detail=" + status_detail + ", publish_start=" + publish_start + ", publish_end="
-				+ publish_end + ", group_id=" + group_id + ", create_by=" + create_by + ", create_at=" + create_at
-				+ ", update_by=" + update_by + ", update_at=" + update_at + ", adOrder=" + adOrder + ", holder="
-				+ holder + ", mall_id=" + mall_id + ", relation_id=" + relation_id + ", relation_name=" + relation_name
-				+ ", relation_code=" + relation_code + ", relation_url=" + relation_url + ", relation_status="
-				+ relation_status + ", mall_ids=" + mall_ids + "]";
+		return "AdvertNewVo{" +
+				"id=" + id +
+				", position=" + position +
+				", adtime=" + adtime +
+				", module_type=" + module_type +
+				", status=" + status +
+				", status_detail='" + status_detail + '\'' +
+				", publish_start=" + publish_start +
+				", publish_end=" + publish_end +
+				", group_id=" + group_id +
+				", create_by='" + create_by + '\'' +
+				", create_at=" + create_at +
+				", update_by='" + update_by + '\'' +
+				", update_at=" + update_at +
+				", adOrder=" + adOrder +
+				", holder=" + holder +
+				", mall_id='" + mall_id + '\'' +
+				", relation_id=" + relation_id +
+				", relation_name='" + relation_name + '\'' +
+				", relation_code='" + relation_code + '\'' +
+				", relation_url='" + relation_url + '\'' +
+				", relation_status=" + relation_status +
+				", mall_ids=" + mall_ids +
+				", materials=" + materials +
+				'}';
 	}
 }
