@@ -15,7 +15,7 @@ public class MyWishListParam extends MalllifeBaseParam implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer type;//1 待回复，2已回复
+	private Integer type;//1 已回复，2 待回复
 
 	public Integer getType() {
 		return type;
