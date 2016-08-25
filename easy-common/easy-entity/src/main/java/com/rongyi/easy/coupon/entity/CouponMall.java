@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class CouponMall implements Serializable {
     /**
@@ -135,5 +136,22 @@ public class CouponMall implements Serializable {
 
     public CouponMall() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        CouponMall that = (CouponMall) o;
+        return Objects.equals(couponId, that.couponId) &&
+            Objects.equals(mallId, that.mallId) &&
+            Objects.equals(mallName, that.mallName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(couponId, mallId, mallName);
     }
 }

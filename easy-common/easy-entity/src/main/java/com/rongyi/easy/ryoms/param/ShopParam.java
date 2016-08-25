@@ -39,6 +39,8 @@ public class ShopParam implements Serializable{
 	private String averageConsumption;  //平均消费
 	private String icon ;             //店铺自定义Logo
 	private Integer valid ;    //店铺状态
+	private String nameEn;  //店铺英文名
+	private String descriptionEn ;//店铺英文介绍
 	
 	@Override
 	public String toString(){
@@ -235,5 +237,21 @@ public class ShopParam implements Serializable{
 
 	public void setValid(Integer valid) {
 		this.valid = valid;
+	}
+
+	public String getNameEn() {
+		return nameEn;
+	}
+
+	public void setNameEn(String nameEn) {
+		this.nameEn = nameEn;
+	}
+
+	public String getDescriptionEn() {
+		return descriptionEn;
+	}
+
+	public void setDescriptionEn(String descriptionEn) {
+		this.descriptionEn = descriptionEn;
 	}
 }
