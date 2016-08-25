@@ -44,6 +44,15 @@ public class CommodityBuyerVO implements Serializable{
 	private List<String> goodsParam;//商品参数
 	private double discount;
 	private String commodityCurrentPrice;
+	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
+
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
 
 	public String getCommodityCurrentPrice() {
 		return commodityCurrentPrice;
@@ -530,7 +539,9 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
 				+", discount=" + discount
-				+ ", isCollected=" + isCollected + "]";
+				+ ", isCollected=" + isCollected 
+				+ ", galleryPosition=" + galleryPosition
+				+ "]";
 	}
 	
 }
