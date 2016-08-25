@@ -1,6 +1,7 @@
 package com.rongyi.rss.msgcenter;
 
 
+import com.rongyi.easy.messagemanage.entity.TriggerActivityVo;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
 
 public interface TriggerActivityService {
@@ -41,4 +42,6 @@ public interface TriggerActivityService {
      * @return
      */
     public boolean isExistRegisteCoupons();
+
+    TriggerActivityVo findTriggerActivityVO(int pushCondition);
 }
