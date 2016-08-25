@@ -29,6 +29,13 @@ public interface WishListService {
     public boolean readingWishList(int id);
 
     /**
+     * 在redis中根据用户id查询是否有已回复为查看的心愿单
+     * @param id
+     * @return
+     */
+    public boolean queryRedisWishList(int id);
+
+    /**
      * 心愿单列表
      * @param param
      * @return
