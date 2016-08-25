@@ -54,7 +54,8 @@ public class ActivitySearchInfo implements Serializable {
 	private List<String> shopIdList = null;
 
 	private Integer publishChannel;//发布渠道(0:大运营；1：商家后台；2:摩店)
-
+	private Integer isRelateAll;//是否关联全部店铺  0：否；1：是
+	private String isMall;//商场通用；"mall" "shop"
 	public List<String> getShopIdList() {
 		return shopIdList;
 	}
@@ -404,50 +405,73 @@ public class ActivitySearchInfo implements Serializable {
 		this.publishChannel = publishChannel;
 	}
 
-	@Override
-	public String toString() {
-		return "ActivitySearchInfo{" +
-				"id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", addr='" + addr + '\'' +
-				", pic_url='" + pic_url + '\'' +
-				", location=" + location +
-				", description='" + description + '\'' +
-				", city_name='" + city_name + '\'' +
-				", shop_own='" + shop_own + '\'' +
-				", title='" + title + '\'' +
-				", start_time=" + start_time +
-				", end_time=" + end_time +
-				", holder_id='" + holder_id + '\'' +
-				", holder_type='" + holder_type + '\'' +
-				", thumbnail='" + thumbnail + '\'' +
-				", carouselImg=" + carouselImg +
-				", vistedNum='" + vistedNum + '\'' +
-				", userQuota='" + userQuota + '\'' +
-				", grouponPrice='" + grouponPrice + '\'' +
-				", grouponOriginal='" + grouponOriginal + '\'' +
-				", grouponNum='" + grouponNum + '\'' +
-				", buyedAmount='" + buyedAmount + '\'' +
-				", restAmount='" + restAmount + '\'' +
-				", useRestriction='" + useRestriction + '\'' +
-				", useMode='" + useMode + '\'' +
-				", grouponStyle='" + grouponStyle + '\'' +
-				", limitPublishCount=" + limitPublishCount +
-				", limitUseCount=" + limitUseCount +
-				", limitCount=" + limitCount +
-				", afterSaleService=" + afterSaleService +
-				", payDownTime=" + payDownTime +
-				", customCategoryIds=" + customCategoryIds +
-				", apply_shops_count=" + apply_shops_count +
-				", activityStatus=" + activityStatus +
-				", workTime='" + workTime + '\'' +
-				", activityType='" + activityType + '\'' +
-				", shopIdList=" + shopIdList +
-				", limitDesc='" + limitDesc + '\'' +
-				", usageDesc='" + usageDesc + '\'' +
-				", remark='" + remark + '\'' +
-				", publishChannel='" + publishChannel + '\'' +
-				'}';
-	}
+		public Integer getIsRelateAll() {
+				return isRelateAll;
+		}
+
+		public void setIsRelateAll(Integer isRelateAll) {
+				this.isRelateAll = isRelateAll;
+		}
+
+		public String getIsMall() {
+				if (isRelateAll != null && isRelateAll == 0) {
+						return "shop";
+				}else if (isRelateAll != null && isRelateAll == 1) {
+						return "mall";
+				}
+				return isMall;
+		}
+
+		public void setIsMall(String isMall) {
+				this.isMall = isMall;
+		}
+
+		@Override
+		public String toString() {
+				final StringBuffer sb = new StringBuffer("ActivitySearchInfo{");
+				sb.append("id='").append(id).append('\'');
+				sb.append(", name='").append(name).append('\'');
+				sb.append(", addr='").append(addr).append('\'');
+				sb.append(", pic_url='").append(pic_url).append('\'');
+				sb.append(", location=").append(location);
+				sb.append(", description='").append(description).append('\'');
+				sb.append(", city_name='").append(city_name).append('\'');
+				sb.append(", shop_own='").append(shop_own).append('\'');
+				sb.append(", title='").append(title).append('\'');
+				sb.append(", start_time=").append(start_time);
+				sb.append(", end_time=").append(end_time);
+				sb.append(", holder_id='").append(holder_id).append('\'');
+				sb.append(", holder_type='").append(holder_type).append('\'');
+				sb.append(", thumbnail='").append(thumbnail).append('\'');
+				sb.append(", carouselImg=").append(carouselImg);
+				sb.append(", vistedNum='").append(vistedNum).append('\'');
+				sb.append(", userQuota='").append(userQuota).append('\'');
+				sb.append(", grouponPrice='").append(grouponPrice).append('\'');
+				sb.append(", grouponOriginal='").append(grouponOriginal).append('\'');
+				sb.append(", grouponNum='").append(grouponNum).append('\'');
+				sb.append(", buyedAmount='").append(buyedAmount).append('\'');
+				sb.append(", restAmount='").append(restAmount).append('\'');
+				sb.append(", useRestriction='").append(useRestriction).append('\'');
+				sb.append(", useMode='").append(useMode).append('\'');
+				sb.append(", grouponStyle='").append(grouponStyle).append('\'');
+				sb.append(", limitPublishCount=").append(limitPublishCount);
+				sb.append(", limitUseCount=").append(limitUseCount);
+				sb.append(", limitCount=").append(limitCount);
+				sb.append(", afterSaleService=").append(afterSaleService);
+				sb.append(", payDownTime=").append(payDownTime);
+				sb.append(", customCategoryIds=").append(customCategoryIds);
+				sb.append(", apply_shops_count=").append(apply_shops_count);
+				sb.append(", activityStatus=").append(activityStatus);
+				sb.append(", workTime='").append(workTime).append('\'');
+				sb.append(", activityType='").append(activityType).append('\'');
+				sb.append(", shopIdList=").append(shopIdList);
+				sb.append(", publishChannel=").append(publishChannel);
+				sb.append(", isRelateAll=").append(isRelateAll);
+				sb.append(", limitDesc='").append(limitDesc).append('\'');
+				sb.append(", usageDesc='").append(usageDesc).append('\'');
+				sb.append(", remark='").append(remark).append('\'');
+				sb.append('}');
+				return sb.toString();
+		}
 
 }
