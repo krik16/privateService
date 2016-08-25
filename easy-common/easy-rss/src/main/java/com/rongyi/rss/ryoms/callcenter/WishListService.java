@@ -1,5 +1,6 @@
 package com.rongyi.rss.ryoms.callcenter;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.param.wish.WishParam;
 import com.rongyi.easy.malllife.param.wish.WishSearchParam;
 import com.rongyi.easy.malllife.vo.wish.WishListVO;
@@ -32,7 +33,7 @@ public interface WishListService {
      * @param param
      * @return
      */
-    public List<WishListVO> wishLists(WishSearchParam param);
+    public ResponseVO wishLists(WishSearchParam param);
 
     /**
      * 心愿单详情

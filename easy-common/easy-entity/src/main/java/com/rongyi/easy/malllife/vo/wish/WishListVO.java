@@ -15,8 +15,8 @@ public class WishListVO implements Serializable{
 	private String brandName;//品牌名称
 	private String remark;//备注
 	private String picUrls;//图片集合
-	private String createAt;//创建人id
-	private Date createBy;//提交时间
+	private Date createAt;//创建人id
+	private String createBy;//提交时间
 	private String response;//官方回复内容
 	private String phone;//手机号
 	private Date updateAt;//更新回复时间
@@ -67,13 +67,7 @@ public class WishListVO implements Serializable{
 		this.picUrls = picUrls;
 	}
 
-	public String getCreateAt() {
-		return createAt;
-	}
 
-	public void setCreateAt(String createAt) {
-		this.createAt = createAt;
-	}
 
 
 
@@ -93,11 +87,19 @@ public class WishListVO implements Serializable{
 		this.phone = phone;
 	}
 
-	public Date getCreateBy() {
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getCreateBy() {
 		return createBy;
 	}
 
-	public void setCreateBy(Date createBy) {
+	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
 
