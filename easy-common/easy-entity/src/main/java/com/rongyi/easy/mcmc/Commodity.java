@@ -655,6 +655,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo=" +commodityModelNo+
 				",goodsParam=" + goodsParam +
+				",discount=" + discount +
 				'}';
 	}
 

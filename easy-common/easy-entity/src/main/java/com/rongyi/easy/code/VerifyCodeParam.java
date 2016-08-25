@@ -22,7 +22,7 @@ public class VerifyCodeParam implements Serializable {
      */
     private String activityId;
     /**
-     * 0:卡券；1：邀请码；2：礼品码
+     * 0:卡券；1：邀请码；2：礼品码 4 活动奖品码
      */
     private Integer type;
 
