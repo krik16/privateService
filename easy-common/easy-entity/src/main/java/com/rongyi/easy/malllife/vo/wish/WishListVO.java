@@ -21,9 +21,15 @@ public class WishListVO implements Serializable{
 	private String phone;//手机号
 	private Date updateAt;//更新回复时间
 	private String responseBy;//回复人
+	
+	
+	public List<String> getPicUrls() {
+		return picUrls;
+	}
 
-
-
+	public void setPicUrls(List<String> picUrls) {
+		this.picUrls = picUrls;
+	}
 
 	public Integer getId() {
 		return id;
@@ -56,14 +62,7 @@ public class WishListVO implements Serializable{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
-	public String getPicUrls() {
-		return picUrls;
-	}
-
-	public void setPicUrls(String picUrls) {
-		this.picUrls = picUrls;
-	}
+	
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -90,14 +89,6 @@ public class WishListVO implements Serializable{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public Date getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(Date createBy) {
-		this.createBy = createBy;
 	}
 
 	public Date getUpdateAt() {
