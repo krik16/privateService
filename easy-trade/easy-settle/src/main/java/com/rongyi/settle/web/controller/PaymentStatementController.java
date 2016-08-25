@@ -494,8 +494,8 @@ public class PaymentStatementController extends BaseController {
 
 	}
 
-	private String getFileName(String name, String date) {
-		return "容易网商户对账单-" + name + "-" + date + ".xlsx";
+	private String getFileName(String name,String ruleCode, String date) {
+		return "容易网商户对账单-" + name + "-" + ruleCode + "-" + date + ".xlsx";
 	}
 
 	/**
@@ -525,7 +525,7 @@ public class PaymentStatementController extends BaseController {
 				LOGGER.error("商家账号只能访问对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
 				return ResponseData.failure(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getCodeInt(), CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getValueStr());
 			}
-			String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
+			String fileName = getFileName(statementConfig.getBussinessName(),statementConfig.getRuleCode(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
 			File f = new File(propertyConfigurer.getProperty("settle.file.path") + statementConfig.getBussinessId() + "/" + fileName);
 			BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
 			byte[] buf = new byte[2048];
