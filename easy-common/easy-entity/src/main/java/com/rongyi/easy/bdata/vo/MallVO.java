@@ -84,6 +84,8 @@ public class MallVO implements Serializable {
 	private String mobile;
 	private String validReason;
 	private String businessStatusReason;
+    private String ename;    //商场英文名称
+    private String descriptionEn;//商场英文介绍
 
 
     public void setId(String id) {
@@ -415,4 +417,20 @@ public class MallVO implements Serializable {
 	public void setMerlogPic(String merlogPic) {
 		this.merlogPic = merlogPic;
 	}
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public String getDescriptionEn() {
+        return descriptionEn;
+    }
+
+    public void setDescriptionEn(String descriptionEn) {
+        this.descriptionEn = descriptionEn;
+    }
 }
