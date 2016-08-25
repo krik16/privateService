@@ -79,6 +79,8 @@ public class Mall implements Serializable {
     private String last_update_id;//最近修改人
     private String validReason;
     private String businessStatusReason;
+    private String ename;
+    private String description_en;
    
    
 
@@ -512,5 +514,21 @@ public class Mall implements Serializable {
 
     public void setMall_banner_num(Integer mall_banner_num) {
         this.mall_banner_num = mall_banner_num;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public String getDescription_en() {
+        return description_en;
+    }
+
+    public void setDescription_en(String description_en) {
+        this.description_en = description_en;
     }
 }

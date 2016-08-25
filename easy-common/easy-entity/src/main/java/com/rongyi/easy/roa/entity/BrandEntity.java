@@ -27,6 +27,7 @@ public class BrandEntity implements Serializable{
     private String merlog_pic; //商家后台Logo图片
     private String tags;
     private List<String> categories_tags;
+    private String description_en ;  //英文描述信息
 
 
 
@@ -145,5 +146,13 @@ public class BrandEntity implements Serializable{
 
     public void setCategories_tags(List<String> categories_tags) {
         this.categories_tags = categories_tags;
+    }
+
+    public String getDescription_en() {
+        return description_en;
+    }
+
+    public void setDescription_en(String description_en) {
+        this.description_en = description_en;
     }
 }
