@@ -10,7 +10,7 @@
         <module>easy-entity</module>
         <module>easy-core</module>
         <module>easy-rss</module>
-    </modules>
+    </modules>      
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
