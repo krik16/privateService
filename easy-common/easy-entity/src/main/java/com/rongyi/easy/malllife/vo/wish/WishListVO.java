@@ -66,14 +66,22 @@ public class WishListVO implements Serializable{
 		this.remark = remark;
 	}
 
+	public String getPicUrls() {
+		return picUrls;
+	}
 
+	public void setPicUrls(String picUrls) {
+		this.picUrls = picUrls;
+	}
 	public Date getCreateAt() {
 		return createAt;
 	}
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-
+	public String getCreateBy() {
+		return createBy;
+	}
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
@@ -93,7 +101,13 @@ public class WishListVO implements Serializable{
 		this.phone = phone;
 	}
 
+	public Date getCreateBy() {
+		return createBy;
+	}
 
+	public void setCreateBy(Date createBy) {
+		this.createBy = createBy;
+	}
 
 	public Date getUpdateAt() {
 		return updateAt;
