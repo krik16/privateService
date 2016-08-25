@@ -1,19 +1,5 @@
 package com.rongyi.settle.service.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -30,13 +16,7 @@ import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
-import com.rongyi.settle.dto.CouponCodeExcelDto;
-import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.CouponStatementDetailDto;
-import com.rongyi.settle.dto.OrderSettlementDetailDto;
-import com.rongyi.settle.dto.OrderSettlementDetailVO;
-import com.rongyi.settle.dto.OrderSettlementTopDto;
-import com.rongyi.settle.dto.PaymentStatementExcelDto;
+import com.rongyi.settle.dto.*;
 import com.rongyi.settle.mapper.OperationLogMapper;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.BussinessInfoService;
@@ -47,6 +27,14 @@ import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.CollectionUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * Created by xgq on 2015/9/22. Modified by ZhengYl on 2015/12/08
@@ -205,8 +193,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             regularDay = DateUtil.getDaysInAdd(toDay, Integer.valueOf(statementConfig.getRollDay()));
         }
         regularDay = DateUtil.addHours(regularDay, toDay.getHours());
-        regularDay = DateUtil.addTime(regularDay,toDay.getMinutes(),Calendar.MINUTE);
-        regularDay = DateUtil.addTime(regularDay,toDay.getSeconds(),Calendar.SECOND);
+        regularDay = DateUtil.addTime(regularDay, toDay.getMinutes(), Calendar.MINUTE);
+        regularDay = DateUtil.addTime(regularDay, toDay.getSeconds(), Calendar.SECOND);
         return regularDay;
     }
 
@@ -552,7 +540,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         logger.info("paymentStatementExcelDto=" + paymentStatementExcelDto.getPayTotal());
         // 生成excel文件
         ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
-                getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+                getFileName(statementConfig.getBussinessName(),statementConfig.getRuleCode(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 
         // 插入生成记录
         paymentStatement.setPayTotal(AmountUtil.changYuanToFen(payTotal));
@@ -668,8 +656,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         return "支付宝";
     }
 
-    private String getFileName(String name, String date) {
-        return "容易网商户对账单-" + name + "-" + date + ".xlsx";
+    private String getFileName(String name, String ruleCode, String date) {
+        return "容易网商户对账单-" + name + "-" + ruleCode + "-" + date + ".xlsx";
     }
 
     public static class SettleConfigNotFoundException extends Exception {
