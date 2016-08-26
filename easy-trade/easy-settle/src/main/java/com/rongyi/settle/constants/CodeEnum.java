@@ -26,7 +26,8 @@ public enum CodeEnum {
 	FIAL_CONFIG_NOT_FOUND(1018011, "对账单配置没有找到"),
 	FIAL_STATEMENT_INVALID(1018013, "作废对账单不能重新生成"),
 	FAIL_CHANGE_DATE(1018100, "日期转换异常"),
-	
+	FAIL_BILL_IS_EXIST(1018106,"该配置对账单文件已生成，不允许修改"),
+
 	NOT_EXIST_DIVIDE_ACCOUNT(1018101, "分账不存在"),
 	FAIL_GENERATE_XML(1018102,"生成xlsx异常"),
 	MALL_NOT_EXIST(1018103,"商场信息错误"),

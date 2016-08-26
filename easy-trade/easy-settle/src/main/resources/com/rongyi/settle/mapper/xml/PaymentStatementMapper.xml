@@ -396,6 +396,11 @@
 		) as total
 	</select>
 
+	<select id="selectCountByConfigId" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(id) from payment_bill
+		where config_id = {configId}
+	</select>
+
 	<select id="selectPageListCountForMerchant" parameterType="java.util.Map" resultType="java.lang.Integer">
 		select count(total.id) from (select pb.id from payment_bill pb
 		left

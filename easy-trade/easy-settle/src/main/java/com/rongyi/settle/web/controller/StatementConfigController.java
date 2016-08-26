@@ -26,6 +26,7 @@ import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
 import com.rongyi.settle.service.AccessService;
+import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.MapUtils;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
@@ -53,7 +54,6 @@ import java.util.Map;
  * @Author: 柯军
  * @Description: 对账单配置controller
  * @datetime:2015年9月17日下午2:31:18
- *
  **/
 @Controller
 @RequestMapping("/statementConfig")
@@ -91,10 +91,13 @@ public class StatementConfigController extends BaseController {
     @Autowired
     private IShopService iShopService;
 
+    @Autowired
+    private PaymentStatementService paymentStatementService;
+
     /**
-     * @Description: 分页查询配置列表
      * @param request
      * @return
+     * @Description: 分页查询配置列表
      * @Author: 柯军
      * @datetime:2015年9月17日下午2:55:37
      **/
@@ -140,8 +143,8 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 增加配置
      * @return
+     * @Description: 增加配置
      * @Author: 柯军
      * @datetime:2015年9月21日下午2:55:32
      **/
@@ -153,10 +156,10 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 保存配置
      * @param request
      * @param map
      * @return
+     * @Description: 保存配置
      * @Author: 柯军
      * @datetime:2015年9月21日下午2:57:11
      **/
@@ -180,6 +183,15 @@ public class StatementConfigController extends BaseController {
             MapUtils.toObject(statementConfig, map);
             if (!map.containsKey("id")) {
                 statementConfig.setCreateAt(DateUtil.getCurrDateTime());
+            } else {
+                StatementConfig oldConfig = statementConfigService.selectById(Integer.valueOf(map.get("id").toString()));
+                if (oldConfig != null && !oldConfig.getBussinessCode().equals(map.get("bussinessCode"))) {
+                    Integer configId = Integer.valueOf(map.get("id").toString());
+                    int count = paymentStatementService.selectCountByConfigId(configId);
+                    if (count > 0) {
+                        return ResponseData.failure(CodeEnum.FAIL_BILL_IS_EXIST.getCodeInt(), CodeEnum.FAIL_BILL_IS_EXIST.getValueStr());
+                    }
+                }
             }
             statementConfig.setCreateBy(getUserName(request));
             if (map.containsKey("effectStartTime") && map.containsKey("effectEndTime")) {
@@ -191,7 +203,7 @@ public class StatementConfigController extends BaseController {
             bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
             String[] linkShopIds = null;
             if (map.containsKey("linkId")) {
-               linkShopIds = map.get("linkId").toString().split(",");
+                linkShopIds = map.get("linkId").toString().split(",");
             }
             List<Byte> statuses = new ArrayList<>();
             statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
@@ -208,7 +220,7 @@ public class StatementConfigController extends BaseController {
             }
             List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");
             String ruleCode = getRuleCode();
-            if (statementConfig.getId()==null) {
+            if (statementConfig.getId() == null) {
                 if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
                     redisService.set(ruleCode.substring(0, 9), ruleCode);
                     redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
@@ -224,9 +236,9 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 修改配置
      * @param map
      * @return ResponseData
+     * @Description: 修改配置
      * @Author: 柯军
      * @datetime:2015年9月21日下午2:59:22
      **/
@@ -254,9 +266,9 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 复制配置
      * @param map
      * @return ResponseData
+     * @Description: 复制配置
      * @Author: 柯军
      * @datetime:2015年9月21日下午2:59:22
      **/
@@ -292,10 +304,10 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 变更配置
      * @param request
      * @param map
      * @return
+     * @Description: 变更配置
      * @Author: 柯军
      * @datetime:2015年9月21日下午2:59:34
      **/
@@ -316,10 +328,10 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 配置详情
      * @param request
      * @param map
      * @return
+     * @Description: 配置详情
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:00:10
      **/
@@ -343,10 +355,10 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 账号详情（分页）
      * @param request
      * @param map
      * @return
+     * @Description: 账号详情（分页）
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:00:10
      **/
@@ -379,10 +391,10 @@ public class StatementConfigController extends BaseController {
     }
 
     /**
-     * @Description: 审核配置
      * @param request
      * @param map
      * @return
+     * @Description: 审核配置
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:00:26
      **/
@@ -424,6 +436,7 @@ public class StatementConfigController extends BaseController {
 
     /**
      * 生成规则编码
+     *
      * @return
      * @Author: 柯军
      * @date:2015年9月22日下午3:37:03

@@ -640,6 +640,13 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         return dateStr + batchNo;
     }
 
+    @Override
+    public Integer selectCountByConfigId(Integer configId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("configId", configId);
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectCountByConfigId", map);
+    }
+
     private String getPayChannelName(Byte payChannel) {
         if (SettleConstant.PayChannel.ZHIFUBAO.equals(payChannel)) {
             return "支付宝";
