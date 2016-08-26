@@ -1,8 +1,10 @@
 package com.rongyi.rss.msgcenter;
 
 
-import com.rongyi.easy.messagemanage.entity.TriggerActivityVo;
+import com.rongyi.easy.msgcenter.OldPushNewParam;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
+import com.rongyi.easy.msgcenter.vo.MLOldPushNewVo;
+import com.rongyi.easy.msgcenter.vo.TriggerActivityVo;
 
 public interface TriggerActivityService {
 	 /**
@@ -43,5 +45,17 @@ public interface TriggerActivityService {
      */
     public boolean isExistRegisteCoupons();
 
+    /**
+     * 获取有效的老推新红包数据
+     * @param pushCondition
+     * @return
+     */
     TriggerActivityVo findTriggerActivityVO(int pushCondition);
+
+    /**
+     * 新用户注册/注册并交易 根据老用户邀请码领取红包
+     * @param param
+     * @return
+     */
+    MLOldPushNewVo getCouponsByOldPushCode(OldPushNewParam param);
 }
