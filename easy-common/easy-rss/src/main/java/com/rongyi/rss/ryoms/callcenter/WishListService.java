@@ -33,7 +33,7 @@ public interface WishListService {
      * @param id
      * @return
      */
-    public boolean queryRedisWishList(int id);
+    public boolean queryRedisWishList(String id);
 
     /**
      * 心愿单列表
