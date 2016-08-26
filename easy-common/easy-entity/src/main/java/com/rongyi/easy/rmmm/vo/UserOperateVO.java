@@ -32,6 +32,14 @@ public class UserOperateVO implements Serializable{
 	private Integer nonReceived = 0;//待收货订单数量
 	private Integer unPaidOrderCount = 0;//待付款商品订单数量
 	private Integer unPaidCouponOrderCount = 0;//待付款优惠券订单数量
+	private Boolean hasUnCheckedRepliedWish;//是否有已回复的未查看的心愿
+	
+	public Boolean getHasUnCheckedRepliedWish() {
+		return hasUnCheckedRepliedWish;
+	}
+	public void setHasUnCheckedRepliedWish(Boolean hasUnCheckedRepliedWish) {
+		this.hasUnCheckedRepliedWish = hasUnCheckedRepliedWish;
+	}
 	public Integer getMyCouponNum() {
 		return myCouponNum;
 	}

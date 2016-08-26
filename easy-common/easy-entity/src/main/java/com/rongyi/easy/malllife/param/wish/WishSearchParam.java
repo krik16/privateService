@@ -8,6 +8,8 @@ import java.util.Date;
  */
 public class WishSearchParam implements Serializable {
 
+    private Integer id;
+    private String response;
 
     private String goodsName;//商品名称
     private String brandName;//品牌名称
@@ -17,6 +19,14 @@ public class WishSearchParam implements Serializable {
     private Integer status;//0全部1回复2未回复
     private Integer pageSize;//
     private Integer currentPage;//
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
 
     public String getGoodsName() {
         return goodsName;
@@ -80,5 +90,13 @@ public class WishSearchParam implements Serializable {
 
     public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

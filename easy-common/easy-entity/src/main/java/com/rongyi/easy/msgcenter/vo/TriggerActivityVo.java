@@ -1,4 +1,4 @@
-package com.rongyi.easy.messagemanage.entity;
+package com.rongyi.easy.msgcenter.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -89,6 +89,8 @@ public class TriggerActivityVo implements Serializable {
     private Integer role;
 
     private String activityRule;//活动规则
+
+    private Integer redPackAmount;//红包或抵扣券金额
 
     public Integer getId() {
         return id;
@@ -266,6 +268,14 @@ public class TriggerActivityVo implements Serializable {
         this.activityRule = activityRule;
     }
 
+    public Integer getRedPackAmount() {
+        return redPackAmount;
+    }
+
+    public void setRedPackAmount(Integer redPackAmount) {
+        this.redPackAmount = redPackAmount;
+    }
+
     @Override
     public String toString() {
         return "TriggerActivityVo{" +
@@ -291,6 +301,7 @@ public class TriggerActivityVo implements Serializable {
                 ", couponCount=" + couponCount +
                 ", role=" + role +
                 ", activityRule='" + activityRule + '\'' +
+                ", redPackAmount=" + redPackAmount +
                 '}';
     }
 }

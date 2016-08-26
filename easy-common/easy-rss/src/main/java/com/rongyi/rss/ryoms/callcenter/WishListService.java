@@ -1,5 +1,6 @@
 package com.rongyi.rss.ryoms.callcenter;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.param.wish.WishParam;
 import com.rongyi.easy.malllife.param.wish.WishSearchParam;
 import com.rongyi.easy.malllife.vo.wish.WishListVO;
@@ -28,11 +29,18 @@ public interface WishListService {
     public boolean readingWishList(int id);
 
     /**
+     * 在redis中根据用户id查询是否有已回复为查看的心愿单
+     * @param id
+     * @return
+     */
+    public boolean queryRedisWishList(String id);
+
+    /**
      * 心愿单列表
      * @param param
      * @return
      */
-    public List<WishListVO> wishLists(WishSearchParam param);
+    public ResponseVO wishLists(WishSearchParam param);
 
     /**
      * 心愿单详情

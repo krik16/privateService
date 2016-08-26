@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.rmmm.param.BullParam;
@@ -319,5 +320,14 @@ public interface McmcCommoditySolrService {
 	public boolean updateCommodityPriceAndStatus(String id, Double price, List<Double> currentPriceList,Integer status);
 
 	public void cleanCommoditiesLiveId(List<String> commodityIds) throws Exception;
+
+	/**
+	 * 根据店铺id、商场id 获取特卖id
+	 *
+	 * @param zoneId
+	 * @return
+	 * @throws RYServiceException
+	 */
+	public List<McmcCommodityDocument> searchSaleIdList(String zoneId) throws RYServiceException;
 
 }

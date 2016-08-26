@@ -14,18 +14,26 @@ public class WishListVO implements Serializable{
 	private String goodsName;//商品名称
 	private String brandName;//品牌名称
 	private String remark;//备注
-	private String picUrls;//图片集合
-	private String createAt;//创建人id
-	private Date createBy;//提交时间
+	private List<String> picUrls;//图片集合
+	private Date createAt;//提交时间
+	private String createBy;//创建人id
 	private String response;//官方回复内容
 	private String phone;//手机号
 	private Date updateAt;//更新回复时间
 	private String responseBy;//回复人
 
-
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
+	public List<String> getPicUrls() {
+		return picUrls;
 	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setPicUrls(List<String> picUrls) {
+		this.picUrls = picUrls;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -59,24 +67,17 @@ public class WishListVO implements Serializable{
 		this.remark = remark;
 	}
 
-	public String getPicUrls() {
-		return picUrls;
-	}
 
-	public void setPicUrls(String picUrls) {
-		this.picUrls = picUrls;
-	}
-
-	public String getCreateAt() {
+	public Date getCreateAt() {
 		return createAt;
 	}
-
-	public void setCreateAt(String createAt) {
+	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
 
-
-
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
 	public String getResponse() {
 		return response;
 	}
@@ -93,13 +94,7 @@ public class WishListVO implements Serializable{
 		this.phone = phone;
 	}
 
-	public Date getCreateBy() {
-		return createBy;
-	}
 
-	public void setCreateBy(Date createBy) {
-		this.createBy = createBy;
-	}
 
 	public Date getUpdateAt() {
 		return updateAt;
@@ -119,13 +114,12 @@ public class WishListVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "WishVO [id=" + id + ", brandName=" + brandName
-				+ ", goodsName=" + goodsName + ", remark=" + remark
+		return "WishListVO [id=" + id + ", goodsName=" + goodsName
+				+ ", brandName=" + brandName + ", remark=" + remark
 				+ ", picUrls=" + picUrls + ", createAt=" + createAt
 				+ ", createBy=" + createBy + ", response=" + response
 				+ ", phone=" + phone + ", updateAt=" + updateAt
-				+ ", responseBy=" + responseBy
-				+ "]";
+				+ ", responseBy=" + responseBy + "]";
 	}
 	
 }
