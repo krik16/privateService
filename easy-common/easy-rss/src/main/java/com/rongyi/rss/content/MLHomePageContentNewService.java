@@ -69,4 +69,11 @@ public interface MLHomePageContentNewService {
      * @return
      */
     public ResponseVO searchSaleDetailByMallId(String mallId);
+
+    /**
+     * 根据商场id查询商场是否有特卖活动
+     * @param mallId
+     * @return
+     */
+    public boolean isExistSaleByMallId(String mallId);
 }
