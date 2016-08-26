@@ -476,6 +476,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     }
                     List<ShopVO> shops = getShopIdByParam(config.getBussinessType(), config.getBussinessId());
                     for (ShopVO shop : shops) {//getAccountInfoByParam(isOneself, null, 1, businessId, null);
+                        logger.info("bizId={},shopId={}",config.getBussinessId(),shop.getId());
                         List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shop.getId(), null);
                         if (CollectionUtils.isNotEmpty(shopUsers))
                             userInfoVos.addAll(shopUsers);
