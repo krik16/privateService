@@ -62,6 +62,17 @@ public class MalllifeUser implements Serializable {
     /*是否禁用 0 正常 1禁用 2 预先注册 */
     private Integer isDisable=0;
 
+
+    private String invitCode;
+
+    public String getInvitCode() {
+        return invitCode;
+    }
+
+    public void setInvitCode(String invitCode) {
+        this.invitCode = invitCode;
+    }
+
     public String getIdfa() {
         return idfa;
     }
