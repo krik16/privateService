@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class OldMallVO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;//商场mongoId
 	private String name;//商场名称
 	private String icon;//商场icon
@@ -35,6 +39,7 @@ public class OldMallVO implements Serializable{
 	private boolean hasWonderFulAct; //精彩活动
     private boolean hasDiscountAct; //优惠资讯
     private boolean hasRaiders;//潮人攻略
+    private boolean hasSpecialSale;//是否关联特卖
 
 	public String getId() {
 		return id;
@@ -225,6 +230,12 @@ public class OldMallVO implements Serializable{
 	public void setHasRaiders(boolean hasRaiders) {
 		this.hasRaiders = hasRaiders;
 	}
+	public boolean isHasSpecialSale() {
+		return hasSpecialSale;
+	}
+	public void setHasSpecialSale(boolean hasSpecialSale) {
+		this.hasSpecialSale = hasSpecialSale;
+	}
 	@Override
 	public String toString() {
 		return "OldMallVO [id=" + id + ", name=" + name + ", icon=" + icon
@@ -243,7 +254,8 @@ public class OldMallVO implements Serializable{
 				+ title + ", location=" + location + ", type=" + type
 				+ ", shopCount=" + shopCount + ", hasWonderFulAct="
 				+ hasWonderFulAct + ", hasDiscountAct=" + hasDiscountAct
-				+ ", hasRaiders=" + hasRaiders + "]";
+				+ ", hasRaiders=" + hasRaiders + ", hasSpecialSale="
+				+ hasSpecialSale + "]";
 	}
 	
 }
