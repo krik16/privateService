@@ -25,6 +25,46 @@ public class MaxIntegralVO implements Serializable{
 	private BigDecimal realOrderPrice;//不包含积分的支付价格
 	
 	private BigDecimal maxEasyMoney;//最大可使用容易币
+	
+    private String couponCode;//红包券码
+	
+	private Double couponDiscount;// 红包抵扣金额
+	
+    private String platformRebateCode;//抵扣券券码
+	
+	private Double rebateDiscount;// 抵扣券抵扣金额
+
+	public String getCouponCode() {
+		return couponCode;
+	}
+
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
+	}
+
+	public Double getCouponDiscount() {
+		return couponDiscount;
+	}
+
+	public void setCouponDiscount(Double couponDiscount) {
+		this.couponDiscount = couponDiscount;
+	}
+
+	public String getPlatformRebateCode() {
+		return platformRebateCode;
+	}
+
+	public void setPlatformRebateCode(String platformRebateCode) {
+		this.platformRebateCode = platformRebateCode;
+	}
+
+	public Double getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(Double rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
+	}
 
 	public BigDecimal getMaxEasyMoney() {
 		return maxEasyMoney;
@@ -88,7 +128,9 @@ public class MaxIntegralVO implements Serializable{
 				+ integralRatio + ", myIntegral=" + myIntegral + ", rebateNum="
 				+ rebateNum + ", hongBaoNum=" + hongBaoNum
 				+ ", realOrderPrice=" + realOrderPrice + ", maxEasyMoney="
-				+ maxEasyMoney + "]";
+				+ maxEasyMoney + ", couponCode=" + couponCode + ", couponDiscount="
+				+ couponDiscount + ", platformRebateCode=" + platformRebateCode
+				+ ", rebateDiscount=" + rebateDiscount + "]";
 	}
 
 }
