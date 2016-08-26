@@ -62,4 +62,11 @@ public interface MLHomePageContentNewService {
      * @return
      */
     public List<ActivityRecomListVO> findSpeContentNew(String cityId, String cityName);
+
+    /**
+     * 根据商场id查询特卖
+     * @param mallId
+     * @return
+     */
+    public ResponseVO searchSaleDetailByMallId(String mallId);
 }
