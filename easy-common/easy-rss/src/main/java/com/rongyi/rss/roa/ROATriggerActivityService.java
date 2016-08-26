@@ -47,5 +47,5 @@ public interface ROATriggerActivityService {
      * @param param
      * @return
      */
-    public MLOldPushNewVo getCouponsByOldPushCode(OldPushNewParam param);
+    public int getCouponsByOldPushCode(OldPushNewParam param);
 }
