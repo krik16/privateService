@@ -14,6 +14,7 @@ public class CommodityCategorySaleVO implements Serializable, Comparable<Commodi
 	private String categoryLogo;
 	private String categoryType;
 	private Date createAt;
+	private int sequence;
 	private List<SndClassCategory> subCategoryList;
 
 	public List<SndClassCategory> getSubCategoryList() {
@@ -34,6 +35,15 @@ public class CommodityCategorySaleVO implements Serializable, Comparable<Commodi
 		this.categoryLogo = commodityCategory.getLogoUrl();
 		this.categoryType = "我是一级类目";
 		this.createAt = commodityCategory.getCreateAt();
+		this.sequence=commodityCategory.getSequence();
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
 	}
 
 	public String getCategoryId() {
