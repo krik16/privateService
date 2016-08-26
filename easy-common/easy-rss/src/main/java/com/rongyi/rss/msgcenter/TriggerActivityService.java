@@ -57,5 +57,5 @@ public interface TriggerActivityService {
      * @param param
      * @return
      */
-    MLOldPushNewVo getCouponsByOldPushCode(OldPushNewParam param);
+    int getCouponsByOldPushCode(OldPushNewParam param);
 }
