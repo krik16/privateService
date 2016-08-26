@@ -7,6 +7,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +21,8 @@ import java.text.DecimalFormat;
  * Modified by erliang on 2015/12/02
  */
 public class ExcelUtils {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelUtils.class);
 
     public static void write(String templateFile, String targetFilePath, String folder, String targetFileName, PaymentStatementExcelDto excelDto) throws Exception {
         String pathname = templateFile;
@@ -420,6 +424,7 @@ public class ExcelUtils {
         }
 
 
+        LOGGER.info("创建对账单文件,path={}",fileFolder);
         File file = new File(fileFolder);
         if (!file.exists() && !file.isDirectory()) {
             file.mkdir();
