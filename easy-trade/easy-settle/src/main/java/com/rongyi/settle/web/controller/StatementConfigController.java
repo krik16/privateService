@@ -186,7 +186,7 @@ public class StatementConfigController extends BaseController {
             } else {
                 StatementConfig oldConfig = statementConfigService.selectById(Integer.valueOf(map.get("id").toString()));
                 if (oldConfig != null &&
-                        (!oldConfig.getBussinessCode().equals(map.get("bussinessCode")) || !oldConfig.getBussinessType().equals(map.get("bussinessType")))) {
+                        (!oldConfig.getBussinessCode().equals(map.get("bussinessCode")) || !oldConfig.getBussinessType().toString().equals(map.get("bussinessType")))) {
                     Integer configId = Integer.valueOf(map.get("id").toString());
                     int count = paymentStatementService.selectCountByConfigId(configId);
                     if (count > 0) {
