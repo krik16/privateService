@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
+
+import com.rongyi.easy.mcmc.Commodity;
 
 
 public class CommodityVO  implements  Serializable {
@@ -83,7 +84,14 @@ public class CommodityVO  implements  Serializable {
 	private Integer activityId;//活动id
 	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
 	private Long updateAt;
+	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -635,7 +643,9 @@ public class CommodityVO  implements  Serializable {
 				+ ", commodityModelNo=" + commodityModelNo
 				+ ", activityId=" + activityId
 				+ ", activityPrice=" + activityPrice
-				+", goodsParam="+ goodsParam + "]";
+				+", goodsParam="+ goodsParam 
+				+", galleryPosition="+ galleryPosition
+				+"]";
 
 	}
 
