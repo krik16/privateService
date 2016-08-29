@@ -3,6 +3,7 @@ package com.rongyi.rss.malllife.roa.user;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.malllife.exception.MallLifeException;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
@@ -200,4 +201,32 @@ public interface ROAMalllifeUserService {
 	 * @throws Exception
 	 */
 	public UserInfoVO findAllStateUserByPhone(String phone) throws Exception;
+
+	/**
+	 * 根据邀请码返回用户信息
+	 * @param invitCode
+	 * @return
+	 * @throws Exception
+	 */
+	public MalllifeUserInfoDto getByInvitCode(String invitCode) throws Exception;
+
+
+	/**
+	 * 更新用户邀请码
+	 * @param malllifeUser
+	 * @throws Exception
+	 */
+	public void updateUserInvitCode(MalllifeUser malllifeUser) throws Exception;
+
+	/**
+	 * 邀请人数
+	 * @param invitCode
+	 * @return
+	 * @throws Exception
+	 */
+	public int sumInvitCode(String invitCode)throws Exception;
+
+	public String generInvitCode(String userId,String phone)throws MallLifeException ;
+
+
 }

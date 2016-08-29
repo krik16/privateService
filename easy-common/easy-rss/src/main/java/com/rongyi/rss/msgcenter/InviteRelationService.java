@@ -1,0 +1,25 @@
+package com.rongyi.rss.msgcenter;
+
+import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
+import com.rongyi.easy.msgcenter.vo.OldPushNewInviteTotalVo;
+
+import java.util.List;
+
+/** 用户红包关联service
+ * Created by shaozhou on 2016/8/26.
+ */
+public interface InviteRelationService {
+    /**
+     * 根据用户id获取领取红包详情
+     * @param userId
+     * @return
+     */
+    List<InviteRelationVo> getInviteRecordByUserId(Integer userId);
+
+    /**
+     * 根据用户id获取领取红包汇总信息
+     * @param userId
+     * @return
+     */
+    OldPushNewInviteTotalVo getInviteRecordTotalVo(Integer userId);
+}

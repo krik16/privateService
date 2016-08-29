@@ -1,5 +1,6 @@
 package com.rongyi.core.util;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -184,5 +185,32 @@ public class Util {
 			}
 		}
 		return code;
+	}
+
+	/**
+	 * 获取友好的时间差
+	 *
+	 * @param ts 毫秒
+	 * @return
+	 * @author wangjh7
+	 */
+	public static String getTimeString(long ts) {
+		// 1秒
+		if (1000 < ts) {
+			// 10秒
+			if (10000 < ts) {
+				// 3分钟
+				if (180000 < ts) {
+					return new DecimalFormat("##0.00").format(ts / 60000f) + "（分）";
+				} else {
+					return ts + "（秒）";
+				}
+			} else {
+				return new DecimalFormat("##0.00").format(ts / 1000f) + "（秒）";
+			}
+
+		} else {
+			return ts + "（毫秒）";
+		}
 	}
 }

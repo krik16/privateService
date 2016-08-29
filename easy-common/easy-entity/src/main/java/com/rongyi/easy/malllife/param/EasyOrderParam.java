@@ -13,7 +13,7 @@ import com.rongyi.easy.rmmm.base.BaseParam;
 
 import java.io.Serializable;
 
-public class EasyOrderParam extends BaseParam implements Serializable {
+public class EasyOrderParam extends BaseParam  {
 
     private static final long serialVersionUID = 1L;
 
