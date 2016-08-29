@@ -3,7 +3,7 @@ package com.rongyi.rss.roa;
 import com.rongyi.easy.msgcenter.OldPushNewParam;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
 import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
-import com.rongyi.easy.msgcenter.vo.MLOldPushNewVo;
+import com.rongyi.easy.msgcenter.vo.OldPushNewInviteTotalVo;
 import com.rongyi.easy.msgcenter.vo.TriggerActivityVo;
 
 import java.util.List;
@@ -31,7 +31,6 @@ public interface ROATriggerActivityService {
      * @throws 0,失败，1成功
      */
     public int triggerMessage(TriggerActivityParam param) ;
-
     /**
      * 判断后台是否配置了注册红包，并给相应用户发送配置的红包
      * @param param
@@ -40,7 +39,7 @@ public interface ROATriggerActivityService {
     public int getRegisteCoupons(TriggerActivityParam param);
 
     /**
-     * 查询有效的老推新红包
+     * 查询有效的老推新红包 position 1:注册，2交易，3邀请，4激活,5分享 6老推新
      * @return
      */
     public TriggerActivityVo findTriggerActivityVO(int pushCondition);
@@ -59,4 +58,10 @@ public interface ROATriggerActivityService {
      */
     public List<InviteRelationVo> getInviteRecordByUserId(Integer userId);
 
+    /**
+     * 根据老用户id获取老用户获取红包汇总信息
+     * @param userId
+     * @return
+     */
+    public OldPushNewInviteTotalVo getInviteRecordTotalVo(Integer userId);
 }
