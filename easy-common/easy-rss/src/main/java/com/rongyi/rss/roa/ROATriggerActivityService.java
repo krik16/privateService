@@ -2,8 +2,11 @@ package com.rongyi.rss.roa;
 
 import com.rongyi.easy.msgcenter.OldPushNewParam;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
+import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
 import com.rongyi.easy.msgcenter.vo.MLOldPushNewVo;
 import com.rongyi.easy.msgcenter.vo.TriggerActivityVo;
+
+import java.util.List;
 
 public interface ROATriggerActivityService {
 	 /**
@@ -43,9 +46,17 @@ public interface ROATriggerActivityService {
     public TriggerActivityVo findTriggerActivityVO(int pushCondition);
 
     /**
-     * 新用户注册/注册并交易 根据老用户邀请码领取红包
+     * 新用户注册/交易 根据老用户邀请码领取红包
      * @param param
      * @return
      */
     public int getCouponsByOldPushCode(OldPushNewParam param);
+
+    /**
+     * 根据老用户userId查询老用户的领取红包的详情
+     * @param userId
+     * @return
+     */
+    public List<InviteRelationVo> getInviteRecordByUserId(Integer userId);
+
 }
