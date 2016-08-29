@@ -56,12 +56,12 @@ public interface ROATriggerActivityService {
      * @param userId
      * @return
      */
-    public List<InviteRelationVo> getInviteRecordByUserId(Integer userId);
+    public List<InviteRelationVo> getInviteRecordByUserId(String userId);
 
     /**
      * 根据老用户id获取老用户获取红包汇总信息
      * @param userId
      * @return
      */
-    public OldPushNewInviteTotalVo getInviteRecordTotalVo(Integer userId);
+    public OldPushNewInviteTotalVo getInviteRecordTotalVo(String userId);
 }

@@ -8,10 +8,10 @@ import java.util.Date;
  */
 public class InviteRelationVo implements Serializable {
     private Integer id;
-    private Integer inviteUserId;//老用户id
+    private String inviteUserId;//老用户id
     private String inviteUserCode;//老用户邀请码
     private Integer pushActivityId;//消息id
-    private Integer userId;//新用户id
+    private String userId;//新用户id
     private String userPhone;//新用户手机号码
     private String userNickName;//新用户昵称
     private Integer inviteType;//新用户领取类型 1 注册，2注册并交易
@@ -20,6 +20,7 @@ public class InviteRelationVo implements Serializable {
     private Date updateAt;//修改时间
     private String updateBy;//修改人
     private Integer envelopAmonut;//获取红包金额
+    private String userLogo;//用户logo
 
     public Integer getId() {
         return id;
@@ -29,11 +30,11 @@ public class InviteRelationVo implements Serializable {
         this.id = id;
     }
 
-    public Integer getInviteUserId() {
+    public String getInviteUserId() {
         return inviteUserId;
     }
 
-    public void setInviteUserId(Integer inviteUserId) {
+    public void setInviteUserId(String inviteUserId) {
         this.inviteUserId = inviteUserId;
     }
 
@@ -53,11 +54,11 @@ public class InviteRelationVo implements Serializable {
         this.pushActivityId = pushActivityId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -125,14 +126,22 @@ public class InviteRelationVo implements Serializable {
         this.envelopAmonut = envelopAmonut;
     }
 
+    public String getUserLogo() {
+        return userLogo;
+    }
+
+    public void setUserLogo(String userLogo) {
+        this.userLogo = userLogo;
+    }
+
     @Override
     public String toString() {
-        return "InviteRelation{" +
+        return "InviteRelationVo{" +
                 "id=" + id +
-                ", inviteUserId=" + inviteUserId +
+                ", inviteUserId='" + inviteUserId + '\'' +
                 ", inviteUserCode='" + inviteUserCode + '\'' +
                 ", pushActivityId=" + pushActivityId +
-                ", userId=" + userId +
+                ", userId='" + userId + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", userNickName='" + userNickName + '\'' +
                 ", inviteType=" + inviteType +
@@ -141,6 +150,7 @@ public class InviteRelationVo implements Serializable {
                 ", updateAt=" + updateAt +
                 ", updateBy='" + updateBy + '\'' +
                 ", envelopAmonut=" + envelopAmonut +
+                ", userLogo='" + userLogo + '\'' +
                 '}';
     }
 }

@@ -90,7 +90,7 @@ public class TriggerActivityVo implements Serializable {
 
     private String activityRule;//活动规则
 
-    private Integer redPackAmount;//红包或抵扣券总金额
+    private Integer redPackAmount;//红包或抵扣券金额
 
     public Integer getId() {
         return id;

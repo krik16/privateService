@@ -14,12 +14,12 @@ public interface InviteRelationService {
      * @param userId
      * @return
      */
-    List<InviteRelationVo> getInviteRecordByUserId(Integer userId);
+    List<InviteRelationVo> getInviteRecordByUserId(String userId);
 
     /**
      * 根据用户id获取领取红包汇总信息
      * @param userId
      * @return
      */
-    OldPushNewInviteTotalVo getInviteRecordTotalVo(Integer userId);
+    OldPushNewInviteTotalVo getInviteRecordTotalVo(String userId);
 }
