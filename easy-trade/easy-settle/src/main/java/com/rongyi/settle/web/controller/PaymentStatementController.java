@@ -495,7 +495,7 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	private String getFileName(String name,String ruleCode, String date) {
-		return "容易网商户对账单-" + name + "-" + ruleCode + "-" + date + ".xlsx";
+		return "容易网商户对账单-" + name.replaceAll(" ","").trim() + "-" + ruleCode.trim() + "-" + date + ".xlsx";
 	}
 
 	/**

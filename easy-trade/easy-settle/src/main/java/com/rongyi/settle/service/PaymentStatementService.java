@@ -1,9 +1,5 @@
 package com.rongyi.settle.service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
@@ -11,6 +7,10 @@ import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.CouponStatementDetailDto;
 import com.rongyi.settle.dto.OrderSettlementDetailDto;
 import com.rongyi.settle.dto.OrderSettlementTopDto;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xgq on 2015/9/22.
@@ -130,4 +130,6 @@ public interface PaymentStatementService {
 	void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig, String userId) throws Exception;
 	
 	String getBatchNo();
+
+	Integer selectCountByConfigId(Integer configId);
 }

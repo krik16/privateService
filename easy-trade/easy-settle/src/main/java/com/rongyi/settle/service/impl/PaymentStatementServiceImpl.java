@@ -540,7 +540,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         logger.info("paymentStatementExcelDto=" + paymentStatementExcelDto.getPayTotal());
         // 生成excel文件
         ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
-                getFileName(statementConfig.getBussinessName(),statementConfig.getRuleCode(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+                getFileName(statementConfig.getBussinessName(), statementConfig.getRuleCode(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 
         // 插入生成记录
         paymentStatement.setPayTotal(AmountUtil.changYuanToFen(payTotal));
@@ -640,6 +640,13 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         return dateStr + batchNo;
     }
 
+    @Override
+    public Integer selectCountByConfigId(Integer configId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("configId", configId);
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectCountByConfigId", map);
+    }
+
     private String getPayChannelName(Byte payChannel) {
         if (SettleConstant.PayChannel.ZHIFUBAO.equals(payChannel)) {
             return "支付宝";
@@ -657,7 +664,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     }
 
     private String getFileName(String name, String ruleCode, String date) {
-        return "容易网商户对账单-" + name + "-" + ruleCode + "-" + date + ".xlsx";
+        return "容易网商户对账单-" + name.replaceAll(" ", "").trim() + "-" + ruleCode.trim() + "-" + date + ".xlsx";
     }
 
     public static class SettleConfigNotFoundException extends Exception {
