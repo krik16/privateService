@@ -59,7 +59,8 @@ public interface AreaService {
 	 * 查询城市信息列表
 	 * @param paramMap
 	 *            cityName 城市中文or英文名称
-	 * @return
+	 *            type     （0:国、1:省、2:市、3:区、4:商圈）
+	 * @return 城市信息列表
 	 */
 	 List<AreaDto> getAreaDtoByParam(Map<String,Object> paramMap);
 
