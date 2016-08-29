@@ -35,5 +35,11 @@ public class AreaDto implements Serializable{
 	public void setCnname(String cnname) {
 		this.cnname = cnname;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }
