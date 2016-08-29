@@ -84,7 +84,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private BigDecimal orderDiscountFee;
 
     /**大订单积分分摊*/
-    private BigDecimal orderScore;
+    private Integer orderScore;
 
     /**大订单积分分摊优惠金额*/
     private BigDecimal orderScoreDiscount;
@@ -516,12 +516,12 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityType = activityType;
     }
 
-    public BigDecimal getOrderScore()
+    public Integer getOrderScore()
     {
         return orderScore;
     }
 
-    public void setOrderScore(BigDecimal orderScore)
+    public void setOrderScore(Integer orderScore)
     {
         this.orderScore = orderScore;
     }
