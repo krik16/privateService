@@ -38,7 +38,7 @@ public class FeedBackEntity implements Serializable{
     private Date updatedAt;
     @Property("created_at")
     private Date createdAt;
-
+    @Property("user_name")
     private String userName;
 
     public String getUserName() {
