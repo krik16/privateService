@@ -1,5 +1,7 @@
 package com.rongyi.rss.msgcenter;
 
+import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.msgcenter.InviteRecordSearchParam;
 import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
 import com.rongyi.easy.msgcenter.vo.OldPushNewInviteTotalVo;
 
@@ -14,7 +16,7 @@ public interface InviteRelationService {
      * @param userId
      * @return
      */
-    List<InviteRelationVo> getInviteRecordByUserId(String userId);
+    PagingVO<InviteRelationVo> getInviteRecordByUserId(InviteRecordSearchParam param);
 
     /**
      * 根据用户id获取领取红包汇总信息
