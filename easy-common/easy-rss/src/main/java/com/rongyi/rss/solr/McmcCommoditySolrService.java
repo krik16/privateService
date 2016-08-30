@@ -7,6 +7,7 @@ import java.util.Map;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
+import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
@@ -329,5 +330,14 @@ public interface McmcCommoditySolrService {
 	 * @throws RYServiceException
 	 */
 	public List<McmcCommodityDocument> searchSaleIdList(String zoneId) throws RYServiceException;
+
+	/**
+	 * 获取有销量的商品列表
+	 *
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<Commodity> searchHasSalesCommodity(int page, int size) throws RYServiceException;
 
 }
