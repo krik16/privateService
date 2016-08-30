@@ -1,5 +1,7 @@
 package com.rongyi.rss.roa;
 
+import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.msgcenter.InviteRecordSearchParam;
 import com.rongyi.easy.msgcenter.OldPushNewParam;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
 import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
@@ -56,7 +58,7 @@ public interface ROATriggerActivityService {
      * @param userId
      * @return
      */
-    public List<InviteRelationVo> getInviteRecordByUserId(String userId);
+    public PagingVO<InviteRelationVo> getInviteRecordByUserId(InviteRecordSearchParam param);
 
     /**
      * 根据老用户id获取老用户获取红包汇总信息

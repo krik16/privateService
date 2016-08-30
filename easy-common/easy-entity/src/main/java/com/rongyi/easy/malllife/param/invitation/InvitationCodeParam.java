@@ -22,6 +22,10 @@ public class InvitationCodeParam extends BaseParam {
 
     private String userPhone;//手机号
 
+    private Integer pageSize;//页码
+
+    private Integer currentPage;//当前页
+
     public String getInvitCode() {
         return invitCode;
     }
@@ -36,5 +40,21 @@ public class InvitationCodeParam extends BaseParam {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 }
