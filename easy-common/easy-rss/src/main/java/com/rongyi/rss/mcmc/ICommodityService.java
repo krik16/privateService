@@ -77,13 +77,4 @@ public interface ICommodityService {
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
 
-	/**
-	 * 获取有销量的商品列表
-	 *
-	 * @param startIndex
-	 * @param size
-	 * @return
-	 */
-	public List<Commodity> searchHasSalesCommodity(int startIndex, int size) throws RYServiceException;
-
 }
