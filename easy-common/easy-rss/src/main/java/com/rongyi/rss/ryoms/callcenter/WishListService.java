@@ -23,17 +23,17 @@ public interface WishListService {
 
     /**
      * 已查看心愿单(红点，dubbo-redis)
-     * @param id
+     * @param userId  容易逛用户id
      * @return
      */
-    public boolean readingWishList(int id);
+    public boolean readingWishList(String userId);
 
     /**
      * 在redis中根据用户id查询是否有已回复为查看的心愿单
-     * @param id
+     * @param userId 容易逛用户id
      * @return
      */
-    public boolean queryRedisWishList(String id);
+    public boolean queryRedisWishList(String userId);
 
     /**
      * 心愿单列表
