@@ -761,6 +761,7 @@ public interface Constants {
     	Integer HONGBAO = 1;//红包
     	Integer COUPON = 2;//代金券
     	Integer REBATE = 3;//抵扣券
+        Integer INVITATIONRED = 4;//推荐红包
     }
 
     interface RedenvelopStatus{

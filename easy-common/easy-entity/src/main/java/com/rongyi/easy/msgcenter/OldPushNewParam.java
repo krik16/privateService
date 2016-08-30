@@ -10,6 +10,7 @@ public class OldPushNewParam implements Serializable {
     private Integer inviteType;//邀请类型 1注册 2注册并交易
     private String userId;//被邀请用户id
     private String userPhone;//被邀请用户手机号码
+    private Integer tradeStartAmont;//交易金额
 
     public String getInviteCode() {
         return inviteCode;
@@ -42,12 +43,23 @@ public class OldPushNewParam implements Serializable {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
+
+    public Integer getTradeStartAmont() {
+        return tradeStartAmont;
+    }
+
+    public void setTradeStartAmont(Integer tradeStartAmont) {
+        this.tradeStartAmont = tradeStartAmont;
+    }
+
     @Override
     public String toString() {
         return "OldPushNewParam{" +
                 "inviteCode='" + inviteCode + '\'' +
                 ", inviteType=" + inviteType +
-                ", userId=" + userId +
+                ", userId='" + userId + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", tradeStartAmont=" + tradeStartAmont +
                 '}';
     }
 }
