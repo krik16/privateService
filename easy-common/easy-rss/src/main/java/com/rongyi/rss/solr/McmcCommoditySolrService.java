@@ -340,4 +340,6 @@ public interface McmcCommoditySolrService {
 	 */
 	public List<Commodity> searchHasSalesCommodity(int page, int size) throws RYServiceException;
 
+	public boolean updateCommodityGalleryPositionSolr(String bullerId,String shopMid,String commodityId, Integer galleryPosition);
+
 }

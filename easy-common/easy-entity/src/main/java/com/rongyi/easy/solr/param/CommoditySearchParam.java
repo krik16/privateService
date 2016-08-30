@@ -101,6 +101,8 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private Map commodityMaxMinValues;  // 商品最大最小销量和更新时间
 
+	private Integer galleryPosition;//橱窗位置
+
 	public String getCouponId() {
 		return couponId;
 	}
@@ -305,6 +307,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		return systemNumber;
 	}
 
+
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
@@ -391,6 +394,16 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.commodityMaxMinValues = commodityMaxMinValues;
 	}
 
+
+	@NeedCheck(getFieldName = "galleryPosition")
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam{" +
@@ -423,6 +436,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				", categoryList=" + categoryList +
 				", couponId='" + couponId + '\'' +
 				", commodityMaxMinValues=" + commodityMaxMinValues +
+				", galleryPosition=" + galleryPosition +
 				"} " + super.toString();
 	}
 
