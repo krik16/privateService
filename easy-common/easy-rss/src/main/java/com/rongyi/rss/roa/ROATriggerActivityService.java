@@ -8,6 +8,7 @@ import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
 import com.rongyi.easy.msgcenter.vo.OldPushNewInviteTotalVo;
 import com.rongyi.easy.msgcenter.vo.TriggerActivityVo;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ROATriggerActivityService {
@@ -66,4 +67,11 @@ public interface ROATriggerActivityService {
      * @return
      */
     public OldPushNewInviteTotalVo getInviteRecordTotalVo(String userId);
+
+    /**
+     * 根据老用户id获取是否有最新的老推新记录
+     * @param userId
+     * @return
+     */
+    public int getUpTodateInviteRecord(String userId,Date searchTime);
 }
