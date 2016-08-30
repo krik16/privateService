@@ -47,6 +47,8 @@ public class Categories implements Serializable {
 	 */
 	private ObjectId parent_id;
 
+	private String ename ;  //英文名称
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -102,10 +104,12 @@ public class Categories implements Serializable {
 	public void setParent_id(ObjectId parent_id) {
 		this.parent_id = parent_id;
 	}
-	
-	
-	
-	
-	
 
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
 }

@@ -18,7 +18,7 @@ public class ValidCouponVO implements Serializable {
 		private String limitDesc;//使用限制
 		private String usageDesc;//使用说明
 		private String activityName;
-		private Integer couponType;// 0:代金券 ;1：活动券；2：礼品；3：停车券
+		private Integer couponType;// 0:代金券 ;1：活动券；2：礼品；3：停车券 4 活动奖品券
 		private String buyerPhone;
 		private String buyerName;
 		private String validStartAtStr;

@@ -256,6 +256,12 @@ public class Coupon implements Serializable {
      */
     private Boolean isDeleted;
 
+    /**
+     * 第一位表示微信，第二位表示终端。0：不能操作是否显示；1：隐藏；2：显示
+     */
+    private String showChannel;
+
+    private String thirdCouponType;
 
     /**
      * 代金券分类
@@ -269,9 +275,10 @@ public class Coupon implements Serializable {
 		return listCouponCategorys;
 	}
 
-	public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
-		this.listCouponCategorys = listCouponCategorys;
-	}
+    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+        this.listCouponCategorys = listCouponCategorys;
+    }
+
 
 	/**
      * 代金券关联的集团
@@ -590,6 +597,13 @@ public class Coupon implements Serializable {
     }
 
 
+    public String getShowChannel() {
+        return showChannel;
+    }
+
+    public void setShowChannel(String showChannel) {
+        this.showChannel = showChannel;
+    }
 
     public List<String> getDetailPicUrls() {
         List<String> list = ListUtils.EMPTY_LIST;
@@ -966,6 +980,14 @@ public class Coupon implements Serializable {
         this.couponCommodityCategories = couponCommodityCategories;
     }
 
+    public String getThirdCouponType() {
+        return thirdCouponType;
+    }
+
+    public void setThirdCouponType(String thirdCouponType) {
+        this.thirdCouponType = thirdCouponType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -1031,6 +1053,7 @@ public class Coupon implements Serializable {
                 .append("couponCommodityCategories", couponCommodityCategories)
                 .append("couponBrands", couponBrands)
                 .append("activityStatus", activityStatus)
+                .append("thirdCouponType", thirdCouponType)
                 .toString();
     }
 

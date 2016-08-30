@@ -64,7 +64,7 @@ public class UserManagerParam extends BaseParam {
 	private String workImg;    //工作证照
 	
 	private String otherImg;   //其它照片
-
+	private Boolean isOrdering;//是否接单状态  true:是，false:否
 
     public Integer getId() {
 		return id;
@@ -243,7 +243,7 @@ public class UserManagerParam extends BaseParam {
 	public void setAccountList(List<AccountParam> accountList) {
 		this.accountList = accountList;
 	}
-public Integer getIdentity() {
+    public Integer getIdentity() {
 		return identity;
 	}
 
@@ -361,5 +361,12 @@ public Integer getIdentity() {
 	public void setOtherImg(String otherImg) {
 		this.otherImg = otherImg;
 	}
-	
+	public Boolean getIsOrdering() {
+		return isOrdering;
 	}
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+	
+	
+}

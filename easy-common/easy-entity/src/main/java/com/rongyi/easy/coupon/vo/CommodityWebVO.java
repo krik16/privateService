@@ -25,6 +25,15 @@ public class CommodityWebVO implements Serializable{
 
     private String shopName;
     private String detailPic;
+    private String discount;
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
 
     public String getShopMid() {
         return shopMid;
@@ -119,6 +128,7 @@ public class CommodityWebVO implements Serializable{
                 .append("shopMid", shopMid)
                 .append("shopName", shopName)
                 .append("detailPic", detailPic)
+                .append("discount", discount)
                 .toString();
     }
 }

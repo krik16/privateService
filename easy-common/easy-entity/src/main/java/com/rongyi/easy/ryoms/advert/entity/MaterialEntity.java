@@ -9,13 +9,15 @@ public class MaterialEntity implements Serializable {
 	*/ 
 	private static final long serialVersionUID = -2914863310955169966L;
 	private Integer id;//
-	private Integer module_type;//素材模板 11全屏模板-A 21首页Banner-A
+	private Integer module_type;//素材模板 11 全屏模板-A 12 全屏模板-B 浮窗 13 全屏模板-c 浮窗2 21首页Banner模板-A 31 内页广告模板
 	private String content;//素材url
 	private Integer content_type;//素材类型 1:jpg,2:mov,3:mp4,4:f4v,5:swf 6:avi
 	private Integer create_by;
 	private Date create_at;
 	private Integer update_by;
 	private Date update_at;
+	private Integer position;
+	private String m_type;//素材类型  image flash video
 	/**
 	 * @return the id
 	 */
@@ -111,5 +113,21 @@ public class MaterialEntity implements Serializable {
 	 */
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
+	}
+
+	public Integer getPosition() {
+		return position;
+	}
+
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
+
+	public String getM_type() {
+		return m_type;
+	}
+
+	public void setM_type(String m_type) {
+		this.m_type = m_type;
 	}
 }
