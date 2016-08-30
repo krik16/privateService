@@ -108,4 +108,20 @@ public class ForumHotArea  implements Serializable{
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
+
+    @Override
+    public String toString() {
+        return "ForumHotArea{" +
+                "id=" + id +
+                ", cityId=" + cityId +
+                ", proId=" + proId +
+                ", cityName='" + cityName + '\'' +
+                ", sortIdx=" + sortIdx +
+                ", isDeleted=" + isDeleted +
+                ", createBy=" + createBy +
+                ", updateBy=" + updateBy +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                '}';
+    }
 }
