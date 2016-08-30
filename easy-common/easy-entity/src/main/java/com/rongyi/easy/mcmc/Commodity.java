@@ -9,8 +9,10 @@ import java.util.Map;
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityStatus;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
+import com.rongyi.easy.malllife.common.util.Utils;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.mcmc.entity.PostageTemplateEntity;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
@@ -379,20 +381,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.stockStatus = stockStatus;
 	}
 	public Double getDiscount() {
-		try {
-			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				BigDecimal currentPrice = new BigDecimal(this.currentPrice);
-				BigDecimal originalPrice = new BigDecimal(this.originalPrice);
-				if (originalPrice.compareTo(new BigDecimal(0)) != 0)
-					return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
-							.multiply(new BigDecimal(10)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				return new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			}
-			return 10.0;
-		} catch(Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
-
+		return discount;
 	}
 	public void setDiscount(Double discount) {
 		this.discount = discount;
@@ -540,54 +529,54 @@ public class Commodity implements  Serializable,Cloneable{
 	public Commodity clone() throws CloneNotSupportedException {
 
 		Commodity commodity=new Commodity();
-		commodity.setCategory(category);
-		commodity.setCategoryIds(categoryIds);
-		commodity.setCode(code);
-		commodity.setCurrentPrice(currentPrice);
-		commodity.setCustomCategoryIds(customCategoryIds);
-		commodity.setDescription(description);
-		//commodity.setDistribution(distribution);
-		commodity.setFreight(freight);
-		commodity.setBrandName(brandName);
-		commodity.setBrandId(brandId);
-		commodity.setcPriceMax(cPriceMax);
-		commodity.setcPriceMin(cPriceMin);
-		commodity.setCreateAt(createAt);
-		commodity.setId(id);
-		commodity.setMallId(mallId);
-		commodity.setMallMid(mallMid);
-		commodity.setName(name);
-		commodity.setoPriceMax(oPriceMax);
-		commodity.setoPriceMin(oPriceMin);
-		commodity.setoPriceOfLowestCPrice(oPriceOfLowestCPrice);
-		commodity.setOriginalPrice(originalPrice);
-		commodity.setPicList(picList);
-		commodity.setPostage(postage);
-		commodity.setPrice(price);
-		commodity.setRegisterAt(registerAt);
-		commodity.setShopId(shopId);
-		commodity.setShopMid(shopMid);
-		commodity.setShopNum(shopNum);
-		commodity.setSold(sold);
-		commodity.setSource(source);
-		commodity.setSpecList(specList);
-		commodity.setStatus(status);
-		commodity.setStock(stock);
-		commodity.setStockStatus(stockStatus);
-		commodity.setTerminalType(terminalType);
-		commodity.setUpdate_by(update_by);
-		commodity.setUpdateAt(updateAt);
-		commodity.setSaleId(saleId);
-		commodity.setFlashSaleId(flashSaleId);
-		commodity.setSecKillSign(secKillSign);
-		commodity.setDiscount(discount);
-//		commodity.setActivityStartTime(activityStartTime);
-//		commodity.setActivityEndTime(activityEndTime);
-		commodity.setPurchaseCount(purchaseCount);
-		commodity.setWeAndTeStatus(weAndTeStatus);
-		commodity.setSort(sort);
-		commodity.setCommodityModelNo(commodityModelNo);
-		commodity.setGoodsParam(goodsParam);
+		this.setCategory(category);
+		this.setCategoryIds(categoryIds);
+		this.setCode(code);
+		this.setCurrentPrice(currentPrice);
+		this.setCustomCategoryIds(customCategoryIds);
+		this.setDescription(description);
+		//this.setDistribution(distribution);
+		this.setFreight(freight);
+		this.setBrandName(brandName);
+		this.setBrandId(brandId);
+		this.setcPriceMax(cPriceMax);
+		this.setcPriceMin(cPriceMin);
+		this.setCreateAt(createAt);
+		this.setId(id);
+		this.setMallId(mallId);
+		this.setMallMid(mallMid);
+		this.setName(name);
+		this.setoPriceMax(oPriceMax);
+		this.setoPriceMin(oPriceMin);
+		this.setoPriceOfLowestCPrice(oPriceOfLowestCPrice);
+		this.setOriginalPrice(originalPrice);
+		this.setPicList(picList);
+		this.setPostage(postage);
+		this.setPrice(price);
+		this.setRegisterAt(registerAt);
+		this.setShopId(shopId);
+		this.setShopMid(shopMid);
+		this.setShopNum(shopNum);
+		this.setSold(sold);
+		this.setSource(source);
+		this.setSpecList(specList);
+		this.setStatus(status);
+		this.setStock(stock);
+		this.setStockStatus(stockStatus);
+		this.setTerminalType(terminalType);
+		this.setUpdate_by(update_by);
+		this.setUpdateAt(updateAt);
+		this.setSaleId(saleId);
+		this.setFlashSaleId(flashSaleId);
+		this.setSecKillSign(secKillSign);
+		this.setDiscount(discount);
+//		this.setActivityStartTime(activityStartTime);
+//		this.setActivityEndTime(activityEndTime);
+		this.setPurchaseCount(purchaseCount);
+		this.setWeAndTeStatus(weAndTeStatus);
+		this.setSort(sort);
+		this.setCommodityModelNo(commodityModelNo);
+		this.setGoodsParam(goodsParam);
 		return commodity;
 	}
 	@Override
@@ -750,7 +739,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setTemplateId(vo.getTemplateId());
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
-		this.setDiscount(this.getDiscount());
+		this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
 
 		this.setBrandName(brandName);
 		if(shopInfo != null) {
@@ -793,5 +782,125 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setBrandMid(brandMid);
 			this.setShopMid(vo.getShopMid());
 		}
+	}
+
+	public void wrapEditCommodityInfo(Map specMap, CommodityVO vo) {
+		if(specMap == null) {
+			this.setStock(Integer.valueOf(vo.getCommodityStock()));
+			this.setOriginalPrice(vo.getCommodityOriginalPrice());
+			this.setCurrentPrice((vo.getCommodityCurrentPrice() != null
+					&& !vo.getCommodityCurrentPrice().isEmpty()) ?
+					vo.getCommodityCurrentPrice() :
+					vo.getCommodityOriginalPrice());
+			this.setPrice(Double.parseDouble(this.getCurrentPrice()));
+			this.setoPriceMax(this.getOriginalPrice());
+			this.setoPriceMin(this.getOriginalPrice());
+			this.setcPriceMax(this.getCurrentPrice());
+			this.setcPriceMin(this.getCurrentPrice());
+		} else {
+			this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
+			this.setStock((Integer) specMap.get("specStock"));
+			this.setOriginalPrice(specMap.get("oMin").toString());
+			this.setCurrentPrice(specMap.get("lowest").toString());
+			this.setPrice(Double.valueOf(specMap.get("lowest").toString()));
+			this.setoPriceMax(specMap.get("oMax").toString());
+			this.setoPriceMin(specMap.get("oMin").toString());
+			this.setcPriceMin(specMap.get("lowest").toString());
+			this.setcPriceMax(specMap.get("cMax").toString());
+		}
+
+		this.setCode(vo.getCommodityCode());
+		this.setName(vo.getCommodityName());
+		if(!this.getCategory().equals(vo.getCommodityCategory())) {
+
+		}
+		this.setCategory(vo.getCommodityCategory());
+		this.setDescription(vo.getCommodityDescription());
+		this.setPostage((this.getPostage() == null) ? "0.0" : vo.getCommodityPostage());
+		this.setSupportCourierDeliver(vo.isSupportCourierDeliver());//是否支持快递发货
+		this.setSupportSelfPickup(vo.isSupportSelfPickup());//支持到店自提
+		//老版本安卓bug兼容，如果支持快递和自提都为false，则默认设为true
+		if(!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
+			this.setSupportCourierDeliver(true);
+			this.setSupportSelfPickup(true);
+		}
+
+		if(this.getStock() <= 0) {
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+		}
+		this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
+		this.setGoodsParam(vo.getGoodsParam());//商品参数
+		//商家后台修改商品时修改商品状态
+		if(vo.getSource()!= null){
+			this.setStatus(vo.getCommodityStatus());
+		}
+
+		this.setUpdateAt(new Date());
+		this.setUpdate_by(vo.getUpdate_by());
+		this.setDiscount(this.getDiscount());
+		this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_1);
+		//设置商家终端默认为隐藏
+		this.setWeAndTeStatus(CommodityTerminalType.weAndTeStatus.STATUS_4);
+		this.setTemplateId(vo.getTemplateId());
+		//设置限购数量
+		this.setPurchaseCount(vo.getPurchaseCount());
+
+		if(vo.getSource() == null) {//app来源
+			//app编辑商品不影响上下架时间
+			if(this.getStatus() == CommodityDataStatus.STATUS_COMMODITY_UNSHELVE) {//下架
+				if(this.getRegisterAt() == null) {
+					this.setRegisterAt(DateUtils.addYears(new Date(), -1));
+				}
+				if(this.getSoldOutAt() == null) {
+					this.setSoldOutAt(new Date());
+				}
+			} else if(this.getStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE) {//上架
+				if(this.getRegisterAt() == null) {
+					this.setRegisterAt(new Date());
+				}
+				if(this.getSoldOutAt() == null) {
+					this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
+				}
+			}
+		} else {
+			this.setRegisterAt(vo.getRegisterAt());
+			this.setSoldOutAt(vo.getSoldOutAt());
+			this.setSupportSelfPickup(vo.isSupportSelfPickup());//支持到店自提
+
+			//1表示商家承担运费,0表示买家承担运费
+			this.setFreight((vo.getFreight() != null) ? vo.getFreight() : 0);
+			//0表示统一库存1表示分管库存默认是分管库存
+			this.setStockStatus((vo.getStockStatus() != null) ? vo.getStockStatus() : 1);
+			this.setReason(vo.getReason());
+			if (vo.getCommodityPicList() != null && !vo.getCommodityPicList().isEmpty()) {
+				this.setPicList(vo.getCommodityPicList());//图片
+			}
+			this.setCustomCategoryIds(vo.getCustomCategoryIds());
+
+			//设置自定义类目
+			/*if (CollectionUtils.isNotEmpty(vo.getCustomCategoryIds())
+					&& vo.getCustomCategoryIds().size() > 3) {
+				throw new Exception("商品自定义分类最多3个");
+			}*/
+		}
+		/*if(vo.getTemplateId()!=null){//商品有模版id通过模版运费通过模版id查出来
+			PostageTemplateEntity postage=postageTemplateService
+					.searchPostageTemplateById(vo.getTemplateId());
+			if(postage!=null)
+				this.setPostage(Double.toString(postage.getPostage() / 100.0));
+		}*/
+	}
+
+	public static void main(String[] args) {
+		Commodity c = new Commodity();
+		c.setOriginalPrice("100");
+		c.setCurrentPrice("80");
+		c.setDiscount(c.getDiscount());
+
+		c.setOriginalPrice("200");
+		c.setCurrentPrice("100");
+
+		System.out.println(c.getDiscount());
+
 	}
 }
