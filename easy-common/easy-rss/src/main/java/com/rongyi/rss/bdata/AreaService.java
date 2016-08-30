@@ -53,4 +53,16 @@ public interface AreaService {
 	 * @return
 	 */
 	public List<BdAreaVo> getAreaVoByParam(Map map);
+
+
+	/**
+	 * 查询城市信息列表
+	 * @param paramMap
+	 *            cityName 城市中文or英文名称
+	 *            type     （0:国、1:省、2:市、3:区、4:商圈）
+	 * @return 城市信息列表
+	 */
+	 List<AreaDto> getAreaDtoByParam(Map<String,Object> paramMap);
+
+
 }

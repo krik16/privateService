@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class OldPushNewParam implements Serializable {
     private String inviteCode;//老用户邀请码
     private Integer inviteType;//邀请类型 1注册 2注册并交易
-    private Integer userId;//被邀请用户id
+    private String userId;//被邀请用户id
     private String userPhone;//被邀请用户手机号码
 
     public String getInviteCode() {
@@ -27,11 +27,11 @@ public class OldPushNewParam implements Serializable {
         this.inviteType = inviteType;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
