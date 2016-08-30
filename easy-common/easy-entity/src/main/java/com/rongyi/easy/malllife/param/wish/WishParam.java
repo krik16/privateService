@@ -18,24 +18,24 @@ public class WishParam extends MalllifeBaseParam implements Serializable{
 	private Integer id;//心愿id
 	private String goodsName;//商品名称
 	private String brandName;//品牌名称
-	private Long phone;//手机号码
-	private Integer userId;
+	private String phone;//手机号码
+	private String userId;
 	private String remark;//备注
 	private List<String> picList;//图片集合
 
-	public Long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
