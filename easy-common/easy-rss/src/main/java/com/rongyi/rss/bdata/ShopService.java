@@ -3,6 +3,7 @@ package com.rongyi.rss.bdata;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bdata.entity.Photo;
 import com.rongyi.easy.bdata.entity.Shop;
+import com.rongyi.easy.bdata.vo.ShopVO;
 import com.rongyi.easy.ryoms.entity.RyUserInfo;
 import com.rongyi.easy.ryoms.param.ShopParam;
 
@@ -124,4 +125,6 @@ public interface ShopService {
 	
 	
 	public boolean updateShopLocation(String locationString, String shopName, String mallId); 
+	
+	public List<ShopVO> getMallShops(String mallId);
 }

@@ -24,6 +24,20 @@ public class CommunalFacilityVO implements Serializable {
     private String    createAt;
     private String    updateAt;
     private String    updator;
+    
+ private String    ename;
+    
+    
+    
+    
+    public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
 
     public String getOperator() {
 		return operator;

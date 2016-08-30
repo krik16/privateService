@@ -22,9 +22,20 @@ public class CommunalFacility {
     private Date    create_at;
     private Date    update_at;
     private String    updator;
+    private String    ename;
     
     
-    public String getOperator() {
+    
+    
+    public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+	public String getOperator() {
 		return operator;
 	}
 
