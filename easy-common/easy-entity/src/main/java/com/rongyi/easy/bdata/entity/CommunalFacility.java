@@ -22,6 +22,7 @@ public class CommunalFacility {
     private Date    create_at;
     private Date    update_at;
     private String    updator;
+    private String    ename ; //公共设施英文名称
     
     
     public String getOperator() {
@@ -136,5 +137,13 @@ public class CommunalFacility {
 
     public void setOrganize(String organize) {
         this.organize = organize;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
     }
 }
