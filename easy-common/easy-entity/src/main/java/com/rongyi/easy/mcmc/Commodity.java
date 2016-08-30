@@ -96,6 +96,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> goodsParam;//商品参数
 	private Integer commodityOffUserId; //商品下架操作人
 	private String commodityOffUserName; //商品下架操作人
+	private Integer galleryPosition;//橱窗排序商品
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -536,6 +537,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityOffUserName = commodityOffUserName;
 	}
 
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -588,6 +597,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
+		commodity.setGalleryPosition(galleryPosition);
 		return commodity;
 	}
 	@Override
@@ -656,6 +666,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", commodityModelNo=" +commodityModelNo+
 				",goodsParam=" + goodsParam +
 				",discount=" + discount +
+				",galleryPosition=" + galleryPosition +
 				'}';
 	}
 

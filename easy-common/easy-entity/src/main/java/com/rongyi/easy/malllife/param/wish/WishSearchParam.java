@@ -14,11 +14,20 @@ public class WishSearchParam implements Serializable {
     private String goodsName;//商品名称
     private String brandName;//品牌名称
     private Date endTime;//截至结束时间
-    private Integer phone;//电话
+    private String phone;//电话
     private Date startTime;//截至开始时间
     private Integer status;//0全部1回复2未回复
     private Integer pageSize;//
     private Integer currentPage;//
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getResponse() {
         return response;
@@ -52,11 +61,11 @@ public class WishSearchParam implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

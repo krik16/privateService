@@ -14,7 +14,8 @@ public class BrandParam implements Serializable{
 	private String currentPage;// （要请求页）
 
 	private String pageSize;// 每页数据显示数量
-
+	private String longitude;//坐标经度
+	private String latitude;//坐标纬度
 	public String getBrandId() {
 		return brandId;
 	}
@@ -39,4 +40,20 @@ public class BrandParam implements Serializable{
 		this.pageSize = pageSize;
 	}
 
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	
 }

@@ -1,11 +1,14 @@
 package com.rongyi.rss.roa;
 
+import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.msgcenter.InviteRecordSearchParam;
 import com.rongyi.easy.msgcenter.OldPushNewParam;
 import com.rongyi.easy.msgcenter.TriggerActivityParam;
 import com.rongyi.easy.msgcenter.vo.InviteRelationVo;
 import com.rongyi.easy.msgcenter.vo.OldPushNewInviteTotalVo;
 import com.rongyi.easy.msgcenter.vo.TriggerActivityVo;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ROATriggerActivityService {
@@ -56,7 +59,7 @@ public interface ROATriggerActivityService {
      * @param userId
      * @return
      */
-    public List<InviteRelationVo> getInviteRecordByUserId(String userId);
+    public PagingVO<InviteRelationVo> getInviteRecordByUserId(InviteRecordSearchParam param);
 
     /**
      * 根据老用户id获取老用户获取红包汇总信息
@@ -64,4 +67,11 @@ public interface ROATriggerActivityService {
      * @return
      */
     public OldPushNewInviteTotalVo getInviteRecordTotalVo(String userId);
+
+    /**
+     * 根据老用户id获取是否有最新的老推新记录
+     * @param userId
+     * @return
+     */
+    public int getUpTodateInviteRecord(String userId,Date searchTime);
 }

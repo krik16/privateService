@@ -28,12 +28,21 @@ public class UserOperateVO implements Serializable{
 	private Integer myCouponNum = 0;//我的代金券数量
 	private Integer myHongBaoNum = 0;//我的红包数量
 	private Integer myRebateNum = 0;//我的抵扣券数量
+	private Integer invitaNum   =0;//推荐红包
 	private Integer nonPayment = 0;//待付款订单数量（含商品订单和优惠券订单）
 	private Integer nonReceived = 0;//待收货订单数量
 	private Integer unPaidOrderCount = 0;//待付款商品订单数量
 	private Integer unPaidCouponOrderCount = 0;//待付款优惠券订单数量
 	private Boolean hasUnCheckedRepliedWish;//是否有已回复的未查看的心愿
-	
+
+	public Integer getInvitaNum() {
+		return invitaNum;
+	}
+
+	public void setInvitaNum(Integer invitaNum) {
+		this.invitaNum = invitaNum;
+	}
+
 	public Boolean getHasUnCheckedRepliedWish() {
 		return hasUnCheckedRepliedWish;
 	}
