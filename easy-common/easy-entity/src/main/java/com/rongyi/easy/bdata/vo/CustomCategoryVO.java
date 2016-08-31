@@ -68,7 +68,10 @@ public class CustomCategoryVO implements Serializable {
      */
 	private Long shopNum;
 
-	
+	/**
+	 * 英文名
+	 */
+	private String alias;
 	
 	
 
@@ -185,5 +188,11 @@ public class CustomCategoryVO implements Serializable {
 		this.shopNum = shopNum;
 	}
 
+	public String getAlias() {
+		return alias;
+	}
 
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 }
