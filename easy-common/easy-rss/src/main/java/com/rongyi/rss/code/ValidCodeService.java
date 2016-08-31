@@ -58,6 +58,17 @@ public interface ValidCodeService {
     /**
      * 验证礼品码
      * @param code
+     * @param sessionUserInfo
+     * @param isSuperShop 是否是超级店长
+     * @return
+     */
+    public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop) ;
+
+
+
+    /**
+     * 验证礼品码
+     * @param code
      * @return
      */
     public boolean validGiftCode(String code, String mallId,String shopId,String validUser,String identity) throws CodeServiceException;
@@ -112,6 +123,17 @@ public interface ValidCodeService {
      * @return
      */
     public boolean validEventGiftCode(String code, SessionUserInfo sessionUserInfo);
+
+    /**
+     * 验证活动奖品码
+     * @param code
+     * @param sessionUserInfo
+     * @param isSuperShop 是否是超级店长
+     * @return
+     */
+    public boolean validEventGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop);
+
+
 
     /**
      * 查询活动奖品码的信息

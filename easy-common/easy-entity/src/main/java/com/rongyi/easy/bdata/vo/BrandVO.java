@@ -24,6 +24,7 @@ public class BrandVO implements Serializable {
     private String telephone;
     private List<BrandsCategoryVO> categories;
     private String tags;
+    private String descriptionEn; //英文描述信息
 
     public String getBrandId() {
         return brandId;
@@ -159,5 +160,13 @@ public class BrandVO implements Serializable {
 
     public void setCategories(List<BrandsCategoryVO> categories) {
         this.categories = categories;
+    }
+
+    public String getDescriptionEn() {
+        return descriptionEn;
+    }
+
+    public void setDescriptionEn(String descriptionEn) {
+        this.descriptionEn = descriptionEn;
     }
 }

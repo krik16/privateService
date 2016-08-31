@@ -48,6 +48,8 @@ public class ShopVO implements Serializable {
 	private String businessStatusReason;
 	private String operatorUser;  //创建者
 	private String updateUser ;   //最后修改者
+	private String nameEn;  //店铺英文名
+	private String descriptionEn; //英文描述
 
 	public String getBusinessStatusReason() {
 		return businessStatusReason;
@@ -368,5 +370,21 @@ public class ShopVO implements Serializable {
 
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
+	}
+
+	public String getNameEn() {
+		return nameEn;
+	}
+
+	public void setNameEn(String nameEn) {
+		this.nameEn = nameEn;
+	}
+
+	public String getDescriptionEn() {
+		return descriptionEn;
+	}
+
+	public void setDescriptionEn(String descriptionEn) {
+		this.descriptionEn = descriptionEn;
 	}
 }

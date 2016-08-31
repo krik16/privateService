@@ -8,7 +8,7 @@ public class GalleryFeaturedParam extends BaseParam implements Serializable {
 	
 	private String shopId;//店铺id
 	private String commodityId;//商品id
-	private int galleryPosition;//橱窗位置，分别是 1 ,2, 3
+	private Integer galleryPosition;//橱窗位置，分别是 1 ,2, 3
 	
 	public String getShopId() {
 		return shopId;
@@ -22,10 +22,10 @@ public class GalleryFeaturedParam extends BaseParam implements Serializable {
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
 	}
-	public int getGalleryPosition() {
+	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
-	public void setGalleryPosition(int galleryPosition) {
+	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
 	}
 	@Override
