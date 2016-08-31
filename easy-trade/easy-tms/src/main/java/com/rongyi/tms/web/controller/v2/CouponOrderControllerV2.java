@@ -16,11 +16,14 @@ import com.rongyi.rss.coupon.RoaCouponService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.tradecenter.ITradeOrderService;
 import com.rongyi.rss.tradecenter.ITradeUserCodeService;
+import com.rongyi.tms.Exception.BizException;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.excel.ExportCouponOrderExcel;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO.CouponVO;
+import com.rongyi.tms.moudle.vo.CouponOrderExcelSearchVO;
 import com.rongyi.tms.moudle.vo.CouponOrderVO;
 import com.rongyi.tms.service.CouponOrderService;
 import org.slf4j.Logger;
@@ -33,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +65,9 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
 
     @Autowired
     ROAMalllifeUserService roaMalllifeUserService;
+
+    @Autowired
+    ExportCouponOrderExcel exportCouponOrderExcel;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CouponOrderControllerV2.class);
 
@@ -146,8 +153,8 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     couponVO.setHbDiscount(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVO.setRebateDisCount(avgRebateDiscount.doubleValue());
                     couponVO.setScoreDisCount(avgScoreDiscount.doubleValue());
-                    BigDecimal payAmount =avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
-                    couponVO.setPayAmount(payAmount.compareTo(BigDecimal.ZERO)<0?0:payAmount.doubleValue());
+                    BigDecimal payAmount = avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+                    couponVO.setPayAmount(payAmount.compareTo(BigDecimal.ZERO) < 0 ? 0 : payAmount.doubleValue());
                     couponVO.setValidBeginDate(tCCouponVO.getValidBeginDate());
                     couponVO.setValidEndDate(tCCouponVO.getValidEndDate());
                     couponVOList.add(couponVO);
@@ -159,7 +166,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     couponVOList.get(couponVOList.size() - 1).setScoreDisCount(lastScoreDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     //最后一笔实际支付金额=平均支付金额-(最后一笔红包优惠)-(最后一笔抵扣券优惠)-(最后一笔积分优惠)
                     BigDecimal payAmount = avgPayAmount.subtract(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP)).subtract(lastRebateDiscount).subtract(lastScoreDiscount);
-                    couponVOList.get(couponVOList.size() - 1).setPayAmount(payAmount.compareTo(BigDecimal.ZERO)<0?0:payAmount.doubleValue());
+                    couponVOList.get(couponVOList.size() - 1).setPayAmount(payAmount.compareTo(BigDecimal.ZERO) < 0 ? 0 : payAmount.doubleValue());
                 }
 
             }
@@ -177,6 +184,31 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
             LOGGER.error("优惠券订单查询失败,message={}", e);
         }
 
+        return responseData;
+    }
+
+    /**
+     * 导出订单
+     **/
+    @RequestMapping("/exportExcel")
+    @ResponseBody
+    public ResponseData exportExcel(CouponOrderExcelSearchVO vo, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("报表导出:vo={}", vo);
+        ResponseData responseData = ResponseData.success();
+        try {
+//            permissionCheck(request, "ORDER_COUPON_VIEW");
+            Map<String, Object> map = vo.toMap();
+            exportCouponOrderExcel.exportExcel(request, response, map);
+        } catch (BizException e) {
+            responseData = ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+            LOGGER.error(e.getMessage());
+        } catch (PermissionException e) {
+            responseData = ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+            LOGGER.error(e.getMessage(), e);
+        } catch (Exception e) {
+            responseData = ResponseData.failure(ConstantEnum.EXCEPTION_INTERFACE.getCodeInt(), ConstantEnum.EXCEPTION_INTERFACE.getValueStr());
+            e.printStackTrace();
+        }
         return responseData;
     }
 }

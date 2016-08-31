@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-trade</artifactId>
-		<version>4.0.2-SNAPSHOT</version>
+		<version>4.0.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>easy-rpb</artifactId>
 	<packaging>war</packaging>
