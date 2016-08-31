@@ -37,7 +37,7 @@ public class TransactionDetailForCartVO implements Serializable{
 	
 	private String integral;//积分
 	
-	private String easyMoney;//容颜值
+	private String easyMoney;//容颜币
 
 	private List<String> orderNums;// 大订单号集合
 	

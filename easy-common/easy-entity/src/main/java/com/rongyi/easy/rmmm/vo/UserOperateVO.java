@@ -34,6 +34,15 @@ public class UserOperateVO implements Serializable{
 	private Integer unPaidOrderCount = 0;//待付款商品订单数量
 	private Integer unPaidCouponOrderCount = 0;//待付款优惠券订单数量
 	private Boolean hasUnCheckedRepliedWish;//是否有已回复的未查看的心愿
+	private String easyMoney;//容颜币
+
+	public String getEasyMoney() {
+		return easyMoney;
+	}
+
+	public void setEasyMoney(String easyMoney) {
+		this.easyMoney = easyMoney;
+	}
 
 	public Integer getInvitaNum() {
 		return invitaNum;
@@ -120,6 +129,20 @@ public class UserOperateVO implements Serializable{
 	}
 	public void setUnPaidCouponOrderCount(Integer unPaidCouponOrderCount) {
 		this.unPaidCouponOrderCount = unPaidCouponOrderCount;
+	}
+
+	@Override
+	public String toString() {
+		return "UserOperateVO [newCoupon=" + newCoupon + ", newHongBao="
+				+ newHongBao + ", newRebate=" + newRebate + ", newTempNum="
+				+ newTempNum + ", myIntegral=" + myIntegral + ", myCouponNum="
+				+ myCouponNum + ", myHongBaoNum=" + myHongBaoNum
+				+ ", myRebateNum=" + myRebateNum + ", invitaNum=" + invitaNum
+				+ ", nonPayment=" + nonPayment + ", nonReceived=" + nonReceived
+				+ ", unPaidOrderCount=" + unPaidOrderCount
+				+ ", unPaidCouponOrderCount=" + unPaidCouponOrderCount
+				+ ", hasUnCheckedRepliedWish=" + hasUnCheckedRepliedWish
+				+ ", easyMoney=" + easyMoney + "]";
 	}
 	
 }
