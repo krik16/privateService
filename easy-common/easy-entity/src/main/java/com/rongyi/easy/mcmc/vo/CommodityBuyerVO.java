@@ -262,13 +262,13 @@ public class CommodityBuyerVO implements Serializable{
 	public List<String> getGoodsParam() {
 		return goodsParam;
 	}
-	
+
 	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
 	}
 
 	public CommodityBuyerVO(){
-		
+
 	}
 
 	public CommodityBuyerVO(Commodity commodity){
@@ -349,7 +349,7 @@ public class CommodityBuyerVO implements Serializable{
 			this.commodityAppStatus = this.commodityStatus;
 		}
 		this.systemNumber = commodity.getSystemNumber();
-		
+
 		//活动类型[0其他 闪购1、特卖2、秒杀3]
 		if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
 			this.activityType = "3";
@@ -363,7 +363,7 @@ public class CommodityBuyerVO implements Serializable{
 			//其他
 			this.activityType = "0";
 		}
-		
+
 		// 当前是秒杀商品
 		if ("3".equals(this.activityType)) {
 			long nowTime = new Date().getTime();
@@ -378,8 +378,9 @@ public class CommodityBuyerVO implements Serializable{
 				}
 			}
 		}
+		this.setGalleryPosition(commodity.getGalleryPosition());
 	}
-	
+
 	public List<String> getCommodityPicList() {
 		return commodityPicList;
 	}
@@ -539,9 +540,9 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
 				+", discount=" + discount
-				+ ", isCollected=" + isCollected 
+				+ ", isCollected=" + isCollected
 				+ ", galleryPosition=" + galleryPosition
 				+ "]";
 	}
-	
+
 }
