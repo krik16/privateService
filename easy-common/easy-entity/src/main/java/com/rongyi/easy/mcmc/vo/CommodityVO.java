@@ -595,7 +595,7 @@ public class CommodityVO  implements  Serializable {
 		this.commodityModelNo = commodity.getCommodityModelNo();//商品款号
 		this.goodsParam = commodity.getGoodsParam();//商品参数
 		this.updateAt=commodity.getUpdateAt().getTime();
-		this.galleryPosition=commodity.getGalleryPosition();
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==9999 ?0:commodity.getGalleryPosition();
 	}
 	@Override
 	public String toString() {
