@@ -71,6 +71,8 @@ public class Shop implements Serializable {
     private List<ObjectId> brand_ids ; //兼营品牌
     private String icon ; //店铺logo
     private int moreFloors = 0;//0不跨楼，1跨楼
+    private String name_en;    //店铺英文名
+    private String description_en ; //店铺英文介绍
 
 
     public ObjectId getId() {
@@ -490,4 +492,20 @@ public class Shop implements Serializable {
 	public void setFiliale_id(ObjectId filiale_id) {
 		this.filiale_id = filiale_id;
 	}
+
+    public String getName_en() {
+        return name_en;
+    }
+
+    public void setName_en(String name_en) {
+        this.name_en = name_en;
+    }
+
+    public String getDescription_en() {
+        return description_en;
+    }
+
+    public void setDescription_en(String description_en) {
+        this.description_en = description_en;
+    }
 }
