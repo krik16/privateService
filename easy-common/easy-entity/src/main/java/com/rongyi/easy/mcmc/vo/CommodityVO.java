@@ -595,6 +595,7 @@ public class CommodityVO  implements  Serializable {
 		this.commodityModelNo = commodity.getCommodityModelNo();//商品款号
 		this.goodsParam = commodity.getGoodsParam();//商品参数
 		this.updateAt=commodity.getUpdateAt().getTime();
+		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==9999 ?0:commodity.getGalleryPosition();
 	}
 	@Override

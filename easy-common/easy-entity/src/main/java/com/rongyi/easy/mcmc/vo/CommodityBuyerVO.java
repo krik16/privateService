@@ -378,7 +378,8 @@ public class CommodityBuyerVO implements Serializable{
 				}
 			}
 		}
-		this.setGalleryPosition(commodity.getGalleryPosition());
+		//默认返回非橱窗商品的值设置为0
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==9999 ?0:commodity.getGalleryPosition();
 	}
 
 	public List<String> getCommodityPicList() {
