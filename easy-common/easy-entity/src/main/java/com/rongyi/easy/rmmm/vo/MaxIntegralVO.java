@@ -30,11 +30,21 @@ public class MaxIntegralVO implements Serializable{
 	
 	private Double couponDiscount;// 红包抵扣金额
 	
+	private String couponName;//红包名称
+	
     private String platformRebateCode;//抵扣券券码
 	
 	private Double rebateDiscount;// 抵扣券抵扣金额
 	
 	private Double rebateOriginalPrice;// 抵扣券满多少元可用
+
+	public String getCouponName() {
+		return couponName;
+	}
+
+	public void setCouponName(String couponName) {
+		this.couponName = couponName;
+	}
 
 	public Double getRebateOriginalPrice() {
 		return rebateOriginalPrice;
@@ -138,7 +148,7 @@ public class MaxIntegralVO implements Serializable{
 				+ integralRatio + ", myIntegral=" + myIntegral + ", rebateNum="
 				+ rebateNum + ", hongBaoNum=" + hongBaoNum
 				+ ", realOrderPrice=" + realOrderPrice + ", maxEasyMoney="
-				+ maxEasyMoney + ", couponCode=" + couponCode + ", couponDiscount="
+				+ maxEasyMoney + ", couponCode=" + couponCode + ", couponName=" + couponName + ", couponDiscount="
 				+ couponDiscount + ", platformRebateCode=" + platformRebateCode
 				+ ", rebateDiscount=" + rebateDiscount 
 				+ ", rebateOriginalPrice=" + rebateOriginalPrice 
