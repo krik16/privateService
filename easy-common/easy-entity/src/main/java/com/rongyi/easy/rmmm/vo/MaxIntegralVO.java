@@ -33,6 +33,16 @@ public class MaxIntegralVO implements Serializable{
     private String platformRebateCode;//抵扣券券码
 	
 	private Double rebateDiscount;// 抵扣券抵扣金额
+	
+	private Double rebateOriginalPrice;// 抵扣券满多少元可用
+
+	public Double getRebateOriginalPrice() {
+		return rebateOriginalPrice;
+	}
+
+	public void setRebateOriginalPrice(Double rebateOriginalPrice) {
+		this.rebateOriginalPrice = rebateOriginalPrice;
+	}
 
 	public String getCouponCode() {
 		return couponCode;
@@ -130,7 +140,9 @@ public class MaxIntegralVO implements Serializable{
 				+ ", realOrderPrice=" + realOrderPrice + ", maxEasyMoney="
 				+ maxEasyMoney + ", couponCode=" + couponCode + ", couponDiscount="
 				+ couponDiscount + ", platformRebateCode=" + platformRebateCode
-				+ ", rebateDiscount=" + rebateDiscount + "]";
+				+ ", rebateDiscount=" + rebateDiscount 
+				+ ", rebateOriginalPrice=" + rebateOriginalPrice 
+				+ "]";
 	}
 
 }
