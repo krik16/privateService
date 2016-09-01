@@ -46,7 +46,7 @@ public class ContentSysMsg implements Serializable{
     /** 消息内容 */
     private String msgContent;
 
-    /** 推送对象 0 全部 1卖家 2买家 3指定用户 4指定商场 5指定店铺*/
+    /** 推送对象 0 全部 1卖家 2买家 3指定单用户 4指定商场 5指定店铺 6指定部分用户*/
     private Integer msgType;
 
     /*相关ID 用户ID，摩店ID，商城ID*/
