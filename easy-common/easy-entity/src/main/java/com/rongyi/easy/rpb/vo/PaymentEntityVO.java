@@ -121,6 +121,16 @@ public class PaymentEntityVO {
     private String openId;
 
     private Integer weixinPayType;
+
+    /**
+     * 支付宝同步回调地址
+     */
+    private String callBackUrl;
+
+    /**
+     * 返回商户地址
+     */
+    private String merchantUrl;
     /**
      * 主键id
      *
@@ -441,5 +451,21 @@ public class PaymentEntityVO {
 
     public void setWeixinPayType(Integer weixinPayType) {
         this.weixinPayType = weixinPayType;
+    }
+
+    public String getCallBackUrl() {
+        return callBackUrl;
+    }
+
+    public void setCallBackUrl(String callBackUrl) {
+        this.callBackUrl = callBackUrl;
+    }
+
+    public String getMerchantUrl() {
+        return merchantUrl;
+    }
+
+    public void setMerchantUrl(String merchantUrl) {
+        this.merchantUrl = merchantUrl;
     }
 }
