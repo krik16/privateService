@@ -15,6 +15,7 @@ public class CommodityVO  implements  Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = 8138633144546500349L;
+	private static final  Integer MAX_GALLERY_POSITION=100;
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
@@ -596,7 +597,7 @@ public class CommodityVO  implements  Serializable {
 		this.goodsParam = commodity.getGoodsParam();//商品参数
 		this.updateAt=commodity.getUpdateAt().getTime();
 		//默认返回非橱窗商品的值设置为0
-		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==9999 ?0:commodity.getGalleryPosition();
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 	}
 	@Override
 	public String toString() {
