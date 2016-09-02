@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class OldPushNewParam implements Serializable {
     private String inviteCode;//老用户邀请码
-    private Integer inviteType;//邀请类型 1注册 2注册并交易
+    private Integer inviteType;//邀请类型 1注册 2交易
     private String userId;//被邀请用户id
     private String userPhone;//被邀请用户手机号码
     private Integer tradeStartAmont;//交易金额
