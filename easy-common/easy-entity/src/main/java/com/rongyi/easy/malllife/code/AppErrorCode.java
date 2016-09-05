@@ -63,7 +63,7 @@ public enum AppErrorCode {
     ERROR_ULTRALIMIT_RED(1068103,"抱歉，您领取红包超限，请明天再来试试呗"),
     ERROR_RED_PASSWORD(1068104,"红包密码错误请重新输入"),
     ERROR_RED_PASSWORD_ULTRALIMIT(1068105,"抱歉您错误输入超限，请明天再试"),
-    ERROR_GET_COUPON(1068106,"领取红包失败")
+    ERROR_GET_COUPON(1068106,"领取红包失败"),
     ;
 
 
