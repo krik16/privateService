@@ -1,5 +1,7 @@
 package com.rongyi.easy.malllife.param.wish;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,6 +22,22 @@ public class WishSearchParam implements Serializable {
     private Integer pageSize;//
     private Integer currentPage;//
     private String userId;
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("response", response)
+                .append("goodsName", goodsName)
+                .append("endTime", endTime)
+                .append("phone", phone)
+                .append("startTime", startTime)
+                .append("status", status)
+                .append("pageSize", pageSize)
+                .append("currentPage", currentPage)
+                .append("userId", userId)
+                .toString();
+    }
 
     public String getUserId() {
         return userId;
