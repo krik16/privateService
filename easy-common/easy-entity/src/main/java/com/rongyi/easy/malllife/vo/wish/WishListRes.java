@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.vo.wish;
 
 import com.google.inject.internal.Lists;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +13,15 @@ public class WishListRes implements Serializable {
     private Integer responseNum;
     private Integer unResponseNum;
     private List<WishListVO> wishListVOs = Lists.newArrayList();
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("responseNum", responseNum)
+                .append("unResponseNum", unResponseNum)
+                .append("wishListVOs", wishListVOs)
+                .toString();
+    }
 
     public List<WishListVO> getWishListVOs() {
         return wishListVOs;
