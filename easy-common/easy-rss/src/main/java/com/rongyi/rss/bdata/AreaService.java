@@ -64,7 +64,9 @@ public interface AreaService {
 	 */
 	 List<AreaDto> getAreaDtoByParam(Map<String,Object> paramMap);
 
-	int areaHandle();
-
-
+	/**
+	 * 处理城市信息接口（用一次）
+	 * @return 影响行数
+	 */
+	 int areaHandle();
 }
