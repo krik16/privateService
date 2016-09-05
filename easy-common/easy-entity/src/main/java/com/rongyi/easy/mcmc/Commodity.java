@@ -98,6 +98,9 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> goodsParam;//商品参数
 	private Integer commodityOffUserId; //商品下架操作人
 	private String commodityOffUserName; //商品下架操作人
+	private String shopName; ///< 店铺名称
+	private String mallName; ///< 商场名称
+	private String hotAreaName; ///< 商圈
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -525,58 +528,85 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityOffUserName = commodityOffUserName;
 	}
 
+	public String getHotAreaName() {
+		return hotAreaName;
+	}
+
+	public void setHotAreaName(String hotAreaName) {
+		this.hotAreaName = hotAreaName;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
 		Commodity commodity=new Commodity();
-		this.setCategory(category);
-		this.setCategoryIds(categoryIds);
-		this.setCode(code);
-		this.setCurrentPrice(currentPrice);
-		this.setCustomCategoryIds(customCategoryIds);
-		this.setDescription(description);
-		//this.setDistribution(distribution);
-		this.setFreight(freight);
-		this.setBrandName(brandName);
-		this.setBrandId(brandId);
-		this.setcPriceMax(cPriceMax);
-		this.setcPriceMin(cPriceMin);
-		this.setCreateAt(createAt);
-		this.setId(id);
-		this.setMallId(mallId);
-		this.setMallMid(mallMid);
-		this.setName(name);
-		this.setoPriceMax(oPriceMax);
-		this.setoPriceMin(oPriceMin);
-		this.setoPriceOfLowestCPrice(oPriceOfLowestCPrice);
-		this.setOriginalPrice(originalPrice);
-		this.setPicList(picList);
-		this.setPostage(postage);
-		this.setPrice(price);
-		this.setRegisterAt(registerAt);
-		this.setShopId(shopId);
-		this.setShopMid(shopMid);
-		this.setShopNum(shopNum);
-		this.setSold(sold);
-		this.setSource(source);
-		this.setSpecList(specList);
-		this.setStatus(status);
-		this.setStock(stock);
-		this.setStockStatus(stockStatus);
-		this.setTerminalType(terminalType);
-		this.setUpdate_by(update_by);
-		this.setUpdateAt(updateAt);
-		this.setSaleId(saleId);
-		this.setFlashSaleId(flashSaleId);
-		this.setSecKillSign(secKillSign);
-		this.setDiscount(discount);
-//		this.setActivityStartTime(activityStartTime);
-//		this.setActivityEndTime(activityEndTime);
-		this.setPurchaseCount(purchaseCount);
-		this.setWeAndTeStatus(weAndTeStatus);
-		this.setSort(sort);
-		this.setCommodityModelNo(commodityModelNo);
-		this.setGoodsParam(goodsParam);
+		commodity.setCategory(category);
+		commodity.setCategoryIds(categoryIds);
+		commodity.setCode(code);
+		commodity.setCurrentPrice(currentPrice);
+		commodity.setCustomCategoryIds(customCategoryIds);
+		commodity.setDescription(description);
+		//commodity.setDistribution(distribution);
+		commodity.setFreight(freight);
+		commodity.setBrandName(brandName);
+		commodity.setBrandId(brandId);
+		commodity.setcPriceMax(cPriceMax);
+		commodity.setcPriceMin(cPriceMin);
+		commodity.setCreateAt(createAt);
+		commodity.setId(id);
+		commodity.setMallId(mallId);
+		commodity.setMallMid(mallMid);
+		commodity.setName(name);
+		commodity.setoPriceMax(oPriceMax);
+		commodity.setoPriceMin(oPriceMin);
+		commodity.setoPriceOfLowestCPrice(oPriceOfLowestCPrice);
+		commodity.setOriginalPrice(originalPrice);
+		commodity.setPicList(picList);
+		commodity.setPostage(postage);
+		commodity.setPrice(price);
+		commodity.setRegisterAt(registerAt);
+		commodity.setShopId(shopId);
+		commodity.setShopMid(shopMid);
+		commodity.setShopNum(shopNum);
+		commodity.setSold(sold);
+		commodity.setSource(source);
+		commodity.setSpecList(specList);
+		commodity.setStatus(status);
+		commodity.setStock(stock);
+		commodity.setStockStatus(stockStatus);
+		commodity.setTerminalType(terminalType);
+		commodity.setUpdate_by(update_by);
+		commodity.setUpdateAt(updateAt);
+		commodity.setSaleId(saleId);
+		commodity.setFlashSaleId(flashSaleId);
+		commodity.setSecKillSign(secKillSign);
+		commodity.setDiscount(discount);
+//		commodity.setActivityStartTime(activityStartTime);
+//		commodity.setActivityEndTime(activityEndTime);
+		commodity.setPurchaseCount(purchaseCount);
+		commodity.setWeAndTeStatus(weAndTeStatus);
+		commodity.setSort(sort);
+		commodity.setCommodityModelNo(commodityModelNo);
+		commodity.setGoodsParam(goodsParam);
+		commodity.setShopName(shopName);
+		commodity.setMallName(mallName);
+		commodity.setHotAreaName(hotAreaName);
 		return commodity;
 	}
 	@Override
@@ -644,6 +674,9 @@ public class Commodity implements  Serializable,Cloneable{
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo=" +commodityModelNo+
 				",goodsParam=" + goodsParam +
+				",shopName=" + shopName +
+				",mallName=" + mallName +
+				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
 				'}';
 	}
