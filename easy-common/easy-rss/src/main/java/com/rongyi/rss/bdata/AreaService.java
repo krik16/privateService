@@ -64,5 +64,7 @@ public interface AreaService {
 	 */
 	 List<AreaDto> getAreaDtoByParam(Map<String,Object> paramMap);
 
+	int areaHandle();
+
 
 }
