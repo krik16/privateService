@@ -196,7 +196,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
         LOGGER.info("报表导出:vo={}", vo);
         ResponseData responseData = ResponseData.success();
         try {
-//            permissionCheck(request, "ORDER_COUPON_VIEW");
+            permissionCheck(request, "ORDER_COUPON_VIEW");
             Map<String, Object> map = vo.toMap();
             exportCouponOrderExcel.exportExcel(request, response, map);
         } catch (BizException e) {
