@@ -194,5 +194,6 @@ public interface MallService {
 	
 	ResponseVO sortCustomCategory(String  id,String sortType, int updateUserId);
 	CustomCategory getCustomCateById(String customCateId);
+	ResponseVO getCustomCategoriesAndChildAllByMallId(String mallId);
 
 }
