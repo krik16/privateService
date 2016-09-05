@@ -196,6 +196,6 @@ public interface MallService {
 	CustomCategory getCustomCateById(String customCateId);
 	ResponseVO getCustomCategoriesAndChildAllByMallId(String mallId);
 	
-	CustomCategory getCustomCateParantByChildId(String customCateId);
+	CustomCategoryVO getCustomCateParantByChildId(String customCateId);
 
 }
