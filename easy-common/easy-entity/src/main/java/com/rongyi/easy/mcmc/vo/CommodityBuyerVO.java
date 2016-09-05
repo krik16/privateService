@@ -12,6 +12,7 @@ import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
 public class CommodityBuyerVO implements Serializable{
 	private static final long serialVersionUID = -1461107119422444629L;
+	private static final  Integer MAX_GALLERY_POSITION=100;
 
 	private String shopName;//店铺名称
 	private List<String> commodityPicList;
@@ -379,7 +380,7 @@ public class CommodityBuyerVO implements Serializable{
 			}
 		}
 		//默认返回非橱窗商品的值设置为0
-		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==9999 ?0:commodity.getGalleryPosition();
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 	}
 
 	public List<String> getCommodityPicList() {
