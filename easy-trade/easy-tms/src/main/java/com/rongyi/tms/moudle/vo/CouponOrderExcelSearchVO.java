@@ -2,7 +2,6 @@ package com.rongyi.tms.moudle.vo;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,9 +11,9 @@ import java.util.Map;
  **/
 public class CouponOrderExcelSearchVO implements Serializable{
 
-    private Date createAtBegin;
+    private String createAtBegin;
 
-    private Date createAtEnd;
+    private String createAtEnd;
 
     private Integer source;
 
@@ -32,19 +31,19 @@ public class CouponOrderExcelSearchVO implements Serializable{
 
     private Byte status;
 
-    public Date getCreateAtBegin() {
+    public String getCreateAtBegin() {
         return createAtBegin;
     }
 
-    public void setCreateAtBegin(Date createAtBegin) {
+    public void setCreateAtBegin(String createAtBegin) {
         this.createAtBegin = createAtBegin;
     }
 
-    public Date getCreateAtEnd() {
+    public String getCreateAtEnd() {
         return createAtEnd;
     }
 
-    public void setCreateAtEnd(Date createAtEnd) {
+    public void setCreateAtEnd(String createAtEnd) {
         this.createAtEnd = createAtEnd;
     }
 
