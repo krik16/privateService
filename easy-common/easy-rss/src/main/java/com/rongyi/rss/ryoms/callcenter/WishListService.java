@@ -17,9 +17,10 @@ public interface WishListService {
      * 心愿单回复
      * @param id
      * @param response
+     * @param userName
      * @return
      */
-    public boolean resWishList(int id,String response,int userId);
+    public boolean resWishList(int id,String response,String userName);
 
     /**
      * 已查看心愿单(红点，dubbo-redis)
