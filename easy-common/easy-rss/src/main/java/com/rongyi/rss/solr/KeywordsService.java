@@ -12,7 +12,9 @@ package com.rongyi.rss.solr;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.malllife.param.KeywordSearchParam;
 import com.rongyi.easy.rmmm.entity.KeywordSearchHistory;
+import org.mongodb.morphia.query.Query;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,4 +39,25 @@ public interface KeywordsService {
      * @return 返回LIST(com.rongyi.easy.solr.result.KeywordHistoryEntity)
      */
     public List<KeywordSearchHistory> searchKeywordHistory(KeywordSearchParam param) throws RYServiceException;
+
+    /**
+     * 删除无效数据
+     */
+    public void deleteInvalid() throws RYServiceException;
+
+    /**
+     * 获取未初始化的数据
+     *
+     * @param start
+     * @param size
+     * @return
+     */
+    public List<KeywordSearchHistory> getInitList(int start, int size) throws RYServiceException;
+
+    /**
+     * 更新KeywordSuggest数据
+     *
+     * @param history
+     */
+    public boolean updateKeywordSuggest(KeywordSearchHistory history) throws RYServiceException;
 }

@@ -13,6 +13,7 @@ import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 import java.util.ArrayList;
@@ -27,6 +28,60 @@ import java.util.regex.Pattern;
  *
  */
 public class Pinyin4jUtil {
+
+	/**
+	 * 获取汉字对应的全拼拼音
+	 *
+	 * @param str
+	 * @return
+	 */
+	public static String getPinYin(String str) {
+		char[] t1 = null;
+		t1 = str.toCharArray();
+		String[] t2 = new String[t1.length];
+		HanyuPinyinOutputFormat t3 = new HanyuPinyinOutputFormat();
+
+		t3.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+		t3.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+		t3.setVCharType(HanyuPinyinVCharType.WITH_V);
+		StringBuilder stringBuilder = new StringBuilder();
+		int t0 = t1.length;
+		try {
+			for (int i = 0; i < t0; i++) {
+				// 判断是否为汉字字符
+				if (Character.toString(t1[i]).matches(
+						"[\\u4E00-\\u9FA5]+")) {
+					t2 = PinyinHelper.toHanyuPinyinStringArray(t1[i], t3);
+					stringBuilder.append(t2[0]);
+				} else
+					stringBuilder.append(Character.toString(t1[i]));
+			}
+		} catch (BadHanyuPinyinOutputFormatCombination e1) {
+			e1.printStackTrace();
+		}
+		return stringBuilder.toString();
+	}
+
+	/**
+	 * 返回中文的首字母
+	 *
+	 * @param str
+	 * @return
+	 */
+	public static String getShortPinYin(String str) {
+		String convert = "";
+		for (int j = 0; j < str.length(); j++) {
+			char word = str.charAt(j);
+			String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
+			if (pinyinArray != null) {
+				convert += pinyinArray[0].charAt(0);
+			} else {
+				convert += word;
+			}
+		}
+		return convert;
+	}
+
 	/**
 	 * 汉字转换位汉语拼音首字母，英文字符不变，特殊字符丢失 支持多音字，生成方式如（长沙市长:cssc,zssz,zssc,cssz）
 	 *汉字

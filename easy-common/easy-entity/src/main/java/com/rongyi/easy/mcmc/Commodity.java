@@ -96,6 +96,9 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> goodsParam;//商品参数
 	private Integer commodityOffUserId; //商品下架操作人
 	private String commodityOffUserName; //商品下架操作人
+	private String shopName; ///< 店铺名称
+	private String mallName; ///< 商场名称
+	private String hotAreaName; ///< 商圈
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -536,6 +539,30 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityOffUserName = commodityOffUserName;
 	}
 
+	public String getHotAreaName() {
+		return hotAreaName;
+	}
+
+	public void setHotAreaName(String hotAreaName) {
+		this.hotAreaName = hotAreaName;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -588,6 +615,9 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
+		commodity.setShopName(shopName);
+		commodity.setMallName(mallName);
+		commodity.setHotAreaName(hotAreaName);
 		return commodity;
 	}
 	@Override
@@ -655,6 +685,9 @@ public class Commodity implements  Serializable,Cloneable{
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo=" +commodityModelNo+
 				",goodsParam=" + goodsParam +
+				",shopName=" + shopName +
+				",mallName=" + mallName +
+				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
 				'}';
 	}
