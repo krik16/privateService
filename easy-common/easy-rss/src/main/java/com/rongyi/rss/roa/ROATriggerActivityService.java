@@ -74,4 +74,9 @@ public interface ROATriggerActivityService {
      * @return
      */
     public int getUpTodateInviteRecord(String userId,Date searchTime);
+    /**
+     * 获取当前新人注册红包的金额
+     * @return
+     */
+   public Double getExistRegisteCouponPrice();
 }
