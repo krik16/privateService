@@ -1,4 +1,5 @@
 package com.rongyi.easy.malllife.common.util;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
@@ -57,4 +58,27 @@ public class Utils {
                 .replace("）", "").replace(")", "");
     }
 
+    /**
+     * 计算商品折扣
+     *
+     * @param originalPrice
+     * @param currentPrice
+     *
+     * @return discount
+     */
+    public static Double calculateDiscount(Double originalPrice, Double currentPrice) {
+        try {
+            if (null != originalPrice && null != currentPrice) {
+                BigDecimal currentPriceBig = new BigDecimal(currentPrice);
+                BigDecimal originalPriceBig = new BigDecimal(originalPrice);
+                if (originalPriceBig.compareTo(new BigDecimal(0)) > 0) {
+                    return currentPriceBig.divide(originalPriceBig, 2, BigDecimal.ROUND_HALF_UP)
+                            .multiply(new BigDecimal(10)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                }
+            }
+            return 10.0;
+        } catch (Exception e) {
+            return 10.0;
+        }
+    }
 }

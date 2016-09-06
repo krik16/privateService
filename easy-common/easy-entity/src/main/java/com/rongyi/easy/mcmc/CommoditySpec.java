@@ -207,7 +207,6 @@ public class CommoditySpec implements  Serializable {
 		this.setTotal(vo.getSpecStock());
 		this.setStock(vo.getSpecStock());
 		this.setPictureUrl(vo.getSpecPictureUrl());
-
 	}
 	
 }
