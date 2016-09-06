@@ -46,6 +46,12 @@ public interface TriggerActivityService {
     public boolean isExistRegisteCoupons();
 
     /**
+     * 获取当前新人注册红包的金额
+     * @return
+     */
+    Double getExistRegisteCouponPrice();
+
+    /**
      * 获取有效的老推新红包数据
      * @param pushCondition
      * @return
@@ -58,4 +64,7 @@ public interface TriggerActivityService {
      * @return
      */
     int getCouponsByOldPushCode(OldPushNewParam param);
+
+
+
 }
