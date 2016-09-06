@@ -111,12 +111,7 @@ public class SystemConfig implements Serializable{
 
 
 
-    public static void main(String args[]){
 
-        SystemConfig systemConfig = new SystemConfig();
-        System.out.println("test=="+systemConfig.isMobileNO("19712165941"));
-
-    }
 
 
     /**
@@ -220,6 +215,52 @@ public class SystemConfig implements Serializable{
             }
         }
         return true;
+    }
+
+
+    /**
+     * 判断中文
+     * @param str
+     * @return
+     */
+    public static boolean isChina(String str){
+
+        String regEx = "[\\u4e00-\\u9fa5]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        while (m.find()) {
+            for (int i = 0; i <= m.groupCount(); i++) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 只包含字母和数字
+     * @param str
+     * @return
+     */
+    public static boolean isNumericAndChar(String str){
+        String regex = "^[a-z0-9A-Z\u9fa5]+$";
+       return str.matches(regex);
+    }
+
+
+    public static void main(String args[]){
+
+        SystemConfig systemConfig = new SystemConfig();
+       System.out.println("test=="+systemConfig.isNumericAndChar("121Dfsd"));
+        String str="12EEsdssd";
+
+        String regex = "^[a-z0-9A-Z\u9fa5]+$";
+        System.out.println("result==" + str.matches(regex));
+      /*  String str="dddEDDF*2222";
+        String regEx="[A-Z,a-z,0-9]*";
+
+        boolean result=Pattern.compile(regEx).matcher(str).find();
+        System.out.println("result==="+result);*/
     }
 
 }
