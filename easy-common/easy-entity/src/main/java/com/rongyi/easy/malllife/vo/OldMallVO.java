@@ -40,7 +40,8 @@ public class OldMallVO implements Serializable{
     private boolean hasDiscountAct; //优惠资讯
     private boolean hasRaiders;//潮人攻略
     private boolean hasSpecialSale;//是否关联特卖
-
+    private String cityName;//城市名称
+    private String cityId;//城市id
 	public String getId() {
 		return id;
 	}
@@ -236,6 +237,18 @@ public class OldMallVO implements Serializable{
 	public void setHasSpecialSale(boolean hasSpecialSale) {
 		this.hasSpecialSale = hasSpecialSale;
 	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getCityId() {
+		return cityId;
+	}
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
 	@Override
 	public String toString() {
 		return "OldMallVO [id=" + id + ", name=" + name + ", icon=" + icon
@@ -255,7 +268,8 @@ public class OldMallVO implements Serializable{
 				+ ", shopCount=" + shopCount + ", hasWonderFulAct="
 				+ hasWonderFulAct + ", hasDiscountAct=" + hasDiscountAct
 				+ ", hasRaiders=" + hasRaiders + ", hasSpecialSale="
-				+ hasSpecialSale + "]";
+				+ hasSpecialSale + ", cityName=" + cityName + ", cityId="
+				+ cityId + "]";
 	}
 	
 }
