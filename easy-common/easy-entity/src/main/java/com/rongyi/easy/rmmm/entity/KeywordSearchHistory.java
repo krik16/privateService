@@ -2,6 +2,7 @@ package com.rongyi.easy.rmmm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 
@@ -36,6 +37,8 @@ public class KeywordSearchHistory implements Serializable {
     private int src_type;
     // 对应ID
     private String src_id;
+    // 预搜索的字段（目前包含中文、全拼、简拼）
+    private List<String> keyword_suggest;
 
     /**
      * @return 1：商品 2：店铺/商场 3：优惠
@@ -145,6 +148,24 @@ public class KeywordSearchHistory implements Serializable {
         this.src_type = src_type;
     }
 
+    /**
+     * 预搜索的字段（目前包含中文、全拼、简拼）
+     *
+     * @return
+     */
+    public List<String> getKeyword_suggest() {
+        return keyword_suggest;
+    }
+
+    /**
+     * 预搜索的字段（目前包含中文、全拼、简拼）
+     *
+     * @param keyword_suggest
+     */
+    public void setKeyword_suggest(List<String> keyword_suggest) {
+        this.keyword_suggest = keyword_suggest;
+    }
+
     @Override
     public String toString() {
         return "KeywordSearchHistory{" +
@@ -159,6 +180,7 @@ public class KeywordSearchHistory implements Serializable {
                 ", search_count=" + search_count +
                 ", src_type=" + src_type +
                 ", src_id='" + src_id + '\'' +
+                ", keyword_suggest='" + keyword_suggest + '\'' +
                 '}';
     }
 }
