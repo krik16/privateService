@@ -121,4 +121,6 @@ public interface ShopService {
 	 * @param shopIds
 	 */
 	public void updateSorl(List<String> shopIds);
+	
+	public List<Shop> getShopListByZoneId(String zoneId);
 }

@@ -28,7 +28,7 @@ public interface FloorService {
 	
 	public BdataFloorVO getBdataFloorById(String id);
 
-	
+	public List<BdataFloor> getMallFloorsDefault(String mallId);
 
 	
 	public List<BdataFloorVO> getMallFloors(String mallId,int currentpage, int pagesize,String status);
