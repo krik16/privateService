@@ -19,12 +19,21 @@ import java.util.List;
  */
 public class CommodityUpdateOrDeleteParam {
 
-   private List<CommodityUpdateOrdeteleParamOperate>  commodityUpdateOrdeteleParamOperates;//批量的商品集合
+	private List<String> commodityIds;//商品id
 
 	private Integer type;//type=0 下架 type=1 删除
 
+	private String reason="";//原因
 
 
+
+	public List<String> getCommodityIds() {
+		return commodityIds;
+	}
+
+	public void setCommodityIds(List<String> commodityIds) {
+		this.commodityIds = commodityIds;
+	}
 
 	public Integer getType() {
 		return type;
@@ -34,12 +43,13 @@ public class CommodityUpdateOrDeleteParam {
 		this.type = type;
 	}
 
-
-	public List<CommodityUpdateOrdeteleParamOperate> getCommodityUpdateOrdeteleParamOperates() {
-		return commodityUpdateOrdeteleParamOperates;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setCommodityUpdateOrdeteleParamOperates(List<CommodityUpdateOrdeteleParamOperate> commodityUpdateOrdeteleParamOperates) {
-		this.commodityUpdateOrdeteleParamOperates = commodityUpdateOrdeteleParamOperates;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
+
+
 }
