@@ -21,6 +21,7 @@ public class InviteRelationVo implements Serializable {
     private String updateBy;//修改人
     private Integer envelopAmonut;//获取红包金额
     private String userLogo;//用户logo
+    private Integer envelopType;//红包类型 1 代金券 2 抵扣券 3 红包
 
     public Integer getId() {
         return id;
@@ -134,6 +135,14 @@ public class InviteRelationVo implements Serializable {
         this.userLogo = userLogo;
     }
 
+    public Integer getEnvelopType() {
+        return envelopType;
+    }
+
+    public void setEnvelopType(Integer envelopType) {
+        this.envelopType = envelopType;
+    }
+
     @Override
     public String toString() {
         return "InviteRelationVo{" +
@@ -151,6 +160,7 @@ public class InviteRelationVo implements Serializable {
                 ", updateBy='" + updateBy + '\'' +
                 ", envelopAmonut=" + envelopAmonut +
                 ", userLogo='" + userLogo + '\'' +
+                ", envelopType=" + envelopType +
                 '}';
     }
 }
