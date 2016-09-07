@@ -70,8 +70,7 @@ public class CustomCategoryVO implements Serializable {
      * 自定义分类下关联的店铺数
      */
 	private Long shopNum;
-	
-	private String alias;//英文名字
+
 	
 	
 
@@ -83,13 +82,6 @@ public class CustomCategoryVO implements Serializable {
 	
 
 
-	public String getAlias() {
-		return alias;
-	}
-
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
 
 	public List<CustomCategoryVO> getChildCustomCategory() {
 		return childCustomCategory;
