@@ -79,4 +79,5 @@ public interface ROAAreaService {
 	 * @return
 	 */
 	public List<AreaDto> getAreaDtoByParam(Map<String,Object> paramMap);
+	public BdAreaVo getAreaVoByAreaMid(String areaMid);
 }
