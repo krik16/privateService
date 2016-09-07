@@ -11,6 +11,9 @@ import java.util.List;
  *
  */
 public class CustomCategoryVO implements Serializable {
+	
+	
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * id
@@ -43,7 +46,7 @@ public class CustomCategoryVO implements Serializable {
 	/**
 	 * 分类id列表
 	 */
-	private List<String> categorysId;
+	private List<String> categorysId;//品牌分类id
 	private List<CustomCategoryVO>  childCustomCategory;
 
 	/**
@@ -67,6 +70,10 @@ public class CustomCategoryVO implements Serializable {
      * 自定义分类下关联的店铺数
      */
 	private Long shopNum;
+	
+	private String alias;//英文名字
+	
+	
 
 	/**
 	 * 英文名
@@ -75,6 +82,14 @@ public class CustomCategoryVO implements Serializable {
 	
 	
 
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 
 	public List<CustomCategoryVO> getChildCustomCategory() {
 		return childCustomCategory;
