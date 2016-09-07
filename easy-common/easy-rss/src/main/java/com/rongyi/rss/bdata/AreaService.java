@@ -54,6 +54,13 @@ public interface AreaService {
 	 */
 	public List<BdAreaVo> getAreaVoByParam(Map map);
 
+	/**
+	 * 通过区域mongoId查询信息
+	 * @param areaMid mongoId
+	 * @return 城市信息
+	 */
+	public BdAreaVo getAreaVoByAreaMid(String areaMid);
+
 
 	/**
 	 * 查询城市信息列表
