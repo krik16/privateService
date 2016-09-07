@@ -25,7 +25,7 @@ public class CustomCategory implements Serializable {
 	 * 名称
 	 */
 	private String name;
-	private String alias;
+
 	
 	/**
 	 * 商场id
@@ -68,17 +68,16 @@ public class CustomCategory implements Serializable {
 	
 	
 	
-	
-	public String getAlias() {
-		return alias;
-	}
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
+
 	/**
 	 * 更新人
 	 */
 	private int updated_by;
+
+	/**
+	* 英文名
+	*/
+	private String alias;
 	public ObjectId getId() {
 		return id;
 	}
@@ -150,5 +149,13 @@ public class CustomCategory implements Serializable {
 	}
 	public void setUpdated_by(int updated_by) {
 		this.updated_by = updated_by;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 }
