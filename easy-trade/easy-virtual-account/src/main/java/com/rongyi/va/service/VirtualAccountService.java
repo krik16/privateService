@@ -9,7 +9,6 @@
  */
 package com.rongyi.va.service;
 
-import com.mysql.jdbc.exceptions.MySQLTransactionRollbackException;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.va.entity.VirtualAccountDetailEntity;
 import com.rongyi.easy.va.entity.VirtualAccountEntity;
@@ -73,28 +72,30 @@ public class VirtualAccountService extends BaseServiceImpl {
      * @date 2015年7月17日 下午6:26:14
      */
     public int updateBalance(String userId, BigDecimal amount, VirtualAccountDetailEntity detailEntity) {
+        LOGGER.info("userId={},amount={}", userId, amount);
         int rowCount;
         int detailId = 0;
-        Map<String, Object> params = new HashMap<>();
-        params.put("userId", userId);
-        params.put("amount", amount);
-        rowCount = this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateBalance", params);
+        VirtualAccountEntity virtualAccountEntity = this.selectByUserId(userId);
+        VirtualAccountEntity lockVirtualAccountEntity = this.selectByIdWithLock(virtualAccountEntity.getId());
+        //设置修改前余额
+        detailEntity.setBalanceBefore(lockVirtualAccountEntity.getBalance());
+        BigDecimal balance = lockVirtualAccountEntity.getBalance().add(amount);
+        lockVirtualAccountEntity.setBalance(balance);
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("userId", userId);
+//        params.put("amount", amount);
+//        rowCount = this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateBalance", params);
+        rowCount = this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateBalanceWithLock", lockVirtualAccountEntity);
         if (rowCount > 0) {
-            try {
-                detailId = virtualAccountDetailService.insertAndGetId(detailEntity);
-            } catch (Exception e) {
-                LOGGER.warn("插入资金明细失败时重新插入,errMsg={}", e.getMessage());
-                try {
-                    Thread.sleep(5000);
-                    detailEntity.setId(null);
-                    detailId = virtualAccountDetailService.insertAndGetId(detailEntity);
-                } catch (Exception e2) {
-                    LOGGER.error(e.getMessage());
-                    e.printStackTrace();
-                }
-            }
+            detailId = virtualAccountDetailService.insertAndGetId(detailEntity);
         }
         return detailId;
+    }
+
+    public VirtualAccountEntity selectByIdWithLock(Integer id) {
+        Map<String, Object> parms = new HashMap<>();
+        parms.put("id", id);
+        return this.getBaseDao().selectOneBySql(MAPPER_NAMESPACE + ".selectByIdWithLock", parms);
     }
 
     /**
