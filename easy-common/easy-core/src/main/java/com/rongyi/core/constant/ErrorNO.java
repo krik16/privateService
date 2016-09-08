@@ -19,6 +19,9 @@ public interface ErrorNO {
 	final int TIME_OUT 		= 1181003;
 	/** 调用异常 **/
 	final int EXCEPTION 	= 1181010;
+	
+	final int ERROR_PARAM 	= 1181011;
+	
 
 	/** 错误消息 **/
 	public final static HashMap<Integer, String> ERRNO_MSG = new HashMap<Integer, String>() {
@@ -28,6 +31,7 @@ public interface ErrorNO {
 			put(LACK_PARAM, "缺少参数");
 			put(TIME_OUT, 	"请求超时");
 			put(EXCEPTION, 	"调用异常");
+			put(ERROR_PARAM,"参数错误");
 		}
 	};
 }

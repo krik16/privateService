@@ -76,4 +76,10 @@ public interface AreaService {
 	 * @return 影响行数
 	 */
 	 int areaHandle();
+
+	/**
+	 * 处理城市信息接口（用一次）
+	 * @return 影响行数
+	 */
+	int areaHandle(String type);
 }
