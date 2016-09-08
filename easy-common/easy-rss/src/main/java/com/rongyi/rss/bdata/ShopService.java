@@ -127,4 +127,5 @@ public interface ShopService {
 	public boolean updateShopLocation(String locationString, String shopName, String mallId); 
 	
 	public List<ShopVO> getMallShops(String mallId);
+	public List<ShopVO> getMallNormallShops(String mallId);
 }
