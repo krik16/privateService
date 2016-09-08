@@ -23,9 +23,9 @@ public class CommunalFacility {
     private Date    update_at;
     private String    updator;
     private String    ename ; //公共设施英文名称
-    
-    
-    public String getOperator() {
+
+
+	public String getOperator() {
 		return operator;
 	}
 
