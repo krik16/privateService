@@ -8,10 +8,10 @@
 
 package com.rongyi.tms.service;
 
+import com.rongyi.tms.moudle.vo.CouponOrderVO;
+
 import java.util.List;
 import java.util.Map;
-
-import com.rongyi.tms.moudle.vo.CouponOrderVO;
 
 /**	
  * @Author:  柯军
@@ -31,7 +31,7 @@ public interface CouponOrderService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月7日上午11:26:24
 	 **/
-	public abstract List<CouponOrderVO> selectPageList(Integer currentPage,Integer pageSize,Map<String,Object> map);
+	 List<CouponOrderVO> selectPageList(Integer currentPage,Integer pageSize,Map<String,Object> map);
 	
 	/**	
 	 * @Description: 列表总数 
@@ -40,7 +40,7 @@ public interface CouponOrderService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月7日上午11:27:50
 	 **/
-	public abstract Integer selectPageListCount(Map<String,Object> map);
+	 Integer selectPageListCount(Map<String,Object> map);
 	
 	/**	
 	 * @Description: 根据ID查询 
@@ -49,6 +49,6 @@ public interface CouponOrderService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月7日下午6:10:57
 	 **/
-	public abstract CouponOrderVO selectById(Integer id);
-	
+	 CouponOrderVO selectById(Integer id);
+
 }

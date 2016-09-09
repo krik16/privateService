@@ -1,167 +1,169 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongyi.tms.mapper.xml.CouponOrderMapper">
-	<resultMap id="BaseResultMap" type="com.rongyi.tms.moudle.vo.CouponOrderVO">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-		<result column="user_id" property="userId" jdbcType="VARCHAR" />
-		<result column="user_name" property="userName" jdbcType="VARCHAR" />
-		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="status" property="status" jdbcType="TINYINT" />
-		<result column="total_amount" property="totalAmount" jdbcType="DOUBLE" />
-		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
-		<result column="discount_bitmap" property="discountBitmap" jdbcType="TINYINT" />
-		<result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
-		<result column="hb_code" property="hbCode" jdbcType="VARCHAR" />
-		<result column="score" property="score" jdbcType="INTEGER" />
-		<result column="rebate_code" property="rebateCode" jdbcType="VARCHAR" />
-		<result column="rebate_discount" property="rebateDiscount" jdbcType="INTEGER" />
-		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
-		<result column="pay_channel" property="payChannel" jdbcType="INTEGER" />
-		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
-		<result column="source" property="source" jdbcType="INTEGER" />
-		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		trade_order.id,
-		trade_order.order_no,
-		trade_order.user_id,
-		trade_order.user_name,
-		trade_order.user_phone,
-		trade_sub_order.unit_name as title,
-		trade_sub_order.unit_id as coupon_id,
-		trade_order.`status`,
-		ROUND(trade_order.total_amount/100,2) as total_amount,
-		trade_order.create_at,
-		trade_order.pay_time,
-		trade_order.discount_bitmap,
-		trade_order.hb_discount,
-		trade_order.hb_code,
-		trade_order.score,
-		trade_order.rebate_code,
-		trade_order.pay_channel,
-		ROUND(trade_order.pay_amount/100,2) as pay_amount,
-		trade_order.source
-	</sql>
-	<sql id="Base_Column">
-		trade_order.id,
-		trade_order.order_no,
-		user_id,
-		user_name,
-		user_phone,
-		trade_order.`status`,
-		ROUND(trade_order.total_amount/100,2) as total_amount,
-		trade_order.create_at,
-		trade_order.pay_time,
-		trade_order.discount_bitmap,
-		trade_order.hb_discount,
-		trade_order.hb_code,
-		trade_order.score,
-		trade_order.rebate_code,
-		ROUND(trade_order.rebate_discount/100,2) as rebate_discount,
-		trade_order.pay_channel,
-		trade_order.pay_no,
-		ROUND(trade_order.score_discount/100,2) as score_discount,
-		ROUND(trade_order.pay_amount/100,2) as pay_amount
+    <resultMap id="BaseResultMap" type="com.rongyi.tms.moudle.vo.CouponOrderVO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DOUBLE"/>
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="discount_bitmap" property="discountBitmap" jdbcType="TINYINT"/>
+        <result column="hb_discount" property="hbDiscount" jdbcType="INTEGER"/>
+        <result column="hb_code" property="hbCode" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="rebate_code" property="rebateCode" jdbcType="VARCHAR"/>
+        <result column="rebate_discount" property="rebateDiscount" jdbcType="INTEGER"/>
+        <result column="coupon_id" property="couponId" jdbcType="VARCHAR"/>
+        <result column="pay_channel" property="payChannel" jdbcType="INTEGER"/>
+        <result column="pay_amount" property="payAmount" jdbcType="DOUBLE"/>
+        <result column="source" property="source" jdbcType="INTEGER"/>
+        <result column="pay_no" property="payNo" jdbcType="VARCHAR"/>
+        <result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        trade_order.id,
+        trade_order.order_no,
+        trade_order.user_id,
+        trade_order.user_name,
+        trade_order.user_phone,
+        trade_sub_order.unit_name as title,
+        trade_sub_order.unit_id as coupon_id,
+        trade_order.`status`,
+        ROUND(trade_order.total_amount/100,2) as total_amount,
+        trade_order.create_at,
+        trade_order.pay_time,
+        trade_order.discount_bitmap,
+        trade_order.hb_discount,
+        trade_order.hb_code,
+        trade_order.score,
+        trade_order.rebate_code,
+        trade_order.pay_channel,
+        ROUND(trade_order.pay_amount/100,2) as pay_amount,
+        trade_order.source
+    </sql>
+    <sql id="Base_Column">
+        trade_order.id,
+        trade_order.order_no,
+        user_id,
+        user_name,
+        user_phone,
+        trade_order.`status`,
+        ROUND(trade_order.total_amount/100,2) as total_amount,
+        trade_order.create_at,
+        trade_order.pay_time,
+        trade_order.discount_bitmap,
+        trade_order.hb_discount,
+        trade_order.hb_code,
+        trade_order.score,
+        trade_order.rebate_code,
+        ROUND(trade_order.rebate_discount/100,2) as rebate_discount,
+        trade_order.pay_channel,
+        trade_order.pay_no,
+        ROUND(trade_order.score_discount/100,2) as score_discount,
+        ROUND(trade_order.pay_amount/100,2) as pay_amount
 
-	</sql>
-	<sql id="Base_where">
-		and trade_order.type = 1
-		<!--<if test="couponCode != null and couponCode != ''">
-			and trade_user_code.coupon_code = #{couponCode}
-		</if>-->
-		<if test="createAtBegin != null and createAtBegin != ''">
-			and trade_order.create_at &gt;= #{createAtBegin}
-		</if>
-		<if test="createAtEnd != null and createAtEnd != ''">
-			and trade_order.create_at &lt;= #{createAtEnd}
-		</if>
-		<if test="source != null and source != ''">
-			and trade_order.source = #{source}
-		</if>
-		<if test="amountType == 1">
-			<if test="realAmountBegin!=null and realAmountBegin >= 0">
-				AND trade_order.total_amount >= #{realAmountBegin}*100
-			</if>
-			<if test="realAmountEnd!=null and realAmountEnd >= 0">
-				AND  #{realAmountEnd}*100 >= trade_order.total_amount
-			</if>
-		</if>
-		<if test="amountType == 2">
-			<if test="realAmountBegin!=null and realAmountBegin >= 0">
-				AND trade_order.pay_amount >= #{realAmountBegin}*100
-			</if>
-			<if test="realAmountEnd!=null and realAmountEnd >= 0">
-				AND  #{realAmountEnd}*100 >=  trade_order.pay_amount
-			</if>
-		</if>
+    </sql>
+    <select id="selectPageList" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from ry_trade.trade_order as trade_order
+        join
+        ry_trade.trade_sub_order as trade_sub_order on trade_order.id = trade_sub_order.order_id
+        <where>
+            <include refid="Base_where"/>
+        </where>
+        order by trade_order.create_at desc
+        <if test="currentPage != null and pageSize != null">
+            limit
+            #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <sql id="Base_where">
+        and trade_order.type = 1
+        <!--<if test="couponCode != null and couponCode != ''">
+            and trade_user_code.coupon_code = #{couponCode}
+        </if>-->
+        <if test="createAtBegin != null and createAtBegin != ''">
+            and trade_order.create_at &gt;= #{createAtBegin}
+        </if>
+        <if test="createAtEnd != null and createAtEnd != ''">
+            and trade_order.create_at &lt;= #{createAtEnd}
+        </if>
+        <if test="source != null and source != ''">
+            and trade_order.source = #{source}
+        </if>
+        <if test="amountType == 1">
+            <if test="realAmountBegin!=null and realAmountBegin >= 0">
+                AND trade_order.total_amount >= #{realAmountBegin}*100
+            </if>
+            <if test="realAmountEnd!=null and realAmountEnd >= 0">
+                AND #{realAmountEnd}*100 >= trade_order.total_amount
+            </if>
+        </if>
+        <if test="amountType == 2">
+            <if test="realAmountBegin!=null and realAmountBegin >= 0">
+                AND trade_order.pay_amount >= #{realAmountBegin}*100
+            </if>
+            <if test="realAmountEnd!=null and realAmountEnd >= 0">
+                AND #{realAmountEnd}*100 >= trade_order.pay_amount
+            </if>
+        </if>
 
 
-		<if test="payChannel!=null">
-			<if test="payChannel==0">
-				AND trade_order.pay_channel IN (1,3)
-			</if>
-			<if test="payChannel==1">
-				AND trade_order.pay_channel=5
-			</if>
-			<if test="payChannel==4">
-				AND trade_order.pay_channel=0
-			</if>
-		</if>
-		<if test="orderNo != null and orderNo != ''">
-			and trade_order.order_no like
-			concat('%',#{orderNo,jdbcType=VARCHAR},'%')
-		</if>
-		<if test="userPhone != null and userPhone != ''">
-			and trade_order.user_phone like
-			concat('%',#{userPhone,jdbcType=VARCHAR},'%')
-		</if>
-		<if test="status != null and status != ''">
-			and trade_order.status = #{status,jdbcType=TINYINT}
-		</if>
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column" />
-		from ry_trade.trade_order
-		where trade_order.id =
-		#{id,jdbcType=INTEGER}
-	</select>
-	<select id="selectPageList" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from ry_trade.trade_order as trade_order
-		join
-		ry_trade.trade_sub_order as trade_sub_order on trade_order.id = trade_sub_order.order_id
-		<!--left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
-		<where>
-			<include refid="Base_where" />
-		</where>
-		order by trade_order.create_at desc
-		limit
-		#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
-	</select>
+        <if test="payChannel!=null">
+            <if test="payChannel==0">
+                AND trade_order.pay_channel IN (1,3)
+            </if>
+            <if test="payChannel==1">
+                AND trade_order.pay_channel=5
+            </if>
+            <if test="payChannel==4">
+                AND trade_order.pay_channel=0
+            </if>
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and trade_order.order_no like
+            concat('%',#{orderNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and trade_order.user_phone like
+            concat('%',#{userPhone,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="status != null and status != ''">
+            and trade_order.status = #{status,jdbcType=TINYINT}
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column"/>
+        from ry_trade.trade_order
+        where trade_order.id =
+        #{id,jdbcType=INTEGER}
+    </select>
 
-	<select id="selectPageListCount" parameterType="java.util.Map"
-		resultType="java.lang.Integer">
-		select count(*) from (select
-		DISTINCT trade_order.id
-		from ry_trade.trade_order
-		as
-		trade_order
-		join ry_trade.trade_sub_order as trade_sub_order
-		on
-		trade_order.id = trade_sub_order.order_id
-		<!--left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
-		<where>
-			<include refid="Base_where" />
-		</where>
-		) as total
-	</select>
+    <select id="selectPageListCount" parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+        select count(*) from (select
+        DISTINCT trade_order.id
+        from ry_trade.trade_order
+        as
+        trade_order
+        join ry_trade.trade_sub_order as trade_sub_order
+        on
+        trade_order.id = trade_sub_order.order_id
+        <!--left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
+        <where>
+            <include refid="Base_where"/>
+        </where>
+        ) as total
+    </select>
 
 </mapper>

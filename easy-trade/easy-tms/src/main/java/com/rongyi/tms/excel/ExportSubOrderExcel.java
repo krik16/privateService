@@ -1,13 +1,10 @@
 package com.rongyi.tms.excel;
 
-import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
-import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -31,9 +28,6 @@ import java.util.Map;
  */
 @Component
 public class ExportSubOrderExcel {
-
-    @Autowired
-    private IOrderQueryService iOrderQueryService;
 
     @Autowired
     ROACommodityService commodityService;
