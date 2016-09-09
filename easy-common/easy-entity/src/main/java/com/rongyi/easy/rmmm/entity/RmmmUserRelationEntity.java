@@ -35,8 +35,8 @@ public class RmmmUserRelationEntity implements Serializable{
 
     /** 摩生活用户Id */
     private String mallUserMid;
-
-    /**
+    
+	/**
      * 表主键
      * @return id
      */

@@ -79,6 +79,14 @@ public interface IOperateRedisService {
 
     public Boolean del(String key)throws Exception;
 
+    /**
+     * 批量删除
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    //public Boolean batchDel(String key)throws Exception;
+
 
 
 }

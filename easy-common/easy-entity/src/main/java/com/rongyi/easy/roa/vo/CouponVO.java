@@ -46,6 +46,9 @@ public class CouponVO implements Serializable {
 
     private String status;
 
+    private Integer publishChannel; //0:大运营平台;1:商家后台；2：摩店APP
+
+    private Integer isRelateAll;  //是否关联全部店铺； 0:否；1：是
 
     private List<ObjectId> shopIds;
 
@@ -272,6 +275,14 @@ public class CouponVO implements Serializable {
             return YUN_ACTIVITY_THUMBNAIL + id + "/" + thumbnail;
         }
         return null;
+    }
+
+    public Integer getIsRelateAll() {
+        return isRelateAll;
+    }
+
+    public void setIsRelateAll(Integer isRelateAll) {
+        this.isRelateAll = isRelateAll;
     }
 
     public String getId() {
@@ -751,6 +762,14 @@ public class CouponVO implements Serializable {
 
     public void setUsageDesc(String usageDesc) {
         this.usageDesc = usageDesc;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
     }
 
     public String getRemark() {

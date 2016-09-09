@@ -15,9 +15,8 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * 俞志坚             2015/5/20              1.0            创建文件
  *
  */
-public class UserManagerParam extends BaseParam implements Serializable{
+public class UserManagerParam extends BaseParam {
 
-    private static final long serialVersionUID = 1L;
 
     private Integer id;//账户id
     private String userAccount ;//用户账号
@@ -65,7 +64,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String workImg;    //工作证照
 	
 	private String otherImg;   //其它照片
-
+	private Boolean isOrdering;//是否接单状态  true:是，false:否
 
     public Integer getId() {
 		return id;
@@ -219,9 +218,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 		this.cardId = cardId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
 
 	/*public Integer getRoleType() {
 		return roleType;
@@ -246,7 +243,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setAccountList(List<AccountParam> accountList) {
 		this.accountList = accountList;
 	}
-public Integer getIdentity() {
+    public Integer getIdentity() {
 		return identity;
 	}
 
@@ -364,5 +361,12 @@ public Integer getIdentity() {
 	public void setOtherImg(String otherImg) {
 		this.otherImg = otherImg;
 	}
-	
+	public Boolean getIsOrdering() {
+		return isOrdering;
 	}
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+	
+	
+}

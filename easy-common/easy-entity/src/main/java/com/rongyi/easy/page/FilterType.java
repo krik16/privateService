@@ -11,7 +11,8 @@ public enum FilterType implements Serializable {
 
     LIKE("LIKE","LIKE"),  EQUALS("EQ","="),  GREATETHAN("GH",">"),  GREATEEQUAL("GE",">="),  LESSTHAN("LH","<"),  LESSEQUAL("LE","<="),  NOTEQUAL("NEQ","!="),
     IN("IN","IN"),NIN("NIN","NOT IN"),ISNULL("NULL","IS NULL"),ISNOTNULL("NNULL","IS NOT NULL"),
-    REGEXP("REGEXP","REGEXP"),BEQ("BEQ","beq") ,EXISTS("EXISTS","EXISTS"),NOTEXISTS("NOTEXISTS","NOT EXISTS");
+    REGEXP("REGEXP","REGEXP"),BEQ("BEQ","beq") ,EXISTS("EXISTS","EXISTS"),NOTEXISTS("NOTEXISTS","NOT EXISTS")
+    ,OP("OP","OP");
 
     public static FilterType toType(String type) {
         for(FilterType filterType:FilterType.values()) {
