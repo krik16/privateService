@@ -3,7 +3,9 @@ package com.rongyi.rss.bdata;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bdata.vo.CustomCategoryVO;
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.entity.CustomCategory;
 import com.rongyi.easy.bdata.entity.Mall;
 import com.rongyi.easy.bdata.vo.CommonTypeVO;
 import com.rongyi.easy.bdata.vo.MallGroupVO;
@@ -185,5 +187,15 @@ public interface MallService {
 	
 	Map<String, Object>getMallsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
 	ResponseVO  getAllCommunalFacilityTypes();
+	
+	ResponseVO createCustomCategory(CustomCategoryVO cvo, int updateUserId);
+	
+	ResponseVO delCustomCategory(String  id, int updateUserId);
+	
+	ResponseVO sortCustomCategory(String  id,String sortType, int updateUserId);
+	CustomCategory getCustomCateById(String customCateId);
+	ResponseVO getCustomCategoriesAndChildAllByMallId(String mallId);
+	
+	CustomCategoryVO getCustomCateParantByChildId(String customCateId);
 
 }
