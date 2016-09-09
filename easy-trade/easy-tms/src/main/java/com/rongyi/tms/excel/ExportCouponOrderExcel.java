@@ -3,6 +3,7 @@ package com.rongyi.tms.excel;
 import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
+import com.rongyi.core.util.AmountConversion;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.rss.coupon.RoaCouponService;
 import com.rongyi.tms.Exception.BizException;
@@ -76,7 +77,7 @@ public class ExportCouponOrderExcel {
                         Coupon coupon = roaCouponService.getCouponById(vo.getCouponId());
                         if (coupon != null) {
                             sheet.getRow(i + 2).getCell(2).setCellValue(coupon.getCreateUser());
-                            sheet.getRow(i + 2).getCell(4).setCellValue(coupon.getOrigPrice());
+                            sheet.getRow(i + 2).getCell(4).setCellValue(AmountConversion.fenToYuan(coupon.getOrigPrice()));
                         }
                     } catch (Exception e) {
                         LOGGER.warn("roaCouponService.getCouponById provide fail,ignore...errMsg={}", e.getMessage());
