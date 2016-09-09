@@ -66,6 +66,14 @@
 		where user_id = #{userId};
 	</update>
 
+	<update id="updateBalanceWithLock" parameterType="com.rongyi.easy.va.entity.VirtualAccountEntity">
+		update virtual_account
+		set
+		balance = #{balance}
+		where id = #{id};
+	</update>
+
+
 	<select id="selectByUserId" resultMap="VirtualAccountMapper"
 		parameterType="java.util.Map">
 		select
@@ -119,4 +127,12 @@
 		draw_password = #{drawPassword}
 		where user_id = #{userId};
 	</update>
+
+	<select id="selectByIdWithLock" resultMap="VirtualAccountMapper"
+			parameterType="java.util.Map">
+		select
+		<include refid="Custom_Column_List" />
+		from virtual_account
+		where id = #{id} for update;
+	</select>
 </mapper>

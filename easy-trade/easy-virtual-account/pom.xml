@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-trade</artifactId>
-		<version>4.0.2-SNAPSHOT</version>
+		<version>4.2.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>easy-virtual-account</artifactId>
 	<packaging>war</packaging>
@@ -237,6 +237,25 @@
 		<dependency>
 			<groupId>org.jboss.netty</groupId>
 			<artifactId>netty</artifactId>
+		</dependency>
+
+		<!-- TestNG/Mockito -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

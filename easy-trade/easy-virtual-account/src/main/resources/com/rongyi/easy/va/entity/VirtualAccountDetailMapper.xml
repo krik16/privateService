@@ -20,16 +20,16 @@
 	</resultMap>
 	<insert id="insertAndGetId" parameterType="com.rongyi.easy.va.entity.VirtualAccountDetailEntity"
 		useGeneratedKeys="true" keyProperty="id">
-		    INSERT INTO virtual_account_detail (id, user_id, amount, 
+		    INSERT INTO virtual_account_detail (user_id, amount,
 		      sign, item_type, settlement_account_no, 
 		      settlement_account_name, application_no, payment_id, 
 		      remark, create_at, collected_at, 
-		      is_collected)
-		    VALUES (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+		      is_collected,balance_before)
+		    VALUES (#{userId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL},
 		      #{sign,jdbcType=INTEGER}, #{itemType,jdbcType=INTEGER}, #{settlementAccountNo,jdbcType=VARCHAR}, 
 		      #{settlementAccountName,jdbcType=VARCHAR}, #{applicationNo,jdbcType=VARCHAR}, #{paymentId,jdbcType=VARCHAR}, 
 		      #{remark,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{collectedAt,jdbcType=TIMESTAMP}, 
-		      #{isCollected,jdbcType=BIT}) 
+		      #{isCollected,jdbcType=BIT},#{balanceBefore,jdbcType=DECIMAL})
 	</insert>
 
 	<update id="updateCollectedResult" parameterType="com.rongyi.easy.va.entity.VirtualAccountDetailEntity">
