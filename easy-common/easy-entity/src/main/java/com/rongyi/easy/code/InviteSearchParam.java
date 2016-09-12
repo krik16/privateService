@@ -19,6 +19,35 @@ public class InviteSearchParam implements Serializable {
     private int startIndex = 0;
     private String exchangeBeginTime;//兑换开始时间
     private String exchangeEndTime;//兑换结束时间
+    private Integer hannelsType;// 0:渠道邀请码；1：红包密码
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("InviteSearchParam{");
+        sb.append("hannelId='").append(hannelId).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", userNickName='").append(userNickName).append('\'');
+        sb.append(", inviteAccount='").append(inviteAccount).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", registerBeginTime='").append(registerBeginTime).append('\'');
+        sb.append(", registerEndTime='").append(registerEndTime).append('\'');
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", startIndex=").append(startIndex);
+        sb.append(", exchangeBeginTime='").append(exchangeBeginTime).append('\'');
+        sb.append(", exchangeEndTime='").append(exchangeEndTime).append('\'');
+        sb.append(", hannelsType=").append(hannelsType);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Integer getHannelsType() {
+        return hannelsType;
+    }
+
+    public void setHannelsType(Integer hannelsType) {
+        this.hannelsType = hannelsType;
+    }
 
     public String getHannelId() {
         return hannelId;
@@ -115,19 +144,4 @@ public class InviteSearchParam implements Serializable {
         this.exchangeEndTime = exchangeEndTime;
     }
 
-    @Override
-    public String toString() {
-        return "InviteSearchParam{" +
-                "hannelId='" + hannelId + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", userNickName='" + userNickName + '\'' +
-                ", inviteAccount='" + inviteAccount + '\'' +
-                ", status=" + status +
-                ", registerBeginTime='" + registerBeginTime + '\'' +
-                ", registerEndTime='" + registerEndTime + '\'' +
-                ", currentPage=" + currentPage +
-                ", pageSize=" + pageSize +
-                ", startIndex=" + startIndex +
-                '}';
-    }
 }
