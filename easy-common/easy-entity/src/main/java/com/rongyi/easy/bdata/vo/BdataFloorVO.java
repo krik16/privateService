@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 public class BdataFloorVO implements Serializable {
 	
 	@Override
@@ -42,13 +40,39 @@ public class BdataFloorVO implements Serializable {
     private Date  updated_at;
     private String reason;//操作描述
     private String swf;//swf图--商家后台用的
-    
-    
-    
-    
-    
-    
-    public String getSwf() {
+
+	public String getFmap() {
+		return fmap;
+	}
+
+	public void setFmap(String fmap) {
+		this.fmap = fmap;
+	}
+
+	private String fmap;//蜂鸟版图片
+
+
+
+	private  Integer createSource;//创建来源 0大运营后台  1  商家后台
+	private Integer updateSource ;
+
+	public Integer getUpdateSource() {
+		return updateSource;
+	}
+
+	public void setUpdateSource(Integer updateSource) {
+		this.updateSource = updateSource;
+	}
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
+	}
+
+	public String getSwf() {
 		return swf;
 	}
 	public void setSwf(String swf) {

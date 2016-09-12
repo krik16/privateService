@@ -1,14 +1,12 @@
 package com.rongyi.rss.bdata;
 
-import java.util.List;
-import java.util.Map;
-
-import com.rongyi.easy.bdata.entity.BdataFloor;
 import com.rongyi.easy.bdata.entity.CommunalFacilityType;
 import com.rongyi.easy.bdata.entity.Floor;
 import com.rongyi.easy.bdata.vo.BdataFloorVO;
 import com.rongyi.easy.bdata.vo.CommunalFacilityVO;
-import com.rongyi.easy.shop.entity.FloorEntity;
+
+import java.util.List;
+import java.util.Map;
 
 public interface FloorService {
 	/**
@@ -36,9 +34,9 @@ public interface FloorService {
 	
 	public	String updateOrInsertFloor(BdataFloorVO vo);
 	
-	public void updateSystemStatus(String floorId,String uId,String reason);
+	public void updateSystemStatus(String floorId,String uId,String reason,int source);
 	
-	public void sortFloor(String floorId,String type,String updateUserId);
+	public void sortFloor(String floorId,String type,String updateUserId,int source);
 	
 	public List<CommunalFacilityType> getCommunalFacilitiesType();
 	
@@ -46,7 +44,7 @@ public interface FloorService {
 	
 	public CommunalFacilityVO getCommunalFacilitiesById(String id);
 	
-	public void setCommunalFacilityStatus(String id,int status,String updateUserId);
+	public void setCommunalFacilityStatus(String id,int status,String updateUserId,int source);
 	
 	public void saveCommunalFacility(CommunalFacilityVO vo);
 	

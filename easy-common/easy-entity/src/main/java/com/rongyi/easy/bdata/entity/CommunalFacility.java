@@ -24,6 +24,28 @@ public class CommunalFacility {
     private String    updator;
     private String    ename ; //公共设施英文名称
 
+    private  Integer createSource;//创建来源 0大运营后台  1  商家后台
+    private Integer updateSource ;
+
+    public Integer getCreateSource() {
+        return createSource;
+    }
+
+    public void setCreateSource(Integer createSource) {
+        this.createSource = createSource;
+    }
+
+
+
+
+    public Integer getUpdateSource() {
+        return updateSource;
+    }
+
+    public void setUpdateSource(Integer updateSource) {
+        this.updateSource = updateSource;
+    }
+
 
 	public String getOperator() {
 		return operator;
