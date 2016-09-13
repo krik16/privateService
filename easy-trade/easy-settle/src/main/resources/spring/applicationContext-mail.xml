@@ -18,8 +18,8 @@
 	<!-- 注意:这里的参数(如用户名、密码)都是针对邮件发送者的 -->
 	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<!-- 这里我以163为例 -->
-		<property name="host" value="smtp.rongyi.com" />
-		<property name="port" value="465" />
+		<property name="host" value="smtp.qiye.163.com" />
+		<property name="port" value="22" />
 		<!-- 发送方用户名 -->
 		<property name="username" value="cwjs@rongyi.com" />
 		<!-- 发送方密码 -->
