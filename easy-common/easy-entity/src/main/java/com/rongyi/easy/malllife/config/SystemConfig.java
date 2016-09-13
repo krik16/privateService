@@ -77,7 +77,7 @@ public class SystemConfig implements Serializable{
 
     public static final List<String> mdUaList = Arrays.asList("Android", "IOS");
 
-
+    public static final List<String> cityList = Arrays.asList("北京","上海","天津","重庆");
     public static String buildPictureUrl(String userId, String headImg) {
         String UPAIYUN_Content = "system/user/avatar/";
         StringBuffer pictureUrl = new StringBuffer();

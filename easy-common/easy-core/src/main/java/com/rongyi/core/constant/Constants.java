@@ -1,5 +1,7 @@
 package com.rongyi.core.constant;
 
+import java.util.List;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
