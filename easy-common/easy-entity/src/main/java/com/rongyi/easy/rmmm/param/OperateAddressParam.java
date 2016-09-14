@@ -111,7 +111,8 @@ public class OperateAddressParam implements Serializable{
 				+ provinceName + ", cityId=" + cityId + ", cityName="
 				+ cityName + ", districtId=" + districtId + ", districtName="
 				+ districtName + ", address=" + address + ", status=" + status
-				+ ", id=" + id + "]";
+				+ ", id=" + id + ", appVersion=" + appVersion
+				+ ", iosOrAndroid=" + iosOrAndroid + "]";
 	}
 	
 }
