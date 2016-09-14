@@ -24,7 +24,7 @@ public class OperateAddressParam implements Serializable{
 	 */
 	private String id;
 	private Integer appVersion;//app版本号
-	private Integer iosOrAndroid;//0 安卓，1 ios 
+	private Integer iosOrAndroid;//1 安卓，2 ios，0 默认值
 	
 	public Integer getAppVersion() {
 		return appVersion;
