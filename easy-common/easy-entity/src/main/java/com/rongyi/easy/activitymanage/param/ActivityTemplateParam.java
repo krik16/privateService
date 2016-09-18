@@ -44,6 +44,16 @@ public class ActivityTemplateParam implements Serializable {
     //0全部 1特卖 2专场
     private Integer moduleType;
 
+    private String shopId;//店铺id
+
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 
     public Integer getModuleType() {
         return moduleType;
@@ -187,6 +197,7 @@ public class ActivityTemplateParam implements Serializable {
                 .append("offset", offset)
                 .append("orderByString", orderByString)
                 .append("moduleType", moduleType)
+                .append("shopId", shopId)
                 .toString();
     }
 }
