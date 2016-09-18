@@ -21,6 +21,7 @@ public class IntegralSearchParam implements Serializable {
     private String shopId;
     private String jsessionId;
 
+
     public String getJsessionId() {
         return jsessionId;
     }
