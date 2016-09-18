@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface ValidRecordService {
 
-    public int createValidRecord(List<String> codes, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId) throws Exception;
+    public int createValidRecord(List<String> codes, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId,int validChannel) throws Exception;
 
-    public int createValidRecord(String code,ValidCouponVO validCouponVO, Integer validUserId, String validUserName, String mallId,String shopId) throws Exception;
+    public int createValidRecord(String code,ValidCouponVO validCouponVO, Integer validUserId, String validUserName, String mallId,String shopId,int validChannel) throws Exception;
 
-    public int createValidRecord(String code, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId) throws Exception;
+    public int createValidRecord(String code, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId,int validChannel) throws Exception;
 }
