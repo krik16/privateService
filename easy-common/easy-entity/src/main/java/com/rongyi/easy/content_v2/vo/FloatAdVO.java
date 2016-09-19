@@ -15,7 +15,7 @@ public class FloatAdVO implements Serializable {
     private String adPic;//浮标广告图
     private String provId;//省份Id
     private String cityId;//城市Id
-    private int type;//浮动广告类型
+    private int type;//浮动广告类型,26老推新
     private String typeVal;//浮动广告Id
     private String publishBeginAt;//发布开始时间
     private String publishEndAt;//发布结束时间

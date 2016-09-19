@@ -232,4 +232,6 @@ public interface ROACommodityService {
 
 	public Long  selectOnlineCommodityCountByuser(String createId);
 
+	public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
 }
