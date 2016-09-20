@@ -117,6 +117,16 @@ public interface ROAUserInfoService {
 	 * @throws Exception
 	 */
 	public List<BAuthorities> getRoleAuthsByUserId(Integer userId) throws Exception;
+
+	/**
+	 * 通过service ticket获取登录用户信息
+	 * @param bsst
+	 * @param bConvertToObj	true:返回为对象
+	 * 						false:返回为json
+	 * @return Map{com.rongyi.easy.bsoms.entity.SessionUserInfo , List}
+	 * @throws Exception
+	 */
+	public Map getSessionUser(String bsst,boolean bConvertToObj) throws Exception;
 	
 	/**
 	 * 通过service ticket获取登录用户信息
@@ -126,7 +136,7 @@ public interface ROAUserInfoService {
 	 * @return Map{com.rongyi.easy.bsoms.entity.SessionUserInfo , List}
 	 * @throws Exception
 	 */
-	public Map getSessionUser(String bsst,boolean bConvertToObj) throws Exception;
+	public Map getSessionUser(String bsst,boolean bConvertToObj,String source) throws Exception;
 	
 	/**
 	 * 判断当前用户是否具有指定角色权限

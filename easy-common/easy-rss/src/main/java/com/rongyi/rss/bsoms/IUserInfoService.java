@@ -127,7 +127,7 @@ public interface IUserInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Map getSessionUserFromRedis(String bsst,boolean bConvertToObj) throws Exception;
+	public Map getSessionUserFromRedis(String bsst,boolean bConvertToObj,String source) throws Exception;
 	
 	/**
 	 * 查询买手账号列表
