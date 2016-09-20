@@ -21,4 +21,5 @@ public interface ValidRecordService {
     public int createValidRecord(String code, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId,int validChannel) throws Exception;
 
     public int createActivityCouponValidRecord(String code, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId,int validChannel) throws Exception;
+
 }
