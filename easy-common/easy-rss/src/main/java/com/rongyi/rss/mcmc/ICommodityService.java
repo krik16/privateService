@@ -76,5 +76,4 @@ public interface ICommodityService {
 	public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
-
 }
