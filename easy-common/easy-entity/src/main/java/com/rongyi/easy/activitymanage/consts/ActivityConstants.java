@@ -145,6 +145,7 @@ public interface ActivityConstants {
         Integer RAFFLE = 2;//抽奖类活动
         Integer SIGN = 4;//签到送积分活动
         Integer SPELLLIST = 6;//拼单活动
+        Integer SECKILL = 7;//秒杀商品类活动
     }
 
     /**
