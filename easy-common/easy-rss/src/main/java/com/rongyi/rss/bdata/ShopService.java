@@ -131,4 +131,6 @@ public interface ShopService {
 	
 	public List<ShopVO> getMallShops(String mallId);
 
+	public List<ShopVO> getMallNormallShops(String mallId);
+
 }

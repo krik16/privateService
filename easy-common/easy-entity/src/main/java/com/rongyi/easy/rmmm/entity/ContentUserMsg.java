@@ -29,7 +29,7 @@ public class ContentUserMsg implements Serializable {
     private String userMid;
 
     /**
-     * 删除 -1 阅读 0 收藏 1  2 ：未读
+     * 删除 -1 ;阅读 0 ;收藏 1;  2 ：未读.
      */
     private String status;
 

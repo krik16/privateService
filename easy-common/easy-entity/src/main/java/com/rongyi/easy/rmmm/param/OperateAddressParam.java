@@ -23,8 +23,21 @@ public class OperateAddressParam implements Serializable{
 	 * 非必要参数，若有则为更新地址，没有为新建地址，若只有id没有其他参数，表示删除此地址
 	 */
 	private String id;
+	private Integer appVersion;//app版本号
+	private Integer iosOrAndroid;//1 安卓，2 ios，0 默认值
 	
-	
+	public Integer getAppVersion() {
+		return appVersion;
+	}
+	public void setAppVersion(Integer appVersion) {
+		this.appVersion = appVersion;
+	}
+	public Integer getIosOrAndroid() {
+		return iosOrAndroid;
+	}
+	public void setIosOrAndroid(Integer iosOrAndroid) {
+		this.iosOrAndroid = iosOrAndroid;
+	}
 	public String getConsignee() {
 		return consignee;
 	}
@@ -98,7 +111,8 @@ public class OperateAddressParam implements Serializable{
 				+ provinceName + ", cityId=" + cityId + ", cityName="
 				+ cityName + ", districtId=" + districtId + ", districtName="
 				+ districtName + ", address=" + address + ", status=" + status
-				+ ", id=" + id + "]";
+				+ ", id=" + id + ", appVersion=" + appVersion
+				+ ", iosOrAndroid=" + iosOrAndroid + "]";
 	}
 	
 }

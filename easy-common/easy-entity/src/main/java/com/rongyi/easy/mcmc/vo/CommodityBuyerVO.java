@@ -12,6 +12,7 @@ import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
 public class CommodityBuyerVO implements Serializable{
 	private static final long serialVersionUID = -1461107119422444629L;
+	private static final  Integer MAX_GALLERY_POSITION=100;
 
 	private String shopName;//店铺名称
 	private List<String> commodityPicList;
@@ -44,6 +45,15 @@ public class CommodityBuyerVO implements Serializable{
 	private List<String> goodsParam;//商品参数
 	private double discount;
 	private String commodityCurrentPrice;
+	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
+
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
 
 	public String getCommodityCurrentPrice() {
 		return commodityCurrentPrice;
@@ -253,13 +263,13 @@ public class CommodityBuyerVO implements Serializable{
 	public List<String> getGoodsParam() {
 		return goodsParam;
 	}
-	
+
 	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
 	}
 
 	public CommodityBuyerVO(){
-		
+
 	}
 
 	public CommodityBuyerVO(Commodity commodity){
@@ -340,7 +350,7 @@ public class CommodityBuyerVO implements Serializable{
 			this.commodityAppStatus = this.commodityStatus;
 		}
 		this.systemNumber = commodity.getSystemNumber();
-		
+
 		//活动类型[0其他 闪购1、特卖2、秒杀3]
 		if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
 			this.activityType = "3";
@@ -354,7 +364,7 @@ public class CommodityBuyerVO implements Serializable{
 			//其他
 			this.activityType = "0";
 		}
-		
+
 		// 当前是秒杀商品
 		if ("3".equals(this.activityType)) {
 			long nowTime = new Date().getTime();
@@ -369,8 +379,10 @@ public class CommodityBuyerVO implements Serializable{
 				}
 			}
 		}
+		//默认返回非橱窗商品的值设置为0
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 	}
-	
+
 	public List<String> getCommodityPicList() {
 		return commodityPicList;
 	}
@@ -530,7 +542,9 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
 				+", discount=" + discount
-				+ ", isCollected=" + isCollected + "]";
+				+ ", isCollected=" + isCollected
+				+ ", galleryPosition=" + galleryPosition
+				+ "]";
 	}
-	
+
 }

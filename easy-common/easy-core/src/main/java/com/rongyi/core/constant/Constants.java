@@ -1,5 +1,7 @@
 package com.rongyi.core.constant;
 
+import java.util.List;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -761,6 +763,7 @@ public interface Constants {
     	Integer HONGBAO = 1;//红包
     	Integer COUPON = 2;//代金券
     	Integer REBATE = 3;//抵扣券
+        Integer INVITATIONRED = 4;//推荐红包
     }
 
     interface RedenvelopStatus{

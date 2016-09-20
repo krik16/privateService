@@ -16,7 +16,7 @@ public class BannerVO implements Serializable {
     private String bannerBackgroundPic;//banner 背景图片
     private String provId;  //省份Id
     private String cityId; //城市Id
-    private int type; //文章类型  21 为特卖列表需要给出shareTitle,shareContent
+    private int type; //文章类型  21 为特卖列表需要给出shareTitle,shareContent , 26老推新
     private String typeVal; //文章Id
     private String publishBeginAt; //发布开始时间
     private String publishEndAt; //发布结束时间
