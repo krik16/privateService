@@ -153,16 +153,12 @@ public interface ActivityService {
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
 
 
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 保存秒杀活动
+     * @param activityInfo
+     * @return
+     */
+    public ActivityInfo saveSecKillActivityInfo(ActivityInfo activityInfo);
 
 
 
