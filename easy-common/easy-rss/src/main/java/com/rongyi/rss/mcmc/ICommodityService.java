@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
@@ -75,4 +76,5 @@ public interface ICommodityService {
 	public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
+
 }

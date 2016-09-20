@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
+
+import com.rongyi.easy.mcmc.Commodity;
 
 
 public class CommodityVO  implements  Serializable {
@@ -14,6 +15,7 @@ public class CommodityVO  implements  Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = 8138633144546500349L;
+	private static final  Integer MAX_GALLERY_POSITION=100;
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
@@ -83,7 +85,14 @@ public class CommodityVO  implements  Serializable {
 	private Integer activityId;//活动id
 	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
 	private Long updateAt;
+	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -587,6 +596,8 @@ public class CommodityVO  implements  Serializable {
 		this.commodityModelNo = commodity.getCommodityModelNo();//商品款号
 		this.goodsParam = commodity.getGoodsParam();//商品参数
 		this.updateAt=commodity.getUpdateAt().getTime();
+		//默认返回非橱窗商品的值设置为0
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 	}
 	@Override
 	public String toString() {
@@ -635,7 +646,9 @@ public class CommodityVO  implements  Serializable {
 				+ ", commodityModelNo=" + commodityModelNo
 				+ ", activityId=" + activityId
 				+ ", activityPrice=" + activityPrice
-				+", goodsParam="+ goodsParam + "]";
+				+", goodsParam="+ goodsParam
+				+", galleryPosition="+ galleryPosition
+				+"]";
 
 	}
 

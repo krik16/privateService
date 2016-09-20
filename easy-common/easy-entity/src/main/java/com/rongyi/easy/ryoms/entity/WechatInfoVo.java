@@ -20,6 +20,7 @@ public class WechatInfoVo implements Serializable{
 	private String appSecret;         //(应用密钥
 	private String encodingAESKey;    //消息加密密钥
 	private Integer type;             //类型  1容易内部&代运营   2容易外部
+	private Integer publicType;       //公众号类型 0:服务号 1:订阅号
 	private String mallId;            //商场monogId or集团id
 	private String mallName;          //商场名称 or 集团名称
 	private String dockingType;       //对接方式  1B类 2C类
@@ -118,6 +119,12 @@ public class WechatInfoVo implements Serializable{
 	public void setWechatPayVo(WechatPayVo wechatPayVo) {
 		this.wechatPayVo = wechatPayVo;
 	}
-	
-	
+
+	public Integer getPublicType() {
+		return publicType;
+	}
+
+	public void setPublicType(Integer publicType) {
+		this.publicType = publicType;
+	}
 }

@@ -401,4 +401,16 @@ public class DateTool {
 		return stringToDate;
 	}
 
+
+	public static String getTimestamp(String dataStr ) throws ParseException{
+		long times=0L;
+		if(StringUtils.isBlank(dataStr)){
+			times= 0L;
+		}else {
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dataStr);
+			  times = date1.getTime();
+		}
+		return String.valueOf(times);
+	}
+
 }

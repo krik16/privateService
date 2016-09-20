@@ -132,6 +132,10 @@ public class PagingVO<T> implements Serializable {
         buildPageNoList();
     }
 
+    public PagingVO(){
+
+    }
+
     /**
      * 创建分页号列表
      * <p/>
