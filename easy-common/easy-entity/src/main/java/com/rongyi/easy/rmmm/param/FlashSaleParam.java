@@ -204,6 +204,7 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 				", randomParam=" + randomParam +
 				", contentId=" + contentId +
 				", templateRoundId=" + templateRoundId +
+				", brandMids=" + brandMids +
 				"} " + super.toString();
 	}
 }
