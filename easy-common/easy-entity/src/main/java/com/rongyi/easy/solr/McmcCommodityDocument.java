@@ -22,7 +22,7 @@ import org.bson.types.ObjectId;
 public class McmcCommodityDocument implements java.io.Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6516058338575306587L;
 	@Field
@@ -107,6 +107,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String brandName;
 	@Field("updateAt")
 	private Date updateAt;
+    @Field("galleryPosition")
+	private Integer galleryPosition;
 
 	@Field("shopName")
 	private String shopName; ///< 店铺名称
@@ -172,7 +174,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setCategory3_id(category_ids.get(2));
 		}
 	}
-	
+
 	public String getCategory1_id() {
 		return category1_id;
 	}
@@ -261,10 +263,18 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.discount = discount;
 	}
 
-	public McmcCommodityDocument(){
-		
+	public Integer getGalleryPosition() {
+		return galleryPosition;
 	}
-	
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
+	public McmcCommodityDocument(){
+
+	}
+
 	public McmcCommodityDocument(SolrDocument doc){
 		this.id = doc.getFieldValue("id").toString();
 		this.category1 = doc.getFieldValue("category1").toString();

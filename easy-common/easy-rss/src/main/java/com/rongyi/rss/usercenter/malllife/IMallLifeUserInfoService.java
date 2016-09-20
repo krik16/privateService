@@ -1,6 +1,7 @@
 package com.rongyi.rss.usercenter.malllife;
   
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.malllife.exception.MallLifeException;
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.msgcenter.UsersParamDto;
@@ -215,6 +216,42 @@ public interface IMallLifeUserInfoService {
      * @throws Exception
      */
     public UserInfoVO findAllStateUserByPhone(String phone) throws Exception;
+
+
+    /**
+     * 根据邀请码返回用户信息
+     * @param invitCode
+     * @return
+     * @throws Exception
+     */
+    public MalllifeUserInfoDto getByInvitCode(String invitCode) throws Exception;
+
+
+    /**
+     * 更新用户邀请码
+     * @param malllifeUser
+     * @throws Exception
+     */
+    public void updateUserInvitCode(MalllifeUser malllifeUser) throws Exception;
+
+
+    /**
+     * 邀请统计人数
+     * @param invitCode
+     * @return
+     * @throws Exception
+     */
+    public int sumInvitCode(String invitCode)throws Exception;
+
+    /**
+     * 获取邀请码
+     * @param userId
+     * @param phone
+     * @return
+     * @throws MallLifeException
+     */
+    public String generInvitCode(String userId,String phone)throws MallLifeException ;
+
 
 
 }

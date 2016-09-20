@@ -21,8 +21,8 @@ public class BullInfoVO implements Serializable {
 	private Integer ifAttention = 0;// 是否已关注0否1是
 	private String bullIntroduction;// 买手简介
 	private String bullImId;// 买手环信id
-
 	private String easyOrder;//容易令
+	private Boolean isOrdering;//是否接单中   true是  false否
 
 	public String getBullId() {
 		return bullId;
@@ -112,11 +112,24 @@ public class BullInfoVO implements Serializable {
 		this.easyOrder = easyOrder;
 	}
 
+	public Boolean getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+
 	@Override
 	public String toString() {
-		return "BullInfoVO [bullId=" + bullId + ", bullNickName=" + bullNickName + ", bullLogo=" + bullLogo + ", bullGrade="
-				+ bullGrade + ", bullFansNum=" + bullFansNum + ", liveCount=" + liveCount + ", commodityCount=" + commodityCount
-				+ ", ifAttention=" + ifAttention + ", bullIntroduction=" + bullIntroduction + ", bullImId=" + bullImId + "]";
+		return "BullInfoVO [bullId=" + bullId + ", bullNickName="
+				+ bullNickName + ", bullLogo=" + bullLogo + ", bullGrade="
+				+ bullGrade + ", bullFansNum=" + bullFansNum + ", liveCount="
+				+ liveCount + ", commodityCount=" + commodityCount
+				+ ", ifAttention=" + ifAttention + ", bullIntroduction="
+				+ bullIntroduction + ", bullImId=" + bullImId + ", easyOrder="
+				+ easyOrder + ", isOrdering=" + isOrdering + "]";
 	}
+	
 
 }

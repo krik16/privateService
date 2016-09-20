@@ -20,6 +20,16 @@ public class OrderListParam implements Serializable {
 	private Double platformRebateAmount = 0.0;// 抵扣券抵扣金额
 	
 	private String couponId;// 代金券id
+	
+	private boolean ifRecommend = false;//是否推荐红包和抵扣券，true推荐  false不推荐
+
+	public boolean isIfRecommend() {
+		return ifRecommend;
+	}
+
+	public void setIfRecommend(boolean ifRecommend) {
+		this.ifRecommend = ifRecommend;
+	}
 
 	public Double getPlatformRebateAmount() {
 		return platformRebateAmount;
@@ -64,6 +74,8 @@ public class OrderListParam implements Serializable {
 	@Override
 	public String toString() {
 		return "OrderListParam [couponAmount=" + couponAmount + ", unitPrice=" + unitPrice + ", num=" + num
-				+ ", platformRebateAmount=" + platformRebateAmount + ", couponId=" + couponId + "]";
+				+ ", platformRebateAmount=" + platformRebateAmount + ", couponId=" + couponId 
+				 + ", ifRecommend=" + ifRecommend 
+				+ "]";
 	}
 }

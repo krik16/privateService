@@ -250,4 +250,6 @@ public interface CommodityService {
     public  ResponseVO selectSpecById(String categoryId);
 
     public Long selectOnlineCommodityCountByuser(String createId);
+
+    public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
 }
