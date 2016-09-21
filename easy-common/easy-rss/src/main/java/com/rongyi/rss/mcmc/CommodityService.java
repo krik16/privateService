@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
@@ -252,4 +253,6 @@ public interface CommodityService {
     public Long selectOnlineCommodityCountByuser(String createId);
 
     public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+    public Map<Integer ,Boolean> checkCommoditySoldOutInSales(List<Integer> saleIds);
 }

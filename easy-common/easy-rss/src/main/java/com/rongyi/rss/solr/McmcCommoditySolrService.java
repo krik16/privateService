@@ -353,4 +353,6 @@ public interface McmcCommoditySolrService {
 	 */
 	public void setCommoditySort(List<CommoditySortVo> list) throws RYServiceException;
 
+	public List<Integer> selectCommodityBySaleIds(List<Integer> saleIds)throws RYServiceException;
+
 }
