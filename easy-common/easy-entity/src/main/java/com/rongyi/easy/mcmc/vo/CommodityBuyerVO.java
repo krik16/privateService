@@ -196,8 +196,6 @@ public class CommodityBuyerVO implements Serializable{
 	private Integer existProgress;//是否存在进行中活动，1存在，0 不存在
 	private Date activityStartAt;//活动开始时间
 	private Date activityEndAt;//活动结束时间
-	private Integer activityAllotStock;//活动分配库存
-	private Integer activityForwardStock;///商品活动提报库存
 	private Integer activitylimitCount;//商品活动限购数量
 
 	public String getCommodityBrandName() {
@@ -590,22 +588,6 @@ public class CommodityBuyerVO implements Serializable{
 		this.activityEndAt = activityEndAt;
 	}
 
-	public Integer getActivityAllotStock() {
-		return activityAllotStock;
-	}
-
-	public void setActivityAllotStock(Integer activityAllotStock) {
-		this.activityAllotStock = activityAllotStock;
-	}
-
-	public Integer getActivityForwardStock() {
-		return activityForwardStock;
-	}
-
-	public void setActivityForwardStock(Integer activityForwardStock) {
-		this.activityForwardStock = activityForwardStock;
-	}
-
 	public Integer getActivitylimitCount() {
 		return activitylimitCount;
 	}
@@ -662,8 +644,6 @@ public class CommodityBuyerVO implements Serializable{
 				", existProgress=" + existProgress +
 				", activityStartAt=" + activityStartAt +
 				", activityEndAt=" + activityEndAt +
-				", activityAllotStock=" + activityAllotStock +
-				", activityForwardStock=" + activityForwardStock +
 				", activitylimitCount=" + activitylimitCount +
 				", commodityPostage='" + commodityPostage + '\'' +
 				", commodityDescription='" + commodityDescription + '\'' +
