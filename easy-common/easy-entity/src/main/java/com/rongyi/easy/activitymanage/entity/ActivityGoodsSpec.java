@@ -44,6 +44,11 @@ public class ActivityGoodsSpec implements Serializable {
     private Integer stockCount;
 
     /**
+     * 可分配库存
+     */
+    private Integer allocationCount;
+
+    /**
      * 活动价
      */
     private Integer activityPrice;
@@ -83,6 +88,14 @@ public class ActivityGoodsSpec implements Serializable {
      * @return
      */
     private String sku;
+
+    public Integer getAllocationCount() {
+        return allocationCount;
+    }
+
+    public void setAllocationCount(Integer allocationCount) {
+        this.allocationCount = allocationCount;
+    }
 
     public String getName() {
         return name;
@@ -193,6 +206,7 @@ public class ActivityGoodsSpec implements Serializable {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityGoodsId", activityGoodsId)
+                .append("allocationCount", allocationCount)
                 .append("currPrice", currPrice)
                 .append("specId", specId)
                 .append("joinCount", joinCount)

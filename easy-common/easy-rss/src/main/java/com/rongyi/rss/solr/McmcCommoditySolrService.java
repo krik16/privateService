@@ -13,6 +13,7 @@ import com.rongyi.easy.mcmc.vo.CommoditySortVo;
 import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
@@ -354,5 +355,7 @@ public interface McmcCommoditySolrService {
 	public void setCommoditySort(List<CommoditySortVo> list) throws RYServiceException;
 
 	public List<Integer> selectCommodityBySaleIds(List<Integer> saleIds)throws RYServiceException;
+
+	List<McmcCommodityDocument> selectSelfCommodity(SelfCommodityParam param);
 
 }

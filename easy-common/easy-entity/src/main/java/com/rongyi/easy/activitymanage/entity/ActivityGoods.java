@@ -29,6 +29,8 @@ public class ActivityGoods implements Serializable {
      */
     private String goodsId;
 
+    private String goodsCode;
+
     /**
      * 类型 0代表红包，1代表代金券，2代表抵扣券 3代表商品  4代表活动券
      */
@@ -78,6 +80,8 @@ public class ActivityGoods implements Serializable {
      * 发布商品的机构类型id
      */
     private String identityId;
+
+    private String identityName;
 
     /**
      * 创建人
@@ -146,6 +150,14 @@ public class ActivityGoods implements Serializable {
     public ActivityGoods() {
     }
 
+    public String getIdentityName() {
+        return identityName;
+    }
+
+    public void setIdentityName(String identityName) {
+        this.identityName = identityName;
+    }
+
     public ActivityGoods(String goodsId){
 		this.goodsId=goodsId;
 	}
@@ -172,6 +184,14 @@ public class ActivityGoods implements Serializable {
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
     }
 
     public Integer getType() {
@@ -332,12 +352,14 @@ public class ActivityGoods implements Serializable {
                 .append("id", id)
                 .append("activityId", activityId)
                 .append("goodsId", goodsId)
+                .append("goodsCode", goodsCode)
                 .append("type", type)
                 .append("name", name)
                 .append("picUrl", picUrl)
                 .append("subsidyType", subsidyType)
                 .append("subsidyPrice", subsidyPrice)
                 .append("joinStartAt", joinStartAt)
+                .append("identityName", identityName)
                 .append("joinEndAt", joinEndAt)
                 .append("status", status)
                 .append("identity", identity)
