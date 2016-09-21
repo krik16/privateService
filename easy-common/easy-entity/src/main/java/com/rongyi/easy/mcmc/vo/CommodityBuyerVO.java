@@ -188,6 +188,8 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityCPriceMin;//我是最低现价”,
 	private String commodityOPOfLCP;//我是最低现价对应的原价
 	private String commodityBrandName;//商品所属的品牌名字
+	private String securityDesc;//保障说明
+	private String securityIcon;//保障说明icon
 	public String getCommodityBrandName() {
 		return commodityBrandName;
 	}
@@ -514,6 +516,22 @@ public class CommodityBuyerVO implements Serializable{
 		this.discount = discount;
 	}
 
+	public String getSecurityDesc() {
+		return securityDesc;
+	}
+
+	public void setSecurityDesc(String securityDesc) {
+		this.securityDesc = securityDesc;
+	}
+
+	public String getSecurityIcon() {
+		return securityIcon;
+	}
+
+	public void setSecurityIcon(String securityIcon) {
+		this.securityIcon = securityIcon;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
@@ -544,6 +562,8 @@ public class CommodityBuyerVO implements Serializable{
 				+", discount=" + discount
 				+ ", isCollected=" + isCollected
 				+ ", galleryPosition=" + galleryPosition
+				+ ", securityDesc=" + securityDesc
+				+ ", securityIcon=" + securityIcon
 				+ "]";
 	}
 
