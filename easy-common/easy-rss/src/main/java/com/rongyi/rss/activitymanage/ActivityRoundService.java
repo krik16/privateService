@@ -22,14 +22,20 @@ public interface ActivityRoundService {
     boolean saveOrUpdateRound(ActivityRoundInfo activityRoundInfo);
 
 
-    boolean delRound(ActivityRoundInfo activityRoundInfo);
+    boolean delRound(int roundId);
 
     Map getActivityRoundInfoList(int activityId ,int state,int currentPage,int pageSize);
     
     
-    List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String sku);
+    List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String spu);
     
-
+    boolean addRoundGoods(List<RoundGood> roundGoods);
+    
+    Map listRoundGoods(int roundId,int currentPage,int pageSize);
+    
+    
+    boolean increaseStock(List<ActivityOrderGoods> goods);
+    boolean reduceStock(List<ActivityOrderGoods> goods);
     
 
 }
