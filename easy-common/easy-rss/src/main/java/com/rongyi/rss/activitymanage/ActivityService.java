@@ -187,4 +187,6 @@ public interface ActivityService {
     int countSecKillGoods(QuerySecKillGoods querySecKillGoods);
 
     public List<ActivityGoods> getSecKillGoods(QuerySecKillGoods querySecKillGoods);
+
+    public List<Integer> batchInsertActivityGoods(List<ActivityGoods> activityGoodses);
 }
