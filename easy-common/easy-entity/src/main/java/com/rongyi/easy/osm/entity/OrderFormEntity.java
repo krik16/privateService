@@ -166,6 +166,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
     private Byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
 
+    private Integer orderScore;//购物车订单积分分摊
+
     private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
 
     private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
@@ -878,6 +880,16 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.userPhone = userPhone;
     }
 
+    public Integer getOrderScore()
+    {
+        return orderScore;
+    }
+
+    public void setOrderScore(Integer orderScore)
+    {
+        this.orderScore = orderScore;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -915,6 +927,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", devType=" + devType +
                 ", couponType=" + couponType +
                 ", isPayVa=" + isPayVa +
+                ", orderScore=" + orderScore +
                 ", orderScoreDiscount=" + orderScoreDiscount +
                 ", orderCouponDiscount=" + orderCouponDiscount +
                 ", changePriceFlag=" + changePriceFlag +

@@ -3,6 +3,7 @@ package com.rongyi.rss.roa;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bdata.dto.AreaDto;
 import com.rongyi.easy.bdata.vo.BdAreaVo;
 import com.rongyi.easy.roa.vo.AreaCityVO;
 
@@ -71,4 +72,12 @@ public interface ROAAreaService {
 	 * @return
 	 */
 	public List<BdAreaVo> getAreaVoByParam(Map map);
+	/**
+	 * 查询城市信息列表
+	 * @param paramMap
+	 *            cityName 城市中文or英文名称
+	 * @return
+	 */
+	public List<AreaDto> getAreaDtoByParam(Map<String,Object> paramMap);
+	public BdAreaVo getAreaVoByAreaMid(String areaMid);
 }
