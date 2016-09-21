@@ -36,15 +36,30 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class ResponseVO implements java.io.Serializable {
     private static final long serialVersionUID = 4807318268209609704L;
+    private final static int DEFAULT_SUCCESS_STATUS = 0;
+    private final static int DEFAULT_FAIL_STATUS = 1;
 
-    public static final Meta SUCCESS = new Meta(0, "success"); //成功
-    public static final Meta FAILURE = new Meta(1, "failure"); //失败
+    public static final Meta SUCCESS = new Meta(DEFAULT_SUCCESS_STATUS, "success"); //成功
+    public static final Meta FAILURE = new Meta(DEFAULT_FAIL_STATUS, "failure"); //失败
 
-    private Meta meta;      	//errno=0：成功, errno=1：失败
-    private Result result;  	//数据
+    private Meta meta;        //errno=0：成功, errno=1：失败
+    private Result result;    //数据
 
-    public ResponseVO(){
+    public ResponseVO() {
 
+    }
+
+    /**
+     * 判断VO是否成功
+     *
+     * @return
+     */
+    public boolean isSuccess() {
+        if (null != meta && DEFAULT_SUCCESS_STATUS == meta.getErrno()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -117,7 +132,8 @@ public class ResponseVO implements java.io.Serializable {
     private <T> ResponseVO(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
         this.meta = meta;
         if (data != null && currentPage != null && pageSize != null && totalCount != null) {
-            this.result = new Result(data, new Page(currentPage, pageSize, totalCount)); ;
+            this.result = new Result(data, new Page(currentPage, pageSize, totalCount));
+            ;
         }
     }
 
@@ -135,7 +151,9 @@ public class ResponseVO implements java.io.Serializable {
         this.meta = new Meta(errno, msg);
     }
 
-    public void setMeta(Meta meta) {this.meta=meta;}
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
 
     public Result getResult() {
         return result;
@@ -149,7 +167,8 @@ public class ResponseVO implements java.io.Serializable {
         private Page page;
         private T data;
 
-        private Result() {}
+        private Result() {
+        }
 
         private Result(T data, Page page) {
             this.data = data;
@@ -175,9 +194,9 @@ public class ResponseVO implements java.io.Serializable {
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("page", page)
-                .append("data", data)
-                .toString();
+                    .append("page", page)
+                    .append("data", data)
+                    .toString();
         }
     }
 
@@ -185,12 +204,14 @@ public class ResponseVO implements java.io.Serializable {
         private int errno;      //错误码
         private String msg;     //提示信息
 
-        private Meta() {}
+        private Meta() {
+        }
 
         private Meta(int errno, String msg) {
             this.errno = errno;
             this.msg = msg;
         }
+
         public void setErrno(int errno) {
             this.errno = errno;
         }
@@ -207,6 +228,7 @@ public class ResponseVO implements java.io.Serializable {
         public int getErrno() {
             return errno;
         }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -216,36 +238,37 @@ public class ResponseVO implements java.io.Serializable {
             Meta meta = (Meta) o;
 
             return new EqualsBuilder()
-                .append(errno, meta.errno)
-                .append(msg, meta.msg)
-                .isEquals();
+                    .append(errno, meta.errno)
+                    .append(msg, meta.msg)
+                    .isEquals();
         }
 
         @Override
         public int hashCode() {
             return new HashCodeBuilder(17, 37)
-                .append(errno)
-                .append(msg)
-                .toHashCode();
+                    .append(errno)
+                    .append(msg)
+                    .toHashCode();
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("errno", errno)
-                .append("msg", msg)
-                .toString();
+                    .append("errno", errno)
+                    .append("msg", msg)
+                    .toString();
         }
     }
 
     public static class Page implements Serializable {
         private static final long serialVersionUID = -9015310768471855060L;
-        private Integer currentPage;	//当前页：统一从1开始
-        private Integer pageSize = 10; 	//每页行数
-        private Integer totalCount; 	//总行数
-        private Integer totalPage = 0;	//总页数
+        private Integer currentPage;    //当前页：统一从1开始
+        private Integer pageSize = 10;    //每页行数
+        private Integer totalCount;    //总行数
+        private Integer totalPage = 0;    //总页数
 
-        private Page() {}
+        private Page() {
+        }
 
         private Page(Integer currentPage, Integer pageSize, Integer totalCount) {
             this.currentPage = currentPage;
@@ -302,19 +325,19 @@ public class ResponseVO implements java.io.Serializable {
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("currentPage", currentPage)
-                .append("pageSize", pageSize)
-                .append("totalCount", totalCount)
-                .toString();
+                    .append("currentPage", currentPage)
+                    .append("pageSize", pageSize)
+                    .append("totalCount", totalCount)
+                    .toString();
         }
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("meta", meta)
-            .append("result", result)
-            .toString();
+                .append("meta", meta)
+                .append("result", result)
+                .toString();
     }
 
     public static void main(String[] args) {
