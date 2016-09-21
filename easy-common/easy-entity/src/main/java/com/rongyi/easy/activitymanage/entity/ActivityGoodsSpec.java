@@ -44,6 +44,11 @@ public class ActivityGoodsSpec implements Serializable {
     private Integer stockCount;
 
     /**
+     * 可分配库存
+     */
+    private Integer allocationCount;
+
+    /**
      * 活动价
      */
     private Integer activityPrice;
@@ -72,6 +77,41 @@ public class ActivityGoodsSpec implements Serializable {
      * 是否恢复库存 0 没有 1恢复
      */
     private Integer recStock;
+
+    /**
+     * 规格名称
+     */
+    private String name;
+
+    /**
+     * 商品sku
+     * @return
+     */
+    private String sku;
+
+    public Integer getAllocationCount() {
+        return allocationCount;
+    }
+
+    public void setAllocationCount(Integer allocationCount) {
+        this.allocationCount = allocationCount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
     public Integer getId() {
         return id;
@@ -166,6 +206,7 @@ public class ActivityGoodsSpec implements Serializable {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityGoodsId", activityGoodsId)
+                .append("allocationCount", allocationCount)
                 .append("currPrice", currPrice)
                 .append("specId", specId)
                 .append("joinCount", joinCount)
@@ -176,6 +217,8 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("version", version)
                 .append("appendCount", appendCount)
                 .append("recStock", recStock)
+                .append("name", name)
+                .append("sku", sku)
                 .toString();
     }
 }

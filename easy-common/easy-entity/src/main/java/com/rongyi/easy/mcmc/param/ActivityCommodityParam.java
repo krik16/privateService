@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by xgq on 2015/11/23.
@@ -8,6 +9,9 @@ import java.io.Serializable;
 public class ActivityCommodityParam implements Serializable {
     private String commodityId; //商品Id
     private Integer sortPosition; //排序数
+
+    private List<ActivitySpecParam> specParamList;
+
 
     public String getCommodityId() {
         return commodityId;
@@ -23,6 +27,14 @@ public class ActivityCommodityParam implements Serializable {
 
     public void setSortPosition(Integer sortPosition) {
         this.sortPosition = sortPosition;
+    }
+
+    public List<ActivitySpecParam> getSpecParamList() {
+        return specParamList;
+    }
+
+    public void setSpecParamList(List<ActivitySpecParam> specParamList) {
+        this.specParamList = specParamList;
     }
 
     @Override

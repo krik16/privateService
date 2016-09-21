@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
+import com.rongyi.easy.activity.entity.QuerySecKillGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
@@ -183,4 +184,7 @@ public interface ActivityService {
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
 
 
+    int countSecKillGoods(QuerySecKillGoods querySecKillGoods);
+
+    public List<ActivityGoods> getSecKillGoods(QuerySecKillGoods querySecKillGoods);
 }

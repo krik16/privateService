@@ -11,10 +11,12 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.McmcCommodityDocument;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
@@ -255,4 +257,10 @@ public interface CommodityService {
     public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
 
     public Map<Integer ,Boolean> checkCommoditySoldOutInSales(List<Integer> saleIds);
+
+    ResponseVO selectSelfCommodity(SelfCommodityParam param);
+
+    ResponseVO deductStock(List<ActivityCommodityParam> params);
+
+    ResponseVO returnStock(List<ActivityCommodityParam> params);
 }
