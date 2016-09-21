@@ -29,7 +29,7 @@ public class SystemMsgDto implements Serializable{
 
     private String msgStatus;
 
-    /** 推送对象 0 全部 1卖家 2买家 3指定用户 4指定商场 5指定店铺*/
+    /** 推送对象 0 全部 1卖家 2买家 3指定卖家 4指定商场 5指定店铺 6指定买家*/
     private Integer msgType;
 
     /*相关ID 用户ID，摩店ID，商城ID*/

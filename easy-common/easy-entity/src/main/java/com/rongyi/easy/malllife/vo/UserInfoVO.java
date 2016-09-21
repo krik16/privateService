@@ -54,6 +54,16 @@ public class UserInfoVO implements Serializable {
 	private String  publicNumId;//商家公众号Id
 	private int isGet;  // 0 失败， 1成功
 
+	private String invitCode ;//邀请码
+
+	public String getInvitCode() {
+		return invitCode;
+	}
+
+	public void setInvitCode(String invitCode) {
+		this.invitCode = invitCode;
+	}
+
 	public Integer getLoginTimes() {
 		return loginTimes;
 	}

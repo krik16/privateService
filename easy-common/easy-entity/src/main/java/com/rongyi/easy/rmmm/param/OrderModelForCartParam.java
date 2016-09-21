@@ -33,6 +33,16 @@ public class OrderModelForCartParam  extends MalllifeBaseParam implements Serial
 	private String source = "1";//来源 0为微网站，1为容易逛，2为终端机，3其他
 	
 	private String userId;//买家id
+	
+	private boolean ifRecommend = true;//是否推荐红包和抵扣券，true推荐  false不推荐  默认推荐
+
+	public boolean isIfRecommend() {
+		return ifRecommend;
+	}
+
+	public void setIfRecommend(boolean ifRecommend) {
+		this.ifRecommend = ifRecommend;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -92,8 +102,11 @@ public class OrderModelForCartParam  extends MalllifeBaseParam implements Serial
 
 	@Override
 	public String toString() {
-		return "OrderModelForCartParam [shopCart=" + shopCart + ", orderModerIdList=" + orderModerIdList + ", type=" + type
-				+ ", detailModelIds=" + detailModelIds + "]";
+		return "OrderModelForCartParam [shopCart=" + shopCart
+				+ ", orderModerIdList=" + orderModerIdList + ", type=" + type
+				+ ", detailModelIds=" + detailModelIds + ", detailModelMap="
+				+ detailModelMap + ", source=" + source + ", userId=" + userId
+				+ ", ifRecommend=" + ifRecommend + "]";
 	}
 
 }
