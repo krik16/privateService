@@ -3,7 +3,6 @@ package com.rongyi.easy.roa.param;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by yaoyiwei on 2016/9/21.
@@ -13,7 +12,8 @@ public class SelfCommodityParam  extends MalllifeBaseParam implements Serializab
     private String commodityCode;
     private String commodityName;
     private String categoryId;
-    List<Integer> stockRange;
+    private Integer minStock;
+    private Integer maxStock;
 
     public String getCommodityCode() {
         return commodityCode;
@@ -39,11 +39,19 @@ public class SelfCommodityParam  extends MalllifeBaseParam implements Serializab
         this.categoryId = categoryId;
     }
 
-    public List<Integer> getStockRange() {
-        return stockRange;
+    public Integer getMinStock() {
+        return minStock;
     }
 
-    public void setStockRange(List<Integer> stockRange) {
-        this.stockRange = stockRange;
+    public void setMinStock(Integer minStock) {
+        this.minStock = minStock;
+    }
+
+    public Integer getMaxStock() {
+        return maxStock;
+    }
+
+    public void setMaxStock(Integer maxStock) {
+        this.maxStock = maxStock;
     }
 }
