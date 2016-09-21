@@ -11,6 +11,7 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -258,4 +259,8 @@ public interface CommodityService {
     public Map<Integer ,Boolean> checkCommoditySoldOutInSales(List<Integer> saleIds);
 
     ResponseVO selectSelfCommodity(SelfCommodityParam param);
+
+    ResponseVO deductStock(ActivityCommodityParam param);
+
+    ResponseVO returnStock(ActivityCommodityParam param);
 }
