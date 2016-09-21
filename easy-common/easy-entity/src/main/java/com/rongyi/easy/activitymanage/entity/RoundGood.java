@@ -13,9 +13,9 @@ public class RoundGood  implements Serializable{
 	
 	private Integer activityId;//活动id
 	
-	private String goodSku;//商品id
+	private String goodId;//商品id
 	
-	private String goodSpecId ;//商品规格
+	private String goodSpecId ;//商品规格id
 	
 	private Integer roundParticipationCount;//本场次参与库存
 	
@@ -23,9 +23,22 @@ public class RoundGood  implements Serializable{
 	
 	private String roundSellIngPrice;//本场次的销售价格
 	
+	private Integer roundRemainCount;//本场剩余库存
 	
 	
 	
+	
+	
+	
+	
+
+	public Integer getRoundRemainCount() {
+		return roundRemainCount;
+	}
+
+	public void setRoundRemainCount(Integer roundRemainCount) {
+		this.roundRemainCount = roundRemainCount;
+	}
 
 	public Integer getActivityId() {
 		return activityId;
@@ -52,11 +65,11 @@ public class RoundGood  implements Serializable{
 	}
 
 	public String getGoodSku() {
-		return goodSku;
+		return goodId;
 	}
 
 	public void setGoodSku(String goodSku) {
-		this.goodSku = goodSku;
+		this.goodId = goodSku;
 	}
 
 	public String getGoodSpecId() {
