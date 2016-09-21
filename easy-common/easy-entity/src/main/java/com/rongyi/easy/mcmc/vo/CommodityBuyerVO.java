@@ -190,6 +190,16 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityBrandName;//商品所属的品牌名字
 	private String securityDesc;//保障说明
 	private String securityIcon;//保障说明icon
+	private Boolean isSale;//是否可售 true 可售 false 不可售
+	private Integer existEnd;//是否存在已结束活动，1存在 0 不存在
+	private Integer existStart;//是否存在待开始活动 1存在，0 不存在
+	private Integer existProgress;//是否存在进行中活动，1存在，0 不存在
+	private Date activityStartAt;//活动开始时间
+	private Date activityEndAt;//活动结束时间
+	private Integer activityAllotStock;//活动分配库存
+	private Integer activityForwardStock;///商品活动提报库存
+	private Integer activitylimitCount;//商品活动限购数量
+
 	public String getCommodityBrandName() {
 		return commodityBrandName;
 	}
@@ -532,39 +542,137 @@ public class CommodityBuyerVO implements Serializable{
 		this.securityIcon = securityIcon;
 	}
 
-	@Override
-	public String toString() {
-		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
-				+ commodityPicList + ", commodityId=" + commodityId
-				+ ", commodityCode=" + commodityCode + ", commodityStock="
-				+ commodityStock + ", commodityStatus=" + commodityStatus
-				+ ", commodityAppStatus=" + commodityAppStatus
-				+ ", commodityType=" + commodityType
-				+ ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup
-				+ ", offlinePayment=" + offlinePayment + ", onlinePayment="
-				+ onlinePayment + ", offlineRefund=" + offlineRefund
-				+ ", onlineRefund=" + onlineRefund + ", shopIM=" + shopIM
-				+ ", bullId=" + bullId + ", distance=" + distance
-				+ ", saleShopCount=" + saleShopCount + ", watching=" + watching
-				+ ", location=" + location + ", systemNumber=" + systemNumber
-				+ ", activityType=" + activityType + ", easyOrder=" + easyOrder
-				+ ", terminalType=" + terminalType + ", commodityOPriceMax="
-				+ commodityOPriceMax + ", commodityOPriceMin="
-				+ commodityOPriceMin + ", commodityCPriceMax="
-				+ commodityCPriceMax + ", commodityCPriceMin="
-				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
-				+ ", commodityBrandName=" + commodityBrandName
-				+ ", commodityPostage=" + commodityPostage
-				+ ", commodityDescription=" + commodityDescription
-				+ ", commodityName=" + commodityName + ", shopId=" + shopId
-				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
-				+", discount=" + discount
-				+ ", isCollected=" + isCollected
-				+ ", galleryPosition=" + galleryPosition
-				+ ", securityDesc=" + securityDesc
-				+ ", securityIcon=" + securityIcon
-				+ "]";
+	public Boolean getIsSale() {
+		return isSale;
 	}
 
+	public void setIsSale(Boolean isSale) {
+		this.isSale = isSale;
+	}
+
+	public Integer getExistEnd() {
+		return existEnd;
+	}
+
+	public void setExistEnd(Integer existEnd) {
+		this.existEnd = existEnd;
+	}
+
+	public Integer getExistStart() {
+		return existStart;
+	}
+
+	public void setExistStart(Integer existStart) {
+		this.existStart = existStart;
+	}
+
+	public Integer getExistProgress() {
+		return existProgress;
+	}
+
+	public void setExistProgress(Integer existProgress) {
+		this.existProgress = existProgress;
+	}
+
+	public Date getActivityStartAt() {
+		return activityStartAt;
+	}
+
+	public void setActivityStartAt(Date activityStartAt) {
+		this.activityStartAt = activityStartAt;
+	}
+
+	public Date getActivityEndAt() {
+		return activityEndAt;
+	}
+
+	public void setActivityEndAt(Date activityEndAt) {
+		this.activityEndAt = activityEndAt;
+	}
+
+	public Integer getActivityAllotStock() {
+		return activityAllotStock;
+	}
+
+	public void setActivityAllotStock(Integer activityAllotStock) {
+		this.activityAllotStock = activityAllotStock;
+	}
+
+	public Integer getActivityForwardStock() {
+		return activityForwardStock;
+	}
+
+	public void setActivityForwardStock(Integer activityForwardStock) {
+		this.activityForwardStock = activityForwardStock;
+	}
+
+	public Integer getActivitylimitCount() {
+		return activitylimitCount;
+	}
+
+	public void setActivitylimitCount(Integer activitylimitCount) {
+		this.activitylimitCount = activitylimitCount;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityBuyerVO{" +
+				"shopName='" + shopName + '\'' +
+				", commodityPicList=" + commodityPicList +
+				", commodityId='" + commodityId + '\'' +
+				", commodityCode='" + commodityCode + '\'' +
+				", commodityStock='" + commodityStock + '\'' +
+				", commodityStatus=" + commodityStatus +
+				", commodityAppStatus=" + commodityAppStatus +
+				", commodityType=" + commodityType +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
+				", offlinePayment=" + offlinePayment +
+				", onlinePayment=" + onlinePayment +
+				", offlineRefund=" + offlineRefund +
+				", onlineRefund=" + onlineRefund +
+				", shopIM=" + shopIM +
+				", bullId='" + bullId + '\'' +
+				", distance=" + distance +
+				", saleShopCount=" + saleShopCount +
+				", watching=" + watching +
+				", location=" + location +
+				", systemNumber='" + systemNumber + '\'' +
+				", activityType='" + activityType + '\'' +
+				", easyOrder='" + easyOrder + '\'' +
+				", terminalType=" + terminalType +
+				", isSpot=" + isSpot +
+				", mallName='" + mallName + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", goodsParam=" + goodsParam +
+				", discount=" + discount +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", galleryPosition=" + galleryPosition +
+				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
+				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
+				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
+				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
+				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
+				", commodityBrandName='" + commodityBrandName + '\'' +
+				", securityDesc='" + securityDesc + '\'' +
+				", securityIcon='" + securityIcon + '\'' +
+				", isSale=" + isSale +
+				", existEnd=" + existEnd +
+				", existStart=" + existStart +
+				", existProgress=" + existProgress +
+				", activityStartAt=" + activityStartAt +
+				", activityEndAt=" + activityEndAt +
+				", activityAllotStock=" + activityAllotStock +
+				", activityForwardStock=" + activityForwardStock +
+				", activitylimitCount=" + activitylimitCount +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", commodityDescription='" + commodityDescription + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", shopId='" + shopId + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", shopMid='" + shopMid + '\'' +
+				", isCollected=" + isCollected +
+				", mallTip='" + mallTip + '\'' +
+				'}';
+	}
 }
