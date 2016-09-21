@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import java.util.List;
 
+import com.rongyi.easy.mcmc.vo.CategoryNodeVO;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
@@ -43,11 +44,10 @@ public interface ICommodityCategoryService {
 	public boolean updateCategoryPopular(String categoryId,boolean isPopular,String popularImg);
 
 	/**
-	 * 修改商品分类单个值
-	 * @param categoryIds 商品分类id
-	 * @param property 属性名
-	 * @param value 属性值
-	 * @return
+	 * 查询所有类目
+	 *
+	 * @return list
 	 */
-	//public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
+	List<CategoryNodeVO> getAllCategories();
+
 }
