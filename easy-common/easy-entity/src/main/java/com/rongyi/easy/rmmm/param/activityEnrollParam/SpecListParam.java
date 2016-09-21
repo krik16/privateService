@@ -8,14 +8,14 @@ public class SpecListParam implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String specId;//规格id
+	private String commoditySpecId;//规格id
 	private String activityPrice;//活动价格
 	private Integer inventory;//活动提报库存
-	public String getSpecId() {
-		return specId;
+	public String getCommoditySpecId() {
+		return commoditySpecId;
 	}
-	public void setSpecId(String specId) {
-		this.specId = specId;
+	public void setCommoditySpecId(String commoditySpecId) {
+		this.commoditySpecId = commoditySpecId;
 	}
 	public String getActivityPrice() {
 		return activityPrice;
@@ -31,7 +31,7 @@ public class SpecListParam implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "SpecListParam [specId=" + specId + ", activityPrice="
+		return "SpecListParam [commoditySpecId=" + commoditySpecId + ", activityPrice="
 				+ activityPrice + ", inventory=" + inventory + "]";
 	}
 	
