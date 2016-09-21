@@ -22,5 +22,5 @@ public interface ICommoditySpecService {
 
 	String validatePriceAndStock(ActivitySpecParam specParam, String commodityId);
 
-	List<CommoditySpec> listSpecInfosByIds(List<ObjectId> ids);
+	List<CommoditySpec> listSpecInfosByIds(List<ObjectId> ids); 
 }
