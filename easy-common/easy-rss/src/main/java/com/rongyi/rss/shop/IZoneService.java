@@ -93,7 +93,7 @@ public interface IZoneService {
      * 根据城市名称获取城市id
      *
      * @param cityName
-     * @return
+     * @return 返回对应城市的id，如果城市名称不存在，返回一个不存在的城市id
      */
     public ResponseVO getCityMidByName(String cityName);
 }
