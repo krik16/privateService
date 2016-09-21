@@ -26,15 +26,22 @@ public interface ICommodityCategoryHistoryService {
      *
      * @param userId
      * @param size
-     * @return
+     * @return List<CommodityCategoryHistory>
      */
     public ResponseVO getList(String userId, int size);
+
+    /**
+     * 获取热门分类
+     *
+     * @return List<CommodityCategoryHistory>
+     */
+    public ResponseVO getHotList();
 
     /**
      * 清除用户的历史搜素列表
      *
      * @param userId
-     * @return
+     * @return boolean
      */
     public ResponseVO clean(String userId);
 
@@ -44,7 +51,8 @@ public interface ICommodityCategoryHistoryService {
      * @param commodityCategoryId
      * @param userId
      * @param commodityCount
-     * @return
+     * @return boolean
      */
     public ResponseVO save(String commodityCategoryId, String userId, int commodityCount);
+
 }
