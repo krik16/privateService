@@ -17,7 +17,7 @@ public class QueryActivityGoods {
 	private int status;//状态
 	private List<String> pageRespGoodsIdList;//记入页面传来的goodsid
 	private List<ActivityGoods> submitActivityGoods;//提交时列表集合
-	
+
 	public int getStatus() {
 		return status;
 	}

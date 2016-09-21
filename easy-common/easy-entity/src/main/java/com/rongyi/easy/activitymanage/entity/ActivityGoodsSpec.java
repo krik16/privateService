@@ -73,6 +73,33 @@ public class ActivityGoodsSpec implements Serializable {
      */
     private Integer recStock;
 
+    /**
+     * 规格名称
+     */
+    private String name;
+
+    /**
+     * 商品sku
+     * @return
+     */
+    private String sku;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -176,6 +203,8 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("version", version)
                 .append("appendCount", appendCount)
                 .append("recStock", recStock)
+                .append("name", name)
+                .append("sku", sku)
                 .toString();
     }
 }

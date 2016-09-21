@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
@@ -23,9 +24,12 @@ public interface ActivityRoundService {
 
     boolean delRound(ActivityRoundInfo activityRoundInfo);
 
-    List<ActivityRoundInfo> getActivityRoundInfoList(int activityId ,int state,int currentPage,int pageSize);
+    Map getActivityRoundInfoList(int activityId ,int state,int currentPage,int pageSize);
     
-    List<ActivityRoundInfo> getGoodInRound(String sku);
+    
+    List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String sku);
+    
+
     
 
 }
