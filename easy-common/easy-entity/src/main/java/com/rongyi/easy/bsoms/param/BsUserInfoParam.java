@@ -8,7 +8,6 @@ public class BsUserInfoParam implements Serializable {
 	
 	private String bsst;
 	private String channel;
-	private String source;
 	
 	public String getBsst() {
 		return bsst;
@@ -23,11 +22,4 @@ public class BsUserInfoParam implements Serializable {
 		this.channel = channel;
 	}
 
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
 }

@@ -128,15 +128,7 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public Map getSessionUserFromRedis(String bsst,boolean bConvertToObj) throws Exception;
-	
-	/**
-	 * 通过service ticket获取登录用户信息
-	 * 返回Map{userInfo:com.rongyi.easy.bsoms.entity.SessionUserInfo,authorities:List<String>}
-	 * @param bsst
-	 * @return
-	 * @throws Exception
-	 */
-	public Map getSessionUserFromRedis(String bsst,boolean bConvertToObj,String source) throws Exception;
+
 	
 	/**
 	 * 查询买手账号列表
