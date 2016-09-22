@@ -53,6 +53,9 @@ public class OrderDetailModelParam implements Serializable {
 	
 	private Double discount;// 红包抵扣金额
 
+	private Integer articleType;//文章类型 1潮人攻略
+	private String articleId;//文章id
+
 	public String getCouponCode() {
 		return couponCode;
 	}
@@ -220,6 +223,22 @@ public class OrderDetailModelParam implements Serializable {
 		this.commodityStock = commodityStock;
 	}
 
+	public Integer getArticleType() {
+		return articleType;
+	}
+
+	public void setArticleType(Integer articleType) {
+		this.articleType = articleType;
+	}
+
+	public String getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetailModelParam{" +
@@ -228,6 +247,8 @@ public class OrderDetailModelParam implements Serializable {
 				", commodityCommission='" + commodityCommission + '\'' +
 				", orderDetailModelId='" + orderDetailModelId + '\'' +
 				", num='" + num + '\'' +
+				", commodityAppStatus='" + commodityAppStatus + '\'' +
+				", commodityStock=" + commodityStock +
 				", specColumnValues=" + specColumnValues +
 				", commodityPic='" + commodityPic + '\'' +
 				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
@@ -236,8 +257,13 @@ public class OrderDetailModelParam implements Serializable {
 				", commodityPostage='" + commodityPostage + '\'' +
 				", supportCourierDeliver=" + supportCourierDeliver +
 				", supportSelfPickup=" + supportSelfPickup +
-				", commodityAppStatus=" + commodityAppStatus +
-				", commodityStock=" + commodityStock +
+				", hongBaoNum=" + hongBaoNum +
+				", supportWay='" + supportWay + '\'' +
+				", couponCode='" + couponCode + '\'' +
+				", couponName='" + couponName + '\'' +
+				", discount=" + discount +
+				", articleType=" + articleType +
+				", articleId='" + articleId + '\'' +
 				'}';
 	}
 }
