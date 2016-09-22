@@ -358,4 +358,6 @@ public interface McmcCommoditySolrService {
 
 	List<String> selectSelfCommodity(SelfCommodityParam param);
 
+	public boolean updateCommodityPriceAndStock(String id, Double price, List<Double> currentPriceList,Integer stock);
+
 }
