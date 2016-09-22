@@ -356,6 +356,6 @@ public interface McmcCommoditySolrService {
 
 	public List<Integer> selectCommodityBySaleIds(List<Integer> saleIds)throws RYServiceException;
 
-	List<McmcCommodityDocument> selectSelfCommodity(SelfCommodityParam param);
+	List<String> selectSelfCommodity(SelfCommodityParam param);
 
 }
