@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class RoundGood  implements Serializable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -9147429880524919599L;
 	private Integer id;//数据库id
 	private Integer roundId;//场次id
@@ -26,8 +24,6 @@ public class RoundGood  implements Serializable{
 	private Integer roundRemainCount;//本场剩余库存
 	
 	private String specName;//规格名称
-	
-	private String catName;//分类
 
 	public Integer getId() {
 		return id;
@@ -109,27 +105,5 @@ public class RoundGood  implements Serializable{
 		this.specName = specName;
 	}
 
-	public String getCatName() {
-		return catName;
-	}
-
-	public void setCatName(String catName) {
-		this.catName = catName;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
 
 }

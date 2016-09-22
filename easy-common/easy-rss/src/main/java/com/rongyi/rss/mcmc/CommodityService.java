@@ -260,7 +260,9 @@ public interface CommodityService {
 
     ResponseVO selectSelfCommodity(SelfCommodityParam param);
 
-    ResponseVO deductStock(List<ActivityCommodityParam> params);
+    Boolean deductStock(List<ActivityCommodityParam> params);
 
-    ResponseVO returnStock(List<ActivityCommodityParam> params);
+    Boolean returnStock(List<ActivityCommodityParam> params);
+
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
 }
