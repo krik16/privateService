@@ -30,6 +30,9 @@ public class RequestPaymentParam implements Serializable{
 	private String callBackUrl;//支付宝网页支付同步通知回调地址
 
 	private String merchantUrl;//支付宝网页支付支付取消返回商家url
+
+	private String operateType;//操作类型 1潮人攻略 string类型
+	private String operateValue;//类型对应的id值 string类型
 	public List<String> getOrderNums() {
 		return orderNums;
 	}
@@ -86,15 +89,34 @@ public class RequestPaymentParam implements Serializable{
 		this.merchantUrl = merchantUrl;
 	}
 
-	@Override
-	public String toString() {
-		return "RequestPaymentParam [orderNums=" + orderNums
-				+ ", paymentEventType=" + paymentEventType + ", appId=" + appId
-				+ ", openId=" + openId + ", weixinPayType=" + weixinPayType
-				+ ", callBackUrl=" + callBackUrl
-				+ ", merchantUrl=" + merchantUrl
-				+ "]";
+	public String getOperateType() {
+		return operateType;
 	}
 
-	
+	public void setOperateType(String operateType) {
+		this.operateType = operateType;
+	}
+
+	public String getOperateValue() {
+		return operateValue;
+	}
+
+	public void setOperateValue(String operateValue) {
+		this.operateValue = operateValue;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestPaymentParam{" +
+				"orderNums=" + orderNums +
+				", paymentEventType='" + paymentEventType + '\'' +
+				", appId='" + appId + '\'' +
+				", openId='" + openId + '\'' +
+				", weixinPayType='" + weixinPayType + '\'' +
+				", callBackUrl='" + callBackUrl + '\'' +
+				", merchantUrl='" + merchantUrl + '\'' +
+				", operateType='" + operateType + '\'' +
+				", operateValue='" + operateValue + '\'' +
+				'}';
+	}
 }
