@@ -5,7 +5,7 @@ import java.util.Date;
 public class ActivityGoodsCategoryRule {
     private Integer id;
 
-    private Integer activityId;
+    private Integer activityId;//活动id
 
     private String categoryId;
 

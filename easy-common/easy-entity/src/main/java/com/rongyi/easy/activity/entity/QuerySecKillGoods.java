@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class QuerySecKillGoods implements Serializable {
 
-    private Integer activityId;
+    private Integer activityId;//活动id
     private String goodsCode;//商品编码
     private String name;//商品名称
     private String shopName;//店铺名称
