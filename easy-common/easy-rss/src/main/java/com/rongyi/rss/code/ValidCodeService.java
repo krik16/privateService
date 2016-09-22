@@ -46,7 +46,7 @@ public interface ValidCodeService {
      * @param platform 验证平台 。0：商家平台；1：摩店；2：轻应用
      * @return
      */
-    public boolean validCouponCode(String code,SessionUserInfo sessionUserInfo,byte platform) throws CodeServiceException;
+    public boolean validCouponCode(String code,SessionUserInfo sessionUserInfo,byte platform,int count) throws CodeServiceException;
 
     /**
      * 验证礼品码

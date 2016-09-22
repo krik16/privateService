@@ -54,6 +54,19 @@ public class VerifyCodeParam implements Serializable {
      */
     private Integer terminal;
 
+    private Integer count;
+
+    public Integer getCount() {
+        if (count == null) {
+            return 1;
+        }
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
     public String getCode() {
         return code;
     }
