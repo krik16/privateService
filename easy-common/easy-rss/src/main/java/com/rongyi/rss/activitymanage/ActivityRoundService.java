@@ -27,10 +27,18 @@ public interface ActivityRoundService {
     Map getActivityRoundInfoList(int activityId ,int state,int currentPage,int pageSize);
     
     
-    List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String spu);
     
     boolean addRoundGoods(List<RoundGood> roundGoods);
     
+    
+    
+    //容易逛:根据spu查出所有的sku信息:场次 库存 价格,提报库存什么的
+    List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String spu);
+    
+    
+    
+   
+    //展示场次商品列表
     Map listRoundGoods(int roundId,int currentPage,int pageSize);
     
     
