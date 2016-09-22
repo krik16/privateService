@@ -206,4 +206,8 @@ public interface ActivityService {
     public List<Integer> batchInsertActivityGoods(List<ActivityGoods> activityGoodses);
 
     boolean updateActivityGoodsStatus(CheckResGoods checkResGoods);
+
+    List<ActivityGoods> getShopActivityGoods(ActivityGoodsParam param);
+
+    ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
 }
