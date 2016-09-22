@@ -31,7 +31,7 @@ public interface ActivityRoundService {
 	/**
 	 * 容易逛:根据spu查出所有的sku信息:场次 库存 价格,提报库存什么的
 	 */
-	List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String spu);
+	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(String spu);
 	
 	
 	/**
