@@ -69,4 +69,15 @@ public class TrdClassCategory implements Serializable {
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
     }
+
+    @Override
+    public String toString() {
+        return "TrdClassCategory{" +
+                "categoryColumList=" + categoryColumList +
+                ", categoryId='" + categoryId + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", categoryLogo='" + categoryLogo + '\'' +
+                ", categoryType='" + categoryType + '\'' +
+                '}';
+    }
 }

@@ -116,7 +116,7 @@ public class TradeOrderCreateParam implements Serializable {
     private String idfa;
 
     //文章id
-    private Integer articleId;
+    private String articleId;
 
     //文章类型 1潮人攻略
     private Integer articleType;
@@ -455,11 +455,11 @@ public class TradeOrderCreateParam implements Serializable {
         this.orderChannel = orderChannel;
     }
 
-    public Integer getArticleId() {
+    public String getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Integer articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 

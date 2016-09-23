@@ -112,9 +112,6 @@ public class TradeOrder implements Serializable {
      * 下单渠道
      */
     private String orderChannel;
-
-    private Integer articleId;
-    private Integer articleType;
     /**
      * 元
      *
@@ -566,21 +563,5 @@ public class TradeOrder implements Serializable {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
-    }
-
-    public Integer getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
-    }
-
-    public Integer getArticleType() {
-        return articleType;
-    }
-
-    public void setArticleType(Integer articleType) {
-        this.articleType = articleType;
     }
 }
