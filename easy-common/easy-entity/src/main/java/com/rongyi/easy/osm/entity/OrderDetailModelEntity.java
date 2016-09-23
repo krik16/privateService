@@ -34,6 +34,12 @@ public class OrderDetailModelEntity {
     /** 版本 */
     private Integer version;
 
+    //文章类型 1潮人攻略
+    private Integer articleType;
+
+    //文章id
+    private Integer articleId;
+
     /**
      * 主键id
      * @return id
@@ -192,5 +198,21 @@ public class OrderDetailModelEntity {
      */
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
+    public Integer getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
     }
 }
