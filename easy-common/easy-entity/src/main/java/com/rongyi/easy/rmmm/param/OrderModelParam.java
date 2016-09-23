@@ -22,6 +22,8 @@ public class OrderModelParam implements Serializable {
 	private String orderPrice;// 订单价格
 	private List<OrderDetailModelParam> ordeDetailModel;
 	private String memberId;//微信用户id
+	private Integer articleId;//文章id
+	private Integer articleType;//文章类型 1潮人攻略
 
 	public String getShopId() {
 		return shopId;
@@ -63,9 +65,25 @@ public class OrderModelParam implements Serializable {
 		this.memberId = memberId;
 	}
 
+	public Integer getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(Integer articleId) {
+		this.articleId = articleId;
+	}
+
+	public Integer getArticleType() {
+		return articleType;
+	}
+
+	public void setArticleType(Integer articleType) {
+		this.articleType = articleType;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId
+		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId + ", articleId=" + articleId + ", articleType=" + articleType
 				+ ", orderPrice=" + orderPrice + ", ordeDetailModel="
 				+ ordeDetailModel + ", memberId=" + memberId + "]";
 	}
