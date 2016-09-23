@@ -23,6 +23,7 @@ public class OrderModelParam implements Serializable {
 	private List<OrderDetailModelParam> ordeDetailModel;
 	private String memberId;//微信用户id
 
+
 	public String getShopId() {
 		return shopId;
 	}

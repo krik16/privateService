@@ -25,6 +25,12 @@ public class OrderModelEntity {
     /** 订单价格 */
     private BigDecimal orderPrice;
 
+    //文章id
+    private Integer articleId;
+
+    //文章类型 1潮人攻略
+    private Integer articleType;
+
     /**
      * 主键
      * @return id
@@ -135,5 +141,21 @@ public class OrderModelEntity {
      */
     public void setOrderPrice(BigDecimal orderPrice) {
         this.orderPrice = orderPrice;
+    }
+
+    public Integer getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
     }
 }

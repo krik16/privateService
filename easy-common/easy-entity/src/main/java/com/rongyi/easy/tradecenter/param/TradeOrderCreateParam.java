@@ -115,6 +115,12 @@ public class TradeOrderCreateParam implements Serializable {
      */
     private String idfa;
 
+    //文章id
+    private Integer articleId;
+
+    //文章类型 1潮人攻略
+    private Integer articleType;
+
 
     /**
      * start
@@ -449,6 +455,22 @@ public class TradeOrderCreateParam implements Serializable {
         this.orderChannel = orderChannel;
     }
 
+    public Integer getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -483,6 +505,8 @@ public class TradeOrderCreateParam implements Serializable {
                 ", platformRebateCode=" + platformRebateCode +
                 ", weixinAppId=" + weixinAppId +
                 ", orderChannel=" + orderChannel +
+                ", articleId=" + articleId +
+                ", articleType=" + articleType +
                 '}';
     }
 }
