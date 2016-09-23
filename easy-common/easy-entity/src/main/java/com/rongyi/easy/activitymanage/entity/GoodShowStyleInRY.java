@@ -7,6 +7,8 @@ public class GoodShowStyleInRY implements Serializable {
 
 	private static final long serialVersionUID = 7695372922025982811L;
 	
+	
+	private String activityName;
 	private Integer activityId;
 	private Integer RoundId;
 	private List<RoundGood> goods;
@@ -15,6 +17,15 @@ public class GoodShowStyleInRY implements Serializable {
 	
 	
 	
+	
+	
+	
+	public String getActivityName() {
+		return activityName;
+	}
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
 	public Integer getActivityId() {
 		return activityId;
 	}
