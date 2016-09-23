@@ -131,7 +131,7 @@ public class ActivityGoods implements Serializable {
     /**
      * 场次信息
      */
-    private  List<SearchGoodInActivityRoundInfo>   activityRoundInfos = Lists.newArrayList();
+    private   List<GoodShowStyleInRY>   goodShowStyleInRYArrayList = Lists.newArrayList();
 
     /**
      * 获取商品分类的层级信息
@@ -149,13 +149,12 @@ public class ActivityGoods implements Serializable {
         return categoryStr;
     }
 
-
-    public List<SearchGoodInActivityRoundInfo> getActivityRoundInfos() {
-        return activityRoundInfos;
+    public List<GoodShowStyleInRY> getGoodShowStyleInRYArrayList() {
+        return goodShowStyleInRYArrayList;
     }
 
-    public void setActivityRoundInfos(List<SearchGoodInActivityRoundInfo> activityRoundInfos) {
-        this.activityRoundInfos = activityRoundInfos;
+    public void setGoodShowStyleInRYArrayList(List<GoodShowStyleInRY> goodShowStyleInRYArrayList) {
+        this.goodShowStyleInRYArrayList = goodShowStyleInRYArrayList;
     }
 
     public ActivityGoods(int type){
@@ -388,7 +387,7 @@ public class ActivityGoods implements Serializable {
                 .append("applyStatus", applyStatus)
                 .append("activityGoodsSpecs", activityGoodsSpecs)
                 .append("activityGoodsCategories", activityGoodsCategories)
-                .append("activityRoundInfos", activityRoundInfos)
+                .append("goodShowStyleInRYArrayList", goodShowStyleInRYArrayList)
                 .toString();
     }
 }

@@ -18,6 +18,10 @@ public class ActivitySpecParam implements Serializable {
         this.joinCount = joinCount;
     }
 
+    public ActivitySpecParam() {
+
+    }
+
     public String getId() {
         return id;
     }
