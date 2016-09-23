@@ -16,6 +16,15 @@ public interface RedisService {
     public Long incr(String key) throws Exception;
 
     /**
+     * 增操作(自定义increment)
+     * @param key
+     * @param increment
+     * @return
+     * @throws Exception
+     */
+    public Long incrBy(String key,long increment) throws Exception;
+    
+    /**
      * 自减操作
      * @param key
      * @return
@@ -38,6 +47,13 @@ public interface RedisService {
      */
     public String set(String key,String value);
 
+    /**
+     * set key value
+     * @param key
+     * @param value
+     * @return
+     */
+    public String setObject(String key,Object value);
     /**
      * 批量插入
      * @param keys
