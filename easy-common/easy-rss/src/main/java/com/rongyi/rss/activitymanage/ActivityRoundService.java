@@ -1,5 +1,6 @@
 package com.rongyi.rss.activitymanage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +32,9 @@ public interface ActivityRoundService {
 	/**
 	 * 容易逛:根据spu查出所有的sku信息:场次 库存 价格,提报库存什么的
 	 */
-	List<SearchGoodInActivityRoundInfo> searchGoodInActivityRoundInfo(String spu);
+	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(String spu);
 	
+	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(Date startAt,Date endAt);
 	
 	/**
 	 * 展示场次商品列表

@@ -49,13 +49,4 @@ public interface ICommodityCategoryService {
 	 * @return list
 	 */
 	List<CategoryNodeVO> getAllCategories();
-
-
-	/**
-	 * 查询类目名称
-	 *
-	 * @return list
-	 */
-	List<String> getCategoryNames(List<ObjectId> categoryIds);
-
 }

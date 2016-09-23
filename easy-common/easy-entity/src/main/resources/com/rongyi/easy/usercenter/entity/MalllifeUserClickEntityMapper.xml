@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.rongyi.easy.usercenter.entity.MalllifeUserClickEntity" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="click_id" property="clickId" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="dev_id" property="devId" jdbcType="VARCHAR" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
@@ -28,7 +28,7 @@
     insert into malllife_user_click (id, click_id, type, 
       status, dev_id, create_at, 
       update_at, is_disabled)
-    values (#{id,jdbcType=INTEGER}, #{clickId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{clickId,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{status,jdbcType=TINYINT}, #{devId,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
       #{updateAt,jdbcType=TIMESTAMP}, #{isDisabled,jdbcType=TINYINT})
   </insert>
@@ -68,7 +68,7 @@
         #{clickId,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+        #{type,jdbcType=TINYINT},
       </if>
       <if test="status != null" >
         #{status,jdbcType=TINYINT},
@@ -94,7 +94,7 @@
         click_id = #{clickId,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
+        type = #{type,jdbcType=TINYINT},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
@@ -117,7 +117,7 @@
   <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserClickEntity" >
     update malllife_user_click
     set click_id = #{clickId,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
       status = #{status,jdbcType=TINYINT},
       dev_id = #{devId,jdbcType=VARCHAR},
       create_at = #{createAt,jdbcType=TIMESTAMP},

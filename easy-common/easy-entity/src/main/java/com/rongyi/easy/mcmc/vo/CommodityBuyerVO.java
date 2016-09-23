@@ -196,7 +196,6 @@ public class CommodityBuyerVO implements Serializable{
 	private Integer existProgress;//是否存在进行中活动，1存在，0 不存在
 	private Date activityStartAt;//活动开始时间
 	private Date activityEndAt;//活动结束时间
-	private Integer activitylimitCount;//商品活动限购数量
 
 	public String getCommodityBrandName() {
 		return commodityBrandName;
@@ -588,14 +587,6 @@ public class CommodityBuyerVO implements Serializable{
 		this.activityEndAt = activityEndAt;
 	}
 
-	public Integer getActivitylimitCount() {
-		return activitylimitCount;
-	}
-
-	public void setActivitylimitCount(Integer activitylimitCount) {
-		this.activitylimitCount = activitylimitCount;
-	}
-
 	@Override
 	public String toString() {
 		return "CommodityBuyerVO{" +
@@ -644,7 +635,6 @@ public class CommodityBuyerVO implements Serializable{
 				", existProgress=" + existProgress +
 				", activityStartAt=" + activityStartAt +
 				", activityEndAt=" + activityEndAt +
-				", activitylimitCount=" + activitylimitCount +
 				", commodityPostage='" + commodityPostage + '\'' +
 				", commodityDescription='" + commodityDescription + '\'' +
 				", commodityName='" + commodityName + '\'' +
