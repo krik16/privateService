@@ -27,6 +27,21 @@ public class ActivityGoodsVO implements Serializable {
     private String goodsName;
 
     /**
+     * 商品价格
+     */
+    private String originPrice;
+
+    /**
+     * 商品价格
+     */
+    private String currentPrice;
+
+    /**
+     * 商品编码
+     */
+    private String goodsCode;
+
+    /**
      * 图片URL
      */
     private String picUrl;
@@ -76,6 +91,30 @@ public class ActivityGoodsVO implements Serializable {
      * 商品规格列表
      */
     private List<ActivityGoodsSpecVO> activityGoodsSpecVOs;
+
+    public String getOriginPrice() {
+        return originPrice;
+    }
+
+    public void setOriginPrice(String originPrice) {
+        this.originPrice = originPrice;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
+    }
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;

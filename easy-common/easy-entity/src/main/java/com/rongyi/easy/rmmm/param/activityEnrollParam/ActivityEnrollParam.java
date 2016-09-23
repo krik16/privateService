@@ -18,6 +18,7 @@ public class ActivityEnrollParam extends BaseParam implements Serializable{
 	
 	private String activityId;//活动id
 	private String commodityId;//商品id
+	private String commodityType;//商品类型
 	private String commoditySpecId;//商品规格id
 	private Integer addSpecNum;//追加的库存数量
 	private List<SpecListParam> specList;//规格集合
@@ -32,6 +33,12 @@ public class ActivityEnrollParam extends BaseParam implements Serializable{
 	}
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
+	}
+	public String getCommodityType() {
+		return commodityType;
+	}
+	public void setCommodityType(String commodityType) {
+		this.commodityType = commodityType;
 	}
 	public String getCommoditySpecId() {
 		return commoditySpecId;

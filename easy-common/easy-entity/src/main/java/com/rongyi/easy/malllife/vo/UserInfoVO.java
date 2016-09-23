@@ -296,4 +296,23 @@ public class UserInfoVO implements Serializable {
 	public void setPublicNumId(String publicNumId) {
 		this.publicNumId = publicNumId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfoVO [userId=" + userId + ", userName=" + userName
+				+ ", password=" + password + ", email=" + email
+				+ ", userPhone=" + userPhone + ", headImg=" + headImg
+				+ ", uid=" + uid + ", openId=" + openId + ", nickName="
+				+ nickName + ", imId=" + imId + ", usualAddress="
+				+ usualAddress + ", hasBindingPhone=" + hasBindingPhone
+				+ ", sex=" + sex + ", credit=" + credit + ", devUuid="
+				+ devUuid + ", hasPwd=" + hasPwd + ", appCode=" + appCode
+				+ ", ischeck=" + ischeck + ", isDeductible=" + isDeductible
+				+ ", isLoginRed=" + isLoginRed + ", loginTimes=" + loginTimes
+				+ ", devId=" + devId + ", pushChanelId=" + pushChanelId
+				+ ", lastSignInIp=" + lastSignInIp + ", channel=" + channel
+				+ ", shareCode=" + shareCode + ", isDisable=" + isDisable
+				+ ", publicNumId=" + publicNumId + ", isGet=" + isGet
+				+ ", invitCode=" + invitCode + "]";
+	}
 }

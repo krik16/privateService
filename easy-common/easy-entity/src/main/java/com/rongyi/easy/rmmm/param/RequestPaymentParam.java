@@ -31,8 +31,7 @@ public class RequestPaymentParam implements Serializable{
 
 	private String merchantUrl;//支付宝网页支付支付取消返回商家url
 
-	private String operateType;//操作类型 1潮人攻略 string类型
-	private String operateValue;//类型对应的id值 string类型
+	private String articleId;//类型文章id
 	public List<String> getOrderNums() {
 		return orderNums;
 	}
@@ -89,20 +88,12 @@ public class RequestPaymentParam implements Serializable{
 		this.merchantUrl = merchantUrl;
 	}
 
-	public String getOperateType() {
-		return operateType;
+	public String getArticleId() {
+		return articleId;
 	}
 
-	public void setOperateType(String operateType) {
-		this.operateType = operateType;
-	}
-
-	public String getOperateValue() {
-		return operateValue;
-	}
-
-	public void setOperateValue(String operateValue) {
-		this.operateValue = operateValue;
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
 	}
 
 	@Override
@@ -115,8 +106,7 @@ public class RequestPaymentParam implements Serializable{
 				", weixinPayType='" + weixinPayType + '\'' +
 				", callBackUrl='" + callBackUrl + '\'' +
 				", merchantUrl='" + merchantUrl + '\'' +
-				", operateType='" + operateType + '\'' +
-				", operateValue='" + operateValue + '\'' +
+				", articleId='" + articleId + '\'' +
 				'}';
 	}
 }
