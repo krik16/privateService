@@ -1,5 +1,6 @@
 package com.rongyi.rss.activitymanage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public interface ActivityRoundService {
 	 */
 	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(String spu);
 	
+	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(Date startAt,Date endAt);
 	
 	/**
 	 * 展示场次商品列表
