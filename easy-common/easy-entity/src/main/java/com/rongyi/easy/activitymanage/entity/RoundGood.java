@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class RoundGood  implements Serializable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -9147429880524919599L;
 	private Integer id;//数据库id
 	private Integer roundId;//场次id
@@ -25,28 +23,7 @@ public class RoundGood  implements Serializable{
 	
 	private Integer roundRemainCount;//本场剩余库存
 	
-	
-	
-	
-	
-	
-	
-
-	public Integer getRoundRemainCount() {
-		return roundRemainCount;
-	}
-
-	public void setRoundRemainCount(Integer roundRemainCount) {
-		this.roundRemainCount = roundRemainCount;
-	}
-
-	public Integer getActivityId() {
-		return activityId;
-	}
-
-	public void setActivityId(Integer activityId) {
-		this.activityId = activityId;
-	}
+	private String specName;//规格名称
 
 	public Integer getId() {
 		return id;
@@ -64,12 +41,20 @@ public class RoundGood  implements Serializable{
 		this.roundId = roundId;
 	}
 
-	public String getGoodSku() {
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+
+	public String getGoodId() {
 		return goodId;
 	}
 
-	public void setGoodSku(String goodSku) {
-		this.goodId = goodSku;
+	public void setGoodId(String goodId) {
+		this.goodId = goodId;
 	}
 
 	public String getGoodSpecId() {
@@ -103,10 +88,22 @@ public class RoundGood  implements Serializable{
 	public void setRoundSellIngPrice(String roundSellIngPrice) {
 		this.roundSellIngPrice = roundSellIngPrice;
 	}
-	
-	
-	
-	
-	
+
+	public Integer getRoundRemainCount() {
+		return roundRemainCount;
+	}
+
+	public void setRoundRemainCount(Integer roundRemainCount) {
+		this.roundRemainCount = roundRemainCount;
+	}
+
+	public String getSpecName() {
+		return specName;
+	}
+
+	public void setSpecName(String specName) {
+		this.specName = specName;
+	}
+
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.vo.*;
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 
@@ -233,5 +234,7 @@ public interface ROACommodityService {
 	public Long  selectOnlineCommodityCountByuser(String createId);
 
 	public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+	public ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
 }

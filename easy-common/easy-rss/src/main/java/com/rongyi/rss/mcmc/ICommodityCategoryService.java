@@ -49,5 +49,4 @@ public interface ICommodityCategoryService {
 	 * @return list
 	 */
 	List<CategoryNodeVO> getAllCategories();
-
 }

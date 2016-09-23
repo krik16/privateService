@@ -13,6 +13,49 @@ public class SelfCommodityVO implements Serializable {
     private List<Double> currentPrices;
     private Integer stock;
 
+    private SelfCommodityVO(Builder builder) {
+        this.commodityName = builder.commodityName;
+        this.commodityCode = builder.commodityCode;
+        this.stock = builder.stock;
+        this.categoryNames = builder.categoryNames;
+        this.currentPrices = builder.currentPrices;
+    }
+
+
+    public static class Builder {
+        private String commodityName;
+        private String commodityCode;
+        private List<String> categoryNames;
+        private List<Double> currentPrices;
+        private Integer stock;
+
+        public Builder(String name, String code, Integer stock) {
+            this.commodityName = name;
+            this.commodityCode = code;
+            this.stock = stock;
+        }
+
+        public Builder categoryNames(List vals) {
+            categoryNames = vals;
+            return this;
+        }
+
+        public Builder currentPrices(List vals) {
+            currentPrices = vals;
+            return this;
+        }
+
+        public SelfCommodityVO build() {
+            return new SelfCommodityVO(this);
+        }
+    }
+
+
+
+
+
+
+
     public String getCommodityName() {
         return commodityName;
     }

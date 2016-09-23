@@ -13,6 +13,15 @@ public class ActivitySpecParam implements Serializable {
     // 活动价
     private Double activityPrice;
 
+    public ActivitySpecParam(String id, Integer joinCount) {
+        this.id = id;
+        this.joinCount = joinCount;
+    }
+
+    public ActivitySpecParam() {
+
+    }
+
     public String getId() {
         return id;
     }

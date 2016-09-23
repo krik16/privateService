@@ -20,13 +20,26 @@ public class ActivityGoodsParam extends PagingParam {
     private Integer activityId;
 
     /**
-     * 活动状态
+     * shop
+     */
+    private String shopId;
+
+    /**
+     * 状态
      */
     private Integer status;
 
     private List<Integer> ids;
 
     private String orderByClause = "create_at desc";
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 
     public Integer getActivityId() {
         return activityId;
@@ -75,6 +88,7 @@ public class ActivityGoodsParam extends PagingParam {
                 .append("activityId", activityId)
                 .append("status", status)
                 .append("ids", ids)
+                .append("shopId", shopId)
                 .append("orderByClause", orderByClause)
                 .toString();
     }

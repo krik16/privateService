@@ -9,6 +9,7 @@ import com.rongyi.easy.activity.entity.QuerySecKillGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
+import com.rongyi.easy.activitymanage.param.CheckResGoods;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.vo.*;
 
@@ -17,6 +18,20 @@ import com.rongyi.easy.activitymanage.vo.*;
  * Created by Leon on 2016/1/20.
  */
 public interface ActivityService {
+
+    /**
+     * 根据activityGoodsId查询spec
+     * @param id
+     * @return
+     */
+    public List<ActivityGoodsSpec> selectSpecByActivityGoodsId(Integer id);
+
+    /**
+     * 根据主键获取活动商品
+     * @param id
+     * @return
+     */
+    public ActivityGoods selectActivityGoodsById(Integer id);
 
     /**
      * 新建活动
@@ -189,4 +204,10 @@ public interface ActivityService {
     public List<ActivityGoods> getSecKillGoods(QuerySecKillGoods querySecKillGoods);
 
     public List<Integer> batchInsertActivityGoods(List<ActivityGoods> activityGoodses);
+
+    boolean updateActivityGoodsStatus(CheckResGoods checkResGoods);
+
+    List<ActivityGoods> getShopActivityGoods(ActivityGoodsParam param);
+
+    ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
 }

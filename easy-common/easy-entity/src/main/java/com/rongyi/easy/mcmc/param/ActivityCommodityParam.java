@@ -9,6 +9,7 @@ import java.util.List;
 public class ActivityCommodityParam implements Serializable {
     private String commodityId; //商品Id
     private Integer sortPosition; //排序数
+    private Integer stock; //商品库存
 
     private List<ActivitySpecParam> specParamList;
 
@@ -35,6 +36,14 @@ public class ActivityCommodityParam implements Serializable {
 
     public void setSpecParamList(List<ActivitySpecParam> specParamList) {
         this.specParamList = specParamList;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     @Override
