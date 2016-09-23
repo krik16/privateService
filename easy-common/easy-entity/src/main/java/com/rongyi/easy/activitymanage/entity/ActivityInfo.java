@@ -122,6 +122,8 @@ public class ActivityInfo implements Serializable {
 
     private String enrollUserType;//可报名用户类型
 
+    private String description;//描述
+
 
     /**
      * 卡券活动规则
@@ -153,6 +155,14 @@ public class ActivityInfo implements Serializable {
 
     public void setActivityEntryRuleList(List<ActivityEntryRule> activityEntryRuleList) {
         this.activityEntryRuleList = activityEntryRuleList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEnrollUserType() {
@@ -392,6 +402,7 @@ public class ActivityInfo implements Serializable {
                 .append("source",source)
                 .append("enrollUserType",enrollUserType)
                 .append("cancelTime",cancelTime)
+                .append("description",description)
                 .toString();
     }
 }

@@ -103,6 +103,10 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private BigDecimal disconntFee;//商品折扣
 
+    private String articleId;//文章id
+
+    private Integer articleType;//文章类型 1潮人攻略
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -526,6 +530,22 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.orderScore = orderScore;
     }
 
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -542,6 +562,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", limitNum=" + limitNum +
                 ", activityType=" + activityType +
                 ", disconntFee=" + disconntFee +
+                ", articleId=" + articleId +
+                ", articleType=" + articleType +
                 " ]";
 	}
 

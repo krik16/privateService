@@ -79,6 +79,12 @@ public class TradeSubOrder implements Serializable {
 
     private Byte activityType;
 
+    //文章类型 1潮人攻略
+    private Integer articleType;
+
+    //文章id
+    private String articleId;
+
     public Integer getId() {
         return id;
     }
@@ -379,5 +385,21 @@ public class TradeSubOrder implements Serializable {
     public void setActivityType(Byte activityType)
     {
         this.activityType = activityType;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 }

@@ -26,4 +26,10 @@ public class CommodityGalleryPositionParam implements Serializable{
     public void setGalleryPosition(Integer galleryPosition) {
         this.galleryPosition = galleryPosition;
     }
+
+	@Override
+	public String toString() {
+		return "CommodityGalleryPositionParam [commodityId=" + commodityId
+				+ ", galleryPosition=" + galleryPosition + "]";
+	}
 }
