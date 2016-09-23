@@ -86,6 +86,68 @@ public class ActivityInfoVO implements Serializable {
      */
     private ActivityGoodsRuleVO activityGoodsRuleVO;
 
+    /**
+     * 活动价格
+     */
+    private String activityPrice;
+    /**
+     * 活动库存
+     */
+    private Integer activityStock;
+    /**
+     * 活动商品限购数
+     */
+    private Integer limitCount;
+    /**
+     * 当前场次id
+     */
+    private Integer roundId;
+    /**
+     * 支付过期时间
+     */
+    private Integer cancleTime;
+
+
+    public String getActivityPrice() {
+        return activityPrice;
+    }
+
+    public void setActivityPrice(String activityPrice) {
+        this.activityPrice = activityPrice;
+    }
+
+    public Integer getActivityStock() {
+        return activityStock;
+    }
+
+    public void setActivityStock(Integer activityStock) {
+        this.activityStock = activityStock;
+    }
+
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
+    }
+
+    public Integer getRoundId() {
+        return roundId;
+    }
+
+    public void setRoundId(Integer roundId) {
+        this.roundId = roundId;
+    }
+
+    public Integer getCancleTime() {
+        return cancleTime;
+    }
+
+    public void setCancleTime(Integer cancleTime) {
+        this.cancleTime = cancleTime;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -224,6 +286,11 @@ public class ActivityInfoVO implements Serializable {
                 .append("isDeleted", isDeleted)
                 .append("version", version)
                 .append("activityGoodsRuleVO", activityGoodsRuleVO)
+                .append("activityPrice", activityPrice)
+                .append("activityStock", activityStock)
+                .append("limitCount", limitCount)
+                .append("cancleTime", cancleTime)
+                .append("roundId", roundId)
                 .toString();
     }
 }
