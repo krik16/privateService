@@ -12,7 +12,8 @@ import java.util.List;
  * Created by wangzehui on 2016/1/22.
  */
 public interface IZoneService {
-
+	
+	public long getMallCount(int type,String id);
     /**
      * 获取需要索引的数据总数
      * @return
