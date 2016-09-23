@@ -26,14 +26,14 @@ public interface ICommodityCategoryHistoryService {
      *
      * @param userId
      * @param size
-     * @return List<CommodityCategoryHistory>
+     * @return List<TrdClassCategory>
      */
     public ResponseVO getList(String userId, int size);
 
     /**
      * 获取热门分类
      *
-     * @return List<CommodityCategoryHistory>
+     * @return List<TrdClassCategory>
      */
     public ResponseVO getHotList();
 
