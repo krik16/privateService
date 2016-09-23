@@ -10,7 +10,7 @@ public class ClickParam extends MalllifeBaseParam implements Serializable{
     private String id;
 
     /** 类型 */
-    private String type;
+    private Integer type;
 
     /** 0:点赞 1:取消点赞 */
     private Integer status;
@@ -26,11 +26,11 @@ public class ClickParam extends MalllifeBaseParam implements Serializable{
 		this.id = id;
 	}
 
-	public String getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
