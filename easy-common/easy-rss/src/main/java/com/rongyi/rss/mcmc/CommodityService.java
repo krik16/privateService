@@ -12,6 +12,7 @@ import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -265,4 +266,6 @@ public interface CommodityService {
     Boolean returnStock(List<ActivityCommodityParam> params);
 
     List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
+
+    public ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 }

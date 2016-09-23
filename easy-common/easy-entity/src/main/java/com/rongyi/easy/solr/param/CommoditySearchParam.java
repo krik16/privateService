@@ -105,6 +105,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private Integer galleryPosition;//橱窗位置
 
+
 	public String getCouponId() {
 		return couponId;
 	}
