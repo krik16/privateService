@@ -14,7 +14,21 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 	private static final long serialVersionUID = 4774118439578283640L;
 	
 	
-    /**
+	private String activityName;
+	
+	
+	
+	
+	
+    public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	/**
      * 场次开始时间
      */
     private Date startAt;
