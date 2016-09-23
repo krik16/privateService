@@ -187,6 +187,16 @@ public interface ActivityService {
      * @return ActivityInfoVO
      */
     ActivityInfoVO getActivityInfoVO(String goodsId, Integer goodsType);
+
+
+    /**
+     * 对外（交易使用）
+     * 查询活动详情接口
+     * @param skuId 商品id
+     * @param goodsType 商品[3] 卡券[1]
+     * @return ActivityInfoVO
+     */
+    ActivityInfoVO getResActivityInfoVO(String skuId, Integer goodsType);
     
 
     /**

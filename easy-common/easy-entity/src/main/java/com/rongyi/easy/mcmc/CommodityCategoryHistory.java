@@ -31,6 +31,8 @@ public class CommodityCategoryHistory implements Serializable {
     private Date updateAt;
     // 更新时间
     private Date createAt;
+    // 分类级别（同mcmc_commodity_category.type)
+    private int type;
 
     public String getCommodityCategoryId() {
         return commodityCategoryId;
@@ -88,6 +90,14 @@ public class CommodityCategoryHistory implements Serializable {
         this.totalCount = totalCount;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "CommodityCategoryHistory{" +
@@ -98,6 +108,7 @@ public class CommodityCategoryHistory implements Serializable {
                 ", totalCount=" + totalCount +
                 ", updateAt=" + updateAt +
                 ", createAt=" + createAt +
+                ", type=" + type +
                 '}';
     }
 }
