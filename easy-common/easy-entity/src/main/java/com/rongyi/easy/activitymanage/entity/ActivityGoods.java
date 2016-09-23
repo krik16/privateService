@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -128,6 +129,11 @@ public class ActivityGoods implements Serializable {
     private List<ActivityGoodsCategory> activityGoodsCategories;
 
     /**
+     * 场次信息
+     */
+    private  List<SearchGoodInActivityRoundInfo>   activityRoundInfos = Lists.newArrayList();
+
+    /**
      * 获取商品分类的层级信息
      * @return 餐饮 > 西餐 > 牛排
      */
@@ -141,6 +147,15 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+
+    public List<SearchGoodInActivityRoundInfo> getActivityRoundInfos() {
+        return activityRoundInfos;
+    }
+
+    public void setActivityRoundInfos(List<SearchGoodInActivityRoundInfo> activityRoundInfos) {
+        this.activityRoundInfos = activityRoundInfos;
     }
 
     public ActivityGoods(int type){
@@ -373,6 +388,7 @@ public class ActivityGoods implements Serializable {
                 .append("applyStatus", applyStatus)
                 .append("activityGoodsSpecs", activityGoodsSpecs)
                 .append("activityGoodsCategories", activityGoodsCategories)
+                .append("activityRoundInfos", activityRoundInfos)
                 .toString();
     }
 }
