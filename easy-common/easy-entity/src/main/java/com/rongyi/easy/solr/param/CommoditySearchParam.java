@@ -105,6 +105,8 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private Integer galleryPosition;//橱窗位置
 
+	private Integer minStock;
+	private Integer maxStock;
 
 	public String getCouponId() {
 		return couponId;
@@ -412,6 +414,22 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
+	}
+
+	public Integer getMaxStock() {
+		return maxStock;
+	}
+
+	public void setMaxStock(Integer maxStock) {
+		this.maxStock = maxStock;
+	}
+
+	public Integer getMinStock() {
+		return minStock;
+	}
+
+	public void setMinStock(Integer minStock) {
+		this.minStock = minStock;
 	}
 
 	@Override

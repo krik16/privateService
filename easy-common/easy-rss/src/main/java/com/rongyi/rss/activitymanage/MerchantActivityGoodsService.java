@@ -41,4 +41,25 @@ public interface MerchantActivityGoodsService {
      * @return
      */
     public  ActivityGoods resGoodsDetail(Integer activityGoodsId);
+
+    /**
+     * 获取报名信息详情
+     * @param activityGoodsId
+     * @return
+     */
+    public  ActivityGoods resGoodsRoundDetail(Integer activityGoodsId);
+
+    /**
+     * 追加提报库存
+     * @param activityGoodsId
+     * @return
+     */
+    public  boolean addGoodsJoinCount(Integer activityGoodsId,Integer addJoinCount);
+
+    /**
+     * 获取规格库存
+     * @param specId
+     * @return
+     */
+    public  Integer getStockBySpecId(String specId);
 }

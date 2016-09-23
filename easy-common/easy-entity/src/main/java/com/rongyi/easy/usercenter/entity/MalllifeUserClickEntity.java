@@ -14,8 +14,8 @@ public class MalllifeUserClickEntity implements Serializable {
     /** 点赞活动id */
     private String clickId;
 
-    /** 类型 */
-    private String type;
+    /** 类型, 0: 文章/活动/同城 */
+    private Integer type;
 
     /** 0:点赞 1:取消点赞 */
     private Integer status;
@@ -36,7 +36,7 @@ public class MalllifeUserClickEntity implements Serializable {
 		super();
 	}
 
-	public MalllifeUserClickEntity(String clickId, String type, Integer status,
+	public MalllifeUserClickEntity(String clickId, Integer type, Integer status,
 			String devId) {
 		super();
 		this.clickId = clickId;
@@ -83,7 +83,7 @@ public class MalllifeUserClickEntity implements Serializable {
      * 类型
      * @return type
      */
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
@@ -91,7 +91,7 @@ public class MalllifeUserClickEntity implements Serializable {
      * 类型
      * @param type
      */
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

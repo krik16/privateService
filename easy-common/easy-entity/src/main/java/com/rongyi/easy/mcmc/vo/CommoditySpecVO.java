@@ -21,6 +21,10 @@ public class CommoditySpecVO implements  Serializable {
 	private String specCurrentPrice;
 	private String specPictureUrl;//规格图片
 	private String sku;
+
+	private String activityStock;// sku 参与活动剩余库存
+	private String activityPrice; //sku 参与活动活动价
+	private String activitylimitCount;// sku 参与活动限购数量
 	
 	private List<CommoditySpecColumnVO> specColumnValues;
 	
@@ -105,5 +109,47 @@ public class CommoditySpecVO implements  Serializable {
 
 	public void setSku(String sku) {
 		this.sku = sku;
+	}
+
+	public String getActivityStock() {
+		return activityStock;
+	}
+
+	public void setActivityStock(String activityStock) {
+		this.activityStock = activityStock;
+	}
+
+	public String getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(String activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
+	public String getActivitylimitCount() {
+		return activitylimitCount;
+	}
+
+	public void setActivitylimitCount(String activitylimitCount) {
+		this.activitylimitCount = activitylimitCount;
+	}
+
+	@Override
+	public String toString() {
+		return "CommoditySpecVO{" +
+				"specId='" + specId + '\'' +
+				", specStock='" + specStock + '\'' +
+				", specTotalStock='" + specTotalStock + '\'' +
+				", specLockedStock='" + specLockedStock + '\'' +
+				", specOriginalPrice='" + specOriginalPrice + '\'' +
+				", specCurrentPrice='" + specCurrentPrice + '\'' +
+				", specPictureUrl='" + specPictureUrl + '\'' +
+				", sku='" + sku + '\'' +
+				", activityStock='" + activityStock + '\'' +
+				", activityPrice='" + activityPrice + '\'' +
+				", activitylimitCount='" + activitylimitCount + '\'' +
+				", specColumnValues=" + specColumnValues +
+				'}';
 	}
 }
