@@ -38,7 +38,7 @@ public class OrderDetailModelEntity {
     private Integer articleType;
 
     //文章id
-    private Integer articleId;
+    private String articleId;
 
     /**
      * 主键id
@@ -208,11 +208,11 @@ public class OrderDetailModelEntity {
         this.articleType = articleType;
     }
 
-    public Integer getArticleId() {
+    public String getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Integer articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 }
