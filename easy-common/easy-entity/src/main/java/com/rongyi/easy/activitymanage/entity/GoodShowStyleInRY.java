@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class GoodShowStyleInRY implements Serializable {
@@ -14,6 +15,29 @@ public class GoodShowStyleInRY implements Serializable {
 	private List<RoundGood> goods;
 	
 	
+	
+	 public Date getStartAt() {
+		return startAt;
+	}
+	public void setStartAt(Date startAt) {
+		this.startAt = startAt;
+	}
+	public Date getEndAt() {
+		return endAt;
+	}
+	public void setEndAt(Date endAt) {
+		this.endAt = endAt;
+	}
+	/**
+     * 场次开始时间
+     */
+    private Date startAt;
+
+    
+    /**
+     * 场次结束时间
+     */
+    private Date endAt;
 	
 	
 	
