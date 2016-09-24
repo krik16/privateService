@@ -13,6 +13,7 @@ import com.rongyi.easy.activitymanage.param.CheckResGoods;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParamV2;
 import com.rongyi.easy.activitymanage.vo.*;
+import com.rongyi.easy.activitymanage.vo.ActivityInfoSimple;
 
 /**
  * 活动后台管理接口
@@ -223,4 +224,9 @@ public interface ActivityService {
     List<ActivityGoods> getShopActivityGoods(ActivityGoodsParam param);
 
     ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
+    
+    
+    ActivityInfoSimple  getActivityInfoSimple(int activityId);
+    List<ActivityInfoSimple> getActivityInfoSimpleList(int userId,int identity,int shopId);
+    
 }

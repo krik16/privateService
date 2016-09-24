@@ -49,5 +49,8 @@ public interface ActivityRoundService {
 	boolean increaseStock(List<ActivityOrderGoods> goods);
 
 	boolean reduceStock(List<ActivityOrderGoods> goods);
+	
+	RoundGoodInSell getRoundGoodInfo(int roundId,int goodSku);
+	
 
 }
