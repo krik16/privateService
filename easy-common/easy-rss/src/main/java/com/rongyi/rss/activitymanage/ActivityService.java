@@ -11,6 +11,7 @@ import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
 import com.rongyi.easy.activitymanage.param.CheckResGoods;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
+import com.rongyi.easy.activitymanage.param.SearchActivityParamV2;
 import com.rongyi.easy.activitymanage.vo.*;
 
 /**
@@ -167,6 +168,8 @@ public interface ActivityService {
      * @return
      */
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
+    
+    public PagingVO<ActivityInfoListVOV2> getActivityListV2(SearchActivityParamV2 searchActivityParam);
 
 
     /**
