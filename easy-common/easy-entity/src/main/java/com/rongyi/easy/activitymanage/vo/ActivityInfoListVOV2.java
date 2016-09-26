@@ -32,7 +32,7 @@ public class ActivityInfoListVOV2 implements Serializable {
     private String synTarget;
     private Date enrollStartAt;//报名开始时间
     private Date enrollEndAt;//报名结束时间
-    /**活动状态  0.待审核
+    /**活动状态  0.未开始、1已开始、2已结束、3已下线
      */
     private Integer status;
     /**创建人*/

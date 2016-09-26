@@ -1,5 +1,6 @@
 package com.rongyi.rss.activitymanage;
 
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.bean.ResponseVO;
@@ -225,8 +226,6 @@ public interface ActivityService {
 
     ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
     
-    
-    ActivityInfoSimple  getActivityInfoSimple(int activityId);
-    List<ActivityInfoSimple> getActivityInfoSimpleList(int userId,int identity,int shopId);
-    
+    /**获取活动简要信息*/
+    ActivityInfoSimple  getActivityInfoSimple(int activityId); 
 }

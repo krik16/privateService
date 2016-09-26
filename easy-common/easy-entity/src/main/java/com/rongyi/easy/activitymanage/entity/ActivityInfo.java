@@ -118,6 +118,9 @@ public class ActivityInfo implements Serializable {
      */
     private String source;
 
+    /**
+     * 支付取消时间，单位分钟
+     */
     private String cancelTime;
 
     private String enrollUserType;//可报名用户类型

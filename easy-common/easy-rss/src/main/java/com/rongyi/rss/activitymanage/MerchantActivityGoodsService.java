@@ -49,6 +49,23 @@ public interface MerchantActivityGoodsService {
      */
     public  ActivityGoods resGoodsRoundDetail(Integer activityGoodsId);
 
+
+    /**
+     * 获取报名信息详情
+     * @param activityId
+     * @param activityId
+     * @return
+     */
+    public  ActivityGoods resGoodsRoundDetail(Integer activityId,String goodsId);
+
+
+    /**
+     * 追加提报库存
+     * @param activityId
+     * @return
+     */
+    public  boolean addGoodsJoinCount(Integer activityId,String goodsId,Integer skuId,Integer addJoinCount);
+
     /**
      * 追加提报库存
      * @param activityGoodsId
