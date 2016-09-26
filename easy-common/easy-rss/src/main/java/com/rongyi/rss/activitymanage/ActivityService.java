@@ -225,6 +225,8 @@ public interface ActivityService {
     List<ActivityGoods> getShopActivityGoods(ActivityGoodsParam param);
 
     ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
+
+    public ActivityGoods selectAllByActivityIdGoodsId(Integer activityId, String goodsId);
     
     /**获取活动简要信息*/
     ActivityInfoSimple  getActivityInfoSimple(int activityId); 
