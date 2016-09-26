@@ -11,7 +11,6 @@ import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
-import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
@@ -173,6 +172,8 @@ public class SubOrderController extends BaseControllerV2 {
             if (StringUtils.isNotBlank(orderDetailVo.getPayTime())) {
                 orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
             }
+            // 设置省市区地址
+            orderDetailVo.setAddress(orderDetailVo.getProvinceName()+orderDetailVo.getCityName()+orderDetailVo.getDistrictName()+orderDetailVo.getAddress());
             responseData = ResponseData.success(orderDetailVo);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
