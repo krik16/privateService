@@ -56,11 +56,24 @@ public class VerifyCodeParam implements Serializable {
 
     private Integer count;
 
+    private Integer platform;
+
     public Integer getCount() {
         if (count == null) {
             return 1;
         }
         return count;
+    }
+
+    public Integer getPlatform() {
+        if (platform == null) {
+            platform=0;
+        }
+        return platform;
+    }
+
+    public void setPlatform(Integer platform) {
+        this.platform = platform;
     }
 
     public void setCount(Integer count) {
