@@ -23,6 +23,8 @@ public interface ActivityRoundService {
 	boolean delRound(int roundId);
 
 	Map getActivityRoundInfoList(int activityId, int state, int currentPage, int pageSize);
+	
+	PagingVO<ActivityRoundInfo> getRoundListByTime(int activityId,Date begin ,Date end ,int currentPage, int pageSize);
 
 	/**
 	 * 添加场次商品
@@ -52,6 +54,6 @@ public interface ActivityRoundService {
 	
 	RoundGoodInSell getRoundGoodInfo(int roundId,int goodSku);
 	
-	boolean delGoodInRound(int activityId,String goodId);
+	boolean delGoodInRound(int activityId,String goodId) throws Exception;
 
 }
