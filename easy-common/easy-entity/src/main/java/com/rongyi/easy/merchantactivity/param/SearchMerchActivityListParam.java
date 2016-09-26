@@ -12,6 +12,12 @@ import java.io.Serializable;
  * ideaworkspace.
  */
 public class SearchMerchActivityListParam extends PagingParam {
+	
+	private	int userId;
+	private int identity;
+	
+	
+	
     /**
      * 店铺id
      */
