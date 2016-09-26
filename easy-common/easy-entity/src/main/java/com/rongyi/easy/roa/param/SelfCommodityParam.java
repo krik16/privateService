@@ -16,6 +16,7 @@ public class SelfCommodityParam  extends MalllifeBaseParam implements Serializab
     private Integer maxStock;
     private String shopId;
 
+
     public String getCommodityCode() {
         return commodityCode;
     }

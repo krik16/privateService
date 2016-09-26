@@ -16,6 +16,7 @@ import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
+import com.rongyi.easy.solr.result.PageBean;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.solr.McmcCommodityDocument;
@@ -357,7 +358,7 @@ public interface McmcCommoditySolrService {
 
 	public List<Integer> selectCommodityBySaleIds(List<Integer> saleIds)throws RYServiceException;
 
-	List<String> selectSelfCommodity(SelfCommodityParam param);
+	PageBean<McmcCommodityDocument> selectSelfCommodity(SelfCommodityParam param);
 
 	public boolean updateCommodityPriceAndStock(String id, Double price, List<Double> currentPriceList,Integer stock);
 
