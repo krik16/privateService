@@ -52,5 +52,6 @@ public interface ActivityRoundService {
 	
 	RoundGoodInSell getRoundGoodInfo(int roundId,int goodSku);
 	
+	boolean delGoodInRound(int activityId,String goodId);
 
 }
