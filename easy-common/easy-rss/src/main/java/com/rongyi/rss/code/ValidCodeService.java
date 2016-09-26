@@ -5,6 +5,7 @@ import com.rongyi.core.framework.exception.CodeServiceException;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.code.StatisticsValidCountVO;
 import com.rongyi.easy.code.ValidCouponVO;
+import com.rongyi.easy.code.WebValidVO;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
 import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
@@ -46,7 +47,7 @@ public interface ValidCodeService {
      * @param platform 验证平台 。0：商家平台；1：摩店；2：轻应用
      * @return
      */
-    public boolean validCouponCode(String code,SessionUserInfo sessionUserInfo,byte platform,int count) throws CodeServiceException;
+    public WebValidVO validCouponCode(String code,SessionUserInfo sessionUserInfo,byte platform,int count) throws CodeServiceException;
 
     /**
      * 验证礼品码
@@ -65,7 +66,7 @@ public interface ValidCodeService {
      * @param platform 验证平台 。0：商家平台；1：摩店；2：轻应用
      * @return
      */
-    public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop,byte platform) ;
+    public WebValidVO validGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop,byte platform) ;
 
 
 
@@ -137,7 +138,7 @@ public interface ValidCodeService {
      * @param platform 验证平台 。0：商家平台；1：摩店；2：轻应用
      * @return
      */
-    public boolean validEventGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop,byte platform);
+    public WebValidVO validEventGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop,byte platform);
 
 
 
