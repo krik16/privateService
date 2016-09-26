@@ -64,7 +64,7 @@ public interface MerchantActivityGoodsService {
      * @param activityId
      * @return
      */
-    public  boolean addGoodsJoinCount(Integer activityId,String goodsId,Integer skuId,Integer addJoinCount);
+    public  boolean addGoodsJoinCount(Integer activityId,String goodsId,String skuId,Integer addJoinCount);
 
     /**
      * 追加提报库存
