@@ -99,6 +99,9 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private Integer limitNum;//关联商品的限购数
+
+    private Integer activityLimitNum;//关联商品的活动限购数
+
     private Integer activityType;//商品活动 闪购1、特卖2、秒杀3
 
     private BigDecimal disconntFee;//商品折扣
@@ -106,6 +109,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private String articleId;//文章id
 
     private Integer articleType;//文章类型 1潮人攻略
+
+    private Integer activityId;//活动id
+
+    private String activityName;//活动名称
+
+    private Integer roundId;//活动场次id
+
+    private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
 
 
     public String getRefundDiscountInfo() {
@@ -546,6 +557,46 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.articleType = articleType;
     }
 
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Integer getRoundId() {
+        return roundId;
+    }
+
+    public void setRoundId(Integer roundId) {
+        this.roundId = roundId;
+    }
+
+    public BigDecimal getUnitOrigPrice() {
+        return unitOrigPrice;
+    }
+
+    public void setUnitOrigPrice(BigDecimal unitOrigPrice) {
+        this.unitOrigPrice = unitOrigPrice;
+    }
+
+    public Integer getActivityLimitNum() {
+        return activityLimitNum;
+    }
+
+    public void setActivityLimitNum(Integer activityLimitNum) {
+        this.activityLimitNum = activityLimitNum;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -564,6 +615,11 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", disconntFee=" + disconntFee +
                 ", articleId=" + articleId +
                 ", articleType=" + articleType +
+                ", activityId=" + activityId +
+                ", roundId=" + roundId +
+                ", activityName=" + activityName +
+                ", unitOrigPrice=" + unitOrigPrice +
+                ", activityLimitNum=" + activityLimitNum +
                 " ]";
 	}
 
