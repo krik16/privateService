@@ -8,6 +8,9 @@ public class RoundGoodInSell  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5433489050872070577L;
+	
+	
+	private Integer id;
 		
 	/**活动id*/
 	private Integer activityId;
@@ -84,12 +87,18 @@ public class RoundGoodInSell  implements Serializable{
 	public void setGoodId(String goodId) {
 		this.goodId = goodId;
 	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "RoundGoodInSell [activityId=" + activityId + ", roundId=" + roundId + ", goodSku=" + goodSku
-				+ ", quotaCount=" + quotaCount + ", cancelTime=" + cancelTime + ", roundParticipationCount="
+		return "RoundGoodInSell [id=" + id + ", activityId=" + activityId + ", roundId=" + roundId + ", goodId="
+				+ goodId + ", goodSku=" + goodSku + ", quotaCount=" + quotaCount + ", roundParticipationCount="
 				+ roundParticipationCount + ", roundSellIngPrice=" + roundSellIngPrice + ", roundRemainCount="
-				+ roundRemainCount + "]";
+				+ roundRemainCount + ", cancelTime=" + cancelTime + "]";
 	}
 	
 	

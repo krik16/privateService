@@ -23,6 +23,8 @@ public interface ActivityRoundService {
 	boolean delRound(int roundId);
 
 	Map getActivityRoundInfoList(int activityId, int state, int currentPage, int pageSize);
+	
+	PagingVO<ActivityRoundInfo> getRoundListByTime(int activityId,Date begin ,Date end ,int currentPage, int pageSize);
 
 	/**
 	 * 添加场次商品
@@ -35,6 +37,7 @@ public interface ActivityRoundService {
 	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(String spu);
 	
 	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(Date startAt,Date endAt);
+	List<RoundGood> getRoundGood(String goodId,Date roundStartTime);
 	
 	/**
 	 * 展示场次商品列表
@@ -52,6 +55,6 @@ public interface ActivityRoundService {
 	
 	RoundGoodInSell getRoundGoodInfo(int roundId,int goodSku);
 	
-	boolean delGoodInRound(int activityId,String goodId);
+	boolean delGoodInRound(int activityId,String goodId) throws Exception;
 
 }
