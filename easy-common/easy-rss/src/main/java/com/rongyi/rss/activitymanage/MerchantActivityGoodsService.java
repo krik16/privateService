@@ -13,11 +13,12 @@ public interface MerchantActivityGoodsService {
 
     /**
      * 获取可以报名商品列表
+     * 如果角色是买手，传入买手id，如果角色是店长或者导购，传入userType=4
      * @param shopId
      * @param activityId
      * @return
      */
-    public List<ActivityGoodsVO> getResGoods(String shopId,Integer activityId);
+    public List<ActivityGoodsVO> getResGoods(String shopId,Integer activityId, String bullId, String userType);
 
     /**
      * 报名商品
