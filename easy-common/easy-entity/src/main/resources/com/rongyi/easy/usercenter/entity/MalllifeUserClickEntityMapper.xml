@@ -6,13 +6,14 @@
     <result column="click_id" property="clickId" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="TINYINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="dev_id" property="devId" jdbcType="VARCHAR" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
     <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, click_id, type, status, dev_id, create_at, update_at, is_disabled
+    id, click_id, type, status, user_id, dev_id, create_at, update_at, is_disabled
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,105 +25,4 @@
     delete from malllife_user_click
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserClickEntity" >
-    insert into malllife_user_click (id, click_id, type, 
-      status, dev_id, create_at, 
-      update_at, is_disabled)
-    values (#{id,jdbcType=INTEGER}, #{clickId,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
-      #{status,jdbcType=TINYINT}, #{devId,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
-      #{updateAt,jdbcType=TIMESTAMP}, #{isDisabled,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserClickEntity" >
-    insert into malllife_user_click
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="clickId != null" >
-        click_id,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="devId != null" >
-        dev_id,
-      </if>
-      <if test="createAt != null" >
-        create_at,
-      </if>
-      <if test="updateAt != null" >
-        update_at,
-      </if>
-      <if test="isDisabled != null" >
-        is_disabled,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="clickId != null" >
-        #{clickId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="devId != null" >
-        #{devId,jdbcType=VARCHAR},
-      </if>
-      <if test="createAt != null" >
-        #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDisabled != null" >
-        #{isDisabled,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserClickEntity" >
-    update malllife_user_click
-    <set >
-      <if test="clickId != null" >
-        click_id = #{clickId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="devId != null" >
-        dev_id = #{devId,jdbcType=VARCHAR},
-      </if>
-      <if test="createAt != null" >
-        create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        update_at = #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDisabled != null" >
-        is_disabled = #{isDisabled,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserClickEntity" >
-    update malllife_user_click
-    set click_id = #{clickId,jdbcType=VARCHAR},
-      type = #{type,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT},
-      dev_id = #{devId,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      is_disabled = #{isDisabled,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>

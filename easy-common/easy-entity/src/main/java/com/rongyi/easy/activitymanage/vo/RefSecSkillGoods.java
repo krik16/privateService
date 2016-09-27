@@ -17,6 +17,7 @@ public class RefSecSkillGoods implements Serializable {
     private String goodsCode;
     private String goodsName;
     private String shopName;
+    private String userName;
     private List<GoodsSku> goodsSkus = Lists.newArrayList();
 
 
@@ -30,9 +31,18 @@ public class RefSecSkillGoods implements Serializable {
                 .append("goodsSkus", goodsSkus)
                 .append("goodsId", goodsId)
                 .append("shopId", shopId)
+                .append("userName", userName)
                 .toString();
     }
 
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getGoodsId() {
         return goodsId;
