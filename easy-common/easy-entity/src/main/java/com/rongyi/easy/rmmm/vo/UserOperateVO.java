@@ -35,6 +35,7 @@ public class UserOperateVO implements Serializable{
 	private Integer unPaidCouponOrderCount = 0;//待付款优惠券订单数量
 	private Boolean hasUnCheckedRepliedWish;//是否有已回复的未查看的心愿
 	private String easyMoney;//容颜币
+	private Integer afterSaleCount;//售后数量
 
 	public String getEasyMoney() {
 		return easyMoney;
@@ -130,6 +131,14 @@ public class UserOperateVO implements Serializable{
 	public void setUnPaidCouponOrderCount(Integer unPaidCouponOrderCount) {
 		this.unPaidCouponOrderCount = unPaidCouponOrderCount;
 	}
+	
+	public Integer getAfterSaleCount() {
+		return afterSaleCount;
+	}
+
+	public void setAfterSaleCount(Integer afterSaleCount) {
+		this.afterSaleCount = afterSaleCount;
+	}
 
 	@Override
 	public String toString() {
@@ -142,7 +151,8 @@ public class UserOperateVO implements Serializable{
 				+ ", unPaidOrderCount=" + unPaidOrderCount
 				+ ", unPaidCouponOrderCount=" + unPaidCouponOrderCount
 				+ ", hasUnCheckedRepliedWish=" + hasUnCheckedRepliedWish
-				+ ", easyMoney=" + easyMoney + "]";
+				+ ", easyMoney=" + easyMoney + ", afterSaleCount="
+				+ afterSaleCount + "]";
 	}
 	
 }
