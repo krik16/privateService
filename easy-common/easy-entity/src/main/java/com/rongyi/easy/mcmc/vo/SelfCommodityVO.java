@@ -50,12 +50,6 @@ public class SelfCommodityVO implements Serializable {
         }
     }
 
-
-
-
-
-
-
     public String getCommodityName() {
         return commodityName;
     }

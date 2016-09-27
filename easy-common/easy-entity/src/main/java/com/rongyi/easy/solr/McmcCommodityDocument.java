@@ -117,6 +117,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("top")
 	private Integer top; ///< 置顶排序
 
+	@Field("secKillSign")
 	private String secKillSign;
 
 	@Field("extend")

@@ -190,9 +190,6 @@ public interface CommodityService {
 
     /**
      * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
-     * @param ids
-     * @param sort
-     * @param type
      * @return
      */
     ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
