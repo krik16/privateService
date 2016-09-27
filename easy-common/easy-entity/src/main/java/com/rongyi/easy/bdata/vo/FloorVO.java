@@ -125,4 +125,16 @@ public class FloorVO implements Serializable {
         this.parentId = parentId;
     }
 
+	@Override
+	public String toString() {
+		return "FloorVO [id=" + id + ", name=" + name + ", buildingName=" + buildingName + ", systemStatus="
+				+ systemStatus + ", position=" + position + ", navigationPic=" + navigationPic + ", pathImg=" + pathImg
+				+ ", picture=" + picture + ", swf=" + swf + ", fmap=" + fmap + ", parentIds=" + parentIds
+				+ ", parentId=" + parentId + "]";
+	}
+
+    
+    
+    
+    
 }
