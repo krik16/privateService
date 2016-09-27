@@ -38,7 +38,13 @@ public class Floor implements Serializable {
     
     
     
+	public String getSwf() {
+		return swf;
+	}
 	public String getFmap() {
+		return fmap;
+	}
+	public String getFullFmap() {
 		 if (StringUtils.isNotBlank(fmap)) {
 	            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + fmap;
 	        } else {
@@ -48,7 +54,7 @@ public class Floor implements Serializable {
 	public void setFmap(String fmap) {
 		this.fmap = fmap;
 	}
-	public String getSwf() {
+	public String getFullSwf() {
 		 if (StringUtils.isNotBlank(swf)) {
 	            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swf;
 	        } else {

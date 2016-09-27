@@ -18,7 +18,30 @@ public class FloorVO implements Serializable {
 	private String navigationPic;
 	private String pathImg;
 	private String picture;
-    private String swfPic;
+	
+	
+	 private String swf;//swf图--商家后台用的
+	    private String fmap;//fmap图--商家后台用的
+	    
+	    
+	    
+   
+	public String getSwf() {
+			return swf;
+		}
+
+		public void setSwf(String swf) {
+			this.swf = swf;
+		}
+
+		public String getFmap() {
+			return fmap;
+		}
+
+		public void setFmap(String fmap) {
+			this.fmap = fmap;
+		}
+
 	private List<String> parentIds;
 	private String parentId;
 
@@ -102,11 +125,4 @@ public class FloorVO implements Serializable {
         this.parentId = parentId;
     }
 
-    public String getSwfPic() {
-        return swfPic;
-    }
-
-    public void setSwfPic(String swfPic) {
-        this.swfPic = swfPic;
-    }
 }
