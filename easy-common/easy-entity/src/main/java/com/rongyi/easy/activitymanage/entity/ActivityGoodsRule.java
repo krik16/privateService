@@ -22,7 +22,7 @@ public class ActivityGoodsRule implements Serializable {
     private Integer stockDeductType;
 
     /**
-     * 库存修改方式:只可增不可减[0] 不可增不可减[1]
+     * 库存修改方式:只可增不可减[0] 不可增不可减[1] 可增亦可减[2]
      */
     private Integer stockUpdateType;
 

@@ -149,7 +149,7 @@ public interface ActivityConstants {
     }
 
     /**
-     * 发布渠道
+     * 发布渠道大运营[0] 商家[1]
      */
     interface PublishChannel {
         Integer OPERATION = 0;

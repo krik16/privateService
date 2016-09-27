@@ -259,6 +259,13 @@ public interface CommodityService {
 
     public Map<Integer ,Boolean> checkCommoditySoldOutInSales(List<Integer> saleIds);
 
+    /**
+     *  查询自营商品
+     *
+     * @param param (SelfCommodityParam)
+     * @return 商品数量
+     *
+     */
     ResponseVO selectSelfCommodity(SelfCommodityParam param);
 
     Boolean deductStock(List<ActivityCommodityParam> params);
@@ -267,5 +274,10 @@ public interface CommodityService {
 
     List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
 
-    public ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+    ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+
+    boolean deductCommodityStock(String commodityId, Integer stock);
+
+    boolean returnCommodityStock(String commodityId, Integer stock);
+
 }

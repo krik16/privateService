@@ -23,6 +23,8 @@ public interface ActivityRoundService {
 	boolean delRound(int roundId);
 
 	Map getActivityRoundInfoList(int activityId, int state, int currentPage, int pageSize);
+	
+	PagingVO<ActivityRoundInfo> getRoundListByTime(int activityId,Date begin ,Date end ,int currentPage, int pageSize);
 
 	/**
 	 * 添加场次商品
@@ -34,7 +36,10 @@ public interface ActivityRoundService {
 	 */
 	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(String spu);
 	
-	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(Date startAt,Date endAt);
+	/**
+	 * 容易逛:根据spu,场次开始时间,查处相关数据
+	 */
+	List<RoundGood> getRoundGood(String goodId,Date roundStartTime);
 	
 	/**
 	 * 展示场次商品列表
@@ -49,5 +54,23 @@ public interface ActivityRoundService {
 	boolean increaseStock(List<ActivityOrderGoods> goods);
 
 	boolean reduceStock(List<ActivityOrderGoods> goods);
+	
+	RoundGoodInSell getRoundGoodInfo(int roundId,int goodSku);
+	
+	boolean delGoodInRound(int activityId,String goodId) throws Exception;
+	
+	/***
+	 * 商品列表:查询商品是否在活动中,是否有活动库存,活动价格,场次id
+	 * @param goodsId
+	 * @return
+	 */
+	List<GoodsInAppList> getGoodsList(List<String> goodsId);
+	/***
+	 * 商品列表:查询商品,查询商品详细活动数据
+	 * @param goodsId
+	 * @param roundId 场次id
+	 * @return
+	 */
+	List<RoundGood> getRoundGood(String goodId,int roundId);
 
 }

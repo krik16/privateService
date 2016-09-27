@@ -17,6 +17,16 @@ public class ClickParam extends MalllifeBaseParam implements Serializable{
 
     /** 设备号 */
     private String devId;
+    
+    private String userId;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public String getId() {
 		return id;
@@ -54,6 +64,7 @@ public class ClickParam extends MalllifeBaseParam implements Serializable{
 	public String toString() {
 		return "ClickParam [id=" + id + ", type=" + type + ", status=" + status
 				+ ", devId=" + devId 
+				+ ", userId=" + userId 
 				+ "]";
 	}
 

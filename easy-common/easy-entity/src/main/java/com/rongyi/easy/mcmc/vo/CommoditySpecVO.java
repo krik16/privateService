@@ -24,7 +24,7 @@ public class CommoditySpecVO implements  Serializable {
 
 	private String activityStock;// sku 参与活动剩余库存
 	private String activityPrice; //sku 参与活动活动价
-	private String activitylimitCount;// sku 参与活动限购数量
+	private Integer activitylimitCount;// sku 参与活动限购数量
 	
 	private List<CommoditySpecColumnVO> specColumnValues;
 	
@@ -127,11 +127,11 @@ public class CommoditySpecVO implements  Serializable {
 		this.activityPrice = activityPrice;
 	}
 
-	public String getActivitylimitCount() {
+	public Integer getActivitylimitCount() {
 		return activitylimitCount;
 	}
 
-	public void setActivitylimitCount(String activitylimitCount) {
+	public void setActivitylimitCount(Integer activitylimitCount) {
 		this.activitylimitCount = activitylimitCount;
 	}
 

@@ -117,6 +117,12 @@ public class ActivityGoods implements Serializable {
      * 0:取消撤销状态  1:表示申请撤销中状态
      */
     private Integer applyStatus;
+    /**
+     * 报名来源 0大运营后台 1摩店
+     */
+    private Integer enrollSource;//0大运营1摩店
+
+    private ActivityGoodsRule activityGoodsRule;
 
     /**
      * 商品规格
@@ -147,6 +153,22 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+    public ActivityGoodsRule getActivityGoodsRule() {
+        return activityGoodsRule;
+    }
+
+    public void setActivityGoodsRule(ActivityGoodsRule activityGoodsRule) {
+        this.activityGoodsRule = activityGoodsRule;
+    }
+
+    public Integer getEnrollSource() {
+        return enrollSource;
+    }
+
+    public void setEnrollSource(Integer enrollSource) {
+        this.enrollSource = enrollSource;
     }
 
     public List<GoodShowStyleInRY> getGoodShowStyleInRYArrayList() {
@@ -388,6 +410,8 @@ public class ActivityGoods implements Serializable {
                 .append("activityGoodsSpecs", activityGoodsSpecs)
                 .append("activityGoodsCategories", activityGoodsCategories)
                 .append("goodShowStyleInRYArrayList", goodShowStyleInRYArrayList)
+                .append("enrollSource", enrollSource)
+                .append("activityGoodsRule", activityGoodsRule)
                 .toString();
     }
 }
