@@ -230,4 +230,9 @@ public interface ActivityService {
     
     /**获取活动简要信息*/
     ActivityInfoSimple  getActivityInfoSimple(int activityId); 
+    
+    /**设置活动状态*/
+    boolean setActivityOfflineState(int activityId);
+    
+    
 }

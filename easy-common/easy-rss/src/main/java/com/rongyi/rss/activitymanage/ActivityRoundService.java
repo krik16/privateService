@@ -37,6 +37,7 @@ public interface ActivityRoundService {
 	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(String spu);
 	
 	List<GoodShowStyleInRY> searchGoodInActivityRoundInfo(Date startAt,Date endAt);
+	List<RoundGood> getRoundGood(String goodId,Date roundStartTime);
 	
 	/**
 	 * 展示场次商品列表
