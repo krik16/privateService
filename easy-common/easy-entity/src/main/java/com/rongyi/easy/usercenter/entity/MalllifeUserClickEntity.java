@@ -19,6 +19,9 @@ public class MalllifeUserClickEntity implements Serializable {
 
     /** 0:点赞 1:取消点赞 */
     private Integer status;
+    
+    /** 用户id */
+    private String userId;
 
     /** 设备号 */
     private String devId;
@@ -30,19 +33,20 @@ public class MalllifeUserClickEntity implements Serializable {
     private Date updateAt;
 
     /** 是否禁用0正常 1禁用 */
-    private Integer isDisabled;
+    private Integer isDisabled;    
 
-    public MalllifeUserClickEntity() {
+	public MalllifeUserClickEntity() {
 		super();
 	}
 
 	public MalllifeUserClickEntity(String clickId, Integer type, Integer status,
-			String devId) {
+			String devId,String userId) {
 		super();
 		this.clickId = clickId;
 		this.type = type;
 		this.status = status;
 		this.devId = devId;
+		this.userId = userId;
 		this.createAt = new Date();
 		this.isDisabled = 0;
 	}
@@ -62,6 +66,14 @@ public class MalllifeUserClickEntity implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
     /**
      * 点赞活动id
@@ -178,7 +190,9 @@ public class MalllifeUserClickEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "MalllifeUserClickEntity [id=" + id + ", clickId=" + clickId
-				+ ", type=" + type + ", status=" + status + ", devId=" + devId
+				+ ", type=" + type + ", status=" + status 
+				+ ", userId=" + userId
+				+ ", devId=" + devId
 				+ ", createAt=" + createAt + ", updateAt=" + updateAt
 				+ ", isDisabled=" + isDisabled 
 				+ "]";
