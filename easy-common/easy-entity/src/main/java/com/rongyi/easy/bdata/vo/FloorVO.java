@@ -20,18 +20,20 @@ public class FloorVO implements Serializable {
 	private String picture;
 	
 	
-	 private String swf;//swf图--商家后台用的
+	private String swfPic;
 	    private String fmap;//fmap图--商家后台用的
 	    
 	    
 	    
    
-	public String getSwf() {
-			return swf;
+
+
+		public String getSwfPic() {
+			return swfPic;
 		}
 
-		public void setSwf(String swf) {
-			this.swf = swf;
+		public void setSwfPic(String swfPic) {
+			this.swfPic = swfPic;
 		}
 
 		public String getFmap() {
