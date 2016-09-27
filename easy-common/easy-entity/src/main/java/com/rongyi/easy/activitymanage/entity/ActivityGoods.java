@@ -122,6 +122,7 @@ public class ActivityGoods implements Serializable {
      */
     private Integer enrollSource;//0大运营1摩店
 
+    private ActivityGoodsRule activityGoodsRule;
 
     /**
      * 商品规格
@@ -152,6 +153,14 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+    public ActivityGoodsRule getActivityGoodsRule() {
+        return activityGoodsRule;
+    }
+
+    public void setActivityGoodsRule(ActivityGoodsRule activityGoodsRule) {
+        this.activityGoodsRule = activityGoodsRule;
     }
 
     public Integer getEnrollSource() {
@@ -402,6 +411,7 @@ public class ActivityGoods implements Serializable {
                 .append("activityGoodsCategories", activityGoodsCategories)
                 .append("goodShowStyleInRYArrayList", goodShowStyleInRYArrayList)
                 .append("enrollSource", enrollSource)
+                .append("activityGoodsRule", activityGoodsRule)
                 .toString();
     }
 }
