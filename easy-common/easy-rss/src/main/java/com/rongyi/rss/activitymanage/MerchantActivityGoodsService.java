@@ -45,12 +45,6 @@ public interface MerchantActivityGoodsService {
      */
     public  ActivityGoods resGoodsDetail(Integer activityGoodsId);
 
-    /**
-     * 获取报名信息详情
-     * @param activityGoodsId
-     * @return
-     */
-    public  ActivityGoods resGoodsRoundDetail(Integer activityGoodsId);
 
 
     /**
@@ -72,12 +66,6 @@ public interface MerchantActivityGoodsService {
      */
     public  boolean addGoodsJoinCount(Integer activityId,String goodsId,String skuId,Integer addJoinCount);
 
-    /**
-     * 追加提报库存
-     * @param activityGoodsId
-     * @return
-     */
-    public  boolean addGoodsJoinCount(Integer activityGoodsId,Integer addJoinCount);
 
     /**
      * 获取规格库存
@@ -93,4 +81,13 @@ public interface MerchantActivityGoodsService {
      * @return
      */
     public boolean updateActivityGoodsStatus(Integer id,String goodsId);
+
+    /**
+     * 获取不同角色报名商品信息列表
+     * @param activityId
+     * @param shopId
+     * @param bullId
+     * @return
+     */
+    public List<ActivityGoods> get(Integer activityId,String shopId,String bullId);
 }

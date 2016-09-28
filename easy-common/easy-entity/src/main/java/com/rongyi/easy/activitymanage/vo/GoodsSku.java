@@ -14,10 +14,10 @@ public class GoodsSku implements Serializable {
     private String currentPrice;//当前价
     private String activityPrice;//活动价
     private Integer joinCount;//提报数量
-    private String sku;//规格sku
-    private String spec;//规格id
+    private String sku;//sku
+    private String spec;//规格信息
     private Integer allocationCount;//可分配数量
-    private String skuId;
+    private String skuId;//规格id
 
 
 
