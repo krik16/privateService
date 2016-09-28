@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.util.List;
+
 /**
  * Created by yaoyiwei on 2016/9/27.
  */
@@ -10,7 +12,7 @@ public class CommodityRuleParam {
     private Integer orderBy;
     private Integer currentPage;
     private Integer pageSize;
-    private String categoryId;
+    private List<String> categoryIds;
     private Integer identity;
 
     public String getKeyword() {
@@ -61,19 +63,19 @@ public class CommodityRuleParam {
         this.pageSize = pageSize;
     }
 
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public Integer getIdentity() {
         return identity;
     }
 
     public void setIdentity(Integer identity) {
         this.identity = identity;
+    }
+
+    public List<String> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(List<String> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 }
