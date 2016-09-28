@@ -14,5 +14,6 @@ public interface MsgCenterConstants {
         byte TRADE=2;
         byte INVITE=3;
         byte ACTIVATE=4;
+        byte OLDPUSHNEW=6;
     }
 }

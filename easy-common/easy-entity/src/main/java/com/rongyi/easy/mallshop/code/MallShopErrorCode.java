@@ -17,7 +17,7 @@ package com.rongyi.easy.mallshop.code;/*
 public enum MallShopErrorCode {
 
     SUCCESS(0, "正常"), //原系统都定义为正常情况 编码规则不变
-    FAILURE(-1, "网络正在打瞌睡，请稍后再试"), //原系统都定义为正常情况 编码规则不变
+    FAILURE(-1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
 
     /** 公共编码 后4位区间  0001---1000*/
     ERROR_PARAM_ISNULL(1070001, "必填参数不能为空"),

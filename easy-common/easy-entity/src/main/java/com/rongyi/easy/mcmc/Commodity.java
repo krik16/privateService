@@ -101,6 +101,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopName; ///< 店铺名称
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
+	private Integer galleryPosition;//橱窗排序商品
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -528,6 +529,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityOffUserName = commodityOffUserName;
 	}
 
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
 	public String getHotAreaName() {
 		return hotAreaName;
 	}
@@ -604,6 +613,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
+		commodity.setGalleryPosition(galleryPosition);
 		commodity.setShopName(shopName);
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
@@ -678,6 +688,7 @@ public class Commodity implements  Serializable,Cloneable{
 				",mallName=" + mallName +
 				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
+				",galleryPosition=" + galleryPosition +
 				'}';
 	}
 
@@ -728,10 +739,15 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
-			if(null !=vo.getSource() && vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+			if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
 			} else {
-				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
+				if(null !=status){
+					this.setStatus(vo.getCommodityStatus());
+				}else {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				}
 			}
 		}
 
@@ -740,10 +756,10 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
-		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
+		/*if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
 		}
-
+*/
 		if(!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
 			this.setSupportCourierDeliver(true);
 			this.setSupportSelfPickup(true);

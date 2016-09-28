@@ -83,6 +83,9 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     /**大订单改价分摊优惠金额*/
     private BigDecimal orderDiscountFee;
 
+    /**大订单积分分摊*/
+    private Integer orderScore;
+
     /**大订单积分分摊优惠金额*/
     private BigDecimal orderScoreDiscount;
 
@@ -513,6 +516,16 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityType = activityType;
     }
 
+    public Integer getOrderScore()
+    {
+        return orderScore;
+    }
+
+    public void setOrderScore(Integer orderScore)
+    {
+        this.orderScore = orderScore;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -524,6 +537,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
                 ", discountAmount=" + discountAmount +
                 ", rebateAmount=" + rebateAmount +
+                ", orderScore=" + orderScore +
                 ", scoreAmount=" + scoreAmount +
                 ", limitNum=" + limitNum +
                 ", activityType=" + activityType +

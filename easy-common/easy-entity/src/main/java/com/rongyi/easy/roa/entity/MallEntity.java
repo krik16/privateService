@@ -90,6 +90,7 @@ public class MallEntity implements Serializable {
 
 	private String navigation_pic;// 黑白图
 	private String pathImg;// 路径图
+	private String swfpic;//楼层导航图
 	private String aliasename;
 	private String aliasname;
 	private String businesstype;
@@ -545,5 +546,13 @@ public class MallEntity implements Serializable {
 	}
 	public String getFullIcon() {
 		return "http://rongyi.b0.upaiyun.com/system/mall/icon/" + id + "/" + icon;
+	}
+
+	public String getSwfpic() {
+		return swfpic;
+	}
+
+	public void setSwfpic(String swfpic) {
+		this.swfpic = swfpic;
 	}
 }

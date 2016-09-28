@@ -43,6 +43,8 @@ public class BuyerInfoPojo implements Serializable {
     private String userAccount; //买手账号
 
     private Integer identity;
+    
+    private Integer isOrdering;//
 
     public Integer getIdentity() {
         return identity;
@@ -146,20 +148,23 @@ public class BuyerInfoPojo implements Serializable {
 	public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;
 	}
-    @Override
-    public String toString() {
-        return "BuyerInfoPojo{" +
-                "userId=" + userId +
-                ", userType=" + userType +
-                ", userLogo='" + userLogo + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", userNickName='" + userNickName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", shareCode='" + shareCode + '\'' +
-                ", userDesc='" + userDesc + '\'' +
-                ", imUser='" + imUser + '\'' +
-                ", userFansCount=" + userFansCount +
-                ", isFans=" + isFans +
-                ", identity=" + identity +
-                '}';
-    }}
+    public Integer getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Integer isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+
+	@Override
+	public String toString() {
+		return "BuyerInfoPojo [userId=" + userId + ", userType=" + userType
+				+ ", userLogo=" + userLogo + ", userPhone=" + userPhone
+				+ ", userNickName=" + userNickName + ", userName=" + userName
+				+ ", shareCode=" + shareCode + ", userDesc=" + userDesc
+				+ ", imUser=" + imUser + ", userFansCount=" + userFansCount
+				+ ", isFans=" + isFans + ", userAccount=" + userAccount
+				+ ", identity=" + identity + ", isOrdering=" + isOrdering + "]";
+	}
+	
+}
