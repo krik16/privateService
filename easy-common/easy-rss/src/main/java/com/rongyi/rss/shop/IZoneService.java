@@ -1,5 +1,6 @@
 package com.rongyi.rss.shop;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.Zones;
 import com.rongyi.easy.solr.CityDocument;
 import com.rongyi.easy.solr.MallsDocument;
@@ -11,7 +12,8 @@ import java.util.List;
  * Created by wangzehui on 2016/1/22.
  */
 public interface IZoneService {
-
+	
+	public long getMallCount(int type,String id);
     /**
      * 获取需要索引的数据总数
      * @return
@@ -87,4 +89,12 @@ public interface IZoneService {
     public long getZonesCount();
 
     public List<String> getZonesByName(String mallName);
+
+    /**
+     * 根据城市名称获取城市id
+     *
+     * @param cityName
+     * @return 返回对应城市的id，如果城市名称不存在，返回一个不存在的城市id
+     */
+    public ResponseVO getCityMidByName(String cityName);
 }
