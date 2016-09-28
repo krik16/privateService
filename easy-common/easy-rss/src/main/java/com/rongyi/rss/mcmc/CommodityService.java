@@ -13,6 +13,7 @@ import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
+import com.rongyi.easy.mcmc.param.CommodityRuleParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -273,8 +274,34 @@ public interface CommodityService {
 
     ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
+    /**
+     * 扣除商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
     boolean deductCommodityStock(String commodityId, Integer stock);
 
+    /**
+     * 返还商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
     boolean returnCommodityStock(String commodityId, Integer stock);
+
+    /**
+     * 根据活动规则查询商品
+     *
+     * @param param
+     *
+     * @return
+     */
+    ResponseResult getCommodityListForMallShopByRule(CommodityRuleParam param);
+
 
 }
