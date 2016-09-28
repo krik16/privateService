@@ -173,7 +173,20 @@ public class SubOrderController extends BaseControllerV2 {
                 orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
             }
             // 设置省市区地址
-            orderDetailVo.setAddress(orderDetailVo.getProvinceName()+orderDetailVo.getCityName()+orderDetailVo.getDistrictName()+orderDetailVo.getAddress());
+            StringBuilder address = new StringBuilder();
+            if(StringUtils.isNotEmpty(orderDetailVo.getProvinceName())){
+                address.append(orderDetailVo.getProvinceName());
+            }
+            if(StringUtils.isNotEmpty(orderDetailVo.getCityName())){
+                address.append(orderDetailVo.getCityName());
+            }
+            if(StringUtils.isNotEmpty(orderDetailVo.getDistrictName())){
+                address.append(orderDetailVo.getDistrictName());
+            }
+            if(StringUtils.isNotEmpty(orderDetailVo.getAddress())){
+                address.append(orderDetailVo.getAddress());
+            }
+            orderDetailVo.setAddress(address.toString());
             responseData = ResponseData.success(orderDetailVo);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
