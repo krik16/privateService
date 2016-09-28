@@ -26,7 +26,7 @@ public class ActivitySearchParam implements Serializable{
 	private String city_name; //城市名（如  上海&上海市）
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
 	private int requiredCoupon = 0;	//需要的优惠券[0：全部、1：代金券、2优惠券]（之前的sort最后一个条件迁移到此）
-	private int from;         //页
+	private int from;         //页（注，从0开始表示第一页）
 	private int size;         //一页数量
 	private String brand_id;  //品牌id
 	private String zone_id;   //区域id

@@ -20,6 +20,7 @@ public class IntegralSearchParam implements Serializable {
     private String qrCordId;
     private String shopId;
     private String jsessionId;
+    private Integer ifIncludeRP;//0需要rp 1剔除rp
 
     public String getJsessionId() {
         return jsessionId;
@@ -109,6 +110,14 @@ public class IntegralSearchParam implements Serializable {
         this.userId = userId;
     }
 
+    public Integer getIfIncludeRP() {
+        return ifIncludeRP;
+    }
+
+    public void setIfIncludeRP(Integer ifIncludeRP) {
+        this.ifIncludeRP = ifIncludeRP;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -123,6 +132,7 @@ public class IntegralSearchParam implements Serializable {
                 .append("qrCordId", qrCordId)
                 .append("shopId", shopId)
                 .append("jsessionId", jsessionId)
+                .append("ifIncludeRP", ifIncludeRP)
                 .toString();
     }
 

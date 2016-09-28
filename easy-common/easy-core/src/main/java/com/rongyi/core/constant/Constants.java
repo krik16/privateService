@@ -872,4 +872,10 @@ public interface Constants {
     	/** 在默认时间前一天给用户推送的消息 */
     	String PUSH_MSG_SHOP = "您的店铺账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
     }
+    interface INDEX_CORE_STAT {//0更新成功  1更新中  2更新失败
+        String SUCCESS = "success";
+        String FAILED = "failed";
+        String PROGRESS = "progress";
+        String PERPROGRESS = "perprogress";
+    }
 }
