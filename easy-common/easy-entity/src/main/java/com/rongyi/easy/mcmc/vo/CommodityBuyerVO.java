@@ -194,8 +194,8 @@ public class CommodityBuyerVO implements Serializable{
 	private Integer existEnd;//是否存在已结束活动，1存在 0 不存在
 	private Integer existStart;//是否存在待开始活动 1存在，0 不存在
 	private Integer existProgress;//是否存在进行中活动，1存在，0 不存在
-	private Date activityStartAt;//活动开始时间
-	private Date activityEndAt;//活动结束时间
+	private Long activityStartAt;//活动开始时间
+	private Long activityEndAt;//活动结束时间
 
 	public String getCommodityBrandName() {
 		return commodityBrandName;
@@ -571,19 +571,19 @@ public class CommodityBuyerVO implements Serializable{
 		this.existProgress = existProgress;
 	}
 
-	public Date getActivityStartAt() {
+	public Long getActivityStartAt() {
 		return activityStartAt;
 	}
 
-	public void setActivityStartAt(Date activityStartAt) {
+	public void setActivityStartAt(Long activityStartAt) {
 		this.activityStartAt = activityStartAt;
 	}
 
-	public Date getActivityEndAt() {
+	public Long getActivityEndAt() {
 		return activityEndAt;
 	}
 
-	public void setActivityEndAt(Date activityEndAt) {
+	public void setActivityEndAt(Long activityEndAt) {
 		this.activityEndAt = activityEndAt;
 	}
 
