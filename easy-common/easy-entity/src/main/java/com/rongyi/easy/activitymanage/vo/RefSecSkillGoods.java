@@ -11,13 +11,14 @@ import java.util.List;
  */
 public class RefSecSkillGoods implements Serializable {
 
-    private Integer id;//活动id
+    private Integer id;
+    private Integer activityId;//活动id
     private String goodsId;//商品id
-    private String shopId;
-    private String goodsCode;
-    private String goodsName;
-    private String shopName;
-    private String userName;
+    private String shopId;//店铺id
+    private String goodsCode;//商品编码
+    private String goodsName;//商品名称
+    private String shopName;//店铺名称
+    private String userId;//用户id
     private List<GoodsSku> goodsSkus = Lists.newArrayList();
 
 
@@ -31,17 +32,25 @@ public class RefSecSkillGoods implements Serializable {
                 .append("goodsSkus", goodsSkus)
                 .append("goodsId", goodsId)
                 .append("shopId", shopId)
-                .append("userName", userName)
+                .append("userId", userId)
                 .toString();
     }
 
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
     }
 
     public String getGoodsId() {

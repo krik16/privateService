@@ -202,7 +202,7 @@ public interface ActivityService {
      * @param goodsType 商品[3] 卡券[1]
      * @return ActivityInfoVO
      */
-    ActivityInfoVO getResActivityInfoVO(String skuId, Integer goodsType);
+    RoundGood getResActivityInfoVO(String skuId, Integer goodsType);
     
 
     /**

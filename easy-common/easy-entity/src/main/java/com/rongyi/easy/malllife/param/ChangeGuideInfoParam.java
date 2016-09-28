@@ -27,5 +27,10 @@ public class ChangeGuideInfoParam extends MalllifeBaseParam implements Serializa
 	public void setModelId(String modelId) {
 		this.modelId = modelId;
 	}
+	@Override
+	public String toString() {
+		return "ChangeGuideInfoParam [userId=" + userId + ", modelId="
+				+ modelId + "]";
+	}
 	
 }

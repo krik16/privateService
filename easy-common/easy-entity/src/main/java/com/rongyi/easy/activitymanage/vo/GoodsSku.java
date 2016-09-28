@@ -10,14 +10,14 @@ import java.io.Serializable;
 public class GoodsSku implements Serializable {
 
 
-    private Integer activityGoodsId;
-    private String currentPrice;
-    private String activityPrice;
-    private Integer joinCount;
-    private String sku;
-    private String spec;
-    private Integer allocationCount;
-    private String skuId;
+    private Integer activityGoodsId;//活动商品表主键
+    private String currentPrice;//当前价
+    private String activityPrice;//活动价
+    private Integer joinCount;//提报数量
+    private String sku;//sku
+    private String spec;//规格信息
+    private Integer allocationCount;//可分配数量
+    private String skuId;//规格id
 
 
 
