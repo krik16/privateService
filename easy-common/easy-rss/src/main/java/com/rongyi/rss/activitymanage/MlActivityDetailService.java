@@ -32,6 +32,13 @@ public interface MlActivityDetailService  {
     public ResponseVO searchSeckillDetailByParam(SearchSecKillParam searchSecKillParam);
 
     /**
+     * 10月版查询秒杀的接口
+     * @param searchSecKillParam
+     * @return
+     */
+    public ResponseVO searchSeckillDetailListByParam(SearchSecKillParam searchSecKillParam);
+
+    /**
      * 特卖闪购 详情
      * @param flashSaleParam
      * @return

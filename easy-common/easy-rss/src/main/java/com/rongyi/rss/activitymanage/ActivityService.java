@@ -15,6 +15,7 @@ import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParamV2;
 import com.rongyi.easy.activitymanage.vo.*;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoSimple;
+import com.rongyi.easy.merchantactivity.vo.MerchantActivityEntryVO;
 
 /**
  * 活动后台管理接口
@@ -201,7 +202,7 @@ public interface ActivityService {
      * @param goodsType 商品[3] 卡券[1]
      * @return ActivityInfoVO
      */
-    ActivityInfoVO getResActivityInfoVO(String skuId, Integer goodsType);
+    RoundGood getResActivityInfoVO(String skuId, Integer goodsType);
     
 
     /**
@@ -233,6 +234,12 @@ public interface ActivityService {
     
     /**设置活动状态*/
     boolean setActivityOfflineState(int activityId);
+
+    public List<MerchantActivityEntryVO> selectActivityEntryRuleByActivityId(Integer id);
+
+    public ActivityGoodsRule selectByActivityId(Integer activityId);
+
+    public  List<ActivityGoodsCategoryRule> selectActivityGoodsCategoryRuleByActivityId(Integer activityId);
     
     
 }

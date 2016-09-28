@@ -1,7 +1,9 @@
 package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.google.inject.internal.Lists;
 import com.rongyi.easy.base.param.BaseParam;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -58,6 +60,11 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 * 品牌id
 	 */
 	private String brandId;
+
+	/**
+	 * 品牌ids
+	 */
+	private List<String> brandMids = Lists.newArrayList();
 	/**
 	 * 類別id
 	 */
@@ -77,6 +84,14 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 * @return
 	 */
 	private Integer templateRoundId;
+
+	public List<String> getBrandMids() {
+		return brandMids;
+	}
+
+	public void setBrandMids(List<String> brandMids) {
+		this.brandMids = brandMids;
+	}
 
 	public Integer getTemplateRoundId() {
 		return templateRoundId;
@@ -189,6 +204,7 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 				", randomParam=" + randomParam +
 				", contentId=" + contentId +
 				", templateRoundId=" + templateRoundId +
+				", brandMids=" + brandMids +
 				"} " + super.toString();
 	}
 }
