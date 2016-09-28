@@ -13,11 +13,11 @@ public class RefSecSkillGoods implements Serializable {
 
     private Integer id;//活动id
     private String goodsId;//商品id
-    private String shopId;
-    private String goodsCode;
-    private String goodsName;
-    private String shopName;
-    private String userName;
+    private String shopId;//店铺id
+    private String goodsCode;//商品编码
+    private String goodsName;//商品名称
+    private String shopName;//店铺名称
+    private String userName;//用户名
     private List<GoodsSku> goodsSkus = Lists.newArrayList();
 
 
