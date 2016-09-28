@@ -114,7 +114,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private String activityName;//活动名称
 
-    private Integer roundId;//活动场次id
+    private Integer activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
 
@@ -574,11 +574,11 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     }
 
     public Integer getRoundId() {
-        return roundId;
+        return activityRoundId;
     }
 
     public void setRoundId(Integer roundId) {
-        this.roundId = roundId;
+        this.activityRoundId = activityRoundId;
     }
 
     public BigDecimal getUnitOrigPrice() {
@@ -616,7 +616,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", articleId=" + articleId +
                 ", articleType=" + articleType +
                 ", activityId=" + activityId +
-                ", roundId=" + roundId +
+                ", activityRoundId=" + activityRoundId +
                 ", activityName=" + activityName +
                 ", unitOrigPrice=" + unitOrigPrice +
                 ", activityLimitNum=" + activityLimitNum +
