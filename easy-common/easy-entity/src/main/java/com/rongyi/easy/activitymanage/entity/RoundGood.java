@@ -25,6 +25,8 @@ public class RoundGood  implements Serializable{
 	
 	private String specName;//规格名称
 
+	private Integer cancelTime;//支付时间
+
 	public Integer getId() {
 		return id;
 	}
@@ -105,5 +107,11 @@ public class RoundGood  implements Serializable{
 		this.specName = specName;
 	}
 
+	public Integer getCancelTime() {
+		return cancelTime;
+	}
 
+	public void setCancelTime(Integer cancelTime) {
+		this.cancelTime = cancelTime;
+	}
 }
