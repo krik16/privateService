@@ -89,5 +89,5 @@ public interface MerchantActivityGoodsService {
      * @param bullId
      * @return
      */
-    public List<ActivityGoods> get(Integer activityId,String shopId,String bullId);
+    public List<ActivityGoods> getActivityGoodsListByRole(Integer activityId,String shopId,String bullId);
 }
