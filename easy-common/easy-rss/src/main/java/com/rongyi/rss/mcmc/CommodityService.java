@@ -38,6 +38,13 @@ public interface CommodityService {
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
 
     /**
+     * 获取规格详情
+     *
+     * @param specId
+     * @return
+     */
+    public ResponseVO getSpecInfo(String specId);
+    /**
      * 查询店铺的商品
      * @param id
      * @param shopId

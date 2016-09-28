@@ -39,12 +39,13 @@ public class CommoditySpecVO implements  Serializable {
 	public CommoditySpecVO(){
 		
 	}
-	
-	public CommoditySpecVO(CommoditySpec commoditySpec){
+
+	public CommoditySpecVO(CommoditySpec commoditySpec) {
 		this.specId = commoditySpec.getId().toString();
 		this.specStock = commoditySpec.getStock();
 		this.specOriginalPrice = commoditySpec.getOriginalPrice();
 		this.specCurrentPrice = commoditySpec.getCurrentPrice();
+		this.sku = commoditySpec.getSku();
 	}
 	
 	public String getSpecId() {
