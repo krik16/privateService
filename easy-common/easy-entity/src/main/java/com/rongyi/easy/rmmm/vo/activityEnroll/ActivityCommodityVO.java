@@ -18,6 +18,9 @@ public class ActivityCommodityVO implements Serializable{
 	private String commodityName;//商品名称
 	private List<String> commodityPicList;//商品图片集合
 	private Integer status;//状态
+	private String commodityNo;//商品款号
+	private String commodityCurrentPrice;//商品现价
+	private boolean isApply = false;//是否报名
 	public String getActivityId() {
 		return activityId;
 	}
@@ -48,12 +51,32 @@ public class ActivityCommodityVO implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public String getCommodityNo() {
+		return commodityNo;
+	}
+	public void setCommodityNo(String commodityNo) {
+		this.commodityNo = commodityNo;
+	}
+	public String getCommodityCurrentPrice() {
+		return commodityCurrentPrice;
+	}
+	public void setCommodityCurrentPrice(String commodityCurrentPrice) {
+		this.commodityCurrentPrice = commodityCurrentPrice;
+	}
+	public boolean isApply() {
+		return isApply;
+	}
+	public void setApply(boolean isApply) {
+		this.isApply = isApply;
+	}
 	@Override
 	public String toString() {
 		return "ActivityCommodityVO [activityId=" + activityId
 				+ ", commodityId=" + commodityId + ", commodityName="
 				+ commodityName + ", commodityPicList=" + commodityPicList
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", commodityNo=" + commodityNo
+				+ ", commodityCurrentPrice=" + commodityCurrentPrice
+				+ ", isApply=" + isApply + "]";
 	}
 	
 }
