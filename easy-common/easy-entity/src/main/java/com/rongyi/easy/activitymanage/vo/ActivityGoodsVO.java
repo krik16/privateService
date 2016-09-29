@@ -88,9 +88,23 @@ public class ActivityGoodsVO implements Serializable {
     private String categoryStr;
 
     /**
+     * 商品是否已参加活动
+     */
+    private boolean isJoin;
+
+    /**
      * 商品规格列表
      */
     private List<ActivityGoodsSpecVO> activityGoodsSpecVOs;
+
+
+    public boolean isJoin() {
+        return isJoin;
+    }
+
+    public void setJoin(boolean isJoin) {
+        this.isJoin = isJoin;
+    }
 
     public String getOriginPrice() {
         return originPrice;
@@ -236,6 +250,7 @@ public class ActivityGoodsVO implements Serializable {
                 .append("createUser", createUser)
                 .append("categoryStr", categoryStr)
                 .append("activityGoodsSpecVOs", activityGoodsSpecVOs)
+                .append("isJoin", isJoin)
                 .toString();
     }
 }

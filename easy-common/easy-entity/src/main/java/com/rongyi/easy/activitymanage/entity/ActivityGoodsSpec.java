@@ -1,9 +1,12 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
+import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 活动商品规格
@@ -42,6 +45,8 @@ public class ActivityGoodsSpec implements Serializable {
      * 商品/卡券活动库存
      */
     private Integer stockCount;
+
+
 
     /**
      * 可分配库存
@@ -88,6 +93,20 @@ public class ActivityGoodsSpec implements Serializable {
      * @return
      */
     private String sku;
+
+    /**
+     * 小规格
+     */
+    private List<CommoditySpecColumnVO> specColumnValues = Lists.newArrayList();
+
+
+    public List<CommoditySpecColumnVO> getSpecColumnValues() {
+        return specColumnValues;
+    }
+
+    public void setSpecColumnValues(List<CommoditySpecColumnVO> specColumnValues) {
+        this.specColumnValues = specColumnValues;
+    }
 
     public Integer getAllocationCount() {
         return allocationCount;
@@ -219,6 +238,7 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("recStock", recStock)
                 .append("name", name)
                 .append("sku", sku)
+                .append("specColumnValues", specColumnValues)
                 .toString();
     }
 }
