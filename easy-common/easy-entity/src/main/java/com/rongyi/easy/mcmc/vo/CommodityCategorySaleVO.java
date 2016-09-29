@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class CommodityCategorySaleVO implements Serializable, Comparable<Commodi
 		this.categoryType = "我是一级类目";
 		this.createAt = commodityCategory.getCreateAt();
 		this.sequence=commodityCategory.getSequence();
+		this.subCategoryList = new ArrayList<>();
 	}
 
 	public Integer getSequence() {
