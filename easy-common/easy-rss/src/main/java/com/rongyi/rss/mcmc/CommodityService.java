@@ -44,6 +44,15 @@ public interface CommodityService {
      * @return
      */
     public ResponseVO getSpecInfo(String specId);
+
+    /**
+     * 获取规格详情（批量）
+     *
+     * @param specIds
+     * @return
+     */
+    public List<CommoditySpecVO> getSpecList(List<String> specIds);
+
     /**
      * 查询店铺的商品
      * @param id
