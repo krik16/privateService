@@ -48,27 +48,23 @@ public class ActivityInfoListVOV2 implements Serializable {
     /**场次个数*/
     private Integer activityRoundCount;
     /**报名商品总数*/
-    private Integer goodsTotal;
+    private Integer goodsJoininTotalCount;
     /**已经分配的商品数*/
-    private Integer goodsUsed;
+    private Integer goodsApplyToRoundCount;
+    /**待审核的商品数*/
+    private Integer goodsNeedAlowedCount;
+    
+    /**撤销商品数*/
+    private Integer goodsCancelCount;
+    
     
     /**模板编辑状态 */
     private boolean isTemplateEdit;
-    
-    
-    
-    
-    
 
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
-
-
-
-
-
 
 
 	public void setId(Integer id) {
@@ -76,19 +72,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public String getName() {
 		return name;
 	}
-
-
-
-
-
 
 
 	public void setName(String name) {
@@ -96,19 +82,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Date getStartAt() {
 		return startAt;
 	}
-
-
-
-
-
 
 
 	public void setStartAt(Date startAt) {
@@ -116,19 +92,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Date getEndAt() {
 		return endAt;
 	}
-
-
-
-
-
 
 
 	public void setEndAt(Date endAt) {
@@ -136,19 +102,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Integer getType() {
 		return type;
 	}
-
-
-
-
-
 
 
 	public void setType(Integer type) {
@@ -156,19 +112,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public String getSynTarget() {
 		return synTarget;
 	}
-
-
-
-
-
 
 
 	public void setSynTarget(String synTarget) {
@@ -176,19 +122,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Date getEnrollStartAt() {
 		return enrollStartAt;
 	}
-
-
-
-
-
 
 
 	public void setEnrollStartAt(Date enrollStartAt) {
@@ -196,19 +132,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Date getEnrollEndAt() {
 		return enrollEndAt;
 	}
-
-
-
-
-
 
 
 	public void setEnrollEndAt(Date enrollEndAt) {
@@ -216,19 +142,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Integer getStatus() {
 		return status;
 	}
-
-
-
-
-
 
 
 	public void setStatus(Integer status) {
@@ -236,19 +152,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public String getCreateUser() {
 		return createUser;
 	}
-
-
-
-
-
 
 
 	public void setCreateUser(String createUser) {
@@ -256,19 +162,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Date getCreateAt() {
 		return createAt;
 	}
-
-
-
-
-
 
 
 	public void setCreateAt(Date createAt) {
@@ -276,19 +172,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public String getUpdateUser() {
 		return updateUser;
 	}
-
-
-
-
-
 
 
 	public void setUpdateUser(String updateUser) {
@@ -296,19 +182,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Date getUpdateAt() {
 		return updateAt;
 	}
-
-
-
-
-
 
 
 	public void setUpdateAt(Date updateAt) {
@@ -316,19 +192,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Integer getGoodsAlowedCount() {
 		return goodsAlowedCount;
 	}
-
-
-
-
-
 
 
 	public void setGoodsAlowedCount(Integer goodsAlowedCount) {
@@ -336,19 +202,9 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public Integer getActivityRoundCount() {
 		return activityRoundCount;
 	}
-
-
-
-
-
 
 
 	public void setActivityRoundCount(Integer activityRoundCount) {
@@ -356,49 +212,44 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
-	public Integer getGoodsTotal() {
-		return goodsTotal;
+	public Integer getGoodsJoininTotalCount() {
+		return goodsJoininTotalCount;
 	}
 
 
-
-
-
-
-
-	public void setGoodsTotal(Integer goodsTotal) {
-		this.goodsTotal = goodsTotal;
+	public void setGoodsJoininTotalCount(Integer goodsJoininTotalCount) {
+		this.goodsJoininTotalCount = goodsJoininTotalCount;
 	}
 
 
-
-
-
-
-
-	public Integer getGoodsUsed() {
-		return goodsUsed;
+	public Integer getGoodsApplyToRoundCount() {
+		return goodsApplyToRoundCount;
 	}
 
 
-
-
-
-
-
-	public void setGoodsUsed(Integer goodsUsed) {
-		this.goodsUsed = goodsUsed;
+	public void setGoodsApplyToRoundCount(Integer goodsApplyToRoundCount) {
+		this.goodsApplyToRoundCount = goodsApplyToRoundCount;
 	}
 
 
+	public Integer getGoodsNeedAlowedCount() {
+		return goodsNeedAlowedCount;
+	}
 
 
+	public void setGoodsNeedAlowedCount(Integer goodsNeedAlowedCount) {
+		this.goodsNeedAlowedCount = goodsNeedAlowedCount;
+	}
 
+
+	public Integer getGoodsCancelCount() {
+		return goodsCancelCount;
+	}
+
+
+	public void setGoodsCancelCount(Integer goodsCancelCount) {
+		this.goodsCancelCount = goodsCancelCount;
+	}
 
 
 	public boolean isTemplateEdit() {
@@ -406,40 +257,25 @@ public class ActivityInfoListVOV2 implements Serializable {
 	}
 
 
-
-
-
-
-
 	public void setTemplateEdit(boolean isTemplateEdit) {
 		this.isTemplateEdit = isTemplateEdit;
 	}
 
 
-
-
-
-
-
 	@Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("startAt", startAt)
-                .append("endAt", endAt)
-                .append("type", type)
-                .append("synTarget", synTarget)
-                .append("enrollStartAt", enrollStartAt)
-                .append("enrollEndAt", enrollEndAt)
-                .append("status", status)
-                .append("createUser", createUser)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("updateAt", updateAt)
-                .append("goodsAlowedCount", goodsAlowedCount)
-                .append("activityRoundCount", activityRoundCount)
-                .append("goodsTotal", goodsTotal)
-                .toString();
-    }
+	public String toString() {
+		return "ActivityInfoListVOV2 [id=" + id + ", name=" + name + ", startAt=" + startAt + ", endAt=" + endAt
+				+ ", type=" + type + ", synTarget=" + synTarget + ", enrollStartAt=" + enrollStartAt + ", enrollEndAt="
+				+ enrollEndAt + ", status=" + status + ", createUser=" + createUser + ", createAt=" + createAt
+				+ ", updateUser=" + updateUser + ", updateAt=" + updateAt + ", goodsAlowedCount=" + goodsAlowedCount
+				+ ", activityRoundCount=" + activityRoundCount + ", goodsJoininTotalCount=" + goodsJoininTotalCount
+				+ ", goodsApplyToRoundCount=" + goodsApplyToRoundCount + ", goodsNeedAlowedCount="
+				+ goodsNeedAlowedCount + ", goodsCancelCount=" + goodsCancelCount + ", isTemplateEdit=" + isTemplateEdit
+				+ "]";
+	}
+   
+    
+    
+	
+
 }
