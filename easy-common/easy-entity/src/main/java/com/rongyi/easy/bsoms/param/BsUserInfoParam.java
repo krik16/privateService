@@ -21,5 +21,5 @@ public class BsUserInfoParam implements Serializable {
 	public void setChannel(String channel) {
 		this.channel = channel;
 	}
-	  
+
 }

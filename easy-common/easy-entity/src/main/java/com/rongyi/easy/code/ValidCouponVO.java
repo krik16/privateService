@@ -10,6 +10,7 @@ package com.rongyi.easy.code;
  */
 public class ValidCouponVO implements Serializable {
 
+		private String couponId;
 		private String name;//券名称
 		private Date validStartAt;//有效期始
 		private Date validEndAt;//有效期止
@@ -27,6 +28,14 @@ public class ValidCouponVO implements Serializable {
 		private Double currentPrice;
 		private Double originalPrice;
 		private Integer point;
+
+		public String getCouponId() {
+				return couponId;
+		}
+
+		public void setCouponId(String couponId) {
+				this.couponId = couponId;
+		}
 
 		public String getName() {
 				return name;
@@ -154,7 +163,8 @@ public class ValidCouponVO implements Serializable {
 		@Override
 		public String toString() {
 				final StringBuffer sb = new StringBuffer("ValidCouponVO{");
-				sb.append("name='").append(name).append('\'');
+				sb.append("couponId='").append(couponId).append('\'');
+				sb.append(", name='").append(name).append('\'');
 				sb.append(", validStartAt=").append(validStartAt);
 				sb.append(", validEndAt=").append(validEndAt);
 				sb.append(", limitUseCount='").append(limitUseCount).append('\'');
