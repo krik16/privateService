@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.vo;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -45,6 +46,11 @@ public class ActivityGoodsVO implements Serializable {
      * 图片URL
      */
     private String picUrl;
+
+    /**
+     * 图片URLs
+     */
+    private List<String> picUrls = Lists.newArrayList();
 
     /**
      * 类型
@@ -104,6 +110,14 @@ public class ActivityGoodsVO implements Serializable {
 
     public void setJoin(boolean isJoin) {
         this.isJoin = isJoin;
+    }
+
+    public List<String> getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(List<String> picUrls) {
+        this.picUrls = picUrls;
     }
 
     public String getOriginPrice() {
@@ -251,6 +265,7 @@ public class ActivityGoodsVO implements Serializable {
                 .append("categoryStr", categoryStr)
                 .append("activityGoodsSpecVOs", activityGoodsSpecVOs)
                 .append("isJoin", isJoin)
+                .append("picUrls", picUrls)
                 .toString();
     }
 }
