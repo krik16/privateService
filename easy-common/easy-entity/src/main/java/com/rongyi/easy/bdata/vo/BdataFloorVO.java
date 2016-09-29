@@ -43,12 +43,20 @@ public class BdataFloorVO implements Serializable {
     private String reason;//操作描述
     private String swf;//swf图--商家后台用的
     
+    private String  fmap;
     
     
     
     
     
-    public String getSwf() {
+    
+    public String getFmap() {
+		return fmap;
+	}
+	public void setFmap(String fmap) {
+		this.fmap = fmap;
+	}
+	public String getSwf() {
 		return swf;
 	}
 	public void setSwf(String swf) {
