@@ -67,5 +67,11 @@ public class FeedbackParam implements Serializable {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "FeedbackParam [contact=" + contact + ", content=" + content
+				+ ", name=" + name + ", type=" + type + "]";
+	}
 	
 }

@@ -13,4 +13,9 @@ public class UserImCountParam implements Serializable{
 		this.userIMCount = userIMCount;
 	}
 
+	@Override
+	public String toString() {
+		return "UserImCountParam [userIMCount=" + userIMCount + "]";
+	}
+
 }

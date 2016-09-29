@@ -236,5 +236,11 @@ public interface ROACommodityService {
 	public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
 
 	public ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
-
+	/**
+     * 获取规格详情
+     *
+     * @param specId
+     * @return
+     */
+    public ResponseVO getSpecInfo(String specId);
 }

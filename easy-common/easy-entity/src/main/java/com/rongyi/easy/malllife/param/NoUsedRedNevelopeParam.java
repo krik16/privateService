@@ -50,5 +50,12 @@ public class NoUsedRedNevelopeParam extends BaseParam implements Serializable{
 	public void setCouponCodes(List<String> couponCodes) {
 		this.couponCodes = couponCodes;
 	}
+
+	@Override
+	public String toString() {
+		return "NoUsedRedNevelopeParam [commodityId=" + commodityId
+				+ ", cashCouponId=" + cashCouponId + ", couponCodes="
+				+ couponCodes + "]";
+	}
 	
 }

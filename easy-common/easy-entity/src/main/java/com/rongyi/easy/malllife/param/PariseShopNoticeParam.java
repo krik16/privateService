@@ -46,5 +46,11 @@ public class PariseShopNoticeParam implements Serializable{
 	public void setJsessionid(String jsessionid) {
 		this.jsessionid = jsessionid;
 	}
+	@Override
+	public String toString() {
+		return "PariseShopNoticeParam [userId=" + userId + ", noticeId="
+				+ noticeId + ", type=" + type + ", jsessionid=" + jsessionid
+				+ "]";
+	}
 	
 }

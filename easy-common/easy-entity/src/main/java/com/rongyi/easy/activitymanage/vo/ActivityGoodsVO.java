@@ -12,7 +12,7 @@ import java.util.List;
 public class ActivityGoodsVO implements Serializable {
 
     /**
-     * PK
+     *活动id
      */
     private Integer id;
 
