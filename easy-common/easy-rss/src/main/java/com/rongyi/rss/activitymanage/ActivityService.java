@@ -240,6 +240,8 @@ public interface ActivityService {
     public ActivityGoodsRule selectByActivityId(Integer activityId);
 
     public  List<ActivityGoodsCategoryRule> selectActivityGoodsCategoryRuleByActivityId(Integer activityId);
+
+    public ActivityInfoListVOV2 getActivityStatusCount(Integer activityId);
     
     
 }

@@ -7,6 +7,7 @@ import com.rongyi.easy.activitymanage.vo.RefSecSkillGoods;
 import java.util.List;
 
 /**
+ * 用户摩店dubbo
  * Created by yangyang on 2016/9/22.
  */
 public interface MerchantActivityGoodsService {
