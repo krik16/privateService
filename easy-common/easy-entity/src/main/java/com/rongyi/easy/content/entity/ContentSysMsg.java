@@ -56,7 +56,7 @@ public class ContentSysMsg implements Serializable{
     private Integer roleType;
 
     /**
-     * 关联的类型。0：默认；1：商品类
+     * 关联的类型。0：默认；1：商品类 2 卡券类 3活动类
      */
     private Integer relateType;
 
