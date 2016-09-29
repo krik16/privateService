@@ -17,18 +17,18 @@ import java.util.List;
  * ideaworkspace.
  */
 public class ActivityContentListVO implements Serializable{
-    private Integer id;
+    private Integer id;//特卖id
     private String title;
     private String bannerPic;
     private Integer type;
     private String typeVal;
     /**活动url*/
-    private String activityUrl;
-    private String shareTitle;
-    private String shareDesc;
-    private String appTitle;
-    private String sharePic;
-    private String replacePic;
+    private String activityUrl;//活动url
+    private String shareTitle;//分享标题
+    private String shareDesc;//分享描述
+    private String appTitle;//展示标题
+    private String sharePic;//分享图片
+    private String replacePic;//banner图片，展示的大图片
     private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
     
     public List<CommoditySaleVO> getCommoditySaleVOList() {

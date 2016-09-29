@@ -49,6 +49,15 @@ public class MalllifeUserInfoDto implements Serializable {
     /** 摩店邀请注册码 */
     private String shareCode;
 
+    private String invitCode;
+
+    public String getInvitCode() {
+        return invitCode;
+    }
+
+    public void setInvitCode(String invitCode) {
+        this.invitCode = invitCode;
+    }
 
     public String getId() {
         return id;

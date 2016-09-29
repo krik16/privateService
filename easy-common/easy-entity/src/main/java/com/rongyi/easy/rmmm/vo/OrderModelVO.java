@@ -36,6 +36,34 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private Double couponTotalDiscount;//店铺红包抵扣金额
 	private String shopMid;//店铺mongoId
 	
+    private String platformRebateCode;//抵扣券券码
+	private Double rebateDiscount;// 抵扣券抵扣金额	
+	private Double rebateOriginalPrice;// 抵扣券满多少元可用
+	
+	public String getPlatformRebateCode() {
+		return platformRebateCode;
+	}
+
+	public void setPlatformRebateCode(String platformRebateCode) {
+		this.platformRebateCode = platformRebateCode;
+	}
+
+	public Double getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(Double rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
+	}
+
+	public Double getRebateOriginalPrice() {
+		return rebateOriginalPrice;
+	}
+
+	public void setRebateOriginalPrice(Double rebateOriginalPrice) {
+		this.rebateOriginalPrice = rebateOriginalPrice;
+	}
+
 	public Double getCouponTotalDiscount() {
 		return couponTotalDiscount;
 	}
@@ -198,11 +226,18 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderModelVO [orderModelId=" + orderModelId + ", provinceId=" + provinceId + ", cityId=" + cityId + ", nickName="
-				+ nickName + ", imId=" + imId + ", paymentWaitMax=" + paymentWaitMax + ", userLogo=" + userLogo + ", userName="
-				+ userName + ", userPhone=" + userPhone + ", shopName=" + shopName + ", shopLogo=" + shopLogo + ", mallName="
-				+ mallName + ", provinceName=" + provinceName + ", cityName=" + cityName + ", guideType=" + guideType
-				+ ", rebateNum=" + rebateNum + ", shopPostage=" + shopPostage + ", supportWay=" + supportWay
-				+ ", couponTotalDiscount=" + couponTotalDiscount + "]";
+		return "OrderModelVO [orderModelId=" + orderModelId + ", provinceId="
+				+ provinceId + ", cityId=" + cityId + ", nickName=" + nickName
+				+ ", imId=" + imId + ", paymentWaitMax=" + paymentWaitMax
+				+ ", userLogo=" + userLogo + ", userName=" + userName
+				+ ", userPhone=" + userPhone + ", shopName=" + shopName
+				+ ", shopLogo=" + shopLogo + ", mallName=" + mallName
+				+ ", provinceName=" + provinceName + ", cityName=" + cityName
+				+ ", guideType=" + guideType + ", rebateNum=" + rebateNum
+				+ ", shopPostage=" + shopPostage + ", supportWay=" + supportWay
+				+ ", couponTotalDiscount=" + couponTotalDiscount + ", shopMid="
+				+ shopMid + ", platformRebateCode=" + platformRebateCode
+				+ ", rebateDiscount=" + rebateDiscount
+				+ ", rebateOriginalPrice=" + rebateOriginalPrice + "]";
 	}
 }
