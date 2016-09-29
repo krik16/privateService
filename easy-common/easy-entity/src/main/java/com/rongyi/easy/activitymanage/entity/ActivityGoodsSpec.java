@@ -28,9 +28,13 @@ public class ActivityGoodsSpec implements Serializable {
     private Integer activityGoodsId;
 
     /**
+     * 原价格
+     */
+    private String origindPrice;
+    /**
      * 当前价格
      */
-    private Integer currPrice;
+    private String currPrice;
     /**
      * 商品规格id
      */
@@ -212,12 +216,21 @@ public class ActivityGoodsSpec implements Serializable {
         this.recStock = recStock;
     }
 
-    public Integer getCurrPrice() {
+    public String getCurrPrice() {
+
         return currPrice;
     }
 
-    public void setCurrPrice(Integer currPrice) {
+    public void setCurrPrice(String currPrice) {
         this.currPrice = currPrice;
+    }
+
+    public String getOrigindPrice() {
+        return origindPrice;
+    }
+
+    public void setOrigindPrice(String origindPrice) {
+        this.origindPrice = origindPrice;
     }
 
     @Override
@@ -239,6 +252,7 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("name", name)
                 .append("sku", sku)
                 .append("specColumnValues", specColumnValues)
+                .append("origindPrice", origindPrice)
                 .toString();
     }
 }
