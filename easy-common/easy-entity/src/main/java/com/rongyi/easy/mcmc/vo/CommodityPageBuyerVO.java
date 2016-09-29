@@ -68,4 +68,13 @@ public class CommodityPageBuyerVO implements Serializable{
 				.append("nextFrom",  nextFrom)
 				.toString();
 	}
+
+	public void wrapPaginationInfo(int totalCount, int from, int totalPage,
+									int pageSize, int currentPage) {
+		this.setTotalCount(totalCount);
+		this.setNextFrom(from);
+		this.setTotalPage(totalPage);
+		this.setPageSize(pageSize);
+		this.setCurrentPage(currentPage);
+	}
 }

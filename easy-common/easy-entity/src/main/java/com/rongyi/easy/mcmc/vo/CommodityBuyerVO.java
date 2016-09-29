@@ -645,4 +645,9 @@ public class CommodityBuyerVO implements Serializable{
 				", mallTip='" + mallTip + '\'' +
 				'}';
 	}
+
+	public void setTip() {
+		this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
+				this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
+	}
 }
