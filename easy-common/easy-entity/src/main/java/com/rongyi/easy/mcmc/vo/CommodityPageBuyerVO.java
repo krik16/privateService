@@ -13,12 +13,12 @@ public class CommodityPageBuyerVO implements Serializable{
 	private static final long serialVersionUID = -611440203770186180L;
 	
 	
-	private int totalPage;
-	private int pageSize;
-	private int currentPage;
-	private int nextFrom;
+	private int totalPage; ///< 总页码
+	private int pageSize; ///< 每页数
+	private int currentPage; ///< 当前页
+	private int nextFrom; ///< 下页开始位置
 	private List<CommodityBuyerVO> commodityList;
-	private int totalCount;
+	private int totalCount; ///< 总记录数
 	public int getTotalPage() {
 		return totalPage;
 	}
