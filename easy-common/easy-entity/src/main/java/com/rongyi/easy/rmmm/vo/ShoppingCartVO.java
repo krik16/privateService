@@ -21,6 +21,7 @@ public class ShoppingCartVO implements Serializable{
 	private Integer guideId;//导购或买手id
 	private Integer guideType = 1;//1导购 2买手
 	private List<ShowCartCommodityVO> commodityList;// 商品信息列表
+	private Boolean isOrdering;//摩店用户是否接单中   true是  false否
 	public String getShopId() {
 		return shopId;
 	}
@@ -81,11 +82,21 @@ public class ShoppingCartVO implements Serializable{
 	public void setCommodityList(List<ShowCartCommodityVO> commodityList) {
 		this.commodityList = commodityList;
 	}
+	
+	public Boolean getIsOrdering() {
+		return isOrdering;
+	}
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
+	}
 	@Override
 	public String toString() {
-		return "ShoppingCartVO [shopId=" + shopId + ", shopName=" + shopName + ", shopLogo=" + shopLogo + ", mallName="
-				+ mallName + ", guideLogo=" + guideLogo + ", guideName=" + guideName + ", guideImId=" + guideImId + ", guideId="
-				+ guideId + ", guideType=" + guideType + ", commodityList=" + commodityList + "]";
+		return "ShoppingCartVO [shopId=" + shopId + ", shopName=" + shopName
+				+ ", shopLogo=" + shopLogo + ", mallName=" + mallName
+				+ ", guideLogo=" + guideLogo + ", guideName=" + guideName
+				+ ", guideImId=" + guideImId + ", guideId=" + guideId
+				+ ", guideType=" + guideType + ", commodityList="
+				+ commodityList + ", isOrdering=" + isOrdering + "]";
 	}
-
+	
 }

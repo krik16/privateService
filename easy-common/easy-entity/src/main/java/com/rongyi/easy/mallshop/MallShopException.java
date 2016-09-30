@@ -11,7 +11,8 @@ package com.rongyi.easy.mallshop;
  *
  */
 public class MallShopException extends Exception {
-
+	
+	private int code;
 
     public MallShopException(){
 
@@ -32,5 +33,18 @@ public class MallShopException extends Exception {
     public MallShopException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+    
+    public MallShopException(int code, String message) {
+		super(message);
+		this.code = code;
+	}
+    
+    public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
 
 }
