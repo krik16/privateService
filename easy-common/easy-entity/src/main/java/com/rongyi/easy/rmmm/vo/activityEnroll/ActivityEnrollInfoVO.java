@@ -22,6 +22,8 @@ public class ActivityEnrollInfoVO implements Serializable{
 	private String commodityCurrentPrice;//商品现价
 	private List<CommoditySpecVO> commoditySpecList;//参与活动的商品规格集合
 	private String userId;//创建人id
+	private Integer status;//状态
+	private String returnReason;//退回原因
 	public Integer getId() {
 		return id;
 	}
@@ -76,6 +78,18 @@ public class ActivityEnrollInfoVO implements Serializable{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getReturnReason() {
+		return returnReason;
+	}
+	public void setReturnReason(String returnReason) {
+		this.returnReason = returnReason;
+	}
 	@Override
 	public String toString() {
 		return "ActivityEnrollInfoVO [id=" + id + ", activityId=" + activityId
@@ -84,7 +98,8 @@ public class ActivityEnrollInfoVO implements Serializable{
 				+ ", commodityPicList=" + commodityPicList
 				+ ", commodityCurrentPrice=" + commodityCurrentPrice
 				+ ", commoditySpecList=" + commoditySpecList + ", userId="
-				+ userId + "]";
+				+ userId + ", status=" + status + ", returnReason="
+				+ returnReason + "]";
 	}
 	
 }

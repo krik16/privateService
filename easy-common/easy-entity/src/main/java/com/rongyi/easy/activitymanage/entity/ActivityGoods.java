@@ -139,6 +139,11 @@ public class ActivityGoods implements Serializable {
     private String commodityNo;
 
     /**
+     * 退回原因
+     */
+    private String rejectReason;
+
+    /**
      * 商品规格
      */
     private List<ActivityGoodsSpec>  activityGoodsSpecs;
@@ -167,6 +172,14 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
     }
 
     public List<String> getPics() {
@@ -453,6 +466,7 @@ public class ActivityGoods implements Serializable {
                 .append("goodShowStyleInRYArrayList", goodShowStyleInRYArrayList)
                 .append("enrollSource", enrollSource)
                 .append("activityGoodsRule", activityGoodsRule)
+                .append("rejectReason", rejectReason)
                 .toString();
     }
 }
