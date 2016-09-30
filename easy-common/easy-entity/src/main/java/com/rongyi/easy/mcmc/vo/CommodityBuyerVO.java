@@ -51,6 +51,8 @@ public class CommodityBuyerVO implements Serializable {
     private Integer existProgress;//是否存在进行中活动，1存在，0 不存在
     private Long activityStartAt;//活动开始时间
     private Long activityEndAt;//活动结束时间
+    private Integer activityStock;//活动库存
+    private String activityMinPrice;//活动 各规格中最低价
     private String easyOrder;//容易令
     private String commodityPostage;//我是商品邮费”,
     private String commodityDescription;//我是商品描述”,
@@ -608,6 +610,22 @@ public class CommodityBuyerVO implements Serializable {
         this.activityEndAt = activityEndAt;
     }
 
+    public Integer getActivityStock() {
+        return activityStock;
+    }
+
+    public void setActivityStock(Integer activityStock) {
+        this.activityStock = activityStock;
+    }
+
+    public String getActivityMinPrice() {
+        return activityMinPrice;
+    }
+
+    public void setActivityMinPrice(String activityMinPrice) {
+        this.activityMinPrice = activityMinPrice;
+    }
+
     @Override
     public String toString() {
         return "CommodityBuyerVO{" +
@@ -633,15 +651,6 @@ public class CommodityBuyerVO implements Serializable {
                 ", location=" + location +
                 ", systemNumber='" + systemNumber + '\'' +
                 ", activityType='" + activityType + '\'' +
-                ", easyOrder='" + easyOrder + '\'' +
-                ", terminalType=" + terminalType +
-                ", isSpot=" + isSpot +
-                ", mallName='" + mallName + '\'' +
-                ", mallMid='" + mallMid + '\'' +
-                ", goodsParam=" + goodsParam +
-                ", discount=" + discount +
-                ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-                ", galleryPosition=" + galleryPosition +
                 ", commodityOPriceMax='" + commodityOPriceMax + '\'' +
                 ", commodityOPriceMin='" + commodityOPriceMin + '\'' +
                 ", commodityCPriceMax='" + commodityCPriceMax + '\'' +
@@ -656,6 +665,9 @@ public class CommodityBuyerVO implements Serializable {
                 ", existProgress=" + existProgress +
                 ", activityStartAt=" + activityStartAt +
                 ", activityEndAt=" + activityEndAt +
+                ", activityStock=" + activityStock +
+                ", activityMinPrice='" + activityMinPrice + '\'' +
+                ", easyOrder='" + easyOrder + '\'' +
                 ", commodityPostage='" + commodityPostage + '\'' +
                 ", commodityDescription='" + commodityDescription + '\'' +
                 ", commodityName='" + commodityName + '\'' +
@@ -664,10 +676,18 @@ public class CommodityBuyerVO implements Serializable {
                 ", shopMid='" + shopMid + '\'' +
                 ", isCollected=" + isCollected +
                 ", mallTip='" + mallTip + '\'' +
+                ", terminalType=" + terminalType +
+                ", isSpot=" + isSpot +
+                ", mallName='" + mallName + '\'' +
+                ", mallMid='" + mallMid + '\'' +
+                ", goodsParam=" + goodsParam +
+                ", discount=" + discount +
+                ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+                ", galleryPosition=" + galleryPosition +
                 '}';
     }
 
-	public void setTip() {
+    public void setTip() {
 		this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
 				this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
 	}
