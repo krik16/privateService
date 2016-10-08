@@ -75,9 +75,9 @@ public class RpbServiceTest extends BaseTest{
 		map.put("orderType", "4");
 		map.put("totalPrice", 1);
 		map.put("sendName", "容易网");
-//		map.put("wishing", "恭喜发财");
+		map.put("wishing", "恭喜发财");
 		map.put("actName", "新年快乐");
-		map.put("remark", "新年红包");
+//		map.put("remark", "新年红包");
 		event.setBody(map);
 		iRpbService.getPaySign(event);
 	}

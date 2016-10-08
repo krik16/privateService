@@ -312,6 +312,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
                 //处理微信红包发送结果
                 doRadBackResult(weixinRedBackParamVO);
                 map.put("code", 0);
+                map.put("message","success");
                 map.put("payNo", weixinRedBackParamVO.getMch_billno());
             } else {
                 throw new WeixinException(weixinRedBackParamVO.getErr_code(), weixinRedBackParamVO.getErr_code_des());
