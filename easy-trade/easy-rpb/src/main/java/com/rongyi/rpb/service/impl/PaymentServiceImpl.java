@@ -289,7 +289,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         } else if (PaymentEventType.PAY_TO_SELLER.equals(event.getType()) || PaymentEventType.REFUND.equals(event.getType())) {
             LOGGER.info("申请退款或打款给卖家");
             bodyMap.put("paymentId", paymentEntityVO.getPayNo());
-        }else if(PaymentEventType.SEND_RED_BACK.equals(event.getType())){//微信发红包
+        } else if (PaymentEventType.SEND_RED_BACK.equals(event.getType())) {//微信发红包
             bodyMap = weixinPayService.sendRedBack(paymentEntityVO);
         } else {
             LOGGER.warn("未发现匹配的业务类型,返回无效数据,event={},paymentEntityVO={}", event, paymentEntityVO);
@@ -317,7 +317,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
         String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
-            PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+            Integer tradeType = Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0;
+            if (PaymentEventType.SEND_RED_BACK.equals(event.getType())) {
+                tradeType = Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8;
+            }
+            PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), tradeType);
             if (paymentEntity != null) {
                 payNo = paymentEntity.getPayNo();
                 boolean bool = validateWeixinModifyPrice(event.getType(), paymentEntityVO, paymentEntity);// 验证是否微信修改价格
@@ -383,7 +387,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
                 paymentEntity.setPayChannel(historyPayment.getPayChannel());
                 paymentEntity.setWeixinMchId(historyPayment.getWeixinMchId());
-            }else if(PaymentEventType.SEND_RED_BACK.equals(event.getType())) {// 微信发红包
+            } else if (PaymentEventType.SEND_RED_BACK.equals(event.getType())) {// 微信发红包
                 paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8);
             }
             paymentEntity.setTitle(paymentEntityVO.getTitle());
