@@ -17,7 +17,7 @@ public class MessageDTO implements Serializable {
     private static final long serialVersionUID = -3022699601318372461L;
 
     private String title;                     // 消息标题
-    private String messageType;               // 消息分类  1.商品类
+    private String messageType;               // 消息分类  1.商品类 2:卡券类；3 秒杀活动类
     private String receiveDate;               // 接收时间
     private String pushDate;                  // 推送时间
     private String createDate;                // 创建时间
