@@ -140,7 +140,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("paymentId") != null && StringUtils.isNotEmpty(bodyMap.get("paymentId").toString()))
             paymentEntityVO.setPayNo(bodyMap.get("paymentId").toString());
         paymentEntityVO.setStatus(0);
-        if (PaymentEventType.WEIXIN_PAY.equals(type))
+        if (PaymentEventType.WEIXIN_PAY.equals(type) || PaymentEventType.SEND_RED_BACK.equals(type))
             paymentEntityVO.setPayChannel(1);
         else if (PaymentEventType.UNION_PAY.equals(type))
             paymentEntityVO.setPayChannel(2);
@@ -170,6 +170,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         }
         if (bodyMap.get("merchantUrl") != null && !"null".equals(bodyMap.get("merchantUrl").toString())) {
             paymentEntityVO.setMerchantUrl(bodyMap.get("merchantUrl").toString());
+        }
+        if (bodyMap.get("sendName") != null && !"null".equals(bodyMap.get("sendName").toString())) {
+            paymentEntityVO.setSendName(bodyMap.get("sendName").toString());
+        }
+        if (bodyMap.get("wishing") != null && !"null".equals(bodyMap.get("wishing").toString())) {
+            paymentEntityVO.setWishing(bodyMap.get("wishing").toString());
+        }
+        if (bodyMap.get("actName") != null && !"null".equals(bodyMap.get("actName").toString())) {
+            paymentEntityVO.setActName(bodyMap.get("actName").toString());
+        }
+        if (bodyMap.get("remark") != null && !"null".equals(bodyMap.get("remark").toString())) {
+            paymentEntityVO.setRemark(bodyMap.get("remark").toString());
         }
 
         return paymentEntityVO;
@@ -277,6 +289,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         } else if (PaymentEventType.PAY_TO_SELLER.equals(event.getType()) || PaymentEventType.REFUND.equals(event.getType())) {
             LOGGER.info("申请退款或打款给卖家");
             bodyMap.put("paymentId", paymentEntityVO.getPayNo());
+        }else if(PaymentEventType.SEND_RED_BACK.equals(event.getType())){//微信发红包
+            bodyMap = weixinPayService.sendRedBack(paymentEntityVO);
         } else {
             LOGGER.warn("未发现匹配的业务类型,返回无效数据,event={},paymentEntityVO={}", event, paymentEntityVO);
         }
@@ -369,6 +383,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
                 paymentEntity.setPayChannel(historyPayment.getPayChannel());
                 paymentEntity.setWeixinMchId(historyPayment.getWeixinMchId());
+            }else if(PaymentEventType.SEND_RED_BACK.equals(event.getType())) {// 微信发红包
+                paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8);
             }
             paymentEntity.setTitle(paymentEntityVO.getTitle());
             if (paymentEntityVO.getAmountMoney() == null || isZero(paymentEntityVO.getAmountMoney())) {// 支付款是0元是直接设置支付状态为已支付
@@ -697,6 +713,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1;
             case 6:
                 return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2;
+            case 8:
+                return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1;
             default:
                 break;
         }

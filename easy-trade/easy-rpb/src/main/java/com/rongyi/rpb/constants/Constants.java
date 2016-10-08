@@ -55,6 +55,7 @@ public interface Constants {
 		int TRADE_TYPE5 = 5;//重复支付
 		int TRADE_TYPE6 = 6;//重复支付退款
 		int TRADE_TYPE7 = 7;//对账单付款
+		int TRADE_TYPE8 = 8;//发红包给用户
 	}
 
 	interface PAYMENT_TRADE_TYPE_STR {
@@ -98,6 +99,7 @@ public interface Constants {
 	    int ORDER_TYPE_0 = 0;//商品订单
 	    int ORDER_TYPE_1 = 1;//优惠券订单
 	    int ORDER_TYPE_2 = 2;//礼品换购订单
+	    int ORDER_TYPE_4 = 4;//微信发红包订单
 	}
 	
 	/**	

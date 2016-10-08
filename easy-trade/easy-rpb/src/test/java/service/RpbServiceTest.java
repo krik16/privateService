@@ -54,25 +54,30 @@ public class RpbServiceTest extends BaseTest{
 	}
 	
 	@Test
+	@Rollback(false)
 	public void testGetPaySign(){
 //		{"body":{"weidianId":"\"\"","title":"测试优惠券 勿买","orderType":"1",
 //		"orderDetailNum":"\"\"","orderNum":"\"1009351119361126\"","totalPrice":0.01},"source":"coupon_order_queue","target":"rpb","timestamp":1444361283613,"type":"5"}
 		MessageEvent event = new MessageEvent();
 		event.setSource("coupon_order_queue");
 		event.setTarget("rpb");
-		event.setType("5");
+		event.setType("8");
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("weidianId","\"\"");
-		map.put("title", "卡券测试1");
-		map.put("timeStart", "2016-02-16 17:17:19");
-		map.put("timeExpire", "2016-02-16 17:52:19");
-		map.put("appId", "wxb0af59268c136d7d");
-		map.put("openId", "o0BDmjr5jmDDZieVha8Evg_aJdQM");
+//		map.put("weidianId","\"\"");
+//		map.put("title", "卡券测试1");
+//		map.put("timeStart", "2016-02-16 17:17:19");
+//		map.put("timeExpire", "2016-02-16 17:52:19");
+		map.put("appId", "wx749527272cae4b9b");
+		map.put("openId", "oljTBs3jTQyXgDzxzpXrsoRGZkF4");
 		map.put("orderDetailNum", "\"\"");
 		map.put("orderNum", "\"021644108544151726\"");
 		map.put("weixinPayType", "1");
-		map.put("orderType", "1");
-		map.put("totalPrice", 2);
+		map.put("orderType", "4");
+		map.put("totalPrice", 1);
+		map.put("sendName", "容易网");
+//		map.put("wishing", "恭喜发财");
+		map.put("actName", "新年快乐");
+		map.put("remark", "新年红包");
 		event.setBody(map);
 		iRpbService.getPaySign(event);
 	}

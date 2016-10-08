@@ -128,6 +128,8 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                     paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
                     if (Constants.ORDER_TYPE.ORDER_TYPE_2 == withLockPaymentEntity.getOrderType()) {//通知第三方业务
                         weixinPayService.payNotifyThird(withLockPaymentEntity);
+                    }else if(Constants.ORDER_TYPE.ORDER_TYPE_4 == withLockPaymentEntity.getOrderType()){//微信发红包
+                        LOGGER.info("发送红包成功通知无需处理...");
                     } else {//通知交易中心
                         paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), withLockPaymentEntity.getOrderNum(), withLockPaymentEntity.getOrderType(), payChannel);
                     }
@@ -138,9 +140,11 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
             LOGGER.warn("支付单号未查询到未支付状态付款记录，忽略此笔支付通知,payNo={}", paymentLogInfo.getOutTradeNo());
         } catch (TradeException e){
             LOGGER.warn(e.getMessage());
+            throw e;
         }catch (Exception e) {
             LOGGER.error("支付通知处理失败",e);
             e.printStackTrace();
+            throw e;
         }
         return false;
     }
