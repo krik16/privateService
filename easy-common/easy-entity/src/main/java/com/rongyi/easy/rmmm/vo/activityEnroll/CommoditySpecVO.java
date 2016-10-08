@@ -16,7 +16,7 @@ public class CommoditySpecVO implements Serializable{
 	
 	private String commoditySpecId;//商品规格id
 	private String specCurrentPrice;//规格现价
-	private String specOriginalPrice;//规格现价
+	private String specOriginalPrice;//规格原价
 	private String activityPrice;//活动价格
 	private Integer inventory;//活动提报库存
 	private Integer specStock;//规格库存
