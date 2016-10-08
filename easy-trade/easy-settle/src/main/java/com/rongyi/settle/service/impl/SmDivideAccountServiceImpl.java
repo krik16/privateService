@@ -612,7 +612,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		// 根据shopMids，查询对应的店铺信息
 		List<com.rongyi.easy.bdata.vo.ShopVO> shopList = new ArrayList<>();
 		Map<String, com.rongyi.easy.bdata.vo.ShopVO> shopMap = new HashMap<>();
-		if (null != shopSb && StringUtils.isNotBlank(shopSb.toString())) {
+		if (StringUtils.isNotBlank(shopSb) && shopSb.length() > 1) {
 			List<com.rongyi.easy.bdata.vo.ShopVO> shopVoList = this.getShopVoList(shopSb.toString().substring(1));
 			for (com.rongyi.easy.bdata.vo.ShopVO vo : shopVoList) {
 				if (null != vo && StringUtils.isNotBlank(vo.getId()) && null != vo.getPosition()
@@ -625,7 +625,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		}
 		// 根据shopList店铺信息，批量查询商场信息
 		Map<String, com.rongyi.easy.bdata.vo.MallVO> mallMap = new HashMap<>();
-		if (null != mallSb) {
+		if (StringUtils.isNotBlank(mallSb) && mallSb.length() > 1) {
 			List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = this.getMallVoList(mallSb.substring(1).toString());
 			Map<String, com.rongyi.easy.bdata.vo.MallVO> mallVoMap = new HashMap<>();
 			for (com.rongyi.easy.bdata.vo.MallVO vo : mallVoList) {
@@ -761,7 +761,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 					mallSb.append(DivideAccountConstant.SEPARATE_COMMA).append(vo.getMallMid());
 				}
 			}
-			if (null != mallSb && StringUtils.isNotBlank(mallSb.toString())) {
+			if (StringUtils.isNotBlank(mallSb) && mallSb.length() > 1) {
 				List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = this.getMallVoList(mallSb.substring(1).toString());
 				if (CollectionUtils.isNotEmpty(mallVoList)) {
 					Map<String, com.rongyi.easy.bdata.vo.MallVO> mallVoMap = new HashMap<>();
@@ -791,7 +791,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 					shopSb.append(DivideAccountConstant.SEPARATE_COMMA).append(vo.getShopMid());
 				}
 			}
-			if (null != shopSb && StringUtils.isNotBlank(shopSb.toString())) {
+			if (StringUtils.isNotBlank(shopSb) && shopSb.length() > 1) {
 				List<com.rongyi.easy.bdata.vo.ShopVO> shopVoList = this.getShopVoList(shopSb.substring(1).toString());
 				if (CollectionUtils.isNotEmpty(shopVoList)) {
 					Map<String, com.rongyi.easy.bdata.vo.ShopVO> shopVoMap = new HashMap<>();
