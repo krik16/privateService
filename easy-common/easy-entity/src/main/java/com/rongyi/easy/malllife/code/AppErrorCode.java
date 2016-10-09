@@ -29,6 +29,8 @@ public enum AppErrorCode {
     /** 代金券相关  后4位区间  5001---6000*/
     ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
     //ERROR_RECEIVED_REBATE(1065002, "您已领取过了暖冬礼盒"),
+    ERROR_WELFARE_REBATE(1065003, "您已参加过该活动"),
+    ERROR_WELFARE_ISNULL(1065004, "今天的红包已发放结束啦\\n客官明天是可以领的哟"),
     ERROR_USER_NOTEXIST(1062003,"用户信息不存在"),
 
     /** 购物车相关  后4位区间  6001---7000*/
