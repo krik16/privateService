@@ -1,6 +1,8 @@
 package com.rongyi.easy.activitymanage.entity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +18,7 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 	
 	private String activityName;
 	
-	private List<String> columnValues;//规格属性
+	List<CommoditySpecColumnVO> specColumnValues;//规格属性
 	
 	
 	
@@ -57,13 +59,15 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 		this.endAt = endAt;
 	}
 
-	public List<String> getColumnValues() {
-		return columnValues;
+	public List<CommoditySpecColumnVO> getSpecColumnValues() {
+		return specColumnValues;
 	}
 
-	public void setColumnValues(List<String> columnValues) {
-		this.columnValues = columnValues;
+	public void setSpecColumnValues(List<CommoditySpecColumnVO> specColumnValues) {
+		this.specColumnValues = specColumnValues;
 	}
+
+
 
 
 	
