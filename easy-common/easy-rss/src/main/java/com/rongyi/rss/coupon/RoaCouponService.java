@@ -247,5 +247,5 @@ public interface RoaCouponService {
 
     int findValidCount(CouponParam couponParam);
 
-    List<RedenvelopVO> queryYifenqianRedenvelop();
+    RedenvelopVO queryYifenqianRedenvelop();
 }
