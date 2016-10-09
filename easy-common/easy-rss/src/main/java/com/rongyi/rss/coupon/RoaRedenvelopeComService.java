@@ -161,10 +161,5 @@ public interface RoaRedenvelopeComService {
 	 */
 	List<String> selectRedenveByStartEndAt(RedenvelopeParam param);
 
-	/**
-	 * 查询一分钱红包
-	 * @return
-	 */
-	RedenvelopVO queryYifenqianRedenvelop();
 
 }

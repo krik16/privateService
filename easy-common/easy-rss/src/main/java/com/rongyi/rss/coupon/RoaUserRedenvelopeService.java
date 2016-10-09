@@ -237,4 +237,6 @@ public interface RoaUserRedenvelopeService {
      * @author wzw
      */
     boolean sendEnvelope(CouponOrderParam couponOrderParam);
+
+    List<String> getCommodityIdsByCouponId(String couponId);
 }
