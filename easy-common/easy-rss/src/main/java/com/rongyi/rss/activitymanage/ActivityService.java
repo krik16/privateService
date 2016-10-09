@@ -241,5 +241,8 @@ public interface ActivityService {
 
     public  List<ActivityGoodsCategoryRule> selectActivityGoodsCategoryRuleByActivityId(Integer activityId);
     
+    boolean isNewActivityInfoCreated(int userId,int identity,int shopId,Date lastReadTime);
+
+    
     
 }

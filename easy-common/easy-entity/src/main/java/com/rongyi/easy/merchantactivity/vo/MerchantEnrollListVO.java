@@ -75,8 +75,17 @@ public class MerchantEnrollListVO implements Serializable {
      * @return
      */
     private Integer type;
-    
-    
+    /**
+     * 关联的店铺分类或则店铺id
+     * @return
+     */
+    private String relevanceId;
+    /**
+     * 关联的类型 1 表示分类 2表示店铺 2 买手
+     * @return
+     */
+    private Integer relevanceType;
+
     
     
 
@@ -184,21 +193,32 @@ public class MerchantEnrollListVO implements Serializable {
         this.isDeleted = isDeleted;
     }
 
-    @Override
-    public String toString() {
-        return "MerchantEnrollListVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", startAt=" + startAt +
-                ", endAt=" + endAt +
-                ", status=" + status +
-                ", enrollStartAt=" + enrollStartAt +
-                ", enrollEndAt=" + enrollEndAt +
-                ", applyStatus=" + applyStatus +
-                ", enrollCreateAt=" + enrollCreateAt +
-                ", goodsCount=" + goodsCount +
-                ", activityRule='" + activityRule + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
+	public String getRelevanceId() {
+		return relevanceId;
+	}
+
+	public void setRelevanceId(String relevanceId) {
+		this.relevanceId = relevanceId;
+	}
+
+	public Integer getRelevanceType() {
+		return relevanceType;
+	}
+
+	public void setRelevanceType(Integer relevanceType) {
+		this.relevanceType = relevanceType;
+	}
+
+	@Override
+	public String toString() {
+		return "MerchantEnrollListVO [id=" + id + ", name=" + name + ", startAt=" + startAt + ", endAt=" + endAt
+				+ ", status=" + status + ", enrollStartAt=" + enrollStartAt + ", enrollEndAt=" + enrollEndAt
+				+ ", applyStatus=" + applyStatus + ", enrollCreateAt=" + enrollCreateAt + ", goodsCount=" + goodsCount
+				+ ", activityRule=" + activityRule + ", isDeleted=" + isDeleted + ", type=" + type + ", relevanceId="
+				+ relevanceId + ", relevanceType=" + relevanceType + "]";
+	}
+
+   
+    
+    
 }
