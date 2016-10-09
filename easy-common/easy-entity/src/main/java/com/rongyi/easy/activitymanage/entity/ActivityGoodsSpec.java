@@ -1,9 +1,12 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
+import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 活动商品规格
@@ -25,9 +28,13 @@ public class ActivityGoodsSpec implements Serializable {
     private Integer activityGoodsId;
 
     /**
+     * 原价格
+     */
+    private String origindPrice;
+    /**
      * 当前价格
      */
-    private Integer currPrice;
+    private String currPrice;
     /**
      * 商品规格id
      */
@@ -42,6 +49,8 @@ public class ActivityGoodsSpec implements Serializable {
      * 商品/卡券活动库存
      */
     private Integer stockCount;
+
+
 
     /**
      * 可分配库存
@@ -88,6 +97,20 @@ public class ActivityGoodsSpec implements Serializable {
      * @return
      */
     private String sku;
+
+    /**
+     * 小规格
+     */
+    private List<CommoditySpecColumnVO> specColumnValues = Lists.newArrayList();
+
+
+    public List<CommoditySpecColumnVO> getSpecColumnValues() {
+        return specColumnValues;
+    }
+
+    public void setSpecColumnValues(List<CommoditySpecColumnVO> specColumnValues) {
+        this.specColumnValues = specColumnValues;
+    }
 
     public Integer getAllocationCount() {
         return allocationCount;
@@ -193,12 +216,21 @@ public class ActivityGoodsSpec implements Serializable {
         this.recStock = recStock;
     }
 
-    public Integer getCurrPrice() {
+    public String getCurrPrice() {
+
         return currPrice;
     }
 
-    public void setCurrPrice(Integer currPrice) {
+    public void setCurrPrice(String currPrice) {
         this.currPrice = currPrice;
+    }
+
+    public String getOrigindPrice() {
+        return origindPrice;
+    }
+
+    public void setOrigindPrice(String origindPrice) {
+        this.origindPrice = origindPrice;
     }
 
     @Override
@@ -219,6 +251,8 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("recStock", recStock)
                 .append("name", name)
                 .append("sku", sku)
+                .append("specColumnValues", specColumnValues)
+                .append("origindPrice", origindPrice)
                 .toString();
     }
 }

@@ -68,7 +68,7 @@ public class ActivityGoods implements Serializable {
     private Date joinEndAt;
 
     /**
-     * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
+     * 商品审核状态：0未审核1未通过、退回2通过3撤销报名4强制撤销
      */
     private Integer status;
 
@@ -125,6 +125,25 @@ public class ActivityGoods implements Serializable {
     private ActivityGoodsRule activityGoodsRule;
 
     /**
+     * 商品图片合集(用户摩店报名详情)
+     */
+    private List<String> pics = Lists.newArrayList();
+
+    /**
+     * 商品价格(用户摩店报名详情)
+     */
+    private String currentPrice;
+    /**
+     * 商品价格(用户摩店报名详情)
+     */
+    private String commodityNo;
+
+    /**
+     * 退回原因
+     */
+    private String rejectReason;
+
+    /**
      * 商品规格
      */
     private List<ActivityGoodsSpec>  activityGoodsSpecs;
@@ -153,6 +172,38 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
+
+    public List<String> getPics() {
+        return pics;
+    }
+
+    public void setPics(List<String> pics) {
+        this.pics = pics;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getCommodityNo() {
+        return commodityNo;
+    }
+
+    public void setCommodityNo(String commodityNo) {
+        this.commodityNo = commodityNo;
     }
 
     public ActivityGoodsRule getActivityGoodsRule() {
@@ -392,6 +443,9 @@ public class ActivityGoods implements Serializable {
                 .append("type", type)
                 .append("name", name)
                 .append("picUrl", picUrl)
+                .append("pics", pics)
+                .append("currentPrice", currentPrice)
+                .append("commodityNo", commodityNo)
                 .append("subsidyType", subsidyType)
                 .append("subsidyPrice", subsidyPrice)
                 .append("joinStartAt", joinStartAt)
@@ -412,6 +466,7 @@ public class ActivityGoods implements Serializable {
                 .append("goodShowStyleInRYArrayList", goodShowStyleInRYArrayList)
                 .append("enrollSource", enrollSource)
                 .append("activityGoodsRule", activityGoodsRule)
+                .append("rejectReason", rejectReason)
                 .toString();
     }
 }

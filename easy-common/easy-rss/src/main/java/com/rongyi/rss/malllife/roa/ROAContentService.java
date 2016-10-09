@@ -494,4 +494,13 @@ public interface ROAContentService {
 
     public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
     public ExistArticlePojo existArticle(String mallId, String shopId);
+    
+    /**
+     * 查询特卖汇列表数据
+     *
+     *@param pageSize 每页显示行数
+     * @param currentPage  当前页码
+     * @return 列表
+     */
+    public PagingVO<ContentPojo> pagingSaleList(int pageSize, Integer currentPage);
 }

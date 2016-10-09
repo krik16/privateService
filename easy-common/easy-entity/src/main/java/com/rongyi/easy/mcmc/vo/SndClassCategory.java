@@ -4,6 +4,7 @@ import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.mcmc.CommodityCategory;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class SndClassCategory implements Serializable, Comparable<SndClassCatego
         this.categoryLogo = commodityCategory.getLogoUrl();
         this.categoryType = "我是二级类目";
         this.createAt = commodityCategory.getCreateAt();
+        this.subCategoryList = new ArrayList<>();
     }
 
     public String getCategoryId() {
