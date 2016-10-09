@@ -23,6 +23,8 @@ public class ActivityEnrollParam extends BaseParam implements Serializable{
 	private String commoditySpecId;//商品规格id
 	private Integer addSpecNum;//追加的库存数量
 	private List<SpecListParam> specList;//规格集合
+	private Integer currentPage;
+	private Integer pageSize;
 	
 	public String getId() {
 		return id;
@@ -66,12 +68,26 @@ public class ActivityEnrollParam extends BaseParam implements Serializable{
 	public void setSpecList(List<SpecListParam> specList) {
 		this.specList = specList;
 	}
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 	@Override
 	public String toString() {
-		return "ActivityEnrollParam [activityId=" + activityId
-				+ ", commodityId=" + commodityId + ", commoditySpecId="
-				+ commoditySpecId + ", addSpecNum=" + addSpecNum
-				+ ", specList=" + specList + "]";
+		return "ActivityEnrollParam [id=" + id + ", activityId=" + activityId
+				+ ", commodityId=" + commodityId + ", commodityType="
+				+ commodityType + ", commoditySpecId=" + commoditySpecId
+				+ ", addSpecNum=" + addSpecNum + ", specList=" + specList
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ "]";
 	}
 	
 }
