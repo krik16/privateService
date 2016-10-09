@@ -23,7 +23,7 @@ public class RoundGood  implements Serializable{
 	
 	private Integer roundRemainCount;//本场剩余库存
 	
-	private String specName;//规格名称
+	//private String specName;//规格名称
 
 	private Integer cancelTime;//支付时间
 	private String activityName;//活动名称
@@ -100,13 +100,13 @@ public class RoundGood  implements Serializable{
 		this.roundRemainCount = roundRemainCount;
 	}
 
-	public String getSpecName() {
-		return specName;
-	}
-
-	public void setSpecName(String specName) {
-		this.specName = specName;
-	}
+//	public String getSpecName() {
+//		return specName;
+//	}
+//
+//	public void setSpecName(String specName) {
+//		this.specName = specName;
+//	}
 
 	public Integer getCancelTime() {
 		return cancelTime;
