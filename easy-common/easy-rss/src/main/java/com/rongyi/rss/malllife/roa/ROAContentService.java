@@ -503,4 +503,11 @@ public interface ROAContentService {
      * @return 列表
      */
     public PagingVO<ContentPojo> pagingSaleList(int pageSize, Integer currentPage);
+    
+    /**
+     * 更新文章点赞数量
+     * @param id 文章ID
+     * @param num 数量 正数加 负数-
+     */
+    void updateLikesNum(Integer id,int num);
 }

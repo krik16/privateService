@@ -185,6 +185,13 @@ public interface IContentService {
      */
     public void updateShareNum(Integer id);
 
+    /**
+     * 更新文章点赞数量
+     * @param id 文章ID
+     * @param num 数量 正数加 负数-
+     */
+    void updateLikesNum(Integer id,int num);
+
     public void updateActivityRecommend(Map<String, Integer> map);
 
     /**
