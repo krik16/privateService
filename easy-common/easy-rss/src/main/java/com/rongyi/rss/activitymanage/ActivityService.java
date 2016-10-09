@@ -215,6 +215,14 @@ public interface ActivityService {
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
 
 
+    /**
+     * 根据活动id查询推送的店铺人员id
+     * @param activityId
+     * @return
+     */
+    public  List<Integer> selectUserIdsByActivityId(Integer activityId);
+
+
     int countSecKillGoods(QuerySecKillGoods querySecKillGoods);
 
     public List<ActivityGoods> getSecKillGoods(QuerySecKillGoods querySecKillGoods);

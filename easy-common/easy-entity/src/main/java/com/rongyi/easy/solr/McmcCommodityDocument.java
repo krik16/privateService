@@ -594,6 +594,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			}
 			this.setBrand_id(brandMid);
 		}
-		this.setStock(StringUtils.isEmpty(commodityVo.getCommodityStock())?0:Integer.valueOf(commodityVo.getCommodityStock()));
+		//库存进入solr
+		this.setStock(commodity.getStock());
 	}
 }

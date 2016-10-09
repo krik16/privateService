@@ -10,7 +10,7 @@ public class CheckResGoods implements Serializable {
     private String reason;//原因
     private Integer status;//0未审核1未通过、退回2通过3撤销报名4强制撤销
     private Integer type;//原因类型
-    private String userName;//审核人
+    private String userId;//审核人
 
     public Integer getActivityGoodsId() {
         return activityGoodsId;
@@ -20,12 +20,12 @@ public class CheckResGoods implements Serializable {
         this.activityGoodsId = activityGoodsId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getReason() {
