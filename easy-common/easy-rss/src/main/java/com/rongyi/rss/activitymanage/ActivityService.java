@@ -251,5 +251,8 @@ public interface ActivityService {
 
     public ActivityInfoListVOV2 getActivityStatusCount(Integer activityId);
     
+    boolean isNewActivityInfoCreated(int userId,int identity,int shopId,Date lastReadTime);
+
+    
     
 }
