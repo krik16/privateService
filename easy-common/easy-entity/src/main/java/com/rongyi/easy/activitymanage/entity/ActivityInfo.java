@@ -123,7 +123,7 @@ public class ActivityInfo implements Serializable {
      */
     private String cancelTime;
 
-    private String enrollUserType;//可报名用户类型
+    private String enrollUserType;//可报名用户类型,保存在activityGoodsRule中
 
     private String description;//描述
 

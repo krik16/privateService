@@ -16,7 +16,7 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 	
 	private String activityName;
 	
-	
+	private List<String> columnValues;//规格属性
 	
 	
 	
@@ -56,6 +56,16 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 	public void setEndAt(Date endAt) {
 		this.endAt = endAt;
 	}
+
+	public List<String> getColumnValues() {
+		return columnValues;
+	}
+
+	public void setColumnValues(List<String> columnValues) {
+		this.columnValues = columnValues;
+	}
+
+
 	
 
 
