@@ -3,7 +3,7 @@ package com.rongyi.easy.rmmm.vo.activityEnroll;
 import java.io.Serializable;
 import java.util.List;
 /**
- * 活动下的商品报名列表VO
+ * 活动下的可报名商品列表VO
  * @author user
  *
  */
