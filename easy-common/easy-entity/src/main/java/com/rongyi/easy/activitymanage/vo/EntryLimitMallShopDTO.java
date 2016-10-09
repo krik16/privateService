@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.vo;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.List;
 public class EntryLimitMallShopDTO implements Serializable {
     private Integer type;//1 表示分类 2表示店铺,0全部店铺
 
-    private List<RelevanDTO> relevances;
+    private List<RelevanDTO> relevances = Lists.newArrayList();
 
     public Integer getType() {
         return type;

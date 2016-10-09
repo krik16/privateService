@@ -61,6 +61,16 @@ public class ActivityGoodsRule implements Serializable {
      */
     private String offlineDiscount;
 
+    private String enrollUserType;//可报名用户类型
+
+    public String getEnrollUserType() {
+        return enrollUserType;
+    }
+
+    public void setEnrollUserType(String enrollUserType) {
+        this.enrollUserType = enrollUserType;
+    }
+
     public String getDiscount() {
         return discount;
     }
@@ -163,6 +173,7 @@ public class ActivityGoodsRule implements Serializable {
                 .append("updateAt", updateAt)
                 .append("discount", discount)
                 .append("offlineDiscount", offlineDiscount)
+                .append("enrollUserType", enrollUserType)
                 .toString();
     }
 }
