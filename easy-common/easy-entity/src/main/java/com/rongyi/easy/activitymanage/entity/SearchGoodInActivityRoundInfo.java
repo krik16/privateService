@@ -13,30 +13,10 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 	 */
 	private static final long serialVersionUID = 4774118439578283640L;
 	
-	private String Color;
-	
-	private String Size;
-
-	public String getColor() {
-		return Color;
-	}
-
-	public void setColor(String color) {
-		Color = color;
-	}
-
-	public String getSize() {
-		return Size;
-	}
-
-	public void setSize(String size) {
-		Size = size;
-	}
-	
 	
 	private String activityName;
 	
-	
+	private List<String> columnValues;//规格属性
 	
 	
 	
@@ -77,17 +57,15 @@ public class SearchGoodInActivityRoundInfo extends RoundGood implements Serializ
 		this.endAt = endAt;
 	}
 
-	@Override
-	public String toString() {
-		return "SearchGoodInActivityRoundInfo [Color=" + Color + ", Size=" + Size + ", activityName=" + activityName
-				+ ", startAt=" + startAt + ", endAt=" + endAt + ", getId()=" + getId() + ", getRoundId()="
-				+ getRoundId() + ", getActivityId()=" + getActivityId() + ", getGoodId()=" + getGoodId()
-				+ ", getGoodSpecId()=" + getGoodSpecId() + ", getRoundParticipationCount()="
-				+ getRoundParticipationCount() + ", getQuotaCount()=" + getQuotaCount() + ", getRoundSellIngPrice()="
-				+ getRoundSellIngPrice() + ", getRoundRemainCount()=" + getRoundRemainCount() + ", getCancelTime()="
-				+ getCancelTime() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+	public List<String> getColumnValues() {
+		return columnValues;
 	}
+
+	public void setColumnValues(List<String> columnValues) {
+		this.columnValues = columnValues;
+	}
+
+
 	
 
 

@@ -73,5 +73,5 @@ public interface ActivityRoundService {
 	 */
 	List<RoundGood> getRoundGood(String goodId,int roundId);
 
-	List<SearchGoodInActivityRoundInfo> searchGoodInRound(String goodId);
+	List<SearchGoodInActivityRoundInfo> searchGoodInRound(String goodId,int activityId);
 }
