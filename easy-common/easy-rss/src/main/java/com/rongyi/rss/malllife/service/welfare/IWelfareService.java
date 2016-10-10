@@ -11,6 +11,7 @@ package com.rongyi.rss.malllife.service.welfare;
  */
 
 import com.rongyi.easy.malllife.exception.MallLifeException;
+import com.rongyi.easy.malllife.param.WelfareParam;
 import com.rongyi.easy.usercenter.entity.MalllifeWelfareEntity;
 
 public interface IWelfareService {
@@ -38,5 +39,14 @@ public interface IWelfareService {
      * @throws MallLifeException
      */
     public MalllifeWelfareEntity findByOpenId(String openId)throws MallLifeException;
+
+    /**
+     * 支付完成后通知更新状态
+     * @param wp
+     * @throws Exception
+     */
+    public void updateOrderStatus(WelfareParam wp)throws Exception;
+
+
 
 }
