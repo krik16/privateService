@@ -150,6 +150,13 @@ public class ActivityRoundInfo implements Serializable {
 		this.updateAt = updateAt;
 	}
 
+	@Override
+	public String toString() {
+		return "ActivityRoundInfo [id=" + id + ", activityId=" + activityId + ", goodsNum=" + goodsNum + ", roundName="
+				+ roundName + ", startAt=" + startAt + ", endAt=" + endAt + ", status=" + status + ", createUser="
+				+ createUser + ", createAt=" + createAt + ", updateUser=" + updateUser + ", updateAt=" + updateAt + "]";
+	}
+
     
     
     

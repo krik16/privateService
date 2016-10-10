@@ -34,6 +34,7 @@ public class SearchActivityParamV2 extends PagingParam {
     /**活动名称*/
     private String name;
     
+    private String orderByClause;
     
     /**发布渠道: -1 所有,大运营[0] 商家[1]'*/
     private Integer publishChannel;
@@ -48,7 +49,27 @@ public class SearchActivityParamV2 extends PagingParam {
     
 
 
-    public Integer getStatus() {
+    public String getOrderByClause() {
+		return orderByClause;
+	}
+
+
+
+
+
+
+
+	public void setOrderByClause(String orderByClause) {
+		this.orderByClause = orderByClause;
+	}
+
+
+
+
+
+
+
+	public Integer getStatus() {
 		return status;
 	}
 
