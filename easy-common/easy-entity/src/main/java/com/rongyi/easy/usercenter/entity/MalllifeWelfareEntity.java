@@ -27,7 +27,40 @@ public class MalllifeWelfareEntity implements Serializable {
     /** 来源渠道 */
     private String channel;
 
+    /** 订单状态 **/
+    private Integer orderStatus;
+
+    /** 订单号 */
+    private String orderNo;
+
+    /** 支付账号 */
+    private String payNo;
+
     private static final long serialVersionUID = 1L;
+
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getPayNo() {
+        return payNo;
+    }
+
+    public void setPayNo(String payNo) {
+        this.payNo = payNo;
+    }
 
     /**
      * 

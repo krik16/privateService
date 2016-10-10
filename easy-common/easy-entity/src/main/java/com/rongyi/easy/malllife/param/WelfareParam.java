@@ -11,7 +11,7 @@ package com.rongyi.easy.malllife.param;
  */
 public class WelfareParam extends MalllifeBaseParam {
 
-    private int orderStatus;//订单状态
+    private int orderStatus;//订单状态 0支付ing，1支付成功，2支付失败
 
     private String orderNo;//订单号
 
