@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
+import com.rongyi.easy.activitymanage.entity.ResGoods;
 import com.rongyi.easy.activitymanage.entity.SearchSelfGoods;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsVO;
 import com.rongyi.easy.activitymanage.vo.RefSecSkillGoods;
@@ -98,5 +99,5 @@ public interface MerchantActivityGoodsService {
      * @param searchSelfGoods
      * @return
      */
-    public List<ActivityGoods> getActivityGoodsListByParam(SearchSelfGoods searchSelfGoods);
+    public List<ResGoods> getActivityGoodsListByParam(SearchSelfGoods searchSelfGoods);
 }
