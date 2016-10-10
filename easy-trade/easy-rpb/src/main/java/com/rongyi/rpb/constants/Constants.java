@@ -99,7 +99,8 @@ public interface Constants {
 	    int ORDER_TYPE_0 = 0;//商品订单
 	    int ORDER_TYPE_1 = 1;//优惠券订单
 	    int ORDER_TYPE_2 = 2;//礼品换购订单
-	    int ORDER_TYPE_4 = 4;//微信发红包订单
+	    int ORDER_TYPE_4 = 4;//微信一分钱订单
+	    int ORDER_TYPE_5 = 5;//微信发红包订单
 	}
 	
 	/**	
