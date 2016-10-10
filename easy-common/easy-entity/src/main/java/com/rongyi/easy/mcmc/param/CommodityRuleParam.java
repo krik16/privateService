@@ -1,11 +1,12 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by yaoyiwei on 2016/9/27.
  */
-public class CommodityRuleParam {
+public class CommodityRuleParam implements Serializable {
     private String keyword;
     private String buyerId;
     private String shopId;
