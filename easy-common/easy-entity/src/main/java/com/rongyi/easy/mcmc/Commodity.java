@@ -832,4 +832,62 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setShopMid(vo.getShopMid());
 		}
 	}
+
+
+
+	public static Commodity copyCommodity(Commodity source)  {
+		Commodity commodity=new Commodity();
+		commodity.setCategory(source.category);
+		commodity.setCategoryIds(source.categoryIds);
+		commodity.setCode(source.code);
+		commodity.setCurrentPrice(source.currentPrice);
+		commodity.setCustomCategoryIds(source.customCategoryIds);
+		commodity.setDescription(source.description);
+		commodity.setFreight(source.freight);
+		commodity.setBrandName(source.brandName);
+		commodity.setBrandId(source.brandId);
+		commodity.setcPriceMax(source.cPriceMax);
+		commodity.setcPriceMin(source.cPriceMin);
+		//commodity.setCreateAt(createAt);
+		//commodity.setId(id);
+		commodity.setMallId(source.mallId);
+		commodity.setMallMid(source.mallMid);
+		commodity.setName(source.name);
+		commodity.setoPriceMax(source.oPriceMax);
+		commodity.setoPriceMin(source.oPriceMin);
+		commodity.setoPriceOfLowestCPrice(source.oPriceOfLowestCPrice);
+		commodity.setOriginalPrice(source.originalPrice);
+		commodity.setPicList(source.picList);
+		commodity.setPostage(source.postage);
+		commodity.setPrice(source.price);
+		commodity.setRegisterAt(source.registerAt);
+		commodity.setShopId(source.shopId);
+		commodity.setShopMid(source.shopMid);
+		commodity.setShopNum(source.shopNum);
+		commodity.setSold(source.sold);
+		commodity.setSource(source.source);
+		commodity.setSpecList(source.specList);
+		commodity.setStatus(source.status);
+		commodity.setStock(source.stock);
+		commodity.setStockStatus(source.stockStatus);
+		commodity.setTerminalType(source.terminalType);
+		//commodity.setUpdate_by(update_by);
+		//commodity.setUpdateAt(updateAt);
+		commodity.setSaleId(source.saleId);
+		commodity.setFlashSaleId(source.flashSaleId);
+		commodity.setSecKillSign(source.secKillSign);
+		commodity.setDiscount(source.discount);
+//		commodity.setActivityStartTime(activityStartTime);
+//		commodity.setActivityEndTime(activityEndTime);
+		commodity.setPurchaseCount(source.purchaseCount);
+		commodity.setWeAndTeStatus(source.weAndTeStatus);
+		commodity.setSort(source.sort);
+		commodity.setCommodityModelNo(source.commodityModelNo);
+		commodity.setGoodsParam(source.goodsParam);
+		commodity.setGalleryPosition(source.galleryPosition);
+		commodity.setShopName(source.shopName);
+		commodity.setMallName(source.mallName);
+		commodity.setHotAreaName(source.hotAreaName);
+		return commodity;
+	}
 }

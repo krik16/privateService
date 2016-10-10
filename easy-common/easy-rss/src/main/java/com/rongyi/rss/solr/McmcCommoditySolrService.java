@@ -353,4 +353,8 @@ public interface McmcCommoditySolrService {
 	 */
 	public void setCommoditySort(List<CommoditySortVo> list) throws RYServiceException;
 
+	public boolean deleteCommodityByIds(List<String> commodityIds);
+
+	public boolean addCommodityListIndex(List<McmcCommodityDocument> commodityDocumentList);
+
 }
