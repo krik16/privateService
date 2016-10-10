@@ -239,4 +239,11 @@ public interface RoaUserRedenvelopeService {
     boolean sendEnvelope(CouponOrderParam couponOrderParam);
 
     List<String> getCommodityIdsByCouponId(String couponId);
+
+    /**
+     * 根据couponId获取当天领取红包的个数
+     * @param couponId
+     * @return
+     */
+    int getOneDayCouponSkype(String couponId);
 }
