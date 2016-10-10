@@ -18,7 +18,7 @@ public class ActivityEnrollVO implements Serializable{
 	private String startAt;//开始时间
 	private String endAt;//结束时间
 	private String createAt;//创建时间
-	private Integer status;//活动状态
+	private Integer statusCode;//活动状态
 	/**
 	 * 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖7秒杀' 7'10月版本新增的秒杀'
 	 */
@@ -59,11 +59,11 @@ public class ActivityEnrollVO implements Serializable{
 	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
-	public Integer getStatus() {
-		return status;
+	public Integer getStatusCode() {
+		return statusCode;
 	}
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setStatusCode(Integer statusCode) {
+		this.statusCode = statusCode;
 	}
 	public Integer getActivityType() {
 		return activityType;
@@ -75,8 +75,8 @@ public class ActivityEnrollVO implements Serializable{
 	public String toString() {
 		return "ActivityEnrollVO [activityId=" + activityId + ", name=" + name
 				+ ", activityRule=" + activityRule + ", startAt=" + startAt
-				+ ", endAt=" + endAt + ", createAt=" + createAt + ", status="
-				+ status + ", activityType=" + activityType + "]";
+				+ ", endAt=" + endAt + ", createAt=" + createAt + ", statusCode="
+				+ statusCode + ", activityType=" + activityType + "]";
 	}
 	
 	
