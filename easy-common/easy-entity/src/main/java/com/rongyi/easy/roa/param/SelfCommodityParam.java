@@ -15,6 +15,7 @@ public class SelfCommodityParam  extends MalllifeBaseParam implements Serializab
     private Integer minStock;
     private Integer maxStock;
     private String shopId;
+    private String commodityId;
 
 
     public String getCommodityCode() {
@@ -63,6 +64,14 @@ public class SelfCommodityParam  extends MalllifeBaseParam implements Serializab
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
     }
 
     @Override
