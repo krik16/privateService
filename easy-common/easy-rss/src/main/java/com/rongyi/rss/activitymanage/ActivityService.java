@@ -222,6 +222,13 @@ public interface ActivityService {
      */
     public  List<Integer> selectUserIdsByActivityId(Integer activityId);
 
+    /**
+     * 根据商品id查询商品是否在秒杀活动中
+     * @param goodsIds
+     * @return
+     */
+    public  List<String> selectActivityGoodsByGoodsIds(List<String> goodsIds);
+
 
     int countSecKillGoods(QuerySecKillGoods querySecKillGoods);
 
