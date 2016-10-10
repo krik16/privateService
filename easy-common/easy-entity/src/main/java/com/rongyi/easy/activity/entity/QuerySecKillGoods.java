@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class QuerySecKillGoods implements Serializable {
 
     private Integer activityId;//活动id
-    private String goodsCode;//商品编码
+    private String goodsId;//商品id
     private String name;//商品名称
     private String shopName;//店铺名称
     private Integer currentPage;
@@ -22,7 +22,7 @@ public class QuerySecKillGoods implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("activityId", activityId)
-                .append("goodsCode", goodsCode)
+                .append("goodsId", goodsId)
                 .append("name", name)
                 .append("shopName", shopName)
                 .append("currentPage", currentPage)
@@ -54,12 +54,12 @@ public class QuerySecKillGoods implements Serializable {
         this.activityId = activityId;
     }
 
-    public String getGoodsCode() {
-        return goodsCode;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoodsCode(String goodsCode) {
-        this.goodsCode = goodsCode;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getName() {
