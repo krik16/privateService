@@ -13,8 +13,8 @@ public class ActivityEnrollVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String activityId;//活动id
-	private String activityName;//活动名称
-	private String description;//描述
+	private String name;//活动名称
+	private String activityRule;//描述
 	private String startAt;//开始时间
 	private String endAt;//结束时间
 	private String createAt;//创建时间
@@ -29,17 +29,17 @@ public class ActivityEnrollVO implements Serializable{
 	public void setActivityId(String activityId) {
 		this.activityId = activityId;
 	}
-	public String getActivityName() {
-		return activityName;
+	public String getName() {
+		return name;
 	}
-	public void setActivityName(String activityName) {
-		this.activityName = activityName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDescription() {
-		return description;
+	public String getActivityRule() {
+		return activityRule;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setActivityRule(String activityRule) {
+		this.activityRule = activityRule;
 	}
 	public String getStartAt() {
 		return startAt;
@@ -73,10 +73,11 @@ public class ActivityEnrollVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "ActivityEnrollVO [activityId=" + activityId + ", activityName="
-				+ activityName + ", description=" + description + ", startAt="
-				+ startAt + ", endAt=" + endAt + ", createAt=" + createAt
-				+ ", status=" + status + ", activityType=" + activityType + "]";
+		return "ActivityEnrollVO [activityId=" + activityId + ", name=" + name
+				+ ", activityRule=" + activityRule + ", startAt=" + startAt
+				+ ", endAt=" + endAt + ", createAt=" + createAt + ", status="
+				+ status + ", activityType=" + activityType + "]";
 	}
+	
 	
 }
