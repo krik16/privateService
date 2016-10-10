@@ -146,7 +146,7 @@ public class ActivityGoods implements Serializable {
     /**
      * 商品规格
      */
-    private List<ActivityGoodsSpec>  activityGoodsSpecs;
+    private List<ActivityGoodsSpec>  activityGoodsSpecs =  Lists.newArrayList();
 
     /**
      * 商品分类

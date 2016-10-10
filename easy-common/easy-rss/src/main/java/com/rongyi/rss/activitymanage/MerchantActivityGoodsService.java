@@ -1,6 +1,8 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
+import com.rongyi.easy.activitymanage.entity.ResGoods;
+import com.rongyi.easy.activitymanage.entity.SearchSelfGoods;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsVO;
 import com.rongyi.easy.activitymanage.vo.RefSecSkillGoods;
 
@@ -91,4 +93,11 @@ public interface MerchantActivityGoodsService {
      * @return
      */
     public List<ActivityGoods> getActivityGoodsListByRole(Integer activityId,String shopId,String bullId);
+
+    /**
+     * 获取某活动下商品数据
+     * @param searchSelfGoods
+     * @return
+     */
+    public List<ResGoods> getActivityGoodsListByParam(SearchSelfGoods searchSelfGoods);
 }
