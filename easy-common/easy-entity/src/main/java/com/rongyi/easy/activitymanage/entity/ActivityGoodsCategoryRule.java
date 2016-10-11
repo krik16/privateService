@@ -1,9 +1,17 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityGoodsCategoryRule {
-    private Integer id;
+public class ActivityGoodsCategoryRule implements Serializable {
+	
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -208969416399494320L;
+
+	private Integer id;
 
     private Integer activityId;//活动id
 
