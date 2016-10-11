@@ -21,8 +21,7 @@ public class SelfCommodityVO implements Serializable {
         this.currentPrices = builder.currentPrices;
     }
 
-
-    public static class Builder {
+    public static class Builder implements Serializable {
         private String commodityName;
         private String commodityCode;
         private List<String> categoryNames;
