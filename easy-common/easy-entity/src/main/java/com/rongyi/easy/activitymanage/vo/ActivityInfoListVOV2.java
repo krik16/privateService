@@ -1,10 +1,12 @@
 package com.rongyi.easy.activitymanage.vo;
 
+import com.rongyi.easy.activitymanage.entity.ActivityGoodsCategoryRule;
 import com.rongyi.easy.activitymanage.entity.ActivityGoodsRule;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * create by com.rongyi.easy.activitymanage.vo easy-api :author lijing
@@ -60,6 +62,26 @@ public class ActivityInfoListVOV2 implements Serializable {
     
     /**模板编辑状态 */
     private boolean isTemplateEdit;
+    
+    /**商品活动范围 */
+    List<ActivityGoodsCategoryRule> activityGoodsCategoryRule ;
+    
+    
+    
+    
+
+
+	
+
+
+	public List<ActivityGoodsCategoryRule> getActivityGoodsCategoryRule() {
+		return activityGoodsCategoryRule;
+	}
+
+
+	public void setActivityGoodsCategoryRule(List<ActivityGoodsCategoryRule> activityGoodsCategoryRule) {
+		this.activityGoodsCategoryRule = activityGoodsCategoryRule;
+	}
 
 
 	public Integer getId() {

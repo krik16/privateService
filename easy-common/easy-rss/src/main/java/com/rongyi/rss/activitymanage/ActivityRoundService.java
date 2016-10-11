@@ -18,9 +18,11 @@ import com.rongyi.easy.activitymanage.vo.*;
  */
 public interface ActivityRoundService {
 
-	boolean saveOrUpdateRound(ActivityRoundInfo activityRoundInfo);
+	int saveOrUpdateRound(ActivityRoundInfo activityRoundInfo);
 
 	boolean delRound(int roundId);
+	
+	ActivityRoundInfo selectByRoundId(int roundId);
 
 	Map getActivityRoundInfoList(int activityId, int state, int currentPage, int pageSize);
 	
