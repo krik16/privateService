@@ -8,9 +8,9 @@
 */
 package com.rongyi.settle.util;
 
-import java.util.Date;
-
 import com.rongyi.core.common.PropertyConfigurer;
+
+import java.util.Date;
 
 /**
  * @author ZhengYl
@@ -31,9 +31,9 @@ public class ReportFilesUtil {
 	 *            报表收件单位的Id，作为报表文件存放的子文件夹
 	 * @return
 	 */
-	public static String getSettlememtExcelFilePath(String name, Date date, PropertyConfigurer propertyConfigurer, String businessId) {
+	public static String getSettlememtExcelFilePath(String name, Date date, PropertyConfigurer propertyConfigurer, String businessId,String ruleCode) {
 		String dateStr = DateUtils.getDateStr(date);
-		String fileName = "容易网商户对账单-" + name + "-" + dateStr + ".xlsx";
+		String fileName = "容易网商户对账单-" + name.replaceAll(" ","").trim() + "-" + ruleCode.trim() + "-" + dateStr + ".xlsx";
 
 		String fileFolder = propertyConfigurer.getProperty("settle.file.path") + businessId;
 		String pathname = fileFolder + "/" + fileName;
