@@ -3,8 +3,6 @@ package com.rongyi.settle.unit;
 
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.settle.mail.MailService;
 import com.rongyi.settle.util.DateUtils;
@@ -70,7 +68,7 @@ public class SendEmailUnit {
         sb.append("如无问题,请您及时登录商家后台确认。");
         try {
             LOGGER.info("发送对账单邮件，收件人列表={}", paymentStatementDto.getBussinessEmail());
-            String fileName = ReportFilesUtil.getSettlememtExcelFilePath(paymentStatementDto.getBussinessName(),paymentStatementDto.getCycleStartTime(),propertyConfigurer,paymentStatementDto.getBussinessId());
+            String fileName = ReportFilesUtil.getSettlememtExcelFilePath(paymentStatementDto.getBussinessName(),paymentStatementDto.getCycleStartTime(),propertyConfigurer,paymentStatementDto.getBussinessId(),paymentStatementDto.getRuleCode());
             List<String> fileNameList = new ArrayList<String>();
             fileNameList.add(fileName);
             mailService.sendAttachmentEmail("商户对账单", propertyConfigurer.getProperty("SEND_ADDRESS"), getToAddress(paymentStatementDto.getBussinessEmail()), sb.toString(), fileNameList);

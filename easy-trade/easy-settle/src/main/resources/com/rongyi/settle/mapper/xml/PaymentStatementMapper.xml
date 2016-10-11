@@ -170,6 +170,7 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="TINYINT" />
 		<result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+		<result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
 		<result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
 		<result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
 		<result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
