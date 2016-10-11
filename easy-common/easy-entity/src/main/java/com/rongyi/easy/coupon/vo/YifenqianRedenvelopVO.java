@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class YifenqianRedenvelopVO implements Serializable {
     private List<String> commodityIds;//促销券关联的商品ids
-    private Integer status;//1 生成红包成功，2生成红包失败，3已经领取过一分钱红包 4 参数不合法
+    private Integer status;//1 生成红包成功，2生成红包失败，3已经领取过一分钱红包 4 参数不合法 5领取红包超过500个 6 查询商品ids
 
     public List<String> getCommodityIds() {
         return commodityIds;
