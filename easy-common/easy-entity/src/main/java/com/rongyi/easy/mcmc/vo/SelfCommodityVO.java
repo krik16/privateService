@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,11 +23,11 @@ public class SelfCommodityVO implements Serializable {
     }
 
     public static class Builder implements Serializable {
-        private String commodityName;
-        private String commodityCode;
-        private List<String> categoryNames;
-        private List<Double> currentPrices;
-        private Integer stock;
+        private String commodityName = "";
+        private String commodityCode = "";
+        private List<String> categoryNames = new ArrayList<>();
+        private List<Double> currentPrices = new ArrayList<>();
+        private Integer stock = 0;
 
         public Builder(String name, String code, Integer stock) {
             this.commodityName = name;
