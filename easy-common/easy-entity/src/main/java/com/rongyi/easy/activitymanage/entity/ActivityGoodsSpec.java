@@ -113,7 +113,7 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     public Integer getAllocationCount() {
-        return allocationCount;
+        return allocationCount==null?0:allocationCount;
     }
 
     public void setAllocationCount(Integer allocationCount) {
@@ -161,7 +161,7 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     public Integer getJoinCount() {
-        return joinCount;
+        return joinCount==null?0:joinCount;
     }
 
     public void setJoinCount(Integer joinCount) {
@@ -169,7 +169,7 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     public Integer getStockCount() {
-        return stockCount;
+        return stockCount==null?0:stockCount;
     }
 
     public void setStockCount(Integer stockCount) {

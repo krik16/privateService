@@ -1,6 +1,9 @@
 package com.rongyi.easy.activitymanage.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.rongyi.easy.mcmc.vo.CommodityCategorySimpleVO;
 
 /**
  * Created by yangyang on 2016/10/10.
@@ -15,8 +18,24 @@ public class ResGoods implements Serializable {
     private String activityPrice;
     private int joinCount;
     private int allocationCount;
+    
+    /**
+     * 分类
+     * */
+    private List<CommodityCategorySimpleVO> categorySimpleVOs;
+    
+    
+    
 
-    public String getGoodsId() {
+    public List<CommodityCategorySimpleVO> getCategorySimpleVOs() {
+		return categorySimpleVOs;
+	}
+
+	public void setCategorySimpleVOs(List<CommodityCategorySimpleVO> categorySimpleVOs) {
+		this.categorySimpleVOs = categorySimpleVOs;
+	}
+
+	public String getGoodsId() {
         return goodsId;
     }
 

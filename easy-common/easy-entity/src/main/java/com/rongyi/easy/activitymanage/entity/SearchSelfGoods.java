@@ -18,8 +18,21 @@ public class SearchSelfGoods implements Serializable {
     private Integer pageSize;
     private String shopName;
     private Integer activityId;
+    private Integer offset;
+    
+    
+	public Integer getOffset() {
+		return offset;
+	}
 
-    @Override
+	public void setOffset(Integer offset) {
+		this.offset = offset;
+	}
+
+
+
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("goodsCat", goodsCat)
