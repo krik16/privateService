@@ -19,6 +19,8 @@ public class PaymentStatementDto implements Serializable {
 
     private String batchNo;
 
+    private String ruleCode;
+
     private Byte bussinessType;
 
     private Date cycleStartTime;
@@ -105,6 +107,14 @@ public class PaymentStatementDto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getRuleCode() {
+        return ruleCode;
+    }
+
+    public void setRuleCode(String ruleCode) {
+        this.ruleCode = ruleCode;
     }
 
     public Byte getType() {
