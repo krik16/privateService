@@ -57,6 +57,7 @@ public class SendEmailUnit {
     }
 
     public void sendMail(PaymentStatementDto paymentStatementDto) {
+        LOGGER.info("paymentStatementDto={}",paymentStatementDto);
         StringBuffer sb = new StringBuffer();
         sb.append("您好:\n");
         sb.append(" ");
@@ -67,8 +68,8 @@ public class SendEmailUnit {
         sb.append("的对账单，请您查收。");
         sb.append("如无问题,请您及时登录商家后台确认。");
         try {
-            LOGGER.info("发送对账单邮件，收件人列表={}", paymentStatementDto.getBussinessEmail());
             String fileName = ReportFilesUtil.getSettlememtExcelFilePath(paymentStatementDto.getBussinessName(),paymentStatementDto.getCycleStartTime(),propertyConfigurer,paymentStatementDto.getBussinessId(),paymentStatementDto.getRuleCode());
+            LOGGER.info("发送对账单邮件，收件人列表={},fileName={}", paymentStatementDto.getBussinessEmail(),fileName);
             List<String> fileNameList = new ArrayList<String>();
             fileNameList.add(fileName);
             mailService.sendAttachmentEmail("商户对账单", propertyConfigurer.getProperty("SEND_ADDRESS"), getToAddress(paymentStatementDto.getBussinessEmail()), sb.toString(), fileNameList);

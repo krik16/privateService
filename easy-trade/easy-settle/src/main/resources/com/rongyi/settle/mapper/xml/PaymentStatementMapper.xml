@@ -458,7 +458,7 @@
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
 		bi.biz_email,
-		bi.pay_account, bi.blank_name, bi.pay_name
+		bi.pay_account, bi.blank_name, bi.pay_name,pb.rule_code
 		from payment_bill pb
 		left
 		join payment_bill_config pbc on pb.config_id = pbc.id
