@@ -15,6 +15,7 @@ public class QuerySecKillGoods implements Serializable {
     private String shopName;//店铺名称
     private Integer currentPage;
     private Integer pageSize;
+    private Integer status;
 
 
 
@@ -27,7 +28,16 @@ public class QuerySecKillGoods implements Serializable {
                 .append("shopName", shopName)
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
+                .append("status", status)
                 .toString();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getCurrentPage() {
