@@ -10,9 +10,13 @@
     <result column="coupon_amount" property="couponAmount" jdbcType="INTEGER" />
     <result column="wechat_amount" property="wechatAmount" jdbcType="INTEGER" />
     <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, open_id, activity_id, coupon_id, coupon_amount, wechat_amount, channel
+    id, user_id, open_id, activity_id, coupon_id, coupon_amount, wechat_amount, channel, order_status, pay_no, order_no
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
