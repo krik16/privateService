@@ -21,6 +21,8 @@ public interface ActivityRoundService {
 	int saveOrUpdateRound(ActivityRoundInfo activityRoundInfo);
 
 	boolean delRound(int roundId);
+	
+	ActivityRoundInfo selectByRoundId(int roundId);
 
 	Map getActivityRoundInfoList(int activityId, int state, int currentPage, int pageSize);
 	
