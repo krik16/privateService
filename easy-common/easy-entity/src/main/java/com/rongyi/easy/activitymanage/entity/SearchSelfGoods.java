@@ -10,34 +10,26 @@ import java.io.Serializable;
 public class SearchSelfGoods implements Serializable {
 
     private String goodsCat;//商品分类
-    private String goodsCode;//商品编码
+    private String goodsId;//商品id
     private String goodsName;//商品名称
     private Integer stockEnd;
     private Integer stockStart;
     private Integer currentPage;
     private Integer pageSize;
     private String shopName;
-    private Double activityMinPrice;
-    private Double activityMaxPrice;
-    private Integer  remainMinStock;
-    private Integer remainMaxStock;
     private Integer activityId;
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("goodsCat", goodsCat)
-                .append("goodsCode", goodsCode)
+                .append("goodsId", goodsId)
                 .append("goodsName", goodsName)
                 .append("stockEnd", stockEnd)
                 .append("stockStart", stockStart)
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
                 .append("shopName", shopName)
-                .append("activityMinPrice", activityMinPrice)
-                .append("activityMaxPrice", activityMaxPrice)
-                .append("remainMinStock", remainMinStock)
-                .append("remainMaxStock", remainMaxStock)
                 .append("activityId", activityId)
                 .toString();
     }
@@ -50,13 +42,6 @@ public class SearchSelfGoods implements Serializable {
         this.activityId = activityId;
     }
 
-    public Integer getRemainMaxStock() {
-        return remainMaxStock;
-    }
-
-    public void setRemainMaxStock(Integer remainMaxStock) {
-        this.remainMaxStock = remainMaxStock;
-    }
 
     public String getShopName() {
         return shopName;
@@ -64,30 +49,6 @@ public class SearchSelfGoods implements Serializable {
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
-    }
-
-    public Double getActivityMinPrice() {
-        return activityMinPrice;
-    }
-
-    public void setActivityMinPrice(Double activityMinPrice) {
-        this.activityMinPrice = activityMinPrice;
-    }
-
-    public Double getActivityMaxPrice() {
-        return activityMaxPrice;
-    }
-
-    public void setActivityMaxPrice(Double activityMaxPrice) {
-        this.activityMaxPrice = activityMaxPrice;
-    }
-
-    public Integer getRemainMinStock() {
-        return remainMinStock;
-    }
-
-    public void setRemainMinStock(Integer remainMinStock) {
-        this.remainMinStock = remainMinStock;
     }
 
     public Integer getCurrentPage() {
@@ -114,12 +75,12 @@ public class SearchSelfGoods implements Serializable {
         this.goodsCat = goodsCat;
     }
 
-    public String getGoodsCode() {
-        return goodsCode;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoodsCode(String goodsCode) {
-        this.goodsCode = goodsCode;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getGoodsName() {

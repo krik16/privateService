@@ -58,7 +58,7 @@ public interface ActivityRoundService {
 	RoundGoodInSell getRoundGoodInfo(int roundId,int goodSku);
 	
 	boolean delGoodInRound(int activityId,String goodId) throws Exception;
-	
+
 	/***
 	 * 商品列表:查询商品是否在活动中,是否有活动库存,活动价格,场次id
 	 * @param goodsId
