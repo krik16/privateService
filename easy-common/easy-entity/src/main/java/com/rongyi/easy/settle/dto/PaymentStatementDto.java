@@ -348,4 +348,41 @@ public class PaymentStatementDto implements Serializable {
     public void setRePay(boolean rePay) {
         this.rePay = rePay;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentStatementDto{" +
+                "id=" + id +
+                ", type=" + type +
+                ", batchNo='" + batchNo + '\'' +
+                ", ruleCode='" + ruleCode + '\'' +
+                ", bussinessType=" + bussinessType +
+                ", cycleStartTime=" + cycleStartTime +
+                ", cycleEndTime=" + cycleEndTime +
+                ", bussinessName='" + bussinessName + '\'' +
+                ", payChannel=" + payChannel +
+                ", payAccount='" + payAccount + '\'' +
+                ", blankName='" + blankName + '\'' +
+                ", payTotal=" + payTotal +
+                ", bussinessEmail='" + bussinessEmail + '\'' +
+                ", bussinessId='" + bussinessId + '\'' +
+                ", desc='" + desc + '\'' +
+                ", statusUpdateTime=" + statusUpdateTime +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", paymentId=" + paymentId +
+                ", payNo='" + payNo + '\'' +
+                ", payTime=" + payTime +
+                ", tradeNo='" + tradeNo + '\'' +
+                ", payName='" + payName + '\'' +
+                ", downLoadUser='" + downLoadUser + '\'' +
+                ", downLoadTime=" + downLoadTime +
+                ", predictPayTime=" + predictPayTime +
+                ", payMode=" + payMode +
+                ", rollType=" + rollType +
+                ", rollDay='" + rollDay + '\'' +
+                ", opTime=" + opTime +
+                ", rePay=" + rePay +
+                '}';
+    }
 }
