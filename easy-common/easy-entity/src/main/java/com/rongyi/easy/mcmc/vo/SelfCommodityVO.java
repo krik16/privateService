@@ -22,7 +22,7 @@ public class SelfCommodityVO implements Serializable {
     }
 
 
-    public static class Builder {
+    public static class Builder{
         private String commodityName;
         private String commodityCode;
         private List<String> categoryNames;
