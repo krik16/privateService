@@ -3,6 +3,8 @@ package com.rongyi.rss.msob;
 import com.rongyi.easy.rmmm.dto.user.PosUserInfoDto;
 import com.rongyi.easy.rmmm.param.user.PosUserManagerParam;
 
+import java.util.List;
+
 /*
  * Description:POS用户信息操作
  * Author: yuzhijian 
@@ -21,6 +23,13 @@ public interface IPosUserService {
      * @throws Exception
      */
     public int savePosUser(PosUserManagerParam posUserManagerParam)throws Exception;
+
+    /**
+     * 批量添加账号
+     * @param posUserManagerParamList
+     * @throws Exception
+     */
+    public void savePosUserBatch(List<PosUserManagerParam> posUserManagerParamList)throws Exception;
 
     /**
      * 返回用户信息
