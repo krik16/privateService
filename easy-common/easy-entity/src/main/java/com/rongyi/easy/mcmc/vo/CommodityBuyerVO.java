@@ -46,6 +46,8 @@ public class CommodityBuyerVO implements Serializable{
 	private double discount;
 	private String commodityCurrentPrice;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
+	private String brandLogo;
+	private String shopLogo;
 
 	public Integer getGalleryPosition() {
 		return galleryPosition;
@@ -512,6 +514,22 @@ public class CommodityBuyerVO implements Serializable{
 
 	public void setDiscount(double discount) {
 		this.discount = discount;
+	}
+
+	public String getBrandLogo() {
+		return brandLogo;
+	}
+
+	public void setBrandLogo(String brandLogo) {
+		this.brandLogo = brandLogo;
+	}
+
+	public String getShopLogo() {
+		return shopLogo;
+	}
+
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
 	}
 
 	@Override
