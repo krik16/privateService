@@ -838,7 +838,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public static Commodity copyCommodity(Commodity source)  {
 		Commodity commodity=new Commodity();
 		commodity.setCategory(source.getCategory());
-		commodity.setType(commodity.getType());
+		commodity.setType(source.getType());
 		commodity.setCategoryIds(source.getCategoryIds());
 		commodity.setCode(source.getCode());
 		commodity.setCurrentPrice(source.getCurrentPrice());
