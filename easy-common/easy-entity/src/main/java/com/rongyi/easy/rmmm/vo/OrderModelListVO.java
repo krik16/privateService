@@ -30,6 +30,36 @@ public class OrderModelListVO implements Serializable{
 	private String message;// 亲，您的订单中有仅支持....
 	
 	private List<Integer> orderModelListNum;//[3,2,1] 分别对应 都支持数量，仅支持快递数量，仅支持自提数量
+	
+	private String platformRebateCode;//抵扣券券码
+	
+	private Double rebateDiscount;// 抵扣券抵扣金额
+	
+	private Double rebateOriginalPrice;// 抵扣券满多少元可用
+
+	public Double getRebateOriginalPrice() {
+		return rebateOriginalPrice;
+	}
+
+	public void setRebateOriginalPrice(Double rebateOriginalPrice) {
+		this.rebateOriginalPrice = rebateOriginalPrice;
+	}
+
+	public String getPlatformRebateCode() {
+		return platformRebateCode;
+	}
+
+	public void setPlatformRebateCode(String platformRebateCode) {
+		this.platformRebateCode = platformRebateCode;
+	}
+
+	public Double getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(Double rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
+	}
 
 	public List<Integer> getOrderModelListNum() {
 		return orderModelListNum;
@@ -89,9 +119,15 @@ public class OrderModelListVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OrderModelListVO [orderModelList=" + orderModelList + ", supportWay=" + supportWay + ", totalCommodityNum="
-				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax + ", rebateNum=" + rebateNum + ", message=" + message
-				+ ", orderModelListNum=" + orderModelListNum + "]";
+		return "OrderModelListVO [orderModelList=" + orderModelList
+				+ ", supportWay=" + supportWay + ", totalCommodityNum="
+				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax
+				+ ", rebateNum=" + rebateNum + ", message=" + message
+				+ ", orderModelListNum=" + orderModelListNum
+				+ ", platformRebateCode=" + platformRebateCode
+				+ ", rebateDiscount=" + rebateDiscount 
+				+ ", rebateOriginalPrice=" + rebateOriginalPrice
+				+ "]";
 	}
 
 }

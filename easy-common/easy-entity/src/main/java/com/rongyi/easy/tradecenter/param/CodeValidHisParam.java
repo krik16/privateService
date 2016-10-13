@@ -17,6 +17,7 @@ public class CodeValidHisParam implements Serializable {
 
 	private Integer date;//时间（0所有时间，1当天，2当周，3当月，4昨天）
 	private String shopId;//店铺id
+	private String mallId;//商场id
 	private String orderBy;//排序：（默认 update_time降序）
 	private String orderVa;//排序方式:降序[-1]
 	private Integer pageSize = 15;//默认15
@@ -74,11 +75,20 @@ public class CodeValidHisParam implements Serializable {
 	public void setCheckUserId(String checkUserId) {
 		this.checkUserId = checkUserId;
 	}
+
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+
 	@Override
 	public String toString() {
 		return "CodeValidHisParam [shopId=" + shopId + ", orderBy=" + orderBy
 				+ ", orderVa=" + orderVa + ", pageSize=" + pageSize+ ", status=" + status
-				+ ", currentPage=" + currentPage + ", checkUserId=" + checkUserId+",date="+date
+				+ ", currentPage=" + currentPage + ", checkUserId=" + checkUserId+",date="+date+",mallId="+mallId
 				+ "]";
 	}
 }

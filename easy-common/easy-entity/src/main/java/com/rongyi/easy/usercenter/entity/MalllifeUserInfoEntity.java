@@ -110,7 +110,17 @@ public class MalllifeUserInfoEntity  implements Serializable {
     private String publicNumId;
 
 
+    /**邀请码*/
+    private String invitCode;
 
+
+    public String getInvitCode() {
+        return invitCode;
+    }
+
+    public void setInvitCode(String invitCode) {
+        this.invitCode = invitCode;
+    }
 
     /**
      * 用户uuid

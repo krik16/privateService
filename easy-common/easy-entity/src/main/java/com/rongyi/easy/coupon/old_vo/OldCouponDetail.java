@@ -67,6 +67,8 @@ public class OldCouponDetail implements Serializable {
     private String couponId;//优惠券id
 
     private int integral;  // 购买时使用的积分
+    
+    private BigDecimal easyMoney;//购买时使用的容易币
 
     private double couponDiscount; //购买时使用的红包价格
 
@@ -93,7 +95,15 @@ public class OldCouponDetail implements Serializable {
     private List<RefundActivityListVO> refundActivityList; //用户退款券码列表
 
     
-    public String getWorkTime() {
+    public BigDecimal getEasyMoney() {
+		return easyMoney;
+	}
+
+	public void setEasyMoney(BigDecimal easyMoney) {
+		this.easyMoney = easyMoney;
+	}
+
+	public String getWorkTime() {
 		return workTime;
 	}
 
@@ -371,7 +381,7 @@ public class OldCouponDetail implements Serializable {
 				+ ", useWay=" + useWay + ", num=" + num + ", mallvos=" + mallvos + ", thumbnail=" + thumbnail
 				+ ", myActivityList=" + myActivityList + ", userCodeList=" + userCodeList + ", ticketTotalNumber="
 				+ ticketTotalNumber + ", grouponPrice=" + grouponPrice + ", notOutCodeFlag=" + notOutCodeFlag + ", currentPrice="
-				+ currentPrice + ", couponId=" + couponId + ", integral=" + integral + ", couponDiscount=" + couponDiscount
+				+ currentPrice + ", couponId=" + couponId + ", integral=" + integral + ", easyMoney=" + easyMoney + ", couponDiscount=" + couponDiscount
 				+ ", unUsered=" + unUsered + ", orderPrice=" + orderPrice + ", refundNum=" + refundNum
 				+ ", platformRebateAmount=" + platformRebateAmount + ", afterSaleService=" + afterSaleService + ", checkCoupons="
 				+ checkCoupons + ", workTime=" + workTime + ", unRefundActivityList=" + unRefundActivityList

@@ -36,6 +36,8 @@ public class TransactionDetailForCartVO implements Serializable{
 	private String payTime;// 付款时间
 	
 	private String integral;//积分
+	
+	private String easyMoney;//容颜币
 
 	private List<String> orderNums;// 大订单号集合
 	
@@ -45,6 +47,14 @@ public class TransactionDetailForCartVO implements Serializable{
 	private Integer errno;
 	/** 翻牌购拼接的url */
 	private String url;
+
+	public String getEasyMoney() {
+		return easyMoney;
+	}
+
+	public void setEasyMoney(String easyMoney) {
+		this.easyMoney = easyMoney;
+	}
 
 	public String getIntegral() {
 		return integral;
@@ -163,8 +173,8 @@ public class TransactionDetailForCartVO implements Serializable{
 		return "TransactionDetailForCartVO [transactionDetail=" + transactionDetail + ", consignee=" + consignee + ", phone="
 				+ phone + ", address=" + address + ", provinceName=" + provinceName + ", cityName=" + cityName
 				+ ", districtName=" + districtName + ", commitOrderTime=" + commitOrderTime + ", payTime=" + payTime
-				+ ", integral=" + integral + ", orderNums=" + orderNums + ", msg=" + msg + ", errno=" + errno + ", url=" + url
-				+ "]";
+				+ ", integral=" + integral + ", easyMoney=" + easyMoney +", orderNums=" + orderNums + ", msg=" + msg + ", errno=" + errno + 
+				", url=" + url + "]";
 	}
 
 }

@@ -156,6 +156,24 @@ public class BdataFloor implements Serializable {
     private Date  updated_at;
     private String last_update_id;//最近修改人
     private String reason;//操作描述
+    private String swf;//swf图--商家后台用的
+    private String fmap;//fmap图--商家后台用的
+    
+    
+    
+    
+	public String getFmap() {
+		return fmap;
+	}
+	public void setFmap(String fmap) {
+		this.fmap = fmap;
+	}
+	public String getSwf() {
+		return swf;
+	}
+	public void setSwf(String swf) {
+		this.swf = swf;
+	}
 	public Integer getSystem_status() {
 		return system_status;
 	}
