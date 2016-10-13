@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
+
 /***
  * 团信息
  * @author caohongjiang
@@ -15,7 +17,7 @@ public class GroupInfo implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -912983980172190001L;
+	private static final long serialVersionUID = -3030158451798838388L;
 
 	/**
 	 * 团id

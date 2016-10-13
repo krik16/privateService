@@ -55,7 +55,7 @@ public interface GroupBuyService {
 	 * @param userIcon
 	 * @return
 	 */
-	int  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String userNick,String userIcon);
+	int  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon);
 	
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
@@ -68,7 +68,7 @@ public interface GroupBuyService {
 	 * @param userIcon
 	 * @return
 	 */
-	int  joinGroup(int activityId,int groupId,String goodId,String goodSpecId,String userId,String userNick,String userIcon);
+	int  joinGroup(int activityId,int groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon);
 	
 	
 	/**
@@ -85,6 +85,17 @@ public interface GroupBuyService {
 	boolean noticePaymentResult(int activityId,int groupId,String goodId,String goodSpecId,String userId,boolean paymentResult);
 	
 	
+	/**
+	 *  库存变更
+	 * @param activityId
+	 * @param groupId
+	 * @param goodId
+	 * @param goodSpecId
+	 * @param count   增加/扣减库存数
+	 * @param type 0 增加 1 减少
+	 * @return
+	 */
+	boolean updateStock(int activityId,int groupId,String goodId,String goodSpecId,int count,int type);
 	
 	
 	
