@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司 author chenjun Description ： time ：2015年5月19日
@@ -26,8 +28,11 @@ public class OrderDetailModelParam implements Serializable {
 	private String num;// 商品数量
 	private String commodityAppStatus;//商品状态 0下架 1上架
 	private Integer commodityStock;//商品库存
+	private Integer activityId;//活动id
+	private Integer activityRoundId;//活动场次id
+	private Integer activityType;//活动类型 0不参与 3秒杀 4拼团
 
-	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
+	private List<CommoditySpecColumnVO> specColumnValues;//  规格参数
 
 	private String commodityPic;// 商品图片
 
@@ -220,24 +225,32 @@ public class OrderDetailModelParam implements Serializable {
 		this.commodityStock = commodityStock;
 	}
 
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+
+	public Integer getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(Integer activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderDetailModelParam{" +
-				"commodityId='" + commodityId + '\'' +
-				", specId='" + specId + '\'' +
-				", commodityCommission='" + commodityCommission + '\'' +
-				", orderDetailModelId='" + orderDetailModelId + '\'' +
-				", num='" + num + '\'' +
-				", specColumnValues=" + specColumnValues +
-				", commodityPic='" + commodityPic + '\'' +
-				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
-				", commodityName='" + commodityName + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", commodityAppStatus=" + commodityAppStatus +
-				", commodityStock=" + commodityStock +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }
