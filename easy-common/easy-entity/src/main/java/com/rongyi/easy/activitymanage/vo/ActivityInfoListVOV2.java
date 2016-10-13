@@ -62,17 +62,33 @@ public class ActivityInfoListVOV2 implements Serializable {
     
     /**模板编辑状态 */
     private boolean isTemplateEdit;
+
+	private Integer userdGoodsCount;
+
+	/**
+	 * 商品活动范围
+	 */
+	private String activityGoodsCategoryRuleStr;
     
     /**商品活动范围 */
     List<ActivityGoodsCategoryRule> activityGoodsCategoryRule ;
-    
-    
-    
-    
 
 
-	
+	public String getActivityGoodsCategoryRuleStr() {
+		return activityGoodsCategoryRuleStr;
+	}
 
+	public void setActivityGoodsCategoryRuleStr(String activityGoodsCategoryRuleStr) {
+		this.activityGoodsCategoryRuleStr = activityGoodsCategoryRuleStr;
+	}
+
+	public Integer getUserdGoodsCount() {
+		return userdGoodsCount;
+	}
+
+	public void setUserdGoodsCount(Integer userdGoodsCount) {
+		this.userdGoodsCount = userdGoodsCount;
+	}
 
 	public List<ActivityGoodsCategoryRule> getActivityGoodsCategoryRule() {
 		return activityGoodsCategoryRule;
@@ -293,7 +309,7 @@ public class ActivityInfoListVOV2 implements Serializable {
 				+ ", activityRoundCount=" + activityRoundCount + ", goodsJoininTotalCount=" + goodsJoininTotalCount
 				+ ", goodsApplyToRoundCount=" + goodsApplyToRoundCount + ", goodsNeedAlowedCount="
 				+ goodsNeedAlowedCount + ", goodsCancelCount=" + goodsCancelCount + ", isTemplateEdit=" + isTemplateEdit
-				+ "]";
+				+ ", goodsCancelCount=" + goodsCancelCount+ ", activityGoodsCategoryRuleStr=" + activityGoodsCategoryRuleStr+"]";
 	}
    
     
