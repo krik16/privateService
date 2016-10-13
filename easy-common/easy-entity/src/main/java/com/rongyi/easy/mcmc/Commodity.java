@@ -889,10 +889,10 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShopName(source.getShopName());
 		commodity.setMallName(source.getMallName());
 		commodity.setHotAreaName(source.getHotAreaName());
-		commodity.setLiveId(source.getLiveId());
+		//commodity.setLiveId(source.getLiveId());
 		commodity.setSpot(source.isSpot());
-		commodity.setLiveStartTime(source.getLiveStartTime());
-		commodity.setLiveEndTime(source.getLiveEndTime());
+		//commodity.setLiveStartTime(source.getLiveStartTime());
+		//commodity.setLiveEndTime(source.getLiveEndTime());
 		commodity.setLockedStock(source.getLockedStock());
 		commodity.setFilialeMid(source.getFilialeMid());
 		commodity.setBrandMid(source.getBrandMid());
