@@ -82,7 +82,7 @@ public interface ICommodityService {
 
 	public Long searchCommodityByUserIdTotalCount(Integer userId);
 
-	public boolean deleteCommodityByUserId(Integer userId);
+	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
 
 	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
 }
