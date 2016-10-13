@@ -78,7 +78,9 @@ public interface ICommodityService {
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
 
-	public List<Commodity> searchCommodityByUserId(Integer userId);
+	public List<Commodity> searchCommodityByUserId(Integer userId,Integer pageCount);
+
+	public Long searchCommodityByUserIdTotalCount(Integer userId);
 
 	public boolean deleteCommodityByUserId(Integer userId);
 
