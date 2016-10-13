@@ -239,8 +239,6 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommodityDiscount(String id, Double discount);
 
-	boolean updateCommodityStock(String id, Integer stock);
-
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 
 	/**
