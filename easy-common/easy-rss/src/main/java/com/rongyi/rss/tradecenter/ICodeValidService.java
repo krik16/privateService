@@ -37,7 +37,7 @@ public interface ICodeValidService {
     /**
      * 提供给手机端 查询未使用券码的接口
      */
-    public Map<String,Object> unusedCodeNum(String couponCode, Integer codeNum,String shopId);
+    public Map<String,Object> unusedCodeNum(String couponCode, Integer codeNum,String shopId,String mallId);
     /**
      * 根据couponCode查用户手机号码
      * @param couponCode

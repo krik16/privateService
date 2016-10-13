@@ -9,8 +9,10 @@ import java.util.Map;
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityStatus;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
+import com.rongyi.easy.malllife.common.util.Utils;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.mcmc.entity.PostageTemplateEntity;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
@@ -96,6 +98,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> goodsParam;//商品参数
 	private Integer commodityOffUserId; //商品下架操作人
 	private String commodityOffUserName; //商品下架操作人
+	private String shopName; ///< 店铺名称
+	private String mallName; ///< 商场名称
+	private String hotAreaName; ///< 商圈
+	private Integer galleryPosition;//橱窗排序商品
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -379,20 +385,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.stockStatus = stockStatus;
 	}
 	public Double getDiscount() {
-		try {
-			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				BigDecimal currentPrice = new BigDecimal(this.currentPrice);
-				BigDecimal originalPrice = new BigDecimal(this.originalPrice);
-				if (originalPrice.compareTo(new BigDecimal(0)) != 0)
-					return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
-							.multiply(new BigDecimal(10)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				return new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			}
-			return 10.0;
-		} catch(Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
-
+		return discount;
 	}
 	public void setDiscount(Double discount) {
 		this.discount = discount;
@@ -536,6 +529,38 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityOffUserName = commodityOffUserName;
 	}
 
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
+	public String getHotAreaName() {
+		return hotAreaName;
+	}
+
+	public void setHotAreaName(String hotAreaName) {
+		this.hotAreaName = hotAreaName;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -588,6 +613,10 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
+		commodity.setGalleryPosition(galleryPosition);
+		commodity.setShopName(shopName);
+		commodity.setMallName(mallName);
+		commodity.setHotAreaName(hotAreaName);
 		return commodity;
 	}
 	@Override
@@ -655,7 +684,11 @@ public class Commodity implements  Serializable,Cloneable{
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo=" +commodityModelNo+
 				",goodsParam=" + goodsParam +
+				",shopName=" + shopName +
+				",mallName=" + mallName +
+				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
+				",galleryPosition=" + galleryPosition +
 				'}';
 	}
 
@@ -706,10 +739,15 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
-			if(null !=vo.getSource() && vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+			if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
 			} else {
-				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
+				if(null !=status){
+					this.setStatus(vo.getCommodityStatus());
+				}else {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				}
 			}
 		}
 
@@ -718,10 +756,10 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
-		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
+		/*if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
 		}
-
+*/
 		if(!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
 			this.setSupportCourierDeliver(true);
 			this.setSupportSelfPickup(true);
@@ -750,7 +788,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setTemplateId(vo.getTemplateId());
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
-		this.setDiscount(this.getDiscount());
+		this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
 
 		this.setBrandName(brandName);
 		if(shopInfo != null) {

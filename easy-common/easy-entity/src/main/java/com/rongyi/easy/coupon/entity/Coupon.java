@@ -177,7 +177,7 @@ public class Coupon implements Serializable {
     private Integer limitPublishCount;
 
     /**
-     * 信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都没选中
+     * 信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都选中
      */
     private String synTarget;
 

@@ -142,4 +142,12 @@ public interface ICooperationBrandService {
 	 * @throws Exception
 	 */
 	public List<BrandEntity> getbrandList(List<String> brandIds) throws Exception ;
+	/**
+	 * 根据品牌id集合和关键词查品牌
+	 * @param listIds
+	 * @param keyword
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandWallListVO getBrandWallListByIdsAndKeyWord(List<ObjectId> listIds,String keyword) throws Exception;
 }

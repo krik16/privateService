@@ -41,10 +41,28 @@ public class BdataFloorVO implements Serializable {
     private Integer systemStatus;//1 隐藏 0正常
     private Date  updated_at;
     private String reason;//操作描述
+    private String swf;//swf图--商家后台用的
+    
+    private String  fmap;
     
     
     
-    public String getReason() {
+    
+    
+    
+    public String getFmap() {
+		return fmap;
+	}
+	public void setFmap(String fmap) {
+		this.fmap = fmap;
+	}
+	public String getSwf() {
+		return swf;
+	}
+	public void setSwf(String swf) {
+		this.swf = swf;
+	}
+	public String getReason() {
 		return reason;
 	}
 	public void setReason(String reason) {

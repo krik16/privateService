@@ -38,7 +38,16 @@ public class FeedBackEntity implements Serializable{
     private Date updatedAt;
     @Property("created_at")
     private Date createdAt;
+    @Property("user_name")
+    private String userName;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getId() {
         return id;
@@ -127,4 +136,6 @@ public class FeedBackEntity implements Serializable{
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+
 }
