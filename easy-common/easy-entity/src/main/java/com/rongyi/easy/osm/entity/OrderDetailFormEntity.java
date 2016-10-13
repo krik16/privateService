@@ -1,6 +1,8 @@
 package com.rongyi.easy.osm.entity;
 
 import com.rongyi.easy.mcmc.vo.CommodityVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -96,9 +98,20 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private Integer limitNum;//关联商品的限购数
-    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3
+
+    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4
 
     private BigDecimal disconntFee;//商品折扣
+
+    private Integer activityId;//活动id
+
+    private Integer activityRoundId;//活动场次id
+
+    private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
+
+    private String activityName;//活动名称
+
+    private Integer activityStatus;//活动状态
 
 
     public String getRefundDiscountInfo() {
@@ -513,22 +526,49 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityType = activityType;
     }
 
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    public Integer getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Integer activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public BigDecimal getUnitOrigPrice() {
+        return unitOrigPrice;
+    }
+
+    public void setUnitOrigPrice(BigDecimal unitOrigPrice) {
+        this.unitOrigPrice = unitOrigPrice;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
     @Override
 	public String toString() {
-		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
-				+ commodityMid + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", refundAmount=" + refundAmount
-				+ ", realAmount=" + realAmount + ", status=" + status + ", appealTimes=" + appealTimes + ", refundTimes="
-				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId+ ", orderCouponDiscount=" + orderCouponDiscount
-                + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
-				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + ","
-                + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
-                ", discountAmount=" + discountAmount +
-                ", rebateAmount=" + rebateAmount +
-                ", scoreAmount=" + scoreAmount +
-                ", limitNum=" + limitNum +
-                ", activityType=" + activityType +
-                ", disconntFee=" + disconntFee +
-                " ]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 
     @Override
