@@ -19,7 +19,17 @@ public class ResGoods implements Serializable {
     private int joinCount;
     private int allocationCount;
     
-    /**
+    private List<RoundGood> roundGood;
+    
+   	public List<RoundGood> getRoundGood() {
+   		return roundGood;
+   	}
+
+   	public void setRoundGood(List<RoundGood> roundGood) {
+   		this.roundGood = roundGood;
+   	}
+
+	/**
      * 分类
      * */
     private List<CommodityCategorySimpleVO> categorySimpleVOs;

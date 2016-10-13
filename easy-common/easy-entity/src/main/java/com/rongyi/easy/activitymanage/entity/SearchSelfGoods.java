@@ -18,9 +18,20 @@ public class SearchSelfGoods implements Serializable {
     private Integer pageSize;
     private String shopName;
     private Integer activityId;
+    private Integer roundId;
     private Integer offset;
     
     
+    
+    
+	public Integer getRoundId() {
+		return roundId;
+	}
+
+	public void setRoundId(Integer roundId) {
+		this.roundId = roundId;
+	}
+
 	public Integer getOffset() {
 		return offset;
 	}
