@@ -119,7 +119,7 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public List<BAuthorities> getRoleAuthsByUserId(Integer userId) throws Exception;
-	
+
 	/**
 	 * 通过service ticket获取登录用户信息
 	 * 返回Map{userInfo:com.rongyi.easy.bsoms.entity.SessionUserInfo,authorities:List<String>}
@@ -128,6 +128,7 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public Map getSessionUserFromRedis(String bsst,boolean bConvertToObj) throws Exception;
+
 	
 	/**
 	 * 查询买手账号列表

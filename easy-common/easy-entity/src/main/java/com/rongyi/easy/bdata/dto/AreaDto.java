@@ -8,6 +8,7 @@ public class AreaDto implements Serializable{
 	private Integer areaId;       //区域ID
 	private Integer parentId;     //父级ID
 	private String cnname;        //名称
+	private String name;          //拼音名称
 	
 	
 	public Integer getId() {
@@ -33,6 +34,12 @@ public class AreaDto implements Serializable{
 	}
 	public void setCnname(String cnname) {
 		this.cnname = cnname;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

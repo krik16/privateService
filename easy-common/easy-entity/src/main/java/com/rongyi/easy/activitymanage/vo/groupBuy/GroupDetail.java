@@ -27,6 +27,10 @@ public class GroupDetail implements Serializable{
 	private String userIcon;
 	private String userId;
 	
+	private int groupRole;
+	
+	private String openId;
+	
 	
 	/***
 	 * 商品id
@@ -37,6 +41,12 @@ public class GroupDetail implements Serializable{
 	 * 商品specid
 	 */
 	private String goodSpecId;
+	
+	/***
+	 * 拼团价格
+	 */
+	private int goodGroupPrice;
+	
 	
 	
 	/**
@@ -49,6 +59,31 @@ public class GroupDetail implements Serializable{
 	 * 参团状态,0 成功  ,1 失败
 	 */
 	private int joinState;
+
+	
+	
+	
+	
+	
+
+	public int getGroupRole() {
+		return groupRole;
+	}
+
+
+	public void setGroupRole(int groupRole) {
+		this.groupRole = groupRole;
+	}
+
+
+	public String getOpenId() {
+		return openId;
+	}
+
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 
 
 	public int getGroupId() {
@@ -148,6 +183,16 @@ public class GroupDetail implements Serializable{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+
+	public int getGoodGroupPrice() {
+		return goodGroupPrice;
+	}
+
+
+	public void setGoodGroupPrice(int goodGroupPrice) {
+		this.goodGroupPrice = goodGroupPrice;
 	}
 	
 	

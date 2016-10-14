@@ -9,6 +9,8 @@ public class CommodityBrandBuyerVO implements Serializable {
     private String id;
     private String name;
     private String icon;
+    private int totalSales;
+    private String slug;
 
     public String getLogo() {
         return "http://rongyi.b0.upaiyun.com/system/brand/icon/" + id + "/" + icon;
@@ -36,5 +38,31 @@ public class CommodityBrandBuyerVO implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public int getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(int totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    @Override
+    public String toString() {
+        return "CommodityBrandBuyerVO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", slug='" + slug + '\'' +
+                ", totalSales=" + totalSales +
+                '}';
     }
 }

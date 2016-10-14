@@ -24,8 +24,8 @@ public class CommunalFacilityVO implements Serializable {
     private String    createAt;
     private String    updateAt;
     private String    updator;
-    private String    ename ;  //公共设施英文名称
-
+    private String    ename;
+    
     public String getOperator() {
 		return operator;
 	}

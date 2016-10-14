@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
+
 /***
  * 团信息
  * @author caohongjiang
@@ -15,7 +17,7 @@ public class GroupInfo implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -912983980172190001L;
+	private static final long serialVersionUID = -3030158451798838388L;
 
 	/**
 	 * 团id
@@ -60,6 +62,7 @@ public class GroupInfo implements Serializable{
 	 *    组团进行中 			2
 	 *    组团成功			3
 	 *    组团失败:团时间到了,人数不够,自动失败 4
+	 *    活动下线,团失败 5
 	 *    
 	 */
 	private int  state;

@@ -22,7 +22,7 @@ import org.bson.types.ObjectId;
 public class McmcCommodityDocument implements java.io.Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6516058338575306587L;
 	@Field
@@ -107,8 +107,22 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String brandName;
 	@Field("updateAt")
 	private Date updateAt;
+    @Field("galleryPosition")
+	private Integer galleryPosition;
+
+	@Field("shopName")
+	private String shopName; ///< 店铺名称
+	@Field("mallName")
+	private String mallName;  ///< 商场名称
+	@Field("hotAreaName")
+	private String hotAreaName; ///< 商圈名称
+	@Field("top")
+	private Integer top; ///< 置顶排序
 
 	private String secKillSign;
+
+	@Field("extend")
+	private String extend;
 
 	public Double getPrice() {
 		return price;
@@ -160,7 +174,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setCategory3_id(category_ids.get(2));
 		}
 	}
-	
+
 	public String getCategory1_id() {
 		return category1_id;
 	}
@@ -249,10 +263,18 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.discount = discount;
 	}
 
-	public McmcCommodityDocument(){
-		
+	public Integer getGalleryPosition() {
+		return galleryPosition;
 	}
-	
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
+	public McmcCommodityDocument(){
+
+	}
+
 	public McmcCommodityDocument(SolrDocument doc){
 		this.id = doc.getFieldValue("id").toString();
 		this.category1 = doc.getFieldValue("category1").toString();
@@ -453,6 +475,46 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		return updateAt;
 	}
 
+	public String getExtend() {
+		return extend;
+	}
+
+	public void setExtend(String extend) {
+		this.extend = extend;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getHotAreaName() {
+		return hotAreaName;
+	}
+
+	public void setHotAreaName(String hotAreaName) {
+		this.hotAreaName = hotAreaName;
+	}
+
+	public Integer getTop() {
+		return top;
+	}
+
+	public void setTop(Integer top) {
+		this.top = top;
+	}
+
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
 								 long brandId, long mallId, CommodityShopInfo shopInfo,
 								 List<Double> positions, List<String> zoneIds, String brandMid) {
@@ -464,6 +526,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setPublic_start(new Date());
 		this.setSold(0);
 		this.setType(CommodityType.GUIDE.getValue());
+		this.setCreateBy(commodity.getCreate_by());
 		this.setPrice(commodity.getPrice());
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
@@ -502,7 +565,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 		if(commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
-			this.setCreateBy(commodity.getCreate_by());
 			this.setSpot(commodity.isSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
 			this.setTerminalType(commodity.getTerminalType());

@@ -33,6 +33,8 @@ public class VirtualAccountDetailEntity implements Serializable{
 
     private Boolean isCollected;
 
+    private BigDecimal balanceBefore;
+
     public Integer getId() {
         return id;
     }
@@ -135,5 +137,13 @@ public class VirtualAccountDetailEntity implements Serializable{
 
     public void setIsCollected(Boolean isCollected) {
         this.isCollected = isCollected;
+    }
+
+    public BigDecimal getBalanceBefore() {
+        return balanceBefore;
+    }
+
+    public void setBalanceBefore(BigDecimal balanceBefore) {
+        this.balanceBefore = balanceBefore;
     }
 }
