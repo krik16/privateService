@@ -1,5 +1,8 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 public class GoodSpecInfo implements Serializable{
@@ -91,10 +94,10 @@ public class GoodSpecInfo implements Serializable{
 	public void setRemainCount(int remainCount) {
 		this.remainCount = remainCount;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
+
 }

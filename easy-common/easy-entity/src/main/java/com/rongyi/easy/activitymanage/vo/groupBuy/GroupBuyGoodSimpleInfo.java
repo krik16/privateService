@@ -1,5 +1,8 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -182,14 +185,11 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	public void setJoinGroupLimit(int joinGroupLimit) {
 		this.joinGroupLimit = joinGroupLimit;
 	}
-	
 
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
 
-
-
-	
-	
-	
-	
 }
