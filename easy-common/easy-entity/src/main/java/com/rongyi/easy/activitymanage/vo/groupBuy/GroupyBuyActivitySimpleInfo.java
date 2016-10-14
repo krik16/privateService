@@ -1,5 +1,8 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -108,12 +111,9 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 		this.groupCloseTime = groupCloseTime;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
 
-	
-
-
-	
-	
-	
-	
 }
