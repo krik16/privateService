@@ -38,7 +38,7 @@ public class SmsConfig implements Serializable{
     public static final String MALLLIFE_BINDING="验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
     public static final String MALLLIFE_DRAWCASH="验证码：@，您正在设置提现密码，10分钟有效，请勿泄露";
 
-    public static final String MALLLIFE_YKCOKE="验证码：@，您正在设置提现密码，请勿泄露";
+    public static final String MALLLIFE_YKCOKE="亲爱的伙伴，你的优酷会员兑换密码为@，兑换链接vip.youku.com。期待您关注我们其他精彩的活动!";
 
     public static final String WEBCHAT_MALLLIFE_BINDING="谢谢您使用容易网客户端，您当前的验证码：@";
 

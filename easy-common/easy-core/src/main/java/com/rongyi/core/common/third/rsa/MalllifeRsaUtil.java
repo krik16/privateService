@@ -284,6 +284,7 @@ public class MalllifeRsaUtil {
               //  System.out.println("解密后="+decryStr);
 
 
+                System.out.println("=================="+(int)(200*0.01));
 
 
             } catch (Exception e) {
@@ -294,6 +295,8 @@ public class MalllifeRsaUtil {
 
         }
     }
+
+
 
 
 

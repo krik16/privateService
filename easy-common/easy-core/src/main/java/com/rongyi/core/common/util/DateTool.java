@@ -422,7 +422,7 @@ public class DateTool {
 	public static long date2TimeStamp(String date_str,String format){
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
-			return sdf.parse(date_str).getTime()/1000;
+			return sdf.parse(date_str).getTime();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

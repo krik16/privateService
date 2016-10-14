@@ -28,7 +28,7 @@ public class MalllifeWelfareEntity implements Serializable {
     private String channel;
 
     /** 订单状态 **/
-    private Integer orderStatus;
+    private Integer orderStatus; //0支付中 1已经完成 2领取红包 3删除
 
     /** 订单号 */
     private String orderNo;

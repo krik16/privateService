@@ -48,5 +48,7 @@ public interface IWelfareService {
     public void updateOrderStatus(WelfareParam wp)throws Exception;
 
 
+    public void delById(Long Id)throws Exception;
+
 
 }
