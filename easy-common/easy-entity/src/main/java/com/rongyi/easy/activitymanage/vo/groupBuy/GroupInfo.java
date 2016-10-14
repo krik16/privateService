@@ -1,5 +1,8 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +65,7 @@ public class GroupInfo implements Serializable{
 	 *    组团进行中 			2
 	 *    组团成功			3
 	 *    组团失败:团时间到了,人数不够,自动失败 4
+	 *    活动下线,团失败 5
 	 *    
 	 */
 	private int  state;
@@ -181,9 +185,12 @@ public class GroupInfo implements Serializable{
 	public void setState(int state) {
 		this.state = state;
 	}
-	
-	
 
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
 	
 	
 
