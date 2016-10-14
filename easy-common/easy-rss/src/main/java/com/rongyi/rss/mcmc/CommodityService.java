@@ -252,4 +252,6 @@ public interface CommodityService {
     public Long selectOnlineCommodityCountByuser(String createId);
 
     public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
 }
