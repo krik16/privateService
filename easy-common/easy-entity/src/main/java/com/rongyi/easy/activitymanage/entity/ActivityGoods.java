@@ -112,6 +112,14 @@ public class ActivityGoods implements Serializable {
      * 0:取消撤销状态  1:表示申请撤销中状态
      */
     private Integer applyStatus;
+    /**
+     * 描述
+     */
+    private String desc;
+    private Integer groupNum;
+    private Integer openGroupLimit;
+    private Integer joinGroupLimit;
+    private Integer sortNum;
 
     /**
      * 商品规格
@@ -326,6 +334,47 @@ public class ActivityGoods implements Serializable {
         this.applyStatus = applyStatus;
     }
 
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(Integer groupNum) {
+        this.groupNum = groupNum;
+    }
+
+    public Integer getOpenGroupLimit() {
+        return openGroupLimit;
+    }
+
+    public void setOpenGroupLimit(Integer openGroupLimit) {
+        this.openGroupLimit = openGroupLimit;
+    }
+
+    public Integer getJoinGroupLimit() {
+        return joinGroupLimit;
+    }
+
+    public void setJoinGroupLimit(Integer joinGroupLimit) {
+        this.joinGroupLimit = joinGroupLimit;
+    }
+
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -351,6 +400,11 @@ public class ActivityGoods implements Serializable {
                 .append("applyStatus", applyStatus)
                 .append("activityGoodsSpecs", activityGoodsSpecs)
                 .append("activityGoodsCategories", activityGoodsCategories)
+                .append("desc", desc)
+                .append("groupNum", groupNum)
+                .append("joinGroupLimit", joinGroupLimit)
+                .append("openGroupLimit", openGroupLimit)
+                .append("sortNum", sortNum)
                 .toString();
     }
 }

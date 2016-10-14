@@ -145,6 +145,7 @@ public interface ActivityService {
       */
      public int insertActivityGoodsSpec(ActivityGoodsSpec activityGoodsSpec);
 
+
     /**
      * 查询活动列表
      * @param searchActivityParam
@@ -153,17 +154,15 @@ public interface ActivityService {
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
 
 
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 更新库存
+     * @param activityGoodsId
+     * @param stockCount
+     * @param joinCount
+     * @param activityPrice
+     * @return
+     */
+    public int updateCountAndPrice(int activityGoodsId, Integer stockCount, Integer joinCount, Integer activityPrice);
 
 
 
