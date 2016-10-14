@@ -254,6 +254,7 @@ public interface CommodityService {
 
     public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
 
+<<<<<<< HEAD
     Boolean deductStock(List<ActivityCommodityParam> params);
 
     Boolean returnStock(List<ActivityCommodityParam> params);
@@ -278,4 +279,7 @@ public interface CommodityService {
      */
     boolean returnCommodityStock(String commodityId, Integer stock);
 
+=======
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
+>>>>>>> develop
 }
