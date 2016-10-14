@@ -51,7 +51,11 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 	private boolean isForceFollow;
 	
 	
+	private String shareTitle;
 	
+	private String sharePic;
+	
+	private String shareContent;
 	
 
 
@@ -111,9 +115,36 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 		this.groupCloseTime = groupCloseTime;
 	}
 
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
+
 
 }

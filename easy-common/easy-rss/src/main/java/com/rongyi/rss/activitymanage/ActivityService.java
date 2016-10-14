@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
+import com.rongyi.easy.activity.entity.QuerySecKillGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
@@ -145,6 +146,7 @@ public interface ActivityService {
       */
      public int insertActivityGoodsSpec(ActivityGoodsSpec activityGoodsSpec);
 
+
     /**
      * 查询活动列表
      * @param searchActivityParam
@@ -153,17 +155,13 @@ public interface ActivityService {
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
 
 
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 更新库存
+     * @param activityGoodsId
+     * @param joinCount
+     * @return
+     */
+    public int updateJoinCount(int activityGoodsId, Integer joinCount);
 
 
 
@@ -185,6 +183,20 @@ public interface ActivityService {
      * @return
      */
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
+
+    /**
+     *
+     * @param querySecKillGoods
+     * @return
+     */
+    public int countResActivityGoods(QuerySecKillGoods querySecKillGoods);
+
+    /**
+     *
+     * @param querySecKillGoods
+     * @return
+     */
+    public List<ActivityGoods> getResActivityGoods(QuerySecKillGoods querySecKillGoods);
 
 
 }
