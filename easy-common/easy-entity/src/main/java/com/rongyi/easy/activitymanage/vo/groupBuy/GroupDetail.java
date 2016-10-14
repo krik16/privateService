@@ -27,6 +27,8 @@ public class GroupDetail implements Serializable{
 	private String userIcon;
 	private String userId;
 	
+	private int groupRole;
+	
 	private String openId;
 	
 	
@@ -60,6 +62,19 @@ public class GroupDetail implements Serializable{
 
 	
 	
+	
+	
+	
+
+	public int getGroupRole() {
+		return groupRole;
+	}
+
+
+	public void setGroupRole(int groupRole) {
+		this.groupRole = groupRole;
+	}
+
 
 	public String getOpenId() {
 		return openId;

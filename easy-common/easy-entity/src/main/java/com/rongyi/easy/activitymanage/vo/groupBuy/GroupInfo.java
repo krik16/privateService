@@ -62,6 +62,7 @@ public class GroupInfo implements Serializable{
 	 *    组团进行中 			2
 	 *    组团成功			3
 	 *    组团失败:团时间到了,人数不够,自动失败 4
+	 *    活动下线,团失败 5
 	 *    
 	 */
 	private int  state;
