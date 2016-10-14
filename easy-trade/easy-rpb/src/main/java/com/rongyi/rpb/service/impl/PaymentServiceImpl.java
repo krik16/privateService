@@ -480,7 +480,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             PaymentEntity paymentEntity = new PaymentEntity();
             BeanUtils.copyProperties(paymentEntityVO, paymentEntity);
             weixinPayService.payNotifyThird(paymentEntity);
-        } else {
+        } else if (Constants.ORDER_TYPE.ORDER_TYPE_4 == paymentEntityVO.getOrderType()){
+            LOGGER.info("微信一分钱红包0元单不处理");
+        }else {
             String type = PaymentEventType.BUYER_PAID;
             if (PaymentEventType.REFUND.equals(event.getType()))
                 type = PaymentEventType.REFUND;
