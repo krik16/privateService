@@ -37,7 +37,7 @@ public class ActivityGoodsSpecVO implements Serializable {
     /**
      * 活动价
      */
-    private Integer activityPrice;
+    private String activityPrice;
 
     /**
      * 商品规格信息，例如大小、尺码、颜色
@@ -84,11 +84,11 @@ public class ActivityGoodsSpecVO implements Serializable {
         this.currPrice = currPrice;
     }
 
-    public Integer getActivityPrice() {
+    public String getActivityPrice() {
         return activityPrice;
     }
 
-    public void setActivityPrice(Integer activityPrice) {
+    public void setActivityPrice(String activityPrice) {
         this.activityPrice = activityPrice;
     }
 

@@ -13,8 +13,8 @@ public class QuerySecKillGoods implements Serializable {
     private String goodsId;//商品id
     private String name;//商品名称
     private String shopName;//店铺名称
-    private Integer currentPage;
-    private Integer pageSize;
+    private Integer currentPage = 1;
+    private Integer pageSize = 10;
     private Integer status;
 
 

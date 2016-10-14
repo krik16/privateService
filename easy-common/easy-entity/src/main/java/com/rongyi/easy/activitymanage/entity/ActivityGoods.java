@@ -120,6 +120,8 @@ public class ActivityGoods implements Serializable {
     private Integer openGroupLimit;
     private Integer joinGroupLimit;
     private Integer sortNum;
+    private String remainStock;
+    private String activityPrice;
 
     /**
      * 商品规格
@@ -145,6 +147,23 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+
+    public String getActivityPrice() {
+        return activityPrice;
+    }
+
+    public void setActivityPrice(String activityPrice) {
+        this.activityPrice = activityPrice;
+    }
+
+    public String getRemainStock() {
+        return remainStock;
+    }
+
+    public void setRemainStock(String remainStock) {
+        this.remainStock = remainStock;
     }
 
     public ActivityGoods(int type){
@@ -405,6 +424,8 @@ public class ActivityGoods implements Serializable {
                 .append("joinGroupLimit", joinGroupLimit)
                 .append("openGroupLimit", openGroupLimit)
                 .append("sortNum", sortNum)
+                .append("remainStock", remainStock)
+                .append("activityPrice", activityPrice)
                 .toString();
     }
 }
