@@ -12,6 +12,7 @@ public class GroupStockParam implements Serializable {
     private String goodsId;
     private String specId;
     private Integer operatorStock;//操作数
+    private Integer activityGoodsId;
 
 
     @Override
@@ -21,7 +22,17 @@ public class GroupStockParam implements Serializable {
                 .append("goodsId", goodsId)
                 .append("specId", specId)
                 .append("operatorStock", operatorStock)
+                .append("activityGoodsId", activityGoodsId)
                 .toString();
+    }
+
+
+    public Integer getActivityGoodsId() {
+        return activityGoodsId;
+    }
+
+    public void setActivityGoodsId(Integer activityGoodsId) {
+        this.activityGoodsId = activityGoodsId;
     }
 
     public Integer getActivityId() {

@@ -199,4 +199,6 @@ public interface ActivityService {
     public List<ActivityGoods> getResActivityGoods(QuerySecKillGoods querySecKillGoods);
 
 
+
+
 }
