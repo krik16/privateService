@@ -22,6 +22,42 @@ public class OrderModelParam implements Serializable {
 	private String orderPrice;// 订单价格
 	private List<OrderDetailModelParam> ordeDetailModel;
 	private String memberId;//微信用户id
+	private Integer from;//0微信,1容易逛
+	private String memberLogo;// 用户头像
+	private String memberName;// 用户昵称
+	private String openId;//
+
+	public Integer getFrom() {
+		return from;
+	}
+
+	public void setFrom(Integer from) {
+		this.from = from;
+	}
+
+	public String getMemberLogo() {
+		return memberLogo;
+	}
+
+	public void setMemberLogo(String memberLogo) {
+		this.memberLogo = memberLogo;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 
 	public String getShopId() {
 		return shopId;
@@ -67,7 +103,9 @@ public class OrderModelParam implements Serializable {
 	public String toString() {
 		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId
 				+ ", orderPrice=" + orderPrice + ", ordeDetailModel="
-				+ ordeDetailModel + ", memberId=" + memberId + "]";
+				+ ordeDetailModel + ", memberId=" + memberId + ", from=" + from
+				+ ", memberLogo=" + memberLogo + ", memberName=" + memberName
+				+ ", openId=" + openId + "]";
 	}
 	
 }
