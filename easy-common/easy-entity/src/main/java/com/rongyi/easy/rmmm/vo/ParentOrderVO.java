@@ -121,6 +121,16 @@ public class ParentOrderVO implements Serializable {
 
 	private BigDecimal orderTotalPrice;//订单总价
 
+	private String activityName;// 活动名称
+
+	private Integer activityType;// 活动类型
+
+	private Integer activityStatus;// 活动状态
+
+	private Integer activityRoundId;// 活动编号
+
+	private Integer orderSource;// 订单来源
+
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
 	}
@@ -730,11 +740,56 @@ public class ParentOrderVO implements Serializable {
 		this.commidityTotalPice = commidityTotalPice;
 	}
 
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
+	public Integer getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(Integer activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+
+	public Integer getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(Integer activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public Integer getOrderSource() {
+		return orderSource;
+	}
+
+	public void setOrderSource(Integer orderSource) {
+		this.orderSource = orderSource;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
 				"orderId='" + orderId + '\'' +
 				", mallName='" + mallName + '\'' +
+				", activityName='" + activityName + '\'' +
+				", activityType='" + activityType + '\'' +
+				", activityStatus='" + activityStatus + '\'' +
+				", activityRoundId='" + activityRoundId + '\'' +
+				", orderSource='" + orderSource + '\'' +
 				", brandName='" + brandName + '\'' +
 				", shopName='" + shopName + '\'' +
 				", shopIM=" + shopIM +
