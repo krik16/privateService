@@ -120,6 +120,16 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal commidityTotalPice;//商品总价
 
 	private BigDecimal orderTotalPrice;//订单总价
+	
+	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
+
+	public boolean isIfPayment() {
+		return ifPayment;
+	}
+
+	public void setIfPayment(boolean ifPayment) {
+		this.ifPayment = ifPayment;
+	}
 
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
@@ -793,6 +803,7 @@ public class ParentOrderVO implements Serializable {
 				", expressOrderInfoId=" + expressOrderInfoId +
 				", ifOnDisplayExpress=" + ifOnDisplayExpress +
 				", newPayAmount=" + newPayAmount +
+				", ifPayment=" + ifPayment +
 				'}';
 	}
 }
