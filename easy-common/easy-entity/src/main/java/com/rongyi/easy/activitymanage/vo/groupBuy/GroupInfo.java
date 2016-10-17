@@ -21,7 +21,7 @@ public class GroupInfo implements Serializable{
 	/**
 	 * 团id
 	 */
-	private int groupId;
+	private long groupId;
 	
 	/***
 	 * 活动id
@@ -87,14 +87,14 @@ public class GroupInfo implements Serializable{
 
 
 
-	public int getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
 
 
 
-	public void setGroupId(int groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 
