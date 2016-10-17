@@ -11,7 +11,7 @@ public interface GroupBuyService {
 /////----------------H5 接口 start
 	/***
 	 * 获取拼团活动简要信息
-	 * @param groupBuyId
+	 * @param activityId
 	 * @return
 	 */
 	GroupyBuyActivitySimpleInfo getGroupyBuyActivitySimpleInfo(int activityId);
@@ -20,7 +20,7 @@ public interface GroupBuyService {
 	 * 获取拼团活动商品列表
 	 * @param currentPage
 	 * @param pageSize
-	 * @param groupBuyId
+	 * @param activityId
 	 * @return
 	 */
 	List<GroupBuyGoodSimpleInfo> getGroupBuyActivityGoodsList(int currentPage,int pageSize,int activityId);
@@ -30,7 +30,7 @@ public interface GroupBuyService {
 	/***
 	 * 参团商品详情
 	 * @param goodId
-	 * @param groupBuyId
+	 * @param activityId
 	 * @return
 	 */
 	GroupBuyGoodSimpleInfo getGroupBuyGoodSimpleInfo(String goodId,int activityId);
@@ -94,22 +94,15 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	GroupInfo getGroupInfo(int groupId);
-	
-	
+
+
 	/**
-	 *  库存变更
-	 * @param activityId
+	 *拼团时间到了,人数不够,退团接口
 	 * @param groupId
-	 * @param goodId
-	 * @param goodSpecId
-	 * @param count   增加/扣减库存数
-	 * @param type 0 增加 1 减少
 	 * @return
 	 */
-	boolean updateStock(int activityId,int groupId,String goodId,String goodSpecId,int count,int type);
-	
-	
-	
+	boolean groupTimeOut(int groupId);
+
 	
 	
 	
