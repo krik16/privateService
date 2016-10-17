@@ -2,6 +2,7 @@ package com.rongyi.rss.activitymanage;
 
 import java.util.List;
 
+import com.rongyi.easy.activity.entity.GroupStockParam;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupyBuyActivitySimpleInfo;
@@ -107,7 +108,12 @@ public interface GroupBuyService {
 	
 	
 /////----------------H5 接口 end
-	
-	
+
+	/**
+	 * 增加库存
+	 */
+	public  boolean returnGroupStock(List<GroupStockParam> params);
+
+	public boolean reduceGroupStock(List<GroupStockParam> params);
 	
 }
