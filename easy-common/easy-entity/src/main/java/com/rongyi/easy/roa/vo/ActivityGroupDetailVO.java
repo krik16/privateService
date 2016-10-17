@@ -25,7 +25,7 @@ public class ActivityGroupDetailVO implements Serializable{
 	private Integer activityId;//拼团活动id
 	private String activityName;//拼团活动名称
 	private Integer activityCommodityStock;//活动商品库存
-	private String activityPrice;//拼团商品最低价格
+	private double activityPrice;//拼团商品最低价格
 	private Long endAt;//拼团活动结束时间
 	private Long startAt;//拼团活动开始时间
 	private Boolean forceAttention = false;//下单是否需要强制关注,true：要关注，false：不需要关注
@@ -35,7 +35,21 @@ public class ActivityGroupDetailVO implements Serializable{
 	private Integer groupStatus;//拼团状态,0：拼团中，1：成功，2：失败
 	private Integer memberIdentity;//用户身份,0：未参团者，1：开团者，2：参团者
 	private String orderNo;//用户参团或开团的订单号
+	private String activityCommodityDesc;//拼团活动商品描述
+	private int groupTotalNum;//活动商品参团总人数
 	
+	public String getActivityCommodityDesc() {
+		return activityCommodityDesc;
+	}
+	public void setActivityCommodityDesc(String activityCommodityDesc) {
+		this.activityCommodityDesc = activityCommodityDesc;
+	}
+	public int getGroupTotalNum() {
+		return groupTotalNum;
+	}
+	public void setGroupTotalNum(int groupTotalNum) {
+		this.groupTotalNum = groupTotalNum;
+	}
 	public int getCommodityAppStatus() {
 		return commodityAppStatus;
 	}
@@ -84,10 +98,10 @@ public class ActivityGroupDetailVO implements Serializable{
 	public void setActivityCommodityStock(Integer activityCommodityStock) {
 		this.activityCommodityStock = activityCommodityStock;
 	}
-	public String getActivityPrice() {
+	public double getActivityPrice() {
 		return activityPrice;
 	}
-	public void setActivityPrice(String activityPrice) {
+	public void setActivityPrice(double activityPrice) {
 		this.activityPrice = activityPrice;
 	}
 	public Long getEndAt() {
@@ -158,6 +172,7 @@ public class ActivityGroupDetailVO implements Serializable{
 				+ groupPeopleLimit + ", groupStatus=" + groupStatus
 				+ ", memberIdentity=" + memberIdentity 
 				+ ", orderNo=" + orderNo + ", commodityAppStatus=" + commodityAppStatus
+				+ ", groupTotalNum=" + groupTotalNum + ", activityCommodityDesc=" + activityCommodityDesc
 				+ "]";
 	}
 
