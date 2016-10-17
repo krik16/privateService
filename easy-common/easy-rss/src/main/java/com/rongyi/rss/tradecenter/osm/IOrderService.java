@@ -57,6 +57,14 @@ public interface IOrderService {
 	 * @return ResponseResult
 	 */
 	ResponseResult repealOrder(OrderDealedParam param);
+
+	/**
+	 * 卖家撤销订单API(批量)
+	 *
+	 * @param paramList 订单参数
+	 * @return ResponseResult
+	 */
+	ResponseResult repealOrderBatch(List<OrderDealedParam> paramList);
 	
 	/**
 	 * c2c提交订单API
