@@ -104,7 +104,12 @@ public interface GroupBuyService {
 	 */
 	boolean groupTimeOut(long groupId) throws Exception;
 
-	
+	/**
+	 * 已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
+	 * @param groupId
+	 * @param goodId
+	 */
+	void    addGroupRandomNumByPV(long groupId,String goodId);
 	
 	
 /////----------------H5 接口 end
