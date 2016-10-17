@@ -26,7 +26,10 @@ public class GroupDetail implements Serializable{
 	
 	private String userIcon;
 	private String userId;
-	
+
+	/**
+	 * 0团长,1团员
+	 */
 	private int groupRole;
 	
 	private String openId;
@@ -61,7 +64,8 @@ public class GroupDetail implements Serializable{
 	private int joinState;
 
 	
-	
+	private  String orderNo;
+
 	
 	
 	
@@ -194,10 +198,13 @@ public class GroupDetail implements Serializable{
 	public void setGoodGroupPrice(int goodGroupPrice) {
 		this.goodGroupPrice = goodGroupPrice;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
 }

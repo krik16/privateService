@@ -23,15 +23,15 @@ public class GoodSpecInfo implements Serializable{
 	
 	/***
 	 * 商品规格id
-	 * 
+	 *
 	 */
 	private String goodSpecId;
-	
-	
+
+
 	/***
-	 * 拼团价格
+	 * 拼团价格:元
 	 */
-	private int goodGroupPrice;
+	private double goodGroupPrice;
 	
 	
 	/***
@@ -66,14 +66,6 @@ public class GoodSpecInfo implements Serializable{
 	}
 
 
-	public int getGoodGroupPrice() {
-		return goodGroupPrice;
-	}
-
-
-	public void setGoodGroupPrice(int goodGroupPrice) {
-		this.goodGroupPrice = goodGroupPrice;
-	}
 
 
 	public int getJoinCount() {
@@ -100,4 +92,11 @@ public class GoodSpecInfo implements Serializable{
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 
+	public double getGoodGroupPrice() {
+		return goodGroupPrice;
+	}
+
+	public void setGoodGroupPrice(double goodGroupPrice) {
+		this.goodGroupPrice = goodGroupPrice;
+	}
 }
