@@ -26,7 +26,10 @@ public class GroupDetail implements Serializable{
 	
 	private String userIcon;
 	private String userId;
-	
+
+	/**
+	 * 0团长,1团员
+	 */
 	private int groupRole;
 	
 	private String openId;
