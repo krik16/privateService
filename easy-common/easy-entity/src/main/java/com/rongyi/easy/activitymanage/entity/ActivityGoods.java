@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -122,11 +123,13 @@ public class ActivityGoods implements Serializable {
     private Integer sortNum;
     private String remainStock;
     private String activityPrice;
+    //开团起始人数（随机数）
+    private Integer groupRandomNum;
 
     /**
      * 商品规格
      */
-    private List<ActivityGoodsSpec>  activityGoodsSpecs;
+    private List<ActivityGoodsSpec>  activityGoodsSpecs  = Lists.newArrayList();
 
     /**
      * 商品分类
@@ -149,6 +152,13 @@ public class ActivityGoods implements Serializable {
         return categoryStr;
     }
 
+    public Integer getGroupRandomNum() {
+        return groupRandomNum;
+    }
+
+    public void setGroupRandomNum(Integer groupRandomNum) {
+        this.groupRandomNum = groupRandomNum;
+    }
 
     public String getActivityPrice() {
         return activityPrice;
@@ -426,6 +436,7 @@ public class ActivityGoods implements Serializable {
                 .append("sortNum", sortNum)
                 .append("remainStock", remainStock)
                 .append("activityPrice", activityPrice)
+                .append("groupRandomNum", groupRandomNum)
                 .toString();
     }
 }
