@@ -11,6 +11,7 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -187,9 +188,7 @@ public interface CommodityService {
 
     /**
      * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
-     * @param ids
-     * @param sort
-     * @param type
+     * @param commoditySortVos
      * @return
      */
     ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
@@ -261,4 +260,30 @@ public interface CommodityService {
      * @return list CommodityPinTuanVO
      */
     List<CommodityPinTuanVO> searchCommodityListForPinTuan(PinTuanCommodityParam param);
+
+    Boolean deductStock(List<ActivityCommodityParam> params);
+
+    Boolean returnStock(List<ActivityCommodityParam> params);
+
+    /**
+     * 扣除商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
+    boolean deductCommodityStock(String commodityId, Integer stock);
+
+    /**
+     * 返还商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
+    boolean returnCommodityStock(String commodityId, Integer stock);
+
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
 }
