@@ -41,7 +41,7 @@ public class OrderDetailModelEntity {
     private Integer activityId;
 
     /**活动场次id**/
-    private Integer activityRoundId;
+    private Long activityRoundId;
 
     /**活动类型 闪购1、特卖2、秒杀3、拼团4**/
     private Integer activityType;
@@ -214,11 +214,11 @@ public class OrderDetailModelEntity {
         this.activityId = activityId;
     }
 
-    public Integer getActivityRoundId() {
+    public Long getActivityRoundId() {
         return activityRoundId;
     }
 
-    public void setActivityRoundId(Integer activityRoundId) {
+    public void setActivityRoundId(Long activityRoundId) {
         this.activityRoundId = activityRoundId;
     }
 
