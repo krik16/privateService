@@ -24,7 +24,7 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * @date 2016-05-09
  * @version 1.1
  */
-public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class CommoditySearchParam extends MalllifeBaseParam implements Serializable {
 
 	private static final long serialVersionUID = -3577116644255163015L;
 
