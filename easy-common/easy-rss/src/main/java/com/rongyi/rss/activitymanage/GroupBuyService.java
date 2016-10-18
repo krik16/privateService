@@ -110,6 +110,14 @@ public interface GroupBuyService {
 	 * @param goodId
 	 */
 	void    addGroupRandomNumByPV(int activityId,String goodId);
+
+	/**
+	 * 获取用户对某个商品是否超出  开参团限制数量,
+	 * @param groupId
+	 * @param userId
+	 * @return true,允许支付,false  不允许
+	 */
+	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
 	
 	
 /////----------------H5 接口 end

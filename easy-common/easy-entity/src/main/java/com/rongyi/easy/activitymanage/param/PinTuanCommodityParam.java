@@ -1,18 +1,20 @@
 package com.rongyi.easy.activitymanage.param;
 
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by xuying on 2016/10/17.
  */
-public class PingtuanCommoditySearchVo implements Serializable{
+public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializable{
 
     private String commodityCode;
 
     private String commodityName;
 
-    private String commodityCategory;
+    private String categoryId;
 
     private Integer startStock;
 
@@ -38,12 +40,12 @@ public class PingtuanCommoditySearchVo implements Serializable{
         this.commodityName = commodityName;
     }
 
-    public String getCommodityCategory() {
-        return commodityCategory;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setCommodityCategory(String commodityCategory) {
-        this.commodityCategory = commodityCategory;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Integer getStartStock() {
