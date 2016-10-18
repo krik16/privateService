@@ -264,5 +264,5 @@ public interface IOrderQueryService {
 	 * @param  buyerNum 用户id
 	 * @throws Exception
 	 */
-	String getOrderNoForPintuan(Integer activityId,Integer activityRoundId, String buyerNum) throws Exception;
+	String getOrderNoForPintuan(Integer activityId,Long activityRoundId, String buyerNum) throws Exception;
 }
