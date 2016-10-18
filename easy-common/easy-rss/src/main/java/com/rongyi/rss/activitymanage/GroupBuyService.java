@@ -2,6 +2,7 @@ package com.rongyi.rss.activitymanage;
 
 import java.util.List;
 
+import com.rongyi.easy.activity.entity.GroupStockParam;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupyBuyActivitySimpleInfo;
@@ -11,7 +12,7 @@ public interface GroupBuyService {
 /////----------------H5 接口 start
 	/***
 	 * 获取拼团活动简要信息
-	 * @param groupBuyId
+	 * @param activityId
 	 * @return
 	 */
 	GroupyBuyActivitySimpleInfo getGroupyBuyActivitySimpleInfo(int activityId);
@@ -20,7 +21,7 @@ public interface GroupBuyService {
 	 * 获取拼团活动商品列表
 	 * @param currentPage
 	 * @param pageSize
-	 * @param groupBuyId
+	 * @param activityId
 	 * @return
 	 */
 	List<GroupBuyGoodSimpleInfo> getGroupBuyActivityGoodsList(int currentPage,int pageSize,int activityId);
@@ -30,7 +31,7 @@ public interface GroupBuyService {
 	/***
 	 * 参团商品详情
 	 * @param goodId
-	 * @param groupBuyId
+	 * @param activityId
 	 * @return
 	 */
 	GroupBuyGoodSimpleInfo getGroupBuyGoodSimpleInfo(String goodId,int activityId);
@@ -56,7 +57,7 @@ public interface GroupBuyService {
 	 *  @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	int  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
+	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
 	
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
@@ -70,7 +71,7 @@ public interface GroupBuyService {
 	 * @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	int  joinGroup(int activityId,int groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
+	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
 	
 	
 	/**
@@ -84,7 +85,7 @@ public interface GroupBuyService {
 	 * @param paymentResult--是否支付成功
 	 * @return
 	 */
-	boolean noticePaymentResult(int activityId,int groupId,String goodId,String goodSpecId,String userId,boolean paymentResult);
+	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult);
 	
 	
 	
@@ -93,28 +94,31 @@ public interface GroupBuyService {
 	 * @param groupId
 	 * @return
 	 */
-	GroupInfo getGroupInfo(int groupId);
-	
-	
+	GroupInfo getGroupInfo(long groupId);
+
+
 	/**
-	 *  库存变更
-	 * @param activityId
+	 *拼团时间到了,人数不够,退团接口
 	 * @param groupId
-	 * @param goodId
-	 * @param goodSpecId
-	 * @param count   增加/扣减库存数
-	 * @param type 0 增加 1 减少
 	 * @return
 	 */
-	boolean updateStock(int activityId,int groupId,String goodId,String goodSpecId,int count,int type);
-	
-	
-	
-	
+	boolean groupTimeOut(long groupId) throws Exception;
+
+	/**
+	 * 已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
+	 * @param groupId
+	 * @param goodId
+	 */
+	void    addGroupRandomNumByPV(int activityId,String goodId);
 	
 	
 /////----------------H5 接口 end
-	
-	
+
+	/**
+	 * 增加库存
+	 */
+	public  boolean returnGroupStock(List<GroupStockParam> params);
+
+	public boolean reduceGroupStock(List<GroupStockParam> params);
 	
 }

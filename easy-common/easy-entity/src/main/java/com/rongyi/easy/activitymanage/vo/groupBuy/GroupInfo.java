@@ -15,17 +15,13 @@ import java.util.List;
  *
  */
 public class GroupInfo implements Serializable{
-	
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3030158451798838388L;
 
+	private static final long serialVersionUID = -1213255267725151298L;
 	/**
 	 * 团id
 	 */
-	private int groupId;
+	private long groupId;
 	
 	/***
 	 * 活动id
@@ -91,14 +87,14 @@ public class GroupInfo implements Serializable{
 
 
 
-	public int getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
 
 
 
-	public void setGroupId(int groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 

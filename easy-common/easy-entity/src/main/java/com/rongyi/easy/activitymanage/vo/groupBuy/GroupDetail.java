@@ -9,8 +9,26 @@ public class GroupDetail implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -8643031504146087289L;
-	
-	
+
+	@Override
+	public String toString() {
+		return "GroupDetail{" +
+				"activityId=" + activityId +
+				", groupId=" + groupId +
+				", userNick='" + userNick + '\'' +
+				", userIcon='" + userIcon + '\'' +
+				", userId='" + userId + '\'' +
+				", groupRole=" + groupRole +
+				", openId='" + openId + '\'' +
+				", goodId='" + goodId + '\'' +
+				", goodSpecId='" + goodSpecId + '\'' +
+				", goodGroupPrice=" + goodGroupPrice +
+				", createAt=" + createAt +
+				", joinState=" + joinState +
+				", orderNo='" + orderNo + '\'' +
+				'}';
+	}
+
 	/***
 	 * 活动id
 	 */
@@ -19,14 +37,17 @@ public class GroupDetail implements Serializable{
 	/**
 	 * 团id
 	 */
-	private int groupId;
+	private long groupId;
 	
 	
 	private String userNick;
 	
 	private String userIcon;
-	private String userId;
-	
+	private String 2;
+
+	/**
+	 * 0团长,1团员
+	 */
 	private int groupRole;
 	
 	private String openId;
@@ -41,11 +62,19 @@ public class GroupDetail implements Serializable{
 	 * 商品specid
 	 */
 	private String goodSpecId;
-	
+
+	public double getGoodGroupPrice() {
+		return goodGroupPrice;
+	}
+
+	public void setGoodGroupPrice(double goodGroupPrice) {
+		this.goodGroupPrice = goodGroupPrice;
+	}
+
 	/***
 	 * 拼团价格
 	 */
-	private int goodGroupPrice;
+	private double goodGroupPrice;
 	
 	
 	
@@ -61,8 +90,11 @@ public class GroupDetail implements Serializable{
 	private int joinState;
 
 	
-	
-	
+	private  String orderNo;
+	/**
+	 * 0微信,1容易逛
+	 */
+	private int userType;
 	
 	
 
@@ -86,12 +118,12 @@ public class GroupDetail implements Serializable{
 	}
 
 
-	public int getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
 
-	public void setGroupId(int groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 
@@ -186,18 +218,23 @@ public class GroupDetail implements Serializable{
 	}
 
 
-	public int getGoodGroupPrice() {
-		return goodGroupPrice;
+
+
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 
 
-	public void setGoodGroupPrice(int goodGroupPrice) {
-		this.goodGroupPrice = goodGroupPrice;
+	public int getUserType() {
+		return userType;
 	}
-	
-	
-	
-	
-	
-	
+
+	public void setUserType(int userType) {
+		this.userType = userType;
+	}
 }

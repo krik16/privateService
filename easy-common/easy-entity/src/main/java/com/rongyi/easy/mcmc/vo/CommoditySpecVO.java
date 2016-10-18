@@ -24,6 +24,25 @@ public class CommoditySpecVO implements  Serializable {
 	
 	private List<CommoditySpecColumnVO> specColumnValues;
 	
+	private Integer activitySpecStock;//拼团商品规格库存
+	private Double activityPrice;//拼团商品规格价格
+	
+	public Integer getActivitySpecStock() {
+		return activitySpecStock;
+	}
+
+	public void setActivitySpecStock(Integer activitySpecStock) {
+		this.activitySpecStock = activitySpecStock;
+	}
+
+	public Double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(Double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
 	public List<CommoditySpecColumnVO> getSpecColumnValues() {
 		return specColumnValues;
 	}
