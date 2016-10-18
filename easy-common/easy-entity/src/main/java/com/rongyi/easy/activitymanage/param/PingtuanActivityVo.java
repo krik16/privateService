@@ -8,6 +8,10 @@ import java.util.Date;
  */
 public class PingtuanActivityVo implements Serializable{
 
+    private Integer activityId;
+
+    private Integer pintuanConfigId;
+
     private String name;
 
     private Date startAt;
@@ -28,6 +32,21 @@ public class PingtuanActivityVo implements Serializable{
 
     private String shareDesc; //分享描述
 
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    public Integer getPintuanConfigId() {
+        return pintuanConfigId;
+    }
+
+    public void setPintuanConfigId(Integer pintuanConfigId) {
+        this.pintuanConfigId = pintuanConfigId;
+    }
 
     public String getName() {
         return name;

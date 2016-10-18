@@ -12,7 +12,7 @@ public class PinTuanConfigEntity implements Serializable {
 
     private Integer cancelTime;
 
-    private Byte forceAttention;
+    private Integer forceAttention;
 
     private String shareTitle;
 
@@ -25,6 +25,8 @@ public class PinTuanConfigEntity implements Serializable {
     private Date updateAt;
 
     private Byte isDeleted;
+
+    private String pic;
 
     private static final long serialVersionUID = 1L;
 
@@ -60,11 +62,11 @@ public class PinTuanConfigEntity implements Serializable {
         this.cancelTime = cancelTime;
     }
 
-    public Byte getForceAttention() {
+    public Integer getForceAttention() {
         return forceAttention;
     }
 
-    public void setForceAttention(Byte forceAttention) {
+    public void setForceAttention(Integer forceAttention) {
         this.forceAttention = forceAttention;
     }
 
@@ -114,5 +116,13 @@ public class PinTuanConfigEntity implements Serializable {
 
     public void setIsDeleted(Byte isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }
