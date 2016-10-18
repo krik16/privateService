@@ -11,7 +11,7 @@ public class GroupActivityParam implements Serializable{
 	
 	private Integer activityId;//拼团活动id
 	private String commodityId;//商品id
-	private Integer activityRoundId;//拼团id
+	private Long activityRoundId;//拼团id
 	private Integer currentPage = 1;
 	private Integer pageSize = 20;
 	private String memberId;//微信用户id
@@ -28,10 +28,10 @@ public class GroupActivityParam implements Serializable{
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
 	}
-	public Integer getActivityRoundId() {
+	public Long getActivityRoundId() {
 		return activityRoundId;
 	}
-	public void setActivityRoundId(Integer activityRoundId) {
+	public void setActivityRoundId(Long activityRoundId) {
 		this.activityRoundId = activityRoundId;
 	}
 	public Integer getCurrentPage() {

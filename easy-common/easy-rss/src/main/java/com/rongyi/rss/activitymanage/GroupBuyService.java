@@ -106,10 +106,18 @@ public interface GroupBuyService {
 
 	/**
 	 * 已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
-	 * @param groupId
+	 * @param activityId
 	 * @param goodId
 	 */
-	void    addGroupRandomNumByPV(long groupId,String goodId);
+	void    addGroupRandomNumByPV(int activityId,String goodId);
+
+	/**
+	 * 获取用户对某个商品是否超出  开参团限制数量,
+	 * @param groupId
+	 * @param userId
+	 * @return true,允许支付,false  不允许
+	 */
+	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
 	
 	
 /////----------------H5 接口 end
