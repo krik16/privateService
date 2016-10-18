@@ -1,6 +1,7 @@
 package com.rongyi.easy.tradecenter.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by jason
@@ -23,6 +24,11 @@ public class OsmOrderQueryParam implements Serializable
     private  String sizePerPage;//每页数量
     private String commodityStatus;//商品状态
     Integer guideId;//导购id
+    private Byte activityStatus;// 拼团活动状态
+    private String activityName;// 活动名称
+    private Byte activityType;// 活动类型
+    private List<String> commodityMidList;// 商品ID集合
+    private Long activityRoundId;// 活动场次ID
 
     public Integer getGuideId() {
         return guideId;
@@ -136,6 +142,46 @@ public class OsmOrderQueryParam implements Serializable
         this.sizePerPage = sizePerPage;
     }
 
+    public Byte getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Byte activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Byte getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Byte activityType) {
+        this.activityType = activityType;
+    }
+
+    public List<String> getCommodityMidList() {
+        return commodityMidList;
+    }
+
+    public void setCommodityMidList(List<String> commodityMidList) {
+        this.commodityMidList = commodityMidList;
+    }
+
+    public Long getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Long activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderQueryParam{" +
@@ -152,6 +198,11 @@ public class OsmOrderQueryParam implements Serializable
                 ", sizePerPage='" + sizePerPage + '\'' +
                 ", commodityStatus='" + commodityStatus + '\'' +
                 ", guideId=" + guideId +
+                ", activityStatus=" + activityStatus +
+                ", activityName=" + activityName +
+                ", activityType=" + activityType +
+                ", commodityMidList=" + commodityMidList +
+                ", activityRoundId=" + activityRoundId +
                 '}';
     }
 }

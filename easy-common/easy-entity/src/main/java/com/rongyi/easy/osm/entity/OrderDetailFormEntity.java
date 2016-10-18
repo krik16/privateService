@@ -108,7 +108,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer activityId;//活动id
 
-    private Integer activityRoundId;//活动场次id
+    private Long activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
 
@@ -537,11 +537,11 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityId = activityId;
     }
 
-    public Integer getActivityRoundId() {
+    public Long getActivityRoundId() {
         return activityRoundId;
     }
 
-    public void setActivityRoundId(Integer activityRoundId) {
+    public void setActivityRoundId(Long activityRoundId) {
         this.activityRoundId = activityRoundId;
     }
 
