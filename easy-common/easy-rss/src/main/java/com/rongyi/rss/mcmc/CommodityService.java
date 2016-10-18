@@ -259,7 +259,7 @@ public interface CommodityService {
      * @param param
      * @return list CommodityPinTuanVO
      */
-    List<CommodityPinTuanVO> searchCommodityListForPinTuan(PinTuanCommodityParam param);
+    CommodityPagePinTuanVO searchCommodityListForPinTuan(PinTuanCommodityParam param);
 
     Boolean deductStock(List<ActivityCommodityParam> params);
 

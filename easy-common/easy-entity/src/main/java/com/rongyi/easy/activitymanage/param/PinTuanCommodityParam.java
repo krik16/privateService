@@ -24,6 +24,8 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
 
     private Date endAt;
 
+    private String activityId;
+
     public String getCommodityCode() {
         return commodityCode;
     }
@@ -78,5 +80,27 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
 
     public void setEndAt(Date endAt) {
         this.endAt = endAt;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    @Override
+    public String toString() {
+        return "PinTuanCommodityParam{" +
+                "commodityCode='" + commodityCode + '\'' +
+                ", commodityName='" + commodityName + '\'' +
+                ", categoryId='" + categoryId + '\'' +
+                ", startStock=" + startStock +
+                ", endStock=" + endStock +
+                ", startAt=" + startAt +
+                ", endAt=" + endAt +
+                ", activityId='" + activityId + '\'' +
+                '}';
     }
 }
