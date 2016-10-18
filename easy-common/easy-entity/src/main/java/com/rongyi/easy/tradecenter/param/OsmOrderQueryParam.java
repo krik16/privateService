@@ -28,7 +28,7 @@ public class OsmOrderQueryParam implements Serializable
     private String activityName;// 活动名称
     private Byte activityType;// 活动类型
     private List<String> commodityMidList;// 商品ID集合
-    private Integer activityRoundId;// 活动场次ID
+    private Long activityRoundId;// 活动场次ID
 
     public Integer getGuideId() {
         return guideId;
@@ -174,11 +174,11 @@ public class OsmOrderQueryParam implements Serializable
         this.commodityMidList = commodityMidList;
     }
 
-    public Integer getActivityRoundId() {
+    public Long getActivityRoundId() {
         return activityRoundId;
     }
 
-    public void setActivityRoundId(Integer activityRoundId) {
+    public void setActivityRoundId(Long activityRoundId) {
         this.activityRoundId = activityRoundId;
     }
 

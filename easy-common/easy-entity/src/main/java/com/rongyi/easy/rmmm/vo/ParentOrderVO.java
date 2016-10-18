@@ -137,7 +137,7 @@ public class ParentOrderVO implements Serializable {
 
 	private Integer activityStatus;// 活动状态
 
-	private Integer activityRoundId;// 活动编号
+	private Long activityRoundId;// 活动编号
 
 	private Integer orderSource;// 订单来源
 
@@ -774,11 +774,11 @@ public class ParentOrderVO implements Serializable {
 		this.activityStatus = activityStatus;
 	}
 
-	public Integer getActivityRoundId() {
+	public Long getActivityRoundId() {
 		return activityRoundId;
 	}
 
-	public void setActivityRoundId(Integer activityRoundId) {
+	public void setActivityRoundId(Long activityRoundId) {
 		this.activityRoundId = activityRoundId;
 	}
 
