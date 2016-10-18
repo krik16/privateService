@@ -9,6 +9,7 @@ import com.rongyi.easy.activity.entity.QuerySecKillGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
+import com.rongyi.easy.activitymanage.param.PingtuanActivityVo;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.vo.*;
 
@@ -119,14 +120,14 @@ public interface ActivityService {
     /**
 	 * 根据活动ID统计报名的商品卡券数量
 	 * @param queryActivityGoods
-	 * @return 
+	 * @return
 	 * @author wangzhiwen
 	 */
      public int countActivityGoods(QueryActivityGoods queryActivityGoods);
      /**
  	 * 根据goodid，joinStartAt，joinEndAt查询商品卡券在同一时间是否参加其他活动
  	 * @param queryActivityGoods
- 	 * @return 
+ 	 * @return
 	 * @author wangzhiwen
  	 */
      public List<ActivityGoods> getActivityGoodsInfo(QueryActivityGoods queryActivityGoods);
@@ -134,14 +135,14 @@ public interface ActivityService {
      /**
       * 新增操作记录
       * @param activityCheckRecord
-      * @return 
+      * @return
 	  * @author wangzhiwen
       */
      public int insertActivityCheckRecord(ActivityCheckRecord activityCheckRecord);
      /**
       * 新增商品规格
       * @param activityGoodsSpec
-      * @return 
+      * @return
 	  * @author wangzhiwen
       */
      public int insertActivityGoodsSpec(ActivityGoodsSpec activityGoodsSpec);
@@ -173,7 +174,7 @@ public interface ActivityService {
      * @return ActivityInfoVO
      */
     ActivityInfoVO getActivityInfoVO(String goodsId, Integer goodsType);
-    
+
 
     /**
      * 查询活动关联的商品信息
@@ -197,6 +198,19 @@ public interface ActivityService {
      * @return
      */
     public List<ActivityGoods> getResActivityGoods(QuerySecKillGoods querySecKillGoods);
+
+    public ResponseVO inSertOrUpdatePingtuanActivity(PingtuanActivityVo pingtuanActivityVo);
+
+    public PingtuanActivityVo pingtuanConfigDetail(Integer activityId);
+
+    /**
+     * 更新商品状态
+     * @param activityGoodsId
+     * @param status
+     * @param userName
+     * @return
+     */
+    public boolean updateActivityGoodsStatus(Integer activityGoodsId,Integer status,String userName);
 
 
 }

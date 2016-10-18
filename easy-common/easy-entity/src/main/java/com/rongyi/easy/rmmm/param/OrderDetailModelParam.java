@@ -29,7 +29,7 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityAppStatus;//商品状态 0下架 1上架
 	private Integer commodityStock;//商品库存
 	private Integer activityId;//活动id
-	private Integer activityRoundId;//活动场次id
+	private Long activityRoundId;//活动场次id
 	private Integer activityType;//活动类型 0不参与 3秒杀 4拼团
 
 	private List<CommoditySpecColumnVO> specColumnValues;//  规格参数
@@ -233,11 +233,11 @@ public class OrderDetailModelParam implements Serializable {
 		this.activityId = activityId;
 	}
 
-	public Integer getActivityRoundId() {
+	public Long getActivityRoundId() {
 		return activityRoundId;
 	}
 
-	public void setActivityRoundId(Integer activityRoundId) {
+	public void setActivityRoundId(Long activityRoundId) {
 		this.activityRoundId = activityRoundId;
 	}
 

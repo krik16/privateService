@@ -57,7 +57,7 @@ public interface GroupBuyService {
 	 *  @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	int  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
+	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
 	
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
@@ -71,7 +71,7 @@ public interface GroupBuyService {
 	 * @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	int  joinGroup(int activityId,int groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
+	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
 	
 	
 	/**
@@ -85,7 +85,7 @@ public interface GroupBuyService {
 	 * @param paymentResult--是否支付成功
 	 * @return
 	 */
-	boolean noticePaymentResult(int activityId,int groupId,String goodId,String goodSpecId,String userId,boolean paymentResult);
+	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult);
 	
 	
 	
@@ -94,7 +94,7 @@ public interface GroupBuyService {
 	 * @param groupId
 	 * @return
 	 */
-	GroupInfo getGroupInfo(int groupId);
+	GroupInfo getGroupInfo(long groupId);
 
 
 	/**
@@ -102,9 +102,22 @@ public interface GroupBuyService {
 	 * @param groupId
 	 * @return
 	 */
-	boolean groupTimeOut(int groupId);
+	boolean groupTimeOut(long groupId) throws Exception;
 
-	
+	/**
+	 * 已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
+	 * @param activityId
+	 * @param goodId
+	 */
+	void    addGroupRandomNumByPV(int activityId,String goodId);
+
+	/**
+	 * 获取用户对某个商品是否超出  开参团限制数量,
+	 * @param groupId
+	 * @param userId
+	 * @return true,允许支付,false  不允许
+	 */
+	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
 	
 	
 /////----------------H5 接口 end

@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
+import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -186,9 +188,7 @@ public interface CommodityService {
 
     /**
      * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
-     * @param ids
-     * @param sort
-     * @param type
+     * @param commoditySortVos
      * @return
      */
     ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
@@ -252,4 +252,38 @@ public interface CommodityService {
     public Long selectOnlineCommodityCountByuser(String createId);
 
     public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+    /**
+     * 查询拼团活动列表
+     *
+     * @param param
+     * @return list CommodityPinTuanVO
+     */
+    CommodityPagePinTuanVO searchCommodityListForPinTuan(PinTuanCommodityParam param);
+
+    Boolean deductStock(List<ActivityCommodityParam> params);
+
+    Boolean returnStock(List<ActivityCommodityParam> params);
+
+    /**
+     * 扣除商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
+    boolean deductCommodityStock(String commodityId, Integer stock);
+
+    /**
+     * 返还商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
+    boolean returnCommodityStock(String commodityId, Integer stock);
+
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
 }

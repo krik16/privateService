@@ -217,7 +217,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
      */
     private String userPhone;
 
-    
+    /**
+     * 活动状态
+     */
+    private Integer activityStatus;
+
     public Byte getIsAlert() {
         return isAlert;
     }
@@ -890,6 +894,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.orderScore = orderScore;
     }
 
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -942,6 +954,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", orderChannel=" + orderChannel +
                 ", openId=" + openId +
                 ", userPhone=" + userPhone +
+                ", activityStatus=" + activityStatus +
                 '}';
     }
 

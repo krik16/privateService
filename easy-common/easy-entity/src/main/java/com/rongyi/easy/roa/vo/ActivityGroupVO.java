@@ -16,7 +16,7 @@ public class ActivityGroupVO implements Serializable{
 	 */
 	private static final long serialVersionUID = -5733923224371109330L;
 	
-	private Integer activityRoundId;//拼团id
+	private Long activityRoundId;//拼团id
 	private String commodityId;//商品id
 	private Long groupEndAt;//拼团结束时间groupNum
 	private Integer groupPeopleLimit;//拼团所需人数
@@ -38,10 +38,10 @@ public class ActivityGroupVO implements Serializable{
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
 	}
-	public Integer getActivityRoundId() {
+	public Long getActivityRoundId() {
 		return activityRoundId;
 	}
-	public void setActivityRoundId(Integer activityRoundId) {
+	public void setActivityRoundId(Long activityRoundId) {
 		this.activityRoundId = activityRoundId;
 	}
 	public Long getGroupEndAt() {
