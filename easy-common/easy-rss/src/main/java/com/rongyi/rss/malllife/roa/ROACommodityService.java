@@ -16,6 +16,7 @@ import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.vo.*;
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 
+import com.rongyi.easy.solr.McmcCommodityDocument;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -235,5 +236,7 @@ public interface ROACommodityService {
 	public Long  selectOnlineCommodityCountByuser(String createId);
 
 	public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+	public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList) throws Exception;
 
 }
