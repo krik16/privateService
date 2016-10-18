@@ -199,6 +199,14 @@ public interface ActivityService {
     public List<ActivityGoods> getResActivityGoods(QuerySecKillGoods querySecKillGoods);
 
 
+    /**
+     * 更新商品状态
+     * @param activityGoodsId
+     * @param status
+     * @param userName
+     * @return
+     */
+    public boolean updateActivityGoodsStatus(Integer activityGoodsId,Integer status,String userName);
 
 
 }
