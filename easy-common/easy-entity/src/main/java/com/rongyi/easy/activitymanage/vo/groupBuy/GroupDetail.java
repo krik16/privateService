@@ -43,7 +43,7 @@ public class GroupDetail implements Serializable{
 	private String userNick;
 	
 	private String userIcon;
-	private String 2;
+	private String userId;
 
 	/**
 	 * 0团长,1团员
