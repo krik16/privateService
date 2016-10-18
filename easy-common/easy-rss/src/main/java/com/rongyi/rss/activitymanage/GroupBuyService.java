@@ -109,7 +109,7 @@ public interface GroupBuyService {
 	 * @param groupId
 	 * @param goodId
 	 */
-	void    addGroupRandomNumByPV(long groupId,String goodId);
+	void    addGroupRandomNumByPV(int activityId,String goodId);
 	
 	
 /////----------------H5 接口 end
