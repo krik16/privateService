@@ -48,6 +48,7 @@ public class CommodityBuyerVO implements Serializable{
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private String brandLogo;
 	private String shopLogo;
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
 
 	public Integer getGalleryPosition() {
 		return galleryPosition;
@@ -383,6 +384,7 @@ public class CommodityBuyerVO implements Serializable{
 		}
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+		this.weAndTeStatus = commodity.getWeAndTeStatus();
 	}
 
 	public List<String> getCommodityPicList() {
@@ -530,6 +532,14 @@ public class CommodityBuyerVO implements Serializable{
 
 	public void setShopLogo(String shopLogo) {
 		this.shopLogo = shopLogo;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
 	}
 
 	@Override
