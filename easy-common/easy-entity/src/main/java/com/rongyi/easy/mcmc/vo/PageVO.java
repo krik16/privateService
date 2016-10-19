@@ -13,6 +13,12 @@ public class PageVO implements Serializable {
     private Integer nextFrom;
     private Integer totalCount;
 
+    public PageVO(Integer currentPage, Integer pageSize, Integer totalCount) {
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.totalCount = totalCount;
+    }
+
     public Integer getTotalPage() {
         return totalPage;
     }
