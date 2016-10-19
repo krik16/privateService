@@ -25,6 +25,13 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	List<GroupBuyGoodSimpleInfo> getGroupBuyActivityGoodsList(int currentPage,int pageSize,int activityId);
+
+	/**
+	 * 获取拼团活动商品总数
+	 * @param activityId
+	 * @return
+	 */
+	int getGroupBuyActivityGoodsCount(int activityId);
 	
 	
 	
