@@ -1,12 +1,13 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 拼团商品VO
  *
  * @author yaoyiwei
- * @date 2016-10-18
+ * @date 2016-10-19
  * @version 1.0
  *
  */
@@ -16,7 +17,14 @@ public class CommodityPinTuanVO implements Serializable {
     private Double activityPrice;
     private Integer groupPeopleLimit;
     private String picUrl;
+    // 拼团剩余库存
     private Integer remainStock;
+    private String commodityCode;
+    private List<Double> currentPriceList;
+    // 商品基本库存
+    private Integer stock;
+    private List<String> categoryNames;
+
 
     public String getCommodityName() {
         return commodityName;
@@ -64,5 +72,37 @@ public class CommodityPinTuanVO implements Serializable {
 
     public void setRemainStock(Integer remainStock) {
         this.remainStock = remainStock;
+    }
+
+    public String getCommodityCode() {
+        return commodityCode;
+    }
+
+    public void setCommodityCode(String commodityCode) {
+        this.commodityCode = commodityCode;
+    }
+
+    public List<Double> getCurrentPriceList() {
+        return currentPriceList;
+    }
+
+    public void setCurrentPriceList(List<Double> currentPriceList) {
+        this.currentPriceList = currentPriceList;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public List<String> getCategoryNames() {
+        return categoryNames;
+    }
+
+    public void setCategoryNames(List<String> categoryNames) {
+        this.categoryNames = categoryNames;
     }
 }
