@@ -213,4 +213,14 @@ public interface ActivityService {
     public boolean updateActivityGoodsStatus(Integer activityGoodsId,Integer status,String userName);
 
 
+    /**
+     * 删除一个活动下的商品
+     * @param activityId
+     * @param status
+     * @param userName
+     * @return
+     */
+    public boolean updateActivityGoodsAndSpecStatusByActivityId(Integer activityId,Integer status, String userName);
+
+
 }
