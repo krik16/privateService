@@ -1,5 +1,6 @@
 package com.rongyi.rss.activitymanage;
 
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.bean.ResponseVO;
@@ -212,6 +213,8 @@ public interface ActivityService {
      */
     public boolean updateActivityGoodsStatus(Integer activityGoodsId,Integer status,String userName);
 
+    public List<ActivityInfo>  selectActivityByEndAt(Date endAt);
+
 
     /**
      * 删除一个活动下的商品
@@ -221,6 +224,9 @@ public interface ActivityService {
      * @return
      */
     public boolean updateActivityGoodsAndSpecStatusByActivityId(Integer activityId,Integer status, String userName);
+
+
+    public boolean cleanActivityById(Integer activityId,String userName);
 
 
 }
