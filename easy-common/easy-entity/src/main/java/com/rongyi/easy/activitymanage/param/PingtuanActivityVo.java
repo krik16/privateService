@@ -32,6 +32,8 @@ public class PingtuanActivityVo implements Serializable{
 
     private String shareDesc; //分享描述
 
+    private String sharePic;
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -126,5 +128,13 @@ public class PingtuanActivityVo implements Serializable{
 
     public void setShareDesc(String shareDesc) {
         this.shareDesc = shareDesc;
+    }
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
     }
 }
