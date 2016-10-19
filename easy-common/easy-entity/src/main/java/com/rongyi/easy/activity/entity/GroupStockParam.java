@@ -8,9 +8,9 @@ import java.io.Serializable;
  * Created by yangyang on 2016/10/17.
  */
 public class GroupStockParam implements Serializable {
-    private Integer activityId;
-    private String goodsId;
-    private String specId;
+    private Integer activityId;//活动id,必填
+    private String goodsId;//商品id,必填
+    private String specId;//规格id,必填
     private Integer operatorStock;//操作数
     private Integer activityGoodsId;
 
