@@ -50,4 +50,7 @@ public interface ICommodityCategoryService {
 	 * @return
 	 */
 	//public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
+
+
+	List<String> getCategoryNames(List<ObjectId> categoryIds);
 }

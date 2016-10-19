@@ -17,6 +17,7 @@ public class CommodityPinTuanVO implements Serializable {
     private Double activityPrice;
     private Integer groupPeopleLimit;
     private String picUrl;
+
     // 拼团剩余库存
     private Integer remainStock;
     private String commodityCode;
@@ -25,8 +26,46 @@ public class CommodityPinTuanVO implements Serializable {
     private Integer stock;
     private List<String> categoryNames;
 
+    public CommodityPinTuanVO(){}
 
+    public CommodityPinTuanVO(Builder builder) {
+        this.commodityName = builder.commodityName;
+        this.commodityCode = builder.commodityCode;
+        this.stock = builder.stock;
+        this.categoryNames = builder.categoryNames;
+        this.currentPriceList = builder.currentPriceList;
+    }
 
+    public static class Builder {
+        private String commodityName;
+        private String commodityCode;
+        private List<Double> currentPriceList;
+        private Integer stock;
+        private List<String> categoryNames;
+
+        public Builder() {}
+
+        public Builder(String name, String code, Integer stock) {
+            this.commodityName = name;
+            this.commodityCode = code;
+            this.stock = stock;
+        }
+
+        public Builder categoryNames(List vals) {
+            categoryNames = vals;
+            return this;
+        }
+
+        public Builder currentPriceList(List vals) {
+            currentPriceList = vals;
+            return this;
+        }
+
+        public CommodityPinTuanVO build() {
+            return new CommodityPinTuanVO(this);
+        }
+
+    }
 
     public String getCommodityName() {
         return commodityName;
