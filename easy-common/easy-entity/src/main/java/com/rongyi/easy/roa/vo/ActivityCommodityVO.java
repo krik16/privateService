@@ -18,10 +18,10 @@ public class ActivityCommodityVO implements Serializable{
 	private static final long serialVersionUID = -598866414899955040L;
 	
 	private Integer activityCommodityStock;//活动商品库存
-	private String activityPrice;//拼团商品最低价格
+	private Double activityPrice;//拼团商品最低价格
 	private String commodityId;//商品id
 	private String commodityName;//商品名称
-	private String commodityOPriceMax;//商品最高原价
+	private Double commodityOPriceMax;//商品最高原价
 	private Integer groupPeopleLimit;//成团所需人数
 	private List<String> commodityPicList;//商品图片
 	public Integer getActivityCommodityStock() {
@@ -30,10 +30,10 @@ public class ActivityCommodityVO implements Serializable{
 	public void setActivityCommodityStock(Integer activityCommodityStock) {
 		this.activityCommodityStock = activityCommodityStock;
 	}
-	public String getActivityPrice() {
+	public Double getActivityPrice() {
 		return activityPrice;
 	}
-	public void setActivityPrice(String activityPrice) {
+	public void setActivityPrice(Double activityPrice) {
 		this.activityPrice = activityPrice;
 	}
 	public String getCommodityId() {
@@ -48,10 +48,10 @@ public class ActivityCommodityVO implements Serializable{
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
 	}
-	public String getCommodityOPriceMax() {
+	public Double getCommodityOPriceMax() {
 		return commodityOPriceMax;
 	}
-	public void setCommodityOPriceMax(String commodityOPriceMax) {
+	public void setCommodityOPriceMax(Double commodityOPriceMax) {
 		this.commodityOPriceMax = commodityOPriceMax;
 	}
 	public Integer getGroupPeopleLimit() {
