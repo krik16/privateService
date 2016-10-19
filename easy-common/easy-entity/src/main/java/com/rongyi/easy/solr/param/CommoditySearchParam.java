@@ -30,6 +30,8 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	private String id;
 
+	private List<String> ids;
+
 	private List<String> brandMids;
 
 	/** 关键词 */
@@ -402,6 +404,14 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
+	}
+
+	public List<String> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<String> ids) {
+		this.ids = ids;
 	}
 
 	@Override
