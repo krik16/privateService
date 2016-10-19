@@ -86,7 +86,5 @@ public interface ICommodityService {
 
 	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
 
-	CommodityPagePinTuanVO searchCommodityListForPinTuan(PinTuanCommodityParam param);
-
 	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
 }

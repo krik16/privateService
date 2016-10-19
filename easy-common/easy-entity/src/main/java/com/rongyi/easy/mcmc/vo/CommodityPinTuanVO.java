@@ -26,6 +26,8 @@ public class CommodityPinTuanVO implements Serializable {
     private List<String> categoryNames;
 
 
+
+
     public String getCommodityName() {
         return commodityName;
     }
