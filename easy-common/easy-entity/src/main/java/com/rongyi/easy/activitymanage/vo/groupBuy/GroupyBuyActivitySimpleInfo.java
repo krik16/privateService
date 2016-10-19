@@ -56,8 +56,16 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 	private String sharePic;
 	
 	private String shareContent;
-	
 
+	public String getActivityPic() {
+		return activityPic;
+	}
+
+	public void setActivityPic(String activityPic) {
+		this.activityPic = activityPic;
+	}
+
+	private String activityPic;
 
 	public boolean isForceFollow() {
 		return isForceFollow;
