@@ -34,6 +34,7 @@ public enum AppErrorCode {
     ERROR_WELFARE_NOTEXIST(1065005, "支付失败，福袋已过期，请重新获取"),
     ERROR_WELFARE_WXPUBLIC(1065006, "未关注微信公众号"),
     ERROR_WELFARE_NOTPAY(1065007, "未支付或者支付失败，无法获取福袋"),
+    ERROR_WELFARE_ISPAY(1065008, "你已参与过支付，无法再支付!"),
     ERROR_USER_NOTEXIST(1062003,"用户信息不存在"),
 
     /** 购物车相关  后4位区间  6001---7000*/
