@@ -12,6 +12,8 @@ import java.util.List;
  *
  */
 public class CommodityPinTuanVO implements Serializable {
+
+    private String commodityId;
     private String commodityName;
     private Double originalPrice;
     private Double activityPrice;
@@ -24,9 +26,16 @@ public class CommodityPinTuanVO implements Serializable {
     // 商品基本库存
     private Integer stock;
     private List<String> categoryNames;
+    private boolean  isActivityCommodity;
 
 
+    public String getCommodityId() {
+        return commodityId;
+    }
 
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
 
     public String getCommodityName() {
         return commodityName;
@@ -106,5 +115,13 @@ public class CommodityPinTuanVO implements Serializable {
 
     public void setCategoryNames(List<String> categoryNames) {
         this.categoryNames = categoryNames;
+    }
+
+    public boolean isActivityCommodity() {
+        return isActivityCommodity;
+    }
+
+    public void setIsActivityCommodity(boolean isActivityCommodity) {
+        this.isActivityCommodity = isActivityCommodity;
     }
 }
