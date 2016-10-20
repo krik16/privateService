@@ -34,6 +34,16 @@ public class PingtuanActivityVo implements Serializable{
 
     private String sharePic;
 
+    private  ActivityGoodsDetail activityGoodsDetail;
+
+    public ActivityGoodsDetail getActivityGoodsDetail() {
+        return activityGoodsDetail;
+    }
+
+    public void setActivityGoodsDetail(ActivityGoodsDetail activityGoodsDetail) {
+        this.activityGoodsDetail = activityGoodsDetail;
+    }
+
     public Integer getActivityId() {
         return activityId;
     }

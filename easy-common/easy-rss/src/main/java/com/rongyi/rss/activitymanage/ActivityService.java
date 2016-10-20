@@ -159,11 +159,13 @@ public interface ActivityService {
 
     /**
      * 更新库存
+     *
+     * @param appendCount
      * @param activityGoodsId
      * @param joinCount
      * @return
      */
-    public int updateJoinCount(int activityGoodsId, Integer joinCount);
+    public int updateJoinCount(Integer activityGoodsId, int joinCount, Integer appendCount);
 
 
 
