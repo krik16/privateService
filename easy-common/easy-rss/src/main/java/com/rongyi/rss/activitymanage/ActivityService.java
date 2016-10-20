@@ -230,5 +230,7 @@ public interface ActivityService {
 
     public boolean cleanActivityById(Integer activityId,String userName);
 
+    public List<ActivityGoods> selectGoodsInPinTuan(List<String> goodIds);
+
 
 }
