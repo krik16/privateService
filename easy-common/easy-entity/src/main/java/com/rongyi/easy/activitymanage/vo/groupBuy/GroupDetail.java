@@ -10,34 +10,17 @@ public class GroupDetail implements Serializable{
 	 */
 	private static final long serialVersionUID = -8643031504146087289L;
 
-	@Override
-	public String toString() {
-		return "GroupDetail{" +
-				"activityId=" + activityId +
-				", groupId=" + groupId +
-				", userNick='" + userNick + '\'' +
-				", userIcon='" + userIcon + '\'' +
-				", userId='" + userId + '\'' +
-				", groupRole=" + groupRole +
-				", openId='" + openId + '\'' +
-				", goodId='" + goodId + '\'' +
-				", goodSpecId='" + goodSpecId + '\'' +
-				", goodGroupPrice=" + goodGroupPrice +
-				", createAt=" + createAt +
-				", joinState=" + joinState +
-				", orderNo='" + orderNo + '\'' +
-				'}';
-	}
+
 
 	/***
 	 * 活动id
 	 */
-	private int activityId;
+	private Integer activityId;
 
 	/**
 	 * 团id
 	 */
-	private long groupId;
+	private Long groupId;
 	
 	
 	private String userNick;
@@ -48,7 +31,7 @@ public class GroupDetail implements Serializable{
 	/**
 	 * 0团长,1团员
 	 */
-	private int groupRole;
+	private Integer groupRole;
 	
 	private String openId;
 	
@@ -63,18 +46,11 @@ public class GroupDetail implements Serializable{
 	 */
 	private String goodSpecId;
 
-	public double getGoodGroupPrice() {
-		return goodGroupPrice;
-	}
-
-	public void setGoodGroupPrice(double goodGroupPrice) {
-		this.goodGroupPrice = goodGroupPrice;
-	}
 
 	/***
 	 * 拼团价格
 	 */
-	private double goodGroupPrice;
+	private Double price;
 	
 	
 	
@@ -87,139 +63,111 @@ public class GroupDetail implements Serializable{
 	/**
 	 * 参团状态,0 成功  ,1 失败
 	 */
-	private int joinState;
+	private Integer joinState;
 
 	
 	private  String orderNo;
 	/**
 	 * 0微信,1容易逛
 	 */
-	private int userType;
-	
-	
+	private Integer userType;
+	private Integer id;
 
-	public int getGroupRole() {
-		return groupRole;
-	}
-
-
-	public void setGroupRole(int groupRole) {
-		this.groupRole = groupRole;
-	}
-
-
-	public String getOpenId() {
-		return openId;
-	}
-
-
-	public void setOpenId(String openId) {
-		this.openId = openId;
-	}
-
-
-	public long getGroupId() {
-		return groupId;
-	}
-
-
-	public void setGroupId(long groupId) {
-		this.groupId = groupId;
-	}
-
-
-	public String getUserName() {
-		return userNick;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userNick = userName;
-	}
-
-
-	public String getUserIcon() {
-		return userIcon;
-	}
-
-
-	public void setUserIcon(String userIcon) {
-		this.userIcon = userIcon;
-	}
-
-
-	public String getGoodId() {
-		return goodId;
-	}
-
-
-	public void setGoodId(String goodId) {
-		this.goodId = goodId;
-	}
-
-
-	public String getGoodSpecId() {
-		return goodSpecId;
-	}
-
-
-	public void setGoodSpecId(String goodSpecId) {
-		this.goodSpecId = goodSpecId;
-	}
-
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-
-	public int getJoinState() {
-		return joinState;
-	}
-
-
-	public void setJoinState(int joinState) {
-		this.joinState = joinState;
-	}
-
-
-	public int getActivityId() {
+	public Integer getActivityId() {
 		return activityId;
 	}
 
-
-	public void setActivityId(int activityId) {
+	public void setActivityId(Integer activityId) {
 		this.activityId = activityId;
 	}
 
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
 
 	public String getUserNick() {
 		return userNick;
 	}
 
-
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}
 
+	public String getUserIcon() {
+		return userIcon;
+	}
+
+	public void setUserIcon(String userIcon) {
+		this.userIcon = userIcon;
+	}
 
 	public String getUserId() {
 		return userId;
 	}
 
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
+	public Integer getGroupRole() {
+		return groupRole;
+	}
 
+	public void setGroupRole(Integer groupRole) {
+		this.groupRole = groupRole;
+	}
 
+	public String getOpenId() {
+		return openId;
+	}
 
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+	public String getGoodId() {
+		return goodId;
+	}
+
+	public void setGoodId(String goodId) {
+		this.goodId = goodId;
+	}
+
+	public String getGoodSpecId() {
+		return goodSpecId;
+	}
+
+	public void setGoodSpecId(String goodSpecId) {
+		this.goodSpecId = goodSpecId;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Integer getJoinState() {
+		return joinState;
+	}
+
+	public void setJoinState(Integer joinState) {
+		this.joinState = joinState;
+	}
 
 	public String getOrderNo() {
 		return orderNo;
@@ -229,12 +177,40 @@ public class GroupDetail implements Serializable{
 		this.orderNo = orderNo;
 	}
 
-
-	public int getUserType() {
+	public Integer getUserType() {
 		return userType;
 	}
 
-	public void setUserType(int userType) {
+	public void setUserType(Integer userType) {
 		this.userType = userType;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupDetail{" +
+				"activityId=" + activityId +
+				", groupId=" + groupId +
+				", userNick='" + userNick + '\'' +
+				", userIcon='" + userIcon + '\'' +
+				", userId='" + userId + '\'' +
+				", groupRole=" + groupRole +
+				", openId='" + openId + '\'' +
+				", goodId='" + goodId + '\'' +
+				", goodSpecId='" + goodSpecId + '\'' +
+				", price=" + price +
+				", createAt=" + createAt +
+				", joinState=" + joinState +
+				", orderNo='" + orderNo + '\'' +
+				", userType=" + userType +
+				", id=" + id +
+				'}';
 	}
 }

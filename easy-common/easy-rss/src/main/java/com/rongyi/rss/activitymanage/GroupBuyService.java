@@ -4,12 +4,15 @@ import java.util.List;
 
 import com.rongyi.easy.activity.entity.GroupStockParam;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
+import com.rongyi.easy.activitymanage.vo.groupBuy.GroupDetail;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupyBuyActivitySimpleInfo;
 
 public interface GroupBuyService {
 	
 /////----------------H5 接口 start
+
+
 	/***
 	 * 获取拼团活动简要信息
 	 * @param activityId
@@ -64,7 +67,7 @@ public interface GroupBuyService {
 	 *  @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from);
+	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from) throws Exception;
 	
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
@@ -92,7 +95,7 @@ public interface GroupBuyService {
 	 * @param paymentResult--是否支付成功
 	 * @return
 	 */
-	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult);
+	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult) throws Exception;
 	
 	
 	
