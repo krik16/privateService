@@ -16,7 +16,7 @@ public class QuerySecKillGoods implements Serializable {
     private Integer currentPage = 1;
     private Integer pageSize = 10;
     private Integer status;
-
+    private String goodsCode;
 
 
     @Override
@@ -29,7 +29,16 @@ public class QuerySecKillGoods implements Serializable {
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
                 .append("status", status)
+                .append("goodsCode", goodsCode)
                 .toString();
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
     }
 
     public Integer getStatus() {
