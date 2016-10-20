@@ -24,5 +24,5 @@ public interface IOrderQueryForWeixinService {
 	 * @param  countType 统计维度（0全部 1当天 2昨天）
 	 * @throws Exception
 	 */
-	PintuanOrderCountVO pintuanOrderCount(Integer activityId,List<String> commodityId, Integer countType) throws Exception;
+	List<PintuanOrderCountVO> pintuanOrderCount(Integer activityId,List<String> commodityId, Integer countType) throws Exception;
 }
