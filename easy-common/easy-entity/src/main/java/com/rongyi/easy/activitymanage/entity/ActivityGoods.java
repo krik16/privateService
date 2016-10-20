@@ -125,6 +125,7 @@ public class ActivityGoods implements Serializable {
     private String activityPrice;
     //开团起始人数（随机数）
     private Integer groupRandomNum;
+    private String enrollSource;//0大运营后台 1摩店
 
     /**
      * 商品规格
@@ -150,6 +151,14 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+    public String getEnrollSource() {
+        return enrollSource;
+    }
+
+    public void setEnrollSource(String enrollSource) {
+        this.enrollSource = enrollSource;
     }
 
     public Integer getGroupRandomNum() {
@@ -437,6 +446,7 @@ public class ActivityGoods implements Serializable {
                 .append("remainStock", remainStock)
                 .append("activityPrice", activityPrice)
                 .append("groupRandomNum", groupRandomNum)
+                .append("enrollSource", enrollSource)
                 .toString();
     }
 }

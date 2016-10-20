@@ -286,4 +286,12 @@ public interface CommodityService {
     boolean returnCommodityStock(String commodityId, Integer stock);
 
     public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
+
+    /**
+     * 查询可以加入拼团的商品
+     *
+     * @param param
+     * @return list CommodityPinTuanVO
+     */
+    CommodityPagePinTuanVO searchBaseCommodityListForPinTuan(PinTuanCommodityParam param);
 }
