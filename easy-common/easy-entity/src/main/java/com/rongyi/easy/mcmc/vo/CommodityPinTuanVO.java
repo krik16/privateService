@@ -28,7 +28,7 @@ public class CommodityPinTuanVO implements Serializable {
     // 商品基本库存
     private Integer stock;
     private List<String> categoryNames;
-    private boolean  isActivityCommodity;
+    private boolean  isActivityCommodity=false;
 
     public CommodityPinTuanVO(){}
 
