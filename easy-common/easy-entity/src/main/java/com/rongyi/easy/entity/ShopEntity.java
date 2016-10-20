@@ -37,6 +37,7 @@ public class ShopEntity implements Serializable{
 //    private String shop_numble;
     private String shop_type;
     private String shop_icon;
+	private String icon;
 //    private String slug;
 //    private String subtitle;
     private String tags;
@@ -278,5 +279,12 @@ public class ShopEntity implements Serializable{
 	public void setFiliale_id(String filiale_id) {
 		this.filiale_id = filiale_id;
 	}
-	
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 }
