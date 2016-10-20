@@ -21,6 +21,7 @@ public class IntegralSearchParam implements Serializable {
     private String shopId;
     private String jsessionId;
     private Integer ifIncludeRP;//0需要rp 1剔除rp
+    private Integer hideLoseCard;//0或null查询所有，1:查询有效卡
 
     public String getJsessionId() {
         return jsessionId;
@@ -118,6 +119,14 @@ public class IntegralSearchParam implements Serializable {
         this.ifIncludeRP = ifIncludeRP;
     }
 
+    public Integer getHideLoseCard() {
+        return hideLoseCard;
+    }
+
+    public void setHideLoseCard(Integer hideLoseCard) {
+        this.hideLoseCard = hideLoseCard;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -133,6 +142,7 @@ public class IntegralSearchParam implements Serializable {
                 .append("shopId", shopId)
                 .append("jsessionId", jsessionId)
                 .append("ifIncludeRP", ifIncludeRP)
+                .append("hideLoseCard", hideLoseCard)
                 .toString();
     }
 
