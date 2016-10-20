@@ -24,11 +24,13 @@ public class OsmOrderQueryParam implements Serializable
     private  String sizePerPage;//每页数量
     private String commodityStatus;//商品状态
     Integer guideId;//导购id
-    private Byte activityStatus;// 拼团活动状态
-    private String activityName;// 活动名称
-    private Byte activityType;// 活动类型
+    private Integer activityStatus;// 拼团活动状态
+    private String activityName;// 活动名称（购买来源）
+    private Integer activityType;// 活动类型
     private List<String> commodityMidList;// 商品ID集合
-    private Long activityRoundId;// 活动场次ID
+    private Integer activityRoundId;// 活动场次ID
+    private String commoditySpecMid;// 产品规格ID
+    private Integer orderSource;// 购买终端
 
     public Integer getGuideId() {
         return guideId;
@@ -142,11 +144,11 @@ public class OsmOrderQueryParam implements Serializable
         this.sizePerPage = sizePerPage;
     }
 
-    public Byte getActivityStatus() {
+    public Integer getActivityStatus() {
         return activityStatus;
     }
 
-    public void setActivityStatus(Byte activityStatus) {
+    public void setActivityStatus(Integer activityStatus) {
         this.activityStatus = activityStatus;
     }
 
@@ -158,11 +160,11 @@ public class OsmOrderQueryParam implements Serializable
         this.activityName = activityName;
     }
 
-    public Byte getActivityType() {
+    public Integer getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(Byte activityType) {
+    public void setActivityType(Integer activityType) {
         this.activityType = activityType;
     }
 
@@ -174,12 +176,20 @@ public class OsmOrderQueryParam implements Serializable
         this.commodityMidList = commodityMidList;
     }
 
-    public Long getActivityRoundId() {
+    public Integer getActivityRoundId() {
         return activityRoundId;
     }
 
-    public void setActivityRoundId(Long activityRoundId) {
+    public void setActivityRoundId(Integer activityRoundId) {
         this.activityRoundId = activityRoundId;
+    }
+
+    public Integer getOrderSource() {
+        return orderSource;
+    }
+
+    public void setOrderSource(Integer orderSource) {
+        this.orderSource = orderSource;
     }
 
     @Override
@@ -203,6 +213,8 @@ public class OsmOrderQueryParam implements Serializable
                 ", activityType=" + activityType +
                 ", commodityMidList=" + commodityMidList +
                 ", activityRoundId=" + activityRoundId +
+                ", activityType=" + activityType +
+                ", orderSource=" + orderSource +
                 '}';
     }
 }
