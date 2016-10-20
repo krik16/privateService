@@ -34,6 +34,8 @@ public class PingtuanActivityVo implements Serializable{
 
     private String sharePic;
 
+    private String mallId;//商场id
+
     private  ActivityGoodsDetail activityGoodsDetail;
 
     public ActivityGoodsDetail getActivityGoodsDetail() {
@@ -146,5 +148,13 @@ public class PingtuanActivityVo implements Serializable{
 
     public void setSharePic(String sharePic) {
         this.sharePic = sharePic;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
     }
 }
