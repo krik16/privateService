@@ -67,7 +67,7 @@ public interface GroupBuyService {
 	 *  @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone) throws Exception;
+//	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone) throws Exception;
 	
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
@@ -81,7 +81,7 @@ public interface GroupBuyService {
 	 * @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
+//	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
 	
 	
 	/**
