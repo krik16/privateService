@@ -25,7 +25,16 @@ public class OrderModelParam implements Serializable {
 	private Integer from;//0微信,1容易逛
 	private String memberLogo;// 用户头像
 	private String memberName;// 用户昵称
+	private String memberPhone;// 用户手机号
 	private String openId;//
+
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
 
 	public Integer getFrom() {
 		return from;
@@ -105,7 +114,9 @@ public class OrderModelParam implements Serializable {
 				+ ", orderPrice=" + orderPrice + ", ordeDetailModel="
 				+ ordeDetailModel + ", memberId=" + memberId + ", from=" + from
 				+ ", memberLogo=" + memberLogo + ", memberName=" + memberName
-				+ ", openId=" + openId + "]";
+				+ ", openId=" + openId 
+				+ ", memberPhone=" + memberPhone
+				+ "]";
 	}
 	
 }

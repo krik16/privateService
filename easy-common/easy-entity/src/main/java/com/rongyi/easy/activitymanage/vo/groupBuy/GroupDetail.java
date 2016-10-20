@@ -35,7 +35,7 @@ public class GroupDetail implements Serializable{
 	
 	private String openId;
 	
-	
+	private String phone;
 	/***
 	 * 商品id
 	 */
@@ -72,6 +72,8 @@ public class GroupDetail implements Serializable{
 	 */
 	private Integer userType;
 	private Integer id;
+
+
 
 	public Integer getActivityId() {
 		return activityId;
@@ -212,5 +214,13 @@ public class GroupDetail implements Serializable{
 				", userType=" + userType +
 				", id=" + id +
 				'}';
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }
