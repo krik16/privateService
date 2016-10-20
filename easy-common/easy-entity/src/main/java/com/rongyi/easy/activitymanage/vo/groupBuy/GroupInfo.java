@@ -21,12 +21,12 @@ public class GroupInfo implements Serializable{
 	/**
 	 * 团id
 	 */
-	private long groupId;
+	private Long groupId;
 	
 	/***
 	 * 活动id
 	 */
-	private int activityId;
+	private Integer activityId;
 	
 	
 	/***
@@ -47,7 +47,7 @@ public class GroupInfo implements Serializable{
 	/***
 	 * 成团人数  :3人团   5 人团
 	 */
-	private int  groupPeopleLimit;
+	private Integer  groupPeopleLimit;
 	
 	
 	private List<GroupDetail> groupDetail;
@@ -64,7 +64,7 @@ public class GroupInfo implements Serializable{
 	 *    活动下线,团失败 5
 	 *    
 	 */
-	private int  state;
+	private Integer  state;
 
 
 	

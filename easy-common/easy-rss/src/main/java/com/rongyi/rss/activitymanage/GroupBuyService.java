@@ -67,7 +67,7 @@ public interface GroupBuyService {
 	 *  @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-//	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone) throws Exception;
+	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone) throws Exception;
 	
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
@@ -81,7 +81,7 @@ public interface GroupBuyService {
 	 * @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-//	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
+	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
 	
 	
 	/**
@@ -109,10 +109,10 @@ public interface GroupBuyService {
 
 	/**
 	 *拼团时间到了,人数不够,退团接口
-	 * @param groupId
+	 *
 	 * @return
 	 */
-	boolean groupTimeOut(long groupId) throws Exception;
+	void groupTimeOut() throws Exception;
 
 	/**
 	 * 已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
