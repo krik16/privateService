@@ -95,6 +95,8 @@ public interface ROACommodityService {
 
 	public ResponseResult getCommodityBuyerInfo(String id, boolean ifCollected);
 
+	ResponseResult getCommodityBuyerInfos(List<String> ids, boolean ifCollected);
+
 	public ResponseResult getBuyerCommodityCategory(String filterId, int filterType, boolean showParent);
 
 	public ResponseResult getBuyerIndexCommodity(int currentPage, int pagesize);

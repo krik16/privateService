@@ -63,7 +63,8 @@ public enum  CouponEnum {
     ERROR_NOTEXIST_COUPON(1021228,"卡券不存在！"),
     VALID_COUPON_CODE_FAIL(1021229,"验券失败"),
     VALID_INVALID_UID(1021230,"必要参数uid 有误！"),
-    VALID_INVALID_COUPONID(1021231,"必要参数couponId 有误！")
+    VALID_INVALID_COUPONID(1021231,"必要参数couponId 有误！"),
+    VALID_INVALID_COUPONIDS(1021232,"必要参数 ids 有误！")
 
 
 
