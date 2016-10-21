@@ -13,6 +13,8 @@ public class GroupSearch implements Serializable {
 
     private Integer totoalCount;
 
+    private  Integer offset;
+
     /**
      * 查询条件
      */
@@ -181,5 +183,13 @@ public class GroupSearch implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 }
