@@ -1,15 +1,18 @@
 package com.rongyi.rss.activitymanage;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.activity.entity.GroupStockParam;
+import com.rongyi.easy.activitymanage.param.CommodityViewCon;
+import com.rongyi.easy.activitymanage.param.ViewControllerVo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupDetail;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupInfo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupyBuyActivitySimpleInfo;
 
 public interface GroupBuyService {
-	
+
 /////----------------H5 接口 start
 
 
@@ -19,7 +22,7 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	GroupyBuyActivitySimpleInfo getGroupyBuyActivitySimpleInfo(int activityId);
-	
+
 	/***
 	 * 获取拼团活动商品列表
 	 * @param currentPage
@@ -35,9 +38,9 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	int getGroupBuyActivityGoodsCount(int activityId);
-	
-	
-	
+
+
+
 	/***
 	 * 参团商品详情
 	 * @param goodId
@@ -45,8 +48,8 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	GroupBuyGoodSimpleInfo getGroupBuyGoodSimpleInfo(String goodId,int activityId);
-	
-	
+
+
 	/**
 	 * 按照活动id 和商品id  查询该商品正在开始中的团
 	 * @param goodId
@@ -54,7 +57,7 @@ public interface GroupBuyService {
 	 * @return获取商品下的所有团，按成团所剩人数倒序排列，然后在最小成团人数里面随机选择两个团
 	 */
 	List<GroupInfo> getGroupByGood(String goodId,int activityId);
-	
+
 
 	/**
 	 * 开团:异常情况返回负数,   正常情况返回团编号
@@ -68,7 +71,7 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	long  beginGroup(int activityId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone) throws Exception;
-	
+
 	/**
 	 * 参团:异常情况返回负数,   正常情况返回团编号,
 	 * @param groupId
@@ -82,8 +85,8 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
-	
-	
+
+
 	/**
 	 * 通知支付结果,变更用户参团成功状态,
 	 * 发现组团成功后需要触发com.rongyi.rss.tradecenter.osm.IOrderService.pintuanActivityStatusChange
@@ -96,11 +99,11 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult) throws Exception;
-	
-	
-	
+
+
+
 	/**
-	 * 
+	 *
 	 * @param groupId
 	 * @return
 	 */
@@ -128,8 +131,8 @@ public interface GroupBuyService {
 	 * @return true,允许支付,false  不允许
 	 */
 	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
-	
-	
+
+
 /////----------------H5 接口 end
 
 	/**
@@ -138,5 +141,7 @@ public interface GroupBuyService {
 	public  boolean returnGroupStock(List<GroupStockParam> params);
 
 	public boolean reduceGroupStock(List<GroupStockParam> params);
-	
+
+	public CommodityViewCon countAllByActivityId(Map<String ,Object> params);
+
 }
