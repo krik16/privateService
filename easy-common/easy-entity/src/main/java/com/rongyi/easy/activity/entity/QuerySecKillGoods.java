@@ -17,6 +17,7 @@ public class QuerySecKillGoods implements Serializable {
     private Integer pageSize = 10;
     private Integer status;
     private String goodsCode;
+    private Integer offset;
 
 
     @Override
@@ -31,6 +32,14 @@ public class QuerySecKillGoods implements Serializable {
                 .append("status", status)
                 .append("goodsCode", goodsCode)
                 .toString();
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 
     public String getGoodsCode() {
