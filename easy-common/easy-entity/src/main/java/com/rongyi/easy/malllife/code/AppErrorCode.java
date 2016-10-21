@@ -30,7 +30,7 @@ public enum AppErrorCode {
     ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
     //ERROR_RECEIVED_REBATE(1065002, "您已领取过了暖冬礼盒"),
     ERROR_WELFARE_REBATE(1065003, "您已参加过该活动"),
-    ERROR_WELFARE_ISNULL(1065004, "今天的红包已发放结束啦\\n客官明天是可以领的哟"),
+    ERROR_WELFARE_ISNULL(1065004, "今天的红包已发放结束啦<br/>客官明天是可以领的哟"),
     ERROR_WELFARE_NOTEXIST(1065005, "支付失败，福袋已过期，请重新获取"),
     ERROR_WELFARE_WXPUBLIC(1065006, "未关注微信公众号"),
     ERROR_WELFARE_NOTPAY(1065007, "未支付或者支付失败，无法获取福袋"),
