@@ -136,7 +136,7 @@ public interface GroupBuyService {
 	 */
 	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
 
-	
+
 	List<GroupSearch> searchGroup(GroupSearch groupSearch);
 	
 

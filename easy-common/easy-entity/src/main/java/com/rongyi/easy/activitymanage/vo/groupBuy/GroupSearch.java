@@ -14,6 +14,21 @@ public class GroupSearch implements Serializable {
     private Integer totoalCount;
 
     /**
+     * 查询条件
+     */
+    private Date qcreateAt;
+
+    /**
+     * 查询条件
+     */
+    private Date qendAt;
+
+    /**
+     * 查询条件:拼团状态   0  成功,1 失败 2  拼团中
+     */
+    private Integer qState;
+
+    /**
      * 团id
      */
     private Long groupId;
@@ -48,6 +63,29 @@ public class GroupSearch implements Serializable {
 
     private String goodName;
 
+    public Integer getqState() {
+        return qState;
+    }
+
+    public void setqState(Integer qState) {
+        this.qState = qState;
+    }
+
+    public Date getQcreateAt() {
+        return qcreateAt;
+    }
+
+    public void setQcreateAt(Date qcreateAt) {
+        this.qcreateAt = qcreateAt;
+    }
+
+    public Date getQendAt() {
+        return qendAt;
+    }
+
+    public void setQendAt(Date qendAt) {
+        this.qendAt = qendAt;
+    }
 
     public String getGoodName() {
         return goodName;
