@@ -3,10 +3,7 @@ package com.rongyi.rss.activitymanage;
 import java.util.List;
 
 import com.rongyi.easy.activity.entity.GroupStockParam;
-import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
-import com.rongyi.easy.activitymanage.vo.groupBuy.GroupDetail;
-import com.rongyi.easy.activitymanage.vo.groupBuy.GroupInfo;
-import com.rongyi.easy.activitymanage.vo.groupBuy.GroupyBuyActivitySimpleInfo;
+import com.rongyi.easy.activitymanage.vo.groupBuy.*;
 
 public interface GroupBuyService {
 	
@@ -128,7 +125,9 @@ public interface GroupBuyService {
 	 * @return true,允许支付,false  不允许
 	 */
 	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
-	
+
+
+	List<GroupSearch> searchGroup(GroupSearch groupSearch);
 	
 /////----------------H5 接口 end
 
