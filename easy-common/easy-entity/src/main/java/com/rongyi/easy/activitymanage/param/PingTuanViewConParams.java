@@ -16,7 +16,9 @@ public class PingTuanViewConParams implements Serializable{
 
     private  Integer pageSizeUp;
 
-    private String nickName;
+    private String phone;
+
+    private Integer groupId;
 
     private Date startAt;
 
@@ -27,6 +29,8 @@ public class PingTuanViewConParams implements Serializable{
     private Integer currentPageDown;
 
     private  Integer pageSizeDown;
+
+    private String commodityName;
 
     public Integer getActivityId() {
         return activityId;
@@ -60,12 +64,20 @@ public class PingTuanViewConParams implements Serializable{
         this.pageSizeUp = pageSizeUp;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
     public Date getStartAt() {
@@ -106,5 +118,13 @@ public class PingTuanViewConParams implements Serializable{
 
     public void setPageSizeDown(Integer pageSizeDown) {
         this.pageSizeDown = pageSizeDown;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 }

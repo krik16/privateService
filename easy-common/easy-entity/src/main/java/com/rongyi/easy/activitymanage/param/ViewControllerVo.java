@@ -1,5 +1,7 @@
 package com.rongyi.easy.activitymanage.param;
 
+import com.rongyi.easy.activitymanage.vo.groupBuy.GroupSearch;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -40,7 +42,7 @@ public class ViewControllerVo implements Serializable{
 
     private List<CommodityViewCon>  commodityViewConList;
 
-    private List<PingtuanInfoVo> pingtuanInfoVoList;
+    private  List<GroupSearch> groupSearchList;
 
     public String getName() {
         return name;
@@ -138,11 +140,11 @@ public class ViewControllerVo implements Serializable{
         this.commodityViewConList = commodityViewConList;
     }
 
-    public List<PingtuanInfoVo> getPingtuanInfoVoList() {
-        return pingtuanInfoVoList;
+    public List<GroupSearch> getGroupSearchList() {
+        return groupSearchList;
     }
 
-    public void setPingtuanInfoVoList(List<PingtuanInfoVo> pingtuanInfoVoList) {
-        this.pingtuanInfoVoList = pingtuanInfoVoList;
+    public void setGroupSearchList(List<GroupSearch> groupSearchList) {
+        this.groupSearchList = groupSearchList;
     }
 }
