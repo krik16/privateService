@@ -17,6 +17,9 @@ public class GroupMsg  implements Serializable{
     private String goodName;
     private String groupLeadName;
     private String goodPrice;
+    private String urlPerfix;
+
+
 
     public GroupInfo getGroupInfo() {
         return groupInfo;
@@ -89,5 +92,13 @@ public class GroupMsg  implements Serializable{
 
     public void setGoodPrice(String goodPrice) {
         this.goodPrice = goodPrice;
+    }
+
+    public String getUrlPerfix() {
+        return urlPerfix;
+    }
+
+    public void setUrlPerfix(String urlPerfix) {
+        this.urlPerfix = urlPerfix;
     }
 }
