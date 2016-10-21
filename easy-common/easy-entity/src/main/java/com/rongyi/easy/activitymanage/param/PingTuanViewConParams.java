@@ -10,7 +10,7 @@ public class PingTuanViewConParams implements Serializable{
 
     private Integer activityId;
 
-    private String flag;//all(全部),yes(昨天),today(今天)
+    private Integer flag;//(0全部 1当天 2昨天）
 
     private Integer currentPageUp;
 
@@ -36,11 +36,11 @@ public class PingTuanViewConParams implements Serializable{
         this.activityId = activityId;
     }
 
-    public String getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(String flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 
