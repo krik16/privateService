@@ -11,8 +11,6 @@ public class GroupSearch implements Serializable {
     private Integer currentPage;
     private Integer pageSize;
 
-    private Integer totoalCount;
-
     private  Integer offset;
 
     /**
@@ -111,14 +109,6 @@ public class GroupSearch implements Serializable {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public Integer getTotoalCount() {
-        return totoalCount;
-    }
-
-    public void setTotoalCount(Integer totoalCount) {
-        this.totoalCount = totoalCount;
     }
 
     public Long getGroupId() {
