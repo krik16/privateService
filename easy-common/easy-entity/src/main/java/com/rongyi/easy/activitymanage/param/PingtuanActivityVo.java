@@ -7,6 +7,26 @@ import java.util.Date;
  * Created by xuying on 2016/10/17.
  */
 public class PingtuanActivityVo implements Serializable{
+    @Override
+    public String toString() {
+        return "PingtuanActivityVo{" +
+                "activityId=" + activityId +
+                ", pintuanConfigId=" + pintuanConfigId +
+                ", name='" + name + '\'' +
+                ", startAt=" + startAt +
+                ", endAt=" + endAt +
+                ", description='" + description + '\'' +
+                ", pic='" + pic + '\'' +
+                ", activeTime=" + activeTime +
+                ", cancelTime=" + cancelTime +
+                ", forceAttention=" + forceAttention +
+                ", shareTitle='" + shareTitle + '\'' +
+                ", shareDesc='" + shareDesc + '\'' +
+                ", sharePic='" + sharePic + '\'' +
+                ", mallId='" + mallId + '\'' +
+                ", activityGoodsDetail=" + activityGoodsDetail +
+                '}';
+    }
 
     private Integer activityId;
 
