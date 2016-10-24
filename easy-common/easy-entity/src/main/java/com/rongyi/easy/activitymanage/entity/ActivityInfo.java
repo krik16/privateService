@@ -43,7 +43,7 @@ public class ActivityInfo implements Serializable {
     /**
      * 活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3]
      */
-    private Integer status;
+    private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
     /**
      * 发布渠道: 大运营[0] 商家[1]
