@@ -7,6 +7,26 @@ import java.util.Date;
  * Created by xuying on 2016/10/17.
  */
 public class PingtuanActivityVo implements Serializable{
+    @Override
+    public String toString() {
+        return "PingtuanActivityVo{" +
+                "activityId=" + activityId +
+                ", pintuanConfigId=" + pintuanConfigId +
+                ", name='" + name + '\'' +
+                ", startAt=" + startAt +
+                ", endAt=" + endAt +
+                ", description='" + description + '\'' +
+                ", pic='" + pic + '\'' +
+                ", activeTime=" + activeTime +
+                ", cancelTime=" + cancelTime +
+                ", forceAttention=" + forceAttention +
+                ", shareTitle='" + shareTitle + '\'' +
+                ", shareDesc='" + shareDesc + '\'' +
+                ", sharePic='" + sharePic + '\'' +
+                ", mallId='" + mallId + '\'' +
+                ", activityGoodsDetail=" + activityGoodsDetail +
+                '}';
+    }
 
     private Integer activityId;
 
@@ -37,6 +57,8 @@ public class PingtuanActivityVo implements Serializable{
     private String mallId;//商场id
 
     private  ActivityGoodsDetail activityGoodsDetail;
+
+    private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
     public ActivityGoodsDetail getActivityGoodsDetail() {
         return activityGoodsDetail;
@@ -156,5 +178,13 @@ public class PingtuanActivityVo implements Serializable{
 
     public void setMallId(String mallId) {
         this.mallId = mallId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
