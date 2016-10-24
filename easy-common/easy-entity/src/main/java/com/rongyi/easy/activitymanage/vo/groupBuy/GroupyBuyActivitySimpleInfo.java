@@ -57,6 +57,22 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 	
 	private String shareContent;
 
+	private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
+
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public void setIsForceFollow(boolean isForceFollow) {
+		this.isForceFollow = isForceFollow;
+	}
+
+
 	public String getActivityPic() {
 		return activityPic;
 	}
