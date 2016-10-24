@@ -124,6 +124,8 @@ public class ActivityInfo implements Serializable {
 
     private List<ActivityEnroll> activityEnrollList;
 
+    private String description;
+
     public String getSource() {
         return source;
     }
@@ -314,6 +316,14 @@ public class ActivityInfo implements Serializable {
 
     public void setActivityEnrollList(List<ActivityEnroll> activityEnrollList) {
         this.activityEnrollList = activityEnrollList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
