@@ -170,6 +170,7 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="TINYINT" />
 		<result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+		<result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
 		<result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
 		<result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
 		<result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
@@ -457,7 +458,7 @@
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
 		bi.biz_email,
-		bi.pay_account, bi.blank_name, bi.pay_name
+		bi.pay_account, bi.blank_name, bi.pay_name,pb.rule_code
 		from payment_bill pb
 		left
 		join payment_bill_config pbc on pb.config_id = pbc.id
