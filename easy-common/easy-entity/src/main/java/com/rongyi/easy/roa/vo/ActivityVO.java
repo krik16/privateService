@@ -17,6 +17,7 @@ public class ActivityVO implements Serializable{
 	private static final long serialVersionUID = -844670575721824951L;
 	
 	private Integer activityId;//拼团活动id
+	private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
 	private String activityName;//拼团活动名称
 	private Long endAt;//拼团活动结束时间
 	private Long startAt;//拼团活动开始时间
@@ -24,13 +25,21 @@ public class ActivityVO implements Serializable{
 	private String sharePic;//	分享图片
 	private String shareTitle;//分享标题
 	private Boolean forceAttention = false;//是否需要强制关注 true需要 false不需要
+	private List<ActivityCommodityVO> commodityList;//拼团活动商品列表
+	
+	public Integer getActivityStatus() {
+		return activityStatus;
+	}
+	public void setActivityStatus(Integer activityStatus) {
+		this.activityStatus = activityStatus;
+	}
 	public Boolean getForceAttention() {
 		return forceAttention;
 	}
 	public void setForceAttention(Boolean forceAttention) {
 		this.forceAttention = forceAttention;
 	}
-	private List<ActivityCommodityVO> commodityList;//拼团活动商品列表
+	
 	
 	public Integer getActivityId() {
 		return activityId;
@@ -87,6 +96,7 @@ public class ActivityVO implements Serializable{
 				+ ", shareDesc=" + shareDesc + ", sharePic=" + sharePic
 				+ ", shareTitle=" + shareTitle + ", commodityList=" + commodityList 
 				+ ", forceAttention=" + forceAttention
+				+ ", activityStatus=" + activityStatus
 				+ "]";
 	}
 

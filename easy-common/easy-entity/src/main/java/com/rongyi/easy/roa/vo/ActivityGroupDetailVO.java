@@ -23,6 +23,7 @@ public class ActivityGroupDetailVO implements Serializable{
 	private int commodityAppStatus;//商品APP显示状态 (0下架 1上架 3待上架 4秒杀结束)
 	private List<String> commodityPicList;//商品图片	
 	private Integer activityId;//拼团活动id
+	private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
 	private String activityName;//拼团活动名称
 	private Integer activityCommodityStock;//活动商品库存
 	private double activityPrice;//拼团商品最低价格
@@ -38,6 +39,12 @@ public class ActivityGroupDetailVO implements Serializable{
 	private String activityCommodityDesc;//拼团活动商品描述
 	private int groupTotalNum;//活动商品参团总人数
 	
+	public Integer getActivityStatus() {
+		return activityStatus;
+	}
+	public void setActivityStatus(Integer activityStatus) {
+		this.activityStatus = activityStatus;
+	}
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
 	}
@@ -173,6 +180,7 @@ public class ActivityGroupDetailVO implements Serializable{
 				+ ", memberIdentity=" + memberIdentity 
 				+ ", orderNo=" + orderNo + ", commodityAppStatus=" + commodityAppStatus
 				+ ", groupTotalNum=" + groupTotalNum + ", activityCommodityDesc=" + activityCommodityDesc
+				+ ", activityStatus=" + activityStatus
 				+ "]";
 	}
 
