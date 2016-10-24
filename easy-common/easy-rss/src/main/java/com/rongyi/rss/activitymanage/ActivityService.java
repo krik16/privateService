@@ -228,7 +228,7 @@ public interface ActivityService {
     public boolean updateActivityGoodsAndSpecStatusByActivityId(Integer activityId,Integer status, String userName);
 
 
-    public boolean cleanActivityById(Integer activityId,String userName);
+    public boolean cleanActivityById(Integer activityId,String userName,Integer status);
 
     public List<ActivityGoods> selectGoodsInPinTuan(List<String> goodIds);
 

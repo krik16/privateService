@@ -53,6 +53,7 @@ public class CommodityBuyerVO implements Serializable{
 	private double activityPrice;//拼团商品最低价格
 	private Long endAt;//拼团活动结束时间
 	private Long startAt;//拼团活动开始时间
+	private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
 	private Boolean forceAttention = false;//下单是否需要强制关注,true：要关注，false：不需要关注
 	private Integer groupPeopleLimit;//成团所需人数
 	private String activityCommodityDesc;//拼团活动商品描述
@@ -61,6 +62,14 @@ public class CommodityBuyerVO implements Serializable{
 	private String brandLogo;
 	private String shopLogo;
 	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+
+	public Integer getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(Integer activityStatus) {
+		this.activityStatus = activityStatus;
+	}
 
 	public Integer getActivityCommodityStock() {
 		return activityCommodityStock;
@@ -648,6 +657,7 @@ public class CommodityBuyerVO implements Serializable{
 				+", discount=" + discount
 				+ ", isCollected=" + isCollected
 				+ ", galleryPosition=" + galleryPosition
+				+ ", activityStatus=" + activityStatus
 				+ "]";
 	}
 
