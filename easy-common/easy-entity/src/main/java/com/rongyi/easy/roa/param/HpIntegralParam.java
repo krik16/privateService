@@ -25,6 +25,7 @@ public class HpIntegralParam implements Serializable{
 	private String userCardId;//绑定卡的id
 	private String phone;
 	private Integer integralType; //积分卡类型 0rp 1默认
+	private Integer hideLoseCard;//是否隐藏失效积分卡 0:不是 1:是
 
 	public String getJsessionId() {
 		return jsessionId;
@@ -93,11 +94,19 @@ public class HpIntegralParam implements Serializable{
 		this.integralType = integralType;
 	}
 
+	public Integer getHideLoseCard() {
+		return hideLoseCard;
+	}
+
+	public void setHideLoseCard(Integer hideLoseCard) {
+		this.hideLoseCard = hideLoseCard;
+	}
+
 	//不要把密码打印出来
 	@Override
 	public String toString() {
 		return "HpIntegralParam [jsessionId=" + jsessionId + ", cardCode=" + cardCode+ ", phone=" + phone + ", cardNo=" + cardNo +", userCardId=" + userCardId + ", password="
-				+ "******" + ", code=" + code + ", cardIntegral=" + cardIntegral + "]";
+				+ "******" + ", code=" + code + ", cardIntegral=" + cardIntegral +", hideLoseCard=" + hideLoseCard + "]";
 	}
 
 }
