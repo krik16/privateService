@@ -1,7 +1,10 @@
 package com.rongyi.easy.activitymanage.param;
 
+import com.google.inject.internal.Lists;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuying on 2016/10/17.
@@ -24,7 +27,7 @@ public class PingtuanActivityVo implements Serializable{
                 ", shareDesc='" + shareDesc + '\'' +
                 ", sharePic='" + sharePic + '\'' +
                 ", mallId='" + mallId + '\'' +
-                ", activityGoodsDetail=" + activityGoodsDetail +
+                ", activityGoodsDetails=" + activityGoodsDetails +
                 '}';
     }
 
@@ -56,16 +59,16 @@ public class PingtuanActivityVo implements Serializable{
 
     private String mallId;//商场id
 
-    private  ActivityGoodsDetail activityGoodsDetail;
+    private List<ActivityGoodsDetail> activityGoodsDetails = Lists.newArrayList();
 
     private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
-    public ActivityGoodsDetail getActivityGoodsDetail() {
-        return activityGoodsDetail;
+    public List<ActivityGoodsDetail> getActivityGoodsDetails() {
+        return activityGoodsDetails;
     }
 
-    public void setActivityGoodsDetail(ActivityGoodsDetail activityGoodsDetail) {
-        this.activityGoodsDetail = activityGoodsDetail;
+    public void setActivityGoodsDetails(List<ActivityGoodsDetail> activityGoodsDetails) {
+        this.activityGoodsDetails = activityGoodsDetails;
     }
 
     public Integer getActivityId() {
