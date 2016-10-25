@@ -54,6 +54,13 @@ public interface ActivityService {
     boolean saveActivityGoods(ActivityGoods activityGoods);
 
     /**
+     * 更新商品
+     * @param activityGoods
+     * @return
+     */
+    public boolean updateActivityGoods(ActivityGoods activityGoods);
+
+    /**
      * 批量新增ActivityGoods数据
      * @param ActivityGoods
      * @return boolean
