@@ -43,7 +43,21 @@ public class SessionUserInfo implements Serializable{
     private Integer filialeId;
     
     private String filialeMid;
-    
+
+	private Integer firstShopId;
+
+	private String firstShopMid;
+
+	private Integer secondShopId;
+
+	private String secondShopMid;
+
+	private Integer thirdShopId;
+
+	private String thirdShopMid;
+
+	private Integer level;  //账号层级 1 2 3
+
     private String logo = "http://rongyi.b0.upaiyun.com/commodity/text/201601051202219059.png";  //logo图片地址
     
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
@@ -267,5 +281,60 @@ public class SessionUserInfo implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
+	public Integer getSecondShopId() {
+		return secondShopId;
+	}
+
+	public void setSecondShopId(Integer secondShopId) {
+		this.secondShopId = secondShopId;
+	}
+
+	public String getSecondShopMid() {
+		return secondShopMid;
+	}
+
+	public void setSecondShopMid(String secondShopMid) {
+		this.secondShopMid = secondShopMid;
+	}
+
+	public Integer getThirdShopId() {
+		return thirdShopId;
+	}
+
+	public void setThirdShopId(Integer thirdShopId) {
+		this.thirdShopId = thirdShopId;
+	}
+
+	public String getThirdShopMid() {
+		return thirdShopMid;
+	}
+
+	public void setThirdShopMid(String thirdShopMid) {
+		this.thirdShopMid = thirdShopMid;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getFirstShopId() {
+		return firstShopId;
+	}
+
+	public void setFirstShopId(Integer firstShopId) {
+		this.firstShopId = firstShopId;
+	}
+
+	public String getFirstShopMid() {
+		return firstShopMid;
+	}
+
+	public void setFirstShopMid(String firstShopMid) {
+		this.firstShopMid = firstShopMid;
+	}
 }
