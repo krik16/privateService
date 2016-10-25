@@ -1,6 +1,8 @@
 package com.rongyi.easy.osm.entity;
 
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -221,6 +223,10 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
      * 活动状态
      */
     private Integer activityStatus;
+
+    private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
+    private Long activityRoundId;//活动场次
+    private String activityName;//活动名称
 
     public Byte getIsAlert() {
         return isAlert;
@@ -902,60 +908,33 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.activityStatus = activityStatus;
     }
 
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public Long getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Long activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
     @Override
     public String toString() {
-        return "OrderFormEntity{" +
-                "id=" + id +
-                ", orderNo='" + orderNo + '\'' +
-                ", totalAmount=" + totalAmount +
-                ", expressFee=" + expressFee +
-                ", disconntFee=" + disconntFee +
-                ", expressInfoId='" + expressInfoId + '\'' +
-                ", status='" + status + '\'' +
-                ", statusRoute='" + statusRoute + '\'' +
-                ", createAt=" + createAt +
-                ", statusHoldMs=" + statusHoldMs +
-                ", nextStatusTime=" + nextStatusTime +
-                ", buyerId='" + buyerId + '\'' +
-                ", weidianId='" + weidianId + '\'' +
-                ", paymentIdList='" + paymentIdList + '\'' +
-                ", isComment=" + isComment +
-                ", addressId='" + addressId + '\'' +
-                ", orderType=" + orderType +
-                ", orderSource=" + orderSource +
-                ", couponId='" + couponId + '\'' +
-                ", internalCouponId='" + internalCouponId + '\'' +
-                ", guideId='" + guideId + '\'' +
-                ", discountInfo='" + discountInfo + '\'' +
-                ", buyerComment='" + buyerComment + '\'' +
-                ", jsonDiscountInfo=" + jsonDiscountInfo +
-                ", guideType=" + guideType +
-                ", isAlert=" + isAlert +
-                ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
-                ", couponDiscount=" + couponDiscount +
-                ", couponSource=" + couponSource +
-                ", couponRequirement=" + couponRequirement +
-                ", scoreDiscount=" + scoreDiscount +
-                ", devType=" + devType +
-                ", couponType=" + couponType +
-                ", isPayVa=" + isPayVa +
-                ", orderScore=" + orderScore +
-                ", orderScoreDiscount=" + orderScoreDiscount +
-                ", orderCouponDiscount=" + orderCouponDiscount +
-                ", changePriceFlag=" + changePriceFlag +
-                ", cartId=" + cartId +
-                ", buyerDeleteFlag=" + buyerDeleteFlag +
-                ", sellerDeleteFlag=" + sellerDeleteFlag +
-                ", realAmount=" + realAmount +
-                ", discountAmount=" + discountAmount +
-                ", rebateAmount=" + rebateAmount +
-                ", scoreAmount=" + scoreAmount +
-                ", weixinAppId=" + weixinAppId +
-                ", orderChannel=" + orderChannel +
-                ", openId=" + openId +
-                ", userPhone=" + userPhone +
-                ", activityStatus=" + activityStatus +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
     @Override
