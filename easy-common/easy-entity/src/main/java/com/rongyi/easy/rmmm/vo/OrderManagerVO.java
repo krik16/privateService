@@ -1,5 +1,8 @@
 package com.rongyi.easy.rmmm.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -38,6 +41,10 @@ public class OrderManagerVO implements Serializable {
 	private BigDecimal integralAmount;//积分抵扣
 	private BigDecimal hbAmount;//红包抵扣
 	private Integer orderSource;//订单来源
+	private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
+	private Long activityRoundId;//活动场次
+	private String activityName;//活动名称
+	private String activityStatus;//活动状态
 
 	public String getOrderCartNo() {
 		return orderCartNo;
@@ -196,15 +203,41 @@ public class OrderManagerVO implements Serializable {
 		this.hbAmount = hbAmount;
 	}
 
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
+	public Long getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(Long activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public String getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(String activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderManagerVO [orderNo=" + orderNo + ", orderId=" + orderId
-				+ ", nickname=" + nickname + ", userId=" + userId
-				+ ", username=" + username + ", mallName=" + mallName
-				+ ", shopName=" + shopName + ", status=" + status
-				+ ", statusRoute=" + statusRoute + ", expressFee=" + expressFee
-				+ ", orderTotalAmount=" + orderTotalAmount + ", createAt="
-				+ createAt + ", discountFee=" + discountFee + "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 
 }
