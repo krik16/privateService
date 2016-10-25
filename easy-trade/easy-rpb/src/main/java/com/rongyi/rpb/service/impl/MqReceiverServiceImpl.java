@@ -124,5 +124,6 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 		payTypeList.add(PaymentEventType.APP);
 		payTypeList.add(PaymentEventType.WEIXIN_PAY);
 		payTypeList.add(PaymentEventType.UNION_PAY);
+		payTypeList.add(PaymentEventType.SEND_RED_BACK);
 	}
 }

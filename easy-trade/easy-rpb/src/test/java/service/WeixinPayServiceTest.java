@@ -4,14 +4,16 @@ import base.BaseTest;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
-import com.rongyi.rpb.common.pay.weixin.model.RefundReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ReverseReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayService;
+import com.rongyi.rpb.common.pay.weixin.model.*;
 import com.rongyi.rpb.common.pay.weixin.service.RefundService;
 import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
 import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
+import com.rongyi.rpb.common.pay.weixin.util.Configure;
+import com.rongyi.rpb.common.pay.weixin.util.HttpsRequest;
+import com.rongyi.rpb.common.pay.weixin.util.MD5;
+import com.rongyi.rpb.common.pay.weixin.util.RandomStringGenerator;
 import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.service.WeixinConfigService;
 import com.rongyi.rpb.service.WeixinPayService;
 import com.rongyi.rpb.unit.WeixinPayUnit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,9 @@ import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class WeixinPayServiceTest extends BaseTest {
@@ -30,6 +34,9 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	@Autowired
 	PaymentService paymentService;
+
+	@Autowired
+	WeixinConfigService weixinConfigService;
 //
 //	@Autowired
 //	Sender sender;
@@ -177,11 +184,11 @@ public class WeixinPayServiceTest extends BaseTest {
 		}
 	}
 
-	// @Test
-	public void testGetWeixinPaySign() {
+//	 @Test
+//	 public void testGetWeixinPaySign() {
 //		Map<String, Object> map = weixinPayService.getAppWeXinSign("1000001111211", 1d,"","");
 //		System.err.println(map.toString());
-	}
+//	}
 
 //	@Test
 //	public void testRefundV3() {
@@ -220,6 +227,15 @@ public class WeixinPayServiceTest extends BaseTest {
 		weixinPayService.refundNotifyThird(paymentEntity);
 	}
 
+	@Test
+	public void testRedBack(){
+//openId		oljTBs3jTQyXgDzxzpXrsoRGZkF4
+//		Integer weixinMchId,String mchBillno, String sendName,String reOpenid,
+// int totalAmount,String wishing,
+//				String actName,String remark
+//		weixinPayUnit.sendRedPack(2, "12321231", "rongyiwang", "oljTBs3jTQyXgDzxzpXrsoRGZkF4", 100, "thank", "fuli", "test");
+	}
+
 
 
 	public static String getRequestXml(SortedMap<Object, Object> parameters) {
@@ -239,5 +255,54 @@ public class WeixinPayServiceTest extends BaseTest {
 		}
 		sb.append("</xml>");
 		return sb.toString();
+	}
+
+	@Test
+	public void testRedPack() throws Exception{
+//		initSDKConfiguration("","","","","");
+
+		RedPackReqData bean = new RedPackReqData();
+		bean.setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
+		bean.setMch_billno(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date())+new Random().nextInt(10));
+		bean.setMch_id("1307525901");
+		bean.setWxappid("wx749527272cae4b9b");
+		bean.setSend_name("商户名称");
+		bean.setRe_openid("oljTBs3jTQyXgDzxzpXrsoRGZkF4");
+		bean.setTotal_amount(100);//金额分
+		bean.setTotal_num(1);//发送人数
+		bean.setWishing("红包祝福语");
+		bean.setClient_ip("活动名称");
+		bean.setAct_name("java");
+		bean.setRemark("备注");
+
+		bean.setSign(getSign(bean));
+		Configure configure = weixinConfigService.initConfigure(2);
+
+		HttpsRequest https = new HttpsRequest();
+		String rets = https.sendPost("https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack", bean,configure);
+		System.out.println(rets);
+	}
+
+	public static String getSign(Object o) throws IllegalAccessException {
+		ArrayList<String> list = new ArrayList<String>();
+		Class cls = o.getClass();
+		Field[] fields = cls.getDeclaredFields();
+		for (Field f : fields) {
+			f.setAccessible(true);
+			if (f.get(o) != null && f.get(o) != "") {
+				list.add(f.getName() + "=" + f.get(o) + "&");
+			}
+		}
+		int size = list.size();
+		String [] arrayToSort = list.toArray(new String[size]);
+		Arrays.sort(arrayToSort, String.CASE_INSENSITIVE_ORDER);
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < size; i ++) {
+			sb.append(arrayToSort[i]);
+		}
+		String result = sb.toString();
+		result += "key=" + "b24aaabb1ea8a155c4572570cd260313";
+		result = MD5.MD5Encode(result).toUpperCase();
+		return result;
 	}
 }

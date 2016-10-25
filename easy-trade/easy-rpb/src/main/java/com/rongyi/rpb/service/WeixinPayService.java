@@ -101,4 +101,11 @@ public interface WeixinPayService {
 	 */
 	void refundNotifyThird(PaymentEntity paymentEntity);
 
+	/**
+	 * 发送红包
+	 * @param paymentEntityVO
+	 * @return
+	 */
+	Map<String,Object> sendRedBack(PaymentEntityVO paymentEntityVO);
+
 }
