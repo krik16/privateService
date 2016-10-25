@@ -6,10 +6,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponActivity;
 import com.rongyi.easy.coupon.param.CouponParam;
-import com.rongyi.easy.coupon.vo.CouponPageVO;
-import com.rongyi.easy.coupon.vo.CouponStockVO;
-import com.rongyi.easy.coupon.vo.TCCouponVO;
-import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
+import com.rongyi.easy.coupon.vo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -249,4 +246,6 @@ public interface RoaCouponService {
     List<CouponStockVO> getCouponsStockCount(List<String> couponIds);
 
     int findValidCount(CouponParam couponParam);
+
+    RedenvelopVO queryYifenqianRedenvelop();
 }
