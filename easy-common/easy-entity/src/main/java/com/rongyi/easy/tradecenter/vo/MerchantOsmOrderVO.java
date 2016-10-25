@@ -43,6 +43,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
+    private String activityStatus;//活动状态
 
     public Integer getOrderSource() {
         return orderSource;
@@ -280,7 +281,15 @@ public class MerchantOsmOrderVO implements Serializable{
 		return createTimeStr;
 	}
 
-	public void setCreateTimeStr(String createTimeStr) {
+    public String getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(String activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
 		this.createTimeStr = createTimeStr;
 	}
 }
