@@ -1,5 +1,8 @@
 package com.rongyi.easy.tradecenter.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,6 +40,9 @@ public class MerchantOsmOrderVO implements Serializable{
     private List<MerchantOrderCommodityVO> commodityList;//订单下的商品列表
     private String createTimeStr;   //格式化下单时间  （今天 12:06:55）
     private String orderChannel; //下单渠道
+    private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
+    private Long activityRoundId;//活动场次
+    private String activityName;//活动名称
 
     public Integer getOrderSource() {
         return orderSource;
@@ -241,24 +247,33 @@ public class MerchantOsmOrderVO implements Serializable{
         this.orderChannel = orderChannel;
     }
 
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public Long getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Long activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
     @Override
     public String toString() {
-        return "OrderVO{" +
-                "orderNo='" + orderNo + '\'' +
-                ", createTime='" + createTime + '\'' +
-                ", paymentTime='" + paymentTime + '\'' +
-                ", shopName='" + shopName + '\'' +
-                ", commodityNum='" + commodityNum + '\'' +
-                ", guideName='" + guideName + '\'' +
-                ", buyerAccount='" + buyerAccount + '\'' +
-                ", paymentAmount='" + paymentAmount + '\'' +
-                ", discountAmount='" + discountAmount + '\'' +
-                ", expressPrice='" + expressPrice + '\'' +
-                ", integralAmount='" + integralAmount + '\'' +
-                ", integralNum='" + integralNum + '\'' +
-                ", orderStatus='" + orderStatus + '\'' +
-                ", orderChannel='" + orderChannel + '\'' +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
 	public String getCreateTimeStr() {
