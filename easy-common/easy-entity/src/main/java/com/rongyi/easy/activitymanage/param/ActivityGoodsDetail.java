@@ -23,6 +23,8 @@ public class ActivityGoodsDetail implements Serializable {
     private Integer sortNum;
     private String createUser;
     private String updateUser;
+    private String remainStock;//剩余库存
+    private String activityPrice;//活动价，是个范围
     private List<GoodsSku> goodsSkuList = Lists.newArrayList();
 
     @Override
@@ -39,7 +41,25 @@ public class ActivityGoodsDetail implements Serializable {
                 .append("sortNum", sortNum)
                 .append("createUser", createUser)
                 .append("updateUser", updateUser)
+                .append("remainStock", remainStock)
+                .append("activityPrice", activityPrice)
                 .toString();
+    }
+
+    public String getActivityPrice() {
+        return activityPrice;
+    }
+
+    public void setActivityPrice(String activityPrice) {
+        this.activityPrice = activityPrice;
+    }
+
+    public String getRemainStock() {
+        return remainStock;
+    }
+
+    public void setRemainStock(String remainStock) {
+        this.remainStock = remainStock;
     }
 
     public String getCreateUser() {
