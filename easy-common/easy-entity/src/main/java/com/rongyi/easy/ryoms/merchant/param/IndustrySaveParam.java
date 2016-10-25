@@ -7,9 +7,19 @@ public class IndustrySaveParam implements Serializable {
 	
 	private static final long serialVersionUID = -1529758349603604413L;
 	
+	private Integer id;
+	
 	private String name;//行业名称
 	
 	private List<IndustryVersionParam> industryVersionParam;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

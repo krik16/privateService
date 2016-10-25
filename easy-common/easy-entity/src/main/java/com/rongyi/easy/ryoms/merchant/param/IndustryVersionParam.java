@@ -13,9 +13,19 @@ import java.util.List;
 public class IndustryVersionParam implements Serializable {
 	private static final long serialVersionUID = 2905367200197306832L;
 	
+	private Integer id;
+	
 	private String name;//版本名称
 	
-	private List<String> auths;//权限值
+	private List<Integer> auths;//权限值
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -25,11 +35,11 @@ public class IndustryVersionParam implements Serializable {
 		this.name = name;
 	}
 
-	public List<String> getAuths() {
+	public List<Integer> getAuths() {
 		return auths;
 	}
 
-	public void setAuths(List<String> auths) {
+	public void setAuths(List<Integer> auths) {
 		this.auths = auths;
 	}
 
@@ -37,5 +47,5 @@ public class IndustryVersionParam implements Serializable {
 	public String toString() {
 		return "IndustryVersionParam [name=" + name + ", auths=" + auths + "]";
 	}
-	
+
 }

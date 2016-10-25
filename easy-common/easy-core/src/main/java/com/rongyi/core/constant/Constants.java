@@ -878,4 +878,14 @@ public interface Constants {
         String PROGRESS = "progress";
         String PERPROGRESS = "perprogress";
     }
+    
+    interface COMMON_STATUS {//0删除  1正常
+    	Integer delete = 0;
+    	Integer normal = 1;
+    }
+    
+    interface IS_DEFAULT {//0非默认 1默认
+    	Integer no = 0;
+    	Integer yes = 1;
+    }
 }
