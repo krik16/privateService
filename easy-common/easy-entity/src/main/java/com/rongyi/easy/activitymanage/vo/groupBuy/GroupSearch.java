@@ -7,6 +7,27 @@ import java.util.Date;
  * Created by caohongjiang on 2016/10/21.
  */
 public class GroupSearch implements Serializable {
+    @Override
+    public String toString() {
+        return "GroupSearch{" +
+                "currentPage=" + currentPage +
+                ", pageSize=" + pageSize +
+                ", offset=" + offset +
+                ", qcreateAt=" + qcreateAt +
+                ", qendAt=" + qendAt +
+                ", qState=" + qState +
+                ", groupId=" + groupId +
+                ", activityId=" + activityId +
+                ", goodId='" + goodId + '\'' +
+                ", createAt=" + createAt +
+                ", endAt=" + endAt +
+                ", groupPeopleLimit=" + groupPeopleLimit +
+                ", userNick='" + userNick + '\'' +
+                ", phone='" + phone + '\'' +
+                ", goodName='" + goodName + '\'' +
+                '}';
+    }
+
     private static final long serialVersionUID = 1532510657452294276L;
     private Integer currentPage;
     private Integer pageSize;
