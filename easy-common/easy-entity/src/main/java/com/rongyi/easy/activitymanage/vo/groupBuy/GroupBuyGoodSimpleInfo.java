@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
+import com.rongyi.easy.util.NumberUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -77,11 +78,24 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 * 商品已参团次数,已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
 	 */
 	private int groupedCount;
-	
-	
-	
-	
-	
+
+
+	public double getMaxActivityPrice(List<GoodSpecInfo> specs) {
+		double max = 0.0;
+
+		for(GoodSpecInfo spec : specs) {
+			max = NumberUtils.getMaxData(max, spec.getGoodGroupPrice());
+		}
+		return max;
+	}
+
+	public int getRemainStock(List<GoodSpecInfo> specs) {
+		int remainStock = 0;
+		for(GoodSpecInfo spec : specs) {
+			remainStock += spec.getRemainCount();
+		}
+		return remainStock;
+	}
 
 
 	public String getDesc() {

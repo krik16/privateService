@@ -1,5 +1,8 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
+import com.rongyi.easy.mcmc.Commodity;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -79,6 +82,20 @@ public class CommodityPinTuanVO implements Serializable {
         public CommodityPinTuanVO build() {
             return new CommodityPinTuanVO(this);
         }
+    }
+
+    public CommodityPinTuanVO wrapPinTuanVO(Commodity commodity, GroupBuyGoodSimpleInfo goods) {
+        CommodityPinTuanVO vo = new CommodityPinTuanVO();
+
+        vo.setCommodityName(commodity.getName());
+        vo.setOriginalPrice(Double.parseDouble(commodity.getoPriceMax()));
+        vo.setGroupPeopleLimit(goods.getGroupPeopleLimit());
+        vo.setPicUrls(commodity.getPicList());
+        vo.setActivityPrice(goods.getMaxActivityPrice(goods.getSpecs()));
+        vo.setRemainStock(goods.getRemainStock(goods.getSpecs()));
+        vo.setCommodityId(commodity.getId().toString());
+
+        return vo;
     }
 
     public String getCommodityName() {
