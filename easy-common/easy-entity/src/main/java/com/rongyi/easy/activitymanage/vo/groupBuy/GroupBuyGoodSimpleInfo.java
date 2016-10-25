@@ -3,8 +3,10 @@ package com.rongyi.easy.activitymanage.vo.groupBuy;
 import com.rongyi.easy.util.NumberUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -80,13 +82,14 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private int groupedCount;
 
 
-	public double getMaxActivityPrice(List<GoodSpecInfo> specs) {
-		double max = 0.0;
+	public double getMinActivityPrice(List<GoodSpecInfo> specs) {
+		Assert.notNull(specs);
+		double min = specs.get(0).getGoodGroupPrice();
 
 		for(GoodSpecInfo spec : specs) {
-			max = NumberUtils.getMaxData(max, spec.getGoodGroupPrice());
+			min = NumberUtils.getMinData(min, spec.getGoodGroupPrice());
 		}
-		return max;
+		return min;
 	}
 
 	public int getRemainStock(List<GoodSpecInfo> specs) {
@@ -96,7 +99,6 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 		}
 		return remainStock;
 	}
-
 
 	public String getDesc() {
 		return desc;

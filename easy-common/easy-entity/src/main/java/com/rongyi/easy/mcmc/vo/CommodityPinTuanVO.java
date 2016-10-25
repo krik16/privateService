@@ -91,7 +91,7 @@ public class CommodityPinTuanVO implements Serializable {
         vo.setOriginalPrice(Double.parseDouble(commodity.getoPriceMax()));
         vo.setGroupPeopleLimit(goods.getGroupPeopleLimit());
         vo.setPicUrls(commodity.getPicList());
-        vo.setActivityPrice(goods.getMaxActivityPrice(goods.getSpecs()));
+        vo.setActivityPrice(goods.getMinActivityPrice(goods.getSpecs()));
         vo.setRemainStock(goods.getRemainStock(goods.getSpecs()));
         vo.setCommodityId(commodity.getId().toString());
 
