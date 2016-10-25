@@ -20,12 +20,14 @@ public enum RoaErrorCode {
     SUCCESS(0, "正常"), //原系统都定义为正常情况 编码规则不变
     FAILURE(1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
     USER_ISNOT_LOGIN(21,"请重新登录"),
+    USE_CARD_INVALID(22,"请选择使用的积分卡"),
     PARAMETER_ISNULL(1050001,"必要参数不能为空"),
     /** 积分福利  */
     ERROR_CODE_ISNULL(1051001,"验证码不能为空"),
     ERROR_CODE_ISERROR(1051002,"验证码错误"),
     ERROR_CARDNUM_ISNULL(1051003,"账号不能为空"),
     ERROR_PASSWORD_ISNULL(1051004,"密码不能为空"),
+    ERROR_PHONE_ISNULL(1051001,"手机号不能为空"),
     ;
 
 

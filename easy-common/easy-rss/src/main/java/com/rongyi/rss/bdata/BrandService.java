@@ -12,4 +12,5 @@ public interface BrandService {
 	Map<String, Object>getBrands(Map params, int currentpage, int pagesize);
 	BrandVO getBrandMoreInfo(String brandId);
 	
+	BrandVO getBrandByName(String name);
 }

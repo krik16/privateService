@@ -273,7 +273,18 @@ public class MalllifeRsaUtil {
                 System.out.println("解密后="+decryStr);
                  */
 
+           String _PUBLICKEY="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCi4KQZzhKwZXrm3dSZwl34LSgHLc250Ch8BZDIQNr6FrOT/PxdQCotwrP3TfjTKSTRov+3A6GMztRvLWjpZK++MzNBmHUNObAfdSTGLbXZQwg0niXeef4C8ELINpF67uTcFNORcZ4az7AU4MgUNEYRD7JD83CP/tpPG+LFnLou9wIDAQAB";
 
+                String jsonStr="{'phone':'15821659415','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+
+                System.out.println("加密前="+jsonStr);
+                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,_PUBLICKEY);
+                System.out.println("加密后="+encryStr);
+             //   String decryStr=MalllifeRsaUtil.decryptStr(encryStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PRIVATEKEY"));
+              //  System.out.println("解密后="+decryStr);
+
+
+                System.out.println("=================="+(int)(200*0.01));
 
 
             } catch (Exception e) {
@@ -284,6 +295,8 @@ public class MalllifeRsaUtil {
 
         }
     }
+
+
 
 
 

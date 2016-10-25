@@ -17,6 +17,15 @@ public class BrandDetailVO implements Serializable{
 	private String[] pictureList; // 顶图列表
 	private String[] brandTag; // 品牌标签
 	private String cooperationBrandId;// mysql表中的主键id
+	private Integer shopNum;//品牌店铺数量
+	
+	public Integer getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
 
 	public String getBrandId() {
 		return brandId;

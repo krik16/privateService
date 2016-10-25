@@ -13,6 +13,8 @@ import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.common.third.rsa.MalllifeRsaUtil;
 import com.rongyi.core.common.third.sms.SmsEnum;
 
+import java.util.Map;
+
 public class MallLifeThirdConfig {
 
 
@@ -139,6 +141,43 @@ public class MallLifeThirdConfig {
                     "\"channel\":\""+channelStr+"\",\n" +
                     "\"sendType\":"+sendType+"\n" +
                     "}");
+
+
+
+           String publicKey1="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCi4KQZzhKwZXrm3dSZwl34LSgHLc250Ch8BZDIQNr6FrOT/PxdQCotwrP3TfjTKSTRov+3A6GMztRvLWjpZK++MzNBmHUNObAfdSTGLbXZQwg0niXeef4C8ELINpF67uTcFNORcZ4az7AU4MgUNEYRD7JD83CP/tpPG+LFnLou9wIDAQAB";
+            String str1="Yin2OArZUIHrVikFJ8syUBjtI5a3rJw/s7Wrq7H2lPm5ssTFv2rDxFsHaboz8ezuUyl/zANnNwXK1vEP3yJmTDGsP40maATFfp7mAA+3FQoIhByB7YxpU7IQD7DiZl47e+/VRIZWqX/I7SNha6Ox1FKEJymRFfnJsSNg92dMXZc=";
+            String privateKey1="MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKLgpBnOErBleubd1JnCXfgtKActzbnQKHwFkMhA2voWs5P8/F1AKi3Cs/dN+NMpJNGi/7cDoYzO1G8taOlkr74zM0GYdQ05sB91JMYttdlDCDSeJd55/gLwQsg2kXru5NwU05FxnhrPsBTgyBQ0RhEPskPzcI/+2k8b4sWcui73AgMBAAECgYBdixTUOTUkl/PA+fArKqUbbpvJm7XGnNVTfULMr+rTrQwP10D9MWfIBkWjp+VbKQsbVzjz3CMBIpyBCZxyRsBjWNoiBPAYpCmD2hO+CIzcytcqKa1gjcraC5hNtLds/eIGcNr/zwnSavfSU+cym2bP1xlMx7Rb4wBGqhGSNDjMIQJBAOcuqHg+F1tFxC0ge4Pp5gcn0CvfzZs65Va5bCYgIusPzN+p8iRxa29Vc4UROw3zGSj2FzmapF8uMPCcVBatUEcCQQC0XNWVYDNU8YBb2//DfkgvpBjxyl+AKi3fYpiY2FVcPMsCoa8RJbzYPd1sfWgOzUOBxDi+euY4jeo0HY7cFrPRAkAFr7QdIQnaCOFGauIe4IXz7xrDuYGJK+2wMGdkmK3DMmRLrBZ0pwWJe4SX5VCaizw3MbZoiFE6thwmDvJSjHjJAkBl3YCrqveS5ArQ1sHvEaWHcrC77sZdRnU+ExuIR7Z+L7+grtyHXL75iodCPNnGclvMMJyzyAm6qzw5TvBekVvhAkB2dF+bkegjkr0t8R15sROKhZJtrV1moUoxkNMq4g5mZWUunCHy2conMcmsabs3vpObhPUB3yooBGPZ4gthGs7a";
+
+            try{
+
+                Map<String, Object> keyMap;
+                //生成 公钥 私钥
+                keyMap = MalllifeRsaUtil.initKey();
+               // String publicKey1 =  MalllifeRsaUtil.getPublicKey(keyMap);
+              //  String privateKey1 =  MalllifeRsaUtil.getPrivateKey(keyMap);
+                System.out.println("publicKey1="+publicKey1);
+                System.out.println("privateKey1="+privateKey1);
+
+                String jsonStr001="hello哈哈";
+
+                System.out.println("加密前=="+jsonStr001);
+                String  keyStr=  MalllifeRsaUtil.encryptionStr(jsonStr001,publicKey1);
+                System.out.println("加密后=="+keyStr);
+
+                String  data1=  MalllifeRsaUtil.decryptStr(str1, privateKey1);
+                System.out.println("解密后======"+data1);
+
+                String ttt="nTaNs9oHiJFJ1okDNwgZ0NCfjwsW5C8/jZjGGjo+z5GHLH+OobzNQj8dwgeBh1i0Vppm3TiefeSq1zP8HVXlXjVCspmILvPDqiKjwiBZP/HfV1cqDNvXVQbnPmceVAT33DoSjEOzzticRbzostdK7V6BbO0l4VVsUU5mz9qNcC0";
+                String strSign="data="+ttt+"&timeStamp=1473056788770"+"&channel=SZCQJJNHNTC"+"&token=DA8A265F751299BF789ED6780DB4DC06";
+
+
+                String md5Sign1= Md5Util.GetMD5Code("data=nTaNs9oHiJFJ1okDNwgZ0NCfjwsW5C8/jZjGGjo+z5GHLH+OobzNQj8dwgeBh1i0Vppm3TiefeSq1zP8HVXlXjVCspmILvPDqiKjwiBZP/HfV1cqDNvXVQbnPmceVAT33DoSjEOzzticRbzostdK7V6BbO0l4VVsUU5mz9qNcC0=&timeStamp=1473056788770&channel=SZCQJJNHNTC&token=DA8A265F751299BF789ED6780DB4DC06");
+                System.out.println("MD5======"+md5Sign1);
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
 
         }catch (Exception e){

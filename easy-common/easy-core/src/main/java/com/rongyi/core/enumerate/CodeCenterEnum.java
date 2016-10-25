@@ -48,6 +48,8 @@ public enum CodeCenterEnum {
     ERROR_HANNELS_USED_CODE(1021342,"推广码已经被使用！"),
     ERROR_HANNELS_DELETED_CODE(1021343,"推广码已经作废！"),
     ERROR_HANNELS_USE_LIMIT(1021344,"超过领取次数！"),
+    ERROR_VALID_FALIURE(1021345,"验码失败！"),
+    ERROR_DATE_TYPE(1021345,"日期类型参数dateType 不对！"),
     ERROR_CHANNEL_TYPE(1021350,"type 不能为空！"),
     ERROR_CHANNEL_THIRD(1021351,"thirdChannel 参数不能为空或有误"),
     ERROR_NOT_EXIST_USER(1021352,"不存在该用户，请重新输入手机号和身份"),

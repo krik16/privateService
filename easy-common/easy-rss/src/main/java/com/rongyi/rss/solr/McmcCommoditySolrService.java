@@ -7,6 +7,7 @@ import java.util.Map;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
+import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.mcmc.vo.CommoditySortVo;
 import com.rongyi.easy.rmmm.param.BullParam;
@@ -325,11 +326,35 @@ public interface McmcCommoditySolrService {
 	public void cleanCommoditiesLiveId(List<String> commodityIds) throws Exception;
 
 	/**
+	 * 根据店铺id、商场id 获取特卖id
+	 *
+	 * @param zoneId
+	 * @return
+	 * @throws RYServiceException
+	 */
+	public List<McmcCommodityDocument> searchSaleIdList(String zoneId) throws RYServiceException;
+
+	/**
+	 * 获取有销量的商品列表
+	 *
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<Commodity> searchHasSalesCommodity(int page, int size) throws RYServiceException;
+
+	public boolean updateCommodityGalleryPositionSolr(String bullerId,String shopMid,String commodityId, Integer galleryPosition);
+
+	/**
 	 * 设置商品优先排序
 	 *
 	 * @param list
 	 * @throws RYServiceException
 	 */
 	public void setCommoditySort(List<CommoditySortVo> list) throws RYServiceException;
+
+	public boolean deleteCommodityByIds(List<String> commodityIds);
+
+	public boolean addCommodityListIndex(List<McmcCommodityDocument> commodityDocumentList);
 
 }

@@ -49,6 +49,16 @@ public class LiveBrand implements Serializable {
 	 */
 	private String tags;
 
+	/**
+	 * 拼音（英文）
+	 */
+	private String slug;
+
+	/**
+	 * 总销量
+	 */
+	private int total_sales;
+
 	public String getIcon() {
 		return icon;
 	}
@@ -117,4 +127,35 @@ public class LiveBrand implements Serializable {
 		this.key_tags = key_tags;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public int getTotal_sales() {
+		return total_sales;
+	}
+
+	public void setTotal_sales(int total_sales) {
+		this.total_sales = total_sales;
+	}
+
+	@Override
+	public String toString() {
+		return "LiveBrand{" +
+				"categories_tags='" + categories_tags + '\'' +
+				", id=" + id +
+				", icon='" + icon + '\'' +
+				", ename='" + ename + '\'' +
+				", name='" + name + '\'' +
+				", key_tags='" + key_tags + '\'' +
+				", description='" + description + '\'' +
+				", tags='" + tags + '\'' +
+				", slug='" + slug + '\'' +
+				", total_sales=" + total_sales +
+				'}';
+	}
 }

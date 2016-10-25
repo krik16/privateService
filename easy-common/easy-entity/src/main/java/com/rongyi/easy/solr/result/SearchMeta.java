@@ -62,12 +62,38 @@ public class SearchMeta implements Serializable{
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
 	}
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("hitCount", hitCount)
-				.append("status", status)
-				.append("msg", msg)
-				.toString();
+		return "SearchMeta{" +
+				"hitCount=" + hitCount +
+				", status=" + status +
+				", msg='" + msg + '\'' +
+				", totalPage=" + totalPage +
+				", totalRecord=" + totalRecord +
+				'}';
+	}
+
+	public SearchMeta() {
+	}
+
+	/**
+	 * 构造结果
+	 *
+	 * @param status
+	 * @param hitCount
+	 * @param totalRecord
+	 * @param pageSize
+	 */
+	public SearchMeta(int status, int hitCount, int totalRecord, int pageSize) {
+		this.status = status;
+		if (0 == status) {
+			this.msg = "success";
+		} else {
+			this.msg = "fail";
+		}
+		this.hitCount = hitCount;
+		this.totalRecord = totalRecord;
+		this.totalPage = (int) Math.ceil(totalRecord / (double) pageSize);
 	}
 }

@@ -218,4 +218,11 @@ public interface ROAShopService {
     public List<ShopEntity> getShopsByShopIds(List<String> shopIds)  throws Exception;
     
     public List<ShopDetailVO> getShopVOsByShopIds(List<String> shopIds)   throws Exception;
+    /**
+     * 根据品牌id查品牌店铺列表V0902
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    public BrandShopListVO getBrandShopListByBrandId(BrandParam param) throws Exception;
 }

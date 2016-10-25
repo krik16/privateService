@@ -18,7 +18,7 @@ public class SmsParam implements Serializable {
     /** 手机号码 */
     private String phone;
 
-    /** 发送短信 */
+    /** 发送短信 必须带签名【XXXXXX】 */
     private String msgStr;
 
     /** 调用渠道   活动等第三方平台调用*/
@@ -34,7 +34,7 @@ public class SmsParam implements Serializable {
     private String requestIp;
 
     //发送渠道
-    private String sendChannel;
+    private String sendChannel;//
 
     private String code;//验证码
 
