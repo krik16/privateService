@@ -10,12 +10,19 @@ public class GroupActivityParam implements Serializable{
 	private static final long serialVersionUID = 7183439909451664270L;
 	
 	private Integer activityId;//拼团活动id
+	private String mallMid;//商场id
 	private String commodityId;//商品id
 	private Long activityRoundId;//拼团id
 	private Integer currentPage = 1;
 	private Integer pageSize = 20;
 	private String memberId;//微信用户id
 	
+	public String getMallMid() {
+		return mallMid;
+	}
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
 	public Integer getActivityId() {
 		return activityId;
 	}
@@ -59,6 +66,7 @@ public class GroupActivityParam implements Serializable{
 				+ activityRoundId + ", currentPage=" + currentPage
 				+ ", pageSize=" + pageSize 
 				+ ", memberId=" + memberId 
+				+ ", mallMid=" + mallMid 
 				+ "]";
 	}
 	
