@@ -132,9 +132,9 @@ public interface GroupBuyService {
 	 * 获取用户对某个商品是否超出  开参团限制数量,
 	 * @param groupId
 	 * @param userId
-	 * @return true,允许支付,false  不允许
+	 * @return CheckLimitResult
 	 */
-	boolean isUserCanJoinOrOpenGroup(long groupId,String userId);
+	CheckLimitResult isUserCanJoinOrOpenGroup(long groupId,String userId);
 
 
 	List<GroupSearch> searchGroup(GroupSearch groupSearch);
