@@ -143,6 +143,15 @@ public interface CommodityService {
      */
     public List<CommodityCategory> getCommodityCategoryByTypeAndParentId(String parentId,int type);
 
+    /***
+     * select category by parentId
+     *
+     * @param parentId the first category if the parentId is null
+     *
+     * @return List<CommodityCategory>
+     */
+    List<CommodityCategory> listCategoryByParentId(ObjectId parentId);
+
     public CommodityCategory findCommodityCategoryById(ObjectId commodityCategoryId);
 
     public CommoditySpec findCommoditySpecById(ObjectId id);
