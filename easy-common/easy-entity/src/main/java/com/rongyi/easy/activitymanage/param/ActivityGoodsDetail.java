@@ -25,6 +25,7 @@ public class ActivityGoodsDetail implements Serializable {
     private String updateUser;
     private String remainStock;//剩余库存
     private String activityPrice;//活动价，是个范围
+    private Integer status;//2已编辑8未编辑
     private List<GoodsSku> goodsSkuList = Lists.newArrayList();
 
     @Override
@@ -43,7 +44,16 @@ public class ActivityGoodsDetail implements Serializable {
                 .append("updateUser", updateUser)
                 .append("remainStock", remainStock)
                 .append("activityPrice", activityPrice)
+                .append("status", status)
                 .toString();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getActivityPrice() {
