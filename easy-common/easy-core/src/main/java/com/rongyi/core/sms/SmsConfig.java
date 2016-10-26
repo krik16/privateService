@@ -38,6 +38,8 @@ public class SmsConfig implements Serializable{
     public static final String MALLLIFE_BINDING="验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
     public static final String MALLLIFE_DRAWCASH="验证码：@，您正在设置提现密码，10分钟有效，请勿泄露";
 
+    public static final String MALLLIFE_YKCOKE="亲爱的伙伴，你的优酷会员兑换密码为@，兑换链接vip.youku.com。期待您关注我们其他精彩的活动!";
+
     public static final String WEBCHAT_MALLLIFE_BINDING="谢谢您使用容易网客户端，您当前的验证码：@";
 
     public static final String COUPON_VALID = "您购买的@于@验证@份，剩@份未消费，如有任何疑问请您与商家咨询：400-040-8989";
@@ -103,6 +105,7 @@ public class SmsConfig implements Serializable{
         public static final  int TONOTICE=6;//B端通知类短信
         public static final  int TOBMARKTING=7;//B端营销短信
         public static final  int DRAWCASH=8;//设置提现密码验证码
+        public static final  int YKCODE=9;//优酷
     }
 
     /**
