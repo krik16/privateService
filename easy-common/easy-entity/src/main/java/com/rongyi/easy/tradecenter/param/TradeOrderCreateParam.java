@@ -19,6 +19,7 @@ public class TradeOrderCreateParam implements Serializable {
      * 2扫码领券
      * 3短信push
      * 4翻牌购
+     * 5翻牌购
      */
     private Byte business = 0;
     /**
