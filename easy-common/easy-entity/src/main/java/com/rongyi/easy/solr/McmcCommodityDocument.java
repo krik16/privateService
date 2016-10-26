@@ -124,6 +124,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("extend")
 	private String extend;
 
+	@Field("commodityModelNo")
+	private String commodityModelNo;//商品款号
+
 	public Double getPrice() {
 		return price;
 	}
@@ -513,6 +516,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setTop(Integer top) {
 		this.top = top;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
 	}
 
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
