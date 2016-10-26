@@ -32,6 +32,7 @@ public class CommodityPinTuanVO implements Serializable {
     private Integer stock;
     private List<String> categoryNames;
     private boolean  isActivityCommodity=false;
+    private boolean hasMoreSpecs;
 
     public CommodityPinTuanVO(){}
 
@@ -192,5 +193,13 @@ public class CommodityPinTuanVO implements Serializable {
 
     public void setIsActivityCommodity(boolean isActivityCommodity) {
         this.isActivityCommodity = isActivityCommodity;
+    }
+
+    public boolean isHasMoreSpecs() {
+        return hasMoreSpecs;
+    }
+
+    public void setHasMoreSpecs(boolean hasMoreSpecs) {
+        this.hasMoreSpecs = hasMoreSpecs;
     }
 }
