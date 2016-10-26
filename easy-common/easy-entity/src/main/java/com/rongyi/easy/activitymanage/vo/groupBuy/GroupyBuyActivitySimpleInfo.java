@@ -28,6 +28,7 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 	 * 活动id
 	 */
 	private int activityId;
+	private String mallId;
 	
 	
 	private Date begin;
@@ -72,6 +73,13 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 		this.isForceFollow = isForceFollow;
 	}
 
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
 
 	public String getActivityPic() {
 		return activityPic;
