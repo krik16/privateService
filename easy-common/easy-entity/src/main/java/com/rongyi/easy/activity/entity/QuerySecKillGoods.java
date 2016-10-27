@@ -1,8 +1,10 @@
 package com.rongyi.easy.activity.entity;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by yangyang on 2016/9/21.
@@ -18,6 +20,7 @@ public class QuerySecKillGoods implements Serializable {
     private Integer status;
     private String goodsCode;
     private Integer offset;
+    private List<Integer> goodsStatus = Lists.newArrayList();//多个活动状态
 
 
     @Override
@@ -31,7 +34,16 @@ public class QuerySecKillGoods implements Serializable {
                 .append("pageSize", pageSize)
                 .append("status", status)
                 .append("goodsCode", goodsCode)
+                .append("goodsStatus", goodsStatus)
                 .toString();
+    }
+
+    public List<Integer> getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(List<Integer> goodsStatus) {
+        this.goodsStatus = goodsStatus;
     }
 
     public Integer getOffset() {
