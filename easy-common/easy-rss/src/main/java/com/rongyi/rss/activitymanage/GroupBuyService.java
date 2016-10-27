@@ -138,6 +138,15 @@ public interface GroupBuyService {
 
 
 	List<GroupSearch> searchGroup(GroupSearch groupSearch);
+
+	/**
+	 * 检查用户开关团限制
+	 * @param activityId
+	 * @param goodId
+	 * @param userId
+	 * @return
+	 */
+	List<CheckLimitResult> checkLimit(int activityId,String goodId,String userId);
 	
 
 /////----------------H5 接口 end
