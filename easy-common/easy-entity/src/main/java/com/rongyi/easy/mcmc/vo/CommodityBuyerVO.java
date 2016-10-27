@@ -37,12 +37,33 @@ public class CommodityBuyerVO implements Serializable {
     private List<Double> location; //经纬度
     private String systemNumber; //商品SPU
     private String activityType = "0";    //活动类型[0其他 闪购1、特卖2、秒杀3]
+
+    private String easyOrder;//容易令
+    private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
+    private int isSpot;//是否现货	0 非现货 1现货
+    private String mallName;//商场名称
+    private String mallMid;//商场mongoId
+    private List<String> goodsParam;//商品参数
+    private double discount;
+    private String commodityCurrentPrice;
+    private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
     private String commodityOPriceMax;//我是最高原价”,
     private String commodityOPriceMin;//我是最低原价”,
     private String commodityCPriceMax;//我是最高现价”,
     private String commodityCPriceMin;//我是最低现价”,
     private String commodityOPOfLCP;//我是最低现价对应的原价
+    private String commodityPostage;//我是商品邮费”,
+    private String commodityDescription;//我是商品描述”,
+    private String commodityName;//我是商品名称”,
+    private String shopId;//123”,
+    private Integer purchaseCount;//商品的限购数量
+    private String shopMid;
     private String commodityBrandName;//商品所属的品牌名字
+    private boolean isCollected;  //是否被收藏
+    private String mallTip; ///< 商城标签（商城名称，如果是街边店则是街边点名称）
+    private String brandLogo;
+    private String shopLogo;
+    private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
     private String securityDesc;//保障说明
     private String securityIcon;//保障说明icon
     private Boolean isSale;//是否可售 true 可售 false 不可售
@@ -53,23 +74,6 @@ public class CommodityBuyerVO implements Serializable {
     private Long activityEndAt;//活动结束时间
     private Integer activityStock;//活动库存
     private String activityMinPrice;//活动 各规格中最低价
-    private String easyOrder;//容易令
-    private String commodityPostage;//我是商品邮费”,
-    private String commodityDescription;//我是商品描述”,
-    private String commodityName;//我是商品名称”,
-    private String shopId;//123”,
-    private Integer purchaseCount;//商品的限购数量
-    private String shopMid;
-    private boolean isCollected;  //是否被收藏
-    private String mallTip; ///< 商城标签（商城名称，如果是街边店则是街边点名称）
-    private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
-    private int isSpot;//是否现货	0 非现货 1现货
-    private String mallName;//商场名称
-    private String mallMid;//商场mongoId
-    private List<String> goodsParam;//商品参数
-    private double discount;
-    private String commodityCurrentPrice;
-    private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 
     public Integer getGalleryPosition() {
         return galleryPosition;
@@ -283,116 +287,7 @@ public class CommodityBuyerVO implements Serializable {
 
     }
 
-    public CommodityBuyerVO(Commodity commodity) {
-        if (commodity.getDiscount() != null)
-            this.discount = commodity.getDiscount();
-        this.commodityId = commodity.getId().toString();
-        this.commodityPicList = commodity.getPicList();
-        this.commodityOPriceMax = commodity.getoPriceMax();
-        this.commodityOPriceMin = commodity.getoPriceMin();
-        this.commodityCPriceMax = commodity.getcPriceMax();
-        this.commodityCPriceMin = commodity.getcPriceMin();
-        this.commodityCurrentPrice = commodity.getCurrentPrice();
-        this.goodsParam = commodity.getGoodsParam();//商品参数
-        if (commodity.getPostage() != null && !commodity.getPostage().isEmpty()) {
-            try {
-                double postage = Double.parseDouble(commodity.getPostage());
-                this.commodityPostage = commodity.getPostage();
-            } catch (Exception e) {
-                this.commodityPostage = "0.0";
-            }
-        } else {
-            this.commodityPostage = "0.0";
-        }
-        if (commodity.isSpot()) {
-            this.isSpot = 1;//现货
-        } else {
-            this.isSpot = 0;//非现货
-        }
-//		this.commodityPostage = commodity.getPostage();
-        this.commodityDescription = commodity.getDescription();
-        this.commodityName = commodity.getName();
-        this.shopId = commodity.getShopId();
-        this.shopMid = "";
-        if (commodity.getShopMid() != null) {
-            this.shopMid = commodity.getShopMid();
-        }
-        this.mallMid = "";
-        if (StringUtils.isNotBlank(commodity.getMallMid())) {
-            this.mallMid = commodity.getMallMid();
-        }
-        this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
-        if (StringUtils.isBlank(this.commodityOPOfLCP)) {
-            this.commodityOPOfLCP = "0.0";
-        }
-        this.commodityCode = commodity.getCode();
-        this.commodityStatus = commodity.getStatus();
-        this.commodityStock = String.valueOf(commodity.getStock());
-        this.commodityBrandName = "";
-        if (commodity.getBrandName() != null) {
-            this.commodityBrandName = commodity.getBrandName();
-        }
-        if (commodity.getCreate_by() != null) {
-            this.bullId = commodity.getCreate_by();//商品创建人
-        }
-        // 买手版渠道  0商家，1买手
-        this.commodityType = commodity.getType();
-        this.supportCourierDeliver = commodity.isSupportCourierDeliver();
-        this.supportSelfPickup = commodity.isSupportSelfPickup();
-        this.terminalType = commodity.getTerminalType();// 终端
-        if (commodity.getPurchaseCount() == null || commodity.getPurchaseCount() == 0) {
-            this.purchaseCount = -1;
-        } else {
-            this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
-        }
-        // 商品待上架且上架时间大于当前时间，app商品状态为 待上架
-        //商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
-        //其他 下架
-        //状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
-        if (this.commodityStatus == 3 && (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() > 0)) {
-            this.commodityAppStatus = 3;
-        } else if ((commodityStatus == 1 || commodityStatus == 3)
-                && (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() <= 0)
-                && (commodity.getSoldOutAt() != null && commodity.getSoldOutAt().getTime() - new Date().getTime() > 0)) {
-            this.commodityAppStatus = 1;
-        } else if (commodityAppStatus != 0 && commodityAppStatus != 1 && commodityAppStatus != 3) {
-            this.commodityAppStatus = 0;
-        } else {
-            this.commodityAppStatus = this.commodityStatus;
-        }
-        this.systemNumber = commodity.getSystemNumber();
 
-        //活动类型[0其他 闪购1、特卖2、秒杀3]
-        if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
-            this.activityType = "3";
-        } else if (commodity.getSaleId() != null) {
-            this.activityType = "2";
-        } else if (commodity.getFlashSaleId() != null) {
-            this.activityType = "1";
-        } else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
-            this.activityType = "3";
-        } else {
-            //其他
-            this.activityType = "0";
-        }
-
-        // 当前是秒杀商品
-        if ("3".equals(this.activityType)) {
-            long nowTime = new Date().getTime();
-            // 商品处于上架状态
-            if (this.commodityAppStatus == 1) {
-                if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
-                    // 秒杀未开始
-                    this.commodityAppStatus = 3;
-                } else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
-                    // 秒杀已结束
-                    this.commodityAppStatus = 4;
-                }
-            }
-        }
-        //默认返回非橱窗商品的值设置为0
-        this.galleryPosition = commodity.getGalleryPosition() == null || commodity.getGalleryPosition() == 0 ? 0 : MAX_GALLERY_POSITION - commodity.getGalleryPosition();
-    }
 
     public List<String> getCommodityPicList() {
         return commodityPicList;
@@ -626,6 +521,142 @@ public class CommodityBuyerVO implements Serializable {
         this.activityMinPrice = activityMinPrice;
     }
 
+    public String getBrandLogo() {
+        return brandLogo;
+    }
+
+    public void setBrandLogo(String brandLogo) {
+        this.brandLogo = brandLogo;
+    }
+
+    public String getShopLogo() {
+        return shopLogo;
+    }
+
+    public void setShopLogo(String shopLogo) {
+        this.shopLogo = shopLogo;
+    }
+
+    public String getWeAndTeStatus() {
+        return weAndTeStatus;
+    }
+
+    public void setWeAndTeStatus(String weAndTeStatus) {
+        this.weAndTeStatus = weAndTeStatus;
+    }
+
+    public CommodityBuyerVO(Commodity commodity){
+        if(commodity.getDiscount()!=null)
+            this.discount=commodity.getDiscount();
+        this.commodityId = commodity.getId().toString();
+        this.commodityPicList = commodity.getPicList();
+        this.commodityOPriceMax = commodity.getoPriceMax();
+        this.commodityOPriceMin = commodity.getoPriceMin();
+        this.commodityCPriceMax = commodity.getcPriceMax();
+        this.commodityCPriceMin = commodity.getcPriceMin();
+        this.commodityCurrentPrice=commodity.getCurrentPrice();
+        this.goodsParam = commodity.getGoodsParam();//商品参数
+        if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
+            try{
+                double postage = Double.parseDouble(commodity.getPostage());
+                this.commodityPostage = commodity.getPostage();
+            }catch(Exception e){
+                this.commodityPostage = "0.0";
+            }
+        }else{
+            this.commodityPostage = "0.0";
+        }
+        if(commodity.isSpot()){
+            this.isSpot = 1;//现货
+        }else{
+            this.isSpot = 0;//非现货
+        }
+//		this.commodityPostage = commodity.getPostage();
+        this.commodityDescription = commodity.getDescription();
+        this.commodityName = commodity.getName();
+        this.shopId = commodity.getShopId();
+        this.shopMid = "";
+        if(commodity.getShopMid() != null ){
+            this.shopMid = commodity.getShopMid();
+        }
+        this.mallMid = "";
+        if(StringUtils.isNotBlank(commodity.getMallMid())){
+            this.mallMid = commodity.getMallMid();
+        }
+        this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
+        if (StringUtils.isBlank(this.commodityOPOfLCP)) {
+            this.commodityOPOfLCP = "0.0";
+        }
+        this.commodityCode = commodity.getCode();
+        this.commodityStatus = commodity.getStatus();
+        this.commodityStock = String.valueOf(commodity.getStock());
+        this.commodityBrandName = "";
+        if(commodity.getBrandName() != null){
+            this.commodityBrandName = commodity.getBrandName();
+        }
+        if(commodity.getCreate_by() != null){
+            this.bullId = commodity.getCreate_by();//商品创建人
+        }
+        // 买手版渠道  0商家，1买手
+        this.commodityType = commodity.getType();
+        this.supportCourierDeliver = commodity.isSupportCourierDeliver();
+        this.supportSelfPickup = commodity.isSupportSelfPickup();
+        this.terminalType = commodity.getTerminalType();// 终端
+        if(commodity.getPurchaseCount() == null || commodity.getPurchaseCount() == 0){
+            this.purchaseCount = -1;
+        }else{
+            this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
+        }
+        // 商品待上架且上架时间大于当前时间，app商品状态为 待上架
+        //商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
+        //其他 下架
+        //状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
+        if (this.commodityStatus == 3 && (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() > 0)) {
+            this.commodityAppStatus = 3;
+        } else if ((commodityStatus == 1 || commodityStatus == 3)
+                && (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() <= 0)
+                && (commodity.getSoldOutAt() != null && commodity.getSoldOutAt().getTime() - new Date().getTime() > 0)) {
+            this.commodityAppStatus = 1;
+        } else if (commodityAppStatus != 0 && commodityAppStatus != 1 && commodityAppStatus != 3) {
+            this.commodityAppStatus = 0;
+        } else {
+            this.commodityAppStatus = this.commodityStatus;
+        }
+        this.systemNumber = commodity.getSystemNumber();
+
+        //活动类型[0其他 闪购1、特卖2、秒杀3]
+        if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+            this.activityType = "3";
+        } else if (commodity.getSaleId() != null) {
+            this.activityType = "2";
+        } else if (commodity.getFlashSaleId() != null) {
+            this.activityType = "1";
+        } else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+            this.activityType = "3";
+        } else {
+            //其他
+            this.activityType = "0";
+        }
+
+        // 当前是秒杀商品
+        if ("3".equals(this.activityType)) {
+            long nowTime = new Date().getTime();
+            // 商品处于上架状态
+            if (this.commodityAppStatus == 1) {
+                if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
+                    // 秒杀未开始
+                    this.commodityAppStatus = 3;
+                } else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
+                    // 秒杀已结束
+                    this.commodityAppStatus = 4;
+                }
+            }
+        }
+        //默认返回非橱窗商品的值设置为0
+        this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+        this.weAndTeStatus = commodity.getWeAndTeStatus();
+    }
+
     @Override
     public String toString() {
         return "CommodityBuyerVO{" +
@@ -688,7 +719,7 @@ public class CommodityBuyerVO implements Serializable {
     }
 
     public void setTip() {
-		this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
-				this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
-	}
+        this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
+                this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
+    }
 }
