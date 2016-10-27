@@ -123,6 +123,7 @@ public enum CodeEnum {
 	ERROR_MCMC_COMMODITY_DESCRIPTION_HAS_SENSITIVE_WORD("-7013", "您填写的商品描述不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_LPINTUAN("-7016", "拼团商品无法操作"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
