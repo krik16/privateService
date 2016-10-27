@@ -172,7 +172,7 @@ public interface ActivityService {
      * @param joinCount
      * @return
      */
-    public int updateJoinCount(Integer activityGoodsId, int joinCount, Integer appendCount, Integer activityPrice);
+    public int updateJoinCountById(Integer activityGoodsId, int joinCount, Integer appendCount, Integer activityPrice);
 
 
 
