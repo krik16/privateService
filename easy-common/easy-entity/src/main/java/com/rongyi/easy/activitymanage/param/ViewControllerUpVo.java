@@ -38,6 +38,8 @@ public class ViewControllerUpVo implements Serializable{
 
     private Integer totalFailChengTuanCount;
 
+    private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
+
     private List<CommodityViewCon> commodityViewConList;
 
 
@@ -135,5 +137,13 @@ public class ViewControllerUpVo implements Serializable{
 
     public void setCommodityViewConList(List<CommodityViewCon> commodityViewConList) {
         this.commodityViewConList = commodityViewConList;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

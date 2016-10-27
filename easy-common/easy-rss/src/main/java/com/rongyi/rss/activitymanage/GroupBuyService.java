@@ -137,7 +137,9 @@ public interface GroupBuyService {
 	CheckLimitResult isUserCanJoinOrOpenGroup(long groupId,String userId);
 
 
-	List<GroupSearch> searchGroup(GroupSearch groupSearch);
+	List<ControllerViewDownGroupVo> searchGroup(GroupSearch groupSearch);
+
+	Integer searchGroupCount(GroupSearch groupSearch);
 
 	/**
 	 * 检查用户开关团限制
@@ -147,7 +149,7 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	List<CheckLimitResult> checkLimit(int activityId,String goodId,String userId);
-	
+
 
 /////----------------H5 接口 end
 
