@@ -17,9 +17,11 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
+import com.rongyi.easy.rpb.vo.WeixinRedBackParamVO;
 import com.rongyi.rpb.Exception.WeixinException;
 import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
 import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
+import com.rongyi.rpb.common.pay.weixin.util.Configure;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -35,6 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,6 +81,9 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Autowired
     PropertyConfigurer propertyConfigurer;
+
+    @Autowired
+    WeixinConfigService weixinConfigService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
@@ -266,7 +272,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         try {
             notifyThird(paymentEntity, ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr());
         } catch (ThirdException e) {
-            LOGGER.error("第三方支付结果处理失败，暂记录日志，不做业务处理，payNo={},errno={},errmsg={}",paymentEntity.getPayNo(),e.getCode(), e.getMessage());
+            LOGGER.error("第三方支付结果处理失败，暂记录日志，不做业务处理，payNo={},errno={},errmsg={}", paymentEntity.getPayNo(), e.getCode(), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -283,11 +289,57 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         try {
             notifyThird(paymentEntity, ConstantEnum.THIRD_NOTIFY_TYPE_2.getCodeStr());
         } catch (ThirdException e) {
-            LOGGER.error("第三方退款结果处理失败，暂记录日志，不做业务处理,payNo={},errno={},errmsg={}",paymentEntity.getPayNo(),e.getCode(), e.getMessage());
+            LOGGER.error("第三方退款结果处理失败，暂记录日志，不做业务处理,payNo={},errno={},errmsg={}", paymentEntity.getPayNo(), e.getCode(), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 微信发红包
+     */
+    @Override
+    public Map<String, Object> sendRedBack(PaymentEntityVO paymentEntityVO) {
+        LOGGER.info("微信发红包 sendRedBack,paymentEntityVO={}", paymentEntityVO);
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Configure configure = weixinConfigService.initConfigure(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+            BigDecimal totalFee = new BigDecimal(Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+            WeixinRedBackParamVO weixinRedBackParamVO = weixinPayUnit.sendRedPack(configure, paymentEntityVO.getPayNo(), paymentEntityVO.getSendName(),
+                    paymentEntityVO.getOpenId(), totalFee.intValue(), paymentEntityVO.getWishing(), paymentEntityVO.getActName(), paymentEntityVO.getRemark());
+            if ("SUCCESS".equals(weixinRedBackParamVO.getReturn_code()) && "SUCCESS".equals(weixinRedBackParamVO.getResult_code()) && "SUCCESS".equals(weixinRedBackParamVO.getErr_code())) {
+                //处理微信红包发送结果
+                doRadBackResult(weixinRedBackParamVO);
+                map.put("code", 0);
+                map.put("message","success");
+                map.put("payNo", weixinRedBackParamVO.getMch_billno());
+            } else {
+                throw new WeixinException(weixinRedBackParamVO.getErr_code(), weixinRedBackParamVO.getErr_code_des());
+            }
+        } catch (WeixinException e) {
+            LOGGER.info("code={},message={}", e.getCode(), e.getMessage());
+            map.put("code", e.getCode());
+            map.put("message", e.getMessage());
+        } catch (Exception e) {
+            map.put("code", "-1");
+            map.put("message", e.getMessage());
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
+     * 红包发送结果通知处理
+     */
+    private void doRadBackResult(WeixinRedBackParamVO weixinRedBackParamVO) {
+        PaymentLogInfo paymentLogInfo = new PaymentLogInfo(Constants.REPLAY_FLAG.REPLAY_FLAG3, null, null, null, DateUtil.getCurrDateTime(), null, null,
+                weixinRedBackParamVO.getSend_listid(), weixinRedBackParamVO.getRe_openid(), weixinRedBackParamVO.getRe_openid(),
+                0, "1", null, DateUtil.getCurrDateTime(), weixinRedBackParamVO.getMch_billno(), null,
+                Integer.valueOf(weixinRedBackParamVO.getTotal_amount()), "success", 0, 0);
+        // 红包发送结果处理
+        paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.SEND_RED_BACK);
+
     }
 
     /**
@@ -317,8 +369,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         resultMap.put("sign", md5Sign);
         String url = propertyConfigurer.getProperty("PHP_SCORE_STORE_NOTYFY_URL");
         String result = HttpUtil.httpPOST(url, resultMap);
-        LOGGER.info("notifyThird end...result={}",result);
-        if(StringUtil.isEmpty(result)){
+        LOGGER.info("notifyThird end...result={}", result);
+        if (StringUtil.isEmpty(result)) {
             throw new ThirdException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
         }
         JSONObject resultJson = JSONObject.fromObject(result);

@@ -61,6 +61,7 @@ public class Signature {
         }
         String result = sb.toString();
         result += "key=" + key;
+        System.err.println("result="+result);
         result = MD5.MD5Encode(result).toUpperCase();
         return result;
     }

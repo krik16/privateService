@@ -85,6 +85,9 @@ public class Configure {
     //7) 统计上报API
     public static String REPORT_API = "https://api.mch.weixin.qq.com/payitil/report";
 
+    //8) 发送红包API
+    public static String SENDREDPACK_API = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";
+
 
     public static String HttpsRequestClassName = "com.rongyi.rpb.common.pay.weixin.util.HttpsRequest";
 

@@ -3,6 +3,7 @@ package com.rongyi.rpb.service.impl;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.malllife.param.WelfareParam;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
@@ -15,6 +16,7 @@ import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.RpbEventService;
 import com.rongyi.rpb.service.WeixinPayService;
+import com.rongyi.rss.malllife.service.welfare.IWelfareService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,9 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
     @Autowired
     WeixinPayService weixinPayService;
+
+    @Autowired
+    IWelfareService iWelfareService;
 
     @Override
     public Map<String, String> insert(PaymentLogInfo logInfo) {
@@ -128,7 +133,17 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                     paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
                     if (Constants.ORDER_TYPE.ORDER_TYPE_2 == withLockPaymentEntity.getOrderType()) {//通知第三方业务
                         weixinPayService.payNotifyThird(withLockPaymentEntity);
+                    }else if(Constants.ORDER_TYPE.ORDER_TYPE_4 == withLockPaymentEntity.getOrderType()){//微信发红包
+                        LOGGER.info("一分钱支付结果通知");
+                        WelfareParam welfareParam = new WelfareParam();
+                        welfareParam.setOrderNo(withLockPaymentEntity.getOrderNum());
+                        welfareParam.setPayNo(withLockPaymentEntity.getPayNo());
+                        welfareParam.setOrderStatus(1);
+                        iWelfareService.updateOrderStatus(welfareParam);
+                    }else if(Constants.ORDER_TYPE.ORDER_TYPE_5 == withLockPaymentEntity.getOrderType()){//微信发红包
+                        LOGGER.info("发送红包成功通知无需处理...");
                     } else {//通知交易中心
+                        LOGGER.info("交易中心通知");
                         paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), withLockPaymentEntity.getOrderNum(), withLockPaymentEntity.getOrderType(), payChannel);
                     }
                     LOGGER.info("更新付款单状态，记录付款事件，通知订单业务成功，payNo={}", withLockPaymentEntity.getPayNo());
@@ -138,6 +153,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
             LOGGER.warn("支付单号未查询到未支付状态付款记录，忽略此笔支付通知,payNo={}", paymentLogInfo.getOutTradeNo());
         } catch (TradeException e){
             LOGGER.warn(e.getMessage());
+            throw e;
         }catch (Exception e) {
             LOGGER.error("支付通知处理失败",e);
             e.printStackTrace();
@@ -167,9 +183,6 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
         List<PaySuccessResponse> responseList = new ArrayList<>();
         if (orderNums != null) {
             String[] orderNumArray = orderNums.split(",");
-            if (Constants.ORDER_TYPE.ORDER_TYPE_2 == orderType) {
-
-            }
             String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
             for (String orderNum : orderNumArray) {
                 if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType) {// 商品订单

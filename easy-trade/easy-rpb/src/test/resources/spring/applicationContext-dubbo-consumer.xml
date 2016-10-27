@@ -24,6 +24,6 @@
     <dubbo:reference interface="com.rongyi.rss.mallshop.user.ROAUserAccountService" id="rOAUserAccountService"  version="${dubbo.version}" check="false"/>
     <!-- 根据订单号查询对应的订单及优惠券信息 -->
     <dubbo:reference interface="com.rongyi.rss.mallshop.order.ROAOrderFormServiceWithCouponInfo" id="rOAOrderFormServiceWithCouponInfoImpl"  version="${dubbo.version}" check="false"/>
-    <!-- 验证券码有效性 -->
-    <!-- <dubbo:reference interface="com.rongyi.rss.coupon.RoaValidCouponCodeService" id="roaValidCouponCodeService"  version="${dubbo.version}" check="false"/> -->
+    <!--一分钱支付支付结果通知地址 -->
+    <dubbo:reference interface="com.rongyi.rss.malllife.service.welfare.IWelfareService" id="iWelfareService"  version="${dubbo.version}" check="false"/>
 </beans>  
