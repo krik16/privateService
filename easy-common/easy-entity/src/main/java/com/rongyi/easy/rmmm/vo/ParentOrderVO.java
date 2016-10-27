@@ -122,6 +122,24 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal orderTotalPrice;//订单总价
 	
 	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
+	private Long groupEndAt;//团结束时间，单位：毫秒
+	private Long nextCloseTime;//待付款订单预计关闭剩余时间，单位：秒
+
+	public Long getGroupEndAt() {
+		return groupEndAt;
+	}
+
+	public void setGroupEndAt(Long groupEndAt) {
+		this.groupEndAt = groupEndAt;
+	}
+
+	public Long getNextCloseTime() {
+		return nextCloseTime;
+	}
+
+	public void setNextCloseTime(Long nextCloseTime) {
+		this.nextCloseTime = nextCloseTime;
+	}
 
 	public boolean isIfPayment() {
 		return ifPayment;
@@ -869,6 +887,8 @@ public class ParentOrderVO implements Serializable {
 				", ifOnDisplayExpress=" + ifOnDisplayExpress +
 				", newPayAmount=" + newPayAmount +
 				", ifPayment=" + ifPayment +
+				", groupEndAt=" + groupEndAt +
+				", nextCloseTime=" + nextCloseTime +
 				'}';
 	}
 }
