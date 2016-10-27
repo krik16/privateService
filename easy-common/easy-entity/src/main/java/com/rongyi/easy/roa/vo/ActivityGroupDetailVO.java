@@ -38,7 +38,21 @@ public class ActivityGroupDetailVO implements Serializable{
 	private String orderNo;//用户参团或开团的订单号
 	private String activityCommodityDesc;//拼团活动商品描述
 	private int groupTotalNum;//活动商品参团总人数
+	private boolean ifOpenGroup;//是否可参团，true:可以，false：不可以
+	private boolean ifJoinGroup;//是否可开团，true可以，false不可以
 	
+	public boolean isIfOpenGroup() {
+		return ifOpenGroup;
+	}
+	public void setIfOpenGroup(boolean ifOpenGroup) {
+		this.ifOpenGroup = ifOpenGroup;
+	}
+	public boolean isIfJoinGroup() {
+		return ifJoinGroup;
+	}
+	public void setIfJoinGroup(boolean ifJoinGroup) {
+		this.ifJoinGroup = ifJoinGroup;
+	}
 	public Integer getActivityStatus() {
 		return activityStatus;
 	}
@@ -181,6 +195,7 @@ public class ActivityGroupDetailVO implements Serializable{
 				+ ", orderNo=" + orderNo + ", commodityAppStatus=" + commodityAppStatus
 				+ ", groupTotalNum=" + groupTotalNum + ", activityCommodityDesc=" + activityCommodityDesc
 				+ ", activityStatus=" + activityStatus
+				+ ", ifOpenGroup=" + ifOpenGroup + ", ifJoinGroup=" + ifJoinGroup
 				+ "]";
 	}
 
