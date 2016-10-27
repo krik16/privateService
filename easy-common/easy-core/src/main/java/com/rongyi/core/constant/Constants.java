@@ -888,4 +888,9 @@ public interface Constants {
     	Integer no = 0;
     	Integer yes = 1;
     }
+    
+    interface INDUSTRY_INFO_TYPE {//0非默认 1默认
+    	String own_info = "own_info";
+    	String extension_info = "extension_info";
+    }
 }

@@ -19,4 +19,5 @@ public class IndustryVersionVO extends BIndustryVersion implements Serializable 
 		this.authorityVOs = authorityVOs;
 	}
 
+	
 }

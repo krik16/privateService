@@ -47,5 +47,12 @@ public class IndustryInfoVO extends BIndustry implements Serializable {
 	public void setIndustryVersionVOs(List<IndustryVersionVO> industryVersionVOs) {
 		this.industryVersionVOs = industryVersionVOs;
 	}
+
+	@Override
+	public String toString() {
+		return "IndustryInfoVO [creatorName=" + creatorName + ", updatorName=" + updatorName + ", industryVersionVOs="
+				+ industryVersionVOs + "]";
+	}
+	
 	
 }
