@@ -3,7 +3,12 @@ package com.rongyi.easy.mcmc.param;
 import java.io.Serializable;
 
 /**
- * Created by yaoyiwei on 2016/9/20.
+ * 活动规格Param
+ *
+ * @author yaoyiwei
+ * @date 2016-10-13
+ * @version 1.0
+ *
  */
 public class ActivitySpecParam implements Serializable {
 

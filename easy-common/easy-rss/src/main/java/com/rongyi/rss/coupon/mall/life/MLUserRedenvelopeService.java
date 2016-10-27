@@ -8,9 +8,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
-import com.rongyi.easy.coupon.vo.UserCouponVO;
-import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
-import com.rongyi.easy.coupon.vo.UserRedPacketVO;
+import com.rongyi.easy.coupon.vo.*;
 
 /**
  * 摩生活：用户红包接口
@@ -167,4 +165,18 @@ public interface MLUserRedenvelopeService {
      * @author wzw
      */
     boolean sendEnvelope(CouponOrderParam couponOrderParam);
+
+    /**
+     * 查询一分钱红包
+     * @return
+     */
+    RedenvelopVO queryYifenqianRedenvelop();
+
+    /**
+     * 根据卡券id,用户id领取红包，并返回红包关联的商品ids
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    YifenqianRedenvelopVO queryYifenqianCommodityIds(String couponId,String userId);
 }

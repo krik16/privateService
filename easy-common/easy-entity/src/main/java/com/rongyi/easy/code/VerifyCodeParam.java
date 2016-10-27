@@ -54,6 +54,32 @@ public class VerifyCodeParam implements Serializable {
      */
     private Integer terminal;
 
+    private Integer count;
+
+    private Integer platform;
+
+    public Integer getCount() {
+        if (count == null) {
+            return 1;
+        }
+        return count;
+    }
+
+    public Integer getPlatform() {
+        if (platform == null) {
+            platform=0;
+        }
+        return platform;
+    }
+
+    public void setPlatform(Integer platform) {
+        this.platform = platform;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
     public String getCode() {
         return code;
     }
@@ -129,7 +155,7 @@ public class VerifyCodeParam implements Serializable {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("VerifyCodeParam{");
-        sb.append("code=").append(code);
+        sb.append("code='").append(code).append('\'');
         sb.append(", activityId='").append(activityId).append('\'');
         sb.append(", type=").append(type);
         sb.append(", mallId='").append(mallId).append('\'');
@@ -138,6 +164,8 @@ public class VerifyCodeParam implements Serializable {
         sb.append(", source='").append(source).append('\'');
         sb.append(", sellerId=").append(sellerId);
         sb.append(", terminal=").append(terminal);
+        sb.append(", count=").append(count);
+        sb.append(", platform=").append(platform);
         sb.append('}');
         return sb.toString();
     }

@@ -252,6 +252,20 @@ public interface IMallLifeUserInfoService {
      */
     public String generInvitCode(String userId,String phone)throws MallLifeException ;
 
+    /**
+     * 获取YK码
+     * @param size
+     * @return
+     * @throws MallLifeException
+     */
+    public List<String> initYkCode(int size) throws MallLifeException;
 
+    /**
+     * 获取yk码
+     * @param userId
+     * @return
+     * @throws MallLifeException
+     */
+    public int getYkCode(String userId,String ykCode) throws MallLifeException;
 
 }

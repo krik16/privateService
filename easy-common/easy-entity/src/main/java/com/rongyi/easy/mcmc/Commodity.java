@@ -839,4 +839,79 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setPrice(Double.parseDouble(goods.getRoundSellIngPrice()));
 		this.setStock(goods.getRoundRemainCount());
 	}
+
+
+
+	public static Commodity copyCommodity(Commodity source)  {
+		Commodity commodity=new Commodity();
+		commodity.setCategory(source.getCategory());
+		commodity.setType(source.getType());
+		commodity.setCategoryIds(source.getCategoryIds());
+		commodity.setCode(source.getCode());
+		commodity.setCurrentPrice(source.getCurrentPrice());
+		commodity.setCustomCategoryIds(source.getCustomCategoryIds());
+		commodity.setDescription(source.getDescription());
+		commodity.setFreight(source.getFreight());
+		commodity.setBrandName(source.getBrandName());
+		commodity.setBrandId(source.getBrandId());
+		commodity.setcPriceMax(source.getcPriceMax());
+		commodity.setcPriceMin(source.getcPriceMin());
+		//commodity.setCreateAt(createAt);
+		//commodity.setId(id);
+		commodity.setMallId(source.getMallId());
+		commodity.setMallMid(source.getMallMid());
+		commodity.setName(source.getName());
+		commodity.setoPriceMax(source.getoPriceMax());
+		commodity.setoPriceMin(source.getoPriceMin());
+		commodity.setoPriceOfLowestCPrice(source.getoPriceOfLowestCPrice());
+		commodity.setOriginalPrice(source.getOriginalPrice());
+		commodity.setPicList(source.getPicList());
+		commodity.setPostage(source.getPostage());
+		commodity.setPrice(source.getPrice());
+		commodity.setRegisterAt(source.getRegisterAt());
+		commodity.setShopId(source.getShopId());
+		commodity.setShopMid(source.getShopMid());
+		commodity.setShopNum(source.getShopNum());
+		commodity.setSold(source.getSold());
+		commodity.setSource(source.getSource());
+		commodity.setSpecList(source.getSpecList());
+		commodity.setStatus(source.getStatus());
+		commodity.setStock(source.getStock());
+		commodity.setStockStatus(source.getStockStatus());
+		commodity.setTerminalType(source.getTerminalType());
+		//commodity.setUpdate_by(update_by);
+		//commodity.setUpdateAt(updateAt);
+		commodity.setSaleId(source.getSaleId());
+		commodity.setFlashSaleId(source.getFlashSaleId());
+		commodity.setSecKillSign(source.getSecKillSign());
+		commodity.setDiscount(source.getDiscount());
+		commodity.setActivityStartTime(source.getActivityStartTime());
+		commodity.setActivityEndTime(source.getActivityEndTime());
+		commodity.setPurchaseCount(source.getPurchaseCount());
+		commodity.setWeAndTeStatus(source.getWeAndTeStatus());
+		commodity.setSort(source.getSort());
+		commodity.setCommodityModelNo(source.getCommodityModelNo());
+		commodity.setGoodsParam(source.getGoodsParam());
+		commodity.setGalleryPosition(source.getGalleryPosition());
+		commodity.setShopName(source.getShopName());
+		commodity.setMallName(source.getMallName());
+		commodity.setHotAreaName(source.getHotAreaName());
+		//commodity.setLiveId(source.getLiveId());
+		commodity.setSpot(source.isSpot());
+		//commodity.setLiveStartTime(source.getLiveStartTime());
+		//commodity.setLiveEndTime(source.getLiveEndTime());
+		commodity.setLockedStock(source.getLockedStock());
+		commodity.setFilialeMid(source.getFilialeMid());
+		commodity.setBrandMid(source.getBrandMid());
+		commodity.setSupportCourierDeliver(source.isSupportCourierDeliver());
+		commodity.setSupportSelfPickup(source.isSupportSelfPickup());
+		commodity.setIdentity(source.getIdentity());
+		commodity.setTemplateId(source.getTemplateId());
+		commodity.setCustomCategory(source.getCustomCategory());
+		commodity.setSoldOutAt(source.getSoldOutAt());
+		commodity.setSystemNumber(source.getSystemNumber());
+		commodity.setReason(source.getReason());
+		commodity.setGoodsSec(source.isGoodsSec());
+		return commodity;
+	}
 }

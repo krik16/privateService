@@ -364,4 +364,8 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateAllCommodityGalleryPositionSolr(String bullerId,String shopMid,List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,List<String> commodityIds);
 
+	public boolean deleteCommodityByIds(List<String> commodityIds);
+
+	public boolean addCommodityListIndex(List<McmcCommodityDocument> commodityDocumentList);
+
 }

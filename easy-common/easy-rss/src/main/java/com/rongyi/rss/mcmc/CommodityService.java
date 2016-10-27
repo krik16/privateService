@@ -106,6 +106,8 @@ public interface CommodityService {
 
     public ResponseResult getCommodityBuyerInfo(String id, boolean ifCollected);
 
+    ResponseResult getCommodityBuyerInfos(List<String> ids, boolean ifCollected);
+
     public ResponseResult getBuyerCommodityCategory(String filterId, int filterType, boolean showParent);
 
     public ResponseResult getBuyerIndexCommodity(int currentPage, int pagesize);
@@ -281,14 +283,25 @@ public interface CommodityService {
      *
      */
     ResponseVO selectSelfCommodity(SelfCommodityParam param);
+    
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
+
+    ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+    
+    /**
+     * 根据活动规则查询商品
+     *
+     * @param param
+     *
+     * @return
+     */
+    ResponseResult getCommodityListForMallShopByRule(CommodityRuleParam param);
+
+
 
     Boolean deductStock(List<ActivityCommodityParam> params);
 
     Boolean returnStock(List<ActivityCommodityParam> params);
-
-    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
-
-    ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
     /**
      * 扣除商品库存
@@ -310,14 +323,5 @@ public interface CommodityService {
      */
     boolean returnCommodityStock(String commodityId, Integer stock);
 
-    /**
-     * 根据活动规则查询商品
-     *
-     * @param param
-     *
-     * @return
-     */
-    ResponseResult getCommodityListForMallShopByRule(CommodityRuleParam param);
-
-
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
 }

@@ -9,6 +9,7 @@ import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
 import com.rongyi.easy.mcmc.vo.SearchParamsForWechat;
+import com.rongyi.easy.solr.McmcCommodityDocument;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -76,4 +77,12 @@ public interface ICommodityService {
 	public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
+
+	public List<Commodity> searchCommodityByUserId(Integer userId,Integer pageCount);
+
+	public Long searchCommodityByUserIdTotalCount(Integer userId);
+
+	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
+
+	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
 }
