@@ -220,7 +220,14 @@ public interface IUserService {
      */
     public boolean userRegistAndVerify(UserManagerParam userManagerParam) throws MallShopException;
 
-
+    /**
+     * 注册用户前的验证
+     * @param userManagerParam
+     * @return
+     * @throws MallShopException
+     */
+    public Map<String,Object> verfiyUserRegist(UserManagerParam userManagerParam) throws MallShopException;
+    
     /**
 	 * 根据shopId查询导购列表
 	 * @param paraMap

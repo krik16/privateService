@@ -15,10 +15,11 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * 俞志坚             2015/5/20              1.0            创建文件
  *
  */
-public class UserManagerParam extends BaseParam {
+public class UserManagerParam extends BaseParam implements Serializable{
 
-
-    private Integer id;//账户id
+	private static final long serialVersionUID = -7626251289745434411L;
+	
+	private Integer id;//账户id
     private String userAccount ;//用户账号
     private String userLogo;//用户头像
     private String  phone; //验证号码是否可注册
@@ -66,6 +67,17 @@ public class UserManagerParam extends BaseParam {
 	private String otherImg;   //其它照片
 	private Boolean isOrdering;//是否接单状态  true:是，false:否
 
+	//行业版账号2016年10月28日10:50:17
+	private Integer industryId;//行业id
+	private Integer industryVersionId;//行业版本id
+	private Integer childAccountNum;//子账号数量0
+	private String validStartAtStamp;//有效期开始时间戳
+	private String validEndAtStamp;//有效期结束时间戳
+	private String contractCode;//合同号
+	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
+	private Integer isChief = 1;//是否主账号，默认 
+	private Integer level;//层级 1级 2级 3级
+	
     public Integer getId() {
 		return id;
 	}
@@ -366,6 +378,60 @@ public class UserManagerParam extends BaseParam {
 	}
 	public void setIsOrdering(Boolean isOrdering) {
 		this.isOrdering = isOrdering;
+	}
+	public Integer getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+	public String getValidStartAtStamp() {
+		return validStartAtStamp;
+	}
+	public void setValidStartAtStamp(String validStartAtStamp) {
+		this.validStartAtStamp = validStartAtStamp;
+	}
+	public String getValidEndAtStamp() {
+		return validEndAtStamp;
+	}
+	public void setValidEndAtStamp(String validEndAtStamp) {
+		this.validEndAtStamp = validEndAtStamp;
+	}
+	public String getContractCode() {
+		return contractCode;
+	}
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+	public String getSynTarget() {
+		return synTarget;
+	}
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+	public Integer getIsChief() {
+		return isChief;
+	}
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 	
 	
