@@ -56,5 +56,12 @@ public interface IRoleService {
 	 * @throws Exception
 	 */
 	List<Object> getRoleScope(Integer roleIdentity,List<String> relationMids) throws Exception;
+
+	/**
+	 * 通过ID查询角色
+ 	 * @param id 角色ID
+	 * @return 角色实体
+	 */
+	BRoles getRoleById(Integer id);
 	
 }

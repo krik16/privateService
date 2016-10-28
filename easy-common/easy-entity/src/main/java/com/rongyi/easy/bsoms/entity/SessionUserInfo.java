@@ -58,6 +58,8 @@ public class SessionUserInfo implements Serializable{
 
 	private Integer level;  //账号层级 1 2 3
 
+	private Integer isChief; //是否主账号  0是 1否
+
     private String logo = "http://rongyi.b0.upaiyun.com/commodity/text/201601051202219059.png";  //logo图片地址
     
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
@@ -336,5 +338,13 @@ public class SessionUserInfo implements Serializable{
 
 	public void setFirstShopMid(String firstShopMid) {
 		this.firstShopMid = firstShopMid;
+	}
+
+	public Integer getIsChief() {
+		return isChief;
+	}
+
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
 	}
 }
