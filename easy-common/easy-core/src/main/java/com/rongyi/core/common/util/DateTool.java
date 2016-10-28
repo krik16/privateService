@@ -413,4 +413,19 @@ public class DateTool {
 		return String.valueOf(times);
 	}
 
+	/**
+	 * 日期格式字符串转换成时间戳
+	 * @param date_str 字符串日期
+	 * @param format 如：yyyy-MM-dd HH:mm:ss
+	 * @return
+	 */
+	public static long date2TimeStamp(String date_str,String format){
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat(format);
+			return sdf.parse(date_str).getTime();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

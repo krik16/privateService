@@ -219,7 +219,8 @@ public class PoiDocument implements Serializable {
 		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
 			valid="0";
 		else
-			valid="1";
+			valid=shop.getValid().toString();
+			//valid="1";/////////////////////////////////////////////////////////////////////
 
 		if(StringUtils.isNotBlank(shop.getTelephone())){
 			if(shop.getTelephone().indexOf("(")>0){

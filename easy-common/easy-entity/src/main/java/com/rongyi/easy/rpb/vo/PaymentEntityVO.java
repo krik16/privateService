@@ -131,6 +131,28 @@ public class PaymentEntityVO {
      * 返回商户地址
      */
     private String merchantUrl;
+
+    /**
+     * 商户名称
+     */
+    private String sendName;
+
+    /**
+     * 祝福语
+     */
+    private String wishing;
+
+    /**
+     * 活动名称
+     */
+    private String actName;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+
     /**
      * 主键id
      *
@@ -467,5 +489,76 @@ public class PaymentEntityVO {
 
     public void setMerchantUrl(String merchantUrl) {
         this.merchantUrl = merchantUrl;
+    }
+
+    public String getSendName() {
+        return sendName;
+    }
+
+    public void setSendName(String sendName) {
+        this.sendName = sendName;
+    }
+
+    public String getWishing() {
+        return wishing;
+    }
+
+    public void setWishing(String wishing) {
+        this.wishing = wishing;
+    }
+
+    public String getActName() {
+        return actName;
+    }
+
+    public void setActName(String actName) {
+        this.actName = actName;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentEntityVO{" +
+                "id=" + id +
+                ", paymentId=" + paymentId +
+                ", orderNum='" + orderNum + '\'' +
+                ", orderType=" + orderType +
+                ", payNo='" + payNo + '\'' +
+                ", title='" + title + '\'' +
+                ", orderDetailNumArray='" + orderDetailNumArray + '\'' +
+                ", amountMoney=" + amountMoney +
+                ", status=" + status +
+                ", statusStr='" + statusStr + '\'' +
+                ", tradeType=" + tradeType +
+                ", tradeTypeStr='" + tradeTypeStr + '\'' +
+                ", createTime=" + createTime +
+                ", createTimeStr='" + createTimeStr + '\'' +
+                ", finishTime=" + finishTime +
+                ", finishTimeStr='" + finishTimeStr + '\'' +
+                ", payChannel=" + payChannel +
+                ", payChannelStr='" + payChannelStr + '\'' +
+                ", outAccount='" + outAccount + '\'' +
+                ", inAccount='" + inAccount + '\'' +
+                ", desc='" + desc + '\'' +
+                ", showNum=" + showNum +
+                ", timeStart='" + timeStart + '\'' +
+                ", timeExpire='" + timeExpire + '\'' +
+                ", appId='" + appId + '\'' +
+                ", openId='" + openId + '\'' +
+                ", weixinPayType=" + weixinPayType +
+                ", callBackUrl='" + callBackUrl + '\'' +
+                ", merchantUrl='" + merchantUrl + '\'' +
+                ", sendName='" + sendName + '\'' +
+                ", wishing='" + wishing + '\'' +
+                ", actName='" + actName + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }
