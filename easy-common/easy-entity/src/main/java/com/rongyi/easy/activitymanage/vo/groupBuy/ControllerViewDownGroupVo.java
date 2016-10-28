@@ -1,11 +1,12 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by xuying on 2016/10/27.
  */
-public class ControllerViewDownGroupVo {
+public class ControllerViewDownGroupVo implements Serializable{
 
    private Integer groupId;
     private String userNick;
