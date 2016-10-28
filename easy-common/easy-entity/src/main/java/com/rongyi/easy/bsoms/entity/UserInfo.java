@@ -75,6 +75,25 @@ public class UserInfo implements Serializable{
 	private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
     private Integer isOrdering;  //是否接单中  0是  1否
     private Date updateOrderingAt;//更新接单状态的时间
+    
+    private Integer industryId;
+
+    private Integer industryVersionId;
+
+    private Integer childAccountNum;
+
+    private Date validStartAt;
+
+    private Date validEndAt;
+
+    private String contractCode;
+
+    private String synTarget;
+
+    private Integer isChief;
+
+    private Integer level;
+    
     public String getStopReason() {
 		return stopReason;
 	}
@@ -360,4 +379,77 @@ public class UserInfo implements Serializable{
     public void setUpdateOrderingAt(Date updateOrderingAt) {
         this.updateOrderingAt = updateOrderingAt;
     }
+
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+
+	public Date getValidStartAt() {
+		return validStartAt;
+	}
+
+	public void setValidStartAt(Date validStartAt) {
+		this.validStartAt = validStartAt;
+	}
+
+	public Date getValidEndAt() {
+		return validEndAt;
+	}
+
+	public void setValidEndAt(Date validEndAt) {
+		this.validEndAt = validEndAt;
+	}
+
+	public String getContractCode() {
+		return contractCode;
+	}
+
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+
+	public String getSynTarget() {
+		return synTarget;
+	}
+
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+
+	public Integer getIsChief() {
+		return isChief;
+	}
+
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
 }
