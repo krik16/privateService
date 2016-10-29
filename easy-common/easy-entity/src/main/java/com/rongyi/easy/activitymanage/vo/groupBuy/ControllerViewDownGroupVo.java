@@ -14,6 +14,8 @@ public class ControllerViewDownGroupVo implements Serializable{
     private Integer groupPeopleLimit;
     private Date createAt;
     private Integer state;
+    private String goodName;
+
 
     public Integer getGroupId() {
         return groupId;
@@ -61,5 +63,13 @@ public class ControllerViewDownGroupVo implements Serializable{
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
     }
 }
