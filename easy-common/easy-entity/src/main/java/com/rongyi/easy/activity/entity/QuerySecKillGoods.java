@@ -22,6 +22,16 @@ public class QuerySecKillGoods implements Serializable {
     private Integer offset;
     private List<Integer> goodsStatus = Lists.newArrayList();//多个活动状态
 
+    public Integer getFromWeixin() {
+        return fromWeixin;
+    }
+
+    public void setFromWeixin(Integer fromWeixin) {
+        this.fromWeixin = fromWeixin;
+    }
+
+    private Integer fromWeixin;//微信端调用
+
 
     @Override
     public String toString() {
