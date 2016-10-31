@@ -154,10 +154,15 @@ public interface GroupBuyService {
 /////----------------H5 接口 end
 
 	/**
-	 * 增加库存
+	 * 活动结束，增加拼团库存，并将拼团库存回滚到商品库存
 	 */
 	public  boolean returnGroupStock(List<GroupStockParam> params);
 
+	/**
+	 * 批量减少拼团活动库存操作
+	 * @param params
+	 * @return
+	 */
 	public boolean reduceGroupStock(List<GroupStockParam> params);
 
 	public CommodityViewCon countAllByActivityId(Map<String ,Object> params);
