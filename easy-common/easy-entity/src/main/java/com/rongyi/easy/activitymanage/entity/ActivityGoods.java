@@ -137,6 +137,20 @@ public class ActivityGoods implements Serializable {
      */
     private List<ActivityGoodsCategory> activityGoodsCategories;
 
+
+    /**
+     * 商品/卡券活动库存
+     */
+    private Integer stockCount;
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
+
     /**
      * 获取商品分类的层级信息
      * @return 餐饮 > 西餐 > 牛排
@@ -447,6 +461,7 @@ public class ActivityGoods implements Serializable {
                 .append("activityPrice", activityPrice)
                 .append("groupRandomNum", groupRandomNum)
                 .append("enrollSource", enrollSource)
+                .append("stockCount", stockCount)
                 .toString();
     }
 }

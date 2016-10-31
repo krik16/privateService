@@ -305,4 +305,12 @@ public interface CommodityService {
      * @return list CommodityPinTuanVO
      */
     CommodityPagePinTuanVO searchBaseCommodityListForPinTuan(PinTuanCommodityParam param);
+
+    /**
+     * 判断商品上下架时间是否包含活动时间
+     *
+     * @param param
+     * @return true commodity is overtime, false otherwise;
+     */
+    boolean isCommodityOvertime(PinTuanCommodityParam param);
 }

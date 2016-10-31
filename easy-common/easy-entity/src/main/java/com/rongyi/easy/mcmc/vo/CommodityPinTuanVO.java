@@ -33,6 +33,7 @@ public class CommodityPinTuanVO implements Serializable {
     private List<String> categoryNames;
     private boolean  isActivityCommodity=false;
     private boolean hasMoreSpecs;
+    private String commodityDescription;//商品描述
 
     public CommodityPinTuanVO(){}
 
@@ -43,6 +44,7 @@ public class CommodityPinTuanVO implements Serializable {
         this.stock = builder.stock;
         this.categoryNames = builder.categoryNames;
         this.currentPriceList = builder.currentPriceList;
+        this.commodityDescription=builder.commodityDescription;
     }
 
     public static class Builder {
@@ -52,6 +54,7 @@ public class CommodityPinTuanVO implements Serializable {
         private List<Double> currentPriceList;
         private Integer stock;
         private List<String> categoryNames;
+        private String commodityDescription;//商品描述
 
         public Builder() {}
 
@@ -77,6 +80,11 @@ public class CommodityPinTuanVO implements Serializable {
 
         public Builder currentPriceList(List vals) {
             currentPriceList = vals;
+            return this;
+        }
+
+        public Builder commodityDescription(String val) {
+            commodityDescription = val;
             return this;
         }
 
@@ -201,5 +209,13 @@ public class CommodityPinTuanVO implements Serializable {
 
     public void setHasMoreSpecs(boolean hasMoreSpecs) {
         this.hasMoreSpecs = hasMoreSpecs;
+    }
+
+    public String getCommodityDescription() {
+        return commodityDescription;
+    }
+
+    public void setCommodityDescription(String commodityDescription) {
+        this.commodityDescription = commodityDescription;
     }
 }
