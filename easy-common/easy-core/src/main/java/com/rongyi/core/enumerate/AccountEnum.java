@@ -21,7 +21,7 @@ public enum AccountEnum {
     //ERROR_SYSTEM("-11", "网络正在打瞌睡，请稍后再试"),
 
     /** 业务错误**/
-    ERROR_MERACC_(1090010, "账号不能为空");
+    ERROR_MERACC_EMPTY(1090010, "账号不能为空");
     
    
 
