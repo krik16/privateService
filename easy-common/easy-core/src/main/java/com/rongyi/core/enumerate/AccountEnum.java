@@ -21,9 +21,10 @@ public enum AccountEnum {
     //ERROR_SYSTEM("-11", "网络正在打瞌睡，请稍后再试"),
 
     /** 业务错误**/
-    ERROR_MERACC_EMPTY(1090010, "账号不能为空"),
-	ERROR_MERACC_REGISTERED(1090011, "账号已被注册");
-	
+    ERROR_ACCOUNT_EMPTY(1090010, "账号不能为空"),
+	ERROR_ACCOUNT_REGISTERED(1090011, "账号已被注册"),
+	ERROR_NICKNAME_EMPTY(1090012, "昵称不能为空"),
+	ERROR_NICKNAME_REGISTERED(1090013, "昵称已被注册");
     
    
 
