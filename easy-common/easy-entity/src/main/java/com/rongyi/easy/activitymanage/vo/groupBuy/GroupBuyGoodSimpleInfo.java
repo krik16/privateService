@@ -81,6 +81,10 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 */
 	private int groupedCount;
 
+	/**
+	 * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
+	 */
+	private Integer status;
 
 	public double getMinActivityPrice(List<GoodSpecInfo> specs) {
 		Assert.notNull(specs);
@@ -98,6 +102,15 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 			remainStock += spec.getRemainCount();
 		}
 		return remainStock;
+	}
+
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public String getDesc() {
