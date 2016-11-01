@@ -121,4 +121,12 @@ public class CommodityViewCon implements Serializable{
     public void setCommodityName(String commodityName) {
         this.commodityName = commodityName;
     }
+
+    public String getCommodityPic() {
+        return commodityPic;
+    }
+
+    public void setCommodityPic(String commodityPic) {
+        this.commodityPic = commodityPic;
+    }
 }
