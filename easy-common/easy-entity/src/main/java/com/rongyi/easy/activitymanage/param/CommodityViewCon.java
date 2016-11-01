@@ -32,6 +32,7 @@ public class CommodityViewCon implements Serializable{
 
     private List<Integer> activityPrice;
 
+    private String commodityPic;
 
     public String getCommodityId() {
         return commodityId;
