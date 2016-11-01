@@ -226,7 +226,7 @@ public interface IUserService {
      * @return
      * @throws MallShopException
      */
-    public Map<String,Object> verfiyUserRegist(UserManagerParam userManagerParam) throws MallShopException;
+    public Map<String,Object> verfiyAndSettingUserRegist(UserManagerParam userManagerParam) throws Exception,MallShopException;
     
     /**
 	 * 根据shopId查询导购列表
