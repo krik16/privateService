@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.easy.activity.entity.GroupStockParam;
 
+import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.vo.groupBuy.*;
 
 import com.rongyi.easy.activitymanage.param.CommodityViewCon;
@@ -167,4 +168,7 @@ public interface GroupBuyService {
 
 	public CommodityViewCon countAllByActivityId(Map<String ,Object> params);
 
+	public void rollBackActivityGoods(List<ActivityGoods> rollbackActivityGooods);
+
+	public void rollBackDelSpecId(List<Integer> rollBackDelspecIds);
 }
