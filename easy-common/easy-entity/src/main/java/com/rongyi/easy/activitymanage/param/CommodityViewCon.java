@@ -32,6 +32,7 @@ public class CommodityViewCon implements Serializable{
 
     private List<Integer> activityPrice;
 
+    private String commodityPic;
 
     public String getCommodityId() {
         return commodityId;
@@ -119,5 +120,13 @@ public class CommodityViewCon implements Serializable{
 
     public void setCommodityName(String commodityName) {
         this.commodityName = commodityName;
+    }
+
+    public String getCommodityPic() {
+        return commodityPic;
+    }
+
+    public void setCommodityPic(String commodityPic) {
+        this.commodityPic = commodityPic;
     }
 }

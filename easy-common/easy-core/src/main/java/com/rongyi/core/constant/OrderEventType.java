@@ -102,6 +102,9 @@ public interface OrderEventType {
 
     /** 卡券被领取*/
     public static final String COUPON_CAGHT = "33";
+
+    /** 拼团失败*/
+    public static final String PINTUAN_FAIL = "34";
     
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";
