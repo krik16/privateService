@@ -47,6 +47,8 @@ public class UserAccountEntity implements Serializable{
     /** 是否为默认资金账号  0是  1否  **/
     private Integer isDefault =1 ;
 
+    private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+    
     /**
      * 主键
      * @return id
@@ -238,5 +240,13 @@ public class UserAccountEntity implements Serializable{
 	public void setIsDefault(Integer isDefault) {
 		this.isDefault = isDefault;
 	}
-    
+
+	public Integer getSettleOrgStrategy() {
+		return settleOrgStrategy;
+	}
+
+	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
+		this.settleOrgStrategy = settleOrgStrategy;
+	}
+	
 }

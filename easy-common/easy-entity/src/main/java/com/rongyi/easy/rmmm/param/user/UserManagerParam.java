@@ -1,6 +1,8 @@
 package com.rongyi.easy.rmmm.param.user;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
@@ -39,7 +41,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String userName;//用户姓名
     private String cardId;//身份证号
 	private Integer type = 1;//商家类型：0商场、1品牌    private Integer roleType=2;//角色类型
-	private Integer roleType=2;//角色类型
+	private Integer roleType=2;//角色类型 @Deprecated
     private List<AccountParam> accountList;//账号信息
 	private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
     private Integer isCooperation = 0;//是否合作(给店长、导购用) 0否 1是
@@ -77,7 +79,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
 	private Integer isChief = 1;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
-	
+	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
     public Integer getId() {
 		return id;
 	}
@@ -432,6 +434,40 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	}
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+	public Date getValidStartAt(){
+		long lt = new Long(this.validStartAtStamp);
+		Date date = new Date(lt);
+        return date;
+	}
+	public Date getValidEndAt(){
+		long lt = new Long(this.validEndAtStamp);
+		Date date = new Date(lt);
+        return date;
+	}
+	public Integer getSettleOrgStrategy() {
+		return settleOrgStrategy;
+	}
+	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
+		this.settleOrgStrategy = settleOrgStrategy;
+	}
+	@Override
+	public String toString() {
+		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount + ", userLogo=" + userLogo + ", phone="
+				+ phone + ", checkCode=" + checkCode + ", nickName=" + nickName + ", uuId=" + uuId + ", invitCode="
+				+ invitCode + ", pswd=" + pswd + ", account=" + account + ", shopId=" + shopId + ", mallId=" + mallId
+				+ ", brandId=" + brandId + ", ownerId=" + ownerId + ", roleId=" + roleId + ", branchCompanyId="
+				+ branchCompanyId + ", userName=" + userName + ", cardId=" + cardId + ", type=" + type + ", roleType="
+				+ roleType + ", accountList=" + accountList + ", identity=" + identity + ", isCooperation="
+				+ isCooperation + ", memo=" + memo + ", createSource=" + createSource + ", stopReason=" + stopReason
+				+ ", creatingUserType=" + creatingUserType + ", merUserId=" + merUserId + ", userDesc=" + userDesc
+				+ ", flag=" + flag + ", isUpdate=" + isUpdate + ", defaultAccount=" + defaultAccount + ", jsessionid="
+				+ jsessionid + ", shareCode=" + shareCode + ", faceImg=" + faceImg + ", backImg=" + backImg
+				+ ", workImg=" + workImg + ", otherImg=" + otherImg + ", isOrdering=" + isOrdering + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum=" + childAccountNum
+				+ ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level="
+				+ level + ", settleOrgStrategy=" + settleOrgStrategy + "]";
 	}
 	
 	
