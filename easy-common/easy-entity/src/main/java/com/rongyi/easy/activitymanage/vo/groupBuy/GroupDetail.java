@@ -195,6 +195,15 @@ public class GroupDetail implements Serializable{
 		this.id = id;
 	}
 
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupDetail{" +
@@ -205,6 +214,7 @@ public class GroupDetail implements Serializable{
 				", userId='" + userId + '\'' +
 				", groupRole=" + groupRole +
 				", openId='" + openId + '\'' +
+				", phone='" + phone + '\'' +
 				", goodId='" + goodId + '\'' +
 				", goodSpecId='" + goodSpecId + '\'' +
 				", price=" + price +
@@ -214,13 +224,5 @@ public class GroupDetail implements Serializable{
 				", userType=" + userType +
 				", id=" + id +
 				'}';
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 }
