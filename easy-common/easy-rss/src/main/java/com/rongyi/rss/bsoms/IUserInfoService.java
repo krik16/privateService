@@ -216,4 +216,11 @@ public interface IUserInfoService {
 	public List<UserInfo> getUserInfoListByUserId(Map paramMap) ;
 
 	public Integer getUserBuyerIdByMobileAndIdentity(String mobile,Integer identity);
+
+	/**
+	 * 根据ID查询用户
+	 * @param id ID
+	 * @return 用户信息
+	 */
+	SessionUserInfo getSessionUserInfoById(Integer id);
 }

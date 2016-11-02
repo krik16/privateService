@@ -224,27 +224,30 @@ public class SessionUserInfo implements Serializable{
 	}
 
 	public Integer getBindingId(){
-//		return 6;//集团假数据
-//		return 36;//商场假数据
 		if(getIdentity() == 0){
 			return groupId;
 		}else if(getIdentity() == 1){
 			return mallId;
-		}else if(getIdentity() == 2 || getIdentity() == 3 || getIdentity() == 4 || getIdentity() == 5){
+		}else if(getIdentity() == 2) {
 			return brandId;
+		}else if (getIdentity() == 3) {
+			return filialeId;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopId;
 		}
 		return null;
 	}
 	public String getBindingMid(){
-//		return "55c1c53e992df1254cdb4e7e";//集团假数据
-//		return "52ca425821232f10a400065e";//商场假数据
-//		return "51f9d9e431d65584ab000c50";//品牌假数据
 		if(getIdentity() == 0){
 			return groupMid;
 		}else if(getIdentity() == 1){
 			return mallMid;
-		}else if(getIdentity() == 2 || getIdentity() == 3 || getIdentity() == 4 || getIdentity() == 5){
+		}else if(getIdentity() == 2){
 			return brandMid;
+		}else if (getIdentity() == 3) {
+			return filialeMid;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopMid;
 		}
 		return null;
 	}
