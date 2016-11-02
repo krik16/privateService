@@ -13,12 +13,15 @@ import java.util.List;
 public class IndustryVersionParam implements Serializable {
 	private static final long serialVersionUID = 2905367200197306832L;
 	
+	
 	private Integer id;
 	
 	private String name;//版本名称
 	
 	private List<Integer> auths;//权限值
 
+	private Integer industryId;//上层行业id
+	
 	public Integer getId() {
 		return id;
 	}
@@ -43,9 +46,18 @@ public class IndustryVersionParam implements Serializable {
 		this.auths = auths;
 	}
 
-	@Override
-	public String toString() {
-		return "IndustryVersionParam [name=" + name + ", auths=" + auths + "]";
+	public Integer getIndustryId() {
+		return industryId;
 	}
 
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	@Override
+	public String toString() {
+		return "IndustryVersionParam [id=" + id + ", name=" + name + ", auths=" + auths + ", industryId=" + industryId
+				+ "]";
+	}
+	
 }

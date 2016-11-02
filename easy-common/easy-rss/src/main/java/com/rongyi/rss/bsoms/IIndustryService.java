@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.BIndustry;
+import com.rongyi.easy.bsoms.entity.BIndustryVersion;
 import com.rongyi.easy.ryoms.merchant.param.IndustrySaveParam;
 import com.rongyi.easy.ryoms.merchant.param.IndustrySearchParam;
 import com.rongyi.easy.ryoms.merchant.param.IndustryVersionParam;
@@ -72,4 +73,6 @@ public interface IIndustryService {
 	Map<String,Object> editIndustryVersion(List<IndustryVersionParam> industryVersionParams,Integer userId) throws Exception;
 	
 	IndustryInfoVO getFullIndustryInfo(Integer industryId,String type) throws Exception;
+	
+	List<BIndustryVersion> getVersionsByIndustryId(Integer industryId) throws Exception;
 }
