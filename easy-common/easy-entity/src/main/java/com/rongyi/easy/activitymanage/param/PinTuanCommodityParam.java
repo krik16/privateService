@@ -1,9 +1,11 @@
 package com.rongyi.easy.activitymanage.param;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuying on 2016/10/17.
@@ -27,6 +29,8 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
     private String activityId;
 
     private String mallId;
+
+    private List<ObjectId> commodityIds;
 
     public String getCommodityCode() {
         return commodityCode;
@@ -98,6 +102,14 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
 
     public void setMallId(String mallId) {
         this.mallId = mallId;
+    }
+
+    public List<ObjectId> getCommodityIds() {
+        return commodityIds;
+    }
+
+    public void setCommodityIds(List<ObjectId> commodityIds) {
+        this.commodityIds = commodityIds;
     }
 
     @Override
