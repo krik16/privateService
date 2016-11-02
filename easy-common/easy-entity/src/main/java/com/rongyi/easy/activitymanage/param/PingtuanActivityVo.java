@@ -31,6 +31,7 @@ public class PingtuanActivityVo implements Serializable{
                 '}';
     }
 
+
     private Integer activityId;
 
     private Integer pintuanConfigId;
