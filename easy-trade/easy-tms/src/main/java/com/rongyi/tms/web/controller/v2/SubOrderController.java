@@ -214,7 +214,7 @@ public class SubOrderController extends BaseControllerV2 {
             warpToParamMap(paramsMap);
             exportOsmOrderExcel.exportExcel(request, response, paramsMap);
         } catch (BizException e) {
-            LOGGER.error(e.getMessage());
+        	LOGGER.error(e.getMessage(), e);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
