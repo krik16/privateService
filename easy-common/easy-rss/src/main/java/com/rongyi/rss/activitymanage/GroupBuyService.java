@@ -171,4 +171,6 @@ public interface GroupBuyService {
 	public void rollBackActivityGoods(List<ActivityGoods> rollbackActivityGooods);
 
 	public void rollBackDelSpecId(List<Integer> rollBackDelspecIds);
+
+	public boolean deleteActivityGoodsSpecById(Integer id);
 }
