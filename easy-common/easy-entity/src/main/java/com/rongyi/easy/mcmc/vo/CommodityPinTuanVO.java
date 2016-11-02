@@ -45,6 +45,7 @@ public class CommodityPinTuanVO implements Serializable {
         this.categoryNames = builder.categoryNames;
         this.currentPriceList = builder.currentPriceList;
         this.commodityDescription=builder.commodityDescription;
+        this.picUrls=builder.picUrls;
     }
 
     public static class Builder {
@@ -55,6 +56,7 @@ public class CommodityPinTuanVO implements Serializable {
         private Integer stock;
         private List<String> categoryNames;
         private String commodityDescription;//商品描述
+        private List<String> picUrls;//商品图片集合
 
         public Builder() {}
 
@@ -85,6 +87,11 @@ public class CommodityPinTuanVO implements Serializable {
 
         public Builder commodityDescription(String val) {
             commodityDescription = val;
+            return this;
+        }
+
+        public Builder picUrls(List vals) {
+            picUrls = vals;
             return this;
         }
 
