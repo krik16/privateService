@@ -21,6 +21,7 @@ public class GoodsSku implements Serializable {
     private String currentPrice;//当前价
     private String activityPrice;//活动价
     private Integer joinCount;//提报数量
+    private Integer stockCount;//拼团剩余数量
     private Integer addCount;//新增数量
     private String sku;//sku
     private String spec;//规格信息
@@ -44,8 +45,17 @@ public class GoodsSku implements Serializable {
                 .append("specSimpleVOs", specColumns)
                 .append("remainStock", remainStock)
                 .append("addCount", addCount)
+                .append("stockCount", stockCount)
                 .append("id", id)
                 .toString();
+    }
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
     }
 
     public Integer getId() {
