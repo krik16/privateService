@@ -72,7 +72,7 @@ public class UserInfo implements Serializable{
 	private String useCode; //注册使用的邀请码
     
     private String jsessionid ;//摩店登录标识	
-	private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
+	private Integer isEdit = 1;  //是否可编辑  0不可编辑  1可编辑
     private Integer isOrdering;  //是否接单中  0是  1否
     private Date updateOrderingAt;//更新接单状态的时间
     private Integer isChief;  //是否主账号 0是1否
