@@ -1,9 +1,13 @@
 package com.rongyi.easy.bsoms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BIndustryVersion {
-    private Integer id;
+public class BIndustryVersion implements Serializable{
+	
+	private static final long serialVersionUID = 1427017907354729679L;
+
+	private Integer id;
 
     private Integer industryId;
 
