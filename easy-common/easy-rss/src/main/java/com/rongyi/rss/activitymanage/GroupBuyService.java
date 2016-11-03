@@ -179,6 +179,7 @@ public interface GroupBuyService {
 	 * @param goodsDetails
 	 */
 	void updateActivityGoodsStockCount(List<ActivityGoodsDetail> goodsDetails);
+	void updateActivityGoodsStockCount(Integer activityId,String goodId);
 
 	public boolean deleteActivityGoodsSpecById(Integer id);
 
