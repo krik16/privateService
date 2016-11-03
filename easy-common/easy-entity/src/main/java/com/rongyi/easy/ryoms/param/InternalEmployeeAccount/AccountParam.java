@@ -16,6 +16,9 @@ public class AccountParam implements Serializable{
 	private String remark;//备注
 	private String createBy;//创建人id
 	private String password;//密码
+	private Byte status;//1：启用   2：停用
+	private String reason;//停用理由
+	private String newPassword;//新密码
 	public Integer getId() {
 		return id;
 	}
@@ -64,12 +67,31 @@ public class AccountParam implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Byte getStatus() {
+		return status;
+	}
+	public void setStatus(Byte status) {
+		this.status = status;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 	@Override
 	public String toString() {
 		return "AccountParam [id=" + id + ", account=" + account + ", name="
 				+ name + ", nickName=" + nickName + ", phone=" + phone
 				+ ", remark=" + remark + ", createBy=" + createBy
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", status=" + status + ", reason="
+				+ reason + ", newPassword=" + newPassword + "]";
 	}
 	
 }
