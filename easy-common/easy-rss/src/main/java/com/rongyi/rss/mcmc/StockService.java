@@ -12,6 +12,6 @@ public interface StockService {
 
 	public boolean increaseSold(String commodityId, int num);
 	
-	public boolean increaseStockForBusinessBackground(String commodityId,String specId,int total,int stock);
+	public boolean increaseStockForBusinessBackground(String commodityId,String specId,int total,int commodityStock, int specStock);
 
 }

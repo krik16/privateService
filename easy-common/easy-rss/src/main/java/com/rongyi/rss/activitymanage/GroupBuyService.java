@@ -173,9 +173,13 @@ public interface GroupBuyService {
 
 	public void rollBackDelSpecId(List<Integer> rollBackDelspecIds);
 
+
 	/**
 	 * 更新商品表的stockCount
 	 * @param goodsDetails
 	 */
 	void updateActivityGoodsStockCount(List<ActivityGoodsDetail> goodsDetails);
+
+	public boolean deleteActivityGoodsSpecById(Integer id);
+
 }

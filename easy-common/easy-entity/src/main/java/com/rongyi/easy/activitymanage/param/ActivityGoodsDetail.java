@@ -14,6 +14,7 @@ public class ActivityGoodsDetail implements Serializable {
     private Integer id;
     private Integer activityId;
 
+    private String commodityPic;
     private String desc;
     private String goodsId;
     private Integer groupNum;
@@ -45,7 +46,17 @@ public class ActivityGoodsDetail implements Serializable {
                 .append("remainStock", remainStock)
                 .append("activityPrice", activityPrice)
                 .append("status", status)
+                .append("commodityPic", commodityPic)
                 .toString();
+    }
+
+
+    public String getCommodityPic() {
+        return commodityPic;
+    }
+
+    public void setCommodityPic(String commodityPic) {
+        this.commodityPic = commodityPic;
     }
 
     public Integer getStatus() {
