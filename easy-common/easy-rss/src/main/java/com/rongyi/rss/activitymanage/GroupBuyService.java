@@ -6,6 +6,7 @@ import java.util.Map;
 import com.rongyi.easy.activity.entity.GroupStockParam;
 
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
+import com.rongyi.easy.activitymanage.param.ActivityGoodsDetail;
 import com.rongyi.easy.activitymanage.vo.groupBuy.*;
 
 import com.rongyi.easy.activitymanage.param.CommodityViewCon;
@@ -171,4 +172,10 @@ public interface GroupBuyService {
 	public void rollBackActivityGoods(List<ActivityGoods> rollbackActivityGooods);
 
 	public void rollBackDelSpecId(List<Integer> rollBackDelspecIds);
+
+	/**
+	 * 更新商品表的stockCount
+	 * @param goodsDetails
+	 */
+	void updateActivityGoodsStockCount(List<ActivityGoodsDetail> goodsDetails);
 }
