@@ -312,5 +312,5 @@ public interface CommodityService {
      * @param param
      * @return true commodity is overtime, false otherwise;
      */
-    boolean isCommodityOvertime(PinTuanCommodityParam param);
+    List<String> isCommodityOvertime(PinTuanCommodityParam param);
 }
