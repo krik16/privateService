@@ -38,7 +38,8 @@
 	<result column="syn_target" property="synTarget" jdbcType="VARCHAR" />
 	<result column="is_chief" property="isChief" jdbcType="INTEGER" />
 	<result column="level" property="level" jdbcType="INTEGER" />
-	
+	<result column="chief_id" property="chiefId" jdbcType="INTEGER" />
+
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
