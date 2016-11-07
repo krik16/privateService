@@ -39,7 +39,8 @@ public enum AccountEnum {
 	ERROR_USERNAME_INVALID(1090025, "请输入4-10字符内姓名"),
 	ERROR_MEMO_INVALID(1090026, "请输入200字符内备注信息"),
 	ERROR_CARDID_INVALID(1090027, "请输入18位的身份证号码"),
-	
+	ERROR_HASCHIEF(1090028,"该商家已有主账号"),
+    ERROR_CHILDACCOUNTNUM_MANY(1090029,"子账号数量已超出限制")
 	;
    
 
