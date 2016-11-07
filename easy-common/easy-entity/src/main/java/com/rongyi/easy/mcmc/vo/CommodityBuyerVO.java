@@ -156,6 +156,10 @@ public class CommodityBuyerVO implements Serializable {
 		this.groupTotalNum = groupTotalNum;
 	}
 
+    public Integer getGalleryPosition() {
+        return galleryPosition;
+    }
+
     public void setGalleryPosition(Integer galleryPosition) {
         this.galleryPosition = galleryPosition;
     }
