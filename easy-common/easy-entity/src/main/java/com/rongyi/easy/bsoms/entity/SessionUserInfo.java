@@ -44,21 +44,17 @@ public class SessionUserInfo implements Serializable{
     
     private String filialeMid;
 
-	private Integer firstShopId;
+	private Integer parentShopId;
 
-	private String firstShopMid;
+	private String parentShopMid;
 
-	private Integer secondShopId;
+	private Integer grandpaShopId;
 
-	private String secondShopMid;
-
-	private Integer thirdShopId;
-
-	private String thirdShopMid;
+	private Integer grandpaShopMid;
 
 	private Integer level;  //账号层级 1 2 3
 
-	private Integer isChief; //是否主账号  0是 1否
+	private Integer isChief; //是否主账号  0否 1是
 
     private String logo = "http://rongyi.b0.upaiyun.com/commodity/text/201601051202219059.png";  //logo图片地址
     
@@ -287,38 +283,6 @@ public class SessionUserInfo implements Serializable{
 		this.address = address;
 	}
 
-	public Integer getSecondShopId() {
-		return secondShopId;
-	}
-
-	public void setSecondShopId(Integer secondShopId) {
-		this.secondShopId = secondShopId;
-	}
-
-	public String getSecondShopMid() {
-		return secondShopMid;
-	}
-
-	public void setSecondShopMid(String secondShopMid) {
-		this.secondShopMid = secondShopMid;
-	}
-
-	public Integer getThirdShopId() {
-		return thirdShopId;
-	}
-
-	public void setThirdShopId(Integer thirdShopId) {
-		this.thirdShopId = thirdShopId;
-	}
-
-	public String getThirdShopMid() {
-		return thirdShopMid;
-	}
-
-	public void setThirdShopMid(String thirdShopMid) {
-		this.thirdShopMid = thirdShopMid;
-	}
-
 	public Integer getLevel() {
 		return level;
 	}
@@ -327,27 +291,43 @@ public class SessionUserInfo implements Serializable{
 		this.level = level;
 	}
 
-	public Integer getFirstShopId() {
-		return firstShopId;
-	}
-
-	public void setFirstShopId(Integer firstShopId) {
-		this.firstShopId = firstShopId;
-	}
-
-	public String getFirstShopMid() {
-		return firstShopMid;
-	}
-
-	public void setFirstShopMid(String firstShopMid) {
-		this.firstShopMid = firstShopMid;
-	}
-
 	public Integer getIsChief() {
 		return isChief;
 	}
 
 	public void setIsChief(Integer isChief) {
 		this.isChief = isChief;
+	}
+
+	public Integer getParentShopId() {
+		return parentShopId;
+	}
+
+	public void setParentShopId(Integer parentShopId) {
+		this.parentShopId = parentShopId;
+	}
+
+	public String getParentShopMid() {
+		return parentShopMid;
+	}
+
+	public void setParentShopMid(String parentShopMid) {
+		this.parentShopMid = parentShopMid;
+	}
+
+	public Integer getGrandpaShopId() {
+		return grandpaShopId;
+	}
+
+	public void setGrandpaShopId(Integer grandpaShopId) {
+		this.grandpaShopId = grandpaShopId;
+	}
+
+	public Integer getGrandpaShopMid() {
+		return grandpaShopMid;
+	}
+
+	public void setGrandpaShopMid(Integer grandpaShopMid) {
+		this.grandpaShopMid = grandpaShopMid;
 	}
 }

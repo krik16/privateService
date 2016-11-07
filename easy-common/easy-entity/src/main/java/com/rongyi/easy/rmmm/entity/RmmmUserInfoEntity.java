@@ -95,6 +95,7 @@ public class RmmmUserInfoEntity implements Serializable{
 	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
 	private Integer isChief;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
+    private Integer chiefId; //主账号ID
 	
     public Integer getId() {
 		return id;
@@ -430,7 +431,13 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
-	
-	
+
+    public Integer getChiefId() {
+        return chiefId;
+    }
+
+    public void setChiefId(Integer chiefId) {
+        this.chiefId = chiefId;
+    }
 }
 

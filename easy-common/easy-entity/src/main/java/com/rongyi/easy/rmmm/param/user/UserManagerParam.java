@@ -80,6 +80,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private Integer isChief = 1;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+	private Integer chiefId; //主账号ID
     public Integer getId() {
 		return id;
 	}
@@ -445,6 +446,15 @@ public class UserManagerParam extends BaseParam implements Serializable{
 		Date date = new Date(lt);
         return date;
 	}
+
+	public Integer getChiefId() {
+		return chiefId;
+	}
+
+	public void setChiefId(Integer chiefId) {
+		this.chiefId = chiefId;
+	}
+
 	public Integer getSettleOrgStrategy() {
 		return settleOrgStrategy;
 	}
