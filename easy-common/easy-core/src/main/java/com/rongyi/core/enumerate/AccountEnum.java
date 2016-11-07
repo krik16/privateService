@@ -35,8 +35,11 @@ public enum AccountEnum {
 	ERROR_CHILDACCOUNTNUM_INVALID(1090021, "子账号数量不正确"),
 	ERROR_CONTRACTCODE_INVALID(1090022, "合同编码不可大于20个字符"),
 	ERROR_ACCOUNT_REPEAT(1090023, "此商户已有账户关联，无法创建"),
-	ERROR_PICTURE_ERROR(1090024, "图片上传失败")
-	
+	ERROR_PICTURE_ERROR(1090024, "图片上传失败"),
+
+    ERROR_HASCHIEF(1090025,"该商家已有主账号"),
+    ERROR_CHILDACCOUNTNUM_MANY(1090026,"子账号数量已超出限制")
+
 	;
    
 
