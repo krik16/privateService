@@ -60,7 +60,7 @@ public class ActivityGoodsSpec implements Serializable {
     /**
      * 活动价
      */
-    private Integer activityPrice;
+    private String activityPrice;
 
     /**
      * 创建时间
@@ -176,11 +176,11 @@ public class ActivityGoodsSpec implements Serializable {
         this.stockCount = stockCount;
     }
 
-    public Integer getActivityPrice() {
+    public String getActivityPrice() {
         return activityPrice;
     }
 
-    public void setActivityPrice(Integer activityPrice) {
+    public void setActivityPrice(String activityPrice) {
         this.activityPrice = activityPrice;
     }
 

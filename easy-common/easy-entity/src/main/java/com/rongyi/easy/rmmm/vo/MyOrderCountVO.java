@@ -1,5 +1,8 @@
 package com.rongyi.easy.rmmm.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 public class MyOrderCountVO implements Serializable{
@@ -14,6 +17,7 @@ public class MyOrderCountVO implements Serializable{
 	private String afterSaleCount;// 售后
 	private int unDeliverCount;//待发货数量
 	private int unReceiveCount2;//待收货数量（不包括待发货数量）
+	private int finishedCount;//完成订单数
 
 	public int getUnDeliverCount() {
 		return unDeliverCount;
@@ -63,12 +67,16 @@ public class MyOrderCountVO implements Serializable{
 		this.afterSaleCount = afterSaleCount;
 	}
 
+	public int getFinishedCount() {
+		return finishedCount;
+	}
+
+	public void setFinishedCount(int finishedCount) {
+		this.finishedCount = finishedCount;
+	}
+
 	@Override
 	public String toString() {
-		return "MyOrderCountVO [unPaidCount=" + unPaidCount
-				+ ", unReceiveCount=" + unReceiveCount + ", unEvalueCount="
-				+ unEvalueCount + ", afterSaleCount=" + afterSaleCount
-				+ ", unDeliverCount=" + unDeliverCount + ", unReceiveCount2="
-				+ unReceiveCount2 + "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }

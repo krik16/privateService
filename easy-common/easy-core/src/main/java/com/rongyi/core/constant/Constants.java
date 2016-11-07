@@ -818,6 +818,7 @@ public interface Constants {
     interface PUSH_APP{
         int RYG=0;//容易逛
         int MD=1;//摩店
+        int DATA=2;
     }
     /**
      * 推荐类目 类型APP

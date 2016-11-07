@@ -119,7 +119,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	@Field("secKillSign")
 	private String secKillSign;
-
 	@Field("extend")
 	private String extend;
 

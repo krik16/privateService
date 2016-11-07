@@ -8,6 +8,7 @@ import java.util.List;
 import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.roa.vo.GroupMemberVO;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -37,7 +38,16 @@ public class CommodityBuyerVO implements Serializable {
     private List<Double> location; //经纬度
     private String systemNumber; //商品SPU
     private String activityType = "0";    //活动类型[0其他 闪购1、特卖2、秒杀3]
-
+	//拼团商品数据
+	private Integer activityCommodityStock;//活动商品库存
+	private double activityPrice;//拼团商品最低价格
+	private Long endAt;//拼团活动结束时间
+	private Long startAt;//拼团活动开始时间
+	private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
+	private Boolean forceAttention = false;//下单是否需要强制关注,true：要关注，false：不需要关注
+	private Integer groupPeopleLimit;//成团所需人数
+	private String activityCommodityDesc;//拼团活动商品描述
+	private int groupTotalNum;//活动商品参团总人数
     private String easyOrder;//容易令
     private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
     private int isSpot;//是否现货	0 非现货 1现货
@@ -74,10 +84,77 @@ public class CommodityBuyerVO implements Serializable {
     private Long activityEndAt;//活动结束时间
     private Integer activityStock;//活动库存
     private String activityMinPrice;//活动 各规格中最低价
+	public Integer getActivityStatus() {
+		return activityStatus;
+	}
 
-    public Integer getGalleryPosition() {
-        return galleryPosition;
-    }
+	public void setActivityStatus(Integer activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+
+	public Integer getActivityCommodityStock() {
+		return activityCommodityStock;
+	}
+
+	public void setActivityCommodityStock(Integer activityCommodityStock) {
+		this.activityCommodityStock = activityCommodityStock;
+	}
+
+	public double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
+	public Long getEndAt() {
+		return endAt;
+	}
+
+	public void setEndAt(Long endAt) {
+		this.endAt = endAt;
+	}
+
+	public Long getStartAt() {
+		return startAt;
+	}
+
+	public void setStartAt(Long startAt) {
+		this.startAt = startAt;
+	}
+
+	public Boolean getForceAttention() {
+		return forceAttention;
+	}
+
+	public void setForceAttention(Boolean forceAttention) {
+		this.forceAttention = forceAttention;
+	}
+
+	public Integer getGroupPeopleLimit() {
+		return groupPeopleLimit;
+	}
+
+	public void setGroupPeopleLimit(Integer groupPeopleLimit) {
+		this.groupPeopleLimit = groupPeopleLimit;
+	}
+
+	public String getActivityCommodityDesc() {
+		return activityCommodityDesc;
+	}
+
+	public void setActivityCommodityDesc(String activityCommodityDesc) {
+		this.activityCommodityDesc = activityCommodityDesc;
+	}
+
+	public int getGroupTotalNum() {
+		return groupTotalNum;
+	}
+
+	public void setGroupTotalNum(int groupTotalNum) {
+		this.groupTotalNum = groupTotalNum;
+	}
 
     public void setGalleryPosition(Integer galleryPosition) {
         this.galleryPosition = galleryPosition;
@@ -380,7 +457,6 @@ public class CommodityBuyerVO implements Serializable {
     public String getShopName() {
         return shopName;
     }
-
     public void setShopName(String shopName) {
         this.shopName = shopName;
     }

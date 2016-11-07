@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.rongyi.easy.rmmm.param;
 
@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司 author chenjun Description ： time ：2015年5月19日
@@ -15,7 +17,7 @@ import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
 public class OrderDetailModelParam implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -26,8 +28,11 @@ public class OrderDetailModelParam implements Serializable {
 	private String num;// 商品数量
 	private String commodityAppStatus;//商品状态 0下架 1上架
 	private Integer commodityStock;//商品库存
+	private Integer activityId;//活动id
+	private Long activityRoundId;//活动场次id
+	private Integer activityType;//活动类型 0不参与 3秒杀 4拼团
 
-	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
+	private List<CommoditySpecColumnVO> specColumnValues;//  规格参数
 
 	private String commodityPic;// 商品图片
 
@@ -38,19 +43,19 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityName;// 商品名称
 
 	private String commodityPostage;// 邮费
-	
+
 	private boolean supportCourierDeliver = true;//支持快递发货字段  true 是    false否
 
 	private boolean supportSelfPickup = true;//支持到店自提  true 是    false否
-	
+
 	private Integer hongBaoNum = 0;// 可使用红包数量
-	
+
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
-	
+
 	private String couponCode;//红包券码
-	
+
 	private String couponName;//红包名称
-	
+
 	private Double discount;// 红包抵扣金额
 
 	private Integer articleType;//文章类型 1潮人攻略
@@ -237,6 +242,30 @@ public class OrderDetailModelParam implements Serializable {
 
 	public void setArticleId(String articleId) {
 		this.articleId = articleId;
+	}
+
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+
+	public Long getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(Long activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
 	}
 
 	@Override

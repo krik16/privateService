@@ -3,6 +3,10 @@ package com.rongyi.easy.activity.entity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import com.google.inject.internal.Lists;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.util.List;
 
 /**
  * Created by yangyang on 2016/9/21.
@@ -13,10 +17,22 @@ public class QuerySecKillGoods implements Serializable {
     private String goodsId;//商品id
     private String name;//商品名称
     private String shopName;//店铺名称
-    private Integer currentPage;
-    private Integer pageSize;
+    private Integer currentPage = 1;
+    private Integer pageSize = 10;
     private Integer status;
+    private String goodsCode;
+    private Integer offset;
+    private List<Integer> goodsStatus = Lists.newArrayList();//多个活动状态
 
+    public Integer getFromWeixin() {
+        return fromWeixin;
+    }
+
+    public void setFromWeixin(Integer fromWeixin) {
+        this.fromWeixin = fromWeixin;
+    }
+
+    private Integer fromWeixin;//微信端调用
 
 
     @Override
@@ -29,7 +45,33 @@ public class QuerySecKillGoods implements Serializable {
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
                 .append("status", status)
+                .append("goodsCode", goodsCode)
+                .append("goodsStatus", goodsStatus)
                 .toString();
+    }
+
+    public List<Integer> getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(List<Integer> goodsStatus) {
+        this.goodsStatus = goodsStatus;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
     }
 
     public Integer getStatus() {

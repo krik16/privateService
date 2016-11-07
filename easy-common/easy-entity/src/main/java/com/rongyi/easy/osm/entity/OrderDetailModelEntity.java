@@ -1,5 +1,8 @@
 package com.rongyi.easy.osm.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -39,6 +42,15 @@ public class OrderDetailModelEntity {
 
     //文章id
     private String articleId;
+
+    /**活动id**/
+    private Integer activityId;
+
+    /**活动场次id**/
+    private Long activityRoundId;
+
+    /**活动类型 闪购1、特卖2、秒杀3、拼团4**/
+    private Integer activityType;
 
     /**
      * 主键id
@@ -214,5 +226,34 @@ public class OrderDetailModelEntity {
 
     public void setArticleId(String articleId) {
         this.articleId = articleId;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    public Long getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Long activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

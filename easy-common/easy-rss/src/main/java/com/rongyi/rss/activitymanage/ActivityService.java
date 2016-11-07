@@ -11,6 +11,7 @@ import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
 import com.rongyi.easy.activitymanage.param.CheckResGoods;
+import com.rongyi.easy.activitymanage.param.PingtuanActivityVo;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParamV2;
 import com.rongyi.easy.activitymanage.vo.*;
@@ -69,6 +70,13 @@ public interface ActivityService {
      * @author Leon
      */
     boolean saveActivityGoods(ActivityGoods activityGoods);
+
+    /**
+     * 更新商品
+     * @param activityGoods
+     * @return
+     */
+    public boolean updateActivityGoods(ActivityGoods activityGoods);
 
     /**
      * 批量新增ActivityGoods数据
@@ -138,14 +146,14 @@ public interface ActivityService {
     /**
 	 * 根据活动ID统计报名的商品卡券数量
 	 * @param queryActivityGoods
-	 * @return 
+	 * @return
 	 * @author wangzhiwen
 	 */
      public int countActivityGoods(QueryActivityGoods queryActivityGoods);
      /**
  	 * 根据goodid，joinStartAt，joinEndAt查询商品卡券在同一时间是否参加其他活动
  	 * @param queryActivityGoods
- 	 * @return 
+ 	 * @return
 	 * @author wangzhiwen
  	 */
      public List<ActivityGoods> getActivityGoodsInfo(QueryActivityGoods queryActivityGoods);
@@ -153,17 +161,18 @@ public interface ActivityService {
      /**
       * 新增操作记录
       * @param activityCheckRecord
-      * @return 
+      * @return
 	  * @author wangzhiwen
       */
      public int insertActivityCheckRecord(ActivityCheckRecord activityCheckRecord);
      /**
       * 新增商品规格
       * @param activityGoodsSpec
-      * @return 
+      * @return
 	  * @author wangzhiwen
       */
      public int insertActivityGoodsSpec(ActivityGoodsSpec activityGoodsSpec);
+
 
     /**
      * 查询活动列表
@@ -171,10 +180,19 @@ public interface ActivityService {
      * @return
      */
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
-    
+
     public PagingVO<ActivityInfoListVOV2> getActivityListV2(SearchActivityParamV2 searchActivityParam);
 
 
+    /**
+     * 更新库存
+     *
+     * @param appendCount
+     * @param activityGoodsId
+     * @param joinCount
+     * @return
+     */
+    public int updateJoinCountById(Integer activityGoodsId, int joinCount, Integer appendCount, Integer activityPrice);
     /**
      * 保存秒杀活动
      * @param activityInfo
@@ -203,7 +221,8 @@ public interface ActivityService {
      * @return ActivityInfoVO
      */
     RoundGood getResActivityInfoVO(String skuId, Integer goodsType);
-    
+
+
 
     /**
      * 查询活动关联的商品信息
@@ -213,6 +232,50 @@ public interface ActivityService {
      * @return
      */
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
+
+    /**
+     *
+     * @param querySecKillGoods
+     * @return
+     */
+    public int countResActivityGoods(QuerySecKillGoods querySecKillGoods);
+
+    /**
+     *
+     * @param querySecKillGoods
+     * @return
+     */
+    public List<ActivityGoods> getResActivityGoods(QuerySecKillGoods querySecKillGoods);
+
+    public ResponseVO inSertOrUpdatePingtuanActivity(PingtuanActivityVo pingtuanActivityVo);
+
+    public PingtuanActivityVo pingtuanConfigDetail(Integer activityId);
+
+    /**
+     * 更新商品状态
+     * @param activityGoodsId
+     * @param status
+     * @param userName
+     * @return
+     */
+    public boolean updateActivityGoodsStatus(Integer activityGoodsId,Integer status,String userName);
+
+    public List<ActivityInfo>  selectActivityByEndAt(Date endAt);
+
+
+    /**
+     * 删除一个活动下的商品
+     * @param activityId
+     * @param status
+     * @param userName
+     * @return
+     */
+    public boolean updateActivityGoodsAndSpecStatusByActivityId(Integer activityId,Integer status, String userName);
+
+
+    public boolean cleanActivityById(Integer activityId,String userName,Integer status);
+
+    public List<ActivityGoods> selectGoodsInPinTuan(List<String> goodIds);
 
 
     /**
@@ -243,10 +306,10 @@ public interface ActivityService {
     ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
 
     public ActivityGoods selectAllByActivityIdGoodsId(Integer activityId, String goodsId);
-    
+
     /**获取活动简要信息*/
-    ActivityInfoSimple  getActivityInfoSimple(int activityId); 
-    
+    ActivityInfoSimple  getActivityInfoSimple(int activityId);
+
     /**设置活动状态*/
     boolean setActivityOfflineState(int activityId);
 
@@ -257,9 +320,9 @@ public interface ActivityService {
     public  List<ActivityGoodsCategoryRule> selectActivityGoodsCategoryRuleByActivityId(Integer activityId);
 
     public ActivityInfoListVOV2 getActivityStatusCount(Integer activityId);
-    
+
     boolean isNewActivityInfoCreated(int userId,int identity,int shopId,Date lastReadTime);
 
-    
-    
+
+
 }

@@ -29,9 +29,9 @@ public interface ICommodityCategoryService {
 	 * @return
 	 */
 	public CommodityCategory selectCategoryById(String id);
-	
+
 	public CommodityCategory selectCategoryByName(String name);
-	
+
 	public CommodityCategory selectCategoryByNameAndParent(String name,String parentId);
 
 	/**
@@ -44,9 +44,15 @@ public interface ICommodityCategoryService {
 	public boolean updateCategoryPopular(String categoryId,boolean isPopular,String popularImg);
 
 	/**
-	 * 查询所有类目
-	 *
-	 * @return list
+	 * 修改商品分类单个值
+	 * @param categoryIds 商品分类id
+	 * @param property 属性名
+	 * @param value 属性值
+	 * @return
 	 */
 	List<CategoryNodeVO> getAllCategories();
+	//public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
+
+
+	List<String> getCategoryNames(List<ObjectId> categoryIds);
 }

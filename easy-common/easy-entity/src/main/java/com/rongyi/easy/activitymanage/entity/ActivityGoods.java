@@ -118,9 +118,18 @@ public class ActivityGoods implements Serializable {
      */
     private Integer applyStatus;
     /**
-     * 报名来源 0大运营后台 1摩店
+     * 描述
      */
-    private Integer enrollSource;//0大运营1摩店
+    private String desc;
+    private Integer groupNum;
+    private Integer openGroupLimit;
+    private Integer joinGroupLimit;
+    private Integer sortNum;
+    private String remainStock;
+    private String activityPrice;
+    //开团起始人数（随机数）
+    private Integer groupRandomNum;
+    private String enrollSource;//0大运营后台 1摩店
 
     private ActivityGoodsRule activityGoodsRule;
 
@@ -146,7 +155,7 @@ public class ActivityGoods implements Serializable {
     /**
      * 商品规格
      */
-    private List<ActivityGoodsSpec>  activityGoodsSpecs =  Lists.newArrayList();
+    private List<ActivityGoodsSpec>  activityGoodsSpecs  = Lists.newArrayList();
 
     /**
      * 商品分类
@@ -157,6 +166,19 @@ public class ActivityGoods implements Serializable {
      * 场次信息
      */
     private   List<GoodShowStyleInRY>   goodShowStyleInRYArrayList = Lists.newArrayList();
+
+    /**
+     * 商品/卡券活动库存
+     */
+    private Integer stockCount;
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
 
     /**
      * 获取商品分类的层级信息
@@ -214,20 +236,44 @@ public class ActivityGoods implements Serializable {
         this.activityGoodsRule = activityGoodsRule;
     }
 
-    public Integer getEnrollSource() {
-        return enrollSource;
-    }
-
-    public void setEnrollSource(Integer enrollSource) {
-        this.enrollSource = enrollSource;
-    }
-
     public List<GoodShowStyleInRY> getGoodShowStyleInRYArrayList() {
         return goodShowStyleInRYArrayList;
     }
 
     public void setGoodShowStyleInRYArrayList(List<GoodShowStyleInRY> goodShowStyleInRYArrayList) {
         this.goodShowStyleInRYArrayList = goodShowStyleInRYArrayList;
+    }
+
+    public String getEnrollSource() {
+        return enrollSource;
+    }
+
+    public void setEnrollSource(String enrollSource) {
+        this.enrollSource = enrollSource;
+    }
+
+    public Integer getGroupRandomNum() {
+        return groupRandomNum;
+    }
+
+    public void setGroupRandomNum(Integer groupRandomNum) {
+        this.groupRandomNum = groupRandomNum;
+    }
+
+    public String getActivityPrice() {
+        return activityPrice;
+    }
+
+    public void setActivityPrice(String activityPrice) {
+        this.activityPrice = activityPrice;
+    }
+
+    public String getRemainStock() {
+        return remainStock;
+    }
+
+    public void setRemainStock(String remainStock) {
+        this.remainStock = remainStock;
     }
 
     public ActivityGoods(int type){
@@ -433,6 +479,47 @@ public class ActivityGoods implements Serializable {
         this.applyStatus = applyStatus;
     }
 
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(Integer groupNum) {
+        this.groupNum = groupNum;
+    }
+
+    public Integer getOpenGroupLimit() {
+        return openGroupLimit;
+    }
+
+    public void setOpenGroupLimit(Integer openGroupLimit) {
+        this.openGroupLimit = openGroupLimit;
+    }
+
+    public Integer getJoinGroupLimit() {
+        return joinGroupLimit;
+    }
+
+    public void setJoinGroupLimit(Integer joinGroupLimit) {
+        this.joinGroupLimit = joinGroupLimit;
+    }
+
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -467,6 +554,16 @@ public class ActivityGoods implements Serializable {
                 .append("enrollSource", enrollSource)
                 .append("activityGoodsRule", activityGoodsRule)
                 .append("rejectReason", rejectReason)
+                .append("desc", desc)
+                .append("groupNum", groupNum)
+                .append("joinGroupLimit", joinGroupLimit)
+                .append("openGroupLimit", openGroupLimit)
+                .append("sortNum", sortNum)
+                .append("remainStock", remainStock)
+                .append("activityPrice", activityPrice)
+                .append("groupRandomNum", groupRandomNum)
+                .append("enrollSource", enrollSource)
+                .append("stockCount", stockCount)
                 .toString();
     }
 }
