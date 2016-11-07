@@ -92,7 +92,7 @@ public interface IUserInfoService {
 	 * @param paramsMap
 	 * @return
 	 */
-	public boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
+	public boolean updateUserInfo(UserManagerParam userManagerParam) throws Exception;
 
 	UserInfo getUserByMap(Map<String, Object> paramsMap);
 
