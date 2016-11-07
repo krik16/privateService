@@ -10,33 +10,15 @@ import com.rongyi.easy.activity.entity.QuerySecKillGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
-import com.rongyi.easy.activitymanage.param.CheckResGoods;
 import com.rongyi.easy.activitymanage.param.PingtuanActivityVo;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
-import com.rongyi.easy.activitymanage.param.SearchActivityParamV2;
 import com.rongyi.easy.activitymanage.vo.*;
-import com.rongyi.easy.activitymanage.vo.ActivityInfoSimple;
-import com.rongyi.easy.merchantactivity.vo.MerchantActivityEntryVO;
 
 /**
  * 活动后台管理接口
  * Created by Leon on 2016/1/20.
  */
 public interface ActivityService {
-
-    /**
-     * 根据activityGoodsId查询spec
-     * @param id
-     * @return
-     */
-    public List<ActivityGoodsSpec> selectSpecByActivityGoodsId(Integer id);
-
-    /**
-     * 根据主键获取活动商品
-     * @param id
-     * @return
-     */
-    public ActivityGoods selectActivityGoodsById(Integer id);
 
     /**
      * 新建活动
@@ -181,8 +163,6 @@ public interface ActivityService {
      */
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
 
-    public PagingVO<ActivityInfoListVOV2> getActivityListV2(SearchActivityParamV2 searchActivityParam);
-
 
     /**
      * 更新库存
@@ -193,13 +173,6 @@ public interface ActivityService {
      * @return
      */
     public int updateJoinCountById(Integer activityGoodsId, int joinCount, Integer appendCount, Integer activityPrice);
-    /**
-     * 保存秒杀活动
-     * @param activityInfo
-     * @return
-     */
-    public ActivityInfo saveSecKillActivityInfo(ActivityInfo activityInfo);
-
 
 
 
@@ -211,17 +184,6 @@ public interface ActivityService {
      * @return ActivityInfoVO
      */
     ActivityInfoVO getActivityInfoVO(String goodsId, Integer goodsType);
-
-
-    /**
-     * 对外（交易使用）
-     * 查询活动详情接口
-     * @param skuId 商品id
-     * @param goodsType 商品[3] 卡券[1]
-     * @return ActivityInfoVO
-     */
-    RoundGood getResActivityInfoVO(String skuId, Integer goodsType);
-
 
 
     /**
@@ -276,53 +238,6 @@ public interface ActivityService {
     public boolean cleanActivityById(Integer activityId,String userName,Integer status);
 
     public List<ActivityGoods> selectGoodsInPinTuan(List<String> goodIds);
-
-
-    /**
-     * 根据活动id查询推送的店铺人员id
-     * @param activityId
-     * @return
-     */
-    public  List<Integer> selectUserIdsByActivityId(Integer activityId);
-
-    /**
-     * 根据商品id查询商品是否在秒杀活动中
-     * @param goodsIds
-     * @return
-     */
-    public  List<String> selectActivityGoodsByGoodsIds(List<String> goodsIds);
-
-
-    int countSecKillGoods(QuerySecKillGoods querySecKillGoods);
-
-    public List<ActivityGoods> getSecKillGoods(QuerySecKillGoods querySecKillGoods);
-
-    public List<Integer> batchInsertActivityGoods(List<ActivityGoods> activityGoodses);
-
-    boolean updateActivityGoodsStatus(CheckResGoods checkResGoods);
-
-    List<ActivityGoods> getShopActivityGoods(ActivityGoodsParam param);
-
-    ActivityGoods selectAllActivityGoodsById(Integer activityGoodsId);
-
-    public ActivityGoods selectAllByActivityIdGoodsId(Integer activityId, String goodsId);
-
-    /**获取活动简要信息*/
-    ActivityInfoSimple  getActivityInfoSimple(int activityId);
-
-    /**设置活动状态*/
-    boolean setActivityOfflineState(int activityId);
-
-    public List<MerchantActivityEntryVO> selectActivityEntryRuleByActivityId(Integer id);
-
-    public ActivityGoodsRule selectByActivityId(Integer activityId);
-
-    public  List<ActivityGoodsCategoryRule> selectActivityGoodsCategoryRuleByActivityId(Integer activityId);
-
-    public ActivityInfoListVOV2 getActivityStatusCount(Integer activityId);
-
-    boolean isNewActivityInfoCreated(int userId,int identity,int shopId,Date lastReadTime);
-
 
 
 }

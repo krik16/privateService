@@ -32,7 +32,7 @@ public class ActivityGoodsSpecVO implements Serializable {
     /**
      * 商品现价
      */
-    private String currPrice;
+    private Integer currPrice;
 
     /**
      * 活动价
@@ -76,11 +76,11 @@ public class ActivityGoodsSpecVO implements Serializable {
         this.stockCount = stockCount;
     }
 
-    public String getCurrPrice() {
+    public Integer getCurrPrice() {
         return currPrice;
     }
 
-    public void setCurrPrice(String currPrice) {
+    public void setCurrPrice(Integer currPrice) {
         this.currPrice = currPrice;
     }
 
