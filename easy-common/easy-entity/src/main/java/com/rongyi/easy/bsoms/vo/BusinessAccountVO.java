@@ -3,6 +3,9 @@ package com.rongyi.easy.bsoms.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import com.rongyi.easy.rmmm.entity.UserAccountEntity;
 /**
  * 商家账户VO
  * @author hebo
@@ -52,6 +55,21 @@ public class BusinessAccountVO implements Serializable {
 	private Integer isAcc;              //是否加速审核  0是 1否
 	private Date certTime;              //提交审核时间
 	private Integer userStatus;         //用户状态 0未提交审核 2审核中 1审核通过 3审核不通过
+	
+	private Integer industryId;
+	private String industryName;
+	private Integer industryVersionId;
+	private String industryVersionName;
+	private Integer childAccountNum;
+	private Date validStartAt;
+	private Date validEndAt;
+	private String contractCode;
+	private String synTarget;
+	private Integer isChief;
+	private Integer level;
+	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+	private List<UserAccountEntity> userAccounts;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -304,4 +322,103 @@ public class BusinessAccountVO implements Serializable {
 	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
 	}
+	public Integer getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+	public String getIndustryName() {
+		return industryName;
+	}
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+	public String getIndustryVersionName() {
+		return industryVersionName;
+	}
+	public void setIndustryVersionName(String industryVersionName) {
+		this.industryVersionName = industryVersionName;
+	}
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+	public Date getValidStartAt() {
+		return validStartAt;
+	}
+	public void setValidStartAt(Date validStartAt) {
+		this.validStartAt = validStartAt;
+	}
+	public Date getValidEndAt() {
+		return validEndAt;
+	}
+	public void setValidEndAt(Date validEndAt) {
+		this.validEndAt = validEndAt;
+	}
+	public String getContractCode() {
+		return contractCode;
+	}
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+	public String getSynTarget() {
+		return synTarget;
+	}
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+	public Integer getIsChief() {
+		return isChief;
+	}
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+	public Integer getSettleOrgStrategy() {
+		return settleOrgStrategy;
+	}
+	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
+		this.settleOrgStrategy = settleOrgStrategy;
+	}
+	public List<UserAccountEntity> getUserAccounts() {
+		return userAccounts;
+	}
+	public void setUserAccounts(List<UserAccountEntity> userAccounts) {
+		this.userAccounts = userAccounts;
+	}
+	@Override
+	public String toString() {
+		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account
+				+ ", userAccount=" + userAccount + ", userName=" + userName + ", nickName=" + nickName + ", type="
+				+ type + ", identity=" + identity + ", groupId=" + groupId + ", groupMid=" + groupMid + ", groupName="
+				+ groupName + ", brandId=" + brandId + ", brandMid=" + brandMid + ", brandName=" + brandName
+				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName=" + mallName + ", shopId=" + shopId
+				+ ", shopMid=" + shopMid + ", shopName=" + shopName + ", roleId=" + roleId + ", roleName=" + roleName
+				+ ", branchId=" + branchId + ", branchName=" + branchName + ", accountStatus=" + accountStatus
+				+ ", isSuspended=" + isSuspended + ", balance=" + balance + ", comment=" + comment + ", createSource="
+				+ createSource + ", createBy=" + createBy + ", createAt=" + createAt + ", updateBy=" + updateBy
+				+ ", updateAt=" + updateAt + ", stopReason=" + stopReason + ", stopAt=" + stopAt
+				+ ", virtualStopReason=" + virtualStopReason + ", virtualStopAt=" + virtualStopAt + ", isAcc=" + isAcc
+				+ ", certTime=" + certTime + ", userStatus=" + userStatus + ", industryId=" + industryId
+				+ ", industryName=" + industryName + ", industryVersionId=" + industryVersionId
+				+ ", industryVersionName=" + industryVersionName + ", childAccountNum=" + childAccountNum
+				+ ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode=" + contractCode
+				+ ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level + ", settleOrgStrategy="
+				+ settleOrgStrategy + ", userAccounts=" + userAccounts + "]";
+	}
+	
 }
