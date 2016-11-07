@@ -120,6 +120,46 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal commidityTotalPice;//商品总价
 
 	private BigDecimal orderTotalPrice;//订单总价
+	
+	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
+	private Long groupEndAt;//团结束时间，单位：毫秒
+	private Long nextCloseTime;//待付款订单预计关闭剩余时间，单位：秒
+
+	public Long getGroupEndAt() {
+		return groupEndAt;
+	}
+
+	public void setGroupEndAt(Long groupEndAt) {
+		this.groupEndAt = groupEndAt;
+	}
+
+	public Long getNextCloseTime() {
+		return nextCloseTime;
+	}
+
+	public void setNextCloseTime(Long nextCloseTime) {
+		this.nextCloseTime = nextCloseTime;
+	}
+
+	public boolean isIfPayment() {
+		return ifPayment;
+	}
+
+	public void setIfPayment(boolean ifPayment) {
+		this.ifPayment = ifPayment;
+	}
+
+	private String activityName;// 活动名称
+
+	private Integer activityType;// 活动类型
+
+	private Integer activityStatus;// 活动状态
+
+	private Long activityRoundId;// 活动编号
+
+	private Integer activityId;// 订单来源
+
+	private Integer orderSource;// 订单来源
 
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
@@ -730,11 +770,64 @@ public class ParentOrderVO implements Serializable {
 		this.commidityTotalPice = commidityTotalPice;
 	}
 
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
+	public Integer getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(Integer activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+
+	public Long getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(Long activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public Integer getOrderSource() {
+		return orderSource;
+	}
+
+	public void setOrderSource(Integer orderSource) {
+		this.orderSource = orderSource;
+	}
+
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
 				"orderId='" + orderId + '\'' +
 				", mallName='" + mallName + '\'' +
+				", activityName='" + activityName + '\'' +
+				", activityType='" + activityType + '\'' +
+				", activityStatus='" + activityStatus + '\'' +
+				", activityRoundId='" + activityRoundId + '\'' +
+				", orderSource='" + orderSource + '\'' +
 				", brandName='" + brandName + '\'' +
 				", shopName='" + shopName + '\'' +
 				", shopIM=" + shopIM +
@@ -793,6 +886,9 @@ public class ParentOrderVO implements Serializable {
 				", expressOrderInfoId=" + expressOrderInfoId +
 				", ifOnDisplayExpress=" + ifOnDisplayExpress +
 				", newPayAmount=" + newPayAmount +
+				", ifPayment=" + ifPayment +
+				", groupEndAt=" + groupEndAt +
+				", nextCloseTime=" + nextCloseTime +
 				'}';
 	}
 }

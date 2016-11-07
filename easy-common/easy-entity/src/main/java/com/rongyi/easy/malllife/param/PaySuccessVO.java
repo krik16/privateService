@@ -28,6 +28,27 @@ public class PaySuccessVO implements Serializable{
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
 	private String districtName;// 区名称
+	private Integer activityId;// 拼团活动id
+	private Integer activityType;// 0不参与，3秒杀，4拼团,
+	private Long activityRoundId;// 团编号
+	public Integer getActivityId() {
+		return activityId;
+	}
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+	public Integer getActivityType() {
+		return activityType;
+	}
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+	public Long getActivityRoundId() {
+		return activityRoundId;
+	}
+	public void setActivityRoundId(Long activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
 	public String getOrderId() {
 		return orderId;
 	}
@@ -153,7 +174,11 @@ public class PaySuccessVO implements Serializable{
 				+ ", expressBillId=" + expressBillId + ", payTime=" + payTime
 				+ ", commitOrderTime=" + commitOrderTime + ", integral="
 				+ integral + ", provinceName=" + provinceName + ", cityName="
-				+ cityName + ", districtName=" + districtName + "]";
+				+ cityName + ", districtName=" + districtName 
+				+ ", activityId=" + activityId 
+				+ ", activityRoundId=" + activityRoundId 
+				+ ", activityType=" + activityType 
+				+ "]";
 	}
 	
 }
