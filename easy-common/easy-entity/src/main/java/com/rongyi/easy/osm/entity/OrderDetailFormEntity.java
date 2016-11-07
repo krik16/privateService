@@ -119,7 +119,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private String activityName;//活动名称
 
-    private Integer activityRoundId;//活动场次id
+    private Long activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
 
@@ -587,11 +587,11 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityName = activityName;
     }
 
-    public Integer getRoundId() {
+    public Long getRoundId() {
         return activityRoundId;
     }
 
-    public void setRoundId(Integer roundId) {
+    public void setRoundId(Long roundId) {
         this.activityRoundId = activityRoundId;
     }
 
@@ -611,30 +611,17 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityLimitNum = activityLimitNum;
     }
 
+    public Long getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Long activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
     @Override
 	public String toString() {
-		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
-				+ commodityMid + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", refundAmount=" + refundAmount
-				+ ", realAmount=" + realAmount + ", status=" + status + ", appealTimes=" + appealTimes + ", refundTimes="
-				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId+ ", orderCouponDiscount=" + orderCouponDiscount
-                + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
-				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + ","
-                + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
-                ", discountAmount=" + discountAmount +
-                ", rebateAmount=" + rebateAmount +
-                ", orderScore=" + orderScore +
-                ", scoreAmount=" + scoreAmount +
-                ", limitNum=" + limitNum +
-                ", activityType=" + activityType +
-                ", disconntFee=" + disconntFee +
-                ", articleId=" + articleId +
-                ", articleType=" + articleType +
-                ", activityId=" + activityId +
-                ", activityRoundId=" + activityRoundId +
-                ", activityName=" + activityName +
-                ", unitOrigPrice=" + unitOrigPrice +
-                ", activityLimitNum=" + activityLimitNum +
-                " ]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 
     @Override
