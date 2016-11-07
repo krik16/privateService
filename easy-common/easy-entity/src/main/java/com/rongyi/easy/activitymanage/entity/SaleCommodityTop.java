@@ -7,23 +7,23 @@ import java.util.Date;
 
 public class SaleCommodityTop implements Serializable {
 
-    /**主键id*/
+    /**主键id**/
     private Integer id;
-   /**活动特卖的id*/
+   /**活动特卖的id**/
     private Integer activityTemplateId;
-   /**商品id*/
+   /**商品id**/
     private String commodityId;
-   /**商品排序*/
+   /**商品排序**/
     private Integer orderPosition;
     /**false 表示没有删除  true 表示删除*/
     private Boolean isDeleted;
-   /**创建人*/
+   /**创建人**/
     private String createUser;
-   /**创建时间*/
+   /**创建时间**/
     private Date createAt;
-   /**修改时间*/
+   /**修改时间**/
     private Date updateAt;
-   /**乐观锁版本*/
+   /**乐观锁版本**/
     private Integer version;
 
     public Integer getId() {

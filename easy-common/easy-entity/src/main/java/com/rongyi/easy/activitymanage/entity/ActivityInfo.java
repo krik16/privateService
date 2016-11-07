@@ -43,7 +43,7 @@ public class ActivityInfo implements Serializable {
     /**
      * 活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3]
      */
-    private Integer status;
+    private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
     /**
      * 发布渠道: 大运营[0] 商家[1]
@@ -123,6 +123,8 @@ public class ActivityInfo implements Serializable {
     private ActivityCouponRule activityCouponRule;
 
     private List<ActivityEnroll> activityEnrollList;
+
+    private String description;
 
     public String getSource() {
         return source;
@@ -314,6 +316,14 @@ public class ActivityInfo implements Serializable {
 
     public void setActivityEnrollList(List<ActivityEnroll> activityEnrollList) {
         this.activityEnrollList = activityEnrollList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
