@@ -39,7 +39,7 @@ public class MethodTimeAdvice implements MethodInterceptor {
         } catch (Throwable e) {
             //监控的参数
 //            Object[] objs = invocation.getArguments();
-            logger.error("MethodTimeAdvice | invoke | 异常 | 方法名：" + methodName, e);
+           // logger.error("MethodTimeAdvice | invoke | 异常 | 方法名：" + methodName, e);
         }
         clock.stop(); //计时结束
         if (logger.isInfoEnabled()) {
