@@ -252,7 +252,7 @@ public interface IUserService {
      * @param paramsMap
      * @return
      */
-    public boolean updateUserInfo(Map<String, Object> paramsMap)throws  Exception;
+    public boolean updateUserInfo(UserManagerParam userManagerParam)throws  Exception;
     
     /**
 	 * 根据用户id查用户信息,不管是否禁用

@@ -92,7 +92,7 @@ public interface IUserInfoService {
 	 * @param paramsMap
 	 * @return
 	 */
-	public boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
+	public boolean updateUserInfo(UserManagerParam userManagerParam) throws Exception;
 
 	UserInfo getUserByMap(Map<String, Object> paramsMap);
 
@@ -223,4 +223,16 @@ public interface IUserInfoService {
 	 * @return 用户信息
 	 */
 	SessionUserInfo getSessionUserInfoById(Integer id);
+
+	/**
+	 * 查询用户数据
+	 * @param paramMap
+	 *           identity
+	 *           shopId
+	 *           mallId
+	 *           isChief
+	 * @return 数量
+	 */
+	int searchUserInfoCount(Map<String, Object> paramMap);
+
 }
