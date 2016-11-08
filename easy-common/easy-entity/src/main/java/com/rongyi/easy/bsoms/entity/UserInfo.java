@@ -82,8 +82,9 @@ public class UserInfo implements Serializable{
     private Date validStartAt;//有效期开始时间
     private Date validEndAt; //有效期结束时间
     private String contractCode; //合同号
-    private Integer synTarget ; //设置终端  1是 0否
+    private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
+    private Integer chiefId;
     public String getStopReason() {
 		return stopReason;
 	}
@@ -434,11 +435,19 @@ public class UserInfo implements Serializable{
         this.contractCode = contractCode;
     }
 
-    public Integer getSynTarget() {
-        return synTarget;
-    }
+	public String getSynTarget() {
+		return synTarget;
+	}
 
-    public void setSynTarget(Integer synTarget) {
-        this.synTarget = synTarget;
-    }
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+
+	public Integer getChiefId() {
+		return chiefId;
+	}
+
+	public void setChiefId(Integer chiefId) {
+		this.chiefId = chiefId;
+	}
 }

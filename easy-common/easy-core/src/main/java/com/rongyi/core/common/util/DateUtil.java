@@ -925,6 +925,18 @@ public class DateUtil {
 
 		return sb.toString();
 	}
+	
+	public static boolean compareDateEquals(Date oldDate, Date newDate) {
+		  if(oldDate == null && newDate == null){
+			  return true;
+		  }else if(oldDate == null && newDate != null || oldDate != null && newDate == null){
+			  return false;
+		  }else if(oldDate.equals(newDate)){
+			  return true;
+		  }else{
+			  return false;
+		  }
+	  }
 
 	public static void main(String[] args) {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
