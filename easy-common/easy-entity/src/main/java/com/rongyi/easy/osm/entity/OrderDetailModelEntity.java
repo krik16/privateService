@@ -41,7 +41,7 @@ public class OrderDetailModelEntity {
     private Integer articleType;
 
     //文章id
-    private String articleId;
+    private Integer articleId;
 
     /**活动id**/
     private Integer activityId;
@@ -220,11 +220,11 @@ public class OrderDetailModelEntity {
         this.articleType = articleType;
     }
 
-    public String getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(String articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
