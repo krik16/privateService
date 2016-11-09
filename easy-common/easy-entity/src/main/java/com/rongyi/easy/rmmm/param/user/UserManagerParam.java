@@ -436,22 +436,32 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
+	
 	public Date getValidStartAt(){
-		if(this.validStartAtStamp != null){
-			long lt = new Long(this.validStartAtStamp);
-			Date date = new Date(lt);
-	        return date;
-		}else{
-			return null;
+		Date date = null;
+		try {
+			if(this.validStartAtStamp != null){
+				long lt = new Long(this.validStartAtStamp);
+				date = new Date(lt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return date;
 		}
 	}
+	
 	public Date getValidEndAt(){
-		if(this.validEndAtStamp != null){
-			long lt = new Long(this.validEndAtStamp);
-			Date date = new Date(lt);
-	        return date;
-		}else{
-			return null;
+		Date date = null;
+		try {
+			if(this.validEndAtStamp != null){
+				long lt = new Long(this.validEndAtStamp);
+				date = new Date(lt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return date;
 		}
 	}
 

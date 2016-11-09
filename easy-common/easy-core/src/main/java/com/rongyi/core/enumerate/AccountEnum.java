@@ -40,7 +40,9 @@ public enum AccountEnum {
 	ERROR_MEMO_INVALID(1090026, "请输入200字符内备注信息"),
 	ERROR_CARDID_INVALID(1090027, "请输入18位的身份证号码"),
 	ERROR_HASCHIEF(1090028,"该商家已有主账号"),
-    ERROR_CHILDACCOUNTNUM_MANY(1090029,"子账号数量已超出限制")
+    ERROR_CHILDACCOUNTNUM_MANY(1090029,"子账号数量已超出限制"),
+    ERROR_VALIDDATE_INVALID(1090030,"有效期截止时间不能早于开始时间"),
+    ERROR_ACCOUNT_NOTFOUND(1090031,"账号不存在")
 	;
    
 

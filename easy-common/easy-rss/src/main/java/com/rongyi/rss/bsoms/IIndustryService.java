@@ -75,4 +75,6 @@ public interface IIndustryService {
 	IndustryInfoVO getFullIndustryInfo(Integer industryId,String type) throws Exception;
 	
 	List<BIndustryVersion> getVersionsByIndustryId(Integer industryId) throws Exception;
+	
+	List<String> getAuthIdsByVersionId(Integer versionId) throws Exception;
 }

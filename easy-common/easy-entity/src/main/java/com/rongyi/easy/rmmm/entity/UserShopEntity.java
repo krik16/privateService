@@ -33,10 +33,13 @@ public class UserShopEntity implements Serializable{
     private Integer ownerId;
     
     private Integer branchCompanyId;
-    
-    private Integer firstShopId;
-    private Integer secondShopId;
-    private Integer thirdShopId;
+
+    /** 上级店铺id **/
+    private Integer parentShopId;
+
+    /**  上上级店铺ID  **/
+    private Integer grandpaShopId;
+
     /**
      * 主键
      * @return id
@@ -165,28 +168,19 @@ public class UserShopEntity implements Serializable{
 		this.branchCompanyId = branchCompanyId;
 	}
 
-	public Integer getFirstShopId() {
-		return firstShopId;
-	}
+    public Integer getGrandpaShopId() {
+        return grandpaShopId;
+    }
 
-	public void setFirstShopId(Integer firstShopId) {
-		this.firstShopId = firstShopId;
-	}
+    public void setGrandpaShopId(Integer grandpaShopId) {
+        this.grandpaShopId = grandpaShopId;
+    }
 
-	public Integer getSecondShopId() {
-		return secondShopId;
-	}
-	
-	public void setSecondShopId(Integer secondShopId) {
-		this.secondShopId = secondShopId;
-	}
+    public Integer getParentShopId() {
+        return parentShopId;
+    }
 
-	public Integer getThirdShopId() {
-		return thirdShopId;
-	}
-
-	public void setThirdShopId(Integer thirdShopId) {
-		this.thirdShopId = thirdShopId;
-	}
-    
+    public void setParentShopId(Integer parentShopId) {
+        this.parentShopId = parentShopId;
+    }
 }

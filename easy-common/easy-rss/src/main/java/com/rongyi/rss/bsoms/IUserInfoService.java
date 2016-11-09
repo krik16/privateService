@@ -235,4 +235,5 @@ public interface IUserInfoService {
 	 */
 	int searchUserInfoCount(Map<String, Object> paramMap);
 
+	public List<Map> getClassifiedAuthsByAccountId(Integer accountId)throws Exception;
 }
