@@ -270,29 +270,6 @@ public class OrderDetailModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderDetailModelParam{" +
-				"commodityId='" + commodityId + '\'' +
-				", specId='" + specId + '\'' +
-				", commodityCommission='" + commodityCommission + '\'' +
-				", orderDetailModelId='" + orderDetailModelId + '\'' +
-				", num='" + num + '\'' +
-				", commodityAppStatus='" + commodityAppStatus + '\'' +
-				", commodityStock=" + commodityStock +
-				", specColumnValues=" + specColumnValues +
-				", commodityPic='" + commodityPic + '\'' +
-				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
-				", commodityName='" + commodityName + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", hongBaoNum=" + hongBaoNum +
-				", supportWay='" + supportWay + '\'' +
-				", couponCode='" + couponCode + '\'' +
-				", couponName='" + couponName + '\'' +
-				", discount=" + discount +
-				", articleType=" + articleType +
-				", articleId='" + articleId + '\'' +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }
