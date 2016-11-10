@@ -2,9 +2,11 @@ package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -84,6 +86,11 @@ public class CommodityBuyerVO implements Serializable {
     private Long activityEndAt;//活动结束时间
     private Integer activityStock;//活动库存
     private String activityMinPrice;//活动 各规格中最低价
+    private String subheading;  //副标题
+
+    private String commodityDetails; //商品详情
+
+    private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
 	public Integer getActivityStatus() {
 		return activityStatus;
 	}
@@ -625,6 +632,31 @@ public class CommodityBuyerVO implements Serializable {
         this.weAndTeStatus = weAndTeStatus;
     }
 
+    public String getSubheading() {
+        return subheading;
+    }
+
+    public void setSubheading(String subheading) {
+        this.subheading = subheading;
+    }
+
+    public String getCommodityDetails() {
+        return commodityDetails;
+    }
+
+    public void setCommodityDetails(String commodityDetails) {
+        this.commodityDetails = commodityDetails;
+    }
+
+
+    public boolean isIfShowInWechat() {
+        return ifShowInWechat;
+    }
+
+    public void setIfShowInWechat(boolean ifShowInWechat) {
+        this.ifShowInWechat = ifShowInWechat;
+    }
+
     public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
@@ -735,6 +767,13 @@ public class CommodityBuyerVO implements Serializable {
         //默认返回非橱窗商品的值设置为0
         this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
         this.weAndTeStatus = commodity.getWeAndTeStatus();
+        this.subheading=commodity.getSubheading();
+        this.commodityDetails=commodity.getCommodityDetails();
+        this.setIfShowInWechat(
+                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
+                        .contains(commodity.getTerminalType())  &&
+                        Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_2,CommodityTerminalType.TERMINAL_TYPE_3).contains(commodity.getWeAndTeStatus())
+                        ?true:false);
     }
 
     @Override
@@ -795,6 +834,9 @@ public class CommodityBuyerVO implements Serializable {
                 ", discount=" + discount +
                 ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
                 ", galleryPosition=" + galleryPosition +
+                ", subheading=" + subheading +
+                ", commodityDetails=" + commodityDetails +
+                ", ifShowInWechat=" + ifShowInWechat +
                 '}';
     }
 
