@@ -17,7 +17,7 @@ public class GiftPayment implements Serializable, Cloneable {
     // 礼品id
     private ObjectId commodityId;
     // 支付方式（1.兑换 2.换购）
-    private Integer payType;
+    private Integer type;
     // 用户等级
     private String level;
     // 所需积分

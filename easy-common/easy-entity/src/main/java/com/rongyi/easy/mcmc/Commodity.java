@@ -114,8 +114,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer commodityType;
 	// 礼品参与活动id
 	private String activityId;
-	// 兑换类型（1.兑换，2.快递）
+	// 兑换类型（1.兑换，2.换购）
 	private List<Integer> exchangeTypes;
+	// 配送方式（1.自提 2.快递）
+	private List<Integer> deliveryTypes;
 	// 自提类型（1.公共设施 2.指定店铺）
 	private Integer selfType;
 	// 自提地点
@@ -130,6 +132,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer pointType;
 	// 换购类型（1.同一设置 2.按等级设置）
 	private Integer buyType;
+	// 标签列表
+	private List<String> tagIds;
+	// 支付方式列表
+	private List<String> paymentIds;
 
 
 
