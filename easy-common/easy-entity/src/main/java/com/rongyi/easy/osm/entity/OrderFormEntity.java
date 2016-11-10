@@ -10,223 +10,73 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity>{
-    /**
-     * 主键id
-     */
-    private Integer id;
 
-    /**
-     * 大订单号
-     */
-    private String orderNo;
-
-    /**
-     * 总价（总价=子订单实价总和 + 邮费 - 折扣
-     */
-    private BigDecimal totalAmount;
-
-    /**
-     * 邮费
-     */
-    private BigDecimal expressFee;
-
-    /**
-     * 折扣
-     */
-    private BigDecimal disconntFee = BigDecimal.ZERO;;
-
-    /**
-     * 物流信息主键id
-     */
-    private String expressInfoId;
-
-    /**
-     * 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
-     */
-    private String status;
-
-    /**
-     * 状态路径
-     */
-    private String statusRoute;
-
-    /**
-     * 订单创建时间
-     */
-    private Date createAt;
-
-    /**
-     * 状态保持剩余时间(毫秒)
-     */
-    private Long statusHoldMs;
-
-    /**
-     * 预计转入下一状态时间
-     */
-    private Date nextStatusTime;
-
-    /**
-     * 买家id
-     */
-    private String buyerId;
-
-    /**
-     * 微店id
-     */
-    private String weidianId;
-
-    /**
-     * 支付款id列表，多个id之间用逗号隔开
-     */
-    private String paymentIdList;
-
-    /**
-     * 是否已评价 (0否 1是)
-     */
-    private Integer isComment;
-
-    /**
-     * 邮寄地址id
-     */
-    private String addressId;
-
-    /**
-     * 订单类型 1直接付款 2担保交易
-     */
-    private Integer orderType;
-
-    /**
-     * 订单渠道 1APP 2终端机
-     */
-    private Integer orderSource;
-
-    /**
-     * 抵扣券ID
-     */
-    private String couponId;
-
-    /**
-     * 容易网活动抵扣券ID
-     */
-    private String internalCouponId;
-
-    /**
-     * 导购id
-     */
-    private String guideId;
-
-    /**
-     * 本订单享受到的优惠(存json格式数据，方便后续扩展)
-     */
-    private String discountInfo;
-
-    /**
-     * 买家备注
-     */
-    private String buyerComment;
-
-    /**
-     * 促销券抵扣金额
-     */
-    private BigDecimal couponDiscount;
-
-    /**
-     * 促销券来源 1：平台 2：商家
-     */
-    private Integer couponSource;
-
-    /**
-     * 促销券类型 1：满减 2：立减
-     */
-    private Integer couponType;
-
-    /**
-     * 积分优惠金额
-     */
-    private BigDecimal scoreDiscount;
-
+    private Integer id;//主键id
+    private String orderNo;//大订单号
+    private BigDecimal totalAmount;//总价（总价=子订单实价总和 + 邮费 - 折扣
+    private BigDecimal expressFee;//邮费
+    private BigDecimal disconntFee = BigDecimal.ZERO;;//折扣
+    private String expressInfoId;//物流信息主键id
+    private String status;//状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
+    private String statusRoute;//状态路径
+    private Date createAt;//订单创建时间
+    private Long statusHoldMs;//状态保持剩余时间(毫秒)
+    private Date nextStatusTime;//预计转入下一状态时间
+    private String buyerId;//买家id
+    private String weidianId;//微店id
+    private String paymentIdList;//支付款id列表，多个id之间用逗号隔开
+    private Integer isComment;//是否已评价 (0否 1是)
+    private String addressId;//邮寄地址id
+    private Integer orderType;//订单类型 1直接付款 2担保交易
+    private Integer orderSource;//订单渠道 1APP 2终端机
+    private String couponId;//抵扣券ID
+    private String internalCouponId;//容易网活动抵扣券ID
+    private String guideId;//导购id
+    private String discountInfo;//本订单享受到的优惠(存json格式数据，方便后续扩展)
+    private String buyerComment;//买家备注
+    private BigDecimal couponDiscount;//促销券抵扣金额
+    private Integer couponSource;//促销券来源 1：平台 2：商家
+    private Integer couponType;//促销券类型 1：满减 2：立减
+    private BigDecimal scoreDiscount;//积分优惠金额
     private JSONObject jsonDiscountInfo;
-
-    /**
-     * 1是导购 2是买手
-     */
-    private Integer guideType;
-    /**
-     * 是否已提醒买家付款 0 未提醒 1 已提醒
-     **/
-    private Byte isAlert;
-    //促销券能使用的最小订单金额
-    private BigDecimal couponRequirement;
-
-    /**
-     * 订单总金额（不包括积分优惠）
-     **/
-    private BigDecimal totalAmountWithoutScoreDiscount = null;
-    //设备类型
-    private Integer devType;
-
-    //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+    private Integer guideType;//1是导购 2是买手
+    private Byte isAlert;//是否已提醒买家付款 0 未提醒 1 已提醒
+    private BigDecimal couponRequirement;//促销券能使用的最小订单金额
+    private BigDecimal totalAmountWithoutScoreDiscount = null;//订单总金额（不包括积分优惠）
+    private Integer devType;//设备类型
     private Byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
-
     private Integer orderScore;//购物车订单积分分摊
-
     private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
-
     private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
-
     private Byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
-
     private Integer cartId;//购物车id 0表示不使用购物车
-
     private Integer buyerDeleteFlag;//买家删除标志 0 未删除 1 删除
-
     private Integer sellerDeleteFlag;//卖家删除标志 0 未删除 1 删除
-
     private BigDecimal realAmount;//原价
-
     private BigDecimal discountAmount;//原价-卖家优惠
-
     private BigDecimal rebateAmount;//discount_amount-红包抵扣券
-
     private BigDecimal scoreAmount;//rebate_amount - 积分
-
     private List<OrderDetailFormEntity> detailOrderList;
     private OrderFormExtraEntity orderExtra;
-    
-    //订单对应事件
-    private OrderEventEntity orderEvent;
-
-    //对单对应退款记录
-    private String applicationType;
-
-    /**
-     * 微信标准版支付记录appid
-     */
-    private String weixinAppId;
-
-    /**
-     * 下单渠道
-     */
-    private String orderChannel;
-
-    /**
-     * 微信openId
-     */
-    private String openId;
-
-    /**
-     * 用户手机号
-     */
-    private String userPhone;
-
-    /**
-     * 活动状态
-     */
-    private Integer activityStatus;
-
+    private OrderEventEntity orderEvent;//订单对应事件
+    private String applicationType;//对单对应退款记录
+    private String weixinAppId;//微信标准版支付记录appid
+    private String orderChannel;//下单渠道
+    private String openId;//微信openId
+    private String userPhone;//用户手机号
+    private Integer activityStatus;//活动状态
     private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
+    private Integer buyerType;//用户类型 0容易逛 1电子会员
+    private Integer pltScore;//平台积分
+    private BigDecimal pltScoreDiscount;//平台积分抵扣金额
+    private Integer deliveryType;//快递方式 1自提 2快递
+    private String orderCode;//订单码，用户礼品自提核销
+    private Date selfpickTime;//自提时间
+    private Integer selfpickStatus;//0待领取，1已领取，2已放弃
+    private Integer business;//0普通商品订单 1礼品订单
+
 
     public Byte getIsAlert() {
         return isAlert;
@@ -268,407 +118,182 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.orderExtra = orderExtra;
     }
 
-    /**
-     * 主键id
-     *
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * 主键id
-     *
-     * @param id
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * 大订单号
-     *
-     * @return orderNo
-     */
     public String getOrderNo() {
         return orderNo;
     }
 
-    /**
-     * 大订单号
-     *
-     * @param orderNo
-     */
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
 
-    /**
-     * 总价（总价=子订单实价总和 + 邮费 - 折扣
-     *
-     * @return totalAmount
-     */
     public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    /**
-     * 总价（总价=子订单实价总和 + 邮费 - 折扣
-     *
-     * @param totalAmount
-     */
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    /**
-     * 邮费
-     *
-     * @return expressFee
-     */
     public BigDecimal getExpressFee() {
         return expressFee;
     }
 
-    /**
-     * 邮费
-     *
-     * @param expressFee
-     */
     public void setExpressFee(BigDecimal expressFee) {
         this.expressFee = expressFee;
     }
 
-    /**
-     * 折扣
-     *
-     * @return disconntFee
-     */
     public BigDecimal getDisconntFee() {
         return disconntFee;
     }
 
-    /**
-     * 折扣
-     *
-     * @param disconntFee
-     */
     public void setDisconntFee(BigDecimal disconntFee) {
         this.disconntFee = disconntFee;
     }
 
-    /**
-     * 物流信息主键id
-     *
-     * @return expressInfoId
-     */
     public String getExpressInfoId() {
         return expressInfoId;
     }
 
-    /**
-     * 物流信息主键id
-     *
-     * @param expressInfoId
-     */
     public void setExpressInfoId(String expressInfoId) {
         this.expressInfoId = expressInfoId;
     }
 
-    /**
-     * 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
-     *
-     * @return status
-     */
     public String getStatus() {
         return status;
     }
 
-    /**
-     * 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
-     *
-     * @param status
-     */
     public void setStatus(String status) {
         this.status = status;
     }
 
-    /**
-     * 状态路径
-     *
-     * @return statusRoute
-     */
     public String getStatusRoute() {
         return statusRoute;
     }
 
-    /**
-     * 状态路径
-     *
-     * @param statusRoute
-     */
     public void setStatusRoute(String statusRoute) {
         this.statusRoute = statusRoute;
     }
 
-    /**
-     * 订单创建时间
-     *
-     * @return createAt
-     */
     public Date getCreateAt() {
         return createAt;
     }
 
-    /**
-     * 订单创建时间
-     *
-     * @param createAt
-     */
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 
-    /**
-     * 状态保持剩余时间(毫秒)
-     *
-     * @return statusHoldMs
-     */
     public Long getStatusHoldMs() {
         return statusHoldMs;
     }
 
-    /**
-     * 状态保持剩余时间(毫秒)
-     *
-     * @param statusHoldMs
-     */
     public void setStatusHoldMs(Long statusHoldMs) {
         this.statusHoldMs = statusHoldMs;
     }
 
-    /**
-     * 预计转入下一状态时间
-     *
-     * @return nextStatusTime
-     */
     public Date getNextStatusTime() {
         return nextStatusTime;
     }
 
-    /**
-     * 预计转入下一状态时间
-     *
-     * @param nextStatusTime
-     */
     public void setNextStatusTime(Date nextStatusTime) {
         this.nextStatusTime = nextStatusTime;
     }
 
-    /**
-     * 买家id
-     *
-     * @return buyerId
-     */
     public String getBuyerId() {
         return buyerId;
     }
 
-    /**
-     * 买家id
-     *
-     * @param buyerId
-     */
     public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
     }
 
-    /**
-     * 微店id
-     *
-     * @return weidianId
-     */
     public String getWeidianId() {
         return weidianId;
     }
 
-    /**
-     * 微店id
-     *
-     * @param weidianId
-     */
     public void setWeidianId(String weidianId) {
         this.weidianId = weidianId;
     }
 
-    /**
-     * 支付款id列表，多个id之间用逗号隔开
-     *
-     * @return paymentIdList
-     */
     public String getPaymentIdList() {
         return paymentIdList;
     }
 
-    /**
-     * 支付款id列表，多个id之间用逗号隔开
-     *
-     * @param paymentIdList
-     */
     public void setPaymentIdList(String paymentIdList) {
         this.paymentIdList = paymentIdList;
     }
 
-    /**
-     * 是否已评价 (0否 1是)
-     *
-     * @return isComment
-     */
     public Integer getIsComment() {
         return isComment;
     }
 
-    /**
-     * 是否已评价 (0否 1是)
-     *
-     * @param isComment
-     */
     public void setIsComment(Integer isComment) {
         this.isComment = isComment;
     }
 
-    /**
-     * 邮寄地址id
-     *
-     * @return addressId
-     */
     public String getAddressId() {
         return addressId;
     }
 
-    /**
-     * 邮寄地址id
-     *
-     * @param addressId
-     */
     public void setAddressId(String addressId) {
         this.addressId = addressId;
     }
 
-    /**
-     * 订单类型 1直接付款 2担保交易
-     *
-     * @return orderType
-     */
     public Integer getOrderType() {
         return orderType;
     }
 
-    /**
-     * 订单类型 1直接付款 2担保交易
-     *
-     * @param orderType
-     */
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
     }
 
-    /**
-     * 订单渠道 1APP 2终端机
-     *
-     * @return orderSource
-     */
     public Integer getOrderSource() {
         return orderSource;
     }
 
-    /**
-     * 订单渠道 1APP 2终端机
-     *
-     * @param orderSource
-     */
     public void setOrderSource(Integer orderSource) {
         this.orderSource = orderSource;
     }
 
-    /**
-     * 抵扣券ID
-     *
-     * @return couponId
-     */
     public String getCouponId() {
         return couponId;
     }
 
-    /**
-     * 抵扣券ID
-     *
-     * @param couponId
-     */
     public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 
-    /**
-     * 容易网活动抵扣券ID
-     *
-     * @return internalCouponId
-     */
     public String getInternalCouponId() {
         return internalCouponId;
     }
 
-    /**
-     * 容易网活动抵扣券ID
-     *
-     * @param internalCouponId
-     */
     public void setInternalCouponId(String internalCouponId) {
         this.internalCouponId = internalCouponId;
     }
 
-    /**
-     * 导购id
-     *
-     * @return guideId
-     */
     public String getGuideId() {
         return guideId;
     }
 
-    /**
-     * 导购id
-     *
-     * @param guideId
-     */
     public void setGuideId(String guideId) {
         this.guideId = guideId;
     }
 
-    /**
-     * 本订单享受到的优惠(存json格式数据，方便后续扩展)
-     *
-     * @return discountInfo
-     */
     public String getDiscountInfo() {
         return discountInfo;
     }
 
-    /**
-     * 本订单享受到的优惠(存json格式数据，方便后续扩展)
-     *
-     * @param discountInfo
-     */
     public void setDiscountInfo(String discountInfo) {
         this.discountInfo = discountInfo;
     }
 
-    /**
-     * 买家备注
-     *
-     * @return buyerComment
-     */
     public String getBuyerComment() {
         return buyerComment;
     }
@@ -693,11 +318,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.sellerDeleteFlag = sellerDeleteFlag;
     }
 
-    /**
-     * 买家备注
-     *
-     * @param buyerComment
-     */
     public void setBuyerComment(String buyerComment) {
         this.buyerComment = buyerComment;
     }
@@ -930,6 +550,70 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public Integer getBuyerType() {
+        return buyerType;
+    }
+
+    public void setBuyerType(Integer buyerType) {
+        this.buyerType = buyerType;
+    }
+
+    public Integer getPltScore() {
+        return pltScore;
+    }
+
+    public void setPltScore(Integer pltScore) {
+        this.pltScore = pltScore;
+    }
+
+    public BigDecimal getPltScoreDiscount() {
+        return pltScoreDiscount;
+    }
+
+    public void setPltScoreDiscount(BigDecimal pltScoreDiscount) {
+        this.pltScoreDiscount = pltScoreDiscount;
+    }
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
+    }
+
+    public Date getSelfpickTime() {
+        return selfpickTime;
+    }
+
+    public void setSelfpickTime(Date selfpickTime) {
+        this.selfpickTime = selfpickTime;
+    }
+
+    public Integer getSelfpickStatus() {
+        return selfpickStatus;
+    }
+
+    public void setSelfpickStatus(Integer selfpickStatus) {
+        this.selfpickStatus = selfpickStatus;
+    }
+
+    public Integer getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Integer business) {
+        this.business = business;
     }
 
     @Override

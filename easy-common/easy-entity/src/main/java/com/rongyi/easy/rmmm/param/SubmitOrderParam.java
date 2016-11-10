@@ -2,8 +2,11 @@ package com.rongyi.easy.rmmm.param;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SubmitOrderParam extends MalllifeBaseParam implements Serializable {
@@ -14,29 +17,18 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private static final long serialVersionUID = 1L;
 
 	private List<ParentOrderParam> parentOrderList;
-
 	private List<String> commodityCartIds;
-
 	private String devId;// 设备号
-
 	private String devType;// 设备类型（0 ios/1 android/2 wap）
-
 	private String source;//订单来源 0为微商城,微信，1为APP，2为终端机，3其他
-
 	private String platformRebateCode;//购物车抵扣券码
-
 	private JSONObject discountInfo;// {“score”:”使用积分”} 购物车使用积分
-
 	private Boolean ifCart = true;//是否购物车订单
-
 	private String weixinAppId;//微信标准版支付appid
-
 	private String orderChannel;//下单渠道
-
 	private String openId;//微信openId
 	private String phone;//用户手机号
 	private String memberId;//微信电子会员id
-
 	private String receiverProvinceName;//收货省市
 	private String receiverCityName;//收货城市
 	private String receiverDistrictName;//收货区县
@@ -46,6 +38,9 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String provinceId;//收货省市id
 	private String cityId;//收货城市id
 	private String districtId;//收货区县id
+	private Integer business;//订单类型（0普通、1积分商城）
+	private Integer point;//积分商城积分
+	private BigDecimal pointDiscount;//积分商城积分抵扣金额
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -241,20 +236,33 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.districtId = districtId;
 	}
 
+	public Integer getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(Integer business) {
+		this.business = business;
+	}
+
+	public Integer getPoint() {
+		return point;
+	}
+
+	public void setPoint(Integer point) {
+		this.point = point;
+	}
+
+	public BigDecimal getPointDiscount() {
+		return pointDiscount;
+	}
+
+	public void setPointDiscount(BigDecimal pointDiscount) {
+		this.pointDiscount = pointDiscount;
+	}
+
 	@Override
 	public String toString() {
-		return "SubmitOrderParam [parentOrderList=" + parentOrderList
-				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
-				+ ", devType=" + devType + ", source=" + source
-				+ ", platformRebateCode=" + platformRebateCode
-				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
-				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
-				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
-				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
-				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
-				+ ", receiverName=" + receiverName
-				+ "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 	
 }

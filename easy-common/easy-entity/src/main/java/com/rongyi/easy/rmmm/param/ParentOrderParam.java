@@ -4,17 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 public class ParentOrderParam implements Serializable {
 
 	private List<SonOrderParam> sonOrderList;//
 	private String shopId;// 店铺ID
+	private String mallid;//商场id
 	private String comment;// 备注
 	private String addressId;// 邮寄地址id
 	private String orderModelId;// 父模板id
 	private String guideId;// 导购id
 	private JSONObject discountInfo;// {“score”:”使用积分”}
 	private String platformRebateCode;//促销券code
+	private Integer deliveryType;//发货方式 （ 1自提 2快递）
 
 	public List<SonOrderParam> getSonOrderList() {
 		return sonOrderList;
@@ -80,17 +84,24 @@ public class ParentOrderParam implements Serializable {
 		this.platformRebateCode = platformRebateCode;
 	}
 
+	public String getMallid() {
+		return mallid;
+	}
+
+	public void setMallid(String mallid) {
+		this.mallid = mallid;
+	}
+
+	public Integer getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(Integer deliveryType) {
+		this.deliveryType = deliveryType;
+	}
+
 	@Override
 	public String toString() {
-		return "ParentOrderParam{" +
-				"sonOrderList=" + sonOrderList +
-				", shopId='" + shopId + '\'' +
-				", comment='" + comment + '\'' +
-				", addressId='" + addressId + '\'' +
-				", orderModelId='" + orderModelId + '\'' +
-				", guideId='" + guideId + '\'' +
-				", discountInfo=" + discountInfo +
-				", platformRebateCode=" + platformRebateCode +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }
