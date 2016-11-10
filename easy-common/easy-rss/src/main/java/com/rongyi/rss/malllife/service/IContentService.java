@@ -185,6 +185,13 @@ public interface IContentService {
      */
     public void updateShareNum(Integer id);
 
+    /**
+     * 更新文章点赞数量
+     * @param id 文章ID
+     * @param num 数量 正数加 负数-
+     */
+    void updateLikesNum(Integer id,int num);
+
     public void updateActivityRecommend(Map<String, Integer> map);
 
     /**
@@ -406,4 +413,13 @@ public interface IContentService {
     public ResponseVO pageSubMallAndShopVo(int pageSize, int currentPage, String refType, String contentId)throws Exception;
 
     public ExistArticlePojo existArticle(String mallId, String shopId);
+
+    /**
+     * 查询特卖汇列表数据
+     *
+     *@param pageSize 每页显示行数
+     * @param currentPage  当前页码
+     * @return 列表
+     */
+    public PagingVO<ContentPojo> pagingSaleList(int pageSize, Integer currentPage);
 }

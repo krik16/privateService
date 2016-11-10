@@ -24,4 +24,12 @@ public class BuyerFansParam extends MalllifeBaseParam{
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+	public String getMallLifeUserId() {
+		return mallLifeUserId;
+	}
+
+	public void setMallLifeUserId(String mallLifeUserId) {
+		this.mallLifeUserId = mallLifeUserId;
+	}
 }

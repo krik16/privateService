@@ -29,5 +29,10 @@ public class RedEnvelopeParam extends BaseParam implements Serializable{
 	public void setCouponCode(String couponCode) {
 		this.couponCode = couponCode;
 	}
+
+	@Override
+	public String toString() {
+		return "RedEnvelopeParam [couponCode=" + couponCode + "]";
+	}
 	
 }

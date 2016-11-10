@@ -56,8 +56,10 @@ public class LogParam implements Serializable {
     private Integer downloadNum;//邀请分享页面容易逛用户点击立即下载的次数
     private Integer browseNumber;//打开邀请分享的浏览次数
     private Integer uniqueVisitorsNum;//打开邀请分享的独立访问数（按openId统计）
-    
-    
+
+    private String articleId;//文章id
+    private String articleType;//文章类型 1 潮人攻略
+
     public Integer getBrowseNumber() {
 		return browseNumber;
 	}
@@ -333,5 +335,21 @@ public class LogParam implements Serializable {
 
     public void setOpType(String opType) {
         this.opType = opType;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
+    }
+
+    public String getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(String articleType) {
+        this.articleType = articleType;
     }
 }

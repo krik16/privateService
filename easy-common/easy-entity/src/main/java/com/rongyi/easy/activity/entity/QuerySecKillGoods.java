@@ -1,9 +1,11 @@
 package com.rongyi.easy.activity.entity;
 
-import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import com.google.inject.internal.Lists;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.util.List;
 
 /**

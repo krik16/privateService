@@ -14,6 +14,7 @@ import java.util.List;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.vo.*;
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 import com.rongyi.easy.solr.McmcCommodityDocument;
@@ -248,4 +249,12 @@ public interface ROACommodityService {
      */
     CommodityPagePinTuanVO searchCommodityListForPinTuan(PinTuanCommodityParam param);
 
+	public ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+	/**
+     * 获取规格详情
+     *
+     * @param specId
+     * @return
+     */
+    public ResponseVO getSpecInfo(String specId);
 }

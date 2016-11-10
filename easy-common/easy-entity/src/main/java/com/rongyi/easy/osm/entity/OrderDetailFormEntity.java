@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDetailFormEntity>{
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 132563330176284561L;
 
@@ -63,10 +63,10 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     /** 抵扣券ID */
     private String couponId;
-    
+
     /** 返佣金额 */
     private BigDecimal commodityCommission;
-    
+
     /** 退款时使用，指退款商品在支付阶段享受到的优惠，例如购买3件商品使用100积分，退款2件，则2件商品对应积分为(2/3)*100四舍五入(存json格式数据)   */
     private String refundDiscountInfo;
 
@@ -102,19 +102,26 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer limitNum;//关联商品的限购数
 
+    private Integer activityLimitNum;//关联商品的活动限购数
+
     private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4
 
     private BigDecimal disconntFee;//商品折扣
 
+    private String articleId;//文章id
+
+    private Integer activityStatus;//活动状态
+
+
+    private Integer articleType;//文章类型 1潮人攻略
+
     private Integer activityId;//活动id
+
+    private String activityName;//活动名称
 
     private Long activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
-
-    private String activityName;//活动名称
-
-    private Integer activityStatus;//活动状态
 
 
     public String getRefundDiscountInfo() {
@@ -396,7 +403,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
-    
+
 	/**
 	* 返佣金额
 	* @return
@@ -529,37 +536,6 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityType = activityType;
     }
 
-    public Integer getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
-    }
-
-    public Long getActivityRoundId() {
-        return activityRoundId;
-    }
-
-    public void setActivityRoundId(Long activityRoundId) {
-        this.activityRoundId = activityRoundId;
-    }
-
-    public BigDecimal getUnitOrigPrice() {
-        return unitOrigPrice;
-    }
-
-    public void setUnitOrigPrice(BigDecimal unitOrigPrice) {
-        this.unitOrigPrice = unitOrigPrice;
-    }
-
-    public String getActivityName() {
-        return activityName;
-    }
-
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
-    }
 
     public Integer getActivityStatus() {
         return activityStatus;
@@ -577,6 +553,70 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     public void setOrderScore(Integer orderScore)
     {
         this.orderScore = orderScore;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Long getRoundId() {
+        return activityRoundId;
+    }
+
+    public void setRoundId(Long roundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public BigDecimal getUnitOrigPrice() {
+        return unitOrigPrice;
+    }
+
+    public void setUnitOrigPrice(BigDecimal unitOrigPrice) {
+        this.unitOrigPrice = unitOrigPrice;
+    }
+
+    public Integer getActivityLimitNum() {
+        return activityLimitNum;
+    }
+
+    public void setActivityLimitNum(Integer activityLimitNum) {
+        this.activityLimitNum = activityLimitNum;
+    }
+
+    public Long getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Long activityRoundId) {
+        this.activityRoundId = activityRoundId;
     }
 
     @Override
