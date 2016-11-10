@@ -104,10 +104,35 @@ public class Commodity implements  Serializable,Cloneable{
 	private String hotAreaName; ///< 商圈
 	private Integer galleryPosition;//橱窗排序商品
 
-//	private int commentCount;
-//	private int highCommentCount;
-//	private int mediumCommentCount;
-//	private int lowCommentCount;
+	// 礼品id mysql id 兼容老数据
+	private Long giftId;
+	// 礼品编号
+	private String giftSn;
+	// 礼品所属id
+	private Long mappingId;
+	// 商品类型(0:商品, 1:礼品)
+	private Integer commodityType;
+	// 礼品参与活动id
+	private String activityId;
+	// 兑换类型（1.兑换，2.快递）
+	private List<Integer> exchangeTypes;
+	// 自提类型（1.公共设施 2.指定店铺）
+	private Integer selfType;
+	// 自提地点
+	private String selfAddress;
+	// 自提地点备注
+	private String selfRemark;
+	// 自提地点id
+	private Long selfAddressId;
+	// 自提期限
+	private Date selfExpireDate;
+	// 积分设置类型
+	private Integer pointType;
+	// 换购类型（1.同一设置 2.按等级设置）
+	private Integer buyType;
+
+
+
 
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
