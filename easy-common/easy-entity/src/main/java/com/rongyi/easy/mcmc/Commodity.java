@@ -103,6 +103,9 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
 	private Integer galleryPosition;//橱窗排序商品
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -562,6 +565,22 @@ public class Commodity implements  Serializable,Cloneable{
 		this.shopName = shopName;
 	}
 
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -618,6 +637,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShopName(shopName);
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
+		commodity.setSubheading(subheading);
+		commodity.setCommodityDetails(commodityDetails);
 		return commodity;
 	}
 	@Override
@@ -690,6 +711,8 @@ public class Commodity implements  Serializable,Cloneable{
 				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
 				",galleryPosition=" + galleryPosition +
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
 				'}';
 	}
 
@@ -802,6 +825,8 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
 		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSubheading(vo.getSubheading());
+		this.setCommodityDetails(vo.getCommodityDetails());
 
 		// 买手&非现货 商品 临时状态: -1
 		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
@@ -912,6 +937,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSystemNumber(source.getSystemNumber());
 		commodity.setReason(source.getReason());
 		commodity.setGoodsSec(source.isGoodsSec());
+		commodity.setSubheading(source.getSubheading());
+		commodity.setCommodityDetails(source.getCommodityDetails());
 		return commodity;
 	}
 }

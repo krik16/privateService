@@ -87,6 +87,10 @@ public class CommodityVO  implements  Serializable {
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
+
 
 	public Integer getGalleryPosition() {
 		return galleryPosition;
@@ -511,6 +515,22 @@ public class CommodityVO  implements  Serializable {
 		this.inActivity = inActivity;
 	}
 
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -607,6 +627,8 @@ public class CommodityVO  implements  Serializable {
 		this.updateAt=commodity.getUpdateAt().getTime();
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+		this.subheading=commodity.getSubheading();
+		this.commodityDetails=commodity.getCommodityDetails();
 	}
 	@Override
 	public String toString() {
@@ -657,6 +679,8 @@ public class CommodityVO  implements  Serializable {
 				+ ", activityPrice=" + activityPrice
 				+", goodsParam="+ goodsParam
 				+", galleryPosition="+ galleryPosition
+		        +", subheading=" + subheading
+				+", commodityDetails=" + commodityDetails
 				+"]";
 
 	}
