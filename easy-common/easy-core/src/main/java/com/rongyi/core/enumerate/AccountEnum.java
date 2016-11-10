@@ -42,7 +42,10 @@ public enum AccountEnum {
 	ERROR_HASCHIEF(1090028,"该商家已有主账号"),
     ERROR_CHILDACCOUNTNUM_MANY(1090029,"子账号数量已超出限制"),
     ERROR_VALIDDATE_INVALID(1090030,"有效期截止时间不能早于开始时间"),
-    ERROR_ACCOUNT_NOTFOUND(1090031,"账号不存在")
+    ERROR_ACCOUNT_NOTFOUND(1090031,"账号不存在"),
+    ERROR_ACCOUNT_MALL(1090032,"请选择所属商场"),
+    ERROR_ACCOUNT_SHOP(1090033,"请选择所属店铺")
+
 	;
    
 
