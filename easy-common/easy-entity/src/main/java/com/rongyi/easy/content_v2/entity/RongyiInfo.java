@@ -37,6 +37,10 @@ public class RongyiInfo implements Serializable {
 
     private String infoContent;
 
+    private Integer currentPage;
+
+    private Integer pageSize;
+
 
     @Override
     public String toString() {
@@ -57,10 +61,27 @@ public class RongyiInfo implements Serializable {
                 .append("updateUser", updateUser)
                 .append("updateAt", updateAt)
                 .append("infoContent", infoContent)
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
                 .toString();
     }
 
 
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
 
     private static final long serialVersionUID = 1L;
 
