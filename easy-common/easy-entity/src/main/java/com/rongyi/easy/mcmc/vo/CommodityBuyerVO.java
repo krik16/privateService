@@ -91,6 +91,8 @@ public class CommodityBuyerVO implements Serializable {
     private String commodityDetails; //商品详情
 
     private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+    private long buyerCount;//用户已购买数量   （只有限购商品才有值）
+    private int totalBuycount;//用户购买数量（是虚假数据）
 	public Integer getActivityStatus() {
 		return activityStatus;
 	}
@@ -657,7 +659,23 @@ public class CommodityBuyerVO implements Serializable {
         this.ifShowInWechat = ifShowInWechat;
     }
 
-    public CommodityBuyerVO(Commodity commodity){
+    public long getBuyerCount() {
+		return buyerCount;
+	}
+
+	public void setBuyerCount(long buyerCount) {
+		this.buyerCount = buyerCount;
+	}
+
+	public int getTotalBuycount() {
+		return totalBuycount;
+	}
+
+	public void setTotalBuycount(int totalBuycount) {
+		this.totalBuycount = totalBuycount;
+	}
+
+	public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -837,6 +855,8 @@ public class CommodityBuyerVO implements Serializable {
                 ", subheading=" + subheading +
                 ", commodityDetails=" + commodityDetails +
                 ", ifShowInWechat=" + ifShowInWechat +
+                ", buyerCount=" + buyerCount +
+                ", totalBuycount=" + totalBuycount +
                 '}';
     }
 
