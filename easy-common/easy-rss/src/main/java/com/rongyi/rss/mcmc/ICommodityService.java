@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
+import com.rongyi.easy.mcmc.vo.CommodityPagePinTuanVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
 import com.rongyi.easy.mcmc.vo.SearchParamsForWechat;
 import com.rongyi.easy.solr.McmcCommodityDocument;

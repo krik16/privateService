@@ -57,6 +57,14 @@ public interface IOrderService {
 	 * @return ResponseResult
 	 */
 	ResponseResult repealOrder(OrderDealedParam param);
+
+	/**
+	 * 卖家撤销订单API(批量)
+	 *
+	 * @param paramList 订单参数
+	 * @return ResponseResult
+	 */
+	ResponseResult repealOrderBatch(List<OrderDealedParam> paramList);
 	
 	/**
 	 * c2c提交订单API
@@ -122,4 +130,13 @@ public interface IOrderService {
 	 * @return ResponseVO
 	 */
 	ResponseVO changeBuyerAddress(OrderAddressParam param);
+
+	/**
+	 * 修改拼团状态
+	 * @param activityId 活动id
+	 * @param activityRoundId 团编号
+	 * @param status 团状态
+	 * @throws Exception
+	 */
+	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;
 }

@@ -19,6 +19,7 @@ public class TradeOrderCreateParam implements Serializable {
      * 2扫码领券
      * 3短信push
      * 4翻牌购
+     * 5翻牌购
      */
     private Byte business = 0;
     /**
@@ -114,6 +115,12 @@ public class TradeOrderCreateParam implements Serializable {
      * 广告标志
      */
     private String idfa;
+
+    //文章id
+    private String articleId;
+
+    //文章类型 1潮人攻略
+    private Integer articleType;
 
 
     /**
@@ -449,6 +456,22 @@ public class TradeOrderCreateParam implements Serializable {
         this.orderChannel = orderChannel;
     }
 
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -483,6 +506,8 @@ public class TradeOrderCreateParam implements Serializable {
                 ", platformRebateCode=" + platformRebateCode +
                 ", weixinAppId=" + weixinAppId +
                 ", orderChannel=" + orderChannel +
+                ", articleId=" + articleId +
+                ", articleType=" + articleType +
                 '}';
     }
 }

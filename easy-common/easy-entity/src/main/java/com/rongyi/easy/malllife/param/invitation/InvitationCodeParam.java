@@ -57,4 +57,11 @@ public class InvitationCodeParam extends BaseParam {
     public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
     }
+
+	@Override
+	public String toString() {
+		return "InvitationCodeParam [invitCode=" + invitCode + ", userPhone="
+				+ userPhone + ", pageSize=" + pageSize + ", currentPage="
+				+ currentPage + "]";
+	}
 }

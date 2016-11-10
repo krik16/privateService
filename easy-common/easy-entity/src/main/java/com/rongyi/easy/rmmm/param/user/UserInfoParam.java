@@ -48,5 +48,12 @@ public class UserInfoParam implements Serializable{
 	public void setShopMId(String shopMId) {
 		this.shopMId = shopMId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfoParam [shopId=" + shopId + ", shopMId=" + shopMId
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ "]";
+	}
 	
 }

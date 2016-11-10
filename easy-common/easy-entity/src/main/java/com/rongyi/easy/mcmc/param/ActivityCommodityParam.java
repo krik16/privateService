@@ -32,6 +32,7 @@ public class ActivityCommodityParam implements Serializable {
     public void setSortPosition(Integer sortPosition) {
         this.sortPosition = sortPosition;
     }
+    
 
     public Integer getStock() {
         return stock;
