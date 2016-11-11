@@ -21,8 +21,10 @@ public interface IOrderQueryForWeixinService {
 	 * 拼团统计
 	 * @param  activityId 活动id（必填）
 	 * @param  commodityId 商品id（空为全部）
-	 * @param  countType 统计维度（0全部 1当天 2昨天）
+	 * @param  countType 统计维度（-1根据时间筛选 0全部 1当天 2昨天 ）
+	 * @param  begingAt 下单开始时间 格式 "2015-11-14 01:37:40"
+	 * @param  endAt    下单结束时间 格式 "2015-11-14 01:37:40"
 	 * @throws Exception
 	 */
-	List<PintuanOrderCountVO> pintuanOrderCount(Integer activityId,List<String> commodityId, Integer countType) throws Exception;
+	List<PintuanOrderCountVO> pintuanOrderCount(Integer activityId,List<String> commodityId, Integer countType,String begingAt,String endAt) throws Exception;
 }
