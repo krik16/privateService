@@ -17,12 +17,13 @@ import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.param.CommodityRuleParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
-
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.McmcCommodityDocument;
+import com.rongyi.easy.roa.param.CommoditySpecParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -359,4 +360,6 @@ public interface CommodityService {
      * @return true commodity is overtime, false otherwise;
      */
     List<String> isCommodityOvertime(PinTuanCommodityParam param);
+    
+    public List<CommodityVO> getCommoditySpecInfoById(List<CommoditySpecParam> commoditySpecIds);
 }

@@ -1,12 +1,14 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 
 
 public class CommodityVO  implements  Serializable {
@@ -90,6 +92,7 @@ public class CommodityVO  implements  Serializable {
 	private String subheading;  //副标题
 
 	private String commodityDetails; //商品详情
+	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
 
 
 	public Integer getGalleryPosition() {
@@ -530,6 +533,14 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityDetails(String commodityDetails) {
 		this.commodityDetails = commodityDetails;
 	}
+	
+	public boolean isIfShowInWechat() {
+        return ifShowInWechat;
+    }
+
+    public void setIfShowInWechat(boolean ifShowInWechat) {
+        this.ifShowInWechat = ifShowInWechat;
+    }
 
 	public CommodityVO(){
 
@@ -629,6 +640,11 @@ public class CommodityVO  implements  Serializable {
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
+		this.setIfShowInWechat(
+                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
+                        .contains(commodity.getTerminalType())  &&
+                        Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_2,CommodityTerminalType.TERMINAL_TYPE_3).contains(commodity.getWeAndTeStatus())
+                        ?true:false);
 	}
 	@Override
 	public String toString() {
