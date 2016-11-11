@@ -29,6 +29,12 @@ public class ShopCartEnrollListVO implements Serializable {
     private String status;
     /**活动状态码*/
     private Integer statusCode;
+    
+    /**
+     * 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖7秒杀' 7'10月版本新增的秒杀'
+     * @return
+     */
+    private Integer type;
 
     public Integer getActivityId() {
         return activityId;
@@ -93,18 +99,26 @@ public class ShopCartEnrollListVO implements Serializable {
     public void setStatusCode(Integer statusCode) {
         this.statusCode = statusCode;
     }
+    
+    
+    
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("activityId", activityId)
-                .append("name", name)
-                .append("activityRule", activityRule)
-                .append("startAt", startAt)
-                .append("endAt", endAt)
-                .append("createAt", createAt)
-                .append("status", status)
-                .append("statusCode", statusCode)
-                .toString();
-    }
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "ShopCartEnrollListVO [activityId=" + activityId + ", name=" + name + ", activityRule=" + activityRule
+				+ ", startAt=" + startAt + ", endAt=" + endAt + ", createAt=" + createAt + ", status=" + status
+				+ ", statusCode=" + statusCode + ", type=" + type + "]";
+	}
+
+
+    
+    
 }

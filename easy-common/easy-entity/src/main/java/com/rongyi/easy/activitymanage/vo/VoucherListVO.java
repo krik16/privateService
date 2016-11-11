@@ -17,7 +17,7 @@ public class VoucherListVO implements Serializable {
     private Integer stockCount;
 
     private String picUrl;
-    private Integer activityPrice;
+    private String activityPrice;
     private Integer subSidyType;
     private Integer subSidyPrice;
     private Date joinEndAt;
@@ -67,11 +67,11 @@ public class VoucherListVO implements Serializable {
         this.picUrl = picUrl;
     }
 
-    public Integer getActivityPrice() {
+    public String getActivityPrice() {
         return activityPrice;
     }
 
-    public void setActivityPrice(Integer activityPrice) {
+    public void setActivityPrice(String activityPrice) {
         this.activityPrice = activityPrice;
     }
 

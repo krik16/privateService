@@ -30,6 +30,8 @@ public class RequestPaymentParam implements Serializable{
 	private String callBackUrl;//支付宝网页支付同步通知回调地址
 
 	private String merchantUrl;//支付宝网页支付支付取消返回商家url
+
+	private String articleId;//类型文章id
 	public List<String> getOrderNums() {
 		return orderNums;
 	}
@@ -86,15 +88,25 @@ public class RequestPaymentParam implements Serializable{
 		this.merchantUrl = merchantUrl;
 	}
 
-	@Override
-	public String toString() {
-		return "RequestPaymentParam [orderNums=" + orderNums
-				+ ", paymentEventType=" + paymentEventType + ", appId=" + appId
-				+ ", openId=" + openId + ", weixinPayType=" + weixinPayType
-				+ ", callBackUrl=" + callBackUrl
-				+ ", merchantUrl=" + merchantUrl
-				+ "]";
+	public String getArticleId() {
+		return articleId;
 	}
 
-	
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestPaymentParam{" +
+				"orderNums=" + orderNums +
+				", paymentEventType='" + paymentEventType + '\'' +
+				", appId='" + appId + '\'' +
+				", openId='" + openId + '\'' +
+				", weixinPayType='" + weixinPayType + '\'' +
+				", callBackUrl='" + callBackUrl + '\'' +
+				", merchantUrl='" + merchantUrl + '\'' +
+				", articleId='" + articleId + '\'' +
+				'}';
+	}
 }

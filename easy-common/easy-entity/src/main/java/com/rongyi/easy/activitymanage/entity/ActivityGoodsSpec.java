@@ -1,9 +1,12 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
+import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 活动商品规格
@@ -25,6 +28,10 @@ public class ActivityGoodsSpec implements Serializable {
     private Integer activityGoodsId;
 
     /**
+     * 原价格
+     */
+    private String origindPrice;
+    /**
      * 当前价格
      */
     private Integer currPrice;
@@ -43,10 +50,17 @@ public class ActivityGoodsSpec implements Serializable {
      */
     private Integer stockCount;
 
+
+
+    /**
+     * 可分配库存
+     */
+    private Integer allocationCount;
+
     /**
      * 活动价
      */
-    private Integer activityPrice;
+    private String activityPrice;
 
     /**
      * 创建时间
@@ -73,6 +87,55 @@ public class ActivityGoodsSpec implements Serializable {
      */
     private Integer recStock;
 
+    /**
+     * 规格名称
+     */
+    private String name;
+
+    /**
+     * 商品sku
+     * @return
+     */
+    private String sku;
+
+    /**
+     * 小规格
+     */
+    private List<CommoditySpecColumnVO> specColumnValues = Lists.newArrayList();
+
+
+    public List<CommoditySpecColumnVO> getSpecColumnValues() {
+        return specColumnValues;
+    }
+
+    public void setSpecColumnValues(List<CommoditySpecColumnVO> specColumnValues) {
+        this.specColumnValues = specColumnValues;
+    }
+
+    public Integer getAllocationCount() {
+        return allocationCount==null?0:allocationCount;
+    }
+
+    public void setAllocationCount(Integer allocationCount) {
+        this.allocationCount = allocationCount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -98,7 +161,7 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     public Integer getJoinCount() {
-        return joinCount;
+        return joinCount==null?0:joinCount;
     }
 
     public void setJoinCount(Integer joinCount) {
@@ -106,18 +169,18 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     public Integer getStockCount() {
-        return stockCount;
+        return stockCount==null?0:stockCount;
     }
 
     public void setStockCount(Integer stockCount) {
         this.stockCount = stockCount;
     }
 
-    public Integer getActivityPrice() {
+    public String getActivityPrice() {
         return activityPrice;
     }
 
-    public void setActivityPrice(Integer activityPrice) {
+    public void setActivityPrice(String activityPrice) {
         this.activityPrice = activityPrice;
     }
 
@@ -154,6 +217,7 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     public Integer getCurrPrice() {
+
         return currPrice;
     }
 
@@ -161,11 +225,20 @@ public class ActivityGoodsSpec implements Serializable {
         this.currPrice = currPrice;
     }
 
+    public String getOrigindPrice() {
+        return origindPrice;
+    }
+
+    public void setOrigindPrice(String origindPrice) {
+        this.origindPrice = origindPrice;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityGoodsId", activityGoodsId)
+                .append("allocationCount", allocationCount)
                 .append("currPrice", currPrice)
                 .append("specId", specId)
                 .append("joinCount", joinCount)
@@ -176,6 +249,10 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("version", version)
                 .append("appendCount", appendCount)
                 .append("recStock", recStock)
+                .append("name", name)
+                .append("sku", sku)
+                .append("specColumnValues", specColumnValues)
+                .append("origindPrice", origindPrice)
                 .toString();
     }
 }

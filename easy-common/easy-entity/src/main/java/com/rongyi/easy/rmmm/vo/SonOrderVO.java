@@ -49,6 +49,16 @@ public class SonOrderVO implements Serializable{
 
 	private String description;// 全场红包/店铺红包
 	private String liveName;//直播名
+	private boolean ifOnDisplayAfterSales = false;//是否显示申请售后按钮,true显示 false不显示
+	
+	public boolean isIfOnDisplayAfterSales() {
+		return ifOnDisplayAfterSales;
+	}
+
+	public void setIfOnDisplayAfterSales(boolean ifOnDisplayAfterSales) {
+		this.ifOnDisplayAfterSales = ifOnDisplayAfterSales;
+	}
+
 	public BigDecimal getRealAmount() {
 		return realAmount;
 	}
@@ -263,6 +273,7 @@ public class SonOrderVO implements Serializable{
 				", discount='" + discount + '\'' +
 				", description='" + description + '\'' +
 				", liveName='" + liveName + '\'' +
+				", ifOnDisplayAfterSales='" + ifOnDisplayAfterSales + '\'' +
 				'}';
 	}
 }

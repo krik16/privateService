@@ -28,6 +28,12 @@ public class ExclusiveGuideParam implements Serializable{
 	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
 	}
+
+	@Override
+	public String toString() {
+		return "ExclusiveGuideParam [currentPage=" + currentPage
+				+ ", pageSize=" + pageSize + "]";
+	}
 	
 	
 }

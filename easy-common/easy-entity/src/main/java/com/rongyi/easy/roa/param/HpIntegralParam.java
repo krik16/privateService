@@ -106,7 +106,9 @@ public class HpIntegralParam implements Serializable{
 	@Override
 	public String toString() {
 		return "HpIntegralParam [jsessionId=" + jsessionId + ", cardCode=" + cardCode+ ", phone=" + phone + ", cardNo=" + cardNo +", userCardId=" + userCardId + ", password="
-				+ "******" + ", code=" + code + ", cardIntegral=" + cardIntegral +", hideLoseCard=" + hideLoseCard + "]";
+				+ "******" + ", code=" + code + ", cardIntegral=" + cardIntegral +", hideLoseCard=" + hideLoseCard
+				+ ", integralType=" + integralType
+				+ "]";
 	}
 
 }

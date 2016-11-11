@@ -3,6 +3,9 @@
  */
 package com.rongyi.easy.rmmm.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,6 +25,52 @@ public class OrderModelParam implements Serializable {
 	private String orderPrice;// 订单价格
 	private List<OrderDetailModelParam> ordeDetailModel;
 	private String memberId;//微信用户id
+	private Integer from;//0微信,1容易逛
+	private String memberLogo;// 用户头像
+	private String memberName;// 用户昵称
+	private String memberPhone;// 用户手机号
+	private String openId;//
+
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+
+	public Integer getFrom() {
+		return from;
+	}
+
+	public void setFrom(Integer from) {
+		this.from = from;
+	}
+
+	public String getMemberLogo() {
+		return memberLogo;
+	}
+
+	public void setMemberLogo(String memberLogo) {
+		this.memberLogo = memberLogo;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
 
 	public String getShopId() {
 		return shopId;
@@ -65,9 +114,7 @@ public class OrderModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId
-				+ ", orderPrice=" + orderPrice + ", ordeDetailModel="
-				+ ordeDetailModel + ", memberId=" + memberId + "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 	
 }

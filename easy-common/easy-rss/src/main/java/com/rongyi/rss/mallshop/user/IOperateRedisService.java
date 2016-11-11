@@ -28,6 +28,15 @@ public interface IOperateRedisService {
      */
     public void  setObject(String key, Object object)throws Exception;
 
+
+    /**
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public Long setnx(String key, String value)throws Exception ;
+
     /**
      *
      * @param key

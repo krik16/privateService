@@ -16,7 +16,7 @@ public class SpecListVO implements Serializable {
     private List<SpecVO> specList;
     private List<SpecValueVO> specValue;
     private Integer joinCount;
-    private Integer activityPrice;
+    private String activityPrice;
     private Integer subsidyType;
     private Integer subsidyPrice;
 
@@ -44,11 +44,11 @@ public class SpecListVO implements Serializable {
         this.joinCount = joinCount;
     }
 
-    public Integer getActivityPrice() {
+    public String getActivityPrice() {
         return activityPrice;
     }
 
-    public void setActivityPrice(Integer activityPrice) {
+    public void setActivityPrice(String activityPrice) {
         this.activityPrice = activityPrice;
     }
 
