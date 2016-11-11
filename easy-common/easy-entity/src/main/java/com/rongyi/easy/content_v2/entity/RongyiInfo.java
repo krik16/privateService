@@ -25,7 +25,7 @@ public class RongyiInfo implements Serializable {
 
     private String intro;
 
-    private Byte status;
+    private Integer status;
 
     private String createUser;
 
@@ -149,11 +149,11 @@ public class RongyiInfo implements Serializable {
         this.intro = intro;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
