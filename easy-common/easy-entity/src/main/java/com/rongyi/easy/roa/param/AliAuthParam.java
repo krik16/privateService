@@ -3,12 +3,15 @@ package com.rongyi.easy.roa.param;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * conan
  * 2016/11/10 11:27
  **/
-public class AliAuthParam {
+public class AliAuthParam implements Serializable{
 
+    private static final long serialVersionUID = -5490826875334761501L;
     private Integer payType;//支付方式 1:微信，2:支付宝
 
     private String appAuthCode;

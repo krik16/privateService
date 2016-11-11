@@ -21,7 +21,7 @@ public class UserCreateOrderParam extends BaseParam{
 
     private String openId;  //openId
 
-    private Integer aliBuyerId;//支付宝用户id
+    private String aliBuyerId;//支付宝用户id
 
     private Integer payScene;//支付场景(0:移动设备,1:扫码支付)
 
@@ -65,11 +65,11 @@ public class UserCreateOrderParam extends BaseParam{
         this.openId = openId;
     }
 
-    public Integer getAliBuyerId() {
+    public String getAliBuyerId() {
         return aliBuyerId;
     }
 
-    public void setAliBuyerId(Integer aliBuyerId) {
+    public void setAliBuyerId(String aliBuyerId) {
         this.aliBuyerId = aliBuyerId;
     }
 
