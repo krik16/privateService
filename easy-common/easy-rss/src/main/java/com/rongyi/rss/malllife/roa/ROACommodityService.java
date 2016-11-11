@@ -259,5 +259,5 @@ public interface ROACommodityService {
      */
     public ResponseVO getSpecInfo(String specId);
     
-    public List<CommodityVO> getCommoditySpecInfoById(List<CommoditySpecParam> commoditySpecIds);
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }

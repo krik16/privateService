@@ -361,5 +361,5 @@ public interface CommodityService {
      */
     List<String> isCommodityOvertime(PinTuanCommodityParam param);
     
-    public List<CommodityVO> getCommoditySpecInfoById(List<CommoditySpecParam> commoditySpecIds);
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }
