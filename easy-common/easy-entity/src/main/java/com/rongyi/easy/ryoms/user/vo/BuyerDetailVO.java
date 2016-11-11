@@ -159,4 +159,5 @@ public class BuyerDetailVO implements Serializable{
 				+ certifiedVo + "]";
 	}
 	
+	
 }

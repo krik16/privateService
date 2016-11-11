@@ -21,6 +21,8 @@ public class BuyerParam implements Serializable{
 	private Integer createBy;//创建人id
 	private String cardId;//身份证号
 	private List<AccountParam> accountList;//账号信息
+	private Integer status;//状态  0启用 1停用    //冻结资金账户时  0:解冻，1:冻结
+	private String stopReason;//停用理由            //冻结资金账户时  冻结理由
 	public Integer getId() {
 		return id;
 	}
@@ -81,6 +83,26 @@ public class BuyerParam implements Serializable{
 	public void setAccountList(List<AccountParam> accountList) {
 		this.accountList = accountList;
 	}
-	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getStopReason() {
+		return stopReason;
+	}
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
+	@Override
+	public String toString() {
+		return "BuyerParam [id=" + id + ", phone=" + phone + ", userName="
+				+ userName + ", userNickName=" + userNickName + ", remark="
+				+ remark + ", userLogo=" + userLogo + ", userAccount="
+				+ userAccount + ", createBy=" + createBy + ", cardId=" + cardId
+				+ ", accountList=" + accountList + ", status=" + status
+				+ ", stopReason=" + stopReason + "]";
+	}
 	
 }

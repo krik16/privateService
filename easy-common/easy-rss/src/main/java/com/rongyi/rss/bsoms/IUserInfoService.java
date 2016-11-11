@@ -11,7 +11,9 @@ import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
+import com.rongyi.easy.ryoms.param.buyer.BuyerListParam;
 import com.rongyi.easy.ryoms.user.vo.BuyerDetailVO;
+import com.rongyi.easy.ryoms.user.vo.BuyerListVO;
 import com.rongyi.easy.va.vo.VirtualAccountVO;
 
 /**
@@ -245,4 +247,6 @@ public interface IUserInfoService {
 	public List<Map> getClassifiedAuthsByAccountId(Integer accountId)throws Exception;
 	
 	public boolean insertBuyerInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
+	
+	public List<BuyerListVO> getBuyerList(BuyerListParam param);
 }
