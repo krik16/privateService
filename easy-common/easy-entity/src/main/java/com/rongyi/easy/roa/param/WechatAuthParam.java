@@ -16,7 +16,7 @@ public class WechatAuthParam {
 
 	private String code;
 
-	private String state;
+	private String storeId;
 
 	public Integer getMchInfoId() {
 		return mchInfoId;
@@ -50,12 +50,12 @@ public class WechatAuthParam {
 		this.code = code;
 	}
 
-	public String getState() {
-		return state;
+	public String getStoreId() {
+		return storeId;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
 	}
 
 	@Override
