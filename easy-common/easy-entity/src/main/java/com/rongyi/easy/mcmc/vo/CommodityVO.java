@@ -86,7 +86,7 @@ public class CommodityVO  implements  Serializable {
 	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
-	private Boolean inActivity;
+	private boolean inActivity; //是否参加活动
 
 	public Integer getGalleryPosition() {
 		return galleryPosition;
@@ -503,11 +503,11 @@ public class CommodityVO  implements  Serializable {
 		this.updateAt = updateAt;
 	}
 
-	public Boolean getInActivity() {
+	public boolean isInActivity() {
 		return inActivity;
 	}
 
-	public void setInActivity(Boolean inActivity) {
+	public void setInActivity(boolean inActivity) {
 		this.inActivity = inActivity;
 	}
 

@@ -556,4 +556,12 @@ public class TradeOrder implements Serializable {
     public void setOrderChannel(String orderChannel) {
         this.orderChannel = orderChannel;
     }
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
 }

@@ -3,6 +3,9 @@
  */
 package com.rongyi.easy.rmmm.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -68,6 +71,7 @@ public class OrderModelParam implements Serializable {
 		this.openId = openId;
 	}
 
+
 	public String getShopId() {
 		return shopId;
 	}
@@ -110,13 +114,7 @@ public class OrderModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId
-				+ ", orderPrice=" + orderPrice + ", ordeDetailModel="
-				+ ordeDetailModel + ", memberId=" + memberId + ", from=" + from
-				+ ", memberLogo=" + memberLogo + ", memberName=" + memberName
-				+ ", openId=" + openId 
-				+ ", memberPhone=" + memberPhone
-				+ "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 	
 }

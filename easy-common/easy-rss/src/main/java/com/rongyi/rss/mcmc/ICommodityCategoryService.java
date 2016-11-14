@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import java.util.List;
 
+import com.rongyi.easy.mcmc.vo.CategoryNodeVO;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
@@ -28,9 +29,9 @@ public interface ICommodityCategoryService {
 	 * @return
 	 */
 	public CommodityCategory selectCategoryById(String id);
-	
+
 	public CommodityCategory selectCategoryByName(String name);
-	
+
 	public CommodityCategory selectCategoryByNameAndParent(String name,String parentId);
 
 	/**
@@ -49,6 +50,7 @@ public interface ICommodityCategoryService {
 	 * @param value 属性值
 	 * @return
 	 */
+	List<CategoryNodeVO> getAllCategories();
 	//public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
 
 

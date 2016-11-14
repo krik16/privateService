@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
@@ -12,10 +13,13 @@ import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
+import com.rongyi.easy.mcmc.param.CommodityRuleParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.McmcCommodityDocument;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
@@ -33,6 +37,22 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
+
+    /**
+     * 获取规格详情
+     *
+     * @param specId
+     * @return
+     */
+    public ResponseVO getSpecInfo(String specId);
+
+    /**
+     * 获取规格详情（批量）
+     *
+     * @param specIds
+     * @return
+     */
+    public List<CommoditySpecVO> getSpecList(List<String> specIds);
 
     /**
      * 查询店铺的商品
@@ -263,6 +283,32 @@ public interface CommodityService {
     public Long selectOnlineCommodityCountByuser(String createId);
 
     public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+    public Map<Integer ,Boolean> checkCommoditySoldOutInSales(List<Integer> saleIds);
+
+    /**
+     *  查询自营商品
+     *
+     * @param param (SelfCommodityParam)
+     * @return 商品数量
+     *
+     */
+    ResponseVO selectSelfCommodity(SelfCommodityParam param);
+
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
+
+    ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+
+    /**
+     * 根据活动规则查询商品
+     *
+     * @param param
+     *
+     * @return
+     */
+    ResponseResult getCommodityListForMallShopByRule(CommodityRuleParam param);
+
+
 
     /**
      * 查询拼团活动列表

@@ -32,4 +32,10 @@ public class ShareRedParam extends MalllifeBaseParam {
     public void setOrderType(int orderType) {
         this.orderType = orderType;
     }
+
+	@Override
+	public String toString() {
+		return "ShareRedParam [orderCode=" + orderCode + ", orderType="
+				+ orderType + "]";
+	}
 }

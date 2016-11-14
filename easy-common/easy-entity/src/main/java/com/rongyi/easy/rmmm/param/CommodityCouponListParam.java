@@ -19,5 +19,10 @@ public class CommodityCouponListParam implements Serializable{
 	public void setCommodityIds(List<String> commodityIds) {
 		this.commodityIds = commodityIds;
 	}
+
+	@Override
+	public String toString() {
+		return "CommodityCouponListParam [commodityIds=" + commodityIds + "]";
+	}
 	
 }

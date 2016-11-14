@@ -17,8 +17,18 @@ public class OrderDetailParam extends MalllifeBaseParam implements Serializable{
 	private String orderNum;//订单号
 	
 	private List<String> closeOrderNums;//订单号集合
+	
+	private String sonOrderId;//子订单id
 
 	
+	public String getSonOrderId() {
+		return sonOrderId;
+	}
+
+	public void setSonOrderId(String sonOrderId) {
+		this.sonOrderId = sonOrderId;
+	}
+
 	public List<String> getCloseOrderNums() {
 		return closeOrderNums;
 	}
@@ -42,6 +52,14 @@ public class OrderDetailParam extends MalllifeBaseParam implements Serializable{
 
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderDetailParam [orderId=" + orderId + ", orderNum="
+				+ orderNum + ", closeOrderNums=" + closeOrderNums
+				+ ", sonOrderId=" + sonOrderId 
+				+ "]";
 	}
 
 }
