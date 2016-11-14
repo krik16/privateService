@@ -533,7 +533,7 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityDetails(String commodityDetails) {
 		this.commodityDetails = commodityDetails;
 	}
-	
+
 	public boolean isIfShowInWechat() {
         return ifShowInWechat;
     }
@@ -643,7 +643,7 @@ public class CommodityVO  implements  Serializable {
 		this.setIfShowInWechat(
                 Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
                         .contains(commodity.getTerminalType())  &&
-                        Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_2,CommodityTerminalType.TERMINAL_TYPE_3).contains(commodity.getWeAndTeStatus())
+                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
 	}
 	@Override
