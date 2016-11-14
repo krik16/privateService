@@ -8,6 +8,7 @@ import com.rongyi.easy.bsoms.entity.BAuthorities;
 import com.rongyi.easy.bsoms.entity.CertifiedCheckInfo;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
+import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
@@ -196,7 +197,7 @@ public interface IUserInfoService {
 	 * @param paramMap
 	 * @return
 	 */
-	public boolean checkCertifiedUser(Map paramMap);
+	public Map<String,Object> checkCertifiedUser(VerifySaveAccountParam param,Integer optId) throws MallShopException, Exception;
 
 	/**
 	 * 查询用户审核记录
@@ -236,4 +237,7 @@ public interface IUserInfoService {
 	int searchUserInfoCount(Map<String, Object> paramMap);
 
 	public List<Map> getClassifiedAuthsByAccountId(Integer accountId)throws Exception;
+	
+	public boolean hasMerchantAccount(String merchantId,String type,Integer accountConfine)throws Exception;
+	public UserInfo getUserConfineAccount(String merchantId,String merchantType,Integer accountConfine)throws Exception;
 }

@@ -39,14 +39,18 @@ public class BusinessAccountVO implements Serializable {
 	private String roleName;//角色名
 	private Integer branchId;//分公司id
 	private String branchName;//分公司名
+	private Integer parentShopId;//上级店铺id
+	private Integer grandpaShopId;//上上级店铺id
 	private Integer accountStatus;//账号状态：是否禁用0正常 1禁用'
 	private Integer isSuspended;//资金账户：是否冻结
 	private BigDecimal balance;//资金账户余额
 	private String comment;//评价
 	private Integer createSource;//账号来源：0大运营、1商家后台
 	private String createBy;//创建人
+	private String createName;//创建人
 	private Date createAt;
 	private String updateBy;//修改人
+	private String updateName;//修改人
 	private Date updateAt;
 	private String stopReason;
 	private Date stopAt;
@@ -68,7 +72,13 @@ public class BusinessAccountVO implements Serializable {
 	private Integer isChief;
 	private Integer level;
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+	private Integer chiefId;//主账号id
+	private String chiefName;//主账号名称
 	private List<UserAccountEntity> userAccounts;
+	private String faceImg;    //身份证正面照 
+	private String backImg;   //身份证背面照 
+	private String workImg;    //工作证照
+	private String otherImg;   //其它照片
 	
 	public Integer getId() {
 		return id;
@@ -400,6 +410,66 @@ public class BusinessAccountVO implements Serializable {
 	public void setUserAccounts(List<UserAccountEntity> userAccounts) {
 		this.userAccounts = userAccounts;
 	}
+	public Integer getChiefId() {
+		return chiefId;
+	}
+	public void setChiefId(Integer chiefId) {
+		this.chiefId = chiefId;
+	}
+	public String getChiefName() {
+		return chiefName;
+	}
+	public void setChiefName(String chiefName) {
+		this.chiefName = chiefName;
+	}
+	public String getCreateName() {
+		return createName;
+	}
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+	public String getUpdateName() {
+		return updateName;
+	}
+	public void setUpdateName(String updateName) {
+		this.updateName = updateName;
+	}
+	public String getFaceImg() {
+		return faceImg;
+	}
+	public void setFaceImg(String faceImg) {
+		this.faceImg = faceImg;
+	}
+	public String getBackImg() {
+		return backImg;
+	}
+	public void setBackImg(String backImg) {
+		this.backImg = backImg;
+	}
+	public String getWorkImg() {
+		return workImg;
+	}
+	public void setWorkImg(String workImg) {
+		this.workImg = workImg;
+	}
+	public String getOtherImg() {
+		return otherImg;
+	}
+	public void setOtherImg(String otherImg) {
+		this.otherImg = otherImg;
+	}
+	public Integer getParentShopId() {
+		return parentShopId;
+	}
+	public void setParentShopId(Integer parentShopId) {
+		this.parentShopId = parentShopId;
+	}
+	public Integer getGrandpaShopId() {
+		return grandpaShopId;
+	}
+	public void setGrandpaShopId(Integer grandpaShopId) {
+		this.grandpaShopId = grandpaShopId;
+	}
 	@Override
 	public String toString() {
 		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account
@@ -418,7 +488,7 @@ public class BusinessAccountVO implements Serializable {
 				+ ", industryVersionName=" + industryVersionName + ", childAccountNum=" + childAccountNum
 				+ ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode=" + contractCode
 				+ ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level + ", settleOrgStrategy="
-				+ settleOrgStrategy + ", userAccounts=" + userAccounts + "]";
+				+ settleOrgStrategy + ", chiefId=" + chiefId + ", userAccounts=" + userAccounts + "]";
 	}
 	
 }

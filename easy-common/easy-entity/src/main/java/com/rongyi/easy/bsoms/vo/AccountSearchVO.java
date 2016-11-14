@@ -1,0 +1,137 @@
+package com.rongyi.easy.bsoms.vo;
+
+import java.io.Serializable;
+
+public class AccountSearchVO implements Serializable{
+
+	private static final long serialVersionUID = 657842639354511268L;
+
+	private Integer id;
+	private String userAccount ;//  用户账号
+	private String userName;//用户姓名
+	private Integer identity;//身份类型
+	private Integer industryId;
+	private String industryName;
+	private Integer industryVersionId;
+	private String industryVersionName;
+	private String marchantName;
+	private Integer isDisabled;
+	private Integer userStatus;
+	private Integer searchStatus;
+	private Integer isSuspended;//资金账户：是否冻结
+	private Integer isChief;
+	
+	private Integer optEdit;//0不显示修改 、1显示修改
+	private Integer optVerify;//0不显示验证 、1显示验证
+	private Integer optSuspended;//0不显示冻结或解冻、1显示冻结或解冻
+	private Integer optStatus;//0不显示停用或启用、1显示停用或启用
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public Integer getIdentity() {
+		return identity;
+	}
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+	public Integer getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+	public String getIndustryName() {
+		return industryName;
+	}
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+	public String getIndustryVersionName() {
+		return industryVersionName;
+	}
+	public void setIndustryVersionName(String industryVersionName) {
+		this.industryVersionName = industryVersionName;
+	}
+	public String getMarchantName() {
+		return marchantName;
+	}
+	public void setMarchantName(String marchantName) {
+		this.marchantName = marchantName;
+	}
+	public Integer getIsDisabled() {
+		return isDisabled;
+	}
+	public void setIsDisabled(Integer isDisabled) {
+		this.isDisabled = isDisabled;
+	}
+	public Integer getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(Integer userStatus) {
+		this.userStatus = userStatus;
+	}
+	public Integer getSearchStatus() {
+		return searchStatus;
+	}
+	public void setSearchStatus(Integer searchStatus) {
+		this.searchStatus = searchStatus;
+	}
+	public Integer getIsSuspended() {
+		return isSuspended;
+	}
+	public void setIsSuspended(Integer isSuspended) {
+		this.isSuspended = isSuspended;
+	}
+	public Integer getIsChief() {
+		return isChief;
+	}
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+	public Integer getOptEdit() {
+		return optEdit;
+	}
+	public void setOptEdit(Integer optEdit) {
+		this.optEdit = optEdit;
+	}
+	public Integer getOptVerify() {
+		return optVerify;
+	}
+	public void setOptVerify(Integer optVerify) {
+		this.optVerify = optVerify;
+	}
+	public Integer getOptSuspended() {
+		return optSuspended;
+	}
+	public void setOptSuspended(Integer optSuspended) {
+		this.optSuspended = optSuspended;
+	}
+	public Integer getOptStatus() {
+		return optStatus;
+	}
+	public void setOptStatus(Integer optStatus) {
+		this.optStatus = optStatus;
+	}
+	
+}
