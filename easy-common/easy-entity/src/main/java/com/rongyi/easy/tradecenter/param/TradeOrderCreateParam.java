@@ -155,6 +155,22 @@ public class TradeOrderCreateParam implements Serializable {
     private String orderChannel;
 
     /**
+     * 积分商城兑换类型（1：兑换 2：换购）
+     */
+    private Integer exchangeType = 0;
+
+    /**
+     * 积分商城积分支付部分
+     */
+    private BigDecimal partOfCredit = new BigDecimal(0);
+
+    /**
+     * 积分商城金额支付部分
+     */
+    private BigDecimal partOfMoney = new BigDecimal(0);
+
+
+    /**
      * end
      */
 
@@ -450,6 +466,30 @@ public class TradeOrderCreateParam implements Serializable {
         this.orderChannel = orderChannel;
     }
 
+    public Integer getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(Integer exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
+    public BigDecimal getPartOfCredit() {
+        return partOfCredit;
+    }
+
+    public void setPartOfCredit(BigDecimal partOfCredit) {
+        this.partOfCredit = partOfCredit;
+    }
+
+    public BigDecimal getPartOfMoney() {
+        return partOfMoney;
+    }
+
+    public void setPartOfMoney(BigDecimal partOfMoney) {
+        this.partOfMoney = partOfMoney;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -484,6 +524,9 @@ public class TradeOrderCreateParam implements Serializable {
                 ", platformRebateCode=" + platformRebateCode +
                 ", weixinAppId=" + weixinAppId +
                 ", orderChannel=" + orderChannel +
+                ", exchangeType=" + exchangeType +
+                ", partOfCredit=" + partOfCredit +
+                ", partOfMoney=" + partOfMoney +
                 '}';
     }
 }
