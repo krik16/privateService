@@ -1,6 +1,7 @@
 package com.rongyi.rss.tradecenter;
 
 import com.rongyi.core.bean.DubboVO;
+import com.rongyi.easy.tradecenter.param.UserCenterParam;
 import com.rongyi.easy.tradecenter.vo.UserCenterVO;
 
 /**
@@ -22,19 +23,17 @@ public interface UserCenterService {
     /**
      * 扣减用户积分
      *
-     * @param userId
-     * @param creditNumber
+     * @param param
      * @return
      */
-    DubboVO<Integer> decreaseCredit(String userId, int creditNumber);
+    DubboVO<Integer> decreaseCredit(UserCenterParam param);
 
     /**
      * 返还库存
      *
-     * @param userId
-     * @param creditNumber
+     * @param param
      * @return
      */
-    DubboVO<Integer> increaseCredit(String userId, int creditNumber);
+    DubboVO<Integer> increaseCredit(UserCenterParam param);
 
 }
