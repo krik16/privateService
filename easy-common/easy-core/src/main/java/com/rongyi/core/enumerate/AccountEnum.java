@@ -43,9 +43,10 @@ public enum AccountEnum {
     ERROR_CHILDACCOUNTNUM_MANY(1090029,"子账号数量已超出限制"),
     ERROR_VALIDDATE_INVALID(1090030,"有效期截止时间不能早于开始时间"),
     ERROR_ACCOUNT_NOTFOUND(1090031,"账号不存在"),
+	ERROR_ACCOUNT_NOTFOUND(1090031,"账号不存在"),
     ERROR_ACCOUNT_CHECKERROR(1090032,"此账号无法审核"),
-    ERROR_ACCOUNT_MERCHANT_REL_ERROR(1090033,"关联商户信息已变更，请刷新重试")
-	;
+    ERROR_ACCOUNT_MERCHANT_REL_ERROR(1090033,"关联商户信息已变更，请刷新重试"),	ERROR_ACCOUNT_MALL(1090034,"请选择所属商场"),
+    ERROR_ACCOUNT_SHOP(1090035,"请选择所属店铺")	;
    
 
     private Integer code;

@@ -12,6 +12,10 @@ import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
+import com.rongyi.easy.ryoms.param.buyer.BuyerCheckParam;
+import com.rongyi.easy.ryoms.param.buyer.BuyerListParam;
+import com.rongyi.easy.ryoms.user.vo.BuyerDetailVO;
+import com.rongyi.easy.ryoms.user.vo.BuyerListVO;
 import com.rongyi.easy.va.vo.VirtualAccountVO;
 
 /**
@@ -154,7 +158,13 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public BusinessAccountVO getBuyerDetailById(Integer id);
-
+	
+	/**
+	 * 查询买手账号详情
+	 * @param id
+	 * @return
+	 */
+	public BuyerDetailVO getBuyerDetailByBuyerId(Integer id);
 	/**
 	 * 根据角色ID查询关联账号
 	 * @return
@@ -237,7 +247,17 @@ public interface IUserInfoService {
 	int searchUserInfoCount(Map<String, Object> paramMap);
 
 	public List<Map> getClassifiedAuthsByAccountId(Integer accountId)throws Exception;
-	
 	public boolean hasMerchantAccount(String merchantId,String type,Integer accountConfine)throws Exception;
+	
 	public UserInfo getUserConfineAccount(String merchantId,String merchantType,Integer accountConfine)throws Exception;
-}
+
+	public boolean insertBuyerInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
+	
+	public List<BuyerListVO> getBuyerList(BuyerListParam param);
+	/**
+	 * 审核买手账号
+	 * @param param
+	 * @param operatorId
+	 * @return
+	 */
+	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);}
