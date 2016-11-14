@@ -13,12 +13,12 @@ public class CommodityPageBuyerVO implements Serializable{
 	private static final long serialVersionUID = -611440203770186180L;
 	
 	
-	private int totalPage;
-	private int pageSize;
-	private int currentPage;
-	private int nextFrom;
+	private int totalPage; ///< 总页码
+	private int pageSize; ///< 每页数
+	private int currentPage; ///< 当前页
+	private int nextFrom; ///< 下页开始位置
 	private List<CommodityBuyerVO> commodityList;
-	private int totalCount;
+	private int totalCount; ///< 总记录数
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -67,5 +67,14 @@ public class CommodityPageBuyerVO implements Serializable{
 				.append("commodityList", commodityList)
 				.append("nextFrom",  nextFrom)
 				.toString();
+	}
+
+	public void wrapPaginationInfo(int totalCount, int from, int totalPage,
+									int pageSize, int currentPage) {
+		this.setTotalCount(totalCount);
+		this.setNextFrom(from);
+		this.setTotalPage(totalPage);
+		this.setPageSize(pageSize);
+		this.setCurrentPage(currentPage);
 	}
 }

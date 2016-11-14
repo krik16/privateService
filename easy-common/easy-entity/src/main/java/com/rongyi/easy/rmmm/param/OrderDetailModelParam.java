@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.rongyi.easy.rmmm.param;
 
@@ -17,7 +17,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 public class OrderDetailModelParam implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -43,20 +43,23 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityName;// 商品名称
 
 	private String commodityPostage;// 邮费
-	
+
 	private boolean supportCourierDeliver = true;//支持快递发货字段  true 是    false否
 
 	private boolean supportSelfPickup = true;//支持到店自提  true 是    false否
-	
+
 	private Integer hongBaoNum = 0;// 可使用红包数量
-	
+
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
-	
+
 	private String couponCode;//红包券码
-	
+
 	private String couponName;//红包名称
-	
+
 	private Double discount;// 红包抵扣金额
+
+	private Integer articleType;//文章类型 1潮人攻略
+	private String articleId;//文章id
 
 	public String getCouponCode() {
 		return couponCode;
@@ -223,6 +226,22 @@ public class OrderDetailModelParam implements Serializable {
 
 	public void setCommodityStock(Integer commodityStock) {
 		this.commodityStock = commodityStock;
+	}
+
+	public Integer getArticleType() {
+		return articleType;
+	}
+
+	public void setArticleType(Integer articleType) {
+		this.articleType = articleType;
+	}
+
+	public String getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
 	}
 
 	public Integer getActivityId() {

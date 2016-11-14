@@ -37,6 +37,12 @@ public class OrderDetailModelEntity {
     /** 版本 */
     private Integer version;
 
+    //文章类型 1潮人攻略
+    private Integer articleType;
+
+    //文章id
+    private String articleId;
+
     /**活动id**/
     private Integer activityId;
 
@@ -204,6 +210,22 @@ public class OrderDetailModelEntity {
      */
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public Integer getActivityId() {

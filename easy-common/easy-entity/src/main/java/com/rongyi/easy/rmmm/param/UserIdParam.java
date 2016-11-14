@@ -16,5 +16,10 @@ public class UserIdParam implements Serializable{
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserIdParam [userId=" + userId + "]";
+	}
 	
 }

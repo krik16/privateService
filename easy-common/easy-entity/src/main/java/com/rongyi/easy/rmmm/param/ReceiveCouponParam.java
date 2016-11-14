@@ -28,5 +28,10 @@ public class ReceiveCouponParam implements Serializable{
 	public void setUser_source(String user_source) {
 		this.user_source = user_source;
 	}
+	@Override
+	public String toString() {
+		return "ReceiveCouponParam [couponId=" + couponId + ", userId="
+				+ userId + ", user_source=" + user_source + "]";
+	}
 	
 }
