@@ -23,7 +23,7 @@ public class UserCreateOrderParam extends BaseParam{
 
     private String aliBuyerId;//支付宝用户id
 
-    private Integer payScene;//支付场景(0:移动设备,1:扫码支付)
+    private Integer payScene;//支付场景(1:移动设备,2:扫码支付)
 
     public String getOrderNo() {
         return orderNo;
