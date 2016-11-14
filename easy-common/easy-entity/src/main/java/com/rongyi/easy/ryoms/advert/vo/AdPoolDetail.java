@@ -34,6 +34,15 @@ public class AdPoolDetail implements Serializable {
 
     private String mallId;
 
+    private Boolean showFlag;//当容易网广告位数量 小于等于 广告组数量，广告组的每个投放时间段之间若存在空挡，每一个空挡算一个广告位。此情况需要显示图标警示。
+
+    public Boolean getShowFlag() {
+        return showFlag;
+    }
+
+    public void setShowFlag(Boolean showFlag) {
+        this.showFlag = showFlag;
+    }
 
     public String getMallId() {
         return mallId;

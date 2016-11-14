@@ -151,5 +151,8 @@ public interface ConfigService {
 	List<Map<String,Object>> adPoolItemAdInfo(AdPoolSearch param);
 
 
+	List<AdPoolDetail> queryAdPoolForExcel(AdPoolSearch param);
+
+
 
 }
