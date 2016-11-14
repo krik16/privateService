@@ -87,6 +87,8 @@ public class CommodityVO  implements  Serializable {
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
+	private List<GiftPaymentVO> paymentVOs; //商品兑换规则
+
 
 	public Integer getGalleryPosition() {
 		return galleryPosition;
@@ -509,6 +511,14 @@ public class CommodityVO  implements  Serializable {
 
 	public void setInActivity(boolean inActivity) {
 		this.inActivity = inActivity;
+	}
+
+	public List<GiftPaymentVO> getPaymentVOs() {
+		return paymentVOs;
+	}
+
+	public void setPaymentVOs(List<GiftPaymentVO> paymentVOs) {
+		this.paymentVOs = paymentVOs;
 	}
 
 	public CommodityVO(){
