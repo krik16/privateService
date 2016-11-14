@@ -604,5 +604,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		}
 		//库存进入solr
 		this.setStock(commodity.getStock());
+		this.setCommodityModelNo(commodity.getCommodityModelNo());
 	}
 }
