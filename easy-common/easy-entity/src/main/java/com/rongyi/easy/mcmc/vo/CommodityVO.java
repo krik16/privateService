@@ -87,7 +87,14 @@ public class CommodityVO  implements  Serializable {
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 
+	public Integer getShelvesType() {
+		return shelvesType;
+	}
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
 	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
@@ -652,13 +659,11 @@ public class CommodityVO  implements  Serializable {
 				+ ", templateId=" + templateId + ", sort=" + sort
 				+ ", mallName=" + mallName + ", weAndTeStatus=" + weAndTeStatus
 				+ ", customCategoryIds=" + customCategoryIds
-				+ ", commodityModelNo=" + commodityModelNo
-				+ ", activityId=" + activityId
-				+ ", activityPrice=" + activityPrice
-				+", goodsParam="+ goodsParam
-				+", galleryPosition="+ galleryPosition
-				+"]";
-
+				+ ", commodityModelNo=" + commodityModelNo + ", goodsParam="
+				+ goodsParam + ", activityId=" + activityId
+				+ ", activityPrice=" + activityPrice + ", updateAt=" + updateAt
+				+ ", galleryPosition=" + galleryPosition + ", inActivity="
+				+ inActivity + ", shelvesType=" + shelvesType + "]";
 	}
-
+	
 }
