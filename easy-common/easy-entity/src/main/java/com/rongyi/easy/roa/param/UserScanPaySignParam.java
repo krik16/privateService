@@ -14,7 +14,7 @@ public class UserScanPaySignParam{
 
     private Integer paymentType;//付款方式  1 微信 2 支付宝
 
-    private Integer payScene;//支付场景 1:微信 2:支付宝
+    private Integer payScene;//支付场景(0:移动设备,1:扫码支付)
 
     private Integer payAmount;//支付金额
 
