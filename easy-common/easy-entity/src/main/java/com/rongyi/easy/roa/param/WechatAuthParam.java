@@ -12,6 +12,12 @@ public class WechatAuthParam {
 
 	private Integer authType;
 
+	private String redirectUrl;
+
+	private String code;
+
+	private String state;
+
 	public Integer getMchInfoId() {
 		return mchInfoId;
 	}
@@ -26,6 +32,30 @@ public class WechatAuthParam {
 
 	public void setAuthType(Integer authType) {
 		this.authType = authType;
+	}
+
+	public String getRedirectUrl() {
+		return redirectUrl;
+	}
+
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	@Override
