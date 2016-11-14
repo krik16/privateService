@@ -13,12 +13,83 @@ public class UserCenterVO implements Serializable {
     private String userId;
     // 用户名称
     private String userName;
+    // 用户昵称
+    private String nickName;
     // 用户手机
     private String userPhone;
     // 微信Id
     private String openId;
     // 用户等级
-    private int level;
+    private String level;
     // 积分
     private int creditNumber;
+
+    public int getCreditNumber() {
+        return creditNumber;
+    }
+
+    public void setCreditNumber(int creditNumber) {
+        this.creditNumber = creditNumber;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    @Override
+    public String toString() {
+        return "UserCenterVO{" +
+                "creditNumber=" + creditNumber +
+                ", userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", openId='" + openId + '\'' +
+                ", level='" + level + '\'' +
+                '}';
+    }
 }
