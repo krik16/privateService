@@ -18,7 +18,7 @@ public interface UserCenterService {
      * @param userId
      * @return
      */
-    DubboVO<UserCenterVO> getUserInfo(String userId);
+    DubboVO<UserCenterVO> getUserInfo(String userId, String mallId);
 
     /**
      * 扣减用户积分
