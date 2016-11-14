@@ -135,7 +135,7 @@ public interface Constants {
 
     interface LOCK_TIME {
         int LOGIN_RED_TIME = 60 * 10;// loginRed 10分钟
-        int PHONE_REGIST_TIME = 60*3;// 手机注册 2秒
+        int PHONE_REGIST_TIME = 60*1;// 手机注册 1分钟
     }
 
 

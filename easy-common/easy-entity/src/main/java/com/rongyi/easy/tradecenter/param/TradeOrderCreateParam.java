@@ -116,6 +116,12 @@ public class TradeOrderCreateParam implements Serializable {
      */
     private String idfa;
 
+    //文章id
+    private String articleId;
+
+    //文章类型 1潮人攻略
+    private Integer articleType;
+
 
     /**
      * start

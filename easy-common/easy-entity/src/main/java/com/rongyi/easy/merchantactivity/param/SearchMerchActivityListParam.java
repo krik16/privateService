@@ -12,6 +12,12 @@ import java.io.Serializable;
  * ideaworkspace.
  */
 public class SearchMerchActivityListParam extends PagingParam {
+	
+	private	int userId;
+	private int identity;
+	
+	
+	
     /**
      * 店铺id
      */
@@ -35,11 +41,29 @@ public class SearchMerchActivityListParam extends PagingParam {
         this.orderByClause = orderByClause;
     }
 
-    @Override
-    public String toString() {
-        return "SearchMerchActivityListParam{" +
-                "shopId='" + shopId + '\'' +
-                ", orderByClause='" + orderByClause + '\'' +
-                "} " + super.toString();
-    }
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(int identity) {
+		this.identity = identity;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchMerchActivityListParam [userId=" + userId + ", identity=" + identity + ", shopId=" + shopId
+				+ ", orderByClause=" + orderByClause + "]";
+	}
+
+
+    
+    
 }

@@ -29,5 +29,10 @@ public class UserGuideChatParam extends BaseParam implements Serializable{
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserGuideChatParam [userId=" + userId + "]";
+	}
 	
 }

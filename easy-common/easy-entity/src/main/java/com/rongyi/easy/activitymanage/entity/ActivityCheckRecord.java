@@ -21,6 +21,8 @@ public class ActivityCheckRecord implements Serializable {
      */
     private Integer status;
 
+    private Integer type;
+
     /**
      * 审核记录
      */
@@ -35,6 +37,24 @@ public class ActivityCheckRecord implements Serializable {
      * 审核时间
      */
     private Date createAt;
+
+    private Integer activityGoodsId;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getActivityGoodsId() {
+        return activityGoodsId;
+    }
+
+    public void setActivityGoodsId(Integer activityGoodsId) {
+        this.activityGoodsId = activityGoodsId;
+    }
 
     public Integer getId() {
         return id;
@@ -93,6 +113,8 @@ public class ActivityCheckRecord implements Serializable {
                 .append("record", record)
                 .append("createUser", createUser)
                 .append("createAt", createAt)
+                .append("type", type)
+                .append("activityGoodsId", activityGoodsId)
                 .toString();
     }
 }

@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.vo;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.List;
 public class ActivityGoodsVO implements Serializable {
 
     /**
-     * PK
+     *活动id
      */
     private Integer id;
 
@@ -27,9 +28,29 @@ public class ActivityGoodsVO implements Serializable {
     private String goodsName;
 
     /**
+     * 商品价格
+     */
+    private String originPrice;
+
+    /**
+     * 商品价格
+     */
+    private String currentPrice;
+
+    /**
+     * 商品编码
+     */
+    private String goodsCode;
+
+    /**
      * 图片URL
      */
     private String picUrl;
+
+    /**
+     * 图片URLs
+     */
+    private List<String> picUrls = Lists.newArrayList();
 
     /**
      * 类型
@@ -73,9 +94,55 @@ public class ActivityGoodsVO implements Serializable {
     private String categoryStr;
 
     /**
+     * 商品是否已参加活动
+     */
+    private boolean isJoin;
+
+    /**
      * 商品规格列表
      */
     private List<ActivityGoodsSpecVO> activityGoodsSpecVOs;
+
+
+    public boolean isJoin() {
+        return isJoin;
+    }
+
+    public void setJoin(boolean isJoin) {
+        this.isJoin = isJoin;
+    }
+
+    public List<String> getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(List<String> picUrls) {
+        this.picUrls = picUrls;
+    }
+
+    public String getOriginPrice() {
+        return originPrice;
+    }
+
+    public void setOriginPrice(String originPrice) {
+        this.originPrice = originPrice;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
+    }
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
@@ -197,6 +264,8 @@ public class ActivityGoodsVO implements Serializable {
                 .append("createUser", createUser)
                 .append("categoryStr", categoryStr)
                 .append("activityGoodsSpecVOs", activityGoodsSpecVOs)
+                .append("isJoin", isJoin)
+                .append("picUrls", picUrls)
                 .toString();
     }
 }
