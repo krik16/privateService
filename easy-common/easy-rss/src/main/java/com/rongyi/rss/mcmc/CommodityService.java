@@ -64,7 +64,7 @@ public interface CommodityService {
 
     public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
 
-    public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
     public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage, int pagesize, String liveId, int isEdit);
 
@@ -369,4 +369,8 @@ public interface CommodityService {
      * @return
      */
     public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
+
+    public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
+
+    public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
 }
