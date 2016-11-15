@@ -112,6 +112,9 @@ public class TradeOrder implements Serializable {
      * 下单渠道
      */
     private String orderChannel;
+
+    // 总积分
+    private Integer totalCredit;
     /**
      * 元
      *
@@ -563,5 +566,13 @@ public class TradeOrder implements Serializable {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public Integer getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(Integer totalCredit) {
+        this.totalCredit = totalCredit;
     }
 }
