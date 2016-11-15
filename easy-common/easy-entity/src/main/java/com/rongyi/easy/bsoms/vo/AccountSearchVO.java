@@ -1,6 +1,7 @@
 package com.rongyi.easy.bsoms.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class AccountSearchVO implements Serializable{
 
@@ -25,6 +26,22 @@ public class AccountSearchVO implements Serializable{
 	private Integer optVerify;//0不显示审核、1显示审核
 	private Integer optSuspended;//0不显示冻结或解冻、1显示冻结或解冻
 	private Integer optStatus;//0不显示停用或启用、1显示停用或启用
+	private Integer showAuthDetail;
+	private Date virtualAccountStopAt;
+	private String virtualAccountStopReason;
+	
+	public Date getVirtualAccountStopAt() {
+		return virtualAccountStopAt;
+	}
+	public void setVirtualAccountStopAt(Date virtualAccountStopAt) {
+		this.virtualAccountStopAt = virtualAccountStopAt;
+	}
+	public String getVirtualAccountStopReason() {
+		return virtualAccountStopReason;
+	}
+	public void setVirtualAccountStopReason(String virtualAccountStopReason) {
+		this.virtualAccountStopReason = virtualAccountStopReason;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -132,6 +149,12 @@ public class AccountSearchVO implements Serializable{
 	}
 	public void setOptStatus(Integer optStatus) {
 		this.optStatus = optStatus;
+	}
+	public Integer getShowAuthDetail() {
+		return showAuthDetail;
+	}
+	public void setShowAuthDetail(Integer showAuthDetail) {
+		this.showAuthDetail = showAuthDetail;
 	}
 	
 }

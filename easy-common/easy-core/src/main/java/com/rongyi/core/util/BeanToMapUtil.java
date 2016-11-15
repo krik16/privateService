@@ -86,8 +86,6 @@ public class BeanToMapUtil {
 				Object result = readMethod.invoke(bean, new Object[0]);
 				if (result != null) {
 					returnMap.put(propertyName, result);
-				} else {
-					returnMap.put(propertyName, "");
 				}
 			}
 		}
