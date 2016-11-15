@@ -74,15 +74,17 @@ public class MongoFactoryBean extends AbstractFactoryBean<MongoClient> {
 //        this.logger.info("[Mongo Client] username: " + this.userName + ", password: " + this.password + ", userdb: " + this.database);
         MongoCredential credential = MongoCredential.createCredential(this.userName, this.database, this.password.toCharArray());
 
-        if (1 == serverList.size()) {
-            if (null != this.mongoOptions) {
+        if(null!=serverList&&1==serverList.size()) {
+            if (null!=this.mongoOptions ) {
                 this.logger.info("[Mongo Client] " + this.showOptions(this.mongoOptions));
                 mongo = new MongoClient(serverList.get(0), Arrays.asList(credential), this.mongoOptions);
-            } else {
+            }else {
                 this.logger.info("[Mongo Client] mongoOptions is empty!");
                 mongo = new MongoClient(serverList.get(0), Arrays.asList(credential));
             }
-        } else {
+
+        }else {
+
             for (ServerAddress serverAddress : serverList) {
                 this.logger.info("[Mongo Client] server: " + serverAddress.getHost() + ":" + serverAddress.getPort());
             }
@@ -90,6 +92,7 @@ public class MongoFactoryBean extends AbstractFactoryBean<MongoClient> {
             if (this.mongoOptions != null) {
                 mongo = new MongoClient(serverList, Arrays.asList(credential), this.mongoOptions);
                 this.logger.info("[Mongo Client] " + this.showOptions(this.mongoOptions));
+
             } else {
                 this.logger.info("[Mongo Client] mongoOptions is empty!");
                 mongo = new MongoClient(serverList, Arrays.asList(credential));
