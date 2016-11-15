@@ -470,6 +470,8 @@ public class BusinessAccountVO implements Serializable {
 	public void setGrandpaShopId(Integer grandpaShopId) {
 		this.grandpaShopId = grandpaShopId;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account

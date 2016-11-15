@@ -17,12 +17,12 @@ public class AccountSearchVO implements Serializable{
 	private String marchantName;
 	private Integer isDisabled;
 	private Integer userStatus;
-	private Integer searchStatus;
-	private Integer isSuspended;//资金账户：是否冻结
+	private Integer searchStatus;//0待审核  1启用  2停用  3未通过
+	private Integer cashStatus;//资金状态: 0正常  1冻结
 	private Integer isChief;
 	
 	private Integer optEdit;//0不显示修改 、1显示修改
-	private Integer optVerify;//0不显示验证 、1显示验证
+	private Integer optVerify;//0不显示审核、1显示审核
 	private Integer optSuspended;//0不显示冻结或解冻、1显示冻结或解冻
 	private Integer optStatus;//0不显示停用或启用、1显示停用或启用
 	public Integer getId() {
@@ -97,11 +97,11 @@ public class AccountSearchVO implements Serializable{
 	public void setSearchStatus(Integer searchStatus) {
 		this.searchStatus = searchStatus;
 	}
-	public Integer getIsSuspended() {
-		return isSuspended;
+	public Integer getCashStatus() {
+		return cashStatus;
 	}
-	public void setIsSuspended(Integer isSuspended) {
-		this.isSuspended = isSuspended;
+	public void setCashStatus(Integer cashStatus) {
+		this.cashStatus = cashStatus;
 	}
 	public Integer getIsChief() {
 		return isChief;
