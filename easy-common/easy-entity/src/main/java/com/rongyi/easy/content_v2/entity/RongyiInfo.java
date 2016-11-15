@@ -27,7 +27,7 @@ public class RongyiInfo implements Serializable {
 
     private String intro;
 
-    private Integer status;
+    private Integer status;//2查询2，4
 
     private String createUser;
 
@@ -43,7 +43,15 @@ public class RongyiInfo implements Serializable {
 
     private Integer pageSize;
 
+    private Integer lastId;//上一篇
+
+    private Integer nextId;//下一篇
+
+    private Integer isShowLastNext;//是否查询上一篇，下一篇,1true,0false
+
     private List<Integer> statusList = Lists.newArrayList();
+
+
 
 
     @Override
@@ -67,10 +75,37 @@ public class RongyiInfo implements Serializable {
                 .append("infoContent", infoContent)
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
+                .append("lastId", lastId)
                 .append("statusList", statusList)
+                .append("nextId", nextId)
+                .append("isShowLastNext", isShowLastNext)
                 .toString();
     }
 
+
+    public Integer getLastId() {
+        return lastId;
+    }
+
+    public void setLastId(Integer lastId) {
+        this.lastId = lastId;
+    }
+
+    public Integer getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(Integer nextId) {
+        this.nextId = nextId;
+    }
+
+    public Integer getIsShowLastNext() {
+        return isShowLastNext;
+    }
+
+    public void setIsShowLastNext(Integer isShowLastNext) {
+        this.isShowLastNext = isShowLastNext;
+    }
 
     public List<Integer> getStatusList() {
         return statusList;

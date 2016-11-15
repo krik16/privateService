@@ -18,4 +18,6 @@ public interface RongyiInfoService {
     public List<RongyiInfo> getRongyiInfoByPage(RongyiInfo rongyiInfo);
 
     public Integer countRongyiInfoList(RongyiInfo rongyiInfo);
+
+    public RongyiInfo  getLastOrNextId(Integer id);
 }
