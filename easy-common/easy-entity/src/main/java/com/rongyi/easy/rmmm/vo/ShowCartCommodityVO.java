@@ -30,12 +30,19 @@ public class ShowCartCommodityVO implements Serializable{
 	private String shopId;//店铺mysqlId
 	private String shopMid;//店铺mongoId
 	private String shopName;//店铺名称
+	private String shopLogo;//店铺logo
 	private boolean supportCourierDeliver=true;//true是  false否
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 	private Integer commodityPurchaseCount;// 商品限购数量   默认值 0 表示不限购
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
     private long buyerCount;//用户已购买数量   （只有限购商品才有值）
     
+	public String getShopLogo() {
+		return shopLogo;
+	}
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
+	}
 	public Integer getPurchaseCount() {
 		return purchaseCount;
 	}
@@ -193,6 +200,7 @@ public class ShowCartCommodityVO implements Serializable{
 				", commodityPurchaseCount=" + commodityPurchaseCount +
 				", buyerCount=" + buyerCount +
 				", ifShowInWechat=" + ifShowInWechat +
+				", shopLogo=" + shopLogo +
 				"]";
 	}
 
