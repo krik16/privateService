@@ -166,16 +166,6 @@ public class TradeOrderCreateParam implements Serializable {
     private Integer exchangeType = 0;
 
     /**
-     * 积分商城积分支付部分
-     */
-    private BigDecimal partOfCredit = new BigDecimal(0);
-
-    /**
-     * 积分商城金额支付部分
-     */
-    private BigDecimal partOfMoney = new BigDecimal(0);
-
-    /**
      * 卖家留言
      */
     private String buyerMessage;
@@ -487,22 +477,6 @@ public class TradeOrderCreateParam implements Serializable {
         this.exchangeType = exchangeType;
     }
 
-    public BigDecimal getPartOfCredit() {
-        return partOfCredit;
-    }
-
-    public void setPartOfCredit(BigDecimal partOfCredit) {
-        this.partOfCredit = partOfCredit;
-    }
-
-    public BigDecimal getPartOfMoney() {
-        return partOfMoney;
-    }
-
-    public void setPartOfMoney(BigDecimal partOfMoney) {
-        this.partOfMoney = partOfMoney;
-    }
-
     public String getArticleId() {
         return articleId;
     }
@@ -572,8 +546,6 @@ public class TradeOrderCreateParam implements Serializable {
                 ", articleId=" + articleId +
                 ", articleType=" + articleType +
                 ", exchangeType=" + exchangeType +
-                ", partOfCredit=" + partOfCredit +
-                ", partOfMoney=" + partOfMoney +
                 ", buyerMessage=" + buyerMessage +
                 ", totalCredit=" + totalCredit +
                 '}';
