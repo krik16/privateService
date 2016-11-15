@@ -17,5 +17,5 @@ public interface RongyiInfoService {
 
     public List<RongyiInfo> getRongyiInfoByPage(Integer currentPage,Integer pageSize);
 
-    public Integer countRongyiInfoList();
+    public Integer countRongyiInfoList(RongyiInfo rongyiInfo);
 }

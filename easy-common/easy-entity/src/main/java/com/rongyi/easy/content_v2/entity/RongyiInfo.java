@@ -1,9 +1,11 @@
 package com.rongyi.easy.content_v2.entity;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by yangyang on 2016/11/10.
@@ -41,6 +43,8 @@ public class RongyiInfo implements Serializable {
 
     private Integer pageSize;
 
+    private List<Integer> statusList = Lists.newArrayList();
+
 
     @Override
     public String toString() {
@@ -63,9 +67,18 @@ public class RongyiInfo implements Serializable {
                 .append("infoContent", infoContent)
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
+                .append("statusList", statusList)
                 .toString();
     }
 
+
+    public List<Integer> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<Integer> statusList) {
+        this.statusList = statusList;
+    }
 
     public Integer getPageSize() {
         return pageSize;
