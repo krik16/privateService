@@ -559,7 +559,11 @@ public class CommodityVO  implements  Serializable {
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
 		this.mallMid = commodity.getMallMid();//商场mongoId
-		this.purchaseCount=commodity.getPurchaseCount();
+		if(commodity.getPurchaseCount() == null || commodity.getPurchaseCount() == 0){
+            this.purchaseCount = -1;
+        }else{
+            this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
+        }
 		if(commodity.isSpot()){
 			this.isSpot = 1;//现货
 		}else{
