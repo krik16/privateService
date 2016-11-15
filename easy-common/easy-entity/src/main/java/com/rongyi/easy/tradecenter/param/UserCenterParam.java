@@ -15,14 +15,10 @@ public class UserCenterParam implements Serializable {
     private String mallId;
     // 积分数--> point
     private int creditNumber;
-    // 积分操作类型
-    private String opType;
     // 订单号 --> order_no
     private String orderNo;
     // 平台 --> platform
     private String orderChannel;
-    // 描述 -->detail
-    private String remark;
 
     public int getCreditNumber() {
         return creditNumber;
@@ -38,14 +34,6 @@ public class UserCenterParam implements Serializable {
 
     public void setMallId(String mallId) {
         this.mallId = mallId;
-    }
-
-    public String getOpType() {
-        return opType;
-    }
-
-    public void setOpType(String opType) {
-        this.opType = opType;
     }
 
     public String getOrderChannel() {
@@ -64,14 +52,6 @@ public class UserCenterParam implements Serializable {
         this.orderNo = orderNo;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -86,10 +66,8 @@ public class UserCenterParam implements Serializable {
                 "creditNumber=" + creditNumber +
                 ", userId='" + userId + '\'' +
                 ", mallId='" + mallId + '\'' +
-                ", opType=" + opType +
                 ", orderNo='" + orderNo + '\'' +
                 ", orderChannel='" + orderChannel + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }
