@@ -359,6 +359,14 @@ public interface CommodityService {
      * @return true commodity is overtime, false otherwise;
      */
     List<String> isCommodityOvertime(PinTuanCommodityParam param);
-
+    /**
+     * 批量下架商品
+     * @param ids
+     * @param shopId
+     * @param identity
+     * @param reason
+     * @param userName
+     * @return
+     */
     public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
 }
