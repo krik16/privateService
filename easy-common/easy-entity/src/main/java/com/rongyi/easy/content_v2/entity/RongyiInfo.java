@@ -49,6 +49,8 @@ public class RongyiInfo implements Serializable {
 
     private Integer isShowLastNext;//是否查询上一篇，下一篇,1true,0false
 
+    private Integer offset;
+
     private List<Integer> statusList = Lists.newArrayList();
 
 
@@ -79,9 +81,17 @@ public class RongyiInfo implements Serializable {
                 .append("statusList", statusList)
                 .append("nextId", nextId)
                 .append("isShowLastNext", isShowLastNext)
+                .append("offset", offset)
                 .toString();
     }
 
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
 
     public Integer getLastId() {
         return lastId;
