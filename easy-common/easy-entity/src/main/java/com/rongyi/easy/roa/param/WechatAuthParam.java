@@ -1,12 +1,16 @@
 package com.rongyi.easy.roa.param;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * conan 2016/11/10 17:30
  **/
-public class WechatAuthParam {
+public class WechatAuthParam implements Serializable{
+
+	private static final long serialVersionUID = 8914898844957709287L;
 
 	private Integer mchInfoId;
 
