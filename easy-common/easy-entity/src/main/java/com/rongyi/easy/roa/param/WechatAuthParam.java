@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 /**
  * conan 2016/11/10 17:30
  **/
-public class WechatAuthParam implements Serializable{
+public class WechatAuthParam implements Serializable {
 
 	private static final long serialVersionUID = 8914898844957709287L;
 
@@ -21,6 +21,8 @@ public class WechatAuthParam implements Serializable{
 	private String code;
 
 	private Integer storeId;
+
+	private Integer state;
 
 	public Integer getMchInfoId() {
 		return mchInfoId;
@@ -60,6 +62,14 @@ public class WechatAuthParam implements Serializable{
 
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
 
 	@Override
