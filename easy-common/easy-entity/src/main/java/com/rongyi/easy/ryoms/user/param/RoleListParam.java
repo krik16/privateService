@@ -13,7 +13,7 @@ public class RoleListParam extends BaseParam implements Serializable{
 
 	private String name;//角色名称
 	
-	private Integer status;//状态   0 正常，1停用， 空值为全部
+	private Byte status;//状态   0 正常，1停用， 空值为全部
 
 	public String getName() {
 		return name;
@@ -23,11 +23,11 @@ public class RoleListParam extends BaseParam implements Serializable{
 		this.name = name;
 	}
 
-	public Integer getStatus() {
+	public Byte getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(Byte status) {
 		this.status = status;
 	}
 
