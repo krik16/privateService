@@ -22,7 +22,7 @@ public class ActivityGoodsRule implements Serializable {
     private Integer stockDeductType;
 
     /**
-     * 库存修改方式:只可增不可减[0] 不可增不可减[1]
+     * 库存修改方式:只可增不可减[0] 不可增不可减[1] 可增亦可减[2]
      */
     private Integer stockUpdateType;
 
@@ -60,6 +60,16 @@ public class ActivityGoodsRule implements Serializable {
      * 线下折扣
      */
     private String offlineDiscount;
+
+    private String enrollUserType;//可报名用户类型
+
+    public String getEnrollUserType() {
+        return enrollUserType;
+    }
+
+    public void setEnrollUserType(String enrollUserType) {
+        this.enrollUserType = enrollUserType;
+    }
 
     public String getDiscount() {
         return discount;
@@ -163,6 +173,7 @@ public class ActivityGoodsRule implements Serializable {
                 .append("updateAt", updateAt)
                 .append("discount", discount)
                 .append("offlineDiscount", offlineDiscount)
+                .append("enrollUserType", enrollUserType)
                 .toString();
     }
 }

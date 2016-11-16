@@ -49,4 +49,11 @@ public class ContentForumParam implements Serializable{
 	public void setVersion(String version) {
 		this.version = version;
 	}
+
+	@Override
+	public String toString() {
+		return "ContentForumParam [forumCode=" + forumCode + ", currentPage="
+				+ currentPage + ", pageSize=" + pageSize + ", version="
+				+ version + "]";
+	}
 }

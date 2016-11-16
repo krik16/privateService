@@ -9,11 +9,14 @@ import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.vo.CommoditySortVo;
 import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
+import com.rongyi.easy.solr.result.PageBean;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.solr.McmcCommodityDocument;
@@ -352,6 +355,14 @@ public interface McmcCommoditySolrService {
 	 * @throws RYServiceException
 	 */
 	public void setCommoditySort(List<CommoditySortVo> list) throws RYServiceException;
+
+	public List<Integer> selectCommodityBySaleIds(List<Integer> saleIds)throws RYServiceException;
+
+	PageBean<McmcCommodityDocument> selectSelfCommodity(SelfCommodityParam param);
+
+	public boolean updateCommodityPriceAndStock(String id, Double price, List<Double> currentPriceList,Integer stock);
+
+	public boolean updateAllCommodityGalleryPositionSolr(String bullerId,String shopMid,List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,List<String> commodityIds);
 
 	public boolean deleteCommodityByIds(List<String> commodityIds);
 

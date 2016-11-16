@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -28,6 +29,8 @@ public class ActivityGoods implements Serializable {
      * 商品id
      */
     private String goodsId;
+
+    private String goodsCode;
 
     /**
      * 类型 0代表红包，1代表代金券，2代表抵扣券 3代表商品  4代表活动券
@@ -65,7 +68,7 @@ public class ActivityGoods implements Serializable {
     private Date joinEndAt;
 
     /**
-     * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
+     * 商品审核状态：0未审核1未通过、退回2通过3撤销报名4强制撤销
      */
     private Integer status;
 
@@ -78,6 +81,8 @@ public class ActivityGoods implements Serializable {
      * 发布商品的机构类型id
      */
     private String identityId;
+
+    private String identityName;
 
     /**
      * 创建人
@@ -112,16 +117,68 @@ public class ActivityGoods implements Serializable {
      * 0:取消撤销状态  1:表示申请撤销中状态
      */
     private Integer applyStatus;
+    /**
+     * 描述
+     */
+    private String desc;
+    private Integer groupNum;
+    private Integer openGroupLimit;
+    private Integer joinGroupLimit;
+    private Integer sortNum;
+    private String remainStock;
+    private String activityPrice;
+    //开团起始人数（随机数）
+    private Integer groupRandomNum;
+    private String enrollSource;//0大运营后台 1摩店
+
+    private ActivityGoodsRule activityGoodsRule;
+
+    /**
+     * 商品图片合集(用户摩店报名详情)
+     */
+    private List<String> pics = Lists.newArrayList();
+
+    /**
+     * 商品价格(用户摩店报名详情)
+     */
+    private String currentPrice;
+    /**
+     * 商品价格(用户摩店报名详情)
+     */
+    private String commodityNo;
+
+    /**
+     * 退回原因
+     */
+    private String rejectReason;
 
     /**
      * 商品规格
      */
-    private List<ActivityGoodsSpec>  activityGoodsSpecs;
+    private List<ActivityGoodsSpec>  activityGoodsSpecs  = Lists.newArrayList();
 
     /**
      * 商品分类
      */
     private List<ActivityGoodsCategory> activityGoodsCategories;
+
+    /**
+     * 场次信息
+     */
+    private   List<GoodShowStyleInRY>   goodShowStyleInRYArrayList = Lists.newArrayList();
+
+    /**
+     * 商品/卡券活动库存
+     */
+    private Integer stockCount;
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
 
     /**
      * 获取商品分类的层级信息
@@ -139,11 +196,99 @@ public class ActivityGoods implements Serializable {
         return categoryStr;
     }
 
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
+
+    public List<String> getPics() {
+        return pics;
+    }
+
+    public void setPics(List<String> pics) {
+        this.pics = pics;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getCommodityNo() {
+        return commodityNo;
+    }
+
+    public void setCommodityNo(String commodityNo) {
+        this.commodityNo = commodityNo;
+    }
+
+    public ActivityGoodsRule getActivityGoodsRule() {
+        return activityGoodsRule;
+    }
+
+    public void setActivityGoodsRule(ActivityGoodsRule activityGoodsRule) {
+        this.activityGoodsRule = activityGoodsRule;
+    }
+
+    public List<GoodShowStyleInRY> getGoodShowStyleInRYArrayList() {
+        return goodShowStyleInRYArrayList;
+    }
+
+    public void setGoodShowStyleInRYArrayList(List<GoodShowStyleInRY> goodShowStyleInRYArrayList) {
+        this.goodShowStyleInRYArrayList = goodShowStyleInRYArrayList;
+    }
+
+    public String getEnrollSource() {
+        return enrollSource;
+    }
+
+    public void setEnrollSource(String enrollSource) {
+        this.enrollSource = enrollSource;
+    }
+
+    public Integer getGroupRandomNum() {
+        return groupRandomNum;
+    }
+
+    public void setGroupRandomNum(Integer groupRandomNum) {
+        this.groupRandomNum = groupRandomNum;
+    }
+
+    public String getActivityPrice() {
+        return activityPrice;
+    }
+
+    public void setActivityPrice(String activityPrice) {
+        this.activityPrice = activityPrice;
+    }
+
+    public String getRemainStock() {
+        return remainStock;
+    }
+
+    public void setRemainStock(String remainStock) {
+        this.remainStock = remainStock;
+    }
+
     public ActivityGoods(int type){
 		this.type=type;
 	}
 
     public ActivityGoods() {
+    }
+
+    public String getIdentityName() {
+        return identityName;
+    }
+
+    public void setIdentityName(String identityName) {
+        this.identityName = identityName;
     }
 
     public ActivityGoods(String goodsId){
@@ -172,6 +317,14 @@ public class ActivityGoods implements Serializable {
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
     }
 
     public Integer getType() {
@@ -326,18 +479,64 @@ public class ActivityGoods implements Serializable {
         this.applyStatus = applyStatus;
     }
 
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(Integer groupNum) {
+        this.groupNum = groupNum;
+    }
+
+    public Integer getOpenGroupLimit() {
+        return openGroupLimit;
+    }
+
+    public void setOpenGroupLimit(Integer openGroupLimit) {
+        this.openGroupLimit = openGroupLimit;
+    }
+
+    public Integer getJoinGroupLimit() {
+        return joinGroupLimit;
+    }
+
+    public void setJoinGroupLimit(Integer joinGroupLimit) {
+        this.joinGroupLimit = joinGroupLimit;
+    }
+
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityId", activityId)
                 .append("goodsId", goodsId)
+                .append("goodsCode", goodsCode)
                 .append("type", type)
                 .append("name", name)
                 .append("picUrl", picUrl)
+                .append("pics", pics)
+                .append("currentPrice", currentPrice)
+                .append("commodityNo", commodityNo)
                 .append("subsidyType", subsidyType)
                 .append("subsidyPrice", subsidyPrice)
                 .append("joinStartAt", joinStartAt)
+                .append("identityName", identityName)
                 .append("joinEndAt", joinEndAt)
                 .append("status", status)
                 .append("identity", identity)
@@ -351,6 +550,20 @@ public class ActivityGoods implements Serializable {
                 .append("applyStatus", applyStatus)
                 .append("activityGoodsSpecs", activityGoodsSpecs)
                 .append("activityGoodsCategories", activityGoodsCategories)
+                .append("goodShowStyleInRYArrayList", goodShowStyleInRYArrayList)
+                .append("enrollSource", enrollSource)
+                .append("activityGoodsRule", activityGoodsRule)
+                .append("rejectReason", rejectReason)
+                .append("desc", desc)
+                .append("groupNum", groupNum)
+                .append("joinGroupLimit", joinGroupLimit)
+                .append("openGroupLimit", openGroupLimit)
+                .append("sortNum", sortNum)
+                .append("remainStock", remainStock)
+                .append("activityPrice", activityPrice)
+                .append("groupRandomNum", groupRandomNum)
+                .append("enrollSource", enrollSource)
+                .append("stockCount", stockCount)
                 .toString();
     }
 }

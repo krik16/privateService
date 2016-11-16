@@ -24,11 +24,13 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * @date 2016-05-09
  * @version 1.1
  */
-public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class CommoditySearchParam extends MalllifeBaseParam implements Serializable {
 
 	private static final long serialVersionUID = -3577116644255163015L;
 
 	private String id;
+
+	private List<String> ids;
 
 	private List<String> brandMids;
 
@@ -99,9 +101,14 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private List<String> categoryList;//分类id集合
 	private String couponId;//红包券id
 
+	private List<Integer> saleIds;
+
 	private Map commodityMaxMinValues;  // 商品最大最小销量和更新时间
 
 	private Integer galleryPosition;//橱窗位置
+
+	private Integer minStock;
+	private Integer maxStock;
 
 	public String getCouponId() {
 		return couponId;
@@ -394,6 +401,13 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.commodityMaxMinValues = commodityMaxMinValues;
 	}
 
+	public List<Integer> getSaleIds() {
+		return saleIds;
+	}
+
+	public void setSaleIds(List<Integer> saleIds) {
+		this.saleIds = saleIds;
+	}
 
 	@NeedCheck(getFieldName = "galleryPosition")
 	public Integer getGalleryPosition() {
@@ -402,6 +416,30 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
+	}
+
+	public List<String> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<String> ids) {
+		this.ids = ids;
+	}
+
+	public Integer getMaxStock() {
+		return maxStock;
+	}
+
+	public void setMaxStock(Integer maxStock) {
+		this.maxStock = maxStock;
+	}
+
+	public Integer getMinStock() {
+		return minStock;
+	}
+
+	public void setMinStock(Integer minStock) {
+		this.minStock = minStock;
 	}
 
 	@Override

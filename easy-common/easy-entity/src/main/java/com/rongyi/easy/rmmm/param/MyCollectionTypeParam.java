@@ -22,5 +22,10 @@ public class MyCollectionTypeParam implements Serializable{
 	public void setCurrentPage(String currentPage) {
 		this.currentPage = currentPage;
 	}
+	@Override
+	public String toString() {
+		return "MyCollectionTypeParam [pageSize=" + pageSize + ", currentPage="
+				+ currentPage + "]";
+	}
 	
 }

@@ -1,4 +1,5 @@
 package com.rongyi.easy.activitymanage.entity;
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -43,7 +44,7 @@ public class ActivityInfo implements Serializable {
     /**
      * 活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3]
      */
-    private Integer status;
+    private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
     /**
      * 发布渠道: 大运营[0] 商家[1]
@@ -118,11 +119,71 @@ public class ActivityInfo implements Serializable {
     private String source;
 
     /**
+     * 支付取消时间，单位分钟
+     */
+    private String cancelTime;
+
+    private String enrollUserType;//可报名用户类型,保存在activityGoodsRule中
+
+    private String description;//描述
+
+
+    /**
      * 卡券活动规则
      */
     private ActivityCouponRule activityCouponRule;
 
     private List<ActivityEnroll> activityEnrollList;
+
+    //商品分类
+    private  List<ActivityGoodsCategoryRule> activityGoodsCategoryRules = Lists.newArrayList();
+
+
+    public List<ActivityGoodsCategoryRule> getActivityGoodsCategoryRules() {
+        return activityGoodsCategoryRules;
+    }
+
+    public void setActivityGoodsCategoryRules(List<ActivityGoodsCategoryRule> activityGoodsCategoryRules) {
+        this.activityGoodsCategoryRules = activityGoodsCategoryRules;
+    }
+
+    /**
+     * 规则信息表
+     */
+    private List<ActivityEntryRule> activityEntryRuleList = Lists.newArrayList();//之前放在卡卷里面，之后秒杀上线后可以去除
+
+    public List<ActivityEntryRule> getActivityEntryRuleList() {
+        return activityEntryRuleList;
+    }
+
+    public void setActivityEntryRuleList(List<ActivityEntryRule> activityEntryRuleList) {
+        this.activityEntryRuleList = activityEntryRuleList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEnrollUserType() {
+        return enrollUserType;
+    }
+
+    public void setEnrollUserType(String enrollUserType) {
+        this.enrollUserType = enrollUserType;
+    }
+
+    public String getCancelTime() {
+        return cancelTime;
+    }
+
+    public void setCancelTime(String cancelTime) {
+        this.cancelTime = cancelTime;
+    }
+
 
     public String getSource() {
         return source;
@@ -343,6 +404,9 @@ public class ActivityInfo implements Serializable {
                 .append("activityCouponRule", activityCouponRule)
                 .append("activityEnrollList", activityEnrollList)
                 .append("source",source)
+                .append("enrollUserType",enrollUserType)
+                .append("cancelTime",cancelTime)
+                .append("description",description)
                 .toString();
     }
 }

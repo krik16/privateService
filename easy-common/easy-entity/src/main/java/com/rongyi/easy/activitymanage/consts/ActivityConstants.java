@@ -145,10 +145,11 @@ public interface ActivityConstants {
         Integer RAFFLE = 2;//抽奖类活动
         Integer SIGN = 4;//签到送积分活动
         Integer SPELLLIST = 6;//拼单活动
+        Integer SECKILL = 7;//秒杀商品类活动
     }
 
     /**
-     * 发布渠道
+     * 发布渠道大运营[0] 商家[1]
      */
     interface PublishChannel {
         Integer OPERATION = 0;
@@ -189,5 +190,44 @@ public interface ActivityConstants {
         Integer REBATE = 2;//抵扣券
         Integer COMMODITY = 3;//商品
     }
+
+    /***
+     * 团状态:
+     *  第一个人发起,未支付,等待支付--   0
+     *    发起,未支付,开团失败--- 1
+     *    组团进行中 			2
+     *    组团成功			3
+     *    组团失败:团时间到了,人数不够,自动失败 4
+     *    活动下线,团失败 5
+     *
+     */
+    interface GroupState {
+        /**
+         * 第一个人发起,未支付,等待支付
+         */
+        int FIRST_WAIT_PAY = 0;
+        /**
+         * 发起,未支付,开团失败
+         */
+        int FAILED_FIRST_NO_PAY = 1;
+        /**
+         * 组团进行中
+         */
+        int GROUPING = 2;
+        /**
+         * 组团成功
+         */
+        int SUCCESS = 3;
+        /**
+         * 组团失败:团时间到了,人数不够,自动失败
+         */
+        int FAILD_NOENOUGH_PEOPLE = 4;
+        /**
+         * 活动下线,团失败
+         */
+        int FAILD_ACTIVITY_DOWN = 5;
+
+    }
+
 
 }

@@ -257,4 +257,12 @@ public interface IOrderQueryService {
 	 */
 	public DetailListVO getMyDealCommissionDetail(String orderNo) throws Exception;
 
+	/**
+	 * 我的拼团订单
+	 * @param  activityId 活动id
+	 * @param  activityRoundId 活动团编号
+	 * @param  buyerNum 用户id
+	 * @throws Exception
+	 */
+	String getOrderNoForPintuan(Integer activityId,Long activityRoundId, String buyerNum) throws Exception;
 }

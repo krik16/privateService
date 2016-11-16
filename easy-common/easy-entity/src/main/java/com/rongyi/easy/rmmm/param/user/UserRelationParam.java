@@ -41,4 +41,10 @@ public class UserRelationParam implements Serializable{
 		this.shopMId = shopMId;
 	}
 
+	@Override
+	public String toString() {
+		return "UserRelationParam [mallUserMid=" + mallUserMid + ", userId="
+				+ userId + ", shopMId=" + shopMId + "]";
+	}
+
 }

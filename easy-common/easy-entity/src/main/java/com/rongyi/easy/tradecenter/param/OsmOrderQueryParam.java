@@ -1,6 +1,7 @@
 package com.rongyi.easy.tradecenter.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by jason
@@ -23,6 +24,13 @@ public class OsmOrderQueryParam implements Serializable
     private  String sizePerPage;//每页数量
     private String commodityStatus;//商品状态
     Integer guideId;//导购id
+    private Integer activityStatus;// 拼团活动状态
+    private String activityName;// 活动名称（购买来源）
+    private Integer activityType;// 活动类型
+    private List<String> commodityMidList;// 商品ID集合
+    private Integer activityRoundId;// 活动场次ID
+    private String commoditySpecMid;// 产品规格ID
+    private Integer orderSource;// 购买终端
 
     public Integer getGuideId() {
         return guideId;
@@ -136,6 +144,54 @@ public class OsmOrderQueryParam implements Serializable
         this.sizePerPage = sizePerPage;
     }
 
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public List<String> getCommodityMidList() {
+        return commodityMidList;
+    }
+
+    public void setCommodityMidList(List<String> commodityMidList) {
+        this.commodityMidList = commodityMidList;
+    }
+
+    public Integer getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(Integer activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public Integer getOrderSource() {
+        return orderSource;
+    }
+
+    public void setOrderSource(Integer orderSource) {
+        this.orderSource = orderSource;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderQueryParam{" +
@@ -152,6 +208,13 @@ public class OsmOrderQueryParam implements Serializable
                 ", sizePerPage='" + sizePerPage + '\'' +
                 ", commodityStatus='" + commodityStatus + '\'' +
                 ", guideId=" + guideId +
+                ", activityStatus=" + activityStatus +
+                ", activityName=" + activityName +
+                ", activityType=" + activityType +
+                ", commodityMidList=" + commodityMidList +
+                ", activityRoundId=" + activityRoundId +
+                ", activityType=" + activityType +
+                ", orderSource=" + orderSource +
                 '}';
     }
 }
