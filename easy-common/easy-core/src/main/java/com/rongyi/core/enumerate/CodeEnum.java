@@ -268,7 +268,8 @@ public enum CodeEnum {
 	/** 内部员工账号相关提示  */
 	ERROR_RYUSER_NOT_EXIST("1400001","该账号不存在"),
 	ERROR_RYUSER_STOP("1400002","停用理由不能为空"),
-	ERROR_RYUSER_START("1400003","该账号已存在，您无法启用当前账号");
+	ERROR_RYUSER_START("1400003","该账号已存在，您无法启用当前账号"),
+	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复");
 
     private String code; 
     private String message; 
