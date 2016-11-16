@@ -183,6 +183,9 @@ public class TradeOrderCreateParam implements Serializable {
     // 总积分
     private BigDecimal totalCredit = new BigDecimal(0);
 
+    // 用户类型
+    private int userType ;
+
     /**
      * end
      */
@@ -535,6 +538,14 @@ public class TradeOrderCreateParam implements Serializable {
         this.totalCredit = totalCredit;
     }
 
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -576,6 +587,7 @@ public class TradeOrderCreateParam implements Serializable {
                 ", partOfMoney=" + partOfMoney +
                 ", buyerMessage=" + buyerMessage +
                 ", totalCredit=" + totalCredit +
+                ", userType=" + userType +
                 '}';
     }
 }
