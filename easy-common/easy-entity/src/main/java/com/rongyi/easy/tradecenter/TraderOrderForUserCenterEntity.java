@@ -32,7 +32,7 @@ public class TraderOrderForUserCenterEntity implements Serializable {
     // 总积分
     private int totalCredit;
     // 总金额
-    private int totalAmount;
+    private int payAmount;
     // 订单状态
     private int status;
     // 卡券id
@@ -96,12 +96,12 @@ public class TraderOrderForUserCenterEntity implements Serializable {
         this.status = status;
     }
 
-    public int getTotalAmount() {
-        return totalAmount;
+    public int getPayAmount() {
+        return payAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setPayAmount(int payAmount) {
+        this.payAmount = payAmount;
     }
 
     public int getTotalCredit() {
@@ -206,7 +206,7 @@ public class TraderOrderForUserCenterEntity implements Serializable {
                 ", createAt=" + createAt +
                 ", payAt=" + payAt +
                 ", totalCredit=" + totalCredit +
-                ", totalAmount=" + totalAmount +
+                ", payAmount=" + payAmount +
                 ", status=" + status +
                 ", unitId=" + unitId +
                 ", unitNum=" + unitNum +
