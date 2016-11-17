@@ -14,7 +14,7 @@ public class TradeSearchForUserCenterParam implements Serializable {
     // mallId
     private String mallId;
     // 卡券（兑换）状态
-    private int status;
+    private Integer status;
     // 订单编号
     private String tradeNo;
     // 礼品名称
@@ -26,9 +26,11 @@ public class TradeSearchForUserCenterParam implements Serializable {
     // 订单创建结束时间
     private Date createEndAt;
     //  页码
-    private int pageIndex ;
+    private int pageIndex;
+    // 开始
+    private int start;
     // 没页数
-    private int pageSize ;
+    private int pageSize;
 
     public Date getCreateEndAt() {
         return createEndAt;
@@ -62,11 +64,11 @@ public class TradeSearchForUserCenterParam implements Serializable {
         this.phone = phone;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -100,6 +102,17 @@ public class TradeSearchForUserCenterParam implements Serializable {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public int getStart() {
+        if (0 < pageIndex && 0 < pageSize) {
+            return (pageIndex - 1) * pageSize;
+        }
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
     }
 
     @Override
