@@ -17,6 +17,10 @@ public class TraderOrderResultForUserCenterVO implements Serializable {
     private List<TraderOrderForUserCenterEntity> tradeOrderList;
     // 总数
     private int totalCount;
+    // 页码
+    private int pageIndex ;
+    // 页数
+    private int pageSize;
 
     public int getTotalCount() {
         return totalCount;
@@ -34,11 +38,29 @@ public class TraderOrderResultForUserCenterVO implements Serializable {
         this.tradeOrderList = tradeOrderList;
     }
 
+    public int getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
     @Override
     public String toString() {
         return "TraderOrderResultForUserCenterVO{" +
-                "totalCount=" + totalCount +
+                "pageIndex=" + pageIndex +
                 ", tradeOrderList=" + tradeOrderList +
+                ", totalCount=" + totalCount +
+                ", pageSize=" + pageSize +
                 '}';
     }
 }

@@ -11,9 +11,9 @@ import java.util.Date;
  */
 public class TradeSearchForUserCenterParam implements Serializable {
 
-    // mallId
+    // mallId（必选）
     private String mallId;
-    // 卡券（兑换）状态
+    // 订单 状态（0：全部 1：待付款 2：已完成 3：已关闭）
     private Integer status;
     // 订单编号
     private String tradeNo;
