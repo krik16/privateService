@@ -10,7 +10,7 @@ import java.util.Date;
  * 查询礼品参数类
  *
  * @author yaoyiwei
- * @date 2016-11-14
+ * @date 2016-11-15
  * @version 1.0
  *
  */
@@ -23,6 +23,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private Integer commodityType;
     private Integer terminalType;
     private String keyword;
+    private Integer status;
 
     public String getPlatform() {
         return platform;
@@ -78,5 +79,13 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  *  商品礼品字段标准转换类
  *
  *  @author yaoyiwei
- *  @date 2016-11-14
+ *  @date 2016-11-16
  *  @version 1.0
  *
  */
@@ -24,6 +24,10 @@ public class StandardConvertionUtil {
      *
      */
     public static int convertPlatformToTerminalType(final String platform) {
+        if(null == platform) {
+            return CommodityTerminalType.TERMINAL_TYPE_4;
+        }
+
         List<String> platforms = Arrays.asList(platform.split(","));
         String flag = (platforms.size() > 1) ? "3" : platforms.get(0);
 
@@ -42,6 +46,29 @@ public class StandardConvertionUtil {
                 terminalType = CommodityTerminalType.TERMINAL_TYPE_4;
         }
         return terminalType;
+    }
+
+    public static String convertTerminalTypeToPlatform(final Integer terminalType) {
+        if(null == terminalType) {
+            return "0";
+        }
+
+        String platform;
+        switch(terminalType) {
+            case CommodityTerminalType.TERMINAL_TYPE_4:
+                platform = "1";
+                break;
+            case CommodityTerminalType.TERMINAL_TYPE_2:
+                platform = "2";
+                break;
+            case CommodityTerminalType.TERMINAL_TYPE_6:
+                platform = "1,2";
+                break;
+            default:
+                platform = "0";
+                break;
+        }
+        return platform;
     }
 
     /**
@@ -68,6 +95,9 @@ public class StandardConvertionUtil {
                 break;
             case 4:
                 status = CommodityDataStatus.STATUS_COMMODITY_DELETED;
+                break;
+            case 5:
+                status = CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING;
                 break;
             default:
                 status = CommodityDataStatus.STATUS_COMMODITY_SHELVE;

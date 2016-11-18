@@ -105,17 +105,21 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer galleryPosition;//橱窗排序商品
 
 	// 礼品id mysql id 兼容老数据
-	private Long giftId;
+	private String giftId;
 	// 礼品编号
-	private String giftSn;
+	private String sn;
 	// 礼品所属id
-	private Long mappingId;
+	private String mappingId;
 	// 商品类型(0:商品, 1:礼品)
 	private Integer commodityType;
 	// 礼品参与活动id
 	private String activityId;
 	// 兑换类型（1.兑换，2.换购）
 	private List<Integer> exchangeTypes;
+	// 积分设置类型（1.同一设置 2.按等级设置）
+	private Integer pointType;
+	// 换购类型（1.同一设置 2.按等级设置）
+	private Integer buyType;
 	// 配送方式（1.自提 2.快递）
 	private List<Integer> deliveryTypes;
 	// 自提类型（1.公共设施 2.指定店铺）
@@ -128,17 +132,148 @@ public class Commodity implements  Serializable,Cloneable{
 	private Long selfAddressId;
 	// 自提期限
 	private Date selfExpireDate;
-	// 积分设置类型
-	private Integer pointType;
-	// 换购类型（1.同一设置 2.按等级设置）
-	private Integer buyType;
 	// 标签列表
 	private List<String> tagIds;
 	// 支付方式列表
 	private List<String> paymentIds;
+	// 商品总库存
+	private Integer total;
 
+	public String getGiftId() {
+		return giftId;
+	}
 
+	public void setGiftId(String giftId) {
+		this.giftId = giftId;
+	}
 
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
+	public String getMappingId() {
+		return mappingId;
+	}
+
+	public void setMappingId(String mappingId) {
+		this.mappingId = mappingId;
+	}
+
+	public Integer getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(Integer commodityType) {
+		this.commodityType = commodityType;
+	}
+
+	public String getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
+	}
+
+	public List<Integer> getExchangeTypes() {
+		return exchangeTypes;
+	}
+
+	public void setExchangeTypes(List<Integer> exchangeTypes) {
+		this.exchangeTypes = exchangeTypes;
+	}
+
+	public Integer getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(Integer pointType) {
+		this.pointType = pointType;
+	}
+
+	public Integer getBuyType() {
+		return buyType;
+	}
+
+	public void setBuyType(Integer buyType) {
+		this.buyType = buyType;
+	}
+
+	public List<Integer> getDeliveryTypes() {
+		return deliveryTypes;
+	}
+
+	public void setDeliveryTypes(List<Integer> deliveryTypes) {
+		this.deliveryTypes = deliveryTypes;
+	}
+
+	public Integer getSelfType() {
+		return selfType;
+	}
+
+	public void setSelfType(Integer selfType) {
+		this.selfType = selfType;
+	}
+
+	public String getSelfAddress() {
+		return selfAddress;
+	}
+
+	public void setSelfAddress(String selfAddress) {
+		this.selfAddress = selfAddress;
+	}
+
+	public String getSelfRemark() {
+		return selfRemark;
+	}
+
+	public void setSelfRemark(String selfRemark) {
+		this.selfRemark = selfRemark;
+	}
+
+	public Long getSelfAddressId() {
+		return selfAddressId;
+	}
+
+	public void setSelfAddressId(Long selfAddressId) {
+		this.selfAddressId = selfAddressId;
+	}
+
+	public Date getSelfExpireDate() {
+		return selfExpireDate;
+	}
+
+	public void setSelfExpireDate(Date selfExpireDate) {
+		this.selfExpireDate = selfExpireDate;
+	}
+
+	public List<String> getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(List<String> tagIds) {
+		this.tagIds = tagIds;
+	}
+
+	public List<String> getPaymentIds() {
+		return paymentIds;
+	}
+
+	public void setPaymentIds(List<String> paymentIds) {
+		this.paymentIds = paymentIds;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
 
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;

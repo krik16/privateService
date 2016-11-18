@@ -25,9 +25,19 @@ public interface CommodityConstants {
         int SPECIFIC_SHOP = 2;
     }
 
+    interface PointType {
+        int ALL = 1;
+        int LEVEL = 2;
+    }
+
     interface BuyType {
         int ALL = 1;
         int LEVEL = 2;
+    }
+
+    interface DeliveryType {
+        int SELF_PICK = 1;
+        int DELIVERY = 2;
     }
 
 }

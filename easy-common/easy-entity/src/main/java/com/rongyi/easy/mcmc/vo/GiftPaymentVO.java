@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.rongyi.easy.mcmc.GiftPayment;
+
 import java.io.Serializable;
 
 /**
@@ -45,5 +47,15 @@ public class GiftPaymentVO implements Serializable {
 
     public void setMoney(Double money) {
         this.money = money;
+    }
+
+    @Override
+    public String toString() {
+        return "GiftPaymentVO{" +
+                "type=" + type +
+                ", level='" + level + '\'' +
+                ", point=" + point +
+                ", money=" + money +
+                '}';
     }
 }
