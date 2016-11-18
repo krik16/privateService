@@ -59,6 +59,7 @@ public class BusinessAccountVO implements Serializable {
 	private Integer isAcc;              //是否加速审核  0是 1否
 	private Date certTime;              //提交审核时间
 	private Integer userStatus;         //用户状态 0未提交审核 2审核中 1审核通过 3审核不通过
+	private String shareCode;
 	
 	private Integer industryId;
 	private String industryName;
@@ -79,6 +80,8 @@ public class BusinessAccountVO implements Serializable {
 	private String backImg;   //身份证背面照 
 	private String workImg;    //工作证照
 	private String otherImg;   //其它照片
+	private String resume;      //自我简介
+	private String position;   //申请所在城市
 	
 	public Integer getId() {
 		return id;
@@ -471,7 +474,25 @@ public class BusinessAccountVO implements Serializable {
 		this.grandpaShopId = grandpaShopId;
 	}
 	
+	public String getShareCode() {
+		return shareCode;
+	}
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
 	
+	public String getResume() {
+		return resume;
+	}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
 	@Override
 	public String toString() {
 		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account
@@ -480,17 +501,20 @@ public class BusinessAccountVO implements Serializable {
 				+ groupName + ", brandId=" + brandId + ", brandMid=" + brandMid + ", brandName=" + brandName
 				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName=" + mallName + ", shopId=" + shopId
 				+ ", shopMid=" + shopMid + ", shopName=" + shopName + ", roleId=" + roleId + ", roleName=" + roleName
-				+ ", branchId=" + branchId + ", branchName=" + branchName + ", accountStatus=" + accountStatus
-				+ ", isSuspended=" + isSuspended + ", balance=" + balance + ", comment=" + comment + ", createSource="
-				+ createSource + ", createBy=" + createBy + ", createAt=" + createAt + ", updateBy=" + updateBy
-				+ ", updateAt=" + updateAt + ", stopReason=" + stopReason + ", stopAt=" + stopAt
-				+ ", virtualStopReason=" + virtualStopReason + ", virtualStopAt=" + virtualStopAt + ", isAcc=" + isAcc
-				+ ", certTime=" + certTime + ", userStatus=" + userStatus + ", industryId=" + industryId
-				+ ", industryName=" + industryName + ", industryVersionId=" + industryVersionId
-				+ ", industryVersionName=" + industryVersionName + ", childAccountNum=" + childAccountNum
-				+ ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode=" + contractCode
-				+ ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level + ", settleOrgStrategy="
-				+ settleOrgStrategy + ", chiefId=" + chiefId + ", userAccounts=" + userAccounts + "]";
+				+ ", branchId=" + branchId + ", branchName=" + branchName + ", parentShopId=" + parentShopId
+				+ ", grandpaShopId=" + grandpaShopId + ", accountStatus=" + accountStatus + ", isSuspended="
+				+ isSuspended + ", balance=" + balance + ", comment=" + comment + ", createSource=" + createSource
+				+ ", createBy=" + createBy + ", createName=" + createName + ", createAt=" + createAt + ", updateBy="
+				+ updateBy + ", updateName=" + updateName + ", updateAt=" + updateAt + ", stopReason=" + stopReason
+				+ ", stopAt=" + stopAt + ", virtualStopReason=" + virtualStopReason + ", virtualStopAt=" + virtualStopAt
+				+ ", isAcc=" + isAcc + ", certTime=" + certTime + ", userStatus=" + userStatus + ", shareCode="
+				+ shareCode + ", industryId=" + industryId + ", industryName=" + industryName + ", industryVersionId="
+				+ industryVersionId + ", industryVersionName=" + industryVersionName + ", childAccountNum="
+				+ childAccountNum + ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode="
+				+ contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level
+				+ ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + ", chiefName=" + chiefName
+				+ ", userAccounts=" + userAccounts + ", faceImg=" + faceImg + ", backImg=" + backImg + ", workImg="
+				+ workImg + ", otherImg=" + otherImg + ", resume=" + resume + ", position=" + position + "]";
 	}
 	
 }
