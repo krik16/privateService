@@ -19,8 +19,12 @@ public class UserParam extends BaseParam {
     private Integer userIdentity; //用户类型  0集团 1商场 2品牌（暂时去掉了） 3分公司 4店长 5导购
     private Integer bindingId;  //用户绑定的ID  （集团ID or商场ID or分公司id or店铺ID）
     private Integer onlyShop; //给推送增加的参数  不查询导购数据
-    private Identity identity ; //查询用户类型
+    private Integer identity ; //查询用户类型
     private Integer isChief;  //是否是主账号  1是 0否
+    private String orderVar = "desc";   //order by顺序
+    private Integer isDisabled ; //0正常 1禁用
+    private Integer status;  //状态
+    private Integer industryId;
 
     public String getTerm() {
         return term;
@@ -94,11 +98,11 @@ public class UserParam extends BaseParam {
         this.userId = userId;
     }
 
-    public Identity getIdentity() {
+    public Integer getIdentity() {
         return identity;
     }
 
-    public void setIdentity(Identity identity) {
+    public void setIdentity(Integer identity) {
         this.identity = identity;
     }
 
@@ -108,6 +112,38 @@ public class UserParam extends BaseParam {
 
     public void setIsChief(Integer isChief) {
         this.isChief = isChief;
+    }
+
+    public String getOrderVar() {
+        return orderVar;
+    }
+
+    public void setOrderVar(String orderVar) {
+        this.orderVar = orderVar;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getIsDisabled() {
+        return isDisabled;
+    }
+
+    public void setIsDisabled(Integer isDisabled) {
+        this.isDisabled = isDisabled;
+    }
+
+    public Integer getIndustryId() {
+        return industryId;
+    }
+
+    public void setIndustryId(Integer industryId) {
+        this.industryId = industryId;
     }
 
     @Override
