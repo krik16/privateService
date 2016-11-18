@@ -2,6 +2,7 @@ package com.rongyi.easy.ryoms.advert.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by caohongjiang on 2016/11/11.
@@ -10,8 +11,8 @@ public class AdPoolSearch implements Serializable {
     private static final long serialVersionUID = -6362248136398024024L;
 
     private Integer configId;
-    private String cityId;
-    private  String businessDistrictId;
+    private List<String> cityId;
+    private  List<String> businessDistrictId;
     private Date begin;
     private Date end;
     private String mallLevel;
@@ -71,19 +72,19 @@ public class AdPoolSearch implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public String getCityId() {
+    public List<String> getCityId() {
         return cityId;
     }
 
-    public void setCityId(String cityId) {
+    public void setCityId(List<String> cityId) {
         this.cityId = cityId;
     }
 
-    public String getBusinessDistrictId() {
+    public List<String> getBusinessDistrictId() {
         return businessDistrictId;
     }
 
-    public void setBusinessDistrictId(String businessDistrictId) {
+    public void setBusinessDistrictId(List<String> businessDistrictId) {
         this.businessDistrictId = businessDistrictId;
     }
 
