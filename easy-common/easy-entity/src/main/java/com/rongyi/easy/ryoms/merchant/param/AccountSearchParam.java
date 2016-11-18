@@ -84,5 +84,12 @@ public class AccountSearchParam implements Serializable {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+	@Override
+	public String toString() {
+		return "AccountSearchParam [userAccount=" + userAccount + ", userPhone=" + userPhone + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId + ", isChief=" + isChief + ", identity="
+				+ identity + ", relId=" + relId + ", isSuspended=" + isSuspended + ", searchStatus=" + searchStatus
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize + "]";
+	}
 	
 }
