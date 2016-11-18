@@ -16,7 +16,7 @@ public class ShopValidParam implements Serializable{
 	private String shopNumber; //铺位号
 	private String address ;   //详细地址
 	private String shopId;  //店铺ID
-	private Integer shopType;  //店铺类型 2街边店
+	private Integer shopType = 1;  //店铺类型 2街边店
 
 	@Override
 	public String toString() {
