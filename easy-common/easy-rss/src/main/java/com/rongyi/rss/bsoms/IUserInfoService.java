@@ -265,7 +265,18 @@ public interface IUserInfoService {
 
 	public boolean insertBuyerInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
 	
+	/**
+	 * 查询买手账号列表
+	 * @param param
+	 * @return
+	 */
 	public List<BuyerListVO> getBuyerList(BuyerListParam param);
+	/**
+	 * 查询买手账号总数量
+	 * @param param
+	 * @return
+	 */
+	public Integer getBuyerAccountListCount(BuyerListParam param);
 	/**
 	 * 审核买手账号
 	 * @param param
