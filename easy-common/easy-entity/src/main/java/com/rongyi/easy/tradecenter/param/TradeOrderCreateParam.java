@@ -175,6 +175,16 @@ public class TradeOrderCreateParam implements Serializable {
      */
     private BigDecimal partOfMoney = new BigDecimal(0);
 
+    /**
+     * 卖家留言
+     */
+    private String buyerMessage;
+
+    // 总积分
+    private BigDecimal totalCredit = new BigDecimal(0);
+
+    // 用户类型
+    private int userType ;
 
     /**
      * end
@@ -512,6 +522,30 @@ public class TradeOrderCreateParam implements Serializable {
         this.articleType = articleType;
     }
 
+    public String getBuyerMessage() {
+        return buyerMessage;
+    }
+
+    public void setBuyerMessage(String buyerMessage) {
+        this.buyerMessage = buyerMessage;
+    }
+
+    public BigDecimal getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(BigDecimal totalCredit) {
+        this.totalCredit = totalCredit;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -551,6 +585,9 @@ public class TradeOrderCreateParam implements Serializable {
                 ", exchangeType=" + exchangeType +
                 ", partOfCredit=" + partOfCredit +
                 ", partOfMoney=" + partOfMoney +
+                ", buyerMessage=" + buyerMessage +
+                ", totalCredit=" + totalCredit +
+                ", userType=" + userType +
                 '}';
     }
 }
