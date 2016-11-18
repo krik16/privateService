@@ -9,6 +9,7 @@ import java.util.Map;
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityStatus;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
+import com.rongyi.easy.activitymanage.entity.GoodsInAppList;
 import com.rongyi.easy.malllife.common.util.Utils;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -831,6 +832,12 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setBrandMid(brandMid);
 			this.setShopMid(vo.getShopMid());
 		}
+	}
+
+	public void setActivityInfoToCommodity(GoodsInAppList goods) {
+		this.setCurrentPrice(goods.getRoundSellIngPrice());
+		this.setPrice(Double.parseDouble(goods.getRoundSellIngPrice()));
+		this.setStock(goods.getRoundRemainCount());
 	}
 
 

@@ -37,6 +37,10 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 	
 	private List<Integer> guideIds;//导购、买手id集合
 
+	private String articleId;//潮人攻略id
+
+	private Integer articleType;// 文章类型 1潮人攻略
+
 	public ShoppingCartParam() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -130,11 +134,36 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 		this.guideId = guideId;
 	}
 
+	public String getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
+	public Integer getArticleType() {
+		return articleType;
+	}
+
+	public void setArticleType(Integer articleType) {
+		this.articleType = articleType;
+	}
+
 	@Override
 	public String toString() {
-		return "ShoppingCartParam [userId=" + userId + ", shopId=" + shopId + ", guideId=" + guideId + ", commodityCount="
-				+ commodityCount + ", shopCartId=" + shopCartId + ", commodityId=" + commodityId + ", specId=" + specId + "]";
+		return "ShoppingCartParam{" +
+				"userId='" + userId + '\'' +
+				", shopId='" + shopId + '\'' +
+				", guideId=" + guideId +
+				", commodityCount=" + commodityCount +
+				", shopCartId=" + shopCartId +
+				", commodityId='" + commodityId + '\'' +
+				", specId='" + specId + '\'' +
+				", type='" + type + '\'' +
+				", guideIds=" + guideIds +
+				", articleId='" + articleId + '\'' +
+				", articleType=" + articleType +
+				'}';
 	}
-	
-    
 }

@@ -30,6 +30,18 @@ public interface IUserInfoService {
 	PagingVO<BusinessAccountVO> searchAccountListByMap(Map<String, Object> paramsMap, int currentPage, int pageSize);
 
 	/**
+	 * 查询商家账户列表 不分页
+	 * @param paramsMap
+	 *           mallMids
+	 *           shopMids
+	 *           identity
+	 *           identitys
+	 * @return
+	 */
+	List<BusinessAccountVO> searchAccountListByMap(Map<String, Object> paramsMap);
+
+	
+	/**
 	 * 资金账户：冻结/解冻
 	 * @param userId
 	 * @param isSuspended
