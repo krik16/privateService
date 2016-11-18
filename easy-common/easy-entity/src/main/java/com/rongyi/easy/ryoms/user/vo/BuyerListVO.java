@@ -21,6 +21,7 @@ public class BuyerListVO implements Serializable{
 	private Date stopAt;//账号停用时间
 	private String stopReason;//账号停用理由
 	private Integer status;//0未提交审核 2审核中 1审核通过 4审核不通过 
+	private Boolean hasVirtualAccount;//是否有资金账号对应的信息
 	public Integer getId() {
 		return id;
 	}
@@ -93,6 +94,12 @@ public class BuyerListVO implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public Boolean getHasVirtualAccount() {
+		return hasVirtualAccount;
+	}
+	public void setHasVirtualAccount(Boolean hasVirtualAccount) {
+		this.hasVirtualAccount = hasVirtualAccount;
+	}
 	@Override
 	public String toString() {
 		return "BuyerListVO [id=" + id + ", userPhone=" + userPhone
@@ -101,7 +108,8 @@ public class BuyerListVO implements Serializable{
 				+ ", isSuspended=" + isSuspended + ", virtualStopAt="
 				+ virtualStopAt + ", virtualStopReason=" + virtualStopReason
 				+ ", stopAt=" + stopAt + ", stopReason=" + stopReason
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", hasVirtualAccount="
+				+ hasVirtualAccount + "]";
 	}
 	
 }
