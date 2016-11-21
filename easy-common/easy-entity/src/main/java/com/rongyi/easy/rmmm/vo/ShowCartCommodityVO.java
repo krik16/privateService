@@ -25,7 +25,7 @@ public class ShowCartCommodityVO implements Serializable{
 	private String commodityPostage;// 邮费
 	private int commodityAppStatus;// 商品状态 0下架 1上架 3待上架
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
-	private Integer purchaseCount;// 限购数量     小于0不限购  大于等于0 限购
+	private Integer purchaseCount;// 限购数量
 	//微信标准版需要
 	private String shopId;//店铺mysqlId
 	private String shopMid;//店铺mongoId
@@ -33,7 +33,6 @@ public class ShowCartCommodityVO implements Serializable{
 	private String shopLogo;//店铺logo
 	private boolean supportCourierDeliver=true;//true是  false否
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
-	private Integer commodityPurchaseCount;// 商品限购数量   默认值 0 表示不限购
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
     private long buyerCount;//用户已购买数量   （只有限购商品才有值）
     
@@ -140,12 +139,6 @@ public class ShowCartCommodityVO implements Serializable{
 	public void setSupportSelfPickup(boolean supportSelfPickup) {
 		this.supportSelfPickup = supportSelfPickup;
 	}
-	public Integer getCommodityPurchaseCount() {
-		return commodityPurchaseCount;
-	}
-	public void setCommodityPurchaseCount(Integer commodityPurchaseCount) {
-		this.commodityPurchaseCount = commodityPurchaseCount;
-	}
 	public boolean isIfShowInWechat() {
 		return ifShowInWechat;
 	}
@@ -197,7 +190,6 @@ public class ShowCartCommodityVO implements Serializable{
 				", shopName=" + shopName +
 				", supportCourierDeliver=" + supportCourierDeliver +
 				", supportSelfPickup=" + supportSelfPickup +
-				", commodityPurchaseCount=" + commodityPurchaseCount +
 				", buyerCount=" + buyerCount +
 				", ifShowInWechat=" + ifShowInWechat +
 				", shopLogo=" + shopLogo +
