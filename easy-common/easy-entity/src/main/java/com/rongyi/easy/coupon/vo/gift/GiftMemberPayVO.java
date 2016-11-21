@@ -5,38 +5,31 @@ import java.io.Serializable;
 /**
  * Description:
  * Author: yb
- * DATE: 2016/11/15 14:50
+ * DATE: 2016/11/21 11:14
  * Package:com.rongyi.easy.coupon.vo.gift
  * Project:easy-coupon
  */
-public class GiftPaymentVO implements Serializable{
-
-    private static final long serialVersionUID = 1L;
+public class GiftMemberPayVO implements Serializable {
 
     /**
-     * 卡券id
-     */
-    private String couponId;
-    /**
-     * 会员等级 v1 v2 v3 v4
+     * 用户等级
      */
     private String level;
+
     /**
      * 所需积分
      */
     private Integer point;
+
     /**
-     * 所需的钱，单位 ：分
+     * 所需金额
      */
     private Integer money;
 
-    public String getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(String couponId) {
-        this.couponId = couponId;
-    }
+    /**
+     * 是否生效（1是，0否）
+     */
+    private Byte isBuy;
 
     public String getLevel() {
         return level;
@@ -62,13 +55,21 @@ public class GiftPaymentVO implements Serializable{
         this.money = money;
     }
 
+    public Byte getIsBuy() {
+        return isBuy;
+    }
+
+    public void setIsBuy(Byte isBuy) {
+        this.isBuy = isBuy;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("GiftPaymentVO{");
-        sb.append("couponId='").append(couponId).append('\'');
-        sb.append(", level='").append(level).append('\'');
+        final StringBuffer sb = new StringBuffer("GiftMemberPayVO{");
+        sb.append("level='").append(level).append('\'');
         sb.append(", point=").append(point);
         sb.append(", money=").append(money);
+        sb.append(", isBuy=").append(isBuy);
         sb.append('}');
         return sb.toString();
     }
