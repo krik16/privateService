@@ -22,7 +22,43 @@ public class BusinessAccountAuthsVO implements Serializable {
 	private String userName;//用户姓名
 	private String nickName;//用户昵称
 	private String merchantName;
+	private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+	private Integer industryId;
+	private String industryName;
+	private Integer industryVersionId;
+	private String industryVersionName;
 	private List<Map> auths;
+	
+	public Integer getIdentity() {
+		return identity;
+	}
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+	public Integer getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+	public String getIndustryName() {
+		return industryName;
+	}
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+	public String getIndustryVersionName() {
+		return industryVersionName;
+	}
+	public void setIndustryVersionName(String industryVersionName) {
+		this.industryVersionName = industryVersionName;
+	}
 	public Integer getId() {
 		return id;
 	}
