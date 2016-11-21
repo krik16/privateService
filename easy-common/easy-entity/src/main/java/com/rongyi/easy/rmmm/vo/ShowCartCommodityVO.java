@@ -35,7 +35,16 @@ public class ShowCartCommodityVO implements Serializable{
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
     private long buyerCount;//用户已购买数量   （只有限购商品才有值）
-    
+	private boolean isSpecDeleted=false;//下单页面判断规则是否已删除 true已删除 false未删除
+
+	public boolean isSpecDeleted() {
+		return isSpecDeleted;
+	}
+
+	public void setSpecDeleted(boolean isSpecDeleted) {
+		this.isSpecDeleted = isSpecDeleted;
+	}
+
 	public String getShopLogo() {
 		return shopLogo;
 	}
@@ -193,6 +202,7 @@ public class ShowCartCommodityVO implements Serializable{
 				", buyerCount=" + buyerCount +
 				", ifShowInWechat=" + ifShowInWechat +
 				", shopLogo=" + shopLogo +
+				", isSpecDeleted=" + isSpecDeleted +
 				"]";
 	}
 
