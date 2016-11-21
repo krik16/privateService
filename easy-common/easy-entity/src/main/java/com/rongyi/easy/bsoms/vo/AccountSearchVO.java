@@ -10,6 +10,7 @@ public class AccountSearchVO implements Serializable{
 	private Integer id;
 	private String userAccount ;//  用户账号
 	private String userName;//用户姓名
+	private String userPhone;
 	private Integer identity;//身份类型
 	private Integer industryId;
 	private String industryName;
@@ -110,6 +111,12 @@ public class AccountSearchVO implements Serializable{
 	}
 	public Integer getSearchStatus() {
 		return searchStatus;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 	public void setSearchStatus(Integer searchStatus) {
 		this.searchStatus = searchStatus;
