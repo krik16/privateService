@@ -22,13 +22,27 @@ public class FloorVO implements Serializable {
 	
 	private String swfPic;
 	    private String fmap;//fmap图--商家后台用的
-	    
-	    
-	    
-   
 
+    private String aliasename;
+    private String aliasname;
 
-		public String getSwfPic() {
+    public String getAliasename() {
+        return aliasename;
+    }
+
+    public void setAliasename(String aliasename) {
+        this.aliasename = aliasename;
+    }
+
+    public String getAliasname() {
+        return aliasname;
+    }
+
+    public void setAliasname(String aliasname) {
+        this.aliasname = aliasname;
+    }
+
+    public String getSwfPic() {
 			return swfPic;
 		}
 
@@ -127,17 +141,25 @@ public class FloorVO implements Serializable {
         this.parentId = parentId;
     }
 
-	@Override
-	public String toString() {
-		return "FloorVO [id=" + id + ", name=" + name + ", buildingName=" + buildingName + ", systemStatus="
-				+ systemStatus + ", position=" + position + ", navigationPic=" + navigationPic + ", pathImg=" + pathImg
-				+ ", picture=" + picture + ", swfPic=" + swfPic + ", fmap=" + fmap + ", parentIds=" + parentIds
-				+ ", parentId=" + parentId + "]";
-	}
+    @Override
+    public String toString() {
+        return "FloorVO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", buildingName='" + buildingName + '\'' +
+                ", systemStatus=" + systemStatus +
+                ", position=" + position +
+                ", navigationPic='" + navigationPic + '\'' +
+                ", pathImg='" + pathImg + '\'' +
+                ", picture='" + picture + '\'' +
+                ", swfPic='" + swfPic + '\'' +
+                ", fmap='" + fmap + '\'' +
+                ", aliasename='" + aliasename + '\'' +
+                ", aliasname='" + aliasname + '\'' +
+                ", parentIds=" + parentIds +
+                ", parentId='" + parentId + '\'' +
+                '}';
+    }
 
 
-    
-    
-    
-    
 }
