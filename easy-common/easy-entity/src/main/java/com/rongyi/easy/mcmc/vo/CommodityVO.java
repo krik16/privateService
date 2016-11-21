@@ -93,6 +93,7 @@ public class CommodityVO  implements  Serializable {
 
 	private String commodityDetails; //商品详情
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
 
 
 	public Integer getGalleryPosition() {
@@ -541,6 +542,14 @@ public class CommodityVO  implements  Serializable {
     public void setIfShowInWechat(boolean ifShowInWechat) {
         this.ifShowInWechat = ifShowInWechat;
     }
+
+	public boolean isSpecDeleted() {
+		return isSpecDeleted;
+	}
+
+	public void setIsSpecDeleted(boolean isSpecDeleted) {
+		this.isSpecDeleted = isSpecDeleted;
+	}
 
 	public CommodityVO(){
 
