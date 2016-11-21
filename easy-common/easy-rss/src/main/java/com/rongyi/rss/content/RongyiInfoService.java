@@ -2,6 +2,7 @@ package com.rongyi.rss.content;
 
 import com.rongyi.easy.content_v2.entity.RongyiInfo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,5 +20,5 @@ public interface RongyiInfoService {
 
     public Integer countRongyiInfoList(RongyiInfo rongyiInfo);
 
-    public RongyiInfo  getLastOrNextId(Integer id);
+    public RongyiInfo  getLastOrNextId(Date date);
 }
