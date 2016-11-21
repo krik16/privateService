@@ -10,6 +10,26 @@ public class ExpressPushVO  implements Serializable{
 	private List<ExpressDataVO> expressList;
 	
 	private boolean ifSupportByKuaidi100 = false;// true快递100订阅成功 false没成功
+	
+	private String expressBillId;// 物流单号ID
+
+	private String expressName;// 物流名称
+
+	public String getExpressBillId() {
+		return expressBillId;
+	}
+
+	public void setExpressBillId(String expressBillId) {
+		this.expressBillId = expressBillId;
+	}
+
+	public String getExpressName() {
+		return expressName;
+	}
+
+	public void setExpressName(String expressName) {
+		this.expressName = expressName;
+	}
 
 	public boolean isIfSupportByKuaidi100() {
 		return ifSupportByKuaidi100;
@@ -38,7 +58,10 @@ public class ExpressPushVO  implements Serializable{
 	@Override
 	public String toString() {
 		return "ExpressPushVO [state=" + state + ", expressList=" + expressList
-				+ ", ifSupportByKuaidi100=" + ifSupportByKuaidi100 + "]";
+				+ ", ifSupportByKuaidi100=" + ifSupportByKuaidi100 
+				+ ", expressBillId=" + expressBillId
+				+ ", expressName=" + expressName
+				+ "]";
 	}
 
 }

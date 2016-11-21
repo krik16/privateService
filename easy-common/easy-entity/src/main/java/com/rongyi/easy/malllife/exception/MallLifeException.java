@@ -11,6 +11,8 @@ package com.rongyi.easy.malllife.exception;
  *
  */
 public class MallLifeException extends Exception{
+	
+	private int code;
 
 
     public MallLifeException(){
@@ -32,4 +34,17 @@ public class MallLifeException extends Exception{
     public MallLifeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+    
+    public MallLifeException(int code, String message) {
+		super(message);
+		this.code = code;
+	}
+    
+    public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
 }

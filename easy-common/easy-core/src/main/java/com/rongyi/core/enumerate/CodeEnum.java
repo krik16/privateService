@@ -123,6 +123,7 @@ public enum CodeEnum {
 	ERROR_MCMC_COMMODITY_DESCRIPTION_HAS_SENSITIVE_WORD("-7013", "您填写的商品描述不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_LPINTUAN("-7016", "拼团商品无法操作"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
@@ -156,6 +157,8 @@ public enum CodeEnum {
     ERROR_ORDER_NOTFOUND("-1916","订单不存在"),
     ERROR_ORDER_ERRORCREATE("-1917","生成订单模板失败"),
     ERROR_ORDER_COMMODITY_LIMIT_COUNT("-1918","下单数量超过了该商品限购数量，请重新选购"),
+    ERROR_BEGINGROUP("-1919","开团失败"),
+    ERROR_JOINGROUP("-1920","参团失败"),
     /** GCC错误提示*/
     ERROR_GCC("-2101", "GCC异常"),
     /** 申请支付错误提示*/

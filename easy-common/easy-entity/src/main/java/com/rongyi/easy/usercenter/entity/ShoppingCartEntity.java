@@ -36,6 +36,8 @@ public class ShoppingCartEntity  implements Serializable {
 
     /** 是否禁用0正常 1禁用 */
     private Integer isDisabled;
+    private Integer articleType;//1 潮人攻略
+    private String articleId;//文章id
 
     public ShoppingCartEntity() {
 		super();
@@ -43,7 +45,7 @@ public class ShoppingCartEntity  implements Serializable {
 	}
 
 	public ShoppingCartEntity(String userId, String shopId, Integer guideId, String commodityMid, Integer guideType,
-			String commoditySpecMid, Integer commodityCount) {
+			String commoditySpecMid, Integer commodityCount,String articleId,Integer articleType) {
 		super();
 		this.userId = userId;
 		this.shopId = shopId;
@@ -55,6 +57,8 @@ public class ShoppingCartEntity  implements Serializable {
 		this.createAt = new Date();
 		this.updateAt = new Date();
 		this.isDisabled = 0;
+        this.articleId = articleId;
+        this.articleType = articleType;
 	}
 
 	/**
@@ -225,6 +229,22 @@ public class ShoppingCartEntity  implements Serializable {
         return isDisabled;
     }
 
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
+    }
+
     /**
      * 是否禁用0正常 1禁用
      * @param isDisabled
@@ -233,12 +253,22 @@ public class ShoppingCartEntity  implements Serializable {
         this.isDisabled = isDisabled;
     }
 
-	@Override
-	public String toString() {
-		return "ShoppingCartEntity [id=" + id + ", userId=" + userId + ", shopId=" + shopId + ", guideId=" + guideId
-				+ ", commodityMid=" + commodityMid + ", guideType=" + guideType + ", commoditySpecMid=" + commoditySpecMid
-				+ ", commodityCount=" + commodityCount + ", createAt=" + createAt + ", updateAt=" + updateAt + ", isDisabled="
-				+ isDisabled + "]";
-	}
-    
+    @Override
+    public String toString() {
+        return "ShoppingCartEntity{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", guideId=" + guideId +
+                ", commodityMid='" + commodityMid + '\'' +
+                ", guideType=" + guideType +
+                ", commoditySpecMid='" + commoditySpecMid + '\'' +
+                ", commodityCount=" + commodityCount +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", isDisabled=" + isDisabled +
+                ", articleType=" + articleType +
+                ", articleId=" + articleId +
+                '}';
+    }
 }

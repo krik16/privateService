@@ -7,7 +7,7 @@ import com.rongyi.core.common.util.JsonUtil;
 public class BailianBaseVo<T>  implements java.io.Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
@@ -35,7 +35,7 @@ public class BailianBaseVo<T>  implements java.io.Serializable{
 		json.append("	   \"obj\":{");
 		json.append("	   \"member_token\":\"token_string\",");
 		json.append("	   \"expire_in\":\"7200\",");
-		json.append("	   \"member_id\":\"1201\",  "); 
+		json.append("	   \"member_id\":\"1201\",  ");
 		json.append("	   \"member_name\":\"郭煜华\",");
 		json.append("	   \"need_complete\":\"false\",");
 		json.append("	   \"black_account\":\"false\",");
@@ -44,11 +44,11 @@ public class BailianBaseVo<T>  implements java.io.Serializable{
 		json.append("	   \"locked_reason\":\"\",");
 		json.append("	   \"error_times\":\"0\",");
 		json.append("	   \"remain_times\":\"3\"");
-		json.append("	  }                         ");                                                                                                                               
+		json.append("	  }                         ");
 		json.append("	}");
 		HashMap<String, Object> classMap = new HashMap<String, Object>();
-		classMap.put("obj", BailianCouponVo.class);//   
-		
+		classMap.put("obj", BailianCouponVo.class);//
+
 		BailianBaseVo vo = (BailianBaseVo)JsonUtil.getDTO(json.toString(), BailianBaseVo.class, classMap);
 	}
 

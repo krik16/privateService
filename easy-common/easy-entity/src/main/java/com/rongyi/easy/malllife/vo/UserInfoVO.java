@@ -55,6 +55,24 @@ public class UserInfoVO implements Serializable {
 	private int isGet;  // 0 失败， 1成功
 
 	private String invitCode ;//邀请码
+	
+	private String officalImId;// 官方环信账号
+
+	public Boolean getIsDeductible() {
+		return isDeductible;
+	}
+
+	public void setIsDeductible(Boolean isDeductible) {
+		this.isDeductible = isDeductible;
+	}
+
+	public String getOfficalImId() {
+		return officalImId;
+	}
+
+	public void setOfficalImId(String officalImId) {
+		this.officalImId = officalImId;
+	}
 
 	public String getInvitCode() {
 		return invitCode;
@@ -295,5 +313,26 @@ public class UserInfoVO implements Serializable {
 
 	public void setPublicNumId(String publicNumId) {
 		this.publicNumId = publicNumId;
+	}
+
+	@Override
+	public String toString() {
+		return "UserInfoVO [userId=" + userId + ", userName=" + userName
+				+ ", password=" + password + ", email=" + email
+				+ ", userPhone=" + userPhone + ", headImg=" + headImg
+				+ ", uid=" + uid + ", openId=" + openId + ", nickName="
+				+ nickName + ", imId=" + imId + ", usualAddress="
+				+ usualAddress + ", hasBindingPhone=" + hasBindingPhone
+				+ ", sex=" + sex + ", credit=" + credit + ", devUuid="
+				+ devUuid + ", hasPwd=" + hasPwd + ", appCode=" + appCode
+				+ ", ischeck=" + ischeck + ", isDeductible=" + isDeductible
+				+ ", isLoginRed=" + isLoginRed + ", loginTimes=" + loginTimes
+				+ ", devId=" + devId + ", pushChanelId=" + pushChanelId
+				+ ", lastSignInIp=" + lastSignInIp + ", channel=" + channel
+				+ ", shareCode=" + shareCode + ", isDisable=" + isDisable
+				+ ", publicNumId=" + publicNumId + ", isGet=" + isGet
+				+ ", invitCode=" + invitCode 
+				+ ", officalImId=" + officalImId 
+				+ "]";
 	}
 }
