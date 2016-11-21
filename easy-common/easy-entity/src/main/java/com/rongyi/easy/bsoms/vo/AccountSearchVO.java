@@ -30,7 +30,21 @@ public class AccountSearchVO implements Serializable{
 	private Integer showAuthDetail;
 	private Date virtualAccountStopAt;
 	private String virtualAccountStopReason;
+	private Date stopAt;
+	private String stopReason;
 	
+	public Date getStopAt() {
+		return stopAt;
+	}
+	public void setStopAt(Date stopAt) {
+		this.stopAt = stopAt;
+	}
+	public String getStopReason() {
+		return stopReason;
+	}
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
 	public Date getVirtualAccountStopAt() {
 		return virtualAccountStopAt;
 	}
