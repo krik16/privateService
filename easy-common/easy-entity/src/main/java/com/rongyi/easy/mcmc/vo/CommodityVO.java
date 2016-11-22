@@ -774,57 +774,96 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 	}
+
 	@Override
 	public String toString() {
-		return "CommodityVO [commodityId=" + commodityId + ", commodityName="
-				+ commodityName + ", commodityCategory=" + commodityCategory
-				+ ", commodityCategory1=" + commodityCategory1
-				+ ", commodityCategory2=" + commodityCategory2
-				+ ", commodityCategoryName1=" + commodityCategoryName1
-				+ ", commodityCategoryName2=" + commodityCategoryName2
-				+ ", commodityDescription=" + commodityDescription
-				+ ", commodityPostage=" + commodityPostage
-				+ ", commodityStock=" + commodityStock + ", commoditySold="
-				+ commoditySold + ", commodityPubDate=" + commodityPubDate
-				+ ", commodityStatus=" + commodityStatus
-				+ ", commodityAppStatus=" + commodityAppStatus
-				+ ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin
-				+ ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin
-				+ ", commodityOPOfLCP=" + commodityOPOfLCP + ", commodityType="
-				+ commodityType + ", isSpot=" + isSpot + ", liveStartTime="
-				+ liveStartTime + ", liveEndTime=" + liveEndTime
-				+ ", create_by=" + create_by + ", update_by=" + update_by
-				+ ", liveId=" + liveId + ", commodityOriginalPrice="
-				+ commodityOriginalPrice + ", commodityCurrentPrice="
-				+ commodityCurrentPrice + ", shopId=" + shopId + ", shopMid="
-				+ shopMid + ", commodityShopNumber=" + commodityShopNumber
-				+ ", commodityPicList=" + commodityPicList
-				+ ", commoditySpecList=" + commoditySpecList
-				+ ", commodityCode=" + commodityCode + ", commodityCommission="
-				+ commodityCommission + ", brandMid=" + brandMid + ", mallMid="
-				+ mallMid + ", shopName=" + shopName
-				+ ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup + ", registerAt="
-				+ registerAt + ", soldOutAt=" + soldOutAt + ", source="
-				+ source + ", freight=" + freight + ", terminalType="
-				+ terminalType + ", stockStatus=" + stockStatus + ", reason="
-				+ reason + ", mallId=" + mallId + ", brandName=" + brandName
-				+ ", shopNum=" + shopNum + ", brandId=" + brandId
-				+ ", filialeMid=" + filialeMid + ", identity=" + identity
-				+ ", processIdentity=" + processIdentity + ", activityType="
-				+ activityType + ", purchaseCount=" + purchaseCount
-				+ ", templateId=" + templateId + ", sort=" + sort
-				+ ", mallName=" + mallName + ", weAndTeStatus=" + weAndTeStatus
-				+ ", customCategoryIds=" + customCategoryIds
-				+ ", commodityModelNo=" + commodityModelNo
-				+ ", activityId=" + activityId
-				+ ", activityPrice=" + activityPrice
-				+", goodsParam="+ goodsParam
-				+", galleryPosition="+ galleryPosition
-				+"]";
-
+		return "CommodityVO{" +
+				"commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", commodityCategory1='" + commodityCategory1 + '\'' +
+				", commodityCategory2='" + commodityCategory2 + '\'' +
+				", commodityCategoryName1='" + commodityCategoryName1 + '\'' +
+				", commodityCategoryName2='" + commodityCategoryName2 + '\'' +
+				", commodityDescription='" + commodityDescription + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", commodityStock='" + commodityStock + '\'' +
+				", commoditySold='" + commoditySold + '\'' +
+				", commodityPubDate='" + commodityPubDate + '\'' +
+				", commodityStatus=" + commodityStatus +
+				", commodityAppStatus=" + commodityAppStatus +
+				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
+				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
+				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
+				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
+				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
+				", commodityType=" + commodityType +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", update_by='" + update_by + '\'' +
+				", liveId='" + liveId + '\'' +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", commodityShopNumber='" + commodityShopNumber + '\'' +
+				", commodityPicList=" + commodityPicList +
+				", commoditySpecList=" + commoditySpecList +
+				", commodityCode='" + commodityCode + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopName='" + shopName + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", stockStatus=" + stockStatus +
+				", reason='" + reason + '\'' +
+				", mallId='" + mallId + '\'' +
+				", brandName='" + brandName + '\'' +
+				", shopNum='" + shopNum + '\'' +
+				", brandId=" + brandId +
+				", filialeMid='" + filialeMid + '\'' +
+				", identity=" + identity +
+				", processIdentity=" + processIdentity +
+				", activityType='" + activityType + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				", sort=" + sort +
+				", mallName='" + mallName + '\'' +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", customCategoryIds=" + customCategoryIds +
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", goodsParam=" + goodsParam +
+				", activityId=" + activityId +
+				", activityPrice=" + activityPrice +
+				", updateAt=" + updateAt +
+				", galleryPosition=" + galleryPosition +
+				", inActivity=" + inActivity +
+				", giftId='" + giftId + '\'' +
+				", sn='" + sn + '\'' +
+				", mappingId='" + mappingId + '\'' +
+				", type=" + type +
+				", exchangeTypes=" + exchangeTypes +
+				", pointType=" + pointType +
+				", buyType=" + buyType +
+				", deliveryTypes=" + deliveryTypes +
+				", selfType=" + selfType +
+				", selfAddress='" + selfAddress + '\'' +
+				", selfRemark='" + selfRemark + '\'' +
+				", selfAddressId='" + selfAddressId + '\'' +
+				", selfExpireDate=" + selfExpireDate +
+				", tagIds=" + tagIds +
+				", paymentIds=" + paymentIds +
+				", paymentVOs=" + paymentVOs +
+				", total=" + total +
+				'}';
 	}
 
 	public Object clone() throws CloneNotSupportedException {
