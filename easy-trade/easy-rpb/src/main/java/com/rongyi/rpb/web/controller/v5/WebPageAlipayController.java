@@ -76,6 +76,8 @@ public class WebPageAlipayController extends BaseController {
         try {
             String version = request.getParameter("appVersion");
             String client = request.getParameter("RYLogTerminalType");
+            request.removeAttribute("appVersion");
+            request.removeAttribute("RYLogTerminalType");
             Map<String, String> verifyMap = beforeVerify(request);
             if (!AlipayNotify.verifyReturn(verifyMap)) {
                 LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
