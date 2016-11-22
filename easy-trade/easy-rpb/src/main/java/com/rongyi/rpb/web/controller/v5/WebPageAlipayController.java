@@ -71,13 +71,9 @@ public class WebPageAlipayController extends BaseController {
      * datetime:2015年6月26日下午6:24:16
      **/
     @RequestMapping("/call_back.htm")
-    public String callBack(HttpServletRequest request, String result, String out_trade_no, String trade_no,Model model) {
+    public String callBack(HttpServletRequest request, String result, String out_trade_no, String trade_no) {
         LOGGER.info("支付宝手机网页同步通知开始,trade_no={},out_trade_no={},result={}", trade_no, out_trade_no, result);
         try {
-            String version = request.getParameter("appVersion");
-            String client = request.getParameter("RYLogTerminalType");
-            request.removeAttribute("appVersion");
-            request.removeAttribute("RYLogTerminalType");
             Map<String, String> verifyMap = beforeVerify(request);
             if (!AlipayNotify.verifyReturn(verifyMap)) {
                 LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
@@ -94,9 +90,6 @@ public class WebPageAlipayController extends BaseController {
                 paymentService.updateListStatus(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);// 修改付款单状态
                 paymentLogInfoService.paySuccessToMessage(out_trade_no, null, orderNums, paymentEntity.getOrderType(), PaymentEventType.PAYMENT);
             }
-            LOGGER.info("version={},client={}",version,client);
-            model.addAttribute("version",version);
-            model.addAttribute("client",client);
             LOGGER.info("支付宝手机网页同步通知结束 ");
             return "zhifuSuccess";
         } catch (Exception e) {
