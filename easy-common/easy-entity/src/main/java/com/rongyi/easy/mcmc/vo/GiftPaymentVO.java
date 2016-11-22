@@ -1,6 +1,5 @@
 package com.rongyi.easy.mcmc.vo;
 
-import com.rongyi.easy.mcmc.GiftPayment;
 
 import java.io.Serializable;
 
