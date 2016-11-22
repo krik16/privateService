@@ -20,5 +20,5 @@ public interface RongyiInfoService {
 
     public Integer countRongyiInfoList(RongyiInfo rongyiInfo);
 
-    public RongyiInfo  getLastOrNextId(Date date, Integer id);
+    public RongyiInfo  getLastOrNextId(Integer id);
 }
