@@ -23,9 +23,11 @@ public class CommoditySpecColumnVO implements  Serializable{
 		
 	}
 	public CommoditySpecColumnVO(CommoditySpecColumn specColumn){
-		this.columnId = specColumn.getId().toString();
-		this.columnName = specColumn.getName();
-		this.isRequired = specColumn.isRequired();
+		if(specColumn != null){
+			this.columnId = specColumn.getId().toString();
+			this.columnName = specColumn.getName();
+			this.isRequired = specColumn.isRequired();
+		}
 	}
 	public String getColumnId() {
 		return columnId;
