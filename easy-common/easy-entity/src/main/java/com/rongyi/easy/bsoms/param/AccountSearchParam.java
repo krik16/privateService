@@ -85,5 +85,12 @@ public class AccountSearchParam  implements Serializable{
 	public void setSearchStatus(Integer searchStatus) {
 		this.searchStatus = searchStatus;
 	}
+	@Override
+	public String toString() {
+		return "AccountSearchParam [id=" + id + ", userAccount=" + userAccount + ", userPhone=" + userPhone
+				+ ", industryId=" + industryId + ", industryVersionId=" + industryVersionId + ", isChief=" + isChief
+				+ ", identity=" + identity + ", merchantId=" + merchantId + ", userStatus=" + userStatus
+				+ ", isSuspended=" + isSuspended + ", searchStatus=" + searchStatus + "]";
+	}
 	
 }

@@ -101,5 +101,13 @@ public class VerifySaveAccountParam  implements Serializable{
 			return date;
 		}
 	}
+	@Override
+	public String toString() {
+		return "VerifySaveAccountParam [id=" + id + ", verifyStatus=" + verifyStatus + ", reason=" + reason
+				+ ", industryId=" + industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum="
+				+ childAccountNum + ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
+				+ ", bShowChiefInfo=" + bShowChiefInfo + ", mallMid=" + mallMid + ", shopMid=" + shopMid + "]";
+	}
+	
 	
 }

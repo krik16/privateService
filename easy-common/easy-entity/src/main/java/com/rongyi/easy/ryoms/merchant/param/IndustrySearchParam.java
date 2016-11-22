@@ -31,4 +31,5 @@ public class IndustrySearchParam implements Serializable {
 		return "IndustrySearchParam [name=" + name + ", currentPage=" + currentPage + ", pageSize=" + pageSize + "]";
 	}
 	
+	
 }

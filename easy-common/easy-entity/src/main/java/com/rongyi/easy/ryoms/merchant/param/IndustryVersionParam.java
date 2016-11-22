@@ -59,5 +59,5 @@ public class IndustryVersionParam implements Serializable {
 		return "IndustryVersionParam [id=" + id + ", name=" + name + ", auths=" + auths + ", industryId=" + industryId
 				+ "]";
 	}
-	
+
 }

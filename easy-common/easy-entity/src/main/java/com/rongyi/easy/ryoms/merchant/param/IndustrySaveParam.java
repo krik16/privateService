@@ -39,7 +39,8 @@ public class IndustrySaveParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "IndustrySaveParam [name=" + name + ", industryVersionParam=" + industryVersionParam + "]";
+		return "IndustrySaveParam [id=" + id + ", name=" + name + ", industryVersionParam=" + industryVersionParam
+				+ "]";
 	}
-	
+
 }
