@@ -39,7 +39,7 @@ div{color :#2d3e50; font-size:16px; line-height:24px ;margin-bottom:11px}
        <p style="margin-top:15px;">支付宝支付成功页面</p>
         <div style="border-color: #ccc;border-style: none none dotted; border-width: 0 0 1px;"></div>
                      <p> 以下是支付宝返回内容</p>
-		$!{content}
+
 	</body>
 <script>
 $(function(){
@@ -49,6 +49,8 @@ $(function(){
 		imglist.eq(i).removeAttr('style');
 		imglist.eq(i).css('max-width','100%');
 	}
+	var version = ${version};
+	var client = ${client};
 	window.Rongyi.HtmlNavigatePaySuccess(true,"Pay Success!");
 })
 </script>
