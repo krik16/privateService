@@ -19,8 +19,8 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  */
 public class UserManagerParam extends BaseParam implements Serializable{
 
-	private static final long serialVersionUID = -7626251289745434411L;
-	
+
+	private static final long serialVersionUID = 5283693194457124613L;
 	private Integer id;//账户id
     private String userAccount ;//用户账号
     private String userLogo;//用户头像
