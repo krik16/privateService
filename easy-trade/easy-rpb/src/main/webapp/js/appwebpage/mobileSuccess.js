@@ -107,7 +107,41 @@ function connectWebViewJavascriptBridge(callback) {
 	}
 }
 
-connectWebViewJavascriptBridge(defineIOS)
+function setupWebViewJavascriptBridge(callback) {
+	if (window.WebViewJavascriptBridge) {
+		return callback(WebViewJavascriptBridge);
+
+
+	}
+	if (window.WVJBCallbacks) {
+		return window.WVJBCallbacks.push(callback);
+	}
+	window.WVJBCallbacks = [callback];
+	var WVJBIframe = document.createElement('iframe');
+	WVJBIframe.style.display = 'none';
+	WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+	document.documentElement.appendChild(WVJBIframe);
+	setTimeout(function() {
+		document.documentElement.removeChild(WVJBIframe)
+	}, 0)
+}
+
+//var version = getQueryString('version');
+//var client = getQueryString('client');
+if (version >= 730 && client == 'iOS') {
+	setupWebViewJavascriptBridge(defineIOS);
+} else {
+	connectWebViewJavascriptBridge(defineIOS);
+}
+
+//function getQueryString(name) {
+//
+//	var search = window.location.search || window.location.hash;
+//	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+//	var r = search.substr(1).match(reg);
+//	if (r != null) return unescape(r[2]); return null;
+//}
+
 
 $(function(){
 	$(".vote li span.radio").each(function(i){
