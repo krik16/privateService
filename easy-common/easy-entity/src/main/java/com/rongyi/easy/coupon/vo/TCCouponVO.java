@@ -4,8 +4,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponBrand;
 import com.rongyi.easy.coupon.entity.CouponCommodity;
 import com.rongyi.easy.coupon.entity.CouponGroup;
-
-import com.rongyi.easy.coupon.vo.gift.GiftPaymentVO;
+import com.rongyi.easy.coupon.vo.gift.GiftMemberPayVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -197,7 +196,7 @@ public class TCCouponVO implements Serializable {
     /**
      *  会员等级 所需积分和钱
      */
-    private List<GiftPaymentVO> giftPaymentVOs;
+    private List<GiftMemberPayVO> giftPaymentVOs;
 
     public String getId() {
         return id;
@@ -604,11 +603,11 @@ public class TCCouponVO implements Serializable {
         this.giftType = giftType;
     }
 
-    public List<GiftPaymentVO> getGiftPaymentVOs() {
+    public List<GiftMemberPayVO> getGiftPaymentVOs() {
         return giftPaymentVOs;
     }
 
-    public void setGiftPaymentVOs(List<GiftPaymentVO> giftPaymentVOs) {
+    public void setGiftPaymentVOs(List<GiftMemberPayVO> giftPaymentVOs) {
         this.giftPaymentVOs = giftPaymentVOs;
     }
 
