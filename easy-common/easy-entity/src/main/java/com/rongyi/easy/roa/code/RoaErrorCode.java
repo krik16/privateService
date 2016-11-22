@@ -41,7 +41,8 @@ public enum RoaErrorCode {
     ERROR_ORDERMODEL_SHIPTYPE_CONFLICT(1052010,"商品发货方式冲突"),
     ERROR_REPEAT_ORDER(1052011,"你已下过订单了，但还没有支付哦~"),
     ERROR_ORDER_SHOP(1052012,"商品不在同一店铺不可下单"),
-    ERROR_CREATE_ORDER_MODEL(1052013,"生成订单模板失败")
+    ERROR_CREATE_ORDER_MODEL(1052013,"生成订单模板失败"),
+    ERROR_COMMODITY_SPEC(1052014,"商品已失效")
     
     ;
 
