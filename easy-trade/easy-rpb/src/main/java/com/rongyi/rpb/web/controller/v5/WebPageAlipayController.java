@@ -74,8 +74,8 @@ public class WebPageAlipayController extends BaseController {
     public String callBack(HttpServletRequest request, String result, String out_trade_no, String trade_no,Model model) {
         LOGGER.info("支付宝手机网页同步通知开始,trade_no={},out_trade_no={},result={}", trade_no, out_trade_no, result);
         try {
-            String version = request.getHeader("appVersion");
-            String client = request.getHeader("RYLogTerminalType");
+            String version = request.getParameter("appVersion");
+            String client = request.getParameter("RYLogTerminalType");
             Map<String, String> verifyMap = beforeVerify(request);
             if (!AlipayNotify.verifyReturn(verifyMap)) {
                 LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
