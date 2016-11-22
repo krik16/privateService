@@ -49,8 +49,7 @@ $(function(){
 		imglist.eq(i).removeAttr('style');
 		imglist.eq(i).css('max-width','100%');
 	}
-	var version = ${version};
-	var client = ${client};
+
 	window.Rongyi.HtmlNavigatePaySuccess(true,"Pay Success!");
 })
 </script>

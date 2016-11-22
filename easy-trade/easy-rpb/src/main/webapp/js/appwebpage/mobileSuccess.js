@@ -46,10 +46,18 @@ if(typeof AndroidWebAppInterface != 'undefined'){
 }
 
 function defineIOS(bridge){
-	bridge.init(function(message, responseCallback) {
-		var data = { 'Javascript Responds':'Wee!' }
-		responseCallback(data)
-	})
+
+	if (bridge.init) {
+		bridge.init(function(message, responseCallback) {
+			var data = { 'Javascript Responds':'Wee!' }
+			responseCallback(data)
+		})
+	}else if (bridge.registerHandler) {
+		bridge.registerHandler('startIOS', function(data, responseCallback) {
+			responseCallback(responseData)
+		})
+	}
+
 
 	window.Rongyi = {
 		HtmlNavigatePaySuccess : function(isSuccess,msg){
