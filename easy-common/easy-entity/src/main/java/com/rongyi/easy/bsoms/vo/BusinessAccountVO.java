@@ -83,6 +83,13 @@ public class BusinessAccountVO implements Serializable {
 	private String resume;      //自我简介
 	private String position;   //申请所在城市
 	
+	private String merchantAddress;//商户地址
+	public String getMerchantAddress() {
+		return merchantAddress;
+	}
+	public void setMerchantAddress(String merchantAddress) {
+		this.merchantAddress = merchantAddress;
+	}
 	public Integer getId() {
 		return id;
 	}

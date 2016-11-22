@@ -108,5 +108,10 @@ public class ShopPositionVO implements Serializable {
 		this.cityId = cityId;
 	}
     
-
+	public String getFullArea(){
+		if(this.pro == null && this.city == null && this.area == null && this.business == null && this.mall == null){
+			return null;
+		}
+		return this.pro + this.city + this.area + this.business + this.mall;
+	}
 }
