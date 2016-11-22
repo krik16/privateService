@@ -495,8 +495,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 				+ industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum=" + childAccountNum
 				+ ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level="
-				+ level + ", settleOrgStrategy=" + settleOrgStrategy + "]";
+				+ level + ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + "]";
 	}
-	
 	
 }

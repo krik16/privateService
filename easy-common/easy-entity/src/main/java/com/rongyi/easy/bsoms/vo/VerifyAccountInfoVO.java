@@ -25,9 +25,22 @@ public class VerifyAccountInfoVO extends CertifiedInfoVo implements Serializable
 	private String userName;//用户姓名
 	private Integer identity;//身份类型
 	private String memo;
-	
+	private String shopMid;
+	private String mallMid;
 	private boolean bShowChiefInfo;
 	
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+	public String getMallMid() {
+		return mallMid;
+	}
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
 	public String getUserPhone() {
 		return userPhone;
 	}

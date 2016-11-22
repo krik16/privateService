@@ -2,6 +2,13 @@ package com.rongyi.easy.ryoms.merchant.param;
 
 import java.io.Serializable;
 
+/** 
+ * @ClassName: AccountOperationParam 
+ * @Description: 
+ * @author Kenny
+ * @date 2016年11月22日 下午2:29:30 
+ *  
+ */
 public class AccountOperationParam implements Serializable {
 	
 	private static final long serialVersionUID = -4855305307781509440L;
@@ -27,4 +34,9 @@ public class AccountOperationParam implements Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	@Override
+	public String toString() {
+		return "AccountOperationParam [id=" + id + ", accountStatus=" + accountStatus + ", reason=" + reason + "]";
+	}
+	
 }

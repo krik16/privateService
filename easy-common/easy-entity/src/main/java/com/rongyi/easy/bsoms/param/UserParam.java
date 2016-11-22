@@ -146,20 +146,14 @@ public class UserParam extends BaseParam {
         this.industryId = industryId;
     }
 
-    @Override
-    public String toString() {
-        return "UserParam{" +
-                "userId=" + userId +
-                ", term='" + term + '\'' +
-                ", roleId=" + roleId +
-                ", shopId=" + shopId +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", userIdentity=" + userIdentity +
-                ", bindingId=" + bindingId +
-                ", onlyShop=" + onlyShop +
-                ", identity=" + identity +
-                ", isChief=" + isChief +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "UserParam [userId=" + userId + ", term=" + term + ", roleId=" + roleId + ", shopId=" + shopId
+				+ ", startTime=" + startTime + ", endTime=" + endTime + ", userIdentity=" + userIdentity
+				+ ", bindingId=" + bindingId + ", onlyShop=" + onlyShop + ", identity=" + identity + ", isChief="
+				+ isChief + ", orderVar=" + orderVar + ", isDisabled=" + isDisabled + ", status=" + status
+				+ ", industryId=" + industryId + "]";
+	}
+
+   
 }

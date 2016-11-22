@@ -41,6 +41,10 @@ public class BaseRelationDataSearchParam implements Serializable {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	
+	@Override
+	public String toString() {
+		return "BaseRelationDataSearchParam [type=" + type + ", name=" + name + ", mid=" + mid + ", currentPage="
+				+ currentPage + ", pageSize=" + pageSize + "]";
+	}
 	
 }
