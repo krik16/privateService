@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import com.rongyi.easy.mcmc.Commodity;
 
 
-public class CommodityVO  implements  Serializable {
+public class CommodityVO  implements  Serializable, Cloneable {
 
 	/**
 	 *
@@ -87,7 +87,41 @@ public class CommodityVO  implements  Serializable {
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
-	private List<GiftPaymentVO> paymentVOs; //商品兑换规则
+
+	// 礼品id mysql id 兼容老数据
+	private String giftId;
+	// 礼品编号
+	private String sn;
+	// 礼品所属id
+	private String mappingId;
+	// 商品类型(0:商品, 1:礼品)
+	private Integer type;
+	// 兑换类型（1.兑换，2.换购）
+	private List<Integer> exchangeTypes;
+	// 积分设置类型（1.同一设置 2.按等级设置）
+	private Integer pointType;
+	// 换购类型（1.同一设置 2.按等级设置）
+	private Integer buyType;
+	// 配送方式（1.自提 2.快递）
+	private List<Integer> deliveryTypes;
+	// 自提类型（1.公共设施 2.指定店铺）
+	private Integer selfType;
+	// 自提地点
+	private String selfAddress;
+	// 自提地点备注
+	private String selfRemark;
+	// 自提地点id
+	private String selfAddressId;
+	// 自提期限
+	private Date selfExpireDate;
+	// 标签列表
+	private List<String> tagIds;
+	// 支付方式列表
+	private List<String> paymentIds;
+	// 商品兑换规则
+	private List<GiftPaymentVO> paymentVOs;
+	// 商品总库存
+	private Integer total;
 
 
 	public Integer getGalleryPosition() {
@@ -348,12 +382,6 @@ public class CommodityVO  implements  Serializable {
 	public void setSource(Integer source) {
 		this.source = source;
 	}
-	/*public Integer getDistribution() {
-		return distribution;
-	}
-	public void setDistribution(Integer distribution) {
-		this.distribution = distribution;
-	}*/
 	public Integer getFreight() {
 		return freight;
 	}
@@ -521,6 +549,134 @@ public class CommodityVO  implements  Serializable {
 		this.paymentVOs = paymentVOs;
 	}
 
+	public String getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(String giftId) {
+		this.giftId = giftId;
+	}
+
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
+	public String getMappingId() {
+		return mappingId;
+	}
+
+	public void setMappingId(String mappingId) {
+		this.mappingId = mappingId;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public List<Integer> getExchangeTypes() {
+		return exchangeTypes;
+	}
+
+	public void setExchangeTypes(List<Integer> exchangeTypes) {
+		this.exchangeTypes = exchangeTypes;
+	}
+
+	public Integer getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(Integer pointType) {
+		this.pointType = pointType;
+	}
+
+	public Integer getBuyType() {
+		return buyType;
+	}
+
+	public void setBuyType(Integer buyType) {
+		this.buyType = buyType;
+	}
+
+	public List<Integer> getDeliveryTypes() {
+		return deliveryTypes;
+	}
+
+	public void setDeliveryTypes(List<Integer> deliveryTypes) {
+		this.deliveryTypes = deliveryTypes;
+	}
+
+	public Integer getSelfType() {
+		return selfType;
+	}
+
+	public void setSelfType(Integer selfType) {
+		this.selfType = selfType;
+	}
+
+	public String getSelfAddress() {
+		return selfAddress;
+	}
+
+	public void setSelfAddress(String selfAddress) {
+		this.selfAddress = selfAddress;
+	}
+
+	public String getSelfRemark() {
+		return selfRemark;
+	}
+
+	public void setSelfRemark(String selfRemark) {
+		this.selfRemark = selfRemark;
+	}
+
+	public String getSelfAddressId() {
+		return selfAddressId;
+	}
+
+	public void setSelfAddressId(String selfAddressId) {
+		this.selfAddressId = selfAddressId;
+	}
+
+	public Date getSelfExpireDate() {
+		return selfExpireDate;
+	}
+
+	public void setSelfExpireDate(Date selfExpireDate) {
+		this.selfExpireDate = selfExpireDate;
+	}
+
+	public List<String> getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(List<String> tagIds) {
+		this.tagIds = tagIds;
+	}
+
+	public List<String> getPaymentIds() {
+		return paymentIds;
+	}
+
+	public void setPaymentIds(List<String> paymentIds) {
+		this.paymentIds = paymentIds;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -671,4 +827,7 @@ public class CommodityVO  implements  Serializable {
 
 	}
 
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

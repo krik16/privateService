@@ -502,8 +502,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setOriginalPrice(commodity.getOriginalPrice());
 		}
 
-		this.setCreateAt(new Date());
-		this.setUpdateAt(new Date());
+		this.setCreateAt(commodity.getCreateAt());
+		this.setUpdateAt(commodity.getUpdateAt());
 		this.setCategoryIds(commodity.getCategoryIds());
 
 		this.setPicList(commodity.getPicList());

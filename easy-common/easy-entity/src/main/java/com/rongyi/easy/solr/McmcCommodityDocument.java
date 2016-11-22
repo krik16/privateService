@@ -9,6 +9,7 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
@@ -116,14 +117,46 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String hotAreaName; ///< 商圈名称
 	@Field("top")
 	private Integer top; ///< 置顶排序
-
 	@Field("secKillSign")
 	private String secKillSign;
 	@Field("extend")
 	private String extend;
-
 	@Field("stock")
 	private Integer stock;
+	@Field("giftId")
+	private String giftId;
+	@Field("sn")
+	private String sn;
+	@Field("mappingId")
+	private String mappingId;
+	@Field("commodityType")
+	private Integer commodityType;
+	@Field("activityId")
+	private String activityId;
+	@Field("exchangeTypes")
+	private List<Integer> exchangeTypes;
+	@Field("pointType")
+	private Integer pointType;
+	@Field("buyType")
+	private Integer buyType;
+	@Field("deliveryTypes")
+	private List<Integer> deliveryTypes;
+	@Field("selfType")
+	private Integer selfType;
+	@Field("selfAddress")
+	private String selfAddress;
+	@Field("selfRemark")
+	private String selfRemark;
+	@Field("selfAddressId")
+	private String selfAddressId;
+	@Field("selfExpireDate")
+	private Date selfExpireDate;
+	@Field("tagIds")
+	private List<String> tagIds;
+	@Field("paymentIds")
+	private List<String> paymentIds;
+	@Field("total")
+	private Integer total;
 
 	public Double getPrice() {
 		return price;
@@ -270,6 +303,142 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
+	}
+
+	public String getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(String giftId) {
+		this.giftId = giftId;
+	}
+
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
+	public String getMappingId() {
+		return mappingId;
+	}
+
+	public void setMappingId(String mappingId) {
+		this.mappingId = mappingId;
+	}
+
+	public Integer getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(Integer commodityType) {
+		this.commodityType = commodityType;
+	}
+
+	public String getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
+	}
+
+	public List<Integer> getExchangeTypes() {
+		return exchangeTypes;
+	}
+
+	public void setExchangeTypes(List<Integer> exchangeTypes) {
+		this.exchangeTypes = exchangeTypes;
+	}
+
+	public Integer getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(Integer pointType) {
+		this.pointType = pointType;
+	}
+
+	public Integer getBuyType() {
+		return buyType;
+	}
+
+	public void setBuyType(Integer buyType) {
+		this.buyType = buyType;
+	}
+
+	public List<Integer> getDeliveryTypes() {
+		return deliveryTypes;
+	}
+
+	public void setDeliveryTypes(List<Integer> deliveryTypes) {
+		this.deliveryTypes = deliveryTypes;
+	}
+
+	public Integer getSelfType() {
+		return selfType;
+	}
+
+	public void setSelfType(Integer selfType) {
+		this.selfType = selfType;
+	}
+
+	public String getSelfAddress() {
+		return selfAddress;
+	}
+
+	public void setSelfAddress(String selfAddress) {
+		this.selfAddress = selfAddress;
+	}
+
+	public String getSelfRemark() {
+		return selfRemark;
+	}
+
+	public void setSelfRemark(String selfRemark) {
+		this.selfRemark = selfRemark;
+	}
+
+	public String getSelfAddressId() {
+		return selfAddressId;
+	}
+
+	public void setSelfAddressId(String selfAddressId) {
+		this.selfAddressId = selfAddressId;
+	}
+
+	public Date getSelfExpireDate() {
+		return selfExpireDate;
+	}
+
+	public void setSelfExpireDate(Date selfExpireDate) {
+		this.selfExpireDate = selfExpireDate;
+	}
+
+	public List<String> getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(List<String> tagIds) {
+		this.tagIds = tagIds;
+	}
+
+	public List<String> getPaymentIds() {
+		return paymentIds;
+	}
+
+	public void setPaymentIds(List<String> paymentIds) {
+		this.paymentIds = paymentIds;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 
 	public McmcCommodityDocument(){
@@ -541,12 +710,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
 		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
-		List<String> category_ids = new ArrayList<>();
-		for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
-			category_ids.add(categoryObjectId.toString());
+		if(commodity.getCommodityType() != CommodityConstants.CommodityType.GIFT) {
+			List<String> category_ids = new ArrayList<>();
+			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
+				category_ids.add(categoryObjectId.toString());
+			}
+			this.setCategory_ids(category_ids);
+			this.setBrandName(commodity.getBrandName());
 		}
-		this.setCategory_ids(category_ids);
-		this.setBrandName(commodity.getBrandName());
 		this.setUpdateAt(commodity.getUpdateAt());
 
 		if (commodity.getSaleId() != null && commodity.getSaleId() != 0) {
@@ -554,8 +725,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSortPosition(9999);
 		}
 
-		if(commodity.getSource() == 0){//商家后台发布商品，默认下架
-			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+		if(commodityVo.getType() != CommodityConstants.CommodityType.GIFT) {
+			if(commodity.getSource() == 0){//商家后台发布商品，默认下架
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+			}
 		}
 		this.setSystemNumber(commodity.getSystemNumber());
 		this.setDiscount(commodity.getDiscount());
@@ -572,8 +745,28 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
 			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
 		}
+		this.setCommodityType(commodityVo.getType());
 
-		if(commodityVo.getProcessIdentity() == Identity.BUYER) {
+		if(commodityVo.getType() == CommodityConstants.CommodityType.GIFT) {
+			this.setGiftId(commodityVo.getGiftId());
+			this.setSn(commodityVo.getSn());
+			this.setMappingId(commodityVo.getMappingId());
+			this.setActivityId(commodityVo.getActivityId() + "");
+			this.setExchangeTypes(commodityVo.getExchangeTypes());
+			this.setPointType(commodityVo.getPointType());
+			this.setBuyType(commodityVo.getBuyType());
+			this.setDeliveryTypes(commodityVo.getDeliveryTypes());
+			this.setSelfType(commodityVo.getSelfType());
+			this.setSelfAddress(commodityVo.getSelfAddress());
+			this.setSelfRemark(commodityVo.getSelfRemark());
+			this.setSelfAddressId(commodityVo.getSelfAddressId());
+			this.setSelfExpireDate(commodityVo.getSelfExpireDate());
+			this.setTagIds(commodityVo.getTagIds());
+			this.setPaymentIds(commodityVo.getPaymentIds());
+			this.setTotal(commodityVo.getTotal());
+		}
+
+		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
 			this.setSpot(commodity.isSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
