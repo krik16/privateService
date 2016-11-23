@@ -66,7 +66,7 @@ public interface IGiftService {
      *
      * @param gift
      *
-     * @return edit message string
+     * @return ResponseResult
      */
-    String editGift(CommodityVO gift);
+    ResponseVO editGift(CommodityVO gift);
 }

@@ -97,13 +97,13 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	// 商品类型(0:商品, 1:礼品)
 	private Integer type;
 	// 兑换类型（1.兑换，2.换购）
-	private List<Integer> exchangeTypes;
+	private String exchangeTypes;
 	// 积分设置类型（1.同一设置 2.按等级设置）
 	private Integer pointType;
 	// 换购类型（1.同一设置 2.按等级设置）
 	private Integer buyType;
 	// 配送方式（1.自提 2.快递）
-	private List<Integer> deliveryTypes;
+	private String deliveryTypes;
 	// 自提类型（1.公共设施 2.指定店铺）
 	private Integer selfType;
 	// 自提地点
@@ -581,11 +581,11 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.type = type;
 	}
 
-	public List<Integer> getExchangeTypes() {
+	public String getExchangeTypes() {
 		return exchangeTypes;
 	}
 
-	public void setExchangeTypes(List<Integer> exchangeTypes) {
+	public void setExchangeTypes(String exchangeTypes) {
 		this.exchangeTypes = exchangeTypes;
 	}
 
@@ -605,11 +605,11 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.buyType = buyType;
 	}
 
-	public List<Integer> getDeliveryTypes() {
+	public String getDeliveryTypes() {
 		return deliveryTypes;
 	}
 
-	public void setDeliveryTypes(List<Integer> deliveryTypes) {
+	public void setDeliveryTypes(String deliveryTypes) {
 		this.deliveryTypes = deliveryTypes;
 	}
 

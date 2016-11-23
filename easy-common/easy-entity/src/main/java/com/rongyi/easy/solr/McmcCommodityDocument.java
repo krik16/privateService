@@ -134,13 +134,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("activityId")
 	private String activityId;
 	@Field("exchangeTypes")
-	private List<Integer> exchangeTypes;
+	private String exchangeTypes;
 	@Field("pointType")
 	private Integer pointType;
 	@Field("buyType")
 	private Integer buyType;
 	@Field("deliveryTypes")
-	private List<Integer> deliveryTypes;
+	private String deliveryTypes;
 	@Field("selfType")
 	private Integer selfType;
 	@Field("selfAddress")
@@ -345,11 +345,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.activityId = activityId;
 	}
 
-	public List<Integer> getExchangeTypes() {
+	public String getExchangeTypes() {
 		return exchangeTypes;
 	}
 
-	public void setExchangeTypes(List<Integer> exchangeTypes) {
+	public void setExchangeTypes(String exchangeTypes) {
 		this.exchangeTypes = exchangeTypes;
 	}
 
@@ -369,11 +369,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.buyType = buyType;
 	}
 
-	public List<Integer> getDeliveryTypes() {
+	public String getDeliveryTypes() {
 		return deliveryTypes;
 	}
 
-	public void setDeliveryTypes(List<Integer> deliveryTypes) {
+	public void setDeliveryTypes(String deliveryTypes) {
 		this.deliveryTypes = deliveryTypes;
 	}
 
