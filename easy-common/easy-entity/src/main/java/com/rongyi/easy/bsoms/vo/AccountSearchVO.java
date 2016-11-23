@@ -20,6 +20,7 @@ public class AccountSearchVO implements Serializable{
 	private Integer isDisabled;
 	private Integer userStatus;
 	private Integer searchStatus;//0待审核  1启用  2停用  3未通过
+	private String searchStatusName;
 	private Integer cashStatus;//资金状态: 0正常  1冻结
 	private Integer isChief;
 	
@@ -33,6 +34,12 @@ public class AccountSearchVO implements Serializable{
 	private Date stopAt;
 	private String stopReason;
 	
+	public String getSearchStatusName() {
+		return searchStatusName;
+	}
+	public void setSearchStatusName(String searchStatusName) {
+		this.searchStatusName = searchStatusName;
+	}
 	public Date getStopAt() {
 		return stopAt;
 	}
