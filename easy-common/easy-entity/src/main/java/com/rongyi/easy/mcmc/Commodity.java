@@ -970,6 +970,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallId(String.valueOf(mallId));
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
+
 		if(vo.getType() != CommodityConstants.CommodityType.GIFT) {
 			this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
 		}
@@ -993,6 +994,8 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setPaymentIds(vo.getPaymentIds());
 			this.setTotal(vo.getTotal());
 		}
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setCommodityModelNo(vo.getCommodityModelNo());
 
 		// 买手&非现货 商品 临时状态: -1
 		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
