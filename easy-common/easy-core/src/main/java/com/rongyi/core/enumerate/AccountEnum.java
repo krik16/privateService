@@ -48,7 +48,8 @@ public enum AccountEnum {
     ERROR_ACCOUNT_MALL(1090034,"请选择所属商场"),
     ERROR_ACCOUNT_SHOP(1090035,"请选择所属店铺"),
     ERROR_FREEZE_FAILD(1090036,"冻结账号失败"),
-    ERROR_UNFREEZE_FAILD(1090037,"解冻账号失败")
+    ERROR_UNFREEZE_FAILD(1090037,"解冻账号失败"),
+    ERROR_ACCOUNT_CHECKED_ERROR(1090038,"该账号无法审核")
     
     ;
    
