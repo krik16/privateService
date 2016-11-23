@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
 
@@ -576,6 +577,12 @@ public class CommodityVO  implements  Serializable {
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.registerAt = commodity.getRegisterAt();
 		this.soldOutAt = commodity.getSoldOutAt();
+		//立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
+        if( this.judgeShelvesType(DateUtils.addYears(commodity.getRegisterAt(),30),commodity.getSoldOutAt()) ){
+           this.shelvesType = 1;
+        }else {
+            this.shelvesType = 2;
+        }
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		// 商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -666,5 +673,11 @@ public class CommodityVO  implements  Serializable {
 				+ ", galleryPosition=" + galleryPosition + ", inActivity="
 				+ inActivity + ", shelvesType=" + shelvesType + "]";
 	}
-	
+	private boolean judgeShelvesType(Date date1,Date date2){
+        if(null ==date1 || null ==date2){
+            return false;
+        }
+        Long difference=date1.getTime()-date2.getTime();
+        return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
+    }
 }

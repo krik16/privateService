@@ -86,6 +86,25 @@ public class CommodityBuyerVO implements Serializable {
     private Integer activityStock;//活动库存
     private String activityMinPrice;//活动 各规格中最低价
     private Integer shelvesType;
+    private Long registerAt;//上架时间
+	private Long soldOutAt;//下架时间
+
+	
+	public Long getRegisterAt() {
+		return registerAt;
+	}
+
+	public void setRegisterAt(Long registerAt) {
+		this.registerAt = registerAt;
+	}
+
+	public Long getSoldOutAt() {
+		return soldOutAt;
+	}
+
+	public void setSoldOutAt(Long soldOutAt) {
+		this.soldOutAt = soldOutAt;
+	}
 
 	public Integer getActivityStatus() {
 		return activityStatus;
@@ -752,6 +771,8 @@ public class CommodityBuyerVO implements Serializable {
         }else {
             this.shelvesType=2;
         }
+        this.registerAt = commodity.getRegisterAt().getTime();//上架时间
+        this.soldOutAt = commodity.getSoldOutAt().getTime();//下架时间
     }
 
     @Override
