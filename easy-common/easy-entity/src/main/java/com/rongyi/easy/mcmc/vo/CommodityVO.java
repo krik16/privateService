@@ -89,7 +89,14 @@ public class CommodityVO  implements  Serializable {
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
-
+	private boolean offerShelves;//是否可下架  true是；false否
+	
+	public boolean isOfferShelves() {
+		return offerShelves;
+	}
+	public void setOfferShelves(boolean offerShelves) {
+		this.offerShelves = offerShelves;
+	}
 	public Integer getShelvesType() {
 		return shelvesType;
 	}
