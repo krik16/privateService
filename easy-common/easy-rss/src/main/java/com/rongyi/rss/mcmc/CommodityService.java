@@ -62,7 +62,7 @@ public interface CommodityService {
      */
     public ResponseResult getCommodityById(String id, long shopId);
 
-    public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByShopId(int identity,String id, int orderBy, String keyword, int currentpage, int pagesize);
 
     public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
