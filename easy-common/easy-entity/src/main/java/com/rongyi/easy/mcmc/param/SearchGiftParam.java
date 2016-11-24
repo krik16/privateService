@@ -1,6 +1,5 @@
 package com.rongyi.easy.mcmc.param;
 
-import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.util.StandardConvertionUtil;
 
 import java.io.Serializable;
@@ -10,12 +9,13 @@ import java.util.Date;
  * 查询礼品参数类
  *
  * @author yaoyiwei
- * @date 2016-11-15
+ * @date 2016-11-24
  * @version 1.0
  *
  */
 public class SearchGiftParam extends PaginationParam implements Serializable {
 
+    private String id;
     private String platform;
     private String code;
     private String name;
@@ -24,6 +24,15 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private Integer terminalType;
     private String keyword;
     private Integer status;
+    private String reason;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPlatform() {
         return platform;
@@ -87,5 +96,29 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchGiftParam{" +
+                "id='" + id + '\'' +
+                ", platform='" + platform + '\'' +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", createAt=" + createAt +
+                ", commodityType=" + commodityType +
+                ", terminalType=" + terminalType +
+                ", keyword='" + keyword + '\'' +
+                ", reason=" + reason +
+                ", status=" + status +
+                '}';
     }
 }

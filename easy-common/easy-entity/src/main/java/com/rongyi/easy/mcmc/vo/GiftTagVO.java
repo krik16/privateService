@@ -21,6 +21,8 @@ public class GiftTagVO implements Serializable {
     private String name;
     // 创建时间
     private Date createAt;
+    // 更新时间
+    private Date updateAt;
     // mysql id
     private String mysqlId;
 
@@ -64,4 +66,23 @@ public class GiftTagVO implements Serializable {
         this.mysqlId = mysqlId;
     }
 
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    @Override
+    public String toString() {
+        return "GiftTagVO{" +
+                "id='" + id + '\'' +
+                ", mappingId='" + mappingId + '\'' +
+                ", name='" + name + '\'' +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", mysqlId='" + mysqlId + '\'' +
+                '}';
+    }
 }

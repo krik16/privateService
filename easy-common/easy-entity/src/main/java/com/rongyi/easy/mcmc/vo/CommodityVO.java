@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import org.apache.commons.lang.StringUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -95,7 +96,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	// 礼品所属id
 	private String mappingId;
 	// 商品类型(0:商品, 1:礼品)
-	private Integer type;
+	private Integer commodityRange = CommodityConstants.CommodityType.COMMODITY;
 	// 兑换类型（1.兑换，2.换购）
 	private String exchangeTypes;
 	// 积分设置类型（1.同一设置 2.按等级设置）
@@ -120,9 +121,25 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private List<String> paymentIds;
 	// 商品兑换规则
 	private List<GiftPaymentVO> paymentVOs;
-	// 商品总库存
-	private Integer total;
+	private String platform;
+	private Double price;
 
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
 
 	public Integer getGalleryPosition() {
 		return galleryPosition;
@@ -573,12 +590,12 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.mappingId = mappingId;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getCommodityRange() {
+		return commodityRange;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
 	}
 
 	public String getExchangeTypes() {
@@ -667,14 +684,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	public void setPaymentIds(List<String> paymentIds) {
 		this.paymentIds = paymentIds;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
 	}
 
 	public CommodityVO(){
@@ -849,7 +858,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", giftId='" + giftId + '\'' +
 				", sn='" + sn + '\'' +
 				", mappingId='" + mappingId + '\'' +
-				", type=" + type +
+				", commodityRange=" + commodityRange +
 				", exchangeTypes=" + exchangeTypes +
 				", pointType=" + pointType +
 				", buyType=" + buyType +
@@ -862,7 +871,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", tagIds=" + tagIds +
 				", paymentIds=" + paymentIds +
 				", paymentVOs=" + paymentVOs +
-				", total=" + total +
 				'}';
 	}
 

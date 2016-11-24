@@ -24,13 +24,13 @@ public class GiftVO implements Serializable {
     private List<String> picList;
     private String name;
     private List<GiftPaymentVO> paymentVOs;
-    private Integer total;
     private Integer stock;
     private List<String> terminalMsg;
     private Date createAt;
     private String createBy;
     private Integer status;
     private Integer terminalType;
+    private String platform;
 
     public String getCode() {
         return code;
@@ -64,14 +64,6 @@ public class GiftVO implements Serializable {
         this.paymentVOs = paymentVOs;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
     public Integer getStock() {
         return stock;
     }
@@ -86,6 +78,14 @@ public class GiftVO implements Serializable {
 
     public void setTerminalType(Integer terminalType) {
         this.terminalType = terminalType;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 
     public List<String> getTerminalMsg() {
@@ -139,13 +139,13 @@ public class GiftVO implements Serializable {
                 ", picList=" + picList +
                 ", name='" + name + '\'' +
                 ", paymentVOs=" + paymentVOs +
-                ", total=" + total +
                 ", stock=" + stock +
                 ", terminalMsg=" + terminalMsg +
                 ", createAt=" + createAt +
                 ", createBy='" + createBy + '\'' +
                 ", status=" + status +
                 ", terminalType=" + terminalType +
+                ", platform=" + platform +
                 '}';
     }
 }

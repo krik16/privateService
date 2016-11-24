@@ -16,16 +16,16 @@ import java.util.List;
 public class GiftDetailVO extends GiftVO implements Serializable {
 
     private String sn; //礼品编号
-    private String commodityType;
+    private String commodityRange;
     private Double price;
-    private List<Integer> exchangeTypes; // 兑换类型（1.兑换，2.换购）
+    private String exchangeTypes; // 兑换类型（1.兑换，2.换购）
     private Integer pointType; // 积分设置类型（1.同一设置 2.按等级设置）
     private Integer buyType; // 换购类型（1.同一设置 2.按等级设置）
     private List<String> terminalMsg; //上架终端描述
     private Date registerAt; //上架时间
     private Date soldOutAt; //下架时间
     private Integer purchaseCount;//商品的限购数量
-    private List<Integer> deliveryTypes; // 配送方式（1.自提 2.快递）
+    private String deliveryTypes; // 配送方式（1.自提 2.快递）
     private Integer selfType; // 自提类型（1.公共设施 2.指定店铺）
     private String selfAddress; // 自提地点
     private String selfRemark; // 自提地点备注
@@ -41,12 +41,12 @@ public class GiftDetailVO extends GiftVO implements Serializable {
         this.sn = sn;
     }
 
-    public String getCommodityType() {
-        return commodityType;
+    public String getCommodityRange() {
+        return commodityRange;
     }
 
-    public void setCommodityType(String commodityType) {
-        this.commodityType = commodityType;
+    public void setCommodityRange(String commodityRange) {
+        this.commodityRange = commodityRange;
     }
 
     public Double getPrice() {
@@ -57,11 +57,11 @@ public class GiftDetailVO extends GiftVO implements Serializable {
         this.price = price;
     }
 
-    public List<Integer> getExchangeTypes() {
+    public String getExchangeTypes() {
         return exchangeTypes;
     }
 
-    public void setExchangeTypes(List<Integer> exchangeTypes) {
+    public void setExchangeTypes(String exchangeTypes) {
         this.exchangeTypes = exchangeTypes;
     }
 
@@ -105,11 +105,11 @@ public class GiftDetailVO extends GiftVO implements Serializable {
         this.purchaseCount = purchaseCount;
     }
 
-    public List<Integer> getDeliveryTypes() {
+    public String getDeliveryTypes() {
         return deliveryTypes;
     }
 
-    public void setDeliveryTypes(List<Integer> deliveryTypes) {
+    public void setDeliveryTypes(String deliveryTypes) {
         this.deliveryTypes = deliveryTypes;
     }
 
@@ -165,7 +165,7 @@ public class GiftDetailVO extends GiftVO implements Serializable {
     public String toString() {
         return "GiftDetailVO{" +
                 "sn='" + sn + '\'' +
-                ", commodityType='" + commodityType + '\'' +
+                ", commodityRange='" + commodityRange + '\'' +
                 ", price=" + price +
                 ", exchangeTypes=" + exchangeTypes +
                 ", pointType=" + pointType +
