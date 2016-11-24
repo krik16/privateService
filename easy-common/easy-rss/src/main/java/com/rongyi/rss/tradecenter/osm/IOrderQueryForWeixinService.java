@@ -5,6 +5,7 @@ package com.rongyi.rss.tradecenter.osm;
 
 import com.rongyi.easy.tradecenter.vo.PintuanOrderCountVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,5 +27,5 @@ public interface IOrderQueryForWeixinService {
 	 * @param  endAt    下单结束时间 格式 "2015-11-14 01:37:40"
 	 * @throws Exception
 	 */
-	List<PintuanOrderCountVO> pintuanOrderCount(Integer activityId,List<String> commodityId, Integer countType,String begingAt,String endAt) throws Exception;
+	List<PintuanOrderCountVO> pintuanOrderCount(Integer activityId,List<String> commodityId, Integer countType,Date begingAt,Date endAt) throws Exception;
 }
