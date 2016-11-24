@@ -85,11 +85,10 @@ public class CommodityBuyerVO implements Serializable {
     private Long activityEndAt;//活动结束时间
     private Integer activityStock;//活动库存
     private String activityMinPrice;//活动 各规格中最低价
-    private Integer shelvesType;
     private Long registerAt;//上架时间
 	private Long soldOutAt;//下架时间
 
-	
+
 	public Long getRegisterAt() {
 		return registerAt;
 	}
@@ -647,14 +646,6 @@ public class CommodityBuyerVO implements Serializable {
         this.weAndTeStatus = weAndTeStatus;
     }
 
-    public Integer getShelvesType() {
-        return shelvesType;
-    }
-
-    public void setShelvesType(Integer shelvesType) {
-        this.shelvesType = shelvesType;
-    }
-
     public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
@@ -765,12 +756,6 @@ public class CommodityBuyerVO implements Serializable {
         //默认返回非橱窗商品的值设置为0
         this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
         this.weAndTeStatus = commodity.getWeAndTeStatus();
-        //立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
-        if( this.judgeShelvesType(DateUtils.addYears(commodity.getRegisterAt(),30),commodity.getSoldOutAt()) ){
-           this.shelvesType=1;
-        }else {
-            this.shelvesType=2;
-        }
         this.registerAt = commodity.getRegisterAt().getTime();//上架时间
         this.soldOutAt = commodity.getSoldOutAt().getTime();//下架时间
     }
