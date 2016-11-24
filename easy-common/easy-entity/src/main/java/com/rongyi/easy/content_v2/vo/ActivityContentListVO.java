@@ -1,6 +1,7 @@
 package com.rongyi.easy.content_v2.vo;
 
 import com.google.inject.internal.Lists;
+import com.rongyi.easy.malllife.vo.ActivityCommodityVO;
 import com.rongyi.easy.malllife.vo.CommoditySaleVO;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
 
@@ -20,8 +21,8 @@ public class ActivityContentListVO implements Serializable{
     private Integer id;//特卖id
     private String title;
     private String bannerPic;
-    private Integer type;
-    private String typeVal;
+    private Integer type;//4商品  19特卖
+    private String typeVal;//商品id
     /**活动url*/
     private String activityUrl;//活动url
     private String shareTitle;//分享标题
@@ -31,7 +32,17 @@ public class ActivityContentListVO implements Serializable{
     private String replacePic;//banner图片，展示的大图片
     private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
     
-    public List<CommoditySaleVO> getCommoditySaleVOList() {
+    private ActivityCommodityVO activityCommodityVO;
+    
+    public ActivityCommodityVO getActivityCommodityVO() {
+		return activityCommodityVO;
+	}
+
+	public void setActivityCommodityVO(ActivityCommodityVO activityCommodityVO) {
+		this.activityCommodityVO = activityCommodityVO;
+	}
+
+	public List<CommoditySaleVO> getCommoditySaleVOList() {
 		return commoditySaleVOList;
 	}
 
@@ -127,21 +138,16 @@ public class ActivityContentListVO implements Serializable{
         this.appTitle = appTitle;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("title", title)
-                .append("bannerPic", bannerPic)
-                .append("type", type)
-                .append("typeVal", typeVal)
-                .append("activityUrl", activityUrl)
-                .append("shareTitle", shareTitle)
-                .append("shareDesc", shareDesc)
-                .append("appTitle", appTitle)
-                .append("sharePic", sharePic)
-                .append("replacePic", replacePic)
-                .append("commoditySaleVOList", commoditySaleVOList)
-                .toString();
-    }
+	@Override
+	public String toString() {
+		return "ActivityContentListVO [id=" + id + ", title=" + title
+				+ ", bannerPic=" + bannerPic + ", type=" + type + ", typeVal="
+				+ typeVal + ", activityUrl=" + activityUrl + ", shareTitle="
+				+ shareTitle + ", shareDesc=" + shareDesc + ", appTitle="
+				+ appTitle + ", sharePic=" + sharePic + ", replacePic="
+				+ replacePic + ", commoditySaleVOList=" + commoditySaleVOList
+				+ ", activityCommodityVO=" + activityCommodityVO + "]";
+	}
+
+    
 }
