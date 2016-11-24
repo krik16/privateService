@@ -67,4 +67,16 @@ public class PingTuanViewConUpParams implements Serializable{
     public void setStartAt(Date startAt) {
         this.startAt = startAt;
     }
+
+    @Override
+    public String toString() {
+        return "PingTuanViewConUpParams{" +
+                "activityId=" + activityId +
+                ", flag=" + flag +
+                ", currentPageUp=" + currentPageUp +
+                ", pageSizeUp=" + pageSizeUp +
+                ", startAt=" + startAt +
+                ", endAt=" + endAt +
+                '}';
+    }
 }
