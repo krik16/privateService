@@ -39,8 +39,13 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String cityId;//收货城市id
 	private String districtId;//收货区县id
 	private Integer business;//订单类型（0普通、1积分商城）
-	private Integer point;//积分商城积分
-	private BigDecimal pointDiscount;//积分商城积分抵扣金额
+	//=======start= add by wangjh7 at 2016-11-23
+	private Integer commodityType; //商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券
+	private Integer userType; // 用户类型（0：容易逛 1：电子会员）
+	private Integer exchangeType; // 兑换类型（1：兑换 2：换购）
+	private Integer deliveryType; // 快递方式 1：自提 2：快递"
+	private Integer totalCredit; // 总积分
+	// =======end=
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -244,20 +249,44 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.business = business;
 	}
 
-	public Integer getPoint() {
-		return point;
+	public Integer getCommodityType() {
+		return commodityType;
 	}
 
-	public void setPoint(Integer point) {
-		this.point = point;
+	public void setCommodityType(Integer commodityType) {
+		this.commodityType = commodityType;
 	}
 
-	public BigDecimal getPointDiscount() {
-		return pointDiscount;
+	public Integer getExchangeType() {
+		return exchangeType;
 	}
 
-	public void setPointDiscount(BigDecimal pointDiscount) {
-		this.pointDiscount = pointDiscount;
+	public void setExchangeType(Integer exchangeType) {
+		this.exchangeType = exchangeType;
+	}
+
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
+
+	public Integer getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(Integer deliveryType) {
+		this.deliveryType = deliveryType;
+	}
+
+	public Integer getTotalCredit() {
+		return totalCredit;
+	}
+
+	public void setTotalCredit(Integer totalCredit) {
+		this.totalCredit = totalCredit;
 	}
 
 	@Override

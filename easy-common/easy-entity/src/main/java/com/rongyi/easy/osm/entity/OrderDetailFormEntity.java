@@ -123,6 +123,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
 
+    private Integer exchangeType ;  // 兑换类型，1：兑换 2：换购'
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -623,6 +625,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 	public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
+
+    public Integer getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(Integer exchangeType) {
+        this.exchangeType = exchangeType;
+    }
 
     @Override
     public int compareTo(OrderDetailFormEntity o) {
