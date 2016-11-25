@@ -68,15 +68,12 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
-    private Integer buyerType;//用户类型 0容易逛 1电子会员
-    private Integer pltScore;//平台积分
-    private BigDecimal pltScoreDiscount;//平台积分抵扣金额
+    private Integer business; // 0普通商品订单 1礼品订单
     private Integer deliveryType;//快递方式 1自提 2快递
-    private String orderCode;//订单码，用户礼品自提核销
-    private Date selfpickTime;//自提时间
-    private Integer selfpickStatus;//0待领取，1已领取，2已放弃
-    private Integer business;//0普通商品订单 1礼品订单
-
+    //======= add by wangjh7 on 2016-11-23
+    private Integer userType; // 用户类型，0：容易逛；1：电子会员
+    private Integer totalCredit; // 兑换的总积分
+    private Integer commodityType; // 商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
 
     public Byte getIsAlert() {
         return isAlert;
@@ -552,30 +549,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.activityName = activityName;
     }
 
-    public Integer getBuyerType() {
-        return buyerType;
-    }
-
-    public void setBuyerType(Integer buyerType) {
-        this.buyerType = buyerType;
-    }
-
-    public Integer getPltScore() {
-        return pltScore;
-    }
-
-    public void setPltScore(Integer pltScore) {
-        this.pltScore = pltScore;
-    }
-
-    public BigDecimal getPltScoreDiscount() {
-        return pltScoreDiscount;
-    }
-
-    public void setPltScoreDiscount(BigDecimal pltScoreDiscount) {
-        this.pltScoreDiscount = pltScoreDiscount;
-    }
-
     public Integer getDeliveryType() {
         return deliveryType;
     }
@@ -584,36 +557,36 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.deliveryType = deliveryType;
     }
 
-    public String getOrderCode() {
-        return orderCode;
-    }
-
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode;
-    }
-
-    public Date getSelfpickTime() {
-        return selfpickTime;
-    }
-
-    public void setSelfpickTime(Date selfpickTime) {
-        this.selfpickTime = selfpickTime;
-    }
-
-    public Integer getSelfpickStatus() {
-        return selfpickStatus;
-    }
-
-    public void setSelfpickStatus(Integer selfpickStatus) {
-        this.selfpickStatus = selfpickStatus;
-    }
-
     public Integer getBusiness() {
         return business;
     }
 
     public void setBusiness(Integer business) {
         this.business = business;
+    }
+
+    public Integer getCommodityType() {
+        return commodityType;
+    }
+
+    public void setCommodityType(Integer commodityType) {
+        this.commodityType = commodityType;
+    }
+
+    public Integer getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(Integer totalCredit) {
+        this.totalCredit = totalCredit;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     @Override
