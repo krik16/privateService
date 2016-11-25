@@ -23,6 +23,9 @@ public class UserAccountEntity implements Serializable{
 
     /** 对应银行表的ID */
     private Integer bankId;
+    
+    /** 对应银行表的Name */
+    private String bankName;
 
     /** 创建人 */
     private Integer createBy;
@@ -248,5 +251,14 @@ public class UserAccountEntity implements Serializable{
 	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
 		this.settleOrgStrategy = settleOrgStrategy;
 	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	
 	
 }
