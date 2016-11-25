@@ -86,7 +86,15 @@ public class MallVO implements Serializable {
 	private String businessStatusReason;
     private String ename;    //商场英文名称
     private String descriptionEn;//商场英文介绍
+    private  Integer dailyPeople ;//日均人流量
 
+    public Integer getDailyPeople() {
+        return dailyPeople;
+    }
+
+    public void setDailyPeople(Integer dailyPeople) {
+        this.dailyPeople = dailyPeople;
+    }
 
     public void setId(String id) {
         this.id = id;
