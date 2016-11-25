@@ -50,7 +50,8 @@ public enum AccountEnum {
     ERROR_FREEZE_FAILD(1090036,"冻结账号失败"),
     ERROR_UNFREEZE_FAILD(1090037,"解冻账号失败"),
     ERROR_ACCOUNT_CHECKED_ERROR(1090038,"该账号无法审核"),
-    ERROR_NICKNAME_INVALID(1090039,"请输入长度在2-20字符内的昵称")
+    ERROR_NICKNAME_INVALID(1090039,"请输入长度在2-20字符内的昵称"),
+    ERROR_CHILDACCOUNTNUM_TOOLOW(1090040, "子账户数量不可小于现有子账户数量")
     
     ;
    
