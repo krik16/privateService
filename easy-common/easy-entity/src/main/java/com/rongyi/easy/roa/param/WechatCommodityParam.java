@@ -15,6 +15,13 @@ public class WechatCommodityParam extends MalllifeBaseParam implements Serializa
 	private String commodityId;//商品id
 	private Integer activityId;//拼团活动id
 	private String memberId;//微信电子会员ids
+	private List<CommoditySpecParam> commoditySpecIds;
+	public List<CommoditySpecParam> getCommoditySpecIds() {
+		return commoditySpecIds;
+	}
+	public void setCommoditySpecIds(List<CommoditySpecParam> commoditySpecIds) {
+		this.commoditySpecIds = commoditySpecIds;
+	}
 	public Integer getActivityId() {
 		return activityId;
 	}
@@ -34,14 +41,7 @@ public class WechatCommodityParam extends MalllifeBaseParam implements Serializa
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
-	}
-	@Override
-	public String toString() {
-		return "WechatCommodityParam [commodityId=" + commodityId
-				+ ", activityId=" + activityId + ", memberId=" + memberId + "]";
-	}
-	
-	
+	}	
 
 	public List<String> getCommodityIds() {
 		return commodityIds;
@@ -49,5 +49,12 @@ public class WechatCommodityParam extends MalllifeBaseParam implements Serializa
 
 	public void setCommodityIds(List<String> commodityIds) {
 		this.commodityIds = commodityIds;
+	}
+	@Override
+	public String toString() {
+		return "WechatCommodityParam [commodityId=" + commodityId
+				+ ", activityId=" + activityId + ", memberId=" + memberId
+				+ ", commoditySpecIds=" + commoditySpecIds + ", commodityIds="
+				+ commodityIds + "]";
 	}
 }
