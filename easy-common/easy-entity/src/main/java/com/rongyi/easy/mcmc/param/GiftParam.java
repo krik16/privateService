@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
+import com.rongyi.easy.mcmc.vo.GiftPaymentVO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +56,7 @@ public class GiftParam implements Serializable {
     private List<String> tagIds;
     // 支付方式列表
     private List<String> paymentIds;
+    private List<GiftPaymentVO> paymentVOs;
     // 商品总库存
     private Integer total;
     // 商品状态
@@ -64,6 +67,8 @@ public class GiftParam implements Serializable {
     private Date registerAt;//上架时间
     private Date soldOutAt;//下架时间
     private String pass;  // 1:通过 0: 不通过
+    private Integer selfTakeDays;
+    private String reason;
 
     public String getId() {
         return id;
@@ -311,6 +316,30 @@ public class GiftParam implements Serializable {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public List<GiftPaymentVO> getPaymentVOs() {
+        return paymentVOs;
+    }
+
+    public void setPaymentVOs(List<GiftPaymentVO> paymentVOs) {
+        this.paymentVOs = paymentVOs;
+    }
+
+    public Integer getSelfTakeDays() {
+        return selfTakeDays;
+    }
+
+    public void setSelfTakeDays(Integer selfTakeDays) {
+        this.selfTakeDays = selfTakeDays;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     @Override

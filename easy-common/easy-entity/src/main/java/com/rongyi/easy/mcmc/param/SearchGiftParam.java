@@ -20,11 +20,12 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private String code;
     private String name;
     private Date createAt;
-    private Integer commodityType;
+    private Integer commodityRange;
     private Integer terminalType;
     private String keyword;
     private Integer status;
     private String reason;
+    private String mappingId;
 
     public String getId() {
         return id;
@@ -42,12 +43,12 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
         this.platform = platform;
     }
 
-    public Integer getCommodityType() {
-        return commodityType;
+    public Integer getCommodityRange() {
+        return commodityRange;
     }
 
-    public void setCommodityType(Integer commodityType) {
-        this.commodityType = commodityType;
+    public void setCommodityRange(Integer commodityRange) {
+        this.commodityRange = commodityRange;
     }
 
     public String getCode() {
@@ -106,6 +107,14 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
         this.reason = reason;
     }
 
+    public String getMappingId() {
+        return mappingId;
+    }
+
+    public void setMappingId(String mappingId) {
+        this.mappingId = mappingId;
+    }
+
     @Override
     public String toString() {
         return "SearchGiftParam{" +
@@ -114,7 +123,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", createAt=" + createAt +
-                ", commodityType=" + commodityType +
+                ", commodityRange=" + commodityRange +
                 ", terminalType=" + terminalType +
                 ", keyword='" + keyword + '\'' +
                 ", reason=" + reason +

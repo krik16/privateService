@@ -29,9 +29,11 @@ public class GiftDetailVO extends GiftVO implements Serializable {
     private Integer selfType; // 自提类型（1.公共设施 2.指定店铺）
     private String selfAddress; // 自提地点
     private String selfRemark; // 自提地点备注
+    private String selfAddressId; // 自提地点id
     private List<String> tagIds;  // 标签列表
     private List<GiftTagVO> tagVOs;
     private String description;//商品描述
+    private Integer selfTakeDays; //自提天数
 
     public String getSn() {
         return sn;
@@ -159,6 +161,22 @@ public class GiftDetailVO extends GiftVO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSelfAddressId() {
+        return selfAddressId;
+    }
+
+    public void setSelfAddressId(String selfAddressId) {
+        this.selfAddressId = selfAddressId;
+    }
+
+    public Integer getSelfTakeDays() {
+        return selfTakeDays;
+    }
+
+    public void setSelfTakeDays(Integer selfTakeDays) {
+        this.selfTakeDays = selfTakeDays;
     }
 
     @Override

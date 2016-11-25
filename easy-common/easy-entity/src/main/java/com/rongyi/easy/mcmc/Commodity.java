@@ -137,8 +137,6 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> tagIds;
 	// 支付方式列表
 	private List<String> paymentIds;
-	// 商品总库存
-	private Integer total;
 
 	public String getGiftId() {
 		return giftId;
@@ -266,14 +264,6 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setPaymentIds(List<String> paymentIds) {
 		this.paymentIds = paymentIds;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
 	}
 
 	public boolean isSupportCourierDeliver() {

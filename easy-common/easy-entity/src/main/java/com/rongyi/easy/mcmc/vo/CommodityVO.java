@@ -124,7 +124,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String platform;
 	private Double price;
 
-
 	public Double getPrice() {
 		return price;
 	}

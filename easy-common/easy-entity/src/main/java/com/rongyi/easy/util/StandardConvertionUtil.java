@@ -23,9 +23,9 @@ public class StandardConvertionUtil {
      * @return terminalType
      *
      */
-    public static int convertPlatformToTerminalType(final String platform) {
-        if(null == platform) {
-            return CommodityTerminalType.TERMINAL_TYPE_4;
+    public static Integer convertPlatformToTerminalType(final String platform) {
+        if(null == platform || platform.isEmpty()) {
+            return null;
         }
 
         List<String> platforms = Arrays.asList(platform.split(","));
@@ -78,7 +78,11 @@ public class StandardConvertionUtil {
      * @return status
      *
      */
-    public static int convertStatus(final int giftStatus) {
+    public static Integer convertStatus(final Integer giftStatus) {
+        if(giftStatus == null) {
+            return null;
+        }
+
         int status;
         switch (giftStatus) {
             case 0:

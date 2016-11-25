@@ -14,15 +14,17 @@ import java.util.List;
  *  礼品VO
  *
  *  @author yaoyiwei
- *  @date 2016-11-16
+ *  @date 2016-11-24
  *  @version 1.0
  *
  */
 public class GiftVO implements Serializable {
 
+    private String id;
     private String code;
     private List<String> picList;
     private String name;
+    private List<String> paymentIds;
     private List<GiftPaymentVO> paymentVOs;
     private Integer stock;
     private List<String> terminalMsg;
@@ -31,6 +33,15 @@ public class GiftVO implements Serializable {
     private Integer status;
     private Integer terminalType;
     private String platform;
+    private String mappingId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;
@@ -86,6 +97,22 @@ public class GiftVO implements Serializable {
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public String getMappingId() {
+        return mappingId;
+    }
+
+    public void setMappingId(String mappingId) {
+        this.mappingId = mappingId;
+    }
+
+    public List<String> getPaymentIds() {
+        return paymentIds;
+    }
+
+    public void setPaymentIds(List<String> paymentIds) {
+        this.paymentIds = paymentIds;
     }
 
     public List<String> getTerminalMsg() {
