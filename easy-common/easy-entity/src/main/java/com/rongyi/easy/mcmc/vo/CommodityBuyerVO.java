@@ -87,6 +87,7 @@ public class CommodityBuyerVO implements Serializable {
     private String activityMinPrice;//活动 各规格中最低价
     private Long registerAt;//上架时间
 	private Long soldOutAt;//下架时间
+    private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 
 
 	public Long getRegisterAt() {
@@ -646,6 +647,14 @@ public class CommodityBuyerVO implements Serializable {
         this.weAndTeStatus = weAndTeStatus;
     }
 
+    public Integer getShelvesType() {
+        return null ==shelvesType?2:shelvesType;
+    }
+
+    public void setShelvesType(Integer shelvesType) {
+        this.shelvesType = shelvesType;
+    }
+
     public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
@@ -758,6 +767,7 @@ public class CommodityBuyerVO implements Serializable {
         this.weAndTeStatus = commodity.getWeAndTeStatus();
         this.registerAt = commodity.getRegisterAt().getTime();//上架时间
         this.soldOutAt = commodity.getSoldOutAt().getTime();//下架时间
+        this.shelvesType=commodity.getShelvesType();
     }
 
     @Override
@@ -818,6 +828,7 @@ public class CommodityBuyerVO implements Serializable {
                 ", discount=" + discount +
                 ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
                 ", galleryPosition=" + galleryPosition +
+                ", shelvesType=" + shelvesType +
                 '}';
     }
 
@@ -840,7 +851,7 @@ public class CommodityBuyerVO implements Serializable {
         Date c=DateUtils.addDays(a,1);
         CommodityBuyerVO vo=new CommodityBuyerVO();
         System.out.println(vo.judgeShelvesType(DateUtils.addYears(a, 30), b));
-        System.out.println(c.getTime()-a.getTime());
+        System.out.println(c.getTime() - a.getTime());
 
     }
 }

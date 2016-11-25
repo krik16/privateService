@@ -90,7 +90,7 @@ public class CommodityVO  implements  Serializable {
 	private boolean inActivity; //是否参加活动
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 	private boolean offerShelves;//是否可下架  true是；false否
-	
+
 	public boolean isOfferShelves() {
 		return offerShelves;
 	}
@@ -585,16 +585,8 @@ public class CommodityVO  implements  Serializable {
 		this.registerAt = commodity.getRegisterAt();
 		this.soldOutAt = commodity.getSoldOutAt();
 		//立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
-		if(commodity.getRegisterAt() != null && commodity.getSoldOutAt() != null){
-			if(this.judgeShelvesType(DateUtils.addYears(commodity.getRegisterAt(),1),commodity.getSoldOutAt()) ){
-		        this.shelvesType = 1;
-		    }else {
-		        this.shelvesType = 2;
-		    }
-		}else{
-			this.shelvesType = 1;
-		}
-        
+		this.shelvesType=null==commodity.getShelvesType()?2:commodity.getShelvesType();
+
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		// 商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
