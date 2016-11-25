@@ -23,6 +23,7 @@ public class BuyerDetailVO implements Serializable{
 	private String idCard;//身份证号
 	private String account;//用户账号 （手机号）
 	private String userAccount;//  用户账号
+	private Integer userStatus;//账号状态（ 0:未提交审核，未认证 2:审核中,待审核 1:审核通过 4:未通过 ）
 	private String userName;//用户姓名
 	private String nickName;//用户昵称
 	private Integer accountStatus;//账号状态：是否禁用0正常 1禁用'
@@ -37,6 +38,13 @@ public class BuyerDetailVO implements Serializable{
 	private BuyerAlipyVO buyerAlipyVO;//支付宝配置信息
 	private CashAccountVO cashAccountVO;//银行配置信息
 	private CertifiedInfoVo certifiedVo;//身份证照片信息
+	
+	public Integer getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(Integer userStatus) {
+		this.userStatus = userStatus;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -149,15 +157,14 @@ public class BuyerDetailVO implements Serializable{
 	public String toString() {
 		return "BuyerDetailVO [id=" + id + ", userLogo=" + userLogo
 				+ ", idCard=" + idCard + ", account=" + account
-				+ ", userAccount=" + userAccount + ", userName=" + userName
-				+ ", nickName=" + nickName + ", accountStatus=" + accountStatus
-				+ ", comment=" + comment + ", createBy=" + createBy
-				+ ", createAt=" + createAt + ", updateBy=" + updateBy
-				+ ", updateAt=" + updateAt + ", isSuspended=" + isSuspended
-				+ ", balance=" + balance + ", buyerAlipyVO=" + buyerAlipyVO
-				+ ", cashAccountVO=" + cashAccountVO + ", certifiedVo="
-				+ certifiedVo + "]";
+				+ ", userAccount=" + userAccount + ", userStatus=" + userStatus
+				+ ", userName=" + userName + ", nickName=" + nickName
+				+ ", accountStatus=" + accountStatus + ", comment=" + comment
+				+ ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt
+				+ ", isSuspended=" + isSuspended + ", balance=" + balance
+				+ ", buyerAlipyVO=" + buyerAlipyVO + ", cashAccountVO="
+				+ cashAccountVO + ", certifiedVo=" + certifiedVo + "]";
 	}
-	
 	
 }
