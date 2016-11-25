@@ -111,6 +111,14 @@ public interface IUserInfoService {
 	 */
 	public boolean updateUserInfo(UserManagerParam userManagerParam) throws Exception;
 
+	/**
+	 * 修改个人信息
+	 * @param paramsMap 参数
+	 * @return 结果
+	 * @throws Exception
+	 */
+	boolean updateSelfUserInfo(Map<String,Object> paramsMap) throws Exception;
+
 	UserInfo getUserByMap(Map<String, Object> paramsMap);
 
 	/**
