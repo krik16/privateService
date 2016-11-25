@@ -392,4 +392,11 @@ public interface IUserService {
      * @return
      */
     int cleanUserPushId(String pushId, String userPhone);
+
+    /**
+     * 修改个人信息
+     * @param paramsMap
+     * @return
+     */
+     boolean updateSelfUserInfo(Map<String, Object> paramsMap)throws  Exception;
 }
