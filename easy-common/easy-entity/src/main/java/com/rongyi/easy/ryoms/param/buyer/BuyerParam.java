@@ -23,6 +23,14 @@ public class BuyerParam implements Serializable{
 	private List<AccountParam> accountList;//账号信息
 	private Integer status;//状态  0启用 1停用    //冻结资金账户时  0:解冻，1:冻结
 	private String stopReason;//停用理由            //冻结资金账户时  冻结理由
+	private boolean edit;//true修改，新建false
+	
+	public boolean isEdit() {
+		return edit;
+	}
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -102,7 +110,8 @@ public class BuyerParam implements Serializable{
 				+ remark + ", userLogo=" + userLogo + ", userAccount="
 				+ userAccount + ", createBy=" + createBy + ", cardId=" + cardId
 				+ ", accountList=" + accountList + ", status=" + status
-				+ ", stopReason=" + stopReason + "]";
+				+ ", stopReason=" + stopReason + ", edit=" + edit + "]";
 	}
+	
 	
 }
