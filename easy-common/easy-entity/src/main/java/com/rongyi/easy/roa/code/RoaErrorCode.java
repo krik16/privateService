@@ -28,6 +28,7 @@ public enum RoaErrorCode {
     ERROR_CARDNUM_ISNULL(1051003,"账号不能为空"),
     ERROR_PASSWORD_ISNULL(1051004,"密码不能为空"),
     ERROR_PHONE_ISNULL(1051001,"手机号不能为空"),
+    MCH_INFO_MOT_EXIST(1051002,"无有效的商户配置"),
     
     ERROR_COMMODITY_OVER(1052001,"库存不足哦~"),
     ERROR_ACTIVITY_OVERTIME(1052002,"来晚啦，活动已结束"),

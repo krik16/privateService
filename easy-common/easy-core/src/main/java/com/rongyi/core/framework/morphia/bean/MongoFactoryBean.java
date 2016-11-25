@@ -85,19 +85,19 @@ public class MongoFactoryBean extends AbstractFactoryBean<MongoClient> {
 
         }else {
 
-        for (ServerAddress serverAddress : serverList) {
-            this.logger.info("[Mongo Client] server: " + serverAddress.getHost() + ":" + serverAddress.getPort());
-        }
+            for (ServerAddress serverAddress : serverList) {
+                this.logger.info("[Mongo Client] server: " + serverAddress.getHost() + ":" + serverAddress.getPort());
+            }
 
-        if (this.mongoOptions != null) {
-            mongo = new MongoClient(serverList, Arrays.asList(credential), this.mongoOptions);
-            this.logger.info("[Mongo Client] " + this.showOptions(this.mongoOptions));
+            if (this.mongoOptions != null) {
+                mongo = new MongoClient(serverList, Arrays.asList(credential), this.mongoOptions);
+                this.logger.info("[Mongo Client] " + this.showOptions(this.mongoOptions));
 
-        } else {
-            this.logger.info("[Mongo Client] mongoOptions is empty!");
-            mongo = new MongoClient(serverList, Arrays.asList(credential));
+            } else {
+                this.logger.info("[Mongo Client] mongoOptions is empty!");
+                mongo = new MongoClient(serverList, Arrays.asList(credential));
+            }
         }
-    }
         return mongo;
     }
 
