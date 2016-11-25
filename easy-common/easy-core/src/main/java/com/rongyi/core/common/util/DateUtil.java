@@ -314,6 +314,31 @@ public class DateUtil {
 	}
 
 	/**
+	 * 比较2个时间的日期大小
+	 * @param data1 小的时间
+	 * @param data2   大的时间
+	 * @return
+	 */
+	public static int compareToDate(Date data1, Date data2){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		int day = 0;
+		try {
+			data1 = sdf.parse(sdf.format(data1));
+			data2 = sdf.parse(sdf.format(data2));
+			if(data2.getTime() > data1.getTime()){
+				day = 1;
+			}else if (data2.getTime() < data1.getTime()){
+				day = -1;
+			}else{
+				day = 0;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return day;
+	}
+	/**
 	 * 计算两个日期之间相差的天数
 	 * @param smdate 较小的时间
 	 * @param bdate 较大的时间
