@@ -27,6 +27,8 @@ public class BizzValidHistoryParam implements Serializable{
      */
     private Integer type;
 
+    private String userId;
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("BizzValidHistoryParam{");
@@ -47,6 +49,7 @@ public class BizzValidHistoryParam implements Serializable{
         sb.append(", shopMids=").append(shopMids);
         sb.append(", recordStart=").append(recordStart);
         sb.append(", dateStatus=").append(dateStatus);
+        sb.append(", userId=").append(userId);
         sb.append('}');
         return sb.toString();
     }
@@ -191,5 +194,13 @@ public class BizzValidHistoryParam implements Serializable{
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
