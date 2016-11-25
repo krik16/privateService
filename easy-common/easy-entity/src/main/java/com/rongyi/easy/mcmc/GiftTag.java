@@ -11,7 +11,7 @@ import java.util.Date;
  * 礼品标签类
  *
  * @author yaoyiwei
- * @date 2016-11-10
+ * @date 2016-11-23
  * @version 1.0
  *
  */
@@ -25,6 +25,8 @@ public class GiftTag implements Serializable, Cloneable {
     private String name;
     // 创建时间
     private Date createAt;
+    // 更新时间
+    private Date updateAt;
     // mysql id
     private String mysqlId;
 
@@ -68,6 +70,14 @@ public class GiftTag implements Serializable, Cloneable {
         this.mysqlId = mysqlId;
     }
 
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
     @Override
     public String toString() {
         return "GiftTag{" +
@@ -75,6 +85,7 @@ public class GiftTag implements Serializable, Cloneable {
                 ", mappingId=" + mappingId +
                 ", name='" + name + '\'' +
                 ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
                 ", mysqlId=" + mysqlId +
                 '}';
     }

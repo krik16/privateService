@@ -132,8 +132,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String sn;
 	@Field("mappingId")
 	private String mappingId;
-	@Field("commodityType")
-	private Integer commodityType;
+	@Field("commodityRange")
+	private Integer commodityRange;
 	@Field("activityId")
 	private String activityId;
 	@Field("exchangeTypes")
@@ -332,12 +332,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.mappingId = mappingId;
 	}
 
-	public Integer getCommodityType() {
-		return commodityType;
+	public Integer getCommodityRange() {
+		return commodityRange;
 	}
 
-	public void setCommodityType(Integer commodityType) {
-		this.commodityType = commodityType;
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
 	}
 
 	public String getActivityId() {
@@ -720,7 +720,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
 		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
-		if(commodity.getCommodityType() != CommodityConstants.CommodityType.GIFT) {
+		if(commodity.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
 			List<String> category_ids = new ArrayList<>();
 			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
 				category_ids.add(categoryObjectId.toString());
@@ -735,7 +735,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSortPosition(9999);
 		}
 
-		if(commodityVo.getType() != CommodityConstants.CommodityType.GIFT) {
+		if(commodityVo.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
 			if(commodity.getSource() == 0){//商家后台发布商品，默认下架
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 			}
@@ -755,9 +755,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
 			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
 		}
-		this.setCommodityType(commodityVo.getType());
+		this.setCommodityRange(commodityVo.getCommodityRange());
 
-		if(commodityVo.getType() == CommodityConstants.CommodityType.GIFT) {
+		if(commodityVo.getCommodityRange() == CommodityConstants.CommodityType.GIFT) {
 			this.setGiftId(commodityVo.getGiftId());
 			this.setSn(commodityVo.getSn());
 			this.setMappingId(commodityVo.getMappingId());
@@ -773,7 +773,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSelfExpireDate(commodityVo.getSelfExpireDate());
 			this.setTagIds(commodityVo.getTagIds());
 			this.setPaymentIds(commodityVo.getPaymentIds());
-			this.setTotal(commodityVo.getTotal());
 		}
 
 		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {

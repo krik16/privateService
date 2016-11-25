@@ -3,18 +3,14 @@ package com.rongyi.rss.mcmc;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.param.SearchGiftParam;
-import com.rongyi.easy.mcmc.vo.CommodityStatusCountVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
-import com.rongyi.easy.mcmc.vo.GiftDetailVO;
-import com.rongyi.easy.mcmc.vo.GiftVO;
 
-import java.util.List;
 
 /**
  * 礼品Service
  *
  * @author yaoyiwei
- * @date 2016-11-20
+ * @date 2016-11-24
  * @version 1.0
  *
  */
@@ -24,17 +20,17 @@ public interface IGiftService {
      * Get gift list.
      *
      * @param param
-     * @return payment list
+     * @return ResponseVO
      */
-    List<GiftVO> getGiftList(final SearchGiftParam param);
+    ResponseVO getGiftList(final SearchGiftParam param);
 
     /**
      * Get gift numbers of all status.
      *
      * @param param
-     * @return CommodityStatusCountVO list
+     * @return ResponseVO
      */
-    List<CommodityStatusCountVO> getGiftNumsOfAllStatus(final SearchGiftParam param);
+    ResponseVO getGiftNumsOfAllStatus(final SearchGiftParam param);
 
     /**
      * Get gift numbers by status.
@@ -42,22 +38,22 @@ public interface IGiftService {
      * @param param
      * @return CommodityStatusCountVO list
      */
-    CommodityStatusCountVO countGiftByStatus(final SearchGiftParam param);
+    ResponseVO countGiftByStatus(final SearchGiftParam param);
 
     /**
      * Get gift detail by id.
      *
      * @param id gift id
-     * @return GiftDetailVO object
+     * @return ResponseVO
      */
-    GiftDetailVO getGiftDetail(final String id);
+    ResponseVO getGiftDetail(final String id);
 
     /**
      * Create a gift.
      *
      * @param gift
      *
-     * @return ResponseResult
+     * @return ResponseVO
      */
     ResponseVO createGift(CommodityVO gift);
 
@@ -69,4 +65,34 @@ public interface IGiftService {
      * @return ResponseResult
      */
     ResponseVO editGift(CommodityVO gift);
+
+    /**
+     * Do off shelves a gift.
+     *
+     * @param id gift id
+     * @param reason
+     *
+     * @return ResponseResult
+     */
+    ResponseResult offShelves(final String id, final String reason);
+
+    /**
+     * Add stock to gift.
+     *
+     * @param id gift id
+     * @param stock
+     *
+     * @return ResponseVO
+     */
+    ResponseVO addStock(final String id, final Integer stock);
+
+    /**
+     * Audit a gift.
+     *
+     * @param id gift id
+     * @param pass
+     *
+     * @return ResponseVO
+     */
+    ResponseVO auditGift(final String id, final Boolean pass);
 }

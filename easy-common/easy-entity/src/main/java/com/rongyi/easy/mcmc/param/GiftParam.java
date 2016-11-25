@@ -8,16 +8,16 @@ import java.util.List;
  * 礼品参数
  *
  * @author yaoyiwei
- * @date 2016-11-22
+ * @date 2016-11-23
  * @version 1.0
  *
  */
 public class GiftParam implements Serializable {
 
+    private String id;
     private String name;
     private String code;
     private Integer stock;
-    private Integer terminalType;
     private List<String> picList;
     private String description;
     private Integer purchaseCount;
@@ -29,17 +29,17 @@ public class GiftParam implements Serializable {
     // 礼品所属id
     private String mappingId;
     // 商品类型(0:商品, 1:礼品)
-    private Integer commodityType;
+    private Integer commodityRange;
     // 礼品参与活动id
     private String activityId;
     // 兑换类型（1.兑换，2.换购）
-    private List<Integer> exchangeTypes;
+    private String exchangeTypes;
     // 积分设置类型（1.同一设置 2.按等级设置）
     private Integer pointType;
     // 换购类型（1.同一设置 2.按等级设置）
     private Integer buyType;
     // 配送方式（1.自提 2.快递）
-    private List<Integer> deliveryTypes;
+    private String deliveryTypes;
     // 自提类型（1.公共设施 2.指定店铺）
     private Integer selfType;
     // 自提地点
@@ -56,6 +56,22 @@ public class GiftParam implements Serializable {
     private List<String> paymentIds;
     // 商品总库存
     private Integer total;
+    // 商品状态
+    private String status;
+    // 终端
+    private String platform;
+    private Double price;
+    private Date registerAt;//上架时间
+    private Date soldOutAt;//下架时间
+    private String pass;  // 1:通过 0: 不通过
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -79,14 +95,6 @@ public class GiftParam implements Serializable {
 
     public void setStock(Integer stock) {
         this.stock = stock;
-    }
-
-    public Integer getTerminalType() {
-        return terminalType;
-    }
-
-    public void setTerminalType(Integer terminalType) {
-        this.terminalType = terminalType;
     }
 
     public List<String> getPicList() {
@@ -137,12 +145,12 @@ public class GiftParam implements Serializable {
         this.mappingId = mappingId;
     }
 
-    public Integer getCommodityType() {
-        return commodityType;
+    public Integer getCommodityRange() {
+        return commodityRange;
     }
 
-    public void setCommodityType(Integer commodityType) {
-        this.commodityType = commodityType;
+    public void setCommodityRange(Integer commodityRange) {
+        this.commodityRange = commodityRange;
     }
 
     public String getActivityId() {
@@ -153,11 +161,11 @@ public class GiftParam implements Serializable {
         this.activityId = activityId;
     }
 
-    public List<Integer> getExchangeTypes() {
+    public String getExchangeTypes() {
         return exchangeTypes;
     }
 
-    public void setExchangeTypes(List<Integer> exchangeTypes) {
+    public void setExchangeTypes(String exchangeTypes) {
         this.exchangeTypes = exchangeTypes;
     }
 
@@ -177,11 +185,11 @@ public class GiftParam implements Serializable {
         this.buyType = buyType;
     }
 
-    public List<Integer> getDeliveryTypes() {
+    public String getDeliveryTypes() {
         return deliveryTypes;
     }
 
-    public void setDeliveryTypes(List<Integer> deliveryTypes) {
+    public void setDeliveryTypes(String deliveryTypes) {
         this.deliveryTypes = deliveryTypes;
     }
 
@@ -257,25 +265,73 @@ public class GiftParam implements Serializable {
         this.createBy = createBy;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Date getRegisterAt() {
+        return registerAt;
+    }
+
+    public void setRegisterAt(Date registerAt) {
+        this.registerAt = registerAt;
+    }
+
+    public Date getSoldOutAt() {
+        return soldOutAt;
+    }
+
+    public void setSoldOutAt(Date soldOutAt) {
+        this.soldOutAt = soldOutAt;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     @Override
     public String toString() {
         return "GiftParam{" +
                 "name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 ", stock=" + stock +
-                ", terminalType=" + terminalType +
                 ", picList=" + picList +
                 ", description='" + description + '\'' +
                 ", purchaseCount=" + purchaseCount +
+                ", createBy='" + createBy + '\'' +
                 ", giftId='" + giftId + '\'' +
                 ", sn='" + sn + '\'' +
                 ", mappingId='" + mappingId + '\'' +
-                ", commodityType=" + commodityType +
+                ", commodityRange=" + commodityRange +
                 ", activityId='" + activityId + '\'' +
-                ", exchangeTypes=" + exchangeTypes +
+                ", exchangeTypes='" + exchangeTypes + '\'' +
                 ", pointType=" + pointType +
                 ", buyType=" + buyType +
-                ", deliveryTypes=" + deliveryTypes +
+                ", deliveryTypes='" + deliveryTypes + '\'' +
                 ", selfType=" + selfType +
                 ", selfAddress='" + selfAddress + '\'' +
                 ", selfRemark='" + selfRemark + '\'' +
@@ -284,7 +340,11 @@ public class GiftParam implements Serializable {
                 ", tagIds=" + tagIds +
                 ", paymentIds=" + paymentIds +
                 ", total=" + total +
-                ", createBy=" + createBy +
+                ", status='" + status + '\'' +
+                ", platform='" + platform + '\'' +
+                ", price='" + price + '\'' +
+                ", registerAt='" + registerAt + '\'' +
+                ", soldOutAt='" + soldOutAt + '\'' +
                 '}';
     }
 }
