@@ -10,7 +10,7 @@ import java.util.List;
  * 礼品参数
  *
  * @author yaoyiwei
- * @date 2016-11-23
+ * @date 2016-11-27
  * @version 1.0
  *
  */
@@ -57,8 +57,6 @@ public class GiftParam implements Serializable {
     // 支付方式列表
     private List<String> paymentIds;
     private List<GiftPaymentVO> paymentVOs;
-    // 商品总库存
-    private Integer total;
     // 商品状态
     private String status;
     // 终端
@@ -66,7 +64,6 @@ public class GiftParam implements Serializable {
     private Double price;
     private Date registerAt;//上架时间
     private Date soldOutAt;//下架时间
-    private String pass;  // 1:通过 0: 不通过
     private Integer selfTakeDays;
     private String reason;
 
@@ -254,14 +251,6 @@ public class GiftParam implements Serializable {
         this.paymentIds = paymentIds;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
     public String getCreateBy() {
         return createBy;
     }
@@ -308,14 +297,6 @@ public class GiftParam implements Serializable {
 
     public void setSoldOutAt(Date soldOutAt) {
         this.soldOutAt = soldOutAt;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
     }
 
     public List<GiftPaymentVO> getPaymentVOs() {
@@ -368,7 +349,6 @@ public class GiftParam implements Serializable {
                 ", selfExpireDate=" + selfExpireDate +
                 ", tagIds=" + tagIds +
                 ", paymentIds=" + paymentIds +
-                ", total=" + total +
                 ", status='" + status + '\'' +
                 ", platform='" + platform + '\'' +
                 ", price='" + price + '\'' +

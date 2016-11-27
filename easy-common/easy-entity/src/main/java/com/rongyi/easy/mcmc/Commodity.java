@@ -135,8 +135,6 @@ public class Commodity implements  Serializable,Cloneable{
 	private Date selfExpireDate;
 	// 标签列表
 	private List<String> tagIds;
-	// 支付方式列表
-	private List<String> paymentIds;
 
 	public String getGiftId() {
 		return giftId;
@@ -256,14 +254,6 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setTagIds(List<String> tagIds) {
 		this.tagIds = tagIds;
-	}
-
-	public List<String> getPaymentIds() {
-		return paymentIds;
-	}
-
-	public void setPaymentIds(List<String> paymentIds) {
-		this.paymentIds = paymentIds;
 	}
 
 	public boolean isSupportCourierDeliver() {
@@ -901,17 +891,15 @@ public class Commodity implements  Serializable,Cloneable{
 		if(this.getStock() == null || this.getStock() <= 0) {
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
-			if(vo.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
-				//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
-				if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
-					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
-				} else {
-					Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
-					if(null !=status){
-						this.setStatus(vo.getCommodityStatus());
-					}else {
-						this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
-					}
+			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
+			if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+			} else {
+				Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
+				if(null !=status){
+					this.setStatus(vo.getCommodityStatus());
+				}else {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
 				}
 			}
 		}
@@ -982,7 +970,6 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSelfAddressId(vo.getSelfAddressId());
 			this.setSelfExpireDate(vo.getSelfExpireDate());
 			this.setTagIds(vo.getTagIds());
-			this.setPaymentIds(vo.getPaymentIds());
 		} else {
 			this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
 			this.setCommodityModelNo(vo.getCommodityModelNo());

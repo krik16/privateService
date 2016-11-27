@@ -4,7 +4,7 @@ package com.rongyi.easy.mcmc.constant;
  * 商品常量类
  *
  * @author yaoyiwei
- * @date 2016-11-14
+ * @date 2016-11-27
  * @version 1.0
  *
  */
@@ -13,6 +13,8 @@ public interface CommodityConstants {
     interface CommodityType {
         int COMMODITY = 0;
         int GIFT = 1;
+        int COUPON = 2;
+        int COUPON_PARKING = 3;
     }
 
     interface ExchangeType {
