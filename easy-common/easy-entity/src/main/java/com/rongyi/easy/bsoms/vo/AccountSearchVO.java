@@ -28,12 +28,20 @@ public class AccountSearchVO implements Serializable{
 	private Integer optVerify;//0不显示审核、1显示审核
 	private Integer optSuspended;//0不显示冻结或解冻、1显示冻结或解冻
 	private Integer optStatus;//0不显示停用或启用、1显示停用或启用
+	private Integer optAuth;//0不显示权限、1显示权限
 	private Integer showAuthDetail;
 	private Date virtualAccountStopAt;
 	private String virtualAccountStopReason;
 	private Date stopAt;
 	private String stopReason;
 	
+	
+	public Integer getOptAuth() {
+		return optAuth;
+	}
+	public void setOptAuth(Integer optAuth) {
+		this.optAuth = optAuth;
+	}
 	public String getSearchStatusName() {
 		return searchStatusName;
 	}
