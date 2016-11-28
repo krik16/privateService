@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.mcmc.TotalCommodity;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
+import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
+import com.rongyi.easy.roa.vo.ShopVO;
 import org.apache.commons.lang.StringUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -659,6 +666,47 @@ public class CommodityVO  implements  Serializable {
 				+", galleryPosition="+ galleryPosition
 				+"]";
 
+	}
+
+	public CommodityVO getCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
+		if(commodity==null) {
+			return null;
+		}
+
+		CommodityVO vo = new CommodityVO();
+		vo.setCommodityName(commodity.getName());
+		vo.setCommodityCategory(commodity.getCategory());
+		vo.setCommodityDescription(commodity.getDescription());
+		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
+		vo.setCommodityCode(commodity.getCode());
+		vo.setCommodityPicList(commodity.getPicList());
+		vo.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		vo.setFreight(commodity.getFreight());
+		vo.setTerminalType(commodity.getTerminalType());
+		vo.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
+								commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+		vo.setRegisterAt(commodity.getRegisterAt());
+		vo.setSoldOutAt(commodity.getSoldOutAt());
+		vo.setSource(commodity.getSource());
+		vo.setStockStatus(commodity.getStockStatus());
+		vo.setReason(commodity.getReason());
+		//商品状态待上架通过定时任务刷新状态给app使用
+		vo.setCommodityStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
+		vo.setCommodityCurrentPrice(commodity.getCurrentPrice().toString());
+		vo.setCommodityOriginalPrice(commodity.getOriginalPrice().toString());
+		vo.setBrandId(-1);//默认值
+		vo.setShopId("-1");
+		vo.setMallId("-1");
+		vo.setPurchaseCount(commodity.getPurchaseCount());
+		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
+		vo.setTemplateId(commodity.getTemplateId());
+
+		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
+		vo.setProcessIdentity(userInfo.getIdentity());
+		vo.setCreate_by(userInfo.getId().toString());
+
+		return vo;
 	}
 
 }
