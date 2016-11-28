@@ -37,17 +37,6 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private int totalAmount;
     // 订单状态
     private int status;
-//    // 快递方式 1：自提 2：快递
-//    private int deliveryType;
-//    // 收货人手机
-//    private String receiverPhone;
-//    // 收货人地址（包含省市区）
-//    private String receiverAddress;
-//    // 收货人姓名
-//    private  String  receiverName;
-//    // 对应事件
-//    private List<OrderEventEntity> eventList;
-
 
     public String getCommodityId() {
         return commodityId;

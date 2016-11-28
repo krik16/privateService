@@ -5,10 +5,7 @@ package com.rongyi.rss.tradecenter.osm;
 
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
-import com.rongyi.easy.osm.entity.OrderEventEntity;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.easy.osm.entity.OrderFormExtraEntity;
+import com.rongyi.easy.osm.entity.*;
 import com.rongyi.easy.osm.vo.OsmOrdeCommodityCodeVO;
 import com.rongyi.easy.osm.vo.OsmOrdeForUserCenterVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
@@ -279,9 +276,20 @@ public interface IOrderQueryService {
 	DubboVO<OsmOrdeForUserCenterVO> listForUserCenter(OsmOrderQueryForUserCenterParam param);
 
 	/**
+	 * 查询商品订单详情（电子会员）
+	 *
+	 * @param tradeNo
+	 * @param mallId
+	 * @return
+	 */
+	DubboVO<OsmOrderDetailForUserCenterEntity> detailForUserCenter(String tradeNo, String mallId);
+
+
+	/**
 	 * 根据订单号获取商品自提码/卡券码
 	 *
 	 * @param tradeNo
+	 * @param mallId
 	 * @return
 	 */
 	DubboVO<OsmOrdeCommodityCodeVO> searchCommodityCodeList(String tradeNo,String mallId);
