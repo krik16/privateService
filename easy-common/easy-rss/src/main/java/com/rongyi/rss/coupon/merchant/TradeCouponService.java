@@ -13,7 +13,17 @@ import java.util.List;
  * Project:easy-market
  */
 public interface TradeCouponService {
+    /**
+     * 根据券ids ，返回券 是否是通用券
+     * @param couponIds
+     * @return
+     */
     public List<CouponGeneralVO> jugeGeneralByIds(List<String> couponIds);
 
+    /**
+     * 根据店铺id，查询关联该店铺的所有卡券
+     * @param shopId
+     * @return
+     */
     public List<Coupon> findByShopId(String shopId);
 }
