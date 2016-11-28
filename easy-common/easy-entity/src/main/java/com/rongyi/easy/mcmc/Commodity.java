@@ -102,12 +102,27 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopName; ///< 店铺名称
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
-	private Integer galleryPosition;//橱窗排序商品
+	private Integer galleryPosition;//橱窗排序商品\
 
-//	private int commentCount;
-//	private int highCommentCount;
-//	private int mediumCommentCount;
-//	private int lowCommentCount;
+	private List<String> locationIds;//商品记录发到单个集团或者单个商场或者单个店铺集合
+	private Integer accountType;
+	private List<Integer> serviceIds;//微信公众号ids
+
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
 
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
@@ -562,6 +577,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.shopName = shopName;
 	}
 
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -801,7 +824,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallId(String.valueOf(mallId));
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
-		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 
 		// 买手&非现货 商品 临时状态: -1
 		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
