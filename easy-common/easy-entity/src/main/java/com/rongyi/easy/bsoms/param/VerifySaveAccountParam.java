@@ -101,6 +101,19 @@ public class VerifySaveAccountParam  implements Serializable{
 			return date;
 		}
 	}
+	
+	public String getValidStartAtStamp() {
+		return validStartAtStamp;
+	}
+	public void setValidStartAtStamp(String validStartAtStamp) {
+		this.validStartAtStamp = validStartAtStamp;
+	}
+	public String getValidEndAtStamp() {
+		return validEndAtStamp;
+	}
+	public void setValidEndAtStamp(String validEndAtStamp) {
+		this.validEndAtStamp = validEndAtStamp;
+	}
 	@Override
 	public String toString() {
 		return "VerifySaveAccountParam [id=" + id + ", verifyStatus=" + verifyStatus + ", reason=" + reason
