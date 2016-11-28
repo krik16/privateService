@@ -23,6 +23,14 @@ public class ActivityCommodityVO implements Serializable{
     private String commodityDescription;//我是商品描述”,
     private String commodityName;//我是商品名称”,
     private List<String> commodityPicList; // 图片地址
+    private String activityUrl;//单品活动图片
+    
+	public String getActivityUrl() {
+		return activityUrl;
+	}
+	public void setActivityUrl(String activityUrl) {
+		this.activityUrl = activityUrl;
+	}
 	public String getCommodityId() {
 		return commodityId;
 	}
