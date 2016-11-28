@@ -22,7 +22,7 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     // 商品类型
     private int commodityType;
     // 商品数量
-    private int getCommodityNumber;
+    private int commodityNumber;
     // 用户ID
     private String userId;
     // 用户手机
@@ -81,12 +81,12 @@ public class OsmOrderForUserCenterEntity implements Serializable {
         this.createAt = createAt;
     }
 
-    public int getGetCommodityNumber() {
-        return getCommodityNumber;
+    public int getCommodityNumber() {
+        return commodityNumber;
     }
 
-    public void setGetCommodityNumber(int getCommodityNumber) {
-        this.getCommodityNumber = getCommodityNumber;
+    public void setCommodityNumber(int commodityNumber) {
+        this.commodityNumber = commodityNumber;
     }
 
     public String getMallId() {
@@ -161,7 +161,7 @@ public class OsmOrderForUserCenterEntity implements Serializable {
                 ", tradeNo='" + tradeNo + '\'' +
                 ", commodityName='" + commodityName + '\'' +
                 ", commodityType=" + commodityType +
-                ", getCommodityNumber=" + getCommodityNumber +
+                ", commodityNumber=" + commodityNumber +
                 ", userId='" + userId + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", userMessage='" + userMessage + '\'' +
