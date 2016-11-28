@@ -30,6 +30,7 @@ public class ActivityContentListVO implements Serializable{
     private String appTitle;//展示标题
     private String sharePic;//分享图片
     private String replacePic;//banner图片，展示的大图片
+    private String remark;//单品备注
     private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
     
     private ActivityCommodityVO activityCommodityVO;
@@ -49,6 +50,14 @@ public class ActivityContentListVO implements Serializable{
 	public void setCommoditySaleVOList(List<CommoditySaleVO> commoditySaleVOList) {
 		this.commoditySaleVOList = commoditySaleVOList;
 	}
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getSharePic() {
         return sharePic;
@@ -145,7 +154,7 @@ public class ActivityContentListVO implements Serializable{
 				+ typeVal + ", activityUrl=" + activityUrl + ", shareTitle="
 				+ shareTitle + ", shareDesc=" + shareDesc + ", appTitle="
 				+ appTitle + ", sharePic=" + sharePic + ", replacePic="
-				+ replacePic + ", commoditySaleVOList=" + commoditySaleVOList
+				+ replacePic + ", commoditySaleVOList=" + commoditySaleVOList + ", remark=" + remark
 				+ ", activityCommodityVO=" + activityCommodityVO + "]";
 	}
 
