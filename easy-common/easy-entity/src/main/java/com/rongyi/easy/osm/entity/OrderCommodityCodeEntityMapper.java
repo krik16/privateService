@@ -1,5 +1,7 @@
 package com.rongyi.easy.osm.entity;
 
+import java.util.List;
+
 /**
  * 商品券码表
  *
@@ -40,4 +42,12 @@ public interface OrderCommodityCodeEntityMapper {
      * @return
      */
     OrderCommodityCodeEntity getInfoByCouponCode(String couponCode);
+
+    /**
+     * 根据订单号获取商品卡券列表
+     *
+     * @param tradeNo
+     * @return
+     */
+    List<OrderCommodityCodeEntity> listByTradeNo(String tradeNo, String mallId);
 }
