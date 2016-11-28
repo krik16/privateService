@@ -29,7 +29,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String commodityStock;
 	private String commoditySold;
 	private String commodityPubDate;
-	private int commodityStatus;
+	private Integer commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架 1上架 3待上架)
 
 	private String commodityOPriceMax;//我是最高原价”,
@@ -45,6 +45,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String create_by; // 创建人
 	private String update_by;//修改人
 	private String liveId; // 直播Id
+	private Integer saleId;
+	private Integer flashSaleId;
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
 	private String shopId;//店铺mysql Id
@@ -124,6 +126,21 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String platform;
 	private Double price;
 
+	public Integer getFlashSaleId() {
+		return flashSaleId;
+	}
+
+	public void setFlashSaleId(Integer flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
+
+	public Integer getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
 
 	public Double getPrice() {
 		return price;
@@ -255,10 +272,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setCommodityShopNumber(String commodityShopNumber) {
 		this.commodityShopNumber = commodityShopNumber;
 	}
-	public int getCommodityStatus() {
+	public Integer getCommodityStatus() {
 		return commodityStatus;
 	}
-	public void setCommodityStatus(int commodityStatus) {
+	public void setCommodityStatus(Integer commodityStatus) {
 		this.commodityStatus = commodityStatus;
 	}
 	public String getShopMid() {

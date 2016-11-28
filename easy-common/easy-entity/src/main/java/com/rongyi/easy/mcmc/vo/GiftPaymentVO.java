@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Created by yaoyiwei on 2016/11/14.
  */
 public class GiftPaymentVO implements Serializable {
+    private String id;
     // 支付方式（1.兑换 2.换购）
     private Integer type;
     // 用户等级
@@ -15,6 +16,17 @@ public class GiftPaymentVO implements Serializable {
     private Integer point;
     // 所需金额
     private Double money;
+
+    // 是否生效（1.是 0.否）
+    private Integer isEffective;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Integer getType() {
         return type;
@@ -48,6 +60,14 @@ public class GiftPaymentVO implements Serializable {
         this.money = money;
     }
 
+    public Integer getIsEffective() {
+        return isEffective;
+    }
+
+    public void setIsEffective(Integer isEffective) {
+        this.isEffective = isEffective;
+    }
+
     @Override
     public String toString() {
         return "GiftPaymentVO{" +
@@ -55,6 +75,7 @@ public class GiftPaymentVO implements Serializable {
                 ", level='" + level + '\'' +
                 ", point=" + point +
                 ", money=" + money +
+                ", isEffective=" + isEffective +
                 '}';
     }
 }

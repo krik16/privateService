@@ -1,12 +1,8 @@
 package com.rongyi.easy.mcmc.vo;
 
 
-import com.rongyi.core.enumerate.mcmc.TerminalTypeEnum;
-import com.rongyi.easy.util.StandardConvertionUtil;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -14,23 +10,32 @@ import java.util.List;
  *  礼品VO
  *
  *  @author yaoyiwei
- *  @date 2016-11-16
+ *  @date 2016-11-27
  *  @version 1.0
  *
  */
 public class GiftVO implements Serializable {
 
+    private String id;
     private String code;
     private List<String> picList;
     private String name;
     private List<GiftPaymentVO> paymentVOs;
     private Integer stock;
-    private List<String> terminalMsg;
     private Date createAt;
     private String createBy;
     private Integer status;
     private Integer terminalType;
     private String platform;
+    private String mappingId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;
@@ -88,26 +93,14 @@ public class GiftVO implements Serializable {
         this.platform = platform;
     }
 
-    public List<String> getTerminalMsg() {
-        String platform = StandardConvertionUtil.convertTerminalTypeToPlatform(this.terminalType);
-        String[] arrayPlatform = platform.split(",");
-        if(arrayPlatform.length  == 1) {
-            return Arrays.asList(TerminalTypeEnum.getMsgByCode(Integer.parseInt(platform)));
-        }
-
-        List<String> list = new ArrayList<>();
-        for(int i = 0; i < arrayPlatform.length; i++) {
-            if(null != TerminalTypeEnum.getMsgByCode(Integer.parseInt(arrayPlatform[i]))) {
-                list.add(TerminalTypeEnum.getMsgByCode(Integer.parseInt(arrayPlatform[i])));
-            }
-        }
-
-        return list;
+    public String getMappingId() {
+        return mappingId;
     }
 
-    public void setTerminalMsg(List<String> terminalMsg) {
-        this.terminalMsg = terminalMsg;
+    public void setMappingId(String mappingId) {
+        this.mappingId = mappingId;
     }
+
     public Date getCreateAt() {
         return createAt;
     }
@@ -140,7 +133,6 @@ public class GiftVO implements Serializable {
                 ", name='" + name + '\'' +
                 ", paymentVOs=" + paymentVOs +
                 ", stock=" + stock +
-                ", terminalMsg=" + terminalMsg +
                 ", createAt=" + createAt +
                 ", createBy='" + createBy + '\'' +
                 ", status=" + status +

@@ -1,5 +1,6 @@
 package com.rongyi.easy.util;
 
+import com.alibaba.dubbo.common.utils.StringUtils;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 
@@ -23,13 +24,8 @@ public class StandardConvertionUtil {
      * @return terminalType
      *
      */
-    public static int convertPlatformToTerminalType(final String platform) {
-        if(null == platform) {
-            return CommodityTerminalType.TERMINAL_TYPE_4;
-        }
-
-        List<String> platforms = Arrays.asList(platform.split(","));
-        String flag = (platforms.size() > 1) ? "3" : platforms.get(0);
+    public static Integer convertPlatformToTerminalType(final String platform) {
+        String flag = StringUtils.isBlank(platform) ? "3" : platform;
 
         int terminalType;
         switch (flag) {
@@ -78,7 +74,11 @@ public class StandardConvertionUtil {
      * @return status
      *
      */
-    public static int convertStatus(final int giftStatus) {
+    public static Integer convertStatus(final Integer giftStatus) {
+        if(giftStatus == null) {
+            return null;
+        }
+
         int status;
         switch (giftStatus) {
             case 0:
@@ -101,6 +101,48 @@ public class StandardConvertionUtil {
                 break;
             default:
                 status = CommodityDataStatus.STATUS_COMMODITY_SHELVE;
+                break;
+        }
+        return status;
+    }
+
+    /**
+     * 将商品的状态定义转换成礼品的定义
+     *
+     * @param commodityStatus
+     * @return status
+     *
+     */
+    public static Integer reverseStatus(final Integer commodityStatus) {
+        if(commodityStatus == null) {
+            return null;
+        }
+
+        int status;
+        switch (commodityStatus) {
+            case CommodityDataStatus.STATUS_COMMODITY_UNSHELVE:
+                status = 2;
+                break;
+            case CommodityDataStatus.STATUS_COMMODITY_SHELVE:
+                status = 1;
+                break;
+            case CommodityDataStatus.STATUS_COMMODITY_DELETED:
+                status = 4;
+                break;
+            case CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING:
+                status = 5;
+                break;
+            case CommodityDataStatus.STATUS_COMMODITY_PENDING:
+                status = 6;
+                break;
+            case CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING:
+                status = 0;
+                break;
+            case CommodityDataStatus.STATUS_COMMODITY_CHECK_FAIL:
+                status = 3;
+                break;
+            default:
+                status = 1;
                 break;
         }
         return status;

@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
+import com.rongyi.easy.mcmc.vo.GiftPaymentVO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * 礼品参数
  *
  * @author yaoyiwei
- * @date 2016-11-23
+ * @date 2016-11-27
  * @version 1.0
  *
  */
@@ -54,8 +56,7 @@ public class GiftParam implements Serializable {
     private List<String> tagIds;
     // 支付方式列表
     private List<String> paymentIds;
-    // 商品总库存
-    private Integer total;
+    private List<GiftPaymentVO> paymentVOs;
     // 商品状态
     private String status;
     // 终端
@@ -63,7 +64,8 @@ public class GiftParam implements Serializable {
     private Double price;
     private Date registerAt;//上架时间
     private Date soldOutAt;//下架时间
-    private String pass;  // 1:通过 0: 不通过
+    private Integer selfTakeDays;
+    private String reason;
 
     public String getId() {
         return id;
@@ -249,14 +251,6 @@ public class GiftParam implements Serializable {
         this.paymentIds = paymentIds;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
     public String getCreateBy() {
         return createBy;
     }
@@ -305,12 +299,28 @@ public class GiftParam implements Serializable {
         this.soldOutAt = soldOutAt;
     }
 
-    public String getPass() {
-        return pass;
+    public List<GiftPaymentVO> getPaymentVOs() {
+        return paymentVOs;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPaymentVOs(List<GiftPaymentVO> paymentVOs) {
+        this.paymentVOs = paymentVOs;
+    }
+
+    public Integer getSelfTakeDays() {
+        return selfTakeDays;
+    }
+
+    public void setSelfTakeDays(Integer selfTakeDays) {
+        this.selfTakeDays = selfTakeDays;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     @Override
@@ -339,7 +349,6 @@ public class GiftParam implements Serializable {
                 ", selfExpireDate=" + selfExpireDate +
                 ", tagIds=" + tagIds +
                 ", paymentIds=" + paymentIds +
-                ", total=" + total +
                 ", status='" + status + '\'' +
                 ", platform='" + platform + '\'' +
                 ", price='" + price + '\'' +
