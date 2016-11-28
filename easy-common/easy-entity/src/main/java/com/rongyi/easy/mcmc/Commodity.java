@@ -106,6 +106,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private String locationId;
 	private Integer accountType;
+	private List<Integer> serviceIds;//微信公众号ids
 
 	public String getLocationId() {
 		return locationId;
@@ -576,6 +577,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.shopName = shopName;
 	}
 
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -815,7 +824,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallId(String.valueOf(mallId));
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
-		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 
 		// 买手&非现货 商品 临时状态: -1
 		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {

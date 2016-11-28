@@ -86,6 +86,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private List<String> locationIds;
 
+	private List<Integer> serviceIds;//微信公众号ids
+
 	public List<String> getLocationIds() {
 		return locationIds;
 	}
@@ -439,6 +441,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setDiscount(Double discount) {
 		this.discount = discount;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
 	}
 
 	@Override
