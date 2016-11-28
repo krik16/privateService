@@ -84,6 +84,16 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private Double discount; // 折扣
 
+	private List<String> locationIds;
+
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}

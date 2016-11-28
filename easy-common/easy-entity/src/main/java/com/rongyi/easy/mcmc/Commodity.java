@@ -102,12 +102,26 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopName; ///< 店铺名称
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
-	private Integer galleryPosition;//橱窗排序商品
+	private Integer galleryPosition;//橱窗排序商品\
 
-//	private int commentCount;
-//	private int highCommentCount;
-//	private int mediumCommentCount;
-//	private int lowCommentCount;
+	private String locationId;
+	private Integer accountType;
+
+	public String getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
 
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
