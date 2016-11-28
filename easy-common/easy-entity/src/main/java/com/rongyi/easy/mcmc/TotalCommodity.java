@@ -84,7 +84,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private Double discount; // 折扣
 
-	private List<String> locationIds;
+	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
 
 	private List<Integer> serviceIds;//微信公众号ids
 

@@ -104,16 +104,16 @@ public class Commodity implements  Serializable,Cloneable{
 	private String hotAreaName; ///< 商圈
 	private Integer galleryPosition;//橱窗排序商品\
 
-	private String locationId;
+	private List<String> locationIds;//商品记录发到单个集团或者单个商场或者单个店铺集合
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
 
-	public String getLocationId() {
-		return locationId;
+	public List<String> getLocationIds() {
+		return locationIds;
 	}
 
-	public void setLocationId(String locationId) {
-		this.locationId = locationId;
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
 	}
 
 	public Integer getAccountType() {
