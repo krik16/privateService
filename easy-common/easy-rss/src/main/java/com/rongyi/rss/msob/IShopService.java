@@ -234,5 +234,13 @@ public interface IShopService{
      * @throws Exception
      */
     public BrandShopListVO getBrandShopListByBrandId(BrandParam param) throws Exception;
+
+	/**
+	 * 通过上级商户ID查询店铺列表
+	 * @param type 0集团 1商场 4店铺
+	 * @param merId 商户ID
+	 * @return 店铺列表
+	 */
+	List<ShopInfoEntity> getShopInfoListBySuperiorId(Integer type ,Integer merId);
 }
 
