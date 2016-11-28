@@ -74,6 +74,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer userType; // 用户类型，0：容易逛；1：电子会员
     private Integer totalCredit; // 兑换的总积分
     private Integer commodityType; // 商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
+    private String mallMid ; // 商场ID
+    private String shopMid; // 店铺ID
+
 
     public Byte getIsAlert() {
         return isAlert;
@@ -587,6 +590,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setUserType(Integer userType) {
         this.userType = userType;
+    }
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
+
+    public String getShopMid() {
+        return shopMid;
+    }
+
+    public void setShopMid(String shopMid) {
+        this.shopMid = shopMid;
     }
 
     @Override

@@ -3,6 +3,7 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
@@ -13,6 +14,8 @@ import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.*;
+import com.rongyi.easy.tradecenter.param.OsmOrderQueryForUserCenterParam;
+import com.rongyi.easy.tradecenter.vo.TraderOrderResultForUserCenterVO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -265,4 +268,12 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	String getOrderNoForPintuan(Integer activityId,Long activityRoundId, String buyerNum) throws Exception;
+
+	/**
+	 * 查询商品订单列表（电子会员）
+	 *
+	 * @param param
+	 * @return
+	 */
+	DubboVO<TraderOrderResultForUserCenterVO> listForUserCenter(OsmOrderQueryForUserCenterParam param);
 }

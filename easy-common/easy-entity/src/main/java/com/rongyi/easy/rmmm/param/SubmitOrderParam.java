@@ -6,7 +6,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class SubmitOrderParam extends MalllifeBaseParam implements Serializable {
@@ -45,6 +44,8 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private Integer exchangeType; // 兑换类型（1：兑换 2：换购）
 	private Integer deliveryType; // 快递方式 1：自提 2：快递"
 	private Integer totalCredit; // 总积分
+	private String mallMid; // 商场ID
+	private String shopMid; // 店铺ID
 	// =======end=
 
 	public List<ParentOrderParam> getParentOrderList() {
@@ -287,6 +288,22 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	public void setTotalCredit(Integer totalCredit) {
 		this.totalCredit = totalCredit;
+	}
+
+	public String getMallMid() {
+		return mallMid;
+	}
+
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
 	}
 
 	@Override

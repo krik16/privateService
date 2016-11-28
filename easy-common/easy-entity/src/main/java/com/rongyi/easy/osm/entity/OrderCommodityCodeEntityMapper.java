@@ -33,4 +33,11 @@ public interface OrderCommodityCodeEntityMapper {
      */
     int uptStatusForUsed(OrderCommodityCodeEntity entity);
 
+    /**
+     * 获取商品卡券信息
+     *
+     * @param couponCode
+     * @return
+     */
+    OrderCommodityCodeEntity getInfoByCouponCode(String couponCode);
 }

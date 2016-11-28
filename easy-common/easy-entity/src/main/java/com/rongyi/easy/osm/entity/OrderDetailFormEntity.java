@@ -125,6 +125,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer exchangeType ;  // 兑换类型，1：兑换 2：换购'
 
+    private String commodityName; // 商品（卡券）名称
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -632,6 +634,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     public void setExchangeType(Integer exchangeType) {
         this.exchangeType = exchangeType;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 
     @Override
