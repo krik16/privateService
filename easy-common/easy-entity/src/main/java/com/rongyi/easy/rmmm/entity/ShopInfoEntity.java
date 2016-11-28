@@ -14,6 +14,12 @@ public class ShopInfoEntity implements Serializable{
     /** 店铺名称 */
     private String shopName;
 
+    /** 上级店铺ID  **/
+    private Integer parentShopId;
+
+    /**  上上级店铺ID **/
+    private Integer grandPaShopId;
+
     /** 店铺所属商场名称 */
     private Integer mallId;
 
@@ -139,5 +145,21 @@ public class ShopInfoEntity implements Serializable{
      */
     public void setTotalScore(Integer totalScore) {
         this.totalScore = totalScore;
+    }
+
+    public Integer getParentShopId() {
+        return parentShopId;
+    }
+
+    public void setParentShopId(Integer parentShopId) {
+        this.parentShopId = parentShopId;
+    }
+
+    public Integer getGrandPaShopId() {
+        return grandPaShopId;
+    }
+
+    public void setGrandPaShopId(Integer grandPaShopId) {
+        this.grandPaShopId = grandPaShopId;
     }
 }
