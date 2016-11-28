@@ -32,7 +32,7 @@ public class BuyerDetailVO implements Serializable{
 	private Date createAt;
 	private String updateBy;//修改人
 	private Date updateAt;
-	private Integer isSuspended;        //资金账户：是否冻结
+	private Integer isSuspended;        //资金账户：是否冻结      0正常 1冻结  2 --
 	private BigDecimal balance;//资金账户余额
 	
 	private BuyerAlipyVO buyerAlipyVO;//支付宝配置信息
