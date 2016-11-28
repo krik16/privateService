@@ -37,6 +37,45 @@ public class ConfigEntity implements Serializable {
 	private Date create_at;
 	private Integer update_by;
 	private Date update_at;
+	private String businessDistrictId;
+	private Integer isAllowPlay;
+
+	private Integer isAllowPack;
+	private  Long  fee;
+
+	public String getBusinessDistrictId() {
+		return businessDistrictId;
+	}
+
+	public void setBusinessDistrictId(String businessDistrictId) {
+		this.businessDistrictId = businessDistrictId;
+	}
+
+	public Integer getIsAllowPlay() {
+		return isAllowPlay;
+	}
+
+	public void setIsAllowPlay(Integer isAllowPlay) {
+		this.isAllowPlay = isAllowPlay;
+	}
+
+	public Integer getIsAllowPack() {
+		return isAllowPack;
+	}
+
+	public void setIsAllowPack(Integer isAllowPack) {
+		this.isAllowPack = isAllowPack;
+	}
+
+	public Long getFee() {
+		return fee;
+	}
+
+	public void setFee(Long fee) {
+		this.fee = fee;
+	}
+
+
 	/**
 	 * @return the configId
 	 */
@@ -215,10 +254,25 @@ public class ConfigEntity implements Serializable {
 	*/
 	@Override
 	public String toString() {
-		return "ConfigEntity [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mallLevel="
-				+ mallLevel + ", cityMId=" + cityMId + ", position=" + position + ", countTotal=" + countTotal
-				+ ", countRY=" + countRY + ", countMall=" + countMall + ", userId=" + userId + ", create_by="
-				+ create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at=" + update_at
-				+ "]";
+		return "ConfigEntity{" +
+				"configId=" + configId +
+				", mallMId='" + mallMId + '\'' +
+				", mallName='" + mallName + '\'' +
+				", mallLevel='" + mallLevel + '\'' +
+				", cityMId='" + cityMId + '\'' +
+				", position=" + position +
+				", countTotal=" + countTotal +
+				", countRY=" + countRY +
+				", countMall=" + countMall +
+				", userId=" + userId +
+				", create_by=" + create_by +
+				", create_at=" + create_at +
+				", update_by=" + update_by +
+				", update_at=" + update_at +
+				", businessDistrictId='" + businessDistrictId + '\'' +
+				", isAllowPlay=" + isAllowPlay +
+				", isAllowPack=" + isAllowPack +
+				", fee=" + fee +
+				'}';
 	}
 }

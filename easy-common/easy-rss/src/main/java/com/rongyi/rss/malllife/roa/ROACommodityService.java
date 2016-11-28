@@ -28,6 +28,7 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.roa.param.CommoditySpecParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
@@ -257,4 +258,6 @@ public interface ROACommodityService {
      * @return
      */
     public ResponseVO getSpecInfo(String specId);
+    
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }
