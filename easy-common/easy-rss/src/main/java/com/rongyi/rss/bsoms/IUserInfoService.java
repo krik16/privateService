@@ -58,7 +58,7 @@ public interface IUserInfoService {
 	 * 根据id修改账户状态：启用/停用
 	 * @param id
 	 */
-	boolean updateAccountStatus(int id, int accountStatus, String stopReason, Integer userId);
+	boolean updateAccountStatus(int id, int accountStatus, String stopReason, Integer userId)throws MallShopException,Exception;
 
 	UserInfo getUserInfoById(Integer id);
 
