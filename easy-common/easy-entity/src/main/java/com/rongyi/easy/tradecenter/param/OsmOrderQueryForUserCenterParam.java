@@ -15,6 +15,8 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
     private String mallId;
     // 订单 状态（0：全部 1：待付款 2：待发货 3：已发货 4：已完成 5：已关闭）
     private Integer status;
+    // 标题
+    private String title;
     //  s商品状态 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
     private Integer commodityType;
     // 订单编号
@@ -115,12 +117,21 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
         this.commodityType = commodityType;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderQueryForUserCenterParam{" +
                 "commodityType=" + commodityType +
                 ", mallId='" + mallId + '\'' +
                 ", status=" + status +
+                ", title='" + title + '\'' +
                 ", tradeNo='" + tradeNo + '\'' +
                 ", phone='" + phone + '\'' +
                 ", createStartAt=" + createStartAt +

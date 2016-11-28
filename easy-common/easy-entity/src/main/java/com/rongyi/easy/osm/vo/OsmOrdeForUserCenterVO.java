@@ -1,6 +1,6 @@
 package com.rongyi.easy.osm.vo;
 
-import com.rongyi.easy.tradecenter.TraderOrderForUserCenterEntity;
+import com.rongyi.easy.osm.entity.OsmOrderForUserCenterEntity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.List;
 public class OsmOrdeForUserCenterVO implements Serializable {
 
     // 订单列表
-    private List<TraderOrderForUserCenterEntity> tradeOrderList;
+    private List<OsmOrderForUserCenterEntity> osmOrderList;
     // 总数
     private int totalCount;
     // 页码
-    private int pageIndex ;
+    private int pageIndex;
     // 页数
     private int pageSize;
 
@@ -28,14 +28,6 @@ public class OsmOrdeForUserCenterVO implements Serializable {
 
     public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;
-    }
-
-    public List<TraderOrderForUserCenterEntity> getTradeOrderList() {
-        return tradeOrderList;
-    }
-
-    public void setTradeOrderList(List<TraderOrderForUserCenterEntity> tradeOrderList) {
-        this.tradeOrderList = tradeOrderList;
     }
 
     public int getPageIndex() {
@@ -54,12 +46,20 @@ public class OsmOrdeForUserCenterVO implements Serializable {
         this.pageSize = pageSize;
     }
 
+    public List<OsmOrderForUserCenterEntity> getOsmOrderList() {
+        return osmOrderList;
+    }
+
+    public void setOsmOrderList(List<OsmOrderForUserCenterEntity> osmOrderList) {
+        this.osmOrderList = osmOrderList;
+    }
+
     @Override
     public String toString() {
-        return "TraderOrderResultForUserCenterVO{" +
-                "pageIndex=" + pageIndex +
-                ", tradeOrderList=" + tradeOrderList +
+        return "OsmOrdeForUserCenterVO{" +
+                "osmOrderList=" + osmOrderList +
                 ", totalCount=" + totalCount +
+                ", pageIndex=" + pageIndex +
                 ", pageSize=" + pageSize +
                 '}';
     }

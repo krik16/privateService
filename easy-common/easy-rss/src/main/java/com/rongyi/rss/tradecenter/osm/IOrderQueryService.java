@@ -9,6 +9,7 @@ import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.osm.entity.OrderFormExtraEntity;
+import com.rongyi.easy.osm.vo.OsmOrdeForUserCenterVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
@@ -275,5 +276,5 @@ public interface IOrderQueryService {
 	 * @param param
 	 * @return
 	 */
-	DubboVO<TraderOrderResultForUserCenterVO> listForUserCenter(OsmOrderQueryForUserCenterParam param);
+	DubboVO<OsmOrdeForUserCenterVO> listForUserCenter(OsmOrderQueryForUserCenterParam param);
 }
