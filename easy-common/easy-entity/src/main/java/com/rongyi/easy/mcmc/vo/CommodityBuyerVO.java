@@ -765,9 +765,15 @@ public class CommodityBuyerVO implements Serializable {
         //默认返回非橱窗商品的值设置为0
         this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
         this.weAndTeStatus = commodity.getWeAndTeStatus();
-        this.registerAt = commodity.getRegisterAt().getTime();//上架时间
-        this.soldOutAt = commodity.getSoldOutAt().getTime();//下架时间
-        this.shelvesType=commodity.getShelvesType();
+        if(commodity.getRegisterAt() != null){
+        	this.registerAt = commodity.getRegisterAt().getTime();//上架时间
+        }
+        if(commodity.getSoldOutAt() != null){
+        	this.soldOutAt = commodity.getSoldOutAt().getTime();//下架时间
+        }
+        if(commodity.getShelvesType() != null){
+        	this.shelvesType=commodity.getShelvesType();
+        }
     }
 
     @Override
