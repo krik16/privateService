@@ -51,6 +51,8 @@ public class CommodityParam {
 
 	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义说明
 
+	private List<Integer> serviceIds; //公众号
+
 
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
 	//@JsonSerialize(using=JsonDateSerializer.class)
@@ -107,14 +109,15 @@ public class CommodityParam {
 		this.category = category;
 	}
 
-	/*public String getShopId() {
-		return shopId;
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
 	}
 
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
 	}
-*/
+
 	public Integer getStatus() {
 		return status;
 	}

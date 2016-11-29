@@ -90,8 +90,16 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Double discount; // 折扣
 
 	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
-
 	private List<Integer> serviceIds;//微信公众号ids
+	private Integer accountType;
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
 
 	public List<String> getLocationIds() {
 		return locationIds;
@@ -590,11 +598,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 			this.setFreight(param.getFreight());
 			this.setTerminalType(param.getTerminalType());
-			if (param.getStatus() != null
-					&& param.getStatus() == 5) {// 立即上架
+			if(param.getStatus() != null && param.getStatus() == 5) {// 立即上架
 				this.setRegisterAt(DateTool.addTime(new Date(), 3));
-				this.setSoldOutAt(DateTool.addYears(
-						this.getRegisterAt(), 1));
+				this.setSoldOutAt(DateTool.addYears(this.getRegisterAt(), 1));
 				this.setImmediateOn(true);//表示前端是立即上架修改页面展示使用
 			} else {
 				this.setRegisterAt(param.getRegisterAt());
@@ -611,11 +617,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 			this.setUpdateAt(new Date());
 			this.setPurchaseCount(param.getPurchaseCount());
-			if(StringUtils.isNotBlank(param.getWeAndTeStatus())){
-				this.setWeAndTeStatus(param.getWeAndTeStatus());
-			}else {
-				this.setWeAndTeStatus(CommodityTerminalType.weAndTeStatus.STATUS_4);
-			}
+			this.setWeAndTeStatus(StringUtils.isNotBlank(param.getWeAndTeStatus()) ?
+										param.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
 			this.setTemplateId(param.getTemplateId());
 			this.setReason(param.getReason());
 
@@ -628,8 +631,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 
 			//老的app数据identity为-100
-			if(!(this != null && this.getIdentity() != null
-					&& this.getIdentity() == -100)) {
+			if(!(this != null && this.getIdentity() != null && this.getIdentity() == -100)) {
 				this.setIdentity(userInfo.getIdentity());
 			}
 
@@ -645,6 +647,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 					&& this.getIdentity() == -100)) {
 				this.setIdentity(userInfo.getIdentity());
 			}
+
+			this.setAccountType(userInfo.getIdentity());
+			this.setServiceIds(param.getServiceIds());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}

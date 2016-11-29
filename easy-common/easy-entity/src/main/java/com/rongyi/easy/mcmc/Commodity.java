@@ -718,6 +718,10 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
 								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
+		this.setLocationIds(vo.getLocationIds());
+		this.setAccountType(vo.getIdentity());
+		this.setServiceIds(vo.getServiceIds());
+
 		if(specMap == null) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
 			this.setOriginalPrice(vo.getCommodityOriginalPrice());
@@ -763,13 +767,13 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
-			if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+			if(vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
 			} else {
-				Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
-				if(null !=status){
+				Integer status = vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
+				if(null != status){
 					this.setStatus(vo.getCommodityStatus());
-				}else {
+				} else {
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
 				}
 			}
