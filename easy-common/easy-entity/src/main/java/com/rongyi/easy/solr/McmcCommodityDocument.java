@@ -128,6 +128,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("stock")
 	private Integer stock;
 
+	@Field("locationIds")
+	private List<String> locationIds;
+
+	@Field("serviceIds")
+	private List<Integer> serviceIds;
+
 	public Double getPrice() {
 		return price;
 	}
@@ -273,6 +279,22 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
+	}
+
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
 	}
 
 	public McmcCommodityDocument(){
@@ -598,6 +620,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		}
 		//库存进入solr
 		this.setStock(commodity.getStock());
+		this.setLocationIds(commodity.getLocationIds());
+		this.setServiceIds(commodity.getServiceIds());
 	}
 
 	public void toDocument(Commodity commodity) {
