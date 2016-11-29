@@ -1,15 +1,12 @@
 package com.rongyi.easy.solr;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
-import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -127,6 +124,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	@Field("stock")
 	private Integer stock;
+	@Field("locationIds")
+	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
+	@Field("accountType")
+	private Integer accountType;
+	@Field("serviceIds")
+	private List<Integer> serviceIds;//微信公众号ids
 
 	public Double getPrice() {
 		return price;
@@ -528,6 +531,30 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.stock = stock;
 	}
 
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
 								 long brandId, long mallId, CommodityShopInfo shopInfo,
 								 List<Double> positions, List<String> zoneIds, String brandMid) {
@@ -598,6 +625,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		}
 		//库存进入solr
 		this.setStock(commodity.getStock());
+
+		this.setLocationIds(commodity.getLocationIds());
+		this.setAccountType(commodity.getAccountType());
+		this.setServiceIds(commodity.getServiceIds());
 	}
 
 	public void toDocument(Commodity commodity) {
