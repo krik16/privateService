@@ -17,7 +17,7 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
     private Integer status;
     // 标题
     private String title;
-    //  商品状态 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
+    //  商品状态 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品 5：卡券+停车券
     private Integer commodityType;
     // 订单编号
     private String tradeNo;

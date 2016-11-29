@@ -25,6 +25,8 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
     private String receiverName;
     // 对应事件
     private List<OrderEventEntity> eventList;
+    // 券码
+    private List<String> commodityCodeList;
 
     public String getCommodityLogo() {
         return commodityLogo;
@@ -90,12 +92,21 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
         this.receiverPhone = receiverPhone;
     }
 
+    public List<String> getCommodityCodeList() {
+        return commodityCodeList;
+    }
+
+    public void setCommodityCodeList(List<String> commodityCodeList) {
+        this.commodityCodeList = commodityCodeList;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderDetailForUserCenterEntity{" +
-                "commodityLogo='" + commodityLogo + '\'' +
+                "commodityCodeList=" + commodityCodeList +
                 ", commoditySpecIds='" + commoditySpecIds + '\'' +
                 ", commoditySpecList=" + commoditySpecList +
+                ", commodityLogo='" + commodityLogo + '\'' +
                 ", deliveryType=" + deliveryType +
                 ", receiverPhone='" + receiverPhone + '\'' +
                 ", receiverAddress='" + receiverAddress + '\'' +
