@@ -133,6 +133,11 @@ public class ActivityGoods implements Serializable {
 
     private ActivityGoodsRule activityGoodsRule;
 
+    private Integer groupMaxNum;//最大成团人数
+    private String subTitle;//副标题
+    private Integer supModPrice;//是否支持按成团人数调价
+    private String expectTotalAmount;//期望的金额
+
     /**
      * 商品图片合集(用户摩店报名详情)
      */
@@ -194,6 +199,41 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+
+
+
+    public Integer getGroupMaxNum() {
+        return groupMaxNum;
+    }
+
+    public void setGroupMaxNum(Integer groupMaxNum) {
+        this.groupMaxNum = groupMaxNum;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public Integer getSupModPrice() {
+        return supModPrice;
+    }
+
+    public void setSupModPrice(Integer supModPrice) {
+        this.supModPrice = supModPrice;
+    }
+
+    public String getExpectTotalAmount() {
+        return expectTotalAmount;
+    }
+
+    public void setExpectTotalAmount(String expectTotalAmount) {
+        this.expectTotalAmount = expectTotalAmount;
     }
 
     public String getRejectReason() {
