@@ -124,12 +124,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	@Field("stock")
 	private Integer stock;
-	@Field("locationIds")
-	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	@Field("accountType")
 	private Integer accountType;
+	@Field("locationIds")
+	private List<String> locationIds;
 	@Field("serviceIds")
-	private List<Integer> serviceIds;//微信公众号ids
+	private List<Integer> serviceIds;
 
 	public Double getPrice() {
 		return price;

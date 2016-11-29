@@ -35,5 +35,15 @@ public interface IWechatInfoService {
 	 * @param mallId 
 	 * @return
 	 */
-	public WechatInfoVo getWechatInfoByMallId(String mallId) throws Exception;
+	 WechatInfoVo getWechatInfoByMallId(String mallId) throws Exception;
+
+	/**
+	 * 根据商户ID查询对应的微信服务号
+	 * @param merId 商户ID
+	 * @param type 0集团 1商场 2店铺
+	 * @return 服务服务号
+	 */
+	WechatInfoVo getWechatInfoMerId(String merId,Integer type);
+
+
 }
