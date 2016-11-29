@@ -95,6 +95,34 @@ public class CommodityVO  implements  Serializable {
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
 
+	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
+	private Integer accountType;
+	private List<Integer> serviceIds;//微信公众号ids
+
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
@@ -695,12 +723,14 @@ public class CommodityVO  implements  Serializable {
 		vo.setCommodityStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
 		vo.setCommodityCurrentPrice(commodity.getCurrentPrice().toString());
 		vo.setCommodityOriginalPrice(commodity.getOriginalPrice().toString());
-		vo.setBrandId(-1);//默认值
-		vo.setShopId("-1");
-		vo.setMallId("-1");
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
+
+		//默认值
+		vo.setBrandId(-1);
+		vo.setShopId("-1");
+		vo.setMallId("-1");
 
 		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
 		vo.setProcessIdentity(userInfo.getIdentity());

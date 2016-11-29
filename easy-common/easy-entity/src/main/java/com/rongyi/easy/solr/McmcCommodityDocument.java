@@ -599,4 +599,25 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		//库存进入solr
 		this.setStock(commodity.getStock());
 	}
+
+	public void toDocument(Commodity commodity) {
+		if(commodity != null) {
+			this.setId(commodity.getId().toString());
+			this.setCommodityName(commodity.getName());//商品名字
+			this.setCommodityNameSubdiv(commodity.getName());//商品名字
+			this.setCommodityCode(commodity.getCode());//商品编码
+			this.setCommodityShopId(commodity.getShopId());//商品所在店铺 MySQL id
+			this.setCommodityBrandId(commodity.getBrandId());//商品关联品牌 MySQL id
+			this.setBrand_id(commodity.getBrandMid());
+			this.setCommodityMallId(commodity.getMallId());//商品所在商场 MySQL id
+            /*商品状态*/
+			this.setStatus(commodity.getStatus());
+			this.setSold(commodity.getSold());//销量
+			this.setPublic_start(commodity.getRegisterAt());//上架时间
+			this.setPrice(commodity.getPrice());
+			this.setTerminalType(commodity.getTerminalType());
+			this.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
+					commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+		}
+	}
 }

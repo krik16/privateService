@@ -104,7 +104,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String hotAreaName; ///< 商圈
 	private Integer galleryPosition;//橱窗排序商品\
 
-	private List<String> locationIds;//商品记录发到单个集团或者单个商场或者单个店铺集合
+	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
 
