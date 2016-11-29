@@ -23,6 +23,12 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
     private List<OrderEventEntity> eventList;
     // 券码
     private List<String> commodityCodeList;
+    // 快递id
+    private String expressId;
+    // 快递单号
+    private String expressNo;
+    // 快递公司
+    private String expressCompany;
 
     public String getCommodityLogo() {
         return commodityLogo;
@@ -80,6 +86,30 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
         this.orderFormExtraEntity = orderFormExtraEntity;
     }
 
+    public String getExpressCompany() {
+        return expressCompany;
+    }
+
+    public void setExpressCompany(String expressCompany) {
+        this.expressCompany = expressCompany;
+    }
+
+    public String getExpressId() {
+        return expressId;
+    }
+
+    public void setExpressId(String expressId) {
+        this.expressId = expressId;
+    }
+
+    public String getExpressNo() {
+        return expressNo;
+    }
+
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderDetailForUserCenterEntity{" +
@@ -90,6 +120,9 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
                 ", deliveryType=" + deliveryType +
                 ", orderFormExtraEntity=" + orderFormExtraEntity +
                 ", eventList=" + eventList +
+                ", expressId='" + expressId + '\'' +
+                ", expressNo='" + expressNo + '\'' +
+                ", expressCompany='" + expressCompany + '\'' +
                 "} " + super.toString();
     }
 }
