@@ -28,9 +28,13 @@ public class PinTuanConfigEntity implements Serializable {
 
     private String pic;
 
+    private String pics;
+
     private String activityTitle;
 
     private static final long serialVersionUID = 1L;
+
+
 
     public Integer getId() {
         return id;
@@ -38,6 +42,14 @@ public class PinTuanConfigEntity implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getPics() {
+        return pics;
+    }
+
+    public void setPics(String pics) {
+        this.pics = pics;
     }
 
     public Integer getActivityId() {
