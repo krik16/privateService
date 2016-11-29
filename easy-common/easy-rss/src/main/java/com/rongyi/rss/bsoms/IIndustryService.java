@@ -77,4 +77,6 @@ public interface IIndustryService {
 	List<BIndustryVersion> getVersionsByIndustryId(Integer industryId) throws Exception;
 	
 	List<String> getAuthIdsByVersionId(Integer versionId) throws Exception;
+	
+	List<String> getAuthValuesByVersionId(Integer versionId) throws Exception;
 }
