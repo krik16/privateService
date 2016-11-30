@@ -1,5 +1,6 @@
 package com.rongyi.rss.activitymanage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +93,12 @@ public interface GroupBuyService {
 	 */
 	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone,String userName,String userPhone,String userPosition,String userCompany);
 
+
+	/**
+	 * 开团，超级团，只有参团
+	 * @return
+	 */
+	public boolean saveGroupInfo(GroupInfo groupInfo);
 
 	/**
 	 * 通知支付结果,变更用户参团成功状态,
