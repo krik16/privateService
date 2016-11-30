@@ -25,9 +25,15 @@ public class StandardConvertionUtil {
      *
      */
     public static Integer convertPlatformToTerminalType(final String platform) {
-        String flag = StringUtils.isBlank(platform) ? "3" : platform;
+        String flag;
+        if(null == platform || platform.isEmpty()) {
+            flag = "3";
+        } else {
+            List<String> platforms = Arrays.asList(platform.split(","));
+            flag = (platforms.size() > 1) ? "3" : platforms.get(0);
+        }
 
-        int terminalType;
+        Integer terminalType;
         switch (flag) {
             case "1":
                 terminalType = CommodityTerminalType.TERMINAL_TYPE_4;
@@ -39,7 +45,7 @@ public class StandardConvertionUtil {
                 terminalType = CommodityTerminalType.TERMINAL_TYPE_6;
                 break;
             default:
-                terminalType = CommodityTerminalType.TERMINAL_TYPE_4;
+                terminalType = null;
         }
         return terminalType;
     }

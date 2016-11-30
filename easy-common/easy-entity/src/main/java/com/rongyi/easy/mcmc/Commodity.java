@@ -49,7 +49,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
-	private int status;//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
+	private Integer status;//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
@@ -135,6 +135,16 @@ public class Commodity implements  Serializable,Cloneable{
 	private Date selfExpireDate;
 	// 标签列表
 	private List<String> tagIds;
+
+	private Integer selfTakeDays;
+
+	public Integer getSelfTakeDays() {
+		return selfTakeDays;
+	}
+
+	public void setSelfTakeDays(Integer selfTakeDays) {
+		this.selfTakeDays = selfTakeDays;
+	}
 
 	public String getGiftId() {
 		return giftId;
@@ -892,7 +902,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
-			if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+			if(null != vo.getSource() && vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
 			} else {
 				Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断

@@ -125,6 +125,16 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private List<GiftPaymentVO> paymentVOs;
 	private String platform;
 	private Double price;
+	private Integer selfTakeDays;
+
+
+	public Integer getSelfTakeDays() {
+		return selfTakeDays;
+	}
+
+	public void setSelfTakeDays(Integer selfTakeDays) {
+		this.selfTakeDays = selfTakeDays;
+	}
 
 	public Integer getFlashSaleId() {
 		return flashSaleId;

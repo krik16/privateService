@@ -20,6 +20,17 @@ public class GiftPaymentVO implements Serializable {
     // 是否生效（1.是 0.否）
     private Integer isEffective;
 
+    private String commodityId;
+
+
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
     public String getId() {
         return id;
     }

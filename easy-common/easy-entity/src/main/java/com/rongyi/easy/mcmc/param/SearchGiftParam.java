@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
 import com.rongyi.easy.util.StandardConvertionUtil;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private String platform;
     private String code;
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createAt;
     private Integer commodityRange;
     private Integer terminalType;

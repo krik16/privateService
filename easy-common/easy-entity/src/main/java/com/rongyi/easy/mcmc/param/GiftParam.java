@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
 import com.rongyi.easy.mcmc.vo.GiftPaymentVO;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.List;
  * 礼品参数
  *
  * @author yaoyiwei
- * @date 2016-11-27
+ * @date 2016-11-30
  * @version 1.0
  *
  */
@@ -57,8 +58,6 @@ public class GiftParam implements Serializable {
     // 支付方式列表
     private List<String> paymentIds;
     private List<GiftPaymentVO> paymentVOs;
-    // 商品状态
-    private String status;
     // 终端
     private String platform;
     private Double price;
@@ -66,6 +65,11 @@ public class GiftParam implements Serializable {
     private Date soldOutAt;//下架时间
     private Integer selfTakeDays;
     private String reason;
+    private Integer status;
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;
@@ -257,14 +261,6 @@ public class GiftParam implements Serializable {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getPlatform() {
