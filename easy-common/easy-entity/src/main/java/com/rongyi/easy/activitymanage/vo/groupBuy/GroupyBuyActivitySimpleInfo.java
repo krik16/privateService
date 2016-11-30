@@ -61,7 +61,15 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 	private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
 	private String activityTitle;//活动页面标题
+	private String pics;//轮播图片
+	
+	public String getPics() {
+		return pics;
+	}
 
+	public void setPics(String pics) {
+		this.pics = pics;
+	}
 
 	public Integer getStatus() {
 		return status;

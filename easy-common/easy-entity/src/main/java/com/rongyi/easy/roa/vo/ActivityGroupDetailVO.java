@@ -40,7 +40,37 @@ public class ActivityGroupDetailVO implements Serializable{
 	private int groupTotalNum;//活动商品参团总人数
 	private boolean ifOpenGroup;//是否可参团，true:可以，false：不可以
 	private boolean ifJoinGroup;//是否可开团，true可以，false不可以
-	
+
+	//超级团
+	private String  activityGroupDesc;//	开团说明
+	private int groupNum;//已参团人数
+	private int groupPeopleMax;//最大成团人数，0表示没有最大成团人数
+
+
+	public String getActivityGroupDesc() {
+		return activityGroupDesc;
+	}
+
+	public void setActivityGroupDesc(String activityGroupDesc) {
+		this.activityGroupDesc = activityGroupDesc;
+	}
+
+	public int getGroupNum() {
+		return groupNum;
+	}
+
+	public void setGroupNum(int groupNum) {
+		this.groupNum = groupNum;
+	}
+
+	public int getGroupPeopleMax() {
+		return groupPeopleMax;
+	}
+
+	public void setGroupPeopleMax(int groupPeopleMax) {
+		this.groupPeopleMax = groupPeopleMax;
+	}
+
 	public boolean isIfOpenGroup() {
 		return ifOpenGroup;
 	}

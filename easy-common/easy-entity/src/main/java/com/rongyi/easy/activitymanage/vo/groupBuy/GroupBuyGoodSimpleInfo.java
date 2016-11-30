@@ -88,6 +88,35 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
 	 */
 	private Integer status;
+	
+	private Integer groupStatus;//团状态  团状态:0等待发起人支付,1开团失败,2进行中,3成功,4人数不够自动失败,5活动下线,团失败  
+
+	private Long groupStartAt;//商品开始时间
+	private Long groupEndAt;//商品结束时间
+	
+	public Integer getGroupStatus() {
+		return groupStatus;
+	}
+
+	public void setGroupStatus(Integer groupStatus) {
+		this.groupStatus = groupStatus;
+	}
+
+	public Long getGroupStartAt() {
+		return groupStartAt;
+	}
+
+	public void setGroupStartAt(Long groupStartAt) {
+		this.groupStartAt = groupStartAt;
+	}
+
+	public Long getGroupEndAt() {
+		return groupEndAt;
+	}
+
+	public void setGroupEndAt(Long groupEndAt) {
+		this.groupEndAt = groupEndAt;
+	}
 
 	public double getMinActivityPrice(List<GoodSpecInfo> specs) {
 		Assert.notNull(specs);
