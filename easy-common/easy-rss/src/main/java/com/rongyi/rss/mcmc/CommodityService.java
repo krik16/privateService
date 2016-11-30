@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseResult2;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;

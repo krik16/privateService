@@ -112,7 +112,7 @@ public class Commodity implements  Serializable,Cloneable{
 //	private int mediumCommentCount;
 //	private int lowCommentCount;
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
-	private Integer accountType;
+	private Integer accountType;//0集团商品，1商场商品，4,5店铺商品
 	private List<Integer> serviceIds;//微信公众号ids
 
 	public List<String> getLocationIds() {

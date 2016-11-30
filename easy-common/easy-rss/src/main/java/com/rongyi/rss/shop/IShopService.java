@@ -148,4 +148,6 @@ public interface IShopService {
 	public String selectNameByIds(List<String> ids);
 
 	public  List<String> selectShopsByName(String name);
+
+	public List<String> selectMallIdAndGroupIdByShopMid(String shopMid);
 }
