@@ -121,10 +121,10 @@ public class ActivityGoods implements Serializable {
      * 描述
      */
     private String desc;
-    private Integer groupNum;
-    private Integer openGroupLimit;
-    private Integer joinGroupLimit;
-    private Integer sortNum;
+    private Integer groupNum;//成团人数
+    private Integer openGroupLimit;//开团次数限制
+    private Integer joinGroupLimit;//参团次数限制
+    private Integer sortNum;//排序index
     private String remainStock;
     private String activityPrice;
     //开团起始人数（随机数）

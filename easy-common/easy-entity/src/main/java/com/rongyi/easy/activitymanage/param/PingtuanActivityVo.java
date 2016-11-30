@@ -70,7 +70,7 @@ public class PingtuanActivityVo implements Serializable{
 
     private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
-    private String activityTitle;
+    private String activityTitle; //活动标题
 
     public List<ActivityGoodsDetail> getActivityGoodsDetails() {
         return activityGoodsDetails;
