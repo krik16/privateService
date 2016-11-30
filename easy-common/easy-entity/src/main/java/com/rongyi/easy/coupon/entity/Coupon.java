@@ -271,14 +271,6 @@ public class Coupon implements Serializable {
 
     
 
-	public List<CouponCategory> getListCouponCategorys() {
-		return listCouponCategorys;
-	}
-
-    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
-        this.listCouponCategorys = listCouponCategorys;
-    }
-
 
 	/**
      * 代金券关联的集团
@@ -297,13 +289,7 @@ public class Coupon implements Serializable {
      */
 //    private CouponMall couponMall;
 
-    public List<CouponBrand> getCouponBrands() {
-		return couponBrands;
-	}
 
-	public void setCouponBrands(List<CouponBrand> couponBrands) {
-		this.couponBrands = couponBrands;
-	}
 
 	/**
      * 代金券关联的店铺
@@ -315,6 +301,8 @@ public class Coupon implements Serializable {
      */
     private List<CouponMall> couponMalls;
 
+    private List<CouponWechat> wechats;
+
 
     /**
      * 优惠方式 平台抵扣券 0：满减 ；1：立减。商家抵扣券：1 满减；2：立减
@@ -325,7 +313,6 @@ public class Coupon implements Serializable {
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
     private List<CouponCommodity> couponCommodities;
-
 
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
@@ -435,6 +422,29 @@ public class Coupon implements Serializable {
 
     public Integer getOrigPrice() {
         return origPrice;
+    }
+
+    public List<CouponCategory> getListCouponCategorys() {
+        return listCouponCategorys;
+    }
+
+    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+        this.listCouponCategorys = listCouponCategorys;
+    }
+    public List<CouponBrand> getCouponBrands() {
+        return couponBrands;
+    }
+
+    public void setCouponBrands(List<CouponBrand> couponBrands) {
+        this.couponBrands = couponBrands;
+    }
+
+    public List<CouponWechat> getWechats() {
+        return wechats;
+    }
+
+    public void setWechats(List<CouponWechat> wechats) {
+        this.wechats = wechats;
     }
 
     public double getOrigPrice2Double() {
@@ -1054,6 +1064,7 @@ public class Coupon implements Serializable {
                 .append("couponBrands", couponBrands)
                 .append("activityStatus", activityStatus)
                 .append("thirdCouponType", thirdCouponType)
+                .append("wechats", wechats)
                 .toString();
     }
 

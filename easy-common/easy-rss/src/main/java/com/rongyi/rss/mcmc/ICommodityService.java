@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseResult2;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
@@ -87,4 +88,6 @@ public interface ICommodityService {
 	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
 
 	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
+
+	ResponseResult2 resetCommodityDate();
 }

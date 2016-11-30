@@ -122,6 +122,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("extend")
 	private String extend;
 
+	@Field("commodityModelNo")
+	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
 	@Field("accountType")
@@ -522,6 +524,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.top = top;
 	}
 
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
 
 	public Integer getStock() {
 		return stock;
@@ -625,6 +634,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		}
 		//库存进入solr
 		this.setStock(commodity.getStock());
+		this.setCommodityModelNo(commodity.getCommodityModelNo());
 
 		this.setLocationIds(commodity.getLocationIds());
 		this.setAccountType(commodity.getAccountType());

@@ -102,10 +102,17 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopName; ///< 店铺名称
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
-	private Integer galleryPosition;//橱窗排序商品\
+	private Integer galleryPosition;//橱窗排序商品
+	private String subheading;  //副标题
 
+	private String commodityDetails; //商品详情
+
+//	private int commentCount;
+//	private int highCommentCount;
+//	private int mediumCommentCount;
+//	private int lowCommentCount;
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
-	private Integer accountType;
+	private Integer accountType;//0集团商品，1商场商品，4,5店铺商品
 	private List<Integer> serviceIds;//微信公众号ids
 
 	public List<String> getLocationIds() {
@@ -577,6 +584,22 @@ public class Commodity implements  Serializable,Cloneable{
 		this.shopName = shopName;
 	}
 
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
 	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
@@ -641,6 +664,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShopName(shopName);
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
+		commodity.setSubheading(subheading);
+		commodity.setCommodityDetails(commodityDetails);
 		return commodity;
 	}
 	@Override
@@ -713,6 +738,8 @@ public class Commodity implements  Serializable,Cloneable{
 				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
 				",galleryPosition=" + galleryPosition +
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
 				'}';
 	}
 
@@ -828,6 +855,10 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallId(String.valueOf(mallId));
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSubheading(vo.getSubheading());
+		this.setCommodityDetails(vo.getCommodityDetails());
+		this.setCommodityModelNo(vo.getCommodityModelNo());
 		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 
 		// 买手&非现货 商品 临时状态: -1
@@ -939,6 +970,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSystemNumber(source.getSystemNumber());
 		commodity.setReason(source.getReason());
 		commodity.setGoodsSec(source.isGoodsSec());
+		commodity.setSubheading(source.getSubheading());
+		commodity.setCommodityDetails(source.getCommodityDetails());
 		return commodity;
 	}
 }
