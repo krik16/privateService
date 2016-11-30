@@ -72,8 +72,43 @@ public class GroupDetail implements Serializable{
 	 */
 	private Integer userType;
 	private Integer id;
+	private String userName;
+	private String userPhone;
+	private String userPosition;
+	private String userCompany;
 
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserPosition() {
+		return userPosition;
+	}
+
+	public void setUserPosition(String userPosition) {
+		this.userPosition = userPosition;
+	}
+
+	public String getUserCompany() {
+		return userCompany;
+	}
+
+	public void setUserCompany(String userCompany) {
+		this.userCompany = userCompany;
+	}
 
 	public Integer getActivityId() {
 		return activityId;
@@ -222,6 +257,10 @@ public class GroupDetail implements Serializable{
 				", joinState=" + joinState +
 				", orderNo='" + orderNo + '\'' +
 				", userType=" + userType +
+				", userName=" + userName +
+				", userPhone=" + userPhone +
+				", userPosition=" + userPosition +
+				", userCompany=" + userCompany +
 				", id=" + id +
 				'}';
 	}
