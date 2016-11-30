@@ -90,7 +90,7 @@ public interface GroupBuyService {
 	 * @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
+	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone,String userName,String userPhone,String userPosition,String userCompany);
 
 
 	/**

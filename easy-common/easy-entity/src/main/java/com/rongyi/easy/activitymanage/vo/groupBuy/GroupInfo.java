@@ -48,6 +48,11 @@ public class GroupInfo implements Serializable{
 	 * 成团人数  :3人团   5 人团
 	 */
 	private Integer  groupPeopleLimit;
+
+	/**
+	 * 最大成团人数
+	 */
+	private Integer groupPeopleMaxLimit;
 	
 	
 	private List<GroupDetail> groupDetail;
@@ -67,11 +72,13 @@ public class GroupInfo implements Serializable{
 	private Integer  state;
 
 
-	
-	
-	
-	
+	public Integer getGroupPeopleMaxLimit() {
+		return groupPeopleMaxLimit;
+	}
 
+	public void setGroupPeopleMaxLimit(Integer groupPeopleMaxLimit) {
+		this.groupPeopleMaxLimit = groupPeopleMaxLimit;
+	}
 
 	public List<GroupDetail> getGroupDetail() {
 		return groupDetail;

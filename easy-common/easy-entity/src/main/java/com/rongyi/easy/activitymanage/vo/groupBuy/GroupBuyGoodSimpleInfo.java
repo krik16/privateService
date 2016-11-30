@@ -48,7 +48,10 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 * 成团人数  :3人团   5 人团
 	 */
 	private int  groupPeopleLimit;
-	
+	/**
+	 * 最大成团人数
+	 */
+	private Integer groupPeopleMaxLimit;
 
 	/***
 	 * 排序
@@ -104,6 +107,13 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 		return remainStock;
 	}
 
+	public Integer getGroupPeopleMaxLimit() {
+		return groupPeopleMaxLimit;
+	}
+
+	public void setGroupPeopleMaxLimit(Integer groupPeopleMaxLimit) {
+		this.groupPeopleMaxLimit = groupPeopleMaxLimit;
+	}
 
 	public Integer getStatus() {
 		return status;
