@@ -34,16 +34,35 @@ public class Floor implements Serializable {
 
     private String swf;//swf图--商家后台用的
     private String fmap;//fmap图--商家后台用的
-    
-    
-    
-    
-	public String getSwf() {
+    private String aliasename;
+    private String aliasname;
+
+
+    public String getAliasename() {
+        return aliasename;
+    }
+
+    public void setAliasename(String aliasename) {
+        this.aliasename = aliasename;
+    }
+
+    public String getAliasname() {
+        return aliasname;
+    }
+
+    public void setAliasname(String aliasname) {
+        this.aliasname = aliasname;
+    }
+
+    public String getSwf() {
 		return swf;
 	}
 	public String getFmap() {
 		return fmap;
 	}
+
+
+
 	public String getFullFmap() {
 		 if (StringUtils.isNotBlank(fmap)) {
 	            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + fmap;
@@ -180,21 +199,25 @@ public class Floor implements Serializable {
 	public void setMall_valid(Integer mall_valid) {
 		this.mall_valid = mall_valid;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "Floor [id=" + id + ", name=" + name + ", systemStatus=" + systemStatus + ", position=" + position
-				+ ", parent_ids=" + parent_ids + ", parent_id=" + parent_id + ", navigation_pic=" + navigation_pic
-				+ ", pathImg=" + pathImg + ", picture=" + picture + ", created_at=" + created_at + ", mall_valid="
-				+ mall_valid + ", swf=" + swf + ", fmap=" + fmap + "]";
-	}
 
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Floor{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", systemStatus=" + systemStatus +
+                ", position=" + position +
+                ", parent_ids=" + parent_ids +
+                ", parent_id='" + parent_id + '\'' +
+                ", navigation_pic='" + navigation_pic + '\'' +
+                ", pathImg='" + pathImg + '\'' +
+                ", picture='" + picture + '\'' +
+                ", created_at=" + created_at +
+                ", mall_valid=" + mall_valid +
+                ", swf='" + swf + '\'' +
+                ", fmap='" + fmap + '\'' +
+                ", aliasename='" + aliasename + '\'' +
+                ", aliasname='" + aliasname + '\'' +
+                '}';
+    }
 }
