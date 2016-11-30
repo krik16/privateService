@@ -149,5 +149,5 @@ public interface IShopService {
 
 	public  List<String> selectShopsByName(String name);
 
-	public List<String> selectMallIdAndGroupIdByShopMid(String shopMid);
+	public String selectGroupIdByMallMid(String shopMid);
 }
