@@ -3,6 +3,7 @@ package com.rongyi.rss.ryoms;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.ryoms.entity.WechatInfoVo;
 
 /**
@@ -44,6 +45,13 @@ public interface IWechatInfoService {
 	 * @return 服务服务号
 	 */
 	WechatInfoVo getWechatInfoMerId(String merId,Integer type);
+
+	/**
+	 * 根据登录用户信息查询绑定的微信服务号列表
+	 * @param userInfo 登录用户信息
+	 * @return 服务号列表
+	 */
+	List<WechatInfoVo> getWechatInfoListByLoginUser(SessionUserInfo userInfo);
 
 
 }
