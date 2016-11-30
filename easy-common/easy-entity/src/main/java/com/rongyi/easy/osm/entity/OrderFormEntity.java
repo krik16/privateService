@@ -196,6 +196,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     //订单对应事件
     private OrderEventEntity orderEvent;
 
+    //订单对应事件2
+    private OrderEventEntity orderEvent2;
+
     //对单对应退款记录
     private String applicationType;
 
@@ -954,6 +957,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+    public OrderEventEntity getOrderEvent2() {
+        return orderEvent2;
+    }
+
+    public void setOrderEvent2(OrderEventEntity orderEvent2) {
+        this.orderEvent2 = orderEvent2;
     }
 
     @Override
