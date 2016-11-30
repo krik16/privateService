@@ -124,6 +124,8 @@ public interface IShopService{
 
 	public Integer insertCooperateShopByshopMid(String shopMid, Integer brandId, Integer mallId) throws Exception;
 
+	Integer insertCooperateShopByshopMid(String shopMid, Integer brandId, Integer mallId,Integer parentShopId,Integer grandpaShopId) throws Exception;
+
 	/**
 	 * 以下接口是从rongyi.app.content 移过来的接口
 	 * @author 袁波

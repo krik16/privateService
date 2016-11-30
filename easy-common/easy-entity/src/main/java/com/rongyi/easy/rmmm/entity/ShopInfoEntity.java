@@ -18,7 +18,7 @@ public class ShopInfoEntity implements Serializable{
     private Integer parentShopId;
 
     /**  上上级店铺ID **/
-    private Integer grandPaShopId;
+    private Integer grandpaShopId;
 
     /** 店铺所属商场名称 */
     private Integer mallId;
@@ -155,11 +155,11 @@ public class ShopInfoEntity implements Serializable{
         this.parentShopId = parentShopId;
     }
 
-    public Integer getGrandPaShopId() {
-        return grandPaShopId;
+    public Integer getGrandpaShopId() {
+        return grandpaShopId;
     }
 
-    public void setGrandPaShopId(Integer grandPaShopId) {
-        this.grandPaShopId = grandPaShopId;
+    public void setGrandpaShopId(Integer grandpaShopId) {
+        this.grandpaShopId = grandpaShopId;
     }
 }
