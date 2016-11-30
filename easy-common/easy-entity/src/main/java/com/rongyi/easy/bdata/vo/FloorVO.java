@@ -25,6 +25,16 @@ public class FloorVO implements Serializable {
 
     private String aliasename;
     private String aliasname;
+    private String   tMap;//图聚版地图
+
+
+    public String gettMap() {
+        return tMap;
+    }
+
+    public void settMap(String tMap) {
+        this.tMap = tMap;
+    }
 
     public String getAliasename() {
         return aliasename;

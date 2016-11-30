@@ -158,7 +158,16 @@ public class BdataFloor implements Serializable {
     private String reason;//操作描述
     private String swf;//swf图--商家后台用的
     private String fmap;//fmap图--商家后台用的
-    
+	private String   tMap;//图聚版地图
+
+
+	public String gettMap() {
+		return tMap;
+	}
+
+	public void settMap(String tMap) {
+		this.tMap = tMap;
+	}
     
     
     

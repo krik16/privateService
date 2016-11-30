@@ -36,6 +36,16 @@ public class Floor implements Serializable {
     private String fmap;//fmap图--商家后台用的
     private String aliasename;
     private String aliasname;
+    private String   tMap;//图聚版地图
+
+
+    public String gettMap() {
+        return tMap;
+    }
+
+    public void settMap(String tMap) {
+        this.tMap = tMap;
+    }
 
 
     public String getAliasename() {

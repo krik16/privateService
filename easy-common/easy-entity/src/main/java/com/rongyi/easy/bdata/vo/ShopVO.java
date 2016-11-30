@@ -50,6 +50,15 @@ public class ShopVO implements Serializable {
 	private String updateUser ;   //最后修改者
 	private String nameEn;  //店铺英文名
 	private String descriptionEn; //英文描述
+	private String FID;
+
+	public String getFID() {
+		return FID;
+	}
+
+	public void setFID(String FID) {
+		this.FID = FID;
+	}
 
 	public String getBusinessStatusReason() {
 		return businessStatusReason;
