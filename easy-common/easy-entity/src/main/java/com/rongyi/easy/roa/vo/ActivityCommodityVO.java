@@ -22,11 +22,29 @@ public class ActivityCommodityVO implements Serializable{
 	private String commodityId;//商品id
 	private String commodityName;//商品名称
 	private Double commodityOPriceMax;//商品最高原价
-	private Integer groupPeopleLimit;//成团所需人数
 	private List<String> commodityPicList;//商品图片
 	public Integer getActivityCommodityStock() {
 		return activityCommodityStock;
 	}
+    //众筹价
+	private String crowdFundingPrice;
+    //活动结束时间，单位：毫
+	private Long groupEndAt;
+    //已参团人数
+	private Integer groupNum;
+	//成团所需人数或者最小成团人数
+	private Integer groupPeopleLimit;
+	//最大成团人数，0表示没有最大成团人数
+	private Integer groupPeopleMax;
+    //活动开始时间，单位：毫秒
+	private Long groupStartAt;
+     //拼团状态,0：拼团中，1：成功不可以参团，2：失败，3：未开始,4成功但仍可以参团
+	private Integer groupStatus;
+
+
+
+
+
 	public void setActivityCommodityStock(Integer activityCommodityStock) {
 		this.activityCommodityStock = activityCommodityStock;
 	}
@@ -66,6 +84,55 @@ public class ActivityCommodityVO implements Serializable{
 	public void setCommodityPicList(List<String> commodityPicList) {
 		this.commodityPicList = commodityPicList;
 	}
+
+	public String getCrowdFundingPrice() {
+		return crowdFundingPrice;
+	}
+
+	public void setCrowdFundingPrice(String crowdFundingPrice) {
+		this.crowdFundingPrice = crowdFundingPrice;
+	}
+
+	public Long getGroupEndAt() {
+		return groupEndAt;
+	}
+
+	public void setGroupEndAt(Long groupEndAt) {
+		this.groupEndAt = groupEndAt;
+	}
+
+	public Integer getGroupNum() {
+		return groupNum;
+	}
+
+	public void setGroupNum(Integer groupNum) {
+		this.groupNum = groupNum;
+	}
+
+	public Integer getGroupPeopleMax() {
+		return groupPeopleMax;
+	}
+
+	public void setGroupPeopleMax(Integer groupPeopleMax) {
+		this.groupPeopleMax = groupPeopleMax;
+	}
+
+	public Long getGroupStartAt() {
+		return groupStartAt;
+	}
+
+	public void setGroupStartAt(Long groupStartAt) {
+		this.groupStartAt = groupStartAt;
+	}
+
+	public Integer getGroupStatus() {
+		return groupStatus;
+	}
+
+	public void setGroupStatus(Integer groupStatus) {
+		this.groupStatus = groupStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupActivityCommodityVO [activityCommodityStock="
