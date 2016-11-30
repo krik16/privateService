@@ -228,6 +228,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
 
+    private String buyerName;//如果是微信用户昵称，昵称是编码之后的
+    private OrderReserveEntity orderReserve;//超级团预约信息
+
     public Byte getIsAlert() {
         return isAlert;
     }
@@ -930,6 +933,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public OrderReserveEntity getOrderReserve() {
+        return orderReserve;
+    }
+
+    public void setOrderReserve(OrderReserveEntity orderReserve) {
+        this.orderReserve = orderReserve;
     }
 
     @Override
