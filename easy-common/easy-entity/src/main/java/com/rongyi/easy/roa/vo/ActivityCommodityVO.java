@@ -26,6 +26,9 @@ public class ActivityCommodityVO implements Serializable{
 	public Integer getActivityCommodityStock() {
 		return activityCommodityStock;
 	}
+
+
+
     //众筹价
 	private String crowdFundingPrice;
     //活动结束时间，单位：毫
