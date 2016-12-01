@@ -94,8 +94,25 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private Long groupStartAt;//商品开始时间
 	private Long groupEndAt;//商品结束时间
 	private String expectTotalAmount;//众筹价
-	
-	
+	private Long groupId;//团id
+	private String subTitle;//副标题
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
 	public String getExpectTotalAmount() {
 		return expectTotalAmount;
 	}
