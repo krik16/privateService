@@ -10,72 +10,53 @@ public class GroupDetail implements Serializable{
 	 */
 	private static final long serialVersionUID = -8643031504146087289L;
 
-
-
 	/***
 	 * 活动id
 	 */
 	private Integer activityId;
-
 	/**
 	 * 团id
 	 */
 	private Long groupId;
-	
-	
-	private String userNick;
-	
-	private String userIcon;
-	private String userId;
-
+	private String userNick;//用户昵称(有特殊字符,存的是编码后的)
+	private String userIcon; //用户头像全地址 
+	private String userId;//用户id
 	/**
 	 * 0团长,1团员
 	 */
 	private Integer groupRole;
-	
-	private String openId;
-	
-	private String phone;
+	private String openId;//open id
+	private String phone;//用户手机号码
 	/***
 	 * 商品id
 	 */
 	private String goodId;
-	
 	/***
 	 * 商品specid
 	 */
 	private String goodSpecId;
-
-
 	/***
 	 * 拼团价格
 	 */
 	private Double price;
-	
-	
-	
 	/**
 	 * 创建时间
 	 */
 	private Date createAt;
-	
-	
 	/**
 	 * 参团状态,0 成功  ,1 失败
 	 */
 	private Integer joinState;
-
-	
-	private  String orderNo;
+	private  String orderNo;//订单号
 	/**
 	 * 0微信,1容易逛
 	 */
 	private Integer userType;
 	private Integer id;
-	private String userName;
-	private String userPhone;
-	private String userPosition;
-	private String userCompany;
+	private String userName;//姓名 
+	private String userPhone;//用户手机号码
+	private String userPosition;//用户职位
+	private String userCompany;//用户公司简称
 
 
 	public String getUserName() {

@@ -45,7 +45,15 @@ public class ActivityGroupDetailVO implements Serializable{
 	private String  activityGroupDesc;//	开团说明
 	private int groupNum;//已参团人数
 	private int groupPeopleMax;//最大成团人数，0表示没有最大成团人数
+	private Integer activityType;//8普通拼团,9电商版拼团，10教育版拼团
+	
+	public Integer getActivityType() {
+		return activityType;
+	}
 
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
 
 	public String getActivityGroupDesc() {
 		return activityGroupDesc;

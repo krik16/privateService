@@ -62,7 +62,17 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 
 	private String activityTitle;//活动页面标题
 	private String pics;//轮播图片
+	private Integer type;//活动类型 8普通拼团,9电商版拼团，10教育版拼团
 	
+	
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	public String getPics() {
 		return pics;
 	}
