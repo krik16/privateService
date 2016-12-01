@@ -102,7 +102,7 @@ public class CommodityVO  implements  Serializable {
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
 	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
 
-	private String groupMid;
+
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
@@ -801,9 +801,11 @@ public class CommodityVO  implements  Serializable {
 
 		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
 		vo.setProcessIdentity(userInfo.getIdentity());
-		vo.setCreate_by(userInfo.getId().toString());
-
 		vo.setMerchantId(userInfo.getBindingMid());
+		if(null ==commodity.getId()){
+			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+		}
+		vo.setCreate_by(userInfo.getId().toString());//修改id传入做权限判断
 		return vo;
 	}
 
