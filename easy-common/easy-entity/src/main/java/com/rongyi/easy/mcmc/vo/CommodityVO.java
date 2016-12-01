@@ -102,7 +102,7 @@ public class CommodityVO  implements  Serializable {
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
 	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
 
-
+	private String groupMid;
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
