@@ -6,7 +6,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -37,8 +36,6 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 * 
 	 */
 	private String desc;
-	
-	
 	/***
 	 * 商品名
 	 */
@@ -52,45 +49,31 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 * 最大成团人数
 	 */
 	private Integer groupPeopleMaxLimit;
-
 	/***
 	 * 排序
 	 */
 	private int  level;
-	
-	
-	
 	/***
 	 * 开团限制次数
 	 */
 	private int  openGroupLimit;
-	
-	
 	/***
 	 * 参团限制次数
 	 */
 	private int  joinGroupLimit;
-	
-	
-	
 	/***
 	 * 商品规格列表
 	 */
 	private List<GoodSpecInfo> specs;
-	
-	
 	/***
 	 * 商品已参团次数,已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
 	 */
 	private int groupedCount;
-
 	/**
 	 * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
 	 */
 	private Integer status;
-	
 	private Integer groupStatus;//团状态  团状态:0等待发起人支付,1开团失败,2进行中,3成功,4人数不够自动失败,5活动下线,团失败  
-
 	private Long goodsStartAt;//商品开始时间
 	private Long goodsEndAt;//商品结束时间
 	private Long groupStartAt;//团开始时间
@@ -98,7 +81,8 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private String expectTotalAmount;//众筹价
 	private boolean supModPrice;//true是，false否
 	private int joinGroupNum;//参团人数
-	
+	private Long groupId;//团id
+	private String subTitle;//副标题
 	
 	public int getJoinGroupNum() {
 		return joinGroupNum;
@@ -130,6 +114,21 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 
 	public void setSupModPrice(boolean supModPrice) {
 		this.supModPrice = supModPrice;
+	}
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getExpectTotalAmount() {
