@@ -117,6 +117,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String selfAddressId;
 	// 自提期限
 	private Date selfExpireDate;
+	// 卡券开始时间
+	private Date couponStartDate;
+	// 卡券过期时间
+	private Date couponEndDate;
 	// 标签列表
 	private List<String> tagIds;
 	// 支付方式列表
@@ -713,6 +717,22 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.paymentIds = paymentIds;
 	}
 
+	public Date getCouponEndDate() {
+		return couponEndDate;
+	}
+
+	public void setCouponEndDate(Date couponEndDate) {
+		this.couponEndDate = couponEndDate;
+	}
+
+	public Date getCouponStartDate() {
+		return couponStartDate;
+	}
+
+	public void setCouponStartDate(Date couponStartDate) {
+		this.couponStartDate = couponStartDate;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -814,7 +834,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
-				"commodityId='" + commodityId + '\'' +
+				"activityId=" + activityId +
+				", commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
 				", commodityCategory1='" + commodityCategory1 + '\'' +
@@ -840,6 +861,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", create_by='" + create_by + '\'' +
 				", update_by='" + update_by + '\'' +
 				", liveId='" + liveId + '\'' +
+				", saleId=" + saleId +
+				", flashSaleId=" + flashSaleId +
 				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
 				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
 				", shopId='" + shopId + '\'' +
@@ -877,7 +900,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo='" + commodityModelNo + '\'' +
 				", goodsParam=" + goodsParam +
-				", activityId=" + activityId +
 				", activityPrice=" + activityPrice +
 				", updateAt=" + updateAt +
 				", galleryPosition=" + galleryPosition +
@@ -886,18 +908,23 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", sn='" + sn + '\'' +
 				", mappingId='" + mappingId + '\'' +
 				", commodityRange=" + commodityRange +
-				", exchangeTypes=" + exchangeTypes +
+				", exchangeTypes='" + exchangeTypes + '\'' +
 				", pointType=" + pointType +
 				", buyType=" + buyType +
-				", deliveryTypes=" + deliveryTypes +
+				", deliveryTypes='" + deliveryTypes + '\'' +
 				", selfType=" + selfType +
 				", selfAddress='" + selfAddress + '\'' +
 				", selfRemark='" + selfRemark + '\'' +
 				", selfAddressId='" + selfAddressId + '\'' +
 				", selfExpireDate=" + selfExpireDate +
+				", couponStartDate=" + couponStartDate +
+				", couponEndDate=" + couponEndDate +
 				", tagIds=" + tagIds +
 				", paymentIds=" + paymentIds +
 				", paymentVOs=" + paymentVOs +
+				", platform='" + platform + '\'' +
+				", price=" + price +
+				", selfTakeDays=" + selfTakeDays +
 				'}';
 	}
 

@@ -282,7 +282,7 @@ public interface IOrderQueryService {
 	 * @param mallId
 	 * @return
 	 */
-	DubboVO<OsmOrderDetailForUserCenterEntity> detailForUserCenter(String tradeNo, String mallId);
+	DubboVO<OsmOrderDetailForUserCenterEntity> detailForUserCenter(String tradeNo, String mallId,String couponCode);
 
 
 	/**

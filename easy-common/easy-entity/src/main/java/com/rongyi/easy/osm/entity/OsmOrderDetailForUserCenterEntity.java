@@ -1,5 +1,6 @@
 package com.rongyi.easy.osm.entity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,12 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
     private String expressNo;
     // 快递公司
     private String expressCompany;
+    //  自提商品过期时间
+    private Date expireAt;
+    // 卡券开始时间
+    private Date couponStartAt;
+    // 卡券结束时间
+    private Date couponEndAt;
 
     public String getCommodityLogo() {
         return commodityLogo;
@@ -110,6 +117,30 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
         this.expressNo = expressNo;
     }
 
+    public Date getCouponEndAt() {
+        return couponEndAt;
+    }
+
+    public void setCouponEndAt(Date couponEndAt) {
+        this.couponEndAt = couponEndAt;
+    }
+
+    public Date getCouponStartAt() {
+        return couponStartAt;
+    }
+
+    public void setCouponStartAt(Date couponStartAt) {
+        this.couponStartAt = couponStartAt;
+    }
+
+    public Date getExpireAt() {
+        return expireAt;
+    }
+
+    public void setExpireAt(Date expireAt) {
+        this.expireAt = expireAt;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderDetailForUserCenterEntity{" +
@@ -123,6 +154,9 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
                 ", expressId='" + expressId + '\'' +
                 ", expressNo='" + expressNo + '\'' +
                 ", expressCompany='" + expressCompany + '\'' +
+                ", expireAt=" + expireAt +
+                ", couponStartAt=" + couponStartAt +
+                ", couponEndAt=" + couponEndAt +
                 "} " + super.toString();
     }
 }
