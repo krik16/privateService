@@ -66,6 +66,26 @@ public class GiftParam implements Serializable {
     private Integer selfTakeDays;
     private String reason;
     private Integer status;
+    // 卡券开始时间
+    private Date couponStartDate;
+    // 卡券过期时间
+    private Date couponEndDate;
+
+    public Date getCouponStartDate() {
+        return couponStartDate;
+    }
+
+    public void setCouponStartDate(Date couponStartDate) {
+        this.couponStartDate = couponStartDate;
+    }
+
+    public Date getCouponEndDate() {
+        return couponEndDate;
+    }
+
+    public void setCouponEndDate(Date couponEndDate) {
+        this.couponEndDate = couponEndDate;
+    }
 
     public void setStatus(Integer status) {
         this.status = status;

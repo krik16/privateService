@@ -829,6 +829,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.updateAt=commodity.getUpdateAt().getTime();
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+
+		this.couponStartDate = commodity.getCouponStartDate();
+		this.couponEndDate = commodity.getCouponEndDate();
+		this.selfExpireDate = commodity.getSelfExpireDate();
 	}
 
 	@Override
