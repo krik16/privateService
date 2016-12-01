@@ -115,6 +115,15 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer accountType;//0集团商品，1商场商品，4,5店铺商品
 	private List<Integer> serviceIds;//微信公众号ids
 	private String groupMid; //集团Mid
+	private String merchantId;  //商户id
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
 
 	public String getGroupMid() {
 		return groupMid;
@@ -757,6 +766,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setLocationIds(vo.getLocationIds());
 		this.setAccountType(vo.getIdentity());
 		this.setServiceIds(vo.getServiceIds());
+		this.setMerchantId(vo.getMerchantId());
 
 		if(specMap == null) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));

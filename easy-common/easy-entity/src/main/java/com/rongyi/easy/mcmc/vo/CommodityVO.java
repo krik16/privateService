@@ -106,6 +106,15 @@ public class CommodityVO  implements  Serializable {
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
+	private String merchantId;  //商户id
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
 
 
 	public String getGroupMid() {
@@ -794,6 +803,7 @@ public class CommodityVO  implements  Serializable {
 		vo.setProcessIdentity(userInfo.getIdentity());
 		vo.setCreate_by(userInfo.getId().toString());
 
+		vo.setMerchantId(userInfo.getBindingMid());
 		return vo;
 	}
 

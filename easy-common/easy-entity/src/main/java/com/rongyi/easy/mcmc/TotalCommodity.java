@@ -96,6 +96,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
 	private List<Integer> serviceIds;//微信公众号ids
 	private Integer accountType;
+	private String merchantId;  //商户id
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
 
 	public Integer getAccountType() {
 		return accountType;
@@ -674,6 +683,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 			this.setAccountType(userInfo.getIdentity());
 			this.setServiceIds(param.getServiceIds());
+			this.setMerchantId(userInfo.getBindingMid());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}
