@@ -21,6 +21,8 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
     private Integer commodityType;
     // 订单编号
     private String tradeNo;
+    // 用户id
+    private String userId;
     // 用户手机(买家账号）
     private String phone;
     // 订单创建开始时间
@@ -125,6 +127,14 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
         this.title = title;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderQueryForUserCenterParam{" +
@@ -133,6 +143,7 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
                 ", status=" + status +
                 ", title='" + title + '\'' +
                 ", tradeNo='" + tradeNo + '\'' +
+                ", userId='" + userId + '\'' +
                 ", phone='" + phone + '\'' +
                 ", createStartAt=" + createStartAt +
                 ", createEndAt=" + createEndAt +
