@@ -11,7 +11,7 @@ public class ParentOrderParam implements Serializable {
 
 	private List<SonOrderParam> sonOrderList;//
 	private String shopId;// 店铺ID
-	private String mallid;//商场id
+	private String mallId;//商场id
 	private String comment;// 备注
 	private String addressId;// 邮寄地址id
 	private String orderModelId;// 父模板id
@@ -84,12 +84,12 @@ public class ParentOrderParam implements Serializable {
 		this.platformRebateCode = platformRebateCode;
 	}
 
-	public String getMallid() {
-		return mallid;
+	public String getMallId() {
+		return mallId;
 	}
 
-	public void setMallid(String mallid) {
-		this.mallid = mallid;
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
 	}
 
 	public Integer getDeliveryType() {
