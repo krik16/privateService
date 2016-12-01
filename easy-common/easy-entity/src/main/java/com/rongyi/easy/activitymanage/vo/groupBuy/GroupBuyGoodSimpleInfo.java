@@ -33,7 +33,7 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private String goodId;
 	
 	/***
-	 * 商品desc
+	 * 商品desc   开团说明
 	 * 
 	 */
 	private String desc;
@@ -91,11 +91,47 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	
 	private Integer groupStatus;//团状态  团状态:0等待发起人支付,1开团失败,2进行中,3成功,4人数不够自动失败,5活动下线,团失败  
 
-	private Long groupStartAt;//商品开始时间
-	private Long groupEndAt;//商品结束时间
+	private Long goodsStartAt;//商品开始时间
+	private Long goodsEndAt;//商品结束时间
+	private Long groupStartAt;//团开始时间
+	private Long groupEndAt;//团结束时间
 	private String expectTotalAmount;//众筹价
+	private boolean supModPrice;//true是，false否
+	private int joinGroupNum;//参团人数
 	
 	
+	public int getJoinGroupNum() {
+		return joinGroupNum;
+	}
+
+	public void setJoinGroupNum(int joinGroupNum) {
+		this.joinGroupNum = joinGroupNum;
+	}
+
+	public Long getGoodsStartAt() {
+		return goodsStartAt;
+	}
+
+	public void setGoodsStartAt(Long goodsStartAt) {
+		this.goodsStartAt = goodsStartAt;
+	}
+
+	public Long getGoodsEndAt() {
+		return goodsEndAt;
+	}
+
+	public void setGoodsEndAt(Long goodsEndAt) {
+		this.goodsEndAt = goodsEndAt;
+	}
+
+	public boolean isSupModPrice() {
+		return supModPrice;
+	}
+
+	public void setSupModPrice(boolean supModPrice) {
+		this.supModPrice = supModPrice;
+	}
+
 	public String getExpectTotalAmount() {
 		return expectTotalAmount;
 	}
