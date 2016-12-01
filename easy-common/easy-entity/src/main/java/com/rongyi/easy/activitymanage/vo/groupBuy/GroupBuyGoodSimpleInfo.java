@@ -83,7 +83,16 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private int joinGroupNum;//参团人数
 	private Long groupId;//团id
 	private String subTitle;//副标题
+	private String commodityPic;//商品图片
 	
+	public String getCommodityPic() {
+		return commodityPic;
+	}
+
+	public void setCommodityPic(String commodityPic) {
+		this.commodityPic = commodityPic;
+	}
+
 	public int getJoinGroupNum() {
 		return joinGroupNum;
 	}
