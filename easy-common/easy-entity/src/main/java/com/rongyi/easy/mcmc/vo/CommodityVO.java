@@ -801,9 +801,11 @@ public class CommodityVO  implements  Serializable {
 
 		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
 		vo.setProcessIdentity(userInfo.getIdentity());
-		vo.setCreate_by(userInfo.getId().toString());
-
 		vo.setMerchantId(userInfo.getBindingMid());
+		if(null ==commodity.getId()){
+			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+		}
+		vo.setCreate_by(userInfo.getId().toString());//修改id传入做权限判断
 		return vo;
 	}
 

@@ -608,7 +608,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			if(this.getIdentity() == null) {
 				this.setIdentity(Identity.SHOP);
 			}
-
+            this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
 			this.setName(param.getName());
 			this.setCode(param.getCode());
 			this.setCategory(param.getCategory());

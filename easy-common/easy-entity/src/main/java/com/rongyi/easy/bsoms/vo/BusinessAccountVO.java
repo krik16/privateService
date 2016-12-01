@@ -12,7 +12,7 @@ import com.rongyi.easy.rmmm.entity.UserAccountEntity;
  *
  */
 public class BusinessAccountVO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private Integer id;//用户id
 	private String userLogo;//用户头像
@@ -54,13 +54,13 @@ public class BusinessAccountVO implements Serializable {
 	private Date updateAt;
 	private String stopReason;
 	private Date stopAt;
-	private String virtualStopReason;   //资金账号停用理由 
+	private String virtualStopReason;   //资金账号停用理由
 	private Date virtualStopAt;         //资金账号停用时间
 	private Integer isAcc;              //是否加速审核  0是 1否
 	private Date certTime;              //提交审核时间
 	private Integer userStatus;         //用户状态 0未提交审核 2审核中 1审核通过 3审核不通过
 	private String shareCode;
-	
+
 	private Integer industryId;
 	private String industryName;
 	private Integer industryVersionId;
@@ -76,13 +76,13 @@ public class BusinessAccountVO implements Serializable {
 	private Integer chiefId;//主账号id
 	private String chiefName;//主账号名称
 	private List<UserAccountEntity> userAccounts;
-	private String faceImg;    //身份证正面照 
-	private String backImg;   //身份证背面照 
+	private String faceImg;    //身份证正面照
+	private String backImg;   //身份证背面照
 	private String workImg;    //工作证照
 	private String otherImg;   //其它照片
 	private String resume;      //自我简介
 	private String position;   //申请所在城市
-	
+
 	private String merchantAddress;//商户地址
 	public String getMerchantAddress() {
 		return merchantAddress;
@@ -480,14 +480,14 @@ public class BusinessAccountVO implements Serializable {
 	public void setGrandpaShopId(Integer grandpaShopId) {
 		this.grandpaShopId = grandpaShopId;
 	}
-	
+
 	public String getShareCode() {
 		return shareCode;
 	}
 	public void setShareCode(String shareCode) {
 		this.shareCode = shareCode;
 	}
-	
+
 	public String getResume() {
 		return resume;
 	}
@@ -523,5 +523,19 @@ public class BusinessAccountVO implements Serializable {
 				+ ", userAccounts=" + userAccounts + ", faceImg=" + faceImg + ", backImg=" + backImg + ", workImg="
 				+ workImg + ", otherImg=" + otherImg + ", resume=" + resume + ", position=" + position + "]";
 	}
-	
+
+	public String getBindingMid(){
+		if(getIdentity() == 0){
+			return groupMid;
+		}else if(getIdentity() == 1){
+			return mallMid;
+		}else if(getIdentity() == 2){
+			return brandMid;
+		}else if (getIdentity() == 3) {
+			return null;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopMid;
+		}
+		return null;
+	}
 }
