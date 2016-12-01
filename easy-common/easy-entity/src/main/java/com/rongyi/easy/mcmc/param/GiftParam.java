@@ -71,6 +71,10 @@ public class GiftParam implements Serializable {
         this.status = status;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
     public String getId() {
         return id;
     }
