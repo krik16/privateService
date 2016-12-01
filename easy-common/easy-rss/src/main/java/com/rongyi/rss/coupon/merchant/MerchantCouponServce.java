@@ -136,6 +136,9 @@ public interface MerchantCouponServce {
 
     public Coupon selectByPrimaryKey(String couponId);
 
+    public Coupon selectMerchantCouponById(String couponId);
+
+
     public Coupon getCouponById(String couponId);
 
 

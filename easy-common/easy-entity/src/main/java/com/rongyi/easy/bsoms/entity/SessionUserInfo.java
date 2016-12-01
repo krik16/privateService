@@ -50,7 +50,7 @@ public class SessionUserInfo implements Serializable{
 
 	private Integer grandpaShopId;
 
-	private Integer grandpaShopMid;
+	private String grandpaShopMid;
 
 	private Integer level;  //账号层级 1 2 3
 
@@ -323,11 +323,11 @@ public class SessionUserInfo implements Serializable{
 		this.grandpaShopId = grandpaShopId;
 	}
 
-	public Integer getGrandpaShopMid() {
+	public String getGrandpaShopMid() {
 		return grandpaShopMid;
 	}
 
-	public void setGrandpaShopMid(Integer grandpaShopMid) {
+	public void setGrandpaShopMid(String grandpaShopMid) {
 		this.grandpaShopMid = grandpaShopMid;
 	}
 }

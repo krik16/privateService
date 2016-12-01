@@ -1,8 +1,9 @@
 package com.rongyi.easy.coupon.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CouponWechat {
+public class CouponWechat implements Serializable {
     private Integer id;
 
     private String couponId;
