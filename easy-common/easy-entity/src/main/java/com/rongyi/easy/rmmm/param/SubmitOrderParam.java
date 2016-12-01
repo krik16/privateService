@@ -41,8 +41,8 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	//=======start= add by wangjh7 at 2016-11-23
 	private Integer commodityType; //商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券
 	private Integer userType; // 用户类型（0：容易逛 1：电子会员）
-	private Integer exchangeType; // 兑换类型（1：兑换 2：换购）
-	private Integer deliveryType; // 快递方式 1：自提 2：快递"
+	private String exchangeType; // 兑换类型（1：兑换 2：换购）
+	private String deliveryType; // 快递方式 1：自提 2：快递"
 	private Integer totalCredit; // 总积分
 	private String mallMid; // 商场ID
 	private String shopMid; // 店铺ID
@@ -258,11 +258,11 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.commodityType = commodityType;
 	}
 
-	public Integer getExchangeType() {
+	public String getExchangeType() {
 		return exchangeType;
 	}
 
-	public void setExchangeType(Integer exchangeType) {
+	public void setExchangeType(String exchangeType) {
 		this.exchangeType = exchangeType;
 	}
 
@@ -274,11 +274,11 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.userType = userType;
 	}
 
-	public Integer getDeliveryType() {
+	public String getDeliveryType() {
 		return deliveryType;
 	}
 
-	public void setDeliveryType(Integer deliveryType) {
+	public void setDeliveryType(String deliveryType) {
 		this.deliveryType = deliveryType;
 	}
 
