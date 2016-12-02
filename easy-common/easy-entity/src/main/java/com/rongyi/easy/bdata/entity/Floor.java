@@ -37,7 +37,15 @@ public class Floor implements Serializable {
     private String aliasename;
     private String aliasname;
     private String   tMap;//图聚版地图
+    private Integer system_status;//1 隐藏 0正常
 
+    public Integer getSystem_status() {
+        return system_status;
+    }
+
+    public void setSystem_status(Integer system_status) {
+        this.system_status = system_status;
+    }
 
     public String gettMap() {
         return tMap;
@@ -228,6 +236,8 @@ public class Floor implements Serializable {
                 ", fmap='" + fmap + '\'' +
                 ", aliasename='" + aliasename + '\'' +
                 ", aliasname='" + aliasname + '\'' +
+                ", tMap='" + tMap + '\'' +
+                ", system_status=" + system_status +
                 '}';
     }
 }
