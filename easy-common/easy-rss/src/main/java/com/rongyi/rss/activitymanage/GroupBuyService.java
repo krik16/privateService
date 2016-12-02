@@ -6,11 +6,9 @@ import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.activity.entity.GroupStockParam;
-
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsDetail;
 import com.rongyi.easy.activitymanage.vo.groupBuy.*;
-
 import com.rongyi.easy.activitymanage.param.CommodityViewCon;
 import com.rongyi.easy.activitymanage.param.ViewControllerVo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
@@ -197,4 +195,11 @@ public interface GroupBuyService {
 	public boolean deleteActivityGoodsSpecById(Integer id);
 
 	public List<GroupBuyGoodSimpleInfo> getGroupBuyGoodSimpleInfoList(int currentPage, int pageSize, int activityId);
+	/**
+	 * 根据用户id和团编号查询拼团详情
+	 * @param groupId
+	 * @param userId
+	 * @return
+	 */
+	public GroupDetail findGroupDetailByUserId(long groupId,String userId);
 }
