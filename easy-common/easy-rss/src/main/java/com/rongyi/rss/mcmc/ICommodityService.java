@@ -89,5 +89,5 @@ public interface ICommodityService {
 
 	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
 
-	ResponseResult2 resetCommodityDate();
+	ResponseResult2 resetCommodityData();
 }

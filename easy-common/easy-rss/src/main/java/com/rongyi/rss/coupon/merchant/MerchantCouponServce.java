@@ -4,6 +4,7 @@ package com.rongyi.rss.coupon.merchant;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 import com.rongyi.easy.coupon.entity.CouponShop;
+import com.rongyi.easy.coupon.entity.CouponWechat;
 import com.rongyi.easy.coupon.param.ActivityCouponParam;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
@@ -165,6 +166,7 @@ public interface MerchantCouponServce {
      */
     public List<ShopCouponsVO> shopsCouponsCount(List<String> shopIds);
 
+    public int insertCouponWechat(CouponWechat couponWechat);
     
 }
  
