@@ -195,5 +195,6 @@ public interface GroupBuyService {
 	void updateActivityGoodsStockCount(Integer activityId,String goodId);
 
 	public boolean deleteActivityGoodsSpecById(Integer id);
+
 	public List<GroupBuyGoodSimpleInfo> getGroupBuyGoodSimpleInfoList(int currentPage, int pageSize, int activityId);
 }
