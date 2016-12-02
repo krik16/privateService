@@ -763,7 +763,7 @@ public class CommodityVO  implements  Serializable {
 
 	}
 
-	public CommodityVO getCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
+	public CommodityVO wechatInfoVoListgetCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
 		if(commodity==null) {
 			return null;
 		}
