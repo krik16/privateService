@@ -78,10 +78,13 @@ public class CommodityParam {
 	private String  weAndTeStatus;//1表示终端机，2表示微信，3表示都显示，4表示都不显示
 	private Integer purchaseCount;//限购数量，0表示不限购
 
-
 	private Integer templateId;//商城运费模版id
 
 	private String reason;
+
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
 
 	public String getId() {
 		return id;
@@ -340,6 +343,8 @@ public class CommodityParam {
 				", purchaseCount=" + purchaseCount +
 				", templateId=" + templateId +
 				", reason=" + reason+
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
 				'}';
 	}
 
@@ -349,5 +354,21 @@ public class CommodityParam {
 
 	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
 	}
 }

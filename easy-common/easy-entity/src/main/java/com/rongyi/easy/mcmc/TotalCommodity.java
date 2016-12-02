@@ -82,6 +82,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Integer templateId;//邮费模版id
 	private boolean goodsSec = true;//正品保障
 
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
+
 	private Double discount; // 折扣
 
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
@@ -487,6 +491,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", commodityModelNo=" + commodityModelNo +
 				", goodsParam=" + goodsParam +
 				", shelvesType=" + shelvesType +
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
 				'}';
 	}
 
@@ -547,5 +553,23 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		}
 		this.setReason(commodity.getReason());
 		this.setShelvesType(commodity.getShelvesType());
+		this.setSubheading(commodity.getSubheading());
+		this.setCommodityDetails(commodity.getCommodityDetails());
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
 	}
 }

@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 
 
 public class CommodityVO  implements  Serializable {
@@ -90,6 +92,12 @@ public class CommodityVO  implements  Serializable {
 	private boolean inActivity; //是否参加活动
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 	private boolean offerShelves;//是否可下架  true是；false否
+
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
+	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
 
 	public boolean isOfferShelves() {
 		return offerShelves;
@@ -526,6 +534,38 @@ public class CommodityVO  implements  Serializable {
 		this.inActivity = inActivity;
 	}
 
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
+	public boolean isIfShowInWechat() {
+        return ifShowInWechat;
+    }
+
+    public void setIfShowInWechat(boolean ifShowInWechat) {
+        this.ifShowInWechat = ifShowInWechat;
+    }
+
+	public boolean isSpecDeleted() {
+		return isSpecDeleted;
+	}
+
+	public void setIsSpecDeleted(boolean isSpecDeleted) {
+		this.isSpecDeleted = isSpecDeleted;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -626,6 +666,13 @@ public class CommodityVO  implements  Serializable {
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
 		this.identity = commodity.getIdentity();
+		this.subheading=commodity.getSubheading();
+		this.commodityDetails=commodity.getCommodityDetails();
+		this.setIfShowInWechat(
+                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
+                        .contains(commodity.getTerminalType())  &&
+                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
+                        ?true:false);
 	}
 	@Override
 	public String toString() {
@@ -675,7 +722,15 @@ public class CommodityVO  implements  Serializable {
 				+ goodsParam + ", activityId=" + activityId
 				+ ", activityPrice=" + activityPrice + ", updateAt=" + updateAt
 				+ ", galleryPosition=" + galleryPosition + ", inActivity="
-				+ inActivity + ", shelvesType=" + shelvesType + "]";
+				+ inActivity + ", shelvesType=" + shelvesType + "]"
+				+ ", commodityModelNo=" + commodityModelNo
+				+ ", activityId=" + activityId
+				+ ", activityPrice=" + activityPrice
+				+", goodsParam="+ goodsParam
+				+", galleryPosition="+ galleryPosition
+		        +", subheading=" + subheading
+				+", commodityDetails=" + commodityDetails
+				+"]";
 	}
 	private boolean judgeShelvesType(Date date1,Date date2){
         if(null ==date1 || null ==date2){

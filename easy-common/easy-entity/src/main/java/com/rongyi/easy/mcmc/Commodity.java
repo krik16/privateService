@@ -104,6 +104,9 @@ public class Commodity implements  Serializable,Cloneable{
 	private String hotAreaName; ///< 商圈
 	private Integer galleryPosition;//橱窗排序商品
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -562,13 +565,27 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-
 	public Integer getShelvesType() {
 		return null ==shelvesType?2:shelvesType;
 	}
 
 	public void setShelvesType(Integer shelvesType) {
 		this.shelvesType = shelvesType;
+	}
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
 	}
 
 	@Override
@@ -628,6 +645,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
 		commodity.setShelvesType(null ==shelvesType?2:shelvesType);
+		commodity.setSubheading(subheading);
+		commodity.setCommodityDetails(commodityDetails);
 		return commodity;
 	}
 	@Override
@@ -701,6 +720,8 @@ public class Commodity implements  Serializable,Cloneable{
 				",discount=" + discount +
 				",galleryPosition=" + galleryPosition +
 				",shelvesType=" + shelvesType +
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
 				'}';
 	}
 
@@ -813,6 +834,8 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
 		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSubheading(vo.getSubheading());
+		this.setCommodityDetails(vo.getCommodityDetails());
 		this.setCommodityModelNo(vo.getCommodityModelNo());
 
 		// 买手&非现货 商品 临时状态: -1
@@ -924,6 +947,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSystemNumber(source.getSystemNumber());
 		commodity.setReason(source.getReason());
 		commodity.setGoodsSec(source.isGoodsSec());
+		commodity.setSubheading(source.getSubheading());
+		commodity.setCommodityDetails(source.getCommodityDetails());
 		return commodity;
 	}
 }

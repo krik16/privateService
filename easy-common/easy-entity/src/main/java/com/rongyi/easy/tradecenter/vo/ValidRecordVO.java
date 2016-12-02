@@ -24,6 +24,7 @@ public class ValidRecordVO implements Serializable{
     private String mallMid;
     private String shopMid;
     private Integer point ;
+    private Integer unitPrice;
 
     public Integer getPoint() {
         return point;
@@ -137,6 +138,14 @@ public class ValidRecordVO implements Serializable{
         this.userName = userName;
     }
 
+    public Integer getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Integer unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ValidRecordVO{");
@@ -153,6 +162,7 @@ public class ValidRecordVO implements Serializable{
         sb.append(", mallMid='").append(mallMid).append('\'');
         sb.append(", shopMid='").append(shopMid).append('\'');
         sb.append(", point=").append(point);
+        sb.append(", unitPrice=").append(unitPrice);
         sb.append('}');
         return sb.toString();
     }

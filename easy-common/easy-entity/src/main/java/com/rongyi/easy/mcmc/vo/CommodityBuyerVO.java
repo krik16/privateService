@@ -2,9 +2,11 @@ package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -106,6 +108,17 @@ public class CommodityBuyerVO implements Serializable {
 		this.soldOutAt = soldOutAt;
 	}
 
+    private String subheading;  //副标题
+
+    private String commodityDetails; //商品详情
+
+    private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+    private long buyerCount;//用户已购买数量   （只有限购商品才有值）
+    private int totalBuycount;//用户购买数量（是虚假数据）
+    
+    public void Commodity(){
+    	
+    }
 	public Integer getActivityStatus() {
 		return activityStatus;
 	}
@@ -646,7 +659,6 @@ public class CommodityBuyerVO implements Serializable {
     public void setWeAndTeStatus(String weAndTeStatus) {
         this.weAndTeStatus = weAndTeStatus;
     }
-
     public Integer getShelvesType() {
         return null ==shelvesType?2:shelvesType;
     }
@@ -654,8 +666,48 @@ public class CommodityBuyerVO implements Serializable {
     public void setShelvesType(Integer shelvesType) {
         this.shelvesType = shelvesType;
     }
+    public String getSubheading() {
+        return subheading;
+    }
 
-    public CommodityBuyerVO(Commodity commodity){
+    public void setSubheading(String subheading) {
+        this.subheading = subheading;
+    }
+
+    public String getCommodityDetails() {
+        return commodityDetails;
+    }
+
+    public void setCommodityDetails(String commodityDetails) {
+        this.commodityDetails = commodityDetails;
+    }
+
+
+    public boolean isIfShowInWechat() {
+        return ifShowInWechat;
+    }
+
+    public void setIfShowInWechat(boolean ifShowInWechat) {
+        this.ifShowInWechat = ifShowInWechat;
+    }
+
+    public long getBuyerCount() {
+		return buyerCount;
+	}
+
+	public void setBuyerCount(long buyerCount) {
+		this.buyerCount = buyerCount;
+	}
+
+	public int getTotalBuycount() {
+		return totalBuycount;
+	}
+
+	public void setTotalBuycount(int totalBuycount) {
+		this.totalBuycount = totalBuycount;
+	}
+
+	public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -774,6 +826,13 @@ public class CommodityBuyerVO implements Serializable {
         if(commodity.getShelvesType() != null){
         	this.shelvesType=commodity.getShelvesType();
         }
+        this.subheading=commodity.getSubheading();
+        this.commodityDetails=commodity.getCommodityDetails();
+        this.setIfShowInWechat(
+                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
+                        .contains(commodity.getTerminalType())  &&
+                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
+                        ?true:false);
     }
 
     @Override
@@ -835,6 +894,11 @@ public class CommodityBuyerVO implements Serializable {
                 ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
                 ", galleryPosition=" + galleryPosition +
                 ", shelvesType=" + shelvesType +
+                ", subheading=" + subheading +
+                ", commodityDetails=" + commodityDetails +
+                ", ifShowInWechat=" + ifShowInWechat +
+                ", buyerCount=" + buyerCount +
+                ", totalBuycount=" + totalBuycount +
                 '}';
     }
 
