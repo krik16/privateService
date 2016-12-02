@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
 import com.rongyi.easy.util.NumberUtils;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.util.Assert;
@@ -84,7 +85,44 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private Long groupId;//团id
 	private String subTitle;//副标题
 	private String commodityPic;//商品图片
+    private List<String> commodityPicList;//商品图片集合
+    private Double originalPrice;//商品原价
+    private Double activityPrice;//商品活动最低价
+    // 拼团剩余库存
+    private Integer remainStock;
 	
+	public List<String> getCommodityPicList() {
+		return commodityPicList;
+	}
+
+	public void setCommodityPicList(List<String> commodityPicList) {
+		this.commodityPicList = commodityPicList;
+	}
+
+	public Double getOriginalPrice() {
+		return originalPrice;
+	}
+
+	public void setOriginalPrice(Double originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+
+	public Double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(Double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
+	public Integer getRemainStock() {
+		return remainStock;
+	}
+
+	public void setRemainStock(Integer remainStock) {
+		this.remainStock = remainStock;
+	}
+
 	public String getCommodityPic() {
 		return commodityPic;
 	}
