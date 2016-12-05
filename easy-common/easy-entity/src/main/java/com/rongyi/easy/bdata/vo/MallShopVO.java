@@ -12,6 +12,15 @@ public class MallShopVO implements Serializable{
 	private String name;//名称
 	private Integer type;//类型    1:商场,2:店铺
 	private String address;//地址
+
+	public MallShopVO() {}
+
+	public MallShopVO(String id, String name, String address) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+	}
+
 	
 	public String getAddress() {
 		return address;
