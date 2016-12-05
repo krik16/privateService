@@ -125,40 +125,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
-	@Field("giftId")
-	private String giftId;
-	@Field("sn")
-	private String sn;
-	@Field("mappingId")
-	private String mappingId;
 	@Field("commodityRange")
 	private Integer commodityRange;
-	@Field("activityId")
-	private String activityId;
-	@Field("exchangeTypes")
-	private String exchangeTypes;
-	@Field("pointType")
-	private Integer pointType;
-	@Field("buyType")
-	private Integer buyType;
-	@Field("deliveryTypes")
-	private String deliveryTypes;
-	@Field("selfType")
-	private Integer selfType;
-	@Field("selfAddress")
-	private String selfAddress;
-	@Field("selfRemark")
-	private String selfRemark;
-	@Field("selfAddressId")
-	private String selfAddressId;
-	@Field("selfExpireDate")
-	private Date selfExpireDate;
-	@Field("tagIds")
-	private List<String> tagIds;
-	@Field("paymentIds")
-	private List<String> paymentIds;
-	@Field("total")
-	private Integer total;
+
 
 	public Double getPrice() {
 		return price;
@@ -307,29 +276,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.galleryPosition = galleryPosition;
 	}
 
-	public String getGiftId() {
-		return giftId;
-	}
-
-	public void setGiftId(String giftId) {
-		this.giftId = giftId;
-	}
-
-	public String getSn() {
-		return sn;
-	}
-
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
-
-	public String getMappingId() {
-		return mappingId;
-	}
-
-	public void setMappingId(String mappingId) {
-		this.mappingId = mappingId;
-	}
 
 	public Integer getCommodityRange() {
 		return commodityRange;
@@ -339,109 +285,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityRange = commodityRange;
 	}
 
-	public String getActivityId() {
-		return activityId;
-	}
-
-	public void setActivityId(String activityId) {
-		this.activityId = activityId;
-	}
-
-	public String getExchangeTypes() {
-		return exchangeTypes;
-	}
-
-	public void setExchangeTypes(String exchangeTypes) {
-		this.exchangeTypes = exchangeTypes;
-	}
-
-	public Integer getPointType() {
-		return pointType;
-	}
-
-	public void setPointType(Integer pointType) {
-		this.pointType = pointType;
-	}
-
-	public Integer getBuyType() {
-		return buyType;
-	}
-
-	public void setBuyType(Integer buyType) {
-		this.buyType = buyType;
-	}
-
-	public String getDeliveryTypes() {
-		return deliveryTypes;
-	}
-
-	public void setDeliveryTypes(String deliveryTypes) {
-		this.deliveryTypes = deliveryTypes;
-	}
-
-	public Integer getSelfType() {
-		return selfType;
-	}
-
-	public void setSelfType(Integer selfType) {
-		this.selfType = selfType;
-	}
-
-	public String getSelfAddress() {
-		return selfAddress;
-	}
-
-	public void setSelfAddress(String selfAddress) {
-		this.selfAddress = selfAddress;
-	}
-
-	public String getSelfRemark() {
-		return selfRemark;
-	}
-
-	public void setSelfRemark(String selfRemark) {
-		this.selfRemark = selfRemark;
-	}
-
-	public String getSelfAddressId() {
-		return selfAddressId;
-	}
-
-	public void setSelfAddressId(String selfAddressId) {
-		this.selfAddressId = selfAddressId;
-	}
-
-	public Date getSelfExpireDate() {
-		return selfExpireDate;
-	}
-
-	public void setSelfExpireDate(Date selfExpireDate) {
-		this.selfExpireDate = selfExpireDate;
-	}
-
-	public List<String> getTagIds() {
-		return tagIds;
-	}
-
-	public void setTagIds(List<String> tagIds) {
-		this.tagIds = tagIds;
-	}
-
-	public List<String> getPaymentIds() {
-		return paymentIds;
-	}
-
-	public void setPaymentIds(List<String> paymentIds) {
-		this.paymentIds = paymentIds;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
 
 	public McmcCommodityDocument(){
 
@@ -755,24 +598,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
 		}
 		this.setCommodityRange(commodityVo.getCommodityRange());
-
-		if(commodityVo.getCommodityRange() == CommodityConstants.CommodityType.GIFT) {
-			this.setGiftId(commodityVo.getGiftId());
-			this.setSn(commodityVo.getSn());
-			this.setMappingId(commodityVo.getMappingId());
-			this.setActivityId(commodityVo.getActivityId() + "");
-			this.setExchangeTypes(commodityVo.getExchangeTypes());
-			this.setPointType(commodityVo.getPointType());
-			this.setBuyType(commodityVo.getBuyType());
-			this.setDeliveryTypes(commodityVo.getDeliveryTypes());
-			this.setSelfType(commodityVo.getSelfType());
-			this.setSelfAddress(commodityVo.getSelfAddress());
-			this.setSelfRemark(commodityVo.getSelfRemark());
-			this.setSelfAddressId(commodityVo.getSelfAddressId());
-			this.setSelfExpireDate(commodityVo.getSelfExpireDate());
-			this.setTagIds(commodityVo.getTagIds());
-			this.setPaymentIds(commodityVo.getPaymentIds());
-		}
 
 		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
