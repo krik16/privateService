@@ -25,6 +25,9 @@ public class MyOrderParam implements Serializable{
 
 	private String createAtEnd;//创建时间结束值
 
+	private Integer activityType;//订单类型：空为全部，0-普通、1-闪购、2-特卖、3-秒杀、4-拼团、-1-大促,5预约
+
+
 	public String getJsessionid() {
 		return jsessionid;
 	}
@@ -89,6 +92,14 @@ public class MyOrderParam implements Serializable{
 		this.createAtEnd = createAtEnd;
 	}
 
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
 	@Override
 	public String toString() {
 		return "MyOrderParam{" +
@@ -100,6 +111,7 @@ public class MyOrderParam implements Serializable{
 				", orderSource='" + orderSource + '\'' +
 				", createAtBegin='" + createAtBegin + '\'' +
 				", createAtEnd='" + createAtEnd + '\'' +
+				", activityType='" + activityType + '\'' +
 				'}';
 	}
 }
