@@ -126,8 +126,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
-	@Field("accountType")
-	private Integer accountType;
 	@Field("locationIds")
 	private List<String> locationIds;
 	@Field("serviceIds")

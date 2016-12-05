@@ -793,6 +793,7 @@ public class CommodityVO  implements  Serializable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
+		vo.setServiceIds(commodity.getServiceIds());
 
 		//默认值
 		vo.setBrandId(-1);
