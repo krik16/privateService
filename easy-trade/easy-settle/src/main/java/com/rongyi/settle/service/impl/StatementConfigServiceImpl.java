@@ -466,11 +466,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         List<Integer> result = new ArrayList<>();
         try {
             StatementConfigVO config = selectConfigInfoById(configId);
+            logger.info("config={}",config);
             if (config != null) {
                 List<UserInfoVo> userInfoVos = new ArrayList<>();
                 if (config.getLinkType() != null && config.getLinkType() == 0)//全部
                 {
                     List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
+                    logger.info("selfUsers={}",selfUsers);
                     if (CollectionUtils.isNotEmpty(selfUsers)) {
                         userInfoVos.addAll(selfUsers);
                     }
@@ -500,6 +502,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                             }
                             realShopIds.removeAll(shopIds);
                         }
+                        logger.info("shopIds={}",shopIds);
                         for (String shopId : realShopIds) {
                             List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shopId, null);
                             if (CollectionUtils.isNotEmpty(shopUsers))
@@ -508,6 +511,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     }
                     if (config.getLinkType() == 1) {
                         List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
+                        logger.info("selfUsers={}",selfUsers);
                         if (CollectionUtils.isNotEmpty(selfUsers)) {
                             userInfoVos.addAll(selfUsers);
                         }
