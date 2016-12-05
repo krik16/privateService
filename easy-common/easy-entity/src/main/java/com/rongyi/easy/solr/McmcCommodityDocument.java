@@ -627,7 +627,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 
 		this.setLocationIds(commodity.getLocationIds());
-		this.setAccountType(commodity.getAccountType());
 		this.setServiceIds(commodity.getServiceIds());
 	}
 
