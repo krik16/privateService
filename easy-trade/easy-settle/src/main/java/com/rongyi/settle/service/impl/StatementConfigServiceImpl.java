@@ -649,6 +649,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      */
     @Override
     public List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount) {
+        logger.info("isOneself={},type={},guideType={},id={},userAccount={}",isOneself,type,guideType,id,userAccount);
         List<UserInfoVo> userAccounts = new ArrayList<>();
         Map<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("isDisabled", 0);
