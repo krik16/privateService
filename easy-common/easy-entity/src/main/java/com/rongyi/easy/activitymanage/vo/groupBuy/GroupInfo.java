@@ -71,6 +71,16 @@ public class GroupInfo implements Serializable{
 	 */
 	private Integer  state;
 
+	private Integer type;//8普通团，9超级团
+
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 	public Integer getGroupPeopleMaxLimit() {
 		return groupPeopleMaxLimit;
