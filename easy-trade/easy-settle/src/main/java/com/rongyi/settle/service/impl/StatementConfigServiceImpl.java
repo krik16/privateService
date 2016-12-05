@@ -471,7 +471,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 List<UserInfoVo> userInfoVos = new ArrayList<>();
                 if (config.getLinkType() != null && config.getLinkType() == 0)//全部
                 {
-                    List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
+                    List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessCode(), null);
                     logger.info("selfUsers={}",selfUsers);
                     if (CollectionUtils.isNotEmpty(selfUsers)) {
                         userInfoVos.addAll(selfUsers);
