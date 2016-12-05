@@ -202,4 +202,10 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	public GroupDetail findGroupDetailByUserId(long groupId,String userId);
+	/**
+	 * 根据团id查询已参团人数  状态：0
+	 * @param groupDetail
+	 * @return
+	 */
+	public long countJoinGroupNum(long groupId);
 }
