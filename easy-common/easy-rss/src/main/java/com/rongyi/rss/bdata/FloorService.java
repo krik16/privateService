@@ -1,5 +1,6 @@
 package com.rongyi.rss.bdata;
 
+import com.rongyi.easy.bdata.entity.BdataFloor;
 import com.rongyi.easy.bdata.entity.CommunalFacilityType;
 import com.rongyi.easy.bdata.entity.Floor;
 import com.rongyi.easy.bdata.vo.BdataFloorVO;
