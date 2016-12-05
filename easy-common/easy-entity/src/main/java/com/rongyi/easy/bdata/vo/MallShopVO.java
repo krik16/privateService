@@ -15,10 +15,11 @@ public class MallShopVO implements Serializable{
 
 	public MallShopVO() {}
 
-	public MallShopVO(String id, String name, String address) {
+	public MallShopVO(String id, String name, String address, Integer type) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
+		this.type = type;
 	}
 
 	
