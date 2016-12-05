@@ -3,6 +3,7 @@ package com.rongyi.settle.service.impl;
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
@@ -11,6 +12,7 @@ import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.malllife.roa.ROARedisService;
+import com.rongyi.rss.mcmc.CommodityService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.rpb.OrderNoGenService;
@@ -75,6 +77,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     @Autowired
     private SendEmailUnit sendEmailUnit;
+
+    @Autowired
+    private CommodityService commodityService;
 
     @Override
     public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -502,6 +507,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         double payTotalOrder = 0;
         for (OrderSettlementDetailDto orderSettlementDetailDto : orderDetailDtoList) {
             OrderSettlementDetailVO orderDetailVO = orderSettlementDetailDto.toVO();
+            CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(orderSettlementDetailDto.getCommodityId(),null);
+            if(commodityVO != null) {
+                logger.info("commodityName={}", commodityVO.getCommodityName());
+                orderDetailVO.setCommodityName(commodityVO.getCommodityName());
+            }
             orderSettlementDetailVOs.add(orderDetailVO);
             totalOrder += orderDetailVO.getOrigPrice();
             payTotalOrder += orderDetailVO.getPayAmount();

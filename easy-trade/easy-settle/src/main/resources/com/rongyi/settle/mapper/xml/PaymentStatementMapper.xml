@@ -859,7 +859,7 @@
 				ELSE '状态异常' END AS order_status,
 		 	A.order_no,
 		 	B.commodity_mid AS commodity_id,
-		 	N.`name` AS commodity_name,
+		 	<!--N.`name` AS commodity_name,-->
 			CASE WHEN (O.pay_channel = 0 OR PO.pay_channel = 0) THEN '支付宝' WHEN (O.pay_channel = 1 OR PO.pay_channel = 1) THEN '微信' ELSE '其他' END AS `pay_channel`,
 		 	D.mall_mid AS mall_id,
 		 	D.mall_name,
@@ -885,7 +885,7 @@
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0 AND O.`status` = 2
 				LEFT JOIN ry_osm.order_cart_form OCF ON OCF.id = A.cart_id
 				LEFT JOIN ry_rpb.payment_order PO ON OCF.order_no = PO.order_no and PO.trade_type = 0 AND PO.`status` = 2
-				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
+<!--				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid-->
 				LEFT JOIN ry_user.malllife_user_info MUA ON MUA.id = A.buyer_id
 		WHERE H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND A.`status` &gt; 2
