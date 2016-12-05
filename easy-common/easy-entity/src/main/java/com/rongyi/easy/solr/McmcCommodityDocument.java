@@ -546,14 +546,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.locationIds = locationIds;
 	}
 
-	public Integer getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(Integer accountType) {
-		this.accountType = accountType;
-	}
-
 	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
