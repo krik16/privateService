@@ -12,6 +12,7 @@ import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
 import com.rongyi.easy.mcmc.param.CommoditySpecParam;
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -97,6 +98,16 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<Integer> serviceIds;//微信公众号ids
 	private Integer accountType;
 	private String merchantId;  //商户id
+	private List<WechatInfoVo> wechatInfoVos;
+
+
+	public List<WechatInfoVo> getWechatInfoVos() {
+		return wechatInfoVos;
+	}
+
+	public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+		this.wechatInfoVos = wechatInfoVos;
+	}
 
 	public String getMerchantId() {
 		return merchantId;
