@@ -22,11 +22,21 @@ public class AppFeedBack implements Serializable{
 	private String uuid;
 	private Date updated_at;
 	private Date created_at;
+
+	private String userName;
 	
 	public AppFeedBack() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getId() {
 		return id;
 	}

@@ -17,7 +17,7 @@ package com.rongyi.easy.mallshop.code;/*
 public enum MallShopErrorCode {
 
     SUCCESS(0, "正常"), //原系统都定义为正常情况 编码规则不变
-    FAILURE(-1, "网络正在打瞌睡，请稍后再试"), //原系统都定义为正常情况 编码规则不变
+    FAILURE(-1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
 
     /** 公共编码 后4位区间  0001---1000*/
     ERROR_PARAM_ISNULL(1070001, "必填参数不能为空"),
@@ -58,7 +58,10 @@ public enum MallShopErrorCode {
     ERROR_PHONE_MALLSHOP_EXIST(1076004,"您已是摩店用户哦"),
     ERROR_INVITE_USER_NOT_EXIST(1076005,"邀请对象不符合要求"),
     ERROR_REPEAT_RECEIVE(1076006,"你已领取过，请不要重复领取"),
-    ERROR_OPENID(1076007,"openId为空")
+    ERROR_OPENID(1076007,"openId为空"),
+    /** 活动报名  后4位 7001---8000 */
+    ERROR_ACTIVITY_PRICE(1077001,"请设置活动价"),
+    ERROR_INVENTORY(1077002,"请设置提报库存"),
     ;
 
     /**

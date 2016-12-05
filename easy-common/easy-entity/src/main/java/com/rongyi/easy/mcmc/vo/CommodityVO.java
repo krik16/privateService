@@ -1,11 +1,14 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
+
+import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 
 
 public class CommodityVO  implements  Serializable {
@@ -14,6 +17,7 @@ public class CommodityVO  implements  Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = 8138633144546500349L;
+	private static final  Integer MAX_GALLERY_POSITION=100;
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
@@ -83,7 +87,21 @@ public class CommodityVO  implements  Serializable {
 	private Integer activityId;//活动id
 	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
 	private Long updateAt;
+	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
+	private boolean inActivity; //是否参加活动
+	private String subheading;  //副标题
 
+	private String commodityDetails; //商品详情
+	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
+
+
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -493,6 +511,46 @@ public class CommodityVO  implements  Serializable {
 		this.updateAt = updateAt;
 	}
 
+	public boolean isInActivity() {
+		return inActivity;
+	}
+
+	public void setInActivity(boolean inActivity) {
+		this.inActivity = inActivity;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
+	public boolean isIfShowInWechat() {
+        return ifShowInWechat;
+    }
+
+    public void setIfShowInWechat(boolean ifShowInWechat) {
+        this.ifShowInWechat = ifShowInWechat;
+    }
+
+	public boolean isSpecDeleted() {
+		return isSpecDeleted;
+	}
+
+	public void setIsSpecDeleted(boolean isSpecDeleted) {
+		this.isSpecDeleted = isSpecDeleted;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -587,6 +645,15 @@ public class CommodityVO  implements  Serializable {
 		this.commodityModelNo = commodity.getCommodityModelNo();//商品款号
 		this.goodsParam = commodity.getGoodsParam();//商品参数
 		this.updateAt=commodity.getUpdateAt().getTime();
+		//默认返回非橱窗商品的值设置为0
+		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+		this.subheading=commodity.getSubheading();
+		this.commodityDetails=commodity.getCommodityDetails();
+		this.setIfShowInWechat(
+                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
+                        .contains(commodity.getTerminalType())  &&
+                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
+                        ?true:false);
 	}
 	@Override
 	public String toString() {
@@ -635,7 +702,11 @@ public class CommodityVO  implements  Serializable {
 				+ ", commodityModelNo=" + commodityModelNo
 				+ ", activityId=" + activityId
 				+ ", activityPrice=" + activityPrice
-				+", goodsParam="+ goodsParam + "]";
+				+", goodsParam="+ goodsParam
+				+", galleryPosition="+ galleryPosition
+		        +", subheading=" + subheading
+				+", commodityDetails=" + commodityDetails
+				+"]";
 
 	}
 

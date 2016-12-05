@@ -28,10 +28,61 @@ public class Floor implements Serializable {
     private String navigation_pic;
     private String pathImg;
     private String picture;
-    private String swfpic;//步步高新增楼层动态导航图片 支持swf svg格式
+    //private String swfpic;//步步高新增楼层动态导航图片 支持swf svg格式
     private Date   created_at;
     private Integer mall_valid ;
 
+    private String swf;//swf图--商家后台用的
+    private String fmap;//fmap图--商家后台用的
+    private String aliasename;
+    private String aliasname;
+
+
+    public String getAliasename() {
+        return aliasename;
+    }
+
+    public void setAliasename(String aliasename) {
+        this.aliasename = aliasename;
+    }
+
+    public String getAliasname() {
+        return aliasname;
+    }
+
+    public void setAliasname(String aliasname) {
+        this.aliasname = aliasname;
+    }
+
+    public String getSwf() {
+		return swf;
+	}
+	public String getFmap() {
+		return fmap;
+	}
+
+
+
+	public String getFullFmap() {
+		 if (StringUtils.isNotBlank(fmap)) {
+	            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + fmap;
+	        } else {
+	            return null;
+	        }
+	}
+	public void setFmap(String fmap) {
+		this.fmap = fmap;
+	}
+	public String getFullSwf() {
+		 if (StringUtils.isNotBlank(swf)) {
+	            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swf;
+	        } else {
+	            return null;
+	        }
+	}
+	public void setSwf(String swf) {
+		this.swf = swf;
+	}
 
     public String getId() {
         return id;
@@ -149,24 +200,6 @@ public class Floor implements Serializable {
 		this.mall_valid = mall_valid;
 	}
 
-
-
-    public String getFullSwfPic() {
-        if (StringUtils.isNotBlank(swfpic)) {
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swfpic;
-        } else {
-            return null;
-        }
-    }
-
-    public String getSwfpic() {
-        return swfpic;
-    }
-
-    public void setSwfpic(String swfpic) {
-        this.swfpic = swfpic;
-    }
-
     @Override
     public String toString() {
         return "Floor{" +
@@ -179,9 +212,12 @@ public class Floor implements Serializable {
                 ", navigation_pic='" + navigation_pic + '\'' +
                 ", pathImg='" + pathImg + '\'' +
                 ", picture='" + picture + '\'' +
-                ", swfpic='" + swfpic + '\'' +
                 ", created_at=" + created_at +
+                ", mall_valid=" + mall_valid +
+                ", swf='" + swf + '\'' +
+                ", fmap='" + fmap + '\'' +
+                ", aliasename='" + aliasename + '\'' +
+                ", aliasname='" + aliasname + '\'' +
                 '}';
     }
-
 }

@@ -137,6 +137,54 @@ public class PoiDocument implements Serializable {
 	@Field("mall")
 	private Integer mall;
 
+	@Field("recommend")
+	private Integer recommend;//是否商场推荐
+	
+	// <-- mall 
+	@Field("mold")
+	private String mold;//商场类型
+		
+	@Field("terminal_mall")
+	private boolean terminal_mall;//终端是否合作
+	// -->
+	
+	// <-- shop
+	@Field("has_terminal_pic")
+	private boolean has_terminal_pic;//终端机_商家详情_图片 shop索引中为owner_id 
+	
+	@Field("has_app_pic")
+	private boolean has_app_pic;//App_商家详情_图片 shop索引中为owner_app_id
+	
+	@Field("business_status")
+	private Integer business_status;//营业状态
+	
+	@Field("shop_number")
+	private String shop_number;//铺位号
+	
+	@Field("business_hours")
+	private String business_hours;//营业时间
+	    
+	@Field("create_source")
+	private Integer create_source;//创建源
+	
+	@Field("update_source")
+	private Integer update_source;//最后更新源
+	
+	@Field("created_by")
+	private Integer created_by;//创建人
+
+	@Field("updated_by")
+	private Integer updated_by;//更新人
+	
+	@Field("created_at")
+	private Date created_at;//创建时间
+	
+	@Field("updated_at")
+	private Date updated_at;//更新时间
+	
+	
+	// -->	
+	
 	private String appearance_pic;
 
 	public PoiDocument() {
@@ -171,7 +219,8 @@ public class PoiDocument implements Serializable {
 		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
 			valid="0";
 		else
-			valid="1";
+			valid=shop.getValid().toString();
+			//valid="1";/////////////////////////////////////////////////////////////////////
 
 		if(StringUtils.isNotBlank(shop.getTelephone())){
 			if(shop.getTelephone().indexOf("(")>0){
@@ -559,6 +608,118 @@ public class PoiDocument implements Serializable {
 
 	public void setAppearance_pic(String appearance_pic) {
 		this.appearance_pic = appearance_pic;
+	}
+
+	public String getMold() {
+		return mold;
+	}
+
+	public void setMold(String mold) {
+		this.mold = mold;
+	}
+
+	public Integer getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(Integer recommend) {
+		this.recommend = recommend;
+	}
+
+	public boolean isTerminal_mall() {
+		return terminal_mall;
+	}
+
+	public void setTerminal_mall(boolean terminal_mall) {
+		this.terminal_mall = terminal_mall;
+	}
+
+	public boolean isHas_terminal_pic() {
+		return has_terminal_pic;
+	}
+
+	public void setHas_terminal_pic(boolean has_terminal_pic) {
+		this.has_terminal_pic = has_terminal_pic;
+	}
+
+	public boolean isHas_app_pic() {
+		return has_app_pic;
+	}
+
+	public void setHas_app_pic(boolean has_app_pic) {
+		this.has_app_pic = has_app_pic;
+	}
+
+	public Integer getBusiness_status() {
+		return business_status;
+	}
+
+	public void setBusiness_status(Integer business_status) {
+		this.business_status = business_status;
+	}
+
+	public String getShop_number() {
+		return shop_number;
+	}
+
+	public void setShop_number(String shop_number) {
+		this.shop_number = shop_number;
+	}
+
+	public String getBusiness_hours() {
+		return business_hours;
+	}
+
+	public void setBusiness_hours(String business_hours) {
+		this.business_hours = business_hours;
+	}
+
+	public Integer getCreate_source() {
+		return create_source;
+	}
+
+	public void setCreate_source(Integer create_source) {
+		this.create_source = create_source;
+	}
+
+	public Integer getUpdate_source() {
+		return update_source;
+	}
+
+	public void setUpdate_source(Integer update_source) {
+		this.update_source = update_source;
+	}
+
+	public Integer getCreated_by() {
+		return created_by;
+	}
+
+	public void setCreated_by(Integer created_by) {
+		this.created_by = created_by;
+	}
+
+	public Integer getUpdated_by() {
+		return updated_by;
+	}
+
+	public void setUpdated_by(Integer updated_by) {
+		this.updated_by = updated_by;
+	}
+
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+
+	public Date getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
 	}
 
 

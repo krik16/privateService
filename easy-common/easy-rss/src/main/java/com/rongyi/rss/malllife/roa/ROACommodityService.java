@@ -11,10 +11,13 @@ package com.rongyi.rss.malllife.roa;
 
 import java.util.List;
 
+import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.vo.*;
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
+import com.rongyi.easy.solr.McmcCommodityDocument;
 
 import org.bson.types.ObjectId;
 
@@ -25,6 +28,7 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.roa.param.CommoditySpecParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
@@ -92,6 +96,8 @@ public interface ROACommodityService {
 	public ResponseResult getCommoditySpecBuyerInfo(String id);
 
 	public ResponseResult getCommodityBuyerInfo(String id, boolean ifCollected);
+
+	ResponseResult getCommodityBuyerInfos(List<String> ids, boolean ifCollected);
 
 	public ResponseResult getBuyerCommodityCategory(String filterId, int filterType, boolean showParent);
 
@@ -232,4 +238,26 @@ public interface ROACommodityService {
 
 	public Long  selectOnlineCommodityCountByuser(String createId);
 
+	public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+	public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList) throws Exception;
+	
+	/**
+     * 查询拼团活动列表
+     *
+     * @param param
+     * @return list CommodityPinTuanVO
+     */
+    CommodityPagePinTuanVO searchCommodityListForPinTuan(PinTuanCommodityParam param);
+
+	public ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+	/**
+     * 获取规格详情
+     *
+     * @param specId
+     * @return
+     */
+    public ResponseVO getSpecInfo(String specId);
+    
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }

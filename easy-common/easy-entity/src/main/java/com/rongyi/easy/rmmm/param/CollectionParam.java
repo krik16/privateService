@@ -22,5 +22,9 @@ public class CollectionParam implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	@Override
+	public String toString() {
+		return "CollectionParam [id=" + id + ", type=" + type + "]";
+	}
 	
 }

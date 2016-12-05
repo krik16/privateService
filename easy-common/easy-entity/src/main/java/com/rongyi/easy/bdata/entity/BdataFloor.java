@@ -166,6 +166,7 @@ public class BdataFloor implements Serializable {
 
 	private String fmap;//fmap图--商家后台用的
 
+
 	public String getSwf() {
 		return swf;
 	}

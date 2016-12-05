@@ -44,6 +44,7 @@ public class MallDetailVO implements Serializable{
 	private boolean hasWonderFulAct; //精彩活动
     private boolean hasDiscountAct; //优惠资讯
     private boolean hasRaiders;//潮人攻略
+    private boolean hasSpecialSale;//是否关联特卖
 	public String getMallId() {
 		return mallId;
 	}
@@ -200,6 +201,12 @@ public class MallDetailVO implements Serializable{
 	public void setCommodityCount(Integer commodityCount) {
 		this.commodityCount = commodityCount;
 	}
+	public boolean isHasSpecialSale() {
+		return hasSpecialSale;
+	}
+	public void setHasSpecialSale(boolean hasSpecialSale) {
+		this.hasSpecialSale = hasSpecialSale;
+	}
 	@Override
 	public String toString() {
 		return "MallDetailVO [mallId=" + mallId + ", mallName=" + mallName
@@ -216,7 +223,8 @@ public class MallDetailVO implements Serializable{
 				+ ", commodityList=" + commodityList + ", commodityCount="
 				+ commodityCount + ", shopCategories=" + shopCategories
 				+ ", hasWonderFulAct=" + hasWonderFulAct + ", hasDiscountAct="
-				+ hasDiscountAct + ", hasRaiders=" + hasRaiders + "]";
+				+ hasDiscountAct + ", hasRaiders=" + hasRaiders
+				+ ", hasSpecialSale=" + hasSpecialSale + "]";
 	}
 	
 }

@@ -8,9 +8,7 @@ import java.util.List;
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
-import com.rongyi.easy.mcmc.CommoditySpec;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
@@ -22,7 +20,7 @@ import org.bson.types.ObjectId;
 public class McmcCommodityDocument implements java.io.Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6516058338575306587L;
 	@Field
@@ -107,6 +105,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String brandName;
 	@Field("updateAt")
 	private Date updateAt;
+    @Field("galleryPosition")
+	private Integer galleryPosition;
 
 	@Field("shopName")
 	private String shopName; ///< 店铺名称
@@ -117,10 +117,15 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("top")
 	private Integer top; ///< 置顶排序
 
+	@Field("secKillSign")
 	private String secKillSign;
-
 	@Field("extend")
 	private String extend;
+
+	@Field("commodityModelNo")
+	private String commodityModelNo;//商品款号
+	@Field("stock")
+	private Integer stock;
 
 	public Double getPrice() {
 		return price;
@@ -172,7 +177,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setCategory3_id(category_ids.get(2));
 		}
 	}
-	
+
 	public String getCategory1_id() {
 		return category1_id;
 	}
@@ -261,10 +266,18 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.discount = discount;
 	}
 
-	public McmcCommodityDocument(){
-		
+	public Integer getGalleryPosition() {
+		return galleryPosition;
 	}
-	
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
+	public McmcCommodityDocument(){
+
+	}
+
 	public McmcCommodityDocument(SolrDocument doc){
 		this.id = doc.getFieldValue("id").toString();
 		this.category1 = doc.getFieldValue("category1").toString();
@@ -505,6 +518,22 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.top = top;
 	}
 
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
 								 long brandId, long mallId, CommodityShopInfo shopInfo,
 								 List<Double> positions, List<String> zoneIds, String brandMid) {
@@ -573,7 +602,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			}
 			this.setBrand_id(brandMid);
 		}
-
-
+		//库存进入solr
+		this.setStock(commodity.getStock());
+		this.setCommodityModelNo(commodity.getCommodityModelNo());
 	}
 }

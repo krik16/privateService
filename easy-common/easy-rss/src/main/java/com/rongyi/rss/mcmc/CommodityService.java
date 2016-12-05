@@ -2,21 +2,28 @@ package com.rongyi.rss.mcmc;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
+import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
+import com.rongyi.easy.mcmc.param.CommodityRuleParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
-
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
 import com.rongyi.easy.solr.McmcCommodityDocument;
+import com.rongyi.easy.roa.param.CommoditySpecParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -31,6 +38,22 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
+
+    /**
+     * 获取规格详情
+     *
+     * @param specId
+     * @return
+     */
+    public ResponseVO getSpecInfo(String specId);
+
+    /**
+     * 获取规格详情（批量）
+     *
+     * @param specIds
+     * @return
+     */
+    public List<CommoditySpecVO> getSpecList(List<String> specIds);
 
     /**
      * 查询店铺的商品
@@ -84,6 +107,8 @@ public interface CommodityService {
     public ResponseResult getCommoditySpecBuyerInfo(String id);
 
     public ResponseResult getCommodityBuyerInfo(String id, boolean ifCollected);
+
+    ResponseResult getCommodityBuyerInfos(List<String> ids, boolean ifCollected);
 
     public ResponseResult getBuyerCommodityCategory(String filterId, int filterType, boolean showParent);
 
@@ -139,6 +164,15 @@ public interface CommodityService {
      */
     public List<CommodityCategory> getCommodityCategoryByTypeAndParentId(String parentId,int type);
 
+    /***
+     * select category by parentId
+     *
+     * @param parentId the first category if the parentId is null
+     *
+     * @return List<CommodityCategory>
+     */
+    List<CommodityCategory> listCategoryByParentId(ObjectId parentId);
+
     public CommodityCategory findCommodityCategoryById(ObjectId commodityCategoryId);
 
     public CommoditySpec findCommoditySpecById(ObjectId id);
@@ -186,9 +220,7 @@ public interface CommodityService {
 
     /**
      * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
-     * @param ids
-     * @param sort
-     * @param type
+     * @param commoditySortVos
      * @return
      */
     ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
@@ -250,4 +282,84 @@ public interface CommodityService {
     public  ResponseVO selectSpecById(String categoryId);
 
     public Long selectOnlineCommodityCountByuser(String createId);
+
+    public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
+
+    public Map<Integer ,Boolean> checkCommoditySoldOutInSales(List<Integer> saleIds);
+
+    /**
+     *  查询自营商品
+     *
+     * @param param (SelfCommodityParam)
+     * @return 商品数量
+     *
+     */
+    ResponseVO selectSelfCommodity(SelfCommodityParam param);
+
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
+
+    ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
+
+    /**
+     * 根据活动规则查询商品
+     *
+     * @param param
+     *
+     * @return
+     */
+    ResponseResult getCommodityListForMallShopByRule(CommodityRuleParam param);
+
+
+
+    /**
+     * 查询拼团活动列表
+     *
+     * @param param
+     * @return list CommodityPinTuanVO
+     */
+    CommodityPagePinTuanVO searchCommodityListForPinTuan(PinTuanCommodityParam param);
+
+    Boolean deductStock(List<ActivityCommodityParam> params);
+
+    Boolean returnStock(List<ActivityCommodityParam> params);
+
+    /**
+     * 扣除商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
+    boolean deductCommodityStock(String commodityId, Integer stock);
+
+    /**
+     * 返还商品库存
+     *
+     * @param commodityId
+     * @param stock
+     *
+     * @return boolean
+     */
+    boolean returnCommodityStock(String commodityId, Integer stock);
+
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList)throws  Exception ;
+
+    /**
+     * 查询可以加入拼团的商品
+     *
+     * @param param
+     * @return list CommodityPinTuanVO
+     */
+    CommodityPagePinTuanVO searchBaseCommodityListForPinTuan(PinTuanCommodityParam param);
+
+    /**
+     * 判断商品上下架时间是否包含活动时间
+     *
+     * @param param
+     * @return true commodity is overtime, false otherwise;
+     */
+    List<String> isCommodityOvertime(PinTuanCommodityParam param);
+    
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }

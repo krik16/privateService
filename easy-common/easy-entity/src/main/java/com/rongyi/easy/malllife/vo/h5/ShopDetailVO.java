@@ -43,6 +43,7 @@ public class ShopDetailVO implements Serializable{
 	private String telephone; //电话号码
 	private List<CouponVO> coupons;//优惠信息
 	private List<CommodityShareVO> commodityList;//商品列表
+	private List<CommodityShareVO> galleryCommodityList;//橱窗商品列表
 	private Integer commodityCount;//
 	private List<MayLikeShopVO> mayLikeShops;//可能喜欢的店铺列表
 	private MMNoticeVO noticeVo;//店铺公告
@@ -201,6 +202,12 @@ public class ShopDetailVO implements Serializable{
 	public void setCommodityList(List<CommodityShareVO> commodityList) {
 		this.commodityList = commodityList;
 	}
+	public List<CommodityShareVO> getGalleryCommodityList() {
+		return galleryCommodityList;
+	}
+	public void setGalleryCommodityList(List<CommodityShareVO> galleryCommodityList) {
+		this.galleryCommodityList = galleryCommodityList;
+	}
 	public List<MayLikeShopVO> getMayLikeShops() {
 		return mayLikeShops;
 	}
@@ -263,7 +270,7 @@ public class ShopDetailVO implements Serializable{
 				+ collectionNum + ", avgCost=" + avgCost + ", cityId=" + cityId
 				+ ", cityName=" + cityName + ", categoryIds=" + categoryIds
 				+ ", parking=" + parking + ", telephone=" + telephone
-				+ ", coupons=" + coupons + ", commodityList=" + commodityList
+				+ ", coupons=" + coupons + ", commodityList=" + commodityList + ", galleryCommodityList=" + galleryCommodityList
 				+ ", commodityCount=" + commodityCount + ", mayLikeShops="
 				+ mayLikeShops + ", noticeVo=" + noticeVo + ", commentList="
 				+ commentList + ", commentCount=" + commentCount

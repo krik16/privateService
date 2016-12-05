@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.usercenter.entity.MalllifeWelfareEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.usercenter.entity.MalllifeWelfareEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="activity_id" property="activityId" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="coupon_amount" property="couponAmount" jdbcType="INTEGER" />
+    <result column="wechat_amount" property="wechatAmount" jdbcType="INTEGER" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, open_id, activity_id, coupon_id, coupon_amount, wechat_amount, channel, order_status, pay_no, order_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from malllife_welfare
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from malllife_welfare
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.MalllifeWelfareEntity" >
+    insert into malllife_welfare (id, user_id, open_id, 
+      activity_id, coupon_id, coupon_amount, 
+      wechat_amount, channel)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+      #{activityId,jdbcType=VARCHAR}, #{couponId,jdbcType=VARCHAR}, #{couponAmount,jdbcType=INTEGER}, 
+      #{wechatAmount,jdbcType=INTEGER}, #{channel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.usercenter.entity.MalllifeWelfareEntity" >
+    insert into malllife_welfare
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="couponAmount != null" >
+        coupon_amount,
+      </if>
+      <if test="wechatAmount != null" >
+        wechat_amount,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null" >
+        #{couponAmount,jdbcType=INTEGER},
+      </if>
+      <if test="wechatAmount != null" >
+        #{wechatAmount,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.usercenter.entity.MalllifeWelfareEntity" >
+    update malllife_welfare
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null" >
+        coupon_amount = #{couponAmount,jdbcType=INTEGER},
+      </if>
+      <if test="wechatAmount != null" >
+        wechat_amount = #{wechatAmount,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.MalllifeWelfareEntity" >
+    update malllife_welfare
+    set user_id = #{userId,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      activity_id = #{activityId,jdbcType=VARCHAR},
+      coupon_id = #{couponId,jdbcType=VARCHAR},
+      coupon_amount = #{couponAmount,jdbcType=INTEGER},
+      wechat_amount = #{wechatAmount,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

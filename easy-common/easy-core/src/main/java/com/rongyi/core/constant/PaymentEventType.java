@@ -32,6 +32,11 @@ public interface PaymentEventType {
 	/** 付款给卖家 */
 	public static final String PAY_TO_SELLER = "7";
 
+	/** 微信发红包 */
+	public static final String SEND_RED_BACK = "8";
+
+
+
 	/* ============================================== */
 
 	/**

@@ -9,6 +9,7 @@ import java.util.Map;
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityStatus;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
+import com.rongyi.easy.activitymanage.entity.GoodsInAppList;
 import com.rongyi.easy.malllife.common.util.Utils;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -101,6 +102,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopName; ///< 店铺名称
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
+	private Integer galleryPosition;//橱窗排序商品
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -528,6 +533,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityOffUserName = commodityOffUserName;
 	}
 
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
 	public String getHotAreaName() {
 		return hotAreaName;
 	}
@@ -550,6 +563,22 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
 	}
 
 	@Override
@@ -604,9 +633,12 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
+		commodity.setGalleryPosition(galleryPosition);
 		commodity.setShopName(shopName);
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
+		commodity.setSubheading(subheading);
+		commodity.setCommodityDetails(commodityDetails);
 		return commodity;
 	}
 	@Override
@@ -678,6 +710,9 @@ public class Commodity implements  Serializable,Cloneable{
 				",mallName=" + mallName +
 				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
+				",galleryPosition=" + galleryPosition +
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
 				'}';
 	}
 
@@ -728,10 +763,15 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
-			if(null !=vo.getSource() && vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+			if( vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
 			} else {
-				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				Integer status=vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
+				if(null !=status){
+					this.setStatus(vo.getCommodityStatus());
+				}else {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				}
 			}
 		}
 
@@ -740,10 +780,10 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
-		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
+		/*if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
 		}
-
+*/
 		if(!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
 			this.setSupportCourierDeliver(true);
 			this.setSupportSelfPickup(true);
@@ -785,6 +825,9 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
 		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSubheading(vo.getSubheading());
+		this.setCommodityDetails(vo.getCommodityDetails());
+		this.setCommodityModelNo(vo.getCommodityModelNo());
 
 		// 买手&非现货 商品 临时状态: -1
 		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
@@ -815,5 +858,88 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setBrandMid(brandMid);
 			this.setShopMid(vo.getShopMid());
 		}
+	}
+
+	public void setActivityInfoToCommodity(GoodsInAppList goods) {
+		this.setCurrentPrice(goods.getRoundSellIngPrice());
+		this.setPrice(Double.parseDouble(goods.getRoundSellIngPrice()));
+		this.setStock(goods.getRoundRemainCount());
+	}
+
+
+
+	public static Commodity copyCommodity(Commodity source)  {
+		Commodity commodity=new Commodity();
+		commodity.setCategory(source.getCategory());
+		commodity.setType(source.getType());
+		commodity.setCategoryIds(source.getCategoryIds());
+		commodity.setCode(source.getCode());
+		commodity.setCurrentPrice(source.getCurrentPrice());
+		commodity.setCustomCategoryIds(source.getCustomCategoryIds());
+		commodity.setDescription(source.getDescription());
+		commodity.setFreight(source.getFreight());
+		commodity.setBrandName(source.getBrandName());
+		commodity.setBrandId(source.getBrandId());
+		commodity.setcPriceMax(source.getcPriceMax());
+		commodity.setcPriceMin(source.getcPriceMin());
+		//commodity.setCreateAt(createAt);
+		//commodity.setId(id);
+		commodity.setMallId(source.getMallId());
+		commodity.setMallMid(source.getMallMid());
+		commodity.setName(source.getName());
+		commodity.setoPriceMax(source.getoPriceMax());
+		commodity.setoPriceMin(source.getoPriceMin());
+		commodity.setoPriceOfLowestCPrice(source.getoPriceOfLowestCPrice());
+		commodity.setOriginalPrice(source.getOriginalPrice());
+		commodity.setPicList(source.getPicList());
+		commodity.setPostage(source.getPostage());
+		commodity.setPrice(source.getPrice());
+		commodity.setRegisterAt(source.getRegisterAt());
+		commodity.setShopId(source.getShopId());
+		commodity.setShopMid(source.getShopMid());
+		commodity.setShopNum(source.getShopNum());
+		commodity.setSold(source.getSold());
+		commodity.setSource(source.getSource());
+		commodity.setSpecList(source.getSpecList());
+		commodity.setStatus(source.getStatus());
+		commodity.setStock(source.getStock());
+		commodity.setStockStatus(source.getStockStatus());
+		commodity.setTerminalType(source.getTerminalType());
+		//commodity.setUpdate_by(update_by);
+		//commodity.setUpdateAt(updateAt);
+		commodity.setSaleId(source.getSaleId());
+		commodity.setFlashSaleId(source.getFlashSaleId());
+		commodity.setSecKillSign(source.getSecKillSign());
+		commodity.setDiscount(source.getDiscount());
+		commodity.setActivityStartTime(source.getActivityStartTime());
+		commodity.setActivityEndTime(source.getActivityEndTime());
+		commodity.setPurchaseCount(source.getPurchaseCount());
+		commodity.setWeAndTeStatus(source.getWeAndTeStatus());
+		commodity.setSort(source.getSort());
+		commodity.setCommodityModelNo(source.getCommodityModelNo());
+		commodity.setGoodsParam(source.getGoodsParam());
+		commodity.setGalleryPosition(source.getGalleryPosition());
+		commodity.setShopName(source.getShopName());
+		commodity.setMallName(source.getMallName());
+		commodity.setHotAreaName(source.getHotAreaName());
+		//commodity.setLiveId(source.getLiveId());
+		commodity.setSpot(source.isSpot());
+		//commodity.setLiveStartTime(source.getLiveStartTime());
+		//commodity.setLiveEndTime(source.getLiveEndTime());
+		commodity.setLockedStock(source.getLockedStock());
+		commodity.setFilialeMid(source.getFilialeMid());
+		commodity.setBrandMid(source.getBrandMid());
+		commodity.setSupportCourierDeliver(source.isSupportCourierDeliver());
+		commodity.setSupportSelfPickup(source.isSupportSelfPickup());
+		commodity.setIdentity(source.getIdentity());
+		commodity.setTemplateId(source.getTemplateId());
+		commodity.setCustomCategory(source.getCustomCategory());
+		commodity.setSoldOutAt(source.getSoldOutAt());
+		commodity.setSystemNumber(source.getSystemNumber());
+		commodity.setReason(source.getReason());
+		commodity.setGoodsSec(source.isGoodsSec());
+		commodity.setSubheading(source.getSubheading());
+		commodity.setCommodityDetails(source.getCommodityDetails());
+		return commodity;
 	}
 }

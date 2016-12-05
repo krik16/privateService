@@ -1,5 +1,7 @@
 package com.rongyi.core.constant;
 
+import java.util.List;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -761,6 +763,7 @@ public interface Constants {
     	Integer HONGBAO = 1;//红包
     	Integer COUPON = 2;//代金券
     	Integer REBATE = 3;//抵扣券
+        Integer INVITATIONRED = 4;//推荐红包
     }
 
     interface RedenvelopStatus{
@@ -815,6 +818,7 @@ public interface Constants {
     interface PUSH_APP{
         int RYG=0;//容易逛
         int MD=1;//摩店
+        int DATA=2;
     }
     /**
      * 推荐类目 类型APP
@@ -868,5 +872,55 @@ public interface Constants {
     	String PUSH_MSG_BULL = "您的买手账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
     	/** 在默认时间前一天给用户推送的消息 */
     	String PUSH_MSG_SHOP = "您的店铺账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+    }
+    interface INDEX_CORE_STAT {//0更新成功  1更新中  2更新失败
+        String SUCCESS = "success";
+        String FAILED = "failed";
+        String PROGRESS = "progress";
+        String PERPROGRESS = "perprogress";
+    }
+
+    enum ErrorCode {
+
+        /**
+         * 正常返回状态
+         */
+        SUCCESS(0, "success"),
+        /**
+         * 异常返回状态
+         */
+        ERROR(10001, "fail"),
+        /**
+         * 参数错误
+         */
+        ERROR_PARAMETER(10101, "参数错误"),
+        /**
+         * DB错误
+         */
+        ERROR_DATABASE(10201, "DB错误"),
+        /**
+         * 权限错误
+         */
+        ERROR_AUTHORITY(10301, "权限错误"),
+        /**
+         * 其他、系统、未知错误
+         */
+        ERROR_OTHER(10999, "系统错误");
+
+        private Integer code;
+        private String message;
+
+        private ErrorCode(Integer code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }

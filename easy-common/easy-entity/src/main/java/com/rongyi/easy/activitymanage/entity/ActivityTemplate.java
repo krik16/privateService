@@ -77,6 +77,16 @@ public class ActivityTemplate implements Serializable{
     /**特卖的置顶商品*/
     private List<SaleCommodityTop> saleCommodityTops;
 
+    private int isOuter;//是否外投
+
+    public int getIsOuter() {
+        return isOuter;
+    }
+
+    public void setIsOuter(int isOuter) {
+        this.isOuter = isOuter;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -324,6 +334,7 @@ public class ActivityTemplate implements Serializable{
                 .append("templateSaleShopMalls", templateSaleShopMalls)
                 .append("templateSigned", templateSigned)
                 .append("saleCommodityTops", saleCommodityTops)
+                .append("isOuter", isOuter)
                 .toString();
     }
 }

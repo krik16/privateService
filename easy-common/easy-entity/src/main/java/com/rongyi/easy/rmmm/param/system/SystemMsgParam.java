@@ -92,4 +92,12 @@ public class SystemMsgParam implements Serializable{
     public void setIdentity(Integer identity) {
         this.identity = identity;
     }
+
+	@Override
+	public String toString() {
+		return "SystemMsgParam [currentPage=" + currentPage + ", pageSize="
+				+ pageSize + ", mallid=" + mallid + ", msgId=" + msgId
+				+ ", sellerId=" + sellerId + ", msgStatus=" + msgStatus
+				+ ", jsessionid=" + jsessionid + ", identity=" + identity + "]";
+	}
 }

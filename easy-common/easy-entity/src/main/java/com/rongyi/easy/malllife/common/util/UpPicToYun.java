@@ -18,9 +18,7 @@ public class UpPicToYun {
 	public boolean uploadPicBySync(String filePath, String picUrl) throws IOException {
 		UpYun upyun = new UpYun(BUCKET_NAME, YUN_USERNAME, YUN_PASSWORD);
 		File file = new File(filePath);
-		boolean result = upyun.writeFile(picUrl, file, true);
-		return result;
-
+		return upyun.writeFile(picUrl, file, true);
 	}
 
 }

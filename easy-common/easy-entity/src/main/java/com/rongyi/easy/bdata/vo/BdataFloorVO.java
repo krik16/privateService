@@ -72,6 +72,7 @@ public class BdataFloorVO implements Serializable {
 		this.createSource = createSource;
 	}
 
+
 	public String getSwf() {
 		return swf;
 	}

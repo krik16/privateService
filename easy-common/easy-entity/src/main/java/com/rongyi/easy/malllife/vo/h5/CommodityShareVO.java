@@ -25,6 +25,13 @@ public class CommodityShareVO implements Serializable{
 	private List<String> commodityPicList;//商品图片集合
 	private Double discount;//商品折扣
 	private String mallName;//商场名称
+	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
 	public String getCommodityId() {
 		return commodityId;
 	}
@@ -108,7 +115,7 @@ public class CommodityShareVO implements Serializable{
 				+ ", commodityCurrentPrice=" + commodityCurrentPrice
 				+ ", mallTip=" + mallTip + ", commodityPicList="
 				+ commodityPicList + ", discount=" + discount + ", mallName="
-				+ mallName + "]";
+				+ mallName + ", galleryPosition=" + galleryPosition + "]";
 	}
 	
 }

@@ -24,11 +24,13 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * @date 2016-05-09
  * @version 1.1
  */
-public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class CommoditySearchParam extends MalllifeBaseParam implements Serializable {
 
 	private static final long serialVersionUID = -3577116644255163015L;
 
 	private String id;
+
+	private List<String> ids;
 
 	private List<String> brandMids;
 
@@ -48,7 +50,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String commodityCategory;
 
 	/** 排序规则
-	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高 6:折扣由低到高  7：折扣由高到低
+	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高 6:折扣由低到高  7：折扣由高到低  8:橱窗推荐商品
 	 * */
 	private String sortBy;
 
@@ -99,7 +101,14 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private List<String> categoryList;//分类id集合
 	private String couponId;//红包券id
 
+	private List<Integer> saleIds;
+
 	private Map commodityMaxMinValues;  // 商品最大最小销量和更新时间
+
+	private Integer galleryPosition;//橱窗位置
+
+	private Integer minStock;
+	private Integer maxStock;
 
 	public String getCouponId() {
 		return couponId;
@@ -305,6 +314,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		return systemNumber;
 	}
 
+
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
@@ -391,6 +401,47 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.commodityMaxMinValues = commodityMaxMinValues;
 	}
 
+	public List<Integer> getSaleIds() {
+		return saleIds;
+	}
+
+	public void setSaleIds(List<Integer> saleIds) {
+		this.saleIds = saleIds;
+	}
+
+	@NeedCheck(getFieldName = "galleryPosition")
+	public Integer getGalleryPosition() {
+		return galleryPosition;
+	}
+
+	public void setGalleryPosition(Integer galleryPosition) {
+		this.galleryPosition = galleryPosition;
+	}
+
+	public List<String> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<String> ids) {
+		this.ids = ids;
+	}
+
+	public Integer getMaxStock() {
+		return maxStock;
+	}
+
+	public void setMaxStock(Integer maxStock) {
+		this.maxStock = maxStock;
+	}
+
+	public Integer getMinStock() {
+		return minStock;
+	}
+
+	public void setMinStock(Integer minStock) {
+		this.minStock = minStock;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam{" +
@@ -423,6 +474,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				", categoryList=" + categoryList +
 				", couponId='" + couponId + '\'' +
 				", commodityMaxMinValues=" + commodityMaxMinValues +
+				", galleryPosition=" + galleryPosition +
 				"} " + super.toString();
 	}
 

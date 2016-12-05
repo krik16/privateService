@@ -26,7 +26,7 @@ public interface FloorService {
 	
 	public BdataFloorVO getBdataFloorById(String id);
 
-	
+	public List<BdataFloor> getMallFloorsDefault(String mallId);
 
 	
 	public List<BdataFloorVO> getMallFloors(String mallId,int currentpage, int pagesize,String status);
@@ -49,5 +49,7 @@ public interface FloorService {
 	public void saveCommunalFacility(CommunalFacilityVO vo);
 	
 	public List<CommunalFacilityVO> getFloorCommunalFacilitiesType(Map map);
+	
+	public void delFloorAndShop(List<BdataFloor> floors);
 	
 }

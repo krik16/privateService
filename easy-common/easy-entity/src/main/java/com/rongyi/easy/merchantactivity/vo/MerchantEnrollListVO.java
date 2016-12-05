@@ -69,8 +69,35 @@ public class MerchantEnrollListVO implements Serializable {
     private String activityRule;
 
     private Integer isDeleted;
+    
+    /**
+     * 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖7秒杀' 7'10月版本新增的秒杀'
+     * @return
+     */
+    private Integer type;
+    /**
+     * 关联的店铺分类或则店铺id
+     * @return
+     */
+    private String relevanceId;
+    /**
+     * 关联的类型 1 表示分类 2表示店铺 2 买手
+     * @return
+     */
+    private Integer relevanceType;
 
-    public Integer getId() {
+    
+    
+
+    public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -166,21 +193,32 @@ public class MerchantEnrollListVO implements Serializable {
         this.isDeleted = isDeleted;
     }
 
-    @Override
-    public String toString() {
-        return "MerchantEnrollListVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", startAt=" + startAt +
-                ", endAt=" + endAt +
-                ", status=" + status +
-                ", enrollStartAt=" + enrollStartAt +
-                ", enrollEndAt=" + enrollEndAt +
-                ", applyStatus=" + applyStatus +
-                ", enrollCreateAt=" + enrollCreateAt +
-                ", goodsCount=" + goodsCount +
-                ", activityRule='" + activityRule + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
+	public String getRelevanceId() {
+		return relevanceId;
+	}
+
+	public void setRelevanceId(String relevanceId) {
+		this.relevanceId = relevanceId;
+	}
+
+	public Integer getRelevanceType() {
+		return relevanceType;
+	}
+
+	public void setRelevanceType(Integer relevanceType) {
+		this.relevanceType = relevanceType;
+	}
+
+	@Override
+	public String toString() {
+		return "MerchantEnrollListVO [id=" + id + ", name=" + name + ", startAt=" + startAt + ", endAt=" + endAt
+				+ ", status=" + status + ", enrollStartAt=" + enrollStartAt + ", enrollEndAt=" + enrollEndAt
+				+ ", applyStatus=" + applyStatus + ", enrollCreateAt=" + enrollCreateAt + ", goodsCount=" + goodsCount
+				+ ", activityRule=" + activityRule + ", isDeleted=" + isDeleted + ", type=" + type + ", relevanceId="
+				+ relevanceId + ", relevanceType=" + relevanceType + "]";
+	}
+
+   
+    
+    
 }
