@@ -1,29 +1,24 @@
 package com.rongyi.easy.mcmc;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.core.constant.Identity;
-import com.rongyi.core.enumerate.mcmc.CommodityStatus;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.activitymanage.entity.GoodsInAppList;
 import com.rongyi.easy.malllife.common.util.Utils;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
-import com.rongyi.easy.mcmc.entity.PostageTemplateEntity;
-import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 商品表 app商品对象
@@ -881,11 +876,15 @@ public class Commodity implements  Serializable,Cloneable{
 						&& !vo.getCommodityCurrentPrice().isEmpty()) ?
 						vo.getCommodityCurrentPrice() :
 						vo.getCommodityOriginalPrice());
-				this.setPrice(Double.parseDouble(this.getCurrentPrice()));
-				this.setoPriceMax(this.getOriginalPrice());
-				this.setoPriceMin(this.getOriginalPrice());
-				this.setcPriceMax(this.getCurrentPrice());
-				this.setcPriceMin(this.getCurrentPrice());
+				if (null != this.getCurrentPrice()) {
+					this.setPrice(Double.parseDouble(this.getCurrentPrice()));
+					this.setcPriceMax(this.getCurrentPrice());
+					this.setcPriceMin(this.getCurrentPrice());
+				}
+				if (null != this.getOriginalPrice()) {
+					this.setoPriceMax(this.getOriginalPrice());
+					this.setoPriceMin(this.getOriginalPrice());
+				}
 			} else {
 				this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
 				this.setStock((Integer) specMap.get("specStock"));
