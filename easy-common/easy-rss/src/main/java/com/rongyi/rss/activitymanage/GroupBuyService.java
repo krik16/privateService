@@ -60,7 +60,27 @@ public interface GroupBuyService {
 	 * 已约学院列表
 	 */
 
-	ResponseRoaVO getGroubByDetails(Long groupId, Integer currentPage, Integer pageSize);
+	/**
+	 * 已参人员
+	 * 特殊分页
+	 * @param groupId
+	 * @param currentPage
+	 * @param pageSize
+     * @return
+     */
+	ResponseRoaVO getGroubByDetails1(Long groupId, Integer currentPage, Integer pageSize);
+
+
+	/**
+	 * 已参人员
+	 * 正常分页
+	 * @param groupId
+	 * @param currentPage
+	 * @param pageSize
+     * @return
+     */
+	ResponseVO getGroubByDetails(Long groupId, Integer currentPage, Integer pageSize);
+
 
 	/**
 	 * 按照活动id 和商品id  查询该商品正在开始中的团
