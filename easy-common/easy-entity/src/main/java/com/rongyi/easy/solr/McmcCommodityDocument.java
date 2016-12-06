@@ -1,9 +1,5 @@
 package com.rongyi.easy.solr;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
@@ -11,11 +7,16 @@ import com.rongyi.easy.mcmc.CommodityShopInfo;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
+import com.rongyi.easy.util.CommodityUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
 import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class McmcCommodityDocument implements java.io.Serializable{
 
@@ -562,7 +563,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
 		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
-		if(commodity.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
+		if (!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
 			List<String> category_ids = new ArrayList<>();
 			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
 				category_ids.add(categoryObjectId.toString());
@@ -577,7 +578,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSortPosition(9999);
 		}
 
-		if(commodityVo.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
+		if (!CommodityUtil.isGiftType(commodityVo.getCommodityRange())) {
 			if(commodity.getSource() == 0){//商家后台发布商品，默认下架
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 			}

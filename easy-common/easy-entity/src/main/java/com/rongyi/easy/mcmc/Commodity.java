@@ -8,6 +8,7 @@ import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
+import com.rongyi.easy.util.CommodityUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -934,7 +935,7 @@ public class Commodity implements  Serializable,Cloneable{
 			}
 		}
 
-		if (!isGiftType(vo)) {
+		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
 			this.setGoodsParam(vo.getGoodsParam()); //商品参数
 			this.setIdentity(vo.getProcessIdentity()); //增加商品身份
@@ -969,7 +970,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setTemplateId(vo.getTemplateId());
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
-		if (!isGiftType(vo)) {
+		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
 			this.setBrandName(brandName);
 			if (shopInfo != null) {
@@ -985,7 +986,7 @@ public class Commodity implements  Serializable,Cloneable{
 		}
 		this.setCommodityRange(vo.getCommodityRange());
 
-		if (isGiftType(vo)) {
+		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());
 			this.setMappingId(vo.getMappingId());
@@ -1116,24 +1117,5 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setReason(source.getReason());
 		commodity.setGoodsSec(source.isGoodsSec());
 		return commodity;
-	}
-
-	/**
-	 * 是否是礼品类型
-	 *
-	 * @param vo
-	 * @return
-	 */
-	private boolean isGiftType(CommodityVO vo) {
-		if (vo.getCommodityRange() == CommodityConstants.CommodityType.GIFT) {
-			return true;
-		}
-		if (vo.getCommodityRange() == CommodityConstants.CommodityType.COUPON_PARKING) {
-			return true;
-		}
-		if (vo.getCommodityRange() == CommodityConstants.CommodityType.COUPON) {
-			return true;
-		}
-		return false;
 	}
 }
