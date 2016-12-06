@@ -28,6 +28,13 @@ public class GiftVO implements Serializable {
     private Integer terminalType;
     private String platform;
     private String mappingId;
+    // 兑换类型（1.兑换，2.换购）
+    private String exchangeTypes;
+    // 积分设置类型（1.同一设置 2.按等级设置）
+    private Integer pointType;
+    // 换购类型（1.同一设置 2.按等级设置）
+    private Integer buyType;
+    private Integer sold;//商品销量
 
     public String getId() {
         return id;
@@ -125,10 +132,44 @@ public class GiftVO implements Serializable {
         this.status = status;
     }
 
+    public String getExchangeTypes() {
+        return exchangeTypes;
+    }
+
+    public void setExchangeTypes(String exchangeTypes) {
+        this.exchangeTypes = exchangeTypes;
+    }
+
+    public Integer getBuyType() {
+        return buyType;
+    }
+
+    public void setBuyType(Integer buyType) {
+        this.buyType = buyType;
+    }
+
+    public Integer getPointType() {
+        return pointType;
+    }
+
+    public void setPointType(Integer pointType) {
+        this.pointType = pointType;
+    }
+
+    public Integer getSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
+    }
+
     @Override
     public String toString() {
         return "GiftVO{" +
-                "code='" + code + '\'' +
+                "buyType=" + buyType +
+                ", id='" + id + '\'' +
+                ", code='" + code + '\'' +
                 ", picList=" + picList +
                 ", name='" + name + '\'' +
                 ", paymentVOs=" + paymentVOs +
@@ -137,7 +178,11 @@ public class GiftVO implements Serializable {
                 ", createBy='" + createBy + '\'' +
                 ", status=" + status +
                 ", terminalType=" + terminalType +
-                ", platform=" + platform +
+                ", platform='" + platform + '\'' +
+                ", mappingId='" + mappingId + '\'' +
+                ", exchangeTypes='" + exchangeTypes + '\'' +
+                ", pointType=" + pointType +
+                ", sold=" + sold +
                 '}';
     }
 }
