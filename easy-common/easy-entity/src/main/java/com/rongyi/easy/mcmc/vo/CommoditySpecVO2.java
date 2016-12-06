@@ -28,7 +28,52 @@ public class CommoditySpecVO2 implements  Serializable {
 	private String sku;
 
 	private String commodityId;
-	
+	private String groupMid;
+	private String groupName;
+	private String mallMid;
+	private String mallName;
+	private Integer merchantType;
+
+	public Integer getMerchantType() {
+		return merchantType;
+	}
+
+	public void setMerchantType(Integer merchantType) {
+		this.merchantType = merchantType;
+	}
+
+	public String getGroupMid() {
+		return groupMid;
+	}
+
+	public void setGroupMid(String groupMid) {
+		this.groupMid = groupMid;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public String getMallMid() {
+		return mallMid;
+	}
+
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
 	public String getId() {
 		return id;
 	}
