@@ -126,8 +126,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
-	@Field("accountType")
-	private Integer accountType;
 	@Field("locationIds")
 	private List<String> locationIds;
 	@Field("serviceIds")
@@ -548,14 +546,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.locationIds = locationIds;
 	}
 
-	public Integer getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(Integer accountType) {
-		this.accountType = accountType;
-	}
-
 	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
@@ -637,7 +627,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 
 		this.setLocationIds(commodity.getLocationIds());
-		this.setAccountType(commodity.getAccountType());
 		this.setServiceIds(commodity.getServiceIds());
 	}
 

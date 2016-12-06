@@ -107,6 +107,15 @@ public class CommodityVO  implements  Serializable {
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
 	private String merchantId;  //商户id
+	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
+
+	public Integer getMerchantType() {
+		return merchantType;
+	}
+
+	public void setMerchantType(Integer merchantType) {
+		this.merchantType = merchantType;
+	}
 
 	public String getMerchantId() {
 		return merchantId;
@@ -793,6 +802,7 @@ public class CommodityVO  implements  Serializable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
+		vo.setServiceIds(commodity.getServiceIds());
 
 		//默认值
 		vo.setBrandId(-1);

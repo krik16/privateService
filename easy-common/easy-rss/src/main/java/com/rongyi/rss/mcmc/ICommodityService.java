@@ -90,4 +90,6 @@ public interface ICommodityService {
 	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
 
 	ResponseResult2 resetCommodityData();
+
+	ResponseResult2 resetTotalCommodityData();
 }

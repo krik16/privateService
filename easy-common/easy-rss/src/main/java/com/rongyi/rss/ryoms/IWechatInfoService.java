@@ -53,5 +53,12 @@ public interface IWechatInfoService {
 	 */
 	List<WechatInfoVo> getWechatInfoListByLoginUser(SessionUserInfo userInfo);
 
+	/**
+	 * 根据id查询详情
+	 * @param id 服务号ID
+	 * @return 微信服务号
+	 */
+	WechatInfoVo getWechatInfoById(Integer id);
+
 
 }
