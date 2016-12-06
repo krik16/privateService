@@ -229,4 +229,11 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	public long countJoinGroupNum(long groupId);
+
+	/**
+	 * 根据商品id删除团
+	 * @param groupInfo
+	 * @return
+	 */
+	public boolean deleteGroupInfoByGoodsId(GroupInfo groupInfo);
 }
