@@ -150,4 +150,6 @@ public interface IShopService {
 	public  List<String> selectShopsByName(String name);
 
 	public String selectGroupIdByMallMid(String shopMid);
+
+	public List<String> locationIdsByid(Integer identity,String id);
 }
