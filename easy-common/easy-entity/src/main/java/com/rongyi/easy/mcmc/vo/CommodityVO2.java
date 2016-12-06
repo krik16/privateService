@@ -58,7 +58,16 @@ public class CommodityVO2 implements  Serializable {
 
 	private String commodityDetails; //商品详情
 	private List<WechatInfoVo> wechatInfoVos;
+	private List<Integer> serviceIds;
 
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
 
 	public List<WechatInfoVo> getWechatInfoVos() {
 		return wechatInfoVos;
