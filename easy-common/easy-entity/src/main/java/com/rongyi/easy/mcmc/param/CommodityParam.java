@@ -88,6 +88,16 @@ public class CommodityParam {
 
 	private String commodityDetails; //商品详情
 
+	private Integer source;
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
 	public String getId() {
 		return id;
 	}

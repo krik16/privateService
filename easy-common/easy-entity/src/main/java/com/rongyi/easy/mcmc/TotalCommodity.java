@@ -695,6 +695,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setAccountType(userInfo.getIdentity());
 			this.setServiceIds(param.getServiceIds());
 			this.setMerchantId(userInfo.getBindingMid());
+			this.setSource(param.getSource());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}
