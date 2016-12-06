@@ -18,6 +18,7 @@ import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.entity.PostageTemplateEntity;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
+import com.rongyi.easy.mcmc.vo.WechatSwitch;
 import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -120,6 +121,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private String groupMid; //集团Mid
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
+
+	private List<WechatSwitch>  wechatSwitchList;
 
 	public Integer getMerchantType() {
 		return merchantType;
