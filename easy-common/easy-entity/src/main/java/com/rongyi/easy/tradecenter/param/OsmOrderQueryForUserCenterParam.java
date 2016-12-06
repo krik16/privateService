@@ -29,6 +29,8 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
     private Date createStartAt;
     // 订单创建结束时间
     private Date createEndAt;
+    // 商品Id
+    private String commodityId;
     //  页码
     private int pageIndex;
     // 开始
@@ -135,13 +137,22 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
         this.userId = userId;
     }
 
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderQueryForUserCenterParam{" +
-                "commodityType=" + commodityType +
+                "commodityId='" + commodityId + '\'' +
                 ", mallId='" + mallId + '\'' +
                 ", status=" + status +
                 ", title='" + title + '\'' +
+                ", commodityType=" + commodityType +
                 ", tradeNo='" + tradeNo + '\'' +
                 ", userId='" + userId + '\'' +
                 ", phone='" + phone + '\'' +
