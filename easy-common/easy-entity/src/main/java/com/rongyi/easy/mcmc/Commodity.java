@@ -934,13 +934,13 @@ public class Commodity implements  Serializable,Cloneable{
 			}
 		}
 
-		if(vo.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
+		if (!isGiftType(vo)) {
 			this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
 			this.setGoodsParam(vo.getGoodsParam()); //商品参数
 			this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 			this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
-			if(!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
+			if (!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
 				this.setSupportCourierDeliver(true);
 				this.setSupportSelfPickup(true);
 			}
@@ -969,10 +969,10 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setTemplateId(vo.getTemplateId());
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
-		if(vo.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
+		if (!isGiftType(vo)) {
 			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
 			this.setBrandName(brandName);
-			if(shopInfo != null) {
+			if (shopInfo != null) {
 				this.setBrandMid(shopInfo.getBrandMid());
 				this.setShopMid(shopInfo.getShopMid());
 			}
@@ -981,11 +981,11 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setMallId(String.valueOf(mallId));
 			this.setMallMid(mallMid);
 			this.setShopNum(shopNum);
-			this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 		}
 		this.setCommodityRange(vo.getCommodityRange());
 
-		if(vo.getCommodityRange() == CommodityConstants.CommodityType.GIFT) {
+		if (isGiftType(vo)) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());
 			this.setMappingId(vo.getMappingId());
@@ -1116,5 +1116,24 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setReason(source.getReason());
 		commodity.setGoodsSec(source.isGoodsSec());
 		return commodity;
+	}
+
+	/**
+	 * 是否是礼品类型
+	 *
+	 * @param vo
+	 * @return
+	 */
+	private boolean isGiftType(CommodityVO vo) {
+		if (vo.getCommodityRange() == CommodityConstants.CommodityType.GIFT) {
+			return true;
+		}
+		if (vo.getCommodityRange() == CommodityConstants.CommodityType.COUPON_PARKING) {
+			return true;
+		}
+		if (vo.getCommodityRange() == CommodityConstants.CommodityType.COUPON) {
+			return true;
+		}
+		return false;
 	}
 }
