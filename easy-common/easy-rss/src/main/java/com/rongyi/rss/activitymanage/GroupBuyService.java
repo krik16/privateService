@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseRoaVO;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.activity.entity.GroupStockParam;
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
@@ -59,7 +60,7 @@ public interface GroupBuyService {
 	 * 已约学院列表
 	 */
 
-	ResponseVO getGroubByDetails(Long groupId,Integer currentPage,Integer pageSize);
+	ResponseRoaVO getGroubByDetails(Long groupId, Integer currentPage, Integer pageSize);
 
 	/**
 	 * 按照活动id 和商品id  查询该商品正在开始中的团
