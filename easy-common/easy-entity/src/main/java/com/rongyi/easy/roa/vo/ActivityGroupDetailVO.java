@@ -47,6 +47,9 @@ public class ActivityGroupDetailVO implements Serializable{
 	private int groupNum;//已参团人数
 	private int groupPeopleMax;//最大成团人数，0表示没有最大成团人数
 	private Integer activityType;//8普通拼团,9电商版拼团，10教育版拼团
+
+	private String activityRoundId;//超级团教育版团编号，用来参团，如果超级团未开团，则没有团编号
+	private boolean ifSupportAdjustPrice;//是否支持按成团人数调价，true:支持，false:不支持
 	
 	
 	public Long getGroupStartAt() {
@@ -226,6 +229,22 @@ public class ActivityGroupDetailVO implements Serializable{
 	}
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
+	}
+
+	public String getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(String activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public boolean isIfSupportAdjustPrice() {
+		return ifSupportAdjustPrice;
+	}
+
+	public void setIfSupportAdjustPrice(boolean ifSupportAdjustPrice) {
+		this.ifSupportAdjustPrice = ifSupportAdjustPrice;
 	}
 
 	@Override
