@@ -35,6 +35,11 @@ public class GiftVO implements Serializable {
     // 换购类型（1.同一设置 2.按等级设置）
     private Integer buyType;
     private Integer sold;//商品销量
+    // 标签列表
+    private List<String> tagIds;
+    private List<GiftTagVO> tagVOs;
+    // 商品类型(0:商品, 1:礼品)
+    private Integer commodityRange;
 
     public String getId() {
         return id;
@@ -164,6 +169,30 @@ public class GiftVO implements Serializable {
         this.sold = sold;
     }
 
+    public List<String> getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(List<String> tagIds) {
+        this.tagIds = tagIds;
+    }
+
+    public List<GiftTagVO> getTagVOs() {
+        return tagVOs;
+    }
+
+    public void setTagVOs(List<GiftTagVO> tagVOs) {
+        this.tagVOs = tagVOs;
+    }
+
+    public Integer getCommodityRange() {
+        return commodityRange;
+    }
+
+    public void setCommodityRange(Integer commodityRange) {
+        this.commodityRange = commodityRange;
+    }
+
     @Override
     public String toString() {
         return "GiftVO{" +
@@ -183,6 +212,9 @@ public class GiftVO implements Serializable {
                 ", exchangeTypes='" + exchangeTypes + '\'' +
                 ", pointType=" + pointType +
                 ", sold=" + sold +
+                ", tagIds=" + tagIds +
+                ", tagVOs=" + tagVOs +
+                ", commodityRange=" + commodityRange +
                 '}';
     }
 }
