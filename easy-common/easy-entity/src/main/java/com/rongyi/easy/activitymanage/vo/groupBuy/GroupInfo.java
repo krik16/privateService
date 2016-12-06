@@ -172,21 +172,13 @@ public class GroupInfo implements Serializable{
 	}
 
 
-
-
-	public int getGroupPeopleLimit() {
+	public Integer getGroupPeopleLimit() {
 		return groupPeopleLimit;
 	}
 
-
-
-
-	public void setGroupPeopleLimit(int groupPeopleLimit) {
+	public void setGroupPeopleLimit(Integer groupPeopleLimit) {
 		this.groupPeopleLimit = groupPeopleLimit;
 	}
-
-
-
 
 	public int getState() {
 		return state;
