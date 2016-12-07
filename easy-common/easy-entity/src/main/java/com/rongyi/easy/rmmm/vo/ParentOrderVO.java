@@ -154,6 +154,15 @@ public class ParentOrderVO implements Serializable {
 	private String reservePhone;//预约人手机号
 	private String reserveCompany;//预约人公司
 	private String reservePost;//预约人职称
+	private String activityCommodityDesc;//超级团商品副标题
+
+	public String getActivityCommodityDesc() {
+		return activityCommodityDesc;
+	}
+
+	public void setActivityCommodityDesc(String activityCommodityDesc) {
+		this.activityCommodityDesc = activityCommodityDesc;
+	}
 
 	public Long getGroupEndAt() {
 		return groupEndAt;
@@ -931,6 +940,7 @@ public class ParentOrderVO implements Serializable {
 				", reservePost=" + reservePost +
 				", reservePhone=" + reservePhone +
 				", reserveCompany=" + reserveCompany +
+				", activityCommodityDesc=" + activityCommodityDesc +
 				'}';
 	}
 }
