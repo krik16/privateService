@@ -38,6 +38,15 @@ public class Floor implements Serializable {
     private String aliasname;
     private String   tMap;//图聚版地图
     private Integer system_status;//1 隐藏 0正常
+    private String thirdFloorId;//第三方楼层id
+
+    public String getThirdFloorId() {
+        return thirdFloorId;
+    }
+
+    public void setThirdFloorId(String thirdFloorId) {
+        this.thirdFloorId = thirdFloorId;
+    }
 
     public Integer getSystem_status() {
         return system_status;
