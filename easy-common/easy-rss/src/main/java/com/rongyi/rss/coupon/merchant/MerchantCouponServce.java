@@ -13,6 +13,7 @@ import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
 import com.rongyi.easy.page.QueryParam;
 import  java.util.List;
+import java.util.Map;
 
 /**
  * Descriptions:
@@ -167,6 +168,15 @@ public interface MerchantCouponServce {
     public List<ShopCouponsVO> shopsCouponsCount(List<String> shopIds);
 
     public int insertCouponWechat(CouponWechat couponWechat);
-    
+
+    /**
+     * 查询卡券运营数据
+     * @param paramMap
+     * @param user
+     * @return
+     */
+    MerchantPaging<Coupon> getCouponBySearchParam(Map<String, Object> paramMap, UserInfoVo user);
+
+    int getCountByParamMap(Map<String, Object> paramMap, UserInfoVo user);
 }
  
