@@ -74,11 +74,11 @@ public class WebPageAlipayController extends BaseController {
     public String callBack(HttpServletRequest request, String result, String out_trade_no, String trade_no) {
         LOGGER.info("支付宝手机网页同步通知开始,trade_no={},out_trade_no={},result={}", trade_no, out_trade_no, result);
         try {
-            Map<String, String> verifyMap = beforeVerify(request);
-            if (!AlipayNotify.verifyReturn(verifyMap)) {
-                LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
-                return "zhifuFail";
-            }
+//            Map<String, String> verifyMap = beforeVerify(request);
+//            if (!AlipayNotify.verifyReturn(verifyMap)) {
+//                LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
+//                return "zhifuFail";
+//            }
             boolean bool = rpbService.queryOrderPayStatus(trade_no, out_trade_no, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, null);
             if (!bool) {
                 LOGGER.info("支付宝订单查询结果是未支付状态");
