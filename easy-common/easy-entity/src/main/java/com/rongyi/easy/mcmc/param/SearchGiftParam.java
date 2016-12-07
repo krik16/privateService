@@ -120,16 +120,17 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     @Override
     public String toString() {
         return "SearchGiftParam{" +
-                "id='" + id + '\'' +
+                "code='" + code + '\'' +
+                ", id='" + id + '\'' +
                 ", platform='" + platform + '\'' +
-                ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", createAt=" + createAt +
                 ", commodityRange=" + commodityRange +
                 ", terminalType=" + terminalType +
                 ", keyword='" + keyword + '\'' +
-                ", reason=" + reason +
                 ", status=" + status +
-                '}';
+                ", reason='" + reason + '\'' +
+                ", mappingId='" + mappingId + '\'' +
+                "} " + super.toString();
     }
 }
