@@ -804,6 +804,7 @@ public class CommodityVO  implements  Serializable {
 		vo.setTemplateId(commodity.getTemplateId());
 		vo.setServiceIds(commodity.getServiceIds());
 		vo.setSubheading(commodity.getSubheading());
+		vo.setCommodityDetails(commodity.getCommodityDetails());
 
 		//默认值
 		vo.setBrandId(-1);
