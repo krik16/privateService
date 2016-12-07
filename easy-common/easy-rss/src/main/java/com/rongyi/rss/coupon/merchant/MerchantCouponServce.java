@@ -6,6 +6,7 @@ import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 import com.rongyi.easy.coupon.entity.CouponShop;
 import com.rongyi.easy.coupon.entity.CouponWechat;
 import com.rongyi.easy.coupon.param.ActivityCouponParam;
+import com.rongyi.easy.coupon.param.CouponOperaterSearchParam;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.ShopCouponsVO;
@@ -169,14 +170,16 @@ public interface MerchantCouponServce {
 
     public int insertCouponWechat(CouponWechat couponWechat);
 
+    public int updateCouponWechat(CouponWechat couponWechat);
+
     /**
      * 查询卡券运营数据
      * @param paramMap
      * @param user
      * @return
      */
-    MerchantPaging<Coupon> getCouponBySearchParam(Map<String, Object> paramMap, UserInfoVo user);
+    MerchantPaging<Coupon> getCouponBySearchParam(CouponOperaterSearchParam paramMap, UserInfoVo user);
 
-    int getCountByParamMap(Map<String, Object> paramMap, UserInfoVo user);
+    int getCountByParamMap(CouponOperaterSearchParam paramMap, UserInfoVo user);
 }
  
