@@ -595,6 +595,11 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setReason(commodity.getReason());
 		this.setSubheading(commodity.getSubheading());
 		this.setCommodityDetails(commodity.getCommodityDetails());
+
+		this.setLocationIds(commodity.getLocationIds());
+		this.setAccountType(commodity.getIdentity());
+		this.setServiceIds(commodity.getServiceIds());
+		this.setMerchantId(commodity.getMerchantId());
 	}
 
 	public String getSubheading() {
