@@ -1,9 +1,9 @@
 package com.rongyi.easy.util;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,6 +43,40 @@ public class StandardConvertionUtil {
                 break;
             case "3":
                 terminalType = CommodityTerminalType.TERMINAL_TYPE_6;
+                break;
+            default:
+                terminalType = null;
+        }
+        return terminalType;
+    }
+
+    /**
+     * 将礼品的终端参数值转换成现有商品的规则
+     *
+     * @param platform
+     * @return terminalType
+     */
+    public static List<Integer> convertPlatformToTerminalTypeList(final String platform) {
+        String flag;
+        if (null == platform || platform.isEmpty()) {
+            flag = "3";
+        } else {
+            List<String> platforms = Arrays.asList(platform.split(","));
+            flag = (platforms.size() > 1) ? "3" : platforms.get(0);
+        }
+
+        List<Integer> terminalType = new ArrayList<>();
+        switch (flag) {
+            case "1":
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_4);
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_6);
+                break;
+            case "2":
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_2);
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_6);
+                break;
+            case "3":
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_6);
                 break;
             default:
                 terminalType = null;

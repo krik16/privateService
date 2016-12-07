@@ -1,6 +1,5 @@
 package com.rongyi.easy.mcmc.param;
 
-import com.rongyi.easy.util.StandardConvertionUtil;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -10,9 +9,8 @@ import java.util.Date;
  * 查询礼品参数类
  *
  * @author yaoyiwei
- * @date 2016-11-24
  * @version 1.0
- *
+ * @date 2016-11-24
  */
 public class SearchGiftParam extends PaginationParam implements Serializable {
 
@@ -78,7 +76,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     }
 
     public Integer getTerminalType() {
-        return StandardConvertionUtil.convertPlatformToTerminalType(this.platform);
+        return this.terminalType;
     }
 
     public void setTerminalType(Integer terminalType) {
