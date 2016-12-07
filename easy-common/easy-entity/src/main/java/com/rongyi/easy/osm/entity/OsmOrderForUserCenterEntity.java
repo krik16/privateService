@@ -37,6 +37,8 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private int totalAmount;
     // 订单状态
     private int status;
+    // 兑换类型
+    private int exchangeType;
 
     public String getCommodityId() {
         return commodityId;
@@ -142,6 +144,14 @@ public class OsmOrderForUserCenterEntity implements Serializable {
         this.userPhone = userPhone;
     }
 
+    public int getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(int exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderForUserCenterEntity{" +
@@ -158,6 +168,7 @@ public class OsmOrderForUserCenterEntity implements Serializable {
                 ", totalCredit=" + totalCredit +
                 ", totalAmount=" + totalAmount +
                 ", status=" + status +
+                ", exchangeType=" + exchangeType +
                 '}';
     }
 }
