@@ -12,7 +12,7 @@ public interface MerchantService {
 	 * @param id
 	 * @return
 	 */
-	public List<MallShopVO> getMallShopVO(Integer type,String id);
+	public List<MallShopVO> dgetMallShopVO(Integer type,String id);
 	
 	/**
 	 * 根据类型和id查询下属商场/店铺列表

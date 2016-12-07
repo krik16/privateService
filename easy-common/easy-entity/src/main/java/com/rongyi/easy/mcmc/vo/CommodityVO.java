@@ -803,6 +803,7 @@ public class CommodityVO  implements  Serializable {
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
 		vo.setServiceIds(commodity.getServiceIds());
+		vo.setSubheading(commodity.getSubheading());
 
 		//默认值
 		vo.setBrandId(-1);
@@ -814,8 +815,9 @@ public class CommodityVO  implements  Serializable {
 		vo.setMerchantId(userInfo.getBindingMid());
 		if(null ==commodity.getId()){
 			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+		} else {
+			vo.setUpdate_by(userInfo.getId().toString());
 		}
-		vo.setCreate_by(userInfo.getId().toString());//修改id传入做权限判断
 		return vo;
 	}
 
