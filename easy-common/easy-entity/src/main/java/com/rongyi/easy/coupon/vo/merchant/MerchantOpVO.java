@@ -19,6 +19,7 @@ public class MerchantOpVO implements Serializable{
     private String createUser;
     private Integer isShowWx;
     private Integer isShowTer;
+    private Date createAt;
 
     public String getId() {
         return id;
@@ -84,6 +85,14 @@ public class MerchantOpVO implements Serializable{
         this.isShowTer = isShowTer;
     }
 
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MerchantOpVO{");
@@ -95,6 +104,7 @@ public class MerchantOpVO implements Serializable{
         sb.append(", createUser='").append(createUser).append('\'');
         sb.append(", isShowWx=").append(isShowWx);
         sb.append(", isShowTer=").append(isShowTer);
+        sb.append(", createAt=").append(createAt);
         sb.append('}');
         return sb.toString();
     }
