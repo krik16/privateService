@@ -78,6 +78,10 @@ public interface CommodityService {
 
     public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, String userName);
 
+    public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
+
+    public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason, String userName);
+
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
     public String editCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid, String brandName, String brandMid, String shopNum, List<Double> position, List<String> zone_ids);
@@ -361,6 +365,6 @@ public interface CommodityService {
      * @return true commodity is overtime, false otherwise;
      */
     List<String> isCommodityOvertime(PinTuanCommodityParam param);
-    
+
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }
