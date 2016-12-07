@@ -33,6 +33,15 @@ public class CommoditySpecVO2 implements  Serializable {
 	private String mallMid;
 	private String mallName;
 	private Integer merchantType;
+	private Integer type;
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 	public Integer getMerchantType() {
 		return merchantType;
