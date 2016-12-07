@@ -53,6 +53,8 @@ public class CommodityParam {
 
 	private List<Integer> serviceIds; //公众号
 
+	private Integer createBy;
+
 
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
 	//@JsonSerialize(using=JsonDateSerializer.class)
@@ -89,6 +91,14 @@ public class CommodityParam {
 	private String commodityDetails; //商品详情
 
 	private Integer source;
+
+	public Integer getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Integer createBy) {
+		this.createBy = createBy;
+	}
 
 	public Integer getSource() {
 		return source;

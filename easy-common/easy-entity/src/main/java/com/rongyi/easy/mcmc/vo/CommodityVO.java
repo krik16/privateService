@@ -816,6 +816,9 @@ public class CommodityVO  implements  Serializable {
 		if(null ==commodity.getId()){
 			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
 		} else {
+			if(null != commodity.getCreateBy()) {
+				vo.setCreate_by(commodity.getCreateBy() + "");
+			}
 			vo.setUpdate_by(userInfo.getId().toString());
 		}
 		return vo;
