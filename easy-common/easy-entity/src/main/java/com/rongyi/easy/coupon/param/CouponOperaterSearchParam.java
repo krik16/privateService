@@ -110,11 +110,11 @@ public class CouponOperaterSearchParam implements Serializable {
     }
 
     public Integer getStartIndex() {
-        return startIndex;
+        return  (pageNo-1)*pageSize;
     }
 
     public void setStartIndex(Integer startIndex) {
-        this.startIndex = (pageNo-1)*pageSize;
+        this.startIndex =startIndex;
     }
 
     public String getWechatAppId() {

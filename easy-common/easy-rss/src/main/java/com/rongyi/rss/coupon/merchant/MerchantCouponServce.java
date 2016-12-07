@@ -8,10 +8,7 @@ import com.rongyi.easy.coupon.entity.CouponWechat;
 import com.rongyi.easy.coupon.param.ActivityCouponParam;
 import com.rongyi.easy.coupon.param.CouponOperaterSearchParam;
 import com.rongyi.easy.coupon.param.CouponParam;
-import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
-import com.rongyi.easy.coupon.vo.merchant.ShopCouponsVO;
-import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
-import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
+import com.rongyi.easy.coupon.vo.merchant.*;
 import com.rongyi.easy.page.QueryParam;
 import  java.util.List;
 import java.util.Map;
@@ -178,7 +175,7 @@ public interface MerchantCouponServce {
      * @param user
      * @return
      */
-    MerchantPaging<Coupon> getCouponBySearchParam(CouponOperaterSearchParam paramMap, UserInfoVo user);
+    MerchantPaging<MerchantOpVO> getCouponBySearchParam(CouponOperaterSearchParam paramMap, UserInfoVo user);
 
     int getCountByParamMap(CouponOperaterSearchParam paramMap, UserInfoVo user);
 }

@@ -17,8 +17,8 @@ public class MerchantOpVO implements Serializable{
     private Date publishEndAt;
     private Integer publishChannel;
     private String createUser;
-    private Boolean isShowWx;
-    private Boolean isShowTer;
+    private Integer isShowWx;
+    private Integer isShowTer;
 
     public String getId() {
         return id;
@@ -68,19 +68,34 @@ public class MerchantOpVO implements Serializable{
         this.createUser = createUser;
     }
 
-    public Boolean getIsShowWx() {
+    public Integer getIsShowWx() {
         return isShowWx;
     }
 
-    public void setIsShowWx(Boolean isShowWx) {
+    public void setIsShowWx(Integer isShowWx) {
         this.isShowWx = isShowWx;
     }
 
-    public Boolean getIsShowTer() {
+    public Integer getIsShowTer() {
         return isShowTer;
     }
 
-    public void setIsShowTer(Boolean isShowTer) {
+    public void setIsShowTer(Integer isShowTer) {
         this.isShowTer = isShowTer;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MerchantOpVO{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", publishStartAt=").append(publishStartAt);
+        sb.append(", publishEndAt=").append(publishEndAt);
+        sb.append(", publishChannel=").append(publishChannel);
+        sb.append(", createUser='").append(createUser).append('\'');
+        sb.append(", isShowWx=").append(isShowWx);
+        sb.append(", isShowTer=").append(isShowTer);
+        sb.append('}');
+        return sb.toString();
     }
 }
