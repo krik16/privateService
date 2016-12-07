@@ -228,4 +228,19 @@ public interface IUserInfoService {
 	public List<UserInfo> getUserInfoListByUserId(Map paramMap) ;
 
 	public Integer getUserBuyerIdByMobileAndIdentity(String mobile,Integer identity);
+
+	/**
+	 * 根据登录用户或手机号查询用户
+	 * @param userPhone 用户名或手机号
+	 * @return 用户信息
+	 */
+	List<UserInfo> getAllByUserPhone(String userPhone);
+
+	/**
+	 * 根据用户信息查询用户权限
+	 * @param user 用户
+	 * @return 权限
+	 * @throws Exception
+	 */
+	List<String> getAuths(UserInfo user) throws Exception ;
 }
