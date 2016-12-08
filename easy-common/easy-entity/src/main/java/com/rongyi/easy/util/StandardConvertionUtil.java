@@ -76,6 +76,8 @@ public class StandardConvertionUtil {
                 terminalType.add(CommodityTerminalType.TERMINAL_TYPE_6);
                 break;
             case "3":
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_2);
+                terminalType.add(CommodityTerminalType.TERMINAL_TYPE_4);
                 terminalType.add(CommodityTerminalType.TERMINAL_TYPE_6);
                 break;
             default:
