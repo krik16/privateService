@@ -108,6 +108,15 @@ public class CommodityVO  implements  Serializable {
 	private List<Integer> serviceIds;//微信公众号ids
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
+	private List<String> categoryNames;
+
+	public List<String> getCategoryNames() {
+		return categoryNames;
+	}
+
+	public void setCategoryNames(List<String> categoryNames) {
+		this.categoryNames = categoryNames;
+	}
 
 	public Integer getMerchantType() {
 		return merchantType;
