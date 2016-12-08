@@ -41,6 +41,10 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private int exchangeType;
     // 下个状态的时间
     private Date nextStatusTime;
+    // 礼品编号
+    private String sn;
+    // 商品logo
+    private String commodityLogo;
 
     public String getCommodityId() {
         return commodityId;
@@ -162,6 +166,22 @@ public class OsmOrderForUserCenterEntity implements Serializable {
         this.nextStatusTime = nextStatusTime;
     }
 
+    public String getCommodityLogo() {
+        return commodityLogo;
+    }
+
+    public void setCommodityLogo(String commodityLogo) {
+        this.commodityLogo = commodityLogo;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderForUserCenterEntity{" +
@@ -180,6 +200,8 @@ public class OsmOrderForUserCenterEntity implements Serializable {
                 ", status=" + status +
                 ", exchangeType=" + exchangeType +
                 ", nextStatusTime=" + nextStatusTime +
+                ", sn='" + sn + '\'' +
+                ", commodityLogo='" + commodityLogo + '\'' +
                 '}';
     }
 }

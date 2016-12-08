@@ -14,8 +14,6 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
     private String commoditySpecIds;
     // 类目列表
     private List<String> commoditySpecList;
-    // 商品logo
-    private String commodityLogo;
     // 快递方式 1：自提 2：快递
     private int deliveryType;
     // 快递信息
@@ -36,14 +34,6 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
     private Date couponStartAt;
     // 卡券结束时间
     private Date couponEndAt;
-
-    public String getCommodityLogo() {
-        return commodityLogo;
-    }
-
-    public void setCommodityLogo(String commodityLogo) {
-        this.commodityLogo = commodityLogo;
-    }
 
     public String getCommoditySpecIds() {
         return commoditySpecIds;
@@ -147,7 +137,6 @@ public class OsmOrderDetailForUserCenterEntity extends OsmOrderForUserCenterEnti
                 "commodityCodeList=" + commodityCodeList +
                 ", commoditySpecIds='" + commoditySpecIds + '\'' +
                 ", commoditySpecList=" + commoditySpecList +
-                ", commodityLogo='" + commodityLogo + '\'' +
                 ", deliveryType=" + deliveryType +
                 ", orderFormExtraEntity=" + orderFormExtraEntity +
                 ", eventList=" + eventList +
