@@ -8,6 +8,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.*;
 import com.rongyi.easy.osm.vo.OsmOrdeCommodityCodeVO;
 import com.rongyi.easy.osm.vo.OsmOrdeForUserCenterVO;
+import com.rongyi.easy.osm.vo.OsmOrderCountByCommodityForUserCenterVO;
 import com.rongyi.easy.osm.vo.OsmOrderCountForUserCenterVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyDealParam;
@@ -303,4 +304,13 @@ public interface IOrderQueryService {
 	 * @return
 	 */
 	DubboVO<OsmOrderCountForUserCenterVO> getOrderCountByStatus(String mallId);
+
+	/**
+	 * 统计订单数(商品维度）
+	 *
+	 * @param mallId
+	 * @param commodityId
+	 * @return
+	 */
+	DubboVO<OsmOrderCountByCommodityForUserCenterVO> getOrderCountByCommodityId(String mallId, String commodityId);
 }

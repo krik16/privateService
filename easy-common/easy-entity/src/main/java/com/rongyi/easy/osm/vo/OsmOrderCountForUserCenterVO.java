@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 订单统计
+ * 订单统计（商城维度）
  *
  * @author wangjh7
  * @date 2016-12-08

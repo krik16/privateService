@@ -16,6 +16,8 @@ public class OsmCommodityCodeQueryForUserCenterParam implements Serializable {
     private String tradeNo;
     // 自提码/券码
     private String couponCode;
+    // 商品ID
+    private String commodityId;
 
     public String getTradeNo() {
         return tradeNo;
@@ -41,12 +43,21 @@ public class OsmCommodityCodeQueryForUserCenterParam implements Serializable {
         this.couponCode = couponCode;
     }
 
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
     @Override
     public String toString() {
         return "OsmCommodityCodeQueryForUserCenterParam{" +
-                "couponCode='" + couponCode + '\'' +
+                "commodityId='" + commodityId + '\'' +
                 ", mallId='" + mallId + '\'' +
                 ", tradeNo='" + tradeNo + '\'' +
+                ", couponCode='" + couponCode + '\'' +
                 '}';
     }
 }
