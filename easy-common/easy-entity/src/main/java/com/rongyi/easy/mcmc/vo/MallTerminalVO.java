@@ -13,6 +13,7 @@ public class MallTerminalVO implements Serializable {
 
 	private List<WechatInfoVo> wechatInfoVoList;
 	private Integer mallTerminal;	// 商场终端
+	private String rongyiguangStatus;//容易逛是否展示  1是 0否
 
 	public List<WechatInfoVo> getWechatInfoVoList() {
 		return wechatInfoVoList;
@@ -28,9 +29,18 @@ public class MallTerminalVO implements Serializable {
 	public void setMallTerminal(Integer mallTerminal) {
 		this.mallTerminal = mallTerminal;
 	}
+
+	public String getRongyiguangStatus() {
+		return rongyiguangStatus;
+	}
+
+	public void setRongyiguangStatus(String rongyiguangStatus) {
+		this.rongyiguangStatus = rongyiguangStatus;
+	}
+
 	@Override
 	public String toString() {
-		return "MallTerminalVO [wechatInfoVoList=" + wechatInfoVoList + ", mallTerminal=" + mallTerminal + "]";
+		return "MallTerminalVO [wechatInfoVoList=" + wechatInfoVoList + ", rongyiguangStatus=" + rongyiguangStatus+ ", mallTerminal=" + mallTerminal + "]";
 	}
 
 }

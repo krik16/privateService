@@ -864,6 +864,7 @@ public class Commodity implements  Serializable,Cloneable{
 		// 5.微商,容易逛
 		// 6.微商,互动屏
 		// 7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+
 		this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_7);
 		this.setWeAndTeStatus(CommodityTerminalType.weAndTeStatus.STATUS_4);//默认为都不展示
 
