@@ -51,8 +51,16 @@ public class ActivityGroupDetailVO implements Serializable{
 	private String activityRoundId;//超级团教育版团编号，用来参团，如果超级团未开团，则没有团编号
 	private boolean ifSupportAdjustPrice;//是否支持按成团人数调价，true:支持，false:不支持
 	private String expectTotalAmount;//众筹价
+	private String mallName;//商场名称
 	
-	
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
 	public String getExpectTotalAmount() {
 		return expectTotalAmount;
 	}
