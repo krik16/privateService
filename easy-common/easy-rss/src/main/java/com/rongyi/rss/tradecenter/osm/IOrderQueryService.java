@@ -8,6 +8,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.*;
 import com.rongyi.easy.osm.vo.OsmOrdeCommodityCodeVO;
 import com.rongyi.easy.osm.vo.OsmOrdeForUserCenterVO;
+import com.rongyi.easy.osm.vo.OsmOrderCountForUserCenterVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
@@ -294,4 +295,12 @@ public interface IOrderQueryService {
 	 * @return
 	 */
 	DubboVO<OsmOrdeCommodityCodeVO> searchCommodityCodeList(String tradeNo,String mallId);
+
+	/**
+	 * 统计订单状态的数量
+	 *
+	 * @param mallId
+	 * @return
+	 */
+	DubboVO<OsmOrderCountForUserCenterVO> getOrderCountByStatus(String mallId);
 }
