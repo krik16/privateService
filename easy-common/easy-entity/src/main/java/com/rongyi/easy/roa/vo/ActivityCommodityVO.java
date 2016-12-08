@@ -23,12 +23,7 @@ public class ActivityCommodityVO implements Serializable{
 	private String commodityName;//商品名称
 	private Double commodityOPriceMax;//商品最高原价
 	private List<String> commodityPicList;//商品图片
-	public Integer getActivityCommodityStock() {
-		return activityCommodityStock;
-	}
-
-
-
+	private String commodityPic;//商品图片，超级团教育版取后台配置的1:2的图片
     //众筹价
 	private String crowdFundingPrice;
     //活动结束时间，单位：毫
@@ -43,11 +38,17 @@ public class ActivityCommodityVO implements Serializable{
 	private Long groupStartAt;
      //拼团状态,0：拼团中，1：成功不可以参团，2：失败，3：未开始,4成功但仍可以参团
 	private Integer groupStatus;
-
-
-
-
-
+	
+	
+	public String getCommodityPic() {
+		return commodityPic;
+	}
+	public void setCommodityPic(String commodityPic) {
+		this.commodityPic = commodityPic;
+	}
+	public Integer getActivityCommodityStock() {
+		return activityCommodityStock;
+	}
 	public void setActivityCommodityStock(Integer activityCommodityStock) {
 		this.activityCommodityStock = activityCommodityStock;
 	}
