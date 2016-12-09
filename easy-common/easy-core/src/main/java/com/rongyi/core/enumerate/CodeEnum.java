@@ -124,6 +124,9 @@ public enum CodeEnum {
 	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_LPINTUAN("-7016", "拼团商品无法操作"),
+	ERROR_MCMC_OFFER_DATE("-7017","下架时间需大于上架时间"),
+	ERROR_MCMC_DATE("-7018","下架时间有误，请重新设置"),
+	ERROR_MCMC_REGIST_DATE("-7019","上架时间有误，请重新设置"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 

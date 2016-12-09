@@ -88,6 +88,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private Double discount; // 折扣
 
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -435,6 +438,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.discount = discount;
 	}
 
+	public Integer getShelvesType() {
+		return null ==shelvesType?2:shelvesType;
+	}
+
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
+
 	@Override
 	public String toString() {
 		return "TotalCommodity{" +
@@ -479,6 +490,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", discount=" + discount +
 				", commodityModelNo=" + commodityModelNo +
 				", goodsParam=" + goodsParam +
+				", shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
 				'}';
@@ -540,6 +552,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setCustomCategoryIds((commodity.getCustomCategoryIds()));
 		}
 		this.setReason(commodity.getReason());
+		this.setShelvesType(commodity.getShelvesType());
 		this.setSubheading(commodity.getSubheading());
 		this.setCommodityDetails(commodity.getCommodityDetails());
 	}
