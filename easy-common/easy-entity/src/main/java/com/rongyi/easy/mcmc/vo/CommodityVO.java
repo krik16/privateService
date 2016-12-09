@@ -183,18 +183,6 @@ public class CommodityVO  implements  Serializable {
 	public void setShelvesType(Integer shelvesType) {
 		this.shelvesType = shelvesType;
 	}
-	public boolean isOfferShelves() {
-		return offerShelves;
-	}
-	public void setOfferShelves(boolean offerShelves) {
-		this.offerShelves = offerShelves;
-	}
-	public Integer getShelvesType() {
-		return shelvesType;
-	}
-	public void setShelvesType(Integer shelvesType) {
-		this.shelvesType = shelvesType;
-	}
 	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
@@ -869,13 +857,6 @@ public class CommodityVO  implements  Serializable {
 		}
 		return vo;
 	}
-	private boolean judgeShelvesType(Date date1,Date date2){
-        if(null ==date1 || null ==date2){
-            return false;
-        }
-        Long difference=date1.getTime()-date2.getTime();
-        return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
-    }
 	private boolean judgeShelvesType(Date date1,Date date2){
         if(null ==date1 || null ==date2){
             return false;
