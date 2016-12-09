@@ -1001,7 +1001,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSelfAddressId(vo.getSelfAddressId());
 			this.setSelfExpireDate(vo.getSelfExpireDate());
 			this.setTagIds(vo.getTagIds());
-			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);
 		} else {
 			this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
 			this.setCommodityModelNo(vo.getCommodityModelNo());
