@@ -829,7 +829,9 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
 		this.setType(CommodityType.GUIDE.getValue());
 		this.setShelvesType(vo.getShelvesType());
-		if(this.getSource() == 2  && vo.getShelvesType()==1) {//发布商品的逻辑有修改，魔店发布的商品不再是默认上下架时间为1年(立即上架是1年)
+		//发布商品的逻辑有修改，魔店发布的商品不再是默认上下架时间为1年(立即上架是1年)
+		// null == vo.getShelvesType() 版本兼容
+		if(this.getSource() == 2  && (null == vo.getShelvesType() || vo.getShelvesType()==1)) {
 			this.setRegisterAt(new Date());//设置默认上下架时间
 			this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
 		}
