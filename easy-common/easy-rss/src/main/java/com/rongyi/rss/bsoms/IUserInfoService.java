@@ -243,4 +243,12 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	List<String> getAuths(UserInfo user) throws Exception ;
+
+	/**
+	 * 根据用户手机号修改密码
+	 * @param userPhone 手机号
+	 * @param pwd 密码
+	 * @return 影响账号数
+	 */
+	int updatePwdByUserPhone(String userPhone,String pwd);
 }
