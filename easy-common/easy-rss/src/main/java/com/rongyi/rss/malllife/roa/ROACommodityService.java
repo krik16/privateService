@@ -263,6 +263,21 @@ public interface ROACommodityService {
      */
     public ResponseVO getSpecInfo(String specId);
 
+	public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
+
+	public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
+    /**
+     * 批量下架商品
+     * @param ids
+     * @param shopId
+     * @param identity
+     * @param reason
+     * @param userName
+     * @return
+     */
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
+
+
 
 	public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
 
