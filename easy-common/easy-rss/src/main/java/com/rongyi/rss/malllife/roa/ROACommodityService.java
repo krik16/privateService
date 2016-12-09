@@ -53,7 +53,7 @@ public interface ROACommodityService {
 	public ResponseResult getCommodityById(String id, long shopId);
 
 	public ResponseResult getCommodityListByShopId(int identity, String shopId, String buyerId, int orderBy,
-			String keyword, int currentpage, int pagesize);
+			String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
 	public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage,
 			int pagesize, String liveId, int isEdit);
@@ -262,6 +262,21 @@ public interface ROACommodityService {
      * @return
      */
     public ResponseVO getSpecInfo(String specId);
+
+
+	public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
+
+	public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
+    /**
+     * 批量下架商品
+     * @param ids
+     * @param shopId
+     * @param identity
+     * @param reason
+     * @param userName
+     * @return
+     */
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
 
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }

@@ -107,6 +107,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallName; ///< 商场名称
 	private String hotAreaName; ///< 商圈
 	private Integer galleryPosition;//橱窗排序商品
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 	private String subheading;  //副标题
 
 	private String commodityDetails; //商品详情
@@ -616,7 +617,13 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+	public Integer getShelvesType() {
+		return null ==shelvesType?2:shelvesType;
+	}
 
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
 	public String getSubheading() {
 		return subheading;
 	}
@@ -697,6 +704,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShopName(shopName);
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
+		commodity.setShelvesType(null ==shelvesType?2:shelvesType);
 		commodity.setSubheading(subheading);
 		commodity.setCommodityDetails(commodityDetails);
 		return commodity;
@@ -771,6 +779,7 @@ public class Commodity implements  Serializable,Cloneable{
 				",hotAreaName=" + hotAreaName +
 				",discount=" + discount +
 				",galleryPosition=" + galleryPosition +
+				",shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
 				'}';
@@ -819,8 +828,8 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setSoldOutAt(vo.getSoldOutAt());
 		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
 		this.setType(CommodityType.GUIDE.getValue());
-
-		if(this.getSource() == 2) {
+		this.setShelvesType(vo.getShelvesType());
+		if(this.getSource() == 2  && vo.getShelvesType()==1) {//发布商品的逻辑有修改，魔店发布的商品不再是默认上下架时间为1年(立即上架是1年)
 			this.setRegisterAt(new Date());//设置默认上下架时间
 			this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
 		}

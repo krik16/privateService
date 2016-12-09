@@ -94,6 +94,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private Double discount; // 折扣
 
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
+
 	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
 	private List<Integer> serviceIds;//微信公众号ids
 	private Integer accountType;
@@ -480,6 +483,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.discount = discount;
 	}
 
+	public Integer getShelvesType() {
+		return null ==shelvesType?2:shelvesType;
+	}
+
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
+
 	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
@@ -532,6 +543,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", discount=" + discount +
 				", commodityModelNo=" + commodityModelNo +
 				", goodsParam=" + goodsParam +
+				", shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
 				'}';
@@ -593,6 +605,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setCustomCategoryIds((commodity.getCustomCategoryIds()));
 		}
 		this.setReason(commodity.getReason());
+		this.setShelvesType(commodity.getShelvesType());
 		this.setSubheading(commodity.getSubheading());
 		this.setCommodityDetails(commodity.getCommodityDetails());
 

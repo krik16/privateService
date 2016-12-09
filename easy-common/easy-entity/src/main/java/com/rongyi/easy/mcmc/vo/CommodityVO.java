@@ -13,6 +13,7 @@ import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -96,6 +97,9 @@ public class CommodityVO  implements  Serializable {
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+	private boolean offerShelves;//是否可下架  true是；false否
+
 	private String subheading;  //副标题
 
 	private String commodityDetails; //商品详情
@@ -167,6 +171,18 @@ public class CommodityVO  implements  Serializable {
 		this.serviceIds = serviceIds;
 	}
 
+	public boolean isOfferShelves() {
+		return offerShelves;
+	}
+	public void setOfferShelves(boolean offerShelves) {
+		this.offerShelves = offerShelves;
+	}
+	public Integer getShelvesType() {
+		return shelvesType;
+	}
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
 	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
@@ -680,6 +696,9 @@ public class CommodityVO  implements  Serializable {
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.registerAt = commodity.getRegisterAt();
 		this.soldOutAt = commodity.getSoldOutAt();
+		//立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
+		this.shelvesType=null==commodity.getShelvesType()?2:commodity.getShelvesType();
+
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		// 商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -718,6 +737,7 @@ public class CommodityVO  implements  Serializable {
 		this.updateAt=commodity.getUpdateAt().getTime();
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+		this.identity = commodity.getIdentity();
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
 		this.setIfShowInWechat(
@@ -770,6 +790,11 @@ public class CommodityVO  implements  Serializable {
 				+ ", templateId=" + templateId + ", sort=" + sort
 				+ ", mallName=" + mallName + ", weAndTeStatus=" + weAndTeStatus
 				+ ", customCategoryIds=" + customCategoryIds
+				+ ", commodityModelNo=" + commodityModelNo + ", goodsParam="
+				+ goodsParam + ", activityId=" + activityId
+				+ ", activityPrice=" + activityPrice + ", updateAt=" + updateAt
+				+ ", galleryPosition=" + galleryPosition + ", inActivity="
+				+ inActivity + ", shelvesType=" + shelvesType + "]"
 				+ ", commodityModelNo=" + commodityModelNo
 				+ ", activityId=" + activityId
 				+ ", activityPrice=" + activityPrice
@@ -833,5 +858,11 @@ public class CommodityVO  implements  Serializable {
 		}
 		return vo;
 	}
-
+	private boolean judgeShelvesType(Date date1,Date date2){
+        if(null ==date1 || null ==date2){
+            return false;
+        }
+        Long difference=date1.getTime()-date2.getTime();
+        return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
+    }
 }
