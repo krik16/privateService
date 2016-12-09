@@ -21,4 +21,12 @@ public interface MerchantService {
 	 * @return
 	 */
 	public List<String> getMallShopIds(Integer type,String id);
+	/**
+	 * 根据商场id和店铺id查询子店铺集合
+	 * @param type
+	 * @param mallId
+	 * @param shopId
+	 * @return
+	 */
+	public List<MallShopVO> getSubShopListByMallIdAndShopId(Integer type,String mallId,String shopId);
 }
