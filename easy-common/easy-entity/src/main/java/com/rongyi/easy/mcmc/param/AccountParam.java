@@ -9,6 +9,15 @@ public class AccountParam implements Serializable {
 
     private String zoneId;
     private Integer type; // 0集团 1商场 4,5 店铺
+    private String shopId;
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 
     public String getZoneId() {
         return zoneId;
