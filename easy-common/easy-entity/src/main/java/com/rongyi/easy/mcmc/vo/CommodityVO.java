@@ -183,7 +183,6 @@ public class CommodityVO  implements  Serializable {
 	public void setShelvesType(Integer shelvesType) {
 		this.shelvesType = shelvesType;
 	}
-
 	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
