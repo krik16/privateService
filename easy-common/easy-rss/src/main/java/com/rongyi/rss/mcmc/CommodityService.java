@@ -381,21 +381,6 @@ public interface CommodityService {
     public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
 
 
-    /**
-     * 批量下架商品
-     * @param ids
-     * @param shopId
-     * @param identity
-     * @param reason
-     * @param userName
-     * @return
-     */
-    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
-
-    public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
-
-    public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
-
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 
     CommodityVO getCommodityDetail(String id);
