@@ -21,12 +21,6 @@ import com.rongyi.easy.activitymanage.vo.*;
 public interface ActivityService {
 
 
-    /**
-     * 根据特卖活动模版id查询置顶商品
-     * @param ActivityId
-     * @return
-     */
-    public List<SaleCommodityTop> saleCommodityTopList(Integer ActivityId);
 
     /**
      * 新建活动
