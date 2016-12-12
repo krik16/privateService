@@ -26,16 +26,8 @@ public class CommodityWebVO implements Serializable{
     private String shopName;
     private String detailPic;
     private String discount;
-    private Integer isChoose;//是否可选
 
 
-    public Integer getIsChoose() {
-        return isChoose;
-    }
-
-    public void setIsChoose(Integer isChoose) {
-        this.isChoose = isChoose;
-    }
 
     public String getDiscount() {
         return discount;
@@ -139,7 +131,6 @@ public class CommodityWebVO implements Serializable{
                 .append("shopName", shopName)
                 .append("detailPic", detailPic)
                 .append("discount", discount)
-                .append("isChoose", isChoose)
                 .toString();
     }
 }
