@@ -613,6 +613,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setAccountType(commodity.getIdentity());
 		this.setServiceIds(commodity.getServiceIds());
 		this.setMerchantId(commodity.getMerchantId());
+		this.setShelvesType(commodity.getShelvesType());
 	}
 
 	public String getSubheading() {
@@ -720,6 +721,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			if(param.getCreateBy() != null) {
 				this.setCreateBy(param.getCreateBy());
 			}
+			this.setShelvesType(param.getShelvesType());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}

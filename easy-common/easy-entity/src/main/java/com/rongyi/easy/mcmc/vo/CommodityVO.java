@@ -884,6 +884,7 @@ public class CommodityVO  implements  Serializable {
 			}
 			vo.setUpdate_by(userInfo.getId().toString());
 		}
+		vo.setShelvesType(commodity.getShelvesType());
 		return vo;
 	}
 	private boolean judgeShelvesType(Date date1,Date date2){
