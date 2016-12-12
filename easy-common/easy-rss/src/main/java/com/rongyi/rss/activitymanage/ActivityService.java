@@ -240,6 +240,8 @@ public interface ActivityService {
     public boolean cleanActivityById(Integer activityId,String userName,Integer status);
 
     public List<ActivityGoods> selectGoodsInPinTuan(List<String> goodIds);
+    
+    public List<ActivityGoods> getSuperActivityGoods(QuerySecKillGoods querySecKillGoods);
 
 
 }
