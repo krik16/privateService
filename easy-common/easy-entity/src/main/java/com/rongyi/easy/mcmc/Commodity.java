@@ -910,6 +910,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setCommodityModelNo(vo.getCommodityModelNo());
 		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 		this.setGroupMid(vo.getGroupMid());
+		this.setShelvesType(vo.getShelvesType());
 
 		// 买手&非现货 商品 临时状态: -1
 		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {

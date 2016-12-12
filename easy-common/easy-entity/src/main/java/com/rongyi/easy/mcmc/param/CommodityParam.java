@@ -92,6 +92,8 @@ public class CommodityParam {
 
 	private Integer source;
 
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
 	public Integer getCreateBy() {
 		return createBy;
 	}
@@ -336,6 +338,14 @@ public class CommodityParam {
 		this.reason = reason;
 	}
 
+	public Integer getShelvesType() {
+		return shelvesType;
+	}
+
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityParam{" +
@@ -368,6 +378,7 @@ public class CommodityParam {
 				", reason=" + reason+
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
+				", shelvesType=" + shelvesType+
 				'}';
 	}
 
