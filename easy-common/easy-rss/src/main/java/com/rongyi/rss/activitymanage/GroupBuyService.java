@@ -236,4 +236,11 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	public boolean deleteGroupInfoByGoodsId(GroupInfo groupInfo);
+
+	/**
+	 * 更新拼团时间
+	 * @param groupInfo
+	 * @return
+	 */
+	public boolean updateGroupByGoodActId(GroupInfo groupInfo);
 }
