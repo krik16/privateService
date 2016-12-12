@@ -49,6 +49,8 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private int orderSource;
     // 自提码
     private String couponCode;
+    // 订单关闭前状态
+    private Integer orgStatus;
 
     public String getCommodityId() {
         return commodityId;
@@ -202,6 +204,14 @@ public class OsmOrderForUserCenterEntity implements Serializable {
         this.couponCode = couponCode;
     }
 
+    public Integer getOrgStatus() {
+        return orgStatus;
+    }
+
+    public void setOrgStatus(Integer orgStatus) {
+        this.orgStatus = orgStatus;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderForUserCenterEntity{" +
@@ -224,6 +234,7 @@ public class OsmOrderForUserCenterEntity implements Serializable {
                 ", commodityLogo='" + commodityLogo + '\'' +
                 ", orderSource=" + orderSource +
                 ", couponCode='" + couponCode + '\'' +
+                ", orgStatus=" + orgStatus +
                 '}';
     }
 }
