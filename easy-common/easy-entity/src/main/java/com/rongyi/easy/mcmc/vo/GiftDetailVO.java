@@ -17,7 +17,6 @@ public class GiftDetailVO extends GiftVO implements Serializable {
 
     private String sn; //礼品编号
     private Double price;
-    private List<String> terminalMsg; //上架终端描述
     private Date registerAt; //上架时间
     private Date soldOutAt; //下架时间
     private Integer purchaseCount;//商品的限购数量
@@ -126,20 +125,11 @@ public class GiftDetailVO extends GiftVO implements Serializable {
         this.selfTakeDays = selfTakeDays;
     }
 
-    public List<String> getTerminalMsg() {
-        return terminalMsg;
-    }
-
-    public void setTerminalMsg(List<String> terminalMsg) {
-        this.terminalMsg = terminalMsg;
-    }
-
     @Override
     public String toString() {
         return "GiftDetailVO{" +
                 ", sn='" + sn + '\'' +
                 ", price=" + price +
-                ", terminalMsg=" + terminalMsg +
                 ", registerAt=" + registerAt +
                 ", soldOutAt=" + soldOutAt +
                 ", purchaseCount=" + purchaseCount +
