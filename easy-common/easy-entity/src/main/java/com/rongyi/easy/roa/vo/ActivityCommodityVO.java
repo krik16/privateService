@@ -38,8 +38,15 @@ public class ActivityCommodityVO implements Serializable{
 	private Long groupStartAt;
      //拼团状态,0：拼团中，1：成功不可以参团，2：失败，3：未开始,4成功但仍可以参团
 	private Integer groupStatus;
+	private Integer activityCommodityStatus;//2:审核通过，其它为失效商品
 	
 	
+	public Integer getActivityCommodityStatus() {
+		return activityCommodityStatus;
+	}
+	public void setActivityCommodityStatus(Integer activityCommodityStatus) {
+		this.activityCommodityStatus = activityCommodityStatus;
+	}
 	public String getCommodityPic() {
 		return commodityPic;
 	}
@@ -136,15 +143,19 @@ public class ActivityCommodityVO implements Serializable{
 	public void setGroupStatus(Integer groupStatus) {
 		this.groupStatus = groupStatus;
 	}
-
 	@Override
 	public String toString() {
-		return "GroupActivityCommodityVO [activityCommodityStock="
+		return "ActivityCommodityVO [activityCommodityStock="
 				+ activityCommodityStock + ", activityPrice=" + activityPrice
 				+ ", commodityId=" + commodityId + ", commodityName="
 				+ commodityName + ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", groupPeopleLimit=" + groupPeopleLimit + ", commodityPicList="
-				+ commodityPicList + "]";
+				+ ", commodityPicList=" + commodityPicList + ", commodityPic="
+				+ commodityPic + ", crowdFundingPrice=" + crowdFundingPrice
+				+ ", groupEndAt=" + groupEndAt + ", groupNum=" + groupNum
+				+ ", groupPeopleLimit=" + groupPeopleLimit
+				+ ", groupPeopleMax=" + groupPeopleMax + ", groupStartAt="
+				+ groupStartAt + ", groupStatus=" + groupStatus
+				+ ", activityCommodityStatus=" + activityCommodityStatus + "]";
 	}
-
+	
 }
