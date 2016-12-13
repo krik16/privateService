@@ -222,7 +222,7 @@ public interface GroupBuyService {
 	 * @param userId
 	 * @return
 	 */
-	public GroupDetail findGroupDetailByUserId(long groupId,String userId);
+	public List<GroupDetail> findGroupDetailByUserId(long groupId,String userId);
 	/**
 	 * 根据团id查询已参团人数  状态：0
 	 * @param groupDetail
