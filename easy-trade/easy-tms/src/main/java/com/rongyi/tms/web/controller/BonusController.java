@@ -1,43 +1,6 @@
 package com.rongyi.tms.web.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import base.util.excel.ExcelWriter;
-
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.malllife.common.util.DateTool;
 import com.rongyi.easy.malllife.vo.PagingVO;
@@ -50,14 +13,35 @@ import com.rongyi.rss.mallshop.user.ROAUserService;
 import com.rongyi.rss.roa.ROAVirtualAccountGeneralService;
 import com.rongyi.tms.constants.CodeEnum;
 import com.rongyi.tms.constants.Constant;
-import com.rongyi.tms.moudle.vo.BonusPageParam;
-import com.rongyi.tms.moudle.vo.BonusParam;
-import com.rongyi.tms.moudle.vo.BonusVO;
-import com.rongyi.tms.moudle.vo.CheckParam;
-import com.rongyi.tms.moudle.vo.UserInfo;
+import com.rongyi.tms.moudle.vo.*;
 import com.rongyi.tms.service.BonusService;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.SalesCommissionService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @Description 考核奖金 controller
@@ -463,6 +447,7 @@ public class BonusController extends BaseController {
 					if (hssfRow.getCell(0).getCellType() == XSSFCell.CELL_TYPE_STRING) {
 						accountString = hssfRow.getCell(0).getStringCellValue();
 					} else if (hssfRow.getCell(0).getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
+						hssfRow.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
 						accountString = hssfRow.getCell(0).getStringCellValue();
 					}
 					bonusVO.setSellerAccount(accountString);
