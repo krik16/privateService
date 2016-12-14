@@ -9,9 +9,10 @@ import java.io.Serializable;
 public class VerifyMemberParam implements Serializable {
     private String cardNumber;//会员卡号 或 会员手机号【短信验证码时不可为空，一维码、动态识别码时可为空】
     private String verificationCode;//会员验证码【手机短信验证码（获取积分交易短信验证码接口）、一维码、动态识别码等】
-    private String channel;//渠道编号
+    private Integer channel;//目的渠道 1宝钢
     private Long timeStamp;//时间戳
     private String sign;//签名
+    private Integer source;//源渠道 1家得利
     public String getCardNumber() {
         return cardNumber;
     }
@@ -28,12 +29,20 @@ public class VerifyMemberParam implements Serializable {
         this.verificationCode = verificationCode;
     }
 
-    public String getChannel() {
+    public Integer getChannel() {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel(Integer channel) {
         this.channel = channel;
+    }
+
+    public Integer getSource() {
+        return source;
+    }
+
+    public void setSource(Integer source) {
+        this.source = source;
     }
 
     public Long getTimeStamp() {
@@ -57,9 +66,10 @@ public class VerifyMemberParam implements Serializable {
         return "VerifyMemberParam{" +
                 "cardNumber='" + cardNumber + '\'' +
                 ", verificationCode='" + verificationCode + '\'' +
-                ", channel='" + channel + '\'' +
+                ", channel=" + channel +
                 ", timeStamp=" + timeStamp +
                 ", sign='" + sign + '\'' +
+                ", source=" + source +
                 '}';
     }
 }

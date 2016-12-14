@@ -16,9 +16,10 @@ public class OrderTransactionParam implements Serializable {
     private String orderDetail;//订单详情（参考订单详情 JSON格式）
     private Integer state;//订单状态【默认 0:未完成(如果状态=“未完成”，系统执行退积分)】
     private String price;//订单应收总额（单位：元 2位小数）
-    private String channel;//渠道编号
+    private Integer channel;//目的渠道 1宝钢
     private Long timeStamp;//时间戳
     private String sign;//签名
+    private Integer source;//源渠道 1家得利
 
     public String getCardNumber() {
         return cardNumber;
@@ -92,12 +93,20 @@ public class OrderTransactionParam implements Serializable {
         this.price = price;
     }
 
-    public String getChannel() {
+    public Integer getChannel() {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel(Integer channel) {
         this.channel = channel;
+    }
+
+    public Integer getSource() {
+        return source;
+    }
+
+    public void setSource(Integer source) {
+        this.source = source;
     }
 
     public Long getTimeStamp() {
@@ -128,9 +137,10 @@ public class OrderTransactionParam implements Serializable {
                 ", orderDetail='" + orderDetail + '\'' +
                 ", state=" + state +
                 ", price='" + price + '\'' +
-                ", channel='" + channel + '\'' +
+                ", channel=" + channel +
                 ", timeStamp=" + timeStamp +
                 ", sign='" + sign + '\'' +
+                ", source=" + source +
                 '}';
     }
 }

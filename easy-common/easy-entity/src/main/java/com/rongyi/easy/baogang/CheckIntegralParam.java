@@ -13,22 +13,29 @@ public class CheckIntegralParam implements Serializable {
     private String orderNumber;//商家订单号
     private String serialNumber;//商家交易流水号
     private String orderDate;//商家订单生成时间，格式(0000-00-00 00:00:00)
-    private String channel;//渠道编号
+    private Integer channel;//目标渠道 1宝钢
     private Long timeStamp;//时间戳
     private String sign;//签名
     private String orderDetail;//订单详情（参考订单详情 JSON格式）
     private String price;//订单应收总额（单位：元 2位小数）
     private Integer type;//支付类型【0:宝钢积分 1:非积分】	string	是
     private Integer state;//订单状态【默认 0:未完成(如果状态=“未完成”，系统执行退积分)】
+    private Integer source;//源渠道 1 家得利
 
-
-
-    public String getChannel() {
+    public Integer getChannel() {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel(Integer channel) {
         this.channel = channel;
+    }
+
+    public Integer getSource() {
+        return source;
+    }
+
+    public void setSource(Integer source) {
+        this.source = source;
     }
 
     public Long getTimeStamp() {
@@ -145,13 +152,14 @@ public class CheckIntegralParam implements Serializable {
                 ", orderNumber='" + orderNumber + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", orderDate='" + orderDate + '\'' +
-                ", channel='" + channel + '\'' +
+                ", channel=" + channel +
                 ", timeStamp=" + timeStamp +
                 ", sign='" + sign + '\'' +
                 ", orderDetail='" + orderDetail + '\'' +
                 ", price='" + price + '\'' +
                 ", type=" + type +
                 ", state=" + state +
+                ", source=" + source +
                 '}';
     }
 }

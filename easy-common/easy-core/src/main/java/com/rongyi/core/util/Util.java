@@ -46,6 +46,29 @@ public class Util {
 		}
 		return false;
 	}
+
+	/**
+	 * 签名判断
+	 * @param params
+	 * @return
+	 */
+	public static Boolean signValidateWithoutChannel(HashMap<String, Object> params, String sign) {
+		if (params.size() > 0) {
+			Collection<String> keyset = params.keySet();
+			List<String> list = new ArrayList<>(keyset);
+			//对key键值按字典升序排序
+			Collections.sort(list);
+			String sb = new String();
+			for (int i = 0; i < list.size(); i++) {
+				sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+			}
+			String md5Sign = Md5Util.GetMD5Code(sb.toString());
+			if (md5Sign.equals(sign)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * 判断时间是否超过2秒
