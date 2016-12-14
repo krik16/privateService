@@ -50,4 +50,14 @@ public class AppVersionParam implements Serializable {
 	public void setUpdatePic(String updatePic) {
 		this.updatePic = updatePic;
 	}
+
+	@Override
+	public String toString() {
+		return "AppVersionParam{" +
+				"deviceType='" + deviceType + '\'' +
+				", appVersion='" + appVersion + '\'' +
+				", appName='" + appName + '\'' +
+				", updatePic='" + updatePic + '\'' +
+				'}';
+	}
 }
