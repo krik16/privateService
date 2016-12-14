@@ -158,7 +158,7 @@ public interface IMerchantAccountService {
 	 * @param paramsMap
 	 * @return
 	 */
-	public Boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
+	public Boolean updateUserInfo(UserManagerParam userManagerParam) throws Exception;
 	
 	/**
 	 * 模糊查询用户手机号码

@@ -243,5 +243,10 @@ public interface ActivityService {
     
     public List<ActivityGoods> getSuperActivityGoods(QuerySecKillGoods querySecKillGoods);
 
-
+    /**
+     * 根据特卖活动模版id查询置顶商品
+     * @param ActivityId
+     * @return
+     */
+    public List<SaleCommodityTop> saleCommodityTopList(Integer ActivityId);
 }

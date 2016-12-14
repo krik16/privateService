@@ -43,7 +43,19 @@ public class SessionUserInfo implements Serializable{
     private Integer filialeId;
     
     private String filialeMid;
-    
+
+	private Integer parentShopId;
+
+	private String parentShopMid;
+
+	private Integer grandpaShopId;
+
+	private String grandpaShopMid;
+
+	private Integer level;  //账号层级 1 2 3
+
+	private Integer isChief; //是否主账号  0否 1是
+
     private String logo = "http://rongyi.b0.upaiyun.com/commodity/text/201601051202219059.png";  //logo图片地址
     
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
@@ -208,27 +220,30 @@ public class SessionUserInfo implements Serializable{
 	}
 
 	public Integer getBindingId(){
-//		return 6;//集团假数据
-//		return 36;//商场假数据
 		if(getIdentity() == 0){
 			return groupId;
 		}else if(getIdentity() == 1){
 			return mallId;
-		}else if(getIdentity() == 2 || getIdentity() == 3 || getIdentity() == 4 || getIdentity() == 5){
+		}else if(getIdentity() == 2) {
 			return brandId;
+		}else if (getIdentity() == 3) {
+			return filialeId;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopId;
 		}
 		return null;
 	}
 	public String getBindingMid(){
-//		return "55c1c53e992df1254cdb4e7e";//集团假数据
-//		return "52ca425821232f10a400065e";//商场假数据
-//		return "51f9d9e431d65584ab000c50";//品牌假数据
 		if(getIdentity() == 0){
 			return groupMid;
 		}else if(getIdentity() == 1){
 			return mallMid;
-		}else if(getIdentity() == 2 || getIdentity() == 3 || getIdentity() == 4 || getIdentity() == 5){
+		}else if(getIdentity() == 2){
 			return brandMid;
+		}else if (getIdentity() == 3) {
+			return filialeMid;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopMid;
 		}
 		return null;
 	}
@@ -267,5 +282,52 @@ public class SessionUserInfo implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getIsChief() {
+		return isChief;
+	}
+
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+
+	public Integer getParentShopId() {
+		return parentShopId;
+	}
+
+	public void setParentShopId(Integer parentShopId) {
+		this.parentShopId = parentShopId;
+	}
+
+	public String getParentShopMid() {
+		return parentShopMid;
+	}
+
+	public void setParentShopMid(String parentShopMid) {
+		this.parentShopMid = parentShopMid;
+	}
+
+	public Integer getGrandpaShopId() {
+		return grandpaShopId;
+	}
+
+	public void setGrandpaShopId(Integer grandpaShopId) {
+		this.grandpaShopId = grandpaShopId;
+	}
+
+	public String getGrandpaShopMid() {
+		return grandpaShopMid;
+	}
+
+	public void setGrandpaShopMid(String grandpaShopMid) {
+		this.grandpaShopMid = grandpaShopMid;
+	}
 }
