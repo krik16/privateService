@@ -103,6 +103,18 @@ public class Util {
 		}
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean IntegerIsEmpty(Integer intger) {
+		if (null == intger || intger == 0) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * 判断字符串是否不为空

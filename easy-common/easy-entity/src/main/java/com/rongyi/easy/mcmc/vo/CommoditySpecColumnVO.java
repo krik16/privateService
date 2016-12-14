@@ -1,9 +1,15 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rongyi.easy.mcmc.CommoditySpecColumn;
+import com.rongyi.easy.mcmc.param.CommoditySpecParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.bson.types.ObjectId;
 
 
 public class CommoditySpecColumnVO implements  Serializable{
@@ -23,9 +29,11 @@ public class CommoditySpecColumnVO implements  Serializable{
 		
 	}
 	public CommoditySpecColumnVO(CommoditySpecColumn specColumn){
-		this.columnId = specColumn.getId().toString();
-		this.columnName = specColumn.getName();
-		this.isRequired = specColumn.isRequired();
+		if(specColumn != null){
+			this.columnId = specColumn.getId().toString();
+			this.columnName = specColumn.getName();
+			this.isRequired = specColumn.isRequired();
+		}
 	}
 	public String getColumnId() {
 		return columnId;
@@ -68,6 +76,29 @@ public class CommoditySpecColumnVO implements  Serializable{
 	}
 	public void setColumnNote(String columnNote) {
 		this.columnNote = columnNote;
+	}
+
+	public List<CommoditySpecColumnVO> getSpecColumnInfo(CommoditySpecParam param) {
+		List<CommoditySpecColumnVO> list = new ArrayList<>();
+
+		//设置商品规格
+		for(int i=0; i< param.getColumnIds().size(); i++) {
+			CommoditySpecColumnVO specColumnVO = new CommoditySpecColumnVO();
+
+			specColumnVO.setColumnId(param.getColumnIds().get(i).toString());
+			specColumnVO.setColumnValue(param.getColumnValues().get(i));
+
+			if(CollectionUtils.isNotEmpty(param.getColumnNotes()) &&
+					StringUtils.isNotBlank(param.getColumnNotes().get(i))) {
+				specColumnVO.setColumnNote(param.getColumnNotes().get(i));
+			} else {
+				specColumnVO.setColumnNote("");
+			}
+			specColumnVO.setRequired(false);
+			list.add(specColumnVO);
+		}
+
+		return list;
 	}
 
 }

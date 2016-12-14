@@ -58,7 +58,11 @@ public class ShopEntity implements Serializable{
     
     //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private List<ObjectId> zone_ids;//所在商场
-    
+
+	private ObjectId parent_id; //上级店铺ID
+
+	private List<ObjectId> parent_ids; //上级店铺ids
+
     private String address;//详细地址
     private int moreFloors;//0不跨楼，1跨楼
     
@@ -559,5 +563,21 @@ public class ShopEntity implements Serializable{
 
 	public void setDescription_en(String description_en) {
 		this.description_en = description_en;
+	}
+
+	public ObjectId getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(ObjectId parent_id) {
+		this.parent_id = parent_id;
+	}
+
+	public List<ObjectId> getParent_ids() {
+		return parent_ids;
+	}
+
+	public void setParent_ids(List<ObjectId> parent_ids) {
+		this.parent_ids = parent_ids;
 	}
 }

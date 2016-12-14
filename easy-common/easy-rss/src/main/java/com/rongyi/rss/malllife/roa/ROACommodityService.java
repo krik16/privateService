@@ -28,6 +28,7 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.roa.param.CommoditySpecParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
@@ -52,7 +53,7 @@ public interface ROACommodityService {
 	public ResponseResult getCommodityById(String id, long shopId);
 
 	public ResponseResult getCommodityListByShopId(int identity, String shopId, String buyerId, int orderBy,
-			String keyword, int currentpage, int pagesize);
+			String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
 	public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage,
 			int pagesize, String liveId, int isEdit);
@@ -66,6 +67,10 @@ public interface ROACommodityService {
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
+
+	public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
+
+	public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason);
 
 	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -240,7 +245,7 @@ public interface ROACommodityService {
 	public ResponseVO  updateCommodityGalleryPosition(String commodityId,Integer galleryPosition,String bullerId,String shopMid);
 
 	public List<McmcCommodityDocument> getMcmcCommodityDocumentList(List<Commodity> commodityList) throws Exception;
-	
+
 	/**
      * 查询拼团活动列表
      *
@@ -257,4 +262,20 @@ public interface ROACommodityService {
      * @return
      */
     public ResponseVO getSpecInfo(String specId);
+
+	public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
+
+	public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
+    /**
+     * 批量下架商品
+     * @param ids
+     * @param shopId
+     * @param identity
+     * @param reason
+     * @param userName
+     * @return
+     */
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
+
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }

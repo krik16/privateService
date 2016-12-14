@@ -6,19 +6,20 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.entity.CommodityCustomCategoryEntity;
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mongodb.morphia.annotations.Entity;
 
 import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
 public class CommodityVO2 implements  Serializable {
-	
+
 	private static final long serialVersionUID = -3022699601318372490L;
-	
+
 	private String id;//系统编号
 	private String name;//商品名称
-	
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理
 	private String code;//商品编码
 	private Integer stock;//商品库存（包括卖出的商品和锁定的商品）
 	private Integer remain;//商品剩余量
@@ -53,7 +54,28 @@ public class CommodityVO2 implements  Serializable {
 	private Integer templateId;//邮费模版id
 	private Integer purchaseCount;
 	private List<String> mallMids;//商品对应店铺所在的商场
+	private String subheading;  //副标题
 
+	private String commodityDetails; //商品详情
+	private List<WechatInfoVo> wechatInfoVos;
+	private List<Integer> serviceIds;
+
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
+	public List<WechatInfoVo> getWechatInfoVos() {
+		return wechatInfoVos;
+	}
+
+	public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+		this.wechatInfoVos = wechatInfoVos;
+	}
 
 	public String getId() {
 		return id;
@@ -245,5 +267,21 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setMallMids(List<String> mallMids) {
 		this.mallMids = mallMids;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
 	}
 }

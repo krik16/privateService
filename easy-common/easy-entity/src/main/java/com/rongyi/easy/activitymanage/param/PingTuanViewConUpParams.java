@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.param;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by xuying on 2016/10/27.
@@ -14,6 +15,10 @@ public class PingTuanViewConUpParams implements Serializable{
     private Integer currentPageUp;
 
     private  Integer pageSizeUp;
+
+    private Date startAt;
+
+    private Date endAt;
 
     public Integer getActivityId() {
         return activityId;
@@ -45,5 +50,33 @@ public class PingTuanViewConUpParams implements Serializable{
 
     public void setCurrentPageUp(Integer currentPageUp) {
         this.currentPageUp = currentPageUp;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
+    }
+
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    @Override
+    public String toString() {
+        return "PingTuanViewConUpParams{" +
+                "activityId=" + activityId +
+                ", flag=" + flag +
+                ", currentPageUp=" + currentPageUp +
+                ", pageSizeUp=" + pageSizeUp +
+                ", startAt=" + startAt +
+                ", endAt=" + endAt +
+                '}';
     }
 }

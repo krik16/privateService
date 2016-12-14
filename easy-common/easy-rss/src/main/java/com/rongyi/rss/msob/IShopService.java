@@ -124,6 +124,8 @@ public interface IShopService{
 
 	public Integer insertCooperateShopByshopMid(String shopMid, Integer brandId, Integer mallId) throws Exception;
 
+	Integer insertCooperateShopByshopMid(String shopMid, Integer brandId, Integer mallId,Integer parentShopId,Integer grandpaShopId) throws Exception;
+
 	/**
 	 * 以下接口是从rongyi.app.content 移过来的接口
 	 * @author 袁波
@@ -234,5 +236,13 @@ public interface IShopService{
      * @throws Exception
      */
     public BrandShopListVO getBrandShopListByBrandId(BrandParam param) throws Exception;
+
+	/**
+	 * 通过上级商户ID查询店铺列表
+	 * @param type 0集团 1商场 4店铺
+	 * @param merId 商户ID
+	 * @return 店铺列表
+	 */
+	List<ShopInfoEntity> getShopInfoListBySuperiorId(Integer type ,Integer merId);
 }
 

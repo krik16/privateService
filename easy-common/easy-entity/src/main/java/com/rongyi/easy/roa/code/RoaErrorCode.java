@@ -28,6 +28,7 @@ public enum RoaErrorCode {
     ERROR_CARDNUM_ISNULL(1051003,"账号不能为空"),
     ERROR_PASSWORD_ISNULL(1051004,"密码不能为空"),
     ERROR_PHONE_ISNULL(1051001,"手机号不能为空"),
+    MCH_INFO_MOT_EXIST(1051002,"无有效的商户配置"),
     
     ERROR_COMMODITY_OVER(1052001,"库存不足哦~"),
     ERROR_ACTIVITY_OVERTIME(1052002,"来晚啦，活动已结束"),
@@ -37,7 +38,12 @@ public enum RoaErrorCode {
     ERROR_GROUP_PINGTUAN_ALREADY(1052006,"您已经参加过该团~"),
     ERROR_PAYMENT_STATUS(1052007,"订单过期，不能继续支付~"),
     ERROR_LIMIT_PINGTUAN_JOIN(1052008,"参团次数达上限，不可支付~"),
-    ERROR_LIMIT_PINGTUAN_CREATE(1052009,"开团次数达上限，不可支付~")
+    ERROR_LIMIT_PINGTUAN_CREATE(1052009,"开团次数达上限，不可支付~"),
+    ERROR_ORDERMODEL_SHIPTYPE_CONFLICT(1052010,"商品发货方式冲突"),
+    ERROR_REPEAT_ORDER(1052011,"你已下过订单了，但还没有支付哦~"),
+    ERROR_ORDER_SHOP(1052012,"商品不在同一店铺不可下单"),
+    ERROR_CREATE_ORDER_MODEL(1052013,"生成订单模板失败"),
+    ERROR_COMMODITY_SPEC(1052014,"商品已失效")
     
     ;
 
