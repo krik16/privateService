@@ -107,6 +107,19 @@ public class ShopParamForSearch {
 	public void setZoneId(String zoneId) {
 		this.zoneId = zoneId;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "ShopParamForSearch{" +
+				"shopType=" + shopType +
+				", shopNature=" + shopNature +
+				", status=" + status +
+				", startTime=" + startTime +
+				", endTime=" + endTime +
+				", name='" + name + '\'' +
+				", zoneId='" + zoneId + '\'' +
+				", currpage=" + currpage +
+				", pageSize=" + pageSize +
+				'}';
+	}
 }

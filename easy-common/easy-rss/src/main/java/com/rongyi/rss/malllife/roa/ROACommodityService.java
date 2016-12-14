@@ -68,6 +68,10 @@ public interface ROACommodityService {
 
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
 
+	public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
+
+	public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason);
+
 	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
 	public String editCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
@@ -272,6 +276,6 @@ public interface ROACommodityService {
      * @return
      */
     public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
-    
+
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 }

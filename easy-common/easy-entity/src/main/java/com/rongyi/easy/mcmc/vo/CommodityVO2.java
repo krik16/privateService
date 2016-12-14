@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.entity.CommodityCustomCategoryEntity;
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -56,7 +57,25 @@ public class CommodityVO2 implements  Serializable {
 	private String subheading;  //副标题
 
 	private String commodityDetails; //商品详情
+	private List<WechatInfoVo> wechatInfoVos;
+	private List<Integer> serviceIds;
 
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
+	public List<WechatInfoVo> getWechatInfoVos() {
+		return wechatInfoVos;
+	}
+
+	public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+		this.wechatInfoVos = wechatInfoVos;
+	}
 
 	public String getId() {
 		return id;
