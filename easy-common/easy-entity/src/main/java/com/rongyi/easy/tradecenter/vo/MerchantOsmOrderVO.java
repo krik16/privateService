@@ -18,6 +18,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private String orderNo;//订单编号
     private String createTime;//下单时间
     private String paymentTime;//支付时间
+    private String shopId;//店铺mysqlid
     private String shopName;//店铺名称
     private String commodityNum;//商品种类数
     private  String guideName;//导购名称
@@ -300,5 +301,13 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setBuyerNameByWeixin(String buyerNameByWeixin) {
         this.buyerNameByWeixin = buyerNameByWeixin;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 }
