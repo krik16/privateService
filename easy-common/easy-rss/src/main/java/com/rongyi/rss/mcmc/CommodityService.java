@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseResult2;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
@@ -76,6 +77,10 @@ public interface CommodityService {
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
     public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, String userName);
+
+    public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
+
+    public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason, String userName);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -374,6 +379,9 @@ public interface CommodityService {
     public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
 
     public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
-    
+
+
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
+
+    CommodityVO getCommodityDetail(String id);
 }

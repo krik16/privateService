@@ -1,6 +1,8 @@
 package com.rongyi.easy.rmmm.param.user;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
@@ -15,10 +17,11 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * 俞志坚             2015/5/20              1.0            创建文件
  *
  */
-public class UserManagerParam extends BaseParam {
+public class UserManagerParam extends BaseParam implements Serializable{
 
 
-    private Integer id;//账户id
+	private static final long serialVersionUID = 5283693194457124613L;
+	private Integer id;//账户id
     private String userAccount ;//用户账号
     private String userLogo;//用户头像
     private String  phone; //验证号码是否可注册
@@ -38,7 +41,7 @@ public class UserManagerParam extends BaseParam {
     private String userName;//用户姓名
     private String cardId;//身份证号
 	private Integer type = 1;//商家类型：0商场、1品牌    private Integer roleType=2;//角色类型
-	private Integer roleType=2;//角色类型
+	private Integer roleType=2;//角色类型 @Deprecated
     private List<AccountParam> accountList;//账号信息
 	private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
     private Integer isCooperation = 0;//是否合作(给店长、导购用) 0否 1是
@@ -66,6 +69,18 @@ public class UserManagerParam extends BaseParam {
 	private String otherImg;   //其它照片
 	private Boolean isOrdering;//是否接单状态  true:是，false:否
 
+	//行业版账号2016年10月28日10:50:17
+	private Integer industryId;//行业id
+	private Integer industryVersionId;//行业版本id
+	private Integer childAccountNum;//子账号数量0
+	private String validStartAtStamp;//有效期开始时间戳
+	private String validEndAtStamp;//有效期结束时间戳
+	private String contractCode;//合同号
+	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
+	private Integer isChief = 1;//是否主账号，默认 
+	private Integer level;//层级 1级 2级 3级
+	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+	private Integer chiefId; //主账号ID
     public Integer getId() {
 		return id;
 	}
@@ -367,6 +382,120 @@ public class UserManagerParam extends BaseParam {
 	public void setIsOrdering(Boolean isOrdering) {
 		this.isOrdering = isOrdering;
 	}
+	public Integer getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+	public String getValidStartAtStamp() {
+		return validStartAtStamp;
+	}
+	public void setValidStartAtStamp(String validStartAtStamp) {
+		this.validStartAtStamp = validStartAtStamp;
+	}
+	public String getValidEndAtStamp() {
+		return validEndAtStamp;
+	}
+	public void setValidEndAtStamp(String validEndAtStamp) {
+		this.validEndAtStamp = validEndAtStamp;
+	}
+	public String getContractCode() {
+		return contractCode;
+	}
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+	public String getSynTarget() {
+		return synTarget;
+	}
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+	public Integer getIsChief() {
+		return isChief;
+	}
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 	
+	public Date getValidStartAt(){
+		Date date = null;
+		try {
+			if(this.validStartAtStamp != null){
+				long lt = new Long(this.validStartAtStamp);
+				date = new Date(lt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return date;
+		}
+	}
+	
+	public Date getValidEndAt(){
+		Date date = null;
+		try {
+			if(this.validEndAtStamp != null){
+				long lt = new Long(this.validEndAtStamp);
+				date = new Date(lt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return date;
+		}
+	}
+
+	public Integer getChiefId() {
+		return chiefId;
+	}
+
+	public void setChiefId(Integer chiefId) {
+		this.chiefId = chiefId;
+	}
+
+	public Integer getSettleOrgStrategy() {
+		return settleOrgStrategy;
+	}
+	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
+		this.settleOrgStrategy = settleOrgStrategy;
+	}
+	@Override
+	public String toString() {
+		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount + ", userLogo=" + userLogo + ", phone="
+				+ phone + ", checkCode=" + checkCode + ", nickName=" + nickName + ", uuId=" + uuId + ", invitCode="
+				+ invitCode + ", pswd=" + pswd + ", account=" + account + ", shopId=" + shopId + ", mallId=" + mallId
+				+ ", brandId=" + brandId + ", ownerId=" + ownerId + ", roleId=" + roleId + ", branchCompanyId="
+				+ branchCompanyId + ", userName=" + userName + ", cardId=" + cardId + ", type=" + type + ", roleType="
+				+ roleType + ", accountList=" + accountList + ", identity=" + identity + ", isCooperation="
+				+ isCooperation + ", memo=" + memo + ", createSource=" + createSource + ", stopReason=" + stopReason
+				+ ", creatingUserType=" + creatingUserType + ", merUserId=" + merUserId + ", userDesc=" + userDesc
+				+ ", flag=" + flag + ", isUpdate=" + isUpdate + ", defaultAccount=" + defaultAccount + ", jsessionid="
+				+ jsessionid + ", shareCode=" + shareCode + ", faceImg=" + faceImg + ", backImg=" + backImg
+				+ ", workImg=" + workImg + ", otherImg=" + otherImg + ", isOrdering=" + isOrdering + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum=" + childAccountNum
+				+ ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level="
+				+ level + ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + "]";
+	}
 	
 }

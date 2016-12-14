@@ -220,7 +220,14 @@ public interface IUserService {
      */
     public boolean userRegistAndVerify(UserManagerParam userManagerParam) throws MallShopException;
 
-
+    /**
+     * 注册用户前的验证
+     * @param userManagerParam
+     * @return
+     * @throws MallShopException
+     */
+    public UserManagerParam verfiyAndSettingUserRegist(UserManagerParam userManagerParam) throws Exception,MallShopException;
+    
     /**
 	 * 根据shopId查询导购列表
 	 * @param paraMap
@@ -245,7 +252,7 @@ public interface IUserService {
      * @param paramsMap
      * @return
      */
-    public boolean updateUserInfo(Map<String, Object> paramsMap)throws  Exception;
+    public boolean updateUserInfo(UserManagerParam userManagerParam)throws  Exception;
     
     /**
 	 * 根据用户id查用户信息,不管是否禁用
@@ -385,4 +392,11 @@ public interface IUserService {
      * @return
      */
     int cleanUserPushId(String pushId, String userPhone);
+
+    /**
+     * 修改个人信息
+     * @param paramsMap
+     * @return
+     */
+     boolean updateSelfUserInfo(Map<String, Object> paramsMap)throws  Exception;
 }

@@ -23,6 +23,9 @@ public class UserAccountEntity implements Serializable{
 
     /** 对应银行表的ID */
     private Integer bankId;
+    
+    /** 对应银行表的Name */
+    private String bankName;
 
     /** 创建人 */
     private Integer createBy;
@@ -47,6 +50,8 @@ public class UserAccountEntity implements Serializable{
     /** 是否为默认资金账号  0是  1否  **/
     private Integer isDefault =1 ;
 
+    private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+    
     /**
      * 主键
      * @return id
@@ -238,5 +243,22 @@ public class UserAccountEntity implements Serializable{
 	public void setIsDefault(Integer isDefault) {
 		this.isDefault = isDefault;
 	}
-    
+
+	public Integer getSettleOrgStrategy() {
+		return settleOrgStrategy;
+	}
+
+	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
+		this.settleOrgStrategy = settleOrgStrategy;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	
+	
 }

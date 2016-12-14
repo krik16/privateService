@@ -10,9 +10,9 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  *
  */
 public class SearchCommodityBrandParam extends MalllifeBaseParam implements Serializable {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String mallId;		//商场id
@@ -20,6 +20,7 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	private String source;//1微信  2终端屏
 	private List<String> brandMids;  // mongo ids
 	private List<String> brandIds;   // mysql ids
+	private Integer serviceId;//微信服务号id
 
 	public String getMallId() {
 		return mallId;
@@ -33,7 +34,7 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
 	public String getSource() {
 		return source;
 	}
@@ -55,9 +56,18 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 		this.brandIds = brandIds;
 	}
 
+	public Integer getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(Integer serviceId) {
+		this.serviceId = serviceId;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchCommodityBrandParam [mallId=" + mallId + ", keyword="
-				+ keyword + ", source=" + source + "]";
+				+ keyword + ", serviceId="
+				+ serviceId +", source=" + source + "]";
 	}
 }

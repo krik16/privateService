@@ -8,9 +8,14 @@ import com.rongyi.easy.bsoms.entity.BAuthorities;
 import com.rongyi.easy.bsoms.entity.CertifiedCheckInfo;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
+import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
+import com.rongyi.easy.ryoms.param.buyer.BuyerCheckParam;
+import com.rongyi.easy.ryoms.param.buyer.BuyerListParam;
+import com.rongyi.easy.ryoms.user.vo.BuyerDetailVO;
+import com.rongyi.easy.ryoms.user.vo.BuyerListVO;
 import com.rongyi.easy.va.vo.VirtualAccountVO;
 
 /**
@@ -53,7 +58,7 @@ public interface IUserInfoService {
 	 * 根据id修改账户状态：启用/停用
 	 * @param id
 	 */
-	boolean updateAccountStatus(int id, int accountStatus, String stopReason, Integer userId);
+	boolean updateAccountStatus(int id, int accountStatus, String stopReason, Integer userId)throws MallShopException,Exception;
 
 	UserInfo getUserInfoById(Integer id);
 
@@ -104,7 +109,15 @@ public interface IUserInfoService {
 	 * @param paramsMap
 	 * @return
 	 */
-	public boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
+	public boolean updateUserInfo(UserManagerParam userManagerParam) throws Exception;
+
+	/**
+	 * 修改个人信息
+	 * @param paramsMap 参数
+	 * @return 结果
+	 * @throws Exception
+	 */
+	boolean updateSelfUserInfo(Map<String,Object> paramsMap) throws Exception;
 
 	UserInfo getUserByMap(Map<String, Object> paramsMap);
 
@@ -165,7 +178,13 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public BusinessAccountVO getBuyerDetailById(Integer id);
-
+	
+	/**
+	 * 查询买手账号详情
+	 * @param id
+	 * @return
+	 */
+	public BuyerDetailVO getBuyerDetailByBuyerId(Integer id);
 	/**
 	 * 根据角色ID查询关联账号
 	 * @return
@@ -208,7 +227,7 @@ public interface IUserInfoService {
 	 * @param paramMap
 	 * @return
 	 */
-	public boolean checkCertifiedUser(Map paramMap);
+	public Map<String,Object> checkCertifiedUser(VerifySaveAccountParam param,Integer optId) throws MallShopException, Exception;
 
 	/**
 	 * 查询用户审核记录
@@ -228,4 +247,48 @@ public interface IUserInfoService {
 	public List<UserInfo> getUserInfoListByUserId(Map paramMap) ;
 
 	public Integer getUserBuyerIdByMobileAndIdentity(String mobile,Integer identity);
-}
+
+	/**
+	 * 根据ID查询用户
+	 * @param id ID
+	 * @return 用户信息
+	 */
+	SessionUserInfo getSessionUserInfoById(Integer id);
+
+	/**
+	 * 查询用户数据
+	 * @param paramMap
+	 *           identity
+	 *           shopId
+	 *           mallId
+	 *           isChief
+	 * @return 数量
+	 */
+	int searchUserInfoCount(Map<String, Object> paramMap);
+
+	public List<Map> getClassifiedAuthsByAccountId(Integer accountId)throws Exception;
+	public boolean hasMerchantAccount(String merchantId,String type,Integer accountConfine)throws Exception;
+	
+	public UserInfo getUserConfineAccount(String merchantId,String merchantType,Integer accountConfine)throws Exception;
+
+	public boolean insertBuyerInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
+	
+	/**
+	 * 查询买手账号列表
+	 * @param param
+	 * @return
+	 */
+	public List<BuyerListVO> getBuyerList(BuyerListParam param);
+	/**
+	 * 查询买手账号总数量
+	 * @param param
+	 * @return
+	 */
+	public Integer getBuyerAccountListCount(BuyerListParam param);
+	/**
+	 * 审核买手账号
+	 * @param param
+	 * @param operatorId
+	 * @return
+	 */
+	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);}

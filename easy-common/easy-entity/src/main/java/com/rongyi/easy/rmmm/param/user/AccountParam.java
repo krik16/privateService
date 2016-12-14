@@ -21,7 +21,9 @@ public class AccountParam implements Serializable {
     private String bankId;//开户行ID
     private String  accountName;//支付宝姓名/储蓄卡人姓名
     private Integer userId;
-
+    private Integer id;
+    /** 是否为默认资金账号  0是  1否  **/
+    private Integer isDefault;
     public String getType() {
         return type;
     }
@@ -61,5 +63,20 @@ public class AccountParam implements Serializable {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
- 
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
 }
