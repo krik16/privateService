@@ -50,4 +50,13 @@ public interface SpecialActivityService {
     public int getReceiveLimit();
 
     public boolean couponHasStock();
+
+    /**
+     * 2016-12-15 双蛋活动-->领取 红包
+     * @param userId 用户id
+     * @param times 每个用户可以领取的次数
+     * @return
+     */
+    public boolean receiveActivityCoupon(String userId,Integer times);
+
 }
