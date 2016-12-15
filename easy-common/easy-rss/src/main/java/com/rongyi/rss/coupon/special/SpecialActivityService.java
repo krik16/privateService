@@ -1,5 +1,6 @@
 package com.rongyi.rss.coupon.special;
 
+import com.rongyi.easy.coupon.vo.ActivityCouponVO;
 import com.rongyi.easy.coupon.vo.SpecialVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
@@ -53,10 +54,10 @@ public interface SpecialActivityService {
 
     /**
      * 2016-12-15 双蛋活动-->领取 红包
-     * @param userId 用户id
+     * @param malllifeUserInfoEntity 用户信息
      * @param times 每个用户可以领取的次数
      * @return
      */
-    public boolean receiveActivityCoupon(String userId,Integer times);
+    public List<ActivityCouponVO> receiveActivityCoupon(UserInfoVO malllifeUserInfoEntity,Integer times) throws Exception;
 
 }
