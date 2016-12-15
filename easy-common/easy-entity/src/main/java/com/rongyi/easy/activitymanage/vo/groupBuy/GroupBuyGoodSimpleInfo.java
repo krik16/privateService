@@ -87,10 +87,20 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private String commodityPic;//商品图片
     private List<String> commodityPicList;//商品图片集合
     private Double originalPrice;//商品原价
+    private Double currentPrice;//商品现价
     private Double activityPrice;//商品活动最低价
     // 拼团剩余库存
     private Integer remainStock;
 	
+    
+	public Double getCurrentPrice() {
+		return currentPrice;
+	}
+
+	public void setCurrentPrice(Double currentPrice) {
+		this.currentPrice = currentPrice;
+	}
+
 	public List<String> getCommodityPicList() {
 		return commodityPicList;
 	}

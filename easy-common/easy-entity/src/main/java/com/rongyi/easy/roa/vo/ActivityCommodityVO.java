@@ -22,6 +22,7 @@ public class ActivityCommodityVO implements Serializable{
 	private String commodityId;//商品id
 	private String commodityName;//商品名称
 	private Double commodityOPriceMax;//商品最高原价
+	private Double commodityCPriceMax;//商品最高现价
 	private List<String> commodityPicList;//商品图片
 	private String commodityPic;//商品图片，超级团教育版取后台配置的1:2的图片
     //众筹价
@@ -41,6 +42,12 @@ public class ActivityCommodityVO implements Serializable{
 	private Integer activityCommodityStatus;//2:审核通过，其它为失效商品
 	
 	
+	public Double getCommodityCPriceMax() {
+		return commodityCPriceMax;
+	}
+	public void setCommodityCPriceMax(Double commodityCPriceMax) {
+		this.commodityCPriceMax = commodityCPriceMax;
+	}
 	public Integer getActivityCommodityStatus() {
 		return activityCommodityStatus;
 	}
