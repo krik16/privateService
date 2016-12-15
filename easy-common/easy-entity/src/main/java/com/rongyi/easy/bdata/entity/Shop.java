@@ -55,8 +55,7 @@ public class Shop implements Serializable {
 	private Integer recommend;
 	private String business_hours;
 	private List<String> watcher_ids;
-	private List<ObjectId> parent_ids;
-	private ObjectId filiale_id;   
+	private ObjectId filiale_id;
     private List<ObjectId> custom_category_ids;
     private String qrcode_pic;
     private List<String> photo_urls;//图片地址
@@ -74,6 +73,9 @@ public class Shop implements Serializable {
     private String name_en;    //店铺英文名
     private String description_en ; //店铺英文介绍
     private String FID;
+    private ObjectId parent_id; //上级店铺ID
+    private List<ObjectId> parent_ids; //上级店铺ids
+
 
     public String getFID() {
         return FID;
@@ -511,6 +513,14 @@ public class Shop implements Serializable {
 
     public String getDescription_en() {
         return description_en;
+    }
+
+    public ObjectId getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(ObjectId parent_id) {
+        this.parent_id = parent_id;
     }
 
     public void setDescription_en(String description_en) {

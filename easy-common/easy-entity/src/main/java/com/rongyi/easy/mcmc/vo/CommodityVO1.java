@@ -32,6 +32,7 @@ public class CommodityVO1 implements  Serializable {
 	private Integer terminalType = 1; // com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	private String terminalTypeDesc = CommodityTerminalType.CommodityTerminalCommon.getName(terminalType);
 	private Date soldOutAt;
+	private String merchantId;
 
 	public String getId() {
 		return id;
@@ -141,5 +142,13 @@ public class CommodityVO1 implements  Serializable {
 
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
+	}
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
 	}
 }

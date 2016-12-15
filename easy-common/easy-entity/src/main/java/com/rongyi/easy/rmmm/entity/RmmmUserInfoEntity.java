@@ -85,6 +85,18 @@ public class RmmmUserInfoEntity implements Serializable{
     private String jsessionid; //用户摩店登录标识
     private Integer isOrdering;//是否接单状态   0是  1否
     private Date updateOrderingAt;//更新接单状态的时间
+    
+    private Integer industryId;//行业id
+	private Integer industryVersionId;//行业版本id
+	private Integer childAccountNum;//子账号数量0
+	private Date validStartAt;//有效期开始时间
+	private Date validEndAt;//有效期结束时间
+	private String contractCode;//合同号
+	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
+	private Integer isChief;//是否主账号，默认 
+	private Integer level;//层级 1级 2级 3级
+    private Integer chiefId; //主账号ID
+	
     public Integer getId() {
 		return id;
 	}
@@ -347,6 +359,85 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setUpdateOrderingAt(Date updateOrderingAt) {
 		this.updateOrderingAt = updateOrderingAt;
 	}
-	
+
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+
+	public Date getValidStartAt() {
+		return validStartAt;
+	}
+
+	public void setValidStartAt(Date validStartAt) {
+		this.validStartAt = validStartAt;
+	}
+
+	public Date getValidEndAt() {
+		return validEndAt;
+	}
+
+	public void setValidEndAt(Date validEndAt) {
+		this.validEndAt = validEndAt;
+	}
+
+	public String getContractCode() {
+		return contractCode;
+	}
+
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+
+	public String getSynTarget() {
+		return synTarget;
+	}
+
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+
+	public Integer getIsChief() {
+		return isChief;
+	}
+
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+    public Integer getChiefId() {
+        return chiefId;
+    }
+
+    public void setChiefId(Integer chiefId) {
+        this.chiefId = chiefId;
+    }
 }
 

@@ -1,6 +1,5 @@
 package com.rongyi.easy.solr;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,7 @@ import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -126,6 +126,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
+	@Field("locationIds")
+	private List<String> locationIds;
+	@Field("serviceIds")
+	private List<Integer> serviceIds;
 
 	public Double getPrice() {
 		return price;
@@ -534,6 +538,22 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.stock = stock;
 	}
 
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
 								 long brandId, long mallId, CommodityShopInfo shopInfo,
 								 List<Double> positions, List<String> zoneIds, String brandMid) {
@@ -605,5 +625,29 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		//库存进入solr
 		this.setStock(commodity.getStock());
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
+
+		this.setLocationIds(commodity.getLocationIds());
+		this.setServiceIds(commodity.getServiceIds());
+	}
+
+	public void toDocument(Commodity commodity) {
+		if(commodity != null) {
+			this.setId(commodity.getId().toString());
+			this.setCommodityName(commodity.getName());//商品名字
+			this.setCommodityNameSubdiv(commodity.getName());//商品名字
+			this.setCommodityCode(commodity.getCode());//商品编码
+			this.setCommodityShopId(commodity.getShopId());//商品所在店铺 MySQL id
+			this.setCommodityBrandId(commodity.getBrandId());//商品关联品牌 MySQL id
+			this.setBrand_id(commodity.getBrandMid());
+			this.setCommodityMallId(commodity.getMallId());//商品所在商场 MySQL id
+            /*商品状态*/
+			this.setStatus(commodity.getStatus());
+			this.setSold(commodity.getSold());//销量
+			this.setPublic_start(commodity.getRegisterAt());//上架时间
+			this.setPrice(commodity.getPrice());
+			this.setTerminalType(commodity.getTerminalType());
+			this.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
+					commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+		}
 	}
 }

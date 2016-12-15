@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.bdata.dto.CustomCategoryDto;
 
 public class ShopVO implements Serializable {
@@ -58,6 +60,17 @@ public class ShopVO implements Serializable {
 
 	public void setFID(String FID) {
 		this.FID = FID;
+	}
+	private List<ObjectId> zone_ids;//
+
+	
+	public List<ObjectId> getZone_ids() {
+		return zone_ids;
+	}
+
+	public void setZone_ids(List<ObjectId> zone_ids) {
+		this.zone_ids = zone_ids;
+
 	}
 
 	public String getBusinessStatusReason() {

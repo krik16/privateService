@@ -71,4 +71,11 @@ public interface ICodeValidHisService {
       * @return
       */
      BizzValidHistoryVO getBizzValidHistoryPage(BizzValidHistoryParam param);
+
+    /**
+     * 商家验码记录列表
+     * @param param
+     * @return
+     */
+    BizzValidHistoryVO getValidHisByPage(BizzValidHistoryParam param);
 }

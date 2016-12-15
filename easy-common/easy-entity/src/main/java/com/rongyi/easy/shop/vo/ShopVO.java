@@ -54,6 +54,7 @@ public class ShopVO implements Serializable {
 	private boolean changeAble;//不同的角色在店铺详情页面能否修改
 	private String nameEn;      //店铺英文名
 	private String descriptionEn;  //英文描述
+	private Integer isEdit = 1; //是否可编译  0否 1是
 	
 	public String getId() {
 		return id;
@@ -337,6 +338,15 @@ public class ShopVO implements Serializable {
 	public boolean isChangeAble() { return changeAble; }
 
 	public void setChangeAble(boolean changeAble) { this.changeAble = changeAble; }
+
+	public Integer getIsEdit() {
+		return isEdit;
+	}
+
+	public void setIsEdit(Integer isEdit) {
+		this.isEdit = isEdit;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
