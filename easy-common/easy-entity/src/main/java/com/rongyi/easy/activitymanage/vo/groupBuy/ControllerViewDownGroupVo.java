@@ -17,7 +17,16 @@ public class ControllerViewDownGroupVo implements Serializable{
     private String goodName;
     private String userName;
     private String userPhone;
+    private Integer joinState;
 
+
+    public Integer getJoinState() {
+        return joinState;
+    }
+
+    public void setJoinState(Integer joinState) {
+        this.joinState = joinState;
+    }
 
     public String getUserName() {
         return userName;
