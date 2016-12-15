@@ -36,6 +36,7 @@ public class CommodityPinTuanVO implements Serializable {
     private String commodityDescription;//商品描述
     private String shopMid;//店铺mongoId
     private String shopName;//店铺名称
+    private String subTitle;//副标题
     public CommodityPinTuanVO(){}
 
     public CommodityPinTuanVO(Builder builder) {
@@ -241,6 +242,14 @@ public class CommodityPinTuanVO implements Serializable {
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
 	}
     
 }
