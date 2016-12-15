@@ -243,4 +243,12 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	public boolean updateGroupByGoodActId(GroupInfo groupInfo);
+
+	/**
+	 *
+	 * @param activityId
+	 * @param commodityId
+	 * @return
+	 */
+	public GroupInfo getGroupInfoByAIdAndGoodId(Integer activityId,String commodityId);
 }
