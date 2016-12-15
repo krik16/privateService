@@ -291,7 +291,7 @@ public interface IUserInfoService {
 	 * @param operatorId
 	 * @return
 	 */
-	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);}
+	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);
 
 	/**
 	 * 根据登录用户或手机号查询用户
