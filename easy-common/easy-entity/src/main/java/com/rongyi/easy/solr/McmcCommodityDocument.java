@@ -583,9 +583,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSortPosition(9999);
 		}
 
-		if(commodity.getSource() == 0){//商家后台发布商品，默认下架
-			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
-		}
+
 		this.setSystemNumber(commodity.getSystemNumber());
 		this.setDiscount(commodity.getDiscount());
 
