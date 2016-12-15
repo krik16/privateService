@@ -3,6 +3,7 @@ package com.rongyi.easy.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -66,6 +67,9 @@ public class ShopEntity implements Serializable{
 	public String getAddress() {
 		return address;
 	}
+
+	private ObjectId parent_id; //上级店铺ID
+	private List<ObjectId> parent_ids; //上级店铺ids
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -286,5 +290,21 @@ public class ShopEntity implements Serializable{
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public ObjectId getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(ObjectId parent_id) {
+		this.parent_id = parent_id;
+	}
+
+	public List<ObjectId> getParent_ids() {
+		return parent_ids;
+	}
+
+	public void setParent_ids(List<ObjectId> parent_ids) {
+		this.parent_ids = parent_ids;
 	}
 }

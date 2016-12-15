@@ -1,6 +1,7 @@
 package com.rongyi.easy.roa.vo;
 
 
+import com.rongyi.easy.coupon.entity.CouponWechat;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -59,6 +60,8 @@ public class CouponVO implements Serializable {
     private List<ObjectId> zoneIds;
 
     private List<Double> location;
+
+    private List<CouponWechat> wechats;
 
 
     private Date publicStart; // 发布时间开始
@@ -794,5 +797,13 @@ public class CouponVO implements Serializable {
 
     public void setLimitPublishCount(Integer limitPublishCount) {
         this.limitPublishCount = limitPublishCount;
+    }
+
+    public List<CouponWechat> getWechats() {
+        return wechats;
+    }
+
+    public void setWechats(List<CouponWechat> wechats) {
+        this.wechats = wechats;
     }
 }

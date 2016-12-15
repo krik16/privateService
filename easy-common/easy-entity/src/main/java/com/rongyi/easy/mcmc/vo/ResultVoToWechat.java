@@ -11,6 +11,7 @@ public class ResultVoToWechat implements Serializable{
     private Integer totalNun;
     private Integer showNum;
     private Integer hideNum;
+    private boolean haveWechatService;//是否有微信服务号，true表示有，false表示没有
     private List<CommodityVOToWechat> volist;
 
     public Integer getTotalNun() {
@@ -43,5 +44,13 @@ public class ResultVoToWechat implements Serializable{
 
     public void setVolist(List<CommodityVOToWechat> volist) {
         this.volist = volist;
+    }
+
+    public boolean isHaveWechatService() {
+        return haveWechatService;
+    }
+
+    public void setHaveWechatService(boolean haveWechatService) {
+        this.haveWechatService = haveWechatService;
     }
 }

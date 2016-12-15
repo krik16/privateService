@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -61,8 +62,10 @@ public class AuthorityForSecurityUtil {
 	public static boolean hasRoleAuthority(HttpServletRequest request,String roleAuthority){
 		Collection<GrantedAuthority> authorities = getAuthorities(request);
 		if(StringUtils.isNotBlank(roleAuthority)){
-			if(authorities.contains(new SimpleGrantedAuthority(roleAuthority))){
-				return true;
+			if(CollectionUtils.isNotEmpty(authorities) && !authorities.isEmpty()){
+				if(authorities.contains(new SimpleGrantedAuthority(roleAuthority))){
+					return true;
+				}
 			}
 		}
 		return false;

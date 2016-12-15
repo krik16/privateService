@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseResult2;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
@@ -63,9 +64,9 @@ public interface CommodityService {
      */
     public ResponseResult getCommodityById(String id, long shopId);
 
-    public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByShopId(int identity,String id, int orderBy, String keyword, int currentpage, int pagesize);
 
-    public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
     public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage, int pagesize, String liveId, int isEdit);
 
@@ -76,6 +77,10 @@ public interface CommodityService {
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
     public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, String userName);
+
+    public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
+
+    public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason, String userName);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -360,6 +365,23 @@ public interface CommodityService {
      * @return true commodity is overtime, false otherwise;
      */
     List<String> isCommodityOvertime(PinTuanCommodityParam param);
-    
+    /**
+     * 批量下架商品
+     * @param ids
+     * @param shopId
+     * @param identity
+     * @param reason
+     * @param userName
+     * @return
+     */
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
+
+    public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
+
+    public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
+
+
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
+
+    CommodityVO getCommodityDetail(String id);
 }

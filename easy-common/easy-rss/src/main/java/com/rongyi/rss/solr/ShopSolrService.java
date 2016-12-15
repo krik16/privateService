@@ -57,6 +57,8 @@ public interface ShopSolrService {
 	 * @return
 	 */
 	public ShopSearchIdsResult selectShopIndexByName(ShopSearchParam input);
+
+	List<ShopDocument> searchShop(ShopSearchParam input);
 	
 	/**
 	 * 店铺管理后台更新poi索引
