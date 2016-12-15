@@ -26,6 +26,7 @@ public class ActivityGroupDetailVO implements Serializable{
 	private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
 	private String activityName;//拼团活动名称
 	private Integer activityCommodityStock;//活动商品库存
+	private Integer activityCommodityStatus;//活动商品状态
 	private double activityPrice;//拼团商品最低价格
 	private Long endAt;//拼团活动结束时间
 	private Long startAt;//拼团活动开始时间
@@ -53,6 +54,15 @@ public class ActivityGroupDetailVO implements Serializable{
 	private String expectTotalAmount;//众筹价
 	private String mallName;//商场名称
 	
+	
+	public Integer getActivityCommodityStatus() {
+		return activityCommodityStatus;
+	}
+
+	public void setActivityCommodityStatus(Integer activityCommodityStatus) {
+		this.activityCommodityStatus = activityCommodityStatus;
+	}
+
 	public String getMallName() {
 		return mallName;
 	}
