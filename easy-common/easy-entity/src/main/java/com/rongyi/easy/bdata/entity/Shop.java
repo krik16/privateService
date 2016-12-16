@@ -72,17 +72,17 @@ public class Shop implements Serializable {
     private int moreFloors = 0;//0不跨楼，1跨楼
     private String name_en;    //店铺英文名
     private String description_en ; //店铺英文介绍
-    private String FID;
+    private String fID;
     private ObjectId parent_id; //上级店铺ID
     private List<ObjectId> parent_ids; //上级店铺ids
 
 
-    public String getFID() {
-        return FID;
+    public String getfID() {
+        return fID;
     }
 
-    public void setFID(String FID) {
-        this.FID = FID;
+    public void setfID(String fID) {
+        this.fID = fID;
     }
 
     public ObjectId getId() {

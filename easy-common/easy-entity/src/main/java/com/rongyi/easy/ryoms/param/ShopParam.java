@@ -41,7 +41,7 @@ public class ShopParam implements Serializable{
 	private Integer valid ;    //店铺状态
 	private String nameEn;  //店铺英文名
 	private String descriptionEn ;//店铺英文介绍
-	private String FID;//终端使用第三方地图导航引擎，需要用一个新字段来匹配双方的地图和店铺数据
+	private String fID;//终端使用第三方地图导航引擎，需要用一个新字段来匹配双方的地图和店铺数据
 
 	@Override
 	public String toString() {
@@ -77,16 +77,16 @@ public class ShopParam implements Serializable{
 				", valid=" + valid +
 				", nameEn='" + nameEn + '\'' +
 				", descriptionEn='" + descriptionEn + '\'' +
-				", FID='" + FID + '\'' +
+				", fID='" + fID + '\'' +
 				'}';
 	}
 
-	public String getFID() {
-		return FID;
+	public String getfID() {
+		return fID;
 	}
 
-	public void setFID(String FID) {
-		this.FID = FID;
+	public void setfID(String fID) {
+		this.fID = fID;
 	}
 
 	public String getId() {
