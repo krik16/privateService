@@ -36,7 +36,7 @@ public class Floor implements Serializable {
     private String fmap;//fmap图--商家后台用的
     private String aliasename;
     private String aliasname;
-    private String   tMap;//图聚版地图
+    private String   tmap;//图聚版地图
     private Integer system_status;//1 隐藏 0正常
     private String thirdFloorId;//第三方楼层id
 
@@ -56,14 +56,13 @@ public class Floor implements Serializable {
         this.system_status = system_status;
     }
 
-    public String gettMap() {
-        return tMap;
+    public String getTmap() {
+        return tmap;
     }
 
-    public void settMap(String tMap) {
-        this.tMap = tMap;
+    public void setTmap(String tmap) {
+        this.tmap = tmap;
     }
-
 
     public String getAliasename() {
         return aliasename;
@@ -255,7 +254,7 @@ public class Floor implements Serializable {
                 ", fmap='" + fmap + '\'' +
                 ", aliasename='" + aliasename + '\'' +
                 ", aliasname='" + aliasname + '\'' +
-                ", tMap='" + tMap + '\'' +
+                ", tmap='" + tmap + '\'' +
                 ", system_status=" + system_status +
                 '}';
     }

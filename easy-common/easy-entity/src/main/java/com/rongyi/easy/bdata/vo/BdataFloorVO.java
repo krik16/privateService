@@ -35,7 +35,7 @@ public class BdataFloorVO implements Serializable {
 				", reason='" + reason + '\'' +
 				", swf='" + swf + '\'' +
 				", fmap='" + fmap + '\'' +
-				", tMap='" + tMap + '\'' +
+				", tmap='" + tmap + '\'' +
 				", thirdFloorId='" + thirdFloorId + '\'' +
 				", last_updateId='" + last_updateId + '\'' +
 				", countShop=" + countShop +
@@ -69,8 +69,16 @@ public class BdataFloorVO implements Serializable {
     private String swf;//swf图--商家后台用的
     
     private String  fmap;
-	private String   tMap;//图聚版地图
+	private String   tmap;//图聚版地图
 	private String thirdFloorId;//第三方楼层id
+
+	public String getTmap() {
+		return tmap;
+	}
+
+	public void setTmap(String tmap) {
+		this.tmap = tmap;
+	}
 
 	public String getThirdFloorId() {
 		return thirdFloorId;
@@ -80,13 +88,6 @@ public class BdataFloorVO implements Serializable {
 		this.thirdFloorId = thirdFloorId;
 	}
 
-	public String gettMap() {
-		return tMap;
-	}
-
-	public void settMap(String tMap) {
-		this.tMap = tMap;
-	}
 
 	public String getFmap() {
 		return fmap;

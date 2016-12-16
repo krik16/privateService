@@ -158,7 +158,7 @@ public class BdataFloor implements Serializable {
     private String reason;//操作描述
     private String swf;//swf图--商家后台用的
     private String fmap;//fmap图--商家后台用的
-	private String   tMap;//图聚版地图
+	private String   tmap;//图聚版地图
 	private String thirdFloorId;//第三方楼层id
 
 	public String getThirdFloorId() {
@@ -170,16 +170,14 @@ public class BdataFloor implements Serializable {
 	}
 
 
-	public String gettMap() {
-		return tMap;
+	public String getTmap() {
+		return tmap;
 	}
 
-	public void settMap(String tMap) {
-		this.tMap = tMap;
+	public void setTmap(String tmap) {
+		this.tmap = tmap;
 	}
-    
-    
-    
+
 	public String getFmap() {
 		return fmap;
 	}

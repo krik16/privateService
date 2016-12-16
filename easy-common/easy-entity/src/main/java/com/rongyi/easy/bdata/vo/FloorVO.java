@@ -25,7 +25,7 @@ public class FloorVO implements Serializable {
 
     private String aliasename;
     private String aliasname;
-    private String   tMap;//图聚版地图
+    private String   tmap;//图聚版地图
     private String thirdFloorId;//第三方楼层id
 
     public String getThirdFloorId() {
@@ -37,12 +37,12 @@ public class FloorVO implements Serializable {
     }
 
 
-    public String gettMap() {
-        return tMap;
+    public String getTmap() {
+        return tmap;
     }
 
-    public void settMap(String tMap) {
-        this.tMap = tMap;
+    public void setTmap(String tmap) {
+        this.tmap = tmap;
     }
 
     public String getAliasename() {
