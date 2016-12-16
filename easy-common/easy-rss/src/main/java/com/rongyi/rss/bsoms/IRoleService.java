@@ -56,5 +56,30 @@ public interface IRoleService {
 	 * @throws Exception
 	 */
 	List<Object> getRoleScope(Integer roleIdentity,List<String> relationMids) throws Exception;
+
+	/**
+	 * 通过ID查询角色
+ 	 * @param id 角色ID
+	 * @return 角色实体
+	 */
+	BRoles getRoleById(Integer id);
+
+	/**
+	 * 通过角色ID修改继承自此角色权限的角色
+	 * @param roleId 角色Id
+	 * @param authsOldList 未修改前的角色权限
+	 * @param auths 新的角色权限
+	 * @return 修改的角色数量
+	 */
+	int updateRoleAuthsByExtendsRoleId(Integer roleId,List<String> authsOldList,List<String> auths);
+
+	/**
+	 * 根据用户ID及新旧权限列表更新此用户下所有角色的权限
+	 * @param userId 用户ID
+	 * @param authOldList 旧的权限列表
+	 * @param authList 新的权限列表
+	 * @return 影响的角色数量
+	 */
+	int updateRoleAuthByUserId(Integer userId, List<String> authOldList, List<String> authList);
 	
 }

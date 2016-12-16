@@ -3,13 +3,16 @@ package com.rongyi.easy.bsoms.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import com.rongyi.easy.rmmm.entity.UserAccountEntity;
 /**
  * 商家账户VO
  * @author hebo
  *
  */
 public class BusinessAccountVO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private Integer id;//用户id
 	private String userLogo;//用户头像
@@ -36,22 +39,57 @@ public class BusinessAccountVO implements Serializable {
 	private String roleName;//角色名
 	private Integer branchId;//分公司id
 	private String branchName;//分公司名
+	private Integer parentShopId;//上级店铺id
+	private Integer grandpaShopId;//上上级店铺id
 	private Integer accountStatus;//账号状态：是否禁用0正常 1禁用'
 	private Integer isSuspended;//资金账户：是否冻结
 	private BigDecimal balance;//资金账户余额
 	private String comment;//评价
 	private Integer createSource;//账号来源：0大运营、1商家后台
 	private String createBy;//创建人
+	private String createName;//创建人
 	private Date createAt;
 	private String updateBy;//修改人
+	private String updateName;//修改人
 	private Date updateAt;
 	private String stopReason;
 	private Date stopAt;
-	private String virtualStopReason;   //资金账号停用理由 
+	private String virtualStopReason;   //资金账号停用理由
 	private Date virtualStopAt;         //资金账号停用时间
 	private Integer isAcc;              //是否加速审核  0是 1否
 	private Date certTime;              //提交审核时间
 	private Integer userStatus;         //用户状态 0未提交审核 2审核中 1审核通过 3审核不通过
+	private String shareCode;
+
+	private Integer industryId;
+	private String industryName;
+	private Integer industryVersionId;
+	private String industryVersionName;
+	private Integer childAccountNum;
+	private Date validStartAt;
+	private Date validEndAt;
+	private String contractCode;
+	private String synTarget;
+	private Integer isChief;
+	private Integer level;
+	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
+	private Integer chiefId;//主账号id
+	private String chiefName;//主账号名称
+	private List<UserAccountEntity> userAccounts;
+	private String faceImg;    //身份证正面照
+	private String backImg;   //身份证背面照
+	private String workImg;    //工作证照
+	private String otherImg;   //其它照片
+	private String resume;      //自我简介
+	private String position;   //申请所在城市
+
+	private String merchantAddress;//商户地址
+	public String getMerchantAddress() {
+		return merchantAddress;
+	}
+	public void setMerchantAddress(String merchantAddress) {
+		this.merchantAddress = merchantAddress;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -303,5 +341,201 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
+	}
+	public Integer getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+	public String getIndustryName() {
+		return industryName;
+	}
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+	public String getIndustryVersionName() {
+		return industryVersionName;
+	}
+	public void setIndustryVersionName(String industryVersionName) {
+		this.industryVersionName = industryVersionName;
+	}
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+	public Date getValidStartAt() {
+		return validStartAt;
+	}
+	public void setValidStartAt(Date validStartAt) {
+		this.validStartAt = validStartAt;
+	}
+	public Date getValidEndAt() {
+		return validEndAt;
+	}
+	public void setValidEndAt(Date validEndAt) {
+		this.validEndAt = validEndAt;
+	}
+	public String getContractCode() {
+		return contractCode;
+	}
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+	public String getSynTarget() {
+		return synTarget;
+	}
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+	public Integer getIsChief() {
+		return isChief;
+	}
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+	public Integer getSettleOrgStrategy() {
+		return settleOrgStrategy;
+	}
+	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
+		this.settleOrgStrategy = settleOrgStrategy;
+	}
+	public List<UserAccountEntity> getUserAccounts() {
+		return userAccounts;
+	}
+	public void setUserAccounts(List<UserAccountEntity> userAccounts) {
+		this.userAccounts = userAccounts;
+	}
+	public Integer getChiefId() {
+		return chiefId;
+	}
+	public void setChiefId(Integer chiefId) {
+		this.chiefId = chiefId;
+	}
+	public String getChiefName() {
+		return chiefName;
+	}
+	public void setChiefName(String chiefName) {
+		this.chiefName = chiefName;
+	}
+	public String getCreateName() {
+		return createName;
+	}
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+	public String getUpdateName() {
+		return updateName;
+	}
+	public void setUpdateName(String updateName) {
+		this.updateName = updateName;
+	}
+	public String getFaceImg() {
+		return faceImg;
+	}
+	public void setFaceImg(String faceImg) {
+		this.faceImg = faceImg;
+	}
+	public String getBackImg() {
+		return backImg;
+	}
+	public void setBackImg(String backImg) {
+		this.backImg = backImg;
+	}
+	public String getWorkImg() {
+		return workImg;
+	}
+	public void setWorkImg(String workImg) {
+		this.workImg = workImg;
+	}
+	public String getOtherImg() {
+		return otherImg;
+	}
+	public void setOtherImg(String otherImg) {
+		this.otherImg = otherImg;
+	}
+	public Integer getParentShopId() {
+		return parentShopId;
+	}
+	public void setParentShopId(Integer parentShopId) {
+		this.parentShopId = parentShopId;
+	}
+	public Integer getGrandpaShopId() {
+		return grandpaShopId;
+	}
+	public void setGrandpaShopId(Integer grandpaShopId) {
+		this.grandpaShopId = grandpaShopId;
+	}
+
+	public String getShareCode() {
+		return shareCode;
+	}
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
+
+	public String getResume() {
+		return resume;
+	}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	@Override
+	public String toString() {
+		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account
+				+ ", userAccount=" + userAccount + ", userName=" + userName + ", nickName=" + nickName + ", type="
+				+ type + ", identity=" + identity + ", groupId=" + groupId + ", groupMid=" + groupMid + ", groupName="
+				+ groupName + ", brandId=" + brandId + ", brandMid=" + brandMid + ", brandName=" + brandName
+				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName=" + mallName + ", shopId=" + shopId
+				+ ", shopMid=" + shopMid + ", shopName=" + shopName + ", roleId=" + roleId + ", roleName=" + roleName
+				+ ", branchId=" + branchId + ", branchName=" + branchName + ", parentShopId=" + parentShopId
+				+ ", grandpaShopId=" + grandpaShopId + ", accountStatus=" + accountStatus + ", isSuspended="
+				+ isSuspended + ", balance=" + balance + ", comment=" + comment + ", createSource=" + createSource
+				+ ", createBy=" + createBy + ", createName=" + createName + ", createAt=" + createAt + ", updateBy="
+				+ updateBy + ", updateName=" + updateName + ", updateAt=" + updateAt + ", stopReason=" + stopReason
+				+ ", stopAt=" + stopAt + ", virtualStopReason=" + virtualStopReason + ", virtualStopAt=" + virtualStopAt
+				+ ", isAcc=" + isAcc + ", certTime=" + certTime + ", userStatus=" + userStatus + ", shareCode="
+				+ shareCode + ", industryId=" + industryId + ", industryName=" + industryName + ", industryVersionId="
+				+ industryVersionId + ", industryVersionName=" + industryVersionName + ", childAccountNum="
+				+ childAccountNum + ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode="
+				+ contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level
+				+ ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + ", chiefName=" + chiefName
+				+ ", userAccounts=" + userAccounts + ", faceImg=" + faceImg + ", backImg=" + backImg + ", workImg="
+				+ workImg + ", otherImg=" + otherImg + ", resume=" + resume + ", position=" + position + "]";
+	}
+
+	public String getBindingMid(){
+		if(getIdentity() == 0){
+			return groupMid;
+		}else if(getIdentity() == 1){
+			return mallMid;
+		}else if(getIdentity() == 2){
+			return brandMid;
+		}else if (getIdentity() == 3) {
+			return null;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopMid;
+		}
+		return null;
 	}
 }
