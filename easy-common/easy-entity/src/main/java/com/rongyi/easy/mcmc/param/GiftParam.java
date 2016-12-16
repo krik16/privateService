@@ -355,7 +355,8 @@ public class GiftParam implements Serializable {
     @Override
     public String toString() {
         return "GiftParam{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 ", stock=" + stock +
                 ", picList=" + picList +
@@ -378,11 +379,17 @@ public class GiftParam implements Serializable {
                 ", selfExpireDate=" + selfExpireDate +
                 ", tagIds=" + tagIds +
                 ", paymentIds=" + paymentIds +
-                ", status='" + status + '\'' +
+                ", paymentVOs=" + paymentVOs +
                 ", platform='" + platform + '\'' +
-                ", price='" + price + '\'' +
-                ", registerAt='" + registerAt + '\'' +
-                ", soldOutAt='" + soldOutAt + '\'' +
+                ", price=" + price +
+                ", registerAt=" + registerAt +
+                ", soldOutAt=" + soldOutAt +
+                ", selfTakeDays=" + selfTakeDays +
+                ", reason='" + reason + '\'' +
+                ", status=" + status +
+                ", couponStartDate=" + couponStartDate +
+                ", couponEndDate=" + couponEndDate +
+                ", source=" + source +
                 '}';
     }
 }
