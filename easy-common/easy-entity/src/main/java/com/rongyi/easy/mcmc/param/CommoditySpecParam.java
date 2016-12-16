@@ -23,7 +23,34 @@ public class CommoditySpecParam implements  Serializable {
 	private int stock;//库存
 	private int remain;//剩余量
 	private int userId;//用户id
-	
+	private String groupMid;
+	private String mallMid;
+	private Integer type; //0:集团 1:商场 4:店铺
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getGroupMid() {
+		return groupMid;
+	}
+
+	public void setGroupMid(String groupMid) {
+		this.groupMid = groupMid;
+	}
+
+	public String getMallMid() {
+		return mallMid;
+	}
+
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
+
 	public String getOriginalPrice() {
 		return originalPrice;
 	}

@@ -1,9 +1,13 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.CommoditySpec;
+import com.rongyi.easy.mcmc.param.CommoditySpecParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 
 public class CommoditySpecVO implements  Serializable {
@@ -171,5 +175,15 @@ public class CommoditySpecVO implements  Serializable {
 				", activitylimitCount='" + activitylimitCount + '\'' +
 				", specColumnValues=" + specColumnValues +
 				'}';
+	}
+
+	public void setCommoditySpecInfo(CommoditySpecParam param) {
+		this.setSpecOriginalPrice(param.getOriginalPrice());
+		this.setSpecCurrentPrice(param.getCurrentPrice());
+		this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
+		this.setSpecTotalStock(Integer.toString(param.getStock()));
+		this.setSpecStock(Integer.toString(param.getRemain()));
+		this.setSpecPictureUrl(param.getPictureUrl());
+		this.setSku(param.getSku());
 	}
 }

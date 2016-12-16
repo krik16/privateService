@@ -121,6 +121,8 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.type = type;
 	}
 
+	private Integer serviceId;//微信服务号id
+
 	public String getCouponId() {
 		return couponId;
 	}
@@ -453,6 +455,14 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.minStock = minStock;
 	}
 
+	public Integer getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(Integer serviceId) {
+		this.serviceId = serviceId;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam{" +
@@ -486,6 +496,7 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", couponId='" + couponId + '\'' +
 				", commodityMaxMinValues=" + commodityMaxMinValues +
 				", galleryPosition=" + galleryPosition +
+				", serviceId=" + serviceId +
 				"} " + super.toString();
 	}
 

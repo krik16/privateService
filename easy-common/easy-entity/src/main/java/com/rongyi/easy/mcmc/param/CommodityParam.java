@@ -51,6 +51,10 @@ public class CommodityParam {
 
 	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义说明
 
+	private List<Integer> serviceIds; //公众号
+
+	private Integer createBy;
+
 
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
 	//@JsonSerialize(using=JsonDateSerializer.class)
@@ -78,10 +82,33 @@ public class CommodityParam {
 	private String  weAndTeStatus;//1表示终端机，2表示微信，3表示都显示，4表示都不显示
 	private Integer purchaseCount;//限购数量，0表示不限购
 
-
 	private Integer templateId;//商城运费模版id
 
 	private String reason;
+
+	private String subheading;  //副标题
+
+	private String commodityDetails; //商品详情
+
+	private Integer source;
+
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
+	public Integer getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Integer createBy) {
+		this.createBy = createBy;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
 
 	public String getId() {
 		return id;
@@ -107,14 +134,15 @@ public class CommodityParam {
 		this.category = category;
 	}
 
-	/*public String getShopId() {
-		return shopId;
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
 	}
 
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
 	}
-*/
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -310,6 +338,14 @@ public class CommodityParam {
 		this.reason = reason;
 	}
 
+	public Integer getShelvesType() {
+		return shelvesType;
+	}
+
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityParam{" +
@@ -340,6 +376,9 @@ public class CommodityParam {
 				", purchaseCount=" + purchaseCount +
 				", templateId=" + templateId +
 				", reason=" + reason+
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
+				", shelvesType=" + shelvesType+
 				'}';
 	}
 
@@ -349,5 +388,21 @@ public class CommodityParam {
 
 	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
 	}
 }
