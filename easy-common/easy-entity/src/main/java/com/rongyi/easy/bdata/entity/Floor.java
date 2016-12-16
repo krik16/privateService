@@ -177,14 +177,16 @@ public class Floor implements Serializable {
                 System.out.println(1);
                 System.out.println(created_at.toString());
                 System.out.println(2);
-                System.out.println(new Date(created_at.toString()).getYear());
+                System.out.println(created_at.getYear());
                 System.out.println(3);
-                System.out.println(new Date(created_at.toString()).getYear() + 1900);
+                System.out.println(created_at.getYear() + 1900);
             }catch (Exception e){
                 System.out.println("getFullNavigation_pic error");
                 System.out.println(e.getStackTrace());
             }
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (new Date(created_at.toString()).getYear()+1900) + "/" + (new Date(created_at.toString()).getMonth() + 1) + "/" + id + "/" + navigation_pic;
+//            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (new Date(created_at.toString()).getYear()+1900) + "/" + (new Date(created_at.toString()).getMonth() + 1) + "/" + id + "/" + navigation_pic;
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (created_at.getYear()+1900) + "/" + (created_at.getMonth() + 1) + "/" + id + "/" + navigation_pic;
+
         } else {
             return null;
         }
