@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Description: 红包领取 返回 独享
@@ -23,6 +24,10 @@ public class ActivityCouponVO implements Serializable{
     // 0：满减 （抵扣券）；1：立减 (红包)
     private Integer preferentialType;
 
+    private Date validStartAt;
+
+    private Date validEndAt;
+
     public boolean isReceiveResult() {
         return receiveResult;
     }
@@ -41,6 +46,22 @@ public class ActivityCouponVO implements Serializable{
 
     public void setPreferentialType(Integer preferentialType) {
         this.preferentialType = preferentialType;
+    }
+
+    public Date getValidStartAt() {
+        return validStartAt;
+    }
+
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
     }
 
     public void setCouponId(String couponId) {
@@ -69,5 +90,20 @@ public class ActivityCouponVO implements Serializable{
 
     public void setConditionPrice(Double conditionPrice) {
         this.conditionPrice = conditionPrice;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ActivityCouponVO{");
+        sb.append("receiveResult=").append(receiveResult);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", couponName='").append(couponName).append('\'');
+        sb.append(", money=").append(money);
+        sb.append(", conditionPrice=").append(conditionPrice);
+        sb.append(", preferentialType=").append(preferentialType);
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append('}');
+        return sb.toString();
     }
 }
