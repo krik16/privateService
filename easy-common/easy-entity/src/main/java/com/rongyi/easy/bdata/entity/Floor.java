@@ -174,7 +174,11 @@ public class Floor implements Serializable {
     public String getFullNavigation_pic() {
         if (StringUtils.isNotBlank(navigation_pic)) {
             try {
+                System.out.println(1);
                 System.out.println(created_at.toString());
+                System.out.println(2);
+                System.out.println(new Date(created_at.toString()).getYear());
+                System.out.println(3);
                 System.out.println(new Date(created_at.toString()).getYear() + 1900);
             }catch (Exception e){
                 System.out.println("getFullNavigation_pic error");
