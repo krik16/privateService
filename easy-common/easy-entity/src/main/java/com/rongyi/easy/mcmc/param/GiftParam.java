@@ -70,6 +70,15 @@ public class GiftParam implements Serializable {
     private Date couponStartDate;
     // 卡券过期时间
     private Date couponEndDate;
+    private Integer source;
+
+    public Integer getSource() {
+        return source;
+    }
+
+    public void setSource(Integer source) {
+        this.source = source;
+    }
 
     public Date getCouponStartDate() {
         return couponStartDate;
