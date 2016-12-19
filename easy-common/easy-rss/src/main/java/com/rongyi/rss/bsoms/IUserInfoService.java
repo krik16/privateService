@@ -12,6 +12,7 @@ import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
+import com.rongyi.easy.roa.vo.UserInfoForDistributorVO;
 import com.rongyi.easy.ryoms.param.buyer.BuyerCheckParam;
 import com.rongyi.easy.ryoms.param.buyer.BuyerListParam;
 import com.rongyi.easy.ryoms.user.vo.BuyerDetailVO;
@@ -291,4 +292,17 @@ public interface IUserInfoService {
 	 * @param operatorId
 	 * @return
 	 */
-	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);}
+	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);
+	/**
+	 * 查询二级店铺账号列表
+	 * @param currentPage 当前页从1开始
+	 * @param pageSize  每页显示的数量
+	 * @return
+	 */
+	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(int currentPage,int pageSize);
+	/**
+	 * 查询二级店铺账号数量
+	 * @return
+	 */
+	public Integer getUserInfoCountForDistributor();
+}
