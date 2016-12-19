@@ -13,6 +13,7 @@ import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.*;
+import net.sf.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -265,4 +266,11 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	String getOrderNoForPintuan(Integer activityId,Long activityRoundId, String buyerNum) throws Exception;
+
+	/**
+	 * 查询订单分销数据
+	 * @param params {"status":"1 支付成功,2 确认收货,3 订单取消","orderNo":"订单号"
+	 *               "type":"事件类型 2 支付成功,4 确认收货,7 超时未确认收货,6 超时未发货退款,23 卖家取消订单退款"}
+	 */
+	public Map<String, Object> getCommodityOrderPush(JSONObject params);
 }
