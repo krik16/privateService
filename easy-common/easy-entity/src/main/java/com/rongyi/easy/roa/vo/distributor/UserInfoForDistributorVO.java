@@ -1,4 +1,4 @@
-package com.rongyi.easy.roa.vo;
+package com.rongyi.easy.roa.vo.distributor;
 
 import java.io.Serializable;
 

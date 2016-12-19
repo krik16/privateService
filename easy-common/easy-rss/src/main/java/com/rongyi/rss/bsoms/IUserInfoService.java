@@ -12,7 +12,7 @@ import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
-import com.rongyi.easy.roa.vo.UserInfoForDistributorVO;
+import com.rongyi.easy.roa.vo.distributor.UserInfoForDistributorVO;
 import com.rongyi.easy.ryoms.param.buyer.BuyerCheckParam;
 import com.rongyi.easy.ryoms.param.buyer.BuyerListParam;
 import com.rongyi.easy.ryoms.user.vo.BuyerDetailVO;
