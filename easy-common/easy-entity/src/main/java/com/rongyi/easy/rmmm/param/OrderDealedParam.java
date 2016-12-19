@@ -22,6 +22,7 @@ public class OrderDealedParam extends BaseParam implements Serializable {
 	private Integer source = 1;//操作平台 1摩店 2商家后台
     private List<SalerSonOrderVO> sonOrderList = new ArrayList<>(); //商品详情
     private String orderTotalPrice;//订单总价（包括邮费），用来计算一键改价
+	private int type = 0;// 0:卖家撤销订单，1：拼团团过期通知,默认0
 
 	public String getOrderTotalPrice() {
 		return orderTotalPrice;
@@ -99,6 +100,14 @@ public class OrderDealedParam extends BaseParam implements Serializable {
 		this.sonOrderList = sonOrderList;
 	}
 
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDealedParam [orderId=" + orderId + ", discount="
@@ -106,6 +115,7 @@ public class OrderDealedParam extends BaseParam implements Serializable {
 				+ ", orderNo=" + orderNo + ", orderPrice=" + orderPrice
 				+ ", userId=" + userId + ", source=" + source
 				+ ", sonOrderList=" + sonOrderList + ", orderTotalPrice="
-				+ orderTotalPrice + "]";
+				+ orderTotalPrice + ", type=" + type
+				+ "]";
 	}
 }

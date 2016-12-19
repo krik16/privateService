@@ -1,14 +1,12 @@
 package com.rongyi.core.bean;
 
-import java.io.Serializable;
-
-import com.rongyi.core.constant.Constants;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /*
 使用示例说明：
@@ -34,7 +32,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  *
  * @author Breggor
  */
-public class ResponseVO implements java.io.Serializable {
+public class ResponseRoaVO implements Serializable {
     private static final long serialVersionUID = 4807318268209609704L;
     private final static int DEFAULT_SUCCESS_STATUS = 0;
     private final static int DEFAULT_FAIL_STATUS = 1;
@@ -45,7 +43,7 @@ public class ResponseVO implements java.io.Serializable {
     private Meta meta;        //errno=0：成功, errno=1：失败
     private Result result;    //数据
 
-    public ResponseVO() {
+    public ResponseRoaVO() {
 
     }
 
@@ -68,8 +66,8 @@ public class ResponseVO implements java.io.Serializable {
      *
      * @return ResponseData
      */
-    public static ResponseVO success() {
-        return new ResponseVO(ResponseVO.SUCCESS, null);
+    public static ResponseRoaVO success() {
+        return new ResponseRoaVO(ResponseRoaVO.SUCCESS, null);
     }
 
     /**
@@ -78,8 +76,8 @@ public class ResponseVO implements java.io.Serializable {
      * @param data 数据
      * @return ResponseData
      */
-    public static <T> ResponseVO success(T data) {
-        return new ResponseVO(ResponseVO.SUCCESS, new Result(data, null));
+    public static <T> ResponseRoaVO success(T data) {
+        return new ResponseRoaVO(ResponseRoaVO.SUCCESS, new Result(data, null));
     }
 
     /**
@@ -91,11 +89,23 @@ public class ResponseVO implements java.io.Serializable {
      * @param totalCount  总行数
      * @return ResponseData
      */
-    public static <T> ResponseVO success(T data, Integer currentPage, Integer pageSize, Integer totalCount) {
-        return new ResponseVO(ResponseVO.SUCCESS, data, currentPage, pageSize, totalCount);
+    public static <T> ResponseRoaVO success(T data, Integer currentPage, Integer pageSize, Integer totalCount) {
+        return new ResponseRoaVO(ResponseRoaVO.SUCCESS, data, currentPage, pageSize, totalCount);
     }
 
 
+    /**
+     * 特殊需求
+     * @param data
+     * @param currentPage
+     * @param pageSize
+     * @param totalCount
+     * @param <T>
+     * @return
+     */
+    public static <T> ResponseRoaVO success1(T data, Integer currentPage, Integer pageSize, Integer totalCount) {
+        return new ResponseRoaVO(ResponseRoaVO.SUCCESS, data, currentPage, pageSize, totalCount);
+    }
 
 
     /**
@@ -103,8 +113,8 @@ public class ResponseVO implements java.io.Serializable {
      *
      * @return ResponseData
      */
-    public static ResponseVO failure() {
-        return new ResponseVO(ResponseVO.FAILURE, null);
+    public static ResponseRoaVO failure() {
+        return new ResponseRoaVO(ResponseRoaVO.FAILURE, null);
     }
 
 
@@ -115,8 +125,8 @@ public class ResponseVO implements java.io.Serializable {
      * @param msg
      * @return ResponseData
      */
-    public static ResponseVO failure(int errno, String msg) {
-        return new ResponseVO(new Meta(errno, msg), null);
+    public static ResponseRoaVO failure(int errno, String msg) {
+        return new ResponseRoaVO(new Meta(errno, msg), null);
     }
 
     /**
@@ -126,12 +136,12 @@ public class ResponseVO implements java.io.Serializable {
      * @param msg
      * @return ResponseData
      */
-    public static <T> ResponseVO failure(int errno, String msg, T data) {
-        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+    public static <T> ResponseRoaVO failure(int errno, String msg, T data) {
+        return new ResponseRoaVO(new Meta(errno, msg), new Result(data, null));
     }
 
 
-    private <T> ResponseVO(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
+    private <T> ResponseRoaVO(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
         this.meta = meta;
         if (data != null && currentPage != null && pageSize != null && totalCount != null) {
             this.result = new Result(data, new Page(currentPage, pageSize, totalCount));
@@ -140,7 +150,7 @@ public class ResponseVO implements java.io.Serializable {
     }
 
 
-    private ResponseVO(Meta meta, Result result) {
+    private ResponseRoaVO(Meta meta, Result result) {
         this.meta = meta;
         this.result = result;
     }
@@ -314,14 +324,41 @@ public class ResponseVO implements java.io.Serializable {
          * @return
          */
         public Integer getTotalPage() {
+
+            Integer temppageSize=pageSize;
+
             if (this.pageSize != null && this.pageSize > 0) {
+                if(pageSize>1){
+                    pageSize=pageSize-1;
+                }
+
                 if (totalCount % pageSize == 0) {
                     totalPage = totalCount / pageSize;
                 } else {
                     totalPage = totalCount / pageSize + 1;
                 }
             }
-            return totalPage;
+
+            if(totalPage<2){
+                return totalPage;
+            }else {
+
+                if ( temppageSize != null && temppageSize > 0) {
+                    totalCount=totalCount-temppageSize+1;
+
+                    if (totalCount % temppageSize == 0) {
+                        totalPage = totalCount / temppageSize;
+                    } else {
+                        totalPage = totalCount / temppageSize + 1;
+                    }
+                }
+                    return totalPage+1;
+
+
+            }
+
+
+
         }
 
         @Override
@@ -345,12 +382,12 @@ public class ResponseVO implements java.io.Serializable {
     public static void main(String[] args) {
 
 
-       // System.out.println(JSONObject.fromObject(ResponseVO.success()));
-     //   System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
-        System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回对象集合List<Object>", 1, 10, 200)));
-       // System.out.println(JSONObject.fromObject(ResponseVO.failure()));
-      //  System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
-
+        // System.out.println(JSONObject.fromObject(ResponseVO.success()));
+        //   System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
+        //success1(T data, Integer currentPage, Integer pageSize, Integer totalCount)
+        System.out.println(JSONObject.fromObject(ResponseRoaVO.success1("处理成功：返回对象集合List<Object>", 1, 2, 2)));
+        // System.out.println(JSONObject.fromObject(ResponseVO.failure()));
+        //  System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
 
 
     }
