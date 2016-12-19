@@ -60,4 +60,13 @@ public interface SpecialActivityService {
      */
     public List<ActivityCouponVO> receiveActivityCoupon(UserInfoVO malllifeUserInfoEntity,Integer times) throws Exception;
 
+    /**
+     * 2016-12-15 双蛋活动-->查看某个用户领取过的红包记录
+     * @param malllifeUserInfoEntity 用户信息
+     * @return
+     */
+    public List<ActivityCouponVO> queryReceiveRecords(UserInfoVO malllifeUserInfoEntity) throws Exception;
+
+
+
 }
