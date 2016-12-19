@@ -96,6 +96,8 @@ public class ResponseVO implements java.io.Serializable {
     }
 
 
+
+
     /**
      * 失败返回值对象
      *
@@ -343,10 +345,13 @@ public class ResponseVO implements java.io.Serializable {
     public static void main(String[] args) {
 
 
-        System.out.println(JSONObject.fromObject(ResponseVO.success()));
-        System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
+       // System.out.println(JSONObject.fromObject(ResponseVO.success()));
+     //   System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
         System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回对象集合List<Object>", 1, 10, 200)));
-        System.out.println(JSONObject.fromObject(ResponseVO.failure()));
-        System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
+       // System.out.println(JSONObject.fromObject(ResponseVO.failure()));
+      //  System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
+
+
+
     }
 }

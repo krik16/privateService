@@ -13,6 +13,7 @@ import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.roa.vo.GroupMemberVO;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 public class CommodityBuyerVO implements Serializable {
     private static final long serialVersionUID = -1461107119422444629L;
@@ -86,6 +87,27 @@ public class CommodityBuyerVO implements Serializable {
     private Long activityEndAt;//活动结束时间
     private Integer activityStock;//活动库存
     private String activityMinPrice;//活动 各规格中最低价
+    private Long registerAt;//上架时间
+	private Long soldOutAt;//下架时间
+    private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
+
+	public Long getRegisterAt() {
+		return registerAt;
+	}
+
+	public void setRegisterAt(Long registerAt) {
+		this.registerAt = registerAt;
+	}
+
+	public Long getSoldOutAt() {
+		return soldOutAt;
+	}
+
+	public void setSoldOutAt(Long soldOutAt) {
+		this.soldOutAt = soldOutAt;
+	}
+
     private String subheading;  //副标题
 
     private String commodityDetails; //商品详情
@@ -93,6 +115,118 @@ public class CommodityBuyerVO implements Serializable {
     private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
     private long buyerCount;//用户已购买数量   （只有限购商品才有值）
     private int totalBuycount;//用户购买数量（是虚假数据）
+
+    //超级团参数
+    private int  groupPeopleMax;//最大成团人数，0表示没有最大成团人数
+
+    private Long groupStartAt;// 超级团教育版 团开始时间
+
+    private Long groupEndAt;//超级团教育版 团结束时间
+
+    private int groupNum;//超级团教育版 参团人数
+
+    private String activityRoundId;//超级团教育版团编号，用来参团，如果超级团未开团，则没有团编号
+
+    private int groupStatus; //团状态,0：拼团中，1：成功不可以参团，2：失败，3：未开始,4成功但仍可以参团
+
+    private boolean ifSupportAdjustPrice;//是否支持按成团人数调价，true:支持，false:不支持
+
+    private String activityGroupDesc;//开团说明,
+
+    private int activityCommodityStatus;//活动商品状态2成功，其它失效
+    private String crowdFundingPrice;//众筹价
+    
+    public String getCrowdFundingPrice() {
+		return crowdFundingPrice;
+	}
+
+	public void setCrowdFundingPrice(String crowdFundingPrice) {
+		this.crowdFundingPrice = crowdFundingPrice;
+	}
+
+	public Boolean getSale() {
+        return isSale;
+    }
+
+    public void setSale(Boolean sale) {
+        isSale = sale;
+    }
+
+    public int getGroupPeopleMax() {
+        return groupPeopleMax;
+    }
+
+    public void setGroupPeopleMax(int groupPeopleMax) {
+        this.groupPeopleMax = groupPeopleMax;
+    }
+
+    public Long getGroupStartAt() {
+        return groupStartAt;
+    }
+
+    public void setGroupStartAt(Long groupStartAt) {
+        this.groupStartAt = groupStartAt;
+    }
+
+    public Long getGroupEndAt() {
+        return groupEndAt;
+    }
+
+    public void setGroupEndAt(Long groupEndAt) {
+        this.groupEndAt = groupEndAt;
+    }
+
+    public int getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(int groupNum) {
+        this.groupNum = groupNum;
+    }
+
+    public String getActivityRoundId() {
+        return activityRoundId;
+    }
+
+    public void setActivityRoundId(String activityRoundId) {
+        this.activityRoundId = activityRoundId;
+    }
+
+    public int getGroupStatus() {
+        return groupStatus;
+    }
+
+    public void setGroupStatus(int groupStatus) {
+        this.groupStatus = groupStatus;
+    }
+
+    public boolean isIfSupportAdjustPrice() {
+        return ifSupportAdjustPrice;
+    }
+
+    public void setIfSupportAdjustPrice(boolean ifSupportAdjustPrice) {
+        this.ifSupportAdjustPrice = ifSupportAdjustPrice;
+    }
+
+    public String getActivityGroupDesc() {
+        return activityGroupDesc;
+    }
+
+    public void setActivityGroupDesc(String activityGroupDesc) {
+        this.activityGroupDesc = activityGroupDesc;
+    }
+
+    public int getActivityCommodityStatus() {
+        return activityCommodityStatus;
+    }
+
+    public void setActivityCommodityStatus(int activityCommodityStatus) {
+        this.activityCommodityStatus = activityCommodityStatus;
+    }
+    
+    public void Commodity(){
+    	
+    }
 	public Integer getActivityStatus() {
 		return activityStatus;
 	}
@@ -633,7 +767,13 @@ public class CommodityBuyerVO implements Serializable {
     public void setWeAndTeStatus(String weAndTeStatus) {
         this.weAndTeStatus = weAndTeStatus;
     }
+    public Integer getShelvesType() {
+        return null ==shelvesType?2:shelvesType;
+    }
 
+    public void setShelvesType(Integer shelvesType) {
+        this.shelvesType = shelvesType;
+    }
     public String getSubheading() {
         return subheading;
     }
@@ -785,6 +925,15 @@ public class CommodityBuyerVO implements Serializable {
         //默认返回非橱窗商品的值设置为0
         this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
         this.weAndTeStatus = commodity.getWeAndTeStatus();
+        if(commodity.getRegisterAt() != null){
+        	this.registerAt = commodity.getRegisterAt().getTime();//上架时间
+        }
+        if(commodity.getSoldOutAt() != null){
+        	this.soldOutAt = commodity.getSoldOutAt().getTime();//下架时间
+        }
+        if(commodity.getShelvesType() != null){
+        	this.shelvesType=commodity.getShelvesType();
+        }
         this.subheading=commodity.getSubheading();
         this.commodityDetails=commodity.getCommodityDetails();
         this.setIfShowInWechat(
@@ -852,6 +1001,7 @@ public class CommodityBuyerVO implements Serializable {
                 ", discount=" + discount +
                 ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
                 ", galleryPosition=" + galleryPosition +
+                ", shelvesType=" + shelvesType +
                 ", subheading=" + subheading +
                 ", commodityDetails=" + commodityDetails +
                 ", ifShowInWechat=" + ifShowInWechat +
@@ -863,5 +1013,23 @@ public class CommodityBuyerVO implements Serializable {
     public void setTip() {
         this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
                 this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
+    }
+
+    private boolean judgeShelvesType(Date date1,Date date2){
+        if(null ==date1 || null ==date2){
+            return false;
+        }
+        Long difference=date1.getTime()-date2.getTime();
+        return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
+    }
+
+    public  static  void  main(String args[]){
+        Date  a=new Date();
+        Date b= DateUtils.addYears(a, 30);
+        Date c=DateUtils.addDays(a,1);
+        CommodityBuyerVO vo=new CommodityBuyerVO();
+        System.out.println(vo.judgeShelvesType(DateUtils.addYears(a, 30), b));
+        System.out.println(c.getTime() - a.getTime());
+
     }
 }

@@ -2,11 +2,17 @@ package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+import com.rongyi.core.common.util.DateTool;
+import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.activitymanage.vo.CommodityVO;
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.mcmc.param.CommodityParam;
+import com.rongyi.easy.mcmc.param.CommoditySpecParam;
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -87,6 +93,48 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String commodityDetails; //商品详情
 
 	private Double discount; // 折扣
+
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
+
+	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
+	private List<Integer> serviceIds;//微信公众号ids
+	private Integer accountType;
+	private String merchantId;  //商户id
+	private List<WechatInfoVo> wechatInfoVos;
+
+
+	public List<WechatInfoVo> getWechatInfoVos() {
+		return wechatInfoVos;
+	}
+
+	public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+		this.wechatInfoVos = wechatInfoVos;
+	}
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
+
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
 
 	public ObjectId getId() {
 		return id;
@@ -435,6 +483,22 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.discount = discount;
 	}
 
+	public Integer getShelvesType() {
+		return null ==shelvesType?2:shelvesType;
+	}
+
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	@Override
 	public String toString() {
 		return "TotalCommodity{" +
@@ -479,6 +543,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", discount=" + discount +
 				", commodityModelNo=" + commodityModelNo +
 				", goodsParam=" + goodsParam +
+				", shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
 				'}';
@@ -540,8 +605,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setCustomCategoryIds((commodity.getCustomCategoryIds()));
 		}
 		this.setReason(commodity.getReason());
+		this.setShelvesType(commodity.getShelvesType());
 		this.setSubheading(commodity.getSubheading());
 		this.setCommodityDetails(commodity.getCommodityDetails());
+
+		this.setLocationIds(commodity.getLocationIds());
+		this.setAccountType(commodity.getIdentity());
+		this.setServiceIds(commodity.getServiceIds());
+		this.setMerchantId(commodity.getMerchantId());
+		this.setShelvesType(commodity.getShelvesType());
 	}
 
 	public String getSubheading() {
@@ -558,5 +630,132 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setCommodityDetails(String commodityDetails) {
 		this.commodityDetails = commodityDetails;
+	}
+
+	public void setTotalCommodityFromParam(CommodityParam param, SessionUserInfo userInfo, Map<String, Object> skus) {
+		try {
+			//老的商家后台数据默认是店长发布的商品
+			if(this.getIdentity() == null) {
+				this.setIdentity(Identity.SHOP);
+			}
+            this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
+			this.setName(param.getName());
+			this.setCode(param.getCode());
+			this.setCategory(param.getCategory());
+			this.setCategoryIds(param.getCategoryIds());
+			this.setCustomCategoryIds(param.getCustomCategoryIds());
+			this.setDescription(param.getDescription());
+			this.setPostage(param.getPostage());
+			this.setOriginalPrice(param.getOriginalPrice());
+			this.setCurrentPrice(param.getCurrentPrice());
+			this.setPicList(param.getPicList());
+			this.setSupportCourierDeliver(true);
+			this.setSupportSelfPickup(true);
+			switch(param.getDistribution()){
+				//配送方式 1表示到店自提2快递3表示支持两种方式
+				//supportCourierDeliver支持快递发货字段  true 是    false否
+				// supportSelfPickup支持到店自提  true 是    false否
+				case 2:this.setSupportSelfPickup(false);break;
+				case 1:this.setSupportCourierDeliver(false);break;
+				case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+			}
+			this.setFreight(param.getFreight());
+			this.setTerminalType(param.getTerminalType());
+			if(param.getStatus() != null && param.getStatus() == 5) {// 立即上架
+				this.setRegisterAt(DateTool.addTime(new Date(), 3));
+				this.setSoldOutAt(DateTool.addYears(this.getRegisterAt(), 1));
+				this.setImmediateOn(true);//表示前端是立即上架修改页面展示使用
+			} else {
+				this.setRegisterAt(param.getRegisterAt());
+				this.setSoldOutAt(param.getSoldOutAt());
+			}
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);//上架状态
+			//商家后台修改商品不能改变来源
+			if(this.getId() == null) {
+				this.setSource(0);
+			}
+			this.setStockStatus(param.getStockStatus());
+			if(this.getId() == null) {
+				this.setCreateAt(new Date());
+			}
+			this.setUpdateAt(new Date());
+			this.setPurchaseCount(param.getPurchaseCount());
+			this.setWeAndTeStatus(StringUtils.isNotBlank(param.getWeAndTeStatus()) ?
+										param.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+			this.setTemplateId(param.getTemplateId());
+			this.setReason(param.getReason());
+
+			setFilialeMids(param.getCommoditySpeceParams(), this);
+			setShopMids(param.getCommoditySpeceParams(), this);
+
+			this.setUpdateBy(userInfo.getId());
+			if(param.getId() == null) {
+				this.setCreateBy(userInfo.getId());
+			}
+
+			//老的app数据identity为-100
+			if(!(this != null && this.getIdentity() != null && this.getIdentity() == -100)) {
+				this.setIdentity(userInfo.getIdentity());
+			}
+
+			if(CollectionUtils.isNotEmpty(skus.keySet())) {
+				this.setSkus(new ArrayList<>(skus.keySet()));
+			}
+
+			//保存商品关联店铺的分公司品牌店铺信息
+			this.setBrandMid(userInfo.getBrandMid());
+
+			//老的app数据identity为-100
+			if(!(this != null && this.getIdentity() != null
+					&& this.getIdentity() == -100)) {
+				this.setIdentity(userInfo.getIdentity());
+			}
+
+			this.setAccountType(userInfo.getIdentity());
+			this.setServiceIds(param.getServiceIds());
+			this.setMerchantId(userInfo.getBindingMid());
+			this.setSource(param.getSource());
+			this.setSubheading(param.getSubheading());
+			this.setCommodityDetails(param.getCommodityDetails());
+
+			if(param.getCreateBy() != null) {
+				this.setCreateBy(param.getCreateBy());
+			}
+			this.setShelvesType(param.getShelvesType());
+		} catch (Exception e) {
+			throw new RuntimeException("参数错误");
+		}
+	}
+
+	private boolean isEffectiveMongoId(String id) {
+		return StringUtils.isNotBlank(id) && id.matches("[\\da-zA-Z]{24}");
+	}
+
+	private void setFilialeMids(List<CommoditySpecParam> commoditySpecParams, TotalCommodity totalCommodity) {
+		if(CollectionUtils.isNotEmpty(commoditySpecParams)){
+			Set<String> set = new HashSet<>();
+
+			for(CommoditySpecParam commoditySpecParam : commoditySpecParams){
+				if(isEffectiveMongoId(commoditySpecParam.getFilialeMid())) {
+					set.add(commoditySpecParam.getFilialeMid());
+				}
+			}
+
+			totalCommodity.setFilialeMids(new ArrayList<>(set));
+		}
+	}
+
+	private void setShopMids(List<CommoditySpecParam> commoditySpecParams, TotalCommodity totalCommodity) {
+		if(CollectionUtils.isNotEmpty(commoditySpecParams)){
+			Set<String> set = new HashSet<>();
+
+			for(CommoditySpecParam commoditySpecParam : commoditySpecParams){
+				if(isEffectiveMongoId(commoditySpecParam.getShopMid())) {
+					set.add(commoditySpecParam.getShopMid());
+				}
+			}
+
+			totalCommodity.setShopMids(new ArrayList<>(set));
+		}
 	}
 }

@@ -36,6 +36,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String openId;//微信openId
 	private String phone;//用户手机号
 	private String memberId;//微信电子会员id
+	private String memberName;// 用户昵称
 
 	private String receiverProvinceName;//收货省市
 	private String receiverCityName;//收货城市
@@ -241,6 +242,14 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.districtId = districtId;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
 		return "SubmitOrderParam [parentOrderList=" + parentOrderList
@@ -253,7 +262,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
 				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
 				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
-				+ ", receiverName=" + receiverName
+				+ ", receiverName=" + receiverName+ ", memberName=" + memberName
 				+ "]";
 	}
 	

@@ -18,6 +18,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private String orderNo;//订单编号
     private String createTime;//下单时间
     private String paymentTime;//支付时间
+    private String shopId;//店铺mysqlid
     private String shopName;//店铺名称
     private String commodityNum;//商品种类数
     private  String guideName;//导购名称
@@ -25,6 +26,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private Integer orderSource;//导购id
     private Byte payChannel;//导购id
     private String buyerAccount;//买家账号
+    private String buyerNameByWeixin;//标准微信下单昵称 需要解码
     private String buyerNickName;//买家账号
     private String paymentAmount;//订单实际支付金额 元
     private String discountAmount;//订单优惠金额 元
@@ -292,4 +294,20 @@ public class MerchantOsmOrderVO implements Serializable{
     public void setCreateTimeStr(String createTimeStr) {
 		this.createTimeStr = createTimeStr;
 	}
+
+    public String getBuyerNameByWeixin() {
+        return buyerNameByWeixin;
+    }
+
+    public void setBuyerNameByWeixin(String buyerNameByWeixin) {
+        this.buyerNameByWeixin = buyerNameByWeixin;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 }
