@@ -268,16 +268,14 @@ public enum CodeEnum {
     ERROR_EXIST_PASSWORD("1300000", "虚拟账户未设置提现密码"),
     SUCCESS_EXIST_PASSWORD("1300001", "虚拟账户已设置提现密码"),
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务"),
-<<<<<<< HEAD
 
-    ERROR_TAG_EXISTED("-111111", "标签名称已存在");
-=======
+    ERROR_TAG_EXISTED("-111111", "标签名称已存在"),
 	/** 内部员工账号相关提示  */
 	ERROR_RYUSER_NOT_EXIST("1400001","该账号不存在"),
 	ERROR_RYUSER_STOP("1400002","停用理由不能为空"),
 	ERROR_RYUSER_START("1400003","该账号已存在，您无法启用当前账号"),
 	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复");
->>>>>>> develop
+
 
     private String code; 
     private String message; 
