@@ -125,6 +125,45 @@ public class ParentOrderVO implements Serializable {
 	private Long groupEndAt;//团结束时间，单位：毫秒
 	private Long nextCloseTime;//待付款订单预计关闭剩余时间，单位：秒
 
+	private String activityName;// 活动名称
+
+	private Integer activityType;// 活动类型 0不参与，3秒杀，4拼团,5超级团教育版
+
+	private Integer activityStatus;// 活动状态
+
+	private Long activityRoundId;// 活动编号
+
+	private Integer activityId;// 订单来源
+
+	private Integer orderSource;// 订单来源
+
+	private Integer shopNum = 0;//店铺数量
+
+	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
+	/**
+	 *是否是购物车订单
+	 */
+	private boolean isCartOrder;
+
+	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
+
+	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
+
+	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
+	private String reserveName;//预约人姓名
+	private String reservePhone;//预约人手机号
+	private String reserveCompany;//预约人公司
+	private String reservePost;//预约人职称
+	private String activityCommodityDesc;//超级团商品副标题
+
+	public String getActivityCommodityDesc() {
+		return activityCommodityDesc;
+	}
+
+	public void setActivityCommodityDesc(String activityCommodityDesc) {
+		this.activityCommodityDesc = activityCommodityDesc;
+	}
+
 	public Long getGroupEndAt() {
 		return groupEndAt;
 	}
@@ -148,18 +187,6 @@ public class ParentOrderVO implements Serializable {
 	public void setIfPayment(boolean ifPayment) {
 		this.ifPayment = ifPayment;
 	}
-
-	private String activityName;// 活动名称
-
-	private Integer activityType;// 活动类型
-
-	private Integer activityStatus;// 活动状态
-
-	private Long activityRoundId;// 活动编号
-
-	private Integer activityId;// 订单来源
-
-	private Integer orderSource;// 订单来源
 
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
@@ -237,8 +264,6 @@ public class ParentOrderVO implements Serializable {
 		this.userAccount = userAccount;
 	}
 
-	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
-
 	public BigDecimal getPayAmount() {
 		return payAmount;
 	}
@@ -247,17 +272,7 @@ public class ParentOrderVO implements Serializable {
 		this.payAmount = payAmount;
 	}
 
-	private Integer shopNum = 0;//店铺数量
 
-	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
-	/**
-	 *是否是购物车订单
-	 */
-	private boolean isCartOrder;
-	
-	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
-	
-	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
 
 	public boolean isIfOnDisplay() {
 		return ifOnDisplay;
@@ -818,6 +833,38 @@ public class ParentOrderVO implements Serializable {
 		this.activityId = activityId;
 	}
 
+	public String getReserveName() {
+		return reserveName;
+	}
+
+	public void setReserveName(String reserveName) {
+		this.reserveName = reserveName;
+	}
+
+	public String getReservePhone() {
+		return reservePhone;
+	}
+
+	public void setReservePhone(String reservePhone) {
+		this.reservePhone = reservePhone;
+	}
+
+	public String getReserveCompany() {
+		return reserveCompany;
+	}
+
+	public void setReserveCompany(String reserveCompany) {
+		this.reserveCompany = reserveCompany;
+	}
+
+	public String getReservePost() {
+		return reservePost;
+	}
+
+	public void setReservePost(String reservePost) {
+		this.reservePost = reservePost;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
@@ -889,6 +936,11 @@ public class ParentOrderVO implements Serializable {
 				", ifPayment=" + ifPayment +
 				", groupEndAt=" + groupEndAt +
 				", nextCloseTime=" + nextCloseTime +
+				", reserveName=" + reserveName +
+				", reservePost=" + reservePost +
+				", reservePhone=" + reservePhone +
+				", reserveCompany=" + reserveCompany +
+				", activityCommodityDesc=" + activityCommodityDesc +
 				'}';
 	}
 }
