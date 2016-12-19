@@ -1083,6 +1083,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		}
 
 		CommodityVO vo = new CommodityVO();
+		vo.setCommodityRange(CommodityConstants.CommodityType.COMMODITY);
 		vo.setCommodityName(commodity.getName());
 		vo.setCommodityCategory(commodity.getCategory());
 		vo.setCommodityDescription(commodity.getDescription());

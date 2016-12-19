@@ -964,7 +964,9 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
 								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
-		if(vo.getCommodityRange() != CommodityConstants.CommodityType.GIFT) {
+		if(vo.getCommodityRange() != CommodityConstants.CommodityType.GIFT ||
+				vo.getCommodityRange() != CommodityConstants.CommodityType.COUPON ||
+				vo.getCommodityRange() != CommodityConstants.CommodityType.COUPON_PARKING) {
 			if (specMap == null) {
 				this.setStock(Integer.valueOf(vo.getCommodityStock()));
 				this.setOriginalPrice(vo.getCommodityOriginalPrice());
