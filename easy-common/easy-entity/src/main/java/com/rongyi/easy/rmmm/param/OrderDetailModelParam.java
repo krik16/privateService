@@ -30,7 +30,7 @@ public class OrderDetailModelParam implements Serializable {
 	private Integer commodityStock;//商品库存
 	private Integer activityId;//活动id
 	private Long activityRoundId;//活动场次id
-	private Integer activityType;//活动类型 0不参与 3秒杀 4拼团
+	private Integer activityType;//活动类型 0不参与 3秒杀 4拼团 5超级团教育版
 
 	private List<CommoditySpecColumnVO> specColumnValues;//  规格参数
 
