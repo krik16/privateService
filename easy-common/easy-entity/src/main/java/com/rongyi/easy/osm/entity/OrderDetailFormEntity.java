@@ -104,7 +104,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer activityLimitNum;//关联商品的活动限购数
 
-    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4
+    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4 超级团教育版5
 
     private BigDecimal disconntFee;//商品折扣
 
@@ -122,6 +122,9 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private Long activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
+
+    /** 推广人id */
+    private String promoterId;
 
 
     public String getRefundDiscountInfo() {
@@ -617,6 +620,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     public void setActivityRoundId(Long activityRoundId) {
         this.activityRoundId = activityRoundId;
+    }
+
+    public String getPromoterId() {
+        return promoterId;
+    }
+
+    public void setPromoterId(String promoterId) {
+        this.promoterId = promoterId;
     }
 
     @Override

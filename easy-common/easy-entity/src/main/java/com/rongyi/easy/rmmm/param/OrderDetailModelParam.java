@@ -60,6 +60,7 @@ public class OrderDetailModelParam implements Serializable {
 
 	private Integer articleType;//文章类型 1潮人攻略
 	private String articleId;//文章id
+	private String promoterId;//推广人id
 
 	public String getCouponCode() {
 		return couponCode;
@@ -266,6 +267,14 @@ public class OrderDetailModelParam implements Serializable {
 
 	public void setActivityType(Integer activityType) {
 		this.activityType = activityType;
+	}
+
+	public String getPromoterId() {
+		return promoterId;
+	}
+
+	public void setPromoterId(String promoterId) {
+		this.promoterId = promoterId;
 	}
 
 	@Override
