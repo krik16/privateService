@@ -82,6 +82,9 @@ public class ResponseVO implements java.io.Serializable {
         return new ResponseVO(ResponseVO.SUCCESS, new Result(data, null));
     }
 
+
+
+
     /**
      * 分页成功返回值对象
      *
@@ -116,6 +119,14 @@ public class ResponseVO implements java.io.Serializable {
     public static ResponseVO failure(int errno, String msg) {
         return new ResponseVO(new Meta(errno, msg), null);
     }
+
+
+
+
+    public static <T> ResponseVO redRebate(int errno, String msg,T data) {
+        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+    }
+
 
     /**
      * 失败码/失败信息回值对象
