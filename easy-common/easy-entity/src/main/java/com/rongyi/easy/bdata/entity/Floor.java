@@ -64,6 +64,14 @@ public class Floor implements Serializable {
         this.tmap = tmap;
     }
 
+    public String getFullTmap() {
+        if (StringUtils.isNotBlank(tmap)) {
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + tmap;
+        } else {
+            return null;
+        }
+    }
+
     public String getAliasename() {
         return aliasename;
     }
