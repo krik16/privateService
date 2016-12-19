@@ -1,14 +1,15 @@
 package com.rongyi.rss.activitymanage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseRoaVO;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.activity.entity.GroupStockParam;
-
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsDetail;
 import com.rongyi.easy.activitymanage.vo.groupBuy.*;
-
 import com.rongyi.easy.activitymanage.param.CommodityViewCon;
 import com.rongyi.easy.activitymanage.param.ViewControllerVo;
 import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
@@ -55,6 +56,31 @@ public interface GroupBuyService {
 	 */
 	GroupBuyGoodSimpleInfo getGroupBuyGoodSimpleInfo(String goodId,int activityId);
 
+	/**
+	 * 已约学院列表
+	 */
+
+	/**
+	 * 已参人员
+	 * 特殊分页
+	 * @param groupId
+	 * @param currentPage
+	 * @param pageSize
+     * @return
+     */
+	ResponseRoaVO getGroubByDetails1(Long groupId, Integer currentPage, Integer pageSize);
+
+
+	/**
+	 * 已参人员
+	 * 正常分页
+	 * @param groupId
+	 * @param currentPage
+	 * @param pageSize
+     * @return
+     */
+	ResponseVO getGroubByDetails(Long groupId, Integer currentPage, Integer pageSize);
+
 
 	/**
 	 * 按照活动id 和商品id  查询该商品正在开始中的团
@@ -90,8 +116,14 @@ public interface GroupBuyService {
 	 * @param from  0微信,1容易逛------------------
 	 * @return
 	 */
-	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone);
+	long  joinGroup(int activityId,long groupId,String goodId,String goodSpecId,String userId,String openId,String userNick,String userIcon,int from,String phone,String userName,String userPhone,String userPosition,String userCompany);
 
+
+	/**
+	 * 开团，超级团，只有参团
+	 * @return
+	 */
+	public boolean saveGroupInfo(GroupInfo groupInfo);
 
 	/**
 	 * 通知支付结果,变更用户参团成功状态,
@@ -183,4 +215,40 @@ public interface GroupBuyService {
 
 	public boolean deleteActivityGoodsSpecById(Integer id);
 
+	public List<GroupBuyGoodSimpleInfo> getGroupBuyGoodSimpleInfoList(int currentPage, int pageSize, int activityId);
+	/**
+	 * 根据用户id和团编号查询拼团详情
+	 * @param groupId
+	 * @param userId
+	 * @return
+	 */
+	public List<GroupDetail> findGroupDetailByUserId(long groupId,String userId);
+	/**
+	 * 根据团id查询已参团人数  状态：0
+	 * @param groupDetail
+	 * @return
+	 */
+	public long countJoinGroupNum(long groupId);
+
+	/**
+	 * 根据商品id删除团
+	 * @param groupInfo
+	 * @return
+	 */
+	public boolean deleteGroupInfoByGoodsId(GroupInfo groupInfo);
+
+	/**
+	 * 更新拼团时间
+	 * @param groupInfo
+	 * @return
+	 */
+	public boolean updateGroupByGoodActId(GroupInfo groupInfo);
+
+	/**
+	 *
+	 * @param activityId
+	 * @param commodityId
+	 * @return
+	 */
+	public GroupInfo getGroupInfoByAIdAndGoodId(Integer activityId,String commodityId);
 }

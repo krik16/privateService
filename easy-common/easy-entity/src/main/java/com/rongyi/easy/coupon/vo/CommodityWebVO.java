@@ -37,6 +37,8 @@ public class CommodityWebVO implements Serializable{
         this.isChoose = isChoose;
     }
 
+
+
     public String getDiscount() {
         return discount;
     }
