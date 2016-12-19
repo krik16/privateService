@@ -196,6 +196,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     //订单对应事件
     private OrderEventEntity orderEvent;
 
+    //订单对应事件2
+    private OrderEventEntity orderEvent2;
+
     //对单对应退款记录
     private String applicationType;
 
@@ -227,6 +230,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
+
+    private String buyerName;//如果是微信用户昵称，昵称是编码之后的
+    private OrderReserveEntity orderReserve;//超级团预约信息
 
     public Byte getIsAlert() {
         return isAlert;
@@ -932,9 +938,33 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.activityName = activityName;
     }
 
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public OrderReserveEntity getOrderReserve() {
+        return orderReserve;
+    }
+
+    public void setOrderReserve(OrderReserveEntity orderReserve) {
+        this.orderReserve = orderReserve;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+    public OrderEventEntity getOrderEvent2() {
+        return orderEvent2;
+    }
+
+    public void setOrderEvent2(OrderEventEntity orderEvent2) {
+        this.orderEvent2 = orderEvent2;
     }
 
     @Override
