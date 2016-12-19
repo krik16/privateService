@@ -139,19 +139,5 @@ public class ParentOrderParam implements Serializable {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
-		return "ParentOrderParam{" +
-				"sonOrderList=" + sonOrderList +
-				", shopId='" + shopId + '\'' +
-				", comment='" + comment + '\'' +
-				", addressId='" + addressId + '\'' +
-				", orderModelId='" + orderModelId + '\'' +
-				", guideId='" + guideId + '\'' +
-				", discountInfo=" + discountInfo +
-				", platformRebateCode=" + platformRebateCode +
-				", reservePhone=" + reservePhone +
-				", reserveName=" + reserveName +
-				", reserveCompany=" + reserveCompany +
-				", reservePost=" + reservePost +
-				'}';
 	}
 }

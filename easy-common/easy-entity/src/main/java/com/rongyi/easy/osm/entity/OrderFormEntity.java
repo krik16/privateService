@@ -58,13 +58,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal scoreAmount;//rebate_amount - 积分
     private List<OrderDetailFormEntity> detailOrderList;
     private OrderFormExtraEntity orderExtra;
-    private OrderEventEntity orderEvent;//订单对应事件
-    private String applicationType;//对单对应退款记录
-    private String weixinAppId;//微信标准版支付记录appid
-    private String orderChannel;//下单渠道
-    private String openId;//微信openId
-    private String userPhone;//用户手机号
-    private Integer activityStatus;//活动状态
 
     //订单对应事件
     private OrderEventEntity orderEvent;

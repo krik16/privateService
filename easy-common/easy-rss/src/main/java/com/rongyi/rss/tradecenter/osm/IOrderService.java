@@ -139,7 +139,6 @@ public interface IOrderService {
 	 * @throws Exception
 	 *//*
 	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;*/
-	 */
 	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;
 
 	/**
