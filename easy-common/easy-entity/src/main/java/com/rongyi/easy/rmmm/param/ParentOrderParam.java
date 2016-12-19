@@ -19,6 +19,10 @@ public class ParentOrderParam implements Serializable {
 	private JSONObject discountInfo;// {“score”:”使用积分”}
 	private String platformRebateCode;//促销券code
 	private Integer deliveryType;//发货方式 （ 1自提 2快递）
+	private String reserveName;//预约人姓名
+	private String reservePhone;//预约人手机号
+	private String reserveCompany;//预约人公司
+	private String reservePost;//预约人职称
 
 	public List<SonOrderParam> getSonOrderList() {
 		return sonOrderList;
@@ -100,8 +104,54 @@ public class ParentOrderParam implements Serializable {
 		this.deliveryType = deliveryType;
 	}
 
+	public String getReserveName() {
+		return reserveName;
+	}
+
+	public void setReserveName(String reserveName) {
+		this.reserveName = reserveName;
+	}
+
+	public String getReservePhone() {
+		return reservePhone;
+	}
+
+	public void setReservePhone(String reservePhone) {
+		this.reservePhone = reservePhone;
+	}
+
+	public String getReserveCompany() {
+		return reserveCompany;
+	}
+
+	public void setReserveCompany(String reserveCompany) {
+		this.reserveCompany = reserveCompany;
+	}
+
+	public String getReservePost() {
+		return reservePost;
+	}
+
+	public void setReservePost(String reservePost) {
+		this.reservePost = reservePost;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+		return "ParentOrderParam{" +
+				"sonOrderList=" + sonOrderList +
+				", shopId='" + shopId + '\'' +
+				", comment='" + comment + '\'' +
+				", addressId='" + addressId + '\'' +
+				", orderModelId='" + orderModelId + '\'' +
+				", guideId='" + guideId + '\'' +
+				", discountInfo=" + discountInfo +
+				", platformRebateCode=" + platformRebateCode +
+				", reservePhone=" + reservePhone +
+				", reserveName=" + reserveName +
+				", reserveCompany=" + reserveCompany +
+				", reservePost=" + reservePost +
+				'}';
 	}
 }

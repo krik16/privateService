@@ -131,12 +131,14 @@ public interface IOrderService {
 	 */
 	ResponseVO changeBuyerAddress(OrderAddressParam param);
 
-	/**
+/*	*//**
 	 * 修改拼团状态
 	 * @param activityId 活动id
 	 * @param activityRoundId 团编号
 	 * @param status 团状态
 	 * @throws Exception
+	 *//*
+	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;*/
 	 */
 	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;
 

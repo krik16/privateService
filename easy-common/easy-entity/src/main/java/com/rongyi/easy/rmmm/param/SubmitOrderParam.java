@@ -16,18 +16,30 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private static final long serialVersionUID = 1L;
 
 	private List<ParentOrderParam> parentOrderList;
+
 	private List<String> commodityCartIds;
+
 	private String devId;// 设备号
+
 	private String devType;// 设备类型（0 ios/1 android/2 wap）
+
 	private String source;//订单来源 0为微商城,微信，1为APP，2为终端机，3其他
+
 	private String platformRebateCode;//购物车抵扣券码
+
 	private JSONObject discountInfo;// {“score”:”使用积分”} 购物车使用积分
+
 	private Boolean ifCart = true;//是否购物车订单
+
 	private String weixinAppId;//微信标准版支付appid
+
 	private String orderChannel;//下单渠道
+
 	private String openId;//微信openId
 	private String phone;//用户手机号
 	private String memberId;//微信电子会员id
+	private String memberName;// 用户昵称
+
 	private String receiverProvinceName;//收货省市
 	private String receiverCityName;//收货城市
 	private String receiverDistrictName;//收货区县
@@ -306,9 +318,28 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.shopMid = shopMid;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+		return "SubmitOrderParam [parentOrderList=" + parentOrderList
+				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
+				+ ", devType=" + devType + ", source=" + source
+				+ ", platformRebateCode=" + platformRebateCode
+				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
+				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
+				+ orderChannel + ", openId=" + openId + ", phone=" + phone
+				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
+				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
+				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
+				+ ", receiverName=" + receiverName+ ", memberName=" + memberName
+				+ "]";
 	}
 	
 }

@@ -26,10 +26,12 @@ public class ActivityGroupDetailVO implements Serializable{
 	private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
 	private String activityName;//拼团活动名称
 	private Integer activityCommodityStock;//活动商品库存
+	private Integer activityCommodityStatus;//活动商品状态
 	private double activityPrice;//拼团商品最低价格
 	private Long endAt;//拼团活动结束时间
 	private Long startAt;//拼团活动开始时间
 	private Boolean forceAttention = false;//下单是否需要强制关注,true：要关注，false：不需要关注
+	private Long groupStartAt;//拼团开始时间
 	private Long groupEndAt;//拼团结束时间
 	private List<GroupMemberVO> groupMembers;//参团人员
 	private Integer groupPeopleLimit;//成团所需人数
@@ -40,7 +42,83 @@ public class ActivityGroupDetailVO implements Serializable{
 	private int groupTotalNum;//活动商品参团总人数
 	private boolean ifOpenGroup;//是否可参团，true:可以，false：不可以
 	private boolean ifJoinGroup;//是否可开团，true可以，false不可以
+
+	//超级团
+	private String  activityGroupDesc;//	开团说明
+	private int groupNum;//已参团人数
+	private int groupPeopleMax;//最大成团人数，0表示没有最大成团人数
+	private Integer activityType;//8普通拼团,9电商版拼团，10教育版拼团
+
+	private String activityRoundId;//超级团教育版团编号，用来参团，如果超级团未开团，则没有团编号
+	private boolean ifSupportAdjustPrice;//是否支持按成团人数调价，true:支持，false:不支持
+	private String expectTotalAmount;//众筹价
+	private String mallName;//商场名称
 	
+	
+	public Integer getActivityCommodityStatus() {
+		return activityCommodityStatus;
+	}
+
+	public void setActivityCommodityStatus(Integer activityCommodityStatus) {
+		this.activityCommodityStatus = activityCommodityStatus;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getExpectTotalAmount() {
+		return expectTotalAmount;
+	}
+
+	public void setExpectTotalAmount(String expectTotalAmount) {
+		this.expectTotalAmount = expectTotalAmount;
+	}
+
+	public Long getGroupStartAt() {
+		return groupStartAt;
+	}
+
+	public void setGroupStartAt(Long groupStartAt) {
+		this.groupStartAt = groupStartAt;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
+	public String getActivityGroupDesc() {
+		return activityGroupDesc;
+	}
+
+	public void setActivityGroupDesc(String activityGroupDesc) {
+		this.activityGroupDesc = activityGroupDesc;
+	}
+
+	public int getGroupNum() {
+		return groupNum;
+	}
+
+	public void setGroupNum(int groupNum) {
+		this.groupNum = groupNum;
+	}
+
+	public int getGroupPeopleMax() {
+		return groupPeopleMax;
+	}
+
+	public void setGroupPeopleMax(int groupPeopleMax) {
+		this.groupPeopleMax = groupPeopleMax;
+	}
+
 	public boolean isIfOpenGroup() {
 		return ifOpenGroup;
 	}
@@ -179,24 +257,44 @@ public class ActivityGroupDetailVO implements Serializable{
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
+
+	public String getActivityRoundId() {
+		return activityRoundId;
+	}
+
+	public void setActivityRoundId(String activityRoundId) {
+		this.activityRoundId = activityRoundId;
+	}
+
+	public boolean isIfSupportAdjustPrice() {
+		return ifSupportAdjustPrice;
+	}
+
+	public void setIfSupportAdjustPrice(boolean ifSupportAdjustPrice) {
+		this.ifSupportAdjustPrice = ifSupportAdjustPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "ActivityGroupDetailVO [commodityId=" + commodityId
 				+ ", commodityName=" + commodityName + ", commodityOPriceMax="
-				+ commodityOPriceMax + ", commodityPicList=" + commodityPicList
-				+ ", activityId=" + activityId + ", activityName="
-				+ activityName + ", activityCommodityStock="
-				+ activityCommodityStock + ", activityPrice=" + activityPrice
-				+ ", endAt=" + endAt + ", startAt=" + startAt
-				+ ", forceAttention=" + forceAttention + ", groupEndAt="
-				+ groupEndAt + ", groupMembers=" + groupMembers + ", groupPeopleLimit="
-				+ groupPeopleLimit + ", groupStatus=" + groupStatus
-				+ ", memberIdentity=" + memberIdentity 
-				+ ", orderNo=" + orderNo + ", commodityAppStatus=" + commodityAppStatus
-				+ ", groupTotalNum=" + groupTotalNum + ", activityCommodityDesc=" + activityCommodityDesc
-				+ ", activityStatus=" + activityStatus
-				+ ", ifOpenGroup=" + ifOpenGroup + ", ifJoinGroup=" + ifJoinGroup
-				+ "]";
+				+ commodityOPriceMax + ", commodityAppStatus="
+				+ commodityAppStatus + ", commodityPicList=" + commodityPicList
+				+ ", activityId=" + activityId + ", activityStatus="
+				+ activityStatus + ", activityName=" + activityName
+				+ ", activityCommodityStock=" + activityCommodityStock
+				+ ", activityPrice=" + activityPrice + ", endAt=" + endAt
+				+ ", startAt=" + startAt + ", forceAttention=" + forceAttention
+				+ ", groupStartAt=" + groupStartAt + ", groupEndAt="
+				+ groupEndAt + ", groupMembers=" + groupMembers
+				+ ", groupPeopleLimit=" + groupPeopleLimit + ", groupStatus="
+				+ groupStatus + ", memberIdentity=" + memberIdentity
+				+ ", orderNo=" + orderNo + ", activityCommodityDesc="
+				+ activityCommodityDesc + ", groupTotalNum=" + groupTotalNum
+				+ ", ifOpenGroup=" + ifOpenGroup + ", ifJoinGroup="
+				+ ifJoinGroup + ", activityGroupDesc=" + activityGroupDesc
+				+ ", groupNum=" + groupNum + ", groupPeopleMax="
+				+ groupPeopleMax + ", activityType=" + activityType + "]";
 	}
-
+	
 }

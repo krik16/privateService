@@ -27,6 +27,8 @@ public class CommodityWebVO implements Serializable{
     private String detailPic;
     private String discount;
 
+
+
     public String getDiscount() {
         return discount;
     }
