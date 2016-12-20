@@ -272,5 +272,5 @@ public interface IOrderQueryService {
 	 * @param params {"status":"1 支付成功,2 确认收货,3 订单取消","orderNo":"订单号"
 	 *               "type":"事件类型 2 支付成功,4 确认收货,7 超时未确认收货,6 超时未发货退款,23 卖家取消订单退款"}
 	 */
-	public Map<String, Object> getCommodityOrderPush(JSONObject params);
+	public Map<String, Object> getCommodityOrderPush(Map<String, Object> params);
 }
