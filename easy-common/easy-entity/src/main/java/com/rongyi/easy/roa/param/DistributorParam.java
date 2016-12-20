@@ -15,8 +15,7 @@ public class DistributorParam implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;//表id
-	private String userId;//关联的二级店铺账户id
+	private String userId;//店铺账户id
 	private String userAccount;//用户名
 	private String phone;//登录手机号
 	private String userName;//姓名
@@ -26,12 +25,6 @@ public class DistributorParam implements Serializable{
 	private AccountParam accountParam;//资金账户信息
 	private String memo;//备注
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getUserId() {
 		return userId;
 	}
@@ -88,11 +81,12 @@ public class DistributorParam implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "DistributorParam [id=" + id + ", userId=" + userId
-				+ ", userAccount=" + userAccount + ", phone=" + phone
-				+ ", userName=" + userName + ", userNickName=" + userNickName
-				+ ", cardId=" + cardId + ", bindingPhone=" + bindingPhone
-				+ ", accountParam=" + accountParam + ", memo=" + memo + "]";
+		return "DistributorParam [userId=" + userId + ", userAccount="
+				+ userAccount + ", phone=" + phone + ", userName=" + userName
+				+ ", userNickName=" + userNickName + ", cardId=" + cardId
+				+ ", bindingPhone=" + bindingPhone + ", accountParam="
+				+ accountParam + ", memo=" + memo + "]";
 	}
+	
 	
 }
