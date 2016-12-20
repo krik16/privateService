@@ -57,6 +57,16 @@ public interface IOrderQueryService {
 
 	/**
 	 * 我的订单数量
+	 * easy-roa -> ROAOrderServiceImpl -> getMyOrderCount 调用
+	 * @return Integer activityType 订单类型：空为全部，0-普通、1-闪购、2-特卖、3-秒杀、4-拼团、-1-大促,5预约
+	 * @return String buyerNum
+	 * @throws Exception
+	 */
+	@Deprecated
+	public MyOrderCountVO getMyOrderCount(Integer activityType,String buyerNum) throws Exception;
+
+	/**
+	 * 我的订单数量
 	 *
 	 * @return
 	 * @throws Exception

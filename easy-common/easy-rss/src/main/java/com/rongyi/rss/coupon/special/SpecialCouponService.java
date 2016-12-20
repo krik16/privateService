@@ -17,4 +17,8 @@ public interface SpecialCouponService {
     public int batchInsert(List<String> coupons);
 
     public int batchUpdate(List<String> coupons);
+
+    public int insertByActivity(List<String> couponIds, String activity);
+
+    public int deleteByActivity(String activity);
 }

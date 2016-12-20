@@ -26,6 +26,26 @@ public class PingTuanViewConDownParams implements Serializable{
 
     private String commodityName;
 
+    private String userPhone;
+
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
     public Integer getActivityId() {
         return activityId;
     }
