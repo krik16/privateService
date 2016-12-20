@@ -305,4 +305,6 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public Integer getUserInfoCountForDistributor();
+	
+	public String insertDistributorInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
 }

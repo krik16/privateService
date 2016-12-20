@@ -24,6 +24,8 @@ public class DistributorParam implements Serializable{
 	private String bindingPhone;//绑定会员手机号
 	private AccountParam accountParam;//资金账户信息
 	private String memo;//备注
+	private Integer roleId;//角色id
+	private String mallId;//商场id
 	
 	public String getUserId() {
 		return userId;
@@ -79,14 +81,26 @@ public class DistributorParam implements Serializable{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+	public String getMallId() {
+		return mallId;
+	}
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
 	@Override
 	public String toString() {
 		return "DistributorParam [userId=" + userId + ", userAccount="
 				+ userAccount + ", phone=" + phone + ", userName=" + userName
 				+ ", userNickName=" + userNickName + ", cardId=" + cardId
 				+ ", bindingPhone=" + bindingPhone + ", accountParam="
-				+ accountParam + ", memo=" + memo + "]";
+				+ accountParam + ", memo=" + memo + ", roleId=" + roleId
+				+ ", mallId=" + mallId + "]";
 	}
-	
 	
 }
