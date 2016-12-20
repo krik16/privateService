@@ -15,7 +15,7 @@ public class DistributorDetailVO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 4016043572445905767L;
-	private Integer id;//表id
+	private Integer userId;//表id
 	private String userAccount;//用户名
 	private String phone;//登录手机号
 	private String userName;//姓名
@@ -24,11 +24,12 @@ public class DistributorDetailVO implements Serializable{
 	private UserCashAccountVO cashAccount;//银行卡配置信息
 	private String memo;//备注
 	private UserAlipyVO userAlipy;//支付宝配置信息
-	public Integer getId() {
-		return id;
+	
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	public String getUserAccount() {
 		return userAccount;
@@ -80,7 +81,7 @@ public class DistributorDetailVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "DistributorDetailVO [id=" + id + ", userAccount=" + userAccount
+		return "DistributorDetailVO [userId=" + userId + ", userAccount=" + userAccount
 				+ ", phone=" + phone + ", userName=" + userName
 				+ ", userNickName=" + userNickName + ", cardId=" + cardId
 				+ ", cashAccount=" + cashAccount + ", memo=" + memo

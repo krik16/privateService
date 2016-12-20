@@ -49,7 +49,7 @@ public class Shop implements Serializable {
 	private String terminal_shop;
 	private String token;
 	private Date updated_at;
-	private Integer valid;//店铺状态
+	private Integer valid;//店铺状态   0正常  1隐藏  2删除
 	private ObjectId zone_id;
 	private List<ObjectId> zone_ids;
 	private Integer recommend;//0不置顶  1置顶
