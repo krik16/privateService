@@ -28,6 +28,17 @@ public class ActivityVO implements Serializable{
 	private String activityTitle;//活动页面标题
 	private List<ActivityCommodityVO> commodityList;//拼团活动商品列表
 
+
+	private List<String> activityPics;//活动图片列表
+
+	public List<String> getActivityPics() {
+		return activityPics;
+	}
+
+	public void setActivityPics(List<String> activityPics) {
+		this.activityPics = activityPics;
+	}
+
 	public Integer getActivityStatus() {
 		return activityStatus;
 	}

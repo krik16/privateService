@@ -57,6 +57,16 @@ public interface IOrderQueryService {
 
 	/**
 	 * 我的订单数量
+	 * easy-roa -> ROAOrderServiceImpl -> getMyOrderCount 调用
+	 * @return Integer activityType 订单类型：空为全部，0-普通、1-闪购、2-特卖、3-秒杀、4-拼团、-1-大促,5预约
+	 * @return String buyerNum
+	 * @throws Exception
+	 */
+	@Deprecated
+	public MyOrderCountVO getMyOrderCount(Integer activityType,String buyerNum) throws Exception;
+
+	/**
+	 * 我的订单数量
 	 *
 	 * @return
 	 * @throws Exception
@@ -272,5 +282,5 @@ public interface IOrderQueryService {
 	 * @param params {"status":"1 支付成功,2 确认收货,3 订单取消","orderNo":"订单号"
 	 *               "type":"事件类型 2 支付成功,4 确认收货,7 超时未确认收货,6 超时未发货退款,23 卖家取消订单退款"}
 	 */
-	public Map<String, Object> getCommodityOrderPush(JSONObject params);
+	public Map<String, Object> getCommodityOrderPush(Map<String, Object> params);
 }

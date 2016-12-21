@@ -83,6 +83,44 @@ public class GroupSearch implements Serializable {
     private String phone;
 
     private String goodName;
+    private Integer groupRole;
+    private String userPhone;
+    private Integer joinState;
+
+    private String userName;
+
+
+    public Integer getJoinState() {
+        return joinState;
+    }
+
+    public void setJoinState(Integer joinState) {
+        this.joinState = joinState;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Integer getGroupRole() {
+        return groupRole;
+    }
+
+    public void setGroupRole(Integer groupRole) {
+        this.groupRole = groupRole;
+    }
 
     public Integer getqState() {
         return qState;
