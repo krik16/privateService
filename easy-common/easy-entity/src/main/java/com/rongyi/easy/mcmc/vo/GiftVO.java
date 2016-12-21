@@ -40,6 +40,15 @@ public class GiftVO implements Serializable {
     private List<GiftTagVO> tagVOs;
     // 商品类型(0:商品, 1:礼品)
     private Integer commodityRange;
+    private String reason;
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
     public String getId() {
         return id;
