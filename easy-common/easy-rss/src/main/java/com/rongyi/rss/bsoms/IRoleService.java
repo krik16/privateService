@@ -82,5 +82,4 @@ public interface IRoleService {
 	 */
 	int updateRoleAuthByUserId(Integer userId, List<String> authOldList, List<String> authList);
 	public List<BRoles> getRoleListForDis(Integer userId);
-	public int getRoleListCountForDis(Integer userId);
 }
