@@ -299,12 +299,25 @@ public interface IUserInfoService {
 	 * @param pageSize  每页显示的数量
 	 * @return
 	 */
-	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(int currentPage,int pageSize);
+	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(String mallId,int currentPage,int pageSize);
 	/**
 	 * 查询二级店铺账号数量
 	 * @return
 	 */
-	public Integer getUserInfoCountForDistributor();
-	
+	public Integer getUserInfoCountForDistributor(String mallId);
+	/**
+	 * 新建分销商账号信息
+	 * @param userManagerParam
+	 * @return
+	 * @throws MallShopException
+	 * @throws Exception
+	 */
 	public String insertDistributorInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
+	/**
+	 * 修改分销商账号信息
+	 * @param userManagerParam
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean updateDistributorUserInfo(UserManagerParam userManagerParam) throws Exception;
 }

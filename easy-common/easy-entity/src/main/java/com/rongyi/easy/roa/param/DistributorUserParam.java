@@ -12,6 +12,8 @@ public class DistributorUserParam implements Serializable{
 	private Integer pageSize;
 	
 	private Integer currentPage;
+	
+	private String mallId;
 
 	public Integer getPageSize() {
 		return pageSize;
@@ -29,10 +31,18 @@ public class DistributorUserParam implements Serializable{
 		this.currentPage = currentPage;
 	}
 
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+
 	@Override
 	public String toString() {
 		return "DistributorUserParam [pageSize=" + pageSize + ", currentPage="
-				+ currentPage + "]";
+				+ currentPage + ", mallId=" + mallId + "]";
 	}
 	
 }

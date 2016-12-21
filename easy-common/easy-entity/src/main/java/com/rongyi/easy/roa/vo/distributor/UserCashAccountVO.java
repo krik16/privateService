@@ -12,6 +12,7 @@ public class UserCashAccountVO implements Serializable{
 	private String bankName;//银行名称  开户银行
 	private String bankUserName;//持卡人姓名
 	private Integer type;//资金类型
+	private Integer id;//表id
 	public Integer getBankId() {
 		return bankId;
 	}
@@ -42,11 +43,17 @@ public class UserCashAccountVO implements Serializable{
 	public void setType(Integer type) {
 		this.type = type;
 	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "UserCashAccountVO [bankId=" + bankId + ", bankCardId="
 				+ bankCardId + ", bankName=" + bankName + ", bankUserName="
-				+ bankUserName + ", type=" + type + "]";
+				+ bankUserName + ", type=" + type + ", id=" + id + "]";
 	}
-	
+		
 }

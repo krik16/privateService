@@ -406,4 +406,11 @@ public interface IUserService {
       * @throws MallShopException
       */
      public String userDistributorRegistAndVerify(UserManagerParam userManagerParam) throws MallShopException;
+     /**
+      * 修改分销商账号
+      * @param userManagerParam
+      * @return
+      * @throws Exception
+      */
+     public Boolean updateDistributorUserInfo(UserManagerParam userManagerParam) throws Exception;
 }
