@@ -938,4 +938,28 @@ public interface Constants {
     	String own_info = "own_info";
     	String extension_info = "extension_info";
     }
+
+    /**
+     * 分销推送的订单状态
+     * @author user
+     *
+     */
+    interface OrderPushStatus{
+        /** 支付成功 */
+        String TO_SHIPPED = "1";
+        /** 订单确认收货状态 */
+        String CONFIRM_RECEIPT = "2";
+        /** 订单取消和退款 */
+        String CANCEL = "3";
+    }
+
+    /**
+     * 推送类型
+     * @author user
+     *
+     */
+    interface OrderPushSource{
+        /** 商品分销推送 */
+        String COMMODITY_FENXIAO = "COMMODITY_FENXIAO";
+    }
 }
