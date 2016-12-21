@@ -41,16 +41,54 @@ public class ShopParam implements Serializable{
 	private Integer valid ;    //店铺状态
 	private String nameEn;  //店铺英文名
 	private String descriptionEn ;//店铺英文介绍
-	
+	private String fID;//终端使用第三方地图导航引擎，需要用一个新字段来匹配双方的地图和店铺数据
+
 	@Override
-	public String toString(){
-		return "ShopParam [id="+id+",name="+name+",shopNature="+shopNature+",shopType="+shopType+",qrcodePic="+qrcodePic
-				+",recommend="+recommend+",shopNumber="+shopNumber+",address="+address+",customCategoryIds="+customCategoryIds
-				+"businessStatus="+businessStatus+",location="+location+",tags="+tags+",telephone="+telephone+",businessHours"+businessHours
-				+",openAt="+openAt+",description="+description+",brandId="+brandId+",brandIds="+brandIds+",filialeId="+filialeId
-				+",appPhotosUrl="+appPhotosUrl+",photosUrl="+photosUrl+",coordinate="+coordinate+",icon:"+icon +",position="+position.toString()+"]";
+	public String toString() {
+		return "ShopParam{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", shopNature=" + shopNature +
+				", shopType=" + shopType +
+				", qrcodePic='" + qrcodePic + '\'' +
+				", recommend=" + recommend +
+				", position=" + position +
+				", shopNumber='" + shopNumber + '\'' +
+				", address='" + address + '\'' +
+				", customCategoryIds='" + customCategoryIds + '\'' +
+				", businessStatus=" + businessStatus +
+				", location=" + location +
+				", tags=" + tags +
+				", telephone='" + telephone + '\'' +
+				", businessHours='" + businessHours + '\'' +
+				", openAt='" + openAt + '\'' +
+				", description='" + description + '\'' +
+				", brandId='" + brandId + '\'' +
+				", brandIds='" + brandIds + '\'' +
+				", filialeId='" + filialeId + '\'' +
+				", appPhotosUrl='" + appPhotosUrl + '\'' +
+				", photosUrl='" + photosUrl + '\'' +
+				", coordinate=" + coordinate +
+				", isImport=" + isImport +
+				", optId=" + optId +
+				", createSource=" + createSource +
+				", averageConsumption='" + averageConsumption + '\'' +
+				", icon='" + icon + '\'' +
+				", valid=" + valid +
+				", nameEn='" + nameEn + '\'' +
+				", descriptionEn='" + descriptionEn + '\'' +
+				", fID='" + fID + '\'' +
+				'}';
 	}
-	
+
+	public String getfID() {
+		return fID;
+	}
+
+	public void setfID(String fID) {
+		this.fID = fID;
+	}
+
 	public String getId() {
 		return id;
 	}
