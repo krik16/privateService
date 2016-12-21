@@ -36,6 +36,7 @@ public enum AppErrorCode {
     ERROR_WELFARE_NOTPAY(1065007, "未支付或者支付失败，无法获取福袋"),
     ERROR_WELFARE_ISPAY(1065008, "你已参与过支付，无法再支付!"),
     ERROR_USER_NOTEXIST(1062003,"用户信息不存在"),
+    ERROR_ACTIVITY_END(1062004,"活动已经结束!!!"),
 
     /** 购物车相关  后4位区间  6001---7000*/
     ERROR_COMMODITY_NOTFOUND(1066001,"商品不存在"),
