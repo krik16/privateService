@@ -96,14 +96,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
-    private Integer business; // 0普通商品订单 1礼品订单
-    private Integer deliveryType;//快递方式 1自提 2快递
+    private Integer business = 0; // 0普通商品订单 1礼品订单
+    private Integer deliveryType = 0;//快递方式 1自提 2快递
     //======= add by wangjh7 on 2016-11-23
-    private Integer userType; // 用户类型，0：容易逛；1：电子会员
-    private Integer totalCredit; // 兑换的总积分
-    private Integer commodityType; // 商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
-    private String mallMid ; // 商场ID
-    private String shopMid; // 店铺ID
+    private Integer userType = 0; // 用户类型，0：容易逛；1：电子会员
+    private Integer totalCredit = 0; // 兑换的总积分
+    private Integer commodityType = 0; // 商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
+    private String mallMid = ""; // 商场ID
+    private String shopMid = ""; // 店铺ID
 
 
     private String buyerName;//如果是微信用户昵称，昵称是编码之后的
