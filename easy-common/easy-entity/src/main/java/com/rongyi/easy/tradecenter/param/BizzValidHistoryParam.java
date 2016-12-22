@@ -29,33 +29,12 @@ public class BizzValidHistoryParam implements Serializable{
 
     private String userId;
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("BizzValidHistoryParam{");
-        sb.append("orderBy='").append(orderBy).append('\'');
-        sb.append(", orderVa='").append(orderVa).append('\'');
-        sb.append(", pageSize=").append(pageSize);
-        sb.append(", currentPage=").append(currentPage);
-        sb.append(", checkUserId=").append(checkUserId);
-        sb.append(", checkNickName='").append(checkNickName).append('\'');
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", couponCode='").append(couponCode).append('\'');
-        sb.append(", userPhone='").append(userPhone).append('\'');
-        sb.append(", useTimeBegin=").append(useTimeBegin);
-        sb.append(", useTimeEnd=").append(useTimeEnd);
-        sb.append(", couponIds=").append(couponIds);
-        sb.append(", type=").append(type);
-        sb.append(", mallMids=").append(mallMids);
-        sb.append(", shopMids=").append(shopMids);
-        sb.append(", recordStart=").append(recordStart);
-        sb.append(", dateStatus=").append(dateStatus);
-        sb.append(", userId=").append(userId);
-        sb.append('}');
-        return sb.toString();
-    }
+
 
     private List<String> mallMids;
     private List<String> shopMids;
+    private String mallId;
+    private String shopId;
 
     private Integer recordStart;
     private Integer dateStatus;//记录统计参数     0:所有  1：当天  2：当周...
@@ -181,7 +160,7 @@ public class BizzValidHistoryParam implements Serializable{
     }
 
     public Integer getRecordStart() {
-        return recordStart;
+        return ((currentPage==null?1:currentPage)-1)*pageSize;
     }
 
     public void setRecordStart(Integer recordStart) {
@@ -202,5 +181,47 @@ public class BizzValidHistoryParam implements Serializable{
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("BizzValidHistoryParam{");
+        sb.append("orderBy='").append(orderBy).append('\'');
+        sb.append(", orderVa='").append(orderVa).append('\'');
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", checkUserId=").append(checkUserId);
+        sb.append(", checkNickName='").append(checkNickName).append('\'');
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", useTimeBegin=").append(useTimeBegin);
+        sb.append(", useTimeEnd=").append(useTimeEnd);
+        sb.append(", couponIds=").append(couponIds);
+        sb.append(", type=").append(type);
+        sb.append(", mallMids=").append(mallMids);
+        sb.append(", shopMids=").append(shopMids);
+        sb.append(", recordStart=").append(recordStart);
+        sb.append(", dateStatus=").append(dateStatus);
+        sb.append(", userId=").append(userId);
+        sb.append(", mallId=").append(mallId);
+        sb.append(", shopId=").append(shopId);
+        sb.append('}');
+        return sb.toString();
     }
 }
