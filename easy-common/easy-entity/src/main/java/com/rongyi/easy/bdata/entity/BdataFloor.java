@@ -1,12 +1,10 @@
 package com.rongyi.easy.bdata.entity;
 
-import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -157,6 +155,7 @@ public class BdataFloor implements Serializable {
     private String last_update_id;//最近修改人
     private String reason;//操作描述
     private String swf;//swf图--商家后台用的
+
     private String fmap;//fmap图--商家后台用的
 	private String   tmap;//图聚版地图
 	private String thirdFloorId;//第三方楼层id
@@ -178,12 +177,16 @@ public class BdataFloor implements Serializable {
 		this.tmap = tmap;
 	}
 
+
 	public String getFmap() {
 		return fmap;
 	}
+
 	public void setFmap(String fmap) {
 		this.fmap = fmap;
 	}
+
+
 	public String getSwf() {
 		return swf;
 	}
@@ -202,8 +205,25 @@ public class BdataFloor implements Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-    
-	
+
+	private  Integer createSource;//创建来源 0大运营后台  1  商家后台
+
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
+	}
+	private Integer updateSource ;
+	public Integer getUpdateSource() {
+		return updateSource;
+	}
+
+	public void setUpdateSource(Integer updateSource) {
+		this.updateSource = updateSource;
+	}
 	
    
 
