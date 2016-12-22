@@ -30,7 +30,17 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
 
     private String mallId;
 
+    private Integer isSingleSpec;//是否是单规格
+
     private List<ObjectId> commodityIds;
+
+    public Integer getIsSingleSpec() {
+        return isSingleSpec;
+    }
+
+    public void setIsSingleSpec(Integer isSingleSpec) {
+        this.isSingleSpec = isSingleSpec;
+    }
 
     public String getCommodityCode() {
         return commodityCode;
@@ -123,6 +133,7 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
                 ", startAt=" + startAt +
                 ", endAt=" + endAt +
                 ", mallId=" + mallId +
+                ", isSingleSpec=" + isSingleSpec +
                 ", activityId='" + activityId + '\'' +
                 '}';
     }
