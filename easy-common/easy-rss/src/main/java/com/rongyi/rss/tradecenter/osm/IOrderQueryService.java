@@ -298,6 +298,13 @@ public interface IOrderQueryService {
     DubboVO<OsmOrdeForUserCenterVO> listForUserCenter(OsmOrderQueryForUserCenterParam param);
 
     /**
+     * 查询商品订单列表数量（电子会员）
+     * @param param
+     * @return
+     */
+   DubboVO<Map<String,Object>> listCountForUserCenter(OsmOrderQueryForUserCenterParam param);
+
+    /**
      * 查询商品订单详情（电子会员）
      *
      * @param tradeNo
