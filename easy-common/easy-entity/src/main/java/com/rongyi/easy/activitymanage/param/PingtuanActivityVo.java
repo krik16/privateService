@@ -27,6 +27,8 @@ public class PingtuanActivityVo implements Serializable{
                 ", shareDesc='" + shareDesc + '\'' +
                 ", sharePic='" + sharePic + '\'' +
                 ", mallId='" + mallId + '\'' +
+                ", pics='" + pics + '\'' +
+                ", type='" + type + '\'' +
                 ", activityGoodsDetails=" + activityGoodsDetails +
                 '}';
     }
@@ -46,6 +48,10 @@ public class PingtuanActivityVo implements Serializable{
 
     private String pic;//活动图片
 
+    private String pics;//轮播图片
+
+    private Integer type;//9电商版拼团 10教育版拼团
+
     private Integer activeTime;//成团有效时间，单位:小时
 
     private Integer cancelTime;//订单取消时间，超过多少时间订单自动取消,单位：分钟
@@ -64,7 +70,7 @@ public class PingtuanActivityVo implements Serializable{
 
     private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
-    private String activityTitle;
+    private String activityTitle; //活动标题
 
     public List<ActivityGoodsDetail> getActivityGoodsDetails() {
         return activityGoodsDetails;
@@ -200,5 +206,21 @@ public class PingtuanActivityVo implements Serializable{
 
     public void setActivityTitle(String activityTitle) {
         this.activityTitle = activityTitle;
+    }
+
+    public String getPics() {
+        return pics;
+    }
+
+    public void setPics(String pics) {
+        this.pics = pics;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

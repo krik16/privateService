@@ -88,8 +88,4 @@ public interface ICommodityService {
 	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
 
 	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
-
-	ResponseResult2 resetCommodityData();
-
-	ResponseResult2 resetTotalCommodityData();
 }

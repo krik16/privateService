@@ -2,10 +2,7 @@ package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.vo.QueryGoodCouponParam;
-import com.rongyi.easy.activitymanage.entity.ActivityGoods;
-import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
-import com.rongyi.easy.activitymanage.entity.TemplateRound;
-import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
+import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
 import com.rongyi.easy.activitymanage.vo.ActivityListVO;
 import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
@@ -170,4 +167,10 @@ public interface RoaActivityTemplateService {
      * @return
      */
     public boolean deleteTemplateRoundByActivityTemplateId(Integer id);
+
+    /**
+     * 获取可用的特卖商品id
+     * @return
+     */
+    public  List<TemplateRelevantGoodsCoupon> selectCommodityIdsInActive();
 }
