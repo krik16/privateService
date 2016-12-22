@@ -78,4 +78,10 @@ public interface ICodeValidHisService {
      * @return
      */
     BizzValidHistoryVO getValidHisByPage(BizzValidHistoryParam param);
+
+    /**
+     * @param param 查询验券记录
+     * @return
+     */
+    TradeValidRecord getTradeValidRecord(BizzValidHistoryParam param);
 }
