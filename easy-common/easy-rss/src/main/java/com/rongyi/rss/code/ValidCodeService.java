@@ -1,6 +1,7 @@
 package com.rongyi.rss.code;
 
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.CodeServiceException;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.code.StatisticsValidCountVO;
@@ -149,4 +150,17 @@ public interface ValidCodeService {
      * @return
      */
     ValidCouponVO validSearchEventGift(String code, String mallMid);
+
+    /**
+     * 家得利验码接口
+     * @param code
+     * @param mallId
+     * @param shopId
+     * @param validUser
+     * @param identity
+     * @param platform
+     * @return
+     * @throws CodeServiceException
+     */
+    ResponseVO validJiadeliCouponCode(String code,String mallId,String shopId,Integer userId,byte platform,int count) throws CodeServiceException;
 }

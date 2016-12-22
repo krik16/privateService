@@ -53,6 +53,17 @@ public enum CodeCenterEnum {
     ERROR_CHANNEL_TYPE(1021350,"type 不能为空！"),
     ERROR_CHANNEL_THIRD(1021351,"thirdChannel 参数不能为空或有误"),
     ERROR_NOT_EXIST_USER(1021352,"不存在该用户，请重新输入手机号和身份"),
+
+
+    JIADELI_CODE_REPET(1000001, "卡券已使用，重复验券"),
+    JIADELI_CODE_INVALIDSTATUS(1000002, "退款中、已退款、已过期"),
+    JIADELI_CODE_INVALID(1000003, "输入券码有误"),
+    JIADELI_CODE_NOBELONG(1000004, "非本店铺代金券券码"),
+    JIADELI_CODE_INVALIDUSETIME(1000005, "券未到使用时间"),
+    JIADELI_CODE_USELIMIT(1000006 , "卡券每日限用N张"),
+    JIADELI_CODE_NULL(1000007, "券码为空"),
+    JIADELI_ERROR_PARAM(1000008, "参数不完整"),
+    JIADELI_ERROR_SYSTEM(1000999, "服务异常"),
     ;
 
 
