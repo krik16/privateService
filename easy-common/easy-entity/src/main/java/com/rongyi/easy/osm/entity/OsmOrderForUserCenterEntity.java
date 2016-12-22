@@ -1,6 +1,9 @@
 package com.rongyi.easy.osm.entity;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
@@ -51,6 +54,16 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private String couponCode;
     // 订单关闭前状态
     private Integer orgStatus;
+    // 订单关闭前状态
+    private byte[] buyerComment;
+
+    public byte[] getBuyerComment() {
+        return buyerComment;
+    }
+
+    public void setBuyerComment(byte[] buyerComment) {
+        this.buyerComment = buyerComment;
+    }
 
     public String getCommodityId() {
         return commodityId;
