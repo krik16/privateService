@@ -29,8 +29,7 @@ public class BizzValidHistoryParam implements Serializable{
 
     private String userId;
 
-
-
+    private List<Integer> types;
     private List<String> mallMids;
     private List<String> shopMids;
     private String mallId;
@@ -107,8 +106,15 @@ public class BizzValidHistoryParam implements Serializable{
     }
 
     public List<String> getMallMids() {
-
         return mallMids;
+    }
+
+    public List<Integer> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Integer> types) {
+        this.types = types;
     }
 
     public void setMallMids(List<String> mallMids) {
