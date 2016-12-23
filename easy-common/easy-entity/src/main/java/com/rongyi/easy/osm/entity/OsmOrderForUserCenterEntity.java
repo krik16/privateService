@@ -56,6 +56,8 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private Integer orgStatus;
     // 订单关闭前状态
     private byte[] buyerComment;
+    // 订单创建时间
+    private Date payTime;
 
     public byte[] getBuyerComment() {
         return buyerComment;
@@ -225,6 +227,14 @@ public class OsmOrderForUserCenterEntity implements Serializable {
         this.orgStatus = orgStatus;
     }
 
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderForUserCenterEntity{" +
@@ -248,6 +258,7 @@ public class OsmOrderForUserCenterEntity implements Serializable {
                 ", orderSource=" + orderSource +
                 ", couponCode='" + couponCode + '\'' +
                 ", orgStatus=" + orgStatus +
+                ", payTime=" + payTime +
                 '}';
     }
 }
