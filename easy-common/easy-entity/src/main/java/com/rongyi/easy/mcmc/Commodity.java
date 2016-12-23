@@ -1108,6 +1108,8 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setTagIds(vo.getTagIds());
 			this.setSelfTakeDays(vo.getSelfTakeDays());
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);
+			this.setCouponStartDate(vo.getCouponStartDate());
+			this.setCouponEndDate(vo.getCouponEndDate());
 		} else {
 			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 			this.setCommodityModelNo(vo.getCommodityModelNo());
