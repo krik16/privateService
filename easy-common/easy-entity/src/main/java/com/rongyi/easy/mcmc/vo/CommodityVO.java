@@ -962,6 +962,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.couponStartDate = commodity.getCouponStartDate();
 		this.couponEndDate = commodity.getCouponEndDate();
 		this.selfExpireDate = commodity.getSelfExpireDate();
+		this.selfTakeDays = commodity.getSelfTakeDays();
 		this.commodityRange = commodity.getCommodityRange();
 		this.sn = commodity.getSn();
 		this.identity = commodity.getIdentity();
