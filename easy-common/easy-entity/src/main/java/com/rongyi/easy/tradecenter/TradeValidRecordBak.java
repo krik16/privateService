@@ -1,9 +1,13 @@
 package com.rongyi.easy.tradecenter;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TradeValidRecordBak {
-    private Integer id;
+public class TradeValidRecordBak implements Serializable{
+    
+	private static final long serialVersionUID = -7117994062598703587L;
+
+	private Integer id;
 
     private Integer orderId;
 

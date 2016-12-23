@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TradeValidRecord implements Serializable {
-    private Integer id;
+    
+	private static final long serialVersionUID = 5169397150273037615L;
+
+	private Integer id;
 
     private Integer orderId;
 
