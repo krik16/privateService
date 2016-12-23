@@ -38,9 +38,27 @@ public class GiftVO implements Serializable {
     // 标签列表
     private List<String> tagIds;
     private List<GiftTagVO> tagVOs;
-    // 商品类型(0:商品, 1:礼品)
+    // 商品类型(0:商品, 1:礼品 2:卡券 3:停车券)
     private Integer commodityRange;
     private String reason;
+    private Date couponStartDate;
+    private Date couponEndDate;
+
+    public Date getCouponStartDate() {
+        return couponStartDate;
+    }
+
+    public void setCouponStartDate(Date couponStartDate) {
+        this.couponStartDate = couponStartDate;
+    }
+
+    public Date getCouponEndDate() {
+        return couponEndDate;
+    }
+
+    public void setCouponEndDate(Date couponEndDate) {
+        this.couponEndDate = couponEndDate;
+    }
 
     public String getReason() {
         return reason;
