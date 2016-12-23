@@ -63,6 +63,8 @@ public enum CodeCenterEnum {
     JIADELI_CODE_USELIMIT(1000006 , "卡券每日限用N张"),
     JIADELI_CODE_NULL(1000007, "券码为空"),
     JIADELI_ERROR_PARAM(1000008, "参数不完整"),
+    JIADELI_ERROR_ACCOUNT(1000009, "未找到账号信息"),
+    JIADELI_ERROR_CONFIG(1000010, "未找到配置信息"),
     JIADELI_ERROR_SYSTEM(1000999, "服务异常"),
     ;
 

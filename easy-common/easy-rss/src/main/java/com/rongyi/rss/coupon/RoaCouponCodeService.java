@@ -189,5 +189,5 @@ public interface RoaCouponCodeService {
      * @param couponId
      * @return
      */
-    public String getJiadeliCouponCode(String couponId,String couponCode);
+    public String getJiadeliCouponCode(String couponId,String couponCode) throws RYServiceException;
 }
