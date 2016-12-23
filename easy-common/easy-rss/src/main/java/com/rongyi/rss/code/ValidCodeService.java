@@ -76,7 +76,7 @@ public interface ValidCodeService {
      * @param platform 验证平台 。0：商家平台；1：摩店；2：轻应用
      * @return
      */
-    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,String identity,byte platform) throws CodeServiceException;
+    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,Integer userId,String identity,byte platform) throws CodeServiceException;
 
     /**
      * 统计各个类型的总验码数量和当天验码数
