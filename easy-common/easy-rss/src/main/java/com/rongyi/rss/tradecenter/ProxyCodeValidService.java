@@ -56,4 +56,16 @@ public interface ProxyCodeValidService {
      */
     public boolean validateHagenCoupon(String couponCodeMd5, byte status);
 
+    /**
+     * 家得利优惠券验证
+     * @param couponCode
+     * @param mallId
+     * @param shopId
+     * @param useMode
+     * @param couponId
+     * @param sellerId
+     * @return
+     */
+    public ResponseResult validateJiadeLiCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId, Integer sellerId);
+
 }
