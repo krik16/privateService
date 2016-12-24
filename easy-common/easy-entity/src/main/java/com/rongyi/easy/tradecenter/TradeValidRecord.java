@@ -45,6 +45,8 @@ public class TradeValidRecord implements Serializable {
 
     private String mongoId;
 
+    private Integer isDelete;
+
     public Integer getId() {
         return id;
     }
@@ -195,5 +197,13 @@ public class TradeValidRecord implements Serializable {
 
     public void setMongoId(String mongoId) {
         this.mongoId = mongoId;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }
