@@ -90,5 +90,5 @@ public interface ICodeValidHisService {
      * 备份验券记录，并删除原有验券记录，更新券码信息
      * @param tradeValidRecordBak
      */
-    void backupValidRecord(TradeValidRecordBak tradeValidRecordBak, String couponCode);
+    void backupValidRecord(Integer id, String couponCode);
 }
