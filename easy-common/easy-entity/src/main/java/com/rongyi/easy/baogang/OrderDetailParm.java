@@ -1,9 +1,11 @@
 package com.rongyi.easy.baogang;
 
+import java.io.Serializable;
+
 /**
  * Created by shaozhou on 2016/12/25.
  */
-public class OrderDetailParm {
+public class OrderDetailParm implements Serializable {
     private String code;
     private String goods;
     private String number;
