@@ -1,6 +1,7 @@
 package com.rongyi.easy.baogang;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 订单冲正接口调用参数实体
@@ -13,7 +14,7 @@ public class OrderTransactionParam implements Serializable {
     private String orderNumber;//商家订单号
     private String serialNumber;//商家交易流水号
     private String orderDate;//商家订单创建时间(格式：0000-00-00 00:00:00)
-    private String orderDetail;//订单详情（参考订单详情 JSON格式）
+    private List<OrderDetailParm> orderDetail;//订单详情（参考订单详情 JSON格式）
     private Integer state;//订单状态【默认 0:未完成(如果状态=“未完成”，系统执行退积分)】
     private String price;//订单应收总额（单位：元 2位小数）
     private Integer channel;//目的渠道 1宝钢
@@ -69,11 +70,11 @@ public class OrderTransactionParam implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public String getOrderDetail() {
+    public List<OrderDetailParm> getOrderDetail() {
         return orderDetail;
     }
 
-    public void setOrderDetail(String orderDetail) {
+    public void setOrderDetail(List<OrderDetailParm> orderDetail) {
         this.orderDetail = orderDetail;
     }
 

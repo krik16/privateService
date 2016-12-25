@@ -17,7 +17,7 @@ public class CheckIntegralParam implements Serializable {
     private Integer channel;//目标渠道 1宝钢
     private Long timeStamp;//时间戳
     private String sign;//签名
-    private OrderDetailParm orderDetail;//订单详情（参考订单详情 JSON格式）
+    private List<OrderDetailParm> orderDetail;//订单详情（参考订单详情 JSON格式）
     private String price;//订单应收总额（单位：元 2位小数）
     private Integer type;//支付类型【0:宝钢积分 1:非积分】	string	是
     private Integer state;//订单状态【默认 0:未完成(如果状态=“未完成”，系统执行退积分)】
@@ -111,11 +111,11 @@ public class CheckIntegralParam implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public OrderDetailParm getOrderDetail() {
+    public List<OrderDetailParm> getOrderDetail() {
         return orderDetail;
     }
 
-    public void setOrderDetail(OrderDetailParm orderDetail) {
+    public void setOrderDetail(List<OrderDetailParm> orderDetail) {
         this.orderDetail = orderDetail;
     }
 
