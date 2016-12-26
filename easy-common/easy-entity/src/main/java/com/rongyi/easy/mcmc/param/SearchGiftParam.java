@@ -18,14 +18,30 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private String platform;
     private String code;
     private String name;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createAt;
     private Integer commodityRange;
     private Integer terminalType;
     private String keyword;
     private Integer status;
     private String reason;
     private String mappingId;
+    private Date createAtStart;
+    private Date createAtEnd;
+
+    public Date getCreateAtStart() {
+        return createAtStart;
+    }
+
+    public void setCreateAtStart(Date createAtStart) {
+        this.createAtStart = createAtStart;
+    }
+
+    public Date getCreateAtEnd() {
+        return createAtEnd;
+    }
+
+    public void setCreateAtEnd(Date createAtEnd) {
+        this.createAtEnd = createAtEnd;
+    }
 
     public String getId() {
         return id;
@@ -65,14 +81,6 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
     }
 
     public Integer getTerminalType() {
@@ -118,17 +126,18 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     @Override
     public String toString() {
         return "SearchGiftParam{" +
-                "code='" + code + '\'' +
-                ", id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", platform='" + platform + '\'' +
+                ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", createAt=" + createAt +
                 ", commodityRange=" + commodityRange +
                 ", terminalType=" + terminalType +
                 ", keyword='" + keyword + '\'' +
                 ", status=" + status +
                 ", reason='" + reason + '\'' +
                 ", mappingId='" + mappingId + '\'' +
-                "} " + super.toString();
+                ", createAtStart=" + createAtStart +
+                ", createAtEnd=" + createAtEnd +
+                '}';
     }
 }
