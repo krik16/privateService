@@ -18,7 +18,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private String platform;
     private String code;
     private String name;
-    private Integer commodityRange;
+    private String commodityRange;
     private Integer terminalType;
     private String keyword;
     private Integer status;
@@ -59,11 +59,11 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
         this.platform = platform;
     }
 
-    public Integer getCommodityRange() {
+    public String getCommodityRange() {
         return commodityRange;
     }
 
-    public void setCommodityRange(Integer commodityRange) {
+    public void setCommodityRange(String commodityRange) {
         this.commodityRange = commodityRange;
     }
 
