@@ -25,6 +25,7 @@ public class UserInfoForDistributorVO implements Serializable{
 	private String cardId;//身份证号
 	private String roleName;//角色名称
 	private String roleId;//角色id
+	private String memo;//备注
 	private List<UserCashAccountVO> accountList;//资金账号列表
 	public Integer getId() {
 		return id;
@@ -92,6 +93,12 @@ public class UserInfoForDistributorVO implements Serializable{
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
 	public List<UserCashAccountVO> getAccountList() {
 		return accountList;
 	}
@@ -105,7 +112,8 @@ public class UserInfoForDistributorVO implements Serializable{
 				+ ", userPhone=" + userPhone + ", identity=" + identity
 				+ ", userName=" + userName + ", userNickName=" + userNickName
 				+ ", cardId=" + cardId + ", roleName=" + roleName + ", roleId="
-				+ roleId + ", accountList=" + accountList + "]";
+				+ roleId + ", memo=" + memo + ", accountList=" + accountList
+				+ "]";
 	}
 	
 }
