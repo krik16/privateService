@@ -51,7 +51,8 @@ public interface IValidCouponCodeService {
      * @param shopId
      * @param useMode
      * @param couponId
+     * @param userId
      * @return
      */
-    public ResponseResult validateJiadeliCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId);
+    public ResponseResult validateJiadeliCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId, Integer userId);
 }
