@@ -28,6 +28,8 @@ public class OrderCommodityCodeEntity implements Serializable {
     private int checkedUserId;
     // 1:未使用,2:已使用,3:已过期
     private int status;
+    // 商品 类型
+    private int commodityType;
 
     public int getCheckedUserId() {
         return checkedUserId;
@@ -133,6 +135,14 @@ public class OrderCommodityCodeEntity implements Serializable {
         this.useTime = useTime;
     }
 
+    public int getCommodityType() {
+        return commodityType;
+    }
+
+    public void setCommodityType(int commodityType) {
+        this.commodityType = commodityType;
+    }
+
     @Override
     public String toString() {
         return "OrderCommodityCodeEntity{" +
@@ -149,6 +159,7 @@ public class OrderCommodityCodeEntity implements Serializable {
                 ", endTime=" + endTime +
                 ", useTime=" + useTime +
                 ", status=" + status +
+                ", commodityType=" + commodityType +
                 '}';
     }
 }

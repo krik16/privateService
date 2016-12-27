@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -58,6 +59,10 @@ public class OsmOrderForUserCenterEntity implements Serializable {
     private byte[] buyerComment;
     // 订单创建时间
     private Date payTime;
+    // 使用时间
+    private Date usedDate;
+    // 过期时间
+    private Date expiredDate;
 
     public byte[] getBuyerComment() {
         return buyerComment;
@@ -235,12 +240,29 @@ public class OsmOrderForUserCenterEntity implements Serializable {
         this.payTime = payTime;
     }
 
+    public Date getExpiredDate() {
+        return expiredDate;
+    }
+
+    public void setExpiredDate(Date expiredDate) {
+        this.expiredDate = expiredDate;
+    }
+
+    public Date getUsedDate() {
+        return usedDate;
+    }
+
+    public void setUsedDate(Date usedDate) {
+        this.usedDate = usedDate;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderForUserCenterEntity{" +
-                "commodityId='" + commodityId + '\'' +
+                "buyerComment=" + Arrays.toString(buyerComment) +
                 ", mallId='" + mallId + '\'' +
                 ", tradeNo='" + tradeNo + '\'' +
+                ", commodityId='" + commodityId + '\'' +
                 ", commodityName='" + commodityName + '\'' +
                 ", commodityType=" + commodityType +
                 ", commodityNumber=" + commodityNumber +
@@ -259,6 +281,8 @@ public class OsmOrderForUserCenterEntity implements Serializable {
                 ", couponCode='" + couponCode + '\'' +
                 ", orgStatus=" + orgStatus +
                 ", payTime=" + payTime +
+                ", usedDate=" + usedDate +
+                ", expiredDate=" + expiredDate +
                 '}';
     }
 }
