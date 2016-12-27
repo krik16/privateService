@@ -26,6 +26,16 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private String mappingId;
     private Date createAtStart;
     private Date createAtEnd;
+    private String freePostage;  // 0不包邮 1包邮
+
+
+    public String getFreePostage() {
+        return freePostage;
+    }
+
+    public void setFreePostage(String freePostage) {
+        this.freePostage = freePostage;
+    }
 
     public Date getCreateAtStart() {
         return createAtStart;

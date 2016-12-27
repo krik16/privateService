@@ -155,8 +155,17 @@ public class Commodity implements  Serializable,Cloneable{
 	private String groupMid; //集团Mid
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
-
 	private List<WechatSwitch>  wechatSwitchList;
+	private String freePostage;  // 0不包邮 1包邮
+
+
+	public String getFreePostage() {
+		return freePostage;
+	}
+
+	public void setFreePostage(String freePostage) {
+		this.freePostage = freePostage;
+	}
 
 	public Date getCouponStartDate() {
 		return couponStartDate;
@@ -1104,12 +1113,15 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSelfAddress(vo.getSelfAddress());
 			this.setSelfRemark(vo.getSelfRemark());
 			this.setSelfAddressId(vo.getSelfAddressId());
-			this.setSelfExpireDate(vo.getSelfExpireDate());
 			this.setTagIds(vo.getTagIds());
 			this.setSelfTakeDays(vo.getSelfTakeDays());
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);
 			this.setCouponStartDate(vo.getCouponStartDate());
 			this.setCouponEndDate(vo.getCouponEndDate());
+			this.setPrice(vo.getPrice());
+			this.setOriginalPrice(vo.getPrice() + "");
+			this.setCurrentPrice(vo.getPrice() + "");
+			this.setFreePostage(vo.getFreePostage());
 		} else {
 			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 			this.setCommodityModelNo(vo.getCommodityModelNo());
