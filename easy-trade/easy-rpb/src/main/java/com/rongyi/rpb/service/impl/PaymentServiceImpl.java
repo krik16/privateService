@@ -183,6 +183,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("remark") != null && !"null".equals(bodyMap.get("remark").toString())) {
             paymentEntityVO.setRemark(bodyMap.get("remark").toString());
         }
+        if(bodyMap.get("mallId") != null && !"null".equals(bodyMap.get("mallId").toString())){
+            paymentEntityVO.setMallId(bodyMap.get("mallId").toString());
+        }
 
         return paymentEntityVO;
     }
@@ -309,6 +312,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         BigDecimal totalFee = new BigDecimal(Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
         paySignData.setTotalFee(totalFee.intValue());
         paySignData.setBody("容易网商品");
+        paySignData.setUesId(paymentEntityVO.getMallId());
         return paySignData;
     }
 

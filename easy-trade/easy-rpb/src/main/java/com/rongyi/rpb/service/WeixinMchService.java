@@ -15,7 +15,7 @@ public interface WeixinMchService {
 
     WeixinMch selectByPublicCodeAndUserId(String publicCode,String userId);
 
-    WeixinMch selectByAppIdAndTradeType(String appId,Integer tradeType);
+    WeixinMch selectByAppIdAndTradeType(String appId,Integer tradeType,String uesId);
 
     WeixinMch selectByMchIdAndUserId(String mchId,String userId);
 }

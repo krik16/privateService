@@ -1,7 +1,5 @@
 package com.rongyi.rpb.common.pay.weixin.model;
 
-import java.io.Serializable;
-
 /**
  * Created by kejun on 2016/1/13.
  */
@@ -24,6 +22,11 @@ public class PaySignData {
     private String openId;
 
     private Integer weixinPayType;
+
+    /**
+     * 支付配置使用者id
+     */
+    private String uesId;
 
 
     public String getPayNo() {
@@ -98,6 +101,14 @@ public class PaySignData {
         this.weixinPayType = weixinPayType;
     }
 
+    public String getUesId() {
+        return uesId;
+    }
+
+    public void setUesId(String uesId) {
+        this.uesId = uesId;
+    }
+
     @Override
     public String toString() {
         return "PaySignData{" +
@@ -110,6 +121,7 @@ public class PaySignData {
                 ", appId='" + appId + '\'' +
                 ", openId='" + openId + '\'' +
                 ", weixinPayType='" + weixinPayType + '\'' +
+                ", uesId='" + uesId + '\'' +
                 '}';
     }
 }

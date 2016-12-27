@@ -117,6 +117,10 @@
     <if test="tradeType != null and tradeType != ''">
       and trade_type like  CONCAT('%',#{tradeType},'%')
     </if>
+    <if test="userId != null and userId != ''">
+      and user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+
   </select>
   <select id="selectByMchIdAndUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
