@@ -92,6 +92,8 @@ public class MallEntity implements Serializable {
 	private String pathImg;// 路径图
 	private String swf;//swf图--商家后台用的
 	private String fmap;//fmap图--商家后台用的
+	private String tmap;
+	private String thirdFloorId;
 	private String aliasename;
 	private String aliasname;
 	private String businesstype;
@@ -99,6 +101,23 @@ public class MallEntity implements Serializable {
     private ObjectId building_id;//关联的楼栋幢座id
     private String mall_level;//商场级别 A、B、C、S、SS
     private String app_picturenew;//新的商圈图片
+
+	public String getTmap() {
+		return tmap;
+	}
+
+	public void setTmap(String tmap) {
+		this.tmap = tmap;
+	}
+
+	public String getThirdFloorId() {
+		return thirdFloorId;
+	}
+
+	public void setThirdFloorId(String thirdFloorId) {
+		this.thirdFloorId = thirdFloorId;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
