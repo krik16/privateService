@@ -156,7 +156,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<WechatSwitch>  wechatSwitchList;
-	private String freePostage;  // 0不包邮 1包邮
+	private String freePostage;  // 0包邮 1不包邮
 
 
 	public String getFreePostage() {
