@@ -43,6 +43,15 @@ public class GiftVO implements Serializable {
     private String reason;
     private Date couponStartDate;
     private Date couponEndDate;
+    private String mallMid;
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
 
     public Date getCouponStartDate() {
         return couponStartDate;
@@ -223,8 +232,7 @@ public class GiftVO implements Serializable {
     @Override
     public String toString() {
         return "GiftVO{" +
-                "buyType=" + buyType +
-                ", id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", code='" + code + '\'' +
                 ", picList=" + picList +
                 ", name='" + name + '\'' +
@@ -238,10 +246,15 @@ public class GiftVO implements Serializable {
                 ", mappingId='" + mappingId + '\'' +
                 ", exchangeTypes='" + exchangeTypes + '\'' +
                 ", pointType=" + pointType +
+                ", buyType=" + buyType +
                 ", sold=" + sold +
                 ", tagIds=" + tagIds +
                 ", tagVOs=" + tagVOs +
                 ", commodityRange=" + commodityRange +
+                ", reason='" + reason + '\'' +
+                ", couponStartDate=" + couponStartDate +
+                ", couponEndDate=" + couponEndDate +
+                ", mallMid='" + mallMid + '\'' +
                 '}';
     }
 }
