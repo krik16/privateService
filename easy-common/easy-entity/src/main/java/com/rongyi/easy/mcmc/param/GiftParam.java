@@ -71,6 +71,15 @@ public class GiftParam implements Serializable {
     // 卡券过期时间
     private Date couponEndDate;
     private Integer source;
+    private String mallMid;
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
 
     public Integer getSource() {
         return source;
@@ -390,6 +399,7 @@ public class GiftParam implements Serializable {
                 ", couponStartDate=" + couponStartDate +
                 ", couponEndDate=" + couponEndDate +
                 ", source=" + source +
+                ", mallMid='" + mallMid + '\'' +
                 '}';
     }
 }
