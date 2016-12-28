@@ -871,6 +871,8 @@ public class CommodityVO  implements  Serializable {
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
+				", activityStartTime=" + activityStartTime +
+				", activityEndTime=" + activityEndTime +
 				'}';
 	}
 
