@@ -148,7 +148,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
                 ", platform='" + platform + '\'' +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", commodityRange=" + commodityRange +
+                ", commodityRange='" + commodityRange + '\'' +
                 ", terminalType=" + terminalType +
                 ", keyword='" + keyword + '\'' +
                 ", status=" + status +
@@ -156,6 +156,8 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
                 ", mappingId='" + mappingId + '\'' +
                 ", createAtStart=" + createAtStart +
                 ", createAtEnd=" + createAtEnd +
+                ", freePostage='" + freePostage + '\'' +
+                ", mallMid='" + mallMid + '\'' +
                 '}';
     }
 }
