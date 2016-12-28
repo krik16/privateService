@@ -126,6 +126,11 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 		 */
 		private Date validEndDate;
 
+		/**
+		 * 促销券补贴类型 0：平台补贴 1：商家补贴
+		 */
+		private Byte couponDiscountType;
+
 		public Integer getCount() {
 			return count;
 		}
@@ -180,6 +185,14 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 
 		public void setRebateDisCount(Double rebateDisCount) {
 			this.rebateDisCount = rebateDisCount;
+		}
+
+		public Byte getCouponDiscountType() {
+			return couponDiscountType;
+		}
+
+		public void setCouponDiscountType(Byte couponDiscountType) {
+			this.couponDiscountType = couponDiscountType;
 		}
 	}
 	
