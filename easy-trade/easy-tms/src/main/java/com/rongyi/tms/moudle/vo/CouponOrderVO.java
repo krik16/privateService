@@ -97,7 +97,12 @@ public class CouponOrderVO implements Serializable {
 	private String payNo;
 
 	private Double scoreDiscount;
-    
+
+	/**
+	 * 促销券补贴类型 0：平台补贴 1：商家补贴
+	 */
+	private Byte couponDiscountType;
+
 	public Long getId() {
 		return id;
 	}
@@ -272,5 +277,13 @@ public class CouponOrderVO implements Serializable {
 
 	public void setHbDiscount(Integer hbDiscount) {
 		this.hbDiscount = hbDiscount;
+	}
+
+	public Byte getCouponDiscountType() {
+		return couponDiscountType;
+	}
+
+	public void setCouponDiscountType(Byte couponDiscountType) {
+		this.couponDiscountType = couponDiscountType;
 	}
 }

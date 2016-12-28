@@ -104,7 +104,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
         LOGGER.info("优惠券订单详情:id={}", id);
         ResponseData responseData;
         try {
-//            permissionCheck(request, "ORDER_COUPON_VIEW");
+            permissionCheck(request, "ORDER_COUPON_VIEW");
             CouponOrderDetailVO couponOrderDetailVO = new CouponOrderDetailVO();
             CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
             BeanUtils.copyProperties(couponOrderVO, couponOrderDetailVO);
@@ -157,6 +157,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     couponVO.setPayAmount(payAmount.compareTo(BigDecimal.ZERO) < 0 ? 0 : payAmount.doubleValue());
                     couponVO.setValidBeginDate(tCCouponVO.getValidBeginDate());
                     couponVO.setValidEndDate(tCCouponVO.getValidEndDate());
+                    couponVO.setCouponDiscountType(couponOrderVO.getCouponDiscountType());
                     couponVOList.add(couponVO);
                 }
                 //最后一笔券获得剩余优惠

@@ -44,7 +44,8 @@
         trade_order.rebate_code,
         trade_order.pay_channel,
         ROUND(trade_order.pay_amount/100,2) as pay_amount,
-        trade_order.source
+        trade_order.source,
+        trade_order.coupon_discount_type
     </sql>
     <sql id="Base_Column">
         trade_order.id,

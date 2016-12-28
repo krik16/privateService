@@ -63,7 +63,7 @@ public class ExportCouponOrderExcel {
             if (CollectionUtils.isNotEmpty(list)) {
                 for (int i = 2; i <= list.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 14; j++) {
+                    for (int j = 0; j <= 16; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
@@ -85,32 +85,48 @@ public class ExportCouponOrderExcel {
 
                     sheet.getRow(i + 2).getCell(3).setCellValue(vo.getTitle());
                     sheet.getRow(i + 2).getCell(5).setCellValue(vo.getTotalAmount());
-                    if (vo.getHbDiscount() != null) {
+                    //平台补贴红包
+                    if (vo.getHbDiscount() != null && vo.getCouponDiscountType() == 0) {
                         sheet.getRow(i + 2).getCell(6).setCellValue(new BigDecimal(vo.getHbDiscount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).toString());
                     } else {
                         sheet.getRow(i + 2).getCell(6).setCellValue("0.00");
                     }
+                    //商家补贴红包
+                    if (vo.getHbDiscount() != null && vo.getCouponDiscountType() == 1) {
+                        sheet.getRow(i + 2).getCell(7).setCellValue(new BigDecimal(vo.getHbDiscount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).toString());
+                    } else {
+                        sheet.getRow(i + 2).getCell(7).setCellValue("0.00");
+                    }
+
                     if (vo.getDiscountBitmap() > 0) {
                         detailVo = couponOrderService.selectById(vo.getId().intValue());
                         if (DisCountMap.hasRebate(vo.getDiscountBitmap()) && detailVo.getRebateDiscount() > 0) {
-                            sheet.getRow(i + 2).getCell(7).setCellValue(detailVo.getRebateDiscount());
-                        } else {
-                            sheet.getRow(i + 2).getCell(7).setCellValue("0.00");
-                        }
-                        if (DisCountMap.hasUsedScore(vo.getDiscountBitmap()) && vo.getScore() > 0) {
-                            sheet.getRow(i + 2).getCell(8).setCellValue(new BigDecimal(vo.getScore()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).toString());
+                            sheet.getRow(i + 2).getCell(8).setCellValue(detailVo.getRebateDiscount());
                         } else {
                             sheet.getRow(i + 2).getCell(8).setCellValue("0.00");
                         }
+
+                        if (vo.getCouponDiscountType() == 1) {
+                            sheet.getRow(i + 2).getCell(9).setCellValue("商家");
+                        } else {
+                            sheet.getRow(i + 2).getCell(9).setCellValue("平台");
+                        }
+
+                        if (DisCountMap.hasUsedScore(vo.getDiscountBitmap()) && vo.getScore() > 0) {
+                            sheet.getRow(i + 2).getCell(10).setCellValue(new BigDecimal(vo.getScore()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).toString());
+                        } else {
+                            sheet.getRow(i + 2).getCell(10).setCellValue("0.00");
+                        }
                     } else {
-                        sheet.getRow(i + 2).getCell(7).setCellValue("0.00");
                         sheet.getRow(i + 2).getCell(8).setCellValue("0.00");
+                        sheet.getRow(i + 2).getCell(9).setCellValue("平台");
+                        sheet.getRow(i + 2).getCell(10).setCellValue("0.00");
                     }
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getPayAmount());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(11).setCellValue(convertOrderSource(vo.getSource()));
-                    sheet.getRow(i + 2).getCell(12).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(13).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getPayAmount());
+                    sheet.getRow(i + 2).getCell(12).setCellValue(convertStatus(vo.getStatus()));
+                    sheet.getRow(i + 2).getCell(13).setCellValue(convertOrderSource(vo.getSource()));
+                    sheet.getRow(i + 2).getCell(14).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(15).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
                 }
             }
             String outFile = "卡券订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
