@@ -1122,6 +1122,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setOriginalPrice(vo.getPrice() + "");
 			this.setCurrentPrice(vo.getPrice() + "");
 			this.setFreePostage(vo.getFreePostage());
+			this.setMallMid(vo.getMallMid());
 		} else {
 			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 			this.setCommodityModelNo(vo.getCommodityModelNo());
