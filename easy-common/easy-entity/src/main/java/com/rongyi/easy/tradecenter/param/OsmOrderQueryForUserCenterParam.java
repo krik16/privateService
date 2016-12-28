@@ -37,6 +37,8 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
     private int start;
     // 没页数
     private int pageSize;
+    // 仅仅显示含有券码 1:仅有券码 0:全部
+    private Integer hasCode;
 
     public Date getCreateEndAt() {
         return createEndAt;
@@ -102,6 +104,14 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
         this.pageSize = pageSize;
     }
 
+    public Integer getHasCode() {
+        return hasCode;
+    }
+
+    public void setHasCode(Integer hasCode) {
+        this.hasCode = hasCode;
+    }
+
     public int getStart() {
         if (0 < pageIndex && 0 < pageSize) {
             return (pageIndex - 1) * pageSize;
@@ -161,6 +171,7 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
                 ", pageIndex=" + pageIndex +
                 ", start=" + start +
                 ", pageSize=" + pageSize +
+                ", hasCode=" + hasCode +
                 '}';
     }
 }
