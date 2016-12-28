@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +68,12 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(3).setCellValue(vo.getUsername());
                     sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
                     sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
-                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount().subtract(vo.getDiscountFee()) == null ? "0" : vo.getRealAmount().subtract(vo.getDiscountFee()).toString());
-                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getHbAmount() == null ? "0" : vo.getHbAmount().toString());
-                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
+//                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount().subtract(vo.getDiscountFee()) == null ? "0" : vo.getRealAmount().subtract(vo.getDiscountFee()).toString());
+                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
+//                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getHbAmount() == null ? "0" : vo.getHbAmount().toString());
+//                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
+                    sheet.getRow(i + 2).getCell(7).setCellValue(convertHbAmount(vo.getOperationRedDiscount(),vo.getMerchantRedDiscount()));
+                    sheet.getRow(i + 2).getCell(8).setCellValue(convertRebateAmount(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
                     sheet.getRow(i + 2).getCell(9).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
                     sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
                     sheet.getRow(i + 2).getCell(11).setCellValue(convertStatus(vo.getStatus()));
@@ -155,6 +159,34 @@ public class ExportOsmOrderExcel {
                 case "8" : result="已退款";break;
             }
         return result;
+    }
+
+    private String convertHbAmount(BigDecimal operationRedDiscount,BigDecimal merchantRedDiscount){
+        StringBuilder sb = new StringBuilder();
+        if(operationRedDiscount != null){
+            sb.append(operationRedDiscount).append("元(平台)");
+        }
+        if(merchantRedDiscount != null){
+            if(sb.length() > 0){
+                sb.append("+");
+            }
+            sb.append(merchantRedDiscount).append("元(商户)");
+        }
+        return sb.toString();
+    }
+
+    private String convertRebateAmount(BigDecimal operationRebateDiscount,BigDecimal merchantRebateDiscount){
+        StringBuilder sb = new StringBuilder();
+        if(operationRebateDiscount != null){
+            sb.append(operationRebateDiscount).append("元(平台)");
+        }
+        if(merchantRebateDiscount != null){
+            if(sb.length() > 0){
+                sb.append("+");
+            }
+            sb.append(merchantRebateDiscount).append("元(商户)");
+        }
+        return sb.toString();
     }
 
 }
