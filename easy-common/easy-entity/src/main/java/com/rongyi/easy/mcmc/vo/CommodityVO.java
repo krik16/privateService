@@ -113,6 +113,8 @@ public class CommodityVO  implements  Serializable {
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<String> categoryNames;
+	private Date activityStartTime;
+	private Date activityEndTime;
 
 	public List<String> getCategoryNames() {
 		return categoryNames;
@@ -638,6 +640,23 @@ public class CommodityVO  implements  Serializable {
 		this.isSpecDeleted = isSpecDeleted;
 	}
 
+
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -727,6 +746,27 @@ public class CommodityVO  implements  Serializable {
 		} else {
 			//其他
 			this.activityType = "0";
+		}
+
+		// 当前是秒杀商品
+		if ("3".equals(this.activityType)) {
+			long nowTime = new Date().getTime();
+			// 商品处于上架状态
+			if (this.commodityAppStatus == 1) {
+				if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
+					// 秒杀未开始
+					this.commodityAppStatus = 3;
+				} else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
+					// 秒杀已结束
+					this.commodityAppStatus = 4;
+				}
+			}
+		}
+		if(null !=commodity.getActivityStartTime() ){
+			this.setActivityStartTime(commodity.getActivityStartTime());
+		}
+		if( null !=commodity.getActivityEndTime()){
+			this.setActivityEndTime(commodity.getActivityEndTime());
 		}
 
 		this.terminalType = commodity.getTerminalType();
