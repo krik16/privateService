@@ -43,6 +43,33 @@ public class GiftVO implements Serializable {
     private String reason;
     private Date couponStartDate;
     private Date couponEndDate;
+    private String mallMid;
+    private Date registerAt; //上架时间
+    private Date soldOutAt; //下架时间
+
+    public Date getRegisterAt() {
+        return registerAt;
+    }
+
+    public void setRegisterAt(Date registerAt) {
+        this.registerAt = registerAt;
+    }
+
+    public Date getSoldOutAt() {
+        return soldOutAt;
+    }
+
+    public void setSoldOutAt(Date soldOutAt) {
+        this.soldOutAt = soldOutAt;
+    }
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
 
     public Date getCouponStartDate() {
         return couponStartDate;
@@ -223,8 +250,7 @@ public class GiftVO implements Serializable {
     @Override
     public String toString() {
         return "GiftVO{" +
-                "buyType=" + buyType +
-                ", id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", code='" + code + '\'' +
                 ", picList=" + picList +
                 ", name='" + name + '\'' +
@@ -238,10 +264,17 @@ public class GiftVO implements Serializable {
                 ", mappingId='" + mappingId + '\'' +
                 ", exchangeTypes='" + exchangeTypes + '\'' +
                 ", pointType=" + pointType +
+                ", buyType=" + buyType +
                 ", sold=" + sold +
                 ", tagIds=" + tagIds +
                 ", tagVOs=" + tagVOs +
                 ", commodityRange=" + commodityRange +
+                ", reason='" + reason + '\'' +
+                ", couponStartDate=" + couponStartDate +
+                ", couponEndDate=" + couponEndDate +
+                ", mallMid='" + mallMid + '\'' +
+                ", registerAt=" + registerAt +
+                ", soldOutAt=" + soldOutAt +
                 '}';
     }
 }

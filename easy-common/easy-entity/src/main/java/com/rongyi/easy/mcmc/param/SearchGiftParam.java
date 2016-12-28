@@ -26,6 +26,24 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private String mappingId;
     private Date createAtStart;
     private Date createAtEnd;
+    private String freePostage;  // 0包邮 1不包邮
+    private String mallMid;
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
+
+    public String getFreePostage() {
+        return freePostage;
+    }
+
+    public void setFreePostage(String freePostage) {
+        this.freePostage = freePostage;
+    }
 
     public Date getCreateAtStart() {
         return createAtStart;
@@ -130,7 +148,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
                 ", platform='" + platform + '\'' +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", commodityRange=" + commodityRange +
+                ", commodityRange='" + commodityRange + '\'' +
                 ", terminalType=" + terminalType +
                 ", keyword='" + keyword + '\'' +
                 ", status=" + status +
@@ -138,6 +156,8 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
                 ", mappingId='" + mappingId + '\'' +
                 ", createAtStart=" + createAtStart +
                 ", createAtEnd=" + createAtEnd +
+                ", freePostage='" + freePostage + '\'' +
+                ", mallMid='" + mallMid + '\'' +
                 '}';
     }
 }

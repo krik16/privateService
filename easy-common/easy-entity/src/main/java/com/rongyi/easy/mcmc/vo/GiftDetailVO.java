@@ -17,8 +17,6 @@ public class GiftDetailVO extends GiftVO implements Serializable {
 
     private String sn; //礼品编号
     private Double price;
-    private Date registerAt; //上架时间
-    private Date soldOutAt; //下架时间
     private Integer purchaseCount;//商品的限购数量
     private String deliveryTypes; // 配送方式（1.自提 2.快递）
     private Integer selfType; // 自提类型（1.公共设施 2.指定店铺）
@@ -43,22 +41,6 @@ public class GiftDetailVO extends GiftVO implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Date getRegisterAt() {
-        return registerAt;
-    }
-
-    public void setRegisterAt(Date registerAt) {
-        this.registerAt = registerAt;
-    }
-
-    public Date getSoldOutAt() {
-        return soldOutAt;
-    }
-
-    public void setSoldOutAt(Date soldOutAt) {
-        this.soldOutAt = soldOutAt;
     }
 
     public Integer getPurchaseCount() {
@@ -130,8 +112,6 @@ public class GiftDetailVO extends GiftVO implements Serializable {
         return "GiftDetailVO{" +
                 ", sn='" + sn + '\'' +
                 ", price=" + price +
-                ", registerAt=" + registerAt +
-                ", soldOutAt=" + soldOutAt +
                 ", purchaseCount=" + purchaseCount +
                 ", deliveryTypes='" + deliveryTypes + '\'' +
                 ", selfType=" + selfType +
