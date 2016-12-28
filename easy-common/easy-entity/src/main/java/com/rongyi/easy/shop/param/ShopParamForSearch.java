@@ -35,7 +35,29 @@ public class ShopParamForSearch {
 	private Integer currpage;//当前页1表示第一页
 	
 	private Integer pageSize;//每页大小
-	
+
+	private String shopNumber;//铺位号
+
+	private String customCategoryId;
+
+
+	public String getCustomCategoryId() {
+		return customCategoryId;
+	}
+
+	public void setCustomCategoryId(String customCategoryId) {
+		this.customCategoryId = customCategoryId;
+	}
+
+
+	public String getShopNumber() {
+		return shopNumber;
+	}
+
+	public void setShopNumber(String shopNumber) {
+		this.shopNumber = shopNumber;
+	}
+
 	public Integer getShopType() {
 		return shopType;
 	}
@@ -120,6 +142,8 @@ public class ShopParamForSearch {
 				", zoneId='" + zoneId + '\'' +
 				", currpage=" + currpage +
 				", pageSize=" + pageSize +
+				", shopNumber='" + shopNumber + '\'' +
+				", customCategoryId='" + customCategoryId + '\'' +
 				'}';
 	}
 }
