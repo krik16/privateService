@@ -277,6 +277,8 @@ public class GiftVO implements Serializable {
                 ", stock=" + stock +
                 ", createAt=" + createAt +
                 ", createBy='" + createBy + '\'' +
+                ", updateAt=" + updateAt +
+                ", updateBy='" + updateBy + '\'' +
                 ", status=" + status +
                 ", terminalType=" + terminalType +
                 ", platform='" + platform + '\'' +
