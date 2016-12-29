@@ -977,6 +977,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.identity = commodity.getIdentity();
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
+		this.setSelfAddressId(commodity.getSelfAddressId());
 		this.setIfShowInWechat(
                 Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
                         .contains(commodity.getTerminalType())  &&
