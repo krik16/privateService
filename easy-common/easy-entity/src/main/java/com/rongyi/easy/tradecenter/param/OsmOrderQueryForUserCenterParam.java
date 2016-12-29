@@ -39,6 +39,8 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
     private int pageSize;
     // 仅仅显示含有券码 1:仅有券码 0:全部
     private Integer hasCode;
+    // 礼品编码
+    private String commoditySn;
 
     public Date getCreateEndAt() {
         return createEndAt;
@@ -155,6 +157,14 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
         this.commodityId = commodityId;
     }
 
+    public String getCommoditySn() {
+        return commoditySn;
+    }
+
+    public void setCommoditySn(String commoditySn) {
+        this.commoditySn = commoditySn;
+    }
+
     @Override
     public String toString() {
         return "OsmOrderQueryForUserCenterParam{" +
@@ -172,6 +182,7 @@ public class OsmOrderQueryForUserCenterParam implements Serializable {
                 ", start=" + start +
                 ", pageSize=" + pageSize +
                 ", hasCode=" + hasCode +
+                ", commoditySn='" + commoditySn + '\'' +
                 '}';
     }
 }
