@@ -96,5 +96,5 @@ public interface IGiftService {
      */
     ResponseVO auditGift(final String id, final Boolean pass);
 
-    ResponseVO updateStatus(final String id, final Integer status, final String reason);
+    ResponseVO updateStatus(final String id, final Integer status, final String reason, String updateBy);
 }

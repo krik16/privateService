@@ -24,6 +24,8 @@ public class GiftVO implements Serializable {
     private Integer stock;
     private Date createAt;
     private String createBy;
+    private Date updateAt;
+    private String updateBy;
     private Integer status;
     private Integer terminalType;
     private String platform;
@@ -46,6 +48,23 @@ public class GiftVO implements Serializable {
     private String mallMid;
     private Date registerAt; //上架时间
     private Date soldOutAt; //下架时间
+
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
     public Date getRegisterAt() {
         return registerAt;
