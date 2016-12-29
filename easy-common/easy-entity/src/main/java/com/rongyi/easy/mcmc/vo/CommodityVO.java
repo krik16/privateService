@@ -205,6 +205,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
+	private Date activityStartTime;
+	private Date activityEndTime;
 
 	public List<String> getCategoryNames() {
 		return categoryNames;
@@ -868,6 +870,23 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.isSpecDeleted = isSpecDeleted;
 	}
 
+
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -957,6 +976,27 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		} else {
 			//其他
 			this.activityType = "0";
+		}
+
+		// 当前是秒杀商品
+		if ("3".equals(this.activityType)) {
+			long nowTime = new Date().getTime();
+			// 商品处于上架状态
+			if (this.commodityAppStatus == 1) {
+				if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
+					// 秒杀未开始
+					this.commodityAppStatus = 3;
+				} else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
+					// 秒杀已结束
+					this.commodityAppStatus = 4;
+				}
+			}
+		}
+		if(null !=commodity.getActivityStartTime() ){
+			this.setActivityStartTime(commodity.getActivityStartTime());
+		}
+		if( null !=commodity.getActivityEndTime()){
+			this.setActivityEndTime(commodity.getActivityEndTime());
 		}
 
 		this.terminalType = commodity.getTerminalType();
@@ -1081,6 +1121,21 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", platform='" + platform + '\'' +
 				", price=" + price +
 				", selfTakeDays=" + selfTakeDays +
+				", shelvesType=" + shelvesType +
+				", offerShelves=" + offerShelves +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
+				", ifShowInWechat=" + ifShowInWechat +
+				", isSpecDeleted=" + isSpecDeleted +
+				", groupMid='" + groupMid + '\'' +
+				", locationIds=" + locationIds +
+				", accountType=" + accountType +
+				", serviceIds=" + serviceIds +
+				", merchantId='" + merchantId + '\'' +
+				", merchantType=" + merchantType +
+				", categoryNames=" + categoryNames +
+				", activityStartTime=" + activityStartTime +
+				", activityEndTime=" + activityEndTime +
 				'}';
 	}
 
