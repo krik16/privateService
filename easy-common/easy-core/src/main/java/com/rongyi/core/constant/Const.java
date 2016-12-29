@@ -61,6 +61,8 @@ public interface Const {
 			put("weChat", "156b8d147a2c11e5b7a9000c29a33e39");
 			// 电子会员
 			put("member", "156b8d147a2c11e5b7a9000c29a33e40");
+			// BDPuser
+			put("013", "d53f6f2c06076e925d2691040f814e13");
 		}
 	};
 

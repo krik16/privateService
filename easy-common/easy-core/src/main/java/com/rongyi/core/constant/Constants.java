@@ -938,4 +938,9 @@ public interface Constants {
     	String own_info = "own_info";
     	String extension_info = "extension_info";
     }
+    
+    interface BDP_USER_KEY {
+    	String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNMUbc5ZyOfNnu8nc3Eup8HfhoMzpFvaz5jgmtcwG/88tJ8m40odTaMBCM2IoFIpq2U3fMSF6Z3Km0fVj1+w99nK60dgalyEbuCns/mGLySsJei88NsM/YHILDS8DU5gW18kKCpwvOwL5D3dqJiW2jI8a9A5a7PnEjatJzvMu2/wIDAQAB";
+    	String PRIVATE_KEY= "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=";
+    }
 }

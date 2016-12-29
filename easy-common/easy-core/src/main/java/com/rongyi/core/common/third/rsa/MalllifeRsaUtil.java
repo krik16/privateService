@@ -235,7 +235,7 @@ public class MalllifeRsaUtil {
         try {
             Map<String, Object> keyMap;
             try {
-
+/*
                 //生成 公钥 私钥
                  keyMap = initKey();
                 String publicKey =  getPublicKey(keyMap);
@@ -251,34 +251,34 @@ public class MalllifeRsaUtil {
                 System.out.println("token="+EasyMd5Util.GetMD5Code(uuid).toUpperCase());
 
 
-               /* String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
                 //jsonStr="{'phone':'15821659415',";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,publicKey);
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,privateKey);
-                System.out.println("解密后="+decryStr);*/
+                System.out.println("解密后="+decryStr);
 
 
                 //全民财富
-                /*
+                
                 String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'1111','regiTime':'1442838385146'}";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,MallLifeThirdConfig.THIRD_RSACODER.PUBLIC_KEY_STR);
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr, MallLifeThirdConfig.THIRD_RSACODER.PRIVATE_KEY_STR);
                 System.out.println("解密后="+decryStr);
-                */
+                
 
                 //ToB 业务
-                /*String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
                   jsonStr="{'phone':'15821659415',";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PRIVATEKEY"));
                 System.out.println("解密后="+decryStr);
-                 */
+                 
 
           // String _PUBLICKEY="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCi4KQZzhKwZXrm3dSZwl34LSgHLc250Ch8BZDIQNr6FrOT/PxdQCotwrP3TfjTKSTRov+3A6GMztRvLWjpZK++MzNBmHUNObAfdSTGLbXZQwg0niXeef4C8ELINpF67uTcFNORcZ4az7AU4MgUNEYRD7JD83CP/tpPG+LFnLou9wIDAQAB";
 
@@ -292,7 +292,13 @@ public class MalllifeRsaUtil {
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,privateKey);
                System.out.println("解密后="+decryStr);
 
-
+*/
+            	String mihou = "WUWxfG705iWOHpnKUbNwZ6xFkDQi+zkt6ZSIQ7d9wh9ZPo0nMjs56IlVsrlpt5QKQToXH0S7+yRYMHFKbZEzmwi7o5nGg2LMP2DyUax+/8VPyECrY0tZBXkyqDpwpAO25mfIroSXyiGb0Ic95kTDWchWCv1g3XuGD00oGutTBm8=";
+            	String decryStr=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
+                System.out.println("解密后1="+decryStr);
+                mihou = "X6O5/1DeBfC59YUX06o+MlEkb+hCyvEKj5KsccCCEm8Q5t4iV+1vxyXcsBuBWYMkQpYCSopV9vt2ifZwQ7STNYrkToIXpQolsXeW68lqo7VwkVvheXATa3zCy57cBi89jkc1rXtTbflAJfOmPeV9LkY5tmW9vX3NfrfQbMKCVGU=";
+                String decryStr2=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
+                System.out.println("解密后2="+decryStr2);
                //System.out.println("=================="+(int)(200*0.01));
 
 
