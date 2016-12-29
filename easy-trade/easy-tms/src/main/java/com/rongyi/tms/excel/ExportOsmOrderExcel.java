@@ -55,7 +55,7 @@ public class ExportOsmOrderExcel {
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 15; j++) {
+                    for (int j = 0; j <= 17; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
@@ -72,15 +72,17 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
 //                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getHbAmount() == null ? "0" : vo.getHbAmount().toString());
 //                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
-                    sheet.getRow(i + 2).getCell(7).setCellValue(convertHbAmount(vo.getOperationRedDiscount(),vo.getMerchantRedDiscount()));
-                    sheet.getRow(i + 2).getCell(8).setCellValue(convertRebateAmount(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(11).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(12).setCellValue(convertOrderSource(vo.getOrderSource()));
-                    sheet.getRow(i + 2).getCell(13).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(14).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(15).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getOperationRedDiscount() != null ? vo.getOperationRedDiscount().toString() : "0");
+                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getMerchantRedDiscount() != null ? vo.getMerchantRedDiscount().toString() : "0");
+                    sheet.getRow(i + 2).getCell(9).setCellValue(this.convertRebateAmount(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
+                    sheet.getRow(i + 2).getCell(10).setCellValue(this.convertRebateType(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
+                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
+                    sheet.getRow(i + 2).getCell(12).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
+                    sheet.getRow(i + 2).getCell(13).setCellValue(convertStatus(vo.getStatus()));
+                    sheet.getRow(i + 2).getCell(14).setCellValue(convertOrderSource(vo.getOrderSource()));
+                    sheet.getRow(i + 2).getCell(15).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(16).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(17).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
             String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
@@ -161,32 +163,23 @@ public class ExportOsmOrderExcel {
         return result;
     }
 
-    private String convertHbAmount(BigDecimal operationRedDiscount,BigDecimal merchantRedDiscount){
-        StringBuilder sb = new StringBuilder();
-        if(operationRedDiscount != null){
-            sb.append(operationRedDiscount).append("元(平台)");
-        }
-        if(merchantRedDiscount != null){
-            if(sb.length() > 0){
-                sb.append("+");
-            }
-            sb.append(merchantRedDiscount).append("元(商户)");
-        }
-        return sb.toString();
-    }
-
     private String convertRebateAmount(BigDecimal operationRebateDiscount,BigDecimal merchantRebateDiscount){
-        StringBuilder sb = new StringBuilder();
+        BigDecimal rebateAmount = BigDecimal.ZERO;
         if(operationRebateDiscount != null){
-            sb.append(operationRebateDiscount).append("元(平台)");
+            rebateAmount = rebateAmount.add(operationRebateDiscount);
         }
         if(merchantRebateDiscount != null){
-            if(sb.length() > 0){
-                sb.append("+");
-            }
-            sb.append(merchantRebateDiscount).append("元(商户)");
+            rebateAmount = rebateAmount.add(merchantRebateDiscount);
         }
-        return sb.toString();
+        return rebateAmount.toString();
+    }
+
+    private String convertRebateType(BigDecimal operationRebateDiscount,BigDecimal merchantRebateDiscount){
+        String reabteType = "平台";
+        if(merchantRebateDiscount != null && merchantRebateDiscount.compareTo(BigDecimal.ZERO) > 0){
+            reabteType = "商户";
+        }
+        return reabteType;
     }
 
 }

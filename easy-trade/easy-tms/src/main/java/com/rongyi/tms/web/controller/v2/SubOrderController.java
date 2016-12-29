@@ -140,13 +140,18 @@ public class SubOrderController extends BaseControllerV2 {
                     hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
                     commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
                             .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
-                    if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-                        MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
-                                .getCouponCode());
-                        if (userCouponVO != null) {
-                            userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-                        }
-                    }
+
+                    sonOrderVo.setHbDiscount(sonOrderVo.getDiscountAmount().compareTo(sonOrderVo.getHbDiscount()) <= 0 ?
+                            sonOrderVo.getDiscountAmount() : sonOrderVo.getHbDiscount());
+                    sonOrderVo.setVoucherDiscount(sonOrderVo.getDiscountAmount().compareTo(sonOrderVo.getVoucherDiscount()) <= 0 ?
+                            sonOrderVo.getDiscountAmount() : sonOrderVo.getVoucherDiscount());
+//                    if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
+//                        MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
+//                                .getCouponCode());
+//                        if (userCouponVO != null) {
+//                            userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+//                        }
+//                    }
                 }
             }
             //抵扣券合计
