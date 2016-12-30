@@ -22,7 +22,24 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class Util {
-
+	
+	public static void main(String[] args) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("channel", "013");
+		params.put("st", "H37FjcdLD6G6M8qr1VHWwP59/3lyIX1MMFrB4KFsO7GyrmMXTxvUFVB0Z4YMhUeeotxVYGlKjwoCXBn1fqzrxUdIVLDYJjQEt7Tnv5TwhUkFyebfWblda8XhRupkAMtsPym10wuUnIuIpPU7p5EcYC+QHDE5vbZxKDVdvtEdLgs=");
+		
+		Collection<String> keyset = params.keySet();
+		List<String> list = new ArrayList<>(keyset);
+		//对key键值按字典升序排序
+		Collections.sort(list);
+		String sb = new String();
+		for (int i = 0; i < list.size(); i++) {
+			sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+		}
+		sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+		String md5Sign = Md5Util.GetMD5Code(sb.toString());
+		System.out.println(md5Sign);
+	}
 	/**
 	 * 签名判断
 	 * @param params
