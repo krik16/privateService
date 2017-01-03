@@ -19,6 +19,8 @@ public class UserCenterParam implements Serializable {
     private String orderNo;
     // 平台 --> platform
     private String orderChannel;
+    // 备注
+    private String remark;
 
     public int getCreditNumber() {
         return creditNumber;
@@ -60,6 +62,14 @@ public class UserCenterParam implements Serializable {
         this.userId = userId;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
         return "UserCenterParam{" +
@@ -68,6 +78,7 @@ public class UserCenterParam implements Serializable {
                 ", mallId='" + mallId + '\'' +
                 ", orderNo='" + orderNo + '\'' +
                 ", orderChannel='" + orderChannel + '\'' +
+                ", remark='" + remark + '\'' +
                 '}';
     }
 }
