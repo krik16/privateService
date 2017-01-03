@@ -24,6 +24,8 @@ public class DistributorDetailVO implements Serializable{
 	private UserCashAccountVO cashAccount;//银行卡配置信息
 	private String memo;//备注
 	private UserAlipyVO userAlipy;//支付宝配置信息
+	private Integer roleId;//用户角色id
+	private String roleName;//角色名称
 	
 	public Integer getUserId() {
 		return userId;
@@ -79,13 +81,26 @@ public class DistributorDetailVO implements Serializable{
 	public void setUserAlipy(UserAlipyVO userAlipy) {
 		this.userAlipy = userAlipy;
 	}
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 	@Override
 	public String toString() {
-		return "DistributorDetailVO [userId=" + userId + ", userAccount=" + userAccount
-				+ ", phone=" + phone + ", userName=" + userName
+		return "DistributorDetailVO [userId=" + userId + ", userAccount="
+				+ userAccount + ", phone=" + phone + ", userName=" + userName
 				+ ", userNickName=" + userNickName + ", cardId=" + cardId
 				+ ", cashAccount=" + cashAccount + ", memo=" + memo
-				+ ", userAlipy=" + userAlipy + "]";
+				+ ", userAlipy=" + userAlipy + ", roleId=" + roleId
+				+ ", roleName=" + roleName + "]";
 	}
 	
 }
