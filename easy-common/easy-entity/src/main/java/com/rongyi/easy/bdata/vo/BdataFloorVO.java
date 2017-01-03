@@ -4,19 +4,42 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 public class BdataFloorVO implements Serializable {
-	
+
 	@Override
 	public String toString() {
-		return "BdataFloorVO [id=" + id + ", type=" + type + ", aliasename=" + aliasename + ", aliasname=" + aliasname
-				+ ", buildingId=" + buildingId + ", businesstype=" + businesstype + ", createdAt=" + createdAt
-				+ ", name=" + name + ", navigationPic=" + navigationPic + ", operatorId=" + operatorId + ", parentId="
-				+ parentId + ", parentIds=" + parentIds + ", pathImg=" + pathImg + ", picture=" + picture
-				+ ", position=" + position + ", simpleFloorName=" + simpleFloorName + ", systemStatus=" + systemStatus
-				+ ", updated_at=" + updated_at + ", last_updateId=" + last_updateId + ", countShop=" + countShop + "]";
+		return "BdataFloorVO{" +
+				"id='" + id + '\'' +
+				", type='" + type + '\'' +
+				", aliasename='" + aliasename + '\'' +
+				", aliasname='" + aliasname + '\'' +
+				", buildingId='" + buildingId + '\'' +
+				", buildingType='" + buildingType + '\'' +
+				", businesstype='" + businesstype + '\'' +
+				", createdAt=" + createdAt +
+				", name='" + name + '\'' +
+				", navigationPic='" + navigationPic + '\'' +
+				", operatorId='" + operatorId + '\'' +
+				", operatorName='" + operatorName + '\'' +
+				", lastUpdateName='" + lastUpdateName + '\'' +
+				", parentId='" + parentId + '\'' +
+				", parentIds=" + parentIds +
+				", pathImg='" + pathImg + '\'' +
+				", picture='" + picture + '\'' +
+				", position=" + position +
+				", simpleFloorName='" + simpleFloorName + '\'' +
+				", systemStatus=" + systemStatus +
+				", updated_at=" + updated_at +
+				", reason='" + reason + '\'' +
+				", swf='" + swf + '\'' +
+				", fmap='" + fmap + '\'' +
+				", tmap='" + tmap + '\'' +
+				", thirdFloorId='" + thirdFloorId + '\'' +
+				", last_updateId='" + last_updateId + '\'' +
+				", countShop=" + countShop +
+				'}';
 	}
+
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
@@ -42,20 +65,56 @@ public class BdataFloorVO implements Serializable {
     private Date  updated_at;
     private String reason;//操作描述
     private String swf;//swf图--商家后台用的
-    
-    private String  fmap;
-    
-    
-    
-    
-    
-    
-    public String getFmap() {
+	private String fmap;//蜂鸟版图片
+	private  Integer createSource;//创建来源 0大运营后台  1  商家后台
+	private Integer updateSource ;
+	private String   tmap;//图聚版地图
+	private String thirdFloorId;//第三方楼层id
+
+	public String getTmap() {
+		return tmap;
+	}
+
+	public void setTmap(String tmap) {
+		this.tmap = tmap;
+	}
+
+	public String getThirdFloorId() {
+		return thirdFloorId;
+	}
+
+	public void setThirdFloorId(String thirdFloorId) {
+		this.thirdFloorId = thirdFloorId;
+	}
+
+
+	public String getFmap() {
 		return fmap;
 	}
+
 	public void setFmap(String fmap) {
 		this.fmap = fmap;
 	}
+
+
+
+	public Integer getUpdateSource() {
+		return updateSource;
+	}
+
+	public void setUpdateSource(Integer updateSource) {
+		this.updateSource = updateSource;
+	}
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
+	}
+
+
 	public String getSwf() {
 		return swf;
 	}
