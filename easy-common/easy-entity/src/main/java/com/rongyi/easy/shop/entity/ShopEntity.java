@@ -580,4 +580,58 @@ public class ShopEntity implements Serializable{
 	public void setParent_ids(List<ObjectId> parent_ids) {
 		this.parent_ids = parent_ids;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ShopEntity{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", shop_nature='" + shop_nature + '\'' +
+				", shop_type='" + shop_type + '\'' +
+				", number='" + number + '\'' +
+				", brand_id=" + brand_id +
+				", brand_ids=" + brand_ids +
+				", icon='" + icon + '\'' +
+				", category_ids=" + category_ids +
+				", custom_category_ids=" + custom_category_ids +
+				", photo_urls=" + photo_urls +
+				", tags='" + tags + '\'' +
+				", zone_id=" + zone_id +
+				", zone_ids=" + zone_ids +
+				", parent_id=" + parent_id +
+				", parent_ids=" + parent_ids +
+				", address='" + address + '\'' +
+				", moreFloors=" + moreFloors +
+				", shop_number='" + shop_number + '\'' +
+				", business_status=" + business_status +
+				", business_hours='" + business_hours + '\'' +
+				", opened_time=" + opened_time +
+				", telephone='" + telephone + '\'' +
+				", head_name='" + head_name + '\'' +
+				", head_telephone='" + head_telephone + '\'' +
+				", description='" + description + '\'' +
+				", created_at=" + created_at +
+				", updated_at=" + updated_at +
+				", created_by=" + created_by +
+				", updated_by=" + updated_by +
+				", valid=" + valid +
+				", reason='" + reason + '\'' +
+				", filiale_id=" + filiale_id +
+				", operator_id=" + operator_id +
+				", mold='" + mold + '\'' +
+				", recommend=" + recommend +
+				", average_consumption='" + average_consumption + '\'' +
+				", parent_status=" + parent_status +
+				", slug='" + slug + '\'' +
+				", key_tags='" + key_tags + '\'' +
+				", production_ids=" + production_ids +
+				", location=" + location +
+				", rank=" + rank +
+				", name_en='" + name_en + '\'' +
+				", description_en='" + description_en + '\'' +
+				", create_source=" + create_source +
+				", update_source=" + update_source +
+				'}';
+	}
 }

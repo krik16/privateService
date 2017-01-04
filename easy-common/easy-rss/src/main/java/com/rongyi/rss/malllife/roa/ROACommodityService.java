@@ -138,6 +138,8 @@ public interface ROACommodityService {
 	 */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
+	public ResponseVO deleteCommodityAuth(String commodityId, Long shopId, Integer userId);
+
 	public ResponseVO  topByIds(List<CommoditySortVo> commoditySortVos);
 
 	/**
