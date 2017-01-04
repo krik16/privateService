@@ -1260,6 +1260,9 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setGoodsSec(source.isGoodsSec());
 		commodity.setSubheading(source.getSubheading());
 		commodity.setCommodityDetails(source.getCommodityDetails());
+		commodity.setCommodityRange(source.getCommodityRange());
+		commodity.setFreePostage(source.getFreePostage());
+		commodity.setShelvesType(source.getShelvesType());
 		return commodity;
 	}
 }
