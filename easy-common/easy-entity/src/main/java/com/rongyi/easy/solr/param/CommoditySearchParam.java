@@ -16,6 +16,7 @@ import java.util.Map;
 
 import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 
 /**
  * 商品查询参数类
@@ -109,6 +110,16 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	private Integer minStock;
 	private Integer maxStock;
+	private Integer type = CommodityConstants.CommodityType.COMMODITY; //0:商品 1:礼品
+
+	@NeedCheck(getFieldName = "type")
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 	private Integer serviceId;//微信服务号id
 

@@ -105,6 +105,9 @@ public interface OrderEventType {
 
     /** 拼团失败*/
     public static final String PINTUAN_FAIL = "34";
+
+    /** 未确认收货超时，关闭订单*/
+    public static final String UNCONFIRMED_RECEIPT_TIMEOUT = "35";
     
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";

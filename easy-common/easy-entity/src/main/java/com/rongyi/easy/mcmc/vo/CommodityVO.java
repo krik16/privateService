@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
@@ -19,7 +20,7 @@ import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 
 
-public class CommodityVO  implements  Serializable {
+public class CommodityVO  implements  Serializable, Cloneable {
 
 	/**
 	 *
@@ -38,7 +39,7 @@ public class CommodityVO  implements  Serializable {
 	private String commodityStock;
 	private String commoditySold;
 	private String commodityPubDate;
-	private int commodityStatus;
+	private Integer commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架 1上架 3待上架)
 
 	private String commodityOPriceMax;//我是最高原价”,
@@ -54,6 +55,8 @@ public class CommodityVO  implements  Serializable {
 	private String create_by; // 创建人
 	private String update_by;//修改人
 	private String liveId; // 直播Id
+	private Integer saleId;
+	private Integer flashSaleId;
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
 	private String shopId;//店铺mysql Id
@@ -100,8 +103,47 @@ public class CommodityVO  implements  Serializable {
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 	private boolean offerShelves;//是否可下架  true是；false否
 
-	private String subheading;  //副标题
+	// 礼品id mysql id 兼容老数据
+	private String giftId;
+	// 礼品编号
+	private String sn;
+	// 礼品所属id
+	private String mappingId;
+	// 商品类型(0:商品, 1:礼品)
+	private Integer commodityRange = CommodityConstants.CommodityType.COMMODITY;
+	// 兑换类型（1.兑换，2.换购）
+	private String exchangeTypes;
+	// 积分设置类型（1.同一设置 2.按等级设置）
+	private Integer pointType;
+	// 换购类型（1.同一设置 2.按等级设置）
+	private Integer buyType;
+	// 配送方式（1.自提 2.快递）
+	private String deliveryTypes;
+	// 自提类型（1.公共设施 2.指定店铺）
+	private Integer selfType;
+	// 自提地点
+	private String selfAddress;
+	// 自提地点备注
+	private String selfRemark;
+	// 自提地点id
+	private String selfAddressId;
+	// 自提期限
+	private Date selfExpireDate;
+	// 卡券开始时间
+	private Date couponStartDate;
+	// 卡券过期时间
+	private Date couponEndDate;
+	// 标签列表
+	private List<String> tagIds;
+	// 支付方式列表
+	private List<String> paymentIds;
+	// 商品兑换规则
+	private List<GiftPaymentVO> paymentVOs;
+	private String platform;
+	private Double price;
+	private Integer selfTakeDays;
 
+	private String subheading;  //副标题
 	private String commodityDetails; //商品详情
 	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
 	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
@@ -113,6 +155,56 @@ public class CommodityVO  implements  Serializable {
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<String> categoryNames;
+	private String freePostage;  // 0包邮 1不包邮
+
+
+	public String getFreePostage() {
+		return freePostage;
+	}
+
+	public void setFreePostage(String freePostage) {
+		this.freePostage = freePostage;
+	}
+
+	public Integer getSelfTakeDays() {
+		return selfTakeDays;
+	}
+
+	public void setSelfTakeDays(Integer selfTakeDays) {
+		this.selfTakeDays = selfTakeDays;
+	}
+
+	public Integer getFlashSaleId() {
+		return flashSaleId;
+	}
+
+	public void setFlashSaleId(Integer flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
+
+	public Integer getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
 	private Date activityStartTime;
 	private Date activityEndTime;
 
@@ -299,10 +391,10 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityShopNumber(String commodityShopNumber) {
 		this.commodityShopNumber = commodityShopNumber;
 	}
-	public int getCommodityStatus() {
+	public Integer getCommodityStatus() {
 		return commodityStatus;
 	}
-	public void setCommodityStatus(int commodityStatus) {
+	public void setCommodityStatus(Integer commodityStatus) {
 		this.commodityStatus = commodityStatus;
 	}
 	public String getShopMid() {
@@ -443,12 +535,6 @@ public class CommodityVO  implements  Serializable {
 	public void setSource(Integer source) {
 		this.source = source;
 	}
-	/*public Integer getDistribution() {
-		return distribution;
-	}
-	public void setDistribution(Integer distribution) {
-		this.distribution = distribution;
-	}*/
 	public Integer getFreight() {
 		return freight;
 	}
@@ -606,6 +692,150 @@ public class CommodityVO  implements  Serializable {
 
 	public void setInActivity(boolean inActivity) {
 		this.inActivity = inActivity;
+	}
+
+	public List<GiftPaymentVO> getPaymentVOs() {
+		return paymentVOs;
+	}
+
+	public void setPaymentVOs(List<GiftPaymentVO> paymentVOs) {
+		this.paymentVOs = paymentVOs;
+	}
+
+	public String getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(String giftId) {
+		this.giftId = giftId;
+	}
+
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
+	public String getMappingId() {
+		return mappingId;
+	}
+
+	public void setMappingId(String mappingId) {
+		this.mappingId = mappingId;
+	}
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
+
+	public String getExchangeTypes() {
+		return exchangeTypes;
+	}
+
+	public void setExchangeTypes(String exchangeTypes) {
+		this.exchangeTypes = exchangeTypes;
+	}
+
+	public Integer getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(Integer pointType) {
+		this.pointType = pointType;
+	}
+
+	public Integer getBuyType() {
+		return buyType;
+	}
+
+	public void setBuyType(Integer buyType) {
+		this.buyType = buyType;
+	}
+
+	public String getDeliveryTypes() {
+		return deliveryTypes;
+	}
+
+	public void setDeliveryTypes(String deliveryTypes) {
+		this.deliveryTypes = deliveryTypes;
+	}
+
+	public Integer getSelfType() {
+		return selfType;
+	}
+
+	public void setSelfType(Integer selfType) {
+		this.selfType = selfType;
+	}
+
+	public String getSelfAddress() {
+		return selfAddress;
+	}
+
+	public void setSelfAddress(String selfAddress) {
+		this.selfAddress = selfAddress;
+	}
+
+	public String getSelfRemark() {
+		return selfRemark;
+	}
+
+	public void setSelfRemark(String selfRemark) {
+		this.selfRemark = selfRemark;
+	}
+
+	public String getSelfAddressId() {
+		return selfAddressId;
+	}
+
+	public void setSelfAddressId(String selfAddressId) {
+		this.selfAddressId = selfAddressId;
+	}
+
+	public Date getSelfExpireDate() {
+		return selfExpireDate;
+	}
+
+	public void setSelfExpireDate(Date selfExpireDate) {
+		this.selfExpireDate = selfExpireDate;
+	}
+
+	public List<String> getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(List<String> tagIds) {
+		this.tagIds = tagIds;
+	}
+
+	public List<String> getPaymentIds() {
+		return paymentIds;
+	}
+
+	public void setPaymentIds(List<String> paymentIds) {
+		this.paymentIds = paymentIds;
+	}
+
+	public Date getCouponEndDate() {
+		return couponEndDate;
+	}
+
+	public void setCouponEndDate(Date couponEndDate) {
+		this.couponEndDate = couponEndDate;
+	}
+
+	public Date getCouponStartDate() {
+		return couponStartDate;
+	}
+
+	public void setCouponStartDate(Date couponStartDate) {
+		this.couponStartDate = couponStartDate;
 	}
 
 	public String getSubheading() {
@@ -777,9 +1007,17 @@ public class CommodityVO  implements  Serializable {
 		this.updateAt=commodity.getUpdateAt().getTime();
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+
+		this.couponStartDate = commodity.getCouponStartDate();
+		this.couponEndDate = commodity.getCouponEndDate();
+		this.selfExpireDate = commodity.getSelfExpireDate();
+		this.selfTakeDays = commodity.getSelfTakeDays();
+		this.commodityRange = commodity.getCommodityRange();
+		this.sn = commodity.getSn();
 		this.identity = commodity.getIdentity();
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
+		this.setSelfAddressId(commodity.getSelfAddressId());
 		this.setIfShowInWechat(
                 Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
                         .contains(commodity.getTerminalType())  &&
@@ -790,6 +1028,8 @@ public class CommodityVO  implements  Serializable {
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
+				"activityId=" + activityId +
+				", commodityId='" + commodityId + '\'' +
 				"commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
@@ -816,6 +1056,8 @@ public class CommodityVO  implements  Serializable {
 				", create_by='" + create_by + '\'' +
 				", update_by='" + update_by + '\'' +
 				", liveId='" + liveId + '\'' +
+				", saleId=" + saleId +
+				", flashSaleId=" + flashSaleId +
 				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
 				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
 				", shopId='" + shopId + '\'' +
@@ -858,6 +1100,27 @@ public class CommodityVO  implements  Serializable {
 				", updateAt=" + updateAt +
 				", galleryPosition=" + galleryPosition +
 				", inActivity=" + inActivity +
+				", giftId='" + giftId + '\'' +
+				", sn='" + sn + '\'' +
+				", mappingId='" + mappingId + '\'' +
+				", commodityRange=" + commodityRange +
+				", exchangeTypes='" + exchangeTypes + '\'' +
+				", pointType=" + pointType +
+				", buyType=" + buyType +
+				", deliveryTypes='" + deliveryTypes + '\'' +
+				", selfType=" + selfType +
+				", selfAddress='" + selfAddress + '\'' +
+				", selfRemark='" + selfRemark + '\'' +
+				", selfAddressId='" + selfAddressId + '\'' +
+				", selfExpireDate=" + selfExpireDate +
+				", couponStartDate=" + couponStartDate +
+				", couponEndDate=" + couponEndDate +
+				", tagIds=" + tagIds +
+				", paymentIds=" + paymentIds +
+				", paymentVOs=" + paymentVOs +
+				", platform='" + platform + '\'' +
+				", price=" + price +
+				", selfTakeDays=" + selfTakeDays +
 				", shelvesType=" + shelvesType +
 				", offerShelves=" + offerShelves +
 				", subheading='" + subheading + '\'' +
@@ -876,12 +1139,17 @@ public class CommodityVO  implements  Serializable {
 				'}';
 	}
 
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
 	public CommodityVO getCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
 		if(commodity==null) {
 			return null;
 		}
 
 		CommodityVO vo = new CommodityVO();
+		vo.setCommodityRange(CommodityConstants.CommodityType.COMMODITY);
 		vo.setCommodityName(commodity.getName());
 		vo.setCommodityCategory(commodity.getCategory());
 		vo.setCommodityDescription(commodity.getDescription());
@@ -929,6 +1197,7 @@ public class CommodityVO  implements  Serializable {
 		vo.setShelvesType(commodity.getShelvesType());
 		return vo;
 	}
+
 	private boolean judgeShelvesType(Date date1,Date date2){
         if(null ==date1 || null ==date2){
             return false;
