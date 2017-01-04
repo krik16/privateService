@@ -493,6 +493,7 @@
 		<result column="guide_name" property="guideName" jdbcType="VARCHAR" />
 		<result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="coupon_discount_type" property="couponDiscountType" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap">
@@ -615,7 +616,8 @@
 			US.mall_id,
 			SI.shop_name,
 			MC.mall_name,
-		 	CASE tor.source WHEN 0 THEN '容易逛' WHEN 1 THEN '微网站' WHEN 2 THEN '终端机' ELSE '其他' END AS source
+		 	CASE tor.source WHEN 0 THEN '容易逛' WHEN 1 THEN '微网站' WHEN 2 THEN '终端机' ELSE '其他' END AS source ,
+		   case tor.coupon_discount_type when 0 then '平台' when 1 then '商户' end as coupon_discount_type
 		FROM
 			ry_trade.trade_user_code tuc
 				JOIN ry_trade.trade_order tor ON tuc.order_id = tor.id
@@ -675,6 +677,7 @@
 		<result column="receipt_time" property="receiptTime" jdbcType="TIMESTAMP" />
 		<result column="buyer_phone" property="buyerPhone" jdbcType="VARCHAR" />
 		<result column="order_source" property="orderSource" jdbcType="VARCHAR" />
+		<result column="coupon_discount_type" property="couponDiscountType" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
@@ -871,7 +874,8 @@
 		 	H3.create_at AS delivery_time,
 		 	H4.create_at AS receipt_time,
 		 	MUA.phone AS buyer_phone,
-			CASE A.order_source WHEN 0 THEN '微网站' WHEN 1 THEN '容易逛' WHEN 2 THEN '终端机' ELSE '其他' END AS order_source
+			CASE A.order_source WHEN 0 THEN '微网站' WHEN 1 THEN '容易逛' WHEN 2 THEN '终端机' ELSE '其他' END AS order_source ,
+		   case A.coupon_discount_type WHEN 0 THEN '平台' WHEN 1 THEN '商家' end as coupon_discount_type
 		FROM
 			ry_osm.order_form A
 				LEFT JOIN ry_osm.order_detail_form B ON A.order_no = B.order_no

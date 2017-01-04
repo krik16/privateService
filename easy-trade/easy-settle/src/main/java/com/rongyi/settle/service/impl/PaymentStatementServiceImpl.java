@@ -474,6 +474,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             orderTopDtoList.addAll(orderSettlementTopDtos);
         }
 
+        //查询订单明细列表
         List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
                 paymentStatement.getCycleEndTime());
         if (orderSettlementDetailDtos != null) {

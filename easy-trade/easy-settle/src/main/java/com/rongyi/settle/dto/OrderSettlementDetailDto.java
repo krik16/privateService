@@ -74,6 +74,9 @@ public class OrderSettlementDetailDto {
 	/** 订单来源 */
 	private String orderSource;
 
+	/**  促销券补贴类型 0：平台补贴 1：商家补贴 */
+	private String couponDiscountType;
+
 	public String getOrderSource() {
 		return orderSource;
 	}
@@ -352,6 +355,14 @@ public class OrderSettlementDetailDto {
 		this.buyerPhone = buyerPhone;
 	}
 
+	public String getCouponDiscountType() {
+		return couponDiscountType;
+	}
+
+	public void setCouponDiscountType(String couponDiscountType) {
+		this.couponDiscountType = couponDiscountType;
+	}
+
 	public OrderSettlementDetailVO toVO() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -379,6 +390,7 @@ public class OrderSettlementDetailDto {
 		}
 		vo.setBuyerPhone(getBuyerPhone());
 		vo.setOrderSource(getOrderSource());
+		vo.setCouponDiscountType(getCouponDiscountType());
 		return vo;
 	}
 }
