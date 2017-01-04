@@ -455,12 +455,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             return;
         }
 
+        //查询卡券明细列表
         List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
                 paymentStatement.getCycleEndTime());
         if (couponStatementDetailDtos != null) {
             couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
         }
 
+        //查询卡券汇总列表
         List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
         if (couponExcelDtos != null) {
             couponExcelDtoList.addAll(couponExcelDtos);
