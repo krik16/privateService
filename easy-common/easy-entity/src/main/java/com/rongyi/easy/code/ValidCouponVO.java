@@ -22,6 +22,7 @@ public class ValidCouponVO implements Serializable {
 		private Integer couponType;// 0:代金券 ;1：活动券；2：礼品；3：停车券 4 活动奖品券
 		private String buyerPhone;
 		private String buyerName;
+		private int buyChannel;
 		private String validStartAtStr;
 		private String validEndAtStr;
 		private Integer stock;
@@ -31,6 +32,14 @@ public class ValidCouponVO implements Serializable {
 
 		public String getCouponId() {
 				return couponId;
+		}
+
+		public int getBuyChannel() {
+				return buyChannel;
+		}
+
+		public void setBuyChannel(int buyChannel) {
+				this.buyChannel = buyChannel;
 		}
 
 		public void setCouponId(String couponId) {

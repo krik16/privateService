@@ -13,6 +13,7 @@ package com.rongyi.core.common.third.rsa;
 
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.util.Base64Helper;
+import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.util.EasyMd5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,8 @@ public class MalllifeRsaUtil {
         }
         return str;
     }
+
+
 
     /**
      * 分组加密
@@ -236,6 +239,8 @@ public class MalllifeRsaUtil {
             Map<String, Object> keyMap;
             try {
 /*
+             String json =    decryptStr("c3cNDk0uQ55Jw5Dm2jvSMwFPiCA9HqmF7j9E8PqLRM28dX0C3YaAof66lQD3R22+UuYdZ/Rdi3T1ndNTQMHIHV34MhzGBU65Z1izJXiQFZm9TYR+atun3p7xznl0dLGQ+Ma6lWju4qKEmKdFoYw/yXdvqHdE18AkACE7s9MoVcA=FPoLiYZYK6bv6eKz9trIvkt8lkUrW49nNUhPmAMnIFMWqz6ruUTXHFv1X5xi4XLSXeQt2//ugb+5j4IzZEcsYNAzKfYSjk1j2hm04bFTH6nV2UAQG5fXcu8qH9CAtjJ+Qkpxdzplhza7SRn8Nm+/yoVfT51urBInPXtmVGxlSjw=", TradeConstantEnum.PRIVATE_KEY.getValueStr());
+                System.out.println(json);
                 //生成 公钥 私钥
                  keyMap = initKey();
                 String publicKey =  getPublicKey(keyMap);

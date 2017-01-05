@@ -28,7 +28,7 @@ public class SalerDeliveryParam extends BaseParam implements Serializable {
 	
 	private String expressInfoId;//物流信息主键id
 
-	private Integer source = 1;//操作平台 1摩店 2商家后台
+	private Integer source = 1;//操作平台 1摩店 2商家后台 3php
 
 	public String getExpressInfoId() {
 		return expressInfoId;

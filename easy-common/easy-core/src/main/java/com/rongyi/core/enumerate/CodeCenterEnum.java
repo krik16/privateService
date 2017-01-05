@@ -53,6 +53,7 @@ public enum CodeCenterEnum {
     ERROR_CHANNEL_TYPE(1021350,"type 不能为空！"),
     ERROR_CHANNEL_THIRD(1021351,"thirdChannel 参数不能为空或有误"),
     ERROR_NOT_EXIST_USER(1021352,"不存在该用户，请重新输入手机号和身份"),
+    ERROR_COUPON_TYPE(1021353,"礼品券类型不对！！！"),
     ;
 
 

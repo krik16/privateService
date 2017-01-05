@@ -25,6 +25,33 @@ public class ValidRecordVO implements Serializable{
     private String shopMid;
     private Integer point ;
     private Integer unitPrice;
+    private String shopName;
+    private String mallName;
+    private Integer couponType;
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
 
     public Integer getPoint() {
         return point;
