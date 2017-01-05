@@ -26,7 +26,7 @@ public class Util {
 	public static void main(String[] args) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("channel", "013");
-		params.put("st", "H37FjcdLD6G6M8qr1VHWwP59/3lyIX1MMFrB4KFsO7GyrmMXTxvUFVB0Z4YMhUeeotxVYGlKjwoCXBn1fqzrxUdIVLDYJjQEt7Tnv5TwhUkFyebfWblda8XhRupkAMtsPym10wuUnIuIpPU7p5EcYC+QHDE5vbZxKDVdvtEdLgs=");
+		params.put("st", "bhn5S4+n5v5D6034WwIsjNkRqjyO32jelaPaL5iBPI0M/RWTrRSHT9a/5JJAHxZeaP9wJnnmztbpxqanVeShTnJL1AgDgNV1fVjidXXsya0jHunoq2KjwTANC57JJP4gQS79Jl2ElJM2LNsJnVqG8FS6bVNKayUOFu0QNSvMweA");
 		
 		Collection<String> keyset = params.keySet();
 		List<String> list = new ArrayList<>(keyset);
@@ -37,6 +37,7 @@ public class Util {
 			sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
 		}
 		sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+		System.out.println(sb);
 		String md5Sign = Md5Util.GetMD5Code(sb.toString());
 		System.out.println(md5Sign);
 	}
