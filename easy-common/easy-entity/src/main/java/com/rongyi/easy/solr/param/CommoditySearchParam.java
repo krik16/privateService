@@ -110,7 +110,7 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	private Integer minStock;
 	private Integer maxStock;
-	private Integer type = CommodityConstants.CommodityType.COMMODITY; //0:商品 1:礼品
+	private Integer type;
 
 	@NeedCheck(getFieldName = "type")
 	public Integer getType() {
