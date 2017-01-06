@@ -1,7 +1,5 @@
 package com.rongyi.core.constant;
 
-import java.util.List;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -937,5 +935,32 @@ public interface Constants {
     interface INDUSTRY_INFO_TYPE {//0非默认 1默认
     	String own_info = "own_info";
     	String extension_info = "extension_info";
+    }
+
+    enum LuckyMoneyCode {
+        /**
+         * 2016年双蛋红包
+         */
+        DOUBLE_EGG_2016("2016-SD", "2016年双蛋红包"),
+        /**
+         * 2017福袋红包
+         */
+        LUCKY_BAG_2017("LUCKY_BAG_20017", "2017福袋红包");
+
+        private String code;
+        private String message;
+
+        private LuckyMoneyCode(String code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }
