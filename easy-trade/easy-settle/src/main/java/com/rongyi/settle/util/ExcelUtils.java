@@ -320,31 +320,34 @@ public class ExcelUtils {
                 XSSFCell hbDiscount = row15.createCell(11);
                 hbDiscount.setCellValue(couponCodeExcelDto.getHbAmount());
 
-                XSSFCell scoreDiscount = row15.createCell(12);
+                XSSFCell hbDiscountType = row15.createCell(12);
+                hbDiscountType.setCellValue(couponCodeExcelDto.getCouponDiscountType());
+
+                XSSFCell scoreDiscount = row15.createCell(13);
                 scoreDiscount.setCellValue(couponCodeExcelDto.getScoreAmount());
 
-                XSSFCell discount = row15.createCell(13);
+                XSSFCell discount = row15.createCell(14);
                 discount.setCellValue(couponCodeExcelDto.getDiscountAmount());
 
-                XSSFCell buyerPhone = row15.createCell(14);
+                XSSFCell buyerPhone = row15.createCell(15);
                 buyerPhone.setCellValue(encryptPhone(couponCodeExcelDto.getBuyerPhone()));
 
-                XSSFCell guidePhone = row15.createCell(15);
+                XSSFCell guidePhone = row15.createCell(16);
                 guidePhone.setCellValue(encryptPhone(couponCodeExcelDto.getGuidePhone()));
 
-                XSSFCell buyerName = row15.createCell(16);
+                XSSFCell buyerName = row15.createCell(17);
                 buyerName.setCellValue(couponCodeExcelDto.getBuyerName());
 
-                XSSFCell guideName = row15.createCell(17);
+                XSSFCell guideName = row15.createCell(18);
                 guideName.setCellValue(couponCodeExcelDto.getGuideName());
 
-                XSSFCell mallNameStr = row15.createCell(18);
+                XSSFCell mallNameStr = row15.createCell(19);
                 mallNameStr.setCellValue(couponCodeExcelDto.getMallName());
 
-                XSSFCell shopNameStr = row15.createCell(19);
+                XSSFCell shopNameStr = row15.createCell(20);
                 shopNameStr.setCellValue(couponCodeExcelDto.getShopName());
 
-                XSSFCell sourceStr = row15.createCell(20);
+                XSSFCell sourceStr = row15.createCell(21);
                 sourceStr.setCellValue(couponCodeExcelDto.getSource());
             }
         }
@@ -403,22 +406,25 @@ public class ExcelUtils {
                 XSSFCell hb = rowOrder.createCell(9);
                 hb.setCellValue(orderDetail.getHbDiscount());
 
-                XSSFCell channel = rowOrder.createCell(10);
+                XSSFCell hbDiscountType = rowOrder.createCell(10);
+                hbDiscountType.setCellValue(orderDetail.getCouponDiscountType());
+
+                XSSFCell channel = rowOrder.createCell(11);
                 channel.setCellValue(orderDetail.getPaymentChannel());
 
-                XSSFCell payTime = rowOrder.createCell(11);
+                XSSFCell payTime = rowOrder.createCell(12);
                 payTime.setCellValue(orderDetail.getPaymentTime());
 
-                XSSFCell dlvTime = rowOrder.createCell(12);
+                XSSFCell dlvTime = rowOrder.createCell(13);
                 dlvTime.setCellValue(orderDetail.getDeliveryTime());
 
-                XSSFCell rcptTime = rowOrder.createCell(13);
+                XSSFCell rcptTime = rowOrder.createCell(14);
                 rcptTime.setCellValue(orderDetail.getReceiptTime());
 
-                XSSFCell phone = rowOrder.createCell(14);
+                XSSFCell phone = rowOrder.createCell(15);
                 phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));
 
-                XSSFCell source = rowOrder.createCell(15);
+                XSSFCell source = rowOrder.createCell(16);
                 source.setCellValue(orderDetail.getOrderSource());
             }
         }

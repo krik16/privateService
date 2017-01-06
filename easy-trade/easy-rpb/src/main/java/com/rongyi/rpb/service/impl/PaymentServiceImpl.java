@@ -336,7 +336,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                     //公众号支付
                     if (StringUtils.isNotBlank(paymentEntityVO.getAppId()) && !"null".equals(paymentEntityVO.getAppId())) {
-                        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+                        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType(),paymentEntityVO.getMallId());
                         if (weixinMch != null) {
                             paymentEntity.setWeixinMchId(weixinMch.getId());
                         }
@@ -402,7 +402,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
                 paymentEntity.setPayChannel(null);
             if (StringUtils.isNotBlank(paymentEntityVO.getAppId())) {
-                WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+                WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType(),paymentEntityVO.getMallId());
                 if (weixinMch != null) {
                     paymentEntity.setWeixinMchId(weixinMch.getId());
                 }

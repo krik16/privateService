@@ -62,6 +62,9 @@ public class OrderSettlementDetailVO {
 	/** 订单来源 */
 	private String orderSource;
 
+	/** 促销券补贴类型 0：平台补贴 1：商家补贴 */
+	private String couponDiscountType ;
+
 	public String getOrderSource() {
 		return orderSource;
 	}
@@ -279,6 +282,12 @@ public class OrderSettlementDetailVO {
 	public void setBuyerPhone(String buyerPhone) {
 		this.buyerPhone = buyerPhone;
 	}
-    
-    
+
+	public String getCouponDiscountType() {
+		return couponDiscountType;
+	}
+
+	public void setCouponDiscountType(String couponDiscountType) {
+		this.couponDiscountType = couponDiscountType;
+	}
 }

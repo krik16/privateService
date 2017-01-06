@@ -32,6 +32,7 @@ public class CouponStatementDetailDto {
     private String guidePhone;
     private String guideName;
     private String source;
+    private String couponDiscountType ; //促销券补贴类型 0：平台补贴 1：商家补贴
 
     public String getSource() {
         return source;
@@ -217,6 +218,14 @@ public class CouponStatementDetailDto {
         this.guideName = guideName;
     }
 
+    public String getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(String couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
+    }
+
     public CouponCodeExcelDto toCouponCodeExcelDto() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         CouponCodeExcelDto dto = new CouponCodeExcelDto();
@@ -240,6 +249,7 @@ public class CouponStatementDetailDto {
         dto.setGuideName(getGuideName());
         dto.setGuidePhone(getGuidePhone());
         dto.setSource(getSource());
+        dto.setCouponDiscountType(getCouponDiscountType());
         return dto;
     }
 }
