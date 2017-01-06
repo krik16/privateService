@@ -945,7 +945,7 @@ public interface Constants {
         /**
          * 2017福袋红包
          */
-        LUCKY_BAG_2017("LUCKY_BAG_20017", "2017福袋活动");
+        LUCKY_BAG_2017("LUCKY_BAG_2017", "2017福袋活动");
 
         private String code;
         private String message;
