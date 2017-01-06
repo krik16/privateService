@@ -38,6 +38,9 @@ public class OrderSettlementTopDto {
 	/** 店铺名称 */
 	private String shopName;
 
+	/**  商家红包抵扣金额（汇总） */
+	private Double hbDiscountMerTotal ;
+
 	/**
 	 * @return the incomeType
 	 */
@@ -142,5 +145,13 @@ public class OrderSettlementTopDto {
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+	public Double getHbDiscountMerTotal() {
+		return hbDiscountMerTotal;
+	}
+
+	public void setHbDiscountMerTotal(Double hbDiscountMerTotal) {
+		this.hbDiscountMerTotal = hbDiscountMerTotal;
 	}
 }

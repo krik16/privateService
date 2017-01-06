@@ -468,6 +468,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             couponExcelDtoList.addAll(couponExcelDtos);
         }
 
+        //查询商品订单汇总列表
         List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
                 paymentStatement.getCycleEndTime());
         if (orderSettlementTopDtos != null) {
@@ -594,6 +595,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 // 汇总购券使用积分总金额
                 existCouponExcelDto.setCouponScoreTotal((existCouponExcelDto.getCouponScoreTotal() == null ? 0 : existCouponExcelDto.getCouponScoreTotal())
                         + (couponExcelDto.getCouponScoreTotal() == null ? 0 : couponExcelDto.getCouponScoreTotal()));
+                // 汇总购券使用商家红包总金额
+                existCouponExcelDto.setCouponMerhbTotal((existCouponExcelDto.getCouponMerhbTotal() == null ? 0 : existCouponExcelDto.getCouponMerhbTotal())
+                        + (couponExcelDto.getCouponMerhbTotal() == null ? 0 : couponExcelDto.getCouponMerhbTotal()));
             }
         }
         return new ArrayList(map.values());
@@ -627,6 +631,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 // 汇总订单补贴金额
                 existOrderTopDto.setOrderDiscountTotal((existOrderTopDto.getOrderDiscountTotal() == null ? 0 : existOrderTopDto.getOrderDiscountTotal())
                         + (orderTopDto.getOrderDiscountTotal() == null ? 0 : orderTopDto.getOrderDiscountTotal()));
+                //汇总商家红包抵扣金额
+                existOrderTopDto.setHbDiscountMerTotal((existOrderTopDto.getHbDiscountMerTotal() == null ? 0 : existOrderTopDto.getHbDiscountMerTotal())
+                        + (orderTopDto.getHbDiscountMerTotal() == null ? 0 : orderTopDto.getHbDiscountMerTotal()));
             }
         }
         return new ArrayList(map.values());

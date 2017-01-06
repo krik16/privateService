@@ -644,6 +644,7 @@
 		<result column="total_discount" property="couponDiscountTotal" jdbcType="INTEGER" />
 		<result column="total_score" property="couponScoreTotal" jdbcType="INTEGER" />
 		<result column="total_hb" property="couponHbTotal" jdbcType="INTEGER" />
+		<result column="total_merhb" property="couponMerhbTotal" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="OrderTopDtoMap" type="com.rongyi.settle.dto.OrderSettlementTopDto">
@@ -655,6 +656,7 @@
 		<result column="score_amount" property="scoreDiscountTotal" jdbcType="DOUBLE" />
 		<result column="total_amount" property="orderAmountTotal" jdbcType="DOUBLE" />
 		<result column="discount_amount" property="orderDiscountTotal" jdbcType="DOUBLE" />
+		<result column="hb_amount_mer" property="hbDiscountMerTotal" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="OrderDetailDtoMap" type="com.rongyi.settle.dto.OrderSettlementDetailDto">
@@ -721,8 +723,11 @@
 			,MAX(UC.orig_price) AS coupon_price
 			,SUM(UC.orig_price) AS total_price
 			,SUM(UC.orig_price - UC.unit_price) AS total_discount
-			,SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0)) AS total_hb
 			,SUM(IFNULL((CO.score_discount / COI.unit_count), 0)) AS total_score
+			,case CO.coupon_discount_type when 0 then SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0))
+			else 0 end  AS total_hb ,
+			case CO.coupon_discount_type when 1 then SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0))
+			else 0 end  AS total_merhb
 		FROM ry_trade.trade_user_code UC
 			LEFT JOIN
 				ry_trade.trade_order CO ON CO.id = UC.order_id
@@ -804,6 +809,7 @@
 		SUM(total_amount) AS total_amount,
 		SUM(score_amount) AS score_amount,
 		SUM(hb_amount) AS hb_amount,
+		SUM(hb_amount_mer) AS hb_amount_mer ,
 		0 AS discount_amount
 		FROM (
 		SELECT
@@ -812,7 +818,14 @@
 		OF.id AS OFID,
 		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
 		SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
-		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount
+		case OF.coupon_discount_type when 0 then
+		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount)
+		else
+		0
+		end as hb_amount ,
+		case OF.coupon_discount_type when 1 then
+		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount)
+		else 0 end as hb_amount_mer
 		FROM
 		ry_osm.order_form OF
 		INNER JOIN
