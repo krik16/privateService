@@ -497,6 +497,7 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", commodityMaxMinValues=" + commodityMaxMinValues +
 				", galleryPosition=" + galleryPosition +
 				", serviceId=" + serviceId +
+				", type=" + type +
 				"} " + super.toString();
 	}
 
