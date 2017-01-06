@@ -24,6 +24,7 @@
         <result column="source" property="source" jdbcType="INTEGER"/>
         <result column="pay_no" property="payNo" jdbcType="VARCHAR"/>
         <result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE"/>
+        <result column="coupon_discount_type" property="couponDiscountType" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
         trade_order.id,
@@ -66,7 +67,8 @@
         trade_order.pay_channel,
         trade_order.pay_no,
         ROUND(trade_order.score_discount/100,2) as score_discount,
-        ROUND(trade_order.pay_amount/100,2) as pay_amount
+        ROUND(trade_order.pay_amount/100,2) as pay_amount,
+        trade_order.coupon_discount_type
 
     </sql>
     <select id="selectPageList" resultMap="BaseResultMap"
