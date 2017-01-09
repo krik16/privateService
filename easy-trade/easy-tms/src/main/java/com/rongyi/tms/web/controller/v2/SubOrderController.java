@@ -3,7 +3,6 @@ package com.rongyi.tms.web.controller.v2;
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.UserInfo;
-import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.rmmm.entity.MallCooperateEntity;
@@ -239,7 +238,7 @@ public class SubOrderController extends BaseControllerV2 {
     @ResponseBody
     public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap, HttpServletRequest request) {
         LOGGER.info("validateExcelCount:paramsMap={}", paramsMap);
-        ResponseData responseData = ResponseData.failure();
+        ResponseData responseData = ResponseData.failure(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeInt(),ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
         try {
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
