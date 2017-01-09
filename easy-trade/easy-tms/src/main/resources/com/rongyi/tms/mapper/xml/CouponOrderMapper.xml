@@ -154,8 +154,8 @@
 
     <select id="selectPageListCount" parameterType="java.util.Map"
             resultType="java.lang.Integer">
-        select count(*) from (select
-        DISTINCT trade_order.id
+        select
+        count(trade_order.id)
         from ry_trade.trade_order
         as
         trade_order
@@ -166,7 +166,7 @@
         <where>
             <include refid="Base_where"/>
         </where>
-        ) as total
+
     </select>
 
 </mapper>
