@@ -90,9 +90,17 @@ public class CommodityBuyerVO implements Serializable {
     private Long registerAt;//上架时间
 	private Long soldOutAt;//下架时间
     private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+    private List<String> categoryNames;
 
+    public List<String> getCategoryNames() {
+        return categoryNames;
+    }
 
-	public Long getRegisterAt() {
+    public void setCategoryNames(List<String> categoryNames) {
+        this.categoryNames = categoryNames;
+    }
+
+    public Long getRegisterAt() {
 		return registerAt;
 	}
 

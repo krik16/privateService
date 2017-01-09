@@ -16,6 +16,16 @@ public class WechatCommodityParam extends MalllifeBaseParam implements Serializa
 	private Integer activityId;//拼团活动id
 	private String memberId;//微信电子会员ids
 	private List<CommoditySpecParam> commoditySpecIds;
+	private String categoryParentId;
+
+	public String getCategoryParentId() {
+		return categoryParentId;
+	}
+
+	public void setCategoryParentId(String categoryParentId) {
+		this.categoryParentId = categoryParentId;
+	}
+
 	public List<CommoditySpecParam> getCommoditySpecIds() {
 		return commoditySpecIds;
 	}
