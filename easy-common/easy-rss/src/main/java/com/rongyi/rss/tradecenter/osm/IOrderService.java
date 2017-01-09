@@ -139,4 +139,16 @@ public interface IOrderService {
 	 * @throws Exception
 	 *//*
 	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;*/
+	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;
+
+	/**
+	 * 商品券码核销
+	 *
+	 * @param couponCode 券码
+	 * @param mallId 核销人对应的mallId
+	 * @param shopId 核销人对应的shopId
+	 * @param checkUserId 核销人
+	 * @return
+	 */
+	ResponseVO checkingCode(String couponCode, String mallId, String shopId, Integer checkUserId);
 }

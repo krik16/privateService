@@ -143,7 +143,7 @@ public class CommodityBuyerVO implements Serializable {
 
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
-    
+
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
 	}
@@ -231,9 +231,9 @@ public class CommodityBuyerVO implements Serializable {
     public void setActivityCommodityStatus(int activityCommodityStatus) {
         this.activityCommodityStatus = activityCommodityStatus;
     }
-    
+
     public void Commodity(){
-    	
+
     }
 	public Integer getActivityStatus() {
 		return activityStatus;

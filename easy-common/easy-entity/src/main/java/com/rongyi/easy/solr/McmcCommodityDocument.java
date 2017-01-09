@@ -8,14 +8,20 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
+import com.rongyi.easy.util.CommodityUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
 import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class McmcCommodityDocument implements java.io.Serializable{
 
@@ -116,7 +122,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String hotAreaName; ///< 商圈名称
 	@Field("top")
 	private Integer top; ///< 置顶排序
-
 	@Field("secKillSign")
 	private String secKillSign;
 	@Field("extend")
@@ -126,6 +131,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
+	@Field("commodityRange")
+	private Integer commodityRange;
+
 	@Field("locationIds")
 	private List<String> locationIds;
 	@Field("serviceIds")
@@ -277,6 +285,16 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
 	}
+
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
+
 
 	public McmcCommodityDocument(){
 
@@ -570,12 +588,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
 		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
-		List<String> category_ids = new ArrayList<>();
-		for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
-			category_ids.add(categoryObjectId.toString());
+		if (!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
+			List<String> category_ids = new ArrayList<>();
+			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
+				category_ids.add(categoryObjectId.toString());
+			}
+			this.setCategory_ids(category_ids);
+			this.setBrandName(commodity.getBrandName());
 		}
-		this.setCategory_ids(category_ids);
-		this.setBrandName(commodity.getBrandName());
 		this.setUpdateAt(commodity.getUpdateAt());
 
 		if (commodity.getSaleId() != null && commodity.getSaleId() != 0) {
@@ -583,7 +603,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSortPosition(9999);
 		}
 
-
+		if (!CommodityUtil.isGiftType(commodityVo.getCommodityRange())) {
+			if(commodity.getSource() == 0){//商家后台发布商品，默认下架
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+			}
+		}
 		this.setSystemNumber(commodity.getSystemNumber());
 		this.setDiscount(commodity.getDiscount());
 
@@ -599,8 +623,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
 			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
 		}
+		this.setCommodityRange(commodityVo.getCommodityRange());
 
-		if(commodityVo.getProcessIdentity() == Identity.BUYER) {
+		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
 			this.setSpot(commodity.isSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
