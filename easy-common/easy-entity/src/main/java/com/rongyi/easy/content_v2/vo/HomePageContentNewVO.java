@@ -32,8 +32,6 @@ public class HomePageContentNewVO implements Serializable  {
     /**断码好货*/
     private ShortSizeHomeVO shortSizeHome;
 
-    private ShortSizeHomeVO shortSizeHome;
-
     public TrendsetterVO getTrendsetter() {
         return trendsetter;
     }
