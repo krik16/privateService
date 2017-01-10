@@ -245,7 +245,7 @@ public class Util {
 
 	public static void main(String[] args) {
 		HashMap<String,Object> param = new HashMap<>();
-		param.put("verificationCode","159720");
+		param.put("verificationCode","387561");
 		param.put("timeStamp",1515567178131l);
 		signValidateWithoutChannel(param,"dddd");
 	}
