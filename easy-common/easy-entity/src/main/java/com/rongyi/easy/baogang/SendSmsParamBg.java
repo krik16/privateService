@@ -17,6 +17,7 @@ public class SendSmsParamBg implements Serializable {
     private String sign;
     private String channel;
     private String source;
+    private Integer type;//请求类型 1 短信 2 交易短信
 
     public String getCardNumber() {
         return cardNumber;
@@ -104,5 +105,13 @@ public class SendSmsParamBg implements Serializable {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
