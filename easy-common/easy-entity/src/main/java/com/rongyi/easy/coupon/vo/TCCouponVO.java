@@ -187,6 +187,10 @@ public class TCCouponVO implements Serializable {
      * 兑换类型(1.兑换，2换购)
      */
     private Integer exchangeType;
+    /**
+     * 补贴类型(0:平台补贴,1:商家补贴)
+     */
+    private Byte subsidyType;
 
     /**
      * 0:礼品券；1：停车券
@@ -643,6 +647,14 @@ public class TCCouponVO implements Serializable {
         this.codeShowType = codeShowType;
     }
 
+    public Byte getSubsidyType() {
+        return subsidyType;
+    }
+
+    public void setSubsidyType(Byte subsidyType) {
+        this.subsidyType = subsidyType;
+    }
+
     /**
      * 剩余库存量
      *
@@ -1025,6 +1037,7 @@ public class TCCouponVO implements Serializable {
                 .append(", sortIndex=").append(sortIndex).append(", version=")
                 .append(",inChannel=").append(inChannel)
                 .append(",codeShowType=").append(codeShowType)
+                .append(",subsidyType=").append(subsidyType)
                 .append(",exchangeType=").append(exchangeType)
                 .append(",giftType=").append(giftType)
                 .append(",giftPaymentVOs=").append(giftPaymentVOs)

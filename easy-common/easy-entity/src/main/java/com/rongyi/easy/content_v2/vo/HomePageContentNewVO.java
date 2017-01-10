@@ -32,6 +32,8 @@ public class HomePageContentNewVO implements Serializable  {
     /**断码好货*/
     private ShortSizeHomeVO shortSizeHome;
 
+    private ShortSizeHomeVO shortSizeHome;
+
     public TrendsetterVO getTrendsetter() {
         return trendsetter;
     }
@@ -115,6 +117,7 @@ public class HomePageContentNewVO implements Serializable  {
                 .append("dailySale", dailySale)
                 .append("benefit", benefit)
                 .append("trendsetterVO", trendsetter)
+                .append("shortSizeHome", shortSizeHome)
                 .toString();
     }
 }

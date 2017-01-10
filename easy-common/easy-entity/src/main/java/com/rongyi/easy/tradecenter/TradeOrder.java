@@ -113,10 +113,15 @@ public class TradeOrder implements Serializable {
      */
     private String orderChannel;
 
+
     // 总积分
     private Integer totalCredit;
     // 用户类型
     private Integer userType ;
+    /**
+     * 促销券补贴类型 0：平台补贴 1：商家补贴
+     */
+    private Byte couponDiscountType;
     /**
      * 元
      *
@@ -568,6 +573,14 @@ public class TradeOrder implements Serializable {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public Byte getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(Byte couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
     }
 
     public Integer getTotalCredit() {

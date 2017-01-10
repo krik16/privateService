@@ -1,5 +1,8 @@
 package com.rongyi.easy.osm.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,9 +16,11 @@ public class OrderCartFormEntity implements Serializable {
 
     private BigDecimal rebateDiscount;//抵扣金额
 
-    private Integer rebateSource;//促销券来源 1：平台 2：商家
+    private Integer rebateSource;//促销券来源 0：平台 1：商家
 
-    private Integer rebateType;//促销券类型 1：满减 2：立减
+    private Integer rebateType;//促销券类型 0：满减 1：立减
+
+    private Integer rebateDiscountType;//促销券补贴类型 0：平台补贴 1：商家补贴
 
     private BigDecimal couponRequirement;//抵扣满金额
 
@@ -277,32 +282,16 @@ public class OrderCartFormEntity implements Serializable {
         this.userPhone = userPhone;
     }
 
+    public Integer getRebateDiscountType() {
+        return rebateDiscountType;
+    }
+
+    public void setRebateDiscountType(Integer rebateDiscountType) {
+        this.rebateDiscountType = rebateDiscountType;
+    }
+
     @Override
     public String toString() {
-        return "OrderFormEntity{" +
-                "id=" + id +
-                ", orderNo='" + orderNo + '\'' +
-                ", rebateCode=" + rebateCode +
-                ", rebateDiscount=" + rebateDiscount +
-                ", rebateSource=" + rebateSource +
-                ", rebateType='" + rebateType + '\'' +
-                ", status='" + status + '\'' +
-                ", couponRequirement='" + couponRequirement + '\'' +
-                ", createAt=" + createAt +
-                ", statusHoldMs=" + statusHoldMs +
-                ", nextStatusTime=" + nextStatusTime +
-                ", buyerId='" + buyerId + '\'' +
-                ", payAmount='" + payAmount + '\'' +
-                ", paymentIdList='" + paymentIdList + '\'' +
-                ", realAmount=" + realAmount +
-                ", discountInfo='" + discountInfo + '\'' +
-                ", couponRequirement=" + couponRequirement +
-                ", scoreDiscount=" + scoreDiscount +
-                ", discountAmount=" + discountAmount +
-                ", rebateAmount=" + rebateAmount +
-                ", scoreAmount=" + scoreAmount +
-                ", payChannel=" + payChannel +
-                ", userPhone=" + userPhone +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
