@@ -15,8 +15,8 @@ public class SendSmsParamBg implements Serializable {
     private String price;
     private Long timeStamp;
     private String sign;
-    private String channel;
-    private String source;
+    private String channel;//目的渠道 1宝钢
+    private String source;//源渠道 1家得利
     private Integer type;//请求类型 1 短信 2 交易短信
 
     public String getCardNumber() {

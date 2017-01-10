@@ -1,13 +1,7 @@
 package com.rongyi.core.util;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -247,5 +241,12 @@ public class Util {
 		} else {
 			return ts + "（毫秒）";
 		}
+	}
+
+	public static void main(String[] args) {
+		HashMap<String,Object> param = new HashMap<>();
+		param.put("verificationCode","159720");
+		param.put("timeStamp",1515567178131l);
+		signValidateWithoutChannel(param,"dddd");
 	}
 }
