@@ -114,4 +114,22 @@ public class SendSmsParamBg implements Serializable {
     public void setType(Integer type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "SendSmsParamBg{" +
+                "cardNumber='" + cardNumber + '\'' +
+                ", amount='" + amount + '\'' +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", orderDate='" + orderDate + '\'' +
+                ", orderDetail='" + orderDetail + '\'' +
+                ", price='" + price + '\'' +
+                ", timeStamp=" + timeStamp +
+                ", sign='" + sign + '\'' +
+                ", channel='" + channel + '\'' +
+                ", source='" + source + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }
