@@ -173,4 +173,46 @@ public interface RoaActivityTemplateService {
      * @return
      */
     public  List<TemplateRelevantGoodsCoupon> selectCommodityIdsInActive();
+
+    /**
+     * 查看特卖卡卷列表
+     */
+    public List<TemplateRelevantGoodsCoupon> selectLabelListByActivityId(Integer id);
+
+    /**
+     * 根据ids 查询活动
+     * @param ids
+     * @return
+     */
+    public List<ActivityTemplate> getActivityDetailByIds(List<Integer> ids);
+
+    /**
+     * 批量保存
+     * @param goodsDetailSyncs
+     * @return
+     */
+    public boolean batchInsertGoodsDetailSync(List<GoodsDetailSync> goodsDetailSyncs);
+
+
+    /**
+     * 批量更新
+     * @param goodsDetailSyncs
+     * @return
+     */
+    public boolean batchUpdateGoodsDetailSync(List<GoodsDetailSync> goodsDetailSyncs);
+
+
+    /**
+     * 删除
+     * @param activityTemplateId
+     * @return
+     */
+    public boolean deleteGoodsDetailSyncByActivityTemplateId(Integer activityTemplateId);
+
+    /**
+     * 根据模版id查询商品
+     * @param id
+     * @return
+     */
+    public  List<GoodsDetailSync> searchByActivityTemplateId(Integer id);
 }

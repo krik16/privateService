@@ -311,6 +311,8 @@ public class Commodity implements  Serializable,Cloneable{
 		this.tagIds = tagIds;
 	}
 
+	private String serviceDescription;//售后说明
+
 	public Integer getMerchantType() {
 		return merchantType;
 	}
@@ -834,6 +836,15 @@ public class Commodity implements  Serializable,Cloneable{
 		this.serviceIds = serviceIds;
 	}
 
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -893,6 +904,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShelvesType(null ==shelvesType?2:shelvesType);
 		commodity.setSubheading(subheading);
 		commodity.setCommodityDetails(commodityDetails);
+		commodity.setServiceDescription(serviceDescription);
 		return commodity;
 	}
 	@Override
@@ -968,6 +980,7 @@ public class Commodity implements  Serializable,Cloneable{
 				",shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
+				", serviceDescription=" + serviceDescription+
 				'}';
 	}
 
@@ -1100,6 +1113,18 @@ public class Commodity implements  Serializable,Cloneable{
 		}
 		this.setCommodityRange(vo.getCommodityRange());
 
+		this.setBrandId(String.valueOf(brandId));
+		this.setMallId(String.valueOf(mallId));
+		this.setMallMid(mallMid);
+		this.setShopNum(shopNum);
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSubheading(vo.getSubheading());
+		this.setCommodityDetails(vo.getCommodityDetails());
+		this.setCommodityModelNo(vo.getCommodityModelNo());
+		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+		this.setGroupMid(vo.getGroupMid());
+		this.setShelvesType(vo.getShelvesType());
+		this.setServiceDescription(vo.getServiceDescription());
 		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());

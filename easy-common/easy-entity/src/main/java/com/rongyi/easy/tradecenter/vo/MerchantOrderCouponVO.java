@@ -22,6 +22,8 @@ public class MerchantOrderCouponVO implements Serializable
     String validTime;//有效期
     String status;//状态
     String outChannelName;//推广渠道名
+    String merchantRedDiscount;//商家补贴红包金额
+    String merchantRebateDiscount;//商家补贴抵扣券金额
 
     public String getOutChannelName() {
         return outChannelName;
@@ -127,9 +129,25 @@ public class MerchantOrderCouponVO implements Serializable
         this.status = status;
     }
 
+    public String getMerchantRedDiscount() {
+        return merchantRedDiscount;
+    }
+
+    public void setMerchantRedDiscount(String merchantRedDiscount) {
+        this.merchantRedDiscount = merchantRedDiscount;
+    }
+
+    public String getMerchantRebateDiscount() {
+        return merchantRebateDiscount;
+    }
+
+    public void setMerchantRebateDiscount(String merchantRebateDiscount) {
+        this.merchantRebateDiscount = merchantRebateDiscount;
+    }
+
     public String toString() {
         return "OrderCouponVO=[icon="+icon+",couponName="+couponName+",couponId="+couponId+"," +
                 "couponNum="+couponNum+",unitPrice="+unitPrice+",totalPrice="+totalPrice+",payPrice="+payPrice+",discountAmount="+discountAmount+"," +
-               "discountInfo="+discountInfo+"]";
+               "discountInfo="+discountInfo+"merchantRedDiscount="+merchantRedDiscount+"merchantRebateDiscount="+merchantRebateDiscount+"]";
     }
 }

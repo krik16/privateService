@@ -1,5 +1,8 @@
 package com.rongyi.easy.rmmm.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -155,6 +158,13 @@ public class ParentOrderVO implements Serializable {
 	private String reserveCompany;//预约人公司
 	private String reservePost;//预约人职称
 	private String activityCommodityDesc;//超级团商品副标题
+
+	private BigDecimal merchantRedDiscount;//商家补贴红包金额
+	private BigDecimal operationRedDiscount;//平台补贴红包金额
+	private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
+	private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
+	private String orderChannel;//下单渠道 SmallProgram:小程序
+	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -865,82 +875,56 @@ public class ParentOrderVO implements Serializable {
 		this.reservePost = reservePost;
 	}
 
+	public BigDecimal getMerchantRedDiscount() {
+		return merchantRedDiscount;
+	}
+
+	public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+		this.merchantRedDiscount = merchantRedDiscount;
+	}
+
+	public BigDecimal getOperationRedDiscount() {
+		return operationRedDiscount;
+	}
+
+	public void setOperationRedDiscount(BigDecimal operationRedDiscount) {
+		this.operationRedDiscount = operationRedDiscount;
+	}
+
+	public BigDecimal getMerchantRebateDiscount() {
+		return merchantRebateDiscount;
+	}
+
+	public void setMerchantRebateDiscount(BigDecimal merchantRebateDiscount) {
+		this.merchantRebateDiscount = merchantRebateDiscount;
+	}
+
+	public BigDecimal getOperationRebateDiscount() {
+		return operationRebateDiscount;
+	}
+
+	public void setOperationRebateDiscount(BigDecimal operationRebateDiscount) {
+		this.operationRebateDiscount = operationRebateDiscount;
+	}
+
+	public String getOrderChannel() {
+		return orderChannel;
+	}
+
+	public void setOrderChannel(String orderChannel) {
+		this.orderChannel = orderChannel;
+	}
+
+	public String getOrderSourceForWeiXin() {
+		return orderSourceForWeiXin;
+	}
+
+	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
+		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
 	@Override
 	public String toString() {
-		return "ParentOrderVO{" +
-				"orderId='" + orderId + '\'' +
-				", mallName='" + mallName + '\'' +
-				", activityName='" + activityName + '\'' +
-				", activityType='" + activityType + '\'' +
-				", activityStatus='" + activityStatus + '\'' +
-				", activityRoundId='" + activityRoundId + '\'' +
-				", orderSource='" + orderSource + '\'' +
-				", brandName='" + brandName + '\'' +
-				", shopName='" + shopName + '\'' +
-				", shopIM=" + shopIM +
-				", totalPrice='" + totalPrice + '\'' +
-				", parentOrderStatus='" + parentOrderStatus + '\'' +
-				", nextStatusTime='" + nextStatusTime + '\'' +
-				", sonOrderList=" + sonOrderList +
-				", consignee='" + consignee + '\'' +
-				", phone='" + phone + '\'' +
-				", address='" + address + '\'' +
-				", provinceName='" + provinceName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", districtName='" + districtName + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", comment='" + comment + '\'' +
-				", payTime='" + payTime + '\'' +
-				", commitOrderTime='" + commitOrderTime + '\'' +
-				", deliverTime='" + deliverTime + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", shopLogo='" + shopLogo + '\'' +
-				", isComment='" + isComment + '\'' +
-				", closeType='" + closeType + '\'' +
-				", closeReason='" + closeReason + '\'' +
-				", originalTotalPrice='" + originalTotalPrice + '\'' +
-				", buyerNickName='" + buyerNickName + '\'' +
-				", buyerPhone='" + buyerPhone + '\'' +
-				", receiveType='" + receiveType + '\'' +
-				", nickName='" + nickName + '\'' +
-				", imId='" + imId + '\'' +
-				", userLogo='" + userLogo + '\'' +
-				", userName='" + userName + '\'' +
-				", userPhone='" + userPhone + '\'' +
-				", guideId='" + guideId + '\'' +
-				", guideType=" + guideType +
-				", receiveTime='" + receiveTime + '\'' +
-				", cancelTime='" + cancelTime + '\'' +
-				", closeTime='" + closeTime + '\'' +
-				", statusRoute='" + statusRoute + '\'' +
-				", platformRebateAmount='" + platformRebateAmount + '\'' +
-				", expressBillId='" + expressBillId + '\'' +
-				", expressName='" + expressName + '\'' +
-				", discountFee=" + discountFee +
-				", score='" + score + '\'' +
-				", scoreDeduction='" + scoreDeduction + '\'' +
-				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
-				", liveName='" + liveName + '\'' +
-				", orderScoreDiscount=" + orderScoreDiscount +
-				", orderRebateDiscount=" + orderRebateDiscount +
-				", createAt=" + createAt +
-				", changePriceFlag='" + changePriceFlag + '\'' +
-				", shopNum=" + shopNum +
-				", totalHongBaoAmount=" + totalHongBaoAmount +
-				", isCartOrder=" + isCartOrder +
-				", expressOrderInfoId=" + expressOrderInfoId +
-				", ifOnDisplayExpress=" + ifOnDisplayExpress +
-				", newPayAmount=" + newPayAmount +
-				", ifPayment=" + ifPayment +
-				", groupEndAt=" + groupEndAt +
-				", nextCloseTime=" + nextCloseTime +
-				", reserveName=" + reserveName +
-				", reservePost=" + reservePost +
-				", reservePhone=" + reservePhone +
-				", reserveCompany=" + reserveCompany +
-				", activityCommodityDesc=" + activityCommodityDesc +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }

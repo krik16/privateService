@@ -4,13 +4,12 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.RedenvelopeParam;
-import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.RedenvelopVO;
 import com.rongyi.easy.coupon.vo.UserVO;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 
-import java.util.Date;
 import java.util.List;
 
 public interface RoaRedenvelopeComService {
@@ -160,6 +159,14 @@ public interface RoaRedenvelopeComService {
 	 * @return
 	 */
 	List<String> selectRedenveByStartEndAt(RedenvelopeParam param);
+
+	/**
+	 * 查询用户已领抵扣券/红包信息
+	 * @param couponIds 卡券id集合
+	 * @param userId 用户id
+	 * @return list
+	 */
+	List<UserRedenvelope> findByCouponIds(List<String> couponIds,String userId);
 
 
 }

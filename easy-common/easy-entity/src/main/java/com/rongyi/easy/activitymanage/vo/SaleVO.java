@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.vo;
 
 
+import com.google.inject.internal.Lists;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
 import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
 import org.apache.commons.collections.CollectionUtils;
@@ -42,6 +43,7 @@ public class SaleVO implements Serializable {
     private List<SaleCommodityTopVO> commodities;
 
     private List<SaleFlashCommodityVO> commodityList;
+    private List<CouponVO> couponVOList = Lists.newArrayList();
     public SaleVO(){}
 
     public SaleVO(ActivityTemplate activityTemplate){
@@ -98,6 +100,15 @@ public class SaleVO implements Serializable {
                 }
             }
         }
+    }
+
+
+    public List<CouponVO> getCouponVOList() {
+        return couponVOList;
+    }
+
+    public void setCouponVOList(List<CouponVO> couponVOList) {
+        this.couponVOList = couponVOList;
     }
 
     public String getSharePic() {
@@ -310,6 +321,7 @@ public class SaleVO implements Serializable {
                 .append("shops", shops)
                 .append("commodities", commodities)
                 .append("commodityList", commodityList)
+                .append("couponVOList", couponVOList)
                 .toString();
     }
 }

@@ -315,4 +315,12 @@ public interface IUserInfoService {
 	 * @return 影响账号数
 	 */
 	int updatePwdByUserPhone(String userPhone,String pwd);
+	/**
+	 * 根据帐号/手机号集合查询用户列表
+	 * @param accountList
+	 * @param type  2买手 其他为商家帐户
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserInfo> getUserListByType(List<String> accountList,Integer type) throws Exception;
 }

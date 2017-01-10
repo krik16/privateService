@@ -25,6 +25,9 @@ public class MerchantOrderCommodityVO implements Serializable
     private String postage;//商品邮费
     private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
     private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
+    private Integer couponDiscountType;//红包补贴类型 0：平台补贴 1：商家补贴
+    private BigDecimal hongBaoDiscount;//红包抵扣金额
+    private BigDecimal rebateDiscount;//抵扣券抵扣金额
 
     public boolean isSupportCourierDeliver() {
         return supportCourierDeliver;
@@ -146,9 +149,37 @@ public class MerchantOrderCommodityVO implements Serializable
         this.commodityStatus = commodityStatus;
     }
 
+    public Integer getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(Integer couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
+    }
+
+    public BigDecimal getHongBaoDiscount() {
+        return hongBaoDiscount;
+    }
+
+    public void setHongBaoDiscount(BigDecimal hongBaoDiscount) {
+        this.hongBaoDiscount = hongBaoDiscount;
+    }
+
+    public BigDecimal getRebateDiscount() {
+        return rebateDiscount;
+    }
+
+    public void setRebateDiscount(BigDecimal rebateDiscount) {
+        this.rebateDiscount = rebateDiscount;
+    }
+
     public String toString() {
         return "OrderVO=[icon="+icon+",commodityName="+commodityName+",commodityNo="+commodityNo+"," +
                 "commoditySpec="+commoditySpec+",commodityNum="+commodityNum+",unitPrice="+unitPrice+",totalPrice="+totalPrice+",discountAmount="+discountAmount+"," +
-                "payPrice="+payPrice+",discountInfo="+discountInfo+"]";
+                "payPrice="+payPrice+",discountInfo="+discountInfo
+                +",couponDiscountType="+couponDiscountType
+                +",hongBaoDiscount="+hongBaoDiscount
+                +",rebateDiscount="+rebateDiscount
+                +"]";
     }
 }
