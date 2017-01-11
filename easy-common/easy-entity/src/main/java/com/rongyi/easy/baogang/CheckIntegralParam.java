@@ -22,6 +22,7 @@ public class CheckIntegralParam implements Serializable {
     private Integer type;//支付类型【0:宝钢积分 1:非积分】	string	是
     private Integer state;//订单状态【默认 0:未完成(如果状态=“未完成”，系统执行退积分)】
     private Integer source;//源渠道 1 家得利
+    private String orderAomount;//订单实收金额【 单位：元 2位小数】
 
     public Integer getChannel() {
         return channel;
@@ -143,6 +144,14 @@ public class CheckIntegralParam implements Serializable {
         this.state = state;
     }
 
+    public String getOrderAomount() {
+        return orderAomount;
+    }
+
+    public void setOrderAomount(String orderAomount) {
+        this.orderAomount = orderAomount;
+    }
+
     @Override
     public String toString() {
         return "CheckIntegralParam{" +
@@ -156,11 +165,12 @@ public class CheckIntegralParam implements Serializable {
                 ", channel=" + channel +
                 ", timeStamp=" + timeStamp +
                 ", sign='" + sign + '\'' +
-                ", orderDetail='" + orderDetail + '\'' +
+                ", orderDetail=" + orderDetail +
                 ", price='" + price + '\'' +
                 ", type=" + type +
                 ", state=" + state +
                 ", source=" + source +
+                ", orderAomount='" + orderAomount + '\'' +
                 '}';
     }
 }

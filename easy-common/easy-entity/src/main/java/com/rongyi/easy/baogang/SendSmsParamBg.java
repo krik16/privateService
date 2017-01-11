@@ -1,18 +1,19 @@
 package com.rongyi.easy.baogang;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by shaozhou on 2016/12/23.
  */
 public class SendSmsParamBg implements Serializable {
-    private String cardNumber;
-    private String amount;
-    private String orderNumber;
-    private String serialNumber;
-    private String orderDate;
-    private String orderDetail;
-    private String price;
+    private String cardNumber;//会员卡号 或 会员手机号
+    private String amount;//积分消费数量（实收金额 单位：元 2位小数）
+    private String orderNumber;//商家订单号
+    private String serialNumber;//商家交易流水号
+    private String orderDate;//商家订单创建时间(格式：0000-00-00 00:00:00)
+    private List<OrderDetailParm> orderDetail;//订单详情（参考订单详情 JSON格式）
+    private String price;//订单应收总额（单位：元 2位小数）
     private Long timeStamp;
     private String sign;
     private String channel;//目的渠道 1宝钢
@@ -59,11 +60,11 @@ public class SendSmsParamBg implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public String getOrderDetail() {
+    public List<OrderDetailParm> getOrderDetail() {
         return orderDetail;
     }
 
-    public void setOrderDetail(String orderDetail) {
+    public void setOrderDetail(List<OrderDetailParm> orderDetail) {
         this.orderDetail = orderDetail;
     }
 
@@ -123,7 +124,7 @@ public class SendSmsParamBg implements Serializable {
                 ", orderNumber='" + orderNumber + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", orderDate='" + orderDate + '\'' +
-                ", orderDetail='" + orderDetail + '\'' +
+                ", orderDetail=" + orderDetail +
                 ", price='" + price + '\'' +
                 ", timeStamp=" + timeStamp +
                 ", sign='" + sign + '\'' +
