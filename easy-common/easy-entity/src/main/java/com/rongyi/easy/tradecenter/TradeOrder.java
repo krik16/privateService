@@ -113,11 +113,6 @@ public class TradeOrder implements Serializable {
      */
     private String orderChannel;
 
-
-    // 总积分
-    private Integer totalCredit;
-    // 用户类型
-    private Integer userType ;
     /**
      * 促销券补贴类型 0：平台补贴 1：商家补贴
      */
@@ -583,19 +578,4 @@ public class TradeOrder implements Serializable {
         this.couponDiscountType = couponDiscountType;
     }
 
-    public Integer getTotalCredit() {
-        return totalCredit;
-    }
-
-    public void setTotalCredit(Integer totalCredit) {
-        this.totalCredit = totalCredit;
-    }
-
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
 }
