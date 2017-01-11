@@ -81,5 +81,5 @@ public interface IRoleService {
 	 * @return 影响的角色数量
 	 */
 	int updateRoleAuthByUserId(Integer userId, List<String> authOldList, List<String> authList);
-	
+	public List<BRoles> getRoleListForDis(Integer userId);
 }

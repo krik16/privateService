@@ -450,4 +450,33 @@ public class UserInfo implements Serializable{
 	public void setChiefId(Integer chiefId) {
 		this.chiefId = chiefId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", type=" + type + ", identity="
+				+ identity + ", isCooperation=" + isCooperation + ", userLogo="
+				+ userLogo + ", roleId=" + roleId + ", userPhone=" + userPhone
+				+ ", userAccount=" + userAccount + ", userPwd=" + userPwd
+				+ ", userName=" + userName + ", userNickName=" + userNickName
+				+ ", userStatus=" + userStatus + ", accountId=" + accountId
+				+ ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt
+				+ ", version=" + version + ", isDisabled=" + isDisabled
+				+ ", deviceUuid=" + deviceUuid + ", cardId=" + cardId
+				+ ", memo=" + memo + ", stopAt=" + stopAt + ", stopBy="
+				+ stopBy + ", branchCompanyName=" + branchCompanyName
+				+ ", shopName=" + shopName + ", createName=" + createName
+				+ ", roleName=" + roleName + ", createSource=" + createSource
+				+ ", stopReason=" + stopReason + ", userShop=" + userShop
+				+ ", useCode=" + useCode + ", jsessionid=" + jsessionid
+				+ ", isEdit=" + isEdit + ", isOrdering=" + isOrdering
+				+ ", updateOrderingAt=" + updateOrderingAt + ", isChief="
+				+ isChief + ", industryId=" + industryId
+				+ ", industryVersionId=" + industryVersionId
+				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
+				+ validStartAt + ", validEndAt=" + validEndAt
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", level=" + level + ", chiefId=" + chiefId + "]";
+	}
+	
 }
