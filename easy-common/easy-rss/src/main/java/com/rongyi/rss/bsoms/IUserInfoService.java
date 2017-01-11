@@ -12,6 +12,7 @@ import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
+import com.rongyi.easy.roa.vo.distributor.UserInfoForDistributorVO;
 import com.rongyi.easy.ryoms.param.buyer.BuyerCheckParam;
 import com.rongyi.easy.ryoms.param.buyer.BuyerListParam;
 import com.rongyi.easy.ryoms.user.vo.BuyerDetailVO;
@@ -292,6 +293,34 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	boolean checkBuyerUser(BuyerCheckParam param, Integer operatorId);
+	
+	/**
+	 * 查询二级店铺账号列表
+	 * @param currentPage 当前页从1开始
+	 * @param pageSize  每页显示的数量
+	 * @return
+	 */
+	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(String mallId,int currentPage,int pageSize);
+	/**
+	 * 查询二级店铺账号数量
+	 * @return
+	 */
+	public Integer getUserInfoCountForDistributor(String mallId);
+	/**
+	 * 新建分销商账号信息
+	 * @param userManagerParam
+	 * @return
+	 * @throws MallShopException
+	 * @throws Exception
+	 */
+	public String insertDistributorInfo(UserManagerParam userManagerParam) throws MallShopException,Exception;
+	/**
+	 * 修改分销商账号信息
+	 * @param userManagerParam
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean updateDistributorUserInfo(UserManagerParam userManagerParam) throws Exception;
 
 	/**
 	 * 根据登录用户或手机号查询用户

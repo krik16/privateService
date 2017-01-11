@@ -155,6 +155,8 @@ public class ParentOrderVO implements Serializable {
 	private String reserveCompany;//预约人公司
 	private String reservePost;//预约人职称
 	private String activityCommodityDesc;//超级团商品副标题
+	private String weixinAppId;//
+	private BigDecimal totalPriceToSeller;// 卖家实收款
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -865,6 +867,22 @@ public class ParentOrderVO implements Serializable {
 		this.reservePost = reservePost;
 	}
 
+	public String getWeixinAppId() {
+		return weixinAppId;
+	}
+
+	public void setWeixinAppId(String weixinAppId) {
+		this.weixinAppId = weixinAppId;
+	}
+
+	public BigDecimal getTotalPriceToSeller() {
+		return totalPriceToSeller;
+	}
+
+	public void setTotalPriceToSeller(BigDecimal totalPriceToSeller) {
+		this.totalPriceToSeller = totalPriceToSeller;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
@@ -941,6 +959,8 @@ public class ParentOrderVO implements Serializable {
 				", reservePhone=" + reservePhone +
 				", reserveCompany=" + reserveCompany +
 				", activityCommodityDesc=" + activityCommodityDesc +
+				", totalPriceToSeller=" + totalPriceToSeller +
+				", weixinAppId=" + weixinAppId +
 				'}';
 	}
 }
