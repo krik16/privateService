@@ -1,5 +1,6 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
 
-public class CommodityParam {
+public class CommodityParam implements Serializable{
 
 	private Integer type;//类型0表示只修改库存1表示修改山商品所有信息
 
