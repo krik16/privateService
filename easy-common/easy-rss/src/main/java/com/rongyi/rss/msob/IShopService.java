@@ -244,5 +244,7 @@ public interface IShopService{
 	 * @return 店铺列表
 	 */
 	List<ShopInfoEntity> getShopInfoListBySuperiorId(Integer type ,Integer merId);
+	
+	public void removeShop(String shopMId);
 }
 
