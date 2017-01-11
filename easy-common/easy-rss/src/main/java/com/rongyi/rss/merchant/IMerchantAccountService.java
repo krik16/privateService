@@ -180,4 +180,18 @@ public interface IMerchantAccountService {
 	 * @throws Exception  
 	 */
 	public boolean validateUserByUserParam(Map<String, Object> paramsMap)throws Exception;
+	/**
+	 * 新建分销商账号
+	 * @param userManagerParam
+	 * @return
+	 * @throws MallShopException
+	 */
+	public String userDistributorRegistAndVerify(UserManagerParam userManagerParam) throws MallShopException;
+	/**
+	 * 修改分销商账号信息
+	 * @param userManagerParam
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean updateDistributorUserInfo(UserManagerParam userManagerParam) throws Exception;
 }
