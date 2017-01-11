@@ -28,7 +28,6 @@
 	<result column="jsessionid" property="jsessionid" jdbcType="VARCHAR" />
 	<result column="is_ordering" property="isOrdering" jdbcType="INTEGER" />
 	<result column="update_ordering_at" property="updateOrderingAt" jdbcType="TIMESTAMP" />
-	
 	<result column="industry_id" property="industryId" jdbcType="INTEGER" />
 	<result column="industry_version_id" property="industryVersionId" jdbcType="INTEGER" />
 	<result column="child_account_num" property="childAccountNum" jdbcType="INTEGER" />
@@ -39,7 +38,8 @@
 	<result column="is_chief" property="isChief" jdbcType="INTEGER" />
 	<result column="level" property="level" jdbcType="INTEGER" />
 	<result column="chief_id" property="chiefId" jdbcType="INTEGER" />
-
+	<result column="terminal_type" property="terminalType" jdbcType="VARCHAR" />
+	<result column="default_terminal" property="defaultTerminal" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
