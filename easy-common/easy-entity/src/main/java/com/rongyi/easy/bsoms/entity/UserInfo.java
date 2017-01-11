@@ -85,6 +85,10 @@ public class UserInfo implements Serializable{
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
+    private String terminalType ; //终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+    private String defaultTerminal ; //默认终端:1 容易逛,2 微信,3 终端机'
+
+
     public String getStopReason() {
 		return stopReason;
 	}
@@ -451,7 +455,23 @@ public class UserInfo implements Serializable{
 		this.chiefId = chiefId;
 	}
 
-	@Override
+    public String getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(String terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public String getDefaultTerminal() {
+        return defaultTerminal;
+    }
+
+    public void setDefaultTerminal(String defaultTerminal) {
+        this.defaultTerminal = defaultTerminal;
+    }
+
+    @Override
 	public String toString() {
 		return "UserInfo [id=" + id + ", type=" + type + ", identity="
 				+ identity + ", isCooperation=" + isCooperation + ", userLogo="
@@ -476,6 +496,7 @@ public class UserInfo implements Serializable{
 				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", terminalType=" + terminalType + ", defaultTerminal=" + defaultTerminal
 				+ ", level=" + level + ", chiefId=" + chiefId + "]";
 	}
 	
