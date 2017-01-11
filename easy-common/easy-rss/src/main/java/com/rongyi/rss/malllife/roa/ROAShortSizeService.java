@@ -1,8 +1,8 @@
 package com.rongyi.rss.malllife.roa;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.content.entity.param.ShortSizeParam;
 import com.rongyi.easy.content_v2.entity.ContentParam;
-import com.rongyi.easy.content_v2.entity.ForumContent;
 import com.rongyi.easy.content_v2.param.ForumContentOperateParam;
 
 /**
@@ -12,10 +12,10 @@ import com.rongyi.easy.content_v2.param.ForumContentOperateParam;
 public interface ROAShortSizeService {
     /**
      * 保存、更新content
-     * @param content 内容对象
+     * @param param 断码好货对象
      * @return 统一模型
      */
-    ResponseVO saveOrUpdate(ForumContent content);
+    ResponseVO saveOrUpdate(ShortSizeParam param);
 
     /**
      * 修改状态操作
