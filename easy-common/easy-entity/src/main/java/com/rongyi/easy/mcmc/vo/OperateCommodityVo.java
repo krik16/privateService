@@ -21,6 +21,7 @@ public class OperateCommodityVo implements Serializable {
     private String reason;
     private String buyerAccount;
     private Date soldOutAt;//下架时间
+    private Integer type;//渠道  0商家，1买手
 
     public String getId() {
         return id;
@@ -116,5 +117,13 @@ public class OperateCommodityVo implements Serializable {
 
     public void setSoldOutAt(Date soldOutAt) {
         this.soldOutAt = soldOutAt;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
