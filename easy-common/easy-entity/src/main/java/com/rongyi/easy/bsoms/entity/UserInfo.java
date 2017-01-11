@@ -86,9 +86,8 @@ public class UserInfo implements Serializable{
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
     private String terminalType ; //终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
-    private String defaultTerminal ; //默认终端:1 容易逛,2 微信,3 终端机'
-
-
+    private String defaultTerminal ; //默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机'
+    
     public String getStopReason() {
 		return stopReason;
 	}
