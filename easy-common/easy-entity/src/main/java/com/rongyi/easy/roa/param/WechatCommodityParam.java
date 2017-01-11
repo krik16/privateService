@@ -60,11 +60,16 @@ public class WechatCommodityParam extends MalllifeBaseParam implements Serializa
 	public void setCommodityIds(List<String> commodityIds) {
 		this.commodityIds = commodityIds;
 	}
+
 	@Override
 	public String toString() {
-		return "WechatCommodityParam [commodityId=" + commodityId
-				+ ", activityId=" + activityId + ", memberId=" + memberId
-				+ ", commoditySpecIds=" + commoditySpecIds + ", commodityIds="
-				+ commodityIds + "]";
+		return "WechatCommodityParam{" +
+				"commodityId='" + commodityId + '\'' +
+				", activityId=" + activityId +
+				", memberId='" + memberId + '\'' +
+				", commoditySpecIds=" + commoditySpecIds +
+				", categoryParentId='" + categoryParentId + '\'' +
+				", commodityIds=" + commodityIds +
+				'}';
 	}
 }
