@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class ShortSizeParam extends MalllifeBaseParam implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
+    private String title;
     private String picUrl;
     private Integer typeVal;
     private Integer status;
@@ -19,6 +20,14 @@ public class ShortSizeParam extends MalllifeBaseParam implements Serializable {
     private String  publishEndAt;
     private Integer homePageId;
     private String userName;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Integer getHomePageId() {
         return homePageId;
@@ -95,6 +104,7 @@ public class ShortSizeParam extends MalllifeBaseParam implements Serializable {
                 ", userName='" + userName + '\'' +
                 ", status='" + status + '\'' +
                 ", homePageId='" + homePageId + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

@@ -1,11 +1,14 @@
 package com.rongyi.easy.content_v2.param;
 
+import java.io.Serializable;
+
 /**
  * Created by WUH
  * on 2017/1/3.
  * 内容管理操作类
  */
-public class ForumContentOperateParam {
+public class ForumContentOperateParam  implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private Integer stick;    //是否置顶
     private Integer status;   //0待发布、1已发布、2已关闭

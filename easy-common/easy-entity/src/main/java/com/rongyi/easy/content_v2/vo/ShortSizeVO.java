@@ -15,8 +15,17 @@ public class ShortSizeVO implements Serializable {
     private String introduction; //介绍文案
     private String publishBeginAt;
     private String publishEndAt;
+    private String crateAt;
     private int status;
     private int stick;
+
+    public String getCrateAt() {
+        return crateAt;
+    }
+
+    public void setCrateAt(String crateAt) {
+        this.crateAt = crateAt;
+    }
 
     public int getStatus() {
         return status;
@@ -102,6 +111,7 @@ public class ShortSizeVO implements Serializable {
                 ", publishEndAt='" + publishEndAt + '\'' +
                 ", status=" + status +
                 ", stick=" + stick +
+                ", crateAt=" + crateAt +
                 '}';
     }
 }
