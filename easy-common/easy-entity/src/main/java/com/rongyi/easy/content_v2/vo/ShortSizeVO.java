@@ -11,9 +11,28 @@ public class ShortSizeVO implements Serializable {
     private Integer id;
     private Integer typeVal;
     private String title;       //标题
-    private String headPic;     //头图
+    private String picUrl;
     private String introduction; //介绍文案
-    private String url;                //跳转地址
+    private String publishBeginAt;
+    private String publishEndAt;
+    private int status;
+    private int stick;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStick() {
+        return stick;
+    }
+
+    public void setStick(int stick) {
+        this.stick = stick;
+    }
 
     public Integer getId() {
         return id;
@@ -39,12 +58,12 @@ public class ShortSizeVO implements Serializable {
         this.title = title;
     }
 
-    public String getHeadPic() {
-        return headPic;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setHeadPic(String headPic) {
-        this.headPic = headPic;
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public String getIntroduction() {
@@ -55,11 +74,34 @@ public class ShortSizeVO implements Serializable {
         this.introduction = introduction;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPublishBeginAt() {
+        return publishBeginAt;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPublishBeginAt(String publishBeginAt) {
+        this.publishBeginAt = publishBeginAt;
+    }
+
+    public String getPublishEndAt() {
+        return publishEndAt;
+    }
+
+    public void setPublishEndAt(String publishEndAt) {
+        this.publishEndAt = publishEndAt;
+    }
+
+    @Override
+    public String toString() {
+        return "ShortSizeVO{" +
+                "id=" + id +
+                ", typeVal=" + typeVal +
+                ", title='" + title + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", publishBeginAt='" + publishBeginAt + '\'' +
+                ", publishEndAt='" + publishEndAt + '\'' +
+                ", status=" + status +
+                ", stick=" + stick +
+                '}';
     }
 }
