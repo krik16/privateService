@@ -246,21 +246,21 @@ public class Util {
 	public static void main(String[] args) {
 		HashMap<String,Object> params = new HashMap<>();
 		//会员查询接口
-		params.put("verificationCode","245631");
-		params.put("timeStamp",1515567178131l);
+		/*params.put("verificationCode","294376");
+		params.put("timeStamp",1515567178131l);*/
 
 		//积分消费获取验证码接口
 		/*params.put("cardNumber","15000388436");
-		params.put("orderNumber","401201607250945003");
-		params.put("serialNumber","201701110945003");
+		params.put("orderNumber","401201607250945005");
+		params.put("serialNumber","201701120945003");
 		params.put("timeStamp",1515567178131l);*/
 
 		//积分消费并同步订单接口
 		/*params.put("cardNumber","15000388436");
-		params.put("orderNumber","401201607250945004");
-		params.put("serialNumber","201701110945004");
+		params.put("orderNumber","401201607250945005");
+		params.put("serialNumber","201701120945003");
 		params.put("timeStamp",1515567178131l);
-		params.put("verificationCode","463950");*/
+		params.put("verificationCode","697431");*/
 
 		//订单冲正接口
 		/*params.put("cardNumber","15000388436");
@@ -268,6 +268,11 @@ public class Util {
 		params.put("serialNumber","201701110945004");
 		params.put("timeStamp",1515567178131l);*/
 
+		//退换货接口参数
+		params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945005");
+		params.put("serialNumber","201701120945003");
+		params.put("timeStamp", 1515567178131l);
 		signValidateWithoutChannel(params,"dddd");
 	}
 }
