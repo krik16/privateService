@@ -157,6 +157,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<WechatSwitch>  wechatSwitchList;
 	private String freePostage;  // 0包邮 1不包邮
+	private String editAble="1";//1,商家后台商品运营可以编辑容易逛，微信显示隐藏 ，2商家后台商品运营可以编辑容易逛显示隐藏,3商家后台商品运营可以编辑微信显示隐藏，4都不能
 
 
 	public String getFreePostage() {
@@ -832,6 +833,14 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
+	}
+
+	public String getEditAble() {
+		return editAble;
+	}
+
+	public void setEditAble(String editAble) {
+		this.editAble = editAble;
 	}
 
 	@Override
