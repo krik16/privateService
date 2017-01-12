@@ -246,8 +246,8 @@ public class Util {
 	public static void main(String[] args) {
 		HashMap<String,Object> params = new HashMap<>();
 		//会员查询接口
-		/*params.put("verificationCode","387561");
-		params.put("timeStamp",1515567178131l);*/
+		params.put("verificationCode","245631");
+		params.put("timeStamp",1515567178131l);
 
 		//积分消费获取验证码接口
 		/*params.put("cardNumber","15000388436");
@@ -263,10 +263,10 @@ public class Util {
 		params.put("verificationCode","463950");*/
 
 		//订单冲正接口
-		params.put("cardNumber","15000388436");
+		/*params.put("cardNumber","15000388436");
 		params.put("orderNumber","401201607250945004");
 		params.put("serialNumber","201701110945004");
-		params.put("timeStamp",1515567178131l);
+		params.put("timeStamp",1515567178131l);*/
 
 		signValidateWithoutChannel(params,"dddd");
 	}
