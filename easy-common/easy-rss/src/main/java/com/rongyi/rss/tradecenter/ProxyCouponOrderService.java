@@ -7,7 +7,10 @@ import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RoaCouponOrderParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
+import com.rongyi.easy.tradecenter.param.TradeSearchForUserCenterParam;
 import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
+import com.rongyi.easy.tradecenter.TraderOrderForUserCenterEntity;
+import com.rongyi.easy.tradecenter.vo.TraderOrderResultForUserCenterVO;
 
 import java.util.List;
 import java.util.Map;
@@ -241,4 +244,12 @@ public interface ProxyCouponOrderService {
      * @throws Exception
      */
     int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
+
+    /**
+     * 查询订单列表（电子会员）
+     *
+     * @param param
+     * @return
+     */
+    DubboVO<TraderOrderResultForUserCenterVO> listForUserCenter(TradeSearchForUserCenterParam param);
 }
