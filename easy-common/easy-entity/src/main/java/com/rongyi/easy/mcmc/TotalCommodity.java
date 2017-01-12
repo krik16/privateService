@@ -103,6 +103,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String merchantId;  //商户id
 	private List<WechatInfoVo> wechatInfoVos;
 
+	private String brandName;
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
 
 	public List<WechatInfoVo> getWechatInfoVos() {
 		return wechatInfoVos;
@@ -559,6 +568,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setStock(commodity.getStock());
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 		this.setGoodsParam(commodity.getGoodsParam());
+		this.setSkus(commodity.getSkus());
 
 		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
 			//totalCommodity总表显示时间区域
