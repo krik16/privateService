@@ -11,6 +11,8 @@ public class WechatSwitch implements Serializable{
 
     private Integer switchStatus;//0,不显示，1显示
 
+    private boolean editAble;
+
     public Integer getServiceId() {
         return serviceId;
     }
@@ -25,5 +27,13 @@ public class WechatSwitch implements Serializable{
 
     public void setSwitchStatus(Integer switchStatus) {
         this.switchStatus = switchStatus;
+    }
+
+    public boolean isEditAble() {
+        return editAble;
+    }
+
+    public void setEditAble(boolean editAble) {
+        this.editAble = editAble;
     }
 }

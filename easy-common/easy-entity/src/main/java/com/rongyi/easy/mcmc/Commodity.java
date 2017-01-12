@@ -159,6 +159,12 @@ public class Commodity implements  Serializable,Cloneable{
 	private String freePostage;  // 0包邮 1不包邮
 	private List<String> skus;  //规格的sku集合
 
+	// 4都不能
+	// 3商家后台商品运营可以编辑微信显示隐藏，
+	// 2商家后台商品运营可以编辑容易逛显示隐藏,
+	// 1,商家后台商品运营可以编辑容易逛，微信显示隐藏 ，
+	private String editAble="1";
+
 	public List<String> getSkus() {
 		return skus;
 	}
@@ -840,6 +846,14 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
+	}
+
+	public String getEditAble() {
+		return editAble;
+	}
+
+	public void setEditAble(String editAble) {
+		this.editAble = editAble;
 	}
 
 	@Override
