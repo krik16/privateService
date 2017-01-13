@@ -82,8 +82,9 @@ public class BusinessAccountVO implements Serializable {
 	private String otherImg;   //其它照片
 	private String resume;      //自我简介
 	private String position;   //申请所在城市
-
 	private String merchantAddress;//商户地址
+	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+	private Integer defaultTerminal;//默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机
 	public String getMerchantAddress() {
 		return merchantAddress;
 	}
@@ -500,30 +501,18 @@ public class BusinessAccountVO implements Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	@Override
-	public String toString() {
-		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account
-				+ ", userAccount=" + userAccount + ", userName=" + userName + ", nickName=" + nickName + ", type="
-				+ type + ", identity=" + identity + ", groupId=" + groupId + ", groupMid=" + groupMid + ", groupName="
-				+ groupName + ", brandId=" + brandId + ", brandMid=" + brandMid + ", brandName=" + brandName
-				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName=" + mallName + ", shopId=" + shopId
-				+ ", shopMid=" + shopMid + ", shopName=" + shopName + ", roleId=" + roleId + ", roleName=" + roleName
-				+ ", branchId=" + branchId + ", branchName=" + branchName + ", parentShopId=" + parentShopId
-				+ ", grandpaShopId=" + grandpaShopId + ", accountStatus=" + accountStatus + ", isSuspended="
-				+ isSuspended + ", balance=" + balance + ", comment=" + comment + ", createSource=" + createSource
-				+ ", createBy=" + createBy + ", createName=" + createName + ", createAt=" + createAt + ", updateBy="
-				+ updateBy + ", updateName=" + updateName + ", updateAt=" + updateAt + ", stopReason=" + stopReason
-				+ ", stopAt=" + stopAt + ", virtualStopReason=" + virtualStopReason + ", virtualStopAt=" + virtualStopAt
-				+ ", isAcc=" + isAcc + ", certTime=" + certTime + ", userStatus=" + userStatus + ", shareCode="
-				+ shareCode + ", industryId=" + industryId + ", industryName=" + industryName + ", industryVersionId="
-				+ industryVersionId + ", industryVersionName=" + industryVersionName + ", childAccountNum="
-				+ childAccountNum + ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode="
-				+ contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level
-				+ ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + ", chiefName=" + chiefName
-				+ ", userAccounts=" + userAccounts + ", faceImg=" + faceImg + ", backImg=" + backImg + ", workImg="
-				+ workImg + ", otherImg=" + otherImg + ", resume=" + resume + ", position=" + position + "]";
+	public String getTerminalType() {
+		return terminalType;
 	}
-
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
+	}
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
+	}
 	public String getBindingMid(){
 		if(getIdentity() == 0){
 			return groupMid;
@@ -538,4 +527,45 @@ public class BusinessAccountVO implements Serializable {
 		}
 		return null;
 	}
+	@Override
+	public String toString() {
+		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo
+				+ ", idCard=" + idCard + ", account=" + account
+				+ ", userAccount=" + userAccount + ", userName=" + userName
+				+ ", nickName=" + nickName + ", type=" + type + ", identity="
+				+ identity + ", groupId=" + groupId + ", groupMid=" + groupMid
+				+ ", groupName=" + groupName + ", brandId=" + brandId
+				+ ", brandMid=" + brandMid + ", brandName=" + brandName
+				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName="
+				+ mallName + ", shopId=" + shopId + ", shopMid=" + shopMid
+				+ ", shopName=" + shopName + ", roleId=" + roleId
+				+ ", roleName=" + roleName + ", branchId=" + branchId
+				+ ", branchName=" + branchName + ", parentShopId="
+				+ parentShopId + ", grandpaShopId=" + grandpaShopId
+				+ ", accountStatus=" + accountStatus + ", isSuspended="
+				+ isSuspended + ", balance=" + balance + ", comment=" + comment
+				+ ", createSource=" + createSource + ", createBy=" + createBy
+				+ ", createName=" + createName + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateName=" + updateName
+				+ ", updateAt=" + updateAt + ", stopReason=" + stopReason
+				+ ", stopAt=" + stopAt + ", virtualStopReason="
+				+ virtualStopReason + ", virtualStopAt=" + virtualStopAt
+				+ ", isAcc=" + isAcc + ", certTime=" + certTime
+				+ ", userStatus=" + userStatus + ", shareCode=" + shareCode
+				+ ", industryId=" + industryId + ", industryName="
+				+ industryName + ", industryVersionId=" + industryVersionId
+				+ ", industryVersionName=" + industryVersionName
+				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
+				+ validStartAt + ", validEndAt=" + validEndAt
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", isChief=" + isChief + ", level=" + level
+				+ ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId="
+				+ chiefId + ", chiefName=" + chiefName + ", userAccounts="
+				+ userAccounts + ", faceImg=" + faceImg + ", backImg="
+				+ backImg + ", workImg=" + workImg + ", otherImg=" + otherImg
+				+ ", resume=" + resume + ", position=" + position
+				+ ", merchantAddress=" + merchantAddress + ", terminalType="
+				+ terminalType + ", defaultTerminal=" + defaultTerminal + "]";
+	}
+	
 }
