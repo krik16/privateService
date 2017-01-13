@@ -9,7 +9,7 @@ public class WechatSwitch implements Serializable{
 
     private Integer serviceId;
 
-    private Integer switchStatus;//0,显示，1不显示
+    private Integer switchStatus;//0,不显示，1显示
 
     private boolean editAble;
 
