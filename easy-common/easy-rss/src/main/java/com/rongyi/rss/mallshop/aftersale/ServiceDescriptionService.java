@@ -1,5 +1,6 @@
 package com.rongyi.rss.mallshop.aftersale;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.mallshop.customer.ServiceDescriptionParam;
 
 import java.util.List;
@@ -15,31 +16,31 @@ public interface ServiceDescriptionService {
      * @param userId 用户id
      * @return
      */
-    List<ServiceDescriptionParam> getServiceDescList(String userId);
+    ResponseResult getServiceDescList(String userId);
 
     /**
      * 根据用户id获取该用户的默认售后说明
      * @param userId
      * @return
      */
-    ServiceDescriptionParam  getDefaultByUserId(String userId);
+    ResponseResult  getDefaultByUserId(String userId);
 
     /**
      * 更新售后说明
      * @param param
      */
-    void insertUpdateRecord(ServiceDescriptionParam param);
+    ResponseResult insertUpdateRecord(ServiceDescriptionParam param);
 
     /**
      *删除一条售后说明
      * @param param
      */
-    void deleteRecode(ServiceDescriptionParam param);
+    ResponseResult deleteRecode(ServiceDescriptionParam param);
 
     /**
      * 设置默认售后说明
      * @param param
      */
-    void setDefault(ServiceDescriptionParam param);
+    ResponseResult setDefault(ServiceDescriptionParam param);
 
 }
