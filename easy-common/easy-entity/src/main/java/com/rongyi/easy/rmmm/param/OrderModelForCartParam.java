@@ -36,6 +36,7 @@ public class OrderModelForCartParam  extends MalllifeBaseParam implements Serial
 	
 	private boolean ifRecommend = true;//是否推荐红包和抵扣券，true推荐  false不推荐  默认推荐
 
+
 	public boolean isIfRecommend() {
 		return ifRecommend;
 	}
