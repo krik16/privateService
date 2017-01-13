@@ -72,7 +72,8 @@ public class UserinfoVO implements Serializable{
 	String userMsg;//导购 买手禁用提示信息
 	private int inviteObject;//1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
 	private String rsaUserId;//加密之后的用户id
-	
+	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+	private Integer defaultTerminal;//默认终端：0 无默认终端,1 容易逛,2 微信,3 终端机
 	
 	public String getRsaUserId() {
 		return rsaUserId;
@@ -311,5 +312,21 @@ public class UserinfoVO implements Serializable{
 
 	public void setUserMsg(String userMsg) {
 		this.userMsg = userMsg;
+	}
+
+	public String getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
+	}
+
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
 	}
 }
