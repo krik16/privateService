@@ -49,8 +49,11 @@ public class OrderDetailModelEntity {
     /**活动场次id**/
     private Long activityRoundId;
 
-    /**活动类型 闪购1、特卖2、秒杀3、拼团4**/
+    /**活动类型 闪购1、特卖2、秒杀3、拼团4 超级团教育版5**/
     private Integer activityType;
+
+    /** 推广人id */
+    private String promoterId;
 
     /**
      * 主键id
@@ -250,6 +253,14 @@ public class OrderDetailModelEntity {
 
     public void setActivityType(Integer activityType) {
         this.activityType = activityType;
+    }
+
+    public String getPromoterId() {
+        return promoterId;
+    }
+
+    public void setPromoterId(String promoterId) {
+        this.promoterId = promoterId;
     }
 
     @Override

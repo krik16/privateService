@@ -17,8 +17,8 @@ public class RmmmUserInfoEntity implements Serializable{
     /** 用户头像logo */
     private String userLogo;
 
-    /** 角色ID  */
-    private Integer roleId;
+    /** 角色ID    */
+    private Integer roleId;  //-1 分销商
 
     /** 电话号码 */
     private String userPhone;

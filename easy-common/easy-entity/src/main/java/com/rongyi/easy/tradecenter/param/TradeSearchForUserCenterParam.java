@@ -1,0 +1,132 @@
+package com.rongyi.easy.tradecenter.param;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 订单查询列表（电子会员）
+ *
+ * @author wangjh7
+ * @date 2016-11-16
+ */
+public class TradeSearchForUserCenterParam implements Serializable {
+
+    // mallId（必选）
+    private String mallId;
+    // 订单 状态（0：全部 1：待付款 2：已完成 3：已关闭）
+    private Integer status;
+    // 订单编号
+    private String tradeNo;
+    // 礼品名称
+    private String title;
+    // 用户手机(买家账号）
+    private String phone;
+    // 订单创建开始时间
+    private Date createStartAt;
+    // 订单创建结束时间
+    private Date createEndAt;
+    //  页码
+    private int pageIndex;
+    // 开始
+    private int start;
+    // 没页数
+    private int pageSize;
+
+    public Date getCreateEndAt() {
+        return createEndAt;
+    }
+
+    public void setCreateEndAt(Date createEndAt) {
+        this.createEndAt = createEndAt;
+    }
+
+    public Date getCreateStartAt() {
+        return createStartAt;
+    }
+
+    public void setCreateStartAt(Date createStartAt) {
+        this.createStartAt = createStartAt;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTradeNo() {
+        return tradeNo;
+    }
+
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo;
+    }
+
+    public int getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getStart() {
+        if (0 < pageIndex && 0 < pageSize) {
+            return (pageIndex - 1) * pageSize;
+        }
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    @Override
+    public String toString() {
+        return "TradeSearchForUserCenterParam{" +
+                "createEndAt=" + createEndAt +
+                ", mallId='" + mallId + '\'' +
+                ", status=" + status +
+                ", tradeNo='" + tradeNo + '\'' +
+                ", title='" + title + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createStartAt=" + createStartAt +
+                ", pageIndex=" + pageIndex +
+                ", pageSize=" + pageSize +
+                '}';
+    }
+}

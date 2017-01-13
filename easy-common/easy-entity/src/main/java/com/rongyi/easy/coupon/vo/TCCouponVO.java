@@ -4,7 +4,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponBrand;
 import com.rongyi.easy.coupon.entity.CouponCommodity;
 import com.rongyi.easy.coupon.entity.CouponGroup;
-
+import com.rongyi.easy.coupon.vo.gift.GiftMemberPayVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -183,6 +183,20 @@ public class TCCouponVO implements Serializable {
 
     private Long version; // 乐观锁
 
+    /**
+     * 兑换类型(1.兑换，2换购)
+     */
+    private Integer exchangeType;
+
+    /**
+     * 0:礼品券；1：停车券
+     */
+    private Integer giftType;
+
+    /**
+     *  会员等级 所需积分和钱
+     */
+    private List<GiftMemberPayVO> giftPaymentVOs;
 
     public String getId() {
         return id;
@@ -571,6 +585,30 @@ public class TCCouponVO implements Serializable {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public Integer getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(Integer exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
+    public Integer getGiftType() {
+        return giftType;
+    }
+
+    public void setGiftType(Integer giftType) {
+        this.giftType = giftType;
+    }
+
+    public List<GiftMemberPayVO> getGiftPaymentVOs() {
+        return giftPaymentVOs;
+    }
+
+    public void setGiftPaymentVOs(List<GiftMemberPayVO> giftPaymentVOs) {
+        this.giftPaymentVOs = giftPaymentVOs;
     }
 
     public Integer getVisitedCount() {
@@ -987,6 +1025,9 @@ public class TCCouponVO implements Serializable {
                 .append(", sortIndex=").append(sortIndex).append(", version=")
                 .append(",inChannel=").append(inChannel)
                 .append(",codeShowType=").append(codeShowType)
+                .append(",exchangeType=").append(exchangeType)
+                .append(",giftType=").append(giftType)
+                .append(",giftPaymentVOs=").append(giftPaymentVOs)
                 .append(version).append("]");
         return builder.toString();
     }
