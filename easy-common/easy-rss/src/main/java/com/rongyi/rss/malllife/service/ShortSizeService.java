@@ -1,10 +1,8 @@
 package com.rongyi.rss.malllife.service;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.ShortSizeParam;
-import com.rongyi.easy.mcmc.Commodity;
-
-import java.util.List;
 
 public interface ShortSizeService {
-    List<Commodity> getCommodityList(ShortSizeParam param);
+    ResponseVO getCommodityList(ShortSizeParam param);
 }
