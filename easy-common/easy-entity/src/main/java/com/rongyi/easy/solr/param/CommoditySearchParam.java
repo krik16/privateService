@@ -133,6 +133,17 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.offset = offset;
 	}
 
+	private String commodityName;//商品名称
+
+	@NeedCheck(getFieldName = "commodityName")
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+
 	public String getCouponId() {
 		return couponId;
 	}

@@ -1,7 +1,5 @@
 package com.rongyi.core.constant;
 
-import java.util.List;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -18,9 +16,10 @@ public interface Constants {
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
+
     Integer RY_SESSION_TIMEOUT = 60 * 60 * 2;
     Integer BS_SESSION_TIMEOUT = 60 * 60;
-    
+
     String BS_COOKIE_NAME = "BSST";
     String RY_COOKIE_NAME = "RYST";
 
@@ -28,47 +27,47 @@ public interface Constants {
      * 登录用户的session key
      */
     String USER_SESSION_KEY = "user_session_key"; //
-    
+
     //商家账号初始密码
-  	String USER_INIT_PWD = "RYxyz123";
+    String USER_INIT_PWD = "RYxyz123";
 
 
     String RESULT_SUCCES = "success"; //成功标志位
     String RESULT_FAIL = "fail"; //失败标志位
-    
+
     /**
      * 新版
      * 本地路径
      */
     interface UPAIYUN_LOCAL_URL {
-        String APP_BUSINESSDISTRICT_DIR          = "/businessdistrict/original/"; //app热门商圈
-        String APP_CATEGORY_DIR          = "/category/original/"; //app分类
-        String MALL_ALL_PIC_DIR ="/mall/original/";
+        String APP_BUSINESSDISTRICT_DIR = "/businessdistrict/original/"; //app热门商圈
+        String APP_CATEGORY_DIR = "/category/original/"; //app分类
+        String MALL_ALL_PIC_DIR = "/mall/original/";
         String SHOP_ALL_PIC_DIR = "/shop/original/";
-        String FLOOR_ALL_PIC_DIR ="/mall/floor/";
-		String BRAND_ALL_PIC_DIR ="/brand/original/";  //品牌图片存放路径
-		String SHOPQRCODE_ALL_PIC_DIR ="/shopqrcode/original/";
+        String FLOOR_ALL_PIC_DIR = "/mall/floor/";
+        String BRAND_ALL_PIC_DIR = "/brand/original/";  //品牌图片存放路径
+        String SHOPQRCODE_ALL_PIC_DIR = "/shopqrcode/original/";
     }
-    
+
     /**
      * 新版
      * 上传云路径
      */
     interface UPAIYUN_URL {
-        String UPAIYUN_URL           = "http://rongyi.b0.upaiyun.com/";  //网址
-        String ADVERT_URL          = "system/advert/";//内容管理图片路径
-        String APP_BUSINESSDISTRICT_UPAIYUN_DIR          = "/system/app_businessdistrict/"; //app热门商圈
-        String APP_CATEGORY_UPAIYUN_DIR          = "/system/app_category/"; //app分类
-        String UPAIYUN_URL_MALL_ICON               = "/system/mall/icon/";              // 云盘路径-商场icon /mallId/xxx.jpg
-        String UPAIYUN_URL_MALL_INTRODUCTION_PIC   = "/system/mall/introduction_pic/";  // 云盘路径-商场简介图+ yy/mm/mallId/xxx.png
-        String UPAIYUN_URL_MALL_TERMINAL_LOGO      = "/system/mall/terminal_logo/";     // 云盘路径-商场 终端机logo+/mallId/xxx.png
-        String UPAIYUN_URL_MALL_APPEARANCE_PIC     = "/system/mall/appearance_pic/";    // 云盘路径-商场app外景图 +yy/mm/mallId/xxx.png
-        String UPAIYUN_URL_MALL_TRAFFIC_PIC        = "/system/mall/traffic_pic/";       // 云盘路径-商场交通图 +/yy/mm/mallid/xx.png
+        String UPAIYUN_URL = "http://rongyi.b0.upaiyun.com/";  //网址
+        String ADVERT_URL = "system/advert/";//内容管理图片路径
+        String APP_BUSINESSDISTRICT_UPAIYUN_DIR = "/system/app_businessdistrict/"; //app热门商圈
+        String APP_CATEGORY_UPAIYUN_DIR = "/system/app_category/"; //app分类
+        String UPAIYUN_URL_MALL_ICON = "/system/mall/icon/";              // 云盘路径-商场icon /mallId/xxx.jpg
+        String UPAIYUN_URL_MALL_INTRODUCTION_PIC = "/system/mall/introduction_pic/";  // 云盘路径-商场简介图+ yy/mm/mallId/xxx.png
+        String UPAIYUN_URL_MALL_TERMINAL_LOGO = "/system/mall/terminal_logo/";     // 云盘路径-商场 终端机logo+/mallId/xxx.png
+        String UPAIYUN_URL_MALL_APPEARANCE_PIC = "/system/mall/appearance_pic/";    // 云盘路径-商场app外景图 +yy/mm/mallId/xxx.png
+        String UPAIYUN_URL_MALL_TRAFFIC_PIC = "/system/mall/traffic_pic/";       // 云盘路径-商场交通图 +/yy/mm/mallid/xx.png
         String UPAIYUN_URL_MALL_WEB_APPEARANCE_PIC = "/system/mall/web_appearance_pic/"; // 云盘路径-商场商场web外景图 +/yy/mm/mallId/xx.png
         String UPAIYUN_URL_MALL_WECHAT_PIC = "/system/mall/wechat/"; // 云盘路径-商场微信 /mallId/xxx.jpg
-		String UPAIYUN_URL_MALL_MERLOG_PIC = "/system/mall/merlog/" ;   // 云盘路径-商场存放商家后台Logo  /mallId/xxx.jpg
-        
-        String UPAIYUN_URL_BRAND_MERLOG_PIC ="/system/brand/merlog/";  //云盘路径-品牌存放商家后台Logo  /mallId/xxx.jpg
+        String UPAIYUN_URL_MALL_MERLOG_PIC = "/system/mall/merlog/";   // 云盘路径-商场存放商家后台Logo  /mallId/xxx.jpg
+
+        String UPAIYUN_URL_BRAND_MERLOG_PIC = "/system/brand/merlog/";  //云盘路径-品牌存放商家后台Logo  /mallId/xxx.jpg
         String UPAIYUN_URL_SHOP_QRCODE_PIC = "/system/shop/qrcode/"; // 云盘路径-店铺二维码 /shopId/xxx.jpg		    }
         String UPAIYUN_URL_SHOP_PIC = "/system/photo/file/";   //店铺 APP图片 与终端机图片路径 
     }
@@ -84,7 +83,7 @@ public interface Constants {
         String API_NULL_ACTIVITYID = "最近没有活动";
         String API_NULL_LISTTYPE = "列表类型没有";
         String API_NULL_PAGESize = "没有分页";
-        String API_NULL_USERPHONE="用户手机号为空";
+        String API_NULL_USERPHONE = "用户手机号为空";
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
         String API_USER_NO = "用户没有登录";
@@ -94,11 +93,9 @@ public interface Constants {
     interface SOME_TIME {
 
 
-
         int SESSION_REGIST_TIME = 30 * 60;//注册时的验证码有效期为30分钟
         int SESSION_LEFT_TIME = 60 * 60 * 24 * 30;//一个月的时间吧
     }
-
 
 
     /**
@@ -357,7 +354,7 @@ public interface Constants {
         String UPAIYUN_URL_INTEGRALCOMM = "system/mall/commodity/intrgral/"; // 云盘路径-积分商品
         String UPAIYUN_URL_SHOPS = "system/photo/file/"; // 云盘路径-会员权益
     }
-    
+
     /**
      * 是否绑定的会员
      */
@@ -457,10 +454,10 @@ public interface Constants {
         String MALLSHOP_COUPON = "MALLSHOP_COUPON";// 摩店优惠券
     }
 
-    interface CODE_LENGTH{
-        int COUPON_CODE=12;
-        int INVITE_CODE=6;
-        int GIFT_CODE=8;
+    interface CODE_LENGTH {
+        int COUPON_CODE = 12;
+        int INVITE_CODE = 6;
+        int GIFT_CODE = 8;
     }
 
 
@@ -577,33 +574,32 @@ public interface Constants {
 
     /**
      * 魔生活魔店版本号
-     *
      */
-    interface MallLifeVersion{
-    	Integer VERSION=1;
+    interface MallLifeVersion {
+        Integer VERSION = 1;
     }
 
     interface TMSTimeRangeType {
-    	int ALL = 0;
+        int ALL = 0;
         int DAY = 1;
         int WEEK = 2;
         int MONTH = 3;
     }
 
     /**
-    * @ClassName: DrawApplyStatus
-    * @Description: TODO(提现记录状态)
-    * @author lqy
-    * @date 2015年5月28日 下午4:09:48
-    *
-    */
-    interface DrawApplyStatus{
-    	int ALL = 0;//所有
-    	int SEND = 1;//已发放
-    	int PROCESSING = 2;//处理中
-    	int FAIL = 3;//失败
-    	String BONUS_DEFAULT_MSG = "优秀成交额外奖励";
+     * @author lqy
+     * @ClassName: DrawApplyStatus
+     * @Description: TODO(提现记录状态)
+     * @date 2015年5月28日 下午4:09:48
+     */
+    interface DrawApplyStatus {
+        int ALL = 0;//所有
+        int SEND = 1;//已发放
+        int PROCESSING = 2;//处理中
+        int FAIL = 3;//失败
+        String BONUS_DEFAULT_MSG = "优秀成交额外奖励";
     }
+
     interface VderStatus {
         int NOT_PAY = 0;//待付款
         int HAD_PAY = 1;//已付款
@@ -654,33 +650,41 @@ public interface Constants {
     interface ConfigType {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
-        /** 买手交易配置*/
+        /**
+         * 买手交易配置
+         */
         String BUYER_TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerTransConfigurations";
-        /** 微商城买手参数配置 */
+        /**
+         * 微商城买手参数配置
+         */
         String BUYER_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerConfigurations";
     }
-    interface AppType{
-    	/**
-    	 * 容易逛
-    	 */
-    	Integer MALLLIFE = 1;
-    	/**
-    	 * 摩店
-    	 */
-    	Integer MALLSHOP = 2;
+
+    interface AppType {
+        /**
+         * 容易逛
+         */
+        Integer MALLLIFE = 1;
+        /**
+         * 摩店
+         */
+        Integer MALLSHOP = 2;
     }
-    interface ValidCodeSuggest{
-    	/**
-    	 * 扫码验券建议
-    	 */
-    	String VALID_CODE_SUGGEST = "小提醒：如果遇到用户选择数量和本页面不一致的情况，建议采用单张验码的方式试试噢。问题反馈：400-040-8989";
+
+    interface ValidCodeSuggest {
+        /**
+         * 扫码验券建议
+         */
+        String VALID_CODE_SUGGEST = "小提醒：如果遇到用户选择数量和本页面不一致的情况，建议采用单张验码的方式试试噢。问题反馈：400-040-8989";
     }
-    interface ValidCodeNum{
-    	/**
-    	 * 验券的数量（默认值）
-    	 */
-    	Integer DEFAULT_VALID_CODE_NUM = 1;
+
+    interface ValidCodeNum {
+        /**
+         * 验券的数量（默认值）
+         */
+        Integer DEFAULT_VALID_CODE_NUM = 1;
     }
+
     /**
      * 优惠券验证的异常状态描述
      *
@@ -688,7 +692,7 @@ public interface Constants {
      */
     interface AbnormalMassage {
 
-    	String BEYONDLIMITS = "对不起，您今天已超出此类券的使用次数";
+        String BEYONDLIMITS = "对不起，您今天已超出此类券的使用次数";
         String CODEERROR = "对不起，您输入的券码有误。";
         String REFUND = "对不起，您输入的券码状态异常";
         String BEUSED = "对不起，您输入的券码已被使用。";
@@ -701,25 +705,26 @@ public interface Constants {
         String REPEAT = "您已经成功验证";
         String NOTENOUGHNUM = "没有足够的可用券码";
     }
-    
+
     /**
      * App标识  来自于app store
      */
-    interface AppId{
-    	String MDC2C_IOS_APPId = "999209638";
-    	String RYG_IOS_APPId = "684748850";
+    interface AppId {
+        String MDC2C_IOS_APPId = "999209638";
+        String RYG_IOS_APPId = "684748850";
     }
-    
+
     /**
      * App广告推广通道
      */
-    interface AppAdvertChannel{
-    	String ZHIMENG_CHANNEL = "zhimeng";//指盟
-    	String WAPS_CHANNEL = "waps";//万普
-    	
+    interface AppAdvertChannel {
+        String ZHIMENG_CHANNEL = "zhimeng";//指盟
+        String WAPS_CHANNEL = "waps";//万普
+
     }
-    interface Errno{
-    	int success=0;
+
+    interface Errno {
+        int success = 0;
     }
 
     interface NoticeStatus {
@@ -742,7 +747,7 @@ public interface Constants {
     }
 
     /**
-     *卖家类型
+     * 卖家类型
      */
     interface GuideType {
         /**
@@ -754,42 +759,46 @@ public interface Constants {
          */
         Integer BULL = 2;
     }
-    interface CouponPage{
-        Integer CURRENT_PAGE=1;
-        Integer PAGE_SIZE=10;
+
+    interface CouponPage {
+        Integer CURRENT_PAGE = 1;
+        Integer PAGE_SIZE = 10;
     }
-    
-    interface UserOperate{
-    	Integer HONGBAO = 1;//红包
-    	Integer COUPON = 2;//代金券
-    	Integer REBATE = 3;//抵扣券
+
+    interface UserOperate {
+        Integer HONGBAO = 1;//红包
+        Integer COUPON = 2;//代金券
+        Integer REBATE = 3;//抵扣券
         Integer INVITATIONRED = 4;//推荐红包
     }
 
-    interface RedenvelopStatus{
-        int UNUSED=0;
-        int USED=1;
-        int OVERDUE=2;
+    interface RedenvelopStatus {
+        int UNUSED = 0;
+        int USED = 1;
+        int OVERDUE = 2;
     }
+
     //容易逛[0] 互动屏[1] 微商[2]
-    interface CouponChannel{
-        int RYG=0;//容易逛
-        int HDP=1;//互动屏
-        int WX=2;//微信
+    interface CouponChannel {
+        int RYG = 0;//容易逛
+        int HDP = 1;//互动屏
+        int WX = 2;//微信
     }
-    interface ExportSize{
-        int EXCEL_EXPORT_MAX_SIZE=50000;
+
+    interface ExportSize {
+        int EXCEL_EXPORT_MAX_SIZE = 50000;
     }
+
     //容易逛[0] 互动屏[1] 微商[2]
-    interface CouponPublishChannel{
-        int DYY=0;//大运营卡券
-        int SJ=1;//商家卡券
+    interface CouponPublishChannel {
+        int DYY = 0;//大运营卡券
+        int SJ = 1;//商家卡券
     }
 
     /**
      * 对账类型
      */
-    interface IS_PAY_VA{
+    interface IS_PAY_VA {
         byte IS_PAY_VA_0 = 0;//初始值，未结算
         byte IS_PAY_VA_1 = 1;//对私(打款到导购虚拟账号
         byte IS_PAY_VA_2 = 2;//对公(通过对账单结算)'
@@ -799,80 +808,123 @@ public interface Constants {
     /**
      * 百度推送定义的消息类型
      */
-    interface BD_PUSH_MSG_TYPE{
-        int TC_MSG=0;//透传消息
-        int TZ_MSG=1;//通知消息
+    interface BD_PUSH_MSG_TYPE {
+        int TC_MSG = 0;//透传消息
+        int TZ_MSG = 1;//通知消息
     }
 
 
     /**
      * 百度推送设备类型
      */
-    interface PUSH_DEVICE{
-        int ADDROID=3;
-        int IOS=4;
+    interface PUSH_DEVICE {
+        int ADDROID = 3;
+        int IOS = 4;
     }
+
     /**
      * 百度推送到达APP
      */
-    interface PUSH_APP{
-        int RYG=0;//容易逛
-        int MD=1;//摩店
-        int DATA=2;
+    interface PUSH_APP {
+        int RYG = 0;//容易逛
+        int MD = 1;//摩店
+        int DATA = 2;
     }
+
     /**
      * 推荐类目 类型APP
-     * @author user
      *
+     * @author user
      */
-    interface RECOMMEND_TYPE{
-    	/** 商场/店铺类型 */
-    	Integer MALL_TYPE = 1;
-    	/** 品牌类型 */
-    	Integer BRAND_TYPE = 2;
-    	/** 分类 */
-    	Integer CATEGORY_TYPE = 3;
-    	/** 推荐商场/店铺code */
-    	String MALL_CODE = "REC_MALL";
-    	/** 推荐品牌code */
-    	String BRAND_CODE = "REC_BRAND";
-    	/** 推荐分类code */
-    	String CATEGORY_CODE = "REC_CATEGORY";
+    interface RECOMMEND_TYPE {
+        /**
+         * 商场/店铺类型
+         */
+        Integer MALL_TYPE = 1;
+        /**
+         * 品牌类型
+         */
+        Integer BRAND_TYPE = 2;
+        /**
+         * 分类
+         */
+        Integer CATEGORY_TYPE = 3;
+        /**
+         * 推荐商场/店铺code
+         */
+        String MALL_CODE = "REC_MALL";
+        /**
+         * 推荐品牌code
+         */
+        String BRAND_CODE = "REC_BRAND";
+        /**
+         * 推荐分类code
+         */
+        String CATEGORY_CODE = "REC_CATEGORY";
     }
 
     interface PUSH_PLATFORM {
-        /** 商家后台 */
+        /**
+         * 商家后台
+         */
         Integer BUSINESS_BACKGROUND = 1;
-        /** 摩店APP */
+        /**
+         * 摩店APP
+         */
         Integer MD_APP = 2;
-        /** 摩店管理平台 */
+        /**
+         * 摩店管理平台
+         */
         Integer MD_MANAGEMENT = 3;
     }
-    interface SHARE_USER_TYPE{
-    	/**容易逛用户*/
-    	Integer MALLLIFE = 1;
-    	/**导购*/
-    	Integer MALL_GUIDE = 2;
-    	/**买手*/
-    	Integer MALL_BUYER = 3;
-    	/**摩店用户*/
-    	Integer MALLSHOP = 4;
+
+    interface SHARE_USER_TYPE {
+        /**
+         * 容易逛用户
+         */
+        Integer MALLLIFE = 1;
+        /**
+         * 导购
+         */
+        Integer MALL_GUIDE = 2;
+        /**
+         * 买手
+         */
+        Integer MALL_BUYER = 3;
+        /**
+         * 摩店用户
+         */
+        Integer MALLSHOP = 4;
     }
+
     /***/
-    interface PUBLISH_COMMODITY_DATE{
-    	/** 检测摩店用户发布商品并修改接单状态的默认时间 */
-    	Integer PUBLISH_DEFAULT_TIME = 4;//
-    	/**发布商品给用户推送消息的时间限制*/
-    	Long LIMIT_TIME = (PUBLISH_DEFAULT_TIME - 1)*24*60*60*1000L;
-    	/**发布商品修改用户接单状态的时间限制*/
-    	Long PUBLISH_LIMIT_TIME = PUBLISH_DEFAULT_TIME*24*60*60*1000L;
-    	/** 给用户推送消息的标题 */
-    	String PUSH_TITLE = "任务通知";
-    	/** 在默认时间前一天给用户推送的消息 */
-    	String PUSH_MSG_BULL = "您的买手账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
-    	/** 在默认时间前一天给用户推送的消息 */
-    	String PUSH_MSG_SHOP = "您的店铺账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+    interface PUBLISH_COMMODITY_DATE {
+        /**
+         * 检测摩店用户发布商品并修改接单状态的默认时间
+         */
+        Integer PUBLISH_DEFAULT_TIME = 4;//
+        /**
+         * 发布商品给用户推送消息的时间限制
+         */
+        Long LIMIT_TIME = (PUBLISH_DEFAULT_TIME - 1) * 24 * 60 * 60 * 1000L;
+        /**
+         * 发布商品修改用户接单状态的时间限制
+         */
+        Long PUBLISH_LIMIT_TIME = PUBLISH_DEFAULT_TIME * 24 * 60 * 60 * 1000L;
+        /**
+         * 给用户推送消息的标题
+         */
+        String PUSH_TITLE = "任务通知";
+        /**
+         * 在默认时间前一天给用户推送的消息
+         */
+        String PUSH_MSG_BULL = "您的买手账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
+        /**
+         * 在默认时间前一天给用户推送的消息
+         */
+        String PUSH_MSG_SHOP = "您的店铺账户已经有" + (PUBLISH_DEFAULT_TIME - 1) + "天没有发布商品，快去发布商品吧，否则明天账户将被置为'暂不接单'哦~";
     }
+
     interface INDEX_CORE_STAT {//0更新成功  1更新中  2更新失败
         String SUCCESS = "success";
         String FAILED = "failed";
@@ -923,19 +975,83 @@ public interface Constants {
             return message;
         }
     }
-    
+
     interface COMMON_STATUS {//0删除  1正常
-    	Integer delete = 0;
-    	Integer normal = 1;
+        Integer delete = 0;
+        Integer normal = 1;
     }
-    
+
     interface IS_DEFAULT {//0非默认 1默认
-    	Integer no = 0;
-    	Integer yes = 1;
+        Integer no = 0;
+        Integer yes = 1;
     }
-    
+
     interface INDUSTRY_INFO_TYPE {//0非默认 1默认
-    	String own_info = "own_info";
-    	String extension_info = "extension_info";
+        String own_info = "own_info";
+        String extension_info = "extension_info";
+    }
+
+    enum LuckyMoneyCode {
+        /**
+         * 2016年双蛋红包
+         */
+        DOUBLE_EGG_2016("2016-SD", "2016年双蛋活动"),
+        /**
+         * 2017福袋红包
+         */
+        LUCKY_BAG_2017("LUCKY_BAG_2017", "2017福袋活动");
+
+        private String code;
+        private String message;
+
+        private LuckyMoneyCode(String code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
+    /**
+     * 分销推送的订单状态
+     *
+     * @author user
+     */
+    interface OrderPushStatus {
+        /**
+         * 支付成功
+         */
+        String TO_SHIPPED = "1";
+        /**
+         * 订单确认收货状态
+         */
+        String CONFIRM_RECEIPT = "2";
+        /**
+         * 订单取消和退款
+         */
+        String CANCEL = "3";
+    }
+
+    /**
+     * 推送类型
+     *
+     * @author user
+     */
+    interface OrderPushSource {
+        /**
+         * 商品分销推送
+         */
+        String COMMODITY_FENXIAO = "COMMODITY_FENXIAO";
+    }
+
+    interface BDP_USER_KEY {
+        String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNMUbc5ZyOfNnu8nc3Eup8HfhoMzpFvaz5jgmtcwG/88tJ8m40odTaMBCM2IoFIpq2U3fMSF6Z3Km0fVj1+w99nK60dgalyEbuCns/mGLySsJei88NsM/YHILDS8DU5gW18kKCpwvOwL5D3dqJiW2jI8a9A5a7PnEjatJzvMu2/wIDAQAB";
+        String PRIVATE_KEY = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=";
     }
 }

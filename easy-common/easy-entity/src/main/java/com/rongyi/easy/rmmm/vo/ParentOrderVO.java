@@ -158,6 +158,8 @@ public class ParentOrderVO implements Serializable {
 	private String reserveCompany;//预约人公司
 	private String reservePost;//预约人职称
 	private String activityCommodityDesc;//超级团商品副标题
+	private String weixinAppId;//
+	private BigDecimal totalPriceToSeller;// 卖家实收款
 
 	private BigDecimal merchantRedDiscount;//商家补贴红包金额
 	private BigDecimal operationRedDiscount;//平台补贴红包金额
@@ -921,6 +923,22 @@ public class ParentOrderVO implements Serializable {
 
 	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
 		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
+	public String getWeixinAppId() {
+		return weixinAppId;
+	}
+
+	public void setWeixinAppId(String weixinAppId) {
+		this.weixinAppId = weixinAppId;
+	}
+
+	public BigDecimal getTotalPriceToSeller() {
+		return totalPriceToSeller;
+	}
+
+	public void setTotalPriceToSeller(BigDecimal totalPriceToSeller) {
+		this.totalPriceToSeller = totalPriceToSeller;
 	}
 
 	@Override
