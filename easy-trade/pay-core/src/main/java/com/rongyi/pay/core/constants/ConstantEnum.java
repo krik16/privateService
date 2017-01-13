@@ -1,0 +1,143 @@
+/**
+ * @Copyright (C),上海容易网电子商务有限公司	
+ * @Author: 柯军 
+ * @datetime:2015年5月19日下午3:45:21
+ * @Description: TODO
+ *
+ **/
+
+package com.rongyi.pay.core.constants;
+
+/**
+ * @Author:  柯军
+ * @Description: 常量枚举
+ * @datetime:2015年7月2日下午4:58:18
+ *
+ **/
+public enum ConstantEnum {
+
+
+	EXCEPTION_PARAM_NULL("1019101","参数不合法"),
+	EXCEPTION_PARAM_NULL_SPECIFY("1019102","{}参数不能为空"),
+
+	WEIXIN_REFUND_RESULT_SUCCESS("SUCCESS","退款成功!"),
+	WEIXIN_REFUND_RESULT_PROCESSING("PROCESSING","微信退款处理中!"),
+	WEIXIN_REFUND_RESULT_NOTSURE("NOTSURE","退款未确认,需重新发起退款!"),
+	WEIXIN_REFUND_RESULT_CHANGE("CHANGE","退款转入代发，退款到银行发现用户的卡作废或者冻结了，导致原路退款银行卡失败，资金回流到商户的现金帐号，需要商户人工干预，通过线下或者财付通转账的方式进行退款!"),
+	WEIXIN_REFUND_RESULT_FAIL("FAIL","退款失败!"),
+
+	EXCEPTION_WEIXIN_SIGN_FAIL("1019104","微信支付签名生成失败"),
+	EXCEPTION_WEIXIN_REFUND_QUERY_ORDER("1019105","微信退款查询失败"),
+	EXCEPTION_WEIXIN_REFUND_FAIL("1019106","微信退款失败"),
+	EXCEPTION_WEIXIN_ORDER_CLOSE("1019107","微信订单关闭失败"),
+	EXCEPTION_WEIXIN_QUERY_ORDER("1019108","微信订单查询失败"),
+	EXCEPTION_WEIXIN_PUNCH_CARD_FAIL("1019117","微信刷卡支付失败"),
+	EXCEPTION_WEIXIN_SCAN_FAIL("1019118","微信扫码支付失败"),
+	EXCEPTION_WEIXIN_REVERSE_SUCCESS("1019119","用户超时未支付,订单已关闭,请重新发起订单支付"),
+
+	EXCEPTION_ALI_PAY_SIGN_FAIL("1019201","支付宝支付签名生成失败"),
+	EXCEPTION_ALI_QUERY_ORDER("1019202","订单查询失败"),
+	EXCEPTION_ALI_AUTHORIZE_FAIL("1019203","支付宝授权信息获取失败"),
+
+
+
+	EXCEPTION_APPLE_PAY_TN_FAIL("1019112","applePay生成支付流水号tn失败，请重新尝试"),
+	EXCEPTION_APPLE_PAY_QUERY_FAIL("1019113","applePay支付交易查询失败"),
+	EXCEPTION_APPLE_PAY_REFUND_FAIL("1019114","applePay发起退款申请失败"),
+	EXCEPTION_APPLE_PAY_REFUND_NOTIFY_FAIL("1019116","applePay退款结果通知处理失败"),
+
+
+	ALI_PAY_TIME_EXPIRE_GOODS("60m","商品支付宝支付默认超时时间"),
+	WEIXIN_PAY_TIME_EXPIRE_GOODS(60,"商品微信支付默认超时时间"),
+
+
+	WEIXIN_PAY_TRADE_TYPE_APP(0,"APP"),//app支付
+	WEIXIN_PAY_TRADE_TYPE_JSAPI(1,"JSAPI"),//公众号支付
+	WEIXIN_PAY_TRADE_TYPE_NATIVE(2,"NATIVE"),//原生扫码支付
+	WEIXIN_PAY_TRADE_TYPE_PUNCH_CARD(3,"PUNCH_CARD"),//刷卡支付
+
+	ALI_AUTH_TYPE_0(0,"公钥授权"),
+	ALI_AUTH_TYPE_1(1,"商户授权"),
+	ALI_AUTH_TYPE_2(2,"用户授权"),
+
+	;
+    private Object code;
+
+    private Object value;
+
+    private ConstantEnum(Object code, Object value) {
+        this.code = code;
+        this.value = value;
+    }
+
+
+    /**	
+     * @Description: 获取code int类型值,请确保该值可转换为int值，否则会类型转换异常 
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年5月19日下午3:51:11
+     **/
+    public Integer getCodeInt() {
+        return Integer.valueOf(code.toString());
+    }
+    
+    /**	
+     * @Description: 获取code String类型值
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年5月19日下午3:53:36
+     **/
+    public String getCodeStr() {
+        return code.toString();
+    }
+
+
+    /**	
+     * @Description:  获取value int类型值,请确保该值可转换为int值，否则会类型转换异常 
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年5月19日下午3:53:08
+     **/
+    public Integer getValueInt() {
+        return Integer.valueOf(value.toString());
+    }
+    
+    /**	
+     * @Description: 获取value String类型值 
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年5月19日下午3:53:21
+     **/
+    public String getValueStr() {
+        return value.toString();
+    }
+
+	/**
+	 * @Description: 获取code byte类型值,请确保该值可转换为byte值，否则会类型转换异常
+	 * @return
+	 * @Author:  柯军
+	 * @datetime:2015年5月19日下午3:51:11
+	 **/
+	public Byte getCodeByte() {
+		return Integer.valueOf(code.toString()).byteValue();
+	}
+
+	/**
+	 * @Description:  获取value byte类型值,请确保该值可转换为byte值，否则会类型转换异常
+	 * @return
+	 * @Author:  柯军
+	 * @datetime:2015年5月19日下午3:53:08
+	 **/
+	public Byte getValueByte() {
+		return Integer.valueOf(value.toString()).byteValue();
+	}
+    
+    public Object getCode() {
+        return code;
+    }
+
+    
+    public Object getValue() {
+        return value;
+    }
+}

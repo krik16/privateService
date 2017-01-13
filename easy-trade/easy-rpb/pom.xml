@@ -461,6 +461,10 @@
 			<groupId>org.jboss.netty</groupId>
 			<artifactId>netty</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.rongyi</groupId>
+			<artifactId>pay-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -475,9 +479,6 @@
 		</resources>
 	</build>
 
-	<properties>
-		<excludePropertyFiles></excludePropertyFiles>
-	</properties>
 
 	<profiles>
 		<profile>
