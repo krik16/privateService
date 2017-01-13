@@ -15,14 +15,14 @@ public interface ServiceDescriptionService {
      * @param userId 用户id
      * @return
      */
-    List<ServiceDescriptionParam> getServiceDescList(Integer userId);
+    List<ServiceDescriptionParam> getServiceDescList(String userId);
 
     /**
      * 根据用户id获取该用户的默认售后说明
      * @param userId
      * @return
      */
-    ServiceDescriptionParam  getDefaultByUserId(Integer userId);
+    ServiceDescriptionParam  getDefaultByUserId(String userId);
 
     /**
      * 更新售后说明

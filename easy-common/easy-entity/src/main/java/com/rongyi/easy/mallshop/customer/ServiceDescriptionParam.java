@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class ServiceDescriptionParam implements Serializable {
     private int  id;               //主键
-    private int userId;            //买手或导购id
+    private String userId;            //买手或导购id
     private String  remark;        //备注
     private String content;        //说明内容
     private int isDefault;     //是否默认
@@ -21,11 +21,11 @@ public class ServiceDescriptionParam implements Serializable {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
