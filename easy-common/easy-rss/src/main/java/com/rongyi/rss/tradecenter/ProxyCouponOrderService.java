@@ -244,12 +244,4 @@ public interface ProxyCouponOrderService {
      * @throws Exception
      */
     int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
-
-    /**
-     * 查询订单列表（电子会员）
-     *
-     * @param param
-     * @return
-     */
-    DubboVO<TraderOrderResultForUserCenterVO> listForUserCenter(TradeSearchForUserCenterParam param);
 }
