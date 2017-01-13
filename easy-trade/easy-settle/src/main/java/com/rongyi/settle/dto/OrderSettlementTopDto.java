@@ -24,7 +24,7 @@ public class OrderSettlementTopDto {
     private Integer orderCount;
     
     /** 红包抵扣金额（汇总） */
-    private Double hbDiscountTotal;
+    private Double hbDiscountOpeTotal;
     
     /** 积分抵扣金额（汇总） */
     private Double scoreDiscountTotal;
@@ -83,18 +83,12 @@ public class OrderSettlementTopDto {
 		this.orderCount = orderCount;
 	}
 
-	/**
-	 * @return the hbDiscountTotal
-	 */
-	public Double getHbDiscountTotal() {
-		return hbDiscountTotal;
+	public Double getHbDiscountOpeTotal() {
+		return hbDiscountOpeTotal;
 	}
 
-	/**
-	 * @param hbDiscountTotal the hbDiscountTotal to set
-	 */
-	public void setHbDiscountTotal(Double hbDiscountTotal) {
-		this.hbDiscountTotal = hbDiscountTotal;
+	public void setHbDiscountOpeTotal(Double hbDiscountOpeTotal) {
+		this.hbDiscountOpeTotal = hbDiscountOpeTotal;
 	}
 
 	/**

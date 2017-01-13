@@ -620,8 +620,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 // 汇总订单数量
                 existOrderTopDto.setOrderCount(existOrderTopDto.getOrderCount() + orderTopDto.getOrderCount());
                 // 汇总红包抵扣金额
-                existOrderTopDto.setHbDiscountTotal((existOrderTopDto.getHbDiscountTotal() == null ? 0 : existOrderTopDto.getHbDiscountTotal())
-                        + (orderTopDto.getHbDiscountTotal() == null ? 0 : orderTopDto.getHbDiscountTotal()));
+                existOrderTopDto.setHbDiscountOpeTotal((existOrderTopDto.getHbDiscountOpeTotal() == null ? 0 : existOrderTopDto.getHbDiscountOpeTotal())
+                        + (orderTopDto.getHbDiscountOpeTotal() == null ? 0 : orderTopDto.getHbDiscountOpeTotal()));
                 // 汇总积分抵扣金额
                 existOrderTopDto.setScoreDiscountTotal((existOrderTopDto.getScoreDiscountTotal() == null ? 0 : existOrderTopDto.getScoreDiscountTotal())
                         + (orderTopDto.getScoreDiscountTotal() == null ? 0 : orderTopDto.getScoreDiscountTotal()));
