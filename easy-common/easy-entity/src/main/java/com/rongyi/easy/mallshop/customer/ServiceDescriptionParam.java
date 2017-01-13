@@ -9,15 +9,24 @@ import java.io.Serializable;
  * Created by 武辉 on 2016/12/15.
  * 售后服务说明参数
  */
-public class ServiceDescriptionParam extends BaseParam implements Serializable {
+public class ServiceDescriptionParam implements Serializable {
     private int  id;               //主键
     private String userId;   //用户id
+    private String  jsessionid;//用户信息jsessionid
     private String  remark;        //备注
     private String content;        //说明内容
     private int isDefault;     //是否默认
     private int currentPage  = 1; //当前页
     private int  pageSize = 10; //分页大小
     private int offset;
+
+    public String getJsessionid() {
+        return jsessionid;
+    }
+
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
+    }
 
     public int getCurrentPage() {
         return currentPage;
@@ -91,6 +100,7 @@ public class ServiceDescriptionParam extends BaseParam implements Serializable {
                 append(", userId: ").append(userId).
                 append(", remark: ").append(remark).
                 append(", content: ").append(content).
+                append(", jsessionid: ").append(jsessionid).
                 append("，isDefault: ").append(isDefault);
         return sb.toString();
     }
