@@ -7,10 +7,7 @@ import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RoaCouponOrderParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
-import com.rongyi.easy.tradecenter.param.TradeSearchForUserCenterParam;
 import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
-import com.rongyi.easy.tradecenter.TraderOrderForUserCenterEntity;
-import com.rongyi.easy.tradecenter.vo.TraderOrderResultForUserCenterVO;
 
 import java.util.List;
 import java.util.Map;
