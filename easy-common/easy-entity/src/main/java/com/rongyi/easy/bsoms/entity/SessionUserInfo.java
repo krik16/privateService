@@ -63,7 +63,7 @@ public class SessionUserInfo implements Serializable{
     private String address ;  //用户所属公司地址
     
     private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
-    private Integer defaultTerminal;//默认终端
+    private Integer defaultTerminal;//默认终端 1 容易逛,2 微信,3 终端机
 
 	public String getMallMid() {
 		return mallMid;
