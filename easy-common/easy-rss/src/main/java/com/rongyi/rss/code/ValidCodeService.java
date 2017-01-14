@@ -153,14 +153,15 @@ public interface ValidCodeService {
 
     /**
      * 家得利验码接口
+     * @param validUser
+     * @param identity
      * @param code
      * @param mallId
      * @param shopId
-     * @param validUser
-     * @param identity
      * @param platform
+     * @param bizCode
      * @return
      * @throws CodeServiceException
      */
-    ResponseVO validJiadeliCouponCode(String code,String mallId,String shopId,Integer userId,byte platform,int count) throws CodeServiceException;
+    ResponseVO validJiadeliCouponCode(String code, String mallId, String shopId, Integer userId, byte platform, int count, String bizCode) throws CodeServiceException;
 }

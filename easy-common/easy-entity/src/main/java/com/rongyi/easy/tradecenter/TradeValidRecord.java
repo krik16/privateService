@@ -47,6 +47,8 @@ public class TradeValidRecord implements Serializable {
 
     private Integer isDelete;
 
+    private String comment;//备注信息
+
     public Integer getId() {
         return id;
     }
@@ -206,4 +208,14 @@ public class TradeValidRecord implements Serializable {
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+
 }

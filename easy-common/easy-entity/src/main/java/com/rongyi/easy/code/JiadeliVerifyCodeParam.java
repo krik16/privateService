@@ -10,6 +10,7 @@ public class JiadeliVerifyCodeParam implements Serializable {
     private String shopNo;//商户号
     private String couponCode;//券码
     private String channel;//JIADELI
+    private String bizCode;//客户的业务订单号
 
     public String getDeviceNo() {
         return deviceNo;
@@ -43,13 +44,22 @@ public class JiadeliVerifyCodeParam implements Serializable {
         this.channel = channel;
     }
 
+    public String getBizCode() {
+        return bizCode;
+    }
+
+    public void setBizCode(String bizCode) {
+        this.bizCode = bizCode;
+    }
+
     @Override
     public String toString() {
-        return "codeParam{" +
+        return "JiadeliVerifyCodeParam{" +
                 "deviceNo='" + deviceNo + '\'' +
                 ", shopNo='" + shopNo + '\'' +
                 ", couponCode='" + couponCode + '\'' +
                 ", channel='" + channel + '\'' +
+                ", bizCode='" + bizCode + '\'' +
                 '}';
     }
 }
