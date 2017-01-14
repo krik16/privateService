@@ -13,17 +13,17 @@ public interface ServiceDescriptionService {
 
     /**
      * 根据用户id获得售后说明列表
-     * @param userId 用户id
+     * @param param param
      * @return
      */
-    ResponseVO getServiceDescList(String userId);
+    ResponseVO getServiceDescList(ServiceDescriptionParam param);
 
     /**
      * 根据用户id获取该用户的默认售后说明
-     * @param userId
+     * @param param
      * @return
      */
-    ResponseVO  getDefaultByUserId(String userId);
+    ResponseVO  getDefaultByUserId(ServiceDescriptionParam param);
 
     /**
      * 更新售后说明
