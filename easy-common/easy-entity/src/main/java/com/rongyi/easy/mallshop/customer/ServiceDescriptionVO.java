@@ -1,11 +1,13 @@
 package com.rongyi.easy.mallshop.customer;
 
+import java.io.Serializable;
+
 /**
  * Created by WUH
  * on 2017/1/14.
  * 售后说明返回
  */
-public class ServiceDescriptionVO {
+public class ServiceDescriptionVO implements Serializable {
     private int  id;               //主键
     private String userId;   //用户id
     private String  remark;        //备注
