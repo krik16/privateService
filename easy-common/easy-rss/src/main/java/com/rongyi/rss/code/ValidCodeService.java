@@ -160,8 +160,9 @@ public interface ValidCodeService {
      * @param shopId
      * @param platform
      * @param bizCode
+     * @param deviceNo
      * @return
      * @throws CodeServiceException
      */
-    ResponseVO validJiadeliCouponCode(String code, String mallId, String shopId, Integer userId, byte platform, int count, String bizCode) throws CodeServiceException;
+    ResponseVO validJiadeliCouponCode(String code, String mallId, String shopId, Integer userId, byte platform, int count, String bizCode, String deviceNo) throws CodeServiceException;
 }
