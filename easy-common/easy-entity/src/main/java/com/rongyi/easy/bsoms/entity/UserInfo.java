@@ -85,6 +85,7 @@ public class UserInfo implements Serializable{
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
+    private Integer isSuspended;//资金账号
     public String getStopReason() {
 		return stopReason;
 	}
@@ -450,6 +451,14 @@ public class UserInfo implements Serializable{
 	public void setChiefId(Integer chiefId) {
 		this.chiefId = chiefId;
 	}
+	
+	public Integer getIsSuspended() {
+		return isSuspended;
+	}
+
+	public void setIsSuspended(Integer isSuspended) {
+		this.isSuspended = isSuspended;
+	}
 
 	@Override
 	public String toString() {
@@ -476,7 +485,8 @@ public class UserInfo implements Serializable{
 				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
-				+ ", level=" + level + ", chiefId=" + chiefId + "]";
+				+ ", level=" + level + ", chiefId=" + chiefId
+				+ ", isSuspended=" + isSuspended + "]";
 	}
 	
 }

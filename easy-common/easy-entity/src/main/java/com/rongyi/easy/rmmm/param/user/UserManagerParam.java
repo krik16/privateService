@@ -76,7 +76,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String validStartAtStamp;//有效期开始时间戳
 	private String validEndAtStamp;//有效期结束时间戳
 	private String contractCode;//合同号
-	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
+	private String synTarget;//设置终端   /* 是[1]、否[0]*/,  终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
 	private Integer isChief = 1;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
@@ -481,21 +481,33 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount + ", userLogo=" + userLogo + ", phone="
-				+ phone + ", checkCode=" + checkCode + ", nickName=" + nickName + ", uuId=" + uuId + ", invitCode="
-				+ invitCode + ", pswd=" + pswd + ", account=" + account + ", shopId=" + shopId + ", mallId=" + mallId
-				+ ", brandId=" + brandId + ", ownerId=" + ownerId + ", roleId=" + roleId + ", branchCompanyId="
-				+ branchCompanyId + ", userName=" + userName + ", cardId=" + cardId + ", type=" + type + ", roleType="
-				+ roleType + ", accountList=" + accountList + ", identity=" + identity + ", isCooperation="
-				+ isCooperation + ", memo=" + memo + ", createSource=" + createSource + ", stopReason=" + stopReason
-				+ ", creatingUserType=" + creatingUserType + ", merUserId=" + merUserId + ", userDesc=" + userDesc
-				+ ", flag=" + flag + ", isUpdate=" + isUpdate + ", defaultAccount=" + defaultAccount + ", jsessionid="
-				+ jsessionid + ", shareCode=" + shareCode + ", faceImg=" + faceImg + ", backImg=" + backImg
-				+ ", workImg=" + workImg + ", otherImg=" + otherImg + ", isOrdering=" + isOrdering + ", industryId="
-				+ industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum=" + childAccountNum
-				+ ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
-				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level="
-				+ level + ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + "]";
+		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount
+				+ ", userLogo=" + userLogo + ", phone=" + phone
+				+ ", checkCode=" + checkCode + ", nickName=" + nickName
+				+ ", uuId=" + uuId + ", invitCode=" + invitCode + ", pswd="
+				+ pswd + ", account=" + account + ", shopId=" + shopId
+				+ ", mallId=" + mallId + ", brandId=" + brandId + ", ownerId="
+				+ ownerId + ", roleId=" + roleId + ", branchCompanyId="
+				+ branchCompanyId + ", userName=" + userName + ", cardId="
+				+ cardId + ", type=" + type + ", roleType=" + roleType
+				+ ", accountList=" + accountList + ", identity=" + identity
+				+ ", isCooperation=" + isCooperation + ", memo=" + memo
+				+ ", createSource=" + createSource + ", stopReason="
+				+ stopReason + ", creatingUserType=" + creatingUserType
+				+ ", merUserId=" + merUserId + ", userDesc=" + userDesc
+				+ ", flag=" + flag + ", isUpdate=" + isUpdate
+				+ ", defaultAccount=" + defaultAccount + ", jsessionid="
+				+ jsessionid + ", shareCode=" + shareCode + ", faceImg="
+				+ faceImg + ", backImg=" + backImg + ", workImg=" + workImg
+				+ ", otherImg=" + otherImg + ", isOrdering=" + isOrdering
+				+ ", industryId=" + industryId + ", industryVersionId="
+				+ industryVersionId + ", childAccountNum=" + childAccountNum
+				+ ", validStartAtStamp=" + validStartAtStamp
+				+ ", validEndAtStamp=" + validEndAtStamp + ", contractCode="
+				+ contractCode + ", synTarget=" + synTarget + ", isChief="
+				+ isChief + ", level=" + level + ", settleOrgStrategy="
+				+ settleOrgStrategy + ", chiefId=" + chiefId
+				+ "]";
 	}
 	
 }
