@@ -361,4 +361,8 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	boolean deleteSpecificAuthoritiesByUserId(Integer userId) throws Exception;
+	/**
+	 * 修改账号资金状态
+	 */
+	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;
 }
