@@ -208,7 +208,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private Date activityStartTime;
 	private Date activityEndTime;
 
-	private String serviceDescription;//售后说明
+	//private String serviceDescription;//售后说明
+	private Integer serviceDescriptionId;
 
 	public List<String> getCategoryNames() {
 		return categoryNames;
@@ -872,12 +873,12 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.isSpecDeleted = isSpecDeleted;
 	}
 
-	public String getServiceDescription() {
-		return serviceDescription;
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
 	}
 
-	public void setServiceDescription(String serviceDescription) {
-		this.serviceDescription = serviceDescription;
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
 	}
 
 	public Date getActivityStartTime() {
@@ -1032,7 +1033,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
-		this.setServiceDescription(commodity.getServiceDescription());
+		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 	}
 
 	@Override
@@ -1144,7 +1145,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
-				", serviceDescription=" + serviceDescription +
+				", serviceDescriptionId=" + serviceDescriptionId +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
 				'}';
