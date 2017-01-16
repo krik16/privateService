@@ -252,16 +252,16 @@ public class Util {
 
 		//积分消费获取验证码接口
 		/*params.put("cardNumber","15000388436");
-		params.put("orderNumber","401201607250945005");
-		params.put("serialNumber","201701120945003");
+		params.put("orderNumber","401201607250945111");
+		params.put("serialNumber","201701110945111");
 		params.put("timeStamp",1515567178131l);*/
 
 		//积分消费并同步订单接口
-		/*params.put("cardNumber","15000388436");
-		params.put("orderNumber","401201607250945005");
-		params.put("serialNumber","201701120945003");
+		params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945111");
+		params.put("serialNumber","201701110945111");
 		params.put("timeStamp",1515567178131l);
-		params.put("verificationCode","697431");*/
+		params.put("verificationCode","850163");
 
 		//订单冲正接口
 		/*params.put("cardNumber","15000388436");
@@ -275,8 +275,9 @@ public class Util {
 		params.put("serialNumber","201701120945003");
 		params.put("timeStamp", 1515567178131l);*/
 
-		params.put("source",1);
-		params.put("timeStamp",1515567178131l);
+		//渠道列表参数
+		/*params.put("source",1);
+		params.put("timeStamp",1515567178131l);*/
 		signValidateWithoutChannel(params,"dddd");
 	}
 }
