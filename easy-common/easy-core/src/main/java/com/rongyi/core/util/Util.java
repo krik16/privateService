@@ -270,10 +270,13 @@ public class Util {
 		params.put("timeStamp",1515567178131l);*/
 
 		//退换货接口参数
-		params.put("cardNumber","15000388436");
+		/*params.put("cardNumber","15000388436");
 		params.put("orderNumber","401201607250945005");
 		params.put("serialNumber","201701120945003");
-		params.put("timeStamp", 1515567178131l);
+		params.put("timeStamp", 1515567178131l);*/
+
+		params.put("source",1);
+		params.put("timeStamp",1515567178131l);
 		signValidateWithoutChannel(params,"dddd");
 	}
 }
