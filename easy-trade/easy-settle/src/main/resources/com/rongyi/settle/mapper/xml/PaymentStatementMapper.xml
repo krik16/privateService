@@ -652,7 +652,7 @@
 		<result column="income_type" property="incomeType" jdbcType="VARCHAR" />
 		<result column="order_type" property="orderType" jdbcType="VARCHAR" />
 		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
-		<result column="hb_amount" property="hbDiscountTotal" jdbcType="DOUBLE" />
+		<result column="hb_amount_ope" property="hbDiscountOpeTotal" jdbcType="DOUBLE" />
 		<result column="score_amount" property="scoreDiscountTotal" jdbcType="DOUBLE" />
 		<result column="total_amount" property="orderAmountTotal" jdbcType="DOUBLE" />
 		<result column="discount_amount" property="orderDiscountTotal" jdbcType="DOUBLE" />
@@ -671,7 +671,8 @@
 		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
 		<result column="orig_price" property="origPrice" jdbcType="DOUBLE" />
 		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
-		<result column="coupon_discount" property="hbDiscount" jdbcType="DOUBLE" />
+		<result column="coupon_discount" property="hbDiscountOpe" jdbcType="DOUBLE" />
+		<result column="coupon_discount" property="hbDiscountMer" jdbcType="DOUBLE" />
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
 		<result column="pay_channel" property="paymentChannel" jdbcType="VARCHAR" />
 		<result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
@@ -818,13 +819,16 @@
 		OF.id AS OFID,
 		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
 		SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
-		case OF.coupon_discount_type when 0 then
-		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount)
+		case when  ODF.coupon_discount_type=0 || ODF.rebate_discount_type=0 then
+		SUM(ODF.order_coupon_discount + ODF.coupon_discount)
 		else
 		0
-		end as hb_amount ,
-		case OF.coupon_discount_type when 1 then
-		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount)
+		end as hb_amount_ope ,
+		case when  ODF.coupon_discount_type=1 || ODF.rebate_discount_type=1  then
+		SUM(
+		case when ODF.discount_amount &lt; (ODF.order_coupon_discount + ODF.coupon_discount) then  ODF.discount_amount
+		else ODF.order_coupon_discount + ODF.coupon_discount end
+		)
 		else 0 end as hb_amount_mer
 		FROM
 		ry_osm.order_form OF
@@ -845,7 +849,7 @@
 		AND OF.`status` &gt; 2
 		AND OF.is_pay_va = 2
 		<if test="brandId != null">
-			AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
+			AND BI.brand_mid = #{brand,jdbcType=VARCHAR}
 		</if>
 		<if test="mallId != null">
 			AND MC.mall_mid = #{mallId,jdbcType=VARCHAR}
@@ -867,7 +871,12 @@
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
-			A.coupon_discount + A.order_coupon_discount + SUM(B.coupon_discount) AS coupon_discount,
+			case when B.coupon_discount_type =0 || B.rebate_discount_type =0 THEN
+			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
+			else 0 end as coupon_discount ,
+			case when B.coupon_discount_type =1 || B.rebate_discount_type =1 THEN
+			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
+			else 0 end as coupon_discount_mer ,
 			A.score_discount + A.order_score_discount AS score_discount,
 			CASE WHEN A.`status` = 2 THEN '待发货' WHEN A.`status` = 3 THEN '已发货' WHEN A.`status` = 4 THEN '确认收货'
 				WHEN (A.`status` > 4 AND H3.id IS NOT NULL) THEN '已完成'

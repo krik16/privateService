@@ -50,8 +50,8 @@ public class OrderSettlementDetailDto {
 	/** 支付金额 */
 	private Double payAmount;
 
-	/** 红包抵扣金额 */
-	private Double hbDiscount;
+	/** 红包抵扣金额(平台) */
+	private Double hbDiscountOpe;
 
 	/** 积分抵扣金额 */
 	private Double scoreDiscount;
@@ -74,8 +74,8 @@ public class OrderSettlementDetailDto {
 	/** 订单来源 */
 	private String orderSource;
 
-	/**  促销券补贴类型 0：平台补贴 1：商家补贴 */
-	private String couponDiscountType;
+	/** 红包抵扣金额(商家) */
+	private Double hbDiscountMer;
 
 	public String getOrderSource() {
 		return orderSource;
@@ -250,20 +250,6 @@ public class OrderSettlementDetailDto {
 		this.payAmount = payAmount;
 	}
 
-	/**
-	 * @return the hbDiscount
-	 */
-	public Double getHbDiscount() {
-		return hbDiscount;
-	}
-
-	/**
-	 * @param hbDiscount
-	 *            the hbDiscount to set
-	 */
-	public void setHbDiscount(Double hbDiscount) {
-		this.hbDiscount = hbDiscount;
-	}
 
 	/**
 	 * @return the scoreDiscount
@@ -355,12 +341,20 @@ public class OrderSettlementDetailDto {
 		this.buyerPhone = buyerPhone;
 	}
 
-	public String getCouponDiscountType() {
-		return couponDiscountType;
+	public Double getHbDiscountOpe() {
+		return hbDiscountOpe;
 	}
 
-	public void setCouponDiscountType(String couponDiscountType) {
-		this.couponDiscountType = couponDiscountType;
+	public void setHbDiscountOpe(Double hbDiscountOpe) {
+		this.hbDiscountOpe = hbDiscountOpe;
+	}
+
+	public Double getHbDiscountMer() {
+		return hbDiscountMer;
+	}
+
+	public void setHbDiscountMer(Double hbDiscountMer) {
+		this.hbDiscountMer = hbDiscountMer;
 	}
 
 	public OrderSettlementDetailVO toVO() {
@@ -376,7 +370,7 @@ public class OrderSettlementDetailDto {
 		vo.setMallName(getMallName());
 		vo.setOrigPrice(getOrigPrice());
 		vo.setPayAmount(getPayAmount());
-		vo.setHbDiscount(getHbDiscount());
+		vo.setHbDiscountOpe(getHbDiscountOpe());
 		vo.setScoreDiscount(getScoreDiscount());
 		vo.setPaymentChannel(getPaymentChannel());
 		if (getPaymentTime() != null) {
@@ -390,7 +384,7 @@ public class OrderSettlementDetailDto {
 		}
 		vo.setBuyerPhone(getBuyerPhone());
 		vo.setOrderSource(getOrderSource());
-		vo.setCouponDiscountType(getCouponDiscountType());
+		vo.setHbDiscountMer(getHbDiscountMer());
 		return vo;
 	}
 }

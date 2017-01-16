@@ -222,8 +222,8 @@ public class ExcelUtils {
             XSSFCell hbPrice = row18.createCell(6);
             hbPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(6).getCellStyle());
             row18.createCell(7).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(7).getCellStyle());
-            hbPrice.setCellValue(orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal());
-            orderHbSum += orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal();
+            hbPrice.setCellValue(orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal());
+            orderHbSum += orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal();
 
             XSSFCell scorePrice = row18.createCell(8);
             scorePrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(8).getCellStyle());
@@ -281,9 +281,11 @@ public class ExcelUtils {
         // 总金额/总补贴
         XSSFRow row12 = sheet.getRow(12);
         XSSFCell totalPayCell = row12.getCell(4);
-        totalPayCell.setCellValue(orderPriceSum + couponPriceSum);
+        totalPayCell.setCellValue(orderPriceSum + couponPriceSum - orderHbmerPriceSum-couponHbmerPriceSum);
         XSSFCell totalDiscountCell = row12.getCell(10);
         totalDiscountCell.setCellValue(orderHbSum + orderScoreSum + orderDiscountSum + couponHbSum + couponScoreSum + couponDiscountSum);
+        XSSFCell totalDiscountMerCell = row12.getCell(14);
+        totalDiscountMerCell.setCellValue(orderHbmerPriceSum+couponHbmerPriceSum);
 
         // sheet1: 券明细数据
         int sheetCountC = (int) Math.ceil(excelDto.getCouponCodeExcelDtoList().size() / 60000d);
@@ -427,10 +429,10 @@ public class ExcelUtils {
                 score.setCellValue(orderDetail.getScoreDiscount());
 
                 XSSFCell hb = rowOrder.createCell(9);
-                hb.setCellValue(orderDetail.getHbDiscount());
+                hb.setCellValue(orderDetail.getHbDiscountOpe());
 
                 XSSFCell hbDiscountType = rowOrder.createCell(10);
-                hbDiscountType.setCellValue(orderDetail.getCouponDiscountType());
+                hbDiscountType.setCellValue(orderDetail.getHbDiscountMer());
 
                 XSSFCell channel = rowOrder.createCell(11);
                 channel.setCellValue(orderDetail.getPaymentChannel());

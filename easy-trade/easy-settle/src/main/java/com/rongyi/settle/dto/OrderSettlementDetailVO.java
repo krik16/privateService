@@ -38,8 +38,8 @@ public class OrderSettlementDetailVO {
     /** 支付金额 */
     private Double payAmount;
     
-    /** 红包抵扣金额 */
-    private Double hbDiscount;
+    /** 红包抵扣金额(平台) */
+    private Double hbDiscountOpe;
     
     /** 积分抵扣金额 */
     private Double scoreDiscount;
@@ -62,8 +62,8 @@ public class OrderSettlementDetailVO {
 	/** 订单来源 */
 	private String orderSource;
 
-	/** 促销券补贴类型 0：平台补贴 1：商家补贴 */
-	private String couponDiscountType ;
+	/** 红包抵扣金额(商家) */
+	private Double hbDiscountMer;
 
 	public String getOrderSource() {
 		return orderSource;
@@ -186,20 +186,6 @@ public class OrderSettlementDetailVO {
 	}
 
 	/**
-	 * @return the hbDiscount
-	 */
-	public Double getHbDiscount() {
-		return hbDiscount;
-	}
-
-	/**
-	 * @param hbDiscount the hbDiscount to set
-	 */
-	public void setHbDiscount(Double hbDiscount) {
-		this.hbDiscount = hbDiscount;
-	}
-
-	/**
 	 * @return the scoreDiscount
 	 */
 	public Double getScoreDiscount() {
@@ -283,11 +269,19 @@ public class OrderSettlementDetailVO {
 		this.buyerPhone = buyerPhone;
 	}
 
-	public String getCouponDiscountType() {
-		return couponDiscountType;
+	public Double getHbDiscountOpe() {
+		return hbDiscountOpe;
 	}
 
-	public void setCouponDiscountType(String couponDiscountType) {
-		this.couponDiscountType = couponDiscountType;
+	public void setHbDiscountOpe(Double hbDiscountOpe) {
+		this.hbDiscountOpe = hbDiscountOpe;
+	}
+
+	public Double getHbDiscountMer() {
+		return hbDiscountMer;
+	}
+
+	public void setHbDiscountMer(Double hbDiscountMer) {
+		this.hbDiscountMer = hbDiscountMer;
 	}
 }
