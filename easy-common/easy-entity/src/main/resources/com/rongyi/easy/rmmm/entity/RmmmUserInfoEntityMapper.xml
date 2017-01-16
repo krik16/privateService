@@ -28,7 +28,6 @@
 	<result column="jsessionid" property="jsessionid" jdbcType="VARCHAR" />
 	<result column="is_ordering" property="isOrdering" jdbcType="INTEGER" />
 	<result column="update_ordering_at" property="updateOrderingAt" jdbcType="TIMESTAMP" />
-	
 	<result column="industry_id" property="industryId" jdbcType="INTEGER" />
 	<result column="industry_version_id" property="industryVersionId" jdbcType="INTEGER" />
 	<result column="child_account_num" property="childAccountNum" jdbcType="INTEGER" />
@@ -39,7 +38,7 @@
 	<result column="is_chief" property="isChief" jdbcType="INTEGER" />
 	<result column="level" property="level" jdbcType="INTEGER" />
 	<result column="chief_id" property="chiefId" jdbcType="INTEGER" />
-
+	<result column="is_suspended" property="isSuspended" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -242,6 +241,9 @@
         <if test="level != null">
             level,
         </if>
+        <if test="isSuspended != null">
+            is_suspended,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -333,6 +335,9 @@
       </if>
       <if test="level != null">
           #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isSuspended != null">
+          #{isSuspended,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
