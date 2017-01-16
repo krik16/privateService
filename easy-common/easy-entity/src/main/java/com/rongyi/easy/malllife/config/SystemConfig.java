@@ -72,10 +72,10 @@ public class SystemConfig implements Serializable{
             "/v5/shop/getShop.htm"
     });
 
-    public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5");
+    public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5","smallApp");
 
 
-    public static final List<String> mdUaList = Arrays.asList("Android", "IOS");
+    public static final List<String> mdUaList = Arrays.asList("Android", "IOS","smallApp");
 
     public static final List<String> cityList = Arrays.asList("北京","上海","天津","重庆");
     public static String buildPictureUrl(String userId, String headImg) {
