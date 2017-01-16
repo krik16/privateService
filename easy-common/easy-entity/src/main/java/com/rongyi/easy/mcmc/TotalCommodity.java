@@ -102,6 +102,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Integer accountType;
 	private String merchantId;  //商户id
 	private List<WechatInfoVo> wechatInfoVos;
+	private Integer serviceDescriptionId;
+	private String serviceDescription;//售后说明
 
 
 	public List<WechatInfoVo> getWechatInfoVos() {
@@ -499,6 +501,22 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.serviceIds = serviceIds;
 	}
 
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
 	@Override
 	public String toString() {
 		return "TotalCommodity{" +
@@ -546,6 +564,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
+				", serviceDescriptionId=" + serviceDescriptionId+
+				", serviceDescription=" + serviceDescription+
 				'}';
 	}
 
@@ -614,6 +634,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceIds(commodity.getServiceIds());
 		this.setMerchantId(commodity.getMerchantId());
 		this.setShelvesType(commodity.getShelvesType());
+		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		this.setServiceDescription(commodity.getServiceDescription());
 	}
 
 	public String getSubheading() {

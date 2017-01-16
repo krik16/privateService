@@ -1,7 +1,6 @@
 package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.*;
-import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -284,6 +283,8 @@ public class RedenvelopVO implements Serializable{
      * 备注
      */
     private String remark;
+
+    private Byte subsidyType;//补贴类型(0:平台补贴,1:商家补贴)
 
     public String getId() {
         return id;
@@ -681,6 +682,14 @@ public class RedenvelopVO implements Serializable{
 
     }
 
+    public Byte getSubsidyType() {
+        return subsidyType;
+    }
+
+    public void setSubsidyType(Byte subsidyType) {
+        this.subsidyType = subsidyType;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("RedenvelopVO{");
@@ -728,6 +737,7 @@ public class RedenvelopVO implements Serializable{
         sb.append(", validDays=").append(validDays);
         sb.append(", couponVouchers=").append(couponVouchers);
         sb.append(", couponCommodities=").append(couponCommodities);
+        sb.append(", subsidyType=").append(subsidyType);
         sb.append(", remark='").append(remark).append('\'');
         sb.append('}');
         return sb.toString();

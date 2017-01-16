@@ -145,6 +145,7 @@ public class CommodityBuyerVO implements Serializable {
     private String crowdFundingPrice;//众筹价
 
     private String serviceDescription;
+    private Integer serviceDescriptionId;
 
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
@@ -833,6 +834,14 @@ public class CommodityBuyerVO implements Serializable {
         this.serviceDescription = serviceDescription;
     }
 
+    public Integer getServiceDescriptionId() {
+        return serviceDescriptionId;
+    }
+
+    public void setServiceDescriptionId(Integer serviceDescriptionId) {
+        this.serviceDescriptionId = serviceDescriptionId;
+    }
+
     public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
@@ -960,6 +969,7 @@ public class CommodityBuyerVO implements Serializable {
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
         this.serviceDescription=commodity.getServiceDescription();
+        this.serviceDescriptionId=commodity.getServiceDescriptionId();
     }
 
     @Override
@@ -1026,6 +1036,8 @@ public class CommodityBuyerVO implements Serializable {
                 ", ifShowInWechat=" + ifShowInWechat +
                 ", buyerCount=" + buyerCount +
                 ", totalBuycount=" + totalBuycount +
+                ", serviceDescription=" + serviceDescription +
+                ", serviceDescriptionId=" + serviceDescriptionId +
                 '}';
     }
 
