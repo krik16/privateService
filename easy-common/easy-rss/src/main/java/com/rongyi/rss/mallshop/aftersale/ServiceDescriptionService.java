@@ -43,4 +43,17 @@ public interface ServiceDescriptionService {
      */
     ResponseVO setDefault(ServiceDescriptionParam param);
 
+    /**
+     * 获取预设文案
+     * @return
+     */
+    ResponseVO getPreInstalled();
+
+    /**
+     * 修改预设文案
+     * @param param
+     * @return
+     */
+    ResponseVO changePreInstalled(ServiceDescriptionParam param);
+
 }
