@@ -144,8 +144,17 @@ public class CommodityBuyerVO implements Serializable {
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
 
-    private String serviceDescription;
-    private Integer serviceDescriptionId;
+    private String serviceDescription;   //售后说明内容
+    private Integer serviceDescriptionId;  //售后说明id
+    private String serviceDescriptionRemark;   //售后说明备注
+
+    public String getServiceDescriptionRemark() {
+        return serviceDescriptionRemark;
+    }
+
+    public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+        this.serviceDescriptionRemark = serviceDescriptionRemark;
+    }
 
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
