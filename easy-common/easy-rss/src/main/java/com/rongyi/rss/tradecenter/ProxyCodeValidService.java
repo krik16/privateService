@@ -66,6 +66,6 @@ public interface ProxyCodeValidService {
      * @param sellerId
      * @return
      */
-    public ResponseResult validateJiadeLiCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId, Integer sellerId);
+    public ResponseResult validateJiadeLiCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId, Integer sellerId, String comment);
 
 }
