@@ -56,6 +56,7 @@ public class Util {
 			for (int i = 0; i < list.size(); i++) {
 				sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
 			}
+			sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("pos")));
 			String md5Sign = Md5Util.GetMD5Code(sb.toString());
 			if (md5Sign.equals(sign)) {
 				return true;
