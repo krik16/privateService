@@ -311,7 +311,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.tagIds = tagIds;
 	}
 
-	//private String serviceDescription;//售后说明
+	private String serviceDescription;//售后说明
 
 	private Integer serviceDescriptionId;
 
@@ -846,6 +846,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.serviceDescriptionId = serviceDescriptionId;
 	}
 
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -906,6 +914,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSubheading(subheading);
 		commodity.setCommodityDetails(commodityDetails);
 		commodity.setServiceDescriptionId(serviceDescriptionId);
+		commodity.setServiceDescription(serviceDescription);
 		return commodity;
 	}
 	@Override
@@ -981,6 +990,7 @@ public class Commodity implements  Serializable,Cloneable{
 				",shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
+				", serviceDescription=" + serviceDescription+
 				", serviceDescriptionId=" + serviceDescriptionId+
 				'}';
 	}
@@ -1126,6 +1136,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setGroupMid(vo.getGroupMid());
 		this.setShelvesType(vo.getShelvesType());
 		this.setServiceDescriptionId(vo.getServiceDescriptionId());
+		this.setServiceDescription(vo.getServiceDescription());
 		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());
@@ -1290,6 +1301,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setFreePostage(source.getFreePostage());
 		commodity.setShelvesType(source.getShelvesType());
 		commodity.setServiceDescriptionId(source.getServiceDescriptionId());
+		commodity.setServiceDescription(source.getServiceDescription());
 		return commodity;
 	}
 }

@@ -208,8 +208,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private Date activityStartTime;
 	private Date activityEndTime;
 
-	//private String serviceDescription;//售后说明
-	private Integer serviceDescriptionId;
+	private String serviceDescription;//售后说明
+	private Integer serviceDescriptionId;//售后说明id
 
 	public List<String> getCategoryNames() {
 		return categoryNames;
@@ -881,6 +881,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.serviceDescriptionId = serviceDescriptionId;
 	}
 
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
 	public Date getActivityStartTime() {
 		return activityStartTime;
 	}
@@ -1145,6 +1153,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
+				", serviceDescription=" + serviceDescription +
 				", serviceDescriptionId=" + serviceDescriptionId +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
