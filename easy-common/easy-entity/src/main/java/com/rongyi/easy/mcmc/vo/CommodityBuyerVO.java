@@ -959,7 +959,7 @@ public class CommodityBuyerVO implements Serializable {
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
-        this.serviceDescription=commodity.getServiceDescription();
+        //this.serviceDescription=commodity.getServiceDescription();
     }
 
     @Override
