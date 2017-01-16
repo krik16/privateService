@@ -85,6 +85,16 @@ public class UserInfo implements Serializable{
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
+    private Integer isSuspended;
+
+    public Integer getIsSuspended() {
+        return isSuspended;
+    }
+
+    public void setIsSuspended(Integer isSuspended) {
+        this.isSuspended = isSuspended;
+    }
+
     public String getStopReason() {
 		return stopReason;
 	}
