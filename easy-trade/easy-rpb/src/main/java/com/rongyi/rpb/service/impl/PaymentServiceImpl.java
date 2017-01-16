@@ -763,7 +763,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         map.put("payChannel", payChannel);
         map.put("refundRejected", refundRejected);
         map.put("status", status);
-        map.put("today", DateUtil.getToday());
+        /*map.put("today", DateUtil.getToday());*/
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndRefundRejected", map);
     }
 
