@@ -36,12 +36,4 @@ public interface RoaBrandService {
      * @throws Exception
      */
     List<BrandsCategoryVO> getCategoriesName(String cateId,String cateName) throws Exception;
-
-    /**
-     * 根据名称模糊查询品牌列表
-     *
-     * @param name
-     * @return
-     */
-    List<BrandVO> getBrandListByName(String name);
 }
