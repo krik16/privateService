@@ -19,7 +19,7 @@ public class CheckIntegralParam implements Serializable {
     private String sign;//签名
     private List<OrderDetailParm> orderDetail;//订单详情（参考订单详情 JSON格式）
     private String price;//订单应收总额（单位：元 2位小数）
-    private Integer type;//支付类型【0:宝钢积分 1:非积分】	string	是
+    private Integer type;//支付类型【0:宝钢积分 1:非积分】是
     private Integer state;//订单状态【默认 1:已完成(订单冲正，0:未完成，如果状态=“未完成”，系统执行退积分)】
     private Integer source;//源渠道 1 家得利
     private String orderAomount;//订单实收金额【 单位：元 2位小数】
