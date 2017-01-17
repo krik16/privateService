@@ -210,6 +210,15 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	private String serviceDescription;//售后说明
 	private Integer serviceDescriptionId;//售后说明id
+	private String serviceDescriptionRemark;   //售后说明备注
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
 
 	public List<String> getCategoryNames() {
 		return categoryNames;
