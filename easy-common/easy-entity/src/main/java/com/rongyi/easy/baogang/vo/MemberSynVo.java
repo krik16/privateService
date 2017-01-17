@@ -13,7 +13,7 @@ public class MemberSynVo implements Serializable {
     private Integer totalPage;//同步数据总页数
     private Integer pageSize;//每页条数(默认500)
     private Integer page;//当前页数
-    private List<MemberSynVo> memberDetails;
+    private List<MemberDetailVo> memberDetails;
 
     public Integer getTotal() {
         return total;
@@ -63,11 +63,11 @@ public class MemberSynVo implements Serializable {
         this.page = page;
     }
 
-    public List<MemberSynVo> getMemberDetails() {
+    public List<MemberDetailVo> getMemberDetails() {
         return memberDetails;
     }
 
-    public void setMemberDetails(List<MemberSynVo> memberDetails) {
+    public void setMemberDetails(List<MemberDetailVo> memberDetails) {
         this.memberDetails = memberDetails;
     }
 

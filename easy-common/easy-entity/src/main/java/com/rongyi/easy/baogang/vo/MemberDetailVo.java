@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class MemberDetailVo implements Serializable {
     private String cardNumber;//会员卡号
     private String telephone;//手机号码
-    private String type;//0有效 1离职
+    private Integer type;//0有效 1离职
 
     public String getCardNumber() {
         return cardNumber;
@@ -26,11 +26,11 @@ public class MemberDetailVo implements Serializable {
         this.telephone = telephone;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
