@@ -981,6 +981,7 @@ public class CommodityBuyerVO implements Serializable {
                         ?true:false);
         this.serviceDescription=commodity.getServiceDescription();
         this.serviceDescriptionId=commodity.getServiceDescriptionId();
+        this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
     }
 
     @Override
