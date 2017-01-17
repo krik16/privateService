@@ -38,6 +38,8 @@ public class SaleVO implements Serializable {
     private Long updateAt;
     private String bannerPic;
     private Integer isMallShop;
+    private Integer associateCoupon;//是否关联卡卷
+    private String couponPic;//领卷入口图
     private List<MallVO> mall;
     private List<ShopVO> shops;
     private List<SaleCommodityTopVO> commodities;
@@ -65,6 +67,8 @@ public class SaleVO implements Serializable {
                 this.shareDesc = activityTemplate.getTemplateSale().getShareDesc();
                 this.sharePic = activityTemplate.getTemplateSale().getSharePic();
                 this.replacePic = activityTemplate.getTemplateSale().getReplacePic();
+                this.couponPic = activityTemplate.getTemplateSale().getCouponPic();
+                this.associateCoupon = activityTemplate.getTemplateSale().getAssociateCoupon();
                 if (activityTemplate.getTemplateSale().getIsMallShop() != null){
                     this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
                 }
@@ -103,6 +107,21 @@ public class SaleVO implements Serializable {
         }
     }
 
+    public Integer getAssociateCoupon() {
+        return associateCoupon;
+    }
+
+    public void setAssociateCoupon(Integer associateCoupon) {
+        this.associateCoupon = associateCoupon;
+    }
+
+    public String getCouponPic() {
+        return couponPic;
+    }
+
+    public void setCouponPic(String couponPic) {
+        this.couponPic = couponPic;
+    }
 
     public List<CouponVO> getCouponVOList() {
         return couponVOList;
@@ -323,6 +342,8 @@ public class SaleVO implements Serializable {
                 .append("commodities", commodities)
                 .append("commodityList", commodityList)
                 .append("couponVOList", couponVOList)
+                .append("couponPic", couponPic)
+                .append("associateCoupon", associateCoupon)
                 .toString();
     }
 }
