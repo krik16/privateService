@@ -18,4 +18,6 @@ public interface WeixinMchService {
     WeixinMch selectByAppIdAndTradeType(String appId,Integer tradeType,String uesId);
 
     WeixinMch selectByMchIdAndUserId(String mchId,String userId);
+
+    void deleteByUserId(String userId);
 }
