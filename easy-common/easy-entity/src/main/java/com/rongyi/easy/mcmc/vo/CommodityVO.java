@@ -210,6 +210,15 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	private String serviceDescription;//售后说明
 	private Integer serviceDescriptionId;//售后说明id
+	private String serviceDescriptionRemark;   //售后说明备注
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
 
 	public List<String> getCategoryNames() {
 		return categoryNames;
@@ -1041,7 +1050,9 @@ public class CommodityVO  implements  Serializable, Cloneable {
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
-		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		this.serviceDescriptionId=commodity.getServiceDescriptionId();
+		this.serviceDescription=commodity.getServiceDescription();
+		this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
 	}
 
 	@Override

@@ -894,7 +894,9 @@ public class CommodityBuyerVO implements Serializable {
             this.commodityOPOfLCP = "0.0";
         }
         this.commodityCode = commodity.getCode();
-        this.commodityStatus = commodity.getStatus();
+        if (commodity.getStatus() != null){
+            this.commodityStatus = commodity.getStatus();
+        }
         this.commodityStock = String.valueOf(commodity.getStock());
         this.commodityBrandName = "";
         if(commodity.getBrandName() != null){
@@ -979,6 +981,7 @@ public class CommodityBuyerVO implements Serializable {
                         ?true:false);
         this.serviceDescription=commodity.getServiceDescription();
         this.serviceDescriptionId=commodity.getServiceDescriptionId();
+        this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
     }
 
     @Override
