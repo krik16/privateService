@@ -56,6 +56,6 @@ public interface ServiceDescriptionService {
      */
     ResponseVO changePreInstalled(ServiceDescriptionParam param);
 
-    ServiceDescriptionParam getById(int id);
+    ServiceDescriptionParam getById(Integer id);
 
 }
