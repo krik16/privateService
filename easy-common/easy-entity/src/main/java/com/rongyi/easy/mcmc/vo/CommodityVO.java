@@ -1050,7 +1050,9 @@ public class CommodityVO  implements  Serializable, Cloneable {
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
-		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		this.serviceDescriptionId=commodity.getServiceDescriptionId();
+		this.serviceDescription=commodity.getServiceDescription();
+		this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
 	}
 
 	@Override
