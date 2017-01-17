@@ -344,4 +344,8 @@ public interface IUserInfoService {
 	 * @return 影响账号数
 	 */
 	int updatePwdByUserPhone(String userPhone,String pwd);
+	/**
+	 * 修改账号资金状态
+	 */
+	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;
 }
