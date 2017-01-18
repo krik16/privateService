@@ -140,6 +140,8 @@ public class ShortSizeVO implements Serializable {
                 ", stick=" + stick +
                 ", crateAt=" + crateAt +
                 ", createUser=" + createUser +
+                ", updateUser=" + updateUser +
+                ", updateAt=" + updateAt +
                 '}';
     }
 }

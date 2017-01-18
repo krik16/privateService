@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,7 +18,13 @@ public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeC
     private String originalPrice; //商品原价
     private String currentPrice; // 商品现价
     private Integer stock;//商品库存
-//    private
+    private Date updateAt;//数据更新日期
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
     public int compare(ShortSizeCommodityVO commodityVO1, ShortSizeCommodityVO commodityVO2){
         return -1;
     }
