@@ -26,7 +26,15 @@ public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeC
         this.updateAt = updateAt;
     }
     public int compare(ShortSizeCommodityVO commodityVO1, ShortSizeCommodityVO commodityVO2){
-        return -1;
+        if(commodityVO1 == null || commodityVO1.getUpdateAt() == null){
+            return -1;
+        }else if(commodityVO2 == null || commodityVO2.getUpdateAt() ==  null){
+            return 1;
+        }else if(commodityVO1.getUpdateAt().after(commodityVO2.getUpdateAt())){
+            return 1;
+        }else {
+            return -1;
+        }
     }
 
     public int compareTo(ShortSizeCommodityVO o){
