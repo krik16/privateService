@@ -3,7 +3,9 @@ package com.rongyi.rss.tradecenter;
 import com.rongyi.easy.rmmm.param.OrderListParam;
 import com.rongyi.easy.tradecenter.TradeOrder;
 import com.rongyi.easy.tradecenter.TradeSubOrder;
+import com.rongyi.easy.tradecenter.TraderOrderForUserCenterEntity;
 import com.rongyi.easy.tradecenter.param.TradeOrderCreateParam;
+import com.rongyi.easy.tradecenter.param.TradeSearchForUserCenterParam;
 
 import java.util.List;
 import java.util.Map;
@@ -47,4 +49,20 @@ public interface ITradeOrderService {
     Map<String, Object> insertTradeOrder(TradeOrderCreateParam param);
 
     int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
+
+    /**
+     * 获取电子会员订单总数
+     *
+     * @param param
+     * @return
+     */
+    int getTotalCountForUserCenter(TradeSearchForUserCenterParam param);
+
+    /**
+     * 获取电子会员订单列表
+     *
+     * @param param
+     * @return
+     */
+    List<TraderOrderForUserCenterEntity> listForCountForUserCenter(TradeSearchForUserCenterParam param);
 }

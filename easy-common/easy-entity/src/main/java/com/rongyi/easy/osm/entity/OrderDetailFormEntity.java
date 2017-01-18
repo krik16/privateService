@@ -104,7 +104,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer activityLimitNum;//关联商品的活动限购数
 
-    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4
+    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4 超级团教育版5
 
     private BigDecimal disconntFee;//商品折扣
 
@@ -122,6 +122,13 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private Long activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
+
+    private String promoterId;//推广人id
+
+    private Integer exchangeType ;  // 兑换类型，1：兑换 2：换购'
+
+    private String commodityName; // 商品（卡券）名称
+    private String commoditySn; // 商品（礼品）编码
 
 
     public String getRefundDiscountInfo() {
@@ -619,10 +626,42 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityRoundId = activityRoundId;
     }
 
+    public String getPromoterId() {
+        return promoterId;
+    }
+
+    public void setPromoterId(String promoterId) {
+        this.promoterId = promoterId;
+    }
+
     @Override
 	public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
+
+    public Integer getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(Integer exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public String getCommoditySn() {
+        return commoditySn;
+    }
+
+    public void setCommoditySn(String commoditySn) {
+        this.commoditySn = commoditySn;
+    }
 
     @Override
     public int compareTo(OrderDetailFormEntity o) {

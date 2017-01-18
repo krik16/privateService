@@ -17,8 +17,8 @@ public class RmmmUserInfoEntity implements Serializable{
     /** 用户头像logo */
     private String userLogo;
 
-    /** 角色ID  */
-    private Integer roleId;
+    /** 角色ID    */
+    private Integer roleId;  //-1 分销商
 
     /** 电话号码 */
     private String userPhone;
@@ -96,7 +96,7 @@ public class RmmmUserInfoEntity implements Serializable{
 	private Integer isChief;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
     private Integer chiefId; //主账号ID
-	
+    private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
     public Integer getId() {
 		return id;
 	}
@@ -439,5 +439,40 @@ public class RmmmUserInfoEntity implements Serializable{
     public void setChiefId(Integer chiefId) {
         this.chiefId = chiefId;
     }
+
+	public Integer getIsSuspended() {
+		return isSuspended;
+	}
+
+	public void setIsSuspended(Integer isSuspended) {
+		this.isSuspended = isSuspended;
+	}
+
+	@Override
+	public String toString() {
+		return "RmmmUserInfoEntity [id=" + id + ", userLogo=" + userLogo
+				+ ", roleId=" + roleId + ", userPhone=" + userPhone
+				+ ", userAccount=" + userAccount + ", userPwd=" + userPwd
+				+ ", userName=" + userName + ", userNickName=" + userNickName
+				+ ", userStatus=" + userStatus + ", accountId=" + accountId
+				+ ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt
+				+ ", version=" + version + ", isDisabled=" + isDisabled
+				+ ", deviceUuid=" + deviceUuid + ", cardId=" + cardId
+				+ ", userIMCount=" + userIMCount + ", devId=" + devId
+				+ ", type=" + type + ", identity=" + identity
+				+ ", isCooperation=" + isCooperation + ", memo=" + memo
+				+ ", createSource=" + createSource + ", stopReason="
+				+ stopReason + ", sharCode=" + sharCode + ", userDesc="
+				+ userDesc + ", pushId=" + pushId + ", useCode=" + useCode
+				+ ", jsessionid=" + jsessionid + ", isOrdering=" + isOrdering
+				+ ", updateOrderingAt=" + updateOrderingAt + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId
+				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
+				+ validStartAt + ", validEndAt=" + validEndAt
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", isChief=" + isChief + ", level=" + level + ", chiefId="
+				+ chiefId + ", isSuspended=" + isSuspended + "]";
+	}
 }
 

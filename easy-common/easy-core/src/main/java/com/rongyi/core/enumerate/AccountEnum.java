@@ -53,7 +53,8 @@ public enum AccountEnum {
     ERROR_NICKNAME_INVALID(1090039,"请输入长度在2-20字符内的昵称"),
     ERROR_VIRTUALACCOUNT_FAIL(10911040,"虚拟账号创建失败"),
     ERROR_REGISTER_ERROR(10911041,"注册用户异常"),
-	ERROR_CHILDACCOUNTNUM_TOOLOW(1090042, "子账户数量不可小于现有子账户数量")    
+	ERROR_CHILDACCOUNTNUM_TOOLOW(1090042, "子账户数量不可小于现有子账户数量"),
+	ERROR_PHONE_EXIST(1090043,"手机号已存在，你无法使用此手机号")
 	;
    
 
