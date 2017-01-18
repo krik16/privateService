@@ -18,6 +18,15 @@ public class ShortSizeVO implements Serializable {
     private String crateAt;
     private int status;
     private int stick;
+    private String createUser;
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
     public String getCrateAt() {
         return crateAt;
@@ -112,6 +121,7 @@ public class ShortSizeVO implements Serializable {
                 ", status=" + status +
                 ", stick=" + stick +
                 ", crateAt=" + crateAt +
+                ", createUser=" + createUser +
                 '}';
     }
 }
