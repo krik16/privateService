@@ -79,16 +79,8 @@ public class ActivityTemplate implements Serializable{
 
     private int isOuter;//是否外投
 
-    private String description;//活动介绍描述
 
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public int getIsOuter() {
         return isOuter;
@@ -346,7 +338,6 @@ public class ActivityTemplate implements Serializable{
                 .append("templateSigned", templateSigned)
                 .append("saleCommodityTops", saleCommodityTops)
                 .append("isOuter", isOuter)
-                .append("description", description)
                 .toString();
     }
 }
