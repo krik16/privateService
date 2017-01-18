@@ -19,6 +19,24 @@ public class ShortSizeVO implements Serializable {
     private int status;
     private int stick;
     private String createUser;
+    private String updateUser;
+    private String updateAt;
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
+    }
 
     public String getCreateUser() {
         return createUser;
