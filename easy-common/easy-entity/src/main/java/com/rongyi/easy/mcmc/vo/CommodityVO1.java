@@ -38,6 +38,15 @@ public class CommodityVO1 implements  Serializable {
 	private String pic;
 	private String commoditycategoryNames;
 	private String createBy;
+	private List<String> skus;
+
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
 
 	public String getId() {
 		return id;
