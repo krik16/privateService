@@ -19,6 +19,9 @@ public class ShareTitleVo implements Serializable {
     private  String shareTile;
     private  String  shareDesc;
     private  String shareUrl;
+    private String picUrl;
+
+    private String activityUrl;
 
     public String getObjId() {
         return objId;
@@ -50,5 +53,21 @@ public class ShareTitleVo implements Serializable {
 
     public void setShareUrl(String shareUrl) {
         this.shareUrl = shareUrl;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getActivityUrl() {
+        return activityUrl;
+    }
+
+    public void setActivityUrl(String activityUrl) {
+        this.activityUrl = activityUrl;
     }
 }
