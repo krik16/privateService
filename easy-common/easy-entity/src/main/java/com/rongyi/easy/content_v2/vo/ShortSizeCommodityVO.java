@@ -12,7 +12,7 @@ import java.util.List;
  * on 2017/1/14.
  */
 public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeCommodityVO> {
-    private ObjectId id; //商品id
+    private String id; //商品id
     private List<String> picUrls; //商品图片
     private String name; //商品名称
     private String originalPrice; //商品原价
@@ -33,11 +33,11 @@ public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeC
         return -1;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,5 +79,18 @@ public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeC
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return "ShortSizeCommodityVO{" +
+                "id='" + id + '\'' +
+                ", picUrls=" + picUrls +
+                ", name='" + name + '\'' +
+                ", originalPrice='" + originalPrice + '\'' +
+                ", currentPrice='" + currentPrice + '\'' +
+                ", stock=" + stock +
+                ", updateAt=" + updateAt +
+                '}';
     }
 }
