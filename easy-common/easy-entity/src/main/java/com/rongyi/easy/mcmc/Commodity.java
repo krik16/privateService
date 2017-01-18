@@ -315,6 +315,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private Integer serviceDescriptionId;
 
+	private String serviceDescriptionRemark;
+
 	public Integer getMerchantType() {
 		return merchantType;
 	}
@@ -854,6 +856,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.serviceDescription = serviceDescription;
 	}
 
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -915,6 +925,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setCommodityDetails(commodityDetails);
 		commodity.setServiceDescriptionId(serviceDescriptionId);
 		commodity.setServiceDescription(serviceDescription);
+		commodity.setServiceDescriptionRemark(serviceDescriptionRemark);
 		return commodity;
 	}
 	@Override
@@ -992,6 +1003,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", commodityDetails=" + commodityDetails+
 				", serviceDescription=" + serviceDescription+
 				", serviceDescriptionId=" + serviceDescriptionId+
+				", serviceDescriptionRemark=" + serviceDescriptionRemark+
 				'}';
 	}
 
@@ -1137,6 +1149,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setShelvesType(vo.getShelvesType());
 		this.setServiceDescriptionId(vo.getServiceDescriptionId());
 		this.setServiceDescription(vo.getServiceDescription());
+		this.setServiceDescriptionRemark(vo.getServiceDescriptionRemark());
 		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());
@@ -1302,6 +1315,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShelvesType(source.getShelvesType());
 		commodity.setServiceDescriptionId(source.getServiceDescriptionId());
 		commodity.setServiceDescription(source.getServiceDescription());
+		commodity.setServiceDescriptionRemark(source.getServiceDescriptionRemark());
 		return commodity;
 	}
 }
