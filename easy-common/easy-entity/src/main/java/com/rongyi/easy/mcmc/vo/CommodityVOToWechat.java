@@ -16,6 +16,15 @@ public class CommodityVOToWechat implements Serializable{
     private String shopName;
     private String weAndTeStatus;
     private Integer terminalType;
+    private String commodityModelNo;//商品款号
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
 
     public String getId() {
         return id;
