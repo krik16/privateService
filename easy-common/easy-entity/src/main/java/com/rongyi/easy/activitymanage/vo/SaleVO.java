@@ -43,6 +43,7 @@ public class SaleVO implements Serializable {
     private List<MallVO> mall;
     private List<ShopVO> shops;
     private List<SaleCommodityTopVO> commodities;
+    private String desc;//描述
 
     private List<SaleFlashCommodityVO> commodityList;
     private List<CouponVO> couponVOList = Lists.newArrayList();
@@ -69,6 +70,7 @@ public class SaleVO implements Serializable {
                 this.replacePic = activityTemplate.getTemplateSale().getReplacePic();
                 this.couponPic = activityTemplate.getTemplateSale().getCouponPic();
                 this.associateCoupon = activityTemplate.getTemplateSale().getAssociateCoupon();
+                this.desc = activityTemplate.getTemplateSale().getDesc();
                 if (activityTemplate.getTemplateSale().getIsMallShop() != null){
                     this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
                 }
@@ -105,6 +107,14 @@ public class SaleVO implements Serializable {
                 }
             }
         }
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Integer getAssociateCoupon() {
@@ -344,6 +354,7 @@ public class SaleVO implements Serializable {
                 .append("couponVOList", couponVOList)
                 .append("couponPic", couponPic)
                 .append("associateCoupon", associateCoupon)
+                .append("desc", desc)
                 .toString();
     }
 }
