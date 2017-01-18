@@ -104,7 +104,12 @@
             and trade_order.create_at &lt;= #{createAtEnd}
         </if>
         <if test="source != null and source != ''">
-            and trade_order.source = #{source}
+            <if test="source == 4">
+                and trade_order.source = 1 and trade_order.weixin_app_id != '' and trade_order.weixin_app_id is not null
+            </if>
+            <if test="source != 4">
+                and trade_order.source = #{source}
+            </if>
         </if>
         <if test="amountType == 1">
             <if test="realAmountBegin!=null and realAmountBegin >= 0">
