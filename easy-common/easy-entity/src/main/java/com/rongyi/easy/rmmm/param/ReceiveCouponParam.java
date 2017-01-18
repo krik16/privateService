@@ -1,8 +1,10 @@
 package com.rongyi.easy.rmmm.param;
 
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
 import java.io.Serializable;
 
-public class ReceiveCouponParam implements Serializable{
+public class ReceiveCouponParam extends MalllifeBaseParam implements Serializable{
 	/**
 	 * 
 	 */
