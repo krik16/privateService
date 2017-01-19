@@ -17,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class Util {
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("channel", "013");
 		params.put("st", "bhn5S4+n5v5D6034WwIsjNkRqjyO32jelaPaL5iBPI0M/RWTrRSHT9a/5JJAHxZeaP9wJnnmztbpxqanVeShTnJL1AgDgNV1fVjidXXsya0jHunoq2KjwTANC57JJP4gQS79Jl2ElJM2LNsJnVqG8FS6bVNKayUOFu0QNSvMweA");
@@ -34,7 +34,7 @@ public class Util {
 		System.out.println(sb);
 		String md5Sign = Md5Util.GetMD5Code(sb.toString());
 		System.out.println(md5Sign);
-	}
+	}*/
 	/**
 	 * 签名判断
 	 * @param params
