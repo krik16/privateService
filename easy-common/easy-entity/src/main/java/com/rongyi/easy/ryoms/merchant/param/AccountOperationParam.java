@@ -14,7 +14,7 @@ public class AccountOperationParam implements Serializable {
 	private static final long serialVersionUID = -4855305307781509440L;
 	
 	private Integer id;
-	private Integer accountStatus;
+	private Integer accountStatus;  //0 冻结  1解冻
 	private String reason;
 	public Integer getId() {
 		return id;
