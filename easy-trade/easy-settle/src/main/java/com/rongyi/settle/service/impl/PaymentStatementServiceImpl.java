@@ -680,6 +680,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         if (SettleConstant.PayChannel.CASH.equals(payChannel)) {
             return "现金";
         }
+        if (SettleConstant.PayChannel.BANK.equals(payChannel)) {
+            return "银行卡";
+        }
         return "支付宝";
     }
 
