@@ -15,6 +15,7 @@ public class WechatCommodityVo implements Serializable{
 
     private String picUrl;
 
+
     public String getCommodityId() {
         return commodityId;
     }
@@ -46,6 +47,8 @@ public class WechatCommodityVo implements Serializable{
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
     }
+
+
 
     @Override
     public String toString() {

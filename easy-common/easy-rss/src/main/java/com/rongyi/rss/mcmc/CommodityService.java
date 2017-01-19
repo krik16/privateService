@@ -406,5 +406,5 @@ public interface CommodityService {
 
     CommodityVO getCommodityDetail(String id);
 
-    public List<WechatCommodityVo> listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
+    public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 }

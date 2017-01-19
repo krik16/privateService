@@ -11,6 +11,10 @@ public class WechatCommodityParam implements Serializable{
 
     private Integer customCategoryId;
 
+    private Integer currentPage;
+
+    private Integer pageSize;
+
     public String getShopMid() {
         return shopMid;
     }
@@ -27,11 +31,29 @@ public class WechatCommodityParam implements Serializable{
         this.customCategoryId = customCategoryId;
     }
 
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
     @Override
     public String toString() {
         return "WechatCommodityParam{" +
                 "customCategoryId=" + customCategoryId +
-                ", customCategoryName=" + shopMid +
+                ", shopMid=" + shopMid +
+                ", currentPage=" + currentPage +
+                ", pageSize=" + pageSize +
                 '}';
     }
 }
