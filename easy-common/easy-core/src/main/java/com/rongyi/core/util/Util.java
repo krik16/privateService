@@ -16,7 +16,25 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class Util {
-
+	
+	public static void main(String[] args) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("channel", "013");
+		params.put("st", "bhn5S4+n5v5D6034WwIsjNkRqjyO32jelaPaL5iBPI0M/RWTrRSHT9a/5JJAHxZeaP9wJnnmztbpxqanVeShTnJL1AgDgNV1fVjidXXsya0jHunoq2KjwTANC57JJP4gQS79Jl2ElJM2LNsJnVqG8FS6bVNKayUOFu0QNSvMweA");
+		
+		Collection<String> keyset = params.keySet();
+		List<String> list = new ArrayList<>(keyset);
+		//对key键值按字典升序排序
+		Collections.sort(list);
+		String sb = new String();
+		for (int i = 0; i < list.size(); i++) {
+			sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+		}
+		sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+		System.out.println(sb);
+		String md5Sign = Md5Util.GetMD5Code(sb.toString());
+		System.out.println(md5Sign);
+	}
 	/**
 	 * 签名判断
 	 * @param params

@@ -25,7 +25,52 @@ public class CommunalFacilityVO implements Serializable {
     private String    updateAt;
     private String    updator;
     private String    ename;
-    
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
+    private String  creatorName;
+
+    public String getUpdateName() {
+        return updateName;
+    }
+
+    public void setUpdateName(String updateName) {
+        this.updateName = updateName;
+    }
+
+    private String  updateName;
+
+
+
+    private  Integer createSource;//创建来源 0大运营后台  1  商家后台
+    private Integer updateSource ;
+
+    public Integer getCreateSource() {
+        return createSource;
+    }
+
+    public void setCreateSource(Integer createSource) {
+        this.createSource = createSource;
+    }
+
+
+
+
+    public Integer getUpdateSource() {
+        return updateSource;
+    }
+
+    public void setUpdateSource(Integer updateSource) {
+        this.updateSource = updateSource;
+    }
+
+
     public String getOperator() {
 		return operator;
 	}

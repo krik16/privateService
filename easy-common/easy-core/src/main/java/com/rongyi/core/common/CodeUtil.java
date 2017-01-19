@@ -1,5 +1,12 @@
 package com.rongyi.core.common;
 
+import org.apache.commons.beanutils.PropertyUtilsBean;
+import org.apache.commons.lang.StringUtils;
+
+import java.beans.PropertyDescriptor;
+import java.util.HashMap;
+import java.util.Map;
+
 public class CodeUtil {
 
 	/**
@@ -89,5 +96,28 @@ public class CodeUtil {
 		}else {
 			return randomIntSmallThanParam(max);
 		}
+	}
+
+	/**
+	 * 对象->map
+	 * @param obj
+	 * @return
+     */
+	public static Map<String, Object> beanToMap(Object obj) {
+		Map<String, Object> params = new HashMap<String, Object>(0);
+		try {
+			PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
+			PropertyDescriptor[] descriptors = propertyUtilsBean.getPropertyDescriptors(obj);
+			for (int i = 0; i < descriptors.length; i++) {
+				String name = descriptors[i].getName();
+				Object value = propertyUtilsBean.getNestedProperty(obj, name);
+				if (!StringUtils.equals(name, "class") && value != null) {
+					params.put(name, value);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return params;
 	}
 }

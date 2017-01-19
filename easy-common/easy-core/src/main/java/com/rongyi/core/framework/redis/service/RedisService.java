@@ -79,4 +79,11 @@ public interface RedisService {
 	 * @return
 	 */
 	public abstract String ping();
+
+	/**
+	 * 根据key模糊查询
+	 * @param keyPattern key
+	 * @return
+	 */
+	public abstract Set<byte[]> keys( String keyPattern);
 }
