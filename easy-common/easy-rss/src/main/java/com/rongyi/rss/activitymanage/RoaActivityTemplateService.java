@@ -215,4 +215,12 @@ public interface RoaActivityTemplateService {
      * @return
      */
     public  List<GoodsDetailSync> searchByActivityTemplateId(Integer id);
+
+
+    /**
+     *
+     * @param ids
+     * @return
+     */
+    public List<Integer> selectInActiveByActivityTemplateId(List<Integer> ids);
 }
