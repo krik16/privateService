@@ -223,4 +223,6 @@ public interface RoaActivityTemplateService {
      * @return
      */
     public List<Integer> selectInActiveByActivityTemplateId(List<Integer> ids);
+
+    public List<GoodsDetailSync> selectInActiveGoodsByActivityTemplateId(List<Integer> ids);
 }
