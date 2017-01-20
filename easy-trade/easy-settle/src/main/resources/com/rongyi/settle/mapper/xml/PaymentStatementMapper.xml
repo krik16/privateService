@@ -809,7 +809,7 @@
 		COUNT(OFID) AS order_count,
 		SUM(total_amount) AS total_amount,
 		SUM(score_amount) AS score_amount,
-		SUM(hb_amount) AS hb_amount,
+		SUM(hb_amount_ope) AS hb_amount_ope,
 		SUM(hb_amount_mer) AS hb_amount_mer ,
 		0 AS discount_amount
 		FROM (
