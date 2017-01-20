@@ -672,7 +672,7 @@
 		<result column="orig_price" property="origPrice" jdbcType="DOUBLE" />
 		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
 		<result column="coupon_discount" property="hbDiscountOpe" jdbcType="DOUBLE" />
-		<result column="coupon_discount" property="hbDiscountMer" jdbcType="DOUBLE" />
+		<result column="coupon_discount_mer" property="hbDiscountMer" jdbcType="DOUBLE" />
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
 		<result column="pay_channel" property="paymentChannel" jdbcType="VARCHAR" />
 		<result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
@@ -818,7 +818,7 @@
 		SI.shop_name,
 		OF.id AS OFID,
 		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
-		SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
+		OF.score_discount + OF.order_score_discount AS score_amount,
 		case when  ODF.coupon_discount_type=0 || ODF.rebate_discount_type=0 then
 		SUM(ODF.order_coupon_discount + ODF.coupon_discount)
 		else
