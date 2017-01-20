@@ -175,6 +175,9 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     if(lastHbDiscount.compareTo(new BigDecimal(couponVOList.get(couponVOList.size() - 1).getUnitPrice())) > 0){
                         lastHbDiscount =  new BigDecimal(couponVOList.get(couponVOList.size() - 1).getUnitPrice());
                     }
+                    //红包实际抵扣金额，先减去一个平均金额
+                    realHbTotal = realHbTotal.subtract(avgHbDiscount);
+                    //红包实际抵扣金额，再加上最后分摊金额
                     realHbTotal = realHbTotal.add(lastHbDiscount);
                     couponVOList.get(couponVOList.size() - 1).setHbDiscount(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     //抵扣券分摊金额大于实际卡券面额，则抵扣券抵扣金额显示为卡券实际面额
