@@ -94,6 +94,16 @@ public class CommodityParam {
 
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 
+	private String brandId;
+
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+
 	public Integer getCreateBy() {
 		return createBy;
 	}
@@ -379,6 +389,7 @@ public class CommodityParam {
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
 				", shelvesType=" + shelvesType+
+				", brandId=" + brandId+
 				'}';
 	}
 
