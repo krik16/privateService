@@ -144,6 +144,34 @@ public class CouponVO implements Serializable {
      */
     private Integer preferentialType;
 
+    /**
+     * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];导购[4]（商家后台导购建的券）
+     * 平台促销券 ：全场[0]，品牌[1]，商场[2]，店铺[3]、分类[4]，信息[5]
+     */
+    private Integer relatedType;
+
+    public Integer getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(Integer relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    /**
+     * 平台促销券适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+     */
+    private Integer applyGoods;
+
+    public Integer getApplyGoods() {
+        return applyGoods;
+    }
+
+    public void setApplyGoods(Integer applyGoods) {
+        this.applyGoods = applyGoods;
+    }
+
     public Integer getPreferentialType() {
         return preferentialType;
     }
@@ -860,6 +888,8 @@ public class CouponVO implements Serializable {
                 .append("sortIndex", sortIndex)
                 .append("purchaseType", purchaseType)
                 .append("afterSaleService", afterSaleService)
+                .append("relatedType", relatedType)
+                .append("applyGoods", applyGoods)
                 .toString();
     }
 }
