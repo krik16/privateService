@@ -1,6 +1,9 @@
 package com.rongyi.easy.mcmc.vo;
 
+import org.bson.types.ObjectId;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by xuying on 2017/1/19.
@@ -14,6 +17,8 @@ public class WechatCommodityVo implements Serializable{
     private String cuerrentPrice;
 
     private String picUrl;
+
+    private List<String> specList;//商品规格列表
 
 
     public String getCommodityId() {
@@ -48,7 +53,13 @@ public class WechatCommodityVo implements Serializable{
         this.picUrl = picUrl;
     }
 
+    public List<String> getSpecList() {
+        return specList;
+    }
 
+    public void setSpecList(List<String> specList) {
+        this.specList = specList;
+    }
 
     @Override
     public String toString() {
@@ -57,6 +68,7 @@ public class WechatCommodityVo implements Serializable{
                 ", commodityName=" + commodityName +
                 ", cuerrentPrice=" + cuerrentPrice +
                 ", picUrl=" + picUrl +
+                ", specList=" + specList +
                 '}';
     }
 }
