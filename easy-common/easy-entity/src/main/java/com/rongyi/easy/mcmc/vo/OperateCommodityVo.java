@@ -21,6 +21,34 @@ public class OperateCommodityVo implements Serializable {
     private String reason;
     private String buyerAccount;
     private Date soldOutAt;//下架时间
+    private String commodityModelNo;
+    private Integer terminalType;
+    private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+
+
+    public Integer getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(Integer terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public String getWeAndTeStatus() {
+        return weAndTeStatus;
+    }
+
+    public void setWeAndTeStatus(String weAndTeStatus) {
+        this.weAndTeStatus = weAndTeStatus;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
 
     public String getId() {
         return id;
@@ -116,5 +144,26 @@ public class OperateCommodityVo implements Serializable {
 
     public void setSoldOutAt(Date soldOutAt) {
         this.soldOutAt = soldOutAt;
+    }
+
+    @Override
+    public String toString() {
+        return "OperateCommodityVo{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", picList='" + picList + '\'' +
+                ", categoryIds='" + categoryIds + '\'' +
+                ", mallName='" + mallName + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", source=" + source +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", reason='" + reason + '\'' +
+                ", buyerAccount='" + buyerAccount + '\'' +
+                ", soldOutAt=" + soldOutAt +
+                ", commodityModelNo='" + commodityModelNo + '\'' +
+                ", terminalType=" + terminalType +
+                ", weAndTeStatus='" + weAndTeStatus + '\'' +
+                '}';
     }
 }

@@ -66,7 +66,16 @@ public interface CommodityTerminalType {
 		}
 	}
 
-	interface weAndTeStatus{//商品在终端屏的展示状态，0，所有的都不展示，1为终端屏展示，2为微信端展示，3为终端+微信，4为APP，5为终端+APP，6为微信+APP，7为终端+微信+APP
+	//商品在终端屏的展示状态
+	// 0:所有的都不展示
+	// 1:为终端屏展示
+	// 2:为微信端展示
+	// 3:为终端+微信
+	// 4:为APP
+	// 5:为终端+APP
+	// 6:为微信+APP
+	// 7:为终端+微信+APP
+	interface weAndTeStatus{
 		String STATUS_0="0";
 		String STATUS_1="1";
 		String STATUS_2="2";
