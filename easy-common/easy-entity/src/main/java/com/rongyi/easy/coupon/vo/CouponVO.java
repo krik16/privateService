@@ -211,8 +211,6 @@ public class CouponVO implements Serializable {
                     this.setCouponType("02"); break;
                 case 2:
                     this.setCouponType("03"); break;
-                case 3:
-                    this.setCouponType("03"); break;          //红包支持
                 default:
                     throw new IllegalArgumentException(String.format("couponType=%s,没匹配上", convertCouponType));
             }
