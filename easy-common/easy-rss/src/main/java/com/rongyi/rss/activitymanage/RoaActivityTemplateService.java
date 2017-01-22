@@ -6,6 +6,7 @@ import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
 import com.rongyi.easy.activitymanage.vo.ActivityListVO;
 import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
+import com.rongyi.easy.solr.param.CommoditySearchParam;
 
 import java.util.List;
 
@@ -225,4 +226,6 @@ public interface RoaActivityTemplateService {
     public List<Integer> selectInActiveByActivityTemplateId(List<Integer> ids);
 
     public List<GoodsDetailSync> selectInActiveGoodsByActivityTemplateId(List<Integer> ids);
+
+    public List<GoodsDetailSync> searchCommodityByParam(CommoditySearchParam commoditySearchParam);
 }
