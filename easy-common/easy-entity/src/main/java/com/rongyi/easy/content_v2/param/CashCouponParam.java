@@ -23,6 +23,7 @@ public class CashCouponParam extends BaseParam  implements Serializable {
     public String toString() {
         return "CashCouponParam{" +
                 "specialId=" + specialId +
+                "BaseParam{" + super.toString() + "}" +
                 '}';
     }
 }
