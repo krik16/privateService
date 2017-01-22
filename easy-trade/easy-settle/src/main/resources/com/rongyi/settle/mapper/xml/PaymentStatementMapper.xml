@@ -671,6 +671,7 @@
 		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
 		<result column="orig_price" property="origPrice" jdbcType="DOUBLE" />
 		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
+		<result column="discount_amount" property="discountAmount" jdbcType="DOUBLE" />
 		<result column="coupon_discount" property="hbDiscountOpe" jdbcType="DOUBLE" />
 		<result column="coupon_discount_mer" property="hbDiscountMer" jdbcType="DOUBLE" />
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
@@ -725,9 +726,23 @@
 			,SUM(UC.orig_price) AS total_price
 			,SUM(UC.orig_price - UC.unit_price) AS total_discount
 			,SUM(IFNULL((CO.score_discount / COI.unit_count), 0)) AS total_score
-			,case CO.coupon_discount_type when 0 then SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0))
+			,case CO.coupon_discount_type when 0 then SUM(IFNULL((
+				case when  (CO.hb_discount + CO.rebate_discount) / COI.unit_count &lt; COI.unit_price
+		        then
+		          (CO.hb_discount + CO.rebate_discount) / COI.unit_count
+				else
+		           COI.unit_price
+		        end
+		    ), 0))
 			else 0 end  AS total_hb ,
-			case CO.coupon_discount_type when 1 then SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0))
+			case CO.coupon_discount_type when 1 then SUM(IFNULL((
+				case when  (CO.hb_discount + CO.rebate_discount) / COI.unit_count &lt; COI.unit_price
+				then
+				(CO.hb_discount + CO.rebate_discount) / COI.unit_count
+				else
+				COI.unit_price
+				end
+		    ), 0))
 			else 0 end  AS total_merhb
 		FROM ry_trade.trade_user_code UC
 			LEFT JOIN
@@ -820,7 +835,10 @@
 		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
 		OF.score_discount + OF.order_score_discount AS score_amount,
 		case when  ODF.coupon_discount_type=0 || ODF.rebate_discount_type=0 then
-		SUM(ODF.order_coupon_discount + ODF.coupon_discount)
+		SUM(
+		case when ODF.discount_amount &lt; (ODF.order_coupon_discount + ODF.coupon_discount) then  ODF.discount_amount
+		else ODF.order_coupon_discount + ODF.coupon_discount end
+		)
 		else
 		0
 		end as hb_amount_ope ,
@@ -871,6 +889,7 @@
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
+		    B.discount_amount,
 			case when B.coupon_discount_type =0 || B.rebate_discount_type =0 THEN
 			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
 			else 0 end as coupon_discount ,

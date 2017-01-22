@@ -2,6 +2,7 @@ package com.rongyi.settle.dto;
 
 import com.rongyi.settle.util.AmountUtil;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -250,6 +251,9 @@ public class CouponStatementDetailDto {
         dto.setGuidePhone(getGuidePhone());
         dto.setSource(getSource());
         dto.setCouponDiscountType(getCouponDiscountType());
+        if((dto.getOrigPrice() - dto.getDiscountAmount()) < dto.getHbAmount()){
+            dto.setHbAmount(new BigDecimal(dto.getOrigPrice() - dto.getDiscountAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+        }
         return dto;
     }
 }

@@ -48,6 +48,8 @@ public class OrderSettlementDetailDto {
 	private Double origPrice;
 
 	/** 支付金额 */
+	private Double discountAmount;
+	/** 支付金额 */
 	private Double payAmount;
 
 	/** 红包抵扣金额(平台) */
@@ -357,6 +359,14 @@ public class OrderSettlementDetailDto {
 		this.hbDiscountMer = hbDiscountMer;
 	}
 
+	public Double getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(Double discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
 	public OrderSettlementDetailVO toVO() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -385,6 +395,12 @@ public class OrderSettlementDetailDto {
 		vo.setBuyerPhone(getBuyerPhone());
 		vo.setOrderSource(getOrderSource());
 		vo.setHbDiscountMer(getHbDiscountMer());
+		if(getDiscountAmount() < getHbDiscountMer()){
+			vo.setHbDiscountMer(getDiscountAmount());
+		}
+		if(getDiscountAmount() < getHbDiscountOpe()){
+			vo.setHbDiscountOpe(getDiscountAmount());
+		}
 		return vo;
 	}
 }
