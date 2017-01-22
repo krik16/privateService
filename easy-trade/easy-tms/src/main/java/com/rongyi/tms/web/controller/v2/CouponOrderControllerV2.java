@@ -193,7 +193,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
 
             }
             //红包抵扣总金额
-            couponOrderDetailVO.setHbDiscountTotalPrice(realHbTotal.divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+            couponOrderDetailVO.setHbDiscountTotalPrice(realHbTotal.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
             couponOrderDetailVO.setCouponList(couponVOList);
             couponOrderDetailVO.setOrigTotalPrice(new BigDecimal(origTotalPrice).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
             couponOrderDetailVO.setUnitTotalPrice(new BigDecimal(unitTotalPrice).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
