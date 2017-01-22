@@ -151,6 +151,19 @@ public class CouponVO implements Serializable {
      */
     private Integer relatedType;
 
+    /**
+     * 平台促销券有效期天数,领取后设置的天数
+     */
+    private Integer validDays;
+
+    public Integer getValidDays() {
+        return validDays;
+    }
+
+    public void setValidDays(Integer validDays) {
+        this.validDays = validDays;
+    }
+
     public Integer getRelatedType() {
         return relatedType;
     }
@@ -890,6 +903,7 @@ public class CouponVO implements Serializable {
                 .append("afterSaleService", afterSaleService)
                 .append("relatedType", relatedType)
                 .append("applyGoods", applyGoods)
+                .append("validDays", validDays)
                 .toString();
     }
 }
