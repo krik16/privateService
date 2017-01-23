@@ -13,6 +13,15 @@ public class ReceiveCouponParam extends MalllifeBaseParam implements Serializabl
 	private String userId;//用户id userid
 	private String user_source;//用户渠道
 	private String activityId; //活动标识
+	private Integer activityType; //活动类型
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
 
 	public String getActivityId() {
 		return activityId;
@@ -40,10 +49,16 @@ public class ReceiveCouponParam extends MalllifeBaseParam implements Serializabl
 	public void setUser_source(String user_source) {
 		this.user_source = user_source;
 	}
+
 	@Override
 	public String toString() {
-		return "ReceiveCouponParam [couponId=" + couponId + ", userId="
-				+ userId + "activityId=" + activityId + ", user_source="  + user_source +  "]";
+		return "ReceiveCouponParam{" +
+				"couponId='" + couponId + '\'' +
+				", userId='" + userId + '\'' +
+				", user_source='" + user_source + '\'' +
+				", activityId='" + activityId + '\'' +
+				", activityType=" + activityType +
+				", MalllifeBaseParam=" + super.toString() +
+				'}';
 	}
-	
 }

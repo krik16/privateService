@@ -13,6 +13,7 @@ import com.rongyi.easy.coupon.vo.RedenvelopeCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketVO;
+import com.rongyi.easy.rmmm.param.ReceiveCouponParam;
 
 /**
  * 用户红包业务接口
@@ -246,4 +247,5 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     int getOneDayCouponSkype(String couponId);
+    int isReceived(ReceiveCouponParam param);
 }
