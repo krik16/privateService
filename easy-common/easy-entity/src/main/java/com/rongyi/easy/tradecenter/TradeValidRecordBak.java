@@ -3,9 +3,9 @@ package com.rongyi.easy.tradecenter;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TradeValidRecord implements Serializable {
+public class TradeValidRecordBak implements Serializable{
     
-	private static final long serialVersionUID = 5169397150273037615L;
+	private static final long serialVersionUID = -7117994062598703587L;
 
 	private Integer id;
 
@@ -39,15 +39,13 @@ public class TradeValidRecord implements Serializable {
 
     private String title;
 
+    private String mongoId;
+
     private Date createAt;
 
     private Date updateAt;
 
-    private String mongoId;
-
-    private Integer isDelete;
-
-    private String comment;//备注信息
+    private Date correctTime;
 
     public Integer getId() {
         return id;
@@ -177,6 +175,14 @@ public class TradeValidRecord implements Serializable {
         this.title = title;
     }
 
+    public String getMongoId() {
+        return mongoId;
+    }
+
+    public void setMongoId(String mongoId) {
+        this.mongoId = mongoId;
+    }
+
     public Date getCreateAt() {
         return createAt;
     }
@@ -193,29 +199,11 @@ public class TradeValidRecord implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public String getMongoId() {
-        return mongoId;
+    public Date getCorrectTime() {
+        return correctTime;
     }
 
-    public void setMongoId(String mongoId) {
-        this.mongoId = mongoId;
+    public void setCorrectTime(Date correctTime) {
+        this.correctTime = correctTime;
     }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-
 }

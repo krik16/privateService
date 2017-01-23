@@ -1024,6 +1024,7 @@ public interface Constants {
      * @author user
      */
     interface OrderPushStatus {
+
         /**
          * 支付成功
          */
