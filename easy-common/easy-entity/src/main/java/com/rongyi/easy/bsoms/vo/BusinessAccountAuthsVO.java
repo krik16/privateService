@@ -28,7 +28,16 @@ public class BusinessAccountAuthsVO implements Serializable {
 	private Integer industryVersionId;
 	private String industryVersionName;
 	private List<Map> auths;
-	
+	private List<Map> industryVersionAuths;//主账号的版本权限  3期加的
+
+	public List<Map> getIndustryVersionAuths() {
+		return industryVersionAuths;
+	}
+
+	public void setIndustryVersionAuths(List<Map> industryVersionAuths) {
+		this.industryVersionAuths = industryVersionAuths;
+	}
+
 	public Integer getIdentity() {
 		return identity;
 	}

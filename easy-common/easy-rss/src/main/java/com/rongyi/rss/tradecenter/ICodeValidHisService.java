@@ -4,6 +4,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.vo.CouponHistoryVO;
 import com.rongyi.easy.coupon.vo.ValidCommissionVO;
 import com.rongyi.easy.tradecenter.TradeValidRecord;
+import com.rongyi.easy.tradecenter.TradeValidRecordBak;
 import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
 import com.rongyi.easy.tradecenter.param.CodeValidHisParam;
 import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
@@ -78,4 +79,16 @@ public interface ICodeValidHisService {
      * @return
      */
     BizzValidHistoryVO getValidHisByPage(BizzValidHistoryParam param);
+
+    /**
+     * @param param 查询验券记录
+     * @return
+     */
+    TradeValidRecord getTradeValidRecord(BizzValidHistoryParam param);
+
+    /**
+     * 备份验券记录，并删除原有验券记录，更新券码信息
+     * @param tradeValidRecordBak
+     */
+    void backupValidRecord(Integer id, String couponCode);
 }

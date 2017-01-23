@@ -87,6 +87,7 @@ public class UserInfo implements Serializable{
     private Integer chiefId;
     //private Integer isSuspended;//资金账号
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
+
     public String getStopReason() {
 		return stopReason;
 	}
