@@ -1,13 +1,7 @@
 package com.rongyi.core.util;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +16,25 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class Util {
-
+	
+	/*public static void main(String[] args) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("channel", "013");
+		params.put("st", "bhn5S4+n5v5D6034WwIsjNkRqjyO32jelaPaL5iBPI0M/RWTrRSHT9a/5JJAHxZeaP9wJnnmztbpxqanVeShTnJL1AgDgNV1fVjidXXsya0jHunoq2KjwTANC57JJP4gQS79Jl2ElJM2LNsJnVqG8FS6bVNKayUOFu0QNSvMweA");
+		
+		Collection<String> keyset = params.keySet();
+		List<String> list = new ArrayList<>(keyset);
+		//对key键值按字典升序排序
+		Collections.sort(list);
+		String sb = new String();
+		for (int i = 0; i < list.size(); i++) {
+			sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+		}
+		sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+		System.out.println(sb);
+		String md5Sign = Md5Util.GetMD5Code(sb.toString());
+		System.out.println(md5Sign);
+	}*/
 	/**
 	 * 签名判断
 	 * @param params
@@ -39,6 +51,30 @@ public class Util {
 				sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
 			}
 			sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+			String md5Sign = Md5Util.GetMD5Code(sb.toString());
+			if (md5Sign.equals(sign)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 签名判断
+	 * @param params
+	 * @return
+	 */
+	public static Boolean signValidateWithoutChannel(HashMap<String, Object> params, String sign) {
+		if (params.size() > 0) {
+			Collection<String> keyset = params.keySet();
+			List<String> list = new ArrayList<>(keyset);
+			//对key键值按字典升序排序
+			Collections.sort(list);
+			String sb = new String();
+			for (int i = 0; i < list.size(); i++) {
+				sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+			}
+			sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get("pos"));
 			String md5Sign = Md5Util.GetMD5Code(sb.toString());
 			if (md5Sign.equals(sign)) {
 				return true;
@@ -224,5 +260,42 @@ public class Util {
 		} else {
 			return ts + "（毫秒）";
 		}
+	}
+
+	public static void main(String[] args) {
+		HashMap<String,Object> params = new HashMap<>();
+		//会员查询接口
+		/*params.put("verificationCode","294376");
+		params.put("timeStamp",1515567178131l);*/
+
+		//积分消费获取验证码接口
+		/*params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945111");
+		params.put("serialNumber","201701110945111");
+		params.put("timeStamp",1515567178131l);*/
+
+		//积分消费并同步订单接口
+		params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945111");
+		params.put("serialNumber","201701110945111");
+		params.put("timeStamp",1515567178131l);
+		params.put("verificationCode","850163");
+
+		//订单冲正接口
+		/*params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945004");
+		params.put("serialNumber","201701110945004");
+		params.put("timeStamp",1515567178131l);*/
+
+		//退换货接口参数
+		/*params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945005");
+		params.put("serialNumber","201701120945003");
+		params.put("timeStamp", 1515567178131l);*/
+
+		//渠道列表参数
+		/*params.put("source",1);
+		params.put("timeStamp",1515567178131l);*/
+		signValidateWithoutChannel(params,"dddd");
 	}
 }

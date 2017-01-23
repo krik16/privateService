@@ -84,10 +84,11 @@ public class UserInfo implements Serializable{
     private String contractCode; //合同号
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
-    private Integer chiefId;
     private String terminalType ; //终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
     private Integer defaultTerminal ; //默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机'
-    
+    private Integer chiefId;
+    private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
+
     public String getStopReason() {
 		return stopReason;
 	}
@@ -454,6 +455,14 @@ public class UserInfo implements Serializable{
 		this.chiefId = chiefId;
 	}
 
+	public Integer getIsSuspended() {
+		return isSuspended;
+	}
+
+	public void setIsSuspended(Integer isSuspended) {
+		this.isSuspended = isSuspended;
+	}
+
     public String getTerminalType() {
         return terminalType;
     }
@@ -495,6 +504,7 @@ public class UserInfo implements Serializable{
 				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+                + ", isSuspended=" + isSuspended
 				+ ", terminalType=" + terminalType + ", defaultTerminal=" + defaultTerminal
 				+ ", level=" + level + ", chiefId=" + chiefId + "]";
 	}

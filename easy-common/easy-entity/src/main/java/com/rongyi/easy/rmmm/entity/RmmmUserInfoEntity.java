@@ -98,6 +98,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private Integer chiefId; //主账号ID
 	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
 	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机
+    private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
     public Integer getId() {
 		return id;
 	}
@@ -456,6 +457,40 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setDefaultTerminal(Integer defaultTerminal) {
 		this.defaultTerminal = defaultTerminal;
 	}
-    
+
+	public Integer getIsSuspended() {
+		return isSuspended;
+	}
+
+	public void setIsSuspended(Integer isSuspended) {
+		this.isSuspended = isSuspended;
+	}
+
+	@Override
+	public String toString() {
+		return "RmmmUserInfoEntity [id=" + id + ", userLogo=" + userLogo
+				+ ", roleId=" + roleId + ", userPhone=" + userPhone
+				+ ", userAccount=" + userAccount + ", userPwd=" + userPwd
+				+ ", userName=" + userName + ", userNickName=" + userNickName
+				+ ", userStatus=" + userStatus + ", accountId=" + accountId
+				+ ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt
+				+ ", version=" + version + ", isDisabled=" + isDisabled
+				+ ", deviceUuid=" + deviceUuid + ", cardId=" + cardId
+				+ ", userIMCount=" + userIMCount + ", devId=" + devId
+				+ ", type=" + type + ", identity=" + identity
+				+ ", isCooperation=" + isCooperation + ", memo=" + memo
+				+ ", createSource=" + createSource + ", stopReason="
+				+ stopReason + ", sharCode=" + sharCode + ", userDesc="
+				+ userDesc + ", pushId=" + pushId + ", useCode=" + useCode
+				+ ", jsessionid=" + jsessionid + ", isOrdering=" + isOrdering
+				+ ", updateOrderingAt=" + updateOrderingAt + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId
+				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
+				+ validStartAt + ", validEndAt=" + validEndAt
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", isChief=" + isChief + ", level=" + level + ", chiefId="
+				+ chiefId + ", isSuspended=" + isSuspended + "]";
+	}
 }
 
