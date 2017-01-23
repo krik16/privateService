@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by xuying on 2016/6/22.
  */
-public class OperateCommodityVo implements Serializable {
+public class OperateCommodityVo implements Serializable, Cloneable {
 
 
     private String  id ;//系统编号
@@ -182,5 +182,21 @@ public class OperateCommodityVo implements Serializable {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+
+    @Override
+    public OperateCommodityVo clone() throws CloneNotSupportedException {
+        OperateCommodityVo vo = new OperateCommodityVo();
+        vo.setId(id);
+        vo.setName(name);
+        vo.setMallName(mallName);
+        vo.setShopName(shopName);
+        vo.setDescription(description);
+        vo.setStatus(status);
+        vo.setCreateAt(createAt);
+        vo.setSource(source);
+
+        return vo;
     }
 }
