@@ -1,7 +1,10 @@
 package com.rongyi.easy.mcmc.vo;
 
+
+import com.rongyi.mcmc.bean.vo.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuying on 2016/6/22.
@@ -22,12 +25,29 @@ public class OperateCommodityVo implements Serializable {
     private String buyerAccount;
     private Date soldOutAt;//下架时间
     private Integer type;//渠道  0商家，1买手
-
-
     private String originalPrice;//商品原价
     private String currentPrice;//商品现价
     private String description;//商品描述
     private Integer stock;//商品库存
+
+    private List<CommoditySpecVO> specList;
+    private CommoditySpecVO currentSpec;
+
+    public CommoditySpecVO getCurrentSpec() {
+        return currentSpec;
+    }
+
+    public void setCurrentSpec(CommoditySpecVO currentSpec) {
+        this.currentSpec = currentSpec;
+    }
+
+    public List<CommoditySpecVO> getSpecList() {
+        return specList;
+    }
+
+    public void setSpecList(List<CommoditySpecVO> specList) {
+        this.specList = specList;
+    }
 
     public String getOriginalPrice() {
         return originalPrice;
