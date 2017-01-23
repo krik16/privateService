@@ -23,6 +23,44 @@ public class OperateCommodityVo implements Serializable {
     private Date soldOutAt;//下架时间
     private Integer type;//渠道  0商家，1买手
 
+
+    private String originalPrice;//商品原价
+    private String currentPrice;//商品现价
+    private String description;//商品描述
+    private Integer stock;//商品库存
+
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
     public String getId() {
         return id;
     }
