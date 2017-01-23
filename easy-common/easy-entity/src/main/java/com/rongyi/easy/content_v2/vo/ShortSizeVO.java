@@ -11,7 +11,8 @@ public class ShortSizeVO implements Serializable {
     private Integer id;
     private Integer typeVal;
     private String title;       //标题
-    private String picUrl;
+    private String picUrl;    //头图
+    private String bannerUrl; //banner图
     private String introduction; //介绍文案
     private String publishBeginAt;
     private String publishEndAt;
@@ -21,6 +22,14 @@ public class ShortSizeVO implements Serializable {
     private String createUser;
     private String updateUser;
     private String updateAt;
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+    }
 
     public String getUpdateUser() {
         return updateUser;
@@ -133,6 +142,7 @@ public class ShortSizeVO implements Serializable {
                 ", typeVal=" + typeVal +
                 ", title='" + title + '\'' +
                 ", picUrl='" + picUrl + '\'' +
+                ", bannerUrl=" + bannerUrl +
                 ", introduction='" + introduction + '\'' +
                 ", publishBeginAt='" + publishBeginAt + '\'' +
                 ", publishEndAt='" + publishEndAt + '\'' +
