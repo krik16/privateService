@@ -54,7 +54,7 @@ public class ExportOsmOrderExcel {
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 15; j++) {
+                    for (int j = 0; j <= 29; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
@@ -72,11 +72,22 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
                     sheet.getRow(i + 2).getCell(9).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
                     sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(11).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(12).setCellValue(convertOrderSource(vo.getOrderSource()));
-                    sheet.getRow(i + 2).getCell(13).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(14).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(15).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
+                    sheet.getRow(i + 2).getCell(13).setCellValue(convertActivityType(vo.getActivityType()));
+                    sheet.getRow(i + 2).getCell(14).setCellValue(vo.getActivityName());
+                    sheet.getRow(i + 2).getCell(15).setCellValue(convertStatus(vo.getStatus()));
+                    sheet.getRow(i + 2).getCell(16).setCellValue(convertActivityStatus(vo.getActivityStatus()));
+                    sheet.getRow(i + 2).getCell(17).setCellValue(convertOrderSource(vo.getOrderSource()));
+                    sheet.getRow(i + 2).getCell(18).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(19).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(20).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(21).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(25).setCellValue(vo.getPaymentId());
+                    sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverName());
+                    sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverPhone());
+                    sheet.getRow(i + 2).getCell(28).setCellValue(vo.getReceiverAddress());
+                    sheet.getRow(i + 2).getCell(29).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
             String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
@@ -154,6 +165,35 @@ public class ExportOsmOrderExcel {
                 case "5" : result="已关闭";break;
                 case "8" : result="已退款";break;
             }
+        return result;
+    }
+
+    private String convertActivityType(Integer activityType){
+        String result = "普通";
+        if (activityType != null){
+            switch (activityType){
+                case 0: result = "普通"; break;
+                case 1: result = "闪购"; break;
+                case 2: result = "特卖"; break;
+                case 3: result = "秒杀"; break;
+                case 4: result = "拼团"; break;
+                case 5: result = "预约"; break;
+                case 6: result = "断码好货"; break;
+            }
+        }
+        return result;
+    }
+
+    private String convertActivityStatus(String activityStatus){
+        String result = "";
+        if (StringUtils.isNotBlank(activityStatus) && !"0".equals(activityStatus)){
+            switch (activityStatus){
+                case "2": result = "进行中"; break;
+                case "3": result = "成功"; break;
+                case "4": result = "失败"; break;
+                case "5": result = "失败"; break;
+            }
+        }
         return result;
     }
 
