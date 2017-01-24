@@ -45,6 +45,69 @@ public class OrderManagerVO implements Serializable {
 	private Long activityRoundId;//活动场次
 	private String activityName;//活动名称
 	private String activityStatus;//活动状态
+	private Date deleverAt;//发货时间
+	private Date payAt;//付款时间
+	private Date reveiveAt;//确认书后货时间
+	private String paymentId;//交易流水号
+	private String receiverName;//收件人姓名
+	private String receiverPhone;//收件人电话
+	private String receiverAddress;//收件人地址
+
+	public Date getDeleverAt() {
+		return deleverAt;
+	}
+
+	public void setDeleverAt(Date deleverAt) {
+		this.deleverAt = deleverAt;
+	}
+
+	public Date getPayAt() {
+		return payAt;
+	}
+
+	public void setPayAt(Date payAt) {
+		this.payAt = payAt;
+	}
+
+	public Date getReveiveAt() {
+		return reveiveAt;
+	}
+
+	public void setReveiveAt(Date reveiveAt) {
+		this.reveiveAt = reveiveAt;
+	}
+
+	public String getPaymentId() {
+		return paymentId;
+	}
+
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
+	}
+
+	public String getReceiverAddress() {
+		return receiverAddress;
+	}
+
+	public void setReceiverAddress(String receiverAddress) {
+		this.receiverAddress = receiverAddress;
+	}
 
 	public String getOrderCartNo() {
 		return orderCartNo;

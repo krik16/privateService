@@ -1,5 +1,8 @@
 package com.rongyi.easy.rmmm.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -157,6 +160,9 @@ public class ParentOrderVO implements Serializable {
 	private String activityCommodityDesc;//超级团商品副标题
 	private String weixinAppId;//
 	private BigDecimal totalPriceToSeller;// 卖家实收款
+
+	private String selfCode;// 自提码
+	private List<CommentVO> comments;//卖家备注列表
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -883,84 +889,24 @@ public class ParentOrderVO implements Serializable {
 		this.totalPriceToSeller = totalPriceToSeller;
 	}
 
+	public String getSelfCode() {
+		return selfCode;
+	}
+
+	public void setSelfCode(String selfCode) {
+		this.selfCode = selfCode;
+	}
+
+	public List<CommentVO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentVO> comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public String toString() {
-		return "ParentOrderVO{" +
-				"orderId='" + orderId + '\'' +
-				", mallName='" + mallName + '\'' +
-				", activityName='" + activityName + '\'' +
-				", activityType='" + activityType + '\'' +
-				", activityStatus='" + activityStatus + '\'' +
-				", activityRoundId='" + activityRoundId + '\'' +
-				", orderSource='" + orderSource + '\'' +
-				", brandName='" + brandName + '\'' +
-				", shopName='" + shopName + '\'' +
-				", shopIM=" + shopIM +
-				", totalPrice='" + totalPrice + '\'' +
-				", parentOrderStatus='" + parentOrderStatus + '\'' +
-				", nextStatusTime='" + nextStatusTime + '\'' +
-				", sonOrderList=" + sonOrderList +
-				", consignee='" + consignee + '\'' +
-				", phone='" + phone + '\'' +
-				", address='" + address + '\'' +
-				", provinceName='" + provinceName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", districtName='" + districtName + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", comment='" + comment + '\'' +
-				", payTime='" + payTime + '\'' +
-				", commitOrderTime='" + commitOrderTime + '\'' +
-				", deliverTime='" + deliverTime + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", shopLogo='" + shopLogo + '\'' +
-				", isComment='" + isComment + '\'' +
-				", closeType='" + closeType + '\'' +
-				", closeReason='" + closeReason + '\'' +
-				", originalTotalPrice='" + originalTotalPrice + '\'' +
-				", buyerNickName='" + buyerNickName + '\'' +
-				", buyerPhone='" + buyerPhone + '\'' +
-				", receiveType='" + receiveType + '\'' +
-				", nickName='" + nickName + '\'' +
-				", imId='" + imId + '\'' +
-				", userLogo='" + userLogo + '\'' +
-				", userName='" + userName + '\'' +
-				", userPhone='" + userPhone + '\'' +
-				", guideId='" + guideId + '\'' +
-				", guideType=" + guideType +
-				", receiveTime='" + receiveTime + '\'' +
-				", cancelTime='" + cancelTime + '\'' +
-				", closeTime='" + closeTime + '\'' +
-				", statusRoute='" + statusRoute + '\'' +
-				", platformRebateAmount='" + platformRebateAmount + '\'' +
-				", expressBillId='" + expressBillId + '\'' +
-				", expressName='" + expressName + '\'' +
-				", discountFee=" + discountFee +
-				", score='" + score + '\'' +
-				", scoreDeduction='" + scoreDeduction + '\'' +
-				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
-				", liveName='" + liveName + '\'' +
-				", orderScoreDiscount=" + orderScoreDiscount +
-				", orderRebateDiscount=" + orderRebateDiscount +
-				", createAt=" + createAt +
-				", changePriceFlag='" + changePriceFlag + '\'' +
-				", shopNum=" + shopNum +
-				", totalHongBaoAmount=" + totalHongBaoAmount +
-				", isCartOrder=" + isCartOrder +
-				", expressOrderInfoId=" + expressOrderInfoId +
-				", ifOnDisplayExpress=" + ifOnDisplayExpress +
-				", newPayAmount=" + newPayAmount +
-				", ifPayment=" + ifPayment +
-				", groupEndAt=" + groupEndAt +
-				", nextCloseTime=" + nextCloseTime +
-				", reserveName=" + reserveName +
-				", reservePost=" + reservePost +
-				", reservePhone=" + reservePhone +
-				", reserveCompany=" + reserveCompany +
-				", activityCommodityDesc=" + activityCommodityDesc +
-				", totalPriceToSeller=" + totalPriceToSeller +
-				", weixinAppId=" + weixinAppId +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }
