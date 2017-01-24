@@ -30,6 +30,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private String buyerNickName;//买家账号
     private String paymentAmount;//订单实际支付金额 元
     private String discountAmount;//订单优惠金额 元
+    private BigDecimal discountAmountByChange;//卖家折扣之后的金额
     private BigDecimal expressPrice;//邮费 元
     private BigDecimal integralAmount;//积分优惠
     private String integralNum= "0";//积分数
@@ -309,5 +310,13 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    public BigDecimal getDiscountAmountByChange() {
+        return discountAmountByChange;
+    }
+
+    public void setDiscountAmountByChange(BigDecimal discountAmountByChange) {
+        this.discountAmountByChange = discountAmountByChange;
     }
 }
