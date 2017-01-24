@@ -123,6 +123,7 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal commidityTotalPice;//商品总价
 
 	private BigDecimal orderTotalPrice;//订单总价
+	private BigDecimal discountAmount;//订单总价-折扣
 	
 	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
 	private Long groupEndAt;//团结束时间，单位：毫秒
@@ -939,6 +940,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setTotalPriceToSeller(BigDecimal totalPriceToSeller) {
 		this.totalPriceToSeller = totalPriceToSeller;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
 	}
 
 	@Override
