@@ -247,5 +247,5 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     int getOneDayCouponSkype(String couponId);
-    int isReceived(ReceiveCouponParam param);
+    List<UserRedenvelope> findCouponList(ReceiveCouponParam param);
 }
