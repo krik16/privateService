@@ -131,14 +131,14 @@ public class SubOrderController extends BaseControllerV2 {
             BigDecimal rebateDiscountTotal = BigDecimal.ZERO;//抵扣券抵扣总金额
             BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
             rebateDiscountTotal = rebateDiscountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
-            BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
+//            BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
             if (!CollectionUtils.isEmpty(sonOrderList)) {
                 //目前一个订单只会有一种商品，直播也是一个
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
                 for (SonOrderVO sonOrderVo : sonOrderList) {
                     hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
-                    commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
-                            .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
+//                    commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
+//                            .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
 
                     sonOrderVo.setHbDiscount(sonOrderVo.getDiscountAmount().compareTo(sonOrderVo.getHbDiscount()) <= 0 ?
                             sonOrderVo.getDiscountAmount() : sonOrderVo.getHbDiscount());
@@ -154,16 +154,16 @@ public class SubOrderController extends BaseControllerV2 {
                 }
             }
             //抵扣券合计
-            if (rebateDiscountTotal.subtract((commidityTotalPice.subtract(orderDetailVo.getDiscountFee()))).compareTo(BigDecimal.ZERO) > 0) {
-                orderDetailVo.setDeductCouponAmount(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).setScale(2, 4).toString());
+            if (rebateDiscountTotal.subtract(orderDetailVo.getDiscountAmount()).compareTo(BigDecimal.ZERO) > 0) {
+                orderDetailVo.setDeductCouponAmount(orderDetailVo.getDiscountAmount().toString());
             } else {
                 orderDetailVo.setDeductCouponAmount(rebateDiscountTotal.toString());
             }
             //商品总价
-            commidityTotalPice = commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : commidityTotalPice;
-            orderDetailVo.setCommidityTotalPice(commidityTotalPice);
+//            commidityTotalPice = commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : commidityTotalPice;
+            orderDetailVo.setCommidityTotalPice(orderDetailVo.getDiscountAmount());
             //订单总价
-            BigDecimal orderTotalPrice = commidityTotalPice.add(new BigDecimal(orderDetailVo.getCommodityPostage()));
+            BigDecimal orderTotalPrice = orderDetailVo.getDiscountAmount().add(new BigDecimal(orderDetailVo.getCommodityPostage()));
             orderDetailVo.setOrderTotalPrice(orderTotalPrice);
             //红包抵扣合计
             orderDetailVo.setTotalHongBaoAmount(hbDisCountTotal);
