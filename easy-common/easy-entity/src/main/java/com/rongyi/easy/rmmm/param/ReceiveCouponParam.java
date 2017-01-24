@@ -3,6 +3,7 @@ package com.rongyi.easy.rmmm.param;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ReceiveCouponParam extends MalllifeBaseParam implements Serializable{
 	/**
@@ -10,8 +11,36 @@ public class ReceiveCouponParam extends MalllifeBaseParam implements Serializabl
 	 */
 	private static final long serialVersionUID = 1L;
 	private String couponId;//卷 的id
+	private List<String> couponIds;  //券id集合
 	private String userId;//用户id userid
 	private String user_source;//用户渠道
+	private String activityId; //活动标识
+	private Integer activityType; //活动类型
+
+	public List<String> getCouponIds() {
+		return couponIds;
+	}
+
+	public void setCouponIds(List<String> couponIds) {
+		this.couponIds = couponIds;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
+	public String getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
+	}
+
 	public String getCouponId() {
 		return couponId;
 	}
@@ -30,10 +59,17 @@ public class ReceiveCouponParam extends MalllifeBaseParam implements Serializabl
 	public void setUser_source(String user_source) {
 		this.user_source = user_source;
 	}
+
 	@Override
 	public String toString() {
-		return "ReceiveCouponParam [couponId=" + couponId + ", userId="
-				+ userId + ", user_source=" + user_source + "]";
+		return "ReceiveCouponParam{" +
+				"couponId='" + couponId + '\'' +
+				", userId='" + userId + '\'' +
+				", user_source='" + user_source + '\'' +
+				", activityId='" + activityId + '\'' +
+				", activityType=" + activityType + '\'' +
+				", couponIds=" + couponIds + '\'' +
+				", MalllifeBaseParam=" + super.toString() +
+				'}';
 	}
-	
 }

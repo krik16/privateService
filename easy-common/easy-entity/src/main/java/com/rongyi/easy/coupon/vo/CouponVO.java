@@ -177,6 +177,19 @@ public class CouponVO implements Serializable {
      */
     private Integer applyGoods;
 
+    /**
+     * 平台促销券适用对象，商家/买手[0] 商家[1] 买手[2]
+     */
+    private Integer applyObject;
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
     public Integer getApplyGoods() {
         return applyGoods;
     }
@@ -904,6 +917,7 @@ public class CouponVO implements Serializable {
                 .append("relatedType", relatedType)
                 .append("applyGoods", applyGoods)
                 .append("validDays", validDays)
+                .append("applyObject", applyObject)
                 .toString();
     }
 }

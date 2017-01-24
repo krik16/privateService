@@ -10,6 +10,26 @@ import java.io.Serializable;
  */
 public class CashCouponParam extends BaseParam  implements Serializable {
     private Integer specialId;
+    private Integer specialType;
+    private String userId;
+
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getSpecialType() {
+        return specialType;
+    }
+
+    public void setSpecialType(Integer specialType) {
+        this.specialType = specialType;
+    }
 
     public Integer getSpecialId() {
         return specialId;
@@ -23,6 +43,8 @@ public class CashCouponParam extends BaseParam  implements Serializable {
     public String toString() {
         return "CashCouponParam{" +
                 "specialId=" + specialId +
+                "specialType=" + specialType +
+                "userId=" + userId +
                 "BaseParam{" + super.toString() + "}" +
                 '}';
     }
