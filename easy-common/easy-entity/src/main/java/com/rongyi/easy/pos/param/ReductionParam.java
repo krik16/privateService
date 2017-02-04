@@ -9,7 +9,7 @@ import java.util.Date;
  * @author wangjh7
  * @date 2017-02-04
  */
-public class ReductionParam  implements Serializable{
+public class ReductionParam implements Serializable {
     // 活动Id
     private String activityId;
     // 商城Id
@@ -23,9 +23,11 @@ public class ReductionParam  implements Serializable{
     // 开始时间
     private Date startDate;
     // 结束时间
-    private Date endDate ;
+    private Date endDate;
     // 当前页
     private int page;
+    // 起始数
+    private int pageIndex;
     // 每页数
     private int pageSize;
 
@@ -101,6 +103,17 @@ public class ReductionParam  implements Serializable{
         this.pageSize = pageSize;
     }
 
+    public int getPageIndex() {
+        if (0 < page && 0 < pageSize) {
+            return (page - 1) * pageSize;
+        }
+        return 0;
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
     @Override
     public String toString() {
         return "ReductionParam{" +
@@ -112,6 +125,7 @@ public class ReductionParam  implements Serializable{
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", page=" + page +
+                ", pageIndex=" + pageIndex +
                 ", pageSize=" + pageSize +
                 '}';
     }
