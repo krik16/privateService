@@ -1,6 +1,7 @@
 package com.rongyi.core.common.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -8,8 +9,20 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONObject;
+
+
 
 /**
  * @author yoUng
@@ -188,6 +201,34 @@ public class HttpUtil {
         return buffer.toString();
     }
 	
-	
+	public static String httpPostWithJSON(String url, JSONObject jsonObject) {
+		 
+        HttpPost httpPost = new HttpPost(url);
+        CloseableHttpClient client = HttpClients.createDefault();
+        String respContent = null;
+        
+//        json方式
+        StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");//解决中文乱码问题    
+        entity.setContentEncoding("UTF-8");    
+        entity.setContentType("application/json");    
+        httpPost.setEntity(entity);
+        System.out.println();
+        
+        HttpResponse resp;
+		try {
+			resp = client.execute(httpPost);
+			 if(resp.getStatusLine().getStatusCode() == 200) {
+	            HttpEntity he = resp.getEntity();
+	            respContent = EntityUtils.toString(he,"UTF-8");
+	        }
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return respContent;
+    }
 
 }
