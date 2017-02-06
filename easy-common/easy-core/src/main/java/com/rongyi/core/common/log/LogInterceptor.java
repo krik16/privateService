@@ -13,22 +13,20 @@ import java.util.UUID;
  */
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
+    private final static String LOG_ID = "logid";
+    private final static String LOG_ID_COUNT = "logidCount";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        try
-        {
-
-            String logid = UUID.randomUUID().toString().substring(1,16);
-
-            org.slf4j.MDC.put("logid", logid);
-            org.apache.log4j.MDC.put("logid", logid);
-
-            RpcContext.getContext().setAttachment("logid", logid);
-            RpcContext.getContext().setAttachment("logidCount","1");
+        try {
+            String logid = UUID.randomUUID().toString().substring(1, 16);
+            logid = logid + " @ " + request.getRemoteAddr();
+            org.slf4j.MDC.put(LOG_ID, logid);
+            org.apache.log4j.MDC.put(LOG_ID, logid);
+            RpcContext.getContext().setAttachment(LOG_ID, logid);
+            RpcContext.getContext().setAttachment(LOG_ID_COUNT, "1");
             return true;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -37,7 +35,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
         org.slf4j.MDC.clear();
-        org.apache.log4j.MDC.remove("logid");
+        org.apache.log4j.MDC.remove(LOG_ID);
         RpcContext.removeContext();
     }
 }

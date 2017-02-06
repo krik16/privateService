@@ -11,72 +11,78 @@ import java.util.UUID;
  * @author yujisun
  * @date 2015/7/30
  */
-public class LogAopAdvice
-{
+public class LogAopAdvice {
+    private final static String LOG_ID = "logid";
+    private final static String LOG_ID_COUNT = "logidCount";
+
     public void logIdInit() {
+        String logId = RpcContext.getContext().getAttachment(LOG_ID);
 
-
-        String logId = RpcContext.getContext().getAttachment("logid");
-
-        if(StringUtils.isBlank(logId)){
-            logId = UUID.randomUUID().toString().substring(1,16);
+        if (StringUtils.isBlank(logId)) {
+            logId = UUID.randomUUID().toString().substring(1, 16);
         }
-        org.slf4j.MDC.put("logid", logId);
-        org.apache.log4j.MDC.put("logid", logId);
+        String ip = RpcContext.getContext().getLocalHost();
+        if (StringUtils.isNotBlank(ip)) {
+            if (-1 == logId.indexOf(ip)) {
+                logId = logId + " @ " + ip;
+            }
+        }
+
+        org.slf4j.MDC.put(LOG_ID, logId);
+        org.apache.log4j.MDC.put(LOG_ID, logId);
 
         //aop多次切入，计数，只有最后一次会清楚mdc的logid
-        if(RpcContext.getContext().getAttachment("logidCount") != null){
-
-            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) + 1;
-            RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
-        }
-        else{
-            RpcContext.getContext().setAttachment("logidCount", "1");
+        if (getLoginCount() != null) {
+            Integer logIdCount = Integer.parseInt(getLoginCount()) + 1;
+            RpcContext.getContext().setAttachment(LOG_ID_COUNT, String.valueOf(logIdCount));
+        } else {
+            RpcContext.getContext().setAttachment(LOG_ID_COUNT, "1");
         }
 
-        RpcContext.getContext().setAttachment("logid", logId);
+        RpcContext.getContext().setAttachment(LOG_ID, logId);
     }
 
-    public void clear()
-    {
-        if(RpcContext.getContext().getAttachment("logidCount") == null){
+    public void clear() {
+        if (getLoginCount() == null) {
             RpcContext.removeContext();
             org.slf4j.MDC.clear();
-            org.apache.log4j.MDC.remove("logid");
-        }
-        else{
-            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
-            if(logIdCount == 0){
+            org.apache.log4j.MDC.remove(LOG_ID);
+        } else {
+            Integer logIdCount = Integer.parseInt(getLoginCount()) - 1;
+            if (logIdCount == 0) {
                 RpcContext.removeContext();
                 org.slf4j.MDC.clear();
-                org.apache.log4j.MDC.remove("logid");
-            }
-            else{
-                RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+                org.apache.log4j.MDC.remove(LOG_ID);
+            } else {
+                RpcContext.getContext().setAttachment(LOG_ID_COUNT, String.valueOf(logIdCount));
             }
         }
     }
 
-    public void exceptionProcess()
-    {
-        if(RpcContext.getContext().getAttachment("logidCount") == null){
-            RpcContext.removeContext();
-            org.slf4j.MDC.clear();
-            org.apache.log4j.MDC.remove("logid");
-        }
-        else
-        {
-            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
-            if (logIdCount == 0)
-            {
-                RpcContext.removeContext();
-                org.slf4j.MDC.clear();
-                org.apache.log4j.MDC.remove("logid");
-            } else
-            {
-                RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
-            }
-        }
+    public void exceptionProcess() {
+//        if (getLoginCount() == null) {
+//            RpcContext.removeContext();
+//            org.slf4j.MDC.clear();
+//            org.apache.log4j.MDC.remove(LOG_ID);
+//        } else {
+//            Integer logIdCount = Integer.parseInt(getLoginCount()) - 1;
+//            if (logIdCount == 0) {
+//                RpcContext.removeContext();
+//                org.slf4j.MDC.clear();
+//                org.apache.log4j.MDC.remove(LOG_ID);
+//            } else {
+//                RpcContext.getContext().setAttachment(LOG_ID_COUNT, String.valueOf(logIdCount));
+//            }
+//        }
+        clear();
     }
 
+    /**
+     * 获取logid_count
+     *
+     * @return
+     */
+    private String getLoginCount() {
+        return RpcContext.getContext().getAttachment(LOG_ID_COUNT);
+    }
 }
