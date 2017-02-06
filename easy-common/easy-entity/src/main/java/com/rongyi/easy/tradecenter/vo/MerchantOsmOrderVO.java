@@ -47,6 +47,8 @@ public class MerchantOsmOrderVO implements Serializable{
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
     private String activityStatus;//活动状态
+    private String deleverTime;//发货时间
+    private String reveiveTime;//收货时间
 
     public Integer getOrderSource() {
         return orderSource;
@@ -318,5 +320,21 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setDiscountAmountByChange(BigDecimal discountAmountByChange) {
         this.discountAmountByChange = discountAmountByChange;
+    }
+
+    public String getDeleverTime() {
+        return deleverTime;
+    }
+
+    public void setDeleverTime(String deleverTime) {
+        this.deleverTime = deleverTime;
+    }
+
+    public String getReveiveTime() {
+        return reveiveTime;
+    }
+
+    public void setReveiveTime(String reveiveTime) {
+        this.reveiveTime = reveiveTime;
     }
 }

@@ -10,10 +10,6 @@ import java.io.Serializable;
  */
 public class OrderFormVO extends OrderFormEntity implements Serializable{
 
-    /**
-     * 支付方式 1支付宝网页  3支付宝app  5微信
-     */
-    private byte payChannel;
     private String orderCartNo;//购物车订单号
     /**
      * 商品编码
@@ -29,14 +25,6 @@ public class OrderFormVO extends OrderFormEntity implements Serializable{
     private String commoditySpecMid;
 
     private Double unitPrice;
-
-    public Byte getPayChannel() {
-        return payChannel;
-    }
-
-    public void setPayChannel(byte payChannel) {
-        this.payChannel = payChannel;
-    }
 
     public String getOrderCartNo() {
         return orderCartNo;
