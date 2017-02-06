@@ -522,9 +522,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         Map<String, String> map = new HashMap<>();
         try {
             this.getBaseDao().insertBySql(PAYMENTENTITY_NAMESPACE + ".insert", paymentEntity);
-            map.put("message", "成功插入返回的message数据！");
         } catch (Exception e) {
-            map.put("message", e.getMessage());
             LOGGER.error(e.getMessage());
         }
         return map;
