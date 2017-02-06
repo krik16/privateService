@@ -36,6 +36,7 @@ public class CouponShop implements Serializable {
     private String mallId;//商场id
     private String mallName;//商场名称
     /**
+     * 0:卡券与店铺的关联关系
      * 1:通用券指定的验证店铺的关联关系
      * 2：活动券指定验证店铺的关联关系
      * 3：店铺新建卡券，卡券与父级店铺之间的关联关系

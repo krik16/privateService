@@ -7,6 +7,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponChannel;
 import com.rongyi.easy.coupon.entity.CouponSort;
 import com.rongyi.easy.coupon.param.CouponParam;
+import com.rongyi.easy.coupon.param.OutCouponQueryParam;
 import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
@@ -216,4 +217,26 @@ public interface RoaVoucherCouponService {
     PagingVO<CouponChannel> findCouponChannelByPage(Map<String, Object> map);
 
     List<CouponChannel> findAllCouponChannel();
+
+    /**
+     * 创建外部导出券
+     * @param coupon
+     * @return
+     */
+    boolean createOutCoupon(Coupon coupon);
+
+    /**
+     * 外部导出券列表查询
+     * @param couponQueryParam
+     * @return
+     */
+    List<Coupon> queryOutCoupon(OutCouponQueryParam couponQueryParam);
+
+    /**
+     * 外部导出券统计接口
+     * @param couponQueryParam
+     * @return
+     */
+    Integer countOutCoupon(OutCouponQueryParam couponQueryParam);
+
 }
