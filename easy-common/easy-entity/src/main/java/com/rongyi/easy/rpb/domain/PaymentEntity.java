@@ -116,6 +116,10 @@ public class PaymentEntity implements Serializable {
 	 */
 	private Integer weixinMchId;
 
+	private String aliSellerId;
+
+	private String wechatMchId;
+
 	/**
 	 * 主键id
 	 * 
@@ -401,6 +405,22 @@ public class PaymentEntity implements Serializable {
 		this.weixinMchId = weixinMchId;
 	}
 
+	public String getAliSellerId() {
+		return aliSellerId;
+	}
+
+	public void setAliSellerId(String aliSellerId) {
+		this.aliSellerId = aliSellerId;
+	}
+
+	public String getWechatMchId() {
+		return wechatMchId;
+	}
+
+	public void setWechatMchId(String wechatMchId) {
+		this.wechatMchId = wechatMchId;
+	}
+
 	@Override
 	public String toString() {
 		return "PaymentEntity{" +
@@ -424,6 +444,8 @@ public class PaymentEntity implements Serializable {
 				", batchNo='" + batchNo + '\'' +
 				", refundRejected='" + refundRejected + '\'' +
 				", weixinMchId=" + weixinMchId +
+				", aliSellerId=" + aliSellerId +
+				", wechatMchId=" + wechatMchId +
 				'}';
 	}
 }
