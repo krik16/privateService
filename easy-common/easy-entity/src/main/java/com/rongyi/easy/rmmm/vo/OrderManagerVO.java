@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class OrderManagerVO implements Serializable {
 
@@ -52,6 +53,8 @@ public class OrderManagerVO implements Serializable {
 	private String receiverName;//收件人姓名
 	private String receiverPhone;//收件人电话
 	private String receiverAddress;//收件人地址
+
+	private List<OrderManagerCommodityVO> orderCommoditys;
 
 	public Date getDeleverAt() {
 		return deleverAt;
@@ -296,6 +299,14 @@ public class OrderManagerVO implements Serializable {
 
 	public void setActivityStatus(String activityStatus) {
 		this.activityStatus = activityStatus;
+	}
+
+	public List<OrderManagerCommodityVO> getOrderCommoditys() {
+		return orderCommoditys;
+	}
+
+	public void setOrderCommoditys(List<OrderManagerCommodityVO> orderCommoditys) {
+		this.orderCommoditys = orderCommoditys;
 	}
 
 	@Override
