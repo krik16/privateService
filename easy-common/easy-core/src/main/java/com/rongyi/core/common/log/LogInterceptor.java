@@ -20,7 +20,9 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         try {
             String logid = UUID.randomUUID().toString().substring(1, 16);
-            logid = logid + " @ " + request.getRemoteAddr();
+            if(!"127.0.0.1".equals(request.getRemoteAddr())) {
+                logid = logid + " @ " + request.getRemoteAddr();
+            }
             org.slf4j.MDC.put(LOG_ID, logid);
             org.apache.log4j.MDC.put(LOG_ID, logid);
             RpcContext.getContext().setAttachment(LOG_ID, logid);
