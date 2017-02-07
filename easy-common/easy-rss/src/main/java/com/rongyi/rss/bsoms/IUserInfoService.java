@@ -345,6 +345,23 @@ public interface IUserInfoService {
 	 * @return 影响账号数
 	 */
 	int updatePwdByUserPhone(String userPhone,String pwd);
+
+	/**
+	 * 变更 b_user_authority 的用户权限
+	 * @param authList
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	boolean updateSpecificAuthorities(List<String> authList,Integer userId) throws Exception;
+
+	/**
+	 * 删除b_user_authority 的用户权限
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	boolean deleteSpecificAuthoritiesByUserId(Integer userId) throws Exception;
 	/**
 	 * 修改账号资金状态
 	 */

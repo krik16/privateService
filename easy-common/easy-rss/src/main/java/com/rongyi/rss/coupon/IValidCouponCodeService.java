@@ -43,4 +43,16 @@ public interface IValidCouponCodeService {
      * @return
      */
     public String getUserMobile(String couponCode);
+
+    /**
+     * 家得利验券接口
+     * @param couponCode
+     * @param mallId
+     * @param shopId
+     * @param useMode
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    public ResponseResult validateJiadeliCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId, Integer userId,String comment);
 }
