@@ -5,8 +5,10 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponChannel;
+import com.rongyi.easy.coupon.entity.CouponSendRecordEntity;
 import com.rongyi.easy.coupon.entity.CouponSort;
 import com.rongyi.easy.coupon.param.CouponParam;
+import com.rongyi.easy.coupon.param.CouponRecordSearchParam;
 import com.rongyi.easy.coupon.param.OutCouponQueryParam;
 import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
@@ -239,4 +241,24 @@ public interface RoaVoucherCouponService {
      */
     Integer countOutCoupon(OutCouponQueryParam couponQueryParam);
 
+    /**
+     * 查看第三方导出记录
+     * @param param
+     * @return
+     */
+    public List<CouponSendRecordEntity> searchCouponSendReocord(CouponRecordSearchParam param);
+
+    /**
+     * 查看第三方导出记录个数
+     * @param param
+     * @return
+     */
+    public int countCouponSendReocord(CouponRecordSearchParam param);
+
+    /**
+     * 作废
+     * @param batchNo
+     * @return
+     */
+    public boolean deleteCouponSendReord(String batchNo);
 }

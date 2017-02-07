@@ -1,9 +1,13 @@
-package com.rongyi.easy.coupon.entity;
+package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class CouponSendRecordEntity implements Serializable {
+/**
+ * Created by yangyang on 2017/2/7.
+ */
+public class CouponRecordSearchParam implements Serializable{
+
     private Integer id;
 
     private String batchNo;
@@ -22,23 +26,43 @@ public class CouponSendRecordEntity implements Serializable {
 
     private Integer sendNum;
 
-    private String createUser;
+    private Date startAt;
 
-    private Date createAt;
+    private Date endAt;
 
-    private Date updateAt;
+    private String couponName;
 
-    private Integer isDeleted;
+    private Integer currentPage;
+
+    private Integer pageSize;
+
+    private Integer offset;
 
     private static final long serialVersionUID = 1L;
 
 
-    public Integer getIsDeleted() {
-        return isDeleted;
+    public Date getStartAt() {
+        return startAt;
     }
 
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
+    }
+
+    public String getCouponName() {
+        return couponName;
+    }
+
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
     }
 
     public Integer getId() {
@@ -113,29 +137,28 @@ public class CouponSendRecordEntity implements Serializable {
         this.sendNum = sendNum;
     }
 
-    public String getCreateUser() {
-        return createUser;
+
+    public Integer getCurrentPage() {
+        return currentPage;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public Integer getOffset() {
+        return offset;
     }
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
-
-
 }
