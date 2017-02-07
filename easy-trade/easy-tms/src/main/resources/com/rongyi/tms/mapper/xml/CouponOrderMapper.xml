@@ -107,7 +107,10 @@
             <if test="source == 4">
                 and trade_order.source = 1 and trade_order.weixin_app_id != '' and trade_order.weixin_app_id is not null
             </if>
-            <if test="source != 4">
+            <if test="source == 1">
+                and trade_order.source = 1 and (trade_order.weixin_app_id = '' or trade_order.weixin_app_id is null)
+            </if>
+            <if test="source != 4 and source != 1">
                 and trade_order.source = #{source}
             </if>
         </if>
