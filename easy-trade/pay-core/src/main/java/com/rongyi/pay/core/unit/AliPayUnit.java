@@ -7,6 +7,7 @@ import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.response.AlipayOpenAuthTokenAppResponse;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayTradePayResponse;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.rongyi.pay.core.Exception.AliPayException;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.ali.config.AliConfigure;
@@ -28,6 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -59,7 +61,7 @@ public class AliPayUnit {
         // 创建条码支付请求builder，设置请求参数
         AlipayTradeCreateRequestBuilder builder = new AlipayTradeCreateRequestBuilder()
                 .setAppAuthToken(aliScanPayReqData.getAppAuthToken())
-                .setOutTradeNo(aliScanPayReqData.getOutTradeNo())
+                .setOutTradeNo(aliScanPayReqData.getPayNo())
                 .setSubject(aliScanPayReqData.getSubject())
                 .setBuyerId(aliScanPayReqData.getBuyerId())
                 .setBuyerLogonId(aliScanPayReqData.getBuyerLogonId())
@@ -79,20 +81,20 @@ public class AliPayUnit {
             case SUCCESS:
                 LOGGER.info("支付宝扫码支付签名获取成功.");
                 Map<String, Object> map = new HashMap<>();
-                map.put("orderNo", aliScanPayReqData.getOutTradeNo());
+                map.put("payNo", aliScanPayReqData.getPayNo());
                 map.put("tradeNo", result.getResponse().getTradeNo());
                 map.put("totalPrice", aliScanPayReqData.getTotalAmount());
                 return map;
             case FAILED:
-                LOGGER.error("支付宝支付失败!!!");
+                LOGGER.error("支付宝支付失败!!!result={}",result);
                 break;
 
             case UNKNOWN:
-                LOGGER.error("系统异常，订单状态未知!!!");
+                LOGGER.error("系统异常，订单状态未知!!!result={}",result);
                 break;
 
             default:
-                LOGGER.error("不支持的交易状态，交易返回异常!!!");
+                LOGGER.error("不支持的交易状态，交易返回异常!!!result={}",result);
                 break;
         }
         throw new AliPayException(result.getResponse().getSubCode(), result.getResponse().getSubMsg());
@@ -208,7 +210,7 @@ public class AliPayUnit {
      * @param storeId      店铺id
      * @return AlipayF2FRefundResult
      */
-    public static AlipayF2FRefundResult f2fPayRefund(AliConfigure aliConfigure, String outTradeNo, Integer refundAmount, String outRefundNo, String refundReason, String storeId) {
+    public static AlipayTradeRefundResponse f2fPayRefund(AliConfigure aliConfigure, String outTradeNo, Integer refundAmount, String outRefundNo, String refundReason, String storeId) {
 
         LOGGER.info("当面付交易退款,aliConfigure={},outTradeNo={},refundAmount={},outRefundNo={},refundReason={},storeId={}",
                 aliConfigure, outTradeNo, refundAmount, outRefundNo, refundReason, storeId);
@@ -231,7 +233,7 @@ public class AliPayUnit {
         switch (result.getTradeStatus()) {
             case SUCCESS:
                 LOGGER.info("支付宝退款成功: )");
-                return result;
+                return result.getResponse();
             case FAILED:
                 LOGGER.error("支付宝退款失败!!!");
                 break;
@@ -256,10 +258,8 @@ public class AliPayUnit {
      * @param authType     授权类型，0:验证开发者公钥信息,1商户授权，2:用户授权
      * @param redirectUrl  回调地址
      * @return String
-     * @throws Exception
      */
-    public static String getAuthUrl(AliConfigure aliConfigure, String storeId, String scope, Integer authType, String redirectUrl)
-            throws Exception {
+    public static String getAuthUrl(AliConfigure aliConfigure, String storeId, String scope, Integer authType, String redirectUrl) {
 
         LOGGER.info("获取授权链接,aliConfigure={},storeId={},scope={},authType={},redirectUrl={}", aliConfigure, storeId, scope, authType, redirectUrl);
 
@@ -283,7 +283,11 @@ public class AliPayUnit {
         authUrl.append("&auth_type=");
         authUrl.append(authType);
         authUrl.append("&redirect_uri=");
-        authUrl.append(URLEncoder.encode(redirectUrl, "UTF-8"));
+        try {
+            authUrl.append(URLEncoder.encode(redirectUrl, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return authUrl.toString();
     }
 

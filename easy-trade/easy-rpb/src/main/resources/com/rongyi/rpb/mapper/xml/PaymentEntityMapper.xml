@@ -461,6 +461,16 @@
         for update
     </select>
 
+    <select id="selectByOrderNoAndPayChannelWithLock" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from payment_order
+        where pay_channel = #{payChannel,jdbcType=INTEGER} AND trade_type = 0 AND order_no = #{orderNo,jdbcType=VARCHAR}
+        limit 0,1
+        for update
+    </select>
+
     <select id="selectByPayNoAndOrderNo" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
         select

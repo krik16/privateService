@@ -49,6 +49,9 @@ public class WechatConfigure {
     //默认刷卡支付
     private String tradeType = ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getValueStr();
 
+    //支付通知地址
+    private String notifyUrl;
+
     //以下是几个API的路径：
 
     //统一下单API
@@ -241,7 +244,15 @@ public class WechatConfigure {
 		this.appSecret = appSecret;
 	}
 
-	@Override
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
+
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }

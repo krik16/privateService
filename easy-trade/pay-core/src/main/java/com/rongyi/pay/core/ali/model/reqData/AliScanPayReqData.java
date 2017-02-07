@@ -24,8 +24,9 @@ public class AliScanPayReqData extends BaseData{
 
     // 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
     // 需保证商户系统端不能重复，建议通过数据库sequence生成，
-    private String outTradeNo;
+    private String orderNo;
 
+    private String payNo;
 
     // 订单总金额，整形，此处单位为分，不能超过1亿元
     // 如果同时传入了【打折金额】,【不可打折金额】,【订单总金额】三者,则必须满足如下条件:【订单总金额】=【打折金额】+【不可打折金额】
@@ -98,12 +99,20 @@ public class AliScanPayReqData extends BaseData{
         this.buyerLogonId = buyerLogonId;
     }
 
-    public String getOutTradeNo() {
-        return outTradeNo;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getPayNo() {
+        return payNo;
+    }
+
+    public void setPayNo(String payNo) {
+        this.payNo = payNo;
     }
 
     public String getSellerId() {

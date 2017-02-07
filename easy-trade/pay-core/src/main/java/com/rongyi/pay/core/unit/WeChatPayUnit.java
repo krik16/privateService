@@ -234,11 +234,10 @@ public class WeChatPayUnit {
                 throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
             }
 
-        } catch (WeChatException e) {
+        } catch (WeChatException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
             LOGGER.error("刷卡失败,result={},e.getMessage={}", result, e.getMessage(), e);
-            e.printStackTrace();
             throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
         }
         return punchCardPayResData;
@@ -355,7 +354,7 @@ public class WeChatPayUnit {
      * 刷卡支付退款
      **/
 
-    public static ResponseData punchCardRefund(String orderNo, int refundFee, int totalFee, String refundNo, WechatConfigure wechatConfigure) {
+    public static RefundResData punchCardRefund(String orderNo, int refundFee, int totalFee, String refundNo, WechatConfigure wechatConfigure) {
         LOGGER.info("开始退款,weixinRefund orderNo={},refundFee={},totalFee={},newPayNo={},wechatConfigure={}", orderNo, refundFee, totalFee, refundNo, wechatConfigure);
         String result = null;
         try {
@@ -368,7 +367,7 @@ public class WeChatPayUnit {
             RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
             if ("SUCCESS".equals(refundResData.getReturn_code()) && "SUCCESS".equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
                 LOGGER.info("退款成功,refundResData={}", refundResData);
-                return ResponseData.success(refundResData);
+                return refundResData;
             } else {
                 LOGGER.info("退款失败 result={}", result);
                 throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), !StringUtils.isEmpty(refundResData.getErr_code_des()) ? refundResData.getErr_code_des() : ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());

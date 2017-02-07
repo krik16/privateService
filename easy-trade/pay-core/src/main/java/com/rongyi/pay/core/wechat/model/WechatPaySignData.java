@@ -9,6 +9,8 @@ import com.rongyi.pay.core.util.BaseData;
  **/
 public class WechatPaySignData extends BaseData {
 
+    private String orderNo;//订单号
+
     private String payNo; //支付单号
 
     private Integer totalFee; //支付金额，单位分
@@ -25,6 +27,14 @@ public class WechatPaySignData extends BaseData {
 
     private String authCode;//用户支付二维码
 
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
 
     public String getPayNo() {
         return payNo;
