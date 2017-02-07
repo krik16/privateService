@@ -95,4 +95,13 @@ public interface SpecialActivityService {
      */
     public DubboVO<List<ActivityCouponVO>> queryActivityCouponList(UserInfoVO malllifeUserInfo, String activityCode, String title);
 
+
+    /**
+     * 查询活动红包
+     *
+     * @param activityCode 活动code
+     * @return
+     */
+    public DubboVO<List<ActivityCouponVO>> queryActivityCoupon(String activityCode);
+
 }
