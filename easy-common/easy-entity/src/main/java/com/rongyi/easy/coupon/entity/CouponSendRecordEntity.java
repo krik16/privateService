@@ -20,7 +20,7 @@ public class CouponSendRecordEntity implements Serializable {
 
     private String email;
 
-    private Byte sendNum;
+    private Integer sendNum;
 
     private String createUser;
 
@@ -28,9 +28,48 @@ public class CouponSendRecordEntity implements Serializable {
 
     private Date updateAt;
 
-    private Byte isDeleted;
+    private Integer isDeleted;
+
+    private Integer currentPage;
+
+    private Integer pageSize;
+
+    private Integer offset;
 
     private static final long serialVersionUID = 1L;
+
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
 
     public Integer getId() {
         return id;
@@ -96,11 +135,11 @@ public class CouponSendRecordEntity implements Serializable {
         this.email = email;
     }
 
-    public Byte getSendNum() {
+    public Integer getSendNum() {
         return sendNum;
     }
 
-    public void setSendNum(Byte sendNum) {
+    public void setSendNum(Integer sendNum) {
         this.sendNum = sendNum;
     }
 
@@ -128,11 +167,5 @@ public class CouponSendRecordEntity implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public Byte getIsDeleted() {
-        return isDeleted;
-    }
 
-    public void setIsDeleted(Byte isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 }
