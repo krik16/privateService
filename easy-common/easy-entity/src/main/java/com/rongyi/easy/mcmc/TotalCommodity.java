@@ -711,10 +711,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			if(CollectionUtils.isNotEmpty(skus.keySet())) {
 				this.setSkus(new ArrayList<>(skus.keySet()));
 			}
-
-			//保存商品关联店铺的分公司品牌店铺信息
-			this.setBrandMid(userInfo.getBrandMid());
-
 			//老的app数据identity为-100
 			if(!(this != null && this.getIdentity() != null
 					&& this.getIdentity() == -100)) {

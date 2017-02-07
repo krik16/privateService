@@ -903,6 +903,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.commodityCategory = commodity.getCategory();
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
+		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
 		if(commodity.isSpot()){
