@@ -926,7 +926,7 @@
 				LEFT JOIN ry_rmmm.brand_info BI ON BI.id = E.brand_id
 				INNER JOIN ry_osm.order_event H2 ON A.order_no = H2.order_no AND H2.`status` = 2
 				INNER JOIN ry_osm.order_event H3 ON A.order_no = H3.order_no AND H3.`status` = 3
-				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4 AND H4.type = 4
+				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4 AND H4.type in (4,7)
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0 AND O.`status` = 2
 				LEFT JOIN ry_osm.order_cart_form OCF ON OCF.id = A.cart_id
 				LEFT JOIN ry_rpb.payment_order PO ON OCF.order_no = PO.order_no and PO.trade_type = 0 AND PO.`status` = 2
