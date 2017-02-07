@@ -35,6 +35,19 @@ public class TradeUserCodeDto implements Serializable {
 
     private Date endTime;
 
+    /**
+     * 作废时间
+     */
+    private Date obsoleteTime;
+
+    public Date getObsoleteTime() {
+        return obsoleteTime;
+    }
+
+    public void setObsoleteTime(Date obsoleteTime) {
+        this.obsoleteTime = obsoleteTime;
+    }
+
     public Integer getId() {
         return id;
     }

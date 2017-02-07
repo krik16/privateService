@@ -30,8 +30,17 @@ public class CouponSendRecordEntity implements Serializable {
 
     private Integer isDeleted;
 
+    private String acceptName;
+
     private static final long serialVersionUID = 1L;
 
+    public String getAcceptName() {
+        return acceptName;
+    }
+
+    public void setAcceptName(String acceptName) {
+        this.acceptName = acceptName;
+    }
 
     public Integer getIsDeleted() {
         return isDeleted;
