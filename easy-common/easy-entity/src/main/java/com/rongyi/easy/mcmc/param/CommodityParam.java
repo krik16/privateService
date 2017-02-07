@@ -96,6 +96,26 @@ public class CommodityParam {
 
 	private String brandId;
 
+	private String brandMid;
+
+	private String brandName;
+
+	public String getBrandMid() {
+		return brandMid;
+	}
+
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
 	public String getBrandId() {
 		return brandId;
 	}

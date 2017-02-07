@@ -1195,6 +1195,9 @@ public class CommodityVO  implements  Serializable, Cloneable {
 			vo.setUpdate_by(userInfo.getId().toString());
 		}
 		vo.setShelvesType(commodity.getShelvesType());
+
+		vo.setBrandMid(commodity.getBrandMid());
+		vo.setBrandName(commodity.getBrandName());
 		return vo;
 	}
 
