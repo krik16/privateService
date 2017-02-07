@@ -83,7 +83,7 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(20).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
                     sheet.getRow(i + 2).getCell(21).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
                     sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(25).setCellValue(vo.getPaymentId());
+                    sheet.getRow(i + 2).getCell(25).setCellValue(convertPaymentId(vo.getPaymentId()));
                     sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverName());
                     sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverPhone());
                     sheet.getRow(i + 2).getCell(28).setCellValue(vo.getReceiverAddress());
@@ -137,6 +137,14 @@ public class ExportOsmOrderExcel {
                 case 3: result = "支付宝"; break;
                 case 5: result = "微信"; break;
             }
+        }
+        return result;
+    }
+
+    private String convertPaymentId(String paymentId){
+        String result = "";
+        if(StringUtils.isNotBlank(paymentId)){
+            result = paymentId.split(",")[0];
         }
         return result;
     }
