@@ -97,6 +97,8 @@ public class RmmmUserInfoEntity implements Serializable{
 	private Integer level;//层级 1级 2级 3级
     private Integer chiefId; //主账号ID
     private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
+    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
     public Integer getId() {
 		return id;
 	}
@@ -447,6 +449,22 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setIsSuspended(Integer isSuspended) {
 		this.isSuspended = isSuspended;
 	}
+	
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
 
 	@Override
 	public String toString() {
@@ -472,7 +490,10 @@ public class RmmmUserInfoEntity implements Serializable{
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
 				+ ", isChief=" + isChief + ", level=" + level + ", chiefId="
-				+ chiefId + ", isSuspended=" + isSuspended + "]";
+				+ chiefId + ", isSuspended=" + isSuspended + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
+	
 }
 

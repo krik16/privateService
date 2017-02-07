@@ -86,7 +86,8 @@ public class UserInfo implements Serializable{
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
-
+    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
     public String getStopReason() {
 		return stopReason;
 	}
@@ -460,6 +461,22 @@ public class UserInfo implements Serializable{
 	public void setIsSuspended(Integer isSuspended) {
 		this.isSuspended = isSuspended;
 	}
+	
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
 
 	@Override
 	public String toString() {
@@ -487,6 +504,9 @@ public class UserInfo implements Serializable{
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
 				+ ", level=" + level + ", chiefId=" + chiefId
-				+ ", isSuspended=" + isSuspended + "]";
+				+ ", isSuspended=" + isSuspended + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
+	
 }

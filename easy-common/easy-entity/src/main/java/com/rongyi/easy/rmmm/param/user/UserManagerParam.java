@@ -81,6 +81,8 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private Integer level;//层级 1级 2级 3级
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
 	private Integer chiefId; //主账号ID
+	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
     public Integer getId() {
 		return id;
 	}
@@ -479,23 +481,48 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
 		this.settleOrgStrategy = settleOrgStrategy;
 	}
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
 	@Override
 	public String toString() {
-		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount + ", userLogo=" + userLogo + ", phone="
-				+ phone + ", checkCode=" + checkCode + ", nickName=" + nickName + ", uuId=" + uuId + ", invitCode="
-				+ invitCode + ", pswd=" + pswd + ", account=" + account + ", shopId=" + shopId + ", mallId=" + mallId
-				+ ", brandId=" + brandId + ", ownerId=" + ownerId + ", roleId=" + roleId + ", branchCompanyId="
-				+ branchCompanyId + ", userName=" + userName + ", cardId=" + cardId + ", type=" + type + ", roleType="
-				+ roleType + ", accountList=" + accountList + ", identity=" + identity + ", isCooperation="
-				+ isCooperation + ", memo=" + memo + ", createSource=" + createSource + ", stopReason=" + stopReason
-				+ ", creatingUserType=" + creatingUserType + ", merUserId=" + merUserId + ", userDesc=" + userDesc
-				+ ", flag=" + flag + ", isUpdate=" + isUpdate + ", defaultAccount=" + defaultAccount + ", jsessionid="
-				+ jsessionid + ", shareCode=" + shareCode + ", faceImg=" + faceImg + ", backImg=" + backImg
-				+ ", workImg=" + workImg + ", otherImg=" + otherImg + ", isOrdering=" + isOrdering + ", industryId="
-				+ industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum=" + childAccountNum
-				+ ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
-				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level="
-				+ level + ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + "]";
+		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount
+				+ ", userLogo=" + userLogo + ", phone=" + phone
+				+ ", checkCode=" + checkCode + ", nickName=" + nickName
+				+ ", uuId=" + uuId + ", invitCode=" + invitCode + ", pswd="
+				+ pswd + ", account=" + account + ", shopId=" + shopId
+				+ ", mallId=" + mallId + ", brandId=" + brandId + ", ownerId="
+				+ ownerId + ", roleId=" + roleId + ", branchCompanyId="
+				+ branchCompanyId + ", userName=" + userName + ", cardId="
+				+ cardId + ", type=" + type + ", roleType=" + roleType
+				+ ", accountList=" + accountList + ", identity=" + identity
+				+ ", isCooperation=" + isCooperation + ", memo=" + memo
+				+ ", createSource=" + createSource + ", stopReason="
+				+ stopReason + ", creatingUserType=" + creatingUserType
+				+ ", merUserId=" + merUserId + ", userDesc=" + userDesc
+				+ ", flag=" + flag + ", isUpdate=" + isUpdate
+				+ ", defaultAccount=" + defaultAccount + ", jsessionid="
+				+ jsessionid + ", shareCode=" + shareCode + ", faceImg="
+				+ faceImg + ", backImg=" + backImg + ", workImg=" + workImg
+				+ ", otherImg=" + otherImg + ", isOrdering=" + isOrdering
+				+ ", industryId=" + industryId + ", industryVersionId="
+				+ industryVersionId + ", childAccountNum=" + childAccountNum
+				+ ", validStartAtStamp=" + validStartAtStamp
+				+ ", validEndAtStamp=" + validEndAtStamp + ", contractCode="
+				+ contractCode + ", synTarget=" + synTarget + ", isChief="
+				+ isChief + ", level=" + level + ", settleOrgStrategy="
+				+ settleOrgStrategy + ", chiefId=" + chiefId
+				+ ", isOpenQrCode=" + isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
 	
 }

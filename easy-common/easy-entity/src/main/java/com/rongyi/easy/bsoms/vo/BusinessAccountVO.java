@@ -84,6 +84,8 @@ public class BusinessAccountVO implements Serializable {
 	private String position;   //申请所在城市
 
 	private String merchantAddress;//商户地址
+	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
 	public String getMerchantAddress() {
 		return merchantAddress;
 	}
@@ -500,30 +502,61 @@ public class BusinessAccountVO implements Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
+	
 	@Override
 	public String toString() {
-		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo + ", idCard=" + idCard + ", account=" + account
-				+ ", userAccount=" + userAccount + ", userName=" + userName + ", nickName=" + nickName + ", type="
-				+ type + ", identity=" + identity + ", groupId=" + groupId + ", groupMid=" + groupMid + ", groupName="
-				+ groupName + ", brandId=" + brandId + ", brandMid=" + brandMid + ", brandName=" + brandName
-				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName=" + mallName + ", shopId=" + shopId
-				+ ", shopMid=" + shopMid + ", shopName=" + shopName + ", roleId=" + roleId + ", roleName=" + roleName
-				+ ", branchId=" + branchId + ", branchName=" + branchName + ", parentShopId=" + parentShopId
-				+ ", grandpaShopId=" + grandpaShopId + ", accountStatus=" + accountStatus + ", isSuspended="
-				+ isSuspended + ", balance=" + balance + ", comment=" + comment + ", createSource=" + createSource
-				+ ", createBy=" + createBy + ", createName=" + createName + ", createAt=" + createAt + ", updateBy="
-				+ updateBy + ", updateName=" + updateName + ", updateAt=" + updateAt + ", stopReason=" + stopReason
-				+ ", stopAt=" + stopAt + ", virtualStopReason=" + virtualStopReason + ", virtualStopAt=" + virtualStopAt
-				+ ", isAcc=" + isAcc + ", certTime=" + certTime + ", userStatus=" + userStatus + ", shareCode="
-				+ shareCode + ", industryId=" + industryId + ", industryName=" + industryName + ", industryVersionId="
-				+ industryVersionId + ", industryVersionName=" + industryVersionName + ", childAccountNum="
-				+ childAccountNum + ", validStartAt=" + validStartAt + ", validEndAt=" + validEndAt + ", contractCode="
-				+ contractCode + ", synTarget=" + synTarget + ", isChief=" + isChief + ", level=" + level
-				+ ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId=" + chiefId + ", chiefName=" + chiefName
-				+ ", userAccounts=" + userAccounts + ", faceImg=" + faceImg + ", backImg=" + backImg + ", workImg="
-				+ workImg + ", otherImg=" + otherImg + ", resume=" + resume + ", position=" + position + "]";
+		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo
+				+ ", idCard=" + idCard + ", account=" + account
+				+ ", userAccount=" + userAccount + ", userName=" + userName
+				+ ", nickName=" + nickName + ", type=" + type + ", identity="
+				+ identity + ", groupId=" + groupId + ", groupMid=" + groupMid
+				+ ", groupName=" + groupName + ", brandId=" + brandId
+				+ ", brandMid=" + brandMid + ", brandName=" + brandName
+				+ ", mallId=" + mallId + ", mallMid=" + mallMid + ", mallName="
+				+ mallName + ", shopId=" + shopId + ", shopMid=" + shopMid
+				+ ", shopName=" + shopName + ", roleId=" + roleId
+				+ ", roleName=" + roleName + ", branchId=" + branchId
+				+ ", branchName=" + branchName + ", parentShopId="
+				+ parentShopId + ", grandpaShopId=" + grandpaShopId
+				+ ", accountStatus=" + accountStatus + ", isSuspended="
+				+ isSuspended + ", balance=" + balance + ", comment=" + comment
+				+ ", createSource=" + createSource + ", createBy=" + createBy
+				+ ", createName=" + createName + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateName=" + updateName
+				+ ", updateAt=" + updateAt + ", stopReason=" + stopReason
+				+ ", stopAt=" + stopAt + ", virtualStopReason="
+				+ virtualStopReason + ", virtualStopAt=" + virtualStopAt
+				+ ", isAcc=" + isAcc + ", certTime=" + certTime
+				+ ", userStatus=" + userStatus + ", shareCode=" + shareCode
+				+ ", industryId=" + industryId + ", industryName="
+				+ industryName + ", industryVersionId=" + industryVersionId
+				+ ", industryVersionName=" + industryVersionName
+				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
+				+ validStartAt + ", validEndAt=" + validEndAt
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", isChief=" + isChief + ", level=" + level
+				+ ", settleOrgStrategy=" + settleOrgStrategy + ", chiefId="
+				+ chiefId + ", chiefName=" + chiefName + ", userAccounts="
+				+ userAccounts + ", faceImg=" + faceImg + ", backImg="
+				+ backImg + ", workImg=" + workImg + ", otherImg=" + otherImg
+				+ ", resume=" + resume + ", position=" + position
+				+ ", merchantAddress=" + merchantAddress + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
-
+	
 	public String getBindingMid(){
 		if(getIdentity() == 0){
 			return groupMid;
