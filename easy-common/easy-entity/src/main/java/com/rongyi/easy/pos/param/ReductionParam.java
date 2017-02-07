@@ -19,7 +19,7 @@ public class ReductionParam implements Serializable {
     // 用户
     private String buyerId;
     // 渠道 0：全部 6：POS
-    private int platfrom;
+    private int platform;
     // 开始时间
     private Date startDate;
     // 结束时间
@@ -61,14 +61,6 @@ public class ReductionParam implements Serializable {
 
     public void setMallId(String mallId) {
         this.mallId = mallId;
-    }
-
-    public int getPlatfrom() {
-        return platfrom;
-    }
-
-    public void setPlatfrom(int platfrom) {
-        this.platfrom = platfrom;
     }
 
     public String getShopId() {
@@ -114,6 +106,14 @@ public class ReductionParam implements Serializable {
         this.pageIndex = pageIndex;
     }
 
+    public int getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(int platform) {
+        this.platform = platform;
+    }
+
     @Override
     public String toString() {
         return "ReductionParam{" +
@@ -121,7 +121,7 @@ public class ReductionParam implements Serializable {
                 ", mallId='" + mallId + '\'' +
                 ", shopId='" + shopId + '\'' +
                 ", buyerId='" + buyerId + '\'' +
-                ", platfrom=" + platfrom +
+                ", platform=" + platform +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", page=" + page +
