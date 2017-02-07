@@ -25,6 +25,19 @@ public class OutCouponQueryParam implements Serializable{
 
     private Integer start;
 
+    /**
+     * 是否是关联弹框需要的卡券列表；
+     */
+    private Integer isRelate;
+
+    public Integer getIsRelate() {
+        return isRelate;
+    }
+
+    public void setIsRelate(Integer isRelate) {
+        this.isRelate = isRelate;
+    }
+
     public Integer getStart() {
         return (currentPage-1)*pageSize;
     }
@@ -117,6 +130,8 @@ public class OutCouponQueryParam implements Serializable{
         sb.append(", startAt='").append(startAt).append('\'');
         sb.append(", status=").append(status);
         sb.append(", dateType=").append(dateType);
+        sb.append(", start=").append(start);
+        sb.append(", isRelate=").append(isRelate);
         sb.append('}');
         return sb.toString();
     }
