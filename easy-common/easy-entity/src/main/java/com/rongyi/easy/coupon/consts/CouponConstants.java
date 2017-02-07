@@ -106,12 +106,13 @@ public interface CouponConstants {
     }
 
     /**
-     * 券码类型：抵扣券[01] 代金券[02] 红包[03]
+     * 券码类型：抵扣券[01] 代金券[02] 红包[03] 外部到出券【04】
      */
     interface CouponCodeType {
         String REBATE = "01";
         String VOUCHER = "02";
         String REDENVELOPE = "03";
+        String OUTCOUPON = "04";
     }
 
     /**
