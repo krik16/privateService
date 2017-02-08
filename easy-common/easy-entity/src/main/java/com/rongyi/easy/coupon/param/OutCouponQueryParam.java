@@ -39,7 +39,7 @@ public class OutCouponQueryParam implements Serializable{
     }
 
     public Integer getStart() {
-        return (currentPage-1)*pageSize;
+        return pageSize==null?null:((currentPage-1)*pageSize);
     }
 
     public void setStart(Integer start) {
@@ -63,7 +63,7 @@ public class OutCouponQueryParam implements Serializable{
     }
 
     public Integer getPageSize() {
-        return pageSize==null?10:pageSize;
+        return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {
