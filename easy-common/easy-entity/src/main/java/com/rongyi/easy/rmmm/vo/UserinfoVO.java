@@ -74,7 +74,25 @@ public class UserinfoVO implements Serializable{
 	private String rsaUserId;//加密之后的用户id
 	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
 	private Integer defaultTerminal;//默认终端：0 无默认终端,1 容易逛,2 微信,3 终端机
-	
+	private String brandMId;     //与该用户关联的主营品牌
+	private String brandName; //主营品牌名
+
+	public String getBrandMId() {
+		return brandMId;
+	}
+
+	public void setBrandMId(String brandMId) {
+		this.brandMId = brandMId;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
 	public String getRsaUserId() {
 		return rsaUserId;
 	}
