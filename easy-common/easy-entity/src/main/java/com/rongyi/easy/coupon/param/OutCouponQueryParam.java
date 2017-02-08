@@ -47,7 +47,7 @@ public class OutCouponQueryParam implements Serializable{
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return currentPage==null?1:currentPage;
     }
 
     public Integer getDateType() {
@@ -63,7 +63,7 @@ public class OutCouponQueryParam implements Serializable{
     }
 
     public Integer getPageSize() {
-        return pageSize;
+        return pageSize==null?10:pageSize;
     }
 
     public void setPageSize(Integer pageSize) {

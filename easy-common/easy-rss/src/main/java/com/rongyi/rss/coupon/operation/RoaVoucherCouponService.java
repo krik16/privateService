@@ -286,4 +286,18 @@ public interface RoaVoucherCouponService {
      * @return
      */
     public Coupon findOutCouponDetail(String id);
+
+    /**
+     * 查询卡券关联的店铺列表
+     * @param outCouponQueryParam
+     * @return
+     */
+    public List<CouponShop> findRelatedShop(OutCouponQueryParam outCouponQueryParam);
+
+    /**
+     * 统计卡券关联的店铺列表
+     * @param outCouponQueryDTO
+     * @return
+     */
+    Integer countRelatedShop(OutCouponQueryParam outCouponQueryDTO);
 }
