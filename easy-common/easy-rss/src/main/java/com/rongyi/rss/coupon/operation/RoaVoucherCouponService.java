@@ -279,4 +279,11 @@ public interface RoaVoucherCouponService {
      * @return
      */
     public List<CouponBatchEntity> searchBatchReordByBatchNos(List<String> batchNos);
+
+    /**
+     * 外部到出券详情
+     * @param id
+     * @return
+     */
+    public Coupon findOutCouponDetail(String id);
 }
