@@ -3,10 +3,7 @@ package com.rongyi.rss.coupon.operation;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponChannel;
-import com.rongyi.easy.coupon.entity.CouponSendRecordEntity;
-import com.rongyi.easy.coupon.entity.CouponSort;
+import com.rongyi.easy.coupon.entity.*;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.param.CouponRecordSearchParam;
 import com.rongyi.easy.coupon.param.OutCouponQueryParam;
@@ -275,4 +272,11 @@ public interface RoaVoucherCouponService {
      * @return
      */
     public int countCodesByCouponIds(List<String> couponIds);
+
+    /**
+     * 根据批次号查询
+     * @param batchNos
+     * @return
+     */
+    public List<CouponBatchEntity> searchBatchReordByBatchNos(List<String> batchNos);
 }
