@@ -1109,9 +1109,9 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
-			this.setBrandName(brandName);
+			this.setBrandName(vo.getBrandName());
+			this.setBrandMid(vo.getBrandMid());
 			if (shopInfo != null) {
-				this.setBrandMid(shopInfo.getBrandMid());
 				this.setShopMid(shopInfo.getShopMid());
 			}
 
@@ -1197,7 +1197,6 @@ public class Commodity implements  Serializable,Cloneable{
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
 				}
 				this.setType(CommodityType.BULL.getValue());
-				this.setBrandMid(brandMid);
 				this.setShopMid(vo.getShopMid());
 			}
 		}

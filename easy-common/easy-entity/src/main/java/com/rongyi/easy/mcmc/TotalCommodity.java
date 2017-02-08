@@ -598,6 +598,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setCommodityIds(new ArrayList<ObjectId>());
 		this.getCommodityIds().add(commodity.getId());
 		this.setBrandMid(commodity.getBrandMid());
+		this.setBrandName(commodity.getBrandName());
 		this.setFilialeMids(new ArrayList<String>());
 		this.getFilialeMids().add(commodity.getFilialeMid());
 		this.setShopMids(new ArrayList<String>());
@@ -624,6 +625,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceIds(commodity.getServiceIds());
 		this.setMerchantId(commodity.getMerchantId());
 		this.setShelvesType(commodity.getShelvesType());
+
 	}
 
 	public String getSubheading() {
