@@ -144,6 +144,8 @@ public class CommodityBuyerVO implements Serializable {
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
 
+    private List<String> skus;
+
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
 	}
@@ -823,7 +825,15 @@ public class CommodityBuyerVO implements Serializable {
 		this.totalBuycount = totalBuycount;
 	}
 
-	public CommodityBuyerVO(Commodity commodity){
+    public List<String> getSkus() {
+        return skus;
+    }
+
+    public void setSkus(List<String> skus) {
+        this.skus = skus;
+    }
+
+    public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -949,6 +959,7 @@ public class CommodityBuyerVO implements Serializable {
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
                         ?true:false);
+        this.skus=commodity.getSkus();
     }
 
     @Override
