@@ -261,4 +261,11 @@ public interface RoaVoucherCouponService {
      * @return
      */
     public boolean deleteCouponSendReord(String batchNo);
+
+    /**
+     * 根据卡券id 获取发送记录信息
+     * @param couponId
+     * @return
+     */
+    public CouponSendRecordEntity selectByCouponId(String couponId);
 }
