@@ -38,6 +38,26 @@ public class CouponRecordSearchParam implements Serializable{
 
     private Integer offset;
 
+    private Integer couponNum;
+
+    private Integer couponCodeNum;
+
+    public Integer getCouponCodeNum() {
+        return couponCodeNum;
+    }
+
+    public void setCouponCodeNum(Integer couponCodeNum) {
+        this.couponCodeNum = couponCodeNum;
+    }
+
+    public Integer getCouponNum() {
+        return couponNum;
+    }
+
+    public void setCouponNum(Integer couponNum) {
+        this.couponNum = couponNum;
+    }
+
     private static final long serialVersionUID = 1L;
 
 
