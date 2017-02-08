@@ -165,7 +165,7 @@ public class ExportCouponOrderExcel {
                     result = "待付款";
                     break;
                 case 1:
-                    result = "已付款";
+                    result = "已完成";
                     break;
                 case 2:
                     result = "已取消";
@@ -174,10 +174,10 @@ public class ExportCouponOrderExcel {
                     result = "已删除";
                     break;
                 case 4:
-                    result = "退款中";
+                    result = "已完成";
                     break;
                 case 5:
-                    result = "已退款";
+                    result = "已完成";
                     break;
             }
         }
