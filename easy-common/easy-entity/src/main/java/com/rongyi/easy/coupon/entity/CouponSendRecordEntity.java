@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,6 +33,27 @@ public class CouponSendRecordEntity implements Serializable {
     private Integer isDeleted;
 
     private String acceptName;
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("batchNo", batchNo)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("count", count)
+                .append("acceptId", acceptId)
+                .append("phone", phone)
+                .append("email", email)
+                .append("sendNum", sendNum)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .append("acceptName", acceptName)
+                .append("isDeleted", isDeleted)
+                .toString();
+    }
+
 
     private static final long serialVersionUID = 1L;
 

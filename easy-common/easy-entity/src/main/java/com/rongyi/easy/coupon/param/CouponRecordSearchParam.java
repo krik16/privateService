@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -41,6 +43,33 @@ public class CouponRecordSearchParam implements Serializable{
     private Integer couponNum;
 
     private Integer couponCodeNum;
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("batchNo", batchNo)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("count", count)
+                .append("acceptId", acceptId)
+                .append("phone", phone)
+                .append("email", email)
+                .append("sendNum", sendNum)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("couponName", couponName)
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
+                .append("offset", offset)
+                .append("couponNum", couponNum)
+                .append("couponCodeNum", couponCodeNum)
+                .toString();
+    }
+
+
+
 
     public Integer getCouponCodeNum() {
         return couponCodeNum;

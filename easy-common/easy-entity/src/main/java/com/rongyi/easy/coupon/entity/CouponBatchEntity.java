@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 public class CouponBatchEntity implements Serializable {
@@ -14,6 +16,18 @@ public class CouponBatchEntity implements Serializable {
     private Byte isDeleted;
 
     private static final long serialVersionUID = 1L;
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("batchNo", batchNo)
+                .append("couponId", couponId)
+                .append("couponName", couponName)
+                .append("isDeleted", isDeleted)
+                .toString();
+    }
 
     public Integer getId() {
         return id;
