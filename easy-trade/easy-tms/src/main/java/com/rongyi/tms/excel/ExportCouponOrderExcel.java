@@ -168,7 +168,7 @@ public class ExportCouponOrderExcel {
                     result = "已完成";
                     break;
                 case 2:
-                    result = "已取消";
+                    result = "已关闭";
                     break;
                 case 3:
                     result = "已删除";
