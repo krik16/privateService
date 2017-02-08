@@ -236,7 +236,7 @@ public interface RoaVoucherCouponService {
      * @param couponQueryParam
      * @return
      */
-    Integer countOutCoupon(OutCouponQueryParam couponQueryParam);
+    int  countOutCoupon(OutCouponQueryParam couponQueryParam);
 
     /**
      * 查看第三方导出记录
