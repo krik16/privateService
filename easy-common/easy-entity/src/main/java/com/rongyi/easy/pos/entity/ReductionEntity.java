@@ -11,8 +11,11 @@ import java.util.List;
  * @date 2017-01-19
  */
 public class ReductionEntity implements Serializable {
-    private String id;
-    private String name;
+    private int id;
+    // 活动Id
+    private String activityId;
+    // 活动名称、标题
+    private String activityName;
     private Date startDate;
     private Date endDate;
     //条件类型，1:满金额，2:满件数
@@ -27,6 +30,8 @@ public class ReductionEntity implements Serializable {
     private int ruleMember;
     // 参与终端：1:POS，2:非POS
     private int rulePlatform;
+    //  订单号
+    private String orderNo;
     // 规则
     private List<ReductionRuleEntity> reductionRuleEntityList;
 
@@ -46,20 +51,20 @@ public class ReductionEntity implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getId() {
-        return id;
+    public String getActivityId() {
+        return activityId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
     }
 
-    public String getName() {
-        return name;
+    public String getActivityName() {
+        return activityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public List<ReductionRuleEntity> getReductionRuleEntityList() {
@@ -118,19 +123,37 @@ public class ReductionEntity implements Serializable {
         this.startDate = startDate;
     }
 
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ReductionEntity{" +
-                "conditionType=" + conditionType +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                "activityId='" + activityId + '\'' +
+                ", id=" + id +
+                ", activityName='" + activityName + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", conditionType=" + conditionType +
                 ", reductionType=" + reductionType +
                 ", ruleType=" + ruleType +
                 ", ruleRange=" + ruleRange +
                 ", ruleMember=" + ruleMember +
                 ", rulePlatform=" + rulePlatform +
+                ", orderNo='" + orderNo + '\'' +
                 ", reductionRuleEntityList=" + reductionRuleEntityList +
                 '}';
     }
