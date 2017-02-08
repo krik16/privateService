@@ -21,11 +21,11 @@ public interface IWechatPayService {
 
     /**
      * 普通支付退款
-     * payNo 付款单号
+     * orderNo 订单号
      * refundFee 退款金额(单位分)
      * wechatConfigureVo 支付参数
      **/
-    Map<String,Object> refund(String payNo, int refundFee, WechatConfigureVo wechatConfigureVo);
+    Map<String,Object> refund(String orderNo, int refundFee, WechatConfigureVo wechatConfigureVo);
 
     /**
      * 刷卡支付

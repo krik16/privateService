@@ -17,6 +17,7 @@ public enum  TradeConstantEnum {
     EXCEPTION_THIRD_PAY_NOTIFY("1020106","通知结果处理失败"),
     EXCEPTION_THIRD_REFUND_NOTIFY("1020107","退款结果处理失败"),
     EXCEPTION_TIME_OVER("1020108","请求已失效，请重新发起请求"),
+    EXCEPTION_ORDER_NOTIFY_URL_NULL("1020109","通知地址不存在"),
 
     PHP_SCORE_CHANNEL_TOKEN("NOTICECHANNEL","bb1b9a9d989b76b9860a1084ab6cbd3a"),//php积分商城端接口请求加密使用的channel和token
     PHP_SCORE_PUBLIC_KEY("publicKey","MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBD+TuKfbtDEW+Y3Tf0pjMQPTAonKTj6Hsm74TjXuWJzsIywIOLKJPSLoQ5pMhXO+RtgKYEBr1Z9z7r/VhY3LZF78w/jMpIBmIOD9+an4NUuUovCpeg4jIZY6bpgpJuxwWlaooXeG9srHOSGl6jVKnsZwD89R+BbU7WQ/gTzPTnwIDAQAB"),//php积分商城端接口请求加密使用的publicKey

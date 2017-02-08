@@ -20,6 +20,17 @@ public class AliConfigureVo {
 
     private String appAuthToken;//应用令牌
 
+    private static AliConfigureVo aliConfigureVo;
+
+    private AliConfigureVo (){}
+
+    public static synchronized AliConfigureVo getInstance() {
+        if (aliConfigureVo == null) {
+            aliConfigureVo = new AliConfigureVo();
+        }
+        return aliConfigureVo;
+    }
+
     public String getPid() {
         return pid;
     }
