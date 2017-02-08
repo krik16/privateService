@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class CouponOrderQueryParam implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	String orderStatus;//订单状态
+	String orderStatus;//订单状态    0：待付款、1：已完成、2：已取消(下单减库存订单超时）、3：已删除
     String createOrderBegin;//订单创建开始时间
     String createOrderEnd;//订单创建结束时间
     String orderNo;//订单编码

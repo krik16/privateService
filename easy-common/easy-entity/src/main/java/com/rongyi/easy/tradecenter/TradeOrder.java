@@ -117,6 +117,8 @@ public class TradeOrder implements Serializable {
     private Integer totalCredit;
     // 用户类型
     private Integer userType ;
+
+    private Integer couponStatus;//卡券状态  0待付款 2已取消 5已退款 9未核销 10已核销
     /**
      * 元
      *
@@ -584,5 +586,13 @@ public class TradeOrder implements Serializable {
 
     public void setUserType(Integer userType) {
         this.userType = userType;
+    }
+
+    public Integer getCouponStatus() {
+        return couponStatus;
+    }
+
+    public void setCouponStatus(Integer couponStatus) {
+        this.couponStatus = couponStatus;
     }
 }
