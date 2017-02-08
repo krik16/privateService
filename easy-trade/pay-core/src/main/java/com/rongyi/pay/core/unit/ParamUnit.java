@@ -21,8 +21,8 @@ public class ParamUnit {
      */
     public static void checkAliGetScanPaySignParam(AliScanPayReqData aliScanPayReqData){
 
-        if(StringUtils.isEmpty(aliScanPayReqData.getOutTradeNo())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"outTradeNo");
+        if(StringUtils.isEmpty(aliScanPayReqData.getPayNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"payNo");
         }
 
         if(StringUtils.isEmpty(aliScanPayReqData.getSubject())){
@@ -45,8 +45,8 @@ public class ParamUnit {
      */
     public static void checkAliPunchCardPayParam(AliPunchCardPayReqData aliPunchCardPayReqData){
 
-        if(StringUtils.isEmpty(aliPunchCardPayReqData.getOutTradeNo())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"outTradeNo");
+        if(StringUtils.isEmpty(aliPunchCardPayReqData.getPayNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"payNo");
         }
 
         if(StringUtils.isEmpty(aliPunchCardPayReqData.getAuthCode())){

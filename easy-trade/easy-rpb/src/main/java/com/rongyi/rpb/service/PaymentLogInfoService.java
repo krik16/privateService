@@ -116,4 +116,13 @@ public interface PaymentLogInfoService {
 	 **/
 	public abstract PaymentLogInfo getByWeixinNotify(Map<String,Object> map);
 
+	/**
+	 * 验证是否是重复支付
+	 * @param payNo
+	 * @param paymentLogInfo
+	 * @param payChannel
+	 * @return
+	 */
+	boolean validateRepeatPay(String payNo, PaymentLogInfo paymentLogInfo, Integer payChannel);
+
 }

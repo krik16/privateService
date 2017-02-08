@@ -4,10 +4,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayOpenAuthTokenAppRequest;
 import com.alipay.api.request.AlipaySystemOauthTokenRequest;
-import com.alipay.api.response.AlipayOpenAuthTokenAppResponse;
-import com.alipay.api.response.AlipaySystemOauthTokenResponse;
-import com.alipay.api.response.AlipayTradePayResponse;
-import com.alipay.api.response.AlipayTradeRefundResponse;
+import com.alipay.api.response.*;
 import com.rongyi.pay.core.Exception.AliPayException;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.ali.config.AliConfigure;
@@ -50,7 +47,7 @@ public class AliPayUnit {
      * @param aliConfigure      支付宝
      * @return map
      */
-    public static Map<String, Object> getScanPaySign(AliConfigure aliConfigure, AliScanPayReqData aliScanPayReqData) {
+    public static Map<String, Object> getScanPaySign(AliScanPayReqData aliScanPayReqData,AliConfigure aliConfigure) {
 
         LOGGER.info("支付宝扫码支付获取签名,aliScanPayReqData={},aliConfigure={}", aliScanPayReqData, aliConfigure);
 
@@ -107,7 +104,7 @@ public class AliPayUnit {
      * @param aliConfigure           支付宝
      * @return AlipayTradePayResponse
      */
-    public static AlipayTradePayResponse punchCardPay(AliConfigure aliConfigure, AliPunchCardPayReqData aliPunchCardPayReqData) {
+    public static AlipayTradePayResponse punchCardPay( AliPunchCardPayReqData aliPunchCardPayReqData,AliConfigure aliConfigure) {
 
         LOGGER.info("支付宝刷卡支付,aliScanPayReqData={},aliConfigure={}", aliPunchCardPayReqData, aliConfigure);
 
@@ -118,7 +115,7 @@ public class AliPayUnit {
         // 创建条码支付请求builder，设置请求参数
         AlipayTradePayRequestBuilder builder = new AlipayTradePayRequestBuilder()
                 .setAppAuthToken(aliPunchCardPayReqData.getAppAuthToken())
-                .setOutTradeNo(aliPunchCardPayReqData.getOutTradeNo())
+                .setOutTradeNo(aliPunchCardPayReqData.getPayNo())
                 .setSubject(aliPunchCardPayReqData.getSubject())
                 .setAuthCode(aliPunchCardPayReqData.getAuthCode())
                 .setTotalAmount(fenToYuan(aliPunchCardPayReqData.getTotalAmount()).toString())
@@ -138,15 +135,15 @@ public class AliPayUnit {
                 return result.getResponse();
 
             case FAILED:
-                LOGGER.error("支付宝支付失败!!!");
+                LOGGER.error("支付宝支付失败!!!result={}",result);
                 break;
 
             case UNKNOWN:
-                LOGGER.error("系统异常，订单状态未知!!!");
+                LOGGER.error("系统异常，订单状态未知!!!result={}",result);
                 break;
 
             default:
-                LOGGER.error("不支持的交易状态，交易返回异常!!!");
+                LOGGER.error("不支持的交易状态，交易返回异常!!!result={}",result);
                 break;
         }
         throw new AliPayException(result.getResponse().getSubCode(), result.getResponse().getSubMsg());
@@ -161,7 +158,7 @@ public class AliPayUnit {
      * @param tradeNo      交易流水号
      * @return AlipayF2FQueryResult
      */
-    public static AlipayF2FQueryResult f2fPayQuery(AliConfigure aliConfigure, String outTradeNo, String tradeNo) {
+    public static AlipayTradeQueryResponse f2fPayQuery(String outTradeNo, String tradeNo,AliConfigure aliConfigure) {
 
         LOGGER.info("当面付交易结果查询,aliConfigure={},outTradeNo={},tradeNo={}", aliConfigure, outTradeNo, tradeNo);
 
@@ -183,17 +180,17 @@ public class AliPayUnit {
         switch (result.getTradeStatus()) {
             case SUCCESS:
                 LOGGER.info("订单支付成功.");
-                return result;
+                return result.getResponse();
             case FAILED:
-                LOGGER.error("查询返回该订单未支付或支付失败!!!");
+                LOGGER.error("查询返回该订单未支付或支付失败!!!result={}",result);
                 break;
 
             case UNKNOWN:
-                LOGGER.error("系统异常，订单支付状态未知!!!");
+                LOGGER.error("系统异常，订单支付状态未知!!!result={}",result);
                 break;
 
             default:
-                LOGGER.error("不支持的交易状态，交易返回异常!!!");
+                LOGGER.error("不支持的交易状态，交易返回异常!!!result={}",result);
                 break;
         }
         throw new AliPayException(result.getResponse().getSubCode(), result.getResponse().getSubMsg());
@@ -210,7 +207,7 @@ public class AliPayUnit {
      * @param storeId      店铺id
      * @return AlipayF2FRefundResult
      */
-    public static AlipayTradeRefundResponse f2fPayRefund(AliConfigure aliConfigure, String outTradeNo, Integer refundAmount, String outRefundNo, String refundReason, String storeId) {
+    public static AlipayTradeRefundResponse f2fPayRefund(String outTradeNo, Integer refundAmount, String outRefundNo, String refundReason, String storeId,AliConfigure aliConfigure) {
 
         LOGGER.info("当面付交易退款,aliConfigure={},outTradeNo={},refundAmount={},outRefundNo={},refundReason={},storeId={}",
                 aliConfigure, outTradeNo, refundAmount, outRefundNo, refundReason, storeId);
@@ -259,7 +256,7 @@ public class AliPayUnit {
      * @param redirectUrl  回调地址
      * @return String
      */
-    public static String getAuthUrl(AliConfigure aliConfigure, String storeId, String scope, Integer authType, String redirectUrl) {
+    public static String getAuthUrl(String storeId, String scope, Integer authType, String redirectUrl,AliConfigure aliConfigure) {
 
         LOGGER.info("获取授权链接,aliConfigure={},storeId={},scope={},authType={},redirectUrl={}", aliConfigure, storeId, scope, authType, redirectUrl);
 
@@ -302,7 +299,7 @@ public class AliPayUnit {
      * @param authType     授权类型，1商户授权，2:用户授权
      * @return AuthorizeRespData
      */
-    public static AuthorizeRespData getAuthToken(AliConfigure aliConfigure, String appAuthCode, String appId, String storeId, String scope, Integer authType) {
+    public static AuthorizeRespData getAuthToken(String appAuthCode, String appId, String storeId, String scope, Integer authType,AliConfigure aliConfigure) {
 
         LOGGER.info("获取用户token,aliConfigure={}appAuthCode={},appId={},storeId={},scope={},authType={}", aliConfigure, appAuthCode, appId, storeId, scope, authType);
 
@@ -315,7 +312,7 @@ public class AliPayUnit {
             authorizeRespData.setAuthType(String.valueOf(authType));
             //商户授权token
             if (authType == 1) {
-                AlipayOpenAuthTokenAppResponse alipayOpenAuthTokenAppResponse = getMchAuthToken(aliConfigure, authorizeRespData.getAppId(), authorizeRespData.getAppAuthCode());
+                AlipayOpenAuthTokenAppResponse alipayOpenAuthTokenAppResponse = getMchAuthToken(authorizeRespData.getAppId(), authorizeRespData.getAppAuthCode(),aliConfigure);
                 if (StringUtils.isNotEmpty(alipayOpenAuthTokenAppResponse.getSubCode())) {
                     throw new AliPayException(alipayOpenAuthTokenAppResponse.getSubCode(), alipayOpenAuthTokenAppResponse.getSubMsg());
                 }
@@ -324,7 +321,7 @@ public class AliPayUnit {
             }
             //用户授权token
             else {
-                AlipaySystemOauthTokenResponse alipaySystemOauthTokenResponse = getUserAuthToken(aliConfigure, authorizeRespData.getAppId(), authorizeRespData.getAppAuthCode());
+                AlipaySystemOauthTokenResponse alipaySystemOauthTokenResponse = getUserAuthToken(authorizeRespData.getAppId(), authorizeRespData.getAppAuthCode(),aliConfigure);
                 if (StringUtils.isNotEmpty(alipaySystemOauthTokenResponse.getSubCode())) {
                     throw new AliPayException(alipaySystemOauthTokenResponse.getSubCode(), alipaySystemOauthTokenResponse.getSubMsg());
                 }
@@ -354,7 +351,7 @@ public class AliPayUnit {
      * @return AlipayOpenAuthTokenAppResponse
      * @throws Exception
      */
-    private static AlipayOpenAuthTokenAppResponse getMchAuthToken(AliConfigure aliConfigure, String appId, String authCode) throws Exception {
+    private static AlipayOpenAuthTokenAppResponse getMchAuthToken(String appId, String authCode,AliConfigure aliConfigure) throws Exception {
 
         //检查参数
         ParamUnit.checkAliGetTokenParam(appId, authCode);
@@ -378,7 +375,7 @@ public class AliPayUnit {
      * @return AlipaySystemOauthTokenResponse
      * @throws Exception
      */
-    private static AlipaySystemOauthTokenResponse getUserAuthToken(AliConfigure aliConfigure, String appId, String authCode) throws Exception {
+    private static AlipaySystemOauthTokenResponse getUserAuthToken(String appId, String authCode,AliConfigure aliConfigure) throws Exception {
 
         AlipayClient alipayClient = new DefaultAlipayClient(aliConfigure.getOpenApiDomain(), appId, aliConfigure.getPrivateKey(),
                 "json", "GBK", aliConfigure.getAlipayPublicKey());

@@ -813,4 +813,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         PaymentEntity paymentEntity =  this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNoAndPayChannelWithLock", map);
         return (paymentEntity != null && paymentEntity.getId() != null ) ? paymentEntity : null;
     }
+
+    @Override
+    public PaymentEntity selectByPayNoWithLock(String payNo, Integer payChannel, Integer tradeType, Integer status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("payNo", payNo);
+        params.put("payChannel", payChannel);
+        params.put("tradeType", tradeType);
+        params.put("status", status);
+        return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoWithLock", params);
+    }
 }

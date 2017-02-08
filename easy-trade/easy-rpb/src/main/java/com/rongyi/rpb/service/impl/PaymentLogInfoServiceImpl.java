@@ -162,7 +162,8 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
     }
 
 
-    private boolean validateRepeatPay(String payNo, PaymentLogInfo paymentLogInfo, Integer payChannel) {
+    @Override
+    public boolean validateRepeatPay(String payNo, PaymentLogInfo paymentLogInfo, Integer payChannel) {
         boolean bool = validateByTradeNoAndPayNo(paymentLogInfo.getTrade_no(), paymentLogInfo.getOutTradeNo());
         if (bool) {
             LOGGER.info("支付重复通知，忽略此通知，tradeNo={},payChannel={}", paymentLogInfo.getTrade_no(), payChannel);

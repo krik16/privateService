@@ -2,11 +2,11 @@ package ali;
 
 import base.JUnit4Runner;
 import com.alipay.api.response.AlipayTradePayResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
-import com.rongyi.pay.core.ali.model.result.AlipayF2FQueryResult;
-import com.rongyi.pay.core.ali.model.result.AlipayF2FRefundResult;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.sun.org.glassfish.gmbal.Description;
 import org.junit.Test;
@@ -68,12 +68,12 @@ public class AliPayUnitTest{
         aliScanPayReqData.setStoreId(storeId);
 //        aliScanPayReqData.setBody(body);
         aliScanPayReqData.setTimeoutExpress(timeoutExpress);
-        aliScanPayReqData.setOutTradeNo(outTradeNo);
+        aliScanPayReqData.setPayNo(outTradeNo);
         aliScanPayReqData.setSubject(subject);
         aliScanPayReqData.setTotalAmount(totalAmount);
         AliConfigure aliConfigure  = AliConfigure.init();
         try {
-            Map<String,Object> map = AliPayUnit.getScanPaySign(aliConfigure, aliScanPayReqData);
+            Map<String,Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure);
             LOGGER.info("map={}",map);
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
@@ -124,12 +124,12 @@ public class AliPayUnitTest{
         aliPunchCardPayReqData.setStoreId(storeId);
         aliPunchCardPayReqData.setBody(body);
         aliPunchCardPayReqData.setTimeoutExpress(timeoutExpress);
-        aliPunchCardPayReqData.setOutTradeNo(outTradeNo);
+        aliPunchCardPayReqData.setPayNo(outTradeNo);
         aliPunchCardPayReqData.setSubject(subject);
         aliPunchCardPayReqData.setTotalAmount(totalAmount);
         AliConfigure aliConfigure  = AliConfigure.init();
         try {
-            AlipayTradePayResponse alipayTradePayResponse = AliPayUnit.punchCardPay(aliConfigure, aliPunchCardPayReqData);
+            AlipayTradePayResponse alipayTradePayResponse = AliPayUnit.punchCardPay(aliPunchCardPayReqData,aliConfigure);
             LOGGER.info("tradeNo={},orderNo={}",alipayTradePayResponse.getTradeNo(),alipayTradePayResponse.getOutTradeNo());
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
@@ -141,7 +141,7 @@ public class AliPayUnitTest{
     public void testf2fPayQuery(){
         AliConfigure aliConfigure  = AliConfigure.init();
         try {
-            AlipayF2FQueryResult result = AliPayUnit.f2fPayQuery(aliConfigure, "12345678", "2016110421001004240244517494");
+            AlipayTradeQueryResponse result = AliPayUnit.f2fPayQuery("12345678", "2016110421001004240244517494",aliConfigure);
             LOGGER.info("result={}",result);
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
@@ -154,7 +154,7 @@ public class AliPayUnitTest{
     public void testF2fPayRefund(){
         AliConfigure aliConfigure  = AliConfigure.init();
         try {
-            AlipayF2FRefundResult result = AliPayUnit.f2fPayRefund(aliConfigure, "1234", 1, "1111111112", "买错了", "11");
+            AlipayTradeRefundResponse result = AliPayUnit.f2fPayRefund("1234", 1, "1111111112", "买错了", "11",aliConfigure);
             LOGGER.info("result={}",result);
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
@@ -170,11 +170,11 @@ public class AliPayUnitTest{
             String redirectUri = "http://120.25.197.98:8090/fuwuchuanDemo/gateway.do";
 
             //商户授权地址
-            String mchAuthUrl =  AliPayUnit.getAuthUrl(aliConfigure,"1111",null,1,redirectUri);
+            String mchAuthUrl =  AliPayUnit.getAuthUrl("1111",null,1,redirectUri,aliConfigure);
             LOGGER.info("mchAuthUrl={}", mchAuthUrl);
 
             //用户授权地址
-            String userAuthUrl =  AliPayUnit.getAuthUrl(aliConfigure,"2222","auth_base",2,redirectUri);
+            String userAuthUrl =  AliPayUnit.getAuthUrl("2222","auth_base",2,redirectUri,aliConfigure);
             LOGGER.info("userAuthUrl={}",userAuthUrl);
         }catch (Exception e){
             LOGGER.warn(e.getMessage());
@@ -193,7 +193,7 @@ public class AliPayUnitTest{
     public  void testGetAliBuyerId(){
         AliConfigure aliConfigure  = AliConfigure.init();
         try {
-            AliPayUnit.getAuthToken(aliConfigure,"dbc9a8e6988b4a8aa17f1c029a16RX24","2016091201888052","1","",2);
+            AliPayUnit.getAuthToken("dbc9a8e6988b4a8aa17f1c029a16RX24","2016091201888052","1","",2,aliConfigure);
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
         }

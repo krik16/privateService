@@ -11,6 +11,12 @@
 	<dubbo:service interface="com.rongyi.rss.rpb.IRpbService" version="${dubbo.version}" ref="rpbService" />
 	<bean id="rpbService" class="com.rongyi.rpb.service.impl.RpbServiceImpl" />
 
+	<!--支付宝支付服务接口-->
+	<bean id="aliPayService" class="com.rongyi.rpb.service.impl.v2.AliPayServiceImpl" />
+
+	<!--微信支付服务接口-->
+	<bean id="wechatPayService" class="com.rongyi.rpb.service.impl.v2.WechatPayServiceImpl" />
+
 	<!-- 微信批量退款定时任务 -->
 	 <dubbo:service interface="com.rongyi.rss.service.trigger.WeixinBatchRefundTrigger" version="${dubbo.version}" ref="weixinBatchRefundTrigger" retries="0"/>	
 	 <bean id="weixinBatchRefundTrigger" class="com.rongyi.rpb.service.impl.WeixinBatchRefundTriggerImpl" />

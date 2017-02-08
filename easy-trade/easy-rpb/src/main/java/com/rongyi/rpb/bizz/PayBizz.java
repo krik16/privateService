@@ -1,9 +1,12 @@
 package com.rongyi.rpb.bizz;
 
+import com.alipay.api.response.AlipayTradePayResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.ali.config.AliConfigure;
+import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
@@ -127,7 +130,7 @@ public class PayBizz {
 
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
-        Map<String, Object> map = AliPayUnit.getScanPaySign(aliConfigure, aliScanPayReqData);
+        Map<String, Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure);
 
         //保存异步通知地址
         redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), aliConfigure.getNotifyUrl());
@@ -138,6 +141,55 @@ public class PayBizz {
         return map;
     }
 
+
+    /**
+     * 支付宝刷卡支付
+     * @param aliPunchCardPayReqData 业务参数
+     * @param aliConfigure 支付参数
+     * @return AlipayTradePayResponse
+     */
+    public AlipayTradePayResponse aliPunchCardPay(AliPunchCardPayReqData aliPunchCardPayReqData,AliConfigure aliConfigure){
+
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(aliPunchCardPayReqData.getOrderNo(),aliPunchCardPayReqData.getTotalAmount(),aliPunchCardPayReqData.getSellerId(),
+                "",Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,Constants.ORDER_TYPE.ORDER_TYPE_6);
+
+        //发起支付
+        aliPunchCardPayReqData.setPayNo(paymentEntity.getPayNo());
+        AlipayTradePayResponse alipayTradePayResponse = AliPayUnit.punchCardPay(aliPunchCardPayReqData, aliConfigure);
+
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(alipayTradePayResponse.getTradeNo(), alipayTradePayResponse.getOutTradeNo(), Constants.REPLAY_FLAG.REPLAY_FLAG0,
+                "SUCCESS", aliPunchCardPayReqData.getTotalAmount(), alipayTradePayResponse.getBuyerUserId(), alipayTradePayResponse.getBuyerLogonId(),
+                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+
+        return alipayTradePayResponse;
+    }
+
+    /**
+     * 支付宝面对面支付查询
+     * @param orderNo 订单号
+     * @param aliConfigure 支付参数
+     * @return AlipayTradeQueryResponse
+     */
+    public AlipayTradeQueryResponse aliF2FPayQuery(String orderNo,AliConfigure aliConfigure){
+
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+
+        if (oldPaymentEntity == null) {
+            throw new TradeException("此订单支付记录不存在,orderNo={}", orderNo);
+        }
+        return AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(),null,aliConfigure);
+
+
+    }
 
     /**
      * 初始化支付记录信息

@@ -10,4 +10,8 @@ public class AliPayException extends TradeException{
         this.code = code;
     }
 
+    public AliPayException(String message)
+    {
+        super(message);
+    }
 }

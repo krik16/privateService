@@ -285,4 +285,14 @@ public interface PaymentService {
 	 * 根据订单号和支付方式加锁查询
 	 */
 	PaymentEntity selectByOrderNoAndPayChannelWithLock(String orderNo,Integer payChannel);
+
+	/**
+	 * 根据付款单号加锁查询
+	 * @param payNo
+	 * @param payChannel
+	 * @param tradeType
+	 * @param status
+	 * @return
+	 */
+	PaymentEntity selectByPayNoWithLock(String payNo, Integer payChannel, Integer tradeType, Integer status);
 }

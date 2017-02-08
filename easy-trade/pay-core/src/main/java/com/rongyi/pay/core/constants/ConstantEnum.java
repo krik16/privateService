@@ -39,6 +39,7 @@ public enum ConstantEnum {
 	EXCEPTION_ALI_QUERY_ORDER("1019202","订单查询失败"),
 	EXCEPTION_ALI_AUTHORIZE_FAIL("1019203","支付宝授权信息获取失败"),
 	EXCEPTION_ALI_REFUND_FAIL("1019204","支付宝退款失败"),
+	EXCEPTION_ALI_PUNCH_CARD_PAY_FAIL("1019205","支付宝刷卡支付失败"),
 
 
 

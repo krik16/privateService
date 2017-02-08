@@ -13,6 +13,12 @@ import java.util.List;
  **/
 public class AliPunchCardPayReqData extends BaseData{
 
+    //订单号
+    private String orderNo;
+
+    //付款单号
+    private String payNo;
+
     //支付授权码
     private String appAuthToken;
 
@@ -21,10 +27,6 @@ public class AliPunchCardPayReqData extends BaseData{
 
     // 付款条码，用户支付宝钱包手机app点击“付款”产生的付款条码
     private String authCode;
-
-    // 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
-    // 需保证商户系统端不能重复，建议通过数据库sequence生成，
-    private String outTradeNo;
 
 
     // 订单总金额，整形，此处单位为分，不能超过1亿元
@@ -74,6 +76,22 @@ public class AliPunchCardPayReqData extends BaseData{
     // (推荐使用，相对时间) 支付超时时间，5m 5分钟
     private String timeoutExpress;
 
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getPayNo() {
+        return payNo;
+    }
+
+    public void setPayNo(String payNo) {
+        this.payNo = payNo;
+    }
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -96,14 +114,6 @@ public class AliPunchCardPayReqData extends BaseData{
 
     public void setAuthCode(String authCode) {
         this.authCode = authCode;
-    }
-
-    public String getOutTradeNo() {
-        return outTradeNo;
-    }
-
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
     }
 
     public String getSellerId() {
