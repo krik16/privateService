@@ -268,4 +268,11 @@ public interface RoaVoucherCouponService {
      * @return
      */
     public CouponSendRecordEntity selectByCouponId(String couponId);
+
+    /**
+     * 根据券id列表统计券码数量
+     * @param couponIds
+     * @return
+     */
+    public int countCodesByCouponIds(List<String> couponIds);
 }
