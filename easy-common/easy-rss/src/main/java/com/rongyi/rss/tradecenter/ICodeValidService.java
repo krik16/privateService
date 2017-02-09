@@ -52,4 +52,16 @@ public interface ICodeValidService {
      * @return
      */
     public boolean validateHagenCoupon(String couponCodeMd5, byte status);
+
+    /**
+     * 优惠券验证
+     * @param couponCode
+     * @param mallId
+     * @param shopId
+     * @param useMode
+     * @param couponId
+     * @param sellerId
+     * @return
+     */
+    public ResponseResult validateCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId, Integer sellerId, String commont);
 }
