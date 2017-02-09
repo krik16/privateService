@@ -10,7 +10,11 @@ public class CouponSendRecordEntity implements Serializable {
 
     private String batchNo;
 
+    private Integer type;
 
+    private String typeVal;
+
+    private Integer count;
 
     private Integer acceptId;
 
@@ -37,6 +41,9 @@ public class CouponSendRecordEntity implements Serializable {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("batchNo", batchNo)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("count", count)
                 .append("acceptId", acceptId)
                 .append("phone", phone)
                 .append("email", email)
@@ -91,6 +98,30 @@ public class CouponSendRecordEntity implements Serializable {
 
     public void setBatchNo(String batchNo) {
         this.batchNo = batchNo;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getTypeVal() {
+        return typeVal;
+    }
+
+    public void setTypeVal(String typeVal) {
+        this.typeVal = typeVal;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public Integer getAcceptId() {
