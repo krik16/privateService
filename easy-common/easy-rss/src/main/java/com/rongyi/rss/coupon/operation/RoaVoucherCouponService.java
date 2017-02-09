@@ -310,4 +310,6 @@ public interface RoaVoucherCouponService {
     int createSendRecord(CouponSendRecordVO couponSendRecordVO);
 
 
+    List<CouponAcceptEntity> getSendTargets();
+
 }
