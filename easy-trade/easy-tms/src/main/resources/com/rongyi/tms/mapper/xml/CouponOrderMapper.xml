@@ -46,7 +46,7 @@
         trade_order.pay_channel,
         ROUND(trade_order.pay_amount/100,2) as pay_amount,
         trade_order.coupon_discount_type,
-        case source
+        case
         when trade_order.source = 1 and trade_order.weixin_app_id is not null and trade_order.weixin_app_id != ''
         then 4
         else trade_order.source
