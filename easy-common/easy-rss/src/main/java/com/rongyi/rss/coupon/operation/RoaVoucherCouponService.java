@@ -8,6 +8,7 @@ import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.param.CouponRecordSearchParam;
 import com.rongyi.easy.coupon.param.OutCouponQueryParam;
 import com.rongyi.easy.coupon.param.VoucherCouponParam;
+import com.rongyi.easy.coupon.vo.CouponSendRecordVO;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
@@ -300,4 +301,13 @@ public interface RoaVoucherCouponService {
      * @return
      */
     Integer countRelatedShop(OutCouponQueryParam outCouponQueryDTO);
+
+    /**
+     * 创建外部导出券发送记录
+     * @param couponSendRecordVO
+     * @return
+     */
+    int createSendRecord(CouponSendRecordVO couponSendRecordVO);
+
+
 }
