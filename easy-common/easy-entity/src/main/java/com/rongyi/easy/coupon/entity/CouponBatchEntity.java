@@ -15,6 +15,12 @@ public class CouponBatchEntity implements Serializable {
 
     private Byte isDeleted;
 
+    private Integer type;
+
+    private String typeVal;
+
+    private Integer count;
+
     private static final long serialVersionUID = 1L;
 
 
@@ -26,7 +32,34 @@ public class CouponBatchEntity implements Serializable {
                 .append("couponId", couponId)
                 .append("couponName", couponName)
                 .append("isDeleted", isDeleted)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("count", count)
                 .toString();
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getTypeVal() {
+        return typeVal;
+    }
+
+    public void setTypeVal(String typeVal) {
+        this.typeVal = typeVal;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public Integer getId() {
