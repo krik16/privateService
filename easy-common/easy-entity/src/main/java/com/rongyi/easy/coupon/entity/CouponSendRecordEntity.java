@@ -34,6 +34,8 @@ public class CouponSendRecordEntity implements Serializable {
 
     private String acceptName;
 
+    private String couponName;
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -50,10 +52,19 @@ public class CouponSendRecordEntity implements Serializable {
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("acceptName", acceptName)
+                .append("couponName", couponName)
                 .append("isDeleted", isDeleted)
                 .toString();
     }
 
+
+    public String getCouponName() {
+        return couponName;
+    }
+
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
+    }
 
     private static final long serialVersionUID = 1L;
 
