@@ -1156,7 +1156,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 			this.setSubheading(vo.getSubheading());
 			this.setCommodityDetails(vo.getCommodityDetails());
-			this.setCommodityModelNo(vo.getCommodityModelNo());
+
 			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 			this.setGroupMid(vo.getGroupMid());
 			this.setShelvesType(vo.getShelvesType());

@@ -100,6 +100,8 @@ public class CommodityParam {
 
 	private String brandName;
 
+	private String commodityModelNo;
+
 	public String getBrandMid() {
 		return brandMid;
 	}
@@ -410,6 +412,9 @@ public class CommodityParam {
 				", commodityDetails=" + commodityDetails+
 				", shelvesType=" + shelvesType+
 				", brandId=" + brandId+
+				", brandMid=" + brandMid+
+				", brandName=" + brandName+
+				", commodityModelNo=" + commodityModelNo+
 				'}';
 	}
 
@@ -435,5 +440,13 @@ public class CommodityParam {
 
 	public void setSubheading(String subheading) {
 		this.subheading = subheading;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
 	}
 }
