@@ -680,6 +680,8 @@ public class TCCouponVO implements Serializable {
                     this.setCouponType("02"); break;
                 case 2:
                     this.setCouponType("03"); break;
+                case 4:
+                    this.setCouponType("04"); break;
                 default:
                     throw new IllegalArgumentException(String.format("couponType=%s,没匹配上", convertCouponType));
             }
