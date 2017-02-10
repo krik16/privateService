@@ -268,6 +268,16 @@ public interface RoaVoucherCouponService {
     public CouponSendRecordEntity selectByCouponId(String couponId);
 
     /**
+     * 根据卡券id 获取发送记录关联的卡券数据
+     * @param couponId
+     * @return
+     */
+    public CouponBatchEntity selectBatchByCouponId(String couponId);
+
+
+
+
+    /**
      * 根据券id列表统计券码数量
      * @param couponIds
      * @return
@@ -310,6 +320,16 @@ public interface RoaVoucherCouponService {
     int createSendRecord(CouponSendRecordVO couponSendRecordVO);
 
 
+    /**
+     * 获取发送对象列表
+     * @return
+     */
     List<CouponAcceptEntity> getSendTargets();
 
+    /**
+     * 重发
+     * @param id
+     * @return
+     */
+    boolean resend(Integer id);
 }
