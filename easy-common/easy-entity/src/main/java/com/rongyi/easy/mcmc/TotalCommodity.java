@@ -8,6 +8,7 @@ import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.activitymanage.vo.CommodityVO;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
@@ -96,13 +97,31 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 
-
 	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
-	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> serviceIds;//微信公众号ids或者容易逛id
 	private Integer accountType;
 	private String merchantId;  //商户id
 	private List<WechatInfoVo> wechatInfoVos;
 
+	private List<String> onServiceIds;
+	private List<String> offServiceIds;
+
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	public List<WechatInfoVo> getWechatInfoVos() {
 		return wechatInfoVos;
@@ -491,19 +510,18 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.shelvesType = shelvesType;
 	}
 
-	public List<Integer> getServiceIds() {
+	public List<String> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<Integer> serviceIds) {
+	public void setServiceIds(List<String> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
 	@Override
 	public String toString() {
 		return "TotalCommodity{" +
-				"brandMid='" + brandMid + '\'' +
-				", id=" + id +
+				"id=" + id +
 				", name='" + name + '\'' +
 				", category='" + category + '\'' +
 				", status=" + status +
@@ -529,8 +547,11 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", commodityIds=" + commodityIds +
 				", specList=" + specList +
 				", reason='" + reason + '\'' +
+				", brandMid='" + brandMid + '\'' +
 				", filialeMids=" + filialeMids +
 				", shopMids=" + shopMids +
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", goodsParam=" + goodsParam +
 				", supportCourierDeliver=" + supportCourierDeliver +
 				", supportSelfPickup=" + supportSelfPickup +
 				", identity=" + identity +
@@ -540,12 +561,17 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", templateId=" + templateId +
 				", goodsSec=" + goodsSec +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
 				", discount=" + discount +
-				", commodityModelNo=" + commodityModelNo +
-				", goodsParam=" + goodsParam +
 				", shelvesType=" + shelvesType +
-				", subheading=" + subheading+
-				", commodityDetails=" + commodityDetails+
+				", locationIds=" + locationIds +
+				", serviceIds=" + serviceIds +
+				", accountType=" + accountType +
+				", merchantId='" + merchantId + '\'' +
+				", wechatInfoVos=" + wechatInfoVos +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
 				'}';
 	}
 
@@ -580,7 +606,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setPicList(commodity.getPicList());
 		this.setFreight(0);//app默认买家承担运费
 		this.setTerminalType(commodity.getTerminalType());
-		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
 		this.setRegisterAt(commodity.getRegisterAt());
 		this.setSoldOutAt(commodity.getSoldOutAt());
 		this.setSource(commodity.getSource());
@@ -680,8 +705,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 			this.setUpdateAt(new Date());
 			this.setPurchaseCount(param.getPurchaseCount());
-			this.setWeAndTeStatus(StringUtils.isNotBlank(param.getWeAndTeStatus()) ?
-										param.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+			/*this.setWeAndTeStatus(StringUtils.isNotBlank(param.getWeAndTeStatus()) ?
+										param.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);*/
 			this.setTemplateId(param.getTemplateId());
 			this.setReason(param.getReason());
 
@@ -718,9 +743,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setSubheading(param.getSubheading());
 			this.setCommodityDetails(param.getCommodityDetails());
 
-			if(param.getCreateBy() != null) {
-				this.setCreateBy(param.getCreateBy());
-			}
+			this.setCreateBy(param.getCreateBy());
 			this.setShelvesType(param.getShelvesType());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");

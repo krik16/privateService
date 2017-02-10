@@ -8,18 +8,9 @@ import java.util.List;
  */
 public class CommodityVoForWechat implements Serializable{
 
-    private  String weAndTeStatus;
-    private  String terminal;
-    private  String id;
-    private  String type;
+    private String terminal;
+    private String commodityId;
 
-    public String getWeAndTeStatus() {
-        return weAndTeStatus;
-    }
-
-    public void setWeAndTeStatus(String weAndTeStatus) {
-        this.weAndTeStatus = weAndTeStatus;
-    }
 
     public String getTerminal() {
         return terminal;
@@ -29,19 +20,5 @@ public class CommodityVoForWechat implements Serializable{
         this.terminal = terminal;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setIds(String id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

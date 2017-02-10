@@ -368,4 +368,15 @@ public interface McmcCommoditySolrService {
 
 	public boolean addCommodityListIndex(List<McmcCommodityDocument> commodityDocumentList);
 
+	/**
+	 * 设置商品显示隐藏
+	 *
+	 * @param commodityId
+	 * @param onServiceIds 需要显示的ids
+	 * @param offServiceIds 被大运营设置隐藏的ids
+	 *
+	 * @throws RYServiceException
+	 */
+	boolean updateSwitchStatusForCommodity(String commodityId, List<String> onServiceIds, List<String> offServiceIds) throws RYServiceException;
+
 }

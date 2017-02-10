@@ -93,7 +93,6 @@ public class Commodity implements  Serializable,Cloneable{
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
 	private Integer purchaseCount;//商品的限购数量
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
 	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
 	private boolean goodsSec = true;//正品保障
@@ -151,13 +150,30 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;//0集团商品，1商场商品，4,5店铺商品
-	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> serviceIds;//微信公众号ids
 	private String groupMid; //集团Mid
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
-	private List<WechatSwitch>  wechatSwitchList;
 	private String freePostage;  // 0包邮 1不包邮
 
+	private List<String> onServiceIds; // 标记为打开的服务号
+	private List<String> offServiceIds; // 被大运营标记为关闭的服务号
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	public String getFreePostage() {
 		return freePostage;
@@ -447,12 +463,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setPurchaseCount(Integer purchaseCount) {
 		this.purchaseCount = purchaseCount;
 	}
-	public String getWeAndTeStatus() {
-		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
-	}
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -826,11 +837,11 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityDetails = commodityDetails;
 	}
 
-	public List<Integer> getServiceIds() {
+	public List<String> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<Integer> serviceIds) {
+	public void setServiceIds(List<String> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
@@ -882,7 +893,6 @@ public class Commodity implements  Serializable,Cloneable{
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
 		commodity.setPurchaseCount(purchaseCount);
-		commodity.setWeAndTeStatus(weAndTeStatus);
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
@@ -955,7 +965,6 @@ public class Commodity implements  Serializable,Cloneable{
 				", cPriceMax='" + cPriceMax + '\'' +
 				", cPriceMin='" + cPriceMin + '\'' +
 				", purchaseCount=" + purchaseCount +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", sort=" + sort +
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo=" +commodityModelNo+
@@ -1009,6 +1018,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setServiceIds(vo.getServiceIds());
 			this.setMerchantId(vo.getMerchantId());
 			this.setMerchantType(vo.getMerchantType());
+			this.setOnServiceIds(vo.getOnServiceIds());
 		}
 
 		this.setCode(vo.getCommodityCode());
@@ -1071,7 +1081,6 @@ public class Commodity implements  Serializable,Cloneable{
 		// 7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 
 		this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_7);
-		this.setWeAndTeStatus(CommodityTerminalType.weAndTeStatus.STATUS_4);//默认为都不展示
 
 		//0表示统一库存1表示分管库存默认是分管库存
 		this.setStockStatus((vo.getStockStatus() != null) ? vo.getStockStatus() : 1);
@@ -1234,7 +1243,6 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setActivityStartTime(source.getActivityStartTime());
 		commodity.setActivityEndTime(source.getActivityEndTime());
 		commodity.setPurchaseCount(source.getPurchaseCount());
-		commodity.setWeAndTeStatus(source.getWeAndTeStatus());
 		commodity.setSort(source.getSort());
 		commodity.setCommodityModelNo(source.getCommodityModelNo());
 		commodity.setGoodsParam(source.getGoodsParam());

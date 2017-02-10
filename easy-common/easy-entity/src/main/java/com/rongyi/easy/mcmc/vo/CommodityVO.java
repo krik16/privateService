@@ -151,12 +151,30 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String groupMid;
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
-	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> serviceIds;//微信公众号ids
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<String> categoryNames;
 	private String freePostage;  // 0包邮 1不包邮
+	private List<String> onServiceIds;
+	private List<String> offServiceIds;
 
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	public String getFreePostage() {
 		return freePostage;
@@ -257,11 +275,11 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.accountType = accountType;
 	}
 
-	public List<Integer> getServiceIds() {
+	public List<String> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<Integer> serviceIds) {
+	public void setServiceIds(List<String> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
@@ -1018,11 +1036,12 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
 		this.setSelfAddressId(commodity.getSelfAddressId());
-		this.setIfShowInWechat(
+		//TODO: need fix
+		/*this.setIfShowInWechat(
                 Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
-                        ?true:false);
+                        ?true:false);*/
 	}
 
 	@Override
@@ -1144,7 +1163,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	}
 
 	public CommodityVO getCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
-		if(commodity==null) {
+		if(commodity == null) {
 			return null;
 		}
 
@@ -1160,8 +1179,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
 		vo.setFreight(commodity.getFreight());
 		vo.setTerminalType(commodity.getTerminalType());
-		vo.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
-								commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+		/*vo.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
+								commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);*/
 		vo.setRegisterAt(commodity.getRegisterAt());
 		vo.setSoldOutAt(commodity.getSoldOutAt());
 		vo.setSource(commodity.getSource());
@@ -1175,6 +1194,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
 		vo.setServiceIds(commodity.getServiceIds());
+		vo.setOnServiceIds(commodity.getOnServiceIds());
 		vo.setSubheading(commodity.getSubheading());
 		vo.setCommodityDetails(commodity.getCommodityDetails());
 
