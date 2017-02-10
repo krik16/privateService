@@ -74,6 +74,7 @@ public class WeChatPayUnit {
                 String sign = Signature.getSign(map, wechatConfigure.getKey());
                 map.put("appSignature", sign);
             }
+            map.put("payNo",wechatPaySignData.getPayNo());
         } catch (WeChatException | ParamNullException e) {
             throw e;
         } catch (Exception e) {

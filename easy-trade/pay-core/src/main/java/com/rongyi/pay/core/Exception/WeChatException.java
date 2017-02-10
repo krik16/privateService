@@ -5,6 +5,11 @@ package com.rongyi.pay.core.Exception;
  */
 public class WeChatException extends TradeException{
 
+    public WeChatException(String message)
+    {
+        super(message);
+    }
+
     public WeChatException(String code, String message)
     {
         super(message);

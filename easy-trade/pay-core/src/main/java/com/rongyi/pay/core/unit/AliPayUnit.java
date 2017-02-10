@@ -80,7 +80,7 @@ public class AliPayUnit {
                 Map<String, Object> map = new HashMap<>();
                 map.put("payNo", aliScanPayReqData.getPayNo());
                 map.put("tradeNo", result.getResponse().getTradeNo());
-                map.put("totalPrice", aliScanPayReqData.getTotalAmount());
+                map.put("totalAmount", aliScanPayReqData.getTotalAmount());
                 return map;
             case FAILED:
                 LOGGER.error("支付宝支付失败!!!result={}",result);

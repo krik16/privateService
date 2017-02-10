@@ -28,9 +28,10 @@ public class InitEntityUnit {
     /**
      * 初始化支付记录
      */
-    public PaymentEntity initPaymentEntity(String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
+    public PaymentEntity initPaymentEntity(String ryMchId,String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
                                            String aliSellerId,String wechatMchId){
         PaymentEntity paymentEntity = new PaymentEntity();
+        paymentEntity.setRyMchId(ryMchId);
         paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
         paymentEntity.setOrderNum(orderNo);
         paymentEntity.setOrderType(orderType);

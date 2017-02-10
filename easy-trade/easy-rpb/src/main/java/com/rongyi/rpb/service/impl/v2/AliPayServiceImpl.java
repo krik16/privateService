@@ -49,7 +49,9 @@ public class AliPayServiceImpl implements IAliPayService{
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
             //获取签名
-            Map<String,Object> map = payBizz.aliScanPaySign(aliScanPayReqData,aliConfigure);
+            Map<String,Object> map = payBizz.aliScanPaySign(aliConfigureVo.getRyMchId(),aliScanPayReqData,aliConfigure);
+            //外部订单号
+            map.put("orderNo",aliPaySignVo.getOrderNo());
             log.info("支付宝扫码签名结果,map={}",map);
             return map;
         } catch (AliPayException e){
@@ -69,9 +71,14 @@ public class AliPayServiceImpl implements IAliPayService{
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(orderNo, refundAmount, refundReason, aliConfigure);
+            AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(aliConfigureVo.getRyMchId(),orderNo, refundAmount, refundReason, aliConfigure);
 
             Map<String,Object> map = new BeanMap(alipayTradeRefundResponse);
+
+            //外部订单号
+            map.put("orderNo",orderNo);
+            //容易网交易号
+            map.put("payNo",alipayTradeRefundResponse.getOutTradeNo());
 
             log.info("支付宝面对面支付退款,map={}",map);
             return map;
@@ -94,9 +101,15 @@ public class AliPayServiceImpl implements IAliPayService{
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(aliPunchCardPayReqData, aliConfigure);
+            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(aliConfigureVo.getRyMchId(),aliPunchCardPayReqData, aliConfigure);
 
             Map<String,Object> map = new BeanMap(alipayTradePayResponse);
+
+            //外部订单号
+            map.put("orderNo",aliPunchCardPayVo.getOrderNo());
+            //容易网交易号
+            map.put("payNo",alipayTradePayResponse.getOutTradeNo());
+
 
             log.info("支付宝刷卡支付结果,map={}",map);
             return map;
@@ -120,6 +133,11 @@ public class AliPayServiceImpl implements IAliPayService{
             AlipayTradeQueryResponse alipayTradeQueryResponse = payBizz.aliF2FPayQuery(orderNo, aliConfigure);
 
             Map<String,Object> map = new BeanMap(alipayTradeQueryResponse);
+
+            //外部订单号
+            map.put("orderNo",orderNo);
+            //容易网交易号
+            map.put("payNo",alipayTradeQueryResponse.getOutTradeNo());
 
             log.info("支付宝面对面支付查询结果,map={}",map);
             return map;

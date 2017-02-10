@@ -44,7 +44,10 @@ public class WechatPayServiceImpl implements IWechatPayService{
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //获取微信支付签名
-            Map<String,Object> map =  payBizz.wechatScanPaySign(wechatPaySignData, wechatConfigure);
+            Map<String,Object> map =  payBizz.wechatScanPaySign(wechatConfigureVo.getRyMchId(),wechatPaySignData, wechatConfigure);
+            //外部订单号
+            map.put("orderNo",wechatPaySignVo.getOrderNo());
+
             log.info("返回签名结果,map={}",map);
             return map;
         } catch (WeChatException | ParamNullException e){
@@ -62,8 +65,14 @@ public class WechatPayServiceImpl implements IWechatPayService{
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            RefundResData refundResData = refundBizz.weChatRefund(orderNo, refundFee, wechatConfigure);
+            RefundResData refundResData = refundBizz.weChatRefund(wechatConfigureVo.getRyMchId(),orderNo, refundFee, wechatConfigure);
             Map<String,Object> map = new BeanMap(refundResData);
+
+            //外部订单号
+            map.put("orderNo",orderNo);
+            //容易网交易号
+            map.put("payNo",refundResData.getOut_trade_no());
+
             log.info("退款结果,map={}",map);
             return map;
         }  catch (WeChatException | ParamNullException e) {
@@ -84,8 +93,15 @@ public class WechatPayServiceImpl implements IWechatPayService{
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //发起支付
-            PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(wechatPaySignData, wechatConfigure);
+            PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(wechatConfigureVo.getRyMchId(),wechatPaySignData, wechatConfigure);
+
             Map<String,Object> map = new BeanMap(punchCardPayResData);
+
+            //外部订单号
+            map.put("orderNo",wechatPaySignVo.getOrderNo());
+            //容易网交易号
+            map.put("payNo",punchCardPayResData.getOut_trade_no());
+
             log.info("返回刷卡支付结果,map={}",map);
             return map;
         }  catch (WeChatException | ParamNullException e) {
@@ -105,6 +121,11 @@ public class WechatPayServiceImpl implements IWechatPayService{
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             PunchCardPayQueryResData punchCardPayQueryResData = payBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
             Map<String,Object> map = new BeanMap(punchCardPayQueryResData);
+            //外部订单号
+            map.put("orderNo",orderNo);
+            //容易网交易号
+            map.put("payNo",punchCardPayQueryResData.getOut_trade_no());
+
             log.info("订单查询结果,map={}",map);
             return map;
         } catch (WeChatException e){

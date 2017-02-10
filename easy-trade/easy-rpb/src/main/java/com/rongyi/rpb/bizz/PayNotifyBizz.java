@@ -1,17 +1,17 @@
 package com.rongyi.rpb.bizz;
 
-import com.alipay.api.AlipayApiException;
 import com.rongyi.core.common.third.exception.ThirdException;
-import com.rongyi.core.common.third.md5.Md5Util;
-import com.rongyi.core.common.third.rsa.MalllifeRsaUtil;
 import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.core.common.util.HttpUtil;
 import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.TradeConstantEnum;
+import com.rongyi.core.util.TradePaySignUtil;
+import com.rongyi.easy.roa.entity.MchEncryptInfo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.AliPayException;
+import com.rongyi.pay.core.Exception.WeChatException;
 import com.rongyi.rpb.Exception.TradeException;
+import com.rongyi.rpb.common.pay.util.HttpUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentLogInfoService;
@@ -19,6 +19,7 @@ import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.redis.RedisService;
+import com.rongyi.rss.roa.RoaMchEncryptInfoService;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -28,7 +29,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,12 +52,18 @@ public class PayNotifyBizz {
     SaveUnit saveUnit;
     @Autowired
     RedisService redisService;
+    @Autowired
+    RoaMchEncryptInfoService  roaMchEncryptInfoService;
 
     private static final Integer maxRetryTimes = 7;
 
     private static final Integer retryInterval = 2;
 
-    public void aliPayNotify(Map<String,String> map) throws AlipayApiException {
+    /**
+     * 支付宝支付通知
+     * @param map 通知参数
+     */
+    public void aliPayNotify(Map<String,String> map){
         log.info("支付宝支付异步通知内容,map={}", map);
         if ("TRADE_SUCCESS".equals(map.get("trade_status"))) {
             String payNo = map.get("out_trade_no");
@@ -73,9 +79,28 @@ public class PayNotifyBizz {
     }
 
     /**
+     * 微信支付通知
+     * @param map 通知参数
+     */
+    public void wechatPayNotify(Map<String, String> map) {
+        log.info("微信支付通知内容,map={}", map);
+        if ("SUCCESS".equals(map.get("result_code"))) {
+            String payNo = map.get("out_trade_no");
+            String tradeNo = map.get("transaction_id");
+            String openId = map.get("openid");
+            BigDecimal payAmount = new BigDecimal(map.get("total_fee")).multiply(new BigDecimal(100));
+
+            this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, openId,"");
+        } else {
+            throw new WeChatException("通知结果异常,map="+map);
+        }
+
+    }
+
+    /**
      * 处理支付通知
      * @param payNo 付款单号
-     * @param payAmount 付款金额
+     * @param payAmount 付款金额(单位元)
      * @param tradeNo 交易流水号
      * @param payChannel 支付渠道
      * @param buyerId 买家id
@@ -109,7 +134,7 @@ public class PayNotifyBizz {
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
 
         //通知第三方业务
-        payNotifyThird(paymentEntity,tradeNo);
+        payNotifyThird(paymentEntity,paymentLogInfo);
     }
 
     /**
@@ -117,9 +142,9 @@ public class PayNotifyBizz {
      *
      * @param paymentEntity PaymentEntity
      */
-    private void payNotifyThird(PaymentEntity paymentEntity,String tradeNo) {
+    private void payNotifyThird(PaymentEntity paymentEntity,PaymentLogInfo paymentLogInfo) {
         try {
-            sysnNotifyThird(paymentEntity, tradeNo, ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr());
+            sysnNotifyThird(paymentEntity, paymentLogInfo, ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr());
         } catch (TradeException e) {
             log.error("第三方支付结果处理失败，暂记录日志，不做业务处理，payNo={},errno={},errmsg={}", paymentEntity.getPayNo(), e.getCode(), e.getMessage());
         } catch (Exception e) {
@@ -133,11 +158,11 @@ public class PayNotifyBizz {
      * @param paymentEntity PaymentEntity
      * @param type 交易类型 1:支付/2:退款
      */
-    private void sysnNotifyThird(final PaymentEntity paymentEntity,final String tradeNo ,final String type) {
+    private void sysnNotifyThird(final PaymentEntity paymentEntity,final PaymentLogInfo paymentLogInfo ,final String type) {
         final Thread thread = new Thread() {
             @Override
             public void run() {
-                reTryNotifyThird(paymentEntity,tradeNo, type, 1);
+                reTryNotifyThird(paymentEntity,paymentLogInfo, type, 1);
             }
         };
         thread.start();
@@ -149,9 +174,9 @@ public class PayNotifyBizz {
      * @param type 交易类型 1:支付/2:退款
      * @param retryTimes 重试次数
      */
-    private void reTryNotifyThird(PaymentEntity paymentEntity,String tradeNo ,String type, Integer retryTimes) {
+    private void reTryNotifyThird(PaymentEntity paymentEntity,PaymentLogInfo paymentLogInfo,String type, Integer retryTimes) {
         try {
-            notifyThird(paymentEntity, tradeNo,type);
+            notifyThird(paymentEntity, paymentLogInfo,type);
         } catch (ThirdException e) {
             if (retryTimes <= maxRetryTimes) {//最多重试7次,加上默认第一次的通知,一共8次,0,4s,16s,64s,17m,1h8m,4h33m,18h10m
                 //每次重试之后睡眠2的2*n次方秒
@@ -163,7 +188,7 @@ public class PayNotifyBizz {
                     log.warn(e2.getMessage());
                 }
                 retryTimes++;
-                reTryNotifyThird(paymentEntity, tradeNo,type, retryTimes);
+                reTryNotifyThird(paymentEntity, paymentLogInfo,type, retryTimes);
             } else {
                 log.info("异步支付结果通知第三方系统最终处理失败,需人工处理,orderNo={}", paymentEntity.getOrderNum());
             }
@@ -199,33 +224,38 @@ public class PayNotifyBizz {
      * @param type          0:支付,1:退款
      * @throws ThirdException
      */
-    private void notifyThird(PaymentEntity paymentEntity,String tradeNo ,String type) throws ThirdException, UnsupportedEncodingException {
+    private void notifyThird(PaymentEntity paymentEntity,PaymentLogInfo paymentLogInfo ,String type) throws ThirdException, UnsupportedEncodingException {
         log.info("notifyThird start...paymentEntity={},type={}", paymentEntity, type);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("payAmount", String.valueOf(paymentEntity.getAmountMoney()));
-        jsonObject.put("orderNo", paymentEntity.getOrderNum());
-        jsonObject.put("payNo", paymentEntity.getPayNo());
-        jsonObject.put("tradeStatus", "SUCCESS");//支付成功默认为0/否则给1
+
+        //获取商户在容易网的加密信息
+        MchEncryptInfo mchEncryptInfo = roaMchEncryptInfoService.getByRyMchId(paymentEntity.getRyMchId());
+        if(mchEncryptInfo == null || StringUtil.isEmpty(mchEncryptInfo.getToken())){
+            throw new ThirdException(TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getCodeStr(), TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getValueStr());
+        }
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("tradeStatus", "SUCCESS");//支付成功默认为0/否则给1
+        map.put("payAmount", String.valueOf(paymentEntity.getAmountMoney().multiply(new BigDecimal(100))));
+        map.put("orderNo", paymentEntity.getOrderNum());
+        map.put("payNo", paymentEntity.getPayNo());
+        map.put("buyerId", paymentLogInfo.getBuyer_id());
+        map.put("payChannel",paymentEntity.getPayChannel());
         //支付通知返回交易流水号
         if(type.equals(ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr())){
-            jsonObject.put("tradeNo", tradeNo);
+            map.put("tradeNo", paymentLogInfo.getTrade_no());
+        }else{
+            map.put("tradeNo", paymentLogInfo.getTransactionId());
         }
-        jsonObject.put("type", type);
+        map.put("type", type);
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
-        String dataEncrypt = MalllifeRsaUtil.encryptionStr(jsonObject.toString(), TradeConstantEnum.PHP_SCORE_PUBLIC_KEY.getValueStr());
-        String str = "channel=" + TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getCodeStr() + "&data=" + dataEncrypt + "&timestamp=" + timeStamp + "&token=" + TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getValueStr();
-        String md5Sign = Md5Util.GetMD5Code(str);
-        Map<String, String> resultMap = new HashMap<>();
-        String encodeData = URLEncoder.encode(dataEncrypt, "utf-8");
-        resultMap.put("data", encodeData);
-        resultMap.put("timestamp", timeStamp);
-        resultMap.put("channel", TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getCodeStr());
-        resultMap.put("sign", md5Sign);
-        String url = redisService.get(paymentEntity.getPayNo()+paymentEntity.getOrderNum());
-        if (StringUtils.isEmpty(url)) {
+        map.put("timeStamp",timeStamp);
+        String sign = TradePaySignUtil.getSignWithToken(map,mchEncryptInfo.getToken());
+        map.put("sign", sign);
+        String notifyUrl = redisService.get(paymentEntity.getPayNo()+paymentEntity.getOrderNum());
+        if (StringUtils.isEmpty(notifyUrl)) {
             throw new TradeException(TradeConstantEnum.EXCEPTION_ORDER_NOTIFY_URL_NULL.getCodeStr(), TradeConstantEnum.EXCEPTION_ORDER_NOTIFY_URL_NULL.getValueStr());
         }
-        String result = HttpUtil.httpPOST(url, resultMap);
+        String result = HttpUtil.httpPOST(notifyUrl, map);
         log.info("notifyThird end...result={}", result);
         if (StringUtil.isEmpty(result)) {
             throw new ThirdException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
