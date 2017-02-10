@@ -194,6 +194,13 @@ public interface RoaActivityTemplateService {
      */
     public boolean batchInsertGoodsDetailSync(List<GoodsDetailSync> goodsDetailSyncs);
 
+    /**
+     * 批量保存
+     * @param specSyncEntityList
+     * @return
+     */
+    public boolean batchInsertGoodsSpecSync(List<SpecSyncEntity> specSyncEntityList);
+
 
     /**
      * 批量更新
@@ -204,11 +211,26 @@ public interface RoaActivityTemplateService {
 
 
     /**
+     *
+     * @param specSyncEntityList
+     * @return
+     */
+    public boolean batchUpdateSpceDetailSync(List<SpecSyncEntity> specSyncEntityList);
+
+
+    /**
      * 删除
      * @param activityTemplateId
      * @return
      */
     public boolean deleteGoodsDetailSyncByActivityTemplateId(Integer activityTemplateId);
+
+    /**
+     *
+     * @param activityTemplateId
+     * @return
+     */
+    public boolean deleteGoodsSpecByActivityTemplateId(Integer activityTemplateId);
 
     /**
      * 根据模版id查询商品

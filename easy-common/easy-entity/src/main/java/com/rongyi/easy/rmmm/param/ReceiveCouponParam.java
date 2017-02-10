@@ -16,6 +16,14 @@ public class ReceiveCouponParam extends MalllifeBaseParam implements Serializabl
 	private String user_source;//用户渠道
 	private String activityId; //活动标识
 	private Integer activityType; //活动类型
+	private Integer specialType;  //特卖类型
+	public Integer getSpecialType() {
+		return specialType;
+	}
+
+	public void setSpecialType(Integer specialType) {
+		this.specialType = specialType;
+	}
 
 	public List<String> getCouponIds() {
 		return couponIds;
