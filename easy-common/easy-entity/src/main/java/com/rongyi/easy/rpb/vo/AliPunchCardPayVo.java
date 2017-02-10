@@ -16,7 +16,7 @@ public class AliPunchCardPayVo {
 
     // 商户网站订单系统中唯一订单号，64个字符以内，只能包含字母、数字、下划线，
     // 需保证商户系统端不能重复，建议通过数据库sequence生成，
-    private String outTradeNo;
+    private String orderNo;
 
 
     // 订单总金额，整形，此处单位为分，不能超过1亿元
@@ -74,12 +74,12 @@ public class AliPunchCardPayVo {
         this.authCode = authCode;
     }
 
-    public String getOutTradeNo() {
-        return outTradeNo;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
     public Integer getTotalAmount() {

@@ -7,7 +7,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * conan
  * 2017/2/7 17:24
  **/
-public class AliConfigureVo {
+public class AliConfigureVo extends RyMchIdVo{
     private  String pid = "";// 商户partner id
     private  String appid = "";           // 商户应用id
     private  String key = "";//key

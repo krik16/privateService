@@ -27,7 +27,7 @@
 <!-- 			<property name="rootInterface" value="com.rongyi.merchant.biz.mapper.BaseMapper"/> -->
 		</javaClientGenerator>
 		
-		<table tableName="freight_template" domainObjectName="mcmc.entity.FreightTemplateEntity"></table>
+		<table tableName="mch_encrypt_info" domainObjectName="com.rongyi.easy.roa.entity.MchEncryptInfo"></table>
 
 	</context>
 </generatorConfiguration>

@@ -120,6 +120,8 @@ public class PaymentEntity implements Serializable {
 
 	private String wechatMchId;
 
+	private String ryMchId;
+
 	/**
 	 * 主键id
 	 * 
@@ -421,6 +423,14 @@ public class PaymentEntity implements Serializable {
 		this.wechatMchId = wechatMchId;
 	}
 
+	public String getRyMchId() {
+		return ryMchId;
+	}
+
+	public void setRyMchId(String ryMchId) {
+		this.ryMchId = ryMchId;
+	}
+
 	@Override
 	public String toString() {
 		return "PaymentEntity{" +
@@ -446,6 +456,7 @@ public class PaymentEntity implements Serializable {
 				", weixinMchId=" + weixinMchId +
 				", aliSellerId=" + aliSellerId +
 				", wechatMchId=" + wechatMchId +
+				", ryMchId=" + ryMchId +
 				'}';
 	}
 }
