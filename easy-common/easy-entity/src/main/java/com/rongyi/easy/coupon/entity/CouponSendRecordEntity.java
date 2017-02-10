@@ -36,6 +36,8 @@ public class CouponSendRecordEntity implements Serializable {
 
     private String couponName;
 
+    private String couponId;
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -45,6 +47,7 @@ public class CouponSendRecordEntity implements Serializable {
                 .append("typeVal", typeVal)
                 .append("count", count)
                 .append("acceptId", acceptId)
+                .append("couponId", couponId)
                 .append("phone", phone)
                 .append("email", email)
                 .append("sendNum", sendNum)
@@ -57,6 +60,14 @@ public class CouponSendRecordEntity implements Serializable {
                 .toString();
     }
 
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
 
     public String getCouponName() {
         return couponName;
