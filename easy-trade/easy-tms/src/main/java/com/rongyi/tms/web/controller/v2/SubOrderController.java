@@ -490,6 +490,21 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.remove("createAtEnd");
             }
         }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("activityName") && StringUtils.isBlank(paramsMap.get("activityName").toString())) {
+                paramsMap.remove("activityName");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("activityType") && StringUtils.isBlank(paramsMap.get("activityType").toString())) {
+                paramsMap.remove("activityType");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("commodityName") && StringUtils.isBlank(paramsMap.get("commodityName").toString())) {
+                paramsMap.remove("commodityName");
+            }
+        }
     }
 
     /**
