@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class CommoditySwitchParam  implements Serializable {
 
     private String commodityId;
-    private String terminalId;
+    private String serviceId;
     private String switchStatus;
 
     public String getCommodityId() {
@@ -24,12 +24,12 @@ public class CommoditySwitchParam  implements Serializable {
         this.commodityId = commodityId;
     }
 
-    public String getTerminalId() {
-        return terminalId;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setTerminalId(String terminalId) {
-        this.terminalId = terminalId;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getSwitchStatus() {
@@ -44,7 +44,7 @@ public class CommoditySwitchParam  implements Serializable {
     public String toString() {
         return "CommoditySwitchParam{" +
                 "commodityId='" + commodityId + '\'' +
-                ", terminalId='" + terminalId + '\'' +
+                ", serviceId='" + serviceId + '\'' +
                 ", switchStatus='" + switchStatus + '\'' +
                 '}';
     }
