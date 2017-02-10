@@ -932,7 +932,6 @@ public class CommodityBuyerVO implements Serializable {
         }
         //默认返回非橱窗商品的值设置为0
         this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
-        this.weAndTeStatus = commodity.getWeAndTeStatus();
         if(commodity.getRegisterAt() != null){
         	this.registerAt = commodity.getRegisterAt().getTime();//上架时间
         }
@@ -944,11 +943,11 @@ public class CommodityBuyerVO implements Serializable {
         }
         this.subheading=commodity.getSubheading();
         this.commodityDetails=commodity.getCommodityDetails();
-        this.setIfShowInWechat(
+        /*this.setIfShowInWechat(
                 Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
                         .contains(commodity.getTerminalType())  &&
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
-                        ?true:false);
+                        ?true:false);*/
     }
 
     @Override

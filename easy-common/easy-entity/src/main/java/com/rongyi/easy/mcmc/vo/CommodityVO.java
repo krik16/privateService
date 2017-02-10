@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.mcmc.TotalCommodity;
@@ -13,6 +14,7 @@ import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -923,33 +925,24 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
-		if(commodity.isSpot()){
-			this.isSpot = 1;//现货
-		}else{
-			this.isSpot = 0;//非现货
-		}
+		this.isSpot = commodity.isSpot() ? 1 : 0;
+
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
-			try{
-				double postage = Double.parseDouble(commodity.getPostage());
+			try {
 				this.commodityPostage = commodity.getPostage();
-			}catch(Exception e){
+			} catch(Exception e){
 				this.commodityPostage = "0.0";
 			}
-		}else{
+		} else {
 			this.commodityPostage = "0.0";
 		}
-//		this.commodityPostage = commodity.getPostage();
 		this.commodityStock = String.valueOf(commodity.getStock());
 		this.commoditySold = String.valueOf(commodity.getSold());
 		this.commodityPubDate = commodity.getCreateAt().toString();
 		this.commodityOriginalPrice = commodity.getOriginalPrice();
 		this.commodityCurrentPrice = commodity.getCurrentPrice();
 		this.commodityPicList = commodity.getPicList();
-		if(commodity.getCode() !=null){
-			this.commodityCode = commodity.getCode();
-		}else{
-			this.commodityCode = "";
-		}
+		this.commodityCode = (commodity.getCode() != null) ? commodity.getCode() : "";
 		this.commodityStatus = commodity.getStatus();
 		this.commodityShopNumber = "";
 		if(commodity.getShopNum() != null){
@@ -964,7 +957,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.registerAt = commodity.getRegisterAt();
 		this.soldOutAt = commodity.getSoldOutAt();
 		//立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
-		this.shelvesType=null==commodity.getShelvesType()?2:commodity.getShelvesType();
+		this.shelvesType = (null == commodity.getShelvesType()) ? 2 : commodity.getShelvesType();
 
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
@@ -1036,12 +1029,19 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
 		this.setSelfAddressId(commodity.getSelfAddressId());
-		//TODO: need fix
-		/*this.setIfShowInWechat(
-                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
-                        .contains(commodity.getTerminalType())  &&
-                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
-                        ?true:false);*/
+		this.setIfShowInWechat(isShowInWechat());
+	}
+
+	private boolean isShowInWechat() {
+		if(CollectionUtils.isEmpty(getOnServiceIds())) {
+			return false;
+		}
+
+		List<String> onIds = getOnServiceIds();
+		onIds.remove(Constants.ServiceId.APP_RONG_YI_GUANG);
+		onIds.remove(Constants.ServiceId.TERMINAL_SCREEN);
+
+		return onIds.size() > 0;
 	}
 
 	@Override

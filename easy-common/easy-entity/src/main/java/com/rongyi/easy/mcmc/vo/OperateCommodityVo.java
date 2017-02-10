@@ -2,6 +2,7 @@ package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuying on 2016/6/22.
@@ -21,6 +22,10 @@ public class OperateCommodityVo implements Serializable {
     private String reason;
     private String buyerAccount;
     private Date soldOutAt;//下架时间
+    private Integer terminalType;
+    private List<String> serviceIds;
+    private List<String> onServiceIds;
+    private List<String> offServiceIds;
 
     public String getId() {
         return id;
@@ -116,5 +121,37 @@ public class OperateCommodityVo implements Serializable {
 
     public void setSoldOutAt(Date soldOutAt) {
         this.soldOutAt = soldOutAt;
+    }
+
+    public Integer getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(Integer terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public List<String> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<String> serviceIds) {
+        this.serviceIds = serviceIds;
+    }
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
+    }
+
+    public List<String> getOffServiceIds() {
+        return offServiceIds;
+    }
+
+    public void setOffServiceIds(List<String> offServiceIds) {
+        this.offServiceIds = offServiceIds;
     }
 }

@@ -398,6 +398,7 @@ public interface Constants {
     }
     interface ServiceId {
         String APP_RONG_YI_GUANG = "app_rongyiguang";
+        String TERMINAL_SCREEN = "easy_terminal";
     }
 
 }
