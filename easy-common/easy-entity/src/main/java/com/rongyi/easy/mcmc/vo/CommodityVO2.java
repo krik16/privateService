@@ -68,6 +68,7 @@ public class CommodityVO2 implements  Serializable {
 	private String updateBy;
 	private String brandName;
 	private String brandMid;
+	private List<String> referencePriceList;
 
 	public Date getCreateAt() {
 		return createAt;
@@ -347,5 +348,13 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setBrandMid(String brandMid) {
 		this.brandMid = brandMid;
+	}
+
+	public List<String> getReferencePriceList() {
+		return referencePriceList;
+	}
+
+	public void setReferencePriceList(List<String> referencePriceList) {
+		this.referencePriceList = referencePriceList;
 	}
 }
