@@ -320,6 +320,16 @@ public interface RoaVoucherCouponService {
     int createSendRecord(CouponSendRecordVO couponSendRecordVO);
 
 
+    /**
+     * 获取发送对象列表
+     * @return
+     */
     List<CouponAcceptEntity> getSendTargets();
 
+    /**
+     * 重发
+     * @param id
+     * @return
+     */
+    boolean resend(Integer id);
 }
