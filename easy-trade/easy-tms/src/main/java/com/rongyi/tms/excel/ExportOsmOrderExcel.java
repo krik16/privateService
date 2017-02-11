@@ -95,6 +95,14 @@ public class ExportOsmOrderExcel {
             }
 
             XSSFSheet sheet2 = wb.getSheetAt(1);
+            for (int i = 2; i <= orderCommoditys.size() + 2; i++) {
+                sheet2.createRow(i);
+                for (int j = 0; j <= 9; j++) {
+                    sheet2.getRow(i).createCell(j);
+                    sheet2.getRow(i).getCell(j).setCellStyle(bodyStyle);
+                }
+            }
+
             if(CollectionUtils.isNotEmpty(orderCommoditys)){
                 for (int i = 0; i < orderCommoditys.size(); i++) {
                     OrderManagerCommodityVO vo = orderCommoditys.get(i);
