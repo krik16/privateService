@@ -1,5 +1,8 @@
 package com.rongyi.easy.tradecenter.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -19,6 +22,7 @@ public class CouponOrderQueryParam implements Serializable
     String currentPage;//当前页
     String sizePerPage;//每页数量
     String couponStatus;//卡券状态
+    Integer orderSource;//购买终端 0微商城（商家微商城），1容易逛(包括容易逛app、容易逛微商城、容易逛小程序)，2为终端机，3其他
 
     public String getCouponStatus() {
         return couponStatus;
@@ -100,9 +104,15 @@ public class CouponOrderQueryParam implements Serializable
         this.sizePerPage = sizePerPage;
     }
 
+    public Integer getOrderSource() {
+        return orderSource;
+    }
+
+    public void setOrderSource(Integer orderSource) {
+        this.orderSource = orderSource;
+    }
+
     public String toString() {
-        return "OsmOrderQueryParam=[orderStatus="+orderStatus+",createOrderBegin="+createOrderBegin+",createOrderEnd="+createOrderEnd+"," +
-                "orderNo="+orderNo+",couponId="+couponId+",couponName="+couponName+",buyerAccount="+buyerAccount+"," +
-                "currentPage="+currentPage+",sizePerPage="+sizePerPage+"]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
