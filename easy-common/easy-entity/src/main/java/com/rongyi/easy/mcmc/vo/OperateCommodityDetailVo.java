@@ -42,6 +42,7 @@ public class OperateCommodityDetailVo implements Serializable{
     private String currentPrice;   // 销售价
     private Integer terminalType;  //显示终端
     private String brandName;  //品牌名称
+    private String reason;
 
 
     public String getOriginalPrice() {
@@ -290,5 +291,13 @@ public class OperateCommodityDetailVo implements Serializable{
 
     public void setSupportCourierDeliver(boolean supportCourierDeliver) {
         this.supportCourierDeliver = supportCourierDeliver;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }
