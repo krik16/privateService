@@ -23,7 +23,7 @@ public class LogAopAdvice {
         }
         String ip = RpcContext.getContext().getLocalHost();
         if (StringUtils.isNotBlank(ip)) {
-            if (-1 == logId.indexOf(ip)) {
+            if (!logId.endsWith(ip)) {
                 logId = logId + " @ " + ip;
             }
         }
