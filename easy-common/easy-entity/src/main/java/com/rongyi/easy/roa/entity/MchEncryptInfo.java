@@ -7,6 +7,8 @@ public class MchEncryptInfo {
 
     private String ryMchId;
 
+    private String ryMchName;
+
     private String token;
 
     private String privateKey;
@@ -33,6 +35,14 @@ public class MchEncryptInfo {
 
     public void setRyMchId(String ryMchId) {
         this.ryMchId = ryMchId;
+    }
+
+    public String getRyMchName() {
+        return ryMchName;
+    }
+
+    public void setRyMchName(String ryMchName) {
+        this.ryMchName = ryMchName;
     }
 
     public String getToken() {
