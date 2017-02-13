@@ -405,4 +405,6 @@ public interface CommodityService {
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 
     CommodityVO getCommodityDetail(String id);
+
+    boolean setMerchantIdToServiceId();
 }

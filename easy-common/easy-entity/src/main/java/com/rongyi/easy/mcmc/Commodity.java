@@ -158,6 +158,15 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private List<String> onServiceIds; // 标记为打开的服务号
 	private List<String> offServiceIds; // 被大运营标记为关闭的服务号
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
