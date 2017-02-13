@@ -20,7 +20,6 @@ import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.redis.RedisService;
 import com.rongyi.rss.roa.RoaMchEncryptInfoService;
-import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +31,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * conan
@@ -234,12 +234,14 @@ public class PayNotifyBizz {
         }
 
         Map<String,Object> map = new HashMap<>();
+        map.put("notifyId", UUID.randomUUID());
         map.put("tradeStatus", "SUCCESS");//支付成功默认为0/否则给1
-        map.put("payAmount", String.valueOf(paymentEntity.getAmountMoney().multiply(new BigDecimal(100))));
+        map.put("totalAmount", String.valueOf(paymentEntity.getAmountMoney().multiply(new BigDecimal(100))));
         map.put("orderNo", paymentEntity.getOrderNum());
         map.put("payNo", paymentEntity.getPayNo());
         map.put("buyerId", paymentLogInfo.getBuyer_id());
         map.put("payChannel",paymentEntity.getPayChannel());
+        map.put("ryMchId",paymentEntity.getRyMchId());
         //支付通知返回交易流水号
         if(type.equals(ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr())){
             map.put("tradeNo", paymentLogInfo.getTrade_no());
@@ -257,16 +259,8 @@ public class PayNotifyBizz {
         }
         String result = HttpUtil.httpPOST(notifyUrl, map);
         log.info("notifyThird end...result={}", result);
-        if (StringUtil.isEmpty(result)) {
+        if (StringUtil.isEmpty(result) || !"SUCCESS".equals(result)) {
             throw new ThirdException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
-        }
-        JSONObject resultJson = JSONObject.fromObject(result);
-        if (resultJson == null || resultJson.get("meta") == null) {
-            throw new ThirdException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
-        }
-        JSONObject metaJson = resultJson.getJSONObject("meta");
-        if (metaJson.get("errno") == null || !"0".equals(metaJson.getString("errno"))) {
-            throw new ThirdException(metaJson.getString("errno"), metaJson.getString("msg"));
         }
     }
 }

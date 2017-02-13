@@ -56,14 +56,14 @@ public class WeChatPayUnit {
                     throw new WeChatException("-1", resultMap.get("return_msg").toString());
                 }
                 if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(wechatConfigure.getTradeType())) {//APP支付签名
-                    map.put("timestamp", timestamp);
-                    map.put("appid", wechatConfigure.getAppID());
-                    map.put("partnerid", wechatConfigure.getMchID());
+                    map.put("timeStamp", timestamp);
+                    map.put("appId", wechatConfigure.getAppID());
+                    map.put("partnerId", wechatConfigure.getMchID());
                     map.put("package", "Sign=WXPay");
                     if (resultMap.get("prepay_id") == null)
                         throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
-                    map.put("prepayid", resultMap.get("prepay_id"));
-                    map.put("noncestr", resultMap.get("nonce_str"));
+                    map.put("prepayId", resultMap.get("prepay_id"));
+                    map.put("nonceStr", resultMap.get("nonce_str"));
                 } else {//微信公众号支付签名
                     map.put("timeStamp", timestamp);
                     map.put("appId", wechatConfigure.getAppID());
