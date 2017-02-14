@@ -157,6 +157,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private List<String> categoryNames;
 	private String freePostage;  // 0包邮 1不包邮
 
+	private List<String> skus;
+
 
 	public String getFreePostage() {
 		return freePostage;
@@ -887,6 +889,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.activityEndTime = activityEndTime;
 	}
 
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -1020,10 +1030,12 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.commodityDetails=commodity.getCommodityDetails();
 		this.setSelfAddressId(commodity.getSelfAddressId());
 		this.setIfShowInWechat(
-                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
-                        .contains(commodity.getTerminalType())  &&
-                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
-                        ?true:false);
+				Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
+						.contains(commodity.getTerminalType())  &&
+						Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3,
+								CommodityTerminalType.weAndTeStatus.STATUS_6,CommodityTerminalType.weAndTeStatus.STATUS_7).contains(commodity.getWeAndTeStatus())
+						?true:false);
+		this.skus=commodity.getSkus();
 	}
 
 	@Override
@@ -1137,6 +1149,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", categoryNames=" + categoryNames +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
+				", skus=" + skus +
 				'}';
 	}
 
