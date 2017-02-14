@@ -332,4 +332,11 @@ public interface RoaVoucherCouponService {
      * @return
      */
     boolean resend(Integer id);
+
+    /**
+     * 作废卡券
+     * @param couponId
+     * @return
+     */
+    int deleteCouponBatch(String couponId,String updateUser);
 }

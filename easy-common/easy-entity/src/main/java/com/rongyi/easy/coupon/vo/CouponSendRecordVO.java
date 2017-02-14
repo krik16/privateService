@@ -23,11 +23,24 @@ public class CouponSendRecordVO extends CouponSendRecordEntity {
         this.couponBatchEntities = couponBatchEntities;
     }
 
+    public CouponSendRecordVO() {
+        this.couponBatchEntities = couponBatchEntities;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CouponSendRecordVO{");
         sb.append("couponBatchEntities=").append(super.toString()).append(couponBatchEntities);
         sb.append('}');
         return sb.toString();
+    }
+
+    public static CouponSendRecordVO parese(CouponSendRecordEntity couponSendRecordEntity) {
+        CouponSendRecordVO couponSendRecordVO = new CouponSendRecordVO();
+        couponSendRecordVO.setPhone(couponSendRecordEntity.getPhone());
+        couponSendRecordVO.setEmail(couponSendRecordEntity.getEmail());
+        couponSendRecordVO.setId(couponSendRecordEntity.getId());
+        couponSendRecordVO.setCouponId(couponSendRecordEntity.getCouponId());
+        return couponSendRecordVO;
     }
 }
