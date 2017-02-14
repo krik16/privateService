@@ -76,7 +76,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String validStartAtStamp;//有效期开始时间戳
 	private String validEndAtStamp;//有效期结束时间戳
 	private String contractCode;//合同号
-	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
+	private String synTarget;//设置终端   /* 是[1]、否[0]*/,  终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
 	private Integer isChief = 1;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算

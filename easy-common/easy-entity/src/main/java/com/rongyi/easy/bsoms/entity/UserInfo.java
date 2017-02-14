@@ -85,6 +85,7 @@ public class UserInfo implements Serializable{
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
+    //private Integer isSuspended;//资金账号
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
     private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是

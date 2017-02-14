@@ -170,6 +170,15 @@ public interface CouponConstants {
         Integer STAND_CUT = 1;
     }
 
+    /**
+     * 促销券补贴类型
+     * 平台补贴[0] 商家补贴[1]
+     */
+    interface SubsidyType {
+        int OPERATION = 0;
+        int MERCHANT = 1;
+    }
+
     interface USERREDENVELOP_ACTIVITY_TYPE{
         int FPG=0;//翻牌购
         int TS=1;//推送

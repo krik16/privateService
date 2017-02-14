@@ -39,13 +39,35 @@ public class ShoppingCartEntity  implements Serializable {
     private Integer articleType;//1 潮人攻略
     private String articleId;//文章id
 
+
+    private Integer activityType;// 活动类型 普通0、闪购1、特卖2、秒杀3、拼团4、超级团教育版5、断码好货6
+
+    private Integer activityId;// 活动id
+
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
     public ShoppingCartEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public ShoppingCartEntity(String userId, String shopId, Integer guideId, String commodityMid, Integer guideType,
-			String commoditySpecMid, Integer commodityCount,String articleId,Integer articleType) {
+			String commoditySpecMid, Integer commodityCount,String articleId,Integer articleType,Integer activityId,Integer activityType) {
 		super();
 		this.userId = userId;
 		this.shopId = shopId;
@@ -59,6 +81,8 @@ public class ShoppingCartEntity  implements Serializable {
 		this.isDisabled = 0;
         this.articleId = articleId;
         this.articleType = articleType;
+        this.activityId=activityId;
+        this.activityType=activityType;
 	}
 
 	/**

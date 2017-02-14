@@ -23,8 +23,10 @@ public class SalerParentOrderVO implements Serializable {
 	private String buyerIM;// 买家IM账号
 	private String orderId;// 订单id
 	private String countId;// 下单账号
-	private String orderType;// 订单类型
-	private String orderSource;// 订单渠道     0微商城 1APP 2终端机 3其他
+	private String orderType;// 订单类型 1直接付款 2担保交易
+	private String orderSource;// 订单渠道     0微信 1APP 2终端机 3其他
+	private String orderChannel;// 下单渠道     SmallProgram ：小程序
+	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
 	private String payTime;// 付款时间
 	private String deliverTime;// 发货时间
 	private String comment;// 订单备注
@@ -53,9 +55,11 @@ public class SalerParentOrderVO implements Serializable {
 	private String receiveTime;// 收货时间
 	private String buyerPhone;// 买家手机号
 
+	private BigDecimal merchantRedDiscount;//商家红包实际补贴金额
 	private BigDecimal rebateDiscount;//商家抵扣券金额
 	private String rebateTitle;//商家抵扣券名称
-	
+	private BigDecimal totalPriceToSeller;// 实收款
+
 	private boolean ifSupportByKuaidi100 = false;// true快递100支持 false不支持
 	private boolean ifOnDisplayExpress = false;//true显示查看物流按钮 false不显示
 	private String newContextByKuaidi100;// 当前最新推送的一条物流信息
@@ -400,6 +404,38 @@ public class SalerParentOrderVO implements Serializable {
 		this.expressOrderInfoId = expressOrderInfoId;
 	}
 
+	public BigDecimal getMerchantRedDiscount() {
+		return merchantRedDiscount;
+	}
+
+	public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+		this.merchantRedDiscount = merchantRedDiscount;
+	}
+
+	public BigDecimal getTotalPriceToSeller() {
+		return totalPriceToSeller;
+	}
+
+	public void setTotalPriceToSeller(BigDecimal totalPriceToSeller) {
+		this.totalPriceToSeller = totalPriceToSeller;
+	}
+
+	public String getOrderSourceForWeiXin() {
+		return orderSourceForWeiXin;
+	}
+
+	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
+		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
+	public String getOrderChannel() {
+		return orderChannel;
+	}
+
+	public void setOrderChannel(String orderChannel) {
+		this.orderChannel = orderChannel;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerParentOrderVO [status=" + status + ", totalPrice="
@@ -426,7 +462,12 @@ public class SalerParentOrderVO implements Serializable {
 				+ ", buyerPhone=" + buyerPhone + ", rebateDiscount="
 				+ rebateDiscount + ", rebateTitle=" + rebateTitle + ",expressOrderInfoId="+expressOrderInfoId
 				+ ", ifSupportByKuaidi100=" + ifSupportByKuaidi100 + ",ifOnDisplayExpress="+ifOnDisplayExpress 
-				+ ", newContextByKuaidi100=" + newContextByKuaidi100 + ",newTimeByKuaidi100="+newTimeByKuaidi100 +"]";
+				+ ", newContextByKuaidi100=" + newContextByKuaidi100 + ",newTimeByKuaidi100="+newTimeByKuaidi100
+				+ ", merchantRedDiscount=" + merchantRedDiscount
+				+ ", totalPriceToSeller=" + totalPriceToSeller
+				+ ", orderSourceForWeiXin=" + orderSourceForWeiXin
+				+ ", orderChannel=" + orderChannel
+				+"]";
 	}
 
 }
