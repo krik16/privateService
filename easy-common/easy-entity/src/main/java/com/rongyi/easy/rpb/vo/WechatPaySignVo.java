@@ -3,12 +3,14 @@ package com.rongyi.easy.rpb.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * 微信支付业务参数
  * conan
  * 2016/10/11 14:49
  **/
-public class WechatPaySignVo {
+public class WechatPaySignVo implements Serializable{
 
     private String orderNo;//订单号
 

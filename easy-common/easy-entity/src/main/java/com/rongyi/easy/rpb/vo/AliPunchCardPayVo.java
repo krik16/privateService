@@ -1,10 +1,12 @@
 package com.rongyi.easy.rpb.vo;
 
+import java.io.Serializable;
+
 /**
  * conan
  * 2017/2/8 10:34
  **/
-public class AliPunchCardPayVo {
+public class AliPunchCardPayVo implements Serializable {
     //支付授权码
     private String appAuthToken;
 

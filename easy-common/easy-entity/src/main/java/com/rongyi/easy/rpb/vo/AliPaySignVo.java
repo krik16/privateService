@@ -3,11 +3,13 @@ package com.rongyi.easy.rpb.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * conan
  * 2017/2/7 17:08
  **/
-public class AliPaySignVo {
+public class AliPaySignVo implements Serializable {
 
     //支付授权码
     private String appAuthToken;
