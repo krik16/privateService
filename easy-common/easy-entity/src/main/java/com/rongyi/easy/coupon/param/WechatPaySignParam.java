@@ -38,6 +38,11 @@ public class WechatPaySignParam implements Serializable {
      */
     private String merchantUrl;
 
+    /**
+     * 商场id
+     */
+    private String mallId;
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -94,12 +99,20 @@ public class WechatPaySignParam implements Serializable {
         this.merchantUrl = merchantUrl;
     }
 
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
     @Override
     public String toString() {
         return "WechatPaySignParam [orderNo=" + orderNo + ", payType="
                 + payType + ", appId=" + appId + ", openId=" + openId
                 + ", weixinPayType=" + weixinPayType + ", callBackUrl=" + callBackUrl
-                + ", merchantUrl=" + merchantUrl + "]";
+                + ", merchantUrl=" + merchantUrl  + ", mallId=" + mallId + "]";
     }
 
 }

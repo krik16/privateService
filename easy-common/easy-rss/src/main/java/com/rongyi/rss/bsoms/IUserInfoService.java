@@ -344,7 +344,33 @@ public interface IUserInfoService {
 	 * @return 影响账号数
 	 */
 	int updatePwdByUserPhone(String userPhone,String pwd);
+
 	/**
+	 * 变更 b_user_authority 的用户权限
+	 * @param authList
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	boolean updateSpecificAuthorities(List<String> authList,Integer userId) throws Exception;
+
+	/**
+	 * 删除b_user_authority 的用户权限
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	boolean deleteSpecificAuthoritiesByUserId(Integer userId) throws Exception;
+	/**
+	 * 根据帐号/手机号集合查询用户列表
+	 * @param accountList
+	 * @param type  2买手 其他为商家帐户
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserInfo> getUserListByType(List<String> accountList,Integer type) throws Exception;
+
+   /*
 	 * 修改账号资金状态
 	 */
 	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;

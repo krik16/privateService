@@ -18,6 +18,14 @@ public class BaseParam implements Serializable{
     private String  appVersion; //APP版本号
     private String  appType; // 0 表示 ios,1表示 android
 
+    @Override
+    public String toString() {
+        return "BaseParam{" +
+                "jsessionid='" + jsessionid + '\'' +
+                ", appVersion='" + appVersion + '\'' +
+                ", appType='" + appType + '\'' +
+                '}';
+    }
 
     public String getJsessionid() {
         return jsessionid;

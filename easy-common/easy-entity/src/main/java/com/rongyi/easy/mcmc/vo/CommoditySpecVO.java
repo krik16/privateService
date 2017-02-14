@@ -34,7 +34,17 @@ public class CommoditySpecVO implements  Serializable {
 	
 	private Integer activitySpecStock;//拼团商品规格库存
 	private Double activityPrice;//拼团商品规格价格
-	
+	private String specColumnsMsg;
+
+
+	public String getSpecColumnsMsg() {
+		return specColumnsMsg;
+	}
+
+	public void setSpecColumnsMsg(String specColumnsMsg) {
+		this.specColumnsMsg = specColumnsMsg;
+	}
+
 	public Integer getActivitySpecStock() {
 		return activitySpecStock;
 	}

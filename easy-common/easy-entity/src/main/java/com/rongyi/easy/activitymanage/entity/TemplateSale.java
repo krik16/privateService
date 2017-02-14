@@ -1,9 +1,11 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 特卖模版列表
@@ -57,6 +59,34 @@ public class TemplateSale implements Serializable{
     private String replacePic;
     private int roundSum;//0特卖1单场次2多场次
     private int roundType; //0特卖1专场中特卖2专场中拼单
+    private Integer associateCoupon;//是否关联卡卷
+    private String couponPic;//领卷入口图
+    private String desc;//描述
+
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getAssociateCoupon() {
+        return associateCoupon;
+    }
+
+    public void setAssociateCoupon(Integer associateCoupon) {
+        this.associateCoupon = associateCoupon;
+    }
+
+    public String getCouponPic() {
+        return couponPic;
+    }
+
+    public void setCouponPic(String couponPic) {
+        this.couponPic = couponPic;
+    }
 
     public String getSharePic() {
         return sharePic;
@@ -215,6 +245,9 @@ public class TemplateSale implements Serializable{
                 .append("roundSum", roundSum)
                 .append("roundType", roundType)
                 .append("sharePic", sharePic)
+                .append("associateCoupon", associateCoupon)
+                .append("couponPic", couponPic)
+                .append("desc", desc)
                 .toString();
     }
 }

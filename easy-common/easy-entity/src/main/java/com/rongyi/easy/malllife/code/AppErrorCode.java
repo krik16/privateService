@@ -22,7 +22,7 @@ public enum AppErrorCode {
     FAILURE(-1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
     USER_ISNOT_LOGIN(21,"请重新登录"),
     PARAMETER_ISNULL(1060001,"必要参数不能为空"),
-    ERROR_MALLLIFEEXCEPTION(1060011,""),
+    ERROR_MALLLIFEEXCEPTION(1060011,"系统异常"),
     /** 用户导购聊天记录  */
     ERROR_SAVE_USERGUIDECHAT(1062001,"修改或者插入用户导购聊天记录失败"),
     ERROR_GUIDE_ISDISABLED(1062002,"此店铺休息中，无法为您服务"),

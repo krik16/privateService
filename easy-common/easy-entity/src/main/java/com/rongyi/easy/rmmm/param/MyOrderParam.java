@@ -25,7 +25,11 @@ public class MyOrderParam implements Serializable{
 
 	private String createAtEnd;//创建时间结束值
 
+	//普通0、闪购1、特卖2、秒杀3、拼团4、超级团教育版5、断码好货6
 	private Integer activityType;//订单类型：空为全部，0-普通、1-闪购、2-特卖、3-秒杀、4-拼团、-1-大促,5预约
+
+
+	private  String  activityId;//  活动id
 
 
 	public String getJsessionid() {
