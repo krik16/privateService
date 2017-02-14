@@ -1,22 +1,12 @@
 package com.rongyi.easy.coupon.param;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
+import com.rongyi.easy.coupon.entity.*;
+import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 import org.apache.commons.lang.StringUtils;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponBrand;
-import com.rongyi.easy.coupon.entity.CouponCategory;
-import com.rongyi.easy.coupon.entity.CouponCommodity;
-import com.rongyi.easy.coupon.entity.CouponCommodityCategory;
-import com.rongyi.easy.coupon.entity.CouponMall;
-import com.rongyi.easy.coupon.entity.CouponShop;
-import com.rongyi.easy.coupon.entity.CouponVoucher;
-import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 红包参数
@@ -30,7 +20,7 @@ public class RedenvelopeParam implements Serializable {
 	private List<String> ids;// 促销券ids
 	private String name;// 促销券名称/商场名称/券码领用人名称
 	private Integer type;// 促销券类型(0:注册，1：常规)/商场对应商圈类型(0:省id,1:市.区.商圈id)
-	private Integer status;// 促销券状态(0:待审核，1:审核未通过，2:待发布，3:进行中，4:已结束，5:已下架)/券码状态(0:未使用、1:已使用、2:已过期)
+	private Integer status;// 促销券状态(0:待审核，1:审核未通过，2:待发布，3:进行中，4:已结束，5:已下架 6:待发布、进行中的)/券码状态(0:未使用、1:已使用、2:已过期)
 	private Integer applyGoods;// 促销券适用范围1(0：商品/代金券，1：商品，2：代金券)
 	private Integer relatedType;// 促销券适用范围2(0：全场，1：品牌，2：商场，3：店铺、4：分类，5：信息)/代金券关联类型
 	private Integer applyObject;// 促销券适用对象(0:商家/买手,1:商家,2:买手)
@@ -94,6 +84,9 @@ public class RedenvelopeParam implements Serializable {
 //	}
 	private Integer couponType;//卡券类型: 代金券[0],抵扣券[1], 红包[2]
     private String displayRegion;//展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+	private Byte subsidyType;//补贴类型(0:平台补贴,1:商家补贴)
+
+
 	public Integer getPublishChannel() {
 		return publishChannel;
 	}
@@ -607,6 +600,15 @@ public class RedenvelopeParam implements Serializable {
 	public void setShopName(String shopName) {
 		this.shopName = StringUtils.isNotBlank(shopName)?shopName.trim():null;
 	}
+
+	public Byte getSubsidyType() {
+		return subsidyType;
+	}
+
+	public void setSubsidyType(Byte subsidyType) {
+		this.subsidyType = subsidyType;
+	}
+
 	@Override
 	public String toString() {
 		return "RedenvelopeParam [id=" + id + ", ids=" + ids + ", name=" + name
@@ -643,6 +645,6 @@ public class RedenvelopeParam implements Serializable {
 				+ unpassReasons + ", publishChannel=" + publishChannel
 				+ ", dateType=" + dateType + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", couponType=" + couponType
-				+ ", displayRegion=" + displayRegion + "]";
+				+ ", displayRegion=" + displayRegion + ", subsidyType=" + subsidyType + "]";
 	}
 }

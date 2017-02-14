@@ -79,6 +79,17 @@ public class ActivityTemplate implements Serializable{
 
     private int isOuter;//是否外投
 
+
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getIsOuter() {
         return isOuter;
     }
