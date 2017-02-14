@@ -196,4 +196,11 @@ public interface IRpbService {
 	 **/
 	RefundStatusVO getRefundStatus(RefundQueryParamVO refundQueryParamVO);
 
+	/**
+	 * 根据商户ID删除服务号支付信息
+	 * @param userId 商户ID
+	 * @return 返回结果
+	 */
+	ResponseData delWeixinMchByUserId(String userId);
+
 }

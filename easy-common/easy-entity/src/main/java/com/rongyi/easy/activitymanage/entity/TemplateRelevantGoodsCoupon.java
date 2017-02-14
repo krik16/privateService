@@ -60,6 +60,16 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
 
     private Integer createBy;
 
+    private Integer ActivityTemplateId;//只有在selectCommodityIdsInActive会查询出来，其余都为null
+
+
+    public Integer getActivityTemplateId() {
+        return ActivityTemplateId;
+    }
+
+    public void setActivityTemplateId(Integer activityTemplateId) {
+        ActivityTemplateId = activityTemplateId;
+    }
 
     public Integer getId() {
         return id;
@@ -253,6 +263,7 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
                 .append("shopId", shopId)
                 .append("shopName", shopName)
                 .append("createBy", createBy)
+                .append("ActivityTemplateId",ActivityTemplateId)
                 .toString();
     }
 }

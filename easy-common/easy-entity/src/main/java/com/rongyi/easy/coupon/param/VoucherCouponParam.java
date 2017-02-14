@@ -1,9 +1,9 @@
 package com.rongyi.easy.coupon.param;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
 
 @SuppressWarnings("serial")
 public class VoucherCouponParam implements Serializable{
@@ -22,9 +22,15 @@ public class VoucherCouponParam implements Serializable{
 	private String name;
 
 	/**
-     * 关联类型
-     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
-     */
+	 * 平台促销券适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+	 */
+	private Integer applyGoods;
+
+	/**
+	 * 关联类型
+	 * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];导购[4]（商家后台导购建的券）
+	 * 平台促销券 ：全场[0]，品牌[1]，商场[2]，店铺[3]、分类[4]，信息[5]
+	 */
     private Integer relatedType;
 
 	/**
@@ -109,6 +115,11 @@ public class VoucherCouponParam implements Serializable{
      * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
      */
     private String displayRegion;
+
+	/**
+	 * 平台促销券适用对象，商家/买手[0] 商家[1] 买手[2]
+	 */
+	private Integer applyObject;
 
 	private Integer currentPage = CURRENTPAGE;
 
@@ -314,6 +325,22 @@ public class VoucherCouponParam implements Serializable{
 		this.displayRegion = StringUtils.isNotBlank(displayRegion) ? displayRegion.trim() : null;
 	}
 
+	public Integer getApplyObject() {
+		return applyObject;
+	}
+
+	public void setApplyObject(Integer applyObject) {
+		this.applyObject = applyObject;
+	}
+
+	public Integer getApplyGoods() {
+		return applyGoods;
+	}
+
+	public void setApplyGoods(Integer applyGoods) {
+		this.applyGoods = applyGoods;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -327,7 +354,9 @@ public class VoucherCouponParam implements Serializable{
 				.append(", provinceId=").append(provinceId).append(", cityId=").append(cityId).append(", tabType=")
 				.append(tabType).append(", displayRegion=").append(displayRegion).append(", currentPage=")
 				.append(currentPage).append(", pageSize=").append(pageSize).append(", offset=").append(offset)
-				.append(", orderByClause=").append(orderByClause).append("]");
+				.append(", orderByClause=").append(orderByClause).append("]")
+				.append(", applyObject=").append(applyObject).append("]")
+				.append(", applyGoods=").append(applyGoods).append("]");
 		return builder.toString();
 	}
 

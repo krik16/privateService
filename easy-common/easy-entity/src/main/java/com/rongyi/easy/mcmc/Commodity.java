@@ -311,6 +311,12 @@ public class Commodity implements  Serializable,Cloneable{
 		this.tagIds = tagIds;
 	}
 
+	private String serviceDescription;//售后说明
+
+	private Integer serviceDescriptionId;
+
+	private String serviceDescriptionRemark;
+
 	public Integer getMerchantType() {
 		return merchantType;
 	}
@@ -834,6 +840,30 @@ public class Commodity implements  Serializable,Cloneable{
 		this.serviceIds = serviceIds;
 	}
 
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -893,6 +923,9 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShelvesType(null ==shelvesType?2:shelvesType);
 		commodity.setSubheading(subheading);
 		commodity.setCommodityDetails(commodityDetails);
+		commodity.setServiceDescriptionId(serviceDescriptionId);
+		commodity.setServiceDescription(serviceDescription);
+		commodity.setServiceDescriptionRemark(serviceDescriptionRemark);
 		return commodity;
 	}
 	@Override
@@ -968,6 +1001,9 @@ public class Commodity implements  Serializable,Cloneable{
 				",shelvesType=" + shelvesType +
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
+				", serviceDescription=" + serviceDescription+
+				", serviceDescriptionId=" + serviceDescriptionId+
+				", serviceDescriptionRemark=" + serviceDescriptionRemark+
 				'}';
 	}
 
@@ -1100,6 +1136,20 @@ public class Commodity implements  Serializable,Cloneable{
 		}
 		this.setCommodityRange(vo.getCommodityRange());
 
+		this.setBrandId(String.valueOf(brandId));
+		this.setMallId(String.valueOf(mallId));
+		this.setMallMid(mallMid);
+		this.setShopNum(shopNum);
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setSubheading(vo.getSubheading());
+		this.setCommodityDetails(vo.getCommodityDetails());
+		this.setCommodityModelNo(vo.getCommodityModelNo());
+		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+		this.setGroupMid(vo.getGroupMid());
+		this.setShelvesType(vo.getShelvesType());
+		this.setServiceDescriptionId(vo.getServiceDescriptionId());
+		this.setServiceDescription(vo.getServiceDescription());
+		this.setServiceDescriptionRemark(vo.getServiceDescriptionRemark());
 		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());
@@ -1263,6 +1313,9 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setCommodityRange(source.getCommodityRange());
 		commodity.setFreePostage(source.getFreePostage());
 		commodity.setShelvesType(source.getShelvesType());
+		commodity.setServiceDescriptionId(source.getServiceDescriptionId());
+		commodity.setServiceDescription(source.getServiceDescription());
+		commodity.setServiceDescriptionRemark(source.getServiceDescriptionRemark());
 		return commodity;
 	}
 }

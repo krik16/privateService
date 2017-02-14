@@ -152,6 +152,11 @@ public class PaymentEntityVO {
      */
     private String remark;
 
+    /**
+     * 商场id
+     */
+    private String mallId;
+
 
     /**
      * 主键id
@@ -523,6 +528,14 @@ public class PaymentEntityVO {
         this.remark = remark;
     }
 
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
     @Override
     public String toString() {
         return "PaymentEntityVO{" +
@@ -559,6 +572,7 @@ public class PaymentEntityVO {
                 ", wishing='" + wishing + '\'' +
                 ", actName='" + actName + '\'' +
                 ", remark='" + remark + '\'' +
+                ", mallId='" + mallId + '\'' +
                 '}';
     }
 }

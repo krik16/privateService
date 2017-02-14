@@ -362,6 +362,15 @@ public interface IUserInfoService {
 	 */
 	boolean deleteSpecificAuthoritiesByUserId(Integer userId) throws Exception;
 	/**
+	 * 根据帐号/手机号集合查询用户列表
+	 * @param accountList
+	 * @param type  2买手 其他为商家帐户
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserInfo> getUserListByType(List<String> accountList,Integer type) throws Exception;
+
+   /*
 	 * 修改账号资金状态
 	 */
 	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;
