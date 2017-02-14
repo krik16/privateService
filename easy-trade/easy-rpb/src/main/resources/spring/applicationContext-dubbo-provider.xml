@@ -12,9 +12,11 @@
 	<bean id="rpbService" class="com.rongyi.rpb.service.impl.RpbServiceImpl" />
 
 	<!--支付宝支付服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.IAliPayService" version="${dubbo.version}" ref="aliPayService" />
 	<bean id="aliPayService" class="com.rongyi.rpb.service.impl.v2.AliPayServiceImpl" />
 
 	<!--微信支付服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.IWechatPayService" version="${dubbo.version}" ref="wechatPayService" />
 	<bean id="wechatPayService" class="com.rongyi.rpb.service.impl.v2.WechatPayServiceImpl" />
 
 	<!-- 微信批量退款定时任务 -->
