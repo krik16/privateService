@@ -1,5 +1,8 @@
 package com.rongyi.easy.tradecenter.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -22,6 +25,8 @@ public class MerchantOrderCouponVO implements Serializable
     String validTime;//有效期
     String status;//状态
     String outChannelName;//推广渠道名
+    String merchantRedDiscount;//商家补贴红包金额
+    String merchantRebateDiscount;//商家补贴抵扣券金额
     Integer relatedType;//代金券：集团[0],品牌[1], 商场 [2],店铺[3];导购[4]（商家后台导购建的券）
     String relateName;//关联商场或店铺的名称
 
@@ -145,12 +150,23 @@ public class MerchantOrderCouponVO implements Serializable
         this.relateName = relateName;
     }
 
+    public String getMerchantRedDiscount() {
+        return merchantRedDiscount;
+    }
+
+    public void setMerchantRedDiscount(String merchantRedDiscount) {
+        this.merchantRedDiscount = merchantRedDiscount;
+    }
+
+    public String getMerchantRebateDiscount() {
+        return merchantRebateDiscount;
+    }
+
+    public void setMerchantRebateDiscount(String merchantRebateDiscount) {
+        this.merchantRebateDiscount = merchantRebateDiscount;
+    }
+
     public String toString() {
-        return "OrderCouponVO=[icon="+icon+",couponName="+couponName+",couponId="+couponId+"," +
-                "couponNum="+couponNum+",unitPrice="+unitPrice+",totalPrice="+totalPrice+",payPrice="+payPrice+",discountAmount="+discountAmount+"," +
-               "discountInfo="+discountInfo
-                +"relatedType="+relatedType
-                +"relateName="+relateName
-                +"]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

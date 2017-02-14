@@ -37,4 +37,12 @@ public interface MlActivityDetailService  {
      * @return
      */
     public ResponseVO searchSaleFlashDetailByParam(FlashSaleParam flashSaleParam);
+
+
+    /**
+     * 断码好货详情
+     * @param flashSaleParam
+     * @return
+     */
+    public ResponseVO searchBreakCodeDetailByParam(FlashSaleParam flashSaleParam);
 }

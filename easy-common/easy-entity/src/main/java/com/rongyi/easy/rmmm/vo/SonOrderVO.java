@@ -50,7 +50,10 @@ public class SonOrderVO implements Serializable{
 	private String description;// 全场红包/店铺红包
 	private String liveName;//直播名
 	private boolean ifOnDisplayAfterSales = false;//是否显示申请售后按钮,true显示 false不显示
-	
+	private Integer couponDiscountType;//红包补贴类型  0：平台补贴 1：商家补贴
+	private Integer rebateDiscountType;//抵扣券补贴类型  0：平台补贴 1：商家补贴
+	private BigDecimal discountAmount;//原价-卖家优惠
+
 	public boolean isIfOnDisplayAfterSales() {
 		return ifOnDisplayAfterSales;
 	}
@@ -252,6 +255,30 @@ public class SonOrderVO implements Serializable{
 		this.description = description;
 	}
 
+	public Integer getCouponDiscountType() {
+		return couponDiscountType;
+	}
+
+	public void setCouponDiscountType(Integer couponDiscountType) {
+		this.couponDiscountType = couponDiscountType;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
+	public Integer getRebateDiscountType() {
+		return rebateDiscountType;
+	}
+
+	public void setRebateDiscountType(Integer rebateDiscountType) {
+		this.rebateDiscountType = rebateDiscountType;
+	}
+
 	@Override
 	public String toString() {
 		return "SonOrderVO{" +
@@ -274,6 +301,9 @@ public class SonOrderVO implements Serializable{
 				", description='" + description + '\'' +
 				", liveName='" + liveName + '\'' +
 				", ifOnDisplayAfterSales='" + ifOnDisplayAfterSales + '\'' +
+				", couponDiscountType='" + couponDiscountType + '\'' +
+				", rebateDiscountType='" + rebateDiscountType + '\'' +
+				", discountAmount='" + discountAmount + '\'' +
 				'}';
 	}
 }

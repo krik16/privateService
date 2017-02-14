@@ -46,6 +46,16 @@ public class ActivityTemplateParam implements Serializable {
 
     private String shopId;//店铺id
 
+    private String goodId;//商品id
+
+
+    public String getGoodId() {
+        return goodId;
+    }
+
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
+    }
 
     public String getShopId() {
         return shopId;
@@ -198,6 +208,7 @@ public class ActivityTemplateParam implements Serializable {
                 .append("orderByString", orderByString)
                 .append("moduleType", moduleType)
                 .append("shopId", shopId)
+                .append("goodId", goodId)
                 .toString();
     }
 }

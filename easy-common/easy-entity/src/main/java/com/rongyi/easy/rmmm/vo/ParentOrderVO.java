@@ -123,6 +123,7 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal commidityTotalPice;//商品总价
 
 	private BigDecimal orderTotalPrice;//订单总价
+	private BigDecimal discountAmount;//订单总价-折扣
 	
 	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
 	private Long groupEndAt;//团结束时间，单位：毫秒
@@ -160,7 +161,12 @@ public class ParentOrderVO implements Serializable {
 	private String activityCommodityDesc;//超级团商品副标题
 	private String weixinAppId;//
 	private BigDecimal totalPriceToSeller;// 卖家实收款
-
+	private BigDecimal merchantRedDiscount;//商家补贴红包金额
+	private BigDecimal operationRedDiscount;//平台补贴红包金额
+	private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
+	private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
+	private String orderChannel;//下单渠道 SmallProgram:小程序
+	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
 	private String selfCode;// 自提码
 	private List<CommentVO> comments;//卖家备注列表
 
@@ -873,6 +879,54 @@ public class ParentOrderVO implements Serializable {
 		this.reservePost = reservePost;
 	}
 
+	public BigDecimal getMerchantRedDiscount() {
+		return merchantRedDiscount;
+	}
+
+	public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+		this.merchantRedDiscount = merchantRedDiscount;
+	}
+
+	public BigDecimal getOperationRedDiscount() {
+		return operationRedDiscount;
+	}
+
+	public void setOperationRedDiscount(BigDecimal operationRedDiscount) {
+		this.operationRedDiscount = operationRedDiscount;
+	}
+
+	public BigDecimal getMerchantRebateDiscount() {
+		return merchantRebateDiscount;
+	}
+
+	public void setMerchantRebateDiscount(BigDecimal merchantRebateDiscount) {
+		this.merchantRebateDiscount = merchantRebateDiscount;
+	}
+
+	public BigDecimal getOperationRebateDiscount() {
+		return operationRebateDiscount;
+	}
+
+	public void setOperationRebateDiscount(BigDecimal operationRebateDiscount) {
+		this.operationRebateDiscount = operationRebateDiscount;
+	}
+
+	public String getOrderChannel() {
+		return orderChannel;
+	}
+
+	public void setOrderChannel(String orderChannel) {
+		this.orderChannel = orderChannel;
+	}
+
+	public String getOrderSourceForWeiXin() {
+		return orderSourceForWeiXin;
+	}
+
+	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
+		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
 	public String getWeixinAppId() {
 		return weixinAppId;
 	}
@@ -903,6 +957,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setComments(List<CommentVO> comments) {
 		this.comments = comments;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
 	}
 
 	@Override

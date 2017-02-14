@@ -85,6 +85,7 @@ public class UserInfo implements Serializable{
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
     private Integer chiefId;
+    //private Integer isSuspended;//资金账号
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
 
     public String getStopReason() {
@@ -489,4 +490,5 @@ public class UserInfo implements Serializable{
 				+ ", level=" + level + ", chiefId=" + chiefId
 				+ ", isSuspended=" + isSuspended + "]";
 	}
+	
 }

@@ -41,4 +41,11 @@ public interface RoaActivityDetailService  {
      * @return
      */
     public ResponseVO searchSaleFlashBuyDetailByParam(FlashSaleParam flashSaleParam);
+
+    /**
+     * 查看断码好货详情
+     * @param flashSaleParam
+     * @return
+     */
+    public ResponseVO searchBreakCodeDetailByParam(FlashSaleParam flashSaleParam);
 }

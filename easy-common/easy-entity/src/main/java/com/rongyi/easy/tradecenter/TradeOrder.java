@@ -1,6 +1,8 @@
 package com.rongyi.easy.tradecenter;
 
 import com.rongyi.core.common.util.JsonUtil;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -113,12 +115,15 @@ public class TradeOrder implements Serializable {
      */
     private String orderChannel;
 
-    // 总积分
-    private Integer totalCredit;
     // 用户类型
     private Integer userType ;
 
     private Integer couponStatus;//卡券状态  0待付款 2已取消 5已退款 9未核销 10已核销
+
+    /**
+     * 促销券补贴类型 0：平台补贴 1：商家补贴
+     */
+    private Byte couponDiscountType;
     /**
      * 元
      *
@@ -572,12 +577,12 @@ public class TradeOrder implements Serializable {
         this.rate = rate;
     }
 
-    public Integer getTotalCredit() {
-        return totalCredit;
+    public Byte getCouponDiscountType() {
+        return couponDiscountType;
     }
 
-    public void setTotalCredit(Integer totalCredit) {
-        this.totalCredit = totalCredit;
+    public void setCouponDiscountType(Byte couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
     }
 
     public Integer getUserType() {
@@ -594,5 +599,10 @@ public class TradeOrder implements Serializable {
 
     public void setCouponStatus(Integer couponStatus) {
         this.couponStatus = couponStatus;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
