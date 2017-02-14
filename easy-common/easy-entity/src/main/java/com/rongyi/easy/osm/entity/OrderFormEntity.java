@@ -45,17 +45,29 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal totalAmountWithoutScoreDiscount = null;//订单总金额（不包括积分优惠）
     private Integer devType;//设备类型
     private Byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+    private Integer couponDiscountType;//促销券补贴类型 0：平台补贴 1：商家补贴
     private Integer orderScore;//购物车订单积分分摊
+
     private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
+
     private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
+
     private Byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
+
     private Integer cartId;//购物车id 0表示不使用购物车
+
     private Integer buyerDeleteFlag;//买家删除标志 0 未删除 1 删除
+
     private Integer sellerDeleteFlag;//卖家删除标志 0 未删除 1 删除
+
     private BigDecimal realAmount;//原价
+
     private BigDecimal discountAmount;//原价-卖家优惠
+
     private BigDecimal rebateAmount;//discount_amount-红包抵扣券
+
     private BigDecimal scoreAmount;//rebate_amount - 积分
+
     private List<OrderDetailFormEntity> detailOrderList;
     private OrderFormExtraEntity orderExtra;
 
@@ -108,6 +120,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private String buyerName;//如果是微信用户昵称，昵称是编码之后的
     private OrderReserveEntity orderReserve;//超级团预约信息
+
+    private BigDecimal merchantRedDiscount;//商家补贴红包金额
+    private BigDecimal operationRedDiscount;//平台补贴红包金额
+    private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
+    private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
 
     public Byte getIsAlert() {
         return isAlert;
@@ -813,62 +830,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.activityName = activityName;
     }
 
-    public Integer getDeliveryType() {
-        return deliveryType;
-    }
-
-    public void setDeliveryType(Integer deliveryType) {
-        this.deliveryType = deliveryType;
-    }
-
-    public Integer getBusiness() {
-        return business;
-    }
-
-    public void setBusiness(Integer business) {
-        this.business = business;
-    }
-
-    public Integer getCommodityType() {
-        return commodityType;
-    }
-
-    public void setCommodityType(Integer commodityType) {
-        this.commodityType = commodityType;
-    }
-
-    public Integer getTotalCredit() {
-        return totalCredit;
-    }
-
-    public void setTotalCredit(Integer totalCredit) {
-        this.totalCredit = totalCredit;
-    }
-
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
-
-    public String getMallMid() {
-        return mallMid;
-    }
-
-    public void setMallMid(String mallMid) {
-        this.mallMid = mallMid;
-    }
-
-    public String getShopMid() {
-        return shopMid;
-    }
-
-    public void setShopMid(String shopMid) {
-        this.shopMid = shopMid;
-    }
-
     public String getBuyerName() {
         return buyerName;
     }
@@ -896,6 +857,102 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setOrderEvent2(OrderEventEntity orderEvent2) {
         this.orderEvent2 = orderEvent2;
+    }
+
+    public Integer getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(Integer couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
+    }
+
+    public BigDecimal getMerchantRedDiscount() {
+        return merchantRedDiscount;
+    }
+
+    public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+        this.merchantRedDiscount = merchantRedDiscount;
+    }
+
+    public BigDecimal getMerchantRebateDiscount() {
+        return merchantRebateDiscount;
+    }
+
+    public void setMerchantRebateDiscount(BigDecimal merchantRebateDiscount) {
+        this.merchantRebateDiscount = merchantRebateDiscount;
+    }
+
+    public BigDecimal getOperationRedDiscount() {
+        return operationRedDiscount;
+    }
+
+    public void setOperationRedDiscount(BigDecimal operationRedDiscount) {
+        this.operationRedDiscount = operationRedDiscount;
+    }
+
+    public BigDecimal getOperationRebateDiscount() {
+        return operationRebateDiscount;
+    }
+
+    public void setOperationRebateDiscount(BigDecimal operationRebateDiscount) {
+        this.operationRebateDiscount = operationRebateDiscount;
+    }
+
+    public Integer getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Integer business) {
+        this.business = business;
+    }
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public Integer getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(Integer totalCredit) {
+        this.totalCredit = totalCredit;
+    }
+
+    public Integer getCommodityType() {
+        return commodityType;
+    }
+
+    public void setCommodityType(Integer commodityType) {
+        this.commodityType = commodityType;
+    }
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
+
+    public String getShopMid() {
+        return shopMid;
+    }
+
+    public void setShopMid(String shopMid) {
+        this.shopMid = shopMid;
     }
 
     @Override

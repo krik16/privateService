@@ -8,6 +8,7 @@ import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.mcmc.constant.EPOIType;
+import com.rongyi.easy.mcmc.param.CommodityParam;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import com.rongyi.easy.mcmc.vo.CommodityPagePinTuanVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
@@ -81,6 +82,7 @@ public interface ICommodityService {
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
 
+
 	public List<Commodity> searchCommodityByUserId(Integer userId,Integer pageCount);
 
 	public Long searchCommodityByUserIdTotalCount(Integer userId);
@@ -100,4 +102,5 @@ public interface ICommodityService {
 	 */
 	Map<String, List> updateSwitchStatusForCommodity(String commodityId, String terminalId, String switchStatus, boolean isYunYinAuth);
 
+	public boolean updateCommodityForOperate(CommodityParam commodityParam);
 }

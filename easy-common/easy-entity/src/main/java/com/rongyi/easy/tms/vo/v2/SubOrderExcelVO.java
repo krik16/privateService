@@ -49,6 +49,12 @@ public class SubOrderExcelVO {
 
     private String createAt;
 
+    private String commodityName;
+
+    private String activityType;
+
+    private String activityName;
+
     public String getOrderCartNo() {
         return orderCartNo;
     }
@@ -202,6 +208,30 @@ public class SubOrderExcelVO {
         this.userPhone = userPhone;
     }
 
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
     @Override
     public String toString() {
         return "SubOrderExcelVO{" +
@@ -224,6 +254,9 @@ public class SubOrderExcelVO {
                 ", userPhone='" + userPhone + '\'' +
                 ", commodityId='" + commodityId + '\'' +
                 ", createAt=" + createAt +
+                ", activityType=" + activityType +
+                ", activityName=" + activityName +
+                ", commodityName=" + commodityName +
                 '}';
     }
 

@@ -6,12 +6,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.roa.vo.GroupMemberVO;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -91,6 +93,15 @@ public class CommodityBuyerVO implements Serializable {
 	private Long soldOutAt;//下架时间
     private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
     private List<String> categoryNames;
+    private List<String> onServiceIds;
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
+    }
 
     public List<String> getCategoryNames() {
         return categoryNames;
@@ -143,6 +154,18 @@ public class CommodityBuyerVO implements Serializable {
 
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
+
+    private String serviceDescription;   //售后说明内容
+    private Integer serviceDescriptionId;  //售后说明id
+    private String serviceDescriptionRemark;   //售后说明备注
+
+    public String getServiceDescriptionRemark() {
+        return serviceDescriptionRemark;
+    }
+
+    public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+        this.serviceDescriptionRemark = serviceDescriptionRemark;
+    }
 
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
@@ -823,7 +846,23 @@ public class CommodityBuyerVO implements Serializable {
 		this.totalBuycount = totalBuycount;
 	}
 
-	public CommodityBuyerVO(Commodity commodity){
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public Integer getServiceDescriptionId() {
+        return serviceDescriptionId;
+    }
+
+    public void setServiceDescriptionId(Integer serviceDescriptionId) {
+        this.serviceDescriptionId = serviceDescriptionId;
+    }
+
+    public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -866,7 +905,9 @@ public class CommodityBuyerVO implements Serializable {
             this.commodityOPOfLCP = "0.0";
         }
         this.commodityCode = commodity.getCode();
-        this.commodityStatus = commodity.getStatus();
+        if (commodity.getStatus() != null){
+            this.commodityStatus = commodity.getStatus();
+        }
         this.commodityStock = String.valueOf(commodity.getStock());
         this.commodityBrandName = "";
         if(commodity.getBrandName() != null){
@@ -943,11 +984,22 @@ public class CommodityBuyerVO implements Serializable {
         }
         this.subheading=commodity.getSubheading();
         this.commodityDetails=commodity.getCommodityDetails();
-        /*this.setIfShowInWechat(
-                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
-                        .contains(commodity.getTerminalType())  &&
-                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
-                        ?true:false);*/
+        this.setIfShowInWechat(isShowInWechat());
+        this.serviceDescription=commodity.getServiceDescription();
+        this.serviceDescriptionId=commodity.getServiceDescriptionId();
+        this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
+    }
+
+    private boolean isShowInWechat() {
+        if(CollectionUtils.isEmpty(getOnServiceIds())) {
+            return false;
+        }
+
+        List<String> onIds = getOnServiceIds();
+        onIds.remove(Constants.ServiceId.APP_RONG_YI_GUANG);
+        onIds.remove(Constants.ServiceId.TERMINAL_SCREEN);
+
+        return onIds.size() > 0;
     }
 
     @Override
@@ -1014,6 +1066,8 @@ public class CommodityBuyerVO implements Serializable {
                 ", ifShowInWechat=" + ifShowInWechat +
                 ", buyerCount=" + buyerCount +
                 ", totalBuycount=" + totalBuycount +
+                ", serviceDescription=" + serviceDescription +
+                ", serviceDescriptionId=" + serviceDescriptionId +
                 '}';
     }
 

@@ -228,6 +228,18 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private Date activityStartTime;
 	private Date activityEndTime;
 
+	private String serviceDescription;//售后说明
+	private Integer serviceDescriptionId;//售后说明id
+	private String serviceDescriptionRemark;   //售后说明备注
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
 	public List<String> getCategoryNames() {
 		return categoryNames;
 	}
@@ -890,6 +902,21 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.isSpecDeleted = isSpecDeleted;
 	}
 
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
 
 	public Date getActivityStartTime() {
 		return activityStartTime;
@@ -1029,6 +1056,9 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
 		this.setSelfAddressId(commodity.getSelfAddressId());
+		this.serviceDescriptionId=commodity.getServiceDescriptionId();
+		this.serviceDescription=commodity.getServiceDescription();
+		this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
 		this.setIfShowInWechat(isShowInWechat());
 	}
 
@@ -1153,6 +1183,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
+				", serviceDescription=" + serviceDescription +
+				", serviceDescriptionId=" + serviceDescriptionId +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
 				'}';

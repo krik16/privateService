@@ -41,10 +41,16 @@ public class OrderManagerVO implements Serializable {
 	private BigDecimal integralAmount;//积分抵扣
 	private BigDecimal hbAmount;//红包抵扣
 	private Integer orderSource;//订单来源
+	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
 	private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
 	private Long activityRoundId;//活动场次
 	private String activityName;//活动名称
 	private String activityStatus;//活动状态
+	private BigDecimal merchantRedDiscount;//商家补贴红包金额
+	private BigDecimal operationRedDiscount;//平台补贴红包金额
+	private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
+	private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
+	private String orderChannel;//下单渠道  SmallProgram:小程序
 
 	public String getOrderCartNo() {
 		return orderCartNo;
@@ -233,6 +239,54 @@ public class OrderManagerVO implements Serializable {
 
 	public void setActivityStatus(String activityStatus) {
 		this.activityStatus = activityStatus;
+	}
+
+	public BigDecimal getMerchantRedDiscount() {
+		return merchantRedDiscount;
+	}
+
+	public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+		this.merchantRedDiscount = merchantRedDiscount;
+	}
+
+	public BigDecimal getOperationRedDiscount() {
+		return operationRedDiscount;
+	}
+
+	public void setOperationRedDiscount(BigDecimal operationRedDiscount) {
+		this.operationRedDiscount = operationRedDiscount;
+	}
+
+	public BigDecimal getMerchantRebateDiscount() {
+		return merchantRebateDiscount;
+	}
+
+	public void setMerchantRebateDiscount(BigDecimal merchantRebateDiscount) {
+		this.merchantRebateDiscount = merchantRebateDiscount;
+	}
+
+	public BigDecimal getOperationRebateDiscount() {
+		return operationRebateDiscount;
+	}
+
+	public void setOperationRebateDiscount(BigDecimal operationRebateDiscount) {
+		this.operationRebateDiscount = operationRebateDiscount;
+	}
+
+	public String getOrderChannel() {
+		return orderChannel;
+	}
+
+	public void setOrderChannel(String orderChannel) {
+		this.orderChannel = orderChannel;
+	}
+
+	public String getOrderSourceForWeiXin() {
+		return orderSourceForWeiXin;
+	}
+
+	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
+		this.orderSourceForWeiXin = orderSourceForWeiXin;
 	}
 
 	@Override
