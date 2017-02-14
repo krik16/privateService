@@ -183,6 +183,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("remark") != null && !"null".equals(bodyMap.get("remark").toString())) {
             paymentEntityVO.setRemark(bodyMap.get("remark").toString());
         }
+        if(bodyMap.get("mallId") != null && !"null".equals(bodyMap.get("mallId").toString())){
+            paymentEntityVO.setMallId(bodyMap.get("mallId").toString());
+        }
 
         return paymentEntityVO;
     }
@@ -309,6 +312,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         BigDecimal totalFee = new BigDecimal(Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
         paySignData.setTotalFee(totalFee.intValue());
         paySignData.setBody("容易网商品");
+        paySignData.setUesId(paymentEntityVO.getMallId());
         return paySignData;
     }
 
@@ -332,7 +336,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                     //公众号支付
                     if (StringUtils.isNotBlank(paymentEntityVO.getAppId()) && !"null".equals(paymentEntityVO.getAppId())) {
-                        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+                        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType(),paymentEntityVO.getMallId());
                         if (weixinMch != null) {
                             paymentEntity.setWeixinMchId(weixinMch.getId());
                         }
@@ -398,7 +402,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
                 paymentEntity.setPayChannel(null);
             if (StringUtils.isNotBlank(paymentEntityVO.getAppId())) {
-                WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+                WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType(),paymentEntityVO.getMallId());
                 if (weixinMch != null) {
                     paymentEntity.setWeixinMchId(weixinMch.getId());
                 }
@@ -759,7 +763,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         map.put("payChannel", payChannel);
         map.put("refundRejected", refundRejected);
         map.put("status", status);
-        map.put("today", DateUtil.getToday());
+        /*map.put("today", DateUtil.getToday());*/
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndRefundRejected", map);
     }
 

@@ -24,6 +24,7 @@
         <result column="source" property="source" jdbcType="INTEGER"/>
         <result column="pay_no" property="payNo" jdbcType="VARCHAR"/>
         <result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE"/>
+        <result column="coupon_discount_type" property="couponDiscountType" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
         trade_order.id,
@@ -44,7 +45,12 @@
         trade_order.rebate_code,
         trade_order.pay_channel,
         ROUND(trade_order.pay_amount/100,2) as pay_amount,
-        trade_order.source
+        trade_order.coupon_discount_type,
+        case
+        when trade_order.source = 1 and trade_order.weixin_app_id is not null and trade_order.weixin_app_id != ''
+        then 4
+        else trade_order.source
+        end source
     </sql>
     <sql id="Base_Column">
         trade_order.id,
@@ -65,7 +71,8 @@
         trade_order.pay_channel,
         trade_order.pay_no,
         ROUND(trade_order.score_discount/100,2) as score_discount,
-        ROUND(trade_order.pay_amount/100,2) as pay_amount
+        ROUND(trade_order.pay_amount/100,2) as pay_amount,
+        trade_order.coupon_discount_type
 
     </sql>
     <select id="selectPageList" resultMap="BaseResultMap"
@@ -97,7 +104,15 @@
             and trade_order.create_at &lt;= #{createAtEnd}
         </if>
         <if test="source != null and source != ''">
-            and trade_order.source = #{source}
+            <if test="source == 4">
+                and trade_order.source = 1 and trade_order.weixin_app_id != '' and trade_order.weixin_app_id is not null
+            </if>
+            <if test="source == 1">
+                and trade_order.source = 1 and (trade_order.weixin_app_id = '' or trade_order.weixin_app_id is null)
+            </if>
+            <if test="source != 4 and source != 1">
+                and trade_order.source = #{source}
+            </if>
         </if>
         <if test="amountType == 1">
             <if test="realAmountBegin!=null and realAmountBegin >= 0">
@@ -159,8 +174,8 @@
 
     <select id="selectPageListCount" parameterType="java.util.Map"
             resultType="java.lang.Integer">
-        select count(*) from (select
-        DISTINCT trade_order.id
+        select
+        count(trade_order.id)
         from ry_trade.trade_order
         as
         trade_order
@@ -171,7 +186,7 @@
         <where>
             <include refid="Base_where"/>
         </where>
-        ) as total
+
     </select>
 
 </mapper>

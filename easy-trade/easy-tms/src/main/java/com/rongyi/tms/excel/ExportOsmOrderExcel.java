@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class ExportOsmOrderExcel {
         try
         {
             String path = request.getSession().getServletContext().getRealPath("/");
-            InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel2.xlsx");
+            InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
             XSSFWorkbook wb = new XSSFWorkbook(myxls);
             XSSFSheet sheet = wb.getSheetAt(0);
             XSSFCellStyle bodyStyle = wb.createCellStyle();
@@ -56,7 +57,7 @@ public class ExportOsmOrderExcel {
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 29; j++) {
+                    for (int j = 0; j <= 27; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
@@ -70,17 +71,18 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(3).setCellValue(vo.getUsername());
                     sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
                     sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
-                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount().subtract(vo.getDiscountFee()) == null ? "0" : vo.getRealAmount().subtract(vo.getDiscountFee()).toString());
-                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getHbAmount() == null ? "0" : vo.getHbAmount().toString());
-                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
+                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getOperationRedDiscount() != null ? vo.getOperationRedDiscount().toString() : "0");
+                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getMerchantRedDiscount() != null ? vo.getMerchantRedDiscount().toString() : "0");
+                    sheet.getRow(i + 2).getCell(8).setCellValue(this.convertRebateAmount(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
+                    sheet.getRow(i + 2).getCell(9).setCellValue(this.convertRebateType(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
+                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
+                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
+                    sheet.getRow(i + 2).getCell(12).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
                     sheet.getRow(i + 2).getCell(13).setCellValue(convertActivityType(vo.getActivityType()));
                     sheet.getRow(i + 2).getCell(14).setCellValue(vo.getActivityName());
                     sheet.getRow(i + 2).getCell(15).setCellValue(convertStatus(vo.getStatus()));
                     sheet.getRow(i + 2).getCell(16).setCellValue(convertActivityStatus(vo.getActivityStatus()));
-                    sheet.getRow(i + 2).getCell(17).setCellValue(convertOrderSource(vo.getOrderSource()));
+                    sheet.getRow(i + 2).getCell(17).setCellValue(convertOrderSource(vo.getOrderSource(),vo.getOrderSourceForWeiXin(),vo.getOrderChannel()));
                     sheet.getRow(i + 2).getCell(18).setCellValue(convertPayChannel(vo.getPayChannel()));
                     sheet.getRow(i + 2).getCell(19).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
                     sheet.getRow(i + 2).getCell(20).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
@@ -177,12 +179,29 @@ public class ExportOsmOrderExcel {
         return result;
     }
 
-    private String convertOrderSource(Integer orderSource) {
+    /**
+     *
+     * @param orderSource 0为微网站，1为容易逛，2为终端机，3其他
+     * @param orderSourceForWeiXin 订单渠道微信来源     1 微商城 ，2 标准微信
+     * @param orderChannel 下单渠道 SmallProgram:小程序
+     * @return
+     */
+    private String convertOrderSource(Integer orderSource, String orderSourceForWeiXin, String orderChannel) {
         String result = "其他";
         if (orderSource!=null){
             switch (orderSource){
-                case 0: result = "微网站"; break;
-                case 1: result = "容易逛"; break;
+                case 0:
+                    if("2".equals(orderSourceForWeiXin)){
+                        result = "微商城"; break;
+                    }else if("1".equals(orderSourceForWeiXin)){
+                        result = "容易逛（微商城）"; break;
+                    }
+                case 1:
+                    if("SmallProgram".equals(orderChannel)){
+                        result = "容易逛（小程序）"; break;
+                    }else{
+                        result = "容易逛（APP）"; break;
+                    }
                 case 2: result = "终端机"; break;
                 case 3: result = "其他"; break;
             }
@@ -220,17 +239,44 @@ public class ExportOsmOrderExcel {
         return result;
     }
 
-    private String convertActivityStatus(String activityStatus){
+    private String convertActivityStatus(String activityStatus) {
         String result = "";
-        if (StringUtils.isNotBlank(activityStatus) && !"0".equals(activityStatus)){
-            switch (activityStatus){
-                case "2": result = "进行中"; break;
-                case "3": result = "成功"; break;
-                case "4": result = "失败"; break;
-                case "5": result = "失败"; break;
+        if (StringUtils.isNotBlank(activityStatus) && !"0".equals(activityStatus)) {
+            switch (activityStatus) {
+                case "2":
+                    result = "进行中";
+                    break;
+                case "3":
+                    result = "成功";
+                    break;
+                case "4":
+                    result = "失败";
+                    break;
+                case "5":
+                    result = "失败";
+                    break;
             }
         }
         return result;
+    }
+
+    private String convertRebateAmount(BigDecimal operationRebateDiscount,BigDecimal merchantRebateDiscount){
+        BigDecimal rebateAmount = BigDecimal.ZERO;
+        if(operationRebateDiscount != null){
+            rebateAmount = rebateAmount.add(operationRebateDiscount);
+        }
+        if(merchantRebateDiscount != null){
+            rebateAmount = rebateAmount.add(merchantRebateDiscount);
+        }
+        return rebateAmount.toString();
+    }
+
+    private String convertRebateType(BigDecimal operationRebateDiscount,BigDecimal merchantRebateDiscount){
+        String reabteType = "平台";
+        if(merchantRebateDiscount != null && merchantRebateDiscount.compareTo(BigDecimal.ZERO) > 0){
+            reabteType = "商户";
+        }
+        return reabteType;
     }
 
 }

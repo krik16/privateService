@@ -44,18 +44,27 @@ public class WeixinMchServiceImpl extends BaseServiceImpl implements WeixinMchSe
     }
 
     @Override
-    public WeixinMch selectByAppIdAndTradeType(String appId,Integer tradeType) {
+    public WeixinMch selectByAppIdAndTradeType(String appId,Integer tradeType,String useId) {
         Map<String, Object> map = new HashMap<>();
         map.put("appId", appId);
         map.put("tradeType", tradeType);
+        map.put("userId", useId);
         return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByAppIdAndTradeType", map);
     }
 
     @Override
     public WeixinMch selectByMchIdAndUserId(String mchId, String userId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("mchId", mchId);
+        //只需要根据商户ID查询
+ //     map.put("mchId", mchId);
         map.put("userId", userId);
         return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByMchIdAndUserId", map);
+    }
+
+    @Override
+    public void deleteByUserId(String userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        this.getBaseDao().selectOneBySql(NAMESPACE + ".deleteByUserId", map);
     }
 }

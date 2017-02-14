@@ -49,7 +49,8 @@ public interface SettleConstant {
 		Byte ZHIFUBAO = 0;// 支付宝
 		Byte WECHAT = 1;// 微信
 		Byte UNION = 2;// 银联
-		Byte CASH = 3;// 现金
+		Byte CASH = 3;// 现金x
+		Byte BANK = 4; //银行卡
 	}
 
 	interface LinkType {
