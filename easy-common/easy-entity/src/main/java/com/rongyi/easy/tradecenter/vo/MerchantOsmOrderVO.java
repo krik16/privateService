@@ -25,6 +25,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private Integer guideId;//导购id
     private Integer orderSource;//0为微网站，1为容易逛，2为终端机，3其他
     private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
+    private String weixinAppId;//
     private Byte payChannel;//导购id
     private String buyerAccount;//买家账号
     private String buyerNameByWeixin;//标准微信下单昵称 需要解码
@@ -358,6 +359,14 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
         this.orderSourceForWeiXin = orderSourceForWeiXin;
+    }
+
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
     }
 
     @Override
