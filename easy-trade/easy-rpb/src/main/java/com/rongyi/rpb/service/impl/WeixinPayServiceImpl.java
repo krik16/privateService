@@ -304,7 +304,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         LOGGER.info("微信发红包 sendRedBack,paymentEntityVO={}", paymentEntityVO);
         Map<String, Object> map = new HashMap<>();
         try {
-            Configure configure = weixinConfigService.initConfigure(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+            Configure configure = weixinConfigService.initConfigure(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType(),null);
             BigDecimal totalFee = new BigDecimal(Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
             WeixinRedBackParamVO weixinRedBackParamVO = weixinPayUnit.sendRedPack(configure, paymentEntityVO.getPayNo(), paymentEntityVO.getSendName(),
                     paymentEntityVO.getOpenId(), totalFee.intValue(), paymentEntityVO.getWishing(), paymentEntityVO.getActName(), paymentEntityVO.getRemark());

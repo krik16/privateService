@@ -104,7 +104,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
         LOGGER.info("优惠券订单详情:id={}", id);
         ResponseData responseData;
         try {
-//            permissionCheck(request, "ORDER_COUPON_VIEW");
+            permissionCheck(request, "ORDER_COUPON_VIEW");
             CouponOrderDetailVO couponOrderDetailVO = new CouponOrderDetailVO();
             CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
             BeanUtils.copyProperties(couponOrderVO, couponOrderDetailVO);
@@ -120,12 +120,12 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                 couponOrderDetailVO.setUserName(malllifeUserInfoEntity.getNickName());
             }
             TradeSubOrder tradeSubOrder = subOrderList.get(0);
-            //红包抵扣总金额
-            couponOrderDetailVO.setHbDiscountTotalPrice(new BigDecimal(couponOrderVO.getHbDiscount()).divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+
 
             List<TradeUserCode> tradeUserCodeList = iTradeUserCodeService.findTradeUserCodeList(id, tradeSubOrder.getUnitId());
             Integer origTotalPrice = 0;//券面值总价
             Integer unitTotalPrice = 0;//券现价总价
+            BigDecimal realHbTotal = BigDecimal.ZERO;
             if (tradeUserCodeList != null && !tradeUserCodeList.isEmpty()) {
                 //红包分摊抵扣(分)
                 BigDecimal avgHbDiscount = new BigDecimal(couponOrderVO.getHbDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(0, BigDecimal.ROUND_HALF_DOWN);
@@ -149,19 +149,41 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     unitTotalPrice += tradeUserCode.getUnitPrice();
                     CouponVO couponVO = couponOrderDetailVO.new CouponVO();
                     BeanUtils.copyProperties(tradeUserCode, couponVO);
-//					couponVO.setTitle(tradeSubOrder.getUnitName());
+                    //红包分摊金额大于实际卡券面额，则红包抵扣显示为卡券实际面额
+                    if(avgHbDiscount.compareTo(new BigDecimal(couponVO.getUnitPrice())) > 0){
+                        avgHbDiscount =  new BigDecimal(couponVO.getUnitPrice());
+                    }
+                    realHbTotal = realHbTotal.add(avgHbDiscount);
                     couponVO.setHbDiscount(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+                    //抵扣券分摊金额大于实际卡券面额，则抵扣券抵扣金额显示为卡券实际面额
+                    if(avgRebateDiscount.compareTo(new BigDecimal(couponVO.getUnitPrice())) > 0) {
+                        avgRebateDiscount = new BigDecimal(couponVO.getUnitPrice());
+                    }
                     couponVO.setRebateDisCount(avgRebateDiscount.doubleValue());
                     couponVO.setScoreDisCount(avgScoreDiscount.doubleValue());
                     BigDecimal payAmount = avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
                     couponVO.setPayAmount(payAmount.compareTo(BigDecimal.ZERO) < 0 ? 0 : payAmount.doubleValue());
                     couponVO.setValidBeginDate(tCCouponVO.getValidBeginDate());
                     couponVO.setValidEndDate(tCCouponVO.getValidEndDate());
+                    couponVO.setCouponDiscountType(couponOrderVO.getCouponDiscountType());
                     couponVOList.add(couponVO);
                 }
+
                 //最后一笔券获得剩余优惠
                 if (couponVOList.size() > 1) {
+                    //红包分摊金额大于实际卡券面额，则红包抵扣显示为卡券实际面额
+                    if(lastHbDiscount.compareTo(new BigDecimal(couponVOList.get(couponVOList.size() - 1).getUnitPrice())) > 0){
+                        lastHbDiscount =  new BigDecimal(couponVOList.get(couponVOList.size() - 1).getUnitPrice());
+                    }
+                    //红包实际抵扣金额，先减去一个平均金额
+                    realHbTotal = realHbTotal.subtract(avgHbDiscount);
+                    //红包实际抵扣金额，再加上最后分摊金额
+                    realHbTotal = realHbTotal.add(lastHbDiscount);
                     couponVOList.get(couponVOList.size() - 1).setHbDiscount(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+                    //抵扣券分摊金额大于实际卡券面额，则抵扣券抵扣金额显示为卡券实际面额
+                    if(lastRebateDiscount.compareTo(new BigDecimal(couponVOList.get(couponVOList.size() - 1).getUnitPrice())) > 0) {
+                        lastRebateDiscount = new BigDecimal(couponVOList.get(couponVOList.size() - 1).getUnitPrice());
+                    }
                     couponVOList.get(couponVOList.size() - 1).setRebateDisCount(lastRebateDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVOList.get(couponVOList.size() - 1).setScoreDisCount(lastScoreDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     //最后一笔实际支付金额=平均支付金额-(最后一笔红包优惠)-(最后一笔抵扣券优惠)-(最后一笔积分优惠)
@@ -170,6 +192,8 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                 }
 
             }
+            //红包抵扣总金额
+            couponOrderDetailVO.setHbDiscountTotalPrice(realHbTotal.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
             couponOrderDetailVO.setCouponList(couponVOList);
             couponOrderDetailVO.setOrigTotalPrice(new BigDecimal(origTotalPrice).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
             couponOrderDetailVO.setUnitTotalPrice(new BigDecimal(unitTotalPrice).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());

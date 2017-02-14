@@ -455,23 +455,27 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             return;
         }
 
+        //查询卡券明细列表
         List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
                 paymentStatement.getCycleEndTime());
         if (couponStatementDetailDtos != null) {
             couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
         }
 
+        //查询卡券汇总列表
         List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
         if (couponExcelDtos != null) {
             couponExcelDtoList.addAll(couponExcelDtos);
         }
 
+        //查询商品订单汇总列表
         List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
                 paymentStatement.getCycleEndTime());
         if (orderSettlementTopDtos != null) {
             orderTopDtoList.addAll(orderSettlementTopDtos);
         }
 
+        //查询订单明细列表
         List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
                 paymentStatement.getCycleEndTime());
         if (orderSettlementDetailDtos != null) {
@@ -591,6 +595,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 // 汇总购券使用积分总金额
                 existCouponExcelDto.setCouponScoreTotal((existCouponExcelDto.getCouponScoreTotal() == null ? 0 : existCouponExcelDto.getCouponScoreTotal())
                         + (couponExcelDto.getCouponScoreTotal() == null ? 0 : couponExcelDto.getCouponScoreTotal()));
+                // 汇总购券使用商家红包总金额
+                existCouponExcelDto.setCouponMerhbTotal((existCouponExcelDto.getCouponMerhbTotal() == null ? 0 : existCouponExcelDto.getCouponMerhbTotal())
+                        + (couponExcelDto.getCouponMerhbTotal() == null ? 0 : couponExcelDto.getCouponMerhbTotal()));
             }
         }
         return new ArrayList(map.values());
@@ -613,8 +620,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 // 汇总订单数量
                 existOrderTopDto.setOrderCount(existOrderTopDto.getOrderCount() + orderTopDto.getOrderCount());
                 // 汇总红包抵扣金额
-                existOrderTopDto.setHbDiscountTotal((existOrderTopDto.getHbDiscountTotal() == null ? 0 : existOrderTopDto.getHbDiscountTotal())
-                        + (orderTopDto.getHbDiscountTotal() == null ? 0 : orderTopDto.getHbDiscountTotal()));
+                existOrderTopDto.setHbDiscountOpeTotal((existOrderTopDto.getHbDiscountOpeTotal() == null ? 0 : existOrderTopDto.getHbDiscountOpeTotal())
+                        + (orderTopDto.getHbDiscountOpeTotal() == null ? 0 : orderTopDto.getHbDiscountOpeTotal()));
                 // 汇总积分抵扣金额
                 existOrderTopDto.setScoreDiscountTotal((existOrderTopDto.getScoreDiscountTotal() == null ? 0 : existOrderTopDto.getScoreDiscountTotal())
                         + (orderTopDto.getScoreDiscountTotal() == null ? 0 : orderTopDto.getScoreDiscountTotal()));
@@ -624,6 +631,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 // 汇总订单补贴金额
                 existOrderTopDto.setOrderDiscountTotal((existOrderTopDto.getOrderDiscountTotal() == null ? 0 : existOrderTopDto.getOrderDiscountTotal())
                         + (orderTopDto.getOrderDiscountTotal() == null ? 0 : orderTopDto.getOrderDiscountTotal()));
+                //汇总商家红包抵扣金额
+                existOrderTopDto.setHbDiscountMerTotal((existOrderTopDto.getHbDiscountMerTotal() == null ? 0 : existOrderTopDto.getHbDiscountMerTotal())
+                        + (orderTopDto.getHbDiscountMerTotal() == null ? 0 : orderTopDto.getHbDiscountMerTotal()));
             }
         }
         return new ArrayList(map.values());
@@ -669,6 +679,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         }
         if (SettleConstant.PayChannel.CASH.equals(payChannel)) {
             return "现金";
+        }
+        if (SettleConstant.PayChannel.BANK.equals(payChannel)) {
+            return "银行卡";
         }
         return "支付宝";
     }

@@ -92,12 +92,15 @@ public class ExcelUtils {
         double couponScoreSum = 0;
         double couponDiscountSum = 0;
         double couponPriceSum = 0;
+        double couponHbmerPriceSum = 0;
 
         int orderCountSum = 0;
         double orderHbSum = 0;
         double orderScoreSum = 0;
         double orderDiscountSum = 0;
         double orderPriceSum = 0;
+        double orderHbmerPriceSum = 0;
+
         // 单元格向下延展的偏移量
         int offset = 0;
 
@@ -115,6 +118,7 @@ public class ExcelUtils {
             sheet.addMergedRegion(new CellRangeAddress(15 + i, 15 + i, 8, 9));
             sheet.addMergedRegion(new CellRangeAddress(15 + i, 15 + i, 10, 11));
             sheet.addMergedRegion(new CellRangeAddress(15 + i, 15 + i, 12, 13));
+            sheet.addMergedRegion(new CellRangeAddress(15 + i, 15 + i, 14, 15));
 
             XSSFCell couponShopName = row15.createCell(1);
             couponShopName.setCellStyle(sheet.getRow(16 + i).getCell(1).getCellStyle());
@@ -152,9 +156,15 @@ public class ExcelUtils {
             disCountPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal()));
             couponDiscountSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal());
 
-            XSSFCell totalPrice = row15.createCell(12);
-            totalPrice.setCellStyle(sheet.getRow(16 + i).getCell(12).getCellStyle());
+            XSSFCell hbmerPrice = row15.createCell(12);
+            hbmerPrice.setCellStyle(sheet.getRow(16 + i).getCell(12).getCellStyle());
             row15.createCell(13).setCellStyle(sheet.getRow(16 + i).getCell(13).getCellStyle());
+            hbmerPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponMerhbTotal()));
+            couponHbmerPriceSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponMerhbTotal());
+
+            XSSFCell totalPrice = row15.createCell(14);
+            totalPrice.setCellStyle(sheet.getRow(16 + i).getCell(14).getCellStyle());
+            row15.createCell(15).setCellStyle(sheet.getRow(16 + i).getCell(15).getCellStyle());
             totalPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal()));
             couponPriceSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal());
         }
@@ -169,7 +179,9 @@ public class ExcelUtils {
         couponScoreSumCell.setCellValue(couponScoreSum);
         XSSFCell couponDiscountSumCell = row16.getCell(10);
         couponDiscountSumCell.setCellValue(couponDiscountSum);
-        XSSFCell couponPriceSumCell = row16.getCell(12);
+        XSSFCell couponHbmerPriceSumCell = row16.getCell(12);
+        couponHbmerPriceSumCell.setCellValue(couponHbmerPriceSum);
+        XSSFCell couponPriceSumCell = row16.getCell(14);
         couponPriceSumCell.setCellValue(couponPriceSum);
 
         // 商品订单汇总数据
@@ -187,6 +199,7 @@ public class ExcelUtils {
             sheet.addMergedRegion(new CellRangeAddress(orderStartRow + i, orderStartRow + i, 8, 9));
             sheet.addMergedRegion(new CellRangeAddress(orderStartRow + i, orderStartRow + i, 10, 11));
             sheet.addMergedRegion(new CellRangeAddress(orderStartRow + i, orderStartRow + i, 12, 13));
+            sheet.addMergedRegion(new CellRangeAddress(orderStartRow + i, orderStartRow + i, 14, 15));
 
             XSSFCell orderShopName = row18.createCell(1);
             orderShopName.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(1).getCellStyle());
@@ -209,8 +222,8 @@ public class ExcelUtils {
             XSSFCell hbPrice = row18.createCell(6);
             hbPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(6).getCellStyle());
             row18.createCell(7).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(7).getCellStyle());
-            hbPrice.setCellValue(orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal());
-            orderHbSum += orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal();
+            hbPrice.setCellValue(orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal());
+            orderHbSum += orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal();
 
             XSSFCell scorePrice = row18.createCell(8);
             scorePrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(8).getCellStyle());
@@ -224,9 +237,15 @@ public class ExcelUtils {
             disCountPrice.setCellValue(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal());
             orderDiscountSum += orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal();
 
-            XSSFCell totalPrice = row18.createCell(12);
-            totalPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(12).getCellStyle());
+            XSSFCell hbmerPrice = row18.createCell(12);
+            hbmerPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(12).getCellStyle());
             row18.createCell(13).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(13).getCellStyle());
+            hbmerPrice.setCellValue(orderTop.getHbDiscountMerTotal() == null ? 0 : orderTop.getHbDiscountMerTotal());
+            orderHbmerPriceSum += orderTop.getHbDiscountMerTotal() == null ? 0 : orderTop.getHbDiscountMerTotal();
+
+            XSSFCell totalPrice = row18.createCell(14);
+            totalPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(14).getCellStyle());
+            row18.createCell(15).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(15).getCellStyle());
             totalPrice.setCellValue(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal());
             orderPriceSum += orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal();
         }
@@ -241,7 +260,9 @@ public class ExcelUtils {
         orderScoreSumCell.setCellValue(orderScoreSum);
         XSSFCell orderDiscountSumCell = row19.getCell(10);
         orderDiscountSumCell.setCellValue(orderDiscountSum);
-        XSSFCell orderPriceSumCell = row19.getCell(12);
+        XSSFCell orderHbmerSumCell = row19.getCell(12);
+        orderHbmerSumCell.setCellValue(orderHbmerPriceSum);
+        XSSFCell orderPriceSumCell = row19.getCell(14);
         orderPriceSumCell.setCellValue(orderPriceSum);
 
         // 合计
@@ -252,15 +273,19 @@ public class ExcelUtils {
         scoreSumCell.setCellValue(orderScoreSum + couponScoreSum);
         XSSFCell discountSumCell = row20.getCell(10);
         discountSumCell.setCellValue(orderDiscountSum + couponDiscountSum);
-        XSSFCell priceSumCell = row20.getCell(12);
+        XSSFCell hbmerSumCell = row20.getCell(12);
+        hbmerSumCell.setCellValue(orderHbmerPriceSum + couponHbmerPriceSum);
+        XSSFCell priceSumCell = row20.getCell(14);
         priceSumCell.setCellValue(orderPriceSum + couponPriceSum);
 
         // 总金额/总补贴
         XSSFRow row12 = sheet.getRow(12);
         XSSFCell totalPayCell = row12.getCell(4);
-        totalPayCell.setCellValue(orderPriceSum + couponPriceSum);
+        totalPayCell.setCellValue(orderPriceSum + couponPriceSum - orderHbmerPriceSum-couponHbmerPriceSum);
         XSSFCell totalDiscountCell = row12.getCell(10);
         totalDiscountCell.setCellValue(orderHbSum + orderScoreSum + orderDiscountSum + couponHbSum + couponScoreSum + couponDiscountSum);
+        XSSFCell totalDiscountMerCell = row12.getCell(14);
+        totalDiscountMerCell.setCellValue(orderHbmerPriceSum+couponHbmerPriceSum);
 
         // sheet1: 券明细数据
         int sheetCountC = (int) Math.ceil(excelDto.getCouponCodeExcelDtoList().size() / 60000d);
@@ -320,31 +345,34 @@ public class ExcelUtils {
                 XSSFCell hbDiscount = row15.createCell(11);
                 hbDiscount.setCellValue(couponCodeExcelDto.getHbAmount());
 
-                XSSFCell scoreDiscount = row15.createCell(12);
+                XSSFCell hbDiscountType = row15.createCell(12);
+                hbDiscountType.setCellValue(couponCodeExcelDto.getCouponDiscountType());
+
+                XSSFCell scoreDiscount = row15.createCell(13);
                 scoreDiscount.setCellValue(couponCodeExcelDto.getScoreAmount());
 
-                XSSFCell discount = row15.createCell(13);
+                XSSFCell discount = row15.createCell(14);
                 discount.setCellValue(couponCodeExcelDto.getDiscountAmount());
 
-                XSSFCell buyerPhone = row15.createCell(14);
+                XSSFCell buyerPhone = row15.createCell(15);
                 buyerPhone.setCellValue(encryptPhone(couponCodeExcelDto.getBuyerPhone()));
 
-                XSSFCell guidePhone = row15.createCell(15);
+                XSSFCell guidePhone = row15.createCell(16);
                 guidePhone.setCellValue(encryptPhone(couponCodeExcelDto.getGuidePhone()));
 
-                XSSFCell buyerName = row15.createCell(16);
+                XSSFCell buyerName = row15.createCell(17);
                 buyerName.setCellValue(couponCodeExcelDto.getBuyerName());
 
-                XSSFCell guideName = row15.createCell(17);
+                XSSFCell guideName = row15.createCell(18);
                 guideName.setCellValue(couponCodeExcelDto.getGuideName());
 
-                XSSFCell mallNameStr = row15.createCell(18);
+                XSSFCell mallNameStr = row15.createCell(19);
                 mallNameStr.setCellValue(couponCodeExcelDto.getMallName());
 
-                XSSFCell shopNameStr = row15.createCell(19);
+                XSSFCell shopNameStr = row15.createCell(20);
                 shopNameStr.setCellValue(couponCodeExcelDto.getShopName());
 
-                XSSFCell sourceStr = row15.createCell(20);
+                XSSFCell sourceStr = row15.createCell(21);
                 sourceStr.setCellValue(couponCodeExcelDto.getSource());
             }
         }
@@ -401,24 +429,27 @@ public class ExcelUtils {
                 score.setCellValue(orderDetail.getScoreDiscount());
 
                 XSSFCell hb = rowOrder.createCell(9);
-                hb.setCellValue(orderDetail.getHbDiscount());
+                hb.setCellValue(orderDetail.getHbDiscountOpe());
 
-                XSSFCell channel = rowOrder.createCell(10);
+                XSSFCell hbDiscountType = rowOrder.createCell(10);
+                hbDiscountType.setCellValue(orderDetail.getHbDiscountMer());
+
+                XSSFCell channel = rowOrder.createCell(11);
                 channel.setCellValue(orderDetail.getPaymentChannel());
 
-                XSSFCell payTime = rowOrder.createCell(11);
+                XSSFCell payTime = rowOrder.createCell(12);
                 payTime.setCellValue(orderDetail.getPaymentTime());
 
-                XSSFCell dlvTime = rowOrder.createCell(12);
+                XSSFCell dlvTime = rowOrder.createCell(13);
                 dlvTime.setCellValue(orderDetail.getDeliveryTime());
 
-                XSSFCell rcptTime = rowOrder.createCell(13);
+                XSSFCell rcptTime = rowOrder.createCell(14);
                 rcptTime.setCellValue(orderDetail.getReceiptTime());
 
-                XSSFCell phone = rowOrder.createCell(14);
+                XSSFCell phone = rowOrder.createCell(15);
                 phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));
 
-                XSSFCell source = rowOrder.createCell(15);
+                XSSFCell source = rowOrder.createCell(16);
                 source.setCellValue(orderDetail.getOrderSource());
             }
         }

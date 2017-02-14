@@ -493,6 +493,7 @@
 		<result column="guide_name" property="guideName" jdbcType="VARCHAR" />
 		<result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="coupon_discount_type" property="couponDiscountType" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap">
@@ -615,7 +616,8 @@
 			US.mall_id,
 			SI.shop_name,
 			MC.mall_name,
-		 	CASE tor.source WHEN 0 THEN '容易逛' WHEN 1 THEN '微网站' WHEN 2 THEN '终端机' ELSE '其他' END AS source
+		 	CASE tor.source WHEN 0 THEN '容易逛' WHEN 1 THEN '微网站' WHEN 2 THEN '终端机' ELSE '其他' END AS source ,
+		   case tor.coupon_discount_type when 0 then '平台' when 1 then '商户' end as coupon_discount_type
 		FROM
 			ry_trade.trade_user_code tuc
 				JOIN ry_trade.trade_order tor ON tuc.order_id = tor.id
@@ -642,6 +644,7 @@
 		<result column="total_discount" property="couponDiscountTotal" jdbcType="INTEGER" />
 		<result column="total_score" property="couponScoreTotal" jdbcType="INTEGER" />
 		<result column="total_hb" property="couponHbTotal" jdbcType="INTEGER" />
+		<result column="total_merhb" property="couponMerhbTotal" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="OrderTopDtoMap" type="com.rongyi.settle.dto.OrderSettlementTopDto">
@@ -649,10 +652,11 @@
 		<result column="income_type" property="incomeType" jdbcType="VARCHAR" />
 		<result column="order_type" property="orderType" jdbcType="VARCHAR" />
 		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
-		<result column="hb_amount" property="hbDiscountTotal" jdbcType="DOUBLE" />
+		<result column="hb_amount_ope" property="hbDiscountOpeTotal" jdbcType="DOUBLE" />
 		<result column="score_amount" property="scoreDiscountTotal" jdbcType="DOUBLE" />
 		<result column="total_amount" property="orderAmountTotal" jdbcType="DOUBLE" />
 		<result column="discount_amount" property="orderDiscountTotal" jdbcType="DOUBLE" />
+		<result column="hb_amount_mer" property="hbDiscountMerTotal" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="OrderDetailDtoMap" type="com.rongyi.settle.dto.OrderSettlementDetailDto">
@@ -667,7 +671,9 @@
 		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
 		<result column="orig_price" property="origPrice" jdbcType="DOUBLE" />
 		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
-		<result column="coupon_discount" property="hbDiscount" jdbcType="DOUBLE" />
+		<result column="discount_amount" property="discountAmount" jdbcType="DOUBLE" />
+		<result column="coupon_discount" property="hbDiscountOpe" jdbcType="DOUBLE" />
+		<result column="coupon_discount_mer" property="hbDiscountMer" jdbcType="DOUBLE" />
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
 		<result column="pay_channel" property="paymentChannel" jdbcType="VARCHAR" />
 		<result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
@@ -675,6 +681,7 @@
 		<result column="receipt_time" property="receiptTime" jdbcType="TIMESTAMP" />
 		<result column="buyer_phone" property="buyerPhone" jdbcType="VARCHAR" />
 		<result column="order_source" property="orderSource" jdbcType="VARCHAR" />
+		<result column="coupon_discount_type" property="couponDiscountType" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
@@ -718,8 +725,25 @@
 			,MAX(UC.orig_price) AS coupon_price
 			,SUM(UC.orig_price) AS total_price
 			,SUM(UC.orig_price - UC.unit_price) AS total_discount
-			,SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0)) AS total_hb
 			,SUM(IFNULL((CO.score_discount / COI.unit_count), 0)) AS total_score
+			,case CO.coupon_discount_type when 0 then SUM(IFNULL((
+				case when  (CO.hb_discount + CO.rebate_discount) / COI.unit_count &lt; COI.unit_price
+		        then
+		          (CO.hb_discount + CO.rebate_discount) / COI.unit_count
+				else
+		           COI.unit_price
+		        end
+		    ), 0))
+			else 0 end  AS total_hb ,
+			case CO.coupon_discount_type when 1 then SUM(IFNULL((
+				case when  (CO.hb_discount + CO.rebate_discount) / COI.unit_count &lt; COI.unit_price
+				then
+				(CO.hb_discount + CO.rebate_discount) / COI.unit_count
+				else
+				COI.unit_price
+				end
+		    ), 0))
+			else 0 end  AS total_merhb
 		FROM ry_trade.trade_user_code UC
 			LEFT JOIN
 				ry_trade.trade_order CO ON CO.id = UC.order_id
@@ -800,7 +824,8 @@
 		COUNT(OFID) AS order_count,
 		SUM(total_amount) AS total_amount,
 		SUM(score_amount) AS score_amount,
-		SUM(hb_amount) AS hb_amount,
+		SUM(hb_amount_ope) AS hb_amount_ope,
+		SUM(hb_amount_mer) AS hb_amount_mer ,
 		0 AS discount_amount
 		FROM (
 		SELECT
@@ -808,8 +833,21 @@
 		SI.shop_name,
 		OF.id AS OFID,
 		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
-		SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
-		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount
+		OF.score_discount + OF.order_score_discount AS score_amount,
+		case when  ODF.coupon_discount_type=0 || ODF.rebate_discount_type=0 then
+		SUM(
+		case when ODF.discount_amount &lt; (ODF.order_coupon_discount + ODF.coupon_discount) then  ODF.discount_amount
+		else ODF.order_coupon_discount + ODF.coupon_discount end
+		)
+		else
+		0
+		end as hb_amount_ope ,
+		case when  ODF.coupon_discount_type=1 || ODF.rebate_discount_type=1  then
+		SUM(
+		case when ODF.discount_amount &lt; (ODF.order_coupon_discount + ODF.coupon_discount) then  ODF.discount_amount
+		else ODF.order_coupon_discount + ODF.coupon_discount end
+		)
+		else 0 end as hb_amount_mer
 		FROM
 		ry_osm.order_form OF
 		INNER JOIN
@@ -829,7 +867,7 @@
 		AND OF.`status` &gt; 2
 		AND OF.is_pay_va = 2
 		<if test="brandId != null">
-			AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
+			AND BI.brand_mid = #{brand,jdbcType=VARCHAR}
 		</if>
 		<if test="mallId != null">
 			AND MC.mall_mid = #{mallId,jdbcType=VARCHAR}
@@ -851,7 +889,13 @@
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
-			A.coupon_discount + A.order_coupon_discount + SUM(B.coupon_discount) AS coupon_discount,
+		    B.discount_amount,
+			case when B.coupon_discount_type =0 || B.rebate_discount_type =0 THEN
+			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
+			else 0 end as coupon_discount ,
+			case when B.coupon_discount_type =1 || B.rebate_discount_type =1 THEN
+			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
+			else 0 end as coupon_discount_mer ,
 			A.score_discount + A.order_score_discount AS score_discount,
 			CASE WHEN A.`status` = 2 THEN '待发货' WHEN A.`status` = 3 THEN '已发货' WHEN A.`status` = 4 THEN '确认收货'
 				WHEN (A.`status` > 4 AND H3.id IS NOT NULL) THEN '已完成'
@@ -871,7 +915,8 @@
 		 	H3.create_at AS delivery_time,
 		 	H4.create_at AS receipt_time,
 		 	MUA.phone AS buyer_phone,
-			CASE A.order_source WHEN 0 THEN '微网站' WHEN 1 THEN '容易逛' WHEN 2 THEN '终端机' ELSE '其他' END AS order_source
+			CASE A.order_source WHEN 0 THEN '微网站' WHEN 1 THEN '容易逛' WHEN 2 THEN '终端机' ELSE '其他' END AS order_source ,
+		   case A.coupon_discount_type WHEN 0 THEN '平台' WHEN 1 THEN '商家' end as coupon_discount_type
 		FROM
 			ry_osm.order_form A
 				LEFT JOIN ry_osm.order_detail_form B ON A.order_no = B.order_no
@@ -881,7 +926,7 @@
 				LEFT JOIN ry_rmmm.brand_info BI ON BI.id = E.brand_id
 				INNER JOIN ry_osm.order_event H2 ON A.order_no = H2.order_no AND H2.`status` = 2
 				INNER JOIN ry_osm.order_event H3 ON A.order_no = H3.order_no AND H3.`status` = 3
-				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4 AND H4.type = 4
+				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4 AND H4.type in (4,7)
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0 AND O.`status` = 2
 				LEFT JOIN ry_osm.order_cart_form OCF ON OCF.id = A.cart_id
 				LEFT JOIN ry_rpb.payment_order PO ON OCF.order_no = PO.order_no and PO.trade_type = 0 AND PO.`status` = 2
