@@ -2,13 +2,16 @@ package com.rongyi.pay.core.wechat.model;
 
 import com.rongyi.pay.core.util.BaseData;
 
+import java.io.Serializable;
+
 /**
  * 刷卡支付返回参数
  * conan
  * 2016/10/11 14:49
  **/
-public class PunchCardPayResData extends BaseData {
+public class PunchCardPayResData extends BaseData implements Serializable{
 
+    private static final long serialVersionUID = 3556122760497604864L;
     private String return_code;
 
     private String return_msg;

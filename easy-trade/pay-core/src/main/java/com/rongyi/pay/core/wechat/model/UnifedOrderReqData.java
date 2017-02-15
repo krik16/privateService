@@ -5,6 +5,7 @@ import com.rongyi.pay.core.util.BaseData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.pay.core.wechat.util.MD5;
 import com.rongyi.pay.core.wechat.util.Signature;
+import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -18,64 +19,77 @@ import java.util.Random;
  * 2016/10/11 14:49
  **/
 public class UnifedOrderReqData extends BaseData {
-    //每个字段具体的意思请查看API文档
-    private String appid = "";
-    private String mch_id = "";
-    private String device_info = "";
-    private String nonce_str = "";
-    private String sign = "";
-    private String body = "";
-    private String detail = "";
-    private String attach = "";
-    private String out_trade_no = "";
-    private String fee_type = "";
-    private Integer total_fee = 0;
-    private String spbill_create_ip = "";
-    private String time_start = "";
-    private String time_expire = "";
-    private String goods_tag = "";
-    private String notify_url = "";
-    private String trade_type = "";
-    private String product_id = "";
-    private String limit_pay = "";
-    private String openid = "";
-    
+	//每个字段具体的意思请查看API文档
+	private String appid = "";
+	private String mch_id = "";
+	private String sub_mch_id = "";
+	private String sub_appid = "";
+	private String device_info = "";
+	private String nonce_str = "";
+	private String sign = "";
+	private String body = "";
+	private String detail = "";
+	private String attach = "";
+	private String out_trade_no = "";
+	private String fee_type = "";
+	private Integer total_fee = 0;
+	private String spbill_create_ip = "";
+	private String time_start = "";
+	private String time_expire = "";
+	private String goods_tag = "";
+	private String notify_url = "";
+	private String trade_type = "";
+	private String product_id = "";
+	private String limit_pay = "";
+	private String openid = "";
+	private String sub_open_id = "";
 
 
-    /**
-     * @Author:  柯军
-     * @Description: 初始化必要参数 
-     * @datetime:2015年9月2日
-     *
-     **/
-    public UnifedOrderReqData(String body,String outTradeNo,Integer totalFee,String notifyUrl,String timeStart,String timeExpire,String openid,
+
+	/**
+	 * @Author:  柯军
+	 * @Description: 初始化必要参数
+	 * @datetime:2015年9月2日
+	 *
+	 **/
+	public UnifedOrderReqData(String body,String outTradeNo,Integer totalFee,String notifyUrl,String timeStart,String timeExpire,String openid,
 							  WechatConfigure wechatConfigure){
-        //微信分配的公众号ID（开通公众号之后可以获取到）
+		//微信分配的公众号ID（开通公众号之后可以获取到）
 		setAppid(wechatConfigure.getAppID());
 
-        //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-        setMch_id(wechatConfigure.getMchID());
+		//微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
+		setMch_id(wechatConfigure.getMchID());
 
-        //随机字符串，不长于32 位
-        setNonce_str(genNonceStr());
-        
-        //商品描述
-        setBody(body);
-        
-        //商户系统自己生成的唯一的订单号
-        setOut_trade_no(outTradeNo);
 
-        //总金额
-        setTotal_fee(totalFee);
-        
-        //终端IP
-        setSpbill_create_ip(wechatConfigure.getIp());
-        
-        //异步通知地址
-        setNotify_url(notifyUrl);
-        
-        //交易类型
-        setTrade_type(wechatConfigure.getTradeType());
+		if(StringUtils.isNotEmpty(wechatConfigure.getSubMchID())){
+			setSub_mch_id(wechatConfigure.getSubMchID());
+		}
+
+		if(StringUtils.isNotEmpty(wechatConfigure.getSubAppID())){
+			setSub_appid(wechatConfigure.getSubAppID());
+		}
+
+
+		//随机字符串，不长于32 位
+		setNonce_str(genNonceStr());
+
+		//商品描述
+		setBody(body);
+
+		//商户系统自己生成的唯一的订单号
+		setOut_trade_no(outTradeNo);
+
+		//总金额
+		setTotal_fee(totalFee);
+
+		//终端IP
+		setSpbill_create_ip(wechatConfigure.getIp());
+
+		//异步通知地址
+		setNotify_url(notifyUrl);
+
+		//交易类型
+		setTrade_type(wechatConfigure.getTradeType());
 
 		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(wechatConfigure.getTradeType())) {
 			//交易起始时间
@@ -86,65 +100,66 @@ public class UnifedOrderReqData extends BaseData {
 		}
 
 		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getValueStr().equals(wechatConfigure.getTradeType())) {
+
 			setOpenid(openid);
 		}
 
-        //根据API给的签名规则进行签名
-        String sign = Signature.getSign(toMap(), wechatConfigure.getKey());
-        setSign(sign);//把签名数据设置到Sign这个属性中
+		//根据API给的签名规则进行签名
+		String sign = Signature.getSign(toMap(), wechatConfigure.getKey());
+		setSign(sign);//把签名数据设置到Sign这个属性中
 
-    }
-    
+	}
+
 	private String genNonceStr() {
 		Random random = new Random();
 		return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
 	}
 
-    public String getAppid() {
-        return appid;
-    }
+	public String getAppid() {
+		return appid;
+	}
 
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
+	public void setAppid(String appid) {
+		this.appid = appid;
+	}
 
-    public String getMch_id() {
-        return mch_id;
-    }
+	public String getMch_id() {
+		return mch_id;
+	}
 
-    public void setMch_id(String mch_id) {
-        this.mch_id = mch_id;
-    }
+	public void setMch_id(String mch_id) {
+		this.mch_id = mch_id;
+	}
 
 
-    public String getOut_trade_no() {
-        return out_trade_no;
-    }
+	public String getOut_trade_no() {
+		return out_trade_no;
+	}
 
-    public void setOut_trade_no(String out_trade_no) {
-        this.out_trade_no = out_trade_no;
-    }
+	public void setOut_trade_no(String out_trade_no) {
+		this.out_trade_no = out_trade_no;
+	}
 
-    public String getNonce_str() {
-        return nonce_str;
-    }
+	public String getNonce_str() {
+		return nonce_str;
+	}
 
-    public void setNonce_str(String nonce_str) {
-        this.nonce_str = nonce_str;
-    }
+	public void setNonce_str(String nonce_str) {
+		this.nonce_str = nonce_str;
+	}
 
-    public String getSign() {
-        return sign;
-    }
+	public String getSign() {
+		return sign;
+	}
 
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
 
-    
-    
-    
-    public String getDevice_info() {
+
+
+
+	public String getDevice_info() {
 		return device_info;
 	}
 
@@ -262,6 +277,30 @@ public class UnifedOrderReqData extends BaseData {
 
 	public void setOpenid(String openid) {
 		this.openid = openid;
+	}
+
+	public String getSub_mch_id() {
+		return sub_mch_id;
+	}
+
+	public void setSub_mch_id(String sub_mch_id) {
+		this.sub_mch_id = sub_mch_id;
+	}
+
+	public String getSub_appid() {
+		return sub_appid;
+	}
+
+	public void setSub_appid(String sub_appid) {
+		this.sub_appid = sub_appid;
+	}
+
+	public String getSub_open_id() {
+		return sub_open_id;
+	}
+
+	public void setSub_open_id(String sub_open_id) {
+		this.sub_open_id = sub_open_id;
 	}
 
 	public Map<String, Object> toMap() {

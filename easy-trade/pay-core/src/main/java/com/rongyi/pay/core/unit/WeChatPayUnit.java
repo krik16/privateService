@@ -8,6 +8,7 @@ import com.rongyi.pay.core.wechat.model.*;
 import com.rongyi.pay.core.wechat.service.*;
 import com.rongyi.pay.core.wechat.util.*;
 import net.sf.json.JSONObject;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -241,6 +242,7 @@ public class WeChatPayUnit {
             LOGGER.error("刷卡失败,result={},e.getMessage={}", result, e.getMessage(), e);
             throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
         }
+        LOGGER.info("支付结果,punchCardPayResData={}",punchCardPayResData);
         return punchCardPayResData;
     }
 
@@ -263,9 +265,7 @@ public class WeChatPayUnit {
                         && "SUCCESS".equals(punchCardPayQueryResData.getTrade_state())) {
                     LOGGER.info("用户密码输入完成，成功支付");
                     result = true;
-                    punchCardPayResData.setOpenid(punchCardPayQueryResData.getOpenid());
-                    punchCardPayResData.setTransaction_id(punchCardPayQueryResData.getTransaction_id());
-                    punchCardPayResData.setResult_code(punchCardPayQueryResData.getResult_code());
+                    BeanUtils.copyProperties(punchCardPayResData,punchCardPayQueryResData);
                     break;
                 }else if("SUCCESS".equals(punchCardPayQueryResData.getReturn_code()) && "SUCCESS".equals(punchCardPayQueryResData.getResult_code())
                         && !"USERPAYING".equals(punchCardPayQueryResData.getTrade_state())){
@@ -404,22 +404,23 @@ public class WeChatPayUnit {
 //    }
 
     public static GetOpenIdResData getOpenId(String code, String state, WechatConfigure wechatConfigure) {
-		LOGGER.info("获取openId查询, getOpenId code={},state={},wechatConfigure={}", code, state, wechatConfigure);
-		String result = null;
-		try {
-			if (StringUtils.isEmpty(code)) {
-				throw new ParamNullException();
-			}
-			GetOpenIdService getOpenIdService = new GetOpenIdService(MessageFormat.format(
-					WechatConfigure.WEB_GET_OPEN_ID, wechatConfigure.getAppID(), wechatConfigure.getAppSecret(), code));
-			result = getOpenIdService.webGetOpenId(null, wechatConfigure);
-			LOGGER.info("result={}",result);
+        LOGGER.info("获取openId查询, getOpenId code={},state={},wechatConfigure={}", code, state, wechatConfigure);
+        String result = null;
+        try {
+            if (StringUtils.isEmpty(code)) {
+                throw new ParamNullException();
+            }
+
+            GetOpenIdService getOpenIdService = new GetOpenIdService(MessageFormat.format(
+                    WechatConfigure.WEB_GET_OPEN_ID, wechatConfigure.getAppID(), wechatConfigure.getAppSecret(), code));
+            result = getOpenIdService.webGetOpenId(null, wechatConfigure);
+            LOGGER.info("result={}",result);
             return (GetOpenIdResData) JSONObject.toBean(JSONObject.fromObject(result), GetOpenIdResData.class);
-		} catch (Exception e) {
-			LOGGER.info("获取openId查询, result={}", result);
-			e.printStackTrace();
-			throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(),
-					ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
-		}
-	}
+        } catch (Exception e) {
+            LOGGER.info("获取openId查询, result={}", result);
+            e.printStackTrace();
+            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(),
+                    ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
+        }
+    }
 }

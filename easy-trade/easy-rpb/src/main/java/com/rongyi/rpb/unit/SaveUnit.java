@@ -27,12 +27,11 @@ public class SaveUnit {
     public void updatePaymentEntity(PaymentEntity paymentEntity,PaymentLogInfo paymentLogInfo){
 
         try {
-            if(paymentEntity != null && paymentEntity.getId() > 0){
+            if(paymentEntity != null && paymentEntity.getId() != null && paymentEntity.getId() > 0){
                 paymentService.updateByPrimaryKeySelective(paymentEntity);
             }else if(paymentEntity != null){
                 paymentService.insert(paymentEntity);
             }
-
             if(paymentLogInfo != null){
                 paymentLogInfoService.insert(paymentLogInfo);
             }

@@ -211,6 +211,7 @@ public class PayBizz {
             paymentEntity.setAliSellerId(aliSellerId);
             paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
             paymentEntity.setOrderPrice(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+            paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         } else {
             //生成支付信息
             paymentEntity = initEntityUnit.initPaymentEntity(ryMchId,orderNo, totalFee, orderType, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, payChannel, aliSellerId, wechatMchId);

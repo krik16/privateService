@@ -36,6 +36,7 @@ public class InitEntityUnit {
         paymentEntity.setOrderNum(orderNo);
         paymentEntity.setOrderType(orderType);
         paymentEntity.setOrderPrice(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+        paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
         paymentEntity.setTradeType(tradeType);
         paymentEntity.setCreateTime(new Date());
