@@ -1145,6 +1145,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
+			this.setStock(Integer.parseInt(vo.getCommodityStock()));
 			this.setSn(vo.getSn());
 			this.setMappingId(vo.getMappingId());
 			this.setActivityId(vo.getActivityId() + "");
