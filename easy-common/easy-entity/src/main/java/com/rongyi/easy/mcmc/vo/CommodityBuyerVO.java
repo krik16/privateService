@@ -845,11 +845,10 @@ public class CommodityBuyerVO implements Serializable {
         this.skus = skus;
     }
 
-    public CommodityBuyerVO(Commodity commodity){
+
     public String getServiceDescription() {
         return serviceDescription;
     }
-
     public void setServiceDescription(String serviceDescription) {
         this.serviceDescription = serviceDescription;
     }
