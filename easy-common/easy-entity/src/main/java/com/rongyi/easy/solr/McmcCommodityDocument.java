@@ -670,6 +670,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setPublic_start(commodity.getRegisterAt());//上架时间
 			this.setPrice(commodity.getPrice());
 			this.setTerminalType(commodity.getTerminalType());
+			this.setServiceIds(commodity.getServiceIds());
+			this.setOnServiceIds(commodity.getOnServiceIds());
+			this.setOffServiceIds(commodity.getOffServiceIds());
 		}
 	}
 }

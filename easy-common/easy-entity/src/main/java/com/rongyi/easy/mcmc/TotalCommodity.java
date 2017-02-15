@@ -734,6 +734,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				this.setCreateAt(new Date());
 			}
 			this.setUpdateAt(new Date());
+			this.setUpdateBy(userInfo.getId());
 			this.setPurchaseCount(param.getPurchaseCount());
 			/*this.setWeAndTeStatus(StringUtils.isNotBlank(param.getWeAndTeStatus()) ?
 										param.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);*/
@@ -743,10 +744,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			setFilialeMids(param.getCommoditySpeceParams(), this);
 			setShopMids(param.getCommoditySpeceParams(), this);
 
-			this.setUpdateBy(userInfo.getId());
-			if(param.getId() == null) {
-				this.setCreateBy(userInfo.getId());
-			}
+			this.setCreateBy((param.getId() == null) ? userInfo.getId() : param.getCreateBy());
 
 			//老的app数据identity为-100
 			if(!(this != null && this.getIdentity() != null && this.getIdentity() == -100)) {
@@ -773,7 +771,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setSubheading(param.getSubheading());
 			this.setCommodityDetails(param.getCommodityDetails());
 
-			this.setCreateBy(param.getCreateBy());
 			this.setShelvesType(param.getShelvesType());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
