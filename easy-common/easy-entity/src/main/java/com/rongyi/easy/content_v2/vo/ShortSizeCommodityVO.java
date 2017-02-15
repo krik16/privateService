@@ -21,6 +21,15 @@ public class ShortSizeCommodityVO implements Serializable {
     private Integer stock;//商品库存
     private Date updateAt;//数据更新日期
     private Integer position; //排序字段
+    private Integer templateRelevantGoodsCouponId;  //用作排序
+
+    public Integer getTemplateRelevantGoodsCouponId() {
+        return templateRelevantGoodsCouponId;
+    }
+
+    public void setTemplateRelevantGoodsCouponId(Integer templateRelevantGoodsCouponId) {
+        this.templateRelevantGoodsCouponId = templateRelevantGoodsCouponId;
+    }
 
     public Integer getPosition() {
         return position;
