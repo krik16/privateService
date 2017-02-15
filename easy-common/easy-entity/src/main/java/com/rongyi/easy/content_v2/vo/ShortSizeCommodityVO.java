@@ -11,30 +11,38 @@ import java.util.List;
  * Created by WUH
  * on 2017/1/14.
  */
-public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeCommodityVO> {
+public class ShortSizeCommodityVO implements Serializable {
     private String id; //商品id
     private List<String> picUrls; //商品图片
-    private String name; //商品名称
+    private String name; //商品原名称
+    private String title; //商品发布名称
     private String originalPrice; //商品原价
     private String currentPrice; // 商品现价
     private Integer stock;//商品库存
     private Date updateAt;//数据更新日期
+    private Integer position; //排序字段
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Date getUpdateAt() {
         return updateAt;
     }
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
-    }
-    public int compare(ShortSizeCommodityVO commodityVO1, ShortSizeCommodityVO commodityVO2){
-        if(commodityVO1 == null || commodityVO1.getUpdateAt() == null){
-            return -1;
-        }else if(commodityVO2 == null || commodityVO2.getUpdateAt() ==  null){
-            return 1;
-        }else if(commodityVO1.getUpdateAt().after(commodityVO2.getUpdateAt())){
-            return 1;
-        }else {
-            return -1;
-        }
     }
 
     public int compareTo(ShortSizeCommodityVO o){
@@ -95,10 +103,12 @@ public class ShortSizeCommodityVO implements Serializable, Comparator<ShortSizeC
                 "id='" + id + '\'' +
                 ", picUrls=" + picUrls +
                 ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
                 ", originalPrice='" + originalPrice + '\'' +
                 ", currentPrice='" + currentPrice + '\'' +
-                ", stock=" + stock +
-                ", updateAt=" + updateAt +
+                ", stock=" + stock + '\'' +
+                ", updateAt=" + updateAt + '\'' +
+                ", position=" + position + '\'' +
                 '}';
     }
 }
