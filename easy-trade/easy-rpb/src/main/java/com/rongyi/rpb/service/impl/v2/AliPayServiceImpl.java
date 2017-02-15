@@ -3,6 +3,7 @@ package com.rongyi.rpb.service.impl.v2;
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
+import com.rongyi.core.Exception.TradeException;
 import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
@@ -16,8 +17,8 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
+import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
-import org.apache.commons.beanutils.BeanMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -55,7 +56,7 @@ public class AliPayServiceImpl implements IAliPayService{
             log.info("支付宝扫码签名结果,map={}",map);
             return map;
         } catch (AliPayException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("获取支付宝扫码支付签名失败,e={}", e.getMessage(), e);
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getValueStr());
@@ -73,7 +74,7 @@ public class AliPayServiceImpl implements IAliPayService{
 
             AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(aliConfigureVo.getRyMchId(),orderNo, refundAmount, refundReason, aliConfigure);
 
-            Map<String,Object> map = new BeanMap(alipayTradeRefundResponse);
+            Map<String,Object> map = BeanMapUtils.toMap(alipayTradeRefundResponse);
 
             //外部订单号
             map.put("orderNo",orderNo);
@@ -83,7 +84,7 @@ public class AliPayServiceImpl implements IAliPayService{
             log.info("支付宝面对面支付退款,map={}",map);
             return map;
         } catch (AliPayException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("支付宝面对面支付退款失败,e={}", e.getMessage(), e);
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_REFUND_FAIL.getValueStr());
@@ -103,7 +104,7 @@ public class AliPayServiceImpl implements IAliPayService{
 
             AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(aliConfigureVo.getRyMchId(),aliPunchCardPayReqData, aliConfigure);
 
-            Map<String,Object> map = new BeanMap(alipayTradePayResponse);
+            Map<String,Object> map = BeanMapUtils.toMap(alipayTradePayResponse);
 
             //外部订单号
             map.put("orderNo",aliPunchCardPayVo.getOrderNo());
@@ -114,7 +115,7 @@ public class AliPayServiceImpl implements IAliPayService{
             log.info("支付宝刷卡支付结果,map={}",map);
             return map;
         } catch (AliPayException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_PUNCH_CARD_PAY_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PUNCH_CARD_PAY_FAIL.getValueStr());
@@ -132,7 +133,7 @@ public class AliPayServiceImpl implements IAliPayService{
 
             AlipayTradeQueryResponse alipayTradeQueryResponse = payBizz.aliF2FPayQuery(orderNo, aliConfigure);
 
-            Map<String,Object> map = new BeanMap(alipayTradeQueryResponse);
+            Map<String,Object> map = BeanMapUtils.toMap(alipayTradeQueryResponse);
 
             //外部订单号
             map.put("orderNo",orderNo);
@@ -142,7 +143,7 @@ public class AliPayServiceImpl implements IAliPayService{
             log.info("支付宝面对面支付查询结果,map={}",map);
             return map;
         } catch (AliPayException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
@@ -161,7 +162,7 @@ public class AliPayServiceImpl implements IAliPayService{
             log.info("获取支付宝用户支付链接结果,result={}",authUrl);
             return authUrl;
         } catch (AliPayException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("获取支付宝用户支付链接结果失败,e={}", e.getMessage(), e);
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getValueStr());
@@ -172,26 +173,40 @@ public class AliPayServiceImpl implements IAliPayService{
     @Override
     public Map<String, Object> getUserBuyerId(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo) {
 
-        //初始化支付参数
-        AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
+        try {
+            //初始化支付参数
+            AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-        AuthorizeRespData authorizeRespData = AliPayUnit.getAuthToken(appAuthCode, appId, storeId, scope, authType, aliConfigure);
+            AuthorizeRespData authorizeRespData = AliPayUnit.getAuthToken(appAuthCode, appId, storeId, scope, authType, aliConfigure);
 
-        Map<String,Object> map = new HashMap<>();
-        //支付宝买家id
-        map.put("aliBuyerId",authorizeRespData.getAlipaySystemOauthTokenResponse().getUserId());
-        return map;
+            Map<String,Object> map = new HashMap<>();
+            //支付宝买家id
+            map.put("aliBuyerId",authorizeRespData.getAlipaySystemOauthTokenResponse().getUserId());
+            return map;
+        }  catch (AliPayException e){
+            throw new TradeException(e.getCode(),e.getMessage());
+        }catch (Exception e) {
+            log.error("获取支付宝买家id结果失败,e={}", e.getMessage(), e);
+            throw new AliPayException(ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getValueStr());
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Map<String, Object> getMchAuthToken(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo) {
-        //初始化支付参数
-        AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
+        try {
+            //初始化支付参数
+            AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-        AuthorizeRespData authorizeRespData = AliPayUnit.getAuthToken(appAuthCode, appId, storeId, scope, authType, aliConfigure);
+            AuthorizeRespData authorizeRespData = AliPayUnit.getAuthToken(appAuthCode, appId, storeId, scope, authType, aliConfigure);
 
-        return new BeanMap(authorizeRespData);
+            return BeanMapUtils.toMap(authorizeRespData);
+        }  catch (AliPayException e){
+            throw new TradeException(e.getCode(),e.getMessage());
+        }catch (Exception e) {
+            log.error("获取支付宝商户授权结果失败,e={}", e.getMessage(), e);
+            throw new AliPayException(ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getValueStr());
+        }
     }
 
     //设置支付参数

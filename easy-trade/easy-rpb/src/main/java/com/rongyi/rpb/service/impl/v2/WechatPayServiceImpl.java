@@ -1,5 +1,6 @@
 package com.rongyi.rpb.service.impl.v2;
 
+import com.rongyi.core.Exception.TradeException;
 import com.rongyi.easy.rpb.vo.WechatConfigureVo;
 import com.rongyi.easy.rpb.vo.WechatPaySignVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
@@ -10,8 +11,8 @@ import com.rongyi.pay.core.wechat.model.*;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
+import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IWechatPayService;
-import org.apache.commons.beanutils.BeanMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -51,7 +52,7 @@ public class WechatPayServiceImpl implements IWechatPayService{
             log.info("返回签名结果,map={}",map);
             return map;
         } catch (WeChatException | ParamNullException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("获取微信签名失败,e={}",e.getMessage(),e);
             throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
@@ -65,8 +66,8 @@ public class WechatPayServiceImpl implements IWechatPayService{
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            RefundResData refundResData = refundBizz.weChatRefund(wechatConfigureVo.getRyMchId(),orderNo, refundFee, wechatConfigure);
-            Map<String,Object> map = new BeanMap(refundResData);
+            RefundResData refundResData = refundBizz.weChatRefund(wechatConfigureVo.getRyMchId(), orderNo, refundFee, wechatConfigure);
+            Map<String,Object> map = BeanMapUtils.toMap(refundResData);
 
             //外部订单号
             map.put("orderNo",orderNo);
@@ -76,7 +77,7 @@ public class WechatPayServiceImpl implements IWechatPayService{
             log.info("退款结果,map={}",map);
             return map;
         }  catch (WeChatException | ParamNullException e) {
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e) {
             log.error("退款失败,e={}", e.getMessage(), e);
             throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
@@ -93,19 +94,19 @@ public class WechatPayServiceImpl implements IWechatPayService{
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //发起支付
-            PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(wechatConfigureVo.getRyMchId(),wechatPaySignData, wechatConfigure);
+            PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(wechatConfigureVo.getRyMchId(), wechatPaySignData, wechatConfigure);
 
-            Map<String,Object> map = new BeanMap(punchCardPayResData);
+            Map<String,Object> map = BeanMapUtils.toMap(punchCardPayResData);
 
             //外部订单号
-            map.put("orderNo",wechatPaySignVo.getOrderNo());
+            map.put("orderNo",wechatPaySignData.getOrderNo());
             //容易网交易号
             map.put("payNo",punchCardPayResData.getOut_trade_no());
 
             log.info("返回刷卡支付结果,map={}",map);
             return map;
         }  catch (WeChatException | ParamNullException e) {
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         } catch (Exception e) {
             log.error("刷卡支付失败,e={}", e.getMessage(), e);
             throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
@@ -120,7 +121,7 @@ public class WechatPayServiceImpl implements IWechatPayService{
         try {
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             PunchCardPayQueryResData punchCardPayQueryResData = payBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
-            Map<String,Object> map = new BeanMap(punchCardPayQueryResData);
+            Map<String,Object> map = BeanMapUtils.toMap(punchCardPayQueryResData);
             //外部订单号
             map.put("orderNo",orderNo);
             //容易网交易号
@@ -129,7 +130,7 @@ public class WechatPayServiceImpl implements IWechatPayService{
             log.info("订单查询结果,map={}",map);
             return map;
         } catch (WeChatException e){
-            throw e;
+            throw new TradeException(e.getCode(),e.getMessage());
         }catch (Exception e){
             log.error("订单查询失败,e={}",e.getMessage(),e);
             throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
@@ -139,10 +140,17 @@ public class WechatPayServiceImpl implements IWechatPayService{
     @Override
     @SuppressWarnings("unchecked")
     public Map<String, Object> getOpenId(String code, String state, WechatConfigureVo wechatConfigureVo) {
-        //设置支付参数
-        WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-        GetOpenIdResData getOpenIdResData = WeChatPayUnit.getOpenId(code, state, wechatConfigure);
-        return new BeanMap(getOpenIdResData);
+        try {
+            //设置支付参数
+            WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
+            GetOpenIdResData getOpenIdResData = WeChatPayUnit.getOpenId(code, state, wechatConfigure);
+            return BeanMapUtils.toMap(getOpenIdResData);
+        } catch (WeChatException e){
+            throw new TradeException(e.getCode(),e.getMessage());
+        }catch (Exception e){
+            log.error("获取微信openId失败,e={}", e.getMessage(), e);
+            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getValueStr());
+        }
     }
 
     //设置支付参数
