@@ -294,6 +294,8 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 
+	boolean updateCommodityServiceIds(String commodityId, List<String> serviceIds);
+
 	public List<ObjectId> selectBrandIdsByParams(BullParam param);
 
 	/**
