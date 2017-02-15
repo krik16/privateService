@@ -41,7 +41,8 @@ public class CouponSendRecordVO extends CouponSendRecordEntity {
         couponSendRecordVO.setAcceptName(couponSendRecordEntity.getAcceptName());
         couponSendRecordVO.setEmail(couponSendRecordEntity.getEmail());
         couponSendRecordVO.setId(couponSendRecordEntity.getId());
-        couponSendRecordVO.setCouponId(couponSendRecordEntity.getCouponId());
+        couponSendRecordVO.setBatchNo(couponSendRecordEntity.getBatchNo());
+        couponSendRecordVO.setSendNum(couponSendRecordEntity.getSendNum());
         return couponSendRecordVO;
     }
 }
