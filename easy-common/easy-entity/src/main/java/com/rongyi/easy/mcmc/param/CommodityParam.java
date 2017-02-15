@@ -1,5 +1,6 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
 
-public class CommodityParam {
+public class CommodityParam implements Serializable{
 
 	private Integer type;//类型0表示只修改库存1表示修改山商品所有信息
 
@@ -125,6 +126,10 @@ public class CommodityParam {
 	public void setBrandId(String brandId) {
 		this.brandId = brandId;
 	}
+
+	private String  goodsParam;//运营后台商品参数
+
+	private Integer commodityType;//运营后台商品渠道
 
 	public Integer getCreateBy() {
 		return createBy;
@@ -415,6 +420,8 @@ public class CommodityParam {
 				", brandMid=" + brandMid+
 				", brandName=" + brandName+
 				", commodityModelNo=" + commodityModelNo+
+				", goodsParam=" + goodsParam+
+				", commodityType=" + commodityType+
 				'}';
 	}
 
@@ -448,5 +455,21 @@ public class CommodityParam {
 
 	public void setCommodityModelNo(String commodityModelNo) {
 		this.commodityModelNo = commodityModelNo;
+	}
+
+	public String getGoodsParam() {
+		return goodsParam;
+	}
+
+	public void setGoodsParam(String goodsParam) {
+		this.goodsParam = goodsParam;
+	}
+
+	public Integer getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(Integer commodityType) {
+		this.commodityType = commodityType;
 	}
 }

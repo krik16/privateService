@@ -34,7 +34,34 @@ public class SaleDetailVO implements Serializable {
     private String nextShareTitle;
     private String nextShareDesc;
     private String nextSharePic;
+    private String couponPic;//卡卷图片
+    private Integer associateCoupon;//是否关联卡卷
+    private String desc;//描述
 
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getAssociateCoupon() {
+        return associateCoupon;
+    }
+
+    public void setAssociateCoupon(Integer associateCoupon) {
+        this.associateCoupon = associateCoupon;
+    }
+
+    public String getCouponPic() {
+        return couponPic;
+    }
+
+    public void setCouponPic(String couponPic) {
+        this.couponPic = couponPic;
+    }
 
     public String getNextShareTitle() {
         return nextShareTitle;
@@ -214,6 +241,9 @@ public class SaleDetailVO implements Serializable {
                 .append("nextShareDesc", nextShareDesc)
                 .append("nextSharePic",nextSharePic)
                 .append("nextSharePic",nextSharePic)
+                .append("couponPic", couponPic)
+                .append("associateCoupon", associateCoupon)
+                .append("desc", desc)
                 .toString();
     }
 }

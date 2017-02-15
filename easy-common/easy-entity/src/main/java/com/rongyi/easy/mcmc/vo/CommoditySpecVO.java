@@ -37,6 +37,17 @@ public class CommoditySpecVO implements  Serializable {
 
 	private String referencePrice;
 
+	private String specColumnsMsg;
+
+
+	public String getSpecColumnsMsg() {
+		return specColumnsMsg;
+	}
+
+	public void setSpecColumnsMsg(String specColumnsMsg) {
+		this.specColumnsMsg = specColumnsMsg;
+	}
+
 	public Integer getActivitySpecStock() {
 		return activitySpecStock;
 	}

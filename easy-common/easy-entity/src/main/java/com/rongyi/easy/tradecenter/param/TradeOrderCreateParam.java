@@ -161,30 +161,9 @@ public class TradeOrderCreateParam implements Serializable {
     private String orderChannel;
 
     /**
-     * 积分商城兑换类型（1：兑换 2：换购）
-     */
-    private Integer exchangeType = 0;
-
-    /**
-     * 积分商城积分支付部分
-     */
-    private BigDecimal partOfCredit = new BigDecimal(0);
-
-    /**
-     * 积分商城金额支付部分
-     */
-    private BigDecimal partOfMoney = new BigDecimal(0);
-
-    /**
      * 卖家留言
      */
     private String buyerMessage;
-
-    // 总积分
-    private BigDecimal totalCredit = new BigDecimal(0);
-
-    // 用户类型
-    private int userType ;
 
     /**
      * end
@@ -482,30 +461,6 @@ public class TradeOrderCreateParam implements Serializable {
         this.orderChannel = orderChannel;
     }
 
-    public Integer getExchangeType() {
-        return exchangeType;
-    }
-
-    public void setExchangeType(Integer exchangeType) {
-        this.exchangeType = exchangeType;
-    }
-
-    public BigDecimal getPartOfCredit() {
-        return partOfCredit;
-    }
-
-    public void setPartOfCredit(BigDecimal partOfCredit) {
-        this.partOfCredit = partOfCredit;
-    }
-
-    public BigDecimal getPartOfMoney() {
-        return partOfMoney;
-    }
-
-    public void setPartOfMoney(BigDecimal partOfMoney) {
-        this.partOfMoney = partOfMoney;
-    }
-
     public String getArticleId() {
         return articleId;
     }
@@ -528,22 +483,6 @@ public class TradeOrderCreateParam implements Serializable {
 
     public void setBuyerMessage(String buyerMessage) {
         this.buyerMessage = buyerMessage;
-    }
-
-    public BigDecimal getTotalCredit() {
-        return totalCredit;
-    }
-
-    public void setTotalCredit(BigDecimal totalCredit) {
-        this.totalCredit = totalCredit;
-    }
-
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
-        this.userType = userType;
     }
 
     @Override
@@ -582,12 +521,7 @@ public class TradeOrderCreateParam implements Serializable {
                 ", orderChannel=" + orderChannel +
                 ", articleId=" + articleId +
                 ", articleType=" + articleType +
-                ", exchangeType=" + exchangeType +
-                ", partOfCredit=" + partOfCredit +
-                ", partOfMoney=" + partOfMoney +
                 ", buyerMessage=" + buyerMessage +
-                ", totalCredit=" + totalCredit +
-                ", userType=" + userType +
                 '}';
     }
 }

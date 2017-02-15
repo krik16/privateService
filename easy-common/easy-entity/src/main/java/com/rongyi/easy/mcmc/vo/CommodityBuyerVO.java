@@ -146,6 +146,18 @@ public class CommodityBuyerVO implements Serializable {
 
     private List<String> skus;
 
+    private String serviceDescription;   //售后说明内容
+    private Integer serviceDescriptionId;  //售后说明id
+    private String serviceDescriptionRemark;   //售后说明备注
+
+    public String getServiceDescriptionRemark() {
+        return serviceDescriptionRemark;
+    }
+
+    public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+        this.serviceDescriptionRemark = serviceDescriptionRemark;
+    }
+
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
 	}
@@ -834,6 +846,23 @@ public class CommodityBuyerVO implements Serializable {
     }
 
     public CommodityBuyerVO(Commodity commodity){
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public Integer getServiceDescriptionId() {
+        return serviceDescriptionId;
+    }
+
+    public void setServiceDescriptionId(Integer serviceDescriptionId) {
+        this.serviceDescriptionId = serviceDescriptionId;
+    }
+
+    public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -876,7 +905,9 @@ public class CommodityBuyerVO implements Serializable {
             this.commodityOPOfLCP = "0.0";
         }
         this.commodityCode = commodity.getCode();
-        this.commodityStatus = commodity.getStatus();
+        if (commodity.getStatus() != null){
+            this.commodityStatus = commodity.getStatus();
+        }
         this.commodityStock = String.valueOf(commodity.getStock());
         this.commodityBrandName = "";
         if(commodity.getBrandName() != null){
@@ -961,6 +992,9 @@ public class CommodityBuyerVO implements Serializable {
                                 CommodityTerminalType.weAndTeStatus.STATUS_6,CommodityTerminalType.weAndTeStatus.STATUS_7).contains(commodity.getWeAndTeStatus())
                         ?true:false);
         this.skus=commodity.getSkus();
+        this.serviceDescription=commodity.getServiceDescription();
+        this.serviceDescriptionId=commodity.getServiceDescriptionId();
+        this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
     }
 
     @Override
@@ -1027,6 +1061,8 @@ public class CommodityBuyerVO implements Serializable {
                 ", ifShowInWechat=" + ifShowInWechat +
                 ", buyerCount=" + buyerCount +
                 ", totalBuycount=" + totalBuycount +
+                ", serviceDescription=" + serviceDescription +
+                ", serviceDescriptionId=" + serviceDescriptionId +
                 '}';
     }
 

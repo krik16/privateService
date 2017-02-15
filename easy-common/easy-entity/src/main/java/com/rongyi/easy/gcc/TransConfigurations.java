@@ -1,13 +1,17 @@
 package com.rongyi.easy.gcc;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class TransConfigurations implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private int CommissionType;//返佣类型，0固定金额 1订单百分比
+	private int CommissionType;//返佣类型，0固定金额 1订单百分比  2单件商品百分比
 	private int CommissionCountMax  = 0;//这个是同一卖家在同一天与同一买家交易量中，最多能获取的返佣单数
 	private int CommissionDailyMax  = 0;//这个是同一卖家在同一天中，最多能获取的返佣单数
 	private int CashCouponUseMax = 0;//这个是同一个买家同一天允许使用的现金卷的次数
@@ -33,6 +37,16 @@ public class TransConfigurations implements Serializable{
 	private BigDecimal  registPrice = new BigDecimal(0); //这个是每单返回佣金的金额
 	private int  registType= 0;// 0表示系统 1 表示手动
 	private int registMax = 0;//同一导购最多能获取反单数
+
+	//按单件商品百分比返佣
+	private BigDecimal goodsRatio = new BigDecimal(0);  //每件返佣百分比
+	private BigDecimal goodsMinimumPrice = new BigDecimal(0);  //每件起返商品售价
+	private BigDecimal goodsPriceLimit = new BigDecimal(0); //每件商品返佣上限
+
+	private int useUserType ; //可以使用的用户  0全用户   1指定的用户
+	private List<Integer> userList ; //指定的用户列表
+	private String userIdsStr ;    //指定的用户IDs 以逗号分隔
+	private String userAccountsStr ;  //输入的指定用户账号or手机号s 以逗号分隔
 
 
 	public int getCommissionCountMax() {
@@ -209,5 +223,66 @@ public class TransConfigurations implements Serializable{
 	public void setCommissionType(int commissionType)
 	{
 		CommissionType = commissionType;
+	}
+
+	public BigDecimal getGoodsRatio() {
+		return goodsRatio;
+	}
+
+	public void setGoodsRatio(BigDecimal goodsRatio) {
+		this.goodsRatio = goodsRatio;
+	}
+
+	public BigDecimal getGoodsMinimumPrice() {
+		return goodsMinimumPrice;
+	}
+
+	public void setGoodsMinimumPrice(BigDecimal goodsMinimumPrice) {
+		this.goodsMinimumPrice = goodsMinimumPrice;
+	}
+
+	public BigDecimal getGoodsPriceLimit() {
+		return goodsPriceLimit;
+	}
+
+	public void setGoodsPriceLimit(BigDecimal goodsPriceLimit) {
+		this.goodsPriceLimit = goodsPriceLimit;
+	}
+
+	public int getUseUserType() {
+		return useUserType;
+	}
+
+	public void setUseUserType(int useUserType) {
+		this.useUserType = useUserType;
+	}
+
+	public List<Integer> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<Integer> userList) {
+		this.userList = userList;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
+
+	public String getUserIdsStr() {
+		return userIdsStr;
+	}
+
+	public void setUserIdsStr(String userIdsStr) {
+		this.userIdsStr = userIdsStr;
+	}
+
+	public String getUserAccountsStr() {
+		return userAccountsStr;
+	}
+
+	public void setUserAccountsStr(String userAccountsStr) {
+		this.userAccountsStr = userAccountsStr;
 	}
 }

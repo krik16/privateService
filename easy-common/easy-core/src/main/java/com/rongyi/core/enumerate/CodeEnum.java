@@ -47,7 +47,7 @@ public enum CodeEnum {
     
     /**扫码错误信息*/
     ERROR_RECEIVECOUPONMSG("-1125","亲，手慢了，奖品被抢光了……"),
-    ERROR_RECEIVECOUPONMSGCOUNT("-1129","对不去你的领取次数超过了限制"),
+    ERROR_RECEIVECOUPONMSGCOUNT("-1129","抱歉，您的领取次数超过了限制"),
     /** 验证码无效或已过期 */
     ERROR_VERIFICATION_CODE("-1106","验证码无效或已过期 "),
     

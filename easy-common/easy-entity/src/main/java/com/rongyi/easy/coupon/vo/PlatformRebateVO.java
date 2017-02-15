@@ -1,7 +1,6 @@
 package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -105,6 +104,16 @@ public class PlatformRebateVO implements Serializable {
     private String unUsableReason;
 
     private String limitDesc;//使用限制
+
+    /**
+     * 补贴类型(0:平台补贴,1:商家补贴)
+     */
+    private Byte subsidyType;
+
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
+    private Integer publishChannel;
 
     public String getCouponId() {
         return couponId;
@@ -266,6 +275,22 @@ public class PlatformRebateVO implements Serializable {
         this.limitDesc = limitDesc;
     }
 
+    public Byte getSubsidyType() {
+        return subsidyType;
+    }
+
+    public void setSubsidyType(Byte subsidyType) {
+        this.subsidyType = subsidyType;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -296,6 +321,8 @@ public class PlatformRebateVO implements Serializable {
         sb.append(", voucherVOs=").append(voucherVOs);
         sb.append(", preferenceType=").append(preferenceType);
         sb.append(", unUsableReason='").append(unUsableReason).append('\'');
+        sb.append(", subsidyType='").append(subsidyType).append('\'');
+        sb.append(", publishChannel='").append(publishChannel).append('\'');
         sb.append('}');
         return sb.toString();
     }

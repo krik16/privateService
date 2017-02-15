@@ -22,6 +22,11 @@ public class SaleFlashCommodityVO implements Serializable {
      */
     private String commodityTitle;
     /**
+     * 商品当前标题
+     */
+    private String commodityName;
+
+    /**
      * 商品图片
      */
     private String commodityPic;
@@ -37,6 +42,15 @@ public class SaleFlashCommodityVO implements Serializable {
      * 店铺名称
      */
     private String shopName;
+
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
 
     public Integer getId() {
         return id;
@@ -104,6 +118,7 @@ public class SaleFlashCommodityVO implements Serializable {
                 .append("commodityStock", commodityStock)
                 .append("shopId", shopId)
                 .append("shopName", shopName)
+                .append("commodityName", commodityName)
                 .toString();
     }
 }

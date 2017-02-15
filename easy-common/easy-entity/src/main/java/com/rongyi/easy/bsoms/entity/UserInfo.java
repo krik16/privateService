@@ -20,8 +20,8 @@ public class UserInfo implements Serializable{
     private Integer roleId;
 
     private String userPhone;
-    
-    private String userAccount ; 
+
+    private String userAccount ;
 
     private String userPwd;
 
@@ -50,28 +50,28 @@ public class UserInfo implements Serializable{
     private String cardId;
 
     private String memo;
-    
+
     private Date stopAt ;
-    
+
     private Integer stopBy;
-    
+
     private String branchCompanyName;   //所属分公司
-    
+
     private String shopName ;  //所属店铺
-    
+
     private String createName;  //添加人
-    
+
     private String roleName ;  //角色职位
 
     private Integer createSource;
-    
+
     private String stopReason;//停用 原因
-    
+
     private UserShop userShop;
-    
+
 	private String useCode; //注册使用的邀请码
-    
-    private String jsessionid ;//摩店登录标识	
+
+    private String jsessionid ;//摩店登录标识
 	private Integer isEdit = 1;  //是否可编辑  0不可编辑  1可编辑
     private Integer isOrdering;  //是否接单中  0是  1否
     private Date updateOrderingAt;//更新接单状态的时间
@@ -272,7 +272,7 @@ public class UserInfo implements Serializable{
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
     }
-    
+
     public Date getStopAt() {
 		return stopAt;
 	}
@@ -328,7 +328,7 @@ public class UserInfo implements Serializable{
 	public void setUserShop(UserShop userShop) {
 		this.userShop = userShop;
 	}
-	
+
 	public String getRoleName() {
 		return roleName;
 	}
@@ -508,5 +508,5 @@ public class UserInfo implements Serializable{
 				+ ", terminalType=" + terminalType + ", defaultTerminal=" + defaultTerminal
 				+ ", level=" + level + ", chiefId=" + chiefId + "]";
 	}
-	
+
 }

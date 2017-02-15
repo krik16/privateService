@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.vo;
 
 
+import com.google.inject.internal.Lists;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
 import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
 import org.apache.commons.collections.CollectionUtils;
@@ -37,11 +38,15 @@ public class SaleVO implements Serializable {
     private Long updateAt;
     private String bannerPic;
     private Integer isMallShop;
+    private Integer associateCoupon;//是否关联卡卷
+    private String couponPic;//领卷入口图
     private List<MallVO> mall;
     private List<ShopVO> shops;
     private List<SaleCommodityTopVO> commodities;
+    private String desc;//描述
 
     private List<SaleFlashCommodityVO> commodityList;
+    private List<CouponVO> couponVOList = Lists.newArrayList();
     public SaleVO(){}
 
     public SaleVO(ActivityTemplate activityTemplate){
@@ -63,8 +68,12 @@ public class SaleVO implements Serializable {
                 this.shareDesc = activityTemplate.getTemplateSale().getShareDesc();
                 this.sharePic = activityTemplate.getTemplateSale().getSharePic();
                 this.replacePic = activityTemplate.getTemplateSale().getReplacePic();
-                this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
-
+                this.couponPic = activityTemplate.getTemplateSale().getCouponPic();
+                this.associateCoupon = activityTemplate.getTemplateSale().getAssociateCoupon();
+                this.desc = activityTemplate.getTemplateSale().getDesc();
+                if (activityTemplate.getTemplateSale().getIsMallShop() != null){
+                    this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
+                }
             if(!CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
                 List<MallVO>  mallVOs=new ArrayList<MallVO>();
                 List<ShopVO> shopVOs=new ArrayList<ShopVO>();
@@ -98,6 +107,38 @@ public class SaleVO implements Serializable {
                 }
             }
         }
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getAssociateCoupon() {
+        return associateCoupon;
+    }
+
+    public void setAssociateCoupon(Integer associateCoupon) {
+        this.associateCoupon = associateCoupon;
+    }
+
+    public String getCouponPic() {
+        return couponPic;
+    }
+
+    public void setCouponPic(String couponPic) {
+        this.couponPic = couponPic;
+    }
+
+    public List<CouponVO> getCouponVOList() {
+        return couponVOList;
+    }
+
+    public void setCouponVOList(List<CouponVO> couponVOList) {
+        this.couponVOList = couponVOList;
     }
 
     public String getSharePic() {
@@ -310,6 +351,10 @@ public class SaleVO implements Serializable {
                 .append("shops", shops)
                 .append("commodities", commodities)
                 .append("commodityList", commodityList)
+                .append("couponVOList", couponVOList)
+                .append("couponPic", couponPic)
+                .append("associateCoupon", associateCoupon)
+                .append("desc", desc)
                 .toString();
     }
 }

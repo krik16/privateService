@@ -10,7 +10,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -363,6 +362,11 @@ public class Coupon implements Serializable {
      * 活动券关联表中，券的状态
      */
     private Integer activityStatus;
+
+    /**
+     * 补贴类型(0:平台补贴,1:商家补贴)
+     */
+    private Byte subsidyType;
 
     public Integer getActivityStatus() {
         return activityStatus;
@@ -998,6 +1002,14 @@ public class Coupon implements Serializable {
         this.thirdCouponType = thirdCouponType;
     }
 
+    public Byte getSubsidyType() {
+        return subsidyType;
+    }
+
+    public void setSubsidyType(Byte subsidyType) {
+        this.subsidyType = subsidyType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -1065,6 +1077,7 @@ public class Coupon implements Serializable {
                 .append("activityStatus", activityStatus)
                 .append("thirdCouponType", thirdCouponType)
                 .append("wechats", wechats)
+                .append("subsidyType", subsidyType)
                 .toString();
     }
 
