@@ -12,6 +12,7 @@ import java.io.Serializable;
  **/
 public class WechatPaySignVo implements Serializable{
 
+    private static final long serialVersionUID = 2797291649752395523L;
     private String orderNo;//订单号
 
     private String payNo; //支付单号
