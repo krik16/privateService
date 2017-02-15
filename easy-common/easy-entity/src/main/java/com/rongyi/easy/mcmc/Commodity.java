@@ -920,7 +920,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setShopName(shopName);
 		commodity.setMallName(mallName);
 		commodity.setHotAreaName(hotAreaName);
-		commodity.setShelvesType(null ==shelvesType?2:shelvesType);
+		commodity.setShelvesType(null == shelvesType ? 2 : shelvesType);
 		commodity.setSubheading(subheading);
 		commodity.setCommodityDetails(commodityDetails);
 		commodity.setServiceDescriptionId(serviceDescriptionId);
@@ -1009,9 +1009,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
 								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
-		if(vo.getCommodityRange() != CommodityConstants.CommodityType.GIFT ||
-				vo.getCommodityRange() != CommodityConstants.CommodityType.COUPON ||
-				vo.getCommodityRange() != CommodityConstants.CommodityType.COUPON_PARKING) {
+		if(!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			if (specMap == null) {
 				this.setStock(Integer.valueOf(vo.getCommodityStock()));
 				this.setOriginalPrice(vo.getCommodityOriginalPrice());
@@ -1118,38 +1116,33 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setCreate_by(vo.getCreate_by());
 		this.setUpdate_by(vo.getCreate_by());
 		this.setTemplateId(vo.getTemplateId());
+		this.setCommodityRange(vo.getCommodityRange());
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
 			this.setBrandName(brandName);
 			if (shopInfo != null) {
-				this.setBrandMid(shopInfo.getBrandMid());
 				this.setShopMid(shopInfo.getShopMid());
 			}
 
+			this.setCommodityModelNo(vo.getCommodityModelNo());
 			this.setBrandId(String.valueOf(brandId));
+			this.setBrandMid(vo.getBrandMid());
 			this.setMallId(String.valueOf(mallId));
 			this.setMallMid(mallMid);
 			this.setShopNum(shopNum);
+			this.setSubheading(vo.getSubheading());
+			this.setCommodityDetails(vo.getCommodityDetails());
+			this.setCommodityModelNo(vo.getCommodityModelNo());
 			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+			this.setGroupMid(vo.getGroupMid());
+			this.setShelvesType(vo.getShelvesType());
+			this.setServiceDescriptionId(vo.getServiceDescriptionId());
+			this.setServiceDescription(vo.getServiceDescription());
+			this.setServiceDescriptionRemark(vo.getServiceDescriptionRemark());
 		}
-		this.setCommodityRange(vo.getCommodityRange());
 
-		this.setBrandId(String.valueOf(brandId));
-		this.setMallId(String.valueOf(mallId));
-		this.setMallMid(mallMid);
-		this.setShopNum(shopNum);
-		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
-		this.setSubheading(vo.getSubheading());
-		this.setCommodityDetails(vo.getCommodityDetails());
-		this.setCommodityModelNo(vo.getCommodityModelNo());
-		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
-		this.setGroupMid(vo.getGroupMid());
-		this.setShelvesType(vo.getShelvesType());
-		this.setServiceDescriptionId(vo.getServiceDescriptionId());
-		this.setServiceDescription(vo.getServiceDescription());
-		this.setServiceDescriptionRemark(vo.getServiceDescriptionRemark());
 		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setGiftId(vo.getGiftId());
 			this.setSn(vo.getSn());
@@ -1173,20 +1166,6 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setCurrentPrice(vo.getPrice() + "");
 			this.setFreePostage(vo.getFreePostage());
 			this.setMallMid(vo.getMallMid());
-		} else {
-			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
-			this.setCommodityModelNo(vo.getCommodityModelNo());
-			this.setBrandId(String.valueOf(brandId));
-			this.setMallId(String.valueOf(mallId));
-			this.setMallMid(mallMid);
-			this.setShopNum(shopNum);
-			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
-			this.setSubheading(vo.getSubheading());
-			this.setCommodityDetails(vo.getCommodityDetails());
-			this.setCommodityModelNo(vo.getCommodityModelNo());
-			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
-			this.setGroupMid(vo.getGroupMid());
-			this.setShelvesType(vo.getShelvesType());
 		}
 
 		// 买手&非现货 商品 临时状态: -1
