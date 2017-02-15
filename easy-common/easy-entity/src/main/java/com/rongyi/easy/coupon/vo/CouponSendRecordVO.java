@@ -38,6 +38,7 @@ public class CouponSendRecordVO extends CouponSendRecordEntity {
     public static CouponSendRecordVO parese(CouponSendRecordEntity couponSendRecordEntity) {
         CouponSendRecordVO couponSendRecordVO = new CouponSendRecordVO();
         couponSendRecordVO.setPhone(couponSendRecordEntity.getPhone());
+        couponSendRecordVO.setAcceptName(couponSendRecordEntity.getAcceptName());
         couponSendRecordVO.setEmail(couponSendRecordEntity.getEmail());
         couponSendRecordVO.setId(couponSendRecordEntity.getId());
         couponSendRecordVO.setCouponId(couponSendRecordEntity.getCouponId());

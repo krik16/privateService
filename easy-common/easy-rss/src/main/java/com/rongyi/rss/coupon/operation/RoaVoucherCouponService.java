@@ -328,10 +328,11 @@ public interface RoaVoucherCouponService {
 
     /**
      * 重发
+     *
      * @param id
      * @return
      */
-    boolean resend(Integer id);
+    boolean resend(Integer id) throws Exception;
 
     /**
      * 作废卡券
