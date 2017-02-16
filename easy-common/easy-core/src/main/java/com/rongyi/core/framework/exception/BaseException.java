@@ -7,7 +7,7 @@ package com.rongyi.core.framework.exception;
  * @date 2016-05-09
  * @version 1.0
  */
-public class BaseException extends Exception {
+public class BaseException extends RuntimeException {
 
     public BaseException() {
         super();
