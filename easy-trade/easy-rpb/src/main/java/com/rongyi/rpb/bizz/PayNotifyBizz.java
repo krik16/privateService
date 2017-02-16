@@ -18,7 +18,7 @@ import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
-import com.rongyi.rss.redis.RedisService;
+import com.rongyi.rss.malllife.service.IRedisService;
 import com.rongyi.rss.roa.RoaMchEncryptInfoService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -51,7 +51,7 @@ public class PayNotifyBizz {
     @Autowired
     SaveUnit saveUnit;
     @Autowired
-    RedisService redisService;
+    IRedisService redisService;
     @Autowired
     RoaMchEncryptInfoService  roaMchEncryptInfoService;
 

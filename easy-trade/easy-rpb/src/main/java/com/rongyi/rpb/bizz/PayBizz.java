@@ -20,7 +20,7 @@ import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
-import com.rongyi.rss.redis.RedisService;
+import com.rongyi.rss.malllife.service.IRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -42,7 +42,7 @@ public class PayBizz {
     @Autowired
     SaveUnit saveUnit;
     @Autowired
-    RedisService redisService;
+    IRedisService redisService;
 
     /**
      * 微信扫码支付签名
