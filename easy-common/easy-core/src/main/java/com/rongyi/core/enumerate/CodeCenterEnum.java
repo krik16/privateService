@@ -67,6 +67,7 @@ public enum CodeCenterEnum {
     JIADELI_ERROR_ACCOUNT(1000009, "未找到家得利账号信息"),
     JIADELI_ERROR_CONFIG(1000010, "未找到配置信息"),
     JIADELI_ERROR_SYSTEM(1000999, "服务异常"),
+    JIADELI_ERROR_CORRECTCAUTH(1000011, "无冲正权限,不可冲正"),
     ERROR_COUPON_TYPE(1021353,"礼品券类型不对！！！"),
     ;
 
