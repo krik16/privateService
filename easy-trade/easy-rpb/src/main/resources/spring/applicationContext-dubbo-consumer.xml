@@ -28,7 +28,7 @@
 	 <dubbo:reference interface="com.rongyi.rss.malllife.service.welfare.IWelfareService" id="iWelfareService"  version="${dubbo.version}" check="false"/>
 
     <!--redis服务-->
-    <dubbo:reference interface="com.rongyi.rss.redis.RedisService" id="redisService"  version="${dubbo.version}" check="false"/>
+    <dubbo:reference interface="com.rongyi.rss.malllife.service.IRedisService" id="redisService"  version="${dubbo.version}" check="false"/>
 
     <!--容易网商户加密信息接口-->
     <dubbo:reference interface="com.rongyi.rss.roa.RoaMchEncryptInfoService" id="roaMchEncryptInfoService"  version="${dubbo.version}" check="false"/>
