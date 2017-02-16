@@ -91,6 +91,15 @@ public class CommodityBuyerVO implements Serializable {
 	private Long soldOutAt;//下架时间
     private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
     private List<String> categoryNames;
+    private Integer templateRelevantGoodsCouponId;  //用作排序
+
+    public Integer getTemplateRelevantGoodsCouponId() {
+        return templateRelevantGoodsCouponId;
+    }
+
+    public void setTemplateRelevantGoodsCouponId(Integer templateRelevantGoodsCouponId) {
+        this.templateRelevantGoodsCouponId = templateRelevantGoodsCouponId;
+    }
 
     public List<String> getCategoryNames() {
         return categoryNames;

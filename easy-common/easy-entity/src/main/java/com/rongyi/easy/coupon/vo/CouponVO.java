@@ -156,6 +156,19 @@ public class CouponVO implements Serializable {
      */
     private Integer validDays;
 
+    /**
+     * 是否已下架 初始状态[false]，已下架[true], 默认false
+     */
+    private Boolean isOffStock;
+
+    public Boolean getOffStock() {
+        return isOffStock;
+    }
+
+    public void setOffStock(Boolean offStock) {
+        isOffStock = offStock;
+    }
+
     public Integer getValidDays() {
         return validDays;
     }
