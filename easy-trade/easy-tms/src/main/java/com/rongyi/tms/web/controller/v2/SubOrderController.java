@@ -505,6 +505,11 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.remove("commodityName");
             }
         }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("timeType") && StringUtils.isBlank(paramsMap.get("timeType").toString())) {
+                paramsMap.remove("timeType");
+            }
+        }
     }
 
     /**
