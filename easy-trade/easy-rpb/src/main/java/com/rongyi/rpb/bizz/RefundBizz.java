@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -47,7 +48,7 @@ public class RefundBizz {
     public RefundResData weChatRefund(String ryMchId,String orderNo, int refundFee, WechatConfigure wechatConfigure){
 
         //查找订单支付记录
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,Constants.PAYMENT_STATUS.STAUS2,
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
         if (oldPaymentEntity == null) {
             throw new TradeException("此订单支付记录不存在,orderNo={}",orderNo);
@@ -56,8 +57,9 @@ public class RefundBizz {
         //初始化退款记录
         PaymentEntity refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchId,orderNo, refundFee, Constants.ORDER_TYPE.ORDER_TYPE_6, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, "", wechatConfigure.getMchID());
+        Integer payAmount = oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).intValue();
         //发起退款
-        RefundResData refundResData = WeChatPayUnit.refund(oldPaymentEntity.getPayNo(), refundFee, oldPaymentEntity.getAmountMoney().intValue(), refundPaymentEntity.getPayNo(), wechatConfigure);
+        RefundResData refundResData = WeChatPayUnit.refund(oldPaymentEntity.getPayNo(), refundFee,payAmount, refundPaymentEntity.getPayNo(), wechatConfigure);
 
         refundPaymentEntity.setFinishTime(new Date());
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);

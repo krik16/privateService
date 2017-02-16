@@ -79,11 +79,13 @@ public class WechatPayServiceImpl implements IWechatPayService {
             log.info("退款结果,map={}", map);
             return map;
         } catch (WeChatException | ParamNullException e) {
+            log.warn("退款失败，e={}",e.getMessage(),e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("退款失败，e={}",e.getMessage(),e);
             throw e;
         } catch (Exception e) {
-            log.error("退款失败,e={}", e.getMessage(), e);
+            log.error("退款异常,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
         }
     }
