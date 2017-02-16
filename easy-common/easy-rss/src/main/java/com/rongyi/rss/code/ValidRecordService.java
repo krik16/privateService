@@ -25,5 +25,5 @@ public interface ValidRecordService {
 
     int deleteRecord(String couponId, String coupnCode);
 
-    List<ValidRecordVO> findTodayValidRecord();
+    List<ValidRecordVO> findValidRecordByDay(String day);
 }
