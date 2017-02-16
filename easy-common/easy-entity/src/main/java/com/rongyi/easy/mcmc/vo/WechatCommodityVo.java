@@ -20,6 +20,8 @@ public class WechatCommodityVo implements Serializable{
 
     private List<String> specList;//商品规格列表
 
+    private String originalPrice;
+
 
     public String getCommodityId() {
         return commodityId;
@@ -61,6 +63,14 @@ public class WechatCommodityVo implements Serializable{
         this.specList = specList;
     }
 
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
     @Override
     public String toString() {
         return "WechatCommodityVo{" +
@@ -69,6 +79,7 @@ public class WechatCommodityVo implements Serializable{
                 ", cuerrentPrice=" + cuerrentPrice +
                 ", picUrl=" + picUrl +
                 ", specList=" + specList +
+                ", originalPrice=" + originalPrice +
                 '}';
     }
 }
