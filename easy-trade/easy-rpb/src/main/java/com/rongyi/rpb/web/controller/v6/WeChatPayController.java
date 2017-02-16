@@ -1,4 +1,4 @@
-package com.rongyi.rpb.web.controller.v2;
+package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.pay.core.wechat.util.XMLParser;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
@@ -25,7 +25,7 @@ import java.util.Map;
  * 2016/11/9 17:05
  **/
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("/v6/wechat")
 public class WeChatPayController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatPayController.class);

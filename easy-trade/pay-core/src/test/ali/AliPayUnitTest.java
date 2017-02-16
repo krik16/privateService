@@ -73,7 +73,7 @@ public class AliPayUnitTest{
         aliScanPayReqData.setTotalAmount(totalAmount);
         AliConfigure aliConfigure  = AliConfigure.init();
         try {
-            Map<String,Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure);
+            Map<String,Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure,"");
             LOGGER.info("map={}",map);
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());

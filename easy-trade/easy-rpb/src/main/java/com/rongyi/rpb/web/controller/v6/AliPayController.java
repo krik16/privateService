@@ -1,4 +1,4 @@
-package com.rongyi.rpb.web.controller.v2;
+package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.pay.core.ali.utils.Utils;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
@@ -17,7 +17,7 @@ import java.util.Map;
  * 2016/11/9 17:05
  **/
 @Controller
-@RequestMapping("/ali")
+@RequestMapping("/v6/ali")
 public class AliPayController {
 
     @Autowired

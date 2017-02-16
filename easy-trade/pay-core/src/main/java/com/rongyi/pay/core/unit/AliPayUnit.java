@@ -47,7 +47,7 @@ public class AliPayUnit {
      * @param aliConfigure      支付宝
      * @return map
      */
-    public static Map<String, Object> getScanPaySign(AliScanPayReqData aliScanPayReqData,AliConfigure aliConfigure) {
+    public static Map<String, Object> getScanPaySign(AliScanPayReqData aliScanPayReqData,AliConfigure aliConfigure,String notifyUrl) {
 
         LOGGER.info("支付宝扫码支付获取签名,aliScanPayReqData={},aliConfigure={}", aliScanPayReqData, aliConfigure);
 
@@ -69,7 +69,7 @@ public class AliPayUnit {
                 .setExtendParams(aliScanPayReqData.getExtendParams())
                 .setSellerId(aliScanPayReqData.getSellerId())
                 .setGoodsDetailList(aliScanPayReqData.getGoodsDetailList())
-                .setNotifyUrl(aliConfigure.getNotifyUrl())
+                .setNotifyUrl(notifyUrl)
                 .setTimeoutExpress(aliScanPayReqData.getTimeoutExpress());
 
         // 调用tradePay方法获取当面付应答

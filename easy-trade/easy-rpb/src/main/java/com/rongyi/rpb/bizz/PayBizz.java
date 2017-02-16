@@ -15,6 +15,7 @@ import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.PunchCardPayResData;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
+import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
@@ -58,7 +59,7 @@ public class PayBizz {
 
         //获取微信支付签名
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
-        Map<String, Object> map = WeChatPayUnit.getPaySign(wechatPaySignData, wechatConfigure, wechatConfigure.getNotifyUrl());
+        Map<String, Object> map = WeChatPayUnit.getPaySign(wechatPaySignData, wechatConfigure, ConstantUtil.NOTIFY_ADDRESS_V6.WEIXIN_NOTIFY_URL_V6);
 
         //保存异步通知地址
         redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), wechatConfigure.getNotifyUrl());
@@ -132,7 +133,7 @@ public class PayBizz {
 
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
-        Map<String, Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure);
+        Map<String, Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure,ConstantUtil.NOTIFY_ADDRESS_V6.ALI_NOTIFY_URL_V6);
 
         //保存异步通知地址
         redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), aliConfigure.getNotifyUrl());
