@@ -1,6 +1,6 @@
 package com.rongyi.rpb.service.impl.v2;
 
-import com.rongyi.core.Exception.TradeException;
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.vo.WechatConfigureVo;
 import com.rongyi.easy.rpb.vo.WechatPaySignVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
@@ -26,7 +26,7 @@ import java.util.Map;
  * 2017/2/6 17:06
  **/
 @Service
-public class WechatPayServiceImpl implements IWechatPayService{
+public class WechatPayServiceImpl implements IWechatPayService {
 
     private static final Logger log = LoggerFactory.getLogger(WechatPayServiceImpl.class);
 
@@ -36,58 +36,62 @@ public class WechatPayServiceImpl implements IWechatPayService{
     RefundBizz refundBizz;
 
     @Override
-    public Map<String, Object> getPaySign(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws WeChatException,ParamNullException {
+    public Map<String, Object> getPaySign(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
 
-        log.info("获取微信支付签名,wechatPaySignVo={},wechatConfigureVo={}",wechatPaySignVo,wechatConfigureVo);
+        log.info("获取微信支付签名,wechatPaySignVo={},wechatConfigureVo={}", wechatPaySignVo, wechatConfigureVo);
         try {
             //设置业务参数
             WechatPaySignData wechatPaySignData = getWechatPaySignData(wechatPaySignVo);
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //获取微信支付签名
-            Map<String,Object> map =  payBizz.wechatScanPaySign(wechatConfigureVo.getRyMchId(),wechatPaySignData, wechatConfigure);
+            Map<String, Object> map = payBizz.wechatScanPaySign(wechatConfigureVo.getRyMchId(), wechatPaySignData, wechatConfigure);
             //外部订单号
-            map.put("orderNo",wechatPaySignVo.getOrderNo());
+            map.put("orderNo", wechatPaySignVo.getOrderNo());
 
-            log.info("返回签名结果,map={}",map);
+            log.info("返回签名结果,map={}", map);
             return map;
-        } catch (WeChatException | ParamNullException e){
-            throw new TradeException(e.getCode(),e.getMessage());
-        }catch (Exception e) {
-            log.error("获取微信签名失败,e={}",e.getMessage(),e);
-            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
+        } catch (WeChatException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        }catch (TradePayException e){
+            throw e;
+        } catch (Exception e) {
+            log.error("获取微信签名失败,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
         }
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> refund(String orderNo, int refundFee, WechatConfigureVo wechatConfigureVo) {
-        log.info("微信退款,orderNo={}refundFee={},wechatConfigureVo={}",orderNo,refundFee,wechatConfigureVo);
+    public Map<String, Object> refund(String orderNo, int refundFee, WechatConfigureVo wechatConfigureVo) throws TradePayException{
+        log.info("微信退款,orderNo={}refundFee={},wechatConfigureVo={}", orderNo, refundFee, wechatConfigureVo);
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             RefundResData refundResData = refundBizz.weChatRefund(wechatConfigureVo.getRyMchId(), orderNo, refundFee, wechatConfigure);
-            Map<String,Object> map = BeanMapUtils.toMap(refundResData);
+            Map<String, Object> map = BeanMapUtils.toMap(refundResData);
 
             //外部订单号
-            map.put("orderNo",orderNo);
+            map.put("orderNo", orderNo);
             //容易网交易号
-            map.put("payNo",refundResData.getOut_trade_no());
+            map.put("payNo", refundResData.getOut_trade_no());
 
-            log.info("退款结果,map={}",map);
+            log.info("退款结果,map={}", map);
             return map;
-        }  catch (WeChatException | ParamNullException e) {
-            throw new TradeException(e.getCode(),e.getMessage());
-        }catch (Exception e) {
+        } catch (WeChatException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            throw e;
+        } catch (Exception e) {
             log.error("退款失败,e={}", e.getMessage(), e);
-            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
         }
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> punchCardPay(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) {
-        log.info("发起微信刷卡支付,wechatPaySignVo={},wechatConfigureVo={}",wechatPaySignVo,wechatConfigureVo);
+    public Map<String, Object> punchCardPay(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException{
+        log.info("发起微信刷卡支付,wechatPaySignVo={},wechatConfigureVo={}", wechatPaySignVo, wechatConfigureVo);
         try {
             //设置业务参数
             WechatPaySignData wechatPaySignData = getWechatPaySignData(wechatPaySignVo);
@@ -96,74 +100,83 @@ public class WechatPayServiceImpl implements IWechatPayService{
             //发起支付
             PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(wechatConfigureVo.getRyMchId(), wechatPaySignData, wechatConfigure);
 
-            Map<String,Object> map = BeanMapUtils.toMap(punchCardPayResData);
+            Map<String, Object> map = BeanMapUtils.toMap(punchCardPayResData);
 
             //外部订单号
-            map.put("orderNo",wechatPaySignData.getOrderNo());
+            map.put("orderNo", wechatPaySignData.getOrderNo());
             //容易网交易号
-            map.put("payNo",punchCardPayResData.getOut_trade_no());
+            map.put("payNo", punchCardPayResData.getOut_trade_no());
 
-            log.info("返回刷卡支付结果,map={}",map);
+            log.info("返回刷卡支付结果,map={}", map);
             return map;
-        }  catch (WeChatException | ParamNullException e) {
-            throw new TradeException(e.getCode(),e.getMessage());
+        } catch (WeChatException | ParamNullException e) {
+            log.warn("刷卡支付失败,e={}",e.getMessage(),e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.warn("刷卡支付失败,e={}",e.getMessage(),e);
+            throw e;
         } catch (Exception e) {
-            log.error("刷卡支付失败,e={}", e.getMessage(), e);
-            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
+            log.error("刷卡支付异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
         }
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> punchCardPayQueryOrder(String orderNo, WechatConfigureVo wechatConfigureVo) {
-        log.info("微信订单查询,orderNo={},wechatCongfigVo={}",orderNo,wechatConfigureVo);
+    public Map<String, Object> punchCardPayQueryOrder(String orderNo, WechatConfigureVo wechatConfigureVo) throws TradePayException{
+        log.info("微信订单查询,orderNo={},wechatCongfigVo={}", orderNo, wechatConfigureVo);
         //设置支付参数
         try {
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             PunchCardPayQueryResData punchCardPayQueryResData = payBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
-            Map<String,Object> map = BeanMapUtils.toMap(punchCardPayQueryResData);
+            Map<String, Object> map = BeanMapUtils.toMap(punchCardPayQueryResData);
             //外部订单号
-            map.put("orderNo",orderNo);
+            map.put("orderNo", orderNo);
             //容易网交易号
-            map.put("payNo",punchCardPayQueryResData.getOut_trade_no());
+            map.put("payNo", punchCardPayQueryResData.getOut_trade_no());
 
-            log.info("订单查询结果,map={}",map);
+            log.info("订单查询结果,map={}", map);
             return map;
-        } catch (WeChatException e){
-            throw new TradeException(e.getCode(),e.getMessage());
-        }catch (Exception e){
-            log.error("订单查询失败,e={}",e.getMessage(),e);
-            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
+        } catch (WeChatException e) {
+            log.warn("订单查询失败,e={}",e.getMessage(),e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e){
+            log.warn("订单查询失败,e={}",e.getMessage(),e);
+            throw e;
+        }catch (Exception e) {
+            log.error("订单查询异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
         }
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> getOpenId(String code, String state, WechatConfigureVo wechatConfigureVo) {
+    public Map<String, Object> getOpenId(String code, String state, WechatConfigureVo wechatConfigureVo) throws TradePayException{
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             GetOpenIdResData getOpenIdResData = WeChatPayUnit.getOpenId(code, state, wechatConfigure);
             return BeanMapUtils.toMap(getOpenIdResData);
-        } catch (WeChatException e){
-            throw new TradeException(e.getCode(),e.getMessage());
-        }catch (Exception e){
-            log.error("获取微信openId失败,e={}", e.getMessage(), e);
-            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getValueStr());
+        } catch (WeChatException e) {
+            log.warn("获取微信openId失败,e={}",e.getMessage(),e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (Exception e) {
+            log.error("获取微信openId异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getValueStr());
         }
     }
 
     //设置支付参数
-    private WechatConfigure getWechatConfigure(WechatConfigureVo wechatConfigureVo){
+    private WechatConfigure getWechatConfigure(WechatConfigureVo wechatConfigureVo) {
         WechatConfigure wechatConfigure = new WechatConfigure();
-        BeanUtils.copyProperties(wechatConfigureVo,wechatConfigure);
+        BeanUtils.copyProperties(wechatConfigureVo, wechatConfigure);
         return wechatConfigure;
     }
 
     //设置业务参数
-    private WechatPaySignData getWechatPaySignData(WechatPaySignVo wechatPaySignVo){
+    private WechatPaySignData getWechatPaySignData(WechatPaySignVo wechatPaySignVo) {
         WechatPaySignData wechatPaySignData = new WechatPaySignData();
-        BeanUtils.copyProperties(wechatPaySignVo,wechatPaySignData);
+        BeanUtils.copyProperties(wechatPaySignVo, wechatPaySignData);
         return wechatPaySignData;
     }
 }

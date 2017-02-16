@@ -2,6 +2,7 @@ package com.rongyi.rpb.bizz;
 
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
@@ -14,7 +15,6 @@ import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.PunchCardPayResData;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
-import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
@@ -113,7 +113,7 @@ public class PayBizz {
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 
         if (oldPaymentEntity == null) {
-            throw new TradeException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
         }
         return WeChatPayUnit.punchCardPayQueryOrder(null, oldPaymentEntity.getPayNo(), wechatConfigure);
     }
@@ -187,7 +187,7 @@ public class PayBizz {
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
         if (oldPaymentEntity == null) {
-            throw new TradeException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
         }
         return AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(),null,aliConfigure);
 
@@ -205,7 +205,7 @@ public class PayBizz {
         //支付记录已存在
         if (paymentEntity != null) {
             if (Constants.PAYMENT_STATUS.STAUS2 == paymentEntity.getStatus() && payChannel.equals(paymentEntity.getPayChannel())) {// 订单已完成支付后重新发起支付请求
-                throw new TradeException("此订单已成功支付,此次请求属于订单重复支付请求,请重新下单,orderNo=" + orderNo);
+                throw new TradePayException("-1","此订单已成功支付,此次请求属于订单重复支付请求,请重新下单,orderNo=" + orderNo);
             }
             paymentEntity.setWechatMchId(wechatMchId);
             paymentEntity.setAliSellerId(aliSellerId);
