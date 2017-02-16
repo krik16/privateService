@@ -157,7 +157,21 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<WechatSwitch>  wechatSwitchList;
 	private String freePostage;  // 0包邮 1不包邮
+	private List<String> skus;  //规格的sku集合
 
+	// 4都不能
+	// 3商家后台商品运营可以编辑微信显示隐藏，
+	// 2商家后台商品运营可以编辑容易逛显示隐藏,
+	// 1,商家后台商品运营可以编辑容易逛，微信显示隐藏 ，
+	private String editAble="1";
+
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
 
 	public String getFreePostage() {
 		return freePostage;
@@ -864,6 +878,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.serviceDescriptionRemark = serviceDescriptionRemark;
 	}
 
+	public String getEditAble() {
+		return editAble;
+	}
+
+	public void setEditAble(String editAble) {
+		this.editAble = editAble;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -1036,6 +1058,7 @@ public class Commodity implements  Serializable,Cloneable{
 				this.setoPriceMin(specMap.get("oMin").toString());
 				this.setcPriceMin(specMap.get("lowest").toString());
 				this.setcPriceMax(specMap.get("cMax").toString());
+				this.setSkus((List<String>)specMap.get("skus"));
 			}
 
 			this.setLocationIds(vo.getLocationIds());
@@ -1121,7 +1144,8 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
-			this.setBrandName(brandName);
+			this.setBrandName(vo.getBrandName());
+			this.setBrandMid(vo.getBrandMid());
 			if (shopInfo != null) {
 				this.setShopMid(shopInfo.getShopMid());
 			}
@@ -1204,7 +1228,6 @@ public class Commodity implements  Serializable,Cloneable{
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
 				}
 				this.setType(CommodityType.BULL.getValue());
-				this.setBrandMid(brandMid);
 				this.setShopMid(vo.getShopMid());
 			}
 		}

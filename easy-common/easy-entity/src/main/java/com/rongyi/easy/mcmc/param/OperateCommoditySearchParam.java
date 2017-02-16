@@ -25,6 +25,15 @@ public class OperateCommoditySearchParam implements Serializable{
     private Long endTime;//时间段结束
     private int currpage;//当页数1表示第一页
     private int pageSize;//每页大小
+    private String keyword;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String getCode() {
         return code;
@@ -144,5 +153,27 @@ public class OperateCommoditySearchParam implements Serializable{
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    @Override
+    public String toString() {
+        return "OperateCommoditySearchParam{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", source='" + source + '\'' +
+                ", buyerName='" + buyerName + '\'' +
+                ", flag='" + flag + '\'' +
+                ", searchName='" + searchName + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", categoryId='" + categoryId + '\'' +
+                ", category='" + category + '\'' +
+                ", status=" + status +
+                ", timeType='" + timeType + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", currpage=" + currpage +
+                ", pageSize=" + pageSize +
+                ", keyword='" + keyword + '\'' +
+                '}';
     }
 }

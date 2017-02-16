@@ -13,17 +13,20 @@ public class CommodityUtil {
     /**
      * 是否是礼品类型
      *
-     * @param CommodityRange
+     * @param commodityRange
      * @return
      */
-    public static boolean isGiftType(Integer CommodityRange) {
-        if (CommodityRange == CommodityConstants.CommodityType.GIFT) {
+    public static boolean isGiftType(Integer commodityRange) {
+        if(null ==commodityRange){
+            return  false;
+        }
+        if (commodityRange == CommodityConstants.CommodityType.GIFT) {
             return true;
         }
-        if (CommodityRange == CommodityConstants.CommodityType.COUPON_PARKING) {
+        if (commodityRange == CommodityConstants.CommodityType.COUPON_PARKING) {
             return true;
         }
-        if (CommodityRange == CommodityConstants.CommodityType.COUPON) {
+        if (commodityRange == CommodityConstants.CommodityType.COUPON) {
             return true;
         }
         return false;

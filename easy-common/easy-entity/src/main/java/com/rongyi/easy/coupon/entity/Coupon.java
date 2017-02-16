@@ -256,7 +256,7 @@ public class Coupon implements Serializable {
     private Boolean isDeleted;
 
     /**
-     * 第一位表示微信，第二位表示终端。0：不能操作是否显示；1：隐藏；2：显示
+     * 第一位表示微信，第二位表示终端 第三位表示容易逛。0：不能操作是否显示；1：隐藏；2：显示
      */
     private String showChannel;
 

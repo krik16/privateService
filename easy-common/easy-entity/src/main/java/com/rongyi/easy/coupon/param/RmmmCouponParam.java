@@ -121,6 +121,8 @@ public class RmmmCouponParam implements Serializable {
 	private String goodsId;	
 	
 	private String activityGoodsId;
+
+    private Integer userId;//摩店创建人账号id
     
  
 
@@ -300,8 +302,21 @@ public class RmmmCouponParam implements Serializable {
         this.id = id;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("title", title).append("totalCount", totalCount).append("limitCount", limitCount).append("activityId", activityId).append("originalPrice", originalPrice).append("currentPrice", currentPrice).append("publishBeginDate", publishBeginDate).append("publishEndDate", publishEndDate).append("validBeginDate", validBeginDate).append("validEndDate", validEndDate).append("useRestriction", useRestriction).append("useDescription", useDescription).append("detailPicUrls", detailPicUrls).append("shopId", shopId).append("limitPublishCount", limitPublishCount).append("limitUseCount", limitUseCount).append("afterSaleService", afterSaleService).append("createUser", createUser).toString();
+        return new ToStringBuilder(this).append("id", id).append("title", title).append("totalCount", totalCount).append("limitCount", limitCount).append("activityId", activityId).
+                append("originalPrice", originalPrice).append("currentPrice", currentPrice).append("publishBeginDate", publishBeginDate).append("publishEndDate", publishEndDate).
+                append("validBeginDate", validBeginDate).append("validEndDate", validEndDate).append("useRestriction", useRestriction).append("useDescription", useDescription).
+                append("detailPicUrls", detailPicUrls).append("shopId", shopId).append("limitPublishCount", limitPublishCount).append("limitUseCount", limitUseCount).
+                append("afterSaleService", afterSaleService).append("createUser", createUser).append("userId", userId)
+                .toString();
     }
 }
