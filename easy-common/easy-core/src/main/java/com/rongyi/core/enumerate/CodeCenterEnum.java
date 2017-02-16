@@ -56,12 +56,12 @@ public enum CodeCenterEnum {
     ERROR_VALIDRECORD_CREATE(1021353,"创建验券记录异常"),
 
 
-    JIADELI_CODE_REPET(1000001, "卡券已使用，重复验券"),
-    JIADELI_CODE_INVALIDSTATUS(1000002, "退款中、已退款、已过期"),
-    JIADELI_CODE_INVALID(1000003, "输入券码有误"),
-    JIADELI_CODE_NOBELONG(1000004, "非本店铺代金券券码"),
-    JIADELI_CODE_INVALIDUSETIME(1000005, "券未到使用时间"),
-    JIADELI_CODE_USELIMIT(1000006 , "此券今天的使用次数已用完"),
+    JIADELI_CODE_REPET(1000001, "请注意，本券已使用,已被店铺营业员成功核销"),
+    JIADELI_CODE_INVALIDSTATUS(1000002, "对不起，您输入的券码状态异常，请核对卡券状态"),
+    JIADELI_CODE_INVALID(1000003, "对不起，您输入的券码有误，请重新输入"),
+    JIADELI_CODE_NOBELONG(1000004, "对不起，您的券码非本店代金券"),
+    JIADELI_CODE_INVALIDUSETIME(1000005, "对不起，此券还未生效，无法验证"),
+    JIADELI_CODE_USELIMIT(1000006 , "对不起，您使用的券超出每日限制数量，明天再来吧~"),
     JIADELI_CODE_NULL(1000007, "券码为空"),
     JIADELI_ERROR_PARAM(1000008, "参数不完整"),
     JIADELI_ERROR_ACCOUNT(1000009, "未找到家得利账号信息"),
