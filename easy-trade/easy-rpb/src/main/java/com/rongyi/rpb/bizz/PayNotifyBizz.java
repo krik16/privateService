@@ -70,7 +70,7 @@ public class PayNotifyBizz {
             String tradeNo = map.get("trade_no");
             String buyerId = map.get("buyer_id");
             String buyerEmail = map.get("buyer_logon_id");
-            BigDecimal payAmount = new BigDecimal(map.get("total_amount")).multiply(new BigDecimal(100));
+            BigDecimal payAmount = new BigDecimal(map.get("total_amount"));
 
             this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, buyerId, buyerEmail);
         } else {
