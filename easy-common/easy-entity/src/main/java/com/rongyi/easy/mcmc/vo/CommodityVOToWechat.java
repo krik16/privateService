@@ -17,6 +17,16 @@ public class CommodityVOToWechat implements Serializable{
     private String weAndTeStatus;
     private Integer terminalType;
     private String mallMid;//商场mongoId
+    private String commodityModelNo;//商品款号
+    private String editAble;
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
 
     public String getId() {
         return id;
@@ -89,4 +99,11 @@ public class CommodityVOToWechat implements Serializable{
 	public void setMallMid(String mallMid) {
 		this.mallMid = mallMid;
 	}
+    public String getEditAble() {
+        return editAble;
+    }
+
+    public void setEditAble(String editAble) {
+        this.editAble = editAble;
+    }
 }

@@ -33,6 +33,20 @@ public class CommodityVO1 implements  Serializable {
 	private String terminalTypeDesc;
 	private Date soldOutAt;
 	private String merchantId;
+	private Date registerAt;
+	private String commodityModelNo;
+	private String pic;
+	private String commoditycategoryNames;
+	private String createBy;
+	private List<String> skus;
+
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
 
 	public String getId() {
 		return id;
@@ -150,5 +164,46 @@ public class CommodityVO1 implements  Serializable {
 
 	public void setMerchantId(String merchantId) {
 		this.merchantId = merchantId;
+	}
+
+
+	public Date getRegisterAt() {
+		return registerAt;
+	}
+
+	public void setRegisterAt(Date registerAt) {
+		this.registerAt = registerAt;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getCommoditycategoryNames() {
+		return commoditycategoryNames;
+	}
+
+	public void setCommoditycategoryNames(String commoditycategoryNames) {
+		this.commoditycategoryNames = commoditycategoryNames;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 }

@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class OperateCommodityVo implements Serializable, Cloneable {
 
-
     private String  id ;//系统编号
     private String  name;//商品名称
     private String  picList;//商品图片
@@ -27,11 +26,30 @@ public class OperateCommodityVo implements Serializable, Cloneable {
     private List<String> serviceIds;
     private List<String> onServiceIds;
     private List<String> offServiceIds;
+    private String commodityModelNo;
+    private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
     private Integer type;//渠道  0商家，1买手
     private String originalPrice;//商品原价
     private String currentPrice;//商品现价
     private String description;//商品描述
     private Integer stock;//商品库存
+
+
+    public String getWeAndTeStatus() {
+        return weAndTeStatus;
+    }
+
+    public void setWeAndTeStatus(String weAndTeStatus) {
+        this.weAndTeStatus = weAndTeStatus;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
 
     private List<CommoditySpecVO> specList;
     private CommoditySpecVO currentSpec;
@@ -210,6 +228,27 @@ public class OperateCommodityVo implements Serializable, Cloneable {
 
     public void setOffServiceIds(List<String> offServiceIds) {
         this.offServiceIds = offServiceIds;
+    }
+
+    @Override
+    public String toString() {
+        return "OperateCommodityVo{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", picList='" + picList + '\'' +
+                ", categoryIds='" + categoryIds + '\'' +
+                ", mallName='" + mallName + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", source=" + source +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", reason='" + reason + '\'' +
+                ", buyerAccount='" + buyerAccount + '\'' +
+                ", soldOutAt=" + soldOutAt +
+                ", commodityModelNo='" + commodityModelNo + '\'' +
+                ", terminalType=" + terminalType +
+                ", weAndTeStatus='" + weAndTeStatus + '\'' +
+                '}';
     }
 
     public Integer getType() {

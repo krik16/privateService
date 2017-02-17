@@ -161,6 +161,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
 
+	private List<String> skus;
+
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
@@ -934,6 +936,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.activityEndTime = activityEndTime;
 	}
 
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -950,6 +960,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.commodityCategory = commodity.getCategory();
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
+		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
 		this.isSpot = commodity.isSpot() ? 1 : 0;
@@ -1187,6 +1198,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", serviceDescriptionId=" + serviceDescriptionId +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
+				", skus=" + skus +
 				'}';
 	}
 
@@ -1247,6 +1259,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 			vo.setUpdate_by(userInfo.getId().toString());
 		}
 		vo.setShelvesType(commodity.getShelvesType());
+
+		vo.setBrandMid(commodity.getBrandMid());
+		vo.setBrandName(commodity.getBrandName());
+		vo.setCommodityModelNo(commodity.getCommodityModelNo());
 		return vo;
 	}
 

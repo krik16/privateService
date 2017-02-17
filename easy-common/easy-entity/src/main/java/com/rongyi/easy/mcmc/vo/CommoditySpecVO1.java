@@ -21,6 +21,16 @@ public class CommoditySpecVO1 implements  Serializable {
 	private String sku;
 	private String id;
 
+	private String referencePrice;
+
+	public String getReferencePrice() {
+		return referencePrice;
+	}
+
+	public void setReferencePrice(String referencePrice) {
+		this.referencePrice = referencePrice;
+	}
+
 	public String getOriginalPrice() {
 		return originalPrice;
 	}

@@ -3,11 +3,12 @@ package com.rongyi.rss.coupon.operation;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponChannel;
-import com.rongyi.easy.coupon.entity.CouponSort;
+import com.rongyi.easy.coupon.entity.*;
 import com.rongyi.easy.coupon.param.CouponParam;
+import com.rongyi.easy.coupon.param.CouponRecordSearchParam;
+import com.rongyi.easy.coupon.param.OutCouponQueryParam;
 import com.rongyi.easy.coupon.param.VoucherCouponParam;
+import com.rongyi.easy.coupon.vo.CouponSendRecordVO;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
@@ -216,4 +217,127 @@ public interface RoaVoucherCouponService {
     PagingVO<CouponChannel> findCouponChannelByPage(Map<String, Object> map);
 
     List<CouponChannel> findAllCouponChannel();
+
+    /**
+     * 创建外部导出券
+     * @param coupon
+     * @return
+     */
+    boolean createOutCoupon(Coupon coupon);
+
+    /**
+     * 外部导出券列表查询
+     * @param couponQueryParam
+     * @return
+     */
+    List<Coupon> queryOutCoupon(OutCouponQueryParam couponQueryParam);
+
+    /**
+     * 外部导出券统计接口
+     * @param couponQueryParam
+     * @return
+     */
+    int  countOutCoupon(OutCouponQueryParam couponQueryParam);
+
+    /**
+     * 查看第三方导出记录
+     * @param param
+     * @return
+     */
+    public List<CouponSendRecordEntity> searchCouponSendReocord(CouponRecordSearchParam param);
+
+    /**
+     * 查看第三方导出记录个数
+     * @param param
+     * @return
+     */
+    public int countCouponSendReocord(CouponRecordSearchParam param);
+
+    /**
+     * 作废
+     * @param batchNo
+     * @return
+     */
+    public boolean deleteCouponSendReord(String batchNo);
+
+    /**
+     * 根据卡券id 获取发送记录信息
+     * @param couponId
+     * @return
+     */
+    public CouponSendRecordEntity selectByCouponId(String couponId);
+
+    /**
+     * 根据卡券id 获取发送记录关联的卡券数据
+     * @param couponId
+     * @return
+     */
+    public CouponBatchEntity selectBatchByCouponId(String couponId);
+
+
+
+
+    /**
+     * 根据券id列表统计券码数量
+     * @param couponIds
+     * @return
+     */
+    public int countCodesByCouponIds(List<String> couponIds);
+
+    /**
+     * 根据批次号查询
+     * @param batchNos
+     * @return
+     */
+    public List<CouponBatchEntity> searchBatchReordByBatchNos(List<String> batchNos);
+
+    /**
+     * 外部到出券详情
+     * @param id
+     * @return
+     */
+    public Coupon findOutCouponDetail(String id);
+
+    /**
+     * 查询卡券关联的店铺列表
+     * @param outCouponQueryParam
+     * @return
+     */
+    public List<CouponShop> findRelatedShop(OutCouponQueryParam outCouponQueryParam);
+
+    /**
+     * 统计卡券关联的店铺列表
+     * @param outCouponQueryDTO
+     * @return
+     */
+    Integer countRelatedShop(OutCouponQueryParam outCouponQueryDTO);
+
+    /**
+     * 创建外部导出券发送记录
+     * @param couponSendRecordVO
+     * @return
+     */
+    int createSendRecord(CouponSendRecordVO couponSendRecordVO);
+
+
+    /**
+     * 获取发送对象列表
+     * @return
+     */
+    List<CouponAcceptEntity> getSendTargets();
+
+    /**
+     * 重发
+     *
+     * @param id
+     * @return
+     */
+    boolean resend(Integer id) throws Exception;
+
+    /**
+     * 作废卡券
+     * @param couponId
+     * @return
+     */
+    int deleteCouponBatch(String couponId,String updateUser);
 }

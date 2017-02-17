@@ -108,7 +108,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
-
+	private String brandName;
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
@@ -124,6 +124,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setOffServiceIds(List<String> offServiceIds) {
 		this.offServiceIds = offServiceIds;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	public List<WechatInfoVo> getWechatInfoVos() {
@@ -612,6 +620,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setStock(commodity.getStock());
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 		this.setGoodsParam(commodity.getGoodsParam());
+		this.setSkus(commodity.getSkus());
 
 		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
 			//totalCommodity总表显示时间区域
@@ -640,6 +649,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setCommodityIds(new ArrayList<ObjectId>());
 		this.getCommodityIds().add(commodity.getId());
 		this.setBrandMid(commodity.getBrandMid());
+		this.setBrandName(commodity.getBrandName());
 		this.setFilialeMids(new ArrayList<String>());
 		this.getFilialeMids().add(commodity.getFilialeMid());
 		this.setShopMids(new ArrayList<String>());
@@ -669,6 +679,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+
 	}
 
 	public String getSubheading() {
@@ -754,10 +765,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			if(CollectionUtils.isNotEmpty(skus.keySet())) {
 				this.setSkus(new ArrayList<>(skus.keySet()));
 			}
-
-			//保存商品关联店铺的分公司品牌店铺信息
-			this.setBrandMid(userInfo.getBrandMid());
-
 			//老的app数据identity为-100
 			if(!(this != null && this.getIdentity() != null
 					&& this.getIdentity() == -100)) {
@@ -772,6 +779,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setCommodityDetails(param.getCommodityDetails());
 
 			this.setShelvesType(param.getShelvesType());
+
+			this.setBrandMid(param.getBrandMid());
+			this.setBrandName(param.getBrandName());
+			this.setCommodityModelNo(param.getCommodityModelNo());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}

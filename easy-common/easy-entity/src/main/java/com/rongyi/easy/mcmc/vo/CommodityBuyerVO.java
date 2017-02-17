@@ -155,6 +155,8 @@ public class CommodityBuyerVO implements Serializable {
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
 
+    private List<String> skus;
+
     private String serviceDescription;   //售后说明内容
     private Integer serviceDescriptionId;  //售后说明id
     private String serviceDescriptionRemark;   //售后说明备注
@@ -846,10 +848,18 @@ public class CommodityBuyerVO implements Serializable {
 		this.totalBuycount = totalBuycount;
 	}
 
+    public List<String> getSkus() {
+        return skus;
+    }
+
+    public void setSkus(List<String> skus) {
+        this.skus = skus;
+    }
+
+
     public String getServiceDescription() {
         return serviceDescription;
     }
-
     public void setServiceDescription(String serviceDescription) {
         this.serviceDescription = serviceDescription;
     }
@@ -985,6 +995,7 @@ public class CommodityBuyerVO implements Serializable {
         this.subheading=commodity.getSubheading();
         this.commodityDetails=commodity.getCommodityDetails();
         this.setIfShowInWechat(isShowInWechat());
+        this.skus=commodity.getSkus();
         this.serviceDescription=commodity.getServiceDescription();
         this.serviceDescriptionId=commodity.getServiceDescriptionId();
         this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
