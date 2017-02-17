@@ -1,5 +1,6 @@
 package com.rongyi.rss.rpb;
 
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
@@ -18,7 +19,7 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return map 签名内容
      */
-    Map<String, Object> getPaySign(AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo);
+    Map<String, Object> getPaySign(AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
      * 面对面支付退款
@@ -28,7 +29,7 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return map
      */
-    Map<String,Object> f2fPayRefund(String orderNo, Integer refundAmount, String refundReason, AliConfigureVo aliConfigureVo);
+    Map<String,Object> f2fPayRefund(String orderNo, Integer refundAmount, String refundReason, AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
      * 支付宝刷卡支付
@@ -36,7 +37,7 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return map
      */
-    Map<String,Object> punchCardPay(AliPunchCardPayVo aliPunchCardPayVo,AliConfigureVo aliConfigureVo);
+    Map<String,Object> punchCardPay(AliPunchCardPayVo aliPunchCardPayVo,AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
      * 支付宝面对面支付结果查询
@@ -44,7 +45,7 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return
      */
-    Map<String,Object> f2fPayQuery(String orderNo,AliConfigureVo aliConfigureVo);
+    Map<String,Object> f2fPayQuery(String orderNo,AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
      * 获取用户支付授权链接
@@ -55,7 +56,7 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return String
      */
-    String getUserAuthUrl(String storeId,String scope,Integer authType,String redirectUrl, AliConfigureVo aliConfigureVo);
+    String getUserAuthUrl(String storeId,String scope,Integer authType,String redirectUrl, AliConfigureVo aliConfigureVo) throws TradePayException;
 
 
     /**
@@ -68,7 +69,7 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return map
      */
-    Map<String,Object> getUserBuyerId(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo);
+    Map<String,Object> getUserBuyerId(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo)throws TradePayException;
 
     /**
      * 获取支付宝商户授权token信息
@@ -80,5 +81,5 @@ public interface IAliPayService {
      * @param aliConfigureVo 支付参数
      * @return map
      */
-    Map<String,Object> getMchAuthToken(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo);
+    Map<String,Object> getMchAuthToken(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo)throws TradePayException;
 }
