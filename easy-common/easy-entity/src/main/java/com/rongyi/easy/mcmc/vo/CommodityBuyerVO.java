@@ -1071,6 +1071,7 @@ public class CommodityBuyerVO implements Serializable {
                 ", totalBuycount=" + totalBuycount +
                 ", serviceDescription=" + serviceDescription +
                 ", serviceDescriptionId=" + serviceDescriptionId +
+                ", templateRelevantGoodsCouponId=" + templateRelevantGoodsCouponId +
                 '}';
     }
 
