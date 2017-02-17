@@ -256,7 +256,7 @@ public class PayNotifyBizz {
         map.put("timeStamp",timeStamp);
         // TODO 测试暂注释
 //        String sign = TradePaySignUtil.getSignWithToken(map,mchEncryptInfo.getToken());
-        String sign = TradePaySignUtil.getSignWithToken(map, mchEncryptInfo.getToken());
+        String sign = TradePaySignUtil.getSignWithToken(map, "5371c27921232f8c410000b5");
         map.put("sign", sign);
         String notifyUrl = redisService.get(paymentEntity.getPayNo()+paymentEntity.getOrderNum());
         if (StringUtils.isEmpty(notifyUrl)) {
