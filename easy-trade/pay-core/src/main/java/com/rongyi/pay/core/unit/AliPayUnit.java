@@ -334,8 +334,11 @@ public class AliPayUnit {
             }
 
             return authorizeRespData;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (AliPayException e){
+            LOGGER.warn("获取用户token失败,e={}",e.getMessage(),e);
+            throw e;
+        }catch (Exception e) {
+            LOGGER.error("获取用户token出错,e={}",e.getMessage(),e);
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_AUTHORIZE_FAIL.getValueStr());
 
         }

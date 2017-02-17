@@ -64,9 +64,9 @@ public class RefundBizz {
         refundPaymentEntity.setFinishTime(new Date());
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("",refundResData.getOut_trade_no(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(refundResData.getTransaction_id(),refundResData.getOut_refund_no(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 refundResData.getResult_code(),Integer.valueOf(refundResData.getTotal_fee()),"","",
-                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,refundResData.getTransaction_id());
+                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,refundResData.getRefund_id());
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity,paymentLogInfo);
@@ -100,9 +100,9 @@ public class RefundBizz {
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("",alipayTradeRefundResponse.getOutTradeNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(alipayTradeRefundResponse.getTradeNo(),alipayTradeRefundResponse.getOutTradeNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS",refundFee,alipayTradeRefundResponse.getBuyerUserId(),alipayTradeRefundResponse.getBuyerLogonId(),
-                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,alipayTradeRefundResponse.getTradeNo());
+                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,alipayTradeRefundResponse.getOpenId());
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
