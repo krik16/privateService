@@ -2,6 +2,7 @@ package com.rongyi.rss.code;
 
 import com.rongyi.easy.code.ValidCouponVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.tradecenter.vo.ValidRecordVO;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface ValidRecordService {
     public int createActivityCouponValidRecord(String code, Coupon coupon, Byte couponType, Integer validUserId, String validUserName, String mallId,String shopId,int validChannel) throws Exception;
 
     int deleteRecord(String couponId, String coupnCode);
+
+    List<ValidRecordVO> findValidRecordByDay(String day);
 }

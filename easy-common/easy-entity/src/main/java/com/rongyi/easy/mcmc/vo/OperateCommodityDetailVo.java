@@ -38,6 +38,44 @@ public class OperateCommodityDetailVo implements Serializable{
     private String  createBy ;// 创建人
     private Date updateAt ;//最近更新时间
     private String  updateBy ;//最近更新人
+    private String originalPrice;  // 市场价
+    private String currentPrice;   // 销售价
+    private Integer terminalType;  //显示终端
+    private String brandName;  //品牌名称
+    private String reason;
+
+
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public Integer getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(Integer terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 
     public String getId() {
         return id;
@@ -253,5 +291,13 @@ public class OperateCommodityDetailVo implements Serializable{
 
     public void setSupportCourierDeliver(boolean supportCourierDeliver) {
         this.supportCourierDeliver = supportCourierDeliver;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }
