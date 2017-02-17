@@ -142,6 +142,8 @@ public class AliPayServiceImpl implements IAliPayService {
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradeQueryResponse);
 
+            map.remove("fundBillList");
+
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
