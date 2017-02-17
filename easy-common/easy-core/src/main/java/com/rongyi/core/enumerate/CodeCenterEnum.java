@@ -42,6 +42,7 @@ public enum CodeCenterEnum {
     ERROR_VALIDCODE_TIMEOUT(1021335, "调用PHP接口超时异常！"),
     ERROR_VALIDCODE_MUTEX(1021336, "同一类型码同一渠道同一时间段不能重复"),
     ERROR_VALIDCODE_REASON(1021337, "审核失败或作废理由为必填项"),
+    ERROR_VALID_OUTCOUPON_COUNT(1021338, "超出验证数量"),
     ERROR_HANNELS_AUTHRITY(1021339,"无相应操作权限"),
     ERROR_HANNELS_NULL_CODE(1021340,"促销码为空！"),
     ERROR_HANNELS_ERROR_CODE(1021341,"促销码不合法！"),
@@ -56,17 +57,18 @@ public enum CodeCenterEnum {
     ERROR_VALIDRECORD_CREATE(1021353,"创建验券记录异常"),
 
 
-    JIADELI_CODE_REPET(1000001, "卡券已使用，重复验券"),
-    JIADELI_CODE_INVALIDSTATUS(1000002, "退款中、已退款、已过期"),
-    JIADELI_CODE_INVALID(1000003, "输入券码有误"),
-    JIADELI_CODE_NOBELONG(1000004, "非本店铺代金券券码"),
-    JIADELI_CODE_INVALIDUSETIME(1000005, "券未到使用时间"),
-    JIADELI_CODE_USELIMIT(1000006 , "此券今天的使用次数已用完"),
+    JIADELI_CODE_REPET(1000001, "请注意，本券已使用,已被店铺营业员成功核销"),
+    JIADELI_CODE_INVALIDSTATUS(1000002, "对不起，您输入的券码状态异常，请核对卡券状态"),
+    JIADELI_CODE_INVALID(1000003, "对不起，您输入的券码有误，请重新输入"),
+    JIADELI_CODE_NOBELONG(1000004, "对不起，您的券码非本店代金券"),
+    JIADELI_CODE_INVALIDUSETIME(1000005, "对不起，此券还未生效，无法验证"),
+    JIADELI_CODE_USELIMIT(1000006 , "对不起，您使用的券超出每日限制数量，明天再来吧~"),
     JIADELI_CODE_NULL(1000007, "券码为空"),
     JIADELI_ERROR_PARAM(1000008, "参数不完整"),
     JIADELI_ERROR_ACCOUNT(1000009, "未找到家得利账号信息"),
     JIADELI_ERROR_CONFIG(1000010, "未找到配置信息"),
     JIADELI_ERROR_SYSTEM(1000999, "服务异常"),
+    JIADELI_ERROR_CORRECTCAUTH(1000011, "无冲正权限,不可冲正"),
     ERROR_COUPON_TYPE(1021353,"礼品券类型不对！！！"),
     ;
 

@@ -45,7 +45,7 @@ public class Coupon implements Serializable {
     private String name;
 
     /**
-     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3]
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3] ,外部导出券[4]
      */
     private Integer couponType;
 
