@@ -110,11 +110,13 @@ public class PayNotifyBizz {
         //获取支付信息
         PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
         if (paymentEntity == null) {
-            throw new TradeException("此订单支付记录不存在,payNo={}", payNo);
+            log.warn("此订单支付记录不存在,payNo={}",payNo);
+            throw new TradeException("支付记录不存在");
         }
 
         if (paymentEntity.getAmountMoney().compareTo(payAmount) != 0) {
-            throw new TradeException("支付金额不符,payNo={}", payNo);
+            log.warn("支付金额不符payNo={},realAmount={},recordAmount={}",payNo,payAmount,paymentEntity.getAmountMoney());
+            throw new TradeException("支付金额不符");
         }
 
         //初始化支付事件记录
