@@ -88,7 +88,7 @@ public class PayNotifyBizz {
             String payNo = map.get("out_trade_no");
             String tradeNo = map.get("transaction_id");
             String openId = map.get("openid");
-            BigDecimal payAmount = new BigDecimal(map.get("total_fee")).multiply(new BigDecimal(100));
+            BigDecimal payAmount = new BigDecimal(map.get("total_fee")).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
 
             this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, openId,"");
         } else {
@@ -115,7 +115,7 @@ public class PayNotifyBizz {
         }
 
         if (paymentEntity.getAmountMoney().compareTo(payAmount) != 0) {
-            log.warn("支付金额不符payNo={},realAmount={},recordAmount={}",payNo,payAmount,paymentEntity.getAmountMoney());
+            log.warn("支付金额不符payNo={},realAmount={},recordAmount={}", payNo, payAmount, paymentEntity.getAmountMoney());
             throw new TradeException("支付金额不符");
         }
 
@@ -231,9 +231,10 @@ public class PayNotifyBizz {
 
         //获取商户在容易网的加密信息
         MchEncryptInfo mchEncryptInfo = roaMchEncryptInfoService.getByRyMchId(paymentEntity.getRyMchId());
-        if(mchEncryptInfo == null || StringUtil.isEmpty(mchEncryptInfo.getToken())){
-            throw new ThirdException(TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getCodeStr(), TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getValueStr());
-        }
+        // TODO 测试暂注释
+//        if(mchEncryptInfo == null || StringUtil.isEmpty(mchEncryptInfo.getToken())){
+//            throw new ThirdException(TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getCodeStr(), TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getValueStr());
+//        }
 
         Map<String,Object> map = new HashMap<>();
         map.put("notifyId", UUID.randomUUID());
@@ -253,7 +254,9 @@ public class PayNotifyBizz {
         map.put("type", type);
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
         map.put("timeStamp",timeStamp);
-        String sign = TradePaySignUtil.getSignWithToken(map,mchEncryptInfo.getToken());
+        // TODO 测试暂注释
+//        String sign = TradePaySignUtil.getSignWithToken(map,mchEncryptInfo.getToken());
+        String sign = TradePaySignUtil.getSignWithToken(map, mchEncryptInfo.getToken());
         map.put("sign", sign);
         String notifyUrl = redisService.get(paymentEntity.getPayNo()+paymentEntity.getOrderNum());
         if (StringUtils.isEmpty(notifyUrl)) {
