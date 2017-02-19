@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by jason
@@ -23,6 +24,9 @@ public class CouponOrderQueryParam implements Serializable
     String sizePerPage;//每页数量
     String couponStatus;//卡券状态
     Integer orderSource;//购买终端 0微商城（商家微商城），1容易逛(包括容易逛app、容易逛微商城、容易逛小程序)，2为终端机，3其他
+
+    private List<String> totalCouponIds;
+    private List<String> couponIds;
 
     public String getCouponStatus() {
         return couponStatus;
@@ -110,6 +114,22 @@ public class CouponOrderQueryParam implements Serializable
 
     public void setOrderSource(Integer orderSource) {
         this.orderSource = orderSource;
+    }
+
+    public List<String> getTotalCouponIds() {
+        return totalCouponIds;
+    }
+
+    public void setTotalCouponIds(List<String> totalCouponIds) {
+        this.totalCouponIds = totalCouponIds;
+    }
+
+    public List<String> getCouponIds() {
+        return couponIds;
+    }
+
+    public void setCouponIds(List<String> couponIds) {
+        this.couponIds = couponIds;
     }
 
     public String toString() {
