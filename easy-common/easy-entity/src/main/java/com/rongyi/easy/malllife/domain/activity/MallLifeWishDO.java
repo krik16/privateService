@@ -2,6 +2,7 @@ package com.rongyi.easy.malllife.domain.activity;
 
 import com.rongyi.easy.malllife.param.activity.MallLifeWishParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 
@@ -26,6 +27,7 @@ public class MallLifeWishDO {
     public MallLifeWishDO(){}
 
     public MallLifeWishDO(MallLifeWishParam mallLifeWishParam){
+        Assert.notNull(mallLifeWishParam);
         this.setId(mallLifeWishParam.getId());
         this.setWishName(mallLifeWishParam.getWishName());
         this.setWishContent(mallLifeWishParam.getWishContent());
