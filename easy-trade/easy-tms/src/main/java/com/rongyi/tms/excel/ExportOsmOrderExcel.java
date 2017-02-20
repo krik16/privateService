@@ -69,6 +69,7 @@ public class ExportOsmOrderExcel {
 //            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
             List<OrderManagerVO> orderForms = listOrderByThread(paramsMap);
             if (CollectionUtils.isNotEmpty(orderForms)) {
+                LOGGER.info("导出的商品订单数 szie={}",orderForms.size());
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
                     for (int j = 0; j <= 27; j++) {

@@ -52,6 +52,8 @@ import java.util.Map;
 public class SubOrderController extends BaseControllerV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubOrderController.class);
 
+    private static final int MAX_EXCEL_COUNT = 3000;
+
 
     @Autowired
     private ROAMalllifeUserService roaMalllifeUserService;
@@ -232,10 +234,6 @@ public class SubOrderController extends BaseControllerV2 {
         }
     }
 
-
-    /**
-     * 验证导出报表总数是否超过限制
-     **/
     /**
      * 验证导出报表总数是否超过限制
      **/
@@ -249,7 +247,7 @@ public class SubOrderController extends BaseControllerV2 {
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap,1);
-            if (pagingVO != null && pagingVO.getRowCnt() <= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
+            if (pagingVO != null && pagingVO.getRowCnt() <= MAX_EXCEL_COUNT)
                 responseData = ResponseData.success();
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
