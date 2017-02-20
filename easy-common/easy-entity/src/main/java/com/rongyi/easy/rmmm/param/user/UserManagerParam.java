@@ -10,7 +10,7 @@ import com.rongyi.easy.rmmm.base.BaseParam;
 /*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
- * Description:  
+ * Description:
  * time:  2015/5/20
  * History: 变更记录
  * <author>           <time>             <version>        <desc>
@@ -36,7 +36,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String mallId;//商场Id
     private String brandId;//品牌Id
     private String ownerId;//集团Id
-    private Integer roleId; 
+    private Integer roleId;
     private String branchCompanyId;//分公司id
     private String userName;//用户姓名
     private String cardId;//身份证号
@@ -50,7 +50,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
- 
+
 
 	private String userDesc;//买手描述
 	private int flag=0;//操作参数 1升级功能
@@ -59,13 +59,13 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String jsessionid ;//摩店登录标识
 
 	private String shareCode;//邀请码
-	
-	private String faceImg;    //身份证正面照 
-	
-	private String backImg;   //身份证背面照 
-	
+
+	private String faceImg;    //身份证正面照
+
+	private String backImg;   //身份证背面照
+
 	private String workImg;    //工作证照
-	
+
 	private String otherImg;   //其它照片
 	private Boolean isOrdering;//是否接单状态  true:是，false:否
 
@@ -77,12 +77,13 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String validEndAtStamp;//有效期结束时间戳
 	private String contractCode;//合同号
 	private String synTarget;//设置终端   /* 是[1]、否[0]*/,  终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
-	private Integer isChief = 1;//是否主账号，默认 
+	private Integer isChief = 1;//是否主账号，默认
 	private Integer level;//层级 1级 2级 3级
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
 	private Integer chiefId; //主账号ID
 	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机,0 无默认终端
     public Integer getId() {
 		return id;
 	}
@@ -110,7 +111,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 		return creatingUserType;
 	}
 
-    
+
 	public void setCreatingUserType(String creatingUserType) {
 		this.creatingUserType = creatingUserType;
 	}
@@ -438,7 +439,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
-	
+
 	public Date getValidStartAt(){
 		Date date = null;
 		try {
@@ -452,7 +453,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 			return date;
 		}
 	}
-	
+
 	public Date getValidEndAt(){
 		Date date = null;
 		try {
@@ -480,6 +481,12 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	}
 	public void setSettleOrgStrategy(Integer settleOrgStrategy) {
 		this.settleOrgStrategy = settleOrgStrategy;
+	}
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
 	}
 	public Integer getIsOpenQrCode() {
 		return isOpenQrCode;
@@ -522,7 +529,9 @@ public class UserManagerParam extends BaseParam implements Serializable{
 				+ isChief + ", level=" + level + ", settleOrgStrategy="
 				+ settleOrgStrategy + ", chiefId=" + chiefId
 				+ ", isOpenQrCode=" + isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + "]";
+				+ isAllowBindingWechat + ", defaultTerminal=" + defaultTerminal
+				+ "]";
 	}
 	
+
 }

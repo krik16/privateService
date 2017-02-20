@@ -91,6 +91,15 @@ public class CommodityBuyerVO implements Serializable {
 	private Long soldOutAt;//下架时间
     private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
     private List<String> categoryNames;
+    private Integer templateRelevantGoodsCouponId;  //用作排序
+
+    public Integer getTemplateRelevantGoodsCouponId() {
+        return templateRelevantGoodsCouponId;
+    }
+
+    public void setTemplateRelevantGoodsCouponId(Integer templateRelevantGoodsCouponId) {
+        this.templateRelevantGoodsCouponId = templateRelevantGoodsCouponId;
+    }
 
     public List<String> getCategoryNames() {
         return categoryNames;
@@ -143,6 +152,8 @@ public class CommodityBuyerVO implements Serializable {
 
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
+
+    private List<String> skus;
 
     private String serviceDescription;   //售后说明内容
     private Integer serviceDescriptionId;  //售后说明id
@@ -835,10 +846,18 @@ public class CommodityBuyerVO implements Serializable {
 		this.totalBuycount = totalBuycount;
 	}
 
+    public List<String> getSkus() {
+        return skus;
+    }
+
+    public void setSkus(List<String> skus) {
+        this.skus = skus;
+    }
+
+
     public String getServiceDescription() {
         return serviceDescription;
     }
-
     public void setServiceDescription(String serviceDescription) {
         this.serviceDescription = serviceDescription;
     }
@@ -980,6 +999,7 @@ public class CommodityBuyerVO implements Serializable {
                         Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3,
                                 CommodityTerminalType.weAndTeStatus.STATUS_6,CommodityTerminalType.weAndTeStatus.STATUS_7).contains(commodity.getWeAndTeStatus())
                         ?true:false);
+        this.skus=commodity.getSkus();
         this.serviceDescription=commodity.getServiceDescription();
         this.serviceDescriptionId=commodity.getServiceDescriptionId();
         this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
@@ -1051,6 +1071,7 @@ public class CommodityBuyerVO implements Serializable {
                 ", totalBuycount=" + totalBuycount +
                 ", serviceDescription=" + serviceDescription +
                 ", serviceDescriptionId=" + serviceDescriptionId +
+                ", templateRelevantGoodsCouponId=" + templateRelevantGoodsCouponId +
                 '}';
     }
 

@@ -82,10 +82,11 @@ public class BusinessAccountVO implements Serializable {
 	private String otherImg;   //其它照片
 	private String resume;      //自我简介
 	private String position;   //申请所在城市
-
 	private String merchantAddress;//商户地址
 	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+	private Integer defaultTerminal;//默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机
 	public String getMerchantAddress() {
 		return merchantAddress;
 	}
@@ -514,7 +515,32 @@ public class BusinessAccountVO implements Serializable {
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
-	
+	public String getTerminalType() {
+		return terminalType;
+	}
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
+	}
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
+	}
+	public String getBindingMid(){
+		if(getIdentity() == 0){
+			return groupMid;
+		}else if(getIdentity() == 1){
+			return mallMid;
+		}else if(getIdentity() == 2){
+			return brandMid;
+		}else if (getIdentity() == 3) {
+			return null;
+		}else if (getIdentity() == 4 || getIdentity() == 5) {
+			return shopMid;
+		}
+		return null;
+	}
 	@Override
 	public String toString() {
 		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo
@@ -554,21 +580,9 @@ public class BusinessAccountVO implements Serializable {
 				+ ", resume=" + resume + ", position=" + position
 				+ ", merchantAddress=" + merchantAddress + ", isOpenQrCode="
 				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + "]";
+				+ isAllowBindingWechat + ", terminalType=" + terminalType
+				+ ", defaultTerminal=" + defaultTerminal + "]";
 	}
 	
-	public String getBindingMid(){
-		if(getIdentity() == 0){
-			return groupMid;
-		}else if(getIdentity() == 1){
-			return mallMid;
-		}else if(getIdentity() == 2){
-			return brandMid;
-		}else if (getIdentity() == 3) {
-			return null;
-		}else if (getIdentity() == 4 || getIdentity() == 5) {
-			return shopMid;
-		}
-		return null;
-	}
+	
 }

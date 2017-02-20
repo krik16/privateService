@@ -2,6 +2,7 @@ package com.rongyi.rss.roa;
 
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.MallVO;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Map;
@@ -44,4 +45,6 @@ public interface ROAMallService {
     public MallEntity getMallEntityById(String id) throws Exception;
     
 	public void updateMallLevel(Map<String, Object> paramsMap);
+
+    public List<MallEntity> getMallsByIds(List<ObjectId> ids);
 }
