@@ -99,9 +99,9 @@ public class RmmmUserInfoEntity implements Serializable{
 	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
 	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机
     private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
-    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+/*    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
-    public Integer getId() {
+*/    public Integer getId() {
 		return id;
 	}
 
@@ -468,21 +468,6 @@ public class RmmmUserInfoEntity implements Serializable{
 		this.isSuspended = isSuspended;
 	}
 	
-	public Integer getIsOpenQrCode() {
-		return isOpenQrCode;
-	}
-
-	public void setIsOpenQrCode(Integer isOpenQrCode) {
-		this.isOpenQrCode = isOpenQrCode;
-	}
-
-	public Integer getIsAllowBindingWechat() {
-		return isAllowBindingWechat;
-	}
-
-	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
-		this.isAllowBindingWechat = isAllowBindingWechat;
-	}
 
 	@Override
 	public String toString() {
@@ -508,9 +493,7 @@ public class RmmmUserInfoEntity implements Serializable{
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
 				+ ", isChief=" + isChief + ", level=" + level + ", chiefId="
-				+ chiefId + ", isSuspended=" + isSuspended + ", isOpenQrCode="
-				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + "]";
+				+ chiefId + ", isSuspended=" + isSuspended + "]";
 	}
 	
 }
