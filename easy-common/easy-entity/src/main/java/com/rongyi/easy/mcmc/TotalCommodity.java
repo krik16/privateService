@@ -84,7 +84,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> skus;//规格sku集合
 
 	private Integer purchaseCount;//商品的限购数量
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 
 	private Integer templateId;//邮费模版id
 	private boolean goodsSec = true;//正品保障
@@ -453,14 +452,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.purchaseCount = purchaseCount;
 	}
 
-	public String getWeAndTeStatus() {
-		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
-	}
-
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
-
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -593,7 +584,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", immediateOn=" + immediateOn +
 				", skus=" + skus +
 				", purchaseCount=" + purchaseCount +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", templateId=" + templateId +
 				", goodsSec=" + goodsSec +
 				", subheading='" + subheading + '\'' +

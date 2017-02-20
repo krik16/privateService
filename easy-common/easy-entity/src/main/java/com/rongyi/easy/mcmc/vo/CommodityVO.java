@@ -93,7 +93,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private Integer templateId;//邮费模版id
 	private Integer sort;
 	private String mallName;
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
@@ -683,12 +682,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setPurchaseCount(Integer purchaseCount){
 		this.purchaseCount = purchaseCount;
 	}
-	public String getWeAndTeStatus() {
-		return weAndTeStatus;
-	}
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
 	public String getCommodityModelNo() {
 		return commodityModelNo;
 	}
@@ -1151,7 +1144,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", templateId=" + templateId +
 				", sort=" + sort +
 				", mallName='" + mallName + '\'' +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo='" + commodityModelNo + '\'' +
 				", goodsParam=" + goodsParam +

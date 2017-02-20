@@ -18,6 +18,15 @@ public class SearchParamsForWechat implements Serializable{
     private Integer pageSize;
     private String name;
     private String keyword;
+    private String displayStatus;
+
+    public String getDisplayStatus() {
+        return displayStatus;
+    }
+
+    public void setDisplayStatus(String displayStatus) {
+        this.displayStatus = displayStatus;
+    }
 
     public String getWeAndTeStatus() {
         return weAndTeStatus;
