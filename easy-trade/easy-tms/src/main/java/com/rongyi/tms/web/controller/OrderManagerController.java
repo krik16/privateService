@@ -349,7 +349,7 @@ public class OrderManagerController extends BaseController {
 		result.setSuccess(false);
 		try {
 			Map<String, Object> paramsMap = warpToParamMap(paramsJson);
-			PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
+			PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap,1);
 			if (pagingVO!=null && pagingVO.getRowCnt()<= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
                 result.setSuccess(true);
 		} catch (Exception e) {

@@ -6,14 +6,19 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.easy.rmmm.vo.OrderManagerCommodityVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
+import com.rongyi.easy.tradecenter.vo.MerchantOsmOrderVO;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
+import com.rongyi.tms.util.Num;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +27,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by hebo on 2016/1/12.
@@ -32,8 +39,14 @@ import java.util.Map;
 @Component
 public class ExportOsmOrderExcel {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExportOsmOrderExcel.class);
+    private static final int MAX_THREAD = 10;
+
     @Autowired
     private IOrderQueryService iOrderQueryService;
+
+    @Autowired
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 
     public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> paramsMap) {
@@ -53,7 +66,8 @@ public class ExportOsmOrderExcel {
             bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
 
             List<OrderManagerCommodityVO> orderCommoditys = new ArrayList<>();
-            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
+//            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
+            List<OrderManagerVO> orderForms = listOrderByThread(paramsMap);
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
@@ -127,6 +141,59 @@ public class ExportOsmOrderExcel {
         }
     }
 
+    private List<OrderManagerVO> listOrderByThread(final Map<String, Object> paramsMap){
+        LOGGER.info("多线程查询商品订单开始 param={}",paramsMap);
+        final List<OrderManagerVO> orderForms = new ArrayList<>();
+        final Map<String,List<OrderManagerVO>> map = new HashMap<>();
+        try {
+            int pageSize = 300;//每个线程查询300条数据
+            int totalCount = paramsMap.containsKey("pageSize")?Integer.valueOf(paramsMap.get("pageSize").toString()):3000;
+            if(totalCount > 0){
+                int threadCount = totalCount % pageSize == 0 ? totalCount / pageSize : totalCount / pageSize + 1;
+                if(threadCount > MAX_THREAD){
+                    threadCount = MAX_THREAD;
+                }
+                LOGGER.info("开启{}个线程查询商品订单列表", threadCount);
+
+                final CountDownLatch latch = new CountDownLatch(threadCount);
+                final Num num = new Num(1);
+                for(int i = 1; i <= threadCount; i++){
+                    threadPoolTaskExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                int currt = num.getNum();
+                                int size = 0;
+                                PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap, currt);
+                                if(CollectionUtils.isNotEmpty(pagingVO.getDataList())){
+                                    map.put(currt + "",pagingVO.getDataList());
+                                    size = pagingVO.getDataList().size();
+                                }
+                                LOGGER.info("线程{}查询商品订单返回 ,szie={}",currt,size);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                LOGGER.error("多线程查询商品订单开始 param={}", paramsMap);
+                            }
+                            latch.countDown();
+                        }
+                    });
+                }
+                latch.await();
+
+                for(int i = 1; i <= threadCount; i++){
+                    List<OrderManagerVO> list = map.get( i + "");
+                    if(CollectionUtils.isNotEmpty(list)){
+                        orderForms.addAll(list);
+                    }
+                }
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+            LOGGER.error("多线程查询商品订单异常", e);
+        }
+        return orderForms;
+    }
+
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
         int pageSize = 1000;
@@ -134,8 +201,8 @@ public class ExportOsmOrderExcel {
         int currentPage = 1;
         for (int i=0; i< TOTAL_SIZE / pageSize; i++){
             paramsMap.put("pageSize", pageSize);
-            paramsMap.put("currentPage", currentPage);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
+//            paramsMap.put("currentPage", currentPage);
+            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap,currentPage);
             List<OrderManagerVO> pageData = pagingVO.getDataList();
             if (pageData!=null) {
                 orderForms.addAll(pageData);
