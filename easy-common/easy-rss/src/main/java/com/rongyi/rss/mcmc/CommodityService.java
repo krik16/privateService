@@ -75,6 +75,14 @@ public interface CommodityService {
     public List<CommoditySpecVO> getSpecList(List<String> specIds);
 
     /**
+     * 获取指定时间之后的商品规格
+     * @param specIds
+     * @param timeAfter
+     * @return
+     */
+    public List<CommoditySpecVO> getSpecList(List<String> specIds,Date timeAfter);
+
+    /**
      * 查询店铺的商品
      * @param id
      * @param shopId
@@ -323,6 +331,14 @@ public interface CommodityService {
     ResponseVO selectSelfCommodity(SelfCommodityParam param);
 
     List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
+
+    /**
+     *
+     * @param ids
+     * @param isOnlySkillCommdity true 返回非秒杀商品
+     * @return
+     */
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids,boolean isOnlySkillCommdity);
 
     ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
