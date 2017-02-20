@@ -52,7 +52,7 @@ import java.util.Map;
 public class SubOrderController extends BaseControllerV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubOrderController.class);
 
-    private static final int MAX_EXCEL_COUNT = 3000;
+    private static final int MAX_EXCEL_COUNT = 2000;
 
 
     @Autowired
