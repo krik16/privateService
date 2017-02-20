@@ -45,7 +45,7 @@ public class Coupon implements Serializable {
     private String name;
 
     /**
-     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3]
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3] ,外部导出券[4]
      */
     private Integer couponType;
 
@@ -256,7 +256,7 @@ public class Coupon implements Serializable {
     private Boolean isDeleted;
 
     /**
-     * 第一位表示微信，第二位表示终端。0：不能操作是否显示；1：隐藏；2：显示
+     * 第一位表示微信，第二位表示终端 第三位表示容易逛。0：不能操作是否显示；1：隐藏；2：显示
      */
     private String showChannel;
 

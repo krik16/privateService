@@ -12,7 +12,8 @@ import com.rongyi.core.constant.CouponConst;
 public class TradeUtil {
 
     public static boolean isTradeUserCode(String code) {
-        return (!StringUtils.isEmpty(code) && code.startsWith(CouponConst.COUPON_TYPE.COUPON));
+        return (!StringUtils.isEmpty(code) && (code.startsWith(CouponConst.COUPON_TYPE.COUPON)||
+        code.startsWith(CouponConst.COUPON_TYPE.OUTERCOUPON)));
 
     }
 }

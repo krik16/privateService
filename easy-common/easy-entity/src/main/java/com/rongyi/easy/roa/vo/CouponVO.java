@@ -61,8 +61,31 @@ public class CouponVO implements Serializable {
 
     private List<Double> location;
 
-    private List<CouponWechat> wechats;
+    /**
+     * 钩中微信端展示的商户id列表
+     */
+    private List<String> serviceIds;
 
+    /**
+     * 在微信端展示的 商户id列表
+     */
+    private List<String> onServiceIds;
+
+    public List<String> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<String> serviceIds) {
+        this.serviceIds = serviceIds;
+    }
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
+    }
 
     private Date publicStart; // 发布时间开始
 
@@ -799,11 +822,5 @@ public class CouponVO implements Serializable {
         this.limitPublishCount = limitPublishCount;
     }
 
-    public List<CouponWechat> getWechats() {
-        return wechats;
-    }
 
-    public void setWechats(List<CouponWechat> wechats) {
-        this.wechats = wechats;
-    }
 }

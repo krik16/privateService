@@ -1,7 +1,10 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuying on 2016/3/17.
@@ -14,9 +17,45 @@ public class CommodityVOToWechat implements Serializable{
     private String currentPrice;
     private String registerAt;
     private String shopName;
-    private String weAndTeStatus;
     private Integer terminalType;
     private String mallMid;//商场mongoId
+    private String commodityModelNo;//商品款号
+    private List<String> onServiceIds;
+    private List<String> offServiceIds;
+    private List<WechatInfoVo> wechatInfoVos;
+
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
+    }
+
+    public List<String> getOffServiceIds() {
+        return offServiceIds;
+    }
+
+    public void setOffServiceIds(List<String> offServiceIds) {
+        this.offServiceIds = offServiceIds;
+    }
+
+    public List<WechatInfoVo> getWechatInfoVos() {
+        return wechatInfoVos;
+    }
+
+    public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+        this.wechatInfoVos = wechatInfoVos;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
 
     public String getId() {
         return id;
@@ -64,14 +103,6 @@ public class CommodityVOToWechat implements Serializable{
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
-    }
-
-    public String getWeAndTeStatus() {
-        return weAndTeStatus;
-    }
-
-    public void setWeAndTeStatus(String weAndTeStatus) {
-        this.weAndTeStatus = weAndTeStatus;
     }
 
     public Integer getTerminalType() {

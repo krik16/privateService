@@ -2,6 +2,7 @@ package com.rongyi.rss.shop;
 
 import java.util.List;
 
+import com.rongyi.core.framework.exception.InvalidParameterException;
 import com.rongyi.easy.entity.BrandEntity;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 import com.rongyi.easy.solr.BrandDocument;
@@ -73,4 +74,15 @@ public interface IBrandService {
 	 * @return
 	 */
 	public List<BrandEntity> addFilterBrandByCategoryName(String name, List<BrandEntity> brandEntityList);
+
+	/**
+	 * 根据店铺id查询品牌
+	 * @param shopId
+	 *
+	 * @return brand document list
+	 * @throws InvalidParameterException shopId is invalid
+	 * @throws RuntimeException the shop is null
+	 *
+	 */
+	List<BrandDocument> searchBrandByShopId(String shopId);
 }

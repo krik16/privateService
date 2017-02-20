@@ -1,6 +1,8 @@
 package com.rongyi.easy.mcmc.vo;
 
 
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +11,6 @@ import java.util.List;
  * Created by xuying on 2016/6/22.
  */
 public class OperateCommodityVo implements Serializable, Cloneable {
-
 
     private String  id ;//系统编号
     private String  name;//商品名称
@@ -27,11 +28,30 @@ public class OperateCommodityVo implements Serializable, Cloneable {
     private List<String> serviceIds;
     private List<String> onServiceIds;
     private List<String> offServiceIds;
+    private List<WechatInfoVo> wechatInfoVos;
+    private String commodityModelNo;
     private Integer type;//渠道  0商家，1买手
     private String originalPrice;//商品原价
     private String currentPrice;//商品现价
     private String description;//商品描述
     private Integer stock;//商品库存
+
+
+    public List<WechatInfoVo> getWechatInfoVos() {
+        return wechatInfoVos;
+    }
+
+    public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+        this.wechatInfoVos = wechatInfoVos;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
 
     private List<CommoditySpecVO> specList;
     private CommoditySpecVO currentSpec;
@@ -210,6 +230,26 @@ public class OperateCommodityVo implements Serializable, Cloneable {
 
     public void setOffServiceIds(List<String> offServiceIds) {
         this.offServiceIds = offServiceIds;
+    }
+
+    @Override
+    public String toString() {
+        return "OperateCommodityVo{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", picList='" + picList + '\'' +
+                ", categoryIds='" + categoryIds + '\'' +
+                ", mallName='" + mallName + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", source=" + source +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", reason='" + reason + '\'' +
+                ", buyerAccount='" + buyerAccount + '\'' +
+                ", soldOutAt=" + soldOutAt +
+                ", commodityModelNo='" + commodityModelNo + '\'' +
+                ", terminalType=" + terminalType +
+                '}';
     }
 
     public Integer getType() {

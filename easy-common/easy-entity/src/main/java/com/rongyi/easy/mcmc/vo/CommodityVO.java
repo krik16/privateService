@@ -93,7 +93,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private Integer templateId;//邮费模版id
 	private Integer sort;
 	private String mallName;
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
@@ -160,6 +159,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String freePostage;  // 0包邮 1不包邮
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
+
+	private List<String> skus;
 
 
 	public List<String> getOnServiceIds() {
@@ -681,12 +682,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setPurchaseCount(Integer purchaseCount){
 		this.purchaseCount = purchaseCount;
 	}
-	public String getWeAndTeStatus() {
-		return weAndTeStatus;
-	}
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
 	public String getCommodityModelNo() {
 		return commodityModelNo;
 	}
@@ -934,6 +929,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.activityEndTime = activityEndTime;
 	}
 
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -950,6 +953,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.commodityCategory = commodity.getCategory();
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
+		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
 		this.isSpot = commodity.isSpot() ? 1 : 0;
@@ -1140,7 +1144,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", templateId=" + templateId +
 				", sort=" + sort +
 				", mallName='" + mallName + '\'' +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo='" + commodityModelNo + '\'' +
 				", goodsParam=" + goodsParam +
@@ -1187,6 +1190,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", serviceDescriptionId=" + serviceDescriptionId +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
+				", skus=" + skus +
 				'}';
 	}
 
@@ -1247,6 +1251,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 			vo.setUpdate_by(userInfo.getId().toString());
 		}
 		vo.setShelvesType(commodity.getShelvesType());
+
+		vo.setBrandMid(commodity.getBrandMid());
+		vo.setBrandName(commodity.getBrandName());
+		vo.setCommodityModelNo(commodity.getCommodityModelNo());
 		return vo;
 	}
 

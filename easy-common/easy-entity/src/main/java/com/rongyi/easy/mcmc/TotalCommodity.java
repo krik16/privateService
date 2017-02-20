@@ -84,7 +84,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> skus;//规格sku集合
 
 	private Integer purchaseCount;//商品的限购数量
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 
 	private Integer templateId;//邮费模版id
 	private boolean goodsSec = true;//正品保障
@@ -108,7 +107,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
-
+	private String brandName;
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
@@ -124,6 +123,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setOffServiceIds(List<String> offServiceIds) {
 		this.offServiceIds = offServiceIds;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	public List<WechatInfoVo> getWechatInfoVos() {
@@ -445,14 +452,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.purchaseCount = purchaseCount;
 	}
 
-	public String getWeAndTeStatus() {
-		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
-	}
-
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
-
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -585,7 +584,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", immediateOn=" + immediateOn +
 				", skus=" + skus +
 				", purchaseCount=" + purchaseCount +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", templateId=" + templateId +
 				", goodsSec=" + goodsSec +
 				", subheading='" + subheading + '\'' +
@@ -612,6 +610,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setStock(commodity.getStock());
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 		this.setGoodsParam(commodity.getGoodsParam());
+		this.setSkus(commodity.getSkus());
 
 		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
 			//totalCommodity总表显示时间区域
@@ -640,6 +639,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setCommodityIds(new ArrayList<ObjectId>());
 		this.getCommodityIds().add(commodity.getId());
 		this.setBrandMid(commodity.getBrandMid());
+		this.setBrandName(commodity.getBrandName());
 		this.setFilialeMids(new ArrayList<String>());
 		this.getFilialeMids().add(commodity.getFilialeMid());
 		this.setShopMids(new ArrayList<String>());
@@ -669,6 +669,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+
 	}
 
 	public String getSubheading() {
@@ -754,10 +755,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			if(CollectionUtils.isNotEmpty(skus.keySet())) {
 				this.setSkus(new ArrayList<>(skus.keySet()));
 			}
-
-			//保存商品关联店铺的分公司品牌店铺信息
-			this.setBrandMid(userInfo.getBrandMid());
-
 			//老的app数据identity为-100
 			if(!(this != null && this.getIdentity() != null
 					&& this.getIdentity() == -100)) {
@@ -772,6 +769,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setCommodityDetails(param.getCommodityDetails());
 
 			this.setShelvesType(param.getShelvesType());
+
+			this.setBrandMid(param.getBrandMid());
+			this.setBrandName(param.getBrandName());
+			this.setCommodityModelNo(param.getCommodityModelNo());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}
