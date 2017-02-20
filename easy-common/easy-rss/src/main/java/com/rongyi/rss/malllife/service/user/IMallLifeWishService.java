@@ -25,4 +25,27 @@ public interface IMallLifeWishService {
     MallLifeWishDO getByUserId(UserInfoVO userInfo);
 
     int updateCount(UserInfoVO userInfo, MallLifeWishParam mallLifeWishParam);
+
+
+    /**
+     * 获取当前用户
+     * @param userId
+     * @return
+     */
+    public int getRankByUserId(String userId);
+
+
+    /**
+     * 返回排行榜
+     * @param rank 排行前 rank位
+     * @return
+     */
+    public List<MallLifeWishDO> getWishRank(int rank);
+
+
+
+
+
+
+
 }
