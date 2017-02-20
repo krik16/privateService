@@ -74,6 +74,7 @@ public class ParentOrderVO implements Serializable {
 	private String originalTotalPrice  = "0";// 原来的总价
 
 	private String buyerNickName;// 收货人昵称
+	private String buyerNameByWeixin;// 微信昵称
 	private String buyerPhone;// 买家手机号（买家账号）
 	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String nickName;// 导购昵称
@@ -965,6 +966,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setDiscountAmount(BigDecimal discountAmount) {
 		this.discountAmount = discountAmount;
+	}
+
+	public String getBuyerNameByWeixin() {
+		return buyerNameByWeixin;
+	}
+
+	public void setBuyerNameByWeixin(String buyerNameByWeixin) {
+		this.buyerNameByWeixin = buyerNameByWeixin;
 	}
 
 	@Override
