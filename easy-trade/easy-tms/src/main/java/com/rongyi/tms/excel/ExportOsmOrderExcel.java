@@ -66,8 +66,8 @@ public class ExportOsmOrderExcel {
             bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
 
             List<OrderManagerCommodityVO> orderCommoditys = new ArrayList<>();
-//            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
-            List<OrderManagerVO> orderForms = listOrderByThread(paramsMap);
+            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
+//            List<OrderManagerVO> orderForms = listOrderByThread(paramsMap);
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 LOGGER.info("导出的商品订单数 szie={}",orderForms.size());
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
