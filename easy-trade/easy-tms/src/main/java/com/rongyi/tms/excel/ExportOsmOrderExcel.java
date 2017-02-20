@@ -66,8 +66,8 @@ public class ExportOsmOrderExcel {
             bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
 
             List<OrderManagerCommodityVO> orderCommoditys = new ArrayList<>();
-            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
-//            List<OrderManagerVO> orderForms = listOrderByThread(paramsMap);
+//            List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
+            List<OrderManagerVO> orderForms = listOrderByThread(paramsMap);
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 LOGGER.info("导出的商品订单数 szie={}",orderForms.size());
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
@@ -139,53 +139,54 @@ public class ExportOsmOrderExcel {
             ExcelUtil.exportExcel(response, wb, outFile);
         } catch (Exception e) {
             e.printStackTrace();
+            LOGGER.error("商品订单导出记录异常", e);
         }
     }
 
-//    private List<OrderManagerVO> listOrderByThread(final Map<String, Object> paramsMap){
-//        LOGGER.info("多线程查询商品订单开始 param={}",paramsMap);
-//        final List<OrderManagerVO> orderForms = new ArrayList<>();
-//        final Map<String,List<OrderManagerVO>> map = new HashMap<>();
-//        try {
-//            int pageSize = 300;//每个线程查询300条数据
-//            paramsMap.put("pageSize",pageSize);
-//            final CountDownLatch latch = new CountDownLatch(MAX_THREAD);
-//            final Num num = new Num(1);
-//            for(int i = 1; i <= MAX_THREAD; i++){
-//                threadPoolTaskExecutor.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            int currt = num.getNum();
-//                            int size = 0;
-//                            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap, currt);
-//                            if(CollectionUtils.isNotEmpty(pagingVO.getDataList())){
-//                                map.put(currt + "",pagingVO.getDataList());
-//                                size = pagingVO.getDataList().size();
-//                            }
-//                            LOGGER.info("线程{}查询商品订单返回 ,szie={}",currt,size);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                            LOGGER.error("多线程查询商品订单开始 param={}", paramsMap);
-//                        }
-//                        latch.countDown();
-//                    }
-//                });
-//            }
-//            latch.await();
-//
-//            for(int i = 1; i <= MAX_THREAD; i++){
-//                List<OrderManagerVO> list = map.get( i + "");
-//                if(CollectionUtils.isNotEmpty(list)){
-//                    orderForms.addAll(list);
-//                }
-//            }
-//        }catch(Exception e) {
-//            e.printStackTrace();
-//            LOGGER.error("多线程查询商品订单异常", e);
-//        }
-//        return orderForms;
-//    }
+    private List<OrderManagerVO> listOrderByThread(final Map<String, Object> paramsMap){
+        LOGGER.info("多线程查询商品订单开始 param={}",paramsMap);
+        final List<OrderManagerVO> orderForms = new ArrayList<>();
+        final Map<String,List<OrderManagerVO>> map = new HashMap<>();
+        try {
+            int pageSize = 200;//每个线程查询300条数据
+            paramsMap.put("pageSize",pageSize);
+            final CountDownLatch latch = new CountDownLatch(MAX_THREAD);
+            final Num num = new Num(1);
+            for(int i = 1; i <= MAX_THREAD; i++){
+                threadPoolTaskExecutor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            int currt = num.getNum();
+                            int size = 0;
+                            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap, currt);
+                            if(CollectionUtils.isNotEmpty(pagingVO.getDataList())){
+                                map.put(currt + "",pagingVO.getDataList());
+                                size = pagingVO.getDataList().size();
+                            }
+                            LOGGER.info("线程{}查询商品订单返回 ,szie={}",currt,size);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            LOGGER.error("多线程查询商品订单开始 param={}", paramsMap);
+                        }
+                        latch.countDown();
+                    }
+                });
+            }
+            latch.await();
+
+            for(int i = 1; i <= MAX_THREAD; i++){
+                List<OrderManagerVO> list = map.get( i + "");
+                if(CollectionUtils.isNotEmpty(list)){
+                    orderForms.addAll(list);
+                }
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+            LOGGER.error("多线程查询商品订单异常", e);
+        }
+        return orderForms;
+    }
 
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
