@@ -18,6 +18,7 @@ public class OrderManagerCommodityVO  implements Serializable {
     private String commodityNum;//商品数量
     private String unitPrice;//商品单价 元
     private String id;//商品id
+    private String specId;//规格id
     private String mallName;
     private String shopName;
     private String orderCartNo;//母订单号
@@ -109,6 +110,14 @@ public class OrderManagerCommodityVO  implements Serializable {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String getSpecId() {
+        return specId;
+    }
+
+    public void setSpecId(String specId) {
+        this.specId = specId;
     }
 
     @Override
