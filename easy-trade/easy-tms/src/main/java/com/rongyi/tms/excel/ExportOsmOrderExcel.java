@@ -123,10 +123,6 @@ public class ExportOsmOrderExcel {
             if(CollectionUtils.isNotEmpty(orderCommoditys)){
                 for (int i = 0; i < orderCommoditys.size(); i++) {
                     OrderManagerCommodityVO vo = orderCommoditys.get(i);
-                    if("1021498550273161330".equals(vo.getOrderNo())){
-                        LOGGER.info("weuhfuwuhuu={} i ={}",vo,i);
-                    }
-                    LOGGER.info("");
                     sheet2.getRow(i + 2).getCell(0).setCellValue(vo.getOrderCartNo());
                     sheet2.getRow(i + 2).getCell(1).setCellValue(vo.getOrderNo());
                     sheet2.getRow(i + 2).getCell(2).setCellValue(vo.getMallName());
