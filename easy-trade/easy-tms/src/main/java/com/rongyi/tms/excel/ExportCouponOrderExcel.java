@@ -57,7 +57,7 @@ public class ExportCouponOrderExcel {
             bodyStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 指定单元格居中对齐
             bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
             List<CouponOrderVO> list = couponOrderService.selectPageList(null, null, map);
-            if (list.size() > 5000) {
+            if (list.size() > 2000) {
                 throw new BizException(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeStr(), ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
             }
             if (CollectionUtils.isNotEmpty(list)) {
