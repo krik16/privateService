@@ -24,6 +24,8 @@ public interface IMallLifeWishService {
 
     MallLifeWishDO getByUserId(UserInfoVO userInfo);
 
+    MallLifeWishDO getById(MallLifeWishParam wishParam);
+
     int updateCount(UserInfoVO userInfo, MallLifeWishParam mallLifeWishParam);
 
 
