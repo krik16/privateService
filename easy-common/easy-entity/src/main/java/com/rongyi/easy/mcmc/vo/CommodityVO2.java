@@ -48,6 +48,9 @@ public class CommodityVO2 implements  Serializable {
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date soldOutAt;//下架时间
 
+	@JsonSerialize(using=JsonDateSerializer.class)
+	private Date createAt; //创建时间
+
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 
 	private boolean immediateOn = false;//true表示设置是立即上架
@@ -59,7 +62,63 @@ public class CommodityVO2 implements  Serializable {
 	private String commodityDetails; //商品详情
 	private List<WechatInfoVo> wechatInfoVos;
 	private List<Integer> serviceIds;
+	private String commodityModelNo;//商品款号
+	private List<String> goodsParam;//商品参数
+	private String createBy;
+	private String updateBy;
+	private String brandName;
+	private String brandMid;
+	private List<String> referencePriceList;
 
+	private String reason;
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
+	public List<String> getGoodsParam() {
+		return goodsParam;
+	}
+
+	public void setGoodsParam(List<String> goodsParam) {
+		this.goodsParam = goodsParam;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
 
 	public List<Integer> getServiceIds() {
 		return serviceIds;
@@ -283,5 +342,29 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setCommodityDetails(String commodityDetails) {
 		this.commodityDetails = commodityDetails;
+	}
+
+	public String getBrandMid() {
+		return brandMid;
+	}
+
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+
+	public List<String> getReferencePriceList() {
+		return referencePriceList;
+	}
+
+	public void setReferencePriceList(List<String> referencePriceList) {
+		this.referencePriceList = referencePriceList;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

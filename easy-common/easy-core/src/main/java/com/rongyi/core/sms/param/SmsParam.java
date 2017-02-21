@@ -27,7 +27,7 @@ public class SmsParam implements Serializable {
     /** 产品类型 1 mallShop 2,Malllife  3;//ToB_业务 通知类 4;//ToB_业务 营销类*/
     private Integer productType;
 
-    /** 发送类型 1注册，2找回密码，3登录4绑定时间 5 交易类 (不够可以加） 6商家后台 */
+    /** 发送类型 1注册，2找回密码，3登录4绑定时间 5 交易类 (不够可以加） 6商家后台 7:泊桥发送密码*/
     private Integer sendModule;
 
     /*请求来源IP**/
@@ -100,5 +100,20 @@ public class SmsParam implements Serializable {
 
     public void setSendChannel(String sendChannel) {
         this.sendChannel = sendChannel;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SmsParam{");
+        sb.append("phone='").append(phone).append('\'');
+        sb.append(", msgStr='").append(msgStr).append('\'');
+        sb.append(", requestChannel='").append(requestChannel).append('\'');
+        sb.append(", productType=").append(productType);
+        sb.append(", sendModule=").append(sendModule);
+        sb.append(", requestIp='").append(requestIp).append('\'');
+        sb.append(", sendChannel='").append(sendChannel).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

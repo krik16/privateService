@@ -20,44 +20,44 @@ import java.util.List;
  */
 public class BrandDocument implements Serializable{
 
-    private static final long serialVersionUID = -6516058338575306587L;
+    private static final long serialVersionUID = -6516058338575306580L;
 
+    @Field
     private String id;
-
-    @Field
+    @Field("name")
     private String name;
-    @Field
+    @Field("cname")
     private String cname;
-    @Field
+    @Field("ename")
     private String ename;
-    @Field
-    private String operator_id;//
-    @Field
+    @Field("operator_id")
+    private String operator_id;
+    @Field("icon")
     private String icon;//品牌图标
-    @Field
+    @Field("key_tags")
     private String key_tags;//关键标签，shop需要
-    @Field
+    @Field("created_at")
     private Date created_at;//创建时间
-    @Field
+    @Field("updated_at")
     private Date updated_at;//更新时间
-    @Field
-    private ArrayList<String> category_ids;
-    @Field
-    private ArrayList<String> category_tags;//品类
-    @Field
+    @Field("category_ids")
+    private List<String> category_ids;
+    @Field("category_tags")
+    private List<String> category_tags;//品类
+    @Field("aliases")
     private List<String> aliases;//别名
-    @Field
-    private String shopcount;
+    @Field("shopcount")
+    private Long shopcount;
     //进行空值判断，不建索引，1表示有值
-    @Field
+    @Field("tags")
     private String tags;
-    @Field
+    @Field("description")
     private String description;
-    @Field
+    @Field("average_consumption")
     private String average_consumption;
-    @Field
+    @Field("valid")
     private String valid;
-    @Field
+    @Field("slug")
     private String slug;//名称拼音
 
     public BrandDocument() {
@@ -161,7 +161,7 @@ public class BrandDocument implements Serializable{
         this.updated_at = updated_at;
     }
 
-    public ArrayList<String> getCategory_ids() {
+    public List<String> getCategory_ids() {
         return category_ids;
     }
 
@@ -169,7 +169,7 @@ public class BrandDocument implements Serializable{
         this.category_ids = category_ids;
     }
 
-    public ArrayList<String> getCategory_tags() {
+    public List<String> getCategory_tags() {
         return category_tags;
     }
 
@@ -185,11 +185,11 @@ public class BrandDocument implements Serializable{
         this.aliases = aliases;
     }
 
-    public String getShopcount() {
+    public Long getShopcount() {
         return shopcount;
     }
 
-    public void setShopcount(String shopcount) {
+    public void setShopcount(Long shopcount) {
         this.shopcount = shopcount;
     }
 

@@ -42,7 +42,16 @@ public interface ITotalCommodityService {
 
 	public Map<String ,Object> findListForWechat(Map<String, Object> params);
 
-	public String updateCommodityWeAndTeStatus(String id, String type, String terminalType, String weAndTeStatus);
+	/**
+	 *
+	 * @param id
+	 * @param type
+	 * @param terminalType
+	 * @param weAndTeStatus
+	 * @param source  更新来源，0表示大运营后台，1表示商家后台
+	 * @return
+	 */
+	public String updateCommodityWeAndTeStatus(String id, String type, String terminalType, String weAndTeStatus,Integer source);
 
 	public List<TotalCommodity>  findCommodityByCategoryId(Map<String,Object> paramMap);
 

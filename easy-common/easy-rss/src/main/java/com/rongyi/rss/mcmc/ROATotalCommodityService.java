@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.mcmc.Commodity;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.TotalCommodity;
@@ -50,5 +51,5 @@ public interface ROATotalCommodityService {
 
 	public Map<String ,Object>  findListForWechat(Map<String ,Object> params);
 
-	public String updateCommodityWeAndTeStatus(String id,String type,String terminalType,String weAndTeStatus);
+	public String updateCommodityWeAndTeStatus(String id,String type,String terminalType,String weAndTeStatus,Integer source);
 }

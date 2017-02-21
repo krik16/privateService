@@ -213,9 +213,10 @@ public interface RoaActivityTemplateService {
     /**
      *
      * @param specSyncEntityList
+     * @param activityTempalteId
      * @return
      */
-    public boolean batchUpdateSpceDetailSync(List<SpecSyncEntity> specSyncEntityList);
+    public boolean batchUpdateSpceDetailSync(List<SpecSyncEntity> specSyncEntityList, List<Integer> activityTempalteIds);
 
 
     /**
