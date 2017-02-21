@@ -103,6 +103,12 @@ public class CommodityParam implements Serializable{
 
 	private String commodityModelNo;
 
+	private String serviceDescription;//售后说明
+
+	private Integer serviceDescriptionId;
+
+	private String serviceDescriptionRemark;
+
 	public String getBrandMid() {
 		return brandMid;
 	}
@@ -383,6 +389,31 @@ public class CommodityParam implements Serializable{
 		this.shelvesType = shelvesType;
 	}
 
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityParam{" +
@@ -422,6 +453,9 @@ public class CommodityParam implements Serializable{
 				", commodityModelNo=" + commodityModelNo+
 				", goodsParam=" + goodsParam+
 				", commodityType=" + commodityType+
+				", serviceDescription=" + serviceDescription+
+				", serviceDescriptionId=" + serviceDescriptionId+
+				", serviceDescriptionRemark=" + serviceDescriptionRemark+
 				'}';
 	}
 

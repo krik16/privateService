@@ -69,6 +69,11 @@ public class CommodityVO2 implements  Serializable {
 	private String brandName;
 	private String brandMid;
 	private List<String> referencePriceList;
+	private String serviceDescription;//售后说明
+
+	private Integer serviceDescriptionId;
+
+	private String serviceDescriptionRemark;
 
 	private String reason;
 
@@ -366,5 +371,29 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
 	}
 }
