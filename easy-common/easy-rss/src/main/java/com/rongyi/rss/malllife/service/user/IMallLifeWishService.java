@@ -43,7 +43,13 @@ public interface IMallLifeWishService {
     public List<MallLifeWishDO> getWishRank(int rank);
 
 
-
+    /**
+     * 排行榜
+     * @param userInfo 用户信息
+     * @param rankCount 排行前 rank位
+     * @return
+     */
+    ResponseVO getWishRank(UserInfoVO userInfo, int rankCount);
 
 
 

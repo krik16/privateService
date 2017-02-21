@@ -25,6 +25,7 @@ public class MallLifeWishVO implements Serializable {
     private String nickName;  //容易逛呢称
     private int wishCount;  //点赞计数
     private Date updateAt;  //更新时间
+    private int rank;  //排行榜
 
     public MallLifeWishVO(){}
 
@@ -140,6 +141,14 @@ public class MallLifeWishVO implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override
