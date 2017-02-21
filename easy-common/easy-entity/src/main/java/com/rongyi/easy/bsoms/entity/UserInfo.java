@@ -88,6 +88,8 @@ public class UserInfo implements Serializable{
     private Integer defaultTerminal ; //默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机'
     private Integer chiefId;
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
+    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
 
     public String getStopReason() {
 		return stopReason;
@@ -478,8 +480,24 @@ public class UserInfo implements Serializable{
     public void setDefaultTerminal(Integer defaultTerminal) {
         this.defaultTerminal = defaultTerminal;
     }
+    
+    public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
 
-    @Override
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
+
+	@Override
 	public String toString() {
 		return "UserInfo [id=" + id + ", type=" + type + ", identity="
 				+ identity + ", isCooperation=" + isCooperation + ", userLogo="
@@ -504,9 +522,11 @@ public class UserInfo implements Serializable{
 				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
-                + ", isSuspended=" + isSuspended
-				+ ", terminalType=" + terminalType + ", defaultTerminal=" + defaultTerminal
-				+ ", level=" + level + ", chiefId=" + chiefId + "]";
+				+ ", level=" + level + ", terminalType=" + terminalType
+				+ ", defaultTerminal=" + defaultTerminal + ", chiefId="
+				+ chiefId + ", isSuspended=" + isSuspended + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
-
+	
 }

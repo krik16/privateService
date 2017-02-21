@@ -85,6 +85,8 @@ public class BusinessAccountVO implements Serializable {
 	private String merchantAddress;//商户地址
 	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
 	private Integer defaultTerminal;//默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机
+	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
 	public String getMerchantAddress() {
 		return merchantAddress;
 	}
@@ -513,6 +515,18 @@ public class BusinessAccountVO implements Serializable {
 	public void setDefaultTerminal(Integer defaultTerminal) {
 		this.defaultTerminal = defaultTerminal;
 	}
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
 	public String getBindingMid(){
 		if(getIdentity() == 0){
 			return groupMid;
@@ -565,7 +579,9 @@ public class BusinessAccountVO implements Serializable {
 				+ backImg + ", workImg=" + workImg + ", otherImg=" + otherImg
 				+ ", resume=" + resume + ", position=" + position
 				+ ", merchantAddress=" + merchantAddress + ", terminalType="
-				+ terminalType + ", defaultTerminal=" + defaultTerminal + "]";
+				+ terminalType + ", defaultTerminal=" + defaultTerminal
+				+ ", isOpenQrCode=" + isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
 	
 }
