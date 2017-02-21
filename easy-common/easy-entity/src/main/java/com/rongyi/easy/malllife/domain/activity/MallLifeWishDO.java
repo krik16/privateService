@@ -4,13 +4,14 @@ import com.rongyi.easy.malllife.param.activity.MallLifeWishParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.util.Assert;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by wuhui on 2017/2/17.
  * 蜜桃节活动与数据库交互对象
  */
-public class MallLifeWishDO {
+public class MallLifeWishDO implements Serializable {
     private int id;
     private String wishName; //姓名
     private String wishContent;  //许愿内容

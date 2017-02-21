@@ -3,13 +3,14 @@ package com.rongyi.easy.malllife.domain.activity;
 import com.rongyi.easy.malllife.param.activity.MallLifeWishParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by wuhui on 2017/2/17.
  * 蜜桃节活动点赞与数据库交互对象
  */
-public class MallLifeWishRecordDO {
+public class MallLifeWishRecordDO implements Serializable {
     private int id;
     private int wishId;
     private String userId;
