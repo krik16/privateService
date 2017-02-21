@@ -1,6 +1,7 @@
 package com.rongyi.rpb.service.impl.v2;
 
 import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WechatConfigureVo;
 import com.rongyi.easy.rpb.vo.WechatPaySignVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
@@ -36,16 +37,16 @@ public class WechatPayServiceImpl implements IWechatPayService {
     RefundBizz refundBizz;
 
     @Override
-    public Map<String, Object> getPaySign(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
+    public Map<String, Object> getPaySign(RyMchVo ryMchVo,WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
 
-        log.info("获取微信支付签名,wechatPaySignVo={},wechatConfigureVo={}", wechatPaySignVo, wechatConfigureVo);
+        log.info("获取微信支付签名,ryMchVo={},wechatPaySignVo={},wechatConfigureVo={}", ryMchVo,wechatPaySignVo, wechatConfigureVo);
         try {
             //设置业务参数
             WechatPaySignData wechatPaySignData = getWechatPaySignData(wechatPaySignVo);
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //获取微信支付签名
-            Map<String, Object> map = payBizz.wechatScanPaySign(wechatConfigureVo.getRyMchId(), wechatPaySignData, wechatConfigure);
+            Map<String, Object> map = payBizz.wechatScanPaySign(ryMchVo, wechatPaySignData, wechatConfigure);
             //外部订单号
             map.put("orderNo", wechatPaySignVo.getOrderNo());
 
@@ -68,7 +69,7 @@ public class WechatPayServiceImpl implements IWechatPayService {
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            RefundResData refundResData = refundBizz.weChatRefund(wechatConfigureVo.getRyMchId(), orderNo, refundFee, wechatConfigure);
+            RefundResData refundResData = refundBizz.weChatRefund(orderNo, refundFee, wechatConfigure);
             Map<String, Object> map = BeanMapUtils.toMap(refundResData);
 
             //外部订单号
@@ -92,15 +93,15 @@ public class WechatPayServiceImpl implements IWechatPayService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> punchCardPay(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException{
-        log.info("发起微信刷卡支付,wechatPaySignVo={},wechatConfigureVo={}", wechatPaySignVo, wechatConfigureVo);
+    public Map<String, Object> punchCardPay(RyMchVo ryMchVo,WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException{
+        log.info("发起微信刷卡支付,ryMchVo={},wechatPaySignVo={},wechatConfigureVo={}",ryMchVo, wechatPaySignVo, wechatConfigureVo);
         try {
             //设置业务参数
             WechatPaySignData wechatPaySignData = getWechatPaySignData(wechatPaySignVo);
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //发起支付
-            PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(wechatConfigureVo.getRyMchId(), wechatPaySignData, wechatConfigure);
+            PunchCardPayResData punchCardPayResData = payBizz.wechatPunchCardPay(ryMchVo, wechatPaySignData, wechatConfigure);
 
             Map<String, Object> map = BeanMapUtils.toMap(punchCardPayResData);
 

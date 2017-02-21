@@ -5,7 +5,7 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.util.TradePaySignUtil;
-import com.rongyi.easy.roa.entity.MchEncryptInfo;
+import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.AliPayException;
@@ -18,8 +18,8 @@ import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
+import com.rongyi.rss.lightning.RoaRyMchAppService;
 import com.rongyi.rss.malllife.service.IRedisService;
-import com.rongyi.rss.roa.RoaMchEncryptInfoService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +53,7 @@ public class PayNotifyBizz {
     @Autowired
     IRedisService redisService;
     @Autowired
-    RoaMchEncryptInfoService  roaMchEncryptInfoService;
+    RoaRyMchAppService roaRyMchAppService;
 
     private static final Integer maxRetryTimes = 7;
 
@@ -230,11 +230,10 @@ public class PayNotifyBizz {
         log.info("notifyThird start...paymentEntity={},type={}", paymentEntity, type);
 
         //获取商户在容易网的加密信息
-        MchEncryptInfo mchEncryptInfo = roaMchEncryptInfoService.getByRyMchId(paymentEntity.getRyMchId());
-        // TODO 测试暂注释
-//        if(mchEncryptInfo == null || StringUtil.isEmpty(mchEncryptInfo.getToken())){
-//            throw new ThirdException(TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getCodeStr(), TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getValueStr());
-//        }
+        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(paymentEntity.getRyMchId(),paymentEntity.getRyAppId());
+        if(ryMchAppVo == null || StringUtil.isEmpty(ryMchAppVo.getToken())){
+            throw new ThirdException(TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getCodeStr(), TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getValueStr());
+        }
 
         Map<String,Object> map = new HashMap<>();
         map.put("notifyId", UUID.randomUUID());
@@ -254,9 +253,8 @@ public class PayNotifyBizz {
         map.put("type", type);
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
         map.put("timeStamp",timeStamp);
-        // TODO 测试暂注释
-//        String sign = TradePaySignUtil.getSignWithToken(map,mchEncryptInfo.getToken());
-        String sign = TradePaySignUtil.getSignWithToken(map, "5371c27921232f8c410000b5");
+        log.info("token={}",ryMchAppVo.getToken());
+        String sign = TradePaySignUtil.getSignWithToken(map,ryMchAppVo.getToken());
         map.put("sign", sign);
         String notifyUrl = redisService.get(paymentEntity.getPayNo()+paymentEntity.getOrderNum());
         if (StringUtils.isEmpty(notifyUrl)) {

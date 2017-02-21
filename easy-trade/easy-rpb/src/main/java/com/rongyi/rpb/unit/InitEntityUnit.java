@@ -2,6 +2,7 @@ package com.rongyi.rpb.unit;
 
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import org.slf4j.Logger;
@@ -28,10 +29,9 @@ public class InitEntityUnit {
     /**
      * 初始化支付记录
      */
-    public PaymentEntity initPaymentEntity(String ryMchId,String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
+    public PaymentEntity initPaymentEntity(RyMchVo ryMchVo,String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
                                            String aliSellerId,String wechatMchId){
         PaymentEntity paymentEntity = new PaymentEntity();
-        paymentEntity.setRyMchId(ryMchId);
         paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
         paymentEntity.setOrderNum(orderNo);
         paymentEntity.setOrderType(orderType);
@@ -43,6 +43,10 @@ public class InitEntityUnit {
         paymentEntity.setPayChannel(payChannel);
         paymentEntity.setAliSellerId(aliSellerId);
         paymentEntity.setWechatMchId(wechatMchId);
+        paymentEntity.setRyMchId(ryMchVo.getRyMchId());
+        paymentEntity.setRyAppId(ryMchVo.getRyAppId());
+        paymentEntity.setSource(ryMchVo.getSource());
+        paymentEntity.setOrgChannel(ryMchVo.getOrgChannel());
         log.info("初始化支付记录,paymentEntity={}",paymentEntity);
         return paymentEntity;
     }

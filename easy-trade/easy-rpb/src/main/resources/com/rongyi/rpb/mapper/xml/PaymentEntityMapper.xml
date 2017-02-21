@@ -22,15 +22,21 @@
         <result column="batch_no" property="batchNo" jdbcType="VARCHAR"/>
         <result column="refund_rejected" property="refundRejected"
                 jdbcType="VARCHAR"/>
-        <result column="weixin_mch_id" property="weixinMchId"
-                jdbcType="INTEGER"/>
+        <result column="weixin_mch_id" property="weixinMchId" jdbcType="INTEGER"/>
+        <result column="ali_seller_id" property="aliSellerId" jdbcType="VARCHAR"/>
+        <result column="wechat_mch_id" property="wechatMchId" jdbcType="VARCHAR"/>
+        <result column="ry_mch_id" property="ryMchId" jdbcType="VARCHAR"/>
+        <result column="ry_app_id" property="ryAppId" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="TINYINT"/>
+        <result column="org_channel" property="orgChannel" jdbcType="TINYINT"/>
 
     </resultMap>
 
     <sql id="Base_Column_List">
 		id, order_no,order_type,order_price,pay_no,pay_amount,
 		status,trade_type,create_at,
-		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id
+		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
+		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel
 	</sql>
 
     <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntity"
@@ -93,7 +99,25 @@
                 refund_rejected,
             </if>
             <if test="weixinMchId != null">
-                weixin_mch_id
+                weixin_mch_id,
+            </if>
+            <if test="aliSellerId != null">
+                ali_seller_id,
+            </if>
+            <if test="wechatMchId != null">
+                wechat_mch_id,
+            </if>
+            <if test="ryMchId != null">
+                ry_mch_id,
+            </if>
+            <if test="ryAppId != null">
+                ry_app_id,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="orgChannel != null">
+                org_channel
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -152,7 +176,25 @@
                 #{refundRejected,jdbcType=INTEGER},
             </if>
             <if test="weixinMchId != null">
-                #{weixinMchId,jdbcType=INTEGER}
+                #{weixinMchId,jdbcType=INTEGER},
+            </if>
+            <if test="aliSellerId != null">
+                #{aliSellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatMchId != null">
+                #{wechatMchId,jdbcType=VARCHAR},
+            </if>
+            <if test="ryMchId != null">
+                #{ryMchId,jdbcType=VARCHAR},
+            </if>
+            <if test="ryAppId != null">
+                #{ryAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=TINYINT},
+            </if>
+            <if test="orgChannel != null">
+                #{orgChannel,jdbcType=TINYINT}
             </if>
 
         </trim>
@@ -214,6 +256,24 @@
             </if>
             <if test="weixinMchId != null">
                 weixin_mch_id = #{weixinMchId,jdbcType=INTEGER}
+            </if>
+            <if test="aliSellerId != null">
+                ali_seller_id = #{aliSellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatMchId != null">
+                wechat_mch_id = #{wechatMchId,jdbcType=VARCHAR},
+            </if>
+            <if test="ryMchId != null">
+                ry_mch_id = #{ryMchId,jdbcType=VARCHAR},
+            </if>
+            <if test="ryAppId != null">
+                ry_app_id = #{ryAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=TINYINT},
+            </if>
+            <if test="orgChannel != null">
+                org_channel = #{orgChannel,jdbcType=TINYINT}
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}

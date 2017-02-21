@@ -8,6 +8,7 @@ import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.pay.core.Exception.AliPayException;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.ali.config.AliConfigure;
@@ -42,16 +43,16 @@ public class AliPayServiceImpl implements IAliPayService {
     RefundBizz refundBizz;
 
     @Override
-    public Map<String, Object> getPaySign(AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException{
+    public Map<String, Object> getPaySign(RyMchVo ryMchVo,AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException{
 
-        log.info("获取支付宝扫码签名,aliPaySignVo={},aliConfigureVo={}", aliPaySignVo, aliConfigureVo);
+        log.info("获取支付宝扫码签名,ryMchVo={},aliPaySignVo={},aliConfigureVo={}", ryMchVo,aliPaySignVo, aliConfigureVo);
         try {
             //初始化业务参数
             AliScanPayReqData aliScanPayReqData = getAliPaySignData(aliPaySignVo, aliConfigureVo);
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
             //获取签名
-            Map<String, Object> map = payBizz.aliScanPaySign(aliConfigureVo.getRyMchId(), aliScanPayReqData, aliConfigure);
+            Map<String, Object> map = payBizz.aliScanPaySign(ryMchVo, aliScanPayReqData, aliConfigure);
             //外部订单号
             map.put("orderNo", aliPaySignVo.getOrderNo());
             log.info("支付宝扫码签名结果,map={}", map);
@@ -75,7 +76,7 @@ public class AliPayServiceImpl implements IAliPayService {
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(aliConfigureVo.getRyMchId(), orderNo, refundAmount, refundReason, aliConfigure);
+            AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(orderNo, refundAmount, refundReason, aliConfigure);
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradeRefundResponse);
 
@@ -98,7 +99,7 @@ public class AliPayServiceImpl implements IAliPayService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> punchCardPay(AliPunchCardPayVo aliPunchCardPayVo, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> punchCardPay(RyMchVo ryMchVo,AliPunchCardPayVo aliPunchCardPayVo, AliConfigureVo aliConfigureVo) {
 
         log.info("支付宝刷卡支付,aliPunchCardPayVo={},aliConfigureVo={}", aliPunchCardPayVo, aliConfigureVo);
         try {
@@ -107,7 +108,7 @@ public class AliPayServiceImpl implements IAliPayService {
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(aliConfigureVo.getRyMchId(), aliPunchCardPayReqData, aliConfigure);
+            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(ryMchVo, aliPunchCardPayReqData, aliConfigure);
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradePayResponse);
 

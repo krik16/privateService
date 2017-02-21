@@ -6,6 +6,7 @@ import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
@@ -47,15 +48,15 @@ public class PayBizz {
     /**
      * 微信扫码支付签名
      *
-     * @param ryMchId 商户在容易网的商户号
+     * @param ryMchVo 容易商户信息
      * @param wechatPaySignData 业务参数
      * @param wechatConfigure   支付参数
      * @return map
      */
-    public Map<String, Object> wechatScanPaySign(String ryMchId,WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
+    public Map<String, Object> wechatScanPaySign(RyMchVo ryMchVo,WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchId,wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, Constants.ORDER_TYPE.ORDER_TYPE_6);
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo,wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, Constants.ORDER_TYPE.ORDER_TYPE_6);
 
         //获取微信支付签名
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
@@ -73,15 +74,15 @@ public class PayBizz {
 
     /**
      * 微信刷卡支付
-     * @param ryMchId 商户在容易网的商户号
+     * @param ryMchVo 容易商户信息
      * @param wechatPaySignData 业务参数
      * @param wechatConfigure   支付参数
      * @return PunchCardPayResData
      */
-    public PunchCardPayResData wechatPunchCardPay(String ryMchId,WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
+    public PunchCardPayResData wechatPunchCardPay(RyMchVo ryMchVo,WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchId,wechatPaySignData.getOrderNo(),wechatPaySignData.getTotalFee(),"", wechatConfigure.getMchID(),Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,Constants.ORDER_TYPE.ORDER_TYPE_6);
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo,wechatPaySignData.getOrderNo(),wechatPaySignData.getTotalFee(),"", wechatConfigure.getMchID(),Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,Constants.ORDER_TYPE.ORDER_TYPE_6);
 
         //发起支付
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
@@ -121,15 +122,15 @@ public class PayBizz {
 
     /**
      * 支付宝扫码支付签名
-     * @param ryMchId 商户在容易网的商户号
+     * @param ryMchVo 容易商户信息
      * @param aliScanPayReqData 业务参数
      * @param aliConfigure 支付参数
      * @return map
      */
-    public Map<String, Object> aliScanPaySign(String ryMchId,AliScanPayReqData aliScanPayReqData, AliConfigure aliConfigure) {
+    public Map<String, Object> aliScanPaySign(RyMchVo ryMchVo,AliScanPayReqData aliScanPayReqData, AliConfigure aliConfigure) {
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchId,aliScanPayReqData.getOrderNo(), aliScanPayReqData.getTotalAmount(), aliScanPayReqData.getSellerId(),"",Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,Constants.ORDER_TYPE.ORDER_TYPE_6);
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo,aliScanPayReqData.getOrderNo(), aliScanPayReqData.getTotalAmount(), aliScanPayReqData.getSellerId(),"",Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,Constants.ORDER_TYPE.ORDER_TYPE_6);
 
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
@@ -147,15 +148,15 @@ public class PayBizz {
 
     /**
      * 支付宝刷卡支付
-     * @param ryMchId 商户在容易网的商户号
+     * @param ryMchVo 容易商户信息
      * @param aliPunchCardPayReqData 业务参数
      * @param aliConfigure 支付参数
      * @return AlipayTradePayResponse
      */
-    public AlipayTradePayResponse aliPunchCardPay(String ryMchId,AliPunchCardPayReqData aliPunchCardPayReqData,AliConfigure aliConfigure){
+    public AlipayTradePayResponse aliPunchCardPay(RyMchVo ryMchVo,AliPunchCardPayReqData aliPunchCardPayReqData,AliConfigure aliConfigure){
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchId,aliPunchCardPayReqData.getOrderNo(),aliPunchCardPayReqData.getTotalAmount(),aliPunchCardPayReqData.getSellerId(),
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo,aliPunchCardPayReqData.getOrderNo(),aliPunchCardPayReqData.getTotalAmount(),aliPunchCardPayReqData.getSellerId(),
                 "",Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,Constants.ORDER_TYPE.ORDER_TYPE_6);
 
         //发起支付
@@ -198,7 +199,7 @@ public class PayBizz {
     /**
      * 初始化支付记录信息
      */
-    private PaymentEntity initPaymentEntity(String ryMchId,String orderNo, Integer totalFee, String aliSellerId, String wechatMchId, Integer payChannel, Integer orderType) {
+    private PaymentEntity initPaymentEntity(RyMchVo ryMchVo,String orderNo, Integer totalFee, String aliSellerId, String wechatMchId, Integer payChannel, Integer orderType) {
 
         //查找支付记录
         PaymentEntity paymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
@@ -215,7 +216,7 @@ public class PayBizz {
             paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         } else {
             //生成支付信息
-            paymentEntity = initEntityUnit.initPaymentEntity(ryMchId,orderNo, totalFee, orderType, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, payChannel, aliSellerId, wechatMchId);
+            paymentEntity = initEntityUnit.initPaymentEntity(ryMchVo,orderNo, totalFee, orderType, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, payChannel, aliSellerId, wechatMchId);
         }
         return paymentEntity;
     }
