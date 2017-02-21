@@ -252,31 +252,33 @@ public class ActivitySearchParam implements Serializable {
 
     @Override
     public String toString() {
-        return "ActivitySearchParam{" +
-            "brand_id='" + brand_id + '\'' +
-            ", keyword='" + keyword + '\'' +
-            ", distance=" + distance +
-            ", coord_x='" + coord_x + '\'' +
-            ", coord_y='" + coord_y + '\'' +
-            ", cat_id='" + cat_id + '\'' +
-            ", srcCategoryList=" + srcCategoryList +
-            ", custom_cat_id='" + custom_cat_id + '\'' +
-            ", city_name='" + city_name + '\'' +
-            ", sort='" + sort + '\'' +
-            ", requiredCoupon=" + requiredCoupon +
-            ", from=" + from +
-            ", size=" + size +
-            ", zone_id='" + zone_id + '\'' +
-            ", shop_id='" + shop_id + '\'' +
-            ", holder_id='" + holder_id + '\'' +
-            ", couponRequired=" + couponRequired +
-            ", shopList=" + shopList +
-            ", mallId='" + mallId + '\'' +
-            ", startLetter='" + startLetter + '\'' +
-            ", showChannel='" + showChannel + '\'' +
-            ", keywordList=" + keywordList +
-            ", couponId=" + couponId +
-            '}';
+        final StringBuffer sb = new StringBuffer("ActivitySearchParam{");
+        sb.append("keyword='").append(keyword).append('\'');
+        sb.append(", distance=").append(distance);
+        sb.append(", coord_x='").append(coord_x).append('\'');
+        sb.append(", coord_y='").append(coord_y).append('\'');
+        sb.append(", cat_id='").append(cat_id).append('\'');
+        sb.append(", srcCategoryList=").append(srcCategoryList);
+        sb.append(", custom_cat_id='").append(custom_cat_id).append('\'');
+        sb.append(", city_name='").append(city_name).append('\'');
+        sb.append(", sort='").append(sort).append('\'');
+        sb.append(", requiredCoupon=").append(requiredCoupon);
+        sb.append(", from=").append(from);
+        sb.append(", size=").append(size);
+        sb.append(", brand_id='").append(brand_id).append('\'');
+        sb.append(", zone_id='").append(zone_id).append('\'');
+        sb.append(", shop_id='").append(shop_id).append('\'');
+        sb.append(", holder_id='").append(holder_id).append('\'');
+        sb.append(", couponRequired=").append(couponRequired);
+        sb.append(", shopList=").append(shopList);
+        sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", startLetter='").append(startLetter).append('\'');
+        sb.append(", showChannel='").append(showChannel).append('\'');
+        sb.append(", keywordList=").append(keywordList);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", serviceId='").append(serviceId).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
 }
