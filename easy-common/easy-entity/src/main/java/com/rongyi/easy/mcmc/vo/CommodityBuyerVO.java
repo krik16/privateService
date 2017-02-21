@@ -91,6 +91,15 @@ public class CommodityBuyerVO implements Serializable {
 	private Long soldOutAt;//下架时间
     private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
     private List<String> categoryNames;
+    private Integer templateRelevantGoodsCouponId;  //用作排序
+
+    public Integer getTemplateRelevantGoodsCouponId() {
+        return templateRelevantGoodsCouponId;
+    }
+
+    public void setTemplateRelevantGoodsCouponId(Integer templateRelevantGoodsCouponId) {
+        this.templateRelevantGoodsCouponId = templateRelevantGoodsCouponId;
+    }
 
     public List<String> getCategoryNames() {
         return categoryNames;
@@ -143,6 +152,20 @@ public class CommodityBuyerVO implements Serializable {
 
     private int activityCommodityStatus;//活动商品状态2成功，其它失效
     private String crowdFundingPrice;//众筹价
+
+    private List<String> skus;
+
+    private String serviceDescription;   //售后说明内容
+    private Integer serviceDescriptionId;  //售后说明id
+    private String serviceDescriptionRemark;   //售后说明备注
+
+    public String getServiceDescriptionRemark() {
+        return serviceDescriptionRemark;
+    }
+
+    public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+        this.serviceDescriptionRemark = serviceDescriptionRemark;
+    }
 
     public String getCrowdFundingPrice() {
 		return crowdFundingPrice;
@@ -823,7 +846,31 @@ public class CommodityBuyerVO implements Serializable {
 		this.totalBuycount = totalBuycount;
 	}
 
-	public CommodityBuyerVO(Commodity commodity){
+    public List<String> getSkus() {
+        return skus;
+    }
+
+    public void setSkus(List<String> skus) {
+        this.skus = skus;
+    }
+
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public Integer getServiceDescriptionId() {
+        return serviceDescriptionId;
+    }
+
+    public void setServiceDescriptionId(Integer serviceDescriptionId) {
+        this.serviceDescriptionId = serviceDescriptionId;
+    }
+
+    public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -866,7 +913,9 @@ public class CommodityBuyerVO implements Serializable {
             this.commodityOPOfLCP = "0.0";
         }
         this.commodityCode = commodity.getCode();
-        this.commodityStatus = commodity.getStatus();
+        if (commodity.getStatus() != null){
+            this.commodityStatus = commodity.getStatus();
+        }
         this.commodityStock = String.valueOf(commodity.getStock());
         this.commodityBrandName = "";
         if(commodity.getBrandName() != null){
@@ -947,8 +996,13 @@ public class CommodityBuyerVO implements Serializable {
         this.setIfShowInWechat(
                 Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
                         .contains(commodity.getTerminalType())  &&
-                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3).contains(commodity.getWeAndTeStatus())
+                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3,
+                                CommodityTerminalType.weAndTeStatus.STATUS_6,CommodityTerminalType.weAndTeStatus.STATUS_7).contains(commodity.getWeAndTeStatus())
                         ?true:false);
+        this.skus=commodity.getSkus();
+        this.serviceDescription=commodity.getServiceDescription();
+        this.serviceDescriptionId=commodity.getServiceDescriptionId();
+        this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
     }
 
     @Override
@@ -1015,6 +1069,9 @@ public class CommodityBuyerVO implements Serializable {
                 ", ifShowInWechat=" + ifShowInWechat +
                 ", buyerCount=" + buyerCount +
                 ", totalBuycount=" + totalBuycount +
+                ", serviceDescription=" + serviceDescription +
+                ", serviceDescriptionId=" + serviceDescriptionId +
+                ", templateRelevantGoodsCouponId=" + templateRelevantGoodsCouponId +
                 '}';
     }
 

@@ -61,7 +61,9 @@ public class SessionUserInfo implements Serializable{
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
     
     private String address ;  //用户所属公司地址
-
+    
+    private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+    private Integer defaultTerminal;//默认终端 1 容易逛,2 微信,3 终端机
 
 	public String getMallMid() {
 		return mallMid;
@@ -329,5 +331,21 @@ public class SessionUserInfo implements Serializable{
 
 	public void setGrandpaShopMid(String grandpaShopMid) {
 		this.grandpaShopMid = grandpaShopMid;
+	}
+
+	public String getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
+	}
+
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
 	}
 }

@@ -35,6 +35,19 @@ public class TradeUserCodeDto implements Serializable {
 
     private Date endTime;
 
+    /**
+     * 作废时间
+     */
+    private Date obsoleteTime;
+
+    public Date getObsoleteTime() {
+        return obsoleteTime;
+    }
+
+    public void setObsoleteTime(Date obsoleteTime) {
+        this.obsoleteTime = obsoleteTime;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -153,5 +166,28 @@ public class TradeUserCodeDto implements Serializable {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("TradeUserCodeDto{");
+        sb.append("id=").append(id);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", orderId=").append(orderId);
+        sb.append(", orderNo='").append(orderNo).append('\'');
+        sb.append(", subOrderId=").append(subOrderId);
+        sb.append(", status=").append(status);
+        sb.append(", userId='").append(userId).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", source='").append(source).append('\'');
+        sb.append(", payTime=").append(payTime);
+        sb.append(", useTime=").append(useTime);
+        sb.append(", refundTime=").append(refundTime);
+        sb.append(", endTime=").append(endTime);
+        sb.append(", obsoleteTime=").append(obsoleteTime);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -2,10 +2,11 @@ package com.rongyi.easy.mcmc;
 
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
+import com.rongyi.easy.mcmc.vo.OperateCommodityVo;
+import org.apache.commons.collections.CollectionUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -33,103 +34,112 @@ public class CommoditySpec implements  Serializable {
 	private String lockedStock;//锁定库存
 	private String total;//规格商品总数 包括卖出和未卖出的
 	private String sku;//规格sku
-	
+	private String referencePrice;
+
 	public List<ObjectId> getColumnIds() {
 		return columnIds;
 	}
-	
+
 	public void setColumnIds(List<ObjectId> columnIds) {
 		this.columnIds = columnIds;
 	}
-	
+
 	public Date getCreateAt() {
 		return createAt;
 	}
-	
+
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
+
 	public Date getUpdateAt() {
 		return updateAt;
 	}
-	
+
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	
+
 	public ObjectId getId() {
 		return id;
 	}
-	
+
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
-	
+
 	public String getExtendColums() {
 		return extendColums;
 	}
-	
+
 	public void setExtendColums(String extendColums) {
 		this.extendColums = extendColums;
 	}
-	
+
 	public String getStock() {
 		return stock;
 	}
-	
+
 	public void setStock(String stock) {
 		this.stock = stock;
 	}
-	
+
 	public String getOriginalPrice() {
 		return originalPrice;
 	}
-	
+
 	public void setOriginalPrice(String originalPrice) {
 		this.originalPrice = originalPrice;
 	}
-	
+
 	public String getCurrentPrice() {
 		return currentPrice;
 	}
-	
+
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
-	
+
 	public List<String> getColumnValues() {
 		return columnValues;
 	}
-	
+
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
-	
+
 	public String getUpdateBy() {
 		return updateBy;
 	}
-	
+
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
-	
+
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
-	
+
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
-	
+
 	public List<String> getColumnNotes() {
 		return columnNotes;
 	}
-	
+
 	public void setColumnNotes(List<String> columnNotes) {
 		this.columnNotes = columnNotes;
 	}
-	
+
+	public String getReferencePrice() {
+		return referencePrice;
+	}
+
+	public void setReferencePrice(String referencePrice) {
+		this.referencePrice = referencePrice;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -142,7 +152,7 @@ public class CommoditySpec implements  Serializable {
 				+ ((columnValues == null) ? 0 : columnValues.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -169,31 +179,31 @@ public class CommoditySpec implements  Serializable {
 			return false;
 		return true;
 	}
-	
+
 	public String getTotal() {
 		return total;
 	}
-	
+
 	public void setTotal(String total) {
 		this.total = total;
 	}
-	
+
 	public String getLockedStock() {
 		return lockedStock;
 	}
-	
+
 	public void setLockedStock(String lockedStock) {
 		this.lockedStock = lockedStock;
 	}
-	
+
 	public String getSku() {
 		return sku;
 	}
-	
+
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-	
+
 	public void wrapSpecInfo(CommoditySpecVO vo) {
 		this.setCreateAt(new Date());
 		this.setUpdateAt(new Date());
@@ -207,6 +217,7 @@ public class CommoditySpec implements  Serializable {
 		this.setTotal(vo.getSpecStock());
 		this.setStock(vo.getSpecStock());
 		this.setPictureUrl(vo.getSpecPictureUrl());
+		this.setReferencePrice(vo.getReferencePrice());
 	}
-	
+
 }

@@ -15,6 +15,26 @@ public class WebChatParam extends MalllifeBaseParam {
 
     private String openId;//微信openId
 
+   // Valentine's day (情人节代码 VALDAY )
+    private String activityCode;//活动代码
+
+    private String activityTitle;//活动代码
+
+    public String getActivityCode() {
+        return activityCode;
+    }
+
+    public void setActivityCode(String activityCode) {
+        this.activityCode = activityCode;
+    }
+
+    public String getActivityTitle() {
+        return activityTitle;
+    }
+
+    public void setActivityTitle(String activityTitle) {
+        this.activityTitle = activityTitle;
+    }
 
     public String getOpenId() {
         return openId;

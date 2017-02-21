@@ -32,6 +32,12 @@ public class RequestPaymentParam implements Serializable{
 	private String merchantUrl;//支付宝网页支付支付取消返回商家url
 
 	private String articleId;//类型文章id
+
+	/**
+	 * 商场id
+	 */
+	private String mallId;
+
 	public List<String> getOrderNums() {
 		return orderNums;
 	}
@@ -96,6 +102,14 @@ public class RequestPaymentParam implements Serializable{
 		this.articleId = articleId;
 	}
 
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestPaymentParam{" +
@@ -107,6 +121,7 @@ public class RequestPaymentParam implements Serializable{
 				", callBackUrl='" + callBackUrl + '\'' +
 				", merchantUrl='" + merchantUrl + '\'' +
 				", articleId='" + articleId + '\'' +
+				", mallId='" + mallId + '\'' +
 				'}';
 	}
 }

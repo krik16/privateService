@@ -49,6 +49,9 @@ public class TradeUserCode implements Serializable {
 
     private Date endTime;
 
+    /**
+     * 未使用[1],已使用[2],已过期[3],退款中[4],已退款[5],作废[6]
+     */
     private Byte status;
 
     private String mallId;

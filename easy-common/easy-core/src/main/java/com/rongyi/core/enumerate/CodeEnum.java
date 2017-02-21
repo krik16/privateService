@@ -47,7 +47,7 @@ public enum CodeEnum {
     
     /**扫码错误信息*/
     ERROR_RECEIVECOUPONMSG("-1125","亲，手慢了，奖品被抢光了……"),
-    ERROR_RECEIVECOUPONMSGCOUNT("-1129","对不去你的领取次数超过了限制"),
+    ERROR_RECEIVECOUPONMSGCOUNT("-1129","抱歉，您的领取次数超过了限制"),
     /** 验证码无效或已过期 */
     ERROR_VERIFICATION_CODE("-1106","验证码无效或已过期 "),
     
@@ -267,6 +267,7 @@ public enum CodeEnum {
 
     ERROR_EXIST_PASSWORD("1300000", "虚拟账户未设置提现密码"),
     SUCCESS_EXIST_PASSWORD("1300001", "虚拟账户已设置提现密码"),
+    DRAW_AMOUNT_LOW("1300002", "提现金额不能小于0元"),
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务"),
 
     ERROR_TAG_EXISTED("-111111", "标签名称已存在"),
