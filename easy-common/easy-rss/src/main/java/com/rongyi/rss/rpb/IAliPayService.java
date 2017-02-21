@@ -4,6 +4,7 @@ import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 
 import java.util.Map;
 
@@ -15,11 +16,12 @@ public interface IAliPayService {
 
     /**
      * 获取支付宝扫码支付签名
+     * @param ryMchVo 容易商户信息
      * @param aliPaySignVo 业务参数
      * @param aliConfigureVo 支付参数
      * @return map 签名内容
      */
-    Map<String, Object> getPaySign(AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException;
+    Map<String, Object> getPaySign(RyMchVo ryMchVo,AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
      * 面对面支付退款
@@ -33,17 +35,18 @@ public interface IAliPayService {
 
     /**
      * 支付宝刷卡支付
+     * @param ryMchVo 容易商户信息
      * @param aliPunchCardPayVo 业务参数
      * @param aliConfigureVo 支付参数
      * @return map
      */
-    Map<String,Object> punchCardPay(AliPunchCardPayVo aliPunchCardPayVo,AliConfigureVo aliConfigureVo) throws TradePayException;
+    Map<String,Object> punchCardPay(RyMchVo ryMchVo,AliPunchCardPayVo aliPunchCardPayVo,AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
      * 支付宝面对面支付结果查询
      * @param orderNo 订单号
      * @param aliConfigureVo 支付参数
-     * @return
+     * @return map
      */
     Map<String,Object> f2fPayQuery(String orderNo,AliConfigureVo aliConfigureVo) throws TradePayException;
 

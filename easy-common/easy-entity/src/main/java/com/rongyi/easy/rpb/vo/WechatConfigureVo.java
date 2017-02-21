@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * conan
  * 2016/10/11 14:49
  **/
-public class WechatConfigureVo extends RyMchIdVo{
+public class WechatConfigureVo extends RyMchVo {
 
 
     private String key = "";

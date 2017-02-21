@@ -1,6 +1,7 @@
 package com.rongyi.rss.rpb;
 
 import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WechatConfigureVo;
 import com.rongyi.easy.rpb.vo.WechatPaySignVo;
 
@@ -15,11 +16,12 @@ public interface IWechatPayService {
     /**
      * 获取微信支付签名(app或者jsapi)
      *
+     * @param ryMchVo   容易商户信息
      * @param wechatPaySignVo   业务参数
      * @param wechatConfigureVo 支付参数
      * @return map 签名内容
      */
-    Map<String, Object> getPaySign(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException;
+    Map<String, Object> getPaySign(RyMchVo ryMchVo,WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException;
 
     /**
      * 普通支付退款
@@ -32,11 +34,12 @@ public interface IWechatPayService {
     /**
      * 刷卡支付
      *
+     * @param ryMchVo   容易商户信息
      * @param wechatPaySignVo   业务参数
      * @param wechatConfigureVo 支付参数
      * @return map 签名内容
      */
-    Map<String, Object> punchCardPay(WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException;
+    Map<String, Object> punchCardPay(RyMchVo ryMchVo,WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException;
 
     /**
      * 刷卡支付订单查询
