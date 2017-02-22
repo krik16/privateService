@@ -405,8 +405,10 @@ public interface CommodityService {
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 
     CommodityVO getCommodityDetail(String id);
+    public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
     Boolean setMerchantIdToServiceId();
     
     public List<CommodityCategory> selectCommodityCategoryByids(List<String> commodityCategoryids);
+
 }

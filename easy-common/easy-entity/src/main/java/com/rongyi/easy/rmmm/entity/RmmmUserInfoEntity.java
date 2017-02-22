@@ -101,7 +101,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
     private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
-    public Integer getId() {
+     public Integer getId() {
 		return id;
 	}
 
@@ -513,7 +513,6 @@ public class RmmmUserInfoEntity implements Serializable{
 				+ isSuspended + ", isOpenQrCode=" + isOpenQrCode
 				+ ", isAllowBindingWechat=" + isAllowBindingWechat + "]";
 	}
-
 	
 }
 

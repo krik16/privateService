@@ -72,6 +72,7 @@ public interface CommodityTerminalType {
 	// 2:为微信端展示
 	// 3:为终端+微信
 	// 4:为APP
+	// 5:为终端+APPss
 	// 5:为终端+APP
 	// 6:为微信+APP
 	// 7:为终端+微信+APP

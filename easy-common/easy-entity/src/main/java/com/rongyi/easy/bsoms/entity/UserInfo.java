@@ -464,6 +464,7 @@ public class UserInfo implements Serializable{
 	public void setIsSuspended(Integer isSuspended) {
 		this.isSuspended = isSuspended;
 	}
+	
 
     public String getTerminalType() {
         return terminalType;
