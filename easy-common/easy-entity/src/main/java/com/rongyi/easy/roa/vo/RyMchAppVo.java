@@ -1,11 +1,14 @@
 package com.rongyi.easy.roa.vo;
 
+import java.io.Serializable;
+
 /**
  * conan
  * 2017/2/21 10:59
  **/
-public class RyMchAppVo {
+public class RyMchAppVo implements Serializable{
 
+    private static final long serialVersionUID = 2130814086344407716L;
     private String ryMchId;
 
     private String ryMchName;
