@@ -1,0 +1,37 @@
+package com.rongyi.easy.mcmc.vo;
+
+import java.io.Serializable;
+
+/**
+ * Created by xuying on 2017/1/19.
+ */
+public class CustomCategoryVo implements Serializable{
+
+    private Integer customCategoryId;
+
+    private String customCategoryName;
+
+
+    public Integer getCustomCategoryId() {
+        return customCategoryId;
+    }
+
+    public void setCustomCategoryId(Integer customCategoryId) {
+        this.customCategoryId = customCategoryId;
+    }
+
+    public String getCustomCategoryName() {
+        return customCategoryName;
+    }
+
+    public void setCustomCategoryName(String customCategoryName) {
+        this.customCategoryName = customCategoryName;
+    }
+    @Override
+    public String toString() {
+        return "CustomCategoryParam{" +
+                "customCategoryId=" + customCategoryId +
+                ", customCategoryName=" + customCategoryName +
+                '}';
+    }
+}

@@ -190,4 +190,11 @@ public interface RoaCouponCodeService {
      * @return
      */
     public String getJiadeliCouponCode(String couponId,String couponCode) throws RYServiceException;
+
+    /**
+     * 取出所有卡券券码，并更新卡券状态为1
+     * @param couponId
+     * @return
+     */
+    public List<String> getCodesAndUpdateStatus(String couponId);
 }

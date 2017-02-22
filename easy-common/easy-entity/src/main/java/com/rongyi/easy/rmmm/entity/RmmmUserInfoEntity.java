@@ -96,8 +96,12 @@ public class RmmmUserInfoEntity implements Serializable{
 	private Integer isChief;//是否主账号，默认 
 	private Integer level;//层级 1级 2级 3级
     private Integer chiefId; //主账号ID
+	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机
     private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
-    public Integer getId() {
+/*    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+*/    public Integer getId() {
 		return id;
 	}
 
@@ -440,6 +444,22 @@ public class RmmmUserInfoEntity implements Serializable{
         this.chiefId = chiefId;
     }
 
+	public String getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
+	}
+
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
+	}
+
 	public Integer getIsSuspended() {
 		return isSuspended;
 	}
@@ -447,6 +467,7 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setIsSuspended(Integer isSuspended) {
 		this.isSuspended = isSuspended;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -474,5 +495,6 @@ public class RmmmUserInfoEntity implements Serializable{
 				+ ", isChief=" + isChief + ", level=" + level + ", chiefId="
 				+ chiefId + ", isSuspended=" + isSuspended + "]";
 	}
+	
 }
 

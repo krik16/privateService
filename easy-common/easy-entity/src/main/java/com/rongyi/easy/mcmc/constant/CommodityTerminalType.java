@@ -30,7 +30,7 @@ public interface CommodityTerminalType {
 	public static final int TERMINAL_TYPE_6 = 6;
 	/** 终端类别：容易逛、互动屏、微信 **/
 	public static final int TERMINAL_TYPE_7 = 7;
-	
+
 	/**
 	 * 终端索引工具类
 	 */
@@ -47,7 +47,7 @@ public interface CommodityTerminalType {
 				put(TERMINAL_TYPE_7, "容易逛、互动屏、微信");
 			}
 		};
-		
+
 		/**
 		 * 返回终端对应描述索引
 		 * @return
@@ -55,7 +55,7 @@ public interface CommodityTerminalType {
 		public final static Map<Integer, String> getNameIndex() {
 			return typeDic;
 		}
-		
+
 		/**
 		 * 返回对应的终端显示描述
 		 * @param index
@@ -66,11 +66,25 @@ public interface CommodityTerminalType {
 		}
 	}
 
-	interface weAndTeStatus{//商品在终端屏的展示状态，1为终端屏展示，2为微信端展示，3为都展示，4为都不展示。
+	//商品在终端屏的展示状态
+	// 0:所有的都不展示
+	// 1:为终端屏展示
+	// 2:为微信端展示
+	// 3:为终端+微信
+	// 4:为APP
+	// 5:为终端+APPss
+	// 5:为终端+APP
+	// 6:为微信+APP
+	// 7:为终端+微信+APP
+	interface weAndTeStatus{
+		String STATUS_0="0";
 		String STATUS_1="1";
 		String STATUS_2="2";
 		String STATUS_3="3";
 		String STATUS_4="4";
+		String STATUS_5="5";
+		String STATUS_6="6";
+		String STATUS_7="7";
 	}
-	
+
 }

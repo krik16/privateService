@@ -67,6 +67,7 @@ public interface CouponConst {
     interface COUPON_TYPE {
         String COUPON = "02";//代金券
         String CASHCOUPON = "03";//红包
+        String OUTERCOUPON = "04";//外部导入券
     }
 
 
