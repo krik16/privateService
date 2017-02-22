@@ -64,8 +64,9 @@ public class SessionUserInfo implements Serializable{
     
     private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
     private Integer defaultTerminal;//默认终端 1 容易逛,2 微信,3 终端机
-    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
-	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private Integer isOpenQrCode;
+	private Integer isAllowBindingWechat;
+
 
 	public String getMallMid() {
 		return mallMid;

@@ -533,5 +533,4 @@ public class UserManagerParam extends BaseParam implements Serializable{
 				+ isAllowBindingWechat + "]";
 	}
 	
-
 }

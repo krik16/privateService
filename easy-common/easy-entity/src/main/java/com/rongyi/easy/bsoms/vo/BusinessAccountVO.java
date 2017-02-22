@@ -527,6 +527,7 @@ public class BusinessAccountVO implements Serializable {
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
+
 	public String getBindingMid(){
 		if(getIdentity() == 0){
 			return groupMid;
