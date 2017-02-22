@@ -599,6 +599,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", wechatInfoVos=" + wechatInfoVos +
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
+				", mallServiceIds=" + mallServiceIds +
 				'}';
 	}
 
@@ -672,7 +673,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
-
 	}
 
 	public String getSubheading() {
@@ -776,6 +776,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
+			this.setMallServiceIds(param.getServiceIds());
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}

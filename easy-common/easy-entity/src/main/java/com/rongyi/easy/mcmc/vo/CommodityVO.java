@@ -1090,8 +1090,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
-				"activityId=" + activityId +
-				", commodityId='" + commodityId + '\'' +
 				"commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
@@ -1161,6 +1159,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", updateAt=" + updateAt +
 				", galleryPosition=" + galleryPosition +
 				", inActivity=" + inActivity +
+				", shelvesType=" + shelvesType +
+				", offerShelves=" + offerShelves +
 				", giftId='" + giftId + '\'' +
 				", sn='" + sn + '\'' +
 				", mappingId='" + mappingId + '\'' +
@@ -1182,8 +1182,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", platform='" + platform + '\'' +
 				", price=" + price +
 				", selfTakeDays=" + selfTakeDays +
-				", shelvesType=" + shelvesType +
-				", offerShelves=" + offerShelves +
 				", subheading='" + subheading + '\'' +
 				", commodityDetails='" + commodityDetails + '\'' +
 				", ifShowInWechat=" + ifShowInWechat +
@@ -1192,14 +1190,19 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", locationIds=" + locationIds +
 				", accountType=" + accountType +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
-				", serviceDescription=" + serviceDescription +
-				", serviceDescriptionId=" + serviceDescriptionId +
+				", freePostage='" + freePostage + '\'' +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
+				", skus=" + skus +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
-				", skus=" + skus +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				'}';
 	}
 
