@@ -1245,6 +1245,9 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setBrandMid(commodity.getBrandMid());
 		vo.setBrandName(commodity.getBrandName());
 		vo.setCommodityModelNo(commodity.getCommodityModelNo());
+		vo.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		vo.setServiceDescription(commodity.getServiceDescription());
+		vo.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
 		return vo;
 	}
 
