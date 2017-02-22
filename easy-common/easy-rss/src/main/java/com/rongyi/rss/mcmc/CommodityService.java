@@ -411,4 +411,6 @@ public interface CommodityService {
     public List<CommodityCategory> selectCommodityCategoryByids(List<String> commodityCategoryids);
     
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
+
+    public Boolean setMallIdToServiceId();
 }
