@@ -265,5 +265,8 @@ public class PayNotifyBizz {
         if (StringUtil.isEmpty(result) || !"SUCCESS".equals(result)) {
             throw new ThirdException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
         }
+        //删除异步通知地址
+        redisService.expire(paymentEntity.getPayNo() + paymentEntity.getOrderNum(),1000);
+
     }
 }

@@ -255,7 +255,7 @@
                 refund_rejected = #{refundRejected,jdbcType=INTEGER},
             </if>
             <if test="weixinMchId != null">
-                weixin_mch_id = #{weixinMchId,jdbcType=INTEGER}
+                weixin_mch_id = #{weixinMchId,jdbcType=INTEGER},
             </if>
             <if test="aliSellerId != null">
                 ali_seller_id = #{aliSellerId,jdbcType=VARCHAR},
