@@ -335,10 +335,10 @@ public interface CommodityService {
     /**
      *
      * @param ids
-     * @param isOnlySkillCommdity true 返回非秒杀商品
+     * @param isNotSkillCommdity true 返回没有秒杀商品
      * @return
      */
-    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids,boolean isOnlySkillCommdity);
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids,boolean isNotSkillCommdity);
 
     ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
