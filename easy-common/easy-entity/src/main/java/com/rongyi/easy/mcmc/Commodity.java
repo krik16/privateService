@@ -150,7 +150,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;//0集团商品，1商场商品，4,5店铺商品
-	private List<String> serviceIds;//微信公众号ids
+	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> mallServiceIds;
 	private String groupMid; //集团Mid
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
@@ -160,6 +161,14 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> onServiceIds; // 标记为打开的服务号
 	private List<String> offServiceIds; // 被大运营标记为关闭的服务号
 	private String weAndTeStatus;
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
 
 	public String getWeAndTeStatus() {
 		return weAndTeStatus;
@@ -867,11 +876,11 @@ public class Commodity implements  Serializable,Cloneable{
 		this.commodityDetails = commodityDetails;
 	}
 
-	public List<String> getServiceIds() {
+	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<String> serviceIds) {
+	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
@@ -1082,7 +1091,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 			this.setLocationIds(vo.getLocationIds());
 			this.setAccountType(vo.getIdentity());
-			this.setServiceIds(vo.getServiceIds());
+			this.setMallServiceIds(vo.getMallServiceIds());
 			this.setMerchantId(vo.getMerchantId());
 			this.setMerchantType(vo.getMerchantType());
 			this.setOnServiceIds(vo.getOnServiceIds());

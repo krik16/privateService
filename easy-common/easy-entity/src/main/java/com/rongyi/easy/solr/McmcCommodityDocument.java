@@ -135,12 +135,21 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("locationIds")
 	private List<String> locationIds;
 	@Field("serviceIds")
-	private List<String> serviceIds;
+	private List<Integer> serviceIds;
+	@Field("mallServiceIds")
+	private List<String> mallServiceIds;
 	@Field("onServiceIds")
 	private List<String> onServiceIds;
 	@Field("offServiceIds")
 	private List<String> offServiceIds;
 
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
@@ -575,11 +584,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.locationIds = locationIds;
 	}
 
-	public List<String> getServiceIds() {
+	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<String> serviceIds) {
+	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
@@ -651,7 +660,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 
 		this.setLocationIds(commodity.getLocationIds());
-		this.setServiceIds(commodity.getServiceIds());
+		//this.setServiceIds(commodity.getServiceIds());
+		this.setMallServiceIds(commodity.getMallServiceIds());
 	}
 
 	public void toDocument(Commodity commodity) {

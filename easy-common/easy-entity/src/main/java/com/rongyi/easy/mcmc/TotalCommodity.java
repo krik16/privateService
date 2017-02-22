@@ -97,7 +97,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
 
 	private List<String> locationIds;//商品记录发到所有集团或者单个商场或者单个店铺集合
-	private List<String> serviceIds;//微信公众号ids或者容易逛id
+	private List<Integer> serviceIds;//微信公众号ids或者容易逛id
+	private List<String> mallServiceIds;
 	private Integer accountType;
 	private String merchantId;  //商户id
 	private List<WechatInfoVo> wechatInfoVos;
@@ -108,6 +109,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
 	private String brandName;
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
@@ -284,13 +293,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
 		this.customCategoryIds = customCategoryIds;
 	}
-
-	/*public Integer getDistribution() {
-		return distribution;
-	}
-	public void setDistribution(Integer distribution) {
-		this.distribution = distribution;
-	}*/
 
 	public Integer getFreight() {
 		return freight;
@@ -512,11 +514,11 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.shelvesType = shelvesType;
 	}
 
-	public List<String> getServiceIds() {
+	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<String> serviceIds) {
+	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
@@ -663,7 +665,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 		this.setLocationIds(commodity.getLocationIds());
 		this.setAccountType(commodity.getIdentity());
-		this.setServiceIds(commodity.getServiceIds());
+		//this.setServiceIds(commodity.getServiceIds());
+		this.setMallServiceIds(commodity.getMallServiceIds());
 		this.setMerchantId(commodity.getMerchantId());
 		this.setShelvesType(commodity.getShelvesType());
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
@@ -762,7 +765,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 
 			this.setAccountType(userInfo.getIdentity());
-			this.setServiceIds(param.getServiceIds());
+			this.setMallServiceIds(param.getServiceIds());
 			this.setMerchantId(userInfo.getBindingMid());
 			this.setSource(param.getSource());
 			this.setSubheading(param.getSubheading());
