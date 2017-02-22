@@ -38,6 +38,8 @@
 	<result column="is_chief" property="isChief" jdbcType="INTEGER" />
 	<result column="level" property="level" jdbcType="INTEGER" />
 	<result column="chief_id" property="chiefId" jdbcType="INTEGER" />
+	<result column="terminal_type" property="terminalType" jdbcType="VARCHAR" />
+	<result column="default_terminal" property="defaultTerminal" jdbcType="INTEGER" />
 	<result column="is_suspended" property="isSuspended" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >

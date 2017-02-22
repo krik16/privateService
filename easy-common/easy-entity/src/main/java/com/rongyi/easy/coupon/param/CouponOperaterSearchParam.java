@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by shaozhou on 2016/12/7.
  */
 public class CouponOperaterSearchParam implements Serializable {
-    private Integer showChannel;//1 互动屏 2 微信
+    private Integer showChannel;//1 微信 2 互动屏 3容易逛
     private Integer source;// 1 后台添加 2 店长上传 3 代运营
     private String idOrName;// 卡券名称或编号
     private Integer dateType;// 时间查询类型 1 发布时间 2 有效时间

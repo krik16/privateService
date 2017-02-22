@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.constant.Const;
+
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -275,11 +276,14 @@ public class Util {
 		params.put("timeStamp",1515567178131l);*/
 
 		//积分消费并同步订单接口
-		params.put("cardNumber","15000388436");
-		params.put("orderNumber","401201607250945111");
-		params.put("serialNumber","201701110945111");
-		params.put("timeStamp",1515567178131l);
-		params.put("verificationCode","850163");
+//		params.put("cardNumber","15000388436");
+//		params.put("orderNumber","401201607250945111");
+//		params.put("serialNumber","201701110945111");
+//		params.put("timeStamp",1515567178131l);
+//		params.put("verificationCode","850163");
+        params.put("mallId", "54f403eae4b002000cf63762");
+        params.put("channel", "weChat");
+        params.put("timeStamp", "1486722168000");
 
 		//订单冲正接口
 		/*params.put("cardNumber","15000388436");
@@ -296,6 +300,7 @@ public class Util {
 		//渠道列表参数
 		/*params.put("source",1);
 		params.put("timeStamp",1515567178131l);*/
-		signValidateWithoutChannel(params,"dddd");
+		//signValidateWithoutChannel(params,"dddd");
+        signValidate(params,"e854f5203fd3a7eaca5acadc17f54997");
 	}
 }
