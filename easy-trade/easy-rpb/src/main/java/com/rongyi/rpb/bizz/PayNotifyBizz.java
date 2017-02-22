@@ -5,7 +5,7 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.util.TradePaySignUtil;
-import com.rongyi.easy.roa.entity.MchEncryptInfo;
+import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.AliPayException;
@@ -18,8 +18,8 @@ import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
+import com.rongyi.rss.lightning.RoaRyMchAppService;
 import com.rongyi.rss.malllife.service.IRedisService;
-import com.rongyi.rss.roa.RoaMchEncryptInfoService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +53,7 @@ public class PayNotifyBizz {
     @Autowired
     IRedisService redisService;
     @Autowired
-    RoaMchEncryptInfoService  roaMchEncryptInfoService;
+    RoaRyMchAppService roaRyMchAppService;
 
     private static final Integer maxRetryTimes = 7;
 
@@ -70,7 +70,7 @@ public class PayNotifyBizz {
             String tradeNo = map.get("trade_no");
             String buyerId = map.get("buyer_id");
             String buyerEmail = map.get("buyer_logon_id");
-            BigDecimal payAmount = new BigDecimal(map.get("total_amount")).multiply(new BigDecimal(100));
+            BigDecimal payAmount = new BigDecimal(map.get("total_amount"));
 
             this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, buyerId, buyerEmail);
         } else {
@@ -88,7 +88,7 @@ public class PayNotifyBizz {
             String payNo = map.get("out_trade_no");
             String tradeNo = map.get("transaction_id");
             String openId = map.get("openid");
-            BigDecimal payAmount = new BigDecimal(map.get("total_fee")).multiply(new BigDecimal(100));
+            BigDecimal payAmount = new BigDecimal(map.get("total_fee")).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
 
             this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, openId,"");
         } else {
@@ -110,11 +110,13 @@ public class PayNotifyBizz {
         //获取支付信息
         PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
         if (paymentEntity == null) {
-            throw new TradeException("此订单支付记录不存在,payNo={}", payNo);
+            log.warn("此订单支付记录不存在,payNo={}",payNo);
+            throw new TradeException("支付记录不存在");
         }
 
         if (paymentEntity.getAmountMoney().compareTo(payAmount) != 0) {
-            throw new TradeException("支付金额不符,payNo={}", payNo);
+            log.warn("支付金额不符payNo={},realAmount={},recordAmount={}", payNo, payAmount, paymentEntity.getAmountMoney());
+            throw new TradeException("支付金额不符");
         }
 
         //初始化支付事件记录
@@ -228,8 +230,8 @@ public class PayNotifyBizz {
         log.info("notifyThird start...paymentEntity={},type={}", paymentEntity, type);
 
         //获取商户在容易网的加密信息
-        MchEncryptInfo mchEncryptInfo = roaMchEncryptInfoService.getByRyMchId(paymentEntity.getRyMchId());
-        if(mchEncryptInfo == null || StringUtil.isEmpty(mchEncryptInfo.getToken())){
+        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(paymentEntity.getRyMchId(),paymentEntity.getRyAppId());
+        if(ryMchAppVo == null || StringUtil.isEmpty(ryMchAppVo.getToken())){
             throw new ThirdException(TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getCodeStr(), TradeConstantEnum.EXCEPTION_RY_MCH_NOT_FOUND.getValueStr());
         }
 
@@ -251,7 +253,8 @@ public class PayNotifyBizz {
         map.put("type", type);
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
         map.put("timeStamp",timeStamp);
-        String sign = TradePaySignUtil.getSignWithToken(map,mchEncryptInfo.getToken());
+        log.info("token={}",ryMchAppVo.getToken());
+        String sign = TradePaySignUtil.getSignWithToken(map,ryMchAppVo.getToken());
         map.put("sign", sign);
         String notifyUrl = redisService.get(paymentEntity.getPayNo()+paymentEntity.getOrderNum());
         if (StringUtils.isEmpty(notifyUrl)) {
@@ -262,5 +265,8 @@ public class PayNotifyBizz {
         if (StringUtil.isEmpty(result) || !"SUCCESS".equals(result)) {
             throw new ThirdException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
         }
+        //删除异步通知地址
+        redisService.expire(paymentEntity.getPayNo() + paymentEntity.getOrderNum(),1000);
+
     }
 }

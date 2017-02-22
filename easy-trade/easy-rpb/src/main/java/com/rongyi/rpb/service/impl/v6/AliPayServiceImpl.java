@@ -1,4 +1,4 @@
-package com.rongyi.rpb.service.impl.v2;
+package com.rongyi.rpb.service.impl.v6;
 
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
@@ -8,7 +8,9 @@ import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.pay.core.Exception.AliPayException;
+import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.ali.model.auth.AuthorizeRespData;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
@@ -19,6 +21,7 @@ import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -41,21 +44,23 @@ public class AliPayServiceImpl implements IAliPayService {
     RefundBizz refundBizz;
 
     @Override
-    public Map<String, Object> getPaySign(AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> getPaySign(RyMchVo ryMchVo,AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException{
 
-        log.info("获取支付宝扫码签名,aliPaySignVo={},aliConfigureVo={}", aliPaySignVo, aliConfigureVo);
+        log.info("获取支付宝扫码签名,ryMchVo={},aliPaySignVo={},aliConfigureVo={}", ryMchVo,aliPaySignVo, aliConfigureVo);
         try {
+            //检查开放商户信息
+            checkMchParam(ryMchVo);
             //初始化业务参数
             AliScanPayReqData aliScanPayReqData = getAliPaySignData(aliPaySignVo, aliConfigureVo);
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
             //获取签名
-            Map<String, Object> map = payBizz.aliScanPaySign(aliConfigureVo.getRyMchId(), aliScanPayReqData, aliConfigure);
+            Map<String, Object> map = payBizz.aliScanPaySign(ryMchVo, aliScanPayReqData, aliConfigure);
             //外部订单号
             map.put("orderNo", aliPaySignVo.getOrderNo());
             log.info("支付宝扫码签名结果,map={}", map);
             return map;
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             throw e;
@@ -67,14 +72,14 @@ public class AliPayServiceImpl implements IAliPayService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> f2fPayRefund(String orderNo, Integer refundAmount, String refundReason, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> f2fPayRefund(String orderNo, Integer refundAmount, String refundReason, AliConfigureVo aliConfigureVo) throws TradePayException{
 
         log.info("支付宝面对面退款,orderNo={},refundAmount={},refundReson={},aliConfigUreVo={}", orderNo, refundAmount, refundReason, aliConfigureVo);
         try {
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(aliConfigureVo.getRyMchId(), orderNo, refundAmount, refundReason, aliConfigure);
+            AlipayTradeRefundResponse alipayTradeRefundResponse = refundBizz.aliRefund(orderNo, refundAmount, refundReason, aliConfigure);
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradeRefundResponse);
 
@@ -85,7 +90,7 @@ public class AliPayServiceImpl implements IAliPayService {
 
             log.info("支付宝面对面支付退款,map={}", map);
             return map;
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             throw e;
@@ -97,16 +102,18 @@ public class AliPayServiceImpl implements IAliPayService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> punchCardPay(AliPunchCardPayVo aliPunchCardPayVo, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> punchCardPay(RyMchVo ryMchVo,AliPunchCardPayVo aliPunchCardPayVo, AliConfigureVo aliConfigureVo) {
 
         log.info("支付宝刷卡支付,aliPunchCardPayVo={},aliConfigureVo={}", aliPunchCardPayVo, aliConfigureVo);
         try {
+            //检查开放商户信息
+            checkMchParam(ryMchVo);
             //初始化业务参数
             AliPunchCardPayReqData aliPunchCardPayReqData = getAliPunchCardPayReqData(aliPunchCardPayVo, aliConfigureVo);
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(aliConfigureVo.getRyMchId(), aliPunchCardPayReqData, aliConfigure);
+            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(ryMchVo, aliPunchCardPayReqData, aliConfigure);
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradePayResponse);
 
@@ -118,7 +125,7 @@ public class AliPayServiceImpl implements IAliPayService {
 
             log.info("支付宝刷卡支付结果,map={}", map);
             return map;
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             throw e;
@@ -130,7 +137,7 @@ public class AliPayServiceImpl implements IAliPayService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> f2fPayQuery(String orderNo, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> f2fPayQuery(String orderNo, AliConfigureVo aliConfigureVo) throws TradePayException{
 
         log.info("支付宝面对面支付查询,orderNo={},aliConfigureVo={}", orderNo, aliConfigureVo);
         try {
@@ -141,6 +148,8 @@ public class AliPayServiceImpl implements IAliPayService {
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradeQueryResponse);
 
+            map.remove("fundBillList");
+
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
@@ -148,7 +157,7 @@ public class AliPayServiceImpl implements IAliPayService {
 
             log.info("支付宝面对面支付查询结果,map={}", map);
             return map;
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             throw e;
@@ -159,7 +168,7 @@ public class AliPayServiceImpl implements IAliPayService {
     }
 
     @Override
-    public String getUserAuthUrl(String storeId, String scope, Integer authType, String redirectUrl, AliConfigureVo aliConfigureVo) {
+    public String getUserAuthUrl(String storeId, String scope, Integer authType, String redirectUrl, AliConfigureVo aliConfigureVo)throws TradePayException {
 
         log.info("获取支付宝用户支付链接,storeId={},scope={},authType={},redirectUrl={},aliConfigureVo={}", storeId, scope, authType, redirectUrl, aliConfigureVo);
         try {
@@ -169,7 +178,7 @@ public class AliPayServiceImpl implements IAliPayService {
             String authUrl = AliPayUnit.getAuthUrl(storeId, scope, authType, redirectUrl, aliConfigure);
             log.info("获取支付宝用户支付链接结果,result={}", authUrl);
             return authUrl;
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
             log.error("获取支付宝用户支付链接结果失败,e={}", e.getMessage(), e);
@@ -179,7 +188,7 @@ public class AliPayServiceImpl implements IAliPayService {
     }
 
     @Override
-    public Map<String, Object> getUserBuyerId(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> getUserBuyerId(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo) throws TradePayException{
 
         try {
             //初始化支付参数
@@ -191,7 +200,7 @@ public class AliPayServiceImpl implements IAliPayService {
             //支付宝买家id
             map.put("aliBuyerId", authorizeRespData.getAlipaySystemOauthTokenResponse().getUserId());
             return map;
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
             log.error("获取支付宝买家id结果失败,e={}", e.getMessage(), e);
@@ -201,7 +210,7 @@ public class AliPayServiceImpl implements IAliPayService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<String, Object> getMchAuthToken(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo) {
+    public Map<String, Object> getMchAuthToken(String appAuthCode, String appId, String storeId, String scope, Integer authType, AliConfigureVo aliConfigureVo) throws TradePayException{
         try {
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
@@ -209,7 +218,7 @@ public class AliPayServiceImpl implements IAliPayService {
             AuthorizeRespData authorizeRespData = AliPayUnit.getAuthToken(appAuthCode, appId, storeId, scope, authType, aliConfigure);
 
             return BeanMapUtils.toMap(authorizeRespData);
-        } catch (AliPayException e) {
+        } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
             log.error("获取支付宝商户授权结果失败,e={}", e.getMessage(), e);
@@ -242,5 +251,19 @@ public class AliPayServiceImpl implements IAliPayService {
             aliPunchCardPayReqData.setSellerId(aliConfigureVo.getPid());
         }
         return aliPunchCardPayReqData;
+    }
+
+    /**
+     * 检查入住商户参数
+     * @param ryMchVo 入住商户信息
+     */
+    private void checkMchParam(RyMchVo ryMchVo){
+        if(StringUtils.isEmpty(ryMchVo.getRyMchId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryMchId");
+        }
+        if(StringUtil.isEmpty(ryMchVo.getRyAppId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryAppId");
+        }
+
     }
 }
