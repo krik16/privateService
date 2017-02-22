@@ -11,6 +11,7 @@ import java.io.Serializable;
  **/
 public class AliPaySignVo implements Serializable {
 
+    private static final long serialVersionUID = -825461632805396552L;
     //支付授权码
     private String appAuthToken;
 

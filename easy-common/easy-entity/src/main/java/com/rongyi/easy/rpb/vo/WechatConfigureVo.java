@@ -3,14 +3,17 @@ package com.rongyi.easy.rpb.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * 微信支付账号配置信息
  * conan
  * 2016/10/11 14:49
  **/
-public class WechatConfigureVo extends RyMchVo {
+public class WechatConfigureVo implements Serializable {
 
 
+    private static final long serialVersionUID = -4091061010908993281L;
     private String key = "";
 
     //微信分配的公众号ID（开通公众号之后可以获取到）

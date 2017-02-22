@@ -7,6 +7,7 @@ import java.io.Serializable;
  * 2017/2/8 10:34
  **/
 public class AliPunchCardPayVo implements Serializable {
+    private static final long serialVersionUID = 7905299203332866407L;
     //支付授权码
     private String appAuthToken;
 

@@ -3,11 +3,14 @@ package com.rongyi.easy.rpb.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * conan
  * 2017/2/7 17:24
  **/
-public class AliConfigureVo{
+public class AliConfigureVo implements Serializable{
+    private static final long serialVersionUID = 6047576762633696684L;
     private  String pid = "";// 商户partner id
     private  String appid = "";           // 商户应用id
     private  String key = "";//key

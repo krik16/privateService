@@ -9,6 +9,7 @@ import java.io.Serializable;
  **/
 public class RyMchVo implements Serializable {
 
+    private static final long serialVersionUID = -4572796585429693594L;
     private String ryMchId;//容易网商户号
 
     private String ryAppId;//容易网应用号
