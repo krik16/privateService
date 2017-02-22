@@ -1,4 +1,4 @@
-package com.rongyi.rpb.service.impl.v2;
+package com.rongyi.rpb.service.impl.v6;
 
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
@@ -21,6 +21,7 @@ import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -47,6 +48,8 @@ public class AliPayServiceImpl implements IAliPayService {
 
         log.info("获取支付宝扫码签名,ryMchVo={},aliPaySignVo={},aliConfigureVo={}", ryMchVo,aliPaySignVo, aliConfigureVo);
         try {
+            //检查开放商户信息
+            checkMchParam(ryMchVo);
             //初始化业务参数
             AliScanPayReqData aliScanPayReqData = getAliPaySignData(aliPaySignVo, aliConfigureVo);
             //初始化支付参数
@@ -103,6 +106,8 @@ public class AliPayServiceImpl implements IAliPayService {
 
         log.info("支付宝刷卡支付,aliPunchCardPayVo={},aliConfigureVo={}", aliPunchCardPayVo, aliConfigureVo);
         try {
+            //检查开放商户信息
+            checkMchParam(ryMchVo);
             //初始化业务参数
             AliPunchCardPayReqData aliPunchCardPayReqData = getAliPunchCardPayReqData(aliPunchCardPayVo, aliConfigureVo);
             //初始化支付参数
@@ -246,5 +251,19 @@ public class AliPayServiceImpl implements IAliPayService {
             aliPunchCardPayReqData.setSellerId(aliConfigureVo.getPid());
         }
         return aliPunchCardPayReqData;
+    }
+
+    /**
+     * 检查入住商户参数
+     * @param ryMchVo 入住商户信息
+     */
+    private void checkMchParam(RyMchVo ryMchVo){
+        if(StringUtils.isEmpty(ryMchVo.getRyMchId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryMchId");
+        }
+        if(StringUtil.isEmpty(ryMchVo.getRyAppId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryAppId");
+        }
+
     }
 }
