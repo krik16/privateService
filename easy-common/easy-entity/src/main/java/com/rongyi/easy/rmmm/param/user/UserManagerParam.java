@@ -82,6 +82,8 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
 	private Integer chiefId; //主账号ID
 	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机,0 无默认终端
+	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
     public Integer getId() {
 		return id;
 	}
@@ -486,6 +488,18 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setDefaultTerminal(Integer defaultTerminal) {
 		this.defaultTerminal = defaultTerminal;
 	}
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
 	@Override
 	public String toString() {
 		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount
@@ -514,7 +528,9 @@ public class UserManagerParam extends BaseParam implements Serializable{
 				+ contractCode + ", synTarget=" + synTarget + ", isChief="
 				+ isChief + ", level=" + level + ", settleOrgStrategy="
 				+ settleOrgStrategy + ", chiefId=" + chiefId
-				+ "]";
+				+ ", defaultTerminal=" + defaultTerminal + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
-
+	
 }
