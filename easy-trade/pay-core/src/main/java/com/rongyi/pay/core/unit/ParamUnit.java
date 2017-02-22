@@ -4,6 +4,8 @@ import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.constants.ConstantEnum;
+import com.rongyi.pay.core.webank.config.WebankWechatConfigure;
+import com.rongyi.pay.core.webank.param.WebankWechatPunchCardPayParam;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import org.apache.commons.lang.StringUtils;
@@ -179,5 +181,30 @@ public class ParamUnit {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"totalFee");
         }
 
+    }
+
+    //检查微众 微信刷卡支付请求参数
+    public static void checkWebankWechatPunchCardPay(WebankWechatPunchCardPayParam param, WebankWechatConfigure configure) {
+        if (StringUtils.isEmpty(param.getTerminalCode())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"terminalCode");
+        }
+        if (StringUtils.isEmpty(param.getOrderNo())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderNo");
+        }
+        if (StringUtils.isEmpty(param.getAmount())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "amount");
+        }
+        if (StringUtils.isEmpty(param.getProduct())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "product");
+        }
+        if (StringUtils.isEmpty(param.getAuthCode())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "authCode");
+        }
+        if (StringUtils.isEmpty(configure.getMerchantCode())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "merchantCode");
+        }
+        if (StringUtils.isEmpty(configure.getSubAppid())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "subAppid");
+        }
     }
 }

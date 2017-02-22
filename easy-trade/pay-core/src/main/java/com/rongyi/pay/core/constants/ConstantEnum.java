@@ -16,6 +16,7 @@ package com.rongyi.pay.core.constants;
  **/
 public enum ConstantEnum {
 
+	EXCEPTION_SYSTEM_ERROR("1019000","系统异常"),
 
 	EXCEPTION_PARAM_NULL("1019101","参数不合法"),
 	EXCEPTION_PARAM_NULL_SPECIFY("1019102","{}参数不能为空"),
@@ -48,6 +49,8 @@ public enum ConstantEnum {
 	EXCEPTION_APPLE_PAY_QUERY_FAIL("1019113","applePay支付交易查询失败"),
 	EXCEPTION_APPLE_PAY_REFUND_FAIL("1019114","applePay发起退款申请失败"),
 	EXCEPTION_APPLE_PAY_REFUND_NOTIFY_FAIL("1019116","applePay退款结果通知处理失败"),
+
+	EXCEPTION_WEBANK_SIGN_FAIL("1019300","微众签名生成失败"),
 
 
 	ALI_PAY_TIME_EXPIRE_GOODS("60m","商品支付宝支付默认超时时间"),
