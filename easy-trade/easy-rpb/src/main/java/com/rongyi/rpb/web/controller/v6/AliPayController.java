@@ -31,7 +31,7 @@ public class AliPayController {
     public void notify(HttpServletRequest request,HttpServletResponse response) {
         try {
             Map<String, String> map = Utils.getRequestParams(request);
-            LOGGER.info("支付宝异步通知处理开始,map={}", map);
+            LOGGER.info("支付宝异步通知处理开始");
             payNotifyBizz.aliPayNotify(map);
             response.getWriter().print("success");
             LOGGER.info("支付宝异步通知处理结束");
