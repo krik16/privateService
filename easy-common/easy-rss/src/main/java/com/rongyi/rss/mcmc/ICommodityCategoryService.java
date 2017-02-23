@@ -2,7 +2,9 @@ package com.rongyi.rss.mcmc;
 
 import java.util.List;
 
+import com.rongyi.easy.mcmc.param.CommoditySpecSerachParam;
 import com.rongyi.easy.mcmc.vo.CategoryNodeVO;
+import com.rongyi.easy.mcmc.vo.CommodityCategoryVO3;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
@@ -58,4 +60,8 @@ public interface ICommodityCategoryService {
 
 
 	List<String> getCategoryNames(List<ObjectId> categoryIds);
+
+	public List<CommodityCategoryVO3>  selectCommodityCategoryByTypeAndParentId(CommoditySpecSerachParam commoditySpecSerachParam);
+
+	public boolean insertOrUpdateCommodityCategory(CommodityCategoryVO3 commodityCategoryVO3);
 }
