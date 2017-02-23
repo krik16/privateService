@@ -152,7 +152,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String groupMid;
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
-	private List<String> serviceIds;//微信公众号ids
+	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> mallServiceIds;
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<String> categoryNames;
@@ -162,6 +163,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	private List<String> skus;
 
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
 
 	public List<String> getOnServiceIds() {
 		return onServiceIds;
@@ -290,11 +299,11 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.accountType = accountType;
 	}
 
-	public List<String> getServiceIds() {
+	public List<Integer> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<String> serviceIds) {
+	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
@@ -1081,8 +1090,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
-				"activityId=" + activityId +
-				", commodityId='" + commodityId + '\'' +
 				"commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
@@ -1152,6 +1159,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", updateAt=" + updateAt +
 				", galleryPosition=" + galleryPosition +
 				", inActivity=" + inActivity +
+				", shelvesType=" + shelvesType +
+				", offerShelves=" + offerShelves +
 				", giftId='" + giftId + '\'' +
 				", sn='" + sn + '\'' +
 				", mappingId='" + mappingId + '\'' +
@@ -1173,8 +1182,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", platform='" + platform + '\'' +
 				", price=" + price +
 				", selfTakeDays=" + selfTakeDays +
-				", shelvesType=" + shelvesType +
-				", offerShelves=" + offerShelves +
 				", subheading='" + subheading + '\'' +
 				", commodityDetails='" + commodityDetails + '\'' +
 				", ifShowInWechat=" + ifShowInWechat +
@@ -1183,14 +1190,19 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", locationIds=" + locationIds +
 				", accountType=" + accountType +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
-				", serviceDescription=" + serviceDescription +
-				", serviceDescriptionId=" + serviceDescriptionId +
+				", freePostage='" + freePostage + '\'' +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
+				", skus=" + skus +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
-				", skus=" + skus +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				'}';
 	}
 
@@ -1229,7 +1241,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
-		vo.setServiceIds(commodity.getServiceIds());
+		//vo.setServiceIds(commodity.getServiceIds());
+		vo.setMallServiceIds(commodity.getMallServiceIds());
 		vo.setOnServiceIds(commodity.getOnServiceIds());
 		vo.setSubheading(commodity.getSubheading());
 		vo.setCommodityDetails(commodity.getCommodityDetails());
