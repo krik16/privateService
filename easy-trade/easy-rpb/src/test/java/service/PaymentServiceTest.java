@@ -1,9 +1,8 @@
 package service;
 
 import base.BaseTest;
-import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
@@ -11,6 +10,7 @@ import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.*;
 import com.rongyi.rpb.service.impl.RpbServiceImpl;
+import com.rongyi.rss.lightning.RoaRyMchAppService;
 import junit.framework.Assert;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +40,9 @@ public class PaymentServiceTest extends BaseTest {
 
     @Autowired
     PaymentLogInfoService paymentLogInfoService;
+
+    @Autowired
+    RoaRyMchAppService roaRyMchAppService;
 
     //	 @Test
     public void testSelectPageListBySearch() {
@@ -294,17 +297,8 @@ public class PaymentServiceTest extends BaseTest {
     @Test
 //    @Rollback(false)
     public void testPayNotify() {
-//        PaymentEntity withLockPaymentEntity = paymentService.selectByWithLock(6279);
-        PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
-        paymentLogInfo.setOutTradeNo("0061300156160135508");
-        paymentLogInfo.setTrade_no("4009822001201604184963066587");
-        paymentLogInfo.setTradeMode("1");
-        paymentLogInfo.setReplayFlag(2);
-        paymentLogInfo.setRequest_time(DateUtil.getCurrDateTime());
-        paymentLogInfo.setBuyer_type(0);// 买家
-        paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE1);
-        paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2);
-        paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
+        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId("abcdef","123456789");
+        System.err.println("mchId="+ryMchAppVo.getRyMchId());
     }
 
 }
