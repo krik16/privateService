@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import java.util.List;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.mcmc.CommoditySpecColumn;
 import com.rongyi.easy.mcmc.param.commodity.CommoditySpecColumnParam;
 import com.rongyi.easy.mcmc.param.commodity.SpecColumnParam;
@@ -38,5 +39,5 @@ public interface ICommoditySpecColumnService {
 	  * 大运营后台删除商品规格
 	  * @param commoditySpecId
 	  */
-	 public void delCommoditySpecColumn(String commoditySpecId);
+	 public ResponseData delCommoditySpecColumn(String commoditySpecId,Integer updateBy);
 }
