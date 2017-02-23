@@ -4,8 +4,9 @@ import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.constants.ConstantEnum;
-import com.rongyi.pay.core.webank.config.WebankWechatConfigure;
-import com.rongyi.pay.core.webank.param.WebankWechatPunchCardPayParam;
+import com.rongyi.pay.core.webank.config.WwConfigure;
+import com.rongyi.pay.core.webank.model.WwPunchCardQueryOrderReqData;
+import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import org.apache.commons.lang.StringUtils;
@@ -184,7 +185,7 @@ public class ParamUnit {
     }
 
     //检查微众 微信刷卡支付请求参数
-    public static void checkWebankWechatPunchCardPay(WebankWechatPunchCardPayParam param, WebankWechatConfigure configure) {
+    public static void checkWebankWechatPunchCardPay(WwPunchCardPayParam param, WwConfigure configure) {
         if (StringUtils.isEmpty(param.getTerminalCode())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"terminalCode");
         }
@@ -205,6 +206,29 @@ public class ParamUnit {
         }
         if (StringUtils.isEmpty(configure.getSubAppid())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "subAppid");
+        }
+        if (StringUtils.isEmpty(configure.getPunchCardPayUrl())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "payUrl");
+        }
+        if (StringUtils.isEmpty(configure.getKey())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "key");
+        }
+    }
+
+    //检查微众微信刷卡支付查询订单参数
+    public static void checkWebankWechatPunchCardQueryOrder(WwPunchCardQueryOrderReqData reqData, WwConfigure configure) {
+        if (StringUtils.isEmpty(reqData.getMerchant_code())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "merchant_code");
+        }
+        if (StringUtils.isEmpty(reqData.getTerminal_serialno()) && StringUtils.isEmpty(reqData.getOrderid())
+                && StringUtils.isEmpty(reqData.getTransaction_id())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderid");
+        }
+        if (StringUtils.isEmpty(configure.getPunchCardPayQueryOrderUrl())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "queryOrderUrl");
+        }
+        if (StringUtils.isEmpty(configure.getKey())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "key");
         }
     }
 }

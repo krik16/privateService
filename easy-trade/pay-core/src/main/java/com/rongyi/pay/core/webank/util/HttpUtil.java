@@ -210,7 +210,7 @@ public class HttpUtil {
 	 * @param obj 参数
 	 * @return 返回结果
 	 */
-	public static String httpPOSTJson(String url,Object obj) {
+	public static String httpPOSTJson(String url,Object obj) throws Exception{
 		logger.info("发送http请求 url:{},obj:{}",url,obj);
 		Map<String, String> params = objectToMap(obj);
 		logger.info("http请求参数 param:{}",params);
@@ -243,7 +243,7 @@ public class HttpUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
-			throw new WebankException(ConstantEnum.EXCEPTION_SYSTEM_ERROR);
+			throw e;
 		} finally {
 			if (con != null) {
 				con.disconnect();
@@ -260,7 +260,7 @@ public class HttpUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
-			throw new WebankException(ConstantEnum.EXCEPTION_SYSTEM_ERROR);
+			throw e;
 		}
 		return buffer.toString();
 	}
