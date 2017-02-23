@@ -1,5 +1,8 @@
 package com.rongyi.easy.tradecenter.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -14,6 +17,7 @@ public class MerchantOrderCommodityVO implements Serializable
     private String commodityName;//商品名
     private String commodityNo;//商品编码
     private String commoditySpec;//商品规格，多个以”,”分隔
+    private String commodityCategory;//商品分类
     private String commodityNum;//商品数量
     private String unitPrice;//商品单价 元
     private BigDecimal totalPrice;//商品总价 元
@@ -148,6 +152,13 @@ public class MerchantOrderCommodityVO implements Serializable
     public void setCommodityStatus(Integer commodityStatus) {
         this.commodityStatus = commodityStatus;
     }
+    public String getCommodityCategory() {
+        return commodityCategory;
+    }
+
+    public void setCommodityCategory(String commodityCategory) {
+        this.commodityCategory = commodityCategory;
+    }
 
     public Integer getCouponDiscountType() {
         return couponDiscountType;
@@ -174,12 +185,6 @@ public class MerchantOrderCommodityVO implements Serializable
     }
 
     public String toString() {
-        return "OrderVO=[icon="+icon+",commodityName="+commodityName+",commodityNo="+commodityNo+"," +
-                "commoditySpec="+commoditySpec+",commodityNum="+commodityNum+",unitPrice="+unitPrice+",totalPrice="+totalPrice+",discountAmount="+discountAmount+"," +
-                "payPrice="+payPrice+",discountInfo="+discountInfo
-                +",couponDiscountType="+couponDiscountType
-                +",hongBaoDiscount="+hongBaoDiscount
-                +",rebateDiscount="+rebateDiscount
-                +"]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

@@ -144,7 +144,7 @@ public interface IOrderQueryService {
      */
     ParentOrderVO searchRYOrderDetail(Integer orderId) throws Exception;
 
-    PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
+    PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap,int currentPage) throws Exception;
 
     /**
      * 根据事件类型查找订单事件
