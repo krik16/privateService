@@ -24,6 +24,7 @@ public class CouponCodeExcelDto {
     private String guideName;
     private String guidePhone;
     private String source;
+    private String couponDiscountType;
 
     public String getSource() {
         return source;
@@ -192,5 +193,13 @@ public class CouponCodeExcelDto {
 
     public void setGuidePhone(String guidePhone) {
         this.guidePhone = guidePhone;
+    }
+
+    public String getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(String couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
     }
 }

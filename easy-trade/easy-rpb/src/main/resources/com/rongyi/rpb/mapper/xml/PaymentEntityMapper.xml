@@ -478,7 +478,8 @@
         #{refundRejected,jdbcType=INTEGER}
         and status =
         #{status,jdbcType=INTEGER}
-        and #{today,jdbcType=TIMESTAMP} > create_at
+        /*去除只能退今天之前的退款,退当前任务执行时间之前的所有可退款项*/
+        <!--and #{today,jdbcType=TIMESTAMP} > create_at-->
     </select>
     <update id="updateRefundRejected" parameterType="java.lang.Integer">
         update payment_order

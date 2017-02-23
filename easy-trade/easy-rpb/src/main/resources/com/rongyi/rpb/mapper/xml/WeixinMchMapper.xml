@@ -117,12 +117,19 @@
     <if test="tradeType != null and tradeType != ''">
       and trade_type like  CONCAT('%',#{tradeType},'%')
     </if>
+    <if test="userId != null and userId != ''">
+      and user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+
   </select>
   <select id="selectByMchIdAndUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from weixin_mch
-    where mch_id = #{mchId,jdbcType=VARCHAR}
-    and user_id = #{userId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteByUserId" parameterType="java.lang.String" >
+    delete from weixin_mch
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

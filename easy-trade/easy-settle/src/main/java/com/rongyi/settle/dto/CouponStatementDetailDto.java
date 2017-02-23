@@ -2,6 +2,7 @@ package com.rongyi.settle.dto;
 
 import com.rongyi.settle.util.AmountUtil;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,6 +33,7 @@ public class CouponStatementDetailDto {
     private String guidePhone;
     private String guideName;
     private String source;
+    private String couponDiscountType ; //促销券补贴类型 0：平台补贴 1：商家补贴
 
     public String getSource() {
         return source;
@@ -217,6 +219,14 @@ public class CouponStatementDetailDto {
         this.guideName = guideName;
     }
 
+    public String getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(String couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
+    }
+
     public CouponCodeExcelDto toCouponCodeExcelDto() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         CouponCodeExcelDto dto = new CouponCodeExcelDto();
@@ -240,6 +250,10 @@ public class CouponStatementDetailDto {
         dto.setGuideName(getGuideName());
         dto.setGuidePhone(getGuidePhone());
         dto.setSource(getSource());
+        dto.setCouponDiscountType(getCouponDiscountType());
+        if((dto.getOrigPrice() - dto.getDiscountAmount()) < dto.getHbAmount()){
+            dto.setHbAmount(new BigDecimal(dto.getOrigPrice() - dto.getDiscountAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+        }
         return dto;
     }
 }

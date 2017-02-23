@@ -48,10 +48,12 @@ public class OrderSettlementDetailDto {
 	private Double origPrice;
 
 	/** 支付金额 */
+	private Double discountAmount;
+	/** 支付金额 */
 	private Double payAmount;
 
-	/** 红包抵扣金额 */
-	private Double hbDiscount;
+	/** 红包抵扣金额(平台) */
+	private Double hbDiscountOpe;
 
 	/** 积分抵扣金额 */
 	private Double scoreDiscount;
@@ -73,6 +75,9 @@ public class OrderSettlementDetailDto {
 
 	/** 订单来源 */
 	private String orderSource;
+
+	/** 红包抵扣金额(商家) */
+	private Double hbDiscountMer;
 
 	public String getOrderSource() {
 		return orderSource;
@@ -247,20 +252,6 @@ public class OrderSettlementDetailDto {
 		this.payAmount = payAmount;
 	}
 
-	/**
-	 * @return the hbDiscount
-	 */
-	public Double getHbDiscount() {
-		return hbDiscount;
-	}
-
-	/**
-	 * @param hbDiscount
-	 *            the hbDiscount to set
-	 */
-	public void setHbDiscount(Double hbDiscount) {
-		this.hbDiscount = hbDiscount;
-	}
 
 	/**
 	 * @return the scoreDiscount
@@ -352,6 +343,30 @@ public class OrderSettlementDetailDto {
 		this.buyerPhone = buyerPhone;
 	}
 
+	public Double getHbDiscountOpe() {
+		return hbDiscountOpe;
+	}
+
+	public void setHbDiscountOpe(Double hbDiscountOpe) {
+		this.hbDiscountOpe = hbDiscountOpe;
+	}
+
+	public Double getHbDiscountMer() {
+		return hbDiscountMer;
+	}
+
+	public void setHbDiscountMer(Double hbDiscountMer) {
+		this.hbDiscountMer = hbDiscountMer;
+	}
+
+	public Double getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(Double discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
 	public OrderSettlementDetailVO toVO() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -365,7 +380,7 @@ public class OrderSettlementDetailDto {
 		vo.setMallName(getMallName());
 		vo.setOrigPrice(getOrigPrice());
 		vo.setPayAmount(getPayAmount());
-		vo.setHbDiscount(getHbDiscount());
+		vo.setHbDiscountOpe(getHbDiscountOpe());
 		vo.setScoreDiscount(getScoreDiscount());
 		vo.setPaymentChannel(getPaymentChannel());
 		if (getPaymentTime() != null) {
@@ -379,6 +394,13 @@ public class OrderSettlementDetailDto {
 		}
 		vo.setBuyerPhone(getBuyerPhone());
 		vo.setOrderSource(getOrderSource());
+		vo.setHbDiscountMer(getHbDiscountMer());
+		if(getDiscountAmount() < getHbDiscountMer()){
+			vo.setHbDiscountMer(getDiscountAmount());
+		}
+		if(getDiscountAmount() < getHbDiscountOpe()){
+			vo.setHbDiscountOpe(getDiscountAmount());
+		}
 		return vo;
 	}
 }

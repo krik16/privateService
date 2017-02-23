@@ -511,5 +511,19 @@ public class RpbServiceImpl implements IRpbService {
         }
         return responseData;
     }
+
+    @Override
+    public ResponseData delWeixinMchByUserId(String userId) {
+        LOGGER.info("第三方系统删除微信商户相关信息 userId:",userId);
+        ResponseData responseData;
+        try {
+           weixinMchService.deleteByUserId(userId);
+           responseData = ResponseData.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseData = ResponseData.failure();
+        }
+        return responseData;
+    }
 }
 
