@@ -20,6 +20,7 @@ public class CommoditySpecColumn implements  Serializable{
 	private boolean isRequired;//是否必填
 	private String description;//规格说明
 	private boolean hasClassification;//是否含有分类
+	private Integer status;//-1 删除状态，0正常
 	private Integer createBy;//创建人id
 	private Date createAt;//创建时间
 	private Integer updateBy;//修改人id
@@ -54,6 +55,12 @@ public class CommoditySpecColumn implements  Serializable{
 	public void setHasClassification(boolean hasClassification) {
 		this.hasClassification = hasClassification;
 	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	public Integer getCreateBy() {
 		return createBy;
 	}
@@ -82,9 +89,9 @@ public class CommoditySpecColumn implements  Serializable{
 	public String toString() {
 		return "CommoditySpecColumn [id=" + id + ", name=" + name
 				+ ", isRequired=" + isRequired + ", description=" + description
-				+ ", hasClassification=" + hasClassification + ", createBy="
-				+ createBy + ", createAt=" + createAt + ", updateBy="
-				+ updateBy + ", updateAt=" + updateAt + "]";
+				+ ", hasClassification=" + hasClassification + ", status="
+				+ status + ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt + "]";
 	}
 	
 }

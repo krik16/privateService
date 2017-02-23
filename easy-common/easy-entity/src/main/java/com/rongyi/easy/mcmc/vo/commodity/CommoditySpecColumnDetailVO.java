@@ -1,14 +1,9 @@
-package com.rongyi.easy.mcmc.param.commodity;
+package com.rongyi.easy.mcmc.vo.commodity;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 大运营新建商品规格参数
- * @author user
- *
- */
-public class SpecColumnParam implements Serializable{
+public class CommoditySpecColumnDetailVO implements Serializable {
 	
 	/**
 	 * 
@@ -18,10 +13,7 @@ public class SpecColumnParam implements Serializable{
 	private String commoditySpecName;//规格名称
 	private String description;//规格说明
 	private boolean hasClassification;//是否含有分类
-	private Integer createBy;//创建人id
-	private Integer updateBy;//修改人id
-	private List<SpecColumnClassificationParam> specColumnClassificationList;
-	
+	private List<SpecColumnClassificationVO> specColumnClassificationList;//规格分类列表  或者   子规格列表
 	public String getCommoditySpecId() {
 		return commoditySpecId;
 	}
@@ -46,32 +38,19 @@ public class SpecColumnParam implements Serializable{
 	public void setHasClassification(boolean hasClassification) {
 		this.hasClassification = hasClassification;
 	}
-	public Integer getCreateBy() {
-		return createBy;
-	}
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
-	public Integer getUpdateBy() {
-		return updateBy;
-	}
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
-	}
-	public List<SpecColumnClassificationParam> getSpecColumnClassificationList() {
+	public List<SpecColumnClassificationVO> getSpecColumnClassificationList() {
 		return specColumnClassificationList;
 	}
 	public void setSpecColumnClassificationList(
-			List<SpecColumnClassificationParam> specColumnClassificationList) {
+			List<SpecColumnClassificationVO> specColumnClassificationList) {
 		this.specColumnClassificationList = specColumnClassificationList;
 	}
 	@Override
 	public String toString() {
-		return "SpecColumnParam [commoditySpecId=" + commoditySpecId
-				+ ", commoditySpecName=" + commoditySpecName + ", description="
-				+ description + ", hasClassification=" + hasClassification
-				+ ", createBy=" + createBy + ", updateBy=" + updateBy
-				+ ", specColumnClassificationList="
+		return "CommoditySpecColumnDetailVO [commoditySpecId="
+				+ commoditySpecId + ", commoditySpecName=" + commoditySpecName
+				+ ", description=" + description + ", hasClassification="
+				+ hasClassification + ", specColumnClassificationList="
 				+ specColumnClassificationList + "]";
 	}
 	

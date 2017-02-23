@@ -16,14 +16,14 @@ public class SpecColumnClassificationParam implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ObjectId id;
+	private String id;
 	private String color;//颜色规格项对应的色系
 	private String name;//规格类名
 	private List<SpecColumnClassificationParam> specColumnClassificationParamList;
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getColor() {
