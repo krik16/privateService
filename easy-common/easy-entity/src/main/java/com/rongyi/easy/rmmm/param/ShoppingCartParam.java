@@ -41,6 +41,27 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 
 	private Integer articleType;// 文章类型 1潮人攻略
 
+
+	private Integer activityType;// 活动类型 普通0、闪购1、特卖2、秒杀3、拼团4、超级团教育版5、断码好货6
+	private Integer activityId;// 活动id
+
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+
 	public ShoppingCartParam() {
 		super();
 		// TODO Auto-generated constructor stub

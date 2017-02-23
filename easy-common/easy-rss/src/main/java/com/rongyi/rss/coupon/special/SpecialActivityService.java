@@ -1,7 +1,6 @@
 package com.rongyi.rss.coupon.special;
 
 import com.rongyi.core.bean.DubboVO;
-import com.rongyi.core.constant.Constants;
 import com.rongyi.easy.coupon.vo.ActivityCouponVO;
 import com.rongyi.easy.coupon.vo.SpecialVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
@@ -82,18 +81,27 @@ public interface SpecialActivityService {
      *
      * @param malllifeUserInfo 用户信息
      * @param times            每个用户可以领取的次数
-     * @param luckyMoneyCode     活动code
+     * @param activityCode     活动code
      * @return
      */
-    public DubboVO<List<ActivityCouponVO>> getActivityCoupon(UserInfoVO malllifeUserInfo, Integer times, Constants.LuckyMoneyCode luckyMoneyCode);
+    public DubboVO<List<ActivityCouponVO>> getActivityCoupon(UserInfoVO malllifeUserInfo, Integer times, String activityCode, String title);
 
     /**
      * 查询某个用户领取的红包
      *
      * @param malllifeUserInfo 用户信息
-     * @param luckyMoneyCode     活动code
+     * @param activityCode     活动code
      * @return
      */
-    public DubboVO<List<ActivityCouponVO>> queryActivityCouponList(UserInfoVO malllifeUserInfo, Constants.LuckyMoneyCode luckyMoneyCode);
+    public DubboVO<List<ActivityCouponVO>> queryActivityCouponList(UserInfoVO malllifeUserInfo, String activityCode, String title);
+
+
+    /**
+     * 查询活动红包
+     *
+     * @param activityCode 活动code
+     * @return
+     */
+    public DubboVO<List<ActivityCouponVO>> queryActivityCoupon(String activityCode);
 
 }

@@ -35,6 +35,7 @@ public class OrderModelParam implements Serializable {
 	private String reserveCompany;//预约人公司
 	private String reservePost;//预约人职称
 
+
 	public String getMemberPhone() {
 		return memberPhone;
 	}

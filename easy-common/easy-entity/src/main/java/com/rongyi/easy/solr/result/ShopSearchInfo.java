@@ -38,6 +38,25 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
     private Double dist;//距离
     private List<Integer> tip; ///< 店铺标签（格式：[0，0，0] 对应：[货，惠、劵]）
     private String shopFloor;//店铺楼层
+    private String brandMId;     //与该用户关联的主营品牌
+    private String brandName; //主营品牌名
+
+    public String getBrandMId() {
+        return brandMId;
+    }
+
+    public void setBrandMId(String brandMId) {
+        this.brandMId = brandMId;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
     public List<Integer> getTip() {
         return tip;
     }
@@ -212,7 +231,8 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
 				+ cooperationShopId + ", rmmmShopStatus=" + rmmmShopStatus
 				+ ", tags=" + tags + ", activityNum=" + activityNum
 				+ ", brandId=" + brandId + ", appearance_pic=" + appearance_pic
-				+ ", telephone=" + telephone + ", dist=" + dist + ", tip="
+                + ", brandMId=" + brandMId + ", brandName=" + brandName
+                + ", telephone=" + telephone + ", dist=" + dist + ", tip="
 				+ tip + ", shopFloor=" + shopFloor + "]";
 	}
     

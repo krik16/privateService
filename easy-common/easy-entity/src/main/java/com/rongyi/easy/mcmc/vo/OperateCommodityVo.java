@@ -1,12 +1,14 @@
 package com.rongyi.easy.mcmc.vo;
 
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuying on 2016/6/22.
  */
-public class OperateCommodityVo implements Serializable {
+public class OperateCommodityVo implements Serializable, Cloneable {
 
 
     private String  id ;//系统编号
@@ -21,6 +23,90 @@ public class OperateCommodityVo implements Serializable {
     private String reason;
     private String buyerAccount;
     private Date soldOutAt;//下架时间
+    private String commodityModelNo;
+    private Integer terminalType;
+    private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+    private Integer type;//渠道  0商家，1买手
+    private String originalPrice;//商品原价
+    private String currentPrice;//商品现价
+    private String description;//商品描述
+    private Integer stock;//商品库存
+
+
+    public Integer getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(Integer terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public String getWeAndTeStatus() {
+        return weAndTeStatus;
+    }
+
+    public void setWeAndTeStatus(String weAndTeStatus) {
+        this.weAndTeStatus = weAndTeStatus;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
+
+    private List<CommoditySpecVO> specList;
+    private CommoditySpecVO currentSpec;
+
+    public CommoditySpecVO getCurrentSpec() {
+        return currentSpec;
+    }
+
+    public void setCurrentSpec(CommoditySpecVO currentSpec) {
+        this.currentSpec = currentSpec;
+    }
+
+    public List<CommoditySpecVO> getSpecList() {
+        return specList;
+    }
+
+    public void setSpecList(List<CommoditySpecVO> specList) {
+        this.specList = specList;
+    }
+
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
     public String getId() {
         return id;
@@ -116,5 +202,50 @@ public class OperateCommodityVo implements Serializable {
 
     public void setSoldOutAt(Date soldOutAt) {
         this.soldOutAt = soldOutAt;
+    }
+
+    @Override
+    public String toString() {
+        return "OperateCommodityVo{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", picList='" + picList + '\'' +
+                ", categoryIds='" + categoryIds + '\'' +
+                ", mallName='" + mallName + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", source=" + source +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", reason='" + reason + '\'' +
+                ", buyerAccount='" + buyerAccount + '\'' +
+                ", soldOutAt=" + soldOutAt +
+                ", commodityModelNo='" + commodityModelNo + '\'' +
+                ", terminalType=" + terminalType +
+                ", weAndTeStatus='" + weAndTeStatus + '\'' +
+                '}';
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+
+    @Override
+    public OperateCommodityVo clone() throws CloneNotSupportedException {
+        OperateCommodityVo vo = new OperateCommodityVo();
+        vo.setId(id);
+        vo.setName(name);
+        vo.setMallName(mallName);
+        vo.setShopName(shopName);
+        vo.setDescription(description);
+        vo.setStatus(status);
+        vo.setCreateAt(createAt);
+        vo.setSource(source);
+
+        return vo;
     }
 }

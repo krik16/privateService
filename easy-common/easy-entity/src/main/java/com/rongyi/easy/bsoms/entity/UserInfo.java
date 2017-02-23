@@ -20,8 +20,8 @@ public class UserInfo implements Serializable{
     private Integer roleId;
 
     private String userPhone;
-    
-    private String userAccount ; 
+
+    private String userAccount ;
 
     private String userPwd;
 
@@ -50,28 +50,28 @@ public class UserInfo implements Serializable{
     private String cardId;
 
     private String memo;
-    
+
     private Date stopAt ;
-    
+
     private Integer stopBy;
-    
+
     private String branchCompanyName;   //所属分公司
-    
+
     private String shopName ;  //所属店铺
-    
+
     private String createName;  //添加人
-    
+
     private String roleName ;  //角色职位
 
     private Integer createSource;
-    
+
     private String stopReason;//停用 原因
-    
+
     private UserShop userShop;
-    
+
 	private String useCode; //注册使用的邀请码
-    
-    private String jsessionid ;//摩店登录标识	
+
+    private String jsessionid ;//摩店登录标识
 	private Integer isEdit = 1;  //是否可编辑  0不可编辑  1可编辑
     private Integer isOrdering;  //是否接单中  0是  1否
     private Date updateOrderingAt;//更新接单状态的时间
@@ -84,9 +84,12 @@ public class UserInfo implements Serializable{
     private String contractCode; //合同号
     private String synTarget ; //设置终端  1是 0否
     private Integer level ; //等级  1 2 3
+    private String terminalType ; //终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+    private Integer defaultTerminal ; //默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机'
     private Integer chiefId;
+//    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+//	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
-
     public String getStopReason() {
 		return stopReason;
 	}
@@ -270,7 +273,7 @@ public class UserInfo implements Serializable{
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
     }
-    
+
     public Date getStopAt() {
 		return stopAt;
 	}
@@ -326,7 +329,7 @@ public class UserInfo implements Serializable{
 	public void setUserShop(UserShop userShop) {
 		this.userShop = userShop;
 	}
-	
+
 	public String getRoleName() {
 		return roleName;
 	}
@@ -460,6 +463,23 @@ public class UserInfo implements Serializable{
 	public void setIsSuspended(Integer isSuspended) {
 		this.isSuspended = isSuspended;
 	}
+	
+
+    public String getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(String terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public Integer getDefaultTerminal() {
+        return defaultTerminal;
+    }
+
+    public void setDefaultTerminal(Integer defaultTerminal) {
+        this.defaultTerminal = defaultTerminal;
+    }
 
 	@Override
 	public String toString() {
@@ -486,7 +506,10 @@ public class UserInfo implements Serializable{
 				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
 				+ validStartAt + ", validEndAt=" + validEndAt
 				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
-				+ ", level=" + level + ", chiefId=" + chiefId
-				+ ", isSuspended=" + isSuspended + "]";
+				+ ", level=" + level + ", terminalType=" + terminalType
+				+ ", defaultTerminal=" + defaultTerminal + ", chiefId="
+				+ chiefId + ", isSuspended=" + isSuspended + "]";
 	}
+    
+
 }

@@ -10,6 +10,7 @@ import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
+import com.rongyi.easy.bsoms.vo.MerWechatAuthVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
 import com.rongyi.easy.roa.vo.distributor.UserInfoForDistributorVO;
@@ -362,7 +363,24 @@ public interface IUserInfoService {
 	 */
 	boolean deleteSpecificAuthoritiesByUserId(Integer userId) throws Exception;
 	/**
+	 * 根据帐号/手机号集合查询用户列表
+	 * @param accountList
+	 * @param type  2买手 其他为商家帐户
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserInfo> getUserListByType(List<String> accountList,Integer type) throws Exception;
+
+   /*
 	 * 修改账号资金状态
 	 */
 	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;
+	/**
+	 * 根据用户id和权限类型  获取权限信息列表
+	 * @param userId
+	 * @param system
+	 * @return
+	 * @throws Exception 
+	 */
+	public List<MerWechatAuthVO> getUserWechatAuthByUserId(Integer userId,String system) throws Exception;
 }

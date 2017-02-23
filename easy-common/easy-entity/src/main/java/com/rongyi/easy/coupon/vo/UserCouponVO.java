@@ -62,7 +62,17 @@ public class UserCouponVO implements Serializable {
      * 抵扣券关联的代金券结合
      */
     private List<VoucherVO> voucherVOs;
-    
+
+    /**
+     * 补贴类型(0:平台补贴,1:商家补贴)
+     */
+    private Byte subsidyType;
+
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
+    private Integer publishChannel;
+
     public String getLimitDesc() {
 		return limitDesc;
 	}
@@ -231,6 +241,22 @@ public class UserCouponVO implements Serializable {
         this.voucherVOs = voucherVOs;
     }
 
+    public Byte getSubsidyType() {
+        return subsidyType;
+    }
+
+    public void setSubsidyType(Byte subsidyType) {
+        this.subsidyType = subsidyType;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
     // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -260,6 +286,8 @@ public class UserCouponVO implements Serializable {
                 .append("couponType", couponType)
                 .append("couponId", couponId)
                 .append("id", id)
+                .append("subsidyType", subsidyType)
+                .append("publishChannel", publishChannel)
                 .toString();
     }
 }

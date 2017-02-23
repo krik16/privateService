@@ -7,7 +7,7 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * Author: yuzhijian 
  * History: 变更记录
  * <Author>     <time>    <version>    <desc>
- * 俞志坚       2016/12/26    1.0        创建文件 
+ * 俞志坚       2016/12/26    1.0        创建文件
  * Copyright (C): 上海容易网电子商务股份有限公司
  */
 public class ShareTitleParam extends BaseParam {

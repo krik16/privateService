@@ -7,12 +7,16 @@ import java.io.Serializable;
  * Author: yuzhijian 
  * History: 变更记录
  * <Author>     <time>    <version>    <desc>
- * 俞志坚       2016/12/26    1.0        创建文件 
+ * 俞志坚       2017/1/11    1.0        创建文件
  * Copyright (C): 上海容易网电子商务股份有限公司
  */
 public class ShareTitleVo implements Serializable {
 
     static final long serialVersionUID = 1L;
+
+    private String picUrl;
+
+    private String activityUrl;
 
     private String shareTile;//对象标题
 
@@ -22,6 +26,21 @@ public class ShareTitleVo implements Serializable {
 
     private String objId; //对象Id
 
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getActivityUrl() {
+        return activityUrl;
+    }
+
+    public void setActivityUrl(String activityUrl) {
+        this.activityUrl = activityUrl;
+    }
 
     public String getShareTile() {
         return shareTile;

@@ -17,6 +17,7 @@ public class CouponOrderParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String activityId;// 活动id
+    private Integer activityType; //活动类型
     private String activityName;// 活动名字
     private String couponId;// 卡券Id
     private String couponCode;// 卡券码号
@@ -54,6 +55,14 @@ public class CouponOrderParam implements Serializable {
         this.couponCode = couponCode;
         this.userId = userId;
         this.userSrc = userSrc;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
     }
 
     public String getActivityId() {
@@ -147,6 +156,7 @@ public class CouponOrderParam implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("activityId", activityId)
+                .append("activityType", activityType)
                 .append("activityName", activityName)
                 .append("couponId", couponId)
                 .append("couponCode", couponCode)

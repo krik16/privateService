@@ -1,5 +1,6 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
 
-public class CommodityParam {
+public class CommodityParam implements Serializable{
 
 	private Integer type;//类型0表示只修改库存1表示修改山商品所有信息
 
@@ -93,6 +94,42 @@ public class CommodityParam {
 	private Integer source;
 
 	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+
+	private String brandId;
+
+	private String brandMid;
+
+	private String brandName;
+
+	private String commodityModelNo;
+
+	public String getBrandMid() {
+		return brandMid;
+	}
+
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+
+	private String  goodsParam;//运营后台商品参数
+
+	private Integer commodityType;//运营后台商品渠道
 
 	public Integer getCreateBy() {
 		return createBy;
@@ -379,6 +416,12 @@ public class CommodityParam {
 				", subheading=" + subheading+
 				", commodityDetails=" + commodityDetails+
 				", shelvesType=" + shelvesType+
+				", brandId=" + brandId+
+				", brandMid=" + brandMid+
+				", brandName=" + brandName+
+				", commodityModelNo=" + commodityModelNo+
+				", goodsParam=" + goodsParam+
+				", commodityType=" + commodityType+
 				'}';
 	}
 
@@ -404,5 +447,29 @@ public class CommodityParam {
 
 	public void setSubheading(String subheading) {
 		this.subheading = subheading;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
+	public String getGoodsParam() {
+		return goodsParam;
+	}
+
+	public void setGoodsParam(String goodsParam) {
+		this.goodsParam = goodsParam;
+	}
+
+	public Integer getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(Integer commodityType) {
+		this.commodityType = commodityType;
 	}
 }
