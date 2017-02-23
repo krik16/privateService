@@ -832,7 +832,6 @@ public class CommodityBuyerVO implements Serializable {
         this.commodityDetails = commodityDetails;
     }
 
-
     public boolean isIfShowInWechat() {
         return ifShowInWechat;
     }
@@ -1003,6 +1002,7 @@ public class CommodityBuyerVO implements Serializable {
         }
         this.subheading=commodity.getSubheading();
         this.commodityDetails=commodity.getCommodityDetails();
+        this.setOnServiceIds(commodity.getOnServiceIds());
         this.setIfShowInWechat(isShowInWechat());
         this.skus=commodity.getSkus();
         this.serviceDescription=commodity.getServiceDescription();
