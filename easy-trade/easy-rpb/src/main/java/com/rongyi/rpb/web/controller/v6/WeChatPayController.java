@@ -42,7 +42,7 @@ public class WeChatPayController {
     public void payNotify(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, String> requestMap = parseXml(request);
-            LOGGER.info("微信支付异步通知开始,tradeNo={}", requestMap.get("transaction_id"));
+            LOGGER.info("微信支付异步通知开始");
 
             payNotifyBizz.wechatPayNotify(requestMap);
 
@@ -51,7 +51,7 @@ public class WeChatPayController {
             responseMap.put("return_msg", "OK");
             this.setResponse(response, responseMap);
 
-            LOGGER.info("微信支付异步通知处理完成并成功通知response");
+            LOGGER.info("微信支付异步通知结束");
         } catch (Exception e) {
             LOGGER.error("微信支付异步通知处理失败e={}", e.getMessage());
             e.printStackTrace();
