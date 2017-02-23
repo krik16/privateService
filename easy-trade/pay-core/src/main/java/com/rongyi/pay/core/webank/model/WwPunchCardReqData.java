@@ -1,13 +1,14 @@
 package com.rongyi.pay.core.webank.model;
 
-import com.rongyi.pay.core.webank.config.WebankWechatConfigure;
-import com.rongyi.pay.core.webank.param.WebankWechatPunchCardPayParam;
+import com.rongyi.pay.core.util.BaseData;
+import com.rongyi.pay.core.webank.config.WwConfigure;
+import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 
 /**
  * 微众 微信刷卡支付总请求参数
  * Created by sujuan on 2017/2/17.
  */
-public class WechatPunchCardReqData {
+public class WwPunchCardReqData extends BaseData{
 
     //商户号
     private String merchant_code;
@@ -42,11 +43,11 @@ public class WechatPunchCardReqData {
     //签名
     private String sign ;
 
-    public WechatPunchCardReqData() {
+    public WwPunchCardReqData() {
 
     }
 
-    public WechatPunchCardReqData(WebankWechatPunchCardPayParam reqData, WebankWechatConfigure configure) {
+    public WwPunchCardReqData(WwPunchCardPayParam reqData, WwConfigure configure) {
         setMerchant_code(configure.getMerchantCode());
         setTerminal_code(reqData.getTerminalCode());
         setTerminal_serialno(reqData.getOrderNo());
@@ -149,7 +150,7 @@ public class WechatPunchCardReqData {
 
     @Override
     public String toString() {
-        return "WechatPunchCardReqData{" +
+        return "WwPunchCardReqData{" +
                 "merchant_code='" + merchant_code + '\'' +
                 ", terminal_code='" + terminal_code + '\'' +
                 ", terminal_serialno='" + terminal_serialno + '\'' +

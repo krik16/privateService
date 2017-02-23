@@ -6,7 +6,7 @@ import com.rongyi.pay.core.util.BaseData;
  * 微众微信扫码支付参数
  * Created by sujuan on 2017/2/15.
  */
-public class WebankWechatPunchCardPayParam extends BaseData{
+public class WwPunchCardPayParam extends BaseData{
 
     //终端号
     private String terminalCode ;
