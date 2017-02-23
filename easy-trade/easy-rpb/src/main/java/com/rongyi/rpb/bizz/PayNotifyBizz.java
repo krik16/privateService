@@ -245,7 +245,7 @@ public class PayNotifyBizz {
 
         Map<String, Object> map = new HashMap<>();
         map.put("notifyId", UUID.randomUUID());
-        map.put("tradeStatus", "SUCCESS");//支付成功默认为0/否则给1
+        map.put("tradeStatus", "SUCCESS");
         map.put("totalAmount", String.valueOf(paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP)));
         map.put("orderNo", paymentEntity.getOrderNum());
         map.put("payNo", paymentEntity.getPayNo());
