@@ -2,6 +2,7 @@ package com.rongyi.core.util;
 
 import com.rongyi.core.Exception.ParamNullException;
 import com.rongyi.core.common.third.md5.Md5Util;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
 
@@ -26,7 +27,9 @@ public class TradePaySignUtil {
             Collections.sort(list);
             String sb = "";
             for (String aList : list) {
-                sb = sb.concat(aList).concat("=").concat(String.valueOf(params.get(aList))).concat("&");
+                if(StringUtils.isNotEmpty(String.valueOf(params.get(aList)))) {
+                    sb = sb.concat(aList).concat("=").concat(String.valueOf(params.get(aList))).concat("&");
+                }
             }
             sb = sb.concat("token=").concat(token);
             return Md5Util.GetMD5Code(sb);
@@ -50,7 +53,9 @@ public class TradePaySignUtil {
             Collections.sort(list);
             String sb = "";
             for (String aList : list) {
-                sb = sb.concat(aList).concat("=").concat(String.valueOf(params.get(aList))).concat("&");
+                if(StringUtils.isNotEmpty(String.valueOf(params.get(aList)))) {
+                    sb = sb.concat(aList).concat("=").concat(String.valueOf(params.get(aList))).concat("&");
+                }
             }
             sb = sb.concat("token=").concat(token);
             String md5Sign = Md5Util.GetMD5Code(sb);
@@ -65,7 +70,7 @@ public class TradePaySignUtil {
         Map<String,Object> map = new HashMap<>();
         map.put("b",1);
         map.put("d","aaaa");
-        map.put("c", "1231aaa");
+        map.put("c", "");
         String token = "abc123";
        String sign = getSignWithToken(map,token);
         System.err.println("sign=" + sign);
