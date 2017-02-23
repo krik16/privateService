@@ -57,7 +57,7 @@ public class ExportCouponOrderExcel {
             bodyStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 指定单元格居中对齐
             bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
             List<CouponOrderVO> list = couponOrderService.selectPageList(null, null, map);
-            if (list.size() > 5000) {
+            if (list.size() > 2000) {
                 throw new BizException(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeStr(), ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
             }
             if (CollectionUtils.isNotEmpty(list)) {
@@ -181,19 +181,19 @@ public class ExportCouponOrderExcel {
                     result = "待付款";
                     break;
                 case 1:
-                    result = "已付款";
+                    result = "已完成";
                     break;
                 case 2:
-                    result = "已取消";
+                    result = "已关闭";
                     break;
                 case 3:
                     result = "已删除";
                     break;
                 case 4:
-                    result = "退款中";
+                    result = "已完成";
                     break;
                 case 5:
-                    result = "已退款";
+                    result = "已完成";
                     break;
             }
         }
