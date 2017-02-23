@@ -244,6 +244,7 @@ public class PayNotifyBizz {
         map.put("buyerId", paymentLogInfo.getBuyer_id());
         map.put("payChannel",paymentEntity.getPayChannel());
         map.put("ryMchId",paymentEntity.getRyMchId());
+        map.put("ryAppId",paymentEntity.getRyAppId());
         //支付通知返回交易流水号
         if(type.equals(ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr())){
             map.put("tradeNo", paymentLogInfo.getTrade_no());
