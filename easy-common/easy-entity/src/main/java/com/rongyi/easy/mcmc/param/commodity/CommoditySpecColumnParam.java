@@ -11,7 +11,7 @@ import com.rongyi.easy.bsoms.param.BaseParam;
  * @author user
  *
  */
-public class CommoditySpecColumnParam extends BaseParam implements Serializable{
+public class CommoditySpecColumnParam implements Serializable{
 	
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class CommoditySpecColumnParam extends BaseParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String commoditySpecId;//规格id
 	private String commoditySpecName;//规格名称
-    private Integer pageSize;//每页显示的数量  默认值10
+    private Integer pageSize;//每页数量
 	private Integer currentPage;//当前页  从1开始
 	public String getCommoditySpecId() {
 		return commoditySpecId;

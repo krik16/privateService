@@ -40,4 +40,10 @@ public interface ICommoditySpecColumnService {
 	  * @param commoditySpecId
 	  */
 	 public ResponseData delCommoditySpecColumn(String commoditySpecId,Integer updateBy);
+	 /**
+	  * 获取商品规格总数
+	  * @param param
+	  * @return
+	  */
+	 public Integer getTotalSpecColumnCount(CommoditySpecColumnParam param);
 }
