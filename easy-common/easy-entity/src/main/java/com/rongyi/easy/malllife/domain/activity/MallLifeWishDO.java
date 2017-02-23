@@ -15,6 +15,8 @@ public class MallLifeWishDO implements Serializable {
     private int id;
     private String wishName; //姓名
     private String wishContent;  //许愿内容
+    private String wishPreInstall; //蜜桃节预设文案
+    private String wishPicture; //蜜桃节许愿图片
     private String userId;  //用户ID
     private String openId;  //openId
     private String wechatLog;  //微信头像
@@ -32,6 +34,8 @@ public class MallLifeWishDO implements Serializable {
         this.setId(mallLifeWishParam.getId());
         this.setWishName(mallLifeWishParam.getWishName());
         this.setWishContent(mallLifeWishParam.getWishContent());
+        this.setWishPreInstall(mallLifeWishParam.getWishPreInstall());
+        this.setWishPicture(mallLifeWishParam.getWishPicture());
         this.setOpenId(mallLifeWishParam.getOpenId());
         this.setWechatLog(mallLifeWishParam.getWechatLog());
         this.setWechatNickName(mallLifeWishParam.getWechatNickName());
@@ -61,6 +65,22 @@ public class MallLifeWishDO implements Serializable {
 
     public void setWishContent(String wishContent) {
         this.wishContent = wishContent;
+    }
+
+    public String getWishPreInstall() {
+        return wishPreInstall;
+    }
+
+    public void setWishPreInstall(String wishPreInstall) {
+        this.wishPreInstall = wishPreInstall;
+    }
+
+    public String getWishPicture() {
+        return wishPicture;
+    }
+
+    public void setWishPicture(String wishPicture) {
+        this.wishPicture = wishPicture;
     }
 
     public String getUserId() {

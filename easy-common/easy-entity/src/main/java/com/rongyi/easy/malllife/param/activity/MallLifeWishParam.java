@@ -11,6 +11,8 @@ public class MallLifeWishParam extends MalllifeBaseParam {
     private int id;
     private String wishName; //姓名
     private String wishContent;  //许愿内容
+    private String wishPreInstall; //蜜桃节预设文案
+    private String wishPicture; //蜜桃节许愿图片
     private String openId;  //openId
     private String wechatLog;  //微信头像
     private String wechatNickName;  //微信呢称
@@ -39,6 +41,22 @@ public class MallLifeWishParam extends MalllifeBaseParam {
 
     public void setWishContent(String wishContent) {
         this.wishContent = wishContent;
+    }
+
+    public String getWishPreInstall() {
+        return wishPreInstall;
+    }
+
+    public void setWishPreInstall(String wishPreInstall) {
+        this.wishPreInstall = wishPreInstall;
+    }
+
+    public String getWishPicture() {
+        return wishPicture;
+    }
+
+    public void setWishPicture(String wishPicture) {
+        this.wishPicture = wishPicture;
     }
 
     public String getOpenId() {
