@@ -51,6 +51,8 @@ import java.util.Map;
 @RequestMapping("/v2/couponOrder")
 public class CouponOrderControllerV2 extends BaseControllerV2 {
 
+    private static final int MAX_EXCEL_COUNT = 2000;
+
     @Autowired
     CouponOrderService couponOrderService;
 
@@ -232,6 +234,34 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
         } catch (Exception e) {
             responseData = ResponseData.failure(ConstantEnum.EXCEPTION_INTERFACE.getCodeInt(), ConstantEnum.EXCEPTION_INTERFACE.getValueStr());
             e.printStackTrace();
+        }
+        return responseData;
+    }
+
+    /**
+     * 验证导出报表总数是否超过限制
+     **/
+    @RequestMapping("/validateExcelCount")
+    @ResponseBody
+    public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap, HttpServletRequest request) {
+        LOGGER.info("优惠券订单导出上限校验:paramsMap={}", paramsMap);
+        ResponseData responseData;
+        try {
+            permissionCheck(request, "ORDER_COUPON_VIEW");
+            Integer pageTotle = couponOrderService.selectPageListCount(paramsMap);
+            if (pageTotle == null || pageTotle <= MAX_EXCEL_COUNT){
+                return ResponseData.success();
+            }else{
+                return ResponseData.failure(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeInt(),ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
+            }
+        } catch (PermissionException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+        } catch (Exception e) {
+            responseData = ResponseData.failure(ConstantEnum.LIST_QUERY_EXCEPTION.getCodeInt(), ConstantEnum.LIST_QUERY_EXCEPTION.getValueStr());
+            e.printStackTrace();
+            LOGGER.error("优惠券订单导出上限校验失败,message={}", e);
         }
         return responseData;
     }
