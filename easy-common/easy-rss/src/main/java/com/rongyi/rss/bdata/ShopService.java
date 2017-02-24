@@ -134,4 +134,5 @@ public interface ShopService {
 	public List<ShopVO> getMallNormallShops(String mallId);
 	
 	public String insertVirtualShop(String mallId,String brandId);
+	public  void updateShopPhoto( ObjectId id,List<String> photos);
 }
