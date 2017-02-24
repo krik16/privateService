@@ -1,14 +1,13 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.activitymanage.entity.GoodsInAppList;
 import com.rongyi.easy.malllife.common.util.Utils;
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -1257,6 +1256,8 @@ public class Commodity implements  Serializable,Cloneable{
 				}
 				this.setType(CommodityType.BULL.getValue());
 				this.setShopMid(vo.getShopMid());
+				this.setMallServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 			}
 		}
 	}
