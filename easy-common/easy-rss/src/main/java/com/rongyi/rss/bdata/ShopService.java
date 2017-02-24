@@ -135,5 +135,5 @@ public interface ShopService {
 	
 	public String insertVirtualShop(String mallId,String brandId);
 
-	ResponseVO getShopAndChildRenShops(String shopId,Integer currentPage,Integer pageSize );
+	ResponseVO getShopAndChildRenShops(String shopId,String childShopName,Integer currentPage,Integer pageSize );
 }
