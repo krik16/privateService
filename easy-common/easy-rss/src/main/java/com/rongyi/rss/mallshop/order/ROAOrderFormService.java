@@ -34,7 +34,7 @@ public interface ROAOrderFormService {
 	 */
 	public OrderFormEntity getOrderFormByOrderNum(String orderNum) throws Exception;
 	
-	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
+	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap,int currentPage) throws Exception;
 	
     public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
 	
