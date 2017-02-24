@@ -8,6 +8,12 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class WwPunchCardPayParam extends BaseData{
 
+    //商户号
+    private String merchantCode ;
+
+    //商户appid
+    private String subAppid;
+
     //终端号
     private String terminalCode ;
 
@@ -31,6 +37,22 @@ public class WwPunchCardPayParam extends BaseData{
 
     //附加信息
     private String attach ;
+
+    public String getMerchantCode() {
+        return merchantCode;
+    }
+
+    public void setMerchantCode(String merchantCode) {
+        this.merchantCode = merchantCode;
+    }
+
+    public String getSubAppid() {
+        return subAppid;
+    }
+
+    public void setSubAppid(String subAppid) {
+        this.subAppid = subAppid;
+    }
 
     public String getOrderNo() {
         return orderNo;

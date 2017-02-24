@@ -1,9 +1,7 @@
 package com.rongyi.pay.core.webank.service;
 
 import com.rongyi.pay.core.webank.config.WwConfigure;
-import com.rongyi.pay.core.webank.model.WwPunchCardQueryOrderReqData;
-import com.rongyi.pay.core.webank.model.WwPunchCardReqData;
-import com.rongyi.pay.core.webank.model.WwPunchCardResData;
+import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.pay.core.webank.util.Signature;
@@ -28,7 +26,7 @@ public class WebankPayService {
     public WwPunchCardResData wechatPunchCardPay(WwPunchCardPayParam reqData, WwConfigure configure) throws Exception{
         LOGGER.info("微众微信刷卡支付service");
         //将参数封装成微众参数
-        WwPunchCardReqData punchCardParam = new WwPunchCardReqData(reqData, configure);
+        WwPunchCardReqData punchCardParam = new WwPunchCardReqData(reqData);
         //生成签名
         String sign = Signature.getSign(punchCardParam, configure.getKey());
         LOGGER.info("生成的签名sign:{}", sign);
@@ -38,6 +36,13 @@ public class WebankPayService {
         return(WwPunchCardResData) Util.getObjectFromString(result, WwPunchCardResData.class);
     }
 
+    /**
+     * 微众微信支付刷卡支付订单查询
+     * @param reqData 请求参数
+     * @param configure 配置参数
+     * @return 返回结果
+     * @throws Exception
+     */
     public WwPunchCardResData wechatPunchCardQueryOrder(WwPunchCardQueryOrderReqData reqData, WwConfigure configure) throws Exception{
         LOGGER.info("微众微信刷卡支付订单查询 reqData:{},configure:{}", reqData, configure);
         //生成签名
@@ -47,6 +52,23 @@ public class WebankPayService {
         String result = HttpUtil.httpPOSTJson(configure.getPunchCardPayQueryOrderUrl(), reqData);
         LOGGER.info("微众微信刷卡支付订单查询返回结果result:{}",result);
         return (WwPunchCardResData) Util.getObjectFromString(result, WwPunchCardResData.class);
+    }
+
+    /**
+     * 微众微信刷卡支付撤销订单
+     * @param reqData 请求参数
+     * @param configure 配置参数
+     * @return 返回结果
+     */
+    public WwPunchCardReverseResData wechatPunchCardReverse(WwPunchCardReverseReqData reqData, WwConfigure configure) throws Exception{
+        LOGGER.info("微众微信刷卡支付撤销订单 reqData:{},configure:{}", reqData, configure);
+        //生成签名
+        String sign = Signature.getSign(reqData, configure.getKey());
+        LOGGER.info("生成的签名 sign:{}",sign);
+        reqData.setSign(sign);
+        String result = HttpUtil.httpPOSTJson(configure.getPunchCardPayReverseOrderUrl(), reqData);
+        LOGGER.info("微众微信刷卡支付撤销订单返回结果 result:{}",result);
+        return (WwPunchCardReverseResData) Util.getObjectFromString(result, WwPunchCardReverseResData.class);
     }
 
     public static void main(String args[]) {

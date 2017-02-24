@@ -7,11 +7,6 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/2/16.
  */
 public class WwConfigure extends BaseData{
-    //商户号
-    private String merchantCode ;
-
-    //商户appid
-    private String subAppid;
 
     //商户密钥key
     private String key ;
@@ -25,21 +20,15 @@ public class WwConfigure extends BaseData{
     //冲正订单（撤销订单）请求Url
     private String punchCardPayReverseOrderUrl;
 
+    private static WwConfigure wwConfigure;
 
-    public String getMerchantCode() {
-        return merchantCode;
-    }
+    private WwConfigure (){}
 
-    public void setMerchantCode(String merchantCode) {
-        this.merchantCode = merchantCode;
-    }
-
-    public String getSubAppid() {
-        return subAppid;
-    }
-
-    public void setSubAppid(String subAppid) {
-        this.subAppid = subAppid;
+    public static synchronized WwConfigure getInstance() {
+        if (wwConfigure == null) {
+            wwConfigure = new WwConfigure();
+        }
+        return wwConfigure;
     }
 
     public String getKey() {

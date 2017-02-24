@@ -47,14 +47,14 @@ public class WwPunchCardReqData extends BaseData{
 
     }
 
-    public WwPunchCardReqData(WwPunchCardPayParam reqData, WwConfigure configure) {
-        setMerchant_code(configure.getMerchantCode());
+    public WwPunchCardReqData(WwPunchCardPayParam reqData) {
+        setMerchant_code(reqData.getMerchantCode());
         setTerminal_code(reqData.getTerminalCode());
         setTerminal_serialno(reqData.getOrderNo());
         setAmount(reqData.getAmount());
         setProduct(reqData.getProduct());
         setSub_openid(reqData.getOpenid());
-        setSub_appid(configure.getSubAppid());
+        setSub_appid(reqData.getSubAppid());
         setGoods_tag(reqData.getGoodsTag());
         setAuth_code(reqData.getAuthCode());
         setAttach(reqData.getAttach());
