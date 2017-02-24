@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class OrderManagerVO implements Serializable {
 
@@ -51,6 +52,71 @@ public class OrderManagerVO implements Serializable {
 	private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
 	private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
 	private String orderChannel;//下单渠道  SmallProgram:小程序
+	private Date deleverAt;//发货时间
+	private Date payAt;//付款时间
+	private Date reveiveAt;//确认书后货时间
+	private String paymentId;//交易流水号
+	private String receiverName;//收件人姓名
+	private String receiverPhone;//收件人电话
+	private String receiverAddress;//收件人地址
+
+	private List<OrderManagerCommodityVO> orderCommoditys;
+
+	public Date getDeleverAt() {
+		return deleverAt;
+	}
+
+	public void setDeleverAt(Date deleverAt) {
+		this.deleverAt = deleverAt;
+	}
+
+	public Date getPayAt() {
+		return payAt;
+	}
+
+	public void setPayAt(Date payAt) {
+		this.payAt = payAt;
+	}
+
+	public Date getReveiveAt() {
+		return reveiveAt;
+	}
+
+	public void setReveiveAt(Date reveiveAt) {
+		this.reveiveAt = reveiveAt;
+	}
+
+	public String getPaymentId() {
+		return paymentId;
+	}
+
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
+	}
+
+	public String getReceiverAddress() {
+		return receiverAddress;
+	}
+
+	public void setReceiverAddress(String receiverAddress) {
+		this.receiverAddress = receiverAddress;
+	}
 
 	public String getOrderCartNo() {
 		return orderCartNo;
@@ -239,6 +305,14 @@ public class OrderManagerVO implements Serializable {
 
 	public void setActivityStatus(String activityStatus) {
 		this.activityStatus = activityStatus;
+	}
+
+	public List<OrderManagerCommodityVO> getOrderCommoditys() {
+		return orderCommoditys;
+	}
+
+	public void setOrderCommoditys(List<OrderManagerCommodityVO> orderCommoditys) {
+		this.orderCommoditys = orderCommoditys;
 	}
 
 	public BigDecimal getMerchantRedDiscount() {
