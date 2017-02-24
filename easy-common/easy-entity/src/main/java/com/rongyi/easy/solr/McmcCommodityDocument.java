@@ -662,6 +662,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setLocationIds(commodity.getLocationIds());
 		//this.setServiceIds(commodity.getServiceIds());
 		this.setMallServiceIds(commodity.getMallServiceIds());
+		this.setOnServiceIds(commodity.getOnServiceIds());
 	}
 
 	public void toDocument(Commodity commodity) {
