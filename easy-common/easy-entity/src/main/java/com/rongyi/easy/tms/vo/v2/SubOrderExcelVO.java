@@ -1,5 +1,8 @@
 package com.rongyi.easy.tms.vo.v2;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +57,8 @@ public class SubOrderExcelVO {
     private String activityType;
 
     private String activityName;
+
+    private Integer timeType;//0:下单时间，1：付款时间，2：发货时间，3：完成时间
 
     public String getOrderCartNo() {
         return orderCartNo;
@@ -232,32 +237,17 @@ public class SubOrderExcelVO {
         this.activityName = activityName;
     }
 
+    public Integer getTimeType() {
+        return timeType;
+    }
+
+    public void setTimeType(Integer timeType) {
+        this.timeType = timeType;
+    }
+
     @Override
     public String toString() {
-        return "SubOrderExcelVO{" +
-                "orderCartNo='" + orderCartNo + '\'' +
-                ", commodityNo='" + commodityNo + '\'' +
-                ", createAtBegin=" + createAtBegin +
-                ", createAtEnd=" + createAtEnd +
-                ", guideType=" + guideType +
-                ", mallId='" + mallId + '\'' +
-                ", orderNo='" + orderNo + '\'' +
-                ", orderSource=" + orderSource +
-                ", amountType='" + amountType + '\'' +
-                ", realAmountBegin=" + realAmountBegin +
-                ", realAmountEnd=" + realAmountEnd +
-                ", payChannel=" + payChannel +
-                ", status=" + status +
-                ", shopId=" + shopId +
-                ", sellerAccount='" + sellerAccount + '\'' +
-                ", username='" + username + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", commodityId='" + commodityId + '\'' +
-                ", createAt=" + createAt +
-                ", activityType=" + activityType +
-                ", activityName=" + activityName +
-                ", commodityName=" + commodityName +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
     public Map<String,Object> toMap(){
