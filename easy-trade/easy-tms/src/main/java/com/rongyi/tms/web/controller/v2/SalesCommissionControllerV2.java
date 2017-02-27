@@ -2,6 +2,7 @@ package com.rongyi.tms.web.controller.v2;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.easy.tms.param.CommissionParam;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.CodeEnum;
@@ -215,11 +216,12 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
      * 导出推广佣金报表
      **/
     @RequestMapping("/exportExpandListExcel")
-    public void exportExpandListExcel(Map<String, Object> map, HttpServletResponse response, HttpServletRequest request) {
-        LOGGER.info("exportExpandListExcel:paramsMap={}", map);
+    public void exportExpandListExcel(CommissionParam param, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("exportExpandListExcel:param={}", param);
         try {
             permissionCheck(request, "FNC_EXTRT_EXPORT");
 
+            Map<String, Object> map = param.toMap();
             map.put("pageSize", MAX_EXCEL_COUNT);
             map.put("startRecord", 0);
             map.put("type", ConstantEnum.COMMISSION_TYPE_0.getCodeInt());
@@ -267,11 +269,12 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
      * 导出首单返佣报表
      **/
     @RequestMapping("/exportFirstOrderListExcel")
-    public void exportFirstOrderListExcel(Map<String, Object> map, HttpServletResponse response, HttpServletRequest request) {
-        LOGGER.info("exportFirstOrderListExcel:paramsMap={}", map);
+    public void exportFirstOrderListExcel(CommissionParam param, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("exportFirstOrderListExcel:param={}", param);
         try {
             permissionCheck(request, "FNC_FIRRT_EXPORT");
 
+            Map<String, Object> map = param.toMap();
             map.put("pageSize", MAX_EXCEL_COUNT);
             map.put("startRecord", 0);
             map.put("type", ConstantEnum.COMMISSION_TYPE_1.getCodeInt());
