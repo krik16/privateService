@@ -60,7 +60,12 @@ public interface IWechatInfoService {
 	 */
 	WechatInfoVo getWechatInfoById(Integer id);
 
-
+	/**
+	 * 根据appId查询服务号
+	 * @param appId appId
+	 * @return 服务号
+	 */
+	WechatInfoVo getWechatInfoByAppId(String appId);
 
 
 }
