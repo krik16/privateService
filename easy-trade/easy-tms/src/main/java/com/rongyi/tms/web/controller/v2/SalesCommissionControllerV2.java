@@ -70,7 +70,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         }catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("findExpandList error",e);
             result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
         }
         return result;
@@ -103,7 +103,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         }catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("findFirstOrderList error",e);
             result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
         }
         return result;
@@ -125,7 +125,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
             result = ResponseData.success(salesCommissionVO);
             LOGGER.info("detail end");
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("detail error", e);
             result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
         }
         return result;
@@ -176,7 +176,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("verifyCommission error", e);
             result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
         }
         return result;
@@ -208,6 +208,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("推广佣金报表导出上限检查失败,message={}", e);
+            responseData = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
         }
         return responseData;
     }
@@ -261,6 +262,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("首单返佣报表导出上限检查失败,message={}", e);
+            responseData = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
         }
         return responseData;
     }
@@ -285,52 +287,6 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
         }catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("首单返佣报表导出失败,message={}", e);
-        }
-    }
-
-    /**
-     * 测试导出首单返佣报表
-     **/
-    @RequestMapping("/exportFirstOrderListExcel1")
-    public void exportFirstOrderListExcel1(@RequestParam String jsonParam, HttpServletResponse response, HttpServletRequest request) {
-        LOGGER.info("exportFirstOrderListExcel:paramsMap={}", jsonParam);
-        try {
-            Map<String, Object> map = JsonUtil.getMapFromJson(jsonParam);
-//            permissionCheck(request, "FNC_FIRRT_EXPORT");
-
-            map.put("pageSize", MAX_EXCEL_COUNT);
-            map.put("startRecord", 0);
-            map.put("type", ConstantEnum.COMMISSION_TYPE_1.getCodeInt());
-            exportSalesCommissionExcel.exportFirstOrderListExcel(request, response, map);
-        } catch (PermissionException e){
-            LOGGER.error(e.getMessage());
-            e.printStackTrace();
-        }catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.error("首单返佣报表导出失败,message={}", e);
-        }
-    }
-
-    /**
-     * 导出推广佣金报表
-     **/
-    @RequestMapping("/exportExpandListExcel1")
-    public void exportExpandListExcel1(@RequestParam String jsonParam, HttpServletResponse response, HttpServletRequest request) {
-        LOGGER.info("exportExpandListExcel:paramsMap={}", jsonParam);
-        try {
-            Map<String, Object> map = JsonUtil.getMapFromJson(jsonParam);
-//            permissionCheck(request, "FNC_EXTRT_EXPORT");
-
-            map.put("pageSize", MAX_EXCEL_COUNT);
-            map.put("startRecord", 0);
-            map.put("type", ConstantEnum.COMMISSION_TYPE_0.getCodeInt());
-            exportSalesCommissionExcel.exportExpandListExcel(request, response, map);
-        } catch (PermissionException e){
-            LOGGER.error(e.getMessage());
-            e.printStackTrace();
-        }catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.error("推广佣金报表导出失败,message={}", e);
         }
     }
 
