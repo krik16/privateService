@@ -1,10 +1,7 @@
 
 package com.rongyi.rss.coupon.merchant;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponRejectRecord;
-import com.rongyi.easy.coupon.entity.CouponShop;
-import com.rongyi.easy.coupon.entity.CouponWechat;
+import com.rongyi.easy.coupon.entity.*;
 import com.rongyi.easy.coupon.param.ActivityCouponParam;
 import com.rongyi.easy.coupon.param.CouponOperaterSearchParam;
 import com.rongyi.easy.coupon.param.CouponParam;
@@ -185,7 +182,19 @@ public interface MerchantCouponServce {
      */
     public List<CouponWechat> findWechatCoupons();
 
+    /**
+     * 更新 couponWechat
+     * @param couponWechat
+     * @return
+     */
     public int updateCouponWechatById(CouponWechat couponWechat);
+
+    /**
+     * 根据卡券id 获取卡券关联的商场id
+     * @param id
+     * @return
+     */
+    public List<String> findByCouponId(String id);
 
 }
  
