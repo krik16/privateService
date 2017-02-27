@@ -23,6 +23,7 @@ public enum CodeEnum {
     ERROR_DATABASE("-12", "数据库故障"),
     ERROR_PARAM("-13", "必要参数为空或不合法"),
     ERROR_PARAM_1301("-1301", "必填参数不能为空"),
+    FIAL_NO_AUTHORITY_PAYMENT("1098403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 
     ERROR_VERSION_180("-3180", "当前版本不支持注册，请升级到V1.70后的版本再注册"),
 
