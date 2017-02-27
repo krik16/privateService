@@ -23,7 +23,15 @@ public class CommodityVOToWechat implements Serializable{
     private List<String> onServiceIds;
     private List<String> offServiceIds;
     private List<WechatInfoVo> wechatInfoVos;
+    private List<String> categoryNames;
 
+    public List<String> getCategoryNames() {
+        return categoryNames;
+    }
+
+    public void setCategoryNames(List<String> categoryNames) {
+        this.categoryNames = categoryNames;
+    }
 
     public List<String> getOnServiceIds() {
         return onServiceIds;
