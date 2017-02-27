@@ -19,6 +19,15 @@ public class SearchParamsForWechat implements Serializable{
     private String name;
     private String keyword;
     private String displayStatus;
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getDisplayStatus() {
         return displayStatus;
