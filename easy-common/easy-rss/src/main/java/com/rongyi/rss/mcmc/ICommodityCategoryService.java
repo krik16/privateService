@@ -64,4 +64,6 @@ public interface ICommodityCategoryService {
 	public List<CommodityCategoryVO3>  selectCommodityCategoryByTypeAndParentId(CommoditySpecSerachParam commoditySpecSerachParam);
 
 	public boolean insertOrUpdateCommodityCategory(CommodityCategoryVO3 commodityCategoryVO3);
+	
+	public List<CommodityCategory> findCategoryByColumnIds(List<ObjectId> columnIds);
 }

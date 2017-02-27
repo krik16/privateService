@@ -128,6 +128,7 @@ public enum CodeEnum {
 	ERROR_MCMC_DATE("-7018","下架时间有误，请重新设置"),
 	ERROR_MCMC_REGIST_DATE("-7019","上架时间有误，请重新设置"),
 	ERROR_MCMC_COMMODITY_SPEC_DELETED("-7020", "商品规格不存在或已删除"),
+	ERROR_MCMC_COMMODITY_CATEGORY_SPEC("-7021", "此规格已关联商品类目，无法删除"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
