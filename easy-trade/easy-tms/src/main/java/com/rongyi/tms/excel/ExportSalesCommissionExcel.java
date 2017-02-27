@@ -76,7 +76,7 @@ public class ExportSalesCommissionExcel {
                     sheet.getRow(i + 1).getCell(4).setCellValue(this.convertRegisterType(commissionVO.getRegisterType()));//用户类型
                     sheet.getRow(i + 1).getCell(5).setCellValue(commissionVO.getRegisterPhone());//被推荐人账号
                     sheet.getRow(i + 1).getCell(6).setCellValue(commissionVO.getCommissionAmount() != null ? commissionVO.getCommissionAmount().toString() : "0");//返佣金额
-                    sheet.getRow(i + 1).getCell(7).setCellValue(DateUtil.dateToString(commissionVO.getCreateAt()));//注册时间
+                    sheet.getRow(i + 1).getCell(7).setCellValue(DateUtil.dateToString(commissionVO.getRegisterTime()));//注册时间
                     sheet.getRow(i + 1).getCell(8).setCellValue(this.convertStatus(commissionVO.getStatus()));//审核状态
                     sheet.getRow(i + 1).getCell(9).setCellValue(commissionVO.getReason());//未通过原因
                 }
