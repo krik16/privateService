@@ -317,7 +317,9 @@ public class AliPayUnit {
                     throw new AliPayException(alipayOpenAuthTokenAppResponse.getSubCode(), alipayOpenAuthTokenAppResponse.getSubMsg());
                 }
                 authorizeRespData.setAlipayOpenAuthTokenAppResponse(alipayOpenAuthTokenAppResponse);
-                LOGGER.info("商户token={}",alipayOpenAuthTokenAppResponse.getAppAuthToken());
+                LOGGER.info("商户token={},ExpiresIn={},appRefreshToken={},reExpiresIn={},userId={}",alipayOpenAuthTokenAppResponse.getAppAuthToken(),
+                        alipayOpenAuthTokenAppResponse.getExpiresIn(),alipayOpenAuthTokenAppResponse.getAppRefreshToken(),
+                        alipayOpenAuthTokenAppResponse.getReExpiresIn(),alipayOpenAuthTokenAppResponse.getUserId());
             }
             //用户授权token
             else {
@@ -328,9 +330,9 @@ public class AliPayUnit {
                 LOGGER.info("aliByUserId={}", alipaySystemOauthTokenResponse.getUserId());
                 alipaySystemOauthTokenResponse.setAlipayUserId(alipaySystemOauthTokenResponse.getUserId());
                 authorizeRespData.setAlipaySystemOauthTokenResponse(alipaySystemOauthTokenResponse);
-//                LOGGER.info("alipaySystemOauthTokenResponse{}", "accessToken="+alipaySystemOauthTokenResponse.getAccessToken()
-//                        + ",AlipayUserId=" + alipaySystemOauthTokenResponse.getAlipayUserId() + ",ExpiresIn=" + alipaySystemOauthTokenResponse.getExpiresIn() +
-//                        ",RefreshToken=" + alipaySystemOauthTokenResponse.getRefreshToken() + ",ReExpiresIn=" + alipaySystemOauthTokenResponse.getReExpiresIn());
+                LOGGER.info("alipaySystemOauthTokenResponse{}", "accessToken=" + alipaySystemOauthTokenResponse.getAccessToken()
+                        + ",AlipayUserId=" + alipaySystemOauthTokenResponse.getAlipayUserId() + ",ExpiresIn=" + alipaySystemOauthTokenResponse.getExpiresIn() +
+                        ",RefreshToken=" + alipaySystemOauthTokenResponse.getRefreshToken() + ",ReExpiresIn=" + alipaySystemOauthTokenResponse.getReExpiresIn());
             }
 
             return authorizeRespData;
