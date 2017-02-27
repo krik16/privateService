@@ -6,7 +6,7 @@ import com.rongyi.pay.core.constants.ConstantEnum;
  * 微众异常定义
  * Created by sujuan on 2017/2/17.
  */
-public class WebankException extends RuntimeException{
+public class WebankException extends TradeException{
 
     String code;
 

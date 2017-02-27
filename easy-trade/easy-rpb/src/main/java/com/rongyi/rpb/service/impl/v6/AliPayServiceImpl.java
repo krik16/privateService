@@ -21,7 +21,6 @@ import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -34,7 +33,7 @@ import java.util.Map;
  * conan
  * 2017/2/7 17:05
  **/
-public class AliPayServiceImpl implements IAliPayService {
+public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService {
 
     private static final Logger log = LoggerFactory.getLogger(AliPayServiceImpl.class);
 
@@ -253,17 +252,4 @@ public class AliPayServiceImpl implements IAliPayService {
         return aliPunchCardPayReqData;
     }
 
-    /**
-     * 检查入住商户参数
-     * @param ryMchVo 入住商户信息
-     */
-    private void checkMchParam(RyMchVo ryMchVo){
-        if(StringUtils.isEmpty(ryMchVo.getRyMchId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryMchId");
-        }
-        if(StringUtil.isEmpty(ryMchVo.getRyAppId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryAppId");
-        }
-
-    }
 }

@@ -26,6 +26,13 @@
 		<constructor-arg name="workerId" value="${idgenService.workerId}" type="long"/>
 	</bean>
 
+	<bean id="payConfigUnit" class="com.rongyi.rpb.unit.PayConfigInitUnit" init-method="init">
+		<property name="webankKey" value="${WEBANK_KEY}"/>
+		<property name="wechatPunchCardPayUrl" value="${WEBANK_WECHAT_PUNCHCARD_PAY_URL}"/>
+		<property name="wechatPunchCardPayQueryOrderUrl" value="${WEBANK_WECHAT_PUNCHCARD_PAY_QUERY_ORDER_URL}"/>
+		<property name="wechatPunchCardPayReverseOrderUrl" value="${WEBANK_WECHAT_PUNCHCARD_PAY_REVER_ORDER_URL}"/>
+	</bean>
+
 	<bean id="logAdvice" class="com.rongyi.core.common.log.LogAopAdvice"/>
 
 	<aop:config>

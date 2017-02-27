@@ -12,6 +12,8 @@ import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import org.apache.commons.lang.StringUtils;
 
+import java.math.BigDecimal;
+
 /**
  * conan
  * 2016/11/2 11:30
@@ -188,7 +190,6 @@ public class ParamUnit {
     /**
      * 检查微众 微信刷卡支付请求参数
      * @param param 请求参数
-     * @param configure
      */
     public static void checkWebankWechatPunchCardPay(WwPunchCardPayParam param, WwConfigure configure) {
         if (StringUtils.isEmpty(param.getTerminalCode())) {
@@ -197,7 +198,7 @@ public class ParamUnit {
         if (StringUtils.isEmpty(param.getOrderNo())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderNo");
         }
-        if (StringUtils.isEmpty(param.getAmount())) {
+        if (param.getAmount() != null && StringUtils.isNotEmpty(param.getAmount().toString()) && param.getAmount().compareTo(BigDecimal.ZERO) == 1) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "amount");
         }
         if (StringUtils.isEmpty(param.getProduct())) {

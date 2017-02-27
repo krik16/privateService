@@ -1,7 +1,6 @@
 package com.rongyi.rpb.service.impl.v6;
 
 import com.rongyi.core.Exception.TradePayException;
-import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WechatConfigureVo;
 import com.rongyi.easy.rpb.vo.WechatPaySignVo;
@@ -15,7 +14,6 @@ import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IWechatPayService;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -29,7 +27,7 @@ import java.util.Map;
  * 2017/2/6 17:06
  **/
 @Service
-public class WechatPayServiceImpl implements IWechatPayService {
+public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayService {
 
     private static final Logger log = LoggerFactory.getLogger(WechatPayServiceImpl.class);
 
@@ -188,17 +186,5 @@ public class WechatPayServiceImpl implements IWechatPayService {
         BeanUtils.copyProperties(wechatPaySignVo, wechatPaySignData);
         return wechatPaySignData;
     }
-    /**
-     * 检查入住商户参数
-     * @param ryMchVo 入住商户信息
-     */
-    private void checkMchParam(RyMchVo ryMchVo){
-        if(StringUtils.isEmpty(ryMchVo.getRyMchId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryMchId");
-        }
-        if(StringUtil.isEmpty(ryMchVo.getRyAppId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryAppId");
-        }
 
-    }
 }

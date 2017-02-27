@@ -12,6 +12,9 @@ import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
+import com.rongyi.pay.core.unit.WebankPayUnit;
+import com.rongyi.pay.core.webank.model.WwPunchCardResData;
+import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.PunchCardPayResData;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
@@ -134,7 +137,7 @@ public class PayBizz {
 
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
-        Map<String, Object> map = AliPayUnit.getScanPaySign( aliScanPayReqData,aliConfigure,ConstantUtil.NOTIFY_ADDRESS_V6.ALI_NOTIFY_URL_V6);
+        Map<String, Object> map = AliPayUnit.getScanPaySign(aliScanPayReqData, aliConfigure, ConstantUtil.NOTIFY_ADDRESS_V6.ALI_NOTIFY_URL_V6);
 
         //保存异步通知地址
         redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), aliConfigure.getNotifyUrl());
@@ -193,8 +196,38 @@ public class PayBizz {
         }
         return AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(),null,aliConfigure);
 
-
     }
+
+    /**
+     * 微众渠道微信刷卡支付
+     * @param ryMchVo 容易商户信息
+     * @param wwPunchCardPayParam 业务参数
+     * @return WwPunchCardResData
+     */
+    public WwPunchCardResData webankWechatPunchCardPay(RyMchVo ryMchVo,WwPunchCardPayParam wwPunchCardPayParam){
+
+
+        Integer totalFee = wwPunchCardPayParam.getAmount().multiply(new BigDecimal(100)).intValue();
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo,wwPunchCardPayParam.getOrderNo(),totalFee,"","",Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,Constants.ORDER_TYPE.ORDER_TYPE_6);
+
+        //支付流水号设置为微众商户单号
+        wwPunchCardPayParam.setOrderNo(paymentEntity.getPayNo());
+        WwPunchCardResData wwPunchCardResData = WebankPayUnit.webankWechatPunchCardPay(wwPunchCardPayParam);
+
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(wwPunchCardResData.getTransaction_id(), wwPunchCardResData.getTerminal_serialno(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                "SUCCESS", wwPunchCardResData.getTotal_fee().intValue(), wwPunchCardResData.getOpenid(), wwPunchCardResData.getOpenid(),
+                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        return wwPunchCardResData;
+    }
+
 
     /**
      * 初始化支付记录信息

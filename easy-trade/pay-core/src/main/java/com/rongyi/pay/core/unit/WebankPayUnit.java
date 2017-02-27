@@ -22,7 +22,7 @@ public class WebankPayUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebankPayUnit.class);
 
     //微众微信支付配置信息
-    private static WwConfigure configure ;
+    private static WwConfigure configure = WwConfigure.getInstance() ;
 
     private static final long retryInterval = 5000;//等待时间
 
@@ -100,7 +100,6 @@ public class WebankPayUnit {
 
     /**
      * 微众微信刷卡调用冲正接口
-     * @param param
      */
     public static void waitWechatPunchCardReverse(WwPunchCardPayParam param ) {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData(param);
@@ -114,7 +113,7 @@ public class WebankPayUnit {
      */
     public static WwPunchCardResData webankWechatPunchCardPayQueryOrder(WwPunchCardQueryOrderReqData reqData) {
         LOGGER.info("微众微信刷卡支付订单查询 reqData:{},configure:{}",reqData,configure);
-        WwPunchCardResData resData =null;
+        WwPunchCardResData resData;
         try {
             //检查参数
             ParamUnit.checkWebankWechatPunchCardQueryOrder(reqData, configure);
@@ -137,7 +136,7 @@ public class WebankPayUnit {
      */
     public static WwPunchCardReverseResData webankWechatPunchCardReverse(WwPunchCardReverseReqData reqData) {
         LOGGER.info("微众微信刷卡支付撤销订单 reqData:{}",reqData);
-        WwPunchCardReverseResData resData = null;
+        WwPunchCardReverseResData resData;
         try {
             //检查参数
             ParamUnit.checkWebankWechatPunchCardReverse(reqData);

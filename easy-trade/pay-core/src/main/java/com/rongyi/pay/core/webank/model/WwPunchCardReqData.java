@@ -1,7 +1,6 @@
 package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
-import com.rongyi.pay.core.webank.config.WwConfigure;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 
 /**
@@ -51,7 +50,7 @@ public class WwPunchCardReqData extends BaseData{
         setMerchant_code(reqData.getMerchantCode());
         setTerminal_code(reqData.getTerminalCode());
         setTerminal_serialno(reqData.getOrderNo());
-        setAmount(reqData.getAmount());
+        setAmount(reqData.getAmount().toString());
         setProduct(reqData.getProduct());
         setSub_openid(reqData.getOpenid());
         setSub_appid(reqData.getSubAppid());
