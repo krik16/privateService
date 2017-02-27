@@ -178,5 +178,7 @@ public interface MerchantCouponServce {
     MerchantPaging<MerchantOpVO> getCouponBySearchParam(CouponOperaterSearchParam paramMap, UserInfoVo user);
 
     int getCountByParamMap(CouponOperaterSearchParam paramMap, UserInfoVo user);
+
+    public List<Coupon> findWechatCoupons();
 }
  
