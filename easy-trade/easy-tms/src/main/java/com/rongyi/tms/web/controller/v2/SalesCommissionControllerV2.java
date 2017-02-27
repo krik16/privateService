@@ -1,6 +1,7 @@
 package com.rongyi.tms.web.controller.v2;
 
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.CodeEnum;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -197,7 +199,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
             if(totalAccount <= MAX_EXCEL_COUNT){
                 responseData = ResponseData.success();
             }
-            LOGGER.info("validExpandListCount end");
+            LOGGER.info("validExpandListCount end totalAccount={}", totalAccount);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
@@ -249,7 +251,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
             if(totalAccount <= MAX_EXCEL_COUNT){
                 responseData = ResponseData.success();
             }
-            LOGGER.info("validFirstOrderListCount end");
+            LOGGER.info("validFirstOrderListCount end totalAccount={}", totalAccount);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
@@ -280,6 +282,52 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
         }catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("首单返佣报表导出失败,message={}", e);
+        }
+    }
+
+    /**
+     * 测试导出首单返佣报表
+     **/
+    @RequestMapping("/exportFirstOrderListExcel1")
+    public void exportFirstOrderListExcel1(@RequestParam String jsonParam, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("exportFirstOrderListExcel:paramsMap={}", jsonParam);
+        try {
+            Map<String, Object> map = JsonUtil.getMapFromJson(jsonParam);
+//            permissionCheck(request, "FNC_FIRRT_EXPORT");
+
+            map.put("pageSize", MAX_EXCEL_COUNT);
+            map.put("startRecord", 0);
+            map.put("type", ConstantEnum.COMMISSION_TYPE_1.getCodeInt());
+            exportSalesCommissionExcel.exportFirstOrderListExcel(request, response, map);
+        } catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("首单返佣报表导出失败,message={}", e);
+        }
+    }
+
+    /**
+     * 导出推广佣金报表
+     **/
+    @RequestMapping("/exportExpandListExcel1")
+    public void exportExpandListExcel1(@RequestParam String jsonParam, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("exportExpandListExcel:paramsMap={}", jsonParam);
+        try {
+            Map<String, Object> map = JsonUtil.getMapFromJson(jsonParam);
+//            permissionCheck(request, "FNC_EXTRT_EXPORT");
+
+            map.put("pageSize", MAX_EXCEL_COUNT);
+            map.put("startRecord", 0);
+            map.put("type", ConstantEnum.COMMISSION_TYPE_0.getCodeInt());
+            exportSalesCommissionExcel.exportExpandListExcel(request, response, map);
+        } catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("推广佣金报表导出失败,message={}", e);
         }
     }
 

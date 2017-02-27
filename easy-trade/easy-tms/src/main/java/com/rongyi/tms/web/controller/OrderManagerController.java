@@ -297,16 +297,20 @@ public class OrderManagerController extends BaseController {
 				model.addAttribute("currpage", 1);
 				return "order/order_searchajax_list";
 			}
-			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
+			int currentPage = 1;
+			if (paramsMap.containsKey("currentPage")) {
+				currentPage = Integer.parseInt(paramsMap.get("currentPage").toString());
+			}
+			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap, currentPage);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
 			if (!CollectionUtils.isEmpty(orderForms)) {
 				logger.info(">>>>>>>>>>>>> 得到 " + orderForms.size() + " 个订单信息");
 			}
 			int totalPage = pagingVO.getTotalPage();
-			int currentPage = pagingVO.getCurrentPage();
+//			int currentPage = pagingVO.getCurrentPage();
 			model.addAttribute("orderForms", orderForms);
 			model.addAttribute("rowCont", totalPage);
-			model.addAttribute("currpage", currentPage);
+			model.addAttribute("currpage", pagingVO.getCurrentPage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("======== 查询订单列表失败了 ============");

@@ -161,10 +161,12 @@ public class ExportSalesCommissionExcel {
     private String convertRegisterType(Integer registerType) {
         String result = "";
         if (registerType != null){
-            if(registerType == 1){
-                result = "容易逛";
-            }else if(registerType == 2){
-                result = "摩店";
+            switch (registerType) {
+                case  1 : result="容易逛";break;
+                case  2 : result="摩店买手";break;
+                case  3 : result="摩店导购";break;
+                case  4 : result="摩店全部";break;
+                default : result="";break;
             }
         }
         return result;
