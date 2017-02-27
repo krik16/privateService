@@ -179,6 +179,13 @@ public interface MerchantCouponServce {
 
     int getCountByParamMap(CouponOperaterSearchParam paramMap, UserInfoVo user);
 
-    public List<Coupon> findWechatCoupons();
+    /**
+     * 查找有微信appid merchantMid 为空的数据
+     * @return
+     */
+    public List<CouponWechat> findWechatCoupons();
+
+    public int updateCouponWechatById(CouponWechat couponWechat);
+
 }
  
