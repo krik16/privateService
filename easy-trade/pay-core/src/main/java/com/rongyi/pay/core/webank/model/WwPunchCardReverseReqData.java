@@ -29,15 +29,12 @@ public class WwPunchCardReverseReqData extends BaseData{
     //签名
     private String sign;
 
-    public WwPunchCardReverseReqData() {
-
-    }
 
     public WwPunchCardReverseReqData(WwPunchCardPayParam payParam) {
         setMerchant_code(payParam.getMerchantCode());
         setTerminal_code(payParam.getTerminalCode());
         setO_terminal_serialno(payParam.getOrderNo());
-        setAmount(new BigDecimal(payParam.getAmount()));
+        setAmount(payParam.getAmount());
     }
 
     public String getMerchant_code() {

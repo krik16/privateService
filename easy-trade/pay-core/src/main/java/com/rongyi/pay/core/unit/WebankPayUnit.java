@@ -3,11 +3,8 @@ package com.rongyi.pay.core.unit;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
-import com.rongyi.pay.core.webank.config.WwConfigure;
-import com.rongyi.pay.core.webank.model.WwPunchCardQueryOrderReqData;
-import com.rongyi.pay.core.webank.model.WwPunchCardResData;
-import com.rongyi.pay.core.webank.model.WwPunchCardReverseReqData;
-import com.rongyi.pay.core.webank.model.WwPunchCardReverseResData;
+import com.rongyi.pay.core.webank.config.WebankConfigure;
+import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.service.WebankPayService;
 import org.slf4j.Logger;
@@ -22,7 +19,7 @@ public class WebankPayUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebankPayUnit.class);
 
     //微众微信支付配置信息
-    private static WwConfigure configure = WwConfigure.getInstance() ;
+    private static WebankConfigure configure = WebankConfigure.getInstance() ;
 
     private static final long retryInterval = 5000;//等待时间
 
@@ -100,6 +97,7 @@ public class WebankPayUnit {
 
     /**
      * 微众微信刷卡调用冲正接口
+     * @param param
      */
     public static void waitWechatPunchCardReverse(WwPunchCardPayParam param ) {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData(param);
@@ -152,12 +150,48 @@ public class WebankPayUnit {
         return  resData;
     }
 
-    public static WwConfigure getConfigure() {
-        return configure;
+    /**
+     * 微众微信刷卡支付退款
+     * @param reqData 请求参数
+     * @return 返回结果
+     */
+    public static WwPunchCardRefundResData webankWechatPunchCardRefund(WwpunchCardRefundReqData reqData) {
+        LOGGER.info("微众微信刷卡支付退款 reqData:{}",reqData);
+        WwPunchCardRefundResData resData;
+        try {
+            ParamUnit.checkWebankWechatPunchCardRefund(reqData);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.wechatPunchCardRefund(reqData, configure);
+        } catch (WebankException | ParamNullException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.info("微众微信刷卡支付退款失败");
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREFUND_FAIL);
+        }
+        return resData;
     }
 
-    public static void setConfigure(WwConfigure configure) {
-        WebankPayUnit.configure = configure;
+    /**
+     * 微众微信刷卡支付退款结果查询
+     * @param reqData 请求参数
+     * @return 返回结果
+     */
+    public static WwPunchCardRefundResData webankWechatPunchCardRefundQuery(WwpunchCardRefundReqData reqData) {
+        LOGGER.info("微众微信刷卡支付退款结果查询 reqData:{}",reqData);
+        WwPunchCardRefundResData resData;
+        try {
+            ParamUnit.checkWebankWechatPunchCardRefundQuery(reqData);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.wechatPunchCardRefundQuery(reqData, configure);
+        } catch (WebankException | ParamNullException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.info("微众微信刷卡支付退款查询失败");
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREFUNDQUERY_FAIL);
+        }
+        return resData;
     }
 
 }

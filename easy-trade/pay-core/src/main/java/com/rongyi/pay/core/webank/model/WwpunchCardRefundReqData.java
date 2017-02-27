@@ -3,10 +3,10 @@ package com.rongyi.pay.core.webank.model;
 import com.rongyi.pay.core.util.BaseData;
 
 /**
- * 微众微信刷卡支付查询订单接口请求参数
- * Created by sujuan on 2017/2/23.
+ * 微众微信刷卡支付退款接口请求参数
+ * Created by sujuan on 2017/2/27.
  */
-public class WwPunchCardQueryOrderReqData extends BaseData{
+public class WwpunchCardRefundReqData extends BaseData{
 
     //商户号 必填
     private String merchant_code;
@@ -14,22 +14,17 @@ public class WwPunchCardQueryOrderReqData extends BaseData{
     //终端号
     private String terminal_code;
 
-    //商户订单号  （三个订单号必输其一）
-    private String terminal_serialno;
+    //商户订单号 必填
+    private String terminal_serialno ;
+
+    //金额 分 （退款必填）
+    private String refund_amount ;
 
     //微众银行订单号
     private String orderid;
 
-    //微信支付订单号
-    private String transaction_id ;
-
     //签名
-    private String sign;
-
-    public WwPunchCardQueryOrderReqData(String orderNo, String merchantCode) {
-        setMerchant_code(merchantCode);
-        setTerminal_serialno(orderNo);
-    }
+    private String sign ;
 
     public String getMerchant_code() {
         return merchant_code;
@@ -55,20 +50,20 @@ public class WwPunchCardQueryOrderReqData extends BaseData{
         this.terminal_serialno = terminal_serialno;
     }
 
+    public String getRefund_amount() {
+        return refund_amount;
+    }
+
+    public void setRefund_amount(String refund_amount) {
+        this.refund_amount = refund_amount;
+    }
+
     public String getOrderid() {
         return orderid;
     }
 
     public void setOrderid(String orderid) {
         this.orderid = orderid;
-    }
-
-    public String getTransaction_id() {
-        return transaction_id;
-    }
-
-    public void setTransaction_id(String transaction_id) {
-        this.transaction_id = transaction_id;
     }
 
     public String getSign() {

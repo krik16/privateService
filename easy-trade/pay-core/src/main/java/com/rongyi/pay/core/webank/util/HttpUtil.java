@@ -283,7 +283,7 @@ public class HttpUtil {
 			for (Field field : declaredFields) {
 				field.setAccessible(true);
 				Object value = field.get(obj);
-				if (value!=null) {
+				if (value!=null &&value!="") {
 					map.put(field.getName(), field.get(obj).toString());
 				}
 			}

@@ -3,6 +3,8 @@ package com.rongyi.pay.core.webank.model;
 import com.rongyi.pay.core.util.BaseData;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 
+import java.math.BigDecimal;
+
 /**
  * 微众 微信刷卡支付总请求参数
  * Created by sujuan on 2017/2/17.
@@ -18,8 +20,8 @@ public class WwPunchCardReqData extends BaseData{
     //商户订单号
     private String terminal_serialno;
 
-    //金额
-    private String amount;
+    //金额 元
+    private BigDecimal amount;
 
     //产品
     private String product ;
@@ -50,7 +52,7 @@ public class WwPunchCardReqData extends BaseData{
         setMerchant_code(reqData.getMerchantCode());
         setTerminal_code(reqData.getTerminalCode());
         setTerminal_serialno(reqData.getOrderNo());
-        setAmount(reqData.getAmount().toString());
+        setAmount(reqData.getAmount());
         setProduct(reqData.getProduct());
         setSub_openid(reqData.getOpenid());
         setSub_appid(reqData.getSubAppid());
@@ -83,11 +85,11 @@ public class WwPunchCardReqData extends BaseData{
         this.terminal_serialno = terminal_serialno;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
