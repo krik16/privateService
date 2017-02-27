@@ -9,13 +9,13 @@ import com.rongyi.pay.core.webank.config.WwConfigure;
  */
 public class WwPunchCardQueryOrderReqData extends BaseData{
 
-    //商户号
+    //商户号 必填
     private String merchant_code;
 
     //终端号
     private String terminal_code;
 
-    //商户订单号
+    //商户订单号  （三个订单号必输其一）
     private String terminal_serialno;
 
     //微众银行订单号

@@ -8,32 +8,32 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class WwPunchCardPayParam extends BaseData{
 
-    //商户号
+    //商户号 必填
     private String merchantCode ;
 
-    //商户appid
-    private String subAppid;
-
-    //终端号
+    //终端号 必填
     private String terminalCode ;
 
-    //商户订单号
+    //商户订单号 必填
     private String orderNo;
 
-    //金额
+    //金额    必填
     private String amount;
 
-    //产品
+    //产品   必填
     private String product;
+
+    //授权码 必填
+    private String authCode;
 
     //用户OpendId
     private String openid;
 
+    //商户appid
+    private String subAppid;
+
     //商品标记
     private String goodsTag;
-
-    //授权码
-    private String authCode;
 
     //附加信息
     private String attach ;

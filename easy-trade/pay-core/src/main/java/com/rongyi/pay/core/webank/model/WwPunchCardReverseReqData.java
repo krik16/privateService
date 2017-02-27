@@ -11,19 +11,19 @@ import java.math.BigDecimal;
  */
 public class WwPunchCardReverseReqData extends BaseData{
 
-    //商户号
+    //商户号 必填
     private String merchant_code;
 
-    //终端号
+    //终端号  必填
     private String terminal_code;
 
-    //重新生成的商户订单号
+    //重新生成的商户订单号 必填
     private String terminal_serialno ;
 
-    //原商户订单号
+    //原商户订单号      必填
     private String o_terminal_serialno ;
 
-    //金额
+    //金额    必填
     private BigDecimal amount ;
 
     //签名
