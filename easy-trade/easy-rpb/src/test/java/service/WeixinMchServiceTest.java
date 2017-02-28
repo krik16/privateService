@@ -18,7 +18,7 @@ public class WeixinMchServiceTest extends BaseTest{
 
     @Test
     public void selectByAppIdAndTradeTypeTest(){
-        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType("wxb0af59268c136d7d",1);
-        System.err.println("weixinMch="+weixinMch);
+//        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType("wxb0af59268c136d7d",1);
+//        System.err.println("weixinMch="+weixinMch);
     }
 }
