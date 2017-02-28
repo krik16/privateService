@@ -136,4 +136,6 @@ public interface ShopService {
 	public String insertVirtualShop(String mallId,String brandId);
 
 	ResponseVO getShopAndChildRenShops(String shopId,String childShopName,Integer currentPage,Integer pageSize );
+
+	public  void updateShopPhoto( ObjectId id,List<String> photos);
 }
