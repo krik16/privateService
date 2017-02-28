@@ -74,6 +74,7 @@ public class ParentOrderVO implements Serializable {
 	private String originalTotalPrice  = "0";// 原来的总价
 
 	private String buyerNickName;// 收货人昵称
+	private String buyerNameByWeixin;// 微信昵称
 	private String buyerPhone;// 买家手机号（买家账号）
 	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String nickName;// 导购昵称
@@ -161,13 +162,14 @@ public class ParentOrderVO implements Serializable {
 	private String activityCommodityDesc;//超级团商品副标题
 	private String weixinAppId;//
 	private BigDecimal totalPriceToSeller;// 卖家实收款
-
 	private BigDecimal merchantRedDiscount;//商家补贴红包金额
 	private BigDecimal operationRedDiscount;//平台补贴红包金额
 	private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
 	private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
 	private String orderChannel;//下单渠道 SmallProgram:小程序
 	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
+	private String selfCode;// 自提码
+	private List<CommentVO> comments;//卖家备注列表
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -942,12 +944,36 @@ public class ParentOrderVO implements Serializable {
 		this.totalPriceToSeller = totalPriceToSeller;
 	}
 
+	public String getSelfCode() {
+		return selfCode;
+	}
+
+	public void setSelfCode(String selfCode) {
+		this.selfCode = selfCode;
+	}
+
+	public List<CommentVO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentVO> comments) {
+		this.comments = comments;
+	}
+
 	public BigDecimal getDiscountAmount() {
 		return discountAmount;
 	}
 
 	public void setDiscountAmount(BigDecimal discountAmount) {
 		this.discountAmount = discountAmount;
+	}
+
+	public String getBuyerNameByWeixin() {
+		return buyerNameByWeixin;
+	}
+
+	public void setBuyerNameByWeixin(String buyerNameByWeixin) {
+		this.buyerNameByWeixin = buyerNameByWeixin;
 	}
 
 	@Override

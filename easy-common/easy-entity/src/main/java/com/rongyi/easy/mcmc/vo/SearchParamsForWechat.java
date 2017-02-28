@@ -17,6 +17,7 @@ public class SearchParamsForWechat implements Serializable{
     private Integer currpage;
     private Integer pageSize;
     private String name;
+    private String keyword;
 
     public String getWeAndTeStatus() {
         return weAndTeStatus;
@@ -88,6 +89,14 @@ public class SearchParamsForWechat implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override

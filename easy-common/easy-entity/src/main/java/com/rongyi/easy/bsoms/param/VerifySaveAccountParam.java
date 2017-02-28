@@ -18,6 +18,8 @@ public class VerifySaveAccountParam  implements Serializable{
 	private boolean bShowChiefInfo;
 	private String mallMid;
 	private String shopMid;
+	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
 	public Integer getId() {
 		return id;
 	}
@@ -114,13 +116,29 @@ public class VerifySaveAccountParam  implements Serializable{
 	public void setValidEndAtStamp(String validEndAtStamp) {
 		this.validEndAtStamp = validEndAtStamp;
 	}
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
 	@Override
 	public String toString() {
-		return "VerifySaveAccountParam [id=" + id + ", verifyStatus=" + verifyStatus + ", reason=" + reason
-				+ ", industryId=" + industryId + ", industryVersionId=" + industryVersionId + ", childAccountNum="
-				+ childAccountNum + ", validStartAtStamp=" + validStartAtStamp + ", validEndAtStamp=" + validEndAtStamp
-				+ ", bShowChiefInfo=" + bShowChiefInfo + ", mallMid=" + mallMid + ", shopMid=" + shopMid + "]";
+		return "VerifySaveAccountParam [id=" + id + ", verifyStatus="
+				+ verifyStatus + ", reason=" + reason + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId
+				+ ", childAccountNum=" + childAccountNum
+				+ ", validStartAtStamp=" + validStartAtStamp
+				+ ", validEndAtStamp=" + validEndAtStamp + ", bShowChiefInfo="
+				+ bShowChiefInfo + ", mallMid=" + mallMid + ", shopMid="
+				+ shopMid + ", isOpenQrCode=" + isOpenQrCode
+				+ ", isAllowBindingWechat=" + isAllowBindingWechat + "]";
 	}
-	
 	
 }

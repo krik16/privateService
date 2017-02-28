@@ -12,12 +12,24 @@ package com.rongyi.rss.solr;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.solr.BrandDocument;
 import org.bson.types.ObjectId;
 
 /** 
  * 
  */
 public interface ROABrandSolrService {
-	public Map<String,Object> getBrandPage(Map params, int currentpage, int pagesize)
-			throws Exception;
+	Map<String,Object> getBrandPage(Map params, int currentpage, int pagesize) throws Exception;
+
+	/**
+	 * 查询品牌列表
+	 *
+	 * @param param
+	 * @param currentPage
+	 * @param pageSize
+	 *
+	 * @return document list
+	 */
+	List<BrandDocument> getBrandList(Map param, int currentPage, int pageSize);
+
 }

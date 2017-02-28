@@ -75,6 +75,14 @@ public interface CommodityService {
     public List<CommoditySpecVO> getSpecList(List<String> specIds);
 
     /**
+     * 获取指定时间之后的商品规格
+     * @param specIds
+     * @param timeAfter
+     * @return
+     */
+    public List<CommoditySpecVO> getSpecList(List<String> specIds,Date timeAfter);
+
+    /**
      * 查询店铺的商品
      * @param id
      * @param shopId
@@ -324,6 +332,14 @@ public interface CommodityService {
 
     List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
 
+    /**
+     *
+     * @param ids
+     * @param isNotSkillCommdity true 返回没有秒杀商品
+     * @return
+     */
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids,boolean isNotSkillCommdity);
+
     ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
     /**
@@ -405,6 +421,8 @@ public interface CommodityService {
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
 
     CommodityVO getCommodityDetail(String id);
+    public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
     public List<CommodityCategory> selectCommodityCategoryByids(List<String> commodityCategoryids);
+
 }
