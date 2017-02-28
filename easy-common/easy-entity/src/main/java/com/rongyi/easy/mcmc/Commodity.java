@@ -1093,7 +1093,12 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setMallServiceIds(vo.getMallServiceIds());
 			this.setMerchantId(vo.getMerchantId());
 			this.setMerchantType(vo.getMerchantType());
-			this.setOnServiceIds(vo.getOnServiceIds());
+			if(vo.getTerminalType() == 1 ||
+					vo.getTerminalType() == 3 ||
+					vo.getTerminalType() == 5 ||
+					vo.getTerminalType() == 7) {
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+			}
 		}
 
 		this.setCode(vo.getCommodityCode());
@@ -1256,7 +1261,7 @@ public class Commodity implements  Serializable,Cloneable{
 				}
 				this.setType(CommodityType.BULL.getValue());
 				this.setShopMid(vo.getShopMid());
-				this.setMallServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+				//this.setMallServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 			}
 		}

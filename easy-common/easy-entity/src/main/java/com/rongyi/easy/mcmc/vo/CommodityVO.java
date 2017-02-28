@@ -1227,8 +1227,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
 		vo.setFreight(commodity.getFreight());
 		vo.setTerminalType(commodity.getTerminalType());
-		/*vo.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
-								commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);*/
 		vo.setRegisterAt(commodity.getRegisterAt());
 		vo.setSoldOutAt(commodity.getSoldOutAt());
 		vo.setSource(commodity.getSource());
@@ -1241,7 +1239,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
-		//vo.setServiceIds(commodity.getServiceIds());
 		vo.setMallServiceIds(commodity.getMallServiceIds());
 		vo.setOnServiceIds(commodity.getOnServiceIds());
 		vo.setSubheading(commodity.getSubheading());

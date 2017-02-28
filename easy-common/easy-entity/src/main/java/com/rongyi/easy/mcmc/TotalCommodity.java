@@ -740,8 +740,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setUpdateAt(new Date());
 			this.setUpdateBy(userInfo.getId());
 			this.setPurchaseCount(param.getPurchaseCount());
-			/*this.setWeAndTeStatus(StringUtils.isNotBlank(param.getWeAndTeStatus()) ?
-										param.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);*/
 			this.setTemplateId(param.getTemplateId());
 			this.setReason(param.getReason());
 
@@ -766,6 +764,12 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 			this.setAccountType(userInfo.getIdentity());
 			this.setMallServiceIds(param.getServiceIds());
+			if(param.getTerminalType() == 1 ||
+					param.getTerminalType() == 3 ||
+					param.getTerminalType() == 5 ||
+					param.getTerminalType() == 7) {
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+			}
 			this.setMerchantId(userInfo.getBindingMid());
 			this.setSource(param.getSource());
 			this.setSubheading(param.getSubheading());
