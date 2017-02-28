@@ -17,9 +17,11 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	@Id
 	private ObjectId id;
 	private String color;//颜色规格项对应的色系
+	private Integer colorType;//1:标准色系，2：特殊色系
 	private String name;//规格类名
 	private List<ObjectId> parentids;//所有上级id
 	private ObjectId parentid;//直属上级
+	
 	//private Integer type;
 	public ObjectId getId() {
 		return id;
@@ -51,10 +53,11 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	/*public Integer getType() {
-		return type;
+	public Integer getColorType() {
+		return colorType;
 	}
-	public void setType(Integer type) {
-		this.type = type;
-	}*/
+	public void setColorType(Integer colorType) {
+		this.colorType = colorType;
+	}
+	
 }
