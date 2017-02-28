@@ -28,7 +28,7 @@ public interface IMallLifeWishService {
 
     int updateCount(UserInfoVO userInfo, MallLifeWishParam mallLifeWishParam);
 
-
+    boolean checkApproval(UserInfoVO userInfo, MallLifeWishParam wishParam);
     /**
      * 获取当前用户
      * @param userId
