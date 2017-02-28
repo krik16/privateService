@@ -41,6 +41,9 @@ public class PoiDocument implements Serializable {
 	@Field("valid")
 	private String valid;
 
+	@Field("wildcard_name")
+	private String wildcard_name;
+
 	@Field("var_poi_chinese")
 	private String var_poi_chinese;
 
@@ -199,6 +202,7 @@ public class PoiDocument implements Serializable {
 		if(StringUtils.isNotBlank(shop.getName())){
 			var_poi_chinese=shop.getName();
 			var_poi_chinese_str=shop.getName().toLowerCase();
+			wildcard_name=shop.getName();
 		}
 		if(StringUtils.isNotBlank(shop.getSlug()))
 			slug=shop.getSlug().replaceAll("-"," ");
@@ -722,5 +726,11 @@ public class PoiDocument implements Serializable {
 		this.updated_at = updated_at;
 	}
 
+	public String getWildcard_name() {
+		return wildcard_name;
+	}
 
+	public void setWildcard_name(String wildcard_name) {
+		this.wildcard_name = wildcard_name;
+	}
 }
