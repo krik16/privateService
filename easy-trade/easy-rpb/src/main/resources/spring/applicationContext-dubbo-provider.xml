@@ -19,6 +19,10 @@
 	<dubbo:service interface="com.rongyi.rss.rpb.IWechatPayService" version="${dubbo.version}" ref="wechatPayService" />
 	<bean id="wechatPayService" class="com.rongyi.rpb.service.impl.v6.WechatPayServiceImpl" />
 
+	<!--微信支付服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.IweBankService" version="${dubbo.version}" ref="weBankService" />
+	<bean id="weBankService" class="com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl" />
+
 	<!-- 微信批量退款定时任务 -->
 	 <dubbo:service interface="com.rongyi.rss.service.trigger.WeixinBatchRefundTrigger" version="${dubbo.version}" ref="weixinBatchRefundTrigger" retries="0"/>	
 	 <bean id="weixinBatchRefundTrigger" class="com.rongyi.rpb.service.impl.WeixinBatchRefundTriggerImpl" />
