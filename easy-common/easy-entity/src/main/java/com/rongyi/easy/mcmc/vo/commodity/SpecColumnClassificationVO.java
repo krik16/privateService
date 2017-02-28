@@ -13,22 +13,23 @@ public class SpecColumnClassificationVO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String SpecColumnClassificationId;//规格分类id  或者  子规格id
-	private String SpecColumnClassificationName;//规格分类名称  或者  子规格名称
+	private String id;//规格分类id  或者  子规格id
+	private String name;//规格分类名称  或者  子规格名称
 	private String color;//颜色编码
 	private Integer colorType;//色系
-	private List<SpecColumnClassificationVO> subSpecColumnClassificationList;//规格分类下的子规格列表
-	public String getSpecColumnClassificationId() {
-		return SpecColumnClassificationId;
+	private List<SpecColumnClassificationVO> specColumnClassificationParamList;//规格分类下的子规格列表
+	
+	public String getId() {
+		return id;
 	}
-	public void setSpecColumnClassificationId(String specColumnClassificationId) {
-		SpecColumnClassificationId = specColumnClassificationId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getSpecColumnClassificationName() {
-		return SpecColumnClassificationName;
+	public String getName() {
+		return name;
 	}
-	public void setSpecColumnClassificationName(String specColumnClassificationName) {
-		SpecColumnClassificationName = specColumnClassificationName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getColor() {
 		return color;
@@ -42,22 +43,19 @@ public class SpecColumnClassificationVO implements Serializable{
 	public void setColorType(Integer colorType) {
 		this.colorType = colorType;
 	}
-	public List<SpecColumnClassificationVO> getSubSpecColumnClassificationList() {
-		return subSpecColumnClassificationList;
+	public List<SpecColumnClassificationVO> getSpecColumnClassificationParamList() {
+		return specColumnClassificationParamList;
 	}
-	public void setSubSpecColumnClassificationList(
-			List<SpecColumnClassificationVO> subSpecColumnClassificationList) {
-		this.subSpecColumnClassificationList = subSpecColumnClassificationList;
+	public void setSpecColumnClassificationParamList(
+			List<SpecColumnClassificationVO> specColumnClassificationParamList) {
+		this.specColumnClassificationParamList = specColumnClassificationParamList;
 	}
 	@Override
 	public String toString() {
-		return "SpecColumnClassificationVO [SpecColumnClassificationId="
-				+ SpecColumnClassificationId
-				+ ", SpecColumnClassificationName="
-				+ SpecColumnClassificationName + ", color=" + color
-				+ ", colorType=" + colorType
-				+ ", subSpecColumnClassificationList="
-				+ subSpecColumnClassificationList + "]";
+		return "SpecColumnClassificationVO [id=" + id + ", name=" + name
+				+ ", color=" + color + ", colorType=" + colorType
+				+ ", specColumnClassificationParamList="
+				+ specColumnClassificationParamList + "]";
 	}
 	
 }
