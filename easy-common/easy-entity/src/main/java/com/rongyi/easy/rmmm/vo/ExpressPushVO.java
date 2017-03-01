@@ -15,6 +15,8 @@ public class ExpressPushVO  implements Serializable{
 
 	private String expressName;// 物流名称
 
+	private Integer status;//0在途中、1已揽收、2疑难、3正常签收或者退回签收
+
 	public String getExpressBillId() {
 		return expressBillId;
 	}
@@ -55,12 +57,21 @@ public class ExpressPushVO  implements Serializable{
 		this.expressList = expressList;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "ExpressPushVO [state=" + state + ", expressList=" + expressList
 				+ ", ifSupportByKuaidi100=" + ifSupportByKuaidi100 
 				+ ", expressBillId=" + expressBillId
 				+ ", expressName=" + expressName
+				+ ", status=" + status
 				+ "]";
 	}
 
