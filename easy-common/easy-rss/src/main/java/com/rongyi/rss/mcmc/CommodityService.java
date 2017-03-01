@@ -411,7 +411,7 @@ public interface CommodityService {
      * @param userName
      * @return
      */
-    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int userId,String reason, String userName);
 
     public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
 
