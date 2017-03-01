@@ -222,8 +222,11 @@ public class PoiDocument implements Serializable {
 			brand_ids=shop.getBrand_id().toString();
 		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
 			valid="0";
-		else
-			valid=shop.getValid().toString();
+		else if(shop.getValid()==null){
+			valid="0";
+		}else {
+			valid = shop.getValid().toString();
+		}
 			//valid="1";/////////////////////////////////////////////////////////////////////
 
 		if(StringUtils.isNotBlank(shop.getTelephone())){
