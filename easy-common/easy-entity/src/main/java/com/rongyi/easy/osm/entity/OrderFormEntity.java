@@ -127,6 +127,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal operationRedDiscount;//平台补贴红包金额
     private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
     private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
+    private BigDecimal reductionFee;//满减金额
 
     public Byte getIsAlert() {
         return isAlert;
@@ -966,6 +967,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setOrderCommodityCodeEntity(OrderCommodityCodeEntity orderCommodityCodeEntity) {
         this.orderCommodityCodeEntity = orderCommodityCodeEntity;
+    }
+
+    public BigDecimal getReductionFee() {
+        return reductionFee;
+    }
+
+    public void setReductionFee(BigDecimal reductionFee) {
+        this.reductionFee = reductionFee;
     }
 
     @Override

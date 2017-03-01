@@ -135,6 +135,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private String commodityName; // 商品（卡券）名称
     private String commoditySn; // 商品（礼品）编码
+    private BigDecimal reductionFee;//满减金额
 
 
     public String getRefundDiscountInfo() {
@@ -683,6 +684,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     public void setCommoditySn(String commoditySn) {
         this.commoditySn = commoditySn;
+    }
+
+    public BigDecimal getReductionFee() {
+        return reductionFee;
+    }
+
+    public void setReductionFee(BigDecimal reductionFee) {
+        this.reductionFee = reductionFee;
     }
 
     @Override
