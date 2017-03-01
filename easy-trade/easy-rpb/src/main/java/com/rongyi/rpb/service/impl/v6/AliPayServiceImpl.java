@@ -19,7 +19,7 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rpb.common.BeanMapUtils;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -12,7 +12,7 @@ import com.rongyi.pay.core.wechat.model.*;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rpb.common.BeanMapUtils;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IWechatPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
