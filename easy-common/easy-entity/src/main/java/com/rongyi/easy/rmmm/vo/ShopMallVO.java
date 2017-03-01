@@ -26,6 +26,8 @@ public class ShopMallVO implements Serializable {
 	private String cityId;// 市id
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
+	private String shopAdress;//店铺详细地址
+	private String areaName;//区域名称
 
 	public String getShopId() {
 		return shopId;
@@ -145,6 +147,22 @@ public class ShopMallVO implements Serializable {
 
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
+	}
+
+	public String getShopAdress() {
+		return shopAdress;
+	}
+
+	public void setShopAdress(String shopAdress) {
+		this.shopAdress = shopAdress;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
 	@Override
