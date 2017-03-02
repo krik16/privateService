@@ -19,7 +19,7 @@ public class ReductionQueryVO implements Serializable {
     // 	优惠方式，1:减金额，2:打折
     private Integer reductionType;
     // 优惠金额，单位：元
-    private Double reductionFee;
+    private Double totalReductionFee;
     // 匹配的金额（满多少元）
     private Double amount;
     // 匹配的折扣（减少多少元，或者打几折，1折=1）
@@ -69,12 +69,12 @@ public class ReductionQueryVO implements Serializable {
         this.rebate = rebate;
     }
 
-    public Double getReductionFee() {
-        return reductionFee;
+    public Double getTotalReductionFee() {
+        return totalReductionFee;
     }
 
-    public void setReductionFee(Double reductionFee) {
-        this.reductionFee = reductionFee;
+    public void setTotalReductionFee(Double totalReductionFee) {
+        this.totalReductionFee = totalReductionFee;
     }
 
     public Integer getReductionType() {
@@ -99,7 +99,7 @@ public class ReductionQueryVO implements Serializable {
                 "activityId='" + activityId + '\'' +
                 ", activityName='" + activityName + '\'' +
                 ", reductionType=" + reductionType +
-                ", reductionFee=" + reductionFee +
+                ", totalReductionFee=" + totalReductionFee +
                 ", amount=" + amount +
                 ", rebate=" + rebate +
                 ", maxFee=" + maxFee +
