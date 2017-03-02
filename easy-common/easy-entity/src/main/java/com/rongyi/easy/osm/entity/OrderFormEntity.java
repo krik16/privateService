@@ -120,6 +120,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private String buyerName;//如果是微信用户昵称，昵称是编码之后的
     private OrderReserveEntity orderReserve;//超级团预约信息
+    private byte payChannel;//支付方式 1支付宝网页  3支付宝app  5微信
+    private OrderCommodityCodeEntity orderCommodityCodeEntity;//订单自提码信息
 
     private BigDecimal merchantRedDiscount;//商家补贴红包金额
     private BigDecimal operationRedDiscount;//平台补贴红包金额
@@ -846,11 +848,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.orderReserve = orderReserve;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
-    }
-
     public OrderEventEntity getOrderEvent2() {
         return orderEvent2;
     }
@@ -955,11 +952,32 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.shopMid = shopMid;
     }
 
+    public byte getPayChannel() {
+        return payChannel;
+    }
+
+    public void setPayChannel(byte payChannel) {
+        this.payChannel = payChannel;
+    }
+
+    public OrderCommodityCodeEntity getOrderCommodityCodeEntity() {
+        return orderCommodityCodeEntity;
+    }
+
+    public void setOrderCommodityCodeEntity(OrderCommodityCodeEntity orderCommodityCodeEntity) {
+        this.orderCommodityCodeEntity = orderCommodityCodeEntity;
+    }
+
     @Override
     public int compareTo(OrderFormEntity o) {
         if(o == null){
             return 1;
         }
         return this.getOrderNo().compareTo(o.getOrderNo());
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

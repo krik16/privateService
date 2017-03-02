@@ -2,10 +2,7 @@ package com.rongyi.rss.tradecenter.osm;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.rmmm.param.OrderDealedParam;
-import com.rongyi.easy.rmmm.param.RequestPaymentParam;
-import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
-import com.rongyi.easy.rmmm.param.SubmitOrderParam;
+import com.rongyi.easy.rmmm.param.*;
 import com.rongyi.easy.rmmm.param.user.OrderAddressParam;
 
 import java.util.List;
@@ -151,4 +148,11 @@ public interface IOrderService {
 	 * @return
 	 */
 	ResponseVO checkingCode(String couponCode, String mallId, String shopId, Integer checkUserId);
+
+	/**
+	 * 添加卖家备注
+	 * @param param
+	 * @return
+	 */
+	ResponseVO addComment(OrderCommentParam param);
 }
