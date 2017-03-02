@@ -168,7 +168,7 @@ public enum ConstantEnum {
 
     LIST_QUERY_EXCEPTION("1019210","列表查询失败"),
     DETAIL_QUERY_EXCEPTION("1019211","详情查询失败"),
-    EXCEPTION_LIMIT_COUNT("1019212","报表导出数据超出上限,请重新过滤后再选择导出"),
+    EXCEPTION_LIMIT_COUNT("1019212","导出数量超出上限，请修改查询条件后再导出"),
     LIST_QUERY_PARAM("1019215","参数错误"),
 
     RESULT_IS_EMPTY("1019213","查询结果为空"),

@@ -34,7 +34,7 @@
         trade_order.user_phone,
         trade_sub_order.unit_name as title,
         trade_sub_order.unit_id as coupon_id,
-        trade_order.`status`,
+        CASE WHEN trade_order.`status` in (1,4,5)  THEN 1 else trade_order.`status` END status,
         ROUND(trade_order.total_amount/100,2) as total_amount,
         trade_order.create_at,
         trade_order.pay_time,
@@ -58,7 +58,7 @@
         user_id,
         user_name,
         user_phone,
-        trade_order.`status`,
+        CASE WHEN trade_order.`status` in (1,4,5)  THEN 1 else trade_order.`status` END status,
         ROUND(trade_order.total_amount/100,2) as total_amount,
         trade_order.create_at,
         trade_order.pay_time,
@@ -152,7 +152,15 @@
             concat('%',#{userPhone,jdbcType=VARCHAR},'%')
         </if>
         <if test="status != null and status != ''">
-            and trade_order.status = #{status,jdbcType=TINYINT}
+            <choose>
+                <!-- 已完成 -->
+                <when test="status == 1">
+                    and trade_order.status in (1,4,5)
+                </when>
+                <otherwise>
+                    and trade_order.status = #{status,jdbcType=TINYINT}
+                </otherwise>
+            </choose>
         </if>
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap"
