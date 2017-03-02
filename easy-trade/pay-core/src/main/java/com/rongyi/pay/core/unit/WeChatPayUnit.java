@@ -27,7 +27,7 @@ public class WeChatPayUnit {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatPayUnit.class);
 
-    private static final long retryInterval = 6000;//等待时间
+    private static final long retryInterval = 4000;//等待时间
 
     /**
      * 获取微信支付签名
@@ -253,7 +253,7 @@ public class WeChatPayUnit {
      * @param wechatConfigure 商户配置信息
      */
     private static void waitUserPaying(String orderNo, WechatConfigure wechatConfigure,PunchCardPayResData punchCardPayResData) {
-        int retryTimes = 15;
+        int retryTimes = 10;
         LOGGER.info("刷卡支付等待用户输入密码,最多等待{}s,orderNo={}", retryTimes*retryInterval/1000, orderNo);
 
         boolean result = false;//支付结果
