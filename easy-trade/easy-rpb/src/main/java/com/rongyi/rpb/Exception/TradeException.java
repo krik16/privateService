@@ -1,5 +1,7 @@
 package com.rongyi.rpb.Exception;
 
+import com.rongyi.pay.core.constants.ConstantEnum;
+
 /**
  * Created by kejun on 2015/11/25.
  */
@@ -20,6 +22,11 @@ public class TradeException extends RuntimeException{
     {
         super(message);
         this.code = code;
+    }
+    public TradeException(ConstantEnum constantEnum)
+    {
+        super(constantEnum.getValueStr());
+        this.code = constantEnum.getCodeStr();
     }
 
     public String getCode() {
