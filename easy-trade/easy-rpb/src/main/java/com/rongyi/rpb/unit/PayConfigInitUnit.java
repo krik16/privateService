@@ -1,6 +1,6 @@
 package com.rongyi.rpb.unit;
 
-import com.rongyi.pay.core.webank.config.WwConfigure;
+import com.rongyi.pay.core.webank.config.WebankConfigure;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,17 +36,17 @@ public class PayConfigInitUnit {
         initWwConfigure();
     }
 
-    private WwConfigure initWwConfigure(){
+    private WebankConfigure initWwConfigure(){
 
-        WwConfigure wwConfigure = WwConfigure.getInstance();
-        if(StringUtils.isNotEmpty(wwConfigure.getKey())) {
+        WebankConfigure webankConfigure = WebankConfigure.getInstance();
+        if(StringUtils.isNotEmpty(webankConfigure.getKey())) {
             log.info("初始化微众银行支付配置");
-            wwConfigure.setKey(this.webankKey);
-            wwConfigure.setPunchCardPayUrl(this.wechatPunchCardPayUrl);
-            wwConfigure.setPunchCardPayQueryOrderUrl(this.wechatPunchCardPayQueryOrderUrl);
-            wwConfigure.setPunchCardPayReverseOrderUrl(this.wechatPunchCardPayReverseOrderUrl);
+            webankConfigure.setKey(this.webankKey);
+            webankConfigure.setWechatPunchCardPayUrl(this.wechatPunchCardPayUrl);
+            webankConfigure.setWechatPunchCardPayQueryOrderUrl(this.wechatPunchCardPayQueryOrderUrl);
+            webankConfigure.setWechatPunchCardPayReverseOrderUrl(this.wechatPunchCardPayReverseOrderUrl);
         }
-        return wwConfigure;
+        return webankConfigure;
 
     }
 
