@@ -16,7 +16,7 @@ public class SpecColumnClassificationVO implements Serializable{
 	private String id;//规格分类id  或者  子规格id
 	private String name;//规格分类名称  或者  子规格名称
 	private String color;//颜色编码
-	private Integer colorType;//色系
+	private String colorType;//色系
 	private List<SpecColumnClassificationVO> specColumnClassificationParamList;//规格分类下的子规格列表
 	
 	public String getId() {
@@ -37,10 +37,10 @@ public class SpecColumnClassificationVO implements Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public Integer getColorType() {
+	public String getColorType() {
 		return colorType;
 	}
-	public void setColorType(Integer colorType) {
+	public void setColorType(String colorType) {
 		this.colorType = colorType;
 	}
 	public List<SpecColumnClassificationVO> getSpecColumnClassificationParamList() {
