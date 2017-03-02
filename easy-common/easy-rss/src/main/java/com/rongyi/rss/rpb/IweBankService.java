@@ -19,4 +19,6 @@ public interface IweBankService {
      * @return map
      */
     Map<String,Object> webankWechatPunchCardPay(RyMchVo ryMchVo,WwPunchCardPayVo wwPunchCardPayVo);
+
+    Map<String,Object> weBankWechatPayQuery(RyMchVo ryMchVo);
 }
