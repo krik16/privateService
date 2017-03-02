@@ -19,7 +19,7 @@ public class SpecColumnClassificationParam implements Serializable{
 	private String id;
 	private String color;//颜色规格项对应的色系
 	private String name;//规格类名
-	private Integer colorType;// 1:标准色系，2：特殊色系
+	private String colorType;// 1:标准色系，2：特殊色系
 	private List<SpecColumnClassificationParam> specColumnClassificationParamList;
 	public String getId() {
 		return id;
@@ -39,10 +39,10 @@ public class SpecColumnClassificationParam implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getColorType() {
+	public String getColorType() {
 		return colorType;
 	}
-	public void setColorType(Integer colorType) {
+	public void setColorType(String colorType) {
 		this.colorType = colorType;
 	}
 	public List<SpecColumnClassificationParam> getSpecColumnClassificationParamList() {
