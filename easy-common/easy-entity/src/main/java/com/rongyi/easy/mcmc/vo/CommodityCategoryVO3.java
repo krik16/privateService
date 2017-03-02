@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -122,10 +123,10 @@ public class CommodityCategoryVO3 implements Serializable{
         this.name=commodityCategory.getName();
         this.logoUrl=commodityCategory.getLogoUrl();
         this.createAt=commodityCategory.getCreateAt();
-        this.parentids=CollectionUtils.isEmpty(commodityCategory.getParentids())?null:this.getStrForObjectId(commodityCategory.getParentids());
+        this.parentids= CollectionUtils.isEmpty(commodityCategory.getParentids())?(List)new ArrayList<String>():this.getStrForObjectId(commodityCategory.getParentids());
         this.parentid = null ==commodityCategory.getParentid()?"":commodityCategory.getParentid().toString();
         this.type =commodityCategory.getType();
-        this.columnIds=CollectionUtils.isEmpty(commodityCategory.getColumnIds())?null:this.getStrForObjectId(commodityCategory.getColumnIds());
+        this.columnIds=CollectionUtils.isEmpty(commodityCategory.getColumnIds())?(List)new ArrayList<String>():this.getStrForObjectId(commodityCategory.getColumnIds());
         this.popularImg=commodityCategory.getPopularImg();
         this.sequence=commodityCategory.getSequence();
 
