@@ -396,6 +396,10 @@ public interface Constants {
         		};
 
     }
+    interface ServiceId {
+        String APP_RONG_YI_GUANG = "app_rongyiguang";
+        String TERMINAL_SCREEN = "easy_terminal";
+    }
     interface SHARE_USER_TYPE{
     	/**容易逛用户*/
     	Integer MALLLIFE = 1;
@@ -406,6 +410,7 @@ public interface Constants {
     	/**摩店用户*/
     	Integer MALLSHOP = 4;
     }
+
 }
 
 

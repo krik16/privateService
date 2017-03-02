@@ -18,7 +18,7 @@ public class SearchCommodityCategoryParam extends MalllifeBaseParam implements S
 	private String mallId;//商场id
 	private boolean showParent;//是否显示父级类别   true是  false否
 	private String source;//1微信  2终端屏
-	private Integer serviceId;//微信服务号id
+	private String serviceId;//微信服务号id
 	public String getMallId() {
 		return mallId;
 	}
@@ -39,11 +39,11 @@ public class SearchCommodityCategoryParam extends MalllifeBaseParam implements S
 		this.source = source;
 	}
 
-	public Integer getServiceId() {
+	public String getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(Integer serviceId) {
+	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
 

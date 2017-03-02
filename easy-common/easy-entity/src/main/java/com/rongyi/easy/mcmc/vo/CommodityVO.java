@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.mcmc.TotalCommodity;
@@ -13,6 +14,7 @@ import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -91,7 +93,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private Integer templateId;//邮费模版id
 	private Integer sort;
 	private String mallName;
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
@@ -152,13 +153,40 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;
 	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> mallServiceIds;
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
 	private List<String> categoryNames;
 	private String freePostage;  // 0包邮 1不包邮
+	private List<String> onServiceIds;
+	private List<String> offServiceIds;
 
 	private List<String> skus;
 
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	public String getFreePostage() {
 		return freePostage;
@@ -663,12 +691,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setPurchaseCount(Integer purchaseCount){
 		this.purchaseCount = purchaseCount;
 	}
-	public String getWeAndTeStatus() {
-		return weAndTeStatus;
-	}
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
 	public String getCommodityModelNo() {
 		return commodityModelNo;
 	}
@@ -943,33 +965,24 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
-		if(commodity.isSpot()){
-			this.isSpot = 1;//现货
-		}else{
-			this.isSpot = 0;//非现货
-		}
+		this.isSpot = commodity.isSpot() ? 1 : 0;
+
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
-			try{
-				double postage = Double.parseDouble(commodity.getPostage());
+			try {
 				this.commodityPostage = commodity.getPostage();
-			}catch(Exception e){
+			} catch(Exception e){
 				this.commodityPostage = "0.0";
 			}
-		}else{
+		} else {
 			this.commodityPostage = "0.0";
 		}
-//		this.commodityPostage = commodity.getPostage();
 		this.commodityStock = String.valueOf(commodity.getStock());
 		this.commoditySold = String.valueOf(commodity.getSold());
 		this.commodityPubDate = commodity.getCreateAt().toString();
 		this.commodityOriginalPrice = commodity.getOriginalPrice();
 		this.commodityCurrentPrice = commodity.getCurrentPrice();
 		this.commodityPicList = commodity.getPicList();
-		if(commodity.getCode() !=null){
-			this.commodityCode = commodity.getCode();
-		}else{
-			this.commodityCode = "";
-		}
+		this.commodityCode = (commodity.getCode() != null) ? commodity.getCode() : "";
 		this.commodityStatus = commodity.getStatus();
 		this.commodityShopNumber = "";
 		if(commodity.getShopNum() != null){
@@ -984,7 +997,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.registerAt = commodity.getRegisterAt();
 		this.soldOutAt = commodity.getSoldOutAt();
 		//立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
-		this.shelvesType=null==commodity.getShelvesType()?2:commodity.getShelvesType();
+		this.shelvesType = (null == commodity.getShelvesType()) ? 2 : commodity.getShelvesType();
 
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
@@ -1056,23 +1069,27 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.subheading=commodity.getSubheading();
 		this.commodityDetails=commodity.getCommodityDetails();
 		this.setSelfAddressId(commodity.getSelfAddressId());
-		this.setIfShowInWechat(
-				Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
-						.contains(commodity.getTerminalType())  &&
-						Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3,
-								CommodityTerminalType.weAndTeStatus.STATUS_6,CommodityTerminalType.weAndTeStatus.STATUS_7).contains(commodity.getWeAndTeStatus())
-						?true:false);
-		this.skus=commodity.getSkus();
 		this.serviceDescriptionId=commodity.getServiceDescriptionId();
 		this.serviceDescription=commodity.getServiceDescription();
 		this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
+		this.setIfShowInWechat(isShowInWechat());
+	}
+
+	private boolean isShowInWechat() {
+		if(CollectionUtils.isEmpty(getOnServiceIds())) {
+			return false;
+		}
+
+		List<String> onIds = getOnServiceIds();
+		onIds.remove(Constants.ServiceId.APP_RONG_YI_GUANG);
+		onIds.remove(Constants.ServiceId.TERMINAL_SCREEN);
+
+		return onIds.size() > 0;
 	}
 
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
-				"activityId=" + activityId +
-				", commodityId='" + commodityId + '\'' +
 				"commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
@@ -1134,7 +1151,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", templateId=" + templateId +
 				", sort=" + sort +
 				", mallName='" + mallName + '\'' +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo='" + commodityModelNo + '\'' +
 				", goodsParam=" + goodsParam +
@@ -1143,6 +1159,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", updateAt=" + updateAt +
 				", galleryPosition=" + galleryPosition +
 				", inActivity=" + inActivity +
+				", shelvesType=" + shelvesType +
+				", offerShelves=" + offerShelves +
 				", giftId='" + giftId + '\'' +
 				", sn='" + sn + '\'' +
 				", mappingId='" + mappingId + '\'' +
@@ -1164,8 +1182,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", platform='" + platform + '\'' +
 				", price=" + price +
 				", selfTakeDays=" + selfTakeDays +
-				", shelvesType=" + shelvesType +
-				", offerShelves=" + offerShelves +
 				", subheading='" + subheading + '\'' +
 				", commodityDetails='" + commodityDetails + '\'' +
 				", ifShowInWechat=" + ifShowInWechat +
@@ -1174,14 +1190,19 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", locationIds=" + locationIds +
 				", accountType=" + accountType +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", merchantId='" + merchantId + '\'' +
 				", merchantType=" + merchantType +
 				", categoryNames=" + categoryNames +
-				", serviceDescription=" + serviceDescription +
-				", serviceDescriptionId=" + serviceDescriptionId +
+				", freePostage='" + freePostage + '\'' +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
+				", skus=" + skus +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
-				", skus=" + skus +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				'}';
 	}
 
@@ -1190,7 +1211,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	}
 
 	public CommodityVO getCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
-		if(commodity==null) {
+		if(commodity == null) {
 			return null;
 		}
 
@@ -1206,8 +1227,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
 		vo.setFreight(commodity.getFreight());
 		vo.setTerminalType(commodity.getTerminalType());
-		vo.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
-								commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
 		vo.setRegisterAt(commodity.getRegisterAt());
 		vo.setSoldOutAt(commodity.getSoldOutAt());
 		vo.setSource(commodity.getSource());
@@ -1220,7 +1239,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
-		vo.setServiceIds(commodity.getServiceIds());
+		vo.setMallServiceIds(commodity.getMallServiceIds());
+		vo.setOnServiceIds(commodity.getOnServiceIds());
 		vo.setSubheading(commodity.getSubheading());
 		vo.setCommodityDetails(commodity.getCommodityDetails());
 

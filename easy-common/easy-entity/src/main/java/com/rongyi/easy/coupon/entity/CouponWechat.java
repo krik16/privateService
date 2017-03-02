@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CouponWechat implements Serializable {
+
     private Integer id;
 
     private String couponId;
@@ -31,6 +32,12 @@ public class CouponWechat implements Serializable {
     private Date createAt;
 
     private Date updateAt;
+
+    //0:集团；1：商场；2：品牌；3：店铺
+    private Integer merchantType;
+
+    //商户mongDb Id
+    private String merchantMid;
 
     public Integer getId() {
         return id;
@@ -96,6 +103,22 @@ public class CouponWechat implements Serializable {
         this.updateAt = updateAt;
     }
 
+    public Integer getMerchantType() {
+        return merchantType;
+    }
+
+    public void setMerchantType(Integer merchantType) {
+        this.merchantType = merchantType;
+    }
+
+    public String getMerchantMid() {
+        return merchantMid;
+    }
+
+    public void setMerchantMid(String merchantMid) {
+        this.merchantMid = merchantMid;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CouponWechat{");
@@ -107,7 +130,10 @@ public class CouponWechat implements Serializable {
         sb.append(", isShow=").append(isShow);
         sb.append(", createAt=").append(createAt);
         sb.append(", updateAt=").append(updateAt);
+        sb.append(", merchantType=").append(merchantType);
+        sb.append(", merchantMid='").append(merchantMid).append('\'');
         sb.append('}');
         return sb.toString();
     }
+
 }

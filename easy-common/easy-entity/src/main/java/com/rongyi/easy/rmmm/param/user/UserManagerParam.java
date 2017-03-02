@@ -81,9 +81,9 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private Integer level;//层级 1级 2级 3级
 	private Integer settleOrgStrategy;//结算方式 0单一店铺结算 1统一总店结算
 	private Integer chiefId; //主账号ID
+	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机,0 无默认终端
 	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
-	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机,0 无默认终端
     public Integer getId() {
 		return id;
 	}
@@ -528,10 +528,9 @@ public class UserManagerParam extends BaseParam implements Serializable{
 				+ contractCode + ", synTarget=" + synTarget + ", isChief="
 				+ isChief + ", level=" + level + ", settleOrgStrategy="
 				+ settleOrgStrategy + ", chiefId=" + chiefId
-				+ ", isOpenQrCode=" + isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + ", defaultTerminal=" + defaultTerminal
-				+ "]";
+				+ ", defaultTerminal=" + defaultTerminal + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + "]";
 	}
 	
-
 }
