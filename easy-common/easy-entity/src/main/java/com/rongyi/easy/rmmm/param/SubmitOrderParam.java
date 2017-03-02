@@ -58,6 +58,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private Integer totalCredit; // 总积分
 	private String mallMid; // 商场ID
 	private String shopMid; // 店铺ID
+
 	// =======end=
 
 	public List<ParentOrderParam> getParentOrderList() {
