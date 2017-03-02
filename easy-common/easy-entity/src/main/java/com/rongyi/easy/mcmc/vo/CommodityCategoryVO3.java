@@ -4,6 +4,7 @@ package com.rongyi.easy.mcmc.vo;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
@@ -121,10 +122,10 @@ public class CommodityCategoryVO3 implements Serializable{
         this.name=commodityCategory.getName();
         this.logoUrl=commodityCategory.getLogoUrl();
         this.createAt=commodityCategory.getCreateAt();
-        this.parentids=this.getStrForObjectId(commodityCategory.getParentids());
-        this.parentid=commodityCategory.getParentid().toString();
-        this.type=commodityCategory.getType();
-        this.columnIds=this.getStrForObjectId(commodityCategory.getColumnIds());
+        this.parentids=CollectionUtils.isEmpty(commodityCategory.getParentids())?null:this.getStrForObjectId(commodityCategory.getParentids());
+        this.parentid = null ==commodityCategory.getParentid()?"":commodityCategory.getParentid().toString();
+        this.type =commodityCategory.getType();
+        this.columnIds=CollectionUtils.isEmpty(commodityCategory.getColumnIds())?null:this.getStrForObjectId(commodityCategory.getColumnIds());
         this.popularImg=commodityCategory.getPopularImg();
         this.sequence=commodityCategory.getSequence();
 
