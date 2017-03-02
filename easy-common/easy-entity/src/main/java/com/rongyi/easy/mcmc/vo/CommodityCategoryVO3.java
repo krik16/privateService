@@ -19,7 +19,7 @@ import java.util.List;
 public class CommodityCategoryVO3 implements Serializable{
 
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -239360496140548419L;
 	private String id;
@@ -122,21 +122,22 @@ public class CommodityCategoryVO3 implements Serializable{
         this.sequence = sequence;
     }
 
-    public CommodityCategoryVO3 (CommodityCategory commodityCategory){
-        this.id=commodityCategory.getId().toString();
-        this.name=commodityCategory.getName();
-        this.logoUrl=commodityCategory.getLogoUrl();
-        this.createAt=commodityCategory.getCreateAt();
-        this.parentids= CollectionUtils.isEmpty(commodityCategory.getParentids())?null:this.getStrForObjectId(commodityCategory.getParentids());
-        this.parentid = null ==commodityCategory.getParentid()?"":commodityCategory.getParentid().toString();
-        this.type =commodityCategory.getType();
-        this.columnIds=CollectionUtils.isEmpty(commodityCategory.getColumnIds())?null:this.getStrForObjectId(commodityCategory.getColumnIds());
-        this.popularImg=commodityCategory.getPopularImg();
-        this.sequence=commodityCategory.getSequence();
-
+    public static  CommodityCategoryVO3 copyTovo3(CommodityCategory commodityCategory){
+        CommodityCategoryVO3 vo3=new CommodityCategoryVO3();
+        vo3.setId(commodityCategory.getId().toString());
+        vo3.setName(commodityCategory.getName());
+        vo3.setLogoUrl(commodityCategory.getLogoUrl());
+        vo3.setCreateAt(commodityCategory.getCreateAt());
+        vo3.setParentids(CollectionUtils.isEmpty(commodityCategory.getParentids())?null:getStrForObjectId(commodityCategory.getParentids()));
+        vo3.setParentid(null ==commodityCategory.getParentid()?"":commodityCategory.getParentid().toString()) ;
+        vo3.setType(commodityCategory.getType());
+        vo3.setColumnIds(CollectionUtils.isEmpty(commodityCategory.getColumnIds())?null:getStrForObjectId(commodityCategory.getColumnIds()));
+        vo3.setPopularImg(commodityCategory.getPopularImg());
+        vo3.setSequence(commodityCategory.getSequence());
+       return vo3;
     }
 
-    private List<String> getStrForObjectId(List<ObjectId> objectIds){
+    private static List<String> getStrForObjectId(List<ObjectId> objectIds){
         List<String> strList=new ArrayList<>();
         if(CollectionUtils.isNotEmpty(objectIds)){
             for(ObjectId objectId:objectIds){
