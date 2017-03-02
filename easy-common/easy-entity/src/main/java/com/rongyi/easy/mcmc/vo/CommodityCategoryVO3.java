@@ -18,7 +18,11 @@ import java.util.List;
  */
 public class CommodityCategoryVO3 implements Serializable{
 
-    private String id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -239360496140548419L;
+	private String id;
     private String name;//分类名
     private String logoUrl;//图标
     private Date createAt;//创建时间
