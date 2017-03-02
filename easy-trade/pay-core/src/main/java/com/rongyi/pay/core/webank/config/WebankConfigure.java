@@ -26,6 +26,12 @@ public class WebankConfigure extends BaseData{
     //微信退款接口查询地址
     private String wechatPunchCardRefundQueryUrl;
 
+    //支付宝条码支付请求url
+    private String alipayPunchCardPayUrl;
+
+    //支付宝订单查询请求url
+    private String alipayQueryTradeUrl ;
+
     private static WebankConfigure webankConfigure;
 
     private WebankConfigure(){}
@@ -91,5 +97,21 @@ public class WebankConfigure extends BaseData{
 
     public void setWechatPunchCardRefundQueryUrl(String wechatPunchCardRefundQueryUrl) {
         this.wechatPunchCardRefundQueryUrl = wechatPunchCardRefundQueryUrl;
+    }
+
+    public String getAlipayPunchCardPayUrl() {
+        return alipayPunchCardPayUrl;
+    }
+
+    public void setAlipayPunchCardPayUrl(String alipayPunchCardPayUrl) {
+        this.alipayPunchCardPayUrl = alipayPunchCardPayUrl;
+    }
+
+    public String getAlipayQueryTradeUrl() {
+        return alipayQueryTradeUrl;
+    }
+
+    public void setAlipayQueryTradeUrl(String alipayQueryTradeUrl) {
+        this.alipayQueryTradeUrl = alipayQueryTradeUrl;
     }
 }

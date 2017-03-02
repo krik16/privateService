@@ -5,9 +5,11 @@ import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
+import com.rongyi.pay.core.webank.model.WaQueryTradeReqData;
 import com.rongyi.pay.core.webank.model.WwPunchCardQueryOrderReqData;
 import com.rongyi.pay.core.webank.model.WwPunchCardReverseReqData;
 import com.rongyi.pay.core.webank.model.WwpunchCardRefundReqData;
+import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
@@ -200,7 +202,7 @@ public class ParamUnit {
         if (StringUtils.isEmpty(param.getOrderNo())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderNo");
         }
-        if (param.getAmount() != null && StringUtils.isNotEmpty(param.getAmount().toString()) && param.getAmount().compareTo(BigDecimal.ZERO) == 1) {
+        if (param.getAmount() == null || StringUtils.isEmpty(param.getAmount().toString()) || param.getAmount().compareTo(BigDecimal.ZERO) == -1) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "amount");
         }
         if (StringUtils.isEmpty(param.getProduct())) {
@@ -208,9 +210,6 @@ public class ParamUnit {
         }
         if (StringUtils.isEmpty(param.getAuthCode())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "authCode");
-        }
-        if (StringUtils.isEmpty(param.getSubAppid())) {
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "subAppid");
         }
         if (StringUtils.isEmpty(configure.getWechatPunchCardPayUrl())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "payUrl");
@@ -223,7 +222,6 @@ public class ParamUnit {
     /**
      * 检查微众微信刷卡支付查询订单参数
      * @param reqData 请求参数
-     * @param configure
      */
     public static void checkWebankWechatPunchCardQueryOrder(WwPunchCardQueryOrderReqData reqData, WebankConfigure configure) {
         checkWebankMerchatCode(reqData.getMerchant_code());
@@ -259,6 +257,10 @@ public class ParamUnit {
         }
     }
 
+    /**
+     * 检查微众微信刷卡支付退款参数
+     * @param reqData 请求参数
+     */
     public static void checkWebankWechatPunchCardRefund(WwpunchCardRefundReqData reqData) {
         checkWebankMerchatCode(reqData.getMerchant_code());
         if (StringUtils.isEmpty(reqData.getTerminal_serialno())) {
@@ -269,6 +271,10 @@ public class ParamUnit {
         }
     }
 
+    /**
+     * 检查微众刷卡支付退款结果查询参数
+     * @param reqData 请求参数
+     */
     public static void checkWebankWechatPunchCardRefundQuery(WwpunchCardRefundReqData reqData) {
         checkWebankMerchatCode(reqData.getMerchant_code());
         if (StringUtils.isEmpty(reqData.getTerminal_serialno())) {
@@ -276,9 +282,40 @@ public class ParamUnit {
         }
     }
 
+    /**
+     * 检查微众商户号
+     * @param merchatCode 商户号
+     */
     private static void checkWebankMerchatCode(String merchatCode) {
         if (StringUtils.isEmpty(merchatCode)) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "merchant_code");
         }
+    }
+
+
+    /**
+     * 检查微众支付宝刷卡支付参数
+     */
+    public static void checkWebankAlipayPunchCardPay(WaPunchCardPayParam param,WebankConfigure configure) {
+        checkWebankMerchatCode(param.getWbMerchantId());
+        if(StringUtils.isEmpty(configure.getAlipayPunchCardPayUrl()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "url");
+        if (StringUtils.isEmpty(param.getOrderId())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderId");
+        }
+        if(StringUtils.isEmpty(param.getAuthCode()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "authCode");
+    if(param.getTotalAmount()==null)
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "totalAmount");
+    if(StringUtils.isEmpty(param.getSubject()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "subject");
+}
+
+    public static void checkWebankAlipayQueryTrade(WaQueryTradeReqData reqData, WebankConfigure configure) {
+        checkWebankMerchatCode(reqData.getWbMerchantId());
+        if(StringUtils.isEmpty(configure.getAlipayQueryTradeUrl()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "url");
+        if(StringUtils.isEmpty(reqData.getOrderId())&&StringUtils.isEmpty(reqData.getTradeNo()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderId");
     }
 }

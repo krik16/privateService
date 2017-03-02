@@ -211,7 +211,7 @@ public class HttpUtil {
 	 * @return 返回结果
 	 */
 	public static String httpPOSTJson(String url,Object obj) throws Exception{
-		logger.info("发送http请求 url:{},obj:{}",url,obj);
+		logger.info("发送http请求 url:{} , obj:{}",url,obj);
 		Map<String, String> params = objectToMap(obj);
 		logger.info("http请求参数 param:{}",params);
 		URL u = null;
