@@ -59,6 +59,10 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String mallMid; // 商场ID
 	private String shopMid; // 店铺ID
 	// =======end=
+	//=======start= add by wangjh7 at 2017-3-2
+	// 商场类型
+	private Integer mallType;
+	// =======end=
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -326,20 +330,50 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.memberName = memberName;
 	}
 
+	public Integer getMallType() {
+		return mallType;
+	}
+
+	public void setMallType(Integer mallType) {
+		this.mallType = mallType;
+	}
+
 	@Override
 	public String toString() {
-		return "SubmitOrderParam [parentOrderList=" + parentOrderList
-				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
-				+ ", devType=" + devType + ", source=" + source
-				+ ", platformRebateCode=" + platformRebateCode
-				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
-				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
-				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
-				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
-				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
-				+ ", receiverName=" + receiverName+ ", memberName=" + memberName
-				+ "]";
+		return "SubmitOrderParam{" +
+				"business=" + business +
+				", parentOrderList=" + parentOrderList +
+				", commodityCartIds=" + commodityCartIds +
+				", devId='" + devId + '\'' +
+				", devType='" + devType + '\'' +
+				", source='" + source + '\'' +
+				", platformRebateCode='" + platformRebateCode + '\'' +
+				", discountInfo=" + discountInfo +
+				", ifCart=" + ifCart +
+				", weixinAppId='" + weixinAppId + '\'' +
+				", orderChannel='" + orderChannel + '\'' +
+				", openId='" + openId + '\'' +
+				", phone='" + phone + '\'' +
+				", memberId='" + memberId + '\'' +
+				", memberName='" + memberName + '\'' +
+				", receiverProvinceName='" + receiverProvinceName + '\'' +
+				", receiverCityName='" + receiverCityName + '\'' +
+				", receiverDistrictName='" + receiverDistrictName + '\'' +
+				", receiverAddress='" + receiverAddress + '\'' +
+				", receiverPhone='" + receiverPhone + '\'' +
+				", receiverName='" + receiverName + '\'' +
+				", provinceId='" + provinceId + '\'' +
+				", cityId='" + cityId + '\'' +
+				", districtId='" + districtId + '\'' +
+				", commodityType=" + commodityType +
+				", userType=" + userType +
+				", exchangeType='" + exchangeType + '\'' +
+				", deliveryType='" + deliveryType + '\'' +
+				", totalCredit=" + totalCredit +
+				", mallMid='" + mallMid + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", mallType=" + mallType +
+				"} " + super.toString();
 	}
-	
+
 }
