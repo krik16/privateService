@@ -105,8 +105,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String systemNumber;
 	@Field("discount")
 	private Double discount;
-	@Field("weAndTeStatus")
-	private String weAndTeStatus;
 	@Field("brandName")
 	private String brandName;
 	@Field("updateAt")
@@ -138,6 +136,36 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private List<String> locationIds;
 	@Field("serviceIds")
 	private List<Integer> serviceIds;
+	@Field("mallServiceIds")
+	private List<String> mallServiceIds;
+	@Field("onServiceIds")
+	private List<String> onServiceIds;
+	@Field("offServiceIds")
+	private List<String> offServiceIds;
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	public Double getPrice() {
 		return price;
@@ -468,14 +496,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.systemNumber = systemNumber;
 	}
 
-	public String getWeAndTeStatus() {
-		return weAndTeStatus;
-	}
-
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
-
 	public String getSecKillSign() {
 		return secKillSign;
 	}
@@ -587,8 +607,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setPrice(commodity.getPrice());
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
-		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
-		if (!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
+		if(!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
 			List<String> category_ids = new ArrayList<>();
 			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
 				category_ids.add(categoryObjectId.toString());
@@ -615,9 +634,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setBrand_id(shopInfo.getBrandMid());
 		}
 
-		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
-			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
-		}
 		this.setCommodityRange(commodityVo.getCommodityRange());
 
 		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
@@ -625,7 +641,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSpot(commodity.isSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
 			this.setTerminalType(commodity.getTerminalType());
-			this.setWeAndTeStatus(commodity.getWeAndTeStatus());
 			if(commodity.isSpot()) {
 				this.setStatus(commodity.getStatus());
 			} else {
@@ -645,7 +660,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
 
 		this.setLocationIds(commodity.getLocationIds());
-		this.setServiceIds(commodity.getServiceIds());
+		//this.setServiceIds(commodity.getServiceIds());
+		this.setMallServiceIds(commodity.getMallServiceIds());
+		this.setOnServiceIds(commodity.getOnServiceIds());
 	}
 
 	public void toDocument(Commodity commodity) {
@@ -664,8 +681,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setPublic_start(commodity.getRegisterAt());//上架时间
 			this.setPrice(commodity.getPrice());
 			this.setTerminalType(commodity.getTerminalType());
-			this.setWeAndTeStatus(StringUtils.isNotBlank(commodity.getWeAndTeStatus()) ?
-					commodity.getWeAndTeStatus() : CommodityTerminalType.weAndTeStatus.STATUS_4);
+			this.setMallServiceIds(commodity.getMallServiceIds());
+			this.setOnServiceIds(commodity.getOnServiceIds());
+			this.setOffServiceIds(commodity.getOffServiceIds());
 		}
 	}
 }

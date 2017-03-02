@@ -1,14 +1,13 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.activitymanage.entity.GoodsInAppList;
 import com.rongyi.easy.malllife.common.util.Utils;
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -93,7 +92,6 @@ public class Commodity implements  Serializable,Cloneable{
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
 	private Integer purchaseCount;//商品的限购数量
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
 	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
 	private boolean goodsSec = true;//正品保障
@@ -152,12 +150,48 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
 	private Integer accountType;//0集团商品，1商场商品，4,5店铺商品
 	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> mallServiceIds;
 	private String groupMid; //集团Mid
 	private String merchantId;  //商户id
 	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
-	private List<WechatSwitch>  wechatSwitchList;
 	private String freePostage;  // 0包邮 1不包邮
 	private List<String> skus;  //规格的sku集合
+
+	private List<String> onServiceIds; // 标记为打开的服务号
+	private List<String> offServiceIds; // 被大运营标记为关闭的服务号
+	private String weAndTeStatus;
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	// 4都不能
 	// 3商家后台商品运营可以编辑微信显示隐藏，
@@ -467,12 +501,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setPurchaseCount(Integer purchaseCount) {
 		this.purchaseCount = purchaseCount;
 	}
-	public String getWeAndTeStatus() {
-		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
-	}
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -934,7 +963,6 @@ public class Commodity implements  Serializable,Cloneable{
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
 		commodity.setPurchaseCount(purchaseCount);
-		commodity.setWeAndTeStatus(weAndTeStatus);
 		commodity.setSort(sort);
 		commodity.setCommodityModelNo(commodityModelNo);
 		commodity.setGoodsParam(goodsParam);
@@ -1010,7 +1038,6 @@ public class Commodity implements  Serializable,Cloneable{
 				", cPriceMax='" + cPriceMax + '\'' +
 				", cPriceMin='" + cPriceMin + '\'' +
 				", purchaseCount=" + purchaseCount +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", sort=" + sort +
 				", customCategoryIds=" + customCategoryIds +
 				", commodityModelNo=" +commodityModelNo+
@@ -1063,9 +1090,15 @@ public class Commodity implements  Serializable,Cloneable{
 
 			this.setLocationIds(vo.getLocationIds());
 			this.setAccountType(vo.getIdentity());
-			this.setServiceIds(vo.getServiceIds());
+			this.setMallServiceIds(vo.getMallServiceIds());
 			this.setMerchantId(vo.getMerchantId());
 			this.setMerchantType(vo.getMerchantType());
+			if(vo.getTerminalType() == 1 ||
+					vo.getTerminalType() == 3 ||
+					vo.getTerminalType() == 5 ||
+					vo.getTerminalType() == 7) {
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+			}
 		}
 
 		this.setCode(vo.getCommodityCode());
@@ -1128,7 +1161,6 @@ public class Commodity implements  Serializable,Cloneable{
 		// 7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 
 		this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_7);
-		this.setWeAndTeStatus(CommodityTerminalType.weAndTeStatus.STATUS_4);//默认为都不展示
 
 		//0表示统一库存1表示分管库存默认是分管库存
 		this.setStockStatus((vo.getStockStatus() != null) ? vo.getStockStatus() : 1);
@@ -1229,6 +1261,8 @@ public class Commodity implements  Serializable,Cloneable{
 				}
 				this.setType(CommodityType.BULL.getValue());
 				this.setShopMid(vo.getShopMid());
+				//this.setMallServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 			}
 		}
 	}
@@ -1287,7 +1321,6 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setActivityStartTime(source.getActivityStartTime());
 		commodity.setActivityEndTime(source.getActivityEndTime());
 		commodity.setPurchaseCount(source.getPurchaseCount());
-		commodity.setWeAndTeStatus(source.getWeAndTeStatus());
 		commodity.setSort(source.getSort());
 		commodity.setCommodityModelNo(source.getCommodityModelNo());
 		commodity.setGoodsParam(source.getGoodsParam());
