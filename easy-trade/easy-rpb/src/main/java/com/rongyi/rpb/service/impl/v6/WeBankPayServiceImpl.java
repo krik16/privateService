@@ -9,7 +9,7 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.model.WwPunchCardResData;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.rpb.bizz.PayBizz;
-import com.rongyi.rpb.common.BeanMapUtils;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IweBankService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
