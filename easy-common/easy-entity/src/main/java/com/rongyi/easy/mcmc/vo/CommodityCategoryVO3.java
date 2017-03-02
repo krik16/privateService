@@ -123,10 +123,10 @@ public class CommodityCategoryVO3 implements Serializable{
         this.name=commodityCategory.getName();
         this.logoUrl=commodityCategory.getLogoUrl();
         this.createAt=commodityCategory.getCreateAt();
-        this.parentids= CollectionUtils.isEmpty(commodityCategory.getParentids())?(List)new ArrayList<String>():this.getStrForObjectId(commodityCategory.getParentids());
+        this.parentids= CollectionUtils.isEmpty(commodityCategory.getParentids())?null:this.getStrForObjectId(commodityCategory.getParentids());
         this.parentid = null ==commodityCategory.getParentid()?"":commodityCategory.getParentid().toString();
         this.type =commodityCategory.getType();
-        this.columnIds=CollectionUtils.isEmpty(commodityCategory.getColumnIds())?(List)new ArrayList<String>():this.getStrForObjectId(commodityCategory.getColumnIds());
+        this.columnIds=CollectionUtils.isEmpty(commodityCategory.getColumnIds())?null:this.getStrForObjectId(commodityCategory.getColumnIds());
         this.popularImg=commodityCategory.getPopularImg();
         this.sequence=commodityCategory.getSequence();
 
