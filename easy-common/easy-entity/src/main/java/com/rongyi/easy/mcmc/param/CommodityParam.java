@@ -52,7 +52,7 @@ public class CommodityParam implements Serializable{
 
 	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义说明
 
-	private List<Integer> serviceIds; //公众号
+	private List<String> serviceIds; //公众号
 
 	private Integer createBy;
 
@@ -172,11 +172,11 @@ public class CommodityParam implements Serializable{
 	}
 
 
-	public List<Integer> getServiceIds() {
+	public List<String> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<Integer> serviceIds) {
+	public void setServiceIds(List<String> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 

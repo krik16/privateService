@@ -53,6 +53,25 @@ public class ShopVO implements Serializable {
 	private String nameEn;  //店铺英文名
 	private String descriptionEn; //英文描述
 	private String fID;
+	private String parentId; //上级店铺ID
+
+	private List<String> parentIds; //上级店铺ids
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public List<String> getParentIds() {
+		return parentIds;
+	}
+
+	public void setParentIds(List<String> parentIds) {
+		this.parentIds = parentIds;
+	}
 
 	public String getfID() {
 		return fID;

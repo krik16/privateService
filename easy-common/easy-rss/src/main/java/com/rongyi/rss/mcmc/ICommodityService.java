@@ -89,7 +89,18 @@ public interface ICommodityService {
 
 	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
 
-	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
+
+	/**
+	 * 更新商品终端的显示与隐藏
+	 *
+	 * @param commodityId
+	 * @param terminalId 终端id
+	 * @param switchStatus show or hide
+	 * @param isYunYinAuth 是否是大运营操作
+	 *
+	 * @return
+	 */
+	Map<String, List> updateSwitchStatusForCommodity(String commodityId, String terminalId, String switchStatus, boolean isYunYinAuth);
 
 	public boolean updateCommodityForOperate(CommodityParam commodityParam);
 }

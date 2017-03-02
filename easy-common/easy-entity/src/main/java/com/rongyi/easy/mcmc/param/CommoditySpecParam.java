@@ -164,4 +164,27 @@ public class CommoditySpecParam implements  Serializable {
 	public void setReferencePrice(String referencePrice) {
 		this.referencePrice = referencePrice;
 	}
+
+	@Override
+	public String toString() {
+		return "CommoditySpecParam{" +
+				"id='" + id + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", columnIds=" + columnIds +
+				", columnValues=" + columnValues +
+				", columnNotes=" + columnNotes +
+				", shopMid='" + shopMid + '\'' +
+				", filialeMid='" + filialeMid + '\'' +
+				", pictureUrl='" + pictureUrl + '\'' +
+				", sku='" + sku + '\'' +
+				", stock=" + stock +
+				", remain=" + remain +
+				", userId=" + userId +
+				", groupMid='" + groupMid + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", type=" + type +
+				", referencePrice='" + referencePrice + '\'' +
+				'}';
+	}
 }

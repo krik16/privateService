@@ -61,8 +61,31 @@ public class CouponVO implements Serializable {
 
     private List<Double> location;
 
-    private List<CouponWechat> wechats;
+    /**
+     * 钩中微信端展示的商户id列表
+     */
+    private List<String> serviceIds;
 
+    /**
+     * 在微信端展示的 商户id列表
+     */
+    private List<String> onServiceIds;
+
+    public List<String> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<String> serviceIds) {
+        this.serviceIds = serviceIds;
+    }
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
+    }
 
     private Date publicStart; // 发布时间开始
 
@@ -799,11 +822,72 @@ public class CouponVO implements Serializable {
         this.limitPublishCount = limitPublishCount;
     }
 
-    public List<CouponWechat> getWechats() {
-        return wechats;
-    }
-
-    public void setWechats(List<CouponWechat> wechats) {
-        this.wechats = wechats;
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CouponVO{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", terminelTitle='").append(terminelTitle).append('\'');
+        sb.append(", vistedNum=").append(vistedNum);
+        sb.append(", activityType='").append(activityType).append('\'');
+        sb.append(", holderId='").append(holderId).append('\'');
+        sb.append(", holderType='").append(holderType).append('\'');
+        sb.append(", label='").append(label).append('\'');
+        sb.append(", valid='").append(valid).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", publishChannel=").append(publishChannel);
+        sb.append(", isRelateAll=").append(isRelateAll);
+        sb.append(", shopIds=").append(shopIds);
+        sb.append(", mallIds=").append(mallIds);
+        sb.append(", zoneIds=").append(zoneIds);
+        sb.append(", location=").append(location);
+        sb.append(", serviceIds=").append(serviceIds);
+        sb.append(", onServiceIds=").append(onServiceIds);
+        sb.append(", publicStart=").append(publicStart);
+        sb.append(", publicEnd=").append(publicEnd);
+        sb.append(", saleStart=").append(saleStart);
+        sb.append(", saleEnd=").append(saleEnd);
+        sb.append(", saleType=").append(saleType);
+        sb.append(", startTime=").append(startTime);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", endTime=").append(endTime);
+        sb.append(", recommend=").append(recommend);
+        sb.append(", userQuota='").append(userQuota).append('\'');
+        sb.append(", grouponOriginal='").append(grouponOriginal).append('\'');
+        sb.append(", thumbnail='").append(thumbnail).append('\'');
+        sb.append(", grouponPrice='").append(grouponPrice).append('\'');
+        sb.append(", grouponNum='").append(grouponNum).append('\'');
+        sb.append(", buyedAmount='").append(buyedAmount).append('\'');
+        sb.append(", restAmount='").append(restAmount).append('\'');
+        sb.append(", useRestriction='").append(useRestriction).append('\'');
+        sb.append(", useMode='").append(useMode).append('\'');
+        sb.append(", position='").append(position).append('\'');
+        sb.append(", grouponStatus='").append(grouponStatus).append('\'');
+        sb.append(", createdUser=").append(createdUser);
+        sb.append(", updatedUser=").append(updatedUser);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", buyedNum=").append(buyedNum);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", grouponType='").append(grouponType).append('\'');
+        sb.append(", cooperater='").append(cooperater).append('\'');
+        sb.append(", alarmNum=").append(alarmNum);
+        sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", brandCateIds=").append(brandCateIds);
+        sb.append(", showChannel='").append(showChannel).append('\'');
+        sb.append(", carouselImg=").append(carouselImg);
+        sb.append(", buyType='").append(buyType).append('\'');
+        sb.append(", buyQuotaNum=").append(buyQuotaNum);
+        sb.append(", wechatAdImg='").append(wechatAdImg).append('\'');
+        sb.append(", wechatIcon='").append(wechatIcon).append('\'');
+        sb.append(", synFlag='").append(synFlag).append('\'');
+        sb.append(", afterSaleService='").append(afterSaleService).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append(", limitUseCount=").append(limitUseCount);
+        sb.append(", limitPublishCount=").append(limitPublishCount);
+        sb.append('}');
+        return sb.toString();
     }
 }
