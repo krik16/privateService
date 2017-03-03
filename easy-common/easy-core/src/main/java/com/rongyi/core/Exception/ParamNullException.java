@@ -3,7 +3,7 @@ package com.rongyi.core.Exception;
 /**
  * Created by kejun on 2015/11/25.
  */
-public class ParamNullException extends TradeException {
+public class ParamNullException extends TradePayException {
 
     public ParamNullException(String code, String message)
     {
@@ -12,6 +12,6 @@ public class ParamNullException extends TradeException {
     }
 
     public ParamNullException(){
-       throw new TradeException("-1","参数不合法");
+       throw new TradePayException("-1","参数不合法");
    }
 }
