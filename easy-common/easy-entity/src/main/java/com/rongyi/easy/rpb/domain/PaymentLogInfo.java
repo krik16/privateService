@@ -1,5 +1,8 @@
 package com.rongyi.easy.rpb.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -276,5 +279,9 @@ public class PaymentLogInfo implements Serializable {
 		this.tradeType = tradeType;
 	}
 
-	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
+
 }
