@@ -634,6 +634,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 //汇总商家红包抵扣金额
                 existOrderTopDto.setHbDiscountMerTotal((existOrderTopDto.getHbDiscountMerTotal() == null ? 0 : existOrderTopDto.getHbDiscountMerTotal())
                         + (orderTopDto.getHbDiscountMerTotal() == null ? 0 : orderTopDto.getHbDiscountMerTotal()));
+                //汇总商家满减金额
+                existOrderTopDto.setTotalReductionFee((existOrderTopDto.getTotalReductionFee() == null ? 0 : existOrderTopDto.getTotalReductionFee())
+                        + (orderTopDto.getTotalReductionFee() == null ? 0 : orderTopDto.getTotalReductionFee()));
             }
         }
         return new ArrayList(map.values());

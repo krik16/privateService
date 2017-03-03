@@ -41,6 +41,9 @@ public class OrderSettlementTopDto {
 	/**  商家红包抵扣金额（汇总） */
 	private Double hbDiscountMerTotal ;
 
+	/**  商家满减优惠金额（汇总） */
+	private Double totalReductionFee ;
+
 	/**
 	 * @return the incomeType
 	 */
@@ -147,5 +150,13 @@ public class OrderSettlementTopDto {
 
 	public void setHbDiscountMerTotal(Double hbDiscountMerTotal) {
 		this.hbDiscountMerTotal = hbDiscountMerTotal;
+	}
+
+	public Double getTotalReductionFee() {
+		return totalReductionFee;
+	}
+
+	public void setTotalReductionFee(Double totalReductionFee) {
+		this.totalReductionFee = totalReductionFee;
 	}
 }
