@@ -137,7 +137,7 @@ public class CommodityCategoryVO3 implements Serializable{
        return vo3;
     }
 
-    private static List<String> getStrForObjectId(List<ObjectId> objectIds){
+    public static List<String> getStrForObjectId(List<ObjectId> objectIds){
         List<String> strList=new ArrayList<>();
         if(CollectionUtils.isNotEmpty(objectIds)){
             for(ObjectId objectId:objectIds){
