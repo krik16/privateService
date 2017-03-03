@@ -72,8 +72,8 @@ public enum AppErrorCode {
     ERROR_RED_PASSWORD_ULTRALIMIT(1068105,"抱歉您错误输入超限，请明天再试"),
     ERROR_GET_COUPON(1068106,"领取红包失败"),
     /** 注册快捷登录邀请码错误提示 */
-    ERROE_INVITE_CODE(1069100,"您输入了错误邀请码，请重新输入");
-    
+    ERROE_INVITE_CODE(1069100,"您输入了错误邀请码，请重新输入"),
+    ERROR_APPROVAL_CODE(1069101, "该用户已点赞");
 
 
 

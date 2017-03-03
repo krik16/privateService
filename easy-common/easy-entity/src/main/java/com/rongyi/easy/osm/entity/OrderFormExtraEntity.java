@@ -1,6 +1,8 @@
 package com.rongyi.easy.osm.entity;
 
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,6 +30,21 @@ public class OrderFormExtraEntity implements Serializable {
     private String cityId;
 
     private String districtId;
+
+    private Integer type;//0订单地址 1卖家备注
+
+    private String comment;//备注
+
+    /**
+     * 当类型是卖家备注时的扩展字段 {guideId:导购id,guideName:导购昵称}
+     */
+    private String extraInfo;//扩展字段，存json数据
+
+    /** 创建时间 */
+    private Date createAt;
+
+    /** 修改时间 */
+    private Date updateAt;
 
     public Integer getId() {
         return id;
@@ -123,17 +140,48 @@ public class OrderFormExtraEntity implements Serializable {
         this.districtId = districtId;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
     @Override
     public String toString() {
-        return "OrderFormEntity{" +
-                "id=" + id +
-                ", orderNo='" + orderNo + '\'' +
-                ", receiverPhone=" + receiverPhone +
-                ", receiverAddress=" + receiverAddress +
-                ", receiverName=" + receiverName +
-                ", receiverProvinceName='" + receiverProvinceName + '\'' +
-                ", receiverCityName='" + receiverCityName + '\'' +
-                ", receiverDistrictName='" + receiverDistrictName + '\'' +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

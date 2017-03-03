@@ -30,7 +30,7 @@ public class CommodityVO1 implements  Serializable {
 
 	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 	private Integer terminalType = 1; // com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
-	private String terminalTypeDesc = CommodityTerminalType.CommodityTerminalCommon.getName(terminalType);
+	private String terminalTypeDesc;
 	private Date soldOutAt;
 	private String merchantId;
 	private Date registerAt;

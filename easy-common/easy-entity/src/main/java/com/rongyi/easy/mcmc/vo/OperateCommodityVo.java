@@ -1,6 +1,8 @@
 package com.rongyi.easy.mcmc.vo;
 
 
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +11,6 @@ import java.util.List;
  * Created by xuying on 2016/6/22.
  */
 public class OperateCommodityVo implements Serializable, Cloneable {
-
 
     private String  id ;//系统编号
     private String  name;//商品名称
@@ -23,9 +24,12 @@ public class OperateCommodityVo implements Serializable, Cloneable {
     private String reason;
     private String buyerAccount;
     private Date soldOutAt;//下架时间
-    private String commodityModelNo;
     private Integer terminalType;
-    private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+    private List<String> serviceIds;
+    private List<String> onServiceIds;
+    private List<String> offServiceIds;
+    private List<WechatInfoVo> wechatInfoVos;
+    private String commodityModelNo;
     private Integer type;//渠道  0商家，1买手
     private String originalPrice;//商品原价
     private String currentPrice;//商品现价
@@ -33,20 +37,12 @@ public class OperateCommodityVo implements Serializable, Cloneable {
     private Integer stock;//商品库存
 
 
-    public Integer getTerminalType() {
-        return terminalType;
+    public List<WechatInfoVo> getWechatInfoVos() {
+        return wechatInfoVos;
     }
 
-    public void setTerminalType(Integer terminalType) {
-        this.terminalType = terminalType;
-    }
-
-    public String getWeAndTeStatus() {
-        return weAndTeStatus;
-    }
-
-    public void setWeAndTeStatus(String weAndTeStatus) {
-        this.weAndTeStatus = weAndTeStatus;
+    public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+        this.wechatInfoVos = wechatInfoVos;
     }
 
     public String getCommodityModelNo() {
@@ -204,6 +200,38 @@ public class OperateCommodityVo implements Serializable, Cloneable {
         this.soldOutAt = soldOutAt;
     }
 
+    public Integer getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(Integer terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public List<String> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<String> serviceIds) {
+        this.serviceIds = serviceIds;
+    }
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
+    }
+
+    public List<String> getOffServiceIds() {
+        return offServiceIds;
+    }
+
+    public void setOffServiceIds(List<String> offServiceIds) {
+        this.offServiceIds = offServiceIds;
+    }
+
     @Override
     public String toString() {
         return "OperateCommodityVo{" +
@@ -221,7 +249,6 @@ public class OperateCommodityVo implements Serializable, Cloneable {
                 ", soldOutAt=" + soldOutAt +
                 ", commodityModelNo='" + commodityModelNo + '\'' +
                 ", terminalType=" + terminalType +
-                ", weAndTeStatus='" + weAndTeStatus + '\'' +
                 '}';
     }
 

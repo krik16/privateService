@@ -1,5 +1,8 @@
 package com.rongyi.easy.rpb.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -115,6 +118,18 @@ public class PaymentEntity implements Serializable {
 	 * 微信支付商户账号b表对应id
 	 */
 	private Integer weixinMchId;
+
+	private String aliSellerId;
+
+	private String wechatMchId;
+
+	private String ryMchId;
+
+	private String ryAppId;
+
+	private Byte source;
+
+	private Byte orgChannel;
 
 	/**
 	 * 主键id
@@ -401,29 +416,56 @@ public class PaymentEntity implements Serializable {
 		this.weixinMchId = weixinMchId;
 	}
 
+	public String getAliSellerId() {
+		return aliSellerId;
+	}
+
+	public void setAliSellerId(String aliSellerId) {
+		this.aliSellerId = aliSellerId;
+	}
+
+	public String getWechatMchId() {
+		return wechatMchId;
+	}
+
+	public void setWechatMchId(String wechatMchId) {
+		this.wechatMchId = wechatMchId;
+	}
+
+	public String getRyMchId() {
+		return ryMchId;
+	}
+
+	public void setRyMchId(String ryMchId) {
+		this.ryMchId = ryMchId;
+	}
+
+	public String getRyAppId() {
+		return ryAppId;
+	}
+
+	public void setRyAppId(String ryAppId) {
+		this.ryAppId = ryAppId;
+	}
+
+	public Byte getSource() {
+		return source;
+	}
+
+	public void setSource(Byte source) {
+		this.source = source;
+	}
+
+	public Byte getOrgChannel() {
+		return orgChannel;
+	}
+
+	public void setOrgChannel(Byte orgChannel) {
+		this.orgChannel = orgChannel;
+	}
+
 	@Override
 	public String toString() {
-		return "PaymentEntity{" +
-				"id=" + id +
-				", payNo='" + payNo + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", orderType=" + orderType +
-				", orderPrice=" + orderPrice +
-				", title='" + title + '\'' +
-				", amountMoney=" + amountMoney +
-				", status=" + status +
-				", tradeType=" + tradeType +
-				", createTime=" + createTime +
-				", finishTime=" + finishTime +
-				", payChannel=" + payChannel +
-				", outAccount='" + outAccount + '\'' +
-				", inAccount='" + inAccount + '\'' +
-				", showNum=" + showNum +
-				", drawUserId='" + drawUserId + '\'' +
-				", payName='" + payName + '\'' +
-				", batchNo='" + batchNo + '\'' +
-				", refundRejected='" + refundRejected + '\'' +
-				", weixinMchId=" + weixinMchId +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }

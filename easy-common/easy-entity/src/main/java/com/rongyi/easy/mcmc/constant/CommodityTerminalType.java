@@ -85,5 +85,4 @@ public interface CommodityTerminalType {
 		String STATUS_6="6";
 		String STATUS_7="7";
 	}
-
 }
