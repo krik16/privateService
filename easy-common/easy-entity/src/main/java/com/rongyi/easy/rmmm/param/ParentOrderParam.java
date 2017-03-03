@@ -23,6 +23,8 @@ public class ParentOrderParam implements Serializable {
 	private String reservePhone;//预约人手机号
 	private String reserveCompany;//预约人公司
 	private String reservePost;//预约人职称
+	// 商场类型
+	private Integer mallType;
 
 	public List<SonOrderParam> getSonOrderList() {
 		return sonOrderList;
@@ -134,6 +136,14 @@ public class ParentOrderParam implements Serializable {
 
 	public void setReservePost(String reservePost) {
 		this.reservePost = reservePost;
+	}
+
+	public Integer getMallType() {
+		return mallType;
+	}
+
+	public void setMallType(Integer mallType) {
+		this.mallType = mallType;
 	}
 
 	@Override
