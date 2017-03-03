@@ -759,7 +759,7 @@ public class TCCouponVO implements Serializable {
                 if (shop != null) {
                     CouponShop cshop = new CouponShop();
                     cshop.setId(shop.getShopId());
-
+                    cshop.setVerifiable(shop.getVerifiable());
             /*        cshop.setBrandName(shop.getShopBrand());
                     cshop.setMallName(shop.getShopMallName());
                     cshop.setShopLogoUrl(shop.getShopLogoUrl());*/
@@ -963,6 +963,16 @@ public class TCCouponVO implements Serializable {
 
 
         private String brandName;
+
+        private Integer verifiable;
+
+        public Integer getVerifiable() {
+            return verifiable;
+        }
+
+        public void setVerifiable(Integer verifiable) {
+            this.verifiable = verifiable;
+        }
 
         public String getId() {
             return id;
