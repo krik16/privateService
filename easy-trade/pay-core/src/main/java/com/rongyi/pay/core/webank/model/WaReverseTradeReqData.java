@@ -7,7 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/3/2.
  */
 public class WaReverseTradeReqData extends BaseData{
-    //商户号
+    //商户号 必传
     private String wbMerchantId;
 
     //订单号 跟tradeNo不能同时为空

@@ -293,7 +293,7 @@ public class WebankPayUnit {
         LOGGER.info("微众支付宝撤销订单 reqData:{}",reqData);
         WaReverseTradeResData resData = null;
         try {
-
+            ParamUnit.checkWebankAlipayReverseTrade(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
@@ -311,7 +311,7 @@ public class WebankPayUnit {
         LOGGER.info("微众支付宝退款 reqData:{}",reqData);
         WaRefundResData resData = null;
         try {
-
+            ParamUnit.checkWebankAlipayRefund(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {
@@ -320,11 +320,16 @@ public class WebankPayUnit {
         return resData;
     }
 
+    /**
+     * 微众支付宝退款查询
+     * @param reqData 请求参数
+     * @return 返回结果
+     */
     public static WaRefundQueryResData alipayRefundQuery(WaRefundQueryReqData reqData) {
         LOGGER.info("微众支付宝退款查询 reqData:{}",reqData);
         WaRefundQueryResData resData = null ;
         try {
-
+            ParamUnit.checkWebankAlipayRefundQuery(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {

@@ -2,11 +2,15 @@ package com.rongyi.pay.core.webank.util;
 
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
+import com.rongyi.pay.core.webank.config.WebankConfigure;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -14,13 +18,12 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import javax.net.ssl.SSLContext;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,6 +35,8 @@ import java.util.Map.Entry;
  */
 public class HttpUtil {
 	private static Logger	logger = LoggerFactory.getLogger(HttpUtil.class);
+	//HTTP请求器
+	private static CloseableHttpClient httpClient;
 	public static void main(String[] args) {
 		
 	}
@@ -265,6 +270,8 @@ public class HttpUtil {
 		return buffer.toString();
 	}
 
+
+
 	/**
 	 * 将bean将成map
 	 * @param obj bean对象
@@ -324,5 +331,75 @@ public class HttpUtil {
 		}
         return respContent;
     }
+
+
+	public static String sendPostClient(String url, Object object ,WebankConfigure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+		//请求器的配置
+	//	RequestConfig requestConfig;
+		init(configure);
+		JSONObject jsonObject = JSONObject.fromObject(object);
+		String result = null;
+
+		HttpPost httpPost = new HttpPost(url);
+
+		StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");//解决中文乱码问题
+		entity.setContentEncoding("UTF-8");
+		entity.setContentType("application/json");
+		httpPost.setEntity(entity);
+
+////        System.err.println("post data:"+postDataXML);
+//		//得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
+//		StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
+//		httpPost.addHeader("Content-Type", "text/xml");
+//		httpPost.setEntity(postEntity);
+
+		//设置请求器的配置
+		//httpPost.setConfig(requestConfig);
+
+		try {
+			HttpResponse response = httpClient.execute(httpPost);
+
+			HttpEntity httpEntity = response.getEntity();
+
+			result = EntityUtils.toString(httpEntity, "UTF-8");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+			throw e;
+		} finally {
+			httpPost.abort();
+		}
+
+		return result;
+	}
+
+	private static void init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+		logger.info("webankConfigure=" + webankConfigure.toString());
+		String KEY_STORE_PASSWORD = webankConfigure.getWechatKeyStorePwd();
+		String KEY_STORE_TRUST_PASSWORD = "123456";
+		KeyStore keyStore = KeyStore.getInstance("PKCS12");
+		KeyStore trustStore = KeyStore.getInstance("JKS");
+		InputStream ksIn = new FileInputStream(webankConfigure.getWechatKeyStorePath());
+		InputStream tsIn = new FileInputStream(webankConfigure.getWechatTrustStorePath());
+		try {
+			keyStore.load(ksIn, KEY_STORE_PASSWORD.toCharArray());
+			trustStore.load(tsIn, KEY_STORE_TRUST_PASSWORD.toCharArray());
+		} catch (Exception e) {
+			System.out.println("got a exception" + e.getMessage());
+		} finally {
+			ksIn.close();
+			tsIn.close();
+		}
+		SSLContext sslcontext = null;
+		sslcontext = SSLContexts.custom()
+				.loadKeyMaterial(keyStore, KEY_STORE_PASSWORD.toCharArray())
+				.loadTrustMaterial(trustStore, new TrustSelfSignedStrategy())
+				.build();
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+		httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		//HttpResponse response = httpclient.execute(httpPost);
+	}
 
 }

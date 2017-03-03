@@ -41,6 +41,9 @@ public class WebankTest {
         if (StringUtils.isEmpty(configure.getKey())) {
             configure.setKey("123");
             configure.setWechatPunchCardPayUrl("https://test-svrapi.webank.com/1/wbap-bbfront/mao");
+            configure.setWechatKeyStorePath("D:\\cert\\www.rongyi.com\\www.rongyi.com.p12");
+            configure.setWechatTrustStorePath("D:\\cert\\www.rongyi.com\\webank_keystore.jks");
+            configure.setWechatKeyStorePwd("www.rongyi.com");
         }
     }
 

@@ -18,13 +18,13 @@ public class WaRefundReqData extends BaseData{
     //支付宝交易号
     private String tradeNo;
 
-    //退款金额 元
+    //退款金额 元 必传
     private BigDecimal refundAmount ;
 
     //退款原因
     private String refundReason ;
 
-    //退款请求号 每次退款需保证唯一
+    //退款请求号 每次退款需保证唯一 必传
     private String outRequestNo ;
 
     public String getWbMerchantId() {

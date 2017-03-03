@@ -32,6 +32,27 @@ public class WebankConfigure extends BaseData{
     //支付宝订单查询请求url
     private String alipayQueryTradeUrl ;
 
+    //支付宝撤销订单请求url
+    private String alipayReverseTradeUrl ;
+
+    //支付宝退款请求url
+    private String alipayRefundUrl ;
+
+    //支付宝退款查询url
+    private String alipayRefundQueryUrl ;
+
+    //支付宝生成签名key
+    private String ticket ;
+
+    //微信p12证书路径
+    private String wechatKeyStorePath ;
+
+    //微信jks证书路径
+    private String wechatTrustStorePath;
+
+    //微信p12证书密码
+    private String wechatKeyStorePwd ;
+
     private static WebankConfigure webankConfigure;
 
     private WebankConfigure(){}
@@ -113,5 +134,61 @@ public class WebankConfigure extends BaseData{
 
     public void setAlipayQueryTradeUrl(String alipayQueryTradeUrl) {
         this.alipayQueryTradeUrl = alipayQueryTradeUrl;
+    }
+
+    public String getAlipayReverseTradeUrl() {
+        return alipayReverseTradeUrl;
+    }
+
+    public void setAlipayReverseTradeUrl(String alipayReverseTradeUrl) {
+        this.alipayReverseTradeUrl = alipayReverseTradeUrl;
+    }
+
+    public String getAlipayRefundUrl() {
+        return alipayRefundUrl;
+    }
+
+    public void setAlipayRefundUrl(String alipayRefundUrl) {
+        this.alipayRefundUrl = alipayRefundUrl;
+    }
+
+    public String getAlipayRefundQueryUrl() {
+        return alipayRefundQueryUrl;
+    }
+
+    public void setAlipayRefundQueryUrl(String alipayRefundQueryUrl) {
+        this.alipayRefundQueryUrl = alipayRefundQueryUrl;
+    }
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getWechatKeyStorePath() {
+        return wechatKeyStorePath;
+    }
+
+    public void setWechatKeyStorePath(String wechatKeyStorePath) {
+        this.wechatKeyStorePath = wechatKeyStorePath;
+    }
+
+    public String getWechatTrustStorePath() {
+        return wechatTrustStorePath;
+    }
+
+    public void setWechatTrustStorePath(String wechatTrustStorePath) {
+        this.wechatTrustStorePath = wechatTrustStorePath;
+    }
+
+    public String getWechatKeyStorePwd() {
+        return wechatKeyStorePwd;
+    }
+
+    public void setWechatKeyStorePwd(String wechatKeyStorePwd) {
+        this.wechatKeyStorePwd = wechatKeyStorePwd;
     }
 }

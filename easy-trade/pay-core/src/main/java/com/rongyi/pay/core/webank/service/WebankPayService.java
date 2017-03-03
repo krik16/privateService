@@ -31,7 +31,7 @@ public class WebankPayService {
         //生成签名
         String sign = Signature.getWechatSign(punchCardParam, configure.getKey());
         punchCardParam.setSign(sign);
-        String result = HttpUtil.httpPOSTJson(configure.getWechatPunchCardPayUrl(),punchCardParam);
+        String result = HttpUtil.sendPostClient(configure.getWechatPunchCardPayUrl(),punchCardParam,configure);
         LOGGER.info("微众微信刷卡支付返回结果 result:", result);
         return(WwPunchCardResData) Util.getObjectFromString(result, WwPunchCardResData.class);
     }
