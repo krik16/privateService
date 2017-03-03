@@ -263,7 +263,7 @@ public class ParamUnit {
         if (StringUtils.isEmpty(reqData.getTerminal_serialno())) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "terminal_serialno");
         }
-        if (StringUtils.isEmpty(reqData.getRefund_amount())) {
+        if (reqData.getRefund_amount()==null) {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "refund_amount");
         }
     }

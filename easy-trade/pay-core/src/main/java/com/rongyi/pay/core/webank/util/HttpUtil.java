@@ -385,6 +385,7 @@ public class HttpUtil {
 		try {
 			keyStore.load(ksIn, KEY_STORE_PASSWORD.toCharArray());
 			trustStore.load(tsIn, KEY_STORE_TRUST_PASSWORD.toCharArray());
+			System.setProperty("javax.net.ssl.trustStore", webankConfigure.getWechatTrustStorePath());
 		} catch (Exception e) {
 			System.out.println("got a exception" + e.getMessage());
 		} finally {
