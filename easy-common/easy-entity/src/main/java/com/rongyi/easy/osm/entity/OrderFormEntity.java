@@ -127,8 +127,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal operationRedDiscount;//平台补贴红包金额
     private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
     private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
-    // 商场类型
-    private Integer mallType ;
+    // 微信下单时对应的公众号类型（商场公众号/店铺公众号，1：商场 4：店铺）
+    private Integer serviceType ;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -970,12 +970,12 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.orderCommodityCodeEntity = orderCommodityCodeEntity;
     }
 
-    public Integer getMallType() {
-        return mallType;
+    public Integer getServiceType() {
+        return serviceType;
     }
 
-    public void setMallType(Integer mallType) {
-        this.mallType = mallType;
+    public void setServiceType(Integer serviceType) {
+        this.serviceType = serviceType;
     }
 
     @Override

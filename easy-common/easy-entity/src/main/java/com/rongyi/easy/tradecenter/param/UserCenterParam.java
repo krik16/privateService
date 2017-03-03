@@ -22,7 +22,7 @@ public class UserCenterParam implements Serializable {
     // 备注
     private String remark;
     // 商场类型
-    private Integer mallType;
+    private Integer serviceType;
 
     public int getCreditNumber() {
         return creditNumber;
@@ -72,12 +72,12 @@ public class UserCenterParam implements Serializable {
         this.remark = remark;
     }
 
-    public Integer getMallType() {
-        return mallType;
+    public Integer getServiceType() {
+        return serviceType;
     }
 
-    public void setMallType(Integer mallType) {
-        this.mallType = mallType;
+    public void setServiceType(Integer serviceType) {
+        this.serviceType = serviceType;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class UserCenterParam implements Serializable {
                 ", orderNo='" + orderNo + '\'' +
                 ", orderChannel='" + orderChannel + '\'' +
                 ", remark='" + remark + '\'' +
-                ", mallType=" + mallType +
+                ", serviceType=" + serviceType +
                 '}';
     }
 }

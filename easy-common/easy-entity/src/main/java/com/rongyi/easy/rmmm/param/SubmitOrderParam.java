@@ -59,10 +59,6 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String mallMid; // 商场ID
 	private String shopMid; // 店铺ID
 	// =======end=
-	//=======start= add by wangjh7 at 2017-3-2
-	// 商场类型
-	private Integer mallType;
-	// =======end=
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -330,14 +326,6 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.memberName = memberName;
 	}
 
-	public Integer getMallType() {
-		return mallType;
-	}
-
-	public void setMallType(Integer mallType) {
-		this.mallType = mallType;
-	}
-
 	@Override
 	public String toString() {
 		return "SubmitOrderParam{" +
@@ -372,7 +360,6 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				", totalCredit=" + totalCredit +
 				", mallMid='" + mallMid + '\'' +
 				", shopMid='" + shopMid + '\'' +
-				", mallType=" + mallType +
 				"} " + super.toString();
 	}
 
