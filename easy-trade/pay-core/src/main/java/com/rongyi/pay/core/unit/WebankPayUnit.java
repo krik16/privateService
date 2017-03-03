@@ -201,6 +201,10 @@ public class WebankPayUnit {
             ParamUnit.checkWebankWechatPunchCardRefund(reqData);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardRefund(reqData, configure);
+            //检查是否退款成功
+            if(resData.getResult() == null || !"0".equals(resData.getResult().getErrno()) || !"1".equals(resData.getRefundment())){
+                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREFUND_FAIL);
+            }
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {

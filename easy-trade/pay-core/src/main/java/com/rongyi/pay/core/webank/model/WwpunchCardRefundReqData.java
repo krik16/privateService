@@ -2,6 +2,8 @@ package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
 
+import java.math.BigDecimal;
+
 /**
  * 微众微信刷卡支付退款接口请求参数
  * Created by sujuan on 2017/2/27.
@@ -17,8 +19,8 @@ public class WwpunchCardRefundReqData extends BaseData{
     //商户订单号 必填
     private String terminal_serialno ;
 
-    //金额 分 （退款必填）
-    private String refund_amount ;
+    //金额 元 （退款必填）
+    private BigDecimal refund_amount ;
 
     //微众银行订单号
     private String orderid;
@@ -50,11 +52,11 @@ public class WwpunchCardRefundReqData extends BaseData{
         this.terminal_serialno = terminal_serialno;
     }
 
-    public String getRefund_amount() {
+    public BigDecimal getRefund_amount() {
         return refund_amount;
     }
 
-    public void setRefund_amount(String refund_amount) {
+    public void setRefund_amount(BigDecimal refund_amount) {
         this.refund_amount = refund_amount;
     }
 

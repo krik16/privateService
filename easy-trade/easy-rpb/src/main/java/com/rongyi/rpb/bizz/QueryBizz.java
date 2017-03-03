@@ -23,14 +23,14 @@ public class QueryBizz {
      * 微信刷卡支付订单查询
      *
      * @param orderNo     订单号
-     * @param payChannel  支付方式(0:支付宝,1:微信)
+     * @param payType  支付方式(0:支付宝,1:微信)
      * @param weBankMchNo 微众商户号
      * @return PunchCardPayQueryResData
      */
-    public WwPunchCardResData wechatPunchCardPayQueryOrder(String orderNo,Integer payChannel,String weBankMchNo) {
+    public WwPunchCardResData wechatPunchCardPayQueryOrder(String orderNo,Integer payType,String weBankMchNo) {
 
         PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                payChannel);
+                payType);
 
         if (oldPaymentEntity == null) {
             throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
