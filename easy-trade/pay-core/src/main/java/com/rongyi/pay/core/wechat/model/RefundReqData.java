@@ -4,6 +4,7 @@ import com.rongyi.pay.core.util.BaseData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.pay.core.wechat.util.RandomStringGenerator;
 import com.rongyi.pay.core.wechat.util.Signature;
+import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class RefundReqData extends BaseData {
     //每个字段具体的意思请查看API文档
     private String appid = "";
     private String mch_id = "";
+    private String sub_mch_id = "";
     private String device_info = "";
     private String nonce_str = "";
     private String sign = "";
@@ -46,6 +48,11 @@ public class RefundReqData extends BaseData {
 
         //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
         setMch_id(wechatConfigure.getMchID());
+
+
+        if(StringUtils.isNotEmpty(wechatConfigure.getSubMchID())){
+            setSub_mch_id(wechatConfigure.getSubMchID());
+        }
 
         //transaction_id是微信系统为每一笔支付交易分配的订单号，通过这个订单号可以标识这笔交易，它由支付订单API支付成功时返回的数据里面获取到。
         setTransaction_id(transactionID);
@@ -87,6 +94,14 @@ public class RefundReqData extends BaseData {
 
     public void setMch_id(String mch_id) {
         this.mch_id = mch_id;
+    }
+
+    public String getSub_mch_id() {
+        return sub_mch_id;
+    }
+
+    public void setSub_mch_id(String sub_mch_id) {
+        this.sub_mch_id = sub_mch_id;
     }
 
     public String getDevice_info() {

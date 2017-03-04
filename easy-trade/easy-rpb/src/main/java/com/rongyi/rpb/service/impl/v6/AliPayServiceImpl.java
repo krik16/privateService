@@ -216,7 +216,9 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
 
             AuthorizeRespData authorizeRespData = AliPayUnit.getAuthToken(appAuthCode, appId, storeId, scope, authType, aliConfigure);
 
-            return BeanMapUtils.toMap(authorizeRespData);
+            Map<String,Object> map = BeanMapUtils.toMap(authorizeRespData.getAlipayOpenAuthTokenAppResponse());
+            log.info("返回结果,map={}",map);
+            return map;
         } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
