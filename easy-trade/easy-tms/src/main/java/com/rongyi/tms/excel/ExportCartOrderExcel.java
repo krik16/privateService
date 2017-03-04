@@ -87,7 +87,7 @@ public class ExportCartOrderExcel {
     private List<ParentOrderCartVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<ParentOrderCartVO> cartOrderAllList = new ArrayList<>();
         int pageSize = 500;
-        int TOTAL_SIZE = paramsMap.containsKey("pageSize") ? Integer.valueOf(paramsMap.get("pageSize").toString()) : 5000;
+        int TOTAL_SIZE = paramsMap.containsKey("pageSize") ? Integer.valueOf(paramsMap.get("pageSize").toString()) : 2000;
         int currentPage = 1;
         for (int i = 0; i < TOTAL_SIZE / pageSize; i++) {
             paramsMap.put("pageSize", pageSize);

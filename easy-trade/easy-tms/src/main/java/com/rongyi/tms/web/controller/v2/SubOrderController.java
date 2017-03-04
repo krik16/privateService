@@ -52,6 +52,8 @@ import java.util.Map;
 public class SubOrderController extends BaseControllerV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubOrderController.class);
 
+    private static final int MAX_EXCEL_COUNT = 2000;
+
 
     @Autowired
     private ROAMalllifeUserService roaMalllifeUserService;
@@ -96,14 +98,19 @@ public class SubOrderController extends BaseControllerV2 {
             permissionCheck(request, "ORDER_GOODSON_VIEW");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
+            int currentPage = 1;
+            if (paramsMap.containsKey("currentPage")) {
+                currentPage = Integer.parseInt(paramsMap.get("currentPage").toString());
+                paramsMap.remove("currentPage");
+            }
+            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap,currentPage);
 
             orderForms = pagingVO.getDataList();
             if (orderForms == null)
                 orderForms = new ArrayList<>();
             int totalPage = pagingVO.getTotalSize();
-            int currentPage = pagingVO.getCurrentPage();
-            responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
+//            int currentPage = pagingVO.getCurrentPage();
+            responseData = ResponseData.success(orderForms, pagingVO.getCurrentPage(), Constant.PAGE.PAGESIZE, totalPage);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
             responseData = ResponseData.success(new ArrayList<>(),1,Constant.PAGE.PAGESIZE,0);
@@ -227,10 +234,6 @@ public class SubOrderController extends BaseControllerV2 {
         }
     }
 
-
-    /**
-     * 验证导出报表总数是否超过限制
-     **/
     /**
      * 验证导出报表总数是否超过限制
      **/
@@ -243,8 +246,8 @@ public class SubOrderController extends BaseControllerV2 {
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
-            if (pagingVO != null && pagingVO.getRowCnt() <= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
+            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap,1);
+            if (pagingVO != null && pagingVO.getRowCnt() <= MAX_EXCEL_COUNT)
                 responseData = ResponseData.success();
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
@@ -503,6 +506,11 @@ public class SubOrderController extends BaseControllerV2 {
         if (null != paramsMap) {
             if (null != paramsMap.get("commodityName") && StringUtils.isBlank(paramsMap.get("commodityName").toString())) {
                 paramsMap.remove("commodityName");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("timeType") && StringUtils.isBlank(paramsMap.get("timeType").toString())) {
+                paramsMap.remove("timeType");
             }
         }
     }
