@@ -63,7 +63,7 @@ public class RefundBizz {
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, "", wechatConfigure.getMchID());
         Integer payAmount = oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).intValue();
         //发起退款
-        RefundResData refundResData = WeChatPayUnit.refund(oldPaymentEntity.getPayNo(), refundFee,payAmount, refundPaymentEntity.getPayNo(), wechatConfigure);
+        RefundResData refundResData = WeChatPayUnit.refund(oldPaymentEntity.getPayNo(), refundFee, payAmount, refundPaymentEntity.getPayNo(), wechatConfigure);
 
         refundPaymentEntity.setFinishTime(new Date());
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
@@ -120,20 +120,25 @@ public class RefundBizz {
 
     /**
      * 微众微信退款
-     * @param wwpunchCardRefundReqData 退款请求参数
+     *
      * @return WwPunchCardRefundResData
      */
-    public WwPunchCardRefundResData webankWechatRefund(WwpunchCardRefundReqData wwpunchCardRefundReqData){
+    public WwPunchCardRefundResData webankWechatRefund(String orderNo,Integer refundAmount,String webankMchNo){
         //查找订单支付记录
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(wwpunchCardRefundReqData.getTerminal_serialno(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
         if (oldPaymentEntity == null) {
-            throw new TradeException("此订单支付记录不存在,orderNo={}",wwpunchCardRefundReqData.getTerminal_serialno());
+            throw new TradeException("此订单支付记录不存在,orderNo={}",orderNo);
         }
 
         //初始化退款入住商户信息
         RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
 
+        WwpunchCardRefundReqData wwpunchCardRefundReqData = new WwpunchCardRefundReqData();
+        wwpunchCardRefundReqData.setMerchant_code(webankMchNo);
+        wwpunchCardRefundReqData.setOrderid(oldPaymentEntity.getPayNo());
+        BigDecimal refundFee = new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+        wwpunchCardRefundReqData.setRefund_amount(refundFee);
         WwPunchCardRefundResData wwPunchCardRefundResData = WebankPayUnit.webankWechatPunchCardRefund(wwpunchCardRefundReqData);
 
         Integer totalFee = wwpunchCardRefundReqData.getRefund_amount().multiply(new BigDecimal(100)).intValue();
@@ -145,10 +150,10 @@ public class RefundBizz {
         refundPaymentEntity.setFinishTime(new Date());
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
-        Integer refundFee = wwPunchCardRefundResData.getRefund_fee().multiply(new BigDecimal(100)).intValue();
+        Integer resultRefundFee = wwPunchCardRefundResData.getRefund_fee().multiply(new BigDecimal(100)).intValue();
         //初始化支付事件记录
         PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(wwPunchCardRefundResData.getOrderid(),wwpunchCardRefundReqData.getTerminal_serialno(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS",refundFee,"","",
+                "SUCCESS",resultRefundFee,"","",
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
 
         //保存记录

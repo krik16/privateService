@@ -1,6 +1,7 @@
 package com.rongyi.rpb.service.impl.v6;
 
 import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
@@ -9,7 +10,8 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.model.WwPunchCardResData;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.rpb.bizz.PayBizz;
-import com.rongyi.core.util.BeanMapUtils;
+import com.rongyi.rpb.bizz.QueryBizz;
+import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.rss.rpb.IweBankService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,12 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
 
     @Autowired
     PayBizz payBizz;
+
+    @Autowired
+    QueryBizz queryBizz;
+
+    @Autowired
+    RefundBizz refundBizz;
 
     private static final Logger log = LoggerFactory.getLogger(WeBankPayServiceImpl.class);
 
@@ -57,6 +65,33 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             log.error("微众微信刷卡支付失败,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
         }
+    }
+
+    @Override
+    public Map<String, Object> weBankWechatPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType,String weBankMchNo) {
+        try {
+            WwPunchCardResData resData = queryBizz.wechatPunchCardPayQueryOrder(orderNo,payType,weBankMchNo);
+
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", resData.getTerminal_serialno());
+            return map;
+        }  catch (WebankException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("微众微信刷卡支付失败,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> webankWechatRefund(RyMchVo ryMchVo, String orderNo, Integer refundAmount, String refundReason, String weBankMchNo) {
+//        refundBizz.webankWechatRefund(orderNo,refundAmount)
+        return null;
     }
 
     //设置微众微信刷卡支付业务参数
