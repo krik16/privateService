@@ -75,6 +75,8 @@ public class Signature {
         }
         values.removeAll(Collections.singleton(null));// remove null
         values.add(signTicket);
+        values.add("W0000036");
+        values.add("1.0.0");
         java.util.Collections.sort(values);
         StringBuilder sb = new StringBuilder();
         for (String s : values) {
@@ -126,7 +128,7 @@ public class Signature {
             }
             stringBuilder.append(hv);
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().toUpperCase();
     }
 
     public static List<String> objectToList(Object obj) {

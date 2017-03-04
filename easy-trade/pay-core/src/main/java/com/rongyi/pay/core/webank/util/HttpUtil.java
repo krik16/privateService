@@ -7,6 +7,7 @@ import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
@@ -40,59 +41,25 @@ public class HttpUtil {
 	public static void main(String[] args) {
 		
 	}
-	
-	/**
-	 * http://192.168.1.130:8081/market/code/offer.action?key=iamrongyiboy&type=k99&channel=1
-	 * @param s
-	 * @return
-	 */
-	public static String getUrl2(String key, String type, String channel) {
-		String url1 = "http://192.168.1.130:8081/market/code/offer.action?key="+key+"&type="+type+"&channel="+channel+"";
-		String result = httpGET(url1);
-//		logger.info(">>>"+result);
-		return result;
-	}
-	
-	public static String getUrl3(String key, String type, String code) {
-		String url1 = "http://192.168.1.130:8081/market/code/check.action?key="+key+"&type="+type+"&code="+code+"";
-		String result = httpGET(url1);
-		logger.info(">>>"+result);
-		return result;
-	}
 
 	
-	public static String httpGET(String url) {
+	public static String httpGET(String url ,WebankConfigure configure) throws Exception{
+		String result = "";
 		URL u = null;
-		HttpURLConnection con = null;
-		logger.info("send_url:" + url);
+		logger.info("send_url:" + url +",webankConfig:"+configure);
 		try {
-			u = new URL(url);
-			con = (HttpURLConnection) u.openConnection();
-			con.setRequestMethod("GET"); 
-			con.setDoOutput(true);
-			con.setDoInput(true);
-			con.setUseCaches(false);
-			con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			init(configure);
+			HttpGet httpGet = new HttpGet(url);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			HttpEntity httpEntity = httpResponse.getEntity();
+
+			result = EntityUtils.toString(httpEntity, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
-		} finally {
-			if (con != null) {
-				con.disconnect();
-			}
+			throw e;
 		}
-		StringBuffer buffer = new StringBuffer();
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-			String temp;
-			while ((temp = br.readLine()) != null) {
-				buffer.append(temp);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info("http请求报错哦！");
-		}
-		return buffer.toString();
+		return result;
 	}
 	
 	public static String httpPOST(String url, Map<String, String> params) {
@@ -334,6 +301,7 @@ public class HttpUtil {
 
 
 	public static String sendPostClient(String url, Object object ,WebankConfigure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+		logger.info("http请求 url:{},object:{}",url,object);
 		//请求器的配置
 	//	RequestConfig requestConfig;
 		init(configure);

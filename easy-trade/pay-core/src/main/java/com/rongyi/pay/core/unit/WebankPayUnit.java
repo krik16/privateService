@@ -342,4 +342,34 @@ public class WebankPayUnit {
         return resData;
     }
 
+    /**
+     * 微众支付宝获取token (用于获取签名所需的ticket)
+     * @return
+     */
+    public static WaAccessTokenResData alipayGetToken() {
+        LOGGER.info("微众支付宝获取token");
+        WaAccessTokenResData resData = null;
+        try {
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.alipayGetToken(configure);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resData;
+    }
+
+    /**
+     * 微众支付宝获取ticket(用于签名)
+     * @param token token
+     */
+    public static void alipayGetTicket(String token) {
+        LOGGER.info("微众支付宝获取ticket token:{}",token);
+        try {
+            WebankPayService webankPayService  = new WebankPayService();
+            webankPayService.alipayGetTicket(token,configure);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

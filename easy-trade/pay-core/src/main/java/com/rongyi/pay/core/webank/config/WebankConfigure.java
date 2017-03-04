@@ -41,7 +41,7 @@ public class WebankConfigure extends BaseData{
     //支付宝退款查询url
     private String alipayRefundQueryUrl ;
 
-    //支付宝生成签名key
+    //支付宝生成签名key 50分钟失效
     private String ticket ;
 
     //微信p12证书路径
@@ -52,6 +52,18 @@ public class WebankConfigure extends BaseData{
 
     //微信p12证书密码
     private String wechatKeyStorePwd ;
+
+    //支付宝获取token请求地址
+    private String alipayGetTokenUrl ;
+
+    //支付宝获取ticket请求地址
+    private String alipayGetTicketUrl;
+
+    //用于获取支付宝token的 appId
+    private String appId ;
+
+    //appId的密钥
+    private String secret ;
 
     private static WebankConfigure webankConfigure;
 
@@ -190,5 +202,37 @@ public class WebankConfigure extends BaseData{
 
     public void setWechatKeyStorePwd(String wechatKeyStorePwd) {
         this.wechatKeyStorePwd = wechatKeyStorePwd;
+    }
+
+    public String getAlipayGetTokenUrl() {
+        return alipayGetTokenUrl;
+    }
+
+    public void setAlipayGetTokenUrl(String alipayGetTokenUrl) {
+        this.alipayGetTokenUrl = alipayGetTokenUrl;
+    }
+
+    public String getAlipayGetTicketUrl() {
+        return alipayGetTicketUrl;
+    }
+
+    public void setAlipayGetTicketUrl(String alipayGetTicketUrl) {
+        this.alipayGetTicketUrl = alipayGetTicketUrl;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 }

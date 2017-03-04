@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * 微众支付宝刷卡支付请求参数
  * Created by sujuan on 2017/3/1.
  */
-public class WaPunchCardPayReqData {
+public class WaPunchCardPayReqData extends AlipayCommonReqData{
     //商户号  必传
     private String wbMerchantId;
 
@@ -54,7 +54,6 @@ public class WaPunchCardPayReqData {
         setUndiscountableAmount(param.getUndiscountableAmount());
         setSubject(param.getSubject());
         setBody(param.getBody());
-
     }
 
     public String getWbMerchantId() {
