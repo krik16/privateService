@@ -41,6 +41,8 @@
 	<result column="terminal_type" property="terminalType" jdbcType="VARCHAR" />
 	<result column="default_terminal" property="defaultTerminal" jdbcType="INTEGER" />
 	<result column="is_suspended" property="isSuspended" jdbcType="INTEGER" />
+	<result column="is_open_qr_code" property="isOpenQrCode" jdbcType="INTEGER" />
+    <result column="is_allow_binding_wechat" property="isAllowBindingWechat" jdbcType="INTEGER" /> 
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

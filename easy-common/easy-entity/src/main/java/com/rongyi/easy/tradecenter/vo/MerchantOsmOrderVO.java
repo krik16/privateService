@@ -25,12 +25,14 @@ public class MerchantOsmOrderVO implements Serializable{
     private Integer guideId;//导购id
     private Integer orderSource;//0为微网站，1为容易逛，2为终端机，3其他
     private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
+    private String weixinAppId;//
     private Byte payChannel;//导购id
     private String buyerAccount;//买家账号
     private String buyerNameByWeixin;//标准微信下单昵称 需要解码
     private String buyerNickName;//买家账号
     private String paymentAmount;//订单实际支付金额 元
     private String discountAmount;//订单优惠金额 元
+    private BigDecimal discountAmountByChange;//卖家折扣之后的金额
     private BigDecimal expressPrice;//邮费 元
     private BigDecimal integralAmount;//积分优惠
     private String integralNum= "0";//积分数
@@ -47,6 +49,8 @@ public class MerchantOsmOrderVO implements Serializable{
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
     private String activityStatus;//活动状态
+    private String deleverTime;//发货时间
+    private String reveiveTime;//收货时间
     private BigDecimal merchantRedDiscount;//商家红包补贴金额
     private BigDecimal merchantRebateDiscount;//商家抵扣券补贴金额
 
@@ -277,11 +281,6 @@ public class MerchantOsmOrderVO implements Serializable{
         this.activityName = activityName;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
-    }
-
 	public String getCreateTimeStr() {
 		return createTimeStr;
 	}
@@ -314,6 +313,30 @@ public class MerchantOsmOrderVO implements Serializable{
         this.shopId = shopId;
     }
 
+    public BigDecimal getDiscountAmountByChange() {
+        return discountAmountByChange;
+    }
+
+    public void setDiscountAmountByChange(BigDecimal discountAmountByChange) {
+        this.discountAmountByChange = discountAmountByChange;
+    }
+
+    public String getDeleverTime() {
+        return deleverTime;
+    }
+
+    public void setDeleverTime(String deleverTime) {
+        this.deleverTime = deleverTime;
+    }
+
+    public String getReveiveTime() {
+        return reveiveTime;
+    }
+
+    public void setReveiveTime(String reveiveTime) {
+        this.reveiveTime = reveiveTime;
+    }
+
     public BigDecimal getMerchantRedDiscount() {
         return merchantRedDiscount;
     }
@@ -336,5 +359,18 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
         this.orderSourceForWeiXin = orderSourceForWeiXin;
+    }
+
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
