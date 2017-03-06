@@ -1081,4 +1081,16 @@ public interface Constants {
         Integer MAX_AMOUNT = 1;
         Integer STEP_BY_STEP = 2;
     }
+
+    /**
+     * PHP platform
+     */
+    interface RECHARGE_PLATFORM{
+        //操作渠道1:互动屏2:微信3:微商城 5:商家后台 6:POS
+        Integer SCREEN = 1;
+        Integer WECHAT = 2;
+        Integer WECHATMALL = 3;
+        Integer BSOMS = 5;
+        Integer POS = 6;
+    }
 }
