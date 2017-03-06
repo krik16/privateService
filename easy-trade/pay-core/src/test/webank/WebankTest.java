@@ -32,7 +32,7 @@ public class WebankTest {
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
         param.setProduct("测试");
         param.setAuthCode("130187622836349194");
-        WwPunchCardResData resData = webankPayUnit.webankWechatPunchCardPay(param);
+        WwPunchCardResData resData = webankPayUnit.wechatPunchCardPay(param);
         System.out.println(resData);
     }
 
@@ -42,7 +42,7 @@ public class WebankTest {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData("1488610970424","107100000000014");
-        WwPunchCardResData resData = webankPayUnit.webankWechatPunchCardPayQueryOrder(reqData);
+        WwPunchCardResData resData = webankPayUnit.wechatPunchCardPayQueryOrder(reqData);
         System.out.println(resData);
     }
 
@@ -57,7 +57,7 @@ public class WebankTest {
         reqData.setO_terminal_serialno("1488610970424");
         reqData.setTerminal_serialno(getOrderNO());
         reqData.setAmount(new BigDecimal("10001").setScale(2, BigDecimal.ROUND_HALF_UP));
-        WwPunchCardReverseResData resData = webankPayUnit.webankWechatPunchCardReverse(reqData);
+        WwPunchCardReverseResData resData = webankPayUnit.wechatPunchCardReverse(reqData);
         System.out.println(resData);
     }
 
@@ -70,7 +70,7 @@ public class WebankTest {
         reqData.setMerchant_code(merchantCode);
         reqData.setTerminal_serialno("1488614365160");
         reqData.setRefund_amount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
-        WwPunchCardRefundResData resData = webankPayUnit.webankWechatPunchCardRefund(reqData);
+        WwPunchCardRefundResData resData = webankPayUnit.wechatPunchCardRefund(reqData);
         System.out.println(resData);
     }
 
@@ -82,7 +82,7 @@ public class WebankTest {
         WwpunchCardRefundReqData reqData = new WwpunchCardRefundReqData();
         reqData.setMerchant_code(merchantCode);
         reqData.setTerminal_serialno("1488614365160");
-        WwPunchCardRefundResData resData = webankPayUnit.webankWechatPunchCardRefundQuery(reqData);
+        WwPunchCardRefundResData resData = webankPayUnit.wechatPunchCardRefundQuery(reqData);
         System.out.println(resData);
     }
 
