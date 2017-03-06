@@ -1,6 +1,7 @@
 package com.rongyi.easy.solr.result;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -40,6 +41,25 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
     private String shopFloor;//店铺楼层
     private String brandMId;     //与该用户关联的主营品牌
     private String brandName; //主营品牌名
+
+    private String parent_id; //上级店铺ID
+    private List<String> parent_ids; //上级店铺ids
+
+    public String getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(String parent_id) {
+        this.parent_id = parent_id;
+    }
+
+    public List<String> getParent_ids() {
+        return parent_ids;
+    }
+
+    public void setParent_ids(List<String> parent_ids) {
+        this.parent_ids = parent_ids;
+    }
 
     public String getBrandMId() {
         return brandMId;

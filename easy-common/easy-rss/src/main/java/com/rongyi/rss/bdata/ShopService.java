@@ -138,4 +138,6 @@ public interface ShopService {
 	ResponseVO getShopAndChildRenShops(String shopId,String childShopName,Integer currentPage,Integer pageSize );
 
 	public  void updateShopPhoto( ObjectId id,List<String> photos);
+
+	Shop getShopInfo(String id);
 }
