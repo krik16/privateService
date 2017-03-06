@@ -33,12 +33,20 @@ public interface IweBankService {
 
     /**
      * 微众银行微信退款
-     * @param ryMchVo 容易网商户信息
      * @param orderNo 订单号
      * @param refundAmount 退款金额
      * @param refundReason 退款原因
      * @param weBankMchNo 微众商户号
      * @return map
      */
-    Map<String,Object> webankWechatRefund(RyMchVo ryMchVo,String orderNo,Integer refundAmount,String refundReason,String weBankMchNo);
+    Map<String,Object> webankWechatRefund(String orderNo,Integer refundAmount,String refundReason,String weBankMchNo);
+
+    /**
+     * 微众银行微信退款查询
+     * @param orderNo 订单号
+     * @param payType 支付方式(0:支付宝,1:微信)
+     * @param weBankMchNo 微众商户号
+     * @return map
+     */
+    Map<String,Object> webankWechatRefundQuery(String orderNo,Integer payType,String weBankMchNo);
 }

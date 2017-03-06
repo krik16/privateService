@@ -21,27 +21,27 @@ public class BeanMapUtils {
      * @param type type to convert
      * @param map map to convert
      * @return JavaBean converted
-     * @throws IntrospectionException failed to get class fields
-     * @throws IllegalAccessException failed to instant JavaBean
-     * @throws InstantiationException failed to instant JavaBean
-     * @throws InvocationTargetException failed to call setters
      */
-    public static final Object toBean(Class<?> type, Map<String, ? extends Object> map)
-            throws IntrospectionException, IllegalAccessException,  InstantiationException, InvocationTargetException {
-        BeanInfo beanInfo = Introspector.getBeanInfo(type);
-        Object obj = type.newInstance();
-        PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-        for (int i = 0; i< propertyDescriptors.length; i++) {
-            PropertyDescriptor descriptor = propertyDescriptors[i];
-            String propertyName = descriptor.getName();
-            if (map.containsKey(propertyName)) {
-                Object value = map.get(propertyName);
-                Object[] args = new Object[1];
-                args[0] = value;
-                descriptor.getWriteMethod().invoke(obj, args);
+    public static  Object toBean(Class<?> type, Map<String, Object> map){
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(type);
+            Object obj = type.newInstance();
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            for (PropertyDescriptor descriptor : propertyDescriptors) {
+                String propertyName = descriptor.getName();
+                if (map.containsKey(propertyName)) {
+                    Object value = map.get(propertyName);
+                    Object[] args = new Object[1];
+                    args[0] = value;
+                    descriptor.getWriteMethod().invoke(obj, args);
+                }
             }
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("转换异常");
         }
-        return obj;
+
     }
 
     /**
@@ -53,13 +53,12 @@ public class BeanMapUtils {
      * @throws IllegalAccessException failed to instant JavaBean
      * @throws InvocationTargetException failed to call setters
      */
-    public static final Map<String, Object> toMap(Object bean)
+    public static Map<String, Object> toMap(Object bean)
             throws IntrospectionException, IllegalAccessException, InvocationTargetException {
         Map<String, Object> returnMap = new HashMap<String, Object>();
         BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-        for (int i = 0; i< propertyDescriptors.length; i++) {
-            PropertyDescriptor descriptor = propertyDescriptors[i];
+        for (PropertyDescriptor descriptor : propertyDescriptors) {
             String propertyName = descriptor.getName();
             if (!propertyName.equals("class")) {
                 Method readMethod = descriptor.getReadMethod();
