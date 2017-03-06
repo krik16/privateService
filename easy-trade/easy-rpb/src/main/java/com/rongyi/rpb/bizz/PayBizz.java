@@ -236,7 +236,7 @@ public class PayBizz {
      * @param waPunchCardPayParam 业务参数
      * @return WwPunchCardResData
      */
-    public WaPunchCardPayResData webankWechatPunchCardPay(RyMchVo ryMchVo,WaPunchCardPayParam waPunchCardPayParam){
+    public WaPunchCardPayResData webankAliPunchCardPay(RyMchVo ryMchVo,WaPunchCardPayParam waPunchCardPayParam){
 
 
         Integer totalFee = waPunchCardPayParam.getTotalAmount().multiply(new BigDecimal(100)).intValue();

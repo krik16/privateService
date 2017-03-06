@@ -3,12 +3,13 @@ package com.rongyi.rpb.service.impl.v6;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.vo.RyMchVo;
+import com.rongyi.easy.rpb.vo.WaPunchCardVo;
 import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
-import com.rongyi.pay.core.webank.model.WwPunchCardRefundResData;
-import com.rongyi.pay.core.webank.model.WwPunchCardResData;
+import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.QueryBizz;
@@ -45,7 +46,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             //检查开放商户信息
             checkMchParam(ryMchVo);
             //初始化业务参数
-            WwPunchCardPayParam wwPunchCardPayParam = getAliPaySignData(wwPunchCardPayVo);
+            WwPunchCardPayParam wwPunchCardPayParam = getWwPunchCardPayParam(wwPunchCardPayVo);
 
             WwPunchCardResData wwPunchCardResData = payBizz.webankWechatPunchCardPay(ryMchVo, wwPunchCardPayParam);
 
@@ -137,10 +138,119 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
         }
     }
 
+    @Override
+    public Map<String, Object> webankAliPunchCardPay(RyMchVo ryMchVo, WaPunchCardVo waPunchCardVo) {
+        log.info("微众支付宝刷卡支付,ryMchVo={},waPunchCardVo={}", ryMchVo, waPunchCardVo);
+        try {
+            //检查开放商户信息
+            checkMchParam(ryMchVo);
+            //初始化业务参数
+            WaPunchCardPayParam waPunchCardPayParam = getWaPunchCardPayParam(waPunchCardVo);
+
+            WaPunchCardPayResData resData = payBizz.webankAliPunchCardPay(ryMchVo, waPunchCardPayParam);
+
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+
+            //外部订单号
+            map.put("orderNo", waPunchCardVo.getOrderNo());
+            //容易网交易号
+            map.put("payNo", resData.getOutTradeNo());
+
+            log.info("微众支付宝刷卡支付结果,map={}", map);
+            return map;
+        } catch (WebankException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("微众支付宝刷卡支付异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_PUNCH_CARD_PAY_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PUNCH_CARD_PAY_FAIL.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> weBankAliPayQuery(RyMchVo ryMchVo, String orderNo, Integer payType, String weBankMchNo) {
+        try {
+            WaQueryTradeResData resData = queryBizz.weBankAliPunchCardPayQueryOrder(orderNo, payType, weBankMchNo);
+
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", resData.getOutTradeNo());
+            return map;
+        }  catch (WebankException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("微众支付宝刷卡查询异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> webankAliRefund(String orderNo, Integer refundAmount, String refundReason, String weBankMchNo) {
+        try {
+            WaRefundResData resData = refundBizz.webankAliRefund(orderNo, refundAmount, weBankMchNo);
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", resData.getOutTradeNo());
+            //微众银行退款单号
+            map.put("tradeNo",resData.getTradeNo());
+            return map;
+        }  catch (WebankException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("微众支付宝退款异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> webankAliRefundQuery(String orderNo, Integer payType, String weBankMchNo) {
+        try {
+            WaRefundQueryResData resData = queryBizz.webankAliPunchCardRefundQuery(orderNo, payType, weBankMchNo);
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", resData.getOutTradeNo());
+            //微众银行退款单号
+            map.put("tradeNo",resData.getTradeNo());
+            return map;
+        }  catch (WebankException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("微众支付宝退款异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_REFUND_QUERY_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_REFUND_QUERY_FAIL.getValueStr());
+        }
+    }
+
     //设置微众微信刷卡支付业务参数
-    private WwPunchCardPayParam getAliPaySignData(WwPunchCardPayVo wwPunchCardPayVo) {
+    private WwPunchCardPayParam getWwPunchCardPayParam(WwPunchCardPayVo wwPunchCardPayVo) {
         WwPunchCardPayParam wwPunchCardPayParam = new WwPunchCardPayParam();
         BeanUtils.copyProperties(wwPunchCardPayVo, wwPunchCardPayParam);
         return wwPunchCardPayParam;
     }
+
+    //设置微众支付宝刷卡支付业务参数
+    private WaPunchCardPayParam getWaPunchCardPayParam(WaPunchCardVo waPunchCardVo) {
+        WaPunchCardPayParam waPunchCardPayParam = new WaPunchCardPayParam();
+        BeanUtils.copyProperties(waPunchCardVo, waPunchCardPayParam);
+        waPunchCardPayParam.setOrderId(waPunchCardVo.getOrderNo());
+        return waPunchCardPayParam;
+    }
+
+
 }
