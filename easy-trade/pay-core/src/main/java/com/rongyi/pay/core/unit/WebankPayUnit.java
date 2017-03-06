@@ -29,7 +29,7 @@ public class WebankPayUnit {
      * 微众 微信刷卡支付
      * @param param 业务请求参数
      */
-    public static WwPunchCardResData webankWechatPunchCardPay(WwPunchCardPayParam param) {
+    public static WwPunchCardResData wechatPunchCardPay(WwPunchCardPayParam param) {
         LOGGER.info("微众刷卡支付 param:{},configure:{}",param,configure);
         WwPunchCardResData resData ;
         try {
@@ -58,7 +58,7 @@ public class WebankPayUnit {
      * 微众微信刷卡支付等待用户支付处理
      * @param resData 支付请求返回的结果
      */
-    public static void waitUserWechatPaying(WwPunchCardPayParam param , WwPunchCardResData resData) {
+    private static void waitUserWechatPaying(WwPunchCardPayParam param , WwPunchCardResData resData) {
         int retryTimes = 9;
         boolean result = false;
         LOGGER.info("微众微信刷卡支付等待用户输入密码,最多等待{}s,param={},configure={}", retryTimes*retryInterval/1000, param,configure);
@@ -66,7 +66,7 @@ public class WebankPayUnit {
         WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData(param.getOrderNo(), param.getMerchantCode());
         for (int i = 1; i <= retryTimes; i++) {
             try {
-                resData = webankWechatPunchCardPayQueryOrder(reqData);
+                resData = wechatPunchCardPayQueryOrder(reqData);
                 LOGGER.info("等待次数times={},WwPunchCardResData={}", i, resData);
                 if ("0".equals(resData.getResult().getErrno())&&"SUCCESS".equals(resData.getPayment())) {
                     LOGGER.info("用户密码输入完成，成功支付");
@@ -96,7 +96,7 @@ public class WebankPayUnit {
         }
     }
 
-    public static void waitUserAlipayPaying(WaPunchCardPayParam param, WaPunchCardPayResData resData) {
+    private static void waitUserAlipayPaying(WaPunchCardPayParam param, WaPunchCardPayResData resData) {
         int retryTimes = 9;
         boolean result = false;
         WaQueryTradeResData queryTradeResData ;
@@ -140,7 +140,7 @@ public class WebankPayUnit {
      */
     public static void waitWechatPunchCardReverse(WwPunchCardPayParam param ) {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData(param);
-        webankWechatPunchCardReverse(reqData);
+        wechatPunchCardReverse(reqData);
     }
 
     /**
@@ -148,7 +148,7 @@ public class WebankPayUnit {
      * @param reqData 请求参数
      * @return 返回结果
      */
-    public static WwPunchCardResData webankWechatPunchCardPayQueryOrder(WwPunchCardQueryOrderReqData reqData) {
+    public static WwPunchCardResData wechatPunchCardPayQueryOrder(WwPunchCardQueryOrderReqData reqData) {
         LOGGER.info("微众微信刷卡支付订单查询 reqData:{},configure:{}",reqData,configure);
         WwPunchCardResData resData;
         try {
@@ -171,7 +171,7 @@ public class WebankPayUnit {
      * @param reqData 请求参数
      * @return 返回结果
      */
-    public static WwPunchCardReverseResData webankWechatPunchCardReverse(WwPunchCardReverseReqData reqData) {
+    public static WwPunchCardReverseResData wechatPunchCardReverse(WwPunchCardReverseReqData reqData) {
         LOGGER.info("微众微信刷卡支付撤销订单 reqData:{}",reqData);
         WwPunchCardReverseResData resData;
         try {
@@ -194,7 +194,7 @@ public class WebankPayUnit {
      * @param reqData 请求参数
      * @return 返回结果
      */
-    public static WwPunchCardRefundResData webankWechatPunchCardRefund(WwpunchCardRefundReqData reqData) {
+    public static WwPunchCardRefundResData wechatPunchCardRefund(WwpunchCardRefundReqData reqData) {
         LOGGER.info("微众微信刷卡支付退款 reqData:{}",reqData);
         WwPunchCardRefundResData resData;
         try {
@@ -220,7 +220,7 @@ public class WebankPayUnit {
      * @param reqData 请求参数
      * @return 返回结果
      */
-    public static WwPunchCardRefundResData webankWechatPunchCardRefundQuery(WwpunchCardRefundReqData reqData) {
+    public static WwPunchCardRefundResData wechatPunchCardRefundQuery(WwpunchCardRefundReqData reqData) {
         LOGGER.info("微众微信刷卡支付退款结果查询 reqData:{}",reqData);
         WwPunchCardRefundResData resData;
         try {

@@ -34,7 +34,7 @@ public class WebankTest {
         if (param.getAmount() != null && StringUtils.isNotEmpty(param.getAmount().toString()) && param.getAmount().compareTo(BigDecimal.ZERO) == 1) {
             System.out.println(".......");
         }
-        WwPunchCardResData resData = webankPayUnit.webankWechatPunchCardPay(param);
+        WwPunchCardResData resData = webankPayUnit.wechatPunchCardPay(param);
         System.out.println(resData);
     }
 

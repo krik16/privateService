@@ -139,7 +139,7 @@ public class RefundBizz {
         wwpunchCardRefundReqData.setTerminal_serialno(oldPaymentEntity.getPayNo());
         BigDecimal refundFee = new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
         wwpunchCardRefundReqData.setRefund_amount(refundFee);
-        WwPunchCardRefundResData wwPunchCardRefundResData = WebankPayUnit.webankWechatPunchCardRefund(wwpunchCardRefundReqData);
+        WwPunchCardRefundResData wwPunchCardRefundResData = WebankPayUnit.wechatPunchCardRefund(wwpunchCardRefundReqData);
 
         Integer totalFee = wwpunchCardRefundReqData.getRefund_amount().multiply(new BigDecimal(100)).intValue();
         //初始化退款记录

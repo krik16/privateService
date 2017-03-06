@@ -13,7 +13,9 @@ import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
+import com.rongyi.pay.core.webank.model.WaPunchCardPayResData;
 import com.rongyi.pay.core.webank.model.WwPunchCardResData;
+import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.PunchCardPayResData;
@@ -213,7 +215,7 @@ public class PayBizz {
 
         //支付流水号设置为微众商户单号
         wwPunchCardPayParam.setOrderNo(paymentEntity.getPayNo());
-        WwPunchCardResData wwPunchCardResData = WebankPayUnit.webankWechatPunchCardPay(wwPunchCardPayParam);
+        WwPunchCardResData wwPunchCardResData = WebankPayUnit.wechatPunchCardPay(wwPunchCardPayParam);
 
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         paymentEntity.setFinishTime(new Date());
@@ -228,7 +230,38 @@ public class PayBizz {
         return wwPunchCardResData;
     }
 
-    
+    /**
+     * 微众渠道支付宝刷卡支付
+     * @param ryMchVo 容易商户信息
+     * @param waPunchCardPayParam 业务参数
+     * @return WwPunchCardResData
+     */
+    public WaPunchCardPayResData webankWechatPunchCardPay(RyMchVo ryMchVo,WaPunchCardPayParam waPunchCardPayParam){
+
+
+        Integer totalFee = waPunchCardPayParam.getTotalAmount().multiply(new BigDecimal(100)).intValue();
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo,waPunchCardPayParam.getOrderId(),totalFee,"","",Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,Constants.ORDER_TYPE.ORDER_TYPE_6);
+
+        //支付流水号设置为微众商户单号
+        waPunchCardPayParam.setOrderId(paymentEntity.getPayNo());
+        WaPunchCardPayResData resData = WebankPayUnit.alipayPunchCardPay(waPunchCardPayParam);
+
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //支付结果返回金额计算
+        Integer totalAmount = new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(), resData.getOutTradeNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
+                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        return resData;
+    }
+
 
 
     /**

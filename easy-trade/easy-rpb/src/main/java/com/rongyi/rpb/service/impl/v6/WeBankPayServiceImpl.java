@@ -72,7 +72,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
     @Override
     public Map<String, Object> weBankWechatPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType,String weBankMchNo) {
         try {
-            WwPunchCardResData resData = queryBizz.wechatPunchCardPayQueryOrder(orderNo,payType,weBankMchNo);
+            WwPunchCardResData resData = queryBizz.webankWechatPunchCardPayQueryOrder(orderNo, payType, weBankMchNo);
 
             Map<String, Object> map = BeanMapUtils.toMap(resData);
             //外部订单号
@@ -117,7 +117,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
     @Override
     public Map<String, Object> webankWechatRefundQuery(String orderNo,Integer payType, String weBankMchNo) {
         try {
-            WwPunchCardRefundResData resData = queryBizz.wechatPunchCardRefundQuery(orderNo,payType,weBankMchNo);
+            WwPunchCardRefundResData resData = queryBizz.webankWechatPunchCardRefundQuery(orderNo, payType, weBankMchNo);
             Map<String, Object> map = BeanMapUtils.toMap(resData);
             //外部订单号
             map.put("orderNo", orderNo);
