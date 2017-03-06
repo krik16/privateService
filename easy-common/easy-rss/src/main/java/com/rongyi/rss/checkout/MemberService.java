@@ -61,6 +61,6 @@ public interface MemberService {
      * @param amount
      * @return
      */
-    DubboVO presentCredit(String mallId, String userId, Integer amount);
+    DubboVO pushCreditMsg(String mallId, String userId, Integer amount);
 
 }
