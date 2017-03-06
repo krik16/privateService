@@ -26,7 +26,7 @@ public class WwPunchCardQueryOrderReqData extends BaseData{
     //签名
     private String sign;
 
-    public WwPunchCardQueryOrderReqData(String orderNo, String merchantCode) {
+    public WwPunchCardQueryOrderReqData(String merchantCode,String orderNo) {
         setMerchant_code(merchantCode);
         setTerminal_serialno(orderNo);
     }

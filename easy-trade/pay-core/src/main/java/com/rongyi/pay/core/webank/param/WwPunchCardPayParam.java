@@ -19,7 +19,7 @@ public class WwPunchCardPayParam extends BaseData{
     //商户订单号 必填
     private String orderNo;
     
-    //金额（元）
+    //金额（元）必填
     private BigDecimal amount;
 
     //产品   必填

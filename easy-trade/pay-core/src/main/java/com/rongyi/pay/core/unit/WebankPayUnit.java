@@ -38,11 +38,15 @@ public class WebankPayUnit {
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardPay(param, configure);
             LOGGER.info("微众刷卡支付返回结果 resData:{}",resData);
-            if ("0".equals(resData.getResult().getErrno())&&"PAYING".equals(resData.getPayment())) {
+            //返回用户正在支付中
+            if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())) {
                 //用户正在支付中  循环调用接口查询支付状态
-                waitUserWechatPaying(param,resData);
-            }else if("0".equals(resData.getResult().getErrno())&&!"SUCCESS".equals(resData.getPayment())){
-                throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
+                resData= waitUserWechatPaying(param);
+            }
+            //返回状态不是正在支付中 也没有支付成功 则失败 直接抛异常
+            else if(!(ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())&&
+                    ConstantEnum.WEBANK_PAYEMENT_1.getCodeStr().equals(resData.getPayment()))){
+                throw new WebankException(resData.getResult().getErrno(),"".equals(resData.getResult().getErrmsg())?ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr() :resData.getResult().getErrmsg());
             }
         } catch (WebankException | ParamNullException e) {
             throw e ;
@@ -56,24 +60,27 @@ public class WebankPayUnit {
 
     /**
      * 微众微信刷卡支付等待用户支付处理
-     * @param resData 支付请求返回的结果
      */
-    private static void waitUserWechatPaying(WwPunchCardPayParam param , WwPunchCardResData resData) {
+    private static WwPunchCardResData waitUserWechatPaying(WwPunchCardPayParam param) {
+        WwPunchCardResData resData =null;
         int retryTimes = 9;
         boolean result = false;
         LOGGER.info("微众微信刷卡支付等待用户输入密码,最多等待{}s,param={},configure={}", retryTimes*retryInterval/1000, param,configure);
         //参数转换
-        WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData(param.getOrderNo(), param.getMerchantCode());
+        WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData(param.getMerchantCode(),param.getOrderNo());
         for (int i = 1; i <= retryTimes; i++) {
             try {
                 resData = wechatPunchCardPayQueryOrder(reqData);
                 LOGGER.info("等待次数times={},WwPunchCardResData={}", i, resData);
-                if ("0".equals(resData.getResult().getErrno())&&"SUCCESS".equals(resData.getPayment())) {
+                //用户支付成功
+                if (ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())&&
+                        ConstantEnum.WEBANK_PAYEMENT_1.getCodeStr().equals(resData.getPayment())) {
                     LOGGER.info("用户密码输入完成，成功支付");
                     result = true;
                     break;
-                }else if("0".equals(resData.getResult().getErrno())&&!"PAYING".equals(resData.getPayment())){
-                    throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
+                }else if(!ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())){
+                    throw new WebankException(resData.getResult().getErrno(),
+                            "".equals(resData.getResult().getErrmsg())?ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr() :resData.getResult().getErrmsg());
                 }
                 Thread.sleep(retryInterval);
             } catch (WebankException | ParamNullException e) {
@@ -93,6 +100,8 @@ public class WebankPayUnit {
             //调用撤销订单接口
             waitWechatPunchCardReverse(param);
             throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_REVERSE_SUCCESS);
+        }else {
+            return resData;
         }
     }
 
@@ -140,6 +149,7 @@ public class WebankPayUnit {
      */
     public static void waitWechatPunchCardReverse(WwPunchCardPayParam param ) {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData(param);
+        reqData.setTerminal_serialno(System.currentTimeMillis()+"");
         wechatPunchCardReverse(reqData);
     }
 
@@ -156,8 +166,6 @@ public class WebankPayUnit {
             ParamUnit.checkWebankWechatPunchCardQueryOrder(reqData, configure);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardQueryOrder(reqData, configure);
-            if(!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno()))
-                throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         } catch (WebankException | ParamNullException e) {
             throw e ;
         }catch (Exception e) {

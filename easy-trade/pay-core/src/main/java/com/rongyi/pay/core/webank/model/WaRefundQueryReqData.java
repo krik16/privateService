@@ -7,7 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/3/2.
  */
 public class WaRefundQueryReqData extends BaseData{
-    //商户号
+    //商户号 必传
     private String wbMerchantId ;
 
     //订单号 跟tradeNo不能同时为空
@@ -16,7 +16,7 @@ public class WaRefundQueryReqData extends BaseData{
     //支付宝交易号
     private String tradeNo ;
 
-    //退款请求号
+    //退款请求号 必传
     private String outRequestNo ;
 
     public String getWbMerchantId() {

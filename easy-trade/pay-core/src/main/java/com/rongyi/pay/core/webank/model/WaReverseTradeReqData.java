@@ -16,6 +16,15 @@ public class WaReverseTradeReqData extends BaseData{
     //支付宝交易号
     private String tradeNo;
 
+    public WaReverseTradeReqData() {
+
+    }
+
+    public WaReverseTradeReqData(String wbMerchantId, String orderId) {
+        setWbMerchantId(wbMerchantId);
+        setOrderId(orderId);
+    }
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }

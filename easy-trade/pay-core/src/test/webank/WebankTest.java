@@ -1,14 +1,17 @@
 package webank;
 
+import base.JUnit4Runner;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+import com.rongyi.pay.core.webank.util.Signature;
 import com.sun.org.glassfish.gmbal.Description;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 
@@ -16,9 +19,11 @@ import java.math.BigDecimal;
  *
  * Created by sujuan on 2017/3/2.
  */
+//@RunWith(JUnit4Runner.class)
 public class WebankTest {
 
     String merchantCode  = "107100000000014";
+    String wbMerchatId = "107075571030015";
 
     @Test
     @Description("微信刷卡支付")
@@ -31,9 +36,13 @@ public class WebankTest {
         param.setOrderNo(getOrderNO());
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
         param.setProduct("测试");
-        param.setAuthCode("130187622836349194");
+        param.setAuthCode("130054478622727117");
+//        param.setOpenid("99999999999999");
+//        param.setSubAppid("000000000000");
+        param.setGoodsTag("测试商品");
+        param.setAttach("附加信息");
         WwPunchCardResData resData = webankPayUnit.wechatPunchCardPay(param);
-        System.out.println(resData);
+        System.out.println(resData+".....");
     }
 
     @Test
@@ -41,7 +50,7 @@ public class WebankTest {
     public void wechatPunchCardQuery(){
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
-        WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData("1488610970424","107100000000014");
+        WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData("107100000000014","1488792891971");
         WwPunchCardResData resData = webankPayUnit.wechatPunchCardPayQueryOrder(reqData);
         System.out.println(resData);
     }
@@ -100,7 +109,7 @@ public class WebankTest {
     public void alipayGetTicket() {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
-        String token = "WLA0f-dGGlQHTVClazkxtmW6FX_nRhpUB01QpWs5MbZluhUZR0G5aLXVc9BuMu3iBonwHSWB03GkAIOzWLrwHqIJCw";
+        String token = "WLA0f-dGGlQHTVClazkxtmW6FX_nRhpUB01QpWs5MbZluhUWgTOVo4XvWHZuEqevzbjASf2bGbAjUISAu5pliXxh1g";
         webankPayUnit.alipayGetTicket(token);
     }
 
@@ -111,7 +120,7 @@ public class WebankTest {
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WaPunchCardPayParam param = new WaPunchCardPayParam();
         param.setWbMerchantId("107075571030015");
-        param.setAuthCode("283733809390933428");
+        param.setAuthCode("280108596765670997");
         param.setTotalAmount(new BigDecimal("0.01").setScale(2));
         param.setOrderId(getOrderNO());
         param.setSubject("test");
@@ -119,11 +128,49 @@ public class WebankTest {
     }
 
     @Test
-    @Description("支付宝刷订单查询")
+    @Description("支付宝订单查询")
     public void alipayQueyrTrade() {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
-        
+        WaQueryTradeReqData reqData = new WaQueryTradeReqData(wbMerchatId, "1488771549778");
+        WaQueryTradeResData resData = webankPayUnit.alipayQueryTrade(reqData);
+        System.out.println(resData);
+    }
+
+    @Test
+    @Description("支付宝冲正订单")
+    public void alipayReverseTrade() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WaReverseTradeReqData reqData = new WaReverseTradeReqData(wbMerchatId,"1488773144113");
+        WaReverseTradeResData resData = webankPayUnit.alipayReverseTrade(reqData);
+        System.out.println(resData);
+    }
+
+    @Test
+    @Description("支付宝退款")
+    public void alipayRefundOrder() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WaRefundReqData reqData = new WaRefundReqData();
+        reqData.setWbMerchantId(wbMerchatId);
+        reqData.setOrderId("1488771549778");
+        reqData.setRefundAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
+        reqData.setOutRequestNo(getOrderNO());
+        WaRefundResData resData = webankPayUnit.alipayRefund(reqData);
+        System.out.println(resData);
+    }
+
+    @Test
+    @Description("支付宝退款查询")
+    public void alipayRefundOrderQuery() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WaRefundQueryReqData reqData = new WaRefundQueryReqData();
+        reqData.setWbMerchantId(wbMerchatId);
+        reqData.setOrderId("1488771549778");
+        WaRefundQueryResData resData = webankPayUnit.alipayRefundQuery(reqData);
+        System.out.println(resData);
     }
 
     public static void init() {
@@ -144,9 +191,13 @@ public class WebankTest {
             configure.setSecret("mJBdgcPLLRYvJzZYmtEz97ekHGZaoGLFallg6JjOXcptcw6xOtU6JceY15sQH8mb");
             configure.setAlipayGetTokenUrl("https://l.test-svrapi.webank.com/api/oauth2/access_token");
             configure.setAlipayGetTicketUrl("https://l.test-svrapi.webank.com/api/oauth2/api_ticket");
-            configure.setTicket("0MepBKauz3RqTQZRvqwehqoOxCiVgpR2XM3UhWwvrTLeJPqpIB60JDa0iAp7HjoN");
+            configure.setTicket("5tDcIzNp7BehUlfLqjvdTPVJy6TKxVGT5IXGqJfxy36HXjrGiBivDb9ewGbtMaZD");
 
             configure.setAlipayPunchCardPayUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/pay");
+            configure.setAlipayQueryTradeUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/querytrade");
+            configure.setAlipayReverseTradeUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/cancel");
+            configure.setAlipayRefundUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/refund");
+            configure.setAlipayRefundQueryUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/queryrefund");
         }
     }
 
@@ -161,12 +212,13 @@ public class WebankTest {
 //        param.setSub_appid("45546656465");
 //        param.setGoods_tag("");
 //        JSONObject jsonObject = JSONObject.fromObject(param);
-        BigDecimal num = new BigDecimal(1.00).setScale(2);
-        System.out.println(num.toString());
-        JSONObject json = new JSONObject();
-        json.put("num", num+"");
-        System.out.println(json.toString());
-        System.out.println();
+//        BigDecimal num = new BigDecimal(1.00).setScale(2);
+//        System.out.println(num.toString());
+//        JSONObject json = new JSONObject();
+//        json.put("num", num+"");
+//        System.out.println(json.toString());
+        WwPunchCardQueryOrderReqData reqData = new WwPunchCardQueryOrderReqData("107100000000014", "1488787331617");
+        System.out.println(Signature.getWechatSign(reqData,"123"));
     }
 
 }

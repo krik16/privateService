@@ -50,7 +50,7 @@ public class Signature {
      * @return 签名
      */
     public static String getWechatSign(Object obj,String key) {
-        Map<String,Object> map = objectToMap(obj);
+        Map<String,Object> map = objectToMapRemoveSign(obj);
         ArrayList<String> list = new ArrayList<>();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             if (entry.getValue() != "") {
@@ -153,6 +153,37 @@ public class Signature {
             throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_SIGN_FAIL);
         }
         return list;
+    }
+
+    /**
+     * 将bean将成map
+     * @param obj bean对象
+     * @return 转换的map值
+     * @throws Exception
+     */
+    public static Map<String, Object> objectToMapRemoveSign(Object obj) {
+        if(obj == null){
+            return null;
+        }
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        try {
+            Field[] declaredFields = obj.getClass().getDeclaredFields();
+            for (Field field : declaredFields) {
+                field.setAccessible(true);
+                Object value = field.get(obj);
+                if("sign".equals(field.getName()))
+                    continue;
+                if (value!=null&&value!="") {
+                    map.put(field.getName(), field.get(obj) + "");
+                }
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_SIGN_FAIL);
+        }
+        return map;
     }
 
     /**

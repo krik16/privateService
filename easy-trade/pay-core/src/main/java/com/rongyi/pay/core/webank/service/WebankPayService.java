@@ -97,7 +97,7 @@ public class WebankPayService {
         String urlSuffix = getAliPayUrlSuffix(reqData, configure);
         String result = HttpUtil.sendPostClient(configure.getAlipayPunchCardPayUrl()+urlSuffix, reqData, configure);
         LOGGER.info("微众支付宝刷卡支付返回结果result:{}",result);
-        return (WaPunchCardPayResData) Util.getObjectFromString(result, WwPunchCardResData.class);
+        return (WaPunchCardPayResData) Util.getObjectFromString(result, WaPunchCardPayResData.class);
     }
 
     public WaQueryTradeResData alipayQueryTrade(WaQueryTradeReqData reqData, WebankConfigure configure) throws Exception{
@@ -151,6 +151,7 @@ public class WebankPayService {
         String url = configure.getAlipayGetTokenUrl()+"?app_id="+configure.getAppId()+"&secret="+configure.getSecret()+
                 "&grant_type=client_credential&version=1.0.0";
         String result = HttpUtil.httpGET(url, configure);
+        LOGGER.info("微众支付宝获取token返回结果result:{}",result);
         return (WaAccessTokenResData) Util.getObjectFromString(result, WaAccessTokenResData.class);
     }
 
@@ -159,7 +160,7 @@ public class WebankPayService {
         String url = configure.getAlipayGetTicketUrl()+"?app_id="+configure.getAppId()+"&access_token="+token+
                 "&type=SIGN&version=1.0.0";
         String result = HttpUtil.httpGET(url, configure);
-        LOGGER.info("微众返回结果 result:{}",result);
+        LOGGER.info("微众支付宝获取tikect返回结果 result:{}",result);
         return (WaTicketResData) Util.getObjectFromString(result, WaTicketResData.class);
     }
 
