@@ -18,6 +18,17 @@ public class AlipayCommonReqData extends BaseData{
     //签名
     private String sign ;
 
+    //版本
+    private String version = "1.0.0";
+
+    //app_id
+    private String appId ;
+
+    public AlipayCommonReqData(WebankConfigure configure) {
+        setNonce(RandomStringGenerator.getRandomStringByLength(32));
+        setAppId(configure.getAppId());
+    }
+
     public String getNonce() {
         return nonce;
     }
@@ -32,5 +43,21 @@ public class AlipayCommonReqData extends BaseData{
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }

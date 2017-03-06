@@ -29,6 +29,9 @@ public class WwPunchCardReverseReqData extends BaseData{
     //签名
     private String sign;
 
+    public WwPunchCardReverseReqData(){
+
+    }
 
     public WwPunchCardReverseReqData(WwPunchCardPayParam payParam) {
         setMerchant_code(payParam.getMerchantCode());

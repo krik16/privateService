@@ -5,7 +5,7 @@ import com.rongyi.pay.core.util.BaseData;
 import java.math.BigDecimal;
 
 /**
- * 微众微信刷卡支付退款接口请求参数
+ * 微众微信刷卡支付退款/退款查询 接口请求参数
  * Created by sujuan on 2017/2/27.
  */
 public class WwpunchCardRefundReqData extends BaseData{

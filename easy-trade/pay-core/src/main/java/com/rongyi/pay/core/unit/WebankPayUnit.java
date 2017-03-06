@@ -156,6 +156,8 @@ public class WebankPayUnit {
             ParamUnit.checkWebankWechatPunchCardQueryOrder(reqData, configure);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardQueryOrder(reqData, configure);
+            if(!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno()))
+                throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         } catch (WebankException | ParamNullException e) {
             throw e ;
         }catch (Exception e) {
@@ -298,6 +300,8 @@ public class WebankPayUnit {
         WaReverseTradeResData resData = null;
         try {
             ParamUnit.checkWebankAlipayReverseTrade(reqData, configure);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.alipayReverseTrade(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
@@ -316,6 +320,8 @@ public class WebankPayUnit {
         WaRefundResData resData = null;
         try {
             ParamUnit.checkWebankAlipayRefund(reqData, configure);
+            WebankPayService  webankPayService = new WebankPayService();
+            resData = webankPayService.alipayRefundTrade(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {
@@ -334,6 +340,8 @@ public class WebankPayUnit {
         WaRefundQueryResData resData = null ;
         try {
             ParamUnit.checkWebankAlipayRefundQuery(reqData, configure);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.alipayRefundTradeQuery(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {
@@ -362,14 +370,16 @@ public class WebankPayUnit {
      * 微众支付宝获取ticket(用于签名)
      * @param token token
      */
-    public static void alipayGetTicket(String token) {
+    public static WaTicketResData alipayGetTicket(String token) {
         LOGGER.info("微众支付宝获取ticket token:{}",token);
+        WaTicketResData resData = null;
         try {
             WebankPayService webankPayService  = new WebankPayService();
-            webankPayService.alipayGetTicket(token,configure);
+            resData = webankPayService.alipayGetTicket(token,configure);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return  resData;
     }
 
 }

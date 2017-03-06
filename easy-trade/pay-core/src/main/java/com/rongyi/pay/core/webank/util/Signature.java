@@ -11,9 +11,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
+import com.rongyi.pay.core.webank.model.AlipayCommonReqData;
 import com.rongyi.pay.core.wechat.util.MD5;
 import com.rongyi.pay.core.wechat.util.Util;
 import com.rongyi.pay.core.wechat.util.XMLParser;
+import net.sf.json.JSONObject;
 import org.xml.sax.SAXException;
 
 /**
@@ -68,15 +70,16 @@ public class Signature {
         return result;
     }
 
-    public static String getAlipaySign(Object obj, String signTicket) {
-        List<String> values =   objectToList(obj);
-        if (values == null) {
-            throw new NullPointerException("values is null");
-        }
-        values.removeAll(Collections.singleton(null));// remove null
+    public static String getAlipaySign(Object obj, AlipayCommonReqData reqData, String signTicket) {
+        List<String> values = new ArrayList<>();
+        Map<String,Object> map = objectToMap(obj);
+        JSONObject json = JSONObject.fromObject(map);
         values.add(signTicket);
-        values.add("W0000036");
-        values.add("1.0.0");
+        values.add(reqData.getAppId());
+        values.add(reqData.getNonce());
+        values.add(reqData.getVersion());
+        values.add(json.toString());
+        values.removeAll(Collections.singleton(null));// remove null
         java.util.Collections.sort(values);
         StringBuilder sb = new StringBuilder();
         for (String s : values) {
@@ -171,7 +174,7 @@ public class Signature {
                 field.setAccessible(true);
                 Object value = field.get(obj);
                 if (value!=null&&value!="") {
-                    map.put(field.getName(), field.get(obj));
+                    map.put(field.getName(), field.get(obj)+"");
                 }
             }
         } catch (IllegalAccessException e) {

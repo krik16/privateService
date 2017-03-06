@@ -305,7 +305,8 @@ public class HttpUtil {
 		//请求器的配置
 	//	RequestConfig requestConfig;
 		init(configure);
-		JSONObject jsonObject = JSONObject.fromObject(object);
+		Map<String,Object> map = Signature.objectToMap(object);
+		JSONObject jsonObject = JSONObject.fromObject(map);
 		String result = null;
 
 		HttpPost httpPost = new HttpPost(url);
@@ -314,6 +315,7 @@ public class HttpUtil {
 		entity.setContentEncoding("UTF-8");
 		entity.setContentType("application/json");
 		httpPost.setEntity(entity);
+		logger.info("reqEntity:{}",jsonObject);
 
 ////        System.err.println("post data:"+postDataXML);
 //		//得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别

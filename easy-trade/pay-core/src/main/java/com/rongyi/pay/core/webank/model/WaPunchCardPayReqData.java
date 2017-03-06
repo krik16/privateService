@@ -1,5 +1,6 @@
 package com.rongyi.pay.core.webank.model;
 
+import com.rongyi.pay.core.util.BaseData;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  * 微众支付宝刷卡支付请求参数
  * Created by sujuan on 2017/3/1.
  */
-public class WaPunchCardPayReqData extends AlipayCommonReqData{
+public class WaPunchCardPayReqData extends BaseData{
     //商户号  必传
     private String wbMerchantId;
 

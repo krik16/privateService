@@ -49,7 +49,7 @@ public class WaPunchCardPayResData extends AlipayCommonResData{
     private String gmtPayment;
 
     //交易支付使用的资金渠道
-    private List<TradeFundBill> fundBillList ;
+   // private List<TradeFundBill> fundBillList ;
 
     //支付宝卡余额
     private String cardBalance ;
@@ -168,14 +168,6 @@ public class WaPunchCardPayResData extends AlipayCommonResData{
 
     public void setGmtPayment(String gmtPayment) {
         this.gmtPayment = gmtPayment;
-    }
-
-    public List<TradeFundBill> getFundBillList() {
-        return fundBillList;
-    }
-
-    public void setFundBillList(List<TradeFundBill> fundBillList) {
-        this.fundBillList = fundBillList;
     }
 
     public String getCardBalance() {
