@@ -136,7 +136,7 @@ public class RefundBizz {
 
         WwpunchCardRefundReqData wwpunchCardRefundReqData = new WwpunchCardRefundReqData();
         wwpunchCardRefundReqData.setMerchant_code(webankMchNo);
-        wwpunchCardRefundReqData.setOrderid(oldPaymentEntity.getPayNo());
+        wwpunchCardRefundReqData.setTerminal_serialno(oldPaymentEntity.getPayNo());
         BigDecimal refundFee = new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
         wwpunchCardRefundReqData.setRefund_amount(refundFee);
         WwPunchCardRefundResData wwPunchCardRefundResData = WebankPayUnit.webankWechatPunchCardRefund(wwpunchCardRefundReqData);

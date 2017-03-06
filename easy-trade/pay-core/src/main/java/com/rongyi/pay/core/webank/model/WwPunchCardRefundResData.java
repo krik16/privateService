@@ -34,6 +34,9 @@ public class WwPunchCardRefundResData extends BaseData{
     //退款渠道
     private String refund_channel ;
 
+    //容易网交易号
+    private String payNo;
+
     public Result getResult() {
         return result;
     }
@@ -96,5 +99,13 @@ public class WwPunchCardRefundResData extends BaseData{
 
     public void setRefund_channel(String refund_channel) {
         this.refund_channel = refund_channel;
+    }
+
+    public String getPayNo() {
+        return payNo;
+    }
+
+    public void setPayNo(String payNo) {
+        this.payNo = payNo;
     }
 }

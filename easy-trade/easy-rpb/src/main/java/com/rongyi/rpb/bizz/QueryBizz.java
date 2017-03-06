@@ -67,14 +67,14 @@ public class QueryBizz {
         }
         WwpunchCardRefundReqData reqData  = new WwpunchCardRefundReqData();
         reqData.setMerchant_code(weBankMchNo);
-        reqData.setOrderid(oldPaymentEntity.getPayNo());
+        reqData.setTerminal_serialno(oldPaymentEntity.getPayNo());
 
         WwPunchCardRefundResData resData = WebankPayUnit.webankWechatPunchCardRefundQuery(reqData);
-
         //检查是否支付是否成功
         if(!"0".equals(resData.getResult().getErrno()) || !"1".equals(resData.getRefundment())){
             throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         }
+        resData.setPayNo(oldPaymentEntity.getPayNo());
         return resData;
     }
 }
