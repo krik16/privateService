@@ -3,6 +3,7 @@ package com.rongyi.easy.mcmc.vo;
 
 
 import com.rongyi.easy.mcmc.CommodityCategory;
+import com.rongyi.easy.mcmc.vo.commodity.CommoditySpecColumnVo3;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -33,6 +34,7 @@ public class CommodityCategoryVO3 implements Serializable{
     private boolean isPopular;//是否是热门分类 true表示热门分类
     private String popularImg;//热门分类图片
     private int sequence ; ///< 排序字段,数字越大越靠前
+    private List<CommoditySpecColumnVo3> commoditySpecColumnVo3List;
 
     public String getId() {
         return id;
@@ -135,6 +137,14 @@ public class CommodityCategoryVO3 implements Serializable{
         vo3.setPopularImg(commodityCategory.getPopularImg());
         vo3.setSequence(commodityCategory.getSequence());
        return vo3;
+    }
+
+    public List<CommoditySpecColumnVo3> getCommoditySpecColumnVo3List() {
+        return commoditySpecColumnVo3List;
+    }
+
+    public void setCommoditySpecColumnVo3List(List<CommoditySpecColumnVo3> commoditySpecColumnVo3List) {
+        this.commoditySpecColumnVo3List = commoditySpecColumnVo3List;
     }
 
     public static List<String> getStrForObjectId(List<ObjectId> objectIds){

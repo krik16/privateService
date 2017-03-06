@@ -13,7 +13,7 @@ import com.rongyi.easy.mcmc.vo.commodity.CommoditySpecColumnDetailVO;
 
 public interface ICommoditySpecColumnService {
 	 public CommoditySpecColumn selectColumnById(String id);
-	 
+
 	 public CommoditySpecColumn selectColumnByName(String name);
 	 /**
 	  * 大运营后台规格列表
@@ -22,7 +22,7 @@ public interface ICommoditySpecColumnService {
 	  */
 	 public List<CommoditySpecColumn> selectSpecColumnByNameOrId(CommoditySpecColumnParam param);
 	 /**
-	  * 
+	  *
 	  * @param name    规格名称
 	  * @param desc    规格说明
 	  * @param hasClassification  是否含有分类
@@ -49,6 +49,8 @@ public interface ICommoditySpecColumnService {
 	  * @return
 	  */
 	 public Integer getTotalSpecColumnCount(CommoditySpecColumnParam param);
-	 
+
 	 public List<CommodityCategory> findCategoryByColumnIds(List<ObjectId> columnIds);
+
+	public List<CommoditySpecColumn> selectColumnByIds(List<ObjectId> ids);
 }
