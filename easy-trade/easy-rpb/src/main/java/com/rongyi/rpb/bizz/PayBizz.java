@@ -227,6 +227,8 @@ public class PayBizz {
 
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        //微众支付查询接口未返回
+        wwPunchCardResData.setTerminal_serialno(paymentEntity.getPayNo());
         return wwPunchCardResData;
     }
 

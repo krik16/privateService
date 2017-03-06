@@ -11,6 +11,7 @@ import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.wechat.model.*;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.bizz.PayBizz;
+import com.rongyi.rpb.bizz.QueryBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IWechatPayService;
@@ -35,6 +36,8 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
     PayBizz payBizz;
     @Autowired
     RefundBizz refundBizz;
+    @Autowired
+    QueryBizz queryBizz;
 
     @Override
     public Map<String, Object> getPaySign(RyMchVo ryMchVo,WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
@@ -78,6 +81,34 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", refundResData.getOut_trade_no());
+
+            log.info("退款结果,map={}", map);
+            return map;
+        } catch (WeChatException | ParamNullException e) {
+            log.warn("退款失败，e={}",e.getMessage(),e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.warn("退款失败，e={}",e.getMessage(),e);
+            throw e;
+        } catch (Exception e) {
+            log.error("退款异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> refundQuery(String orderNo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
+        log.info("微信退款,orderNo={},wechatConfigureVo={}", orderNo, wechatConfigureVo);
+        try {
+            //设置支付参数
+            WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
+            RefundQueryResData resData = queryBizz.wechatRefundQuery(orderNo, wechatConfigure);
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", resData.getOut_trade_no());
 
             log.info("退款结果,map={}", map);
             return map;

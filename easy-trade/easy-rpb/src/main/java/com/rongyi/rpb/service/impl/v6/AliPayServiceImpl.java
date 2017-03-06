@@ -5,6 +5,7 @@ import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
@@ -18,6 +19,7 @@ import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.rpb.bizz.PayBizz;
+import com.rongyi.rpb.bizz.QueryBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
@@ -41,6 +43,8 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
     PayBizz payBizz;
     @Autowired
     RefundBizz refundBizz;
+    @Autowired
+    QueryBizz queryBizz;
 
     @Override
     public Map<String, Object> getPaySign(RyMchVo ryMchVo,AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException{
@@ -155,6 +159,34 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("payNo", alipayTradeQueryResponse.getOutTradeNo());
 
             log.info("支付宝面对面支付查询结果,map={}", map);
+            return map;
+        } catch (AliPayException | ParamNullException e) {
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> refundQuery(String orderNo, AliConfigureVo aliConfigureVo) throws TradePayException {
+        log.info("支付宝退款查询,orderNo={},aliConfigureVo={}", orderNo, aliConfigureVo);
+        try {
+            //初始化支付参数
+            AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
+
+            PaymentEntity paymentEntity = queryBizz.aliRefundQuery(orderNo, aliConfigure);
+
+            Map<String, Object> map = BeanMapUtils.toMap(paymentEntity);
+
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", paymentEntity.getPayNo());
+
+            log.info("支付宝退款查询结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());

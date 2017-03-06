@@ -3,8 +3,12 @@ package com.rongyi.rpb.bizz;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.pay.core.Exception.WebankException;
+import com.rongyi.pay.core.ali.config.AliConfigure;
+import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.wechat.model.RefundQueryResData;
+import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +47,7 @@ public class QueryBizz {
         if(!"0".equals(resData.getResult().getErrno()) || !"1".equals(resData.getPayment())){
             throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         }
+        resData.setTerminal_serialno(oldPaymentEntity.getPayNo());
         return resData;
     }
 
@@ -117,5 +122,40 @@ public class QueryBizz {
 
     }
 
+    /**
+     *
+     * 支付宝退款结果查询接口(暂未调用支付宝接口，只查询交易网关退款结果)
+     * @param orderNo 订单号
+     * @param aliConfigure 支付配置
+     * @return PaymentEntity
+     */
+    public PaymentEntity aliRefundQuery(String orderNo,AliConfigure aliConfigure) {
+
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+
+        if (oldPaymentEntity == null) {
+            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+        }
+        return oldPaymentEntity;
+    }
+
+        /**
+         * 微信退款订单查询
+         *
+         * @param orderNo     订单号
+         * @return PunchCardPayQueryResData
+         */
+    public RefundQueryResData wechatRefundQuery(String orderNo,WechatConfigure wechatConfigure) {
+
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+
+        if (oldPaymentEntity == null) {
+            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+        }
+        return WeChatPayUnit.refundQuery(null,oldPaymentEntity.getPayNo(),null,wechatConfigure);
+
+    }
 
 }

@@ -72,6 +72,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
 
     @Override
     public Map<String, Object> weBankWechatPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType,String weBankMchNo) {
+        log.info("微众微信刷卡支付查询,ryMchVo={},orderNo={},payType={},weBankMchNo={}", ryMchVo, orderNo,payType,weBankMchNo);
         try {
             WwPunchCardResData resData = queryBizz.webankWechatPunchCardPayQueryOrder(orderNo, payType, weBankMchNo);
 
@@ -80,6 +81,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", resData.getTerminal_serialno());
+            log.info("微众微信刷卡支付查询结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
             throw new TradePayException(e.getCode(), e.getMessage());
