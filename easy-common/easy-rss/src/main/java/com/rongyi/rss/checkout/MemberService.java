@@ -3,6 +3,8 @@ package com.rongyi.rss.checkout;
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.easy.tradecenter.vo.UserCenterVO;
 
+import java.util.Date;
+
 /**
  * 会员服务
  *
@@ -56,11 +58,14 @@ public interface MemberService {
     /**
      * 消费送积分
      *
+     * @param platform
      * @param mallId
+     * @param serviceType
      * @param userId
-     * @param amount
+     * @param payAmount
+     * @param payDate
      * @return
      */
-    DubboVO pushCreditMsg(String mallId, String userId, Integer amount);
+    DubboVO pushCreditMsg(Integer platform, String mallId, Integer serviceType, String userId, double payAmount, Date payDate);
 
 }
