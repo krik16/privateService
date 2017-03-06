@@ -8,6 +8,8 @@ import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
+import com.rongyi.pay.core.webank.model.WaRefundReqData;
+import com.rongyi.pay.core.webank.model.WaRefundResData;
 import com.rongyi.pay.core.webank.model.WwPunchCardRefundResData;
 import com.rongyi.pay.core.webank.model.WwpunchCardRefundReqData;
 import com.rongyi.pay.core.wechat.model.RefundResData;
@@ -144,7 +146,7 @@ public class RefundBizz {
         Integer totalFee = wwpunchCardRefundReqData.getRefund_amount().multiply(new BigDecimal(100)).intValue();
         //初始化退款记录
         PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, wwpunchCardRefundReqData.getTerminal_serialno(),
-                totalFee, Constants.ORDER_TYPE.ORDER_TYPE_6, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
+                totalFee, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, "", "");
         //发起退款
         refundPaymentEntity.setFinishTime(new Date());
@@ -160,6 +162,51 @@ public class RefundBizz {
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
 
         return wwPunchCardRefundResData;
+
+    }
+
+    /**
+     * 微众支付宝退款
+     *
+     * @return WwPunchCardRefundResData
+     */
+    public WaRefundResData webankAliRefund(String orderNo,Integer refundAmount,String webankMchNo){
+        //查找订单支付记录
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        if (oldPaymentEntity == null) {
+            throw new TradeException("此订单支付记录不存在,orderNo={}",orderNo);
+        }
+
+        //初始化退款入住商户信息
+        RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
+
+        //初始化退款记录
+        PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
+                refundAmount, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, "", "");
+
+        WaRefundReqData reqData = new WaRefundReqData();
+        reqData.setWbMerchantId(webankMchNo);
+        reqData.setOrderId(oldPaymentEntity.getPayNo());
+        BigDecimal refundFee = new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+        reqData.setRefundAmount(refundFee);
+        reqData.setOutRequestNo(refundPaymentEntity.getPayNo());
+        WaRefundResData resData = WebankPayUnit.alipayRefund(reqData);
+        //发起退款
+        refundPaymentEntity.setFinishTime(new Date());
+        refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+
+        Integer resultRefundFee = reqData.getRefundAmount().multiply(new BigDecimal(100)).intValue();
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(reqData.getTradeNo(),reqData.getOrderId(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                "SUCCESS",resultRefundFee,"","",
+                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
+
+        //保存记录
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+
+        return resData;
 
     }
 
