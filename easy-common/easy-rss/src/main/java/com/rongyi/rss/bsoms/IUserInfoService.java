@@ -300,12 +300,12 @@ public interface IUserInfoService {
 	 * @param pageSize  每页显示的数量
 	 * @return
 	 */
-	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(String mallId,int currentPage,int pageSize);
+	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(String mallId,String shopId,int currentPage,int pageSize);
 	/**
 	 * 查询二级店铺账号数量
 	 * @return
 	 */
-	public Integer getUserInfoCountForDistributor(String mallId);
+	public Integer getUserInfoCountForDistributor(String mallId,String shopId);
 	/**
 	 * 新建分销商账号信息
 	 * @param userManagerParam
