@@ -27,6 +27,10 @@ public class WaPunchCardVo {
     //订单描述
     private String body ;
 
+    private String notifyUrl;//异步通知地址，刷卡支付非必填
+
+    private Integer orderType;//默认开放平台订单类型
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -81,5 +85,21 @@ public class WaPunchCardVo {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
     }
 }

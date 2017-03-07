@@ -36,6 +36,8 @@ public class WwPunchCardPayVo {
     //附加信息
     private String attach ;
 
+    private Integer orderType;
+
     public String getMerchantCode() {
         return merchantCode;
     }
@@ -114,5 +116,13 @@ public class WwPunchCardPayVo {
 
     public void setAttach(String attach) {
         this.attach = attach;
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
     }
 }
