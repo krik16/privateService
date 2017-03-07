@@ -41,6 +41,12 @@ public class PoiDocument implements Serializable {
 	@Field("valid")
 	private String valid;
 
+	@Field("parent_id")
+	private String parent_id;
+
+	@Field("parent_ids")
+	private List<String> parent_ids;
+
 	@Field("wildcard_name")
 	private String wildcard_name;
 
@@ -262,6 +268,13 @@ public class PoiDocument implements Serializable {
 		mall=0;
 		if(CollectionUtils.isNotEmpty(shop.getZone_ids()))
 			zone_ids= ListUtil.toStringList(shop.getZone_ids());
+
+		if(shop.getParent_id()!=null){
+			parent_id=shop.getParent_id().toString();
+		}
+		if(CollectionUtils.isNotEmpty(shop.getParent_ids()))
+			parent_ids= ListUtil.toStringList(shop.getParent_ids());
+
 	}
 
 
@@ -735,5 +748,21 @@ public class PoiDocument implements Serializable {
 
 	public void setWildcard_name(String wildcard_name) {
 		this.wildcard_name = wildcard_name;
+	}
+
+	public String getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(String parent_id) {
+		this.parent_id = parent_id;
+	}
+
+	public List<String> getParent_ids() {
+		return parent_ids;
+	}
+
+	public void setParent_ids(List<String> parent_ids) {
+		this.parent_ids = parent_ids;
 	}
 }
