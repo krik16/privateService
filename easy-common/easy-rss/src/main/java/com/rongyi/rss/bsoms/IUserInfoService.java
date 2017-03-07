@@ -10,7 +10,6 @@ import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
-import com.rongyi.easy.bsoms.vo.MerWechatAuthVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
 import com.rongyi.easy.roa.vo.distributor.UserInfoForDistributorVO;
@@ -301,12 +300,12 @@ public interface IUserInfoService {
 	 * @param pageSize  每页显示的数量
 	 * @return
 	 */
-	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(String mallId,int currentPage,int pageSize);
+	public List<UserInfoForDistributorVO> getUserInfoForDistributorVOList(String mallId,String shopId,int currentPage,int pageSize);
 	/**
 	 * 查询二级店铺账号数量
 	 * @return
 	 */
-	public Integer getUserInfoCountForDistributor(String mallId);
+	public Integer getUserInfoCountForDistributor(String mallId,String shopId);
 	/**
 	 * 新建分销商账号信息
 	 * @param userManagerParam
@@ -375,12 +374,4 @@ public interface IUserInfoService {
 	 * 修改账号资金状态
 	 */
 	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;
-	/**
-	 * 根据用户id和权限类型  获取权限信息列表
-	 * @param userId
-	 * @param system
-	 * @return
-	 * @throws Exception 
-	 */
-	public List<MerWechatAuthVO> getUserWechatAuthByUserId(Integer userId,String system) throws Exception;
 }

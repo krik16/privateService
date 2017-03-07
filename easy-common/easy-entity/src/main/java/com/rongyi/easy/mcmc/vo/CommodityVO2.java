@@ -61,7 +61,7 @@ public class CommodityVO2 implements  Serializable {
 
 	private String commodityDetails; //商品详情
 	private List<WechatInfoVo> wechatInfoVos;
-	private List<Integer> serviceIds;
+	private List<String> serviceIds;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
 	private String createBy;
@@ -120,11 +120,11 @@ public class CommodityVO2 implements  Serializable {
 		this.brandName = brandName;
 	}
 
-	public List<Integer> getServiceIds() {
+	public List<String> getServiceIds() {
 		return serviceIds;
 	}
 
-	public void setServiceIds(List<Integer> serviceIds) {
+	public void setServiceIds(List<String> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 

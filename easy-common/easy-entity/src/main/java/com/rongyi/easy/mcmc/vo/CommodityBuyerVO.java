@@ -6,12 +6,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.roa.vo.GroupMemberVO;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -92,6 +94,7 @@ public class CommodityBuyerVO implements Serializable {
     private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
     private List<String> categoryNames;
     private Integer templateRelevantGoodsCouponId;  //用作排序
+    private List<String> onServiceIds;
 
     public Integer getTemplateRelevantGoodsCouponId() {
         return templateRelevantGoodsCouponId;
@@ -99,6 +102,14 @@ public class CommodityBuyerVO implements Serializable {
 
     public void setTemplateRelevantGoodsCouponId(Integer templateRelevantGoodsCouponId) {
         this.templateRelevantGoodsCouponId = templateRelevantGoodsCouponId;
+    }
+
+    public List<String> getOnServiceIds() {
+        return onServiceIds;
+    }
+
+    public void setOnServiceIds(List<String> onServiceIds) {
+        this.onServiceIds = onServiceIds;
     }
 
     public List<String> getCategoryNames() {
@@ -821,7 +832,6 @@ public class CommodityBuyerVO implements Serializable {
         this.commodityDetails = commodityDetails;
     }
 
-
     public boolean isIfShowInWechat() {
         return ifShowInWechat;
     }
@@ -981,7 +991,6 @@ public class CommodityBuyerVO implements Serializable {
         }
         //默认返回非橱窗商品的值设置为0
         this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
-        this.weAndTeStatus = commodity.getWeAndTeStatus();
         if(commodity.getRegisterAt() != null){
         	this.registerAt = commodity.getRegisterAt().getTime();//上架时间
         }
@@ -993,16 +1002,24 @@ public class CommodityBuyerVO implements Serializable {
         }
         this.subheading=commodity.getSubheading();
         this.commodityDetails=commodity.getCommodityDetails();
-        this.setIfShowInWechat(
-                Arrays.asList(CommodityTerminalType.TERMINAL_TYPE_4,CommodityTerminalType.TERMINAL_TYPE_5,CommodityTerminalType.TERMINAL_TYPE_6,CommodityTerminalType.TERMINAL_TYPE_7)
-                        .contains(commodity.getTerminalType())  &&
-                        Arrays.asList(CommodityTerminalType.weAndTeStatus.STATUS_2,CommodityTerminalType.weAndTeStatus.STATUS_3,
-                                CommodityTerminalType.weAndTeStatus.STATUS_6,CommodityTerminalType.weAndTeStatus.STATUS_7).contains(commodity.getWeAndTeStatus())
-                        ?true:false);
+        this.setOnServiceIds(commodity.getOnServiceIds());
+        this.setIfShowInWechat(isShowInWechat());
         this.skus=commodity.getSkus();
         this.serviceDescription=commodity.getServiceDescription();
         this.serviceDescriptionId=commodity.getServiceDescriptionId();
         this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
+    }
+
+    private boolean isShowInWechat() {
+        if(CollectionUtils.isEmpty(getOnServiceIds())) {
+            return false;
+        }
+
+        List<String> onIds = getOnServiceIds();
+        onIds.remove(Constants.ServiceId.APP_RONG_YI_GUANG);
+        onIds.remove(Constants.ServiceId.TERMINAL_SCREEN);
+
+        return onIds.size() > 0;
     }
 
     @Override
