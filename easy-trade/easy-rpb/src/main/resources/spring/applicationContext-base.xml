@@ -31,6 +31,20 @@
 		<property name="wechatPunchCardPayUrl" value="${WEBANK_WECHAT_PUNCHCARD_PAY_URL}"/>
 		<property name="wechatPunchCardPayQueryOrderUrl" value="${WEBANK_WECHAT_PUNCHCARD_PAY_QUERY_ORDER_URL}"/>
 		<property name="wechatPunchCardPayReverseOrderUrl" value="${WEBANK_WECHAT_PUNCHCARD_PAY_REVER_ORDER_URL}"/>
+		<property name="wechatPunchCardRefundUrl" value="${WEBANK_WECHAT_PUNCHCARD_REFUND_URL}"/>
+		<property name="wechatPunchCardRefundQueryUrl" value="${WEBANK_WECHAT_PUNCHCARD_REFUND_QUERY_URL}"/>
+		<property name="wechatKeyStorePath" value="${WEBANK_WECHAT_KEY_STORE_PATH}"/>
+		<property name="wechatTrustStorePath" value="${WEBANK_WECHAT_TRUST_STORE_PATH}"/>
+		<property name="wechatKeyStorePwd" value="${WEBANK_WECHAT_KEY_STORE_PWD}"/>
+		<property name="appId" value="${WEBANK_ALI_APP_ID}"/>
+		<property name="secret" value="${WEBANK_ALI_SECRET}"/>
+		<property name="alipayGetTokenUrl" value="${WEBANK_ALI_PAY_GET_TOKEN_URL}"/>
+		<property name="alipayGetTicketUrl" value="${WEBANK_ALI_PAY_GET_TICKET_URL}"/>
+		<property name="alipayPunchCardPayUrl" value="${WEBANK_ALI_PAY_PUNCHCARD_PAY_URL}"/>
+		<property name="alipayQueryTradeUrl" value="${WEBANK_ALI_PAY_QUERY_TRADE_URL}"/>
+		<property name="alipayReverseTradeUrl" value="${WEBANK_ALI_PAY_REVERSE_TRADE_URL}"/>
+		<property name="alipayRefundUrl" value="${WEBANK_ALI_PAY_REFUND_URL}"/>
+		<property name="alipayRefundQueryUrl" value="${WEBANK_ALI_PAY_REFUND_QUERY_URL}"/>
 	</bean>
 
 	<bean id="logAdvice" class="com.rongyi.core.common.log.LogAopAdvice"/>

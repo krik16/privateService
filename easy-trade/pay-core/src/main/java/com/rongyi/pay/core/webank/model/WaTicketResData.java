@@ -18,7 +18,7 @@ public class WaTicketResData extends BaseData{
     //tikect对象数组
     private List<Ticket> tickets ;
 
-    class Ticket{
+   public class Ticket{
         //ticket值
         private String value ;
 

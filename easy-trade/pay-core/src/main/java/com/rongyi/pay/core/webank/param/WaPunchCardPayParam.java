@@ -107,4 +107,5 @@ public class WaPunchCardPayParam extends BaseData {
     public void setBody(String body) {
         this.body = body;
     }
+
 }

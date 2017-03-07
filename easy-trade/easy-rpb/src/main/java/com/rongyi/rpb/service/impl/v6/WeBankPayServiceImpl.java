@@ -48,7 +48,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             //初始化业务参数
             WwPunchCardPayParam wwPunchCardPayParam = getWwPunchCardPayParam(wwPunchCardPayVo);
 
-            WwPunchCardResData wwPunchCardResData = payBizz.webankWechatPunchCardPay(ryMchVo, wwPunchCardPayParam);
+            WwPunchCardResData wwPunchCardResData = payBizz.webankWechatPunchCardPay(ryMchVo, wwPunchCardPayParam,wwPunchCardPayVo.getOrderType());
 
             Map<String, Object> map = BeanMapUtils.toMap(wwPunchCardResData);
 
@@ -149,7 +149,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             //初始化业务参数
             WaPunchCardPayParam waPunchCardPayParam = getWaPunchCardPayParam(waPunchCardVo);
 
-            WaPunchCardPayResData resData = payBizz.webankAliPunchCardPay(ryMchVo, waPunchCardPayParam);
+            WaPunchCardPayResData resData = payBizz.webankAliPunchCardPay(ryMchVo, waPunchCardPayParam,waPunchCardVo.getOrderType());
 
             Map<String, Object> map = BeanMapUtils.toMap(resData);
 
@@ -157,7 +157,8 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("orderNo", waPunchCardVo.getOrderNo());
             //容易网交易号
             map.put("payNo", resData.getOutTradeNo());
-
+            //交易金额
+            map.put("totalAmount",waPunchCardVo.getTotalAmount());
             log.info("微众支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {

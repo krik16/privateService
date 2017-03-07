@@ -116,7 +116,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(ryMchVo, aliPunchCardPayReqData, aliConfigure);
+            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(ryMchVo, aliPunchCardPayReqData, aliConfigure,aliPunchCardPayVo.getOrderType());
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradePayResponse);
 
@@ -124,8 +124,8 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("orderNo", aliPunchCardPayVo.getOrderNo());
             //容易网交易号
             map.put("payNo", alipayTradePayResponse.getOutTradeNo());
-
-
+            //设置支付金额
+            map.put("totalAmount",aliPunchCardPayVo.getTotalAmount());
             log.info("支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {

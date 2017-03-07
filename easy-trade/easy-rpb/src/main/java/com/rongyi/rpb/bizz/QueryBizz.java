@@ -11,6 +11,7 @@ import com.rongyi.pay.core.wechat.model.RefundQueryResData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.unit.PayConfigInitUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,8 @@ public class QueryBizz {
 
     @Autowired
     PaymentService paymentService;
+    @Autowired
+    PayConfigInitUnit payConfigInitUnit;
     /**
      * 微众微信刷卡支付订单查询
      *
@@ -87,6 +90,10 @@ public class QueryBizz {
      */
     public WaQueryTradeResData weBankAliPunchCardPayQueryOrder(String orderNo, Integer payType, String weBankMchNo) {
 
+        //初始化设置支付宝ticket
+        payConfigInitUnit.initAliTicket();
+
+
         PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 payType);
 
@@ -107,6 +114,9 @@ public class QueryBizz {
      * @return PunchCardPayQueryResData
      */
     public WaRefundQueryResData webankAliPunchCardRefundQuery(String orderNo, Integer payType, String weBankMchNo) {
+
+        //初始化设置支付宝ticket
+        payConfigInitUnit.initAliTicket();
 
         PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 payType);

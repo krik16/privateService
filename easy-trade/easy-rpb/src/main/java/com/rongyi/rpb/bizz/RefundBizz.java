@@ -18,6 +18,7 @@ import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
+import com.rongyi.rpb.unit.PayConfigInitUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,8 @@ public class RefundBizz {
     SaveUnit saveUnit;
     @Autowired
     InitEntityUnit initEntityUnit;
+    @Autowired
+    PayConfigInitUnit payConfigInitUnit;
 
     /**
      * 微信支付退款
@@ -89,6 +92,7 @@ public class RefundBizz {
      * @return AlipayTradeRefundResponse
      */
     public AlipayTradeRefundResponse aliRefund(String orderNo, Integer refundFee, String refundReason, AliConfigure aliConfigure){
+
         //查找订单支付记录
         PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
@@ -171,6 +175,9 @@ public class RefundBizz {
      * @return WwPunchCardRefundResData
      */
     public WaRefundResData webankAliRefund(String orderNo,Integer refundAmount,String webankMchNo){
+        //初始化设置支付宝ticket
+        payConfigInitUnit.initAliTicket();
+
         //查找订单支付记录
         PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
