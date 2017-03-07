@@ -66,6 +66,6 @@ public interface MemberService {
      * @param payDate
      * @return
      */
-    DubboVO pushCreditMsg(Integer platform, String mallId, Integer serviceType, String userId, double payAmount, Date payDate);
+    DubboVO pushCreditMsg(Integer platform, String mallId, Integer serviceType, String userId, String orderNo, double payAmount, Date payDate);
 
 }
