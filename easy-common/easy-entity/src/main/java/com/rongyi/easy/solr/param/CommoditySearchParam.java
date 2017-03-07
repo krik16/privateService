@@ -121,7 +121,7 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.type = type;
 	}
 
-	private Integer serviceId;//微信服务号id
+	private String serviceId;//微信服务号id
 
 	private Integer offset;
 
@@ -476,11 +476,11 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.minStock = minStock;
 	}
 
-	public Integer getServiceId() {
+	public String getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(Integer serviceId) {
+	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
 

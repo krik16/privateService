@@ -40,7 +40,7 @@ public class SubOrderExcelVO {
 
     private Integer status;
 
-    private Integer shopId;
+    private String shopId;
 
     private String sellerAccount;
 
@@ -172,11 +172,11 @@ public class SubOrderExcelVO {
         this.status = status;
     }
 
-    public Integer getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(Integer shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
