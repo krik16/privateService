@@ -33,6 +33,9 @@
 		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
 		<result column="finishTime" property="finishTime" jdbcType="TIMESTAMP" />
+		<result column="rebateDiscountMer" property="rebateDiscountMer" jdbcType="DECIMAL" />
+		<result column="reductionFee" property="reductionFee" jdbcType="DECIMAL" />
+		<result column="hbDiscountMer" property="hbDiscountMer" jdbcType="DECIMAL" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -291,7 +294,24 @@
 		SELECT
 		of.id,
 		of.order_no,
-		of.total_amount,
+		SUM(odf.unit_price * odf.quantity) - SUM(odf.disconnt_fee + odf.order_discount_fee) + of.express_fee AS total_amount,
+		(
+		SELECT
+		SUM(
+		CASE WHEN odf1.discount_amount &lt; odf1.order_coupon_discount THEN  odf1.discount_amount ELSE odf1.order_coupon_discount END
+		)
+		FROM order_detail_form odf1
+		WHERE odf1.order_no = of.order_no and  odf1.rebate_discount_type=1
+		) as rebateDiscountMer ,
+		(
+		SELECT
+		SUM(
+		CASE WHEN odf2.discount_amount &lt; odf2.coupon_discount THEN  odf2.discount_amount ELSE odf2.coupon_discount END
+		)
+		FROM order_detail_form odf2
+		WHERE odf2.order_no = of.order_no and  odf1.coupon_discount_type=1
+		) as hbDiscountMer ,
+		of.reduction_fee reductionFee,
 		sum(odf.quantity) totalQuantity,
 		oe.create_at finishTime,
 		si.shop_name,
@@ -336,6 +356,8 @@
 		tor.order_no,
 		tso.id subOrderId,
 		tso.unit_price,
+		case tor.coupon_discount_type when 1 then ROUND(tor.hb_discount / (tor.code_num * 100), 2) else 0 end AS hbDiscountMer,
+		case tor.coupon_discount_type when 1 then ROUND(tor.rebate_discount / (tor.code_num * 100), 2) else 0 end AS rebateDiscountMer,
 		tso.unit_count,
 		tuo.coupon_id,
 		tuo.mall_id mall_mid,
