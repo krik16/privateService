@@ -1,5 +1,8 @@
 package com.rongyi.easy.rpb.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -48,5 +51,9 @@ public class RyMchVo implements Serializable {
 
     public void setOrgChannel(Byte orgChannel) {
         this.orgChannel = orgChannel;
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
