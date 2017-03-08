@@ -1,5 +1,6 @@
 package com.rongyi.rss.rpb;
 
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WaPunchCardVo;
 import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
@@ -19,7 +20,7 @@ public interface IweBankService {
      * @param wwPunchCardPayVo 刷卡支付业务参数
      * @return map
      */
-    Map<String,Object> webankWechatPunchCardPay(RyMchVo ryMchVo,WwPunchCardPayVo wwPunchCardPayVo);
+    Map<String,Object> webankWechatPunchCardPay(RyMchVo ryMchVo,WwPunchCardPayVo wwPunchCardPayVo) throws TradePayException;
 
     /**
      * 微众微信支付查询
@@ -29,7 +30,7 @@ public interface IweBankService {
      * @param weBankMchNo 订单号
      * @return map
      */
-    Map<String,Object> weBankWechatPayQuery(RyMchVo ryMchVo,String orderNo,Integer payType,String weBankMchNo);
+    Map<String,Object> weBankWechatPayQuery(RyMchVo ryMchVo,String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
 
 
     /**
@@ -40,7 +41,7 @@ public interface IweBankService {
      * @param weBankMchNo 微众商户号
      * @return map
      */
-    Map<String,Object> webankWechatRefund(String orderNo,Integer refundAmount,String refundReason,String weBankMchNo);
+    Map<String,Object> webankWechatRefund(String orderNo,Integer refundAmount,String refundReason,String weBankMchNo) throws TradePayException;
 
     /**
      * 微众银行微信退款查询
@@ -49,7 +50,7 @@ public interface IweBankService {
      * @param weBankMchNo 微众商户号
      * @return map
      */
-    Map<String,Object> webankWechatRefundQuery(String orderNo,Integer payType,String weBankMchNo);
+    Map<String,Object> webankWechatRefundQuery(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
 
     /**
      * 微众支付宝刷卡支付
@@ -57,7 +58,7 @@ public interface IweBankService {
      * @param waPunchCardVo 刷卡支付业务参数
      * @return map
      */
-    Map<String,Object> webankAliPunchCardPay(RyMchVo ryMchVo,WaPunchCardVo waPunchCardVo);
+    Map<String,Object> webankAliPunchCardPay(RyMchVo ryMchVo,WaPunchCardVo waPunchCardVo) throws TradePayException;
 
     /**
      * 微众支付宝支付查询
@@ -67,7 +68,7 @@ public interface IweBankService {
      * @param weBankMchNo 订单号
      * @return map
      */
-    Map<String,Object> weBankAliPayQuery(RyMchVo ryMchVo,String orderNo,Integer payType,String weBankMchNo);
+    Map<String,Object> weBankAliPayQuery(RyMchVo ryMchVo,String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
 
 
     /**
@@ -78,7 +79,7 @@ public interface IweBankService {
      * @param weBankMchNo 微众商户号
      * @return map
      */
-    Map<String,Object> webankAliRefund(String orderNo,Integer refundAmount,String refundReason,String weBankMchNo);
+    Map<String,Object> webankAliRefund(String orderNo,Integer refundAmount,String refundReason,String weBankMchNo) throws TradePayException;
 
     /**
      * 微众支付宝退款查询
@@ -87,5 +88,5 @@ public interface IweBankService {
      * @param weBankMchNo 微众商户号
      * @return map
      */
-    Map<String,Object> webankAliRefundQuery(String orderNo,Integer payType,String weBankMchNo);
+    Map<String,Object> webankAliRefundQuery(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
 }
