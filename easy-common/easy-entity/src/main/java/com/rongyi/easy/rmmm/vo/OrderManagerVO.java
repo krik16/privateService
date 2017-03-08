@@ -59,6 +59,8 @@ public class OrderManagerVO implements Serializable {
 	private String receiverName;//收件人姓名
 	private String receiverPhone;//收件人电话
 	private String receiverAddress;//收件人地址
+	// 满减金额
+	private BigDecimal reductionFee;
 
 	private List<OrderManagerCommodityVO> orderCommoditys;
 
@@ -361,6 +363,14 @@ public class OrderManagerVO implements Serializable {
 
 	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
 		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
 	}
 
 	@Override

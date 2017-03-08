@@ -170,6 +170,8 @@ public class ParentOrderVO implements Serializable {
 	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
 	private String selfCode;// 自提码
 	private List<CommentVO> comments;//卖家备注列表
+	// 满减金额
+	private BigDecimal reductionFee;
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -974,6 +976,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setBuyerNameByWeixin(String buyerNameByWeixin) {
 		this.buyerNameByWeixin = buyerNameByWeixin;
+	}
+
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
 	}
 
 	@Override
