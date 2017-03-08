@@ -46,6 +46,12 @@ public class OperateCommodityDetailVo implements Serializable{
     private List<String> referencePriceList;//参考价
     private List<String> originalPriceList;//原价
     private List<String> currentPriceList;//现价
+    private String serviceDescription;//售后说明
+
+    private Integer serviceDescriptionId;
+
+    private String serviceDescriptionRemark;
+
 
 
     public String getOriginalPrice() {
@@ -326,5 +332,29 @@ public class OperateCommodityDetailVo implements Serializable{
 
     public void setCurrentPriceList(List<String> currentPriceList) {
         this.currentPriceList = currentPriceList;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public Integer getServiceDescriptionId() {
+        return serviceDescriptionId;
+    }
+
+    public void setServiceDescriptionId(Integer serviceDescriptionId) {
+        this.serviceDescriptionId = serviceDescriptionId;
+    }
+
+    public String getServiceDescriptionRemark() {
+        return serviceDescriptionRemark;
+    }
+
+    public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+        this.serviceDescriptionRemark = serviceDescriptionRemark;
     }
 }

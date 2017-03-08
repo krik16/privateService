@@ -600,6 +600,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
 				", mallServiceIds=" + mallServiceIds +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescription=" + serviceDescription +
+				", serviceDescriptionRemark=" + serviceDescriptionRemark +
 				'}';
 	}
 
