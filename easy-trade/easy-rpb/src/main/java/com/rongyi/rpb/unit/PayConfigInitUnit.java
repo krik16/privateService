@@ -1,5 +1,7 @@
 package com.rongyi.rpb.unit;
 
+import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.WaAccessTokenResData;
@@ -215,15 +217,20 @@ public class PayConfigInitUnit {
      */
     public void initAliTicket(){
         String ticketKey = "aliPayTicket";
+        log.info("aliPayTicketValue={}",redisService.get(ticketKey));
         if(StringUtils.isEmpty(redisService.get(ticketKey))) {
             WaAccessTokenResData waAccessTokenResData = WebankPayUnit.alipayGetToken();
             WaTicketResData waTicketResData = WebankPayUnit.alipayGetTicket(waAccessTokenResData.getAccess_token());
-            WaTicketResData.Ticket ticket = waTicketResData.getTickets().get(0);
-            String ticketValue = ticket.getValue();
-            this.ticket = ticketValue;
-            redisService.set(ticketKey, ticketValue);
-            redisService.expireAt(ticketKey, 50 * 3600);
-            this.init();
+            if(waTicketResData.getTickets() != null) {
+                WaTicketResData.Ticket ticket = waTicketResData.getTickets().get(0);
+                String ticketValue = ticket.getValue();
+                this.ticket = ticketValue;
+                redisService.set(ticketKey, ticketValue);
+                redisService.expireAt(ticketKey, 50 * 3600);
+                this.init();
+            }else{
+                throw new TradePayException(ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getValueStr());
+            }
         }
     }
 }
