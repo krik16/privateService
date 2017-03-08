@@ -1,11 +1,14 @@
 package com.rongyi.easy.rpb.vo;
 
+import java.io.Serializable;
+
 /**
  * 微众微信刷卡支付业务参数
  * conan
  * 2017/2/27 13:49
  **/
-public class WwPunchCardPayVo {
+public class WwPunchCardPayVo  implements Serializable {
+    private static final long serialVersionUID = -216710226969259204L;
     //商户号 必填
     private String merchantCode ;
 

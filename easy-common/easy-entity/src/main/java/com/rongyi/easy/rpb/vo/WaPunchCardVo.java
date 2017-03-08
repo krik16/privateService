@@ -1,11 +1,14 @@
 package com.rongyi.easy.rpb.vo;
 
+import java.io.Serializable;
+
 /**
  * 微众支付宝刷卡支付
  * conan
  * 2017/3/6 14:15
  **/
-public class WaPunchCardVo {
+public class WaPunchCardVo implements Serializable{
+    private static final long serialVersionUID = -5841080118584970083L;
     //商户号  必传
     private String wbMerchantId;
 
