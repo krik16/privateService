@@ -72,7 +72,7 @@ public class ExportOsmOrderExcel {
                 LOGGER.info("导出的商品订单数 szie={}",orderForms.size());
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 27; j++) {
+                    for (int j = 0; j <= 29; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
@@ -91,23 +91,27 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(8).setCellValue(this.convertRebateAmount(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
                     sheet.getRow(i + 2).getCell(9).setCellValue(this.convertRebateType(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
                     sheet.getRow(i + 2).getCell(10).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
-                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
-                    sheet.getRow(i + 2).getCell(12).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(13).setCellValue(convertActivityType(vo.getActivityType()));
-                    sheet.getRow(i + 2).getCell(14).setCellValue(vo.getActivityName());
-                    sheet.getRow(i + 2).getCell(15).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(16).setCellValue(convertActivityStatus(vo.getActivityStatus()));
-                    sheet.getRow(i + 2).getCell(17).setCellValue(convertOrderSource(vo.getOrderSource(),vo.getOrderSourceForWeiXin(),vo.getOrderChannel()));
-                    sheet.getRow(i + 2).getCell(18).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(19).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    // 新增满减+满减平台  start
+                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getReductionFee() == null ? "0" : vo.getReductionFee().toString());
+                    sheet.getRow(i + 2).getCell(12).setCellValue("商户");
+                    // end
+                    sheet.getRow(i + 2).getCell(13).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
+                    sheet.getRow(i + 2).getCell(14).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
+                    sheet.getRow(i + 2).getCell(15).setCellValue(convertActivityType(vo.getActivityType()));
+                    sheet.getRow(i + 2).getCell(16).setCellValue(vo.getActivityName());
+                    sheet.getRow(i + 2).getCell(17).setCellValue(convertStatus(vo.getStatus()));
+                    sheet.getRow(i + 2).getCell(18).setCellValue(convertActivityStatus(vo.getActivityStatus()));
+                    sheet.getRow(i + 2).getCell(19).setCellValue(convertOrderSource(vo.getOrderSource(),vo.getOrderSourceForWeiXin(),vo.getOrderChannel()));
+                    sheet.getRow(i + 2).getCell(20).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(21).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
                     sheet.getRow(i + 2).getCell(20).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(21).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(23).setCellValue(convertPaymentId(vo.getPaymentId()));
-                    sheet.getRow(i + 2).getCell(24).setCellValue(vo.getReceiverName());
-                    sheet.getRow(i + 2).getCell(25).setCellValue(vo.getReceiverPhone());
-                    sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverAddress());
-                    sheet.getRow(i + 2).getCell(27).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(23).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(24).setCellValue(convertPaymentId(vo.getPaymentId()));
+                    sheet.getRow(i + 2).getCell(25).setCellValue(vo.getReceiverName());
+                    sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverPhone());
+                    sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverAddress());
+                    sheet.getRow(i + 2).getCell(28).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
 
