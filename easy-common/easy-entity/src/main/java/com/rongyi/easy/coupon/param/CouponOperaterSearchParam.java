@@ -20,6 +20,15 @@ public class CouponOperaterSearchParam implements Serializable {
     private Integer startIndex;
     private String wechatAppId;//微信 appid
     private int isShow;// 1 显示中 2 隐藏
+    private String createBy;
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
     public Integer getShowChannel() {
         return showChannel;

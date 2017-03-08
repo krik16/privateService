@@ -42,4 +42,10 @@ public class BAuthorities implements Serializable{
     public void setValue(String value) {
         this.value = value == null ? null : value.trim();
     }
+
+	@Override
+	public String toString() {
+		return "BAuthorities [id=" + id + ", name=" + name + ", system="
+				+ system + ", value=" + value + "]";
+	}
 }
