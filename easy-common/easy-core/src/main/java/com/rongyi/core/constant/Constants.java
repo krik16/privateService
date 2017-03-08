@@ -1098,4 +1098,6 @@ public interface Constants {
         Integer BSOMS = 5;
         Integer POS = 6;
     }
+
+    String USERCENTER_API_URL = "usercenter.url";
 }
