@@ -12,6 +12,7 @@
 		<module>easy-virtual-account</module>
 		<module>easy-anti-cheat</module>
 		<module>easy-settle</module>
+		<module>pay-core</module>
 		
 	</modules>
 	<properties>
@@ -50,6 +51,11 @@
 			<dependency>
 				<groupId>com.rongyi</groupId>
 				<artifactId>easy-rss</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.rongyi</groupId>
+				<artifactId>pay-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -324,6 +330,11 @@
 				<artifactId>logback-ext-spring</artifactId>
 				<version>0.1.2</version>
 			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>1.7.7</version>
+			</dependency>
 			<!-- logback end -->
 			<dependency>
 				<groupId>c3p0</groupId>
@@ -408,12 +419,6 @@
 				<artifactId>json-lib</artifactId>
 				<version>2.3</version>
 				<classifier>jdk15</classifier>
-			</dependency>
-
-			<dependency>
-				<groupId>dom4j</groupId>
-				<artifactId>dom4j</artifactId>
-				<version>1.6.1</version>
 			</dependency>
 
 			<dependency>
@@ -531,11 +536,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.drools</groupId>
-				<artifactId>drools-spring</artifactId>
-				<version>${drools.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.drools</groupId>
 				<artifactId>drools-persistence-jpa</artifactId>
 				<version>${drools.version}</version>
 			</dependency>
@@ -596,6 +596,23 @@
 				<groupId>org.jboss.netty</groupId>
 				<artifactId>netty</artifactId>
 				<version>3.2.5.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom</artifactId>
+				<version>1.1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.2.4</version>
 			</dependency>
 
 		</dependencies>

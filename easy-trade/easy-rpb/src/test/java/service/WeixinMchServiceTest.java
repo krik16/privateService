@@ -1,7 +1,6 @@
 package service;
 
 import base.BaseTest;
-import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.rpb.service.WeixinMchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;

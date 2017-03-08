@@ -26,4 +26,10 @@
 	<dubbo:reference interface="com.rongyi.rss.mallshop.order.ROAOrderFormServiceWithCouponInfo" id="rOAOrderFormServiceWithCouponInfoImpl"  version="${dubbo.version}" check="false"/>
 	 <!--一分钱支付支付结果通知地址 -->
 	 <dubbo:reference interface="com.rongyi.rss.malllife.service.welfare.IWelfareService" id="iWelfareService"  version="${dubbo.version}" check="false"/>
-</beans>  
+
+    <!--redis服务-->
+    <dubbo:reference interface="com.rongyi.rss.malllife.service.IRedisService" id="redisService"  version="${dubbo.version}" check="false"/>
+
+    <!--容易网入住商户信息接口-->
+    <dubbo:reference interface="com.rongyi.rss.lightning.RoaRyMchAppService" id="roaRyMchAppService"  version="${dubbo.version}" check="false"/>
+</beans>

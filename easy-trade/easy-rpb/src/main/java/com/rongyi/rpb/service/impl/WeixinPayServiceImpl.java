@@ -1,6 +1,6 @@
 package com.rongyi.rpb.service.impl;
 
-import com.rongyi.core.Exception.TradeException;
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.third.md5.Md5Util;
@@ -251,7 +251,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
                 }
                 result = true;
             }
-        } catch (TradeException e) {
+        } catch (TradePayException e) {
             LOGGER.warn(e.getMessage());
             e.printStackTrace();
         } catch (Exception e) {

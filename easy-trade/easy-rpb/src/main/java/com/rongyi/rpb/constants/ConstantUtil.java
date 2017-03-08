@@ -102,8 +102,15 @@ public interface ConstantUtil {
 //		  String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
 
 		public static String  WEIXIN_NOTIFY_URL = "http://" + NOTIFY_URL.outernetAddress + "/v5/WebPageAlipay/weixin/notify_url.htm";//支付成功异步通知接口
-		
 
-		
+
+	}
+
+	interface NOTIFY_ADDRESS_V6{
+		//V6版本微信支付成功异步通知接口(2017-02-16时间之后对接的支付功能使用此异步通知地址)
+		String WEIXIN_NOTIFY_URL_V6 = "http://" + NOTIFY_URL.outernetAddress + "/v6/wechat/pay/notify";
+
+		String ALI_NOTIFY_URL_V6 = "http://" + NOTIFY_URL.outernetAddress + "/v6/ali/pay/notify";
+
 	}
 }

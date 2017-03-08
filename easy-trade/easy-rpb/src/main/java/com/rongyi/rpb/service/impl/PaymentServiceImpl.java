@@ -526,9 +526,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         Map<String, String> map = new HashMap<>();
         try {
             this.getBaseDao().insertBySql(PAYMENTENTITY_NAMESPACE + ".insert", paymentEntity);
-            map.put("message", "成功插入返回的message数据！");
         } catch (Exception e) {
-            map.put("message", e.getMessage());
             LOGGER.error(e.getMessage());
         }
         return map;
@@ -809,5 +807,24 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         map.put("tradeType", tradeType);
         map.put("status", status);
         return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoAndOrderNo", map);
+    }
+
+    @Override
+    public PaymentEntity selectByOrderNoAndPayChannelWithLock(String orderNo, Integer payChannel) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderNo", orderNo);
+        map.put("payChannel", payChannel);
+        PaymentEntity paymentEntity =  this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNoAndPayChannelWithLock", map);
+        return (paymentEntity != null && paymentEntity.getId() != null ) ? paymentEntity : null;
+    }
+
+    @Override
+    public PaymentEntity selectByPayNoWithLock(String payNo, Integer payChannel, Integer tradeType, Integer status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("payNo", payNo);
+        params.put("payChannel", payChannel);
+        params.put("tradeType", tradeType);
+        params.put("status", status);
+        return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoWithLock", params);
     }
 }

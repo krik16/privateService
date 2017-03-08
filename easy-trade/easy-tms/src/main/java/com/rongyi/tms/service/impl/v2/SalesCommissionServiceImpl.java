@@ -192,6 +192,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
      */
     @Override
     public int countCommission(Map<String, Object> map) {
+        logger.info("service countCommission start map={}", map);
+        if (map.containsKey("status")) {
+            map.put("statuses", convertToStatus(Integer.valueOf(map.get("status").toString()), Integer.valueOf(map.get("searchType").toString())));
+        }
         int totalCount = 0;
         if (ConstantEnum.COMMISSION_TYPE_0.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
             totalCount = this.getBaseDao().count(NAMESPACE + ".countSalesCommissionExpand", map);
