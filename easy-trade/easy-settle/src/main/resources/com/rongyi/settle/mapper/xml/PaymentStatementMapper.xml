@@ -842,7 +842,7 @@
 			CASE WHEN odf1.discount_amount &lt; (odf1.order_coupon_discount + odf1.coupon_discount) THEN  odf1.discount_amount
 			ELSE odf1.order_coupon_discount + odf1.coupon_discount END
 			)
-		FROM order_detail_form odf1
+		FROM ry_osm.order_detail_form odf1
 		WHERE odf1.order_no = OF.order_no and  (odf1.coupon_discount_type=0 OR odf1.rebate_discount_type=0)
 		) as hb_amount_ope ,
 		(
@@ -851,7 +851,7 @@
 		CASE WHEN odf2.discount_amount &lt; (odf2.order_coupon_discount + odf2.coupon_discount) THEN  odf2.discount_amount
 		ELSE odf2.order_coupon_discount + odf2.coupon_discount END
 		)
-		FROM order_detail_form odf2
+		FROM ry_osm.order_detail_form odf2
 		WHERE odf2.order_no = OF.order_no and  (odf2.coupon_discount_type=1 OR odf2.rebate_discount_type=1)
 		) as hb_amount_mer ,
 		OF.reduction_fee
@@ -903,7 +903,7 @@
 				CASE WHEN odf1.discount_amount &lt; (odf1.order_coupon_discount + odf1.coupon_discount) THEN  odf1.discount_amount
 				ELSE odf1.order_coupon_discount + odf1.coupon_discount END
 			)
-			FROM order_detail_form odf1
+			FROM ry_osm.order_detail_form odf1
 			WHERE odf1.order_no = A.order_no and  (odf1.coupon_discount_type=0 OR odf1.rebate_discount_type=0)
 			) as coupon_discount ,
 			(
@@ -912,7 +912,7 @@
 				CASE WHEN odf2.discount_amount &lt; (odf2.order_coupon_discount + odf2.coupon_discount) THEN  odf2.discount_amount
 				ELSE odf2.order_coupon_discount + odf2.coupon_discount END
 			)
-			FROM order_detail_form odf2
+			FROM ry_osm.order_detail_form odf2
 			WHERE odf2.order_no = A.order_no and  (odf2.coupon_discount_type=1 OR odf2.rebate_discount_type=1)
 			) as coupon_discount_mer ,
 			A.score_discount + A.order_score_discount AS score_discount,

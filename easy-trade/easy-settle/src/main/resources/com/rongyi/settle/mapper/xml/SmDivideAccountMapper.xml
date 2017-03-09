@@ -300,7 +300,7 @@
 		SUM(
 		CASE WHEN odf1.discount_amount &lt; odf1.order_coupon_discount THEN  odf1.discount_amount ELSE odf1.order_coupon_discount END
 		)
-		FROM order_detail_form odf1
+		FROM ry_osm.order_detail_form odf1
 		WHERE odf1.order_no = of.order_no and  odf1.rebate_discount_type=1
 		) as rebateDiscountMer ,
 		(
@@ -308,7 +308,7 @@
 		SUM(
 		CASE WHEN odf2.discount_amount &lt; odf2.coupon_discount THEN  odf2.discount_amount ELSE odf2.coupon_discount END
 		)
-		FROM order_detail_form odf2
+		FROM ry_osm.order_detail_form odf2
 		WHERE odf2.order_no = of.order_no and  odf1.coupon_discount_type=1
 		) as hbDiscountMer ,
 		of.reduction_fee reductionFee,
