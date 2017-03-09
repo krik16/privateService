@@ -424,6 +424,7 @@
         <if test="payChannel != null">
             and pay_channel =#{payChannel,jdbcType=INTEGER}
         </if>
+        limit 0,1
 
     </select>
 

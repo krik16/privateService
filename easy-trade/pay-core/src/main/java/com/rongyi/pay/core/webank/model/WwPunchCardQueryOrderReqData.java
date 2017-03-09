@@ -8,6 +8,7 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class WwPunchCardQueryOrderReqData extends BaseData{
 
+    private static final long serialVersionUID = 6948350933476316522L;
     //商户号 必填
     private String merchant_code;
 

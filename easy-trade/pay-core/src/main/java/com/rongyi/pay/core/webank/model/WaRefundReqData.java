@@ -9,6 +9,7 @@ import java.math.BigDecimal;
  * Created by sujuan on 2017/3/2.
  */
 public class WaRefundReqData extends BaseData{
+    private static final long serialVersionUID = 3998479817379508506L;
     //商户号 必传
     private String wbMerchantId;
 

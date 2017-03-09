@@ -7,6 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/3/2.
  */
 public class WaRefundQueryReqData extends BaseData{
+    private static final long serialVersionUID = -4137219746511015492L;
     //商户号 必传
     private String wbMerchantId ;
 

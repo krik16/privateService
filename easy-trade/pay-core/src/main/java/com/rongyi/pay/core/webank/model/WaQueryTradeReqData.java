@@ -7,6 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/3/1.
  */
 public class WaQueryTradeReqData extends BaseData{
+    private static final long serialVersionUID = -4957790191056499L;
     //商户号
     private String wbMerchantId;
 

@@ -7,6 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/3/1.
  */
 public class AlipayCommonResData extends BaseData{
+    private static final long serialVersionUID = -4266835388463531303L;
     //请求结果码
     private String code;
 

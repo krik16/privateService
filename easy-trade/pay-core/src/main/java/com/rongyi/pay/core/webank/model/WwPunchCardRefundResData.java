@@ -10,6 +10,7 @@ import java.math.BigDecimal;
  */
 public class WwPunchCardRefundResData extends BaseData{
 
+    private static final long serialVersionUID = 8548975811260344972L;
     //结果集
     private Result result;
 

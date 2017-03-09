@@ -344,7 +344,5 @@ public class ParamUnit {
         checkWebankMerchatCode(reqData.getWbMerchantId());
         if(StringUtils.isEmpty(reqData.getOrderId())&&StringUtils.isEmpty(reqData.getTradeNo()))
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderId");
-        if(StringUtils.isEmpty(reqData.getOutRequestNo()))
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "outRequestNo");
     }
 }

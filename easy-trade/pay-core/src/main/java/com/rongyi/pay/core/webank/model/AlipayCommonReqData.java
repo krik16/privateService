@@ -2,16 +2,14 @@ package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
-import com.rongyi.pay.core.webank.util.Signature;
 import com.rongyi.pay.core.wechat.util.RandomStringGenerator;
-
-import java.util.ArrayList;
 
 /**
  * 微众支付宝公共请求参数
  * Created by sujuan on 2017/3/3.
  */
 public class AlipayCommonReqData extends BaseData{
+    private static final long serialVersionUID = 7120930794279628735L;
     //32位随机码
     private String nonce ;
 

@@ -14,7 +14,7 @@ public class WwPunchCardPayParam extends BaseData{
     private String merchantCode ;
 
     //终端号 必填
-    private String terminalCode ;
+    private String terminalCode = "web";
 
     //商户订单号 必填
     private String orderNo;

@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -56,10 +57,15 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("orderNo", wwPunchCardPayVo.getOrderNo());
             //容易网交易号
             map.put("payNo", wwPunchCardResData.getTerminal_serialno());
+            //微信交易号
+            map.put("tradeNo", wwPunchCardResData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",wwPunchCardPayVo.getAmount());
 
             log.info("微众微信刷卡支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
+            log.error("微众微信刷卡支付失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众微信刷卡支付失败,e={}", e.getMessage(), e);
@@ -81,12 +87,19 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", resData.getTerminal_serialno());
+            //微信流水号
+            map.put("tradeNo", resData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",new BigDecimal(resData.getTotal_fee()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //交易状态
+            map.put("tradeStatus",ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
             log.info("微众微信刷卡支付查询结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("微众微信刷卡支付查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信刷卡查询失败,e={}", e.getMessage(), e);
+            log.error("微众微信刷卡支付查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信刷卡查询异常,e={}", e.getMessage(), e);
@@ -107,6 +120,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("tradeNo",resData.getRefundid());
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("微众微信退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众微信退款失败,e={}", e.getMessage(), e);
@@ -128,8 +142,15 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("payNo", resData.getPayNo());
             //微众银行退款单号
             map.put("tradeNo",resData.getRefundid());
+
+            //交易金额
+            map.put("totalAmount",resData.getTotal_fee().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",resData.getRefund_fee().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            map.put("refundStatus","SUCCESS");
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("微众微信退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众微信退款失败,e={}", e.getMessage(), e);
@@ -162,6 +183,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             log.info("微众支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
+            log.error("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
@@ -182,8 +204,17 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", resData.getOutTradeNo());
+            //容易网交易号
+            map.put("tradeNo", resData.getTradeNo());
+            //容易网交易号
+            map.put("tradeStatus","SUCCESS");
+            //交易金额
+            map.put("totalAmount",new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+
+            log.info("微众支付宝支付查询结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
@@ -204,9 +235,14 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             //容易网交易号
             map.put("payNo", resData.getOutTradeNo());
             //微众银行退款单号
-            map.put("tradeNo",resData.getTradeNo());
+            map.put("tradeNo", resData.getTradeNo());
+            //交易金额
+            map.put("totalAmount",new BigDecimal(resData.getRefundFee()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+
+            log.info("微众支付宝支付退款结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
@@ -228,8 +264,14 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("payNo", resData.getOutTradeNo());
             //微众银行退款单号
             map.put("tradeNo",resData.getTradeNo());
+            //交易金额
+            map.put("totalAmount",new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",new BigDecimal(resData.getRefundAmount()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            map.put("refundStatus","SUCCESS");
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
             log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
@@ -243,6 +285,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
     //设置微众微信刷卡支付业务参数
     private WwPunchCardPayParam getWwPunchCardPayParam(WwPunchCardPayVo wwPunchCardPayVo) {
         WwPunchCardPayParam wwPunchCardPayParam = new WwPunchCardPayParam();
+        wwPunchCardPayParam.setAmount(new BigDecimal(wwPunchCardPayVo.getAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         BeanUtils.copyProperties(wwPunchCardPayVo, wwPunchCardPayParam);
         return wwPunchCardPayParam;
     }
@@ -251,6 +294,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
     private WaPunchCardPayParam getWaPunchCardPayParam(WaPunchCardVo waPunchCardVo) {
         WaPunchCardPayParam waPunchCardPayParam = new WaPunchCardPayParam();
         BeanUtils.copyProperties(waPunchCardVo, waPunchCardPayParam);
+        waPunchCardPayParam.setTotalAmount(new BigDecimal(waPunchCardVo.getTotalAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         waPunchCardPayParam.setOrderId(waPunchCardVo.getOrderNo());
         return waPunchCardPayParam;
     }

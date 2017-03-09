@@ -7,6 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/3/3.
  */
 public class WaAccessTokenResData extends BaseData{
+    private static final long serialVersionUID = -4582086507801106050L;
     //请求结果码
     private String code;
 

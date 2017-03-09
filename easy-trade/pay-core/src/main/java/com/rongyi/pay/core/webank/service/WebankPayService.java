@@ -7,7 +7,6 @@ import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.rongyi.pay.core.webank.util.Util;
-import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

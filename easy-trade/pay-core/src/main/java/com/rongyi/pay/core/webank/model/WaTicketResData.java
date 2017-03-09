@@ -9,6 +9,7 @@ import java.util.List;
  * Created by sujuan on 2017/3/6.
  */
 public class WaTicketResData extends BaseData{
+    private static final long serialVersionUID = 138828216372188128L;
     //返回结果码
     private String code;
 

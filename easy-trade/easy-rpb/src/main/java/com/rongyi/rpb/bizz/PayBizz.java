@@ -259,7 +259,7 @@ public class PayBizz {
         Integer totalFee = waPunchCardPayParam.getTotalAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waPunchCardPayParam.getOrderId(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType);
 
         //支付流水号设置为微众商户单号
         waPunchCardPayParam.setOrderId(paymentEntity.getPayNo());
