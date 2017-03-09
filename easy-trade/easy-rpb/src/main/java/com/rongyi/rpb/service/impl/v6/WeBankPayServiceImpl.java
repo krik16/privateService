@@ -118,6 +118,11 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             map.put("payNo", resData.getPayNo());
             //微众银行退款单号
             map.put("tradeNo",resData.getRefundid());
+            //交易金额
+            map.put("totalAmount",resData.getTotal_fee().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",resData.getRefund_fee().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+
             return map;
         }  catch (WebankException | ParamNullException e) {
             log.error("微众微信退款失败,e={}", e.getMessage(), e);
@@ -146,7 +151,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             //交易金额
             map.put("totalAmount",resData.getTotal_fee().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
             //退款金额
-            map.put("refundAmount",resData.getRefund_fee().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            map.put("refundAmount", resData.getRefund_fee().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             map.put("refundStatus","SUCCESS");
             return map;
         }  catch (WebankException | ParamNullException e) {

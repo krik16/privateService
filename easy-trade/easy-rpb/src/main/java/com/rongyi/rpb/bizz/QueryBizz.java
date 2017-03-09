@@ -130,9 +130,15 @@ public class QueryBizz {
         if (oldPaymentEntity == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
+        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
+                payType);
+        if(refundPaymentEntity == null){
+            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
         WaRefundQueryReqData reqData  = new WaRefundQueryReqData();
         reqData.setWbMerchantId(weBankMchNo);
         reqData.setOrderId(oldPaymentEntity.getPayNo());
+        reqData.setOutRequestNo(refundPaymentEntity.getPayNo());
 
         return WebankPayUnit.alipayRefundQuery(reqData);
 

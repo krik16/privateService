@@ -157,14 +157,16 @@ public class RefundBizz {
         refundPaymentEntity.setFinishTime(new Date());
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
-        Integer resultRefundFee = wwPunchCardRefundResData.getRefund_fee().multiply(new BigDecimal(100)).intValue();
         //初始化支付事件记录
         PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(wwPunchCardRefundResData.getOrderid(),wwpunchCardRefundReqData.getTerminal_serialno(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS",resultRefundFee,"","",
+                "SUCCESS",refundAmount,"","",
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+
+        wwPunchCardRefundResData.setRefund_fee(new BigDecimal(refundAmount).divide(new BigDecimal(100),2,BigDecimal.ROUND_HALF_UP));
+        wwPunchCardRefundResData.setTotal_fee(oldPaymentEntity.getAmountMoney());
 
         return wwPunchCardRefundResData;
 
