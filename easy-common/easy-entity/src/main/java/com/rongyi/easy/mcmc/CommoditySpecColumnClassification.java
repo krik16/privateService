@@ -21,6 +21,7 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	private String name;//规格类名
 	private List<ObjectId> parentids;//所有上级id
 	private ObjectId parentid;//直属上级
+	private Integer position;//从1开始
 	
 	//private Integer type;
 	public ObjectId getId() {
@@ -58,6 +59,12 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	}
 	public void setColorType(Integer colorType) {
 		this.colorType = colorType;
+	}
+	public Integer getPosition() {
+		return position;
+	}
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 	
 }

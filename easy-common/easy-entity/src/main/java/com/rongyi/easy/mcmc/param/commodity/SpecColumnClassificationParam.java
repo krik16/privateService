@@ -20,6 +20,7 @@ public class SpecColumnClassificationParam implements Serializable{
 	private String color;//颜色规格项对应的色系
 	private String name;//规格类名
 	private String colorType;// 1:标准色系，2：特殊色系
+	private Integer position;//从1开始
 	private List<SpecColumnClassificationParam> specColumnClassificationParamList;
 	public String getId() {
 		return id;
@@ -52,11 +53,17 @@ public class SpecColumnClassificationParam implements Serializable{
 			List<SpecColumnClassificationParam> specColumnClassificationParamList) {
 		this.specColumnClassificationParamList = specColumnClassificationParamList;
 	}
+	public Integer getPosition() {
+		return position;
+	}
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
 	@Override
 	public String toString() {
 		return "SpecColumnClassificationParam [id=" + id + ", color=" + color
-				+ ", name=" + name + ", colorType=" + colorType
-				+ ", specColumnClassificationParamList="
+				+ ", name=" + name + ", colorType=" + colorType + ", position="
+				+ position + ", specColumnClassificationParamList="
 				+ specColumnClassificationParamList + "]";
 	}
 	
