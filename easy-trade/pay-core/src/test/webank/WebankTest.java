@@ -120,7 +120,7 @@ public class WebankTest {
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WaPunchCardPayParam param = new WaPunchCardPayParam();
         param.setWbMerchantId("107075571030015");
-        param.setAuthCode("280108596765670997");
+        param.setAuthCode("280108596765670998");
         param.setTotalAmount(new BigDecimal("0.01").setScale(2));
         param.setOrderId(getOrderNO());
         param.setSubject("test");
@@ -191,7 +191,7 @@ public class WebankTest {
             configure.setSecret("mJBdgcPLLRYvJzZYmtEz97ekHGZaoGLFallg6JjOXcptcw6xOtU6JceY15sQH8mb");
             configure.setAlipayGetTokenUrl("https://l.test-svrapi.webank.com/api/oauth2/access_token");
             configure.setAlipayGetTicketUrl("https://l.test-svrapi.webank.com/api/oauth2/api_ticket");
-            configure.setTicket("5tDcIzNp7BehUlfLqjvdTPVJy6TKxVGT5IXGqJfxy36HXjrGiBivDb9ewGbtMaZD");
+            configure.setTicket("VghGm11lygUvPVdM3Yy3k6PUsOo50p89Ln4mk93dyEIbTXCxU7Q7HdhPbyl0dhNN");
 
             configure.setAlipayPunchCardPayUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/pay");
             configure.setAlipayQueryTradeUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/querytrade");

@@ -75,6 +75,13 @@ public enum ConstantEnum {
 	WA_PUNCHCARDPAY_SYSERR("20000","微众系统异常"),
 
 	WW_PUNCHCARDPAY_SUCCESS("SUCCESS","支付成功"),
+	WA_TRADESTATUS_00("00","交易处理中"),
+	WA_TRADESTATUS_01("01","交易支付成功"),
+	WA_TRADESTATUS_02("02","交易失败"),
+	WA_TRADESTATUS_03("03","交易创建，等待买家付款"),
+	WA_TRADESTATUS_04("04","未付款订单超时关闭，或支付完成后余额退款"),
+	WA_TRADESTATUS_05("05","交易结束，不可退款"),
+
 	WW_PUNCHCARDPAY_USERPAYING("USERPAYING","用户支付中"),
 
 	WEBANK_PAYEMENT_0("0","未支付"),
