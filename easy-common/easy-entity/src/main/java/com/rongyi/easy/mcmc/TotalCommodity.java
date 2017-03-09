@@ -785,6 +785,86 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		}
 	}
 
+	public void setTotalCommodityFromHaiXinParam(CommodityParam param, SessionUserInfo userInfo) {
+		try {
+			//老的商家后台数据默认是店长发布的商品
+			if(this.getIdentity() == null) {
+				this.setIdentity(Identity.SHOP);
+			}
+			this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
+			this.setName(param.getName());
+			this.setCode(param.getCode());
+			this.setCategory(param.getCategory());
+			this.setCategoryIds(param.getCategoryIds());
+
+			this.setCustomCategoryIds(param.getCustomCategoryIds());
+			this.setDescription(param.getDescription());
+			this.setPostage(param.getPostage());
+			this.setOriginalPrice(param.getOriginalPrice());
+			this.setCurrentPrice(param.getCurrentPrice());
+			this.setPicList(param.getPicList());
+			this.setSupportCourierDeliver(true);
+			this.setSupportSelfPickup(true);
+			switch(param.getDistribution()){
+				//配送方式 1表示到店自提2快递3表示支持两种方式
+				//supportCourierDeliver支持快递发货字段  true 是    false否
+				// supportSelfPickup支持到店自提  true 是    false否
+				case 2:this.setSupportSelfPickup(false);break;
+				case 1:this.setSupportCourierDeliver(false);break;
+				case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+			}
+			this.setFreight(param.getFreight());
+
+			//商家后台修改商品不能改变来源
+			if(this.getId() == null) {
+				this.setSource(0);
+				this.setCreateAt(new Date());
+				this.setCreateBy(userInfo.getId());
+				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);//上架状态:待审核
+			}  else {
+				this.setCreateBy(param.getCreateBy());
+				this.setTerminalType(param.getTerminalType());
+				this.setRegisterAt(param.getRegisterAt());
+				this.setSoldOutAt(param.getSoldOutAt());
+				this.setStatus(param.getStatus());
+			}
+
+			this.setSource(param.getSource());
+			this.setStockStatus(param.getStockStatus());
+			this.setUpdateAt(new Date());
+			this.setUpdateBy(userInfo.getId());
+			this.setPurchaseCount(param.getPurchaseCount());
+			this.setTemplateId(param.getTemplateId());
+			this.setReason(param.getReason());
+			this.setMerchantId(userInfo.getBindingMid());
+			this.setCommodityDetails(param.getCommodityDetails());
+			this.setBrandMid(param.getBrandMid());
+			this.setBrandName(param.getBrandName());
+			this.setAccountType(userInfo.getIdentity());
+			this.setSubheading(param.getSubheading());
+			this.setShelvesType(param.getShelvesType());
+			setFilialeMids(param.getCommoditySpeceParams(), this);
+
+			// 对应商品所属店铺MongoIds
+			setShopMids(param.getCommoditySpeceParams(), this);
+
+			//老的app数据identity为-100
+			// 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
+			if(!(this != null && this.getIdentity() != null && this.getIdentity() == -100)) {
+				this.setIdentity(userInfo.getIdentity());
+			}
+
+			this.setMallServiceIds(param.getServiceIds());
+			this.setOnServiceIds(param.getServiceIds());
+
+			// TODO 海信页面是“商品条形码”，缺少
+
+		} catch (Exception e) {
+			throw new RuntimeException("参数错误");
+		}
+	}
+
 	private boolean isEffectiveMongoId(String id) {
 		return StringUtils.isNotBlank(id) && id.matches("[\\da-zA-Z]{24}");
 	}

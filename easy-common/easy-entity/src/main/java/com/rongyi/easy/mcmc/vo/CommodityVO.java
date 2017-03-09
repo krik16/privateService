@@ -11,6 +11,7 @@ import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.mcmc.param.CommodityParam;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
@@ -1265,6 +1266,66 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setBrandMid(commodity.getBrandMid());
 		vo.setBrandName(commodity.getBrandName());
 		vo.setCommodityModelNo(commodity.getCommodityModelNo());
+		return vo;
+	}
+
+	public CommodityVO getHaiXinCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
+		if(commodity == null) {
+			return null;
+		}
+
+		CommodityVO vo = new CommodityVO();
+		vo.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
+		vo.setCommodityName(commodity.getName());
+		vo.setCommodityCategory(commodity.getCategory());
+		vo.setCommodityDescription(commodity.getDescription());
+		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
+		vo.setCommodityCode(commodity.getCode());
+		vo.setCommodityPicList(commodity.getPicList());
+		vo.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		vo.setFreight(commodity.getFreight());
+		vo.setTerminalType(commodity.getTerminalType());
+		vo.setRegisterAt(commodity.getRegisterAt());
+		vo.setSoldOutAt(commodity.getSoldOutAt());
+		vo.setSource(commodity.getSource());
+		vo.setStockStatus(commodity.getStockStatus());
+		vo.setReason(commodity.getReason());
+		// TODO 商品状态待上架通过定时任务刷新状态给app使用
+		vo.setCommodityStatus(commodity.getStatus());
+		vo.setCommodityCurrentPrice(commodity.getCurrentPrice().toString());
+		vo.setCommodityOriginalPrice(commodity.getOriginalPrice().toString());
+		vo.setPurchaseCount(commodity.getPurchaseCount());
+		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
+		vo.setTemplateId(commodity.getTemplateId());
+		vo.setMallServiceIds(commodity.getMallServiceIds());
+		vo.setOnServiceIds(commodity.getOnServiceIds());
+		vo.setSubheading(commodity.getSubheading());
+		vo.setCommodityDetails(commodity.getCommodityDetails());
+
+		//默认值
+		vo.setBrandId(-1);
+		vo.setShopId("-1");
+		vo.setMallId("-1");
+
+		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
+		vo.setProcessIdentity(userInfo.getIdentity());
+		vo.setMerchantId(userInfo.getBindingMid());
+		if(null ==commodity.getId()){
+			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+		} else {
+			if(null != commodity.getCreateBy()) {
+				vo.setCreate_by(commodity.getCreateBy() + "");
+			}
+			vo.setUpdate_by(userInfo.getId().toString());
+		}
+		vo.setShelvesType(commodity.getShelvesType());
+
+		vo.setBrandMid(commodity.getBrandMid());
+		vo.setBrandName(commodity.getBrandName());
+
+		// TODO 海信页面是“商品条形码”，缺少
+
 		return vo;
 	}
 
