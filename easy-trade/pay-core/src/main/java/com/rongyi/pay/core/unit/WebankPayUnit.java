@@ -105,25 +105,32 @@ public class WebankPayUnit {
         }
     }
 
-    private static void waitUserAlipayPaying(WaPunchCardPayParam param, WaPunchCardPayResData resData) {
-        int retryTimes = 9;
+    private static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param) {
+        return waitUserAlipayPaying(param, 9);
+    }
+
+    private static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param , int retryTimes) {
         boolean result = false;
-        WaQueryTradeResData queryTradeResData ;
+        WaPunchCardPayResData resData ;
+        WaQueryTradeResData queryTradeResData = new WaQueryTradeResData();
         WaQueryTradeReqData reqData = new WaQueryTradeReqData(param.getWbMerchantId(), param.getOrderId());
         LOGGER.info("微众支付宝刷卡支付等待用户输入密码，最多等待{}s,param:{}",retryTimes*retryInterval/1000,param);
         for (int i = 1; i <= retryTimes; i++) {
             try {
                 queryTradeResData = alipayQueryTrade(reqData);
                 LOGGER.info("等待次数times={},WaQueryTradeResData={}", i, queryTradeResData);
-                if (ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(queryTradeResData.getCode())) {
+                if (ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(queryTradeResData.getCode())&&
+                        ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(queryTradeResData.getTradeStatus())) {
                     LOGGER.info("用户密码输入完成，成功支付");
                     result = true;
                     break;
                 }
-//                else if("0".equals(resData.getResult().getErrno())&&!"PAYING".equals(resData.getPayment())){
-//                    throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
-//                }
-                Thread.sleep(retryInterval);
+                else if(!(ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(queryTradeResData.getCode())&&
+                        ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(queryTradeResData.getTradeStatus()))){
+                    throw new WebankException(queryTradeResData.getCode(), queryTradeResData.getMsg());
+                }
+                if(i!=retryTimes)
+                    Thread.sleep(retryInterval);
             } catch (WebankException | ParamNullException e) {
                 throw e;
             } catch (Exception e) {
@@ -140,7 +147,13 @@ public class WebankPayUnit {
             LOGGER.warn("微众支付宝刷卡用户超时未完成支付,需重新支付 orderId:{}", param.getOrderId());
             //调用撤销订单接口
             throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_REVERSE_SUCCESS);
+        }else{
+            resData = new WaPunchCardPayResData();
+            resData.setCode(queryTradeResData.getCode());
+            resData.setMsg(queryTradeResData.getMsg());
+          //  resData.set
         }
+        return null;
     }
 
     /**
@@ -212,8 +225,10 @@ public class WebankPayUnit {
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardRefund(reqData, configure);
             //检查是否退款成功
-            if(resData.getResult() == null || !"0".equals(resData.getResult().getErrno()) || !"1".equals(resData.getRefundment())){
+            if(resData.getResult() == null){
                 throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREFUND_FAIL);
+            }else if(!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())) {
+                throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
             }
         } catch (WebankException | ParamNullException e) {
             throw e;
@@ -259,15 +274,16 @@ public class WebankPayUnit {
             ParamUnit.checkWebankAlipayPunchCardPay(param, configure);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.alipayPunchCardPay(param, configure);
-            //用户支付中  循环查询用户实际支付状态
-            if ("!0".equals(resData.getCode())) {
-                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL);
-            }else if ("0".equals(resData.getCode()) && ConstantEnum.WA_PUNCHCARDPAY_PAYING.getCodeStr().equals(resData.getRetCode())) {
 
-            }else if ("0".equals(resData.getCode()) && ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getCodeStr().equals(resData.getRetCode())) {
+            if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode())) {
+                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL);
+            }else if ( ConstantEnum.WA_PUNCHCARDPAY_PAYING.getCodeStr().equals(resData.getRetCode())) {
+                //用户支付中  循环查询用户实际支付状态
+                resData = waitUserAlipayPaying(param);
+            }else if (ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getCodeStr().equals(resData.getRetCode())) {
                 LOGGER.info("微众返回系统异常 再次调用查询接口查询实际支付状态");
-                throw new Exception();
-            }else if ("0".equals(resData.getCode()) && !ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getRetCode())) {
+                resData = waitUserAlipayPaying(param, 1);
+            }else if (!ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getRetCode())) {
                 throw new WebankException(resData.getRetCode(), resData.getRetMsg());
             }
         } catch (WebankException | ParamNullException e) {
