@@ -1100,4 +1100,5 @@ public interface Constants {
     }
 
     String USERCENTER_API_URL = "usercenter.url";
+    String REDUCTION_API_URL ="reduction.url";
 }
