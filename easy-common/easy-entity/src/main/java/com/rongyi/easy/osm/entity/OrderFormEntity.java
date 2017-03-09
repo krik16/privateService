@@ -114,7 +114,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer userType = 0; // 用户类型，0：容易逛；1：电子会员
     private Integer totalCredit = 0; // 兑换的总积分
     private Integer commodityType = 0; // 商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券类型商品
-    private String mallMid = ""; // 商场ID
+    private String mallMid = ""; // 公众号类型对应的商场ID/店铺ID'
     private String shopMid = ""; // 店铺ID
 
 
@@ -130,6 +130,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal reductionFee;//满减金额
     // 微信下单时对应的公众号类型（商场公众号/店铺公众号，1：商场 4：店铺）
     private Integer serviceType ;
+    private String reductionActivityId;//满减活动Id
+    private String reductionActivityName;//满减活动名称
 
     public Byte getIsAlert() {
         return isAlert;
@@ -985,6 +987,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setReductionFee(BigDecimal reductionFee) {
         this.reductionFee = reductionFee;
+    }
+
+    public String getReductionActivityId() {
+        return reductionActivityId;
+    }
+
+    public void setReductionActivityId(String reductionActivityId) {
+        this.reductionActivityId = reductionActivityId;
+    }
+
+    public String getReductionActivityName() {
+        return reductionActivityName;
+    }
+
+    public void setReductionActivityName(String reductionActivityName) {
+        this.reductionActivityName = reductionActivityName;
     }
 
     @Override

@@ -110,7 +110,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer activityLimitNum;//关联商品的活动限购数
 
-    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4 超级团教育版5
+    private Integer activityType;//商品活动 0：普通、1：闪购、2：特卖、3：秒杀、4：拼团、5：超级团教育版、6：断码好货、8：注册福利
 
     private BigDecimal disconntFee;//商品折扣
 
