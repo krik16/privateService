@@ -445,7 +445,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         List<OrderSettlementTopDto> orderTopDtoList = new ArrayList<>();
         List<OrderSettlementDetailDto> orderDetailDtoList = new ArrayList<>();
 
-        logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
+        logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType()
+        + "cycleStartTime = " + paymentStatement.getCycleStartTime() + "cycleEndTime = " + paymentStatement.getCycleEndTime());
 
         List<Integer> userIds = statementConfigService.getUserIdByConfigId(statementConfig.getId());
         String idStr = CollectionUtil.ListToStringAll(userIds, ",");
