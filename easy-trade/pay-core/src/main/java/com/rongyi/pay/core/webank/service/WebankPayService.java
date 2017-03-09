@@ -7,7 +7,6 @@ import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.rongyi.pay.core.webank.util.Util;
-import com.rongyi.pay.core.wechat.util.RandomStringGenerator;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class WebankPayService {
      * @return 返回结果
      */
     public WwPunchCardResData wechatPunchCardPay(WwPunchCardPayParam reqData, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众微信刷卡支付service");
+        LOGGER.info("微众微信刷卡支付reqData={}",reqData);
         //将参数封装成微众参数
         WwPunchCardReqData punchCardParam = new WwPunchCardReqData(reqData);
         //生成签名
@@ -46,7 +45,7 @@ public class WebankPayService {
      * @throws Exception
      */
     public WwPunchCardResData wechatPunchCardQueryOrder(WwPunchCardQueryOrderReqData reqData, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众微信刷卡支付订单查询 reqData:{},configure:{}", reqData, configure);
+        LOGGER.info("微众微信刷卡支付订单查询 reqData:{}", reqData);
         //生成签名
         String sign = Signature.getWechatSign(reqData, configure.getKey());
         reqData.setSign(sign);
@@ -62,7 +61,7 @@ public class WebankPayService {
      * @return 返回结果
      */
     public WwPunchCardReverseResData wechatPunchCardReverse(WwPunchCardReverseReqData reqData, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众微信刷卡支付撤销订单 reqData:{},configure:{}", reqData, configure);
+        LOGGER.info("微众微信刷卡支付撤销订单 reqData:{}", reqData);
         //生成签名
         String sign = Signature.getWechatSign(reqData, configure.getKey());
         reqData.setSign(sign);
@@ -72,7 +71,7 @@ public class WebankPayService {
     }
 
     public WwPunchCardRefundResData wechatPunchCardRefund(WwpunchCardRefundReqData reqData, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众微信刷卡支付退款 reqData:{},configure:{}",reqData,configure);
+        LOGGER.info("微众微信刷卡支付退款 reqData:{}",reqData);
         //生成签名
         String sign = Signature.getWechatSign(reqData, configure.getKey());
         reqData.setSign(sign);
@@ -82,7 +81,7 @@ public class WebankPayService {
     }
 
     public WwPunchCardRefundResData wechatPunchCardRefundQuery(WwpunchCardRefundReqData reqData, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众微信刷卡支付退款查询 reqData:{},configure:{}",reqData,configure);
+        LOGGER.info("微众微信刷卡支付退款查询 reqData:{}",reqData);
         //生成签名
         String sign = Signature.getWechatSign(reqData, configure.getKey());
         reqData.setSign(sign);
@@ -92,7 +91,7 @@ public class WebankPayService {
     }
 
     public WaPunchCardPayResData alipayPunchCardPay(WaPunchCardPayParam param, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众支付宝刷卡支付 param:{},configure:{}", param, configure);
+        LOGGER.info("微众支付宝刷卡支付 param:{}", param);
         WaPunchCardPayReqData reqData = new WaPunchCardPayReqData(param);
         String urlSuffix = getAliPayUrlSuffix(reqData, configure);
         String result = HttpUtil.sendPostClient(configure.getAlipayPunchCardPayUrl()+urlSuffix, reqData, configure);
@@ -101,7 +100,7 @@ public class WebankPayService {
     }
 
     public WaQueryTradeResData alipayQueryTrade(WaQueryTradeReqData reqData, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众支付宝订单查询 reqData:{},configure:{}",reqData,configure);
+        LOGGER.info("微众支付宝订单查询 reqData:{}",reqData);
         String urlSuffix = getAliPayUrlSuffix(reqData,configure);
         String result = HttpUtil.sendPostClient(configure.getAlipayQueryTradeUrl()+urlSuffix,reqData,configure);
         LOGGER.info("微众支付宝订单查询返回结果 result:{}",result);
@@ -109,7 +108,7 @@ public class WebankPayService {
     }
 
     public WaReverseTradeResData alipayReverseTrade(WaReverseTradeReqData reqData ,WebankConfigure configure) throws Exception {
-        LOGGER.info("微众支付宝撤销订单 reqData:{},configure:{}",reqData,configure);
+        LOGGER.info("微众支付宝撤销订单 reqData:{}",reqData);
         String urlSuffix = getAliPayUrlSuffix(reqData, configure);
         String result = HttpUtil.sendPostClient(configure.getAlipayReverseTradeUrl()+urlSuffix, reqData, configure);
         LOGGER.info("微众支付宝撤销订单返回结果 result:{}",result);
@@ -117,7 +116,7 @@ public class WebankPayService {
     }
 
     public WaRefundResData alipayRefundTrade(WaRefundReqData reqData ,WebankConfigure configure) throws Exception {
-        LOGGER.info("微众支付宝退款 reqData:{},configure:{}",reqData,configure);
+        LOGGER.info("微众支付宝退款 reqData:{}",reqData);
         String urlSuffix = getAliPayUrlSuffix(reqData, configure);
         String result = HttpUtil.sendPostClient(configure.getAlipayRefundUrl()+urlSuffix, reqData, configure);
         LOGGER.info("微众支付宝退款返回结果 result:{}",result);
@@ -125,7 +124,7 @@ public class WebankPayService {
     }
 
     public WaRefundQueryResData alipayRefundTradeQuery(WaRefundQueryReqData reqData ,WebankConfigure configure) throws Exception {
-        LOGGER.info("微众支付宝退款查询 reqData:{},configure:{}",reqData,configure);
+        LOGGER.info("微众支付宝退款查询 reqData:{}",reqData);
         String urlSuffix = getAliPayUrlSuffix(reqData, configure);
         String result = HttpUtil.sendPostClient(configure.getAlipayRefundQueryUrl()+urlSuffix, reqData, configure);
         LOGGER.info("微众支付宝退款查询返回结果 result:{}",result);
@@ -147,7 +146,7 @@ public class WebankPayService {
 
 
     public WaAccessTokenResData alipayGetToken(WebankConfigure configure) throws Exception{
-        LOGGER.info("微众支付宝获取token configure:{}",configure);
+        LOGGER.info("微众支付宝获取token");
         String url = configure.getAlipayGetTokenUrl()+"?app_id="+configure.getAppId()+"&secret="+configure.getSecret()+
                 "&grant_type=client_credential&version=1.0.0";
         String result = HttpUtil.httpGET(url, configure);
@@ -156,21 +155,12 @@ public class WebankPayService {
     }
 
     public WaTicketResData alipayGetTicket(String token, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众支付宝获取ticket token:{},configure:{}",token,configure);
+        LOGGER.info("微众支付宝获取ticket token:{}",token);
         String url = configure.getAlipayGetTicketUrl()+"?app_id="+configure.getAppId()+"&access_token="+token+
                 "&type=SIGN&version=1.0.0";
         String result = HttpUtil.httpGET(url, configure);
         LOGGER.info("微众支付宝获取tikect返回结果 result:{}",result);
         return (WaTicketResData) Util.getObjectFromString(result, WaTicketResData.class);
-    }
-
-    public static void main(String args[]) {
-        WwPunchCardReqData param = new WwPunchCardReqData();
-        param.setAttach("adfafd");
-        param.setSub_appid("45546656465");
-        param.setGoods_tag("");
-        JSONObject jsonObject = JSONObject.fromObject(param);
-        System.out.println(jsonObject.toString());
     }
 
 }

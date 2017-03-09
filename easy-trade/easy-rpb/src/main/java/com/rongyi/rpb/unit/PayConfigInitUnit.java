@@ -1,5 +1,7 @@
 package com.rongyi.rpb.unit;
 
+import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.WaAccessTokenResData;
@@ -9,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Repository;
  * conan
  * 2017/2/27 11:17
  **/
-@Repository
 public class PayConfigInitUnit {
 
     @Autowired
@@ -95,7 +95,7 @@ public class PayConfigInitUnit {
     private WebankConfigure initWwConfigure(){
 
         WebankConfigure configure = WebankConfigure.getInstance();
-        if(StringUtils.isNotEmpty(configure.getKey())) {
+        if(StringUtils.isEmpty(configure.getKey())) {
             log.info("初始化微众银行支付配置");
             configure.setKey(this.webankKey);
             configure.setWechatPunchCardPayUrl(this.wechatPunchCardPayUrl);
@@ -145,56 +145,22 @@ public class PayConfigInitUnit {
         this.wechatPunchCardPayReverseOrderUrl = wechatPunchCardPayReverseOrderUrl;
     }
 
-    public String getWebankKey() {
-        return webankKey;
-    }
-
-    public String getWechatPunchCardPayUrl() {
-        return wechatPunchCardPayUrl;
-    }
-
-    public String getWechatPunchCardPayQueryOrderUrl() {
-        return wechatPunchCardPayQueryOrderUrl;
-    }
-
-    public String getWechatPunchCardPayReverseOrderUrl() {
-        return wechatPunchCardPayReverseOrderUrl;
-    }
-
-    public String getWechatPunchCardRefundUrl() {
-        return wechatPunchCardRefundUrl;
-    }
 
     public void setWechatPunchCardRefundUrl(String wechatPunchCardRefundUrl) {
         this.wechatPunchCardRefundUrl = wechatPunchCardRefundUrl;
-    }
-
-    public String getWechatPunchCardRefundQueryUrl() {
-        return wechatPunchCardRefundQueryUrl;
     }
 
     public void setWechatPunchCardRefundQueryUrl(String wechatPunchCardRefundQueryUrl) {
         this.wechatPunchCardRefundQueryUrl = wechatPunchCardRefundQueryUrl;
     }
 
-    public String getWechatKeyStorePath() {
-        return wechatKeyStorePath;
-    }
 
     public void setWechatKeyStorePath(String wechatKeyStorePath) {
         this.wechatKeyStorePath = wechatKeyStorePath;
     }
 
-    public String getWechatTrustStorePath() {
-        return wechatTrustStorePath;
-    }
-
     public void setWechatTrustStorePath(String wechatTrustStorePath) {
         this.wechatTrustStorePath = wechatTrustStorePath;
-    }
-
-    public String getWechatKeyStorePwd() {
-        return wechatKeyStorePwd;
     }
 
     public void setWechatKeyStorePwd(String wechatKeyStorePwd) {
@@ -209,73 +175,38 @@ public class PayConfigInitUnit {
         this.appId = appId;
     }
 
-    public String getSecret() {
-        return secret;
-    }
-
     public void setSecret(String secret) {
         this.secret = secret;
-    }
-
-    public String getAlipayGetTokenUrl() {
-        return alipayGetTokenUrl;
     }
 
     public void setAlipayGetTokenUrl(String alipayGetTokenUrl) {
         this.alipayGetTokenUrl = alipayGetTokenUrl;
     }
 
-    public String getAlipayGetTicketUrl() {
-        return alipayGetTicketUrl;
-    }
-
     public void setAlipayGetTicketUrl(String alipayGetTicketUrl) {
         this.alipayGetTicketUrl = alipayGetTicketUrl;
     }
 
-    public String getTicket() {
-        return ticket;
-    }
 
-    public void setTicket(String ticket) {
-        this.ticket = ticket;
-    }
-
-    public String getAlipayPunchCardPayUrl() {
-        return alipayPunchCardPayUrl;
-    }
 
     public void setAlipayPunchCardPayUrl(String alipayPunchCardPayUrl) {
         this.alipayPunchCardPayUrl = alipayPunchCardPayUrl;
     }
 
-    public String getAlipayQueryTradeUrl() {
-        return alipayQueryTradeUrl;
-    }
 
     public void setAlipayQueryTradeUrl(String alipayQueryTradeUrl) {
         this.alipayQueryTradeUrl = alipayQueryTradeUrl;
     }
 
-    public String getAlipayReverseTradeUrl() {
-        return alipayReverseTradeUrl;
-    }
 
     public void setAlipayReverseTradeUrl(String alipayReverseTradeUrl) {
         this.alipayReverseTradeUrl = alipayReverseTradeUrl;
-    }
-
-    public String getAlipayRefundUrl() {
-        return alipayRefundUrl;
     }
 
     public void setAlipayRefundUrl(String alipayRefundUrl) {
         this.alipayRefundUrl = alipayRefundUrl;
     }
 
-    public String getAlipayRefundQueryUrl() {
-        return alipayRefundQueryUrl;
-    }
 
     public void setAlipayRefundQueryUrl(String alipayRefundQueryUrl) {
         this.alipayRefundQueryUrl = alipayRefundQueryUrl;
@@ -286,15 +217,20 @@ public class PayConfigInitUnit {
      */
     public void initAliTicket(){
         String ticketKey = "aliPayTicket";
+        log.info("aliPayTicketValue={}",redisService.get(ticketKey));
         if(StringUtils.isEmpty(redisService.get(ticketKey))) {
             WaAccessTokenResData waAccessTokenResData = WebankPayUnit.alipayGetToken();
             WaTicketResData waTicketResData = WebankPayUnit.alipayGetTicket(waAccessTokenResData.getAccess_token());
-            WaTicketResData.Ticket ticket = waTicketResData.getTickets().get(0);
-            String ticketValue = ticket.getValue();
-            this.ticket = ticketValue;
-            redisService.set(ticketKey, ticketValue);
-            redisService.expireAt(ticketKey, 50 * 3600);
-            this.init();
+            if(waTicketResData.getTickets() != null) {
+                WaTicketResData.Ticket ticket = waTicketResData.getTickets().get(0);
+                String ticketValue = ticket.getValue();
+                this.ticket = ticketValue;
+                redisService.set(ticketKey, ticketValue);
+                redisService.expireAt(ticketKey, 50 * 3600);
+                this.init();
+            }else{
+                throw new TradePayException(ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getValueStr());
+            }
         }
     }
 }
