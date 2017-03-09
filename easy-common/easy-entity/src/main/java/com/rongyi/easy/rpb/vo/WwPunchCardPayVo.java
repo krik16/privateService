@@ -16,7 +16,7 @@ public class WwPunchCardPayVo  implements Serializable {
     private String merchantCode ;
 
     //终端号 必填
-    private String terminalCode="defaultNo";
+    private String terminalCode="web";
 
     //商户订单号 必填
     private String orderNo;
