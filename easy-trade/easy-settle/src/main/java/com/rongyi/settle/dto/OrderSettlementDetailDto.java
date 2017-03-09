@@ -391,7 +391,6 @@ public class OrderSettlementDetailDto {
 		vo.setMallName(getMallName());
 		vo.setOrigPrice(getOrigPrice());
 		vo.setPayAmount(getPayAmount());
-		vo.setHbDiscountOpe(getHbDiscountOpe() != null ? getHbDiscountOpe() : 0);
 		vo.setScoreDiscount(getScoreDiscount());
 		vo.setPaymentChannel(getPaymentChannel());
 		if (getPaymentTime() != null) {
@@ -405,13 +404,14 @@ public class OrderSettlementDetailDto {
 		}
 		vo.setBuyerPhone(getBuyerPhone());
 		vo.setOrderSource(getOrderSource());
+		vo.setHbDiscountOpe(getHbDiscountOpe() != null ? getHbDiscountOpe() : 0);
 		vo.setHbDiscountMer(getHbDiscountMer() != null ? getHbDiscountMer() : 0);
-		if(getDiscountAmount() < getHbDiscountMer()){
-			vo.setHbDiscountMer(getDiscountAmount());
-		}
-		if(getDiscountAmount() < getHbDiscountOpe()){
-			vo.setHbDiscountOpe(getDiscountAmount());
-		}
+//		if(getDiscountAmount() < getHbDiscountMer()){
+//			vo.setHbDiscountMer(getDiscountAmount());
+//		}
+//		if(getDiscountAmount() < getHbDiscountOpe()){
+//			vo.setHbDiscountOpe(getDiscountAmount());
+//		}
 		vo.setReductionFee(getReductionFee());
 		return vo;
 	}

@@ -896,7 +896,7 @@
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
-		    B.discount_amount,
+		    A.discount_amount,
 			(
 			SELECT
 				SUM(
