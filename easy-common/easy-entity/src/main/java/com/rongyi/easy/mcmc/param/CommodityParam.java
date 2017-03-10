@@ -28,7 +28,9 @@ public class CommodityParam implements Serializable{
 
 	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 5立即上架
 
-	private String code;//商品编码
+	private String code;//商品编码（海信：条形码）
+
+	private String barCode;//商品编码（海信）
 
 	private String description;//商品描述
 
@@ -57,19 +59,10 @@ public class CommodityParam implements Serializable{
 	private Integer createBy;
 
 
-	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
-	//@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonDeserialize(using=DateJsonDeserializer.class)
-	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date registerAt;//上架时间
-	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	 */
-	//@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonDeserialize(using=DateJsonDeserializer.class)
-	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date soldOutAt;//下架时间
-
-	//private Integer source;//来源
 
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 
@@ -102,6 +95,16 @@ public class CommodityParam implements Serializable{
 	private String brandName;
 
 	private String commodityModelNo;
+
+	private String pass; // 0：不通过  1：通过j
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 
 	public String getBrandMid() {
 		return brandMid;
@@ -195,6 +198,10 @@ public class CommodityParam implements Serializable{
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+	public String getBarCode() { return barCode; }
+
+	public void setBarCode(String barCode) { this.barCode = barCode; }
 
 	public String getDescription() {
 		return description;
