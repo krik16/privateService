@@ -271,7 +271,7 @@ public class PayBizz {
         //支付结果返回金额计算
         Integer totalAmount = new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(), resData.getOutTradeNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
