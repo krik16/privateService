@@ -1265,6 +1265,25 @@ public class Commodity implements  Serializable,Cloneable{
 				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 			}
 		}
+
+
+		// TODO
+		if (CommodityConstants.CommodityType.HAIXIN == vo.getCommodityRange()) {
+			this.setOnServiceIds(vo.getOnServiceIds());
+			this.setRegisterAt(vo.getRegisterAt());
+			this.setSoldOutAt(vo.getSoldOutAt());
+			// TODO 怎么确定值？一般来说，新增的肯定是0的。这个方法只是新增才触发，修改则另外触发其他逻辑
+			this.setSold(0);
+			// TODO 根据逻辑，也可以用原来的逻辑代码
+			this.setStatus(vo.getCommodityStatus());
+			// TODO terminaltype 原逻辑也可以通用
+
+			// TODO isspot很重要，涉及到status的确定，也涉及到前面commodityvo的赋值
+
+			// TODO 1114、1262涉及到type的确定
+
+			// TODO 条形码字段需要新建，vo、totalcommodity也需要新建
+		}
 	}
 
 	public void setActivityInfoToCommodity(GoodsInAppList goods) {

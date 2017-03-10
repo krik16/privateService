@@ -1308,16 +1308,16 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setShopId("-1");
 		vo.setMallId("-1");
 
-		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
-		vo.setProcessIdentity(userInfo.getIdentity());
-		vo.setMerchantId(userInfo.getBindingMid());
+	//	vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
+	//	vo.setProcessIdentity(userInfo.getIdentity());
+	//	vo.setMerchantId(userInfo.getBindingMid());
 		if(null ==commodity.getId()){
-			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+//			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
 		} else {
 			if(null != commodity.getCreateBy()) {
 				vo.setCreate_by(commodity.getCreateBy() + "");
 			}
-			vo.setUpdate_by(userInfo.getId().toString());
+//			vo.setUpdate_by(userInfo.getId().toString());
 		}
 		vo.setShelvesType(commodity.getShelvesType());
 

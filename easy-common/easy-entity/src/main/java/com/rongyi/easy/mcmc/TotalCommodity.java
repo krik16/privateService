@@ -831,20 +831,23 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 
 			this.setSource(param.getSource());
+
+			// TODO 待确定是否是这样的对应关系
+			this.setStock(param.getStock());
 			this.setStockStatus(param.getStockStatus());
 			this.setUpdateAt(new Date());
 			this.setUpdateBy(userInfo.getId());
 			this.setPurchaseCount(param.getPurchaseCount());
 			this.setTemplateId(param.getTemplateId());
-			this.setReason(param.getReason());
+		//	this.setReason(param.getReason());
 			this.setMerchantId(userInfo.getBindingMid());
 			this.setCommodityDetails(param.getCommodityDetails());
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setAccountType(userInfo.getIdentity());
-			this.setSubheading(param.getSubheading());
-			this.setShelvesType(param.getShelvesType());
-			setFilialeMids(param.getCommoditySpeceParams(), this);
+		//	this.setSubheading(param.getSubheading());
+		//	this.setShelvesType(param.getShelvesType());
+		//	setFilialeMids(param.getCommoditySpeceParams(), this);
 
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
