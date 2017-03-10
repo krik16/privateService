@@ -158,7 +158,7 @@ public class RefundBizz {
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("",wwpunchCardRefundReqData.getTerminal_serialno(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("",refundPaymentEntity.getPayNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS",refundAmount,"","",
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,resData.getRefundid());
 
@@ -209,7 +209,7 @@ public class RefundBizz {
 
         Integer resultRefundFee = new BigDecimal(resData.getRefundFee()).multiply(new BigDecimal(100)).intValue();
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(),reqData.getOrderId(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(),refundPaymentEntity.getPayNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS",resultRefundFee,"","",
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
 
