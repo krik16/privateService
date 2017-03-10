@@ -37,7 +37,7 @@ public interface ICommoditySpecColumnService {
 	  * 大运营后台编辑商品规格
 	  * @param param
 	  */
-	 public void editCommoditySpecColumn(SpecColumnParam param);
+	 public void editCommoditySpecColumn(SpecColumnParam param) throws Exception;
 	 /**
 	  * 大运营后台删除商品规格
 	  * @param commoditySpecId
