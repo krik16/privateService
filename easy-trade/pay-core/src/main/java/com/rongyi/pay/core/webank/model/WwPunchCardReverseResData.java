@@ -7,6 +7,7 @@ import com.rongyi.pay.core.util.BaseData;
  * Created by sujuan on 2017/2/24.
  */
 public class WwPunchCardReverseResData extends BaseData{
+    private static final long serialVersionUID = -1820246793692451769L;
     //请求结果
     private Result result;
 

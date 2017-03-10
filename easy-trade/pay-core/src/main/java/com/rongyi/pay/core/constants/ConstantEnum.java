@@ -74,6 +74,7 @@ public enum ConstantEnum {
 	WA_PUNCHCARDPAY_PAYING("10003","支付中"),
 	WA_PUNCHCARDPAY_SYSERR("20000","微众系统异常"),
 
+	WW_PUNCHCARDPAY_SUCCESS("SUCCESS","支付成功"),
 	WA_TRADESTATUS_00("00","交易处理中"),
 	WA_TRADESTATUS_01("01","交易支付成功"),
 	WA_TRADESTATUS_02("02","交易失败"),

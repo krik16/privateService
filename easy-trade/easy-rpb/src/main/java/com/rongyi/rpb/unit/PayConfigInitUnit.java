@@ -217,16 +217,17 @@ public class PayConfigInitUnit {
      */
     public void initAliTicket(){
         String ticketKey = "aliPayTicket";
-        log.info("aliPayTicketValue={}",redisService.get(ticketKey));
-        if(StringUtils.isEmpty(redisService.get(ticketKey))) {
+        String ticketValue = redisService.get(ticketKey);
+        log.info("aliPayTicketValue={}",ticketValue);
+        if(StringUtils.isEmpty(ticketValue)) {
             WaAccessTokenResData waAccessTokenResData = WebankPayUnit.alipayGetToken();
             WaTicketResData waTicketResData = WebankPayUnit.alipayGetTicket(waAccessTokenResData.getAccess_token());
             if(waTicketResData.getTickets() != null) {
                 WaTicketResData.Ticket ticket = waTicketResData.getTickets().get(0);
-                String ticketValue = ticket.getValue();
+                ticketValue = ticket.getValue();
                 this.ticket = ticketValue;
                 redisService.set(ticketKey, ticketValue);
-                redisService.expireAt(ticketKey, 50 * 3600);
+                redisService.expire(ticketKey, 50 * 60);
                 this.init();
             }else{
                 throw new TradePayException(ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getValueStr());

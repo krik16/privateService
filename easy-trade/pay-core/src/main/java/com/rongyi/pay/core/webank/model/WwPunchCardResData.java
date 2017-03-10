@@ -2,14 +2,13 @@ package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
 
-import java.math.BigDecimal;
-
 /**
  * 微众微信刷卡支付返回参数
  * Created by sujuan on 2017/2/22.
  */
 public class WwPunchCardResData extends BaseData{
 
+    private static final long serialVersionUID = -3225431755550963839L;
     //请求结果
     private Result result ;
 

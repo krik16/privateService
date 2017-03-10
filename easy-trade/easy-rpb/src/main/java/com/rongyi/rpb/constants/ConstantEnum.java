@@ -65,6 +65,8 @@ public enum ConstantEnum {
 	EXCEPTION_PAYMENT_NOT_EXIST("1019109","付款记录不存在"),
 	EXCEPTION_WEIXIN_SIGN_OPEN_ID_FAIL("1019110","为确保你可以及时跟进和查看订单状态，请先关注公众号再支付订单"),
 	EXCEPTION_WEIXIN_APPID_NOT_EXIST("1019111","生成支付签名失败，失败原因：APP_ID未找到对应商户信息"),
+	EXCEPTION_PAY_RECORED_NOT_EXIST("1019112","支付记录不存在"),
+	EXCEPTION_REFUND_RECORED_NOT_EXIST("1019113","退款记录不存在"),
 
 	ALI_PAY_TIME_EXPIRE_GOODS("60m","商品支付宝支付默认超时时间"),
 	ALI_PAY_TIME_EXPIRE_COUPONS("15m","代金券支付宝支付默认超时时间"),

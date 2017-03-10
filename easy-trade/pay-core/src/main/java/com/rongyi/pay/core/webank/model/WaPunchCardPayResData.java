@@ -1,14 +1,11 @@
 package com.rongyi.pay.core.webank.model;
 
-import com.alipay.api.domain.TradeFundBill;
-
-import java.util.List;
-
 /**
  * 微众支付宝条码支付返回参数
  * Created by sujuan on 2017/3/1.
  */
 public class WaPunchCardPayResData extends AlipayCommonResData{
+    private static final long serialVersionUID = -7982965583166824007L;
     //结果码
     private String retCode;
 

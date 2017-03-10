@@ -11,6 +11,7 @@ import java.math.BigDecimal;
  */
 public class WwPunchCardReqData extends BaseData{
 
+    private static final long serialVersionUID = -2676624212814513193L;
     //商户号
     private String merchant_code;
 

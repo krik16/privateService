@@ -6,6 +6,7 @@ package com.rongyi.pay.core.webank.model;
  * Created by sujuan on 2017/3/2.
  */
 public class WaRefundQueryResData extends AlipayCommonResData{
+    private static final long serialVersionUID = -7612445227132544329L;
     //支付宝交易号
     private String tradeNo ;
 

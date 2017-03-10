@@ -9,6 +9,7 @@ import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.wechat.model.RefundQueryResData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
@@ -40,7 +41,7 @@ public class QueryBizz {
                 payType);
 
         if (oldPaymentEntity == null) {
-            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         WwPunchCardQueryOrderReqData reqData  = new WwPunchCardQueryOrderReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
@@ -68,7 +69,7 @@ public class QueryBizz {
                 payType);
 
         if (oldPaymentEntity == null) {
-            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         WwpunchCardRefundReqData reqData  = new WwpunchCardRefundReqData();
         reqData.setMerchant_code(weBankMchNo);
@@ -98,11 +99,16 @@ public class QueryBizz {
                 payType);
 
         if (oldPaymentEntity == null) {
-            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
-        WaQueryTradeReqData reqData  = new WaQueryTradeReqData(oldPaymentEntity.getPayNo(),weBankMchNo);
+        WaQueryTradeReqData reqData  = new WaQueryTradeReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
-        return WebankPayUnit.alipayQueryTrade(reqData);
+        WaQueryTradeResData resData = WebankPayUnit.alipayQueryTrade(reqData);
+        if(!"0".equals(resData.getCode()) && (!"02".equals(resData.getTradeStatus()) || !"05".equals(resData.getTradeStatus()))){
+            throw new TradePayException(resData.getCode(),resData.getMsg());
+        }
+        resData.setOutTradeNo(oldPaymentEntity.getPayNo());
+        return resData;
     }
 
     /**
@@ -122,11 +128,17 @@ public class QueryBizz {
                 payType);
 
         if (oldPaymentEntity == null) {
-            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
+        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
+                payType);
+        if(refundPaymentEntity == null){
+            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         WaRefundQueryReqData reqData  = new WaRefundQueryReqData();
         reqData.setWbMerchantId(weBankMchNo);
         reqData.setOrderId(oldPaymentEntity.getPayNo());
+        reqData.setOutRequestNo(refundPaymentEntity.getPayNo());
 
         return WebankPayUnit.alipayRefundQuery(reqData);
 
@@ -145,7 +157,7 @@ public class QueryBizz {
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
         if (oldPaymentEntity == null) {
-            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         return oldPaymentEntity;
     }

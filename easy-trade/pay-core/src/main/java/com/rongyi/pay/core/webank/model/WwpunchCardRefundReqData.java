@@ -10,6 +10,7 @@ import java.math.BigDecimal;
  */
 public class WwpunchCardRefundReqData extends BaseData{
 
+    private static final long serialVersionUID = 5365766204382774093L;
     //商户号 必填
     private String merchant_code;
 

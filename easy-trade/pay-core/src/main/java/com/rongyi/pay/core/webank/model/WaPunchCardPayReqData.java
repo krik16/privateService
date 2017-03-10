@@ -2,7 +2,6 @@ package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
-import org.apache.commons.beanutils.BeanUtils;
 
 import java.math.BigDecimal;
 
@@ -11,6 +10,7 @@ import java.math.BigDecimal;
  * Created by sujuan on 2017/3/1.
  */
 public class WaPunchCardPayReqData extends BaseData{
+    private static final long serialVersionUID = -4515746222737252127L;
     //商户号  必传
     private String wbMerchantId;
 

@@ -9,6 +9,7 @@ import java.util.List;
  * Created by sujuan on 2017/3/1.
  */
 public class WaQueryTradeResData extends AlipayCommonResData{
+    private static final long serialVersionUID = 8779864859029211225L;
     //支付宝交易号
     private String tradeNo ;
 

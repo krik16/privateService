@@ -9,6 +9,7 @@ import java.util.List;
  * Created by sujuan on 2017/3/2.
  */
 public class WaRefundResData extends AlipayCommonResData{
+    private static final long serialVersionUID = 5059457778098681520L;
     //结果码
     private String retCode ;
 
