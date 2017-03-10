@@ -429,4 +429,8 @@ public interface CommodityService {
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
     public Boolean setMallIdToServiceId();
+
+    public Boolean updateCommodityStatus(String id, Integer status);
+
+    List<HaiXinCommodityVO> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
 }
