@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -91,7 +92,9 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                 // 实际结算生成的结束时间
                 settleEndDay = settleEndDay.plusDays(spacingDays);
 
-                DateTime currentDateTime = new DateTime();
+//                DateTime currentDateTime = new DateTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                DateTime currentDateTime = new DateTime(sdf.parse(sdf.format(new Date())));
                 while (settleDay.isBefore(settleEndDay)) {
                     // 判断今天是否处于固定间隔的日期上，通过从结算生成的开始时间（settleDay）开始累加固定间隔天数（spacingDays）的方式循环判断
                     if (Days.daysBetween(currentDateTime, settleDay).getDays() == 0) {
