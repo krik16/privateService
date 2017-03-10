@@ -57,19 +57,10 @@ public class CommodityParam implements Serializable{
 	private Integer createBy;
 
 
-	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
-	//@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonDeserialize(using=DateJsonDeserializer.class)
-	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date registerAt;//上架时间
-	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	 */
-	//@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonDeserialize(using=DateJsonDeserializer.class)
-	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date soldOutAt;//下架时间
-
-	//private Integer source;//来源
 
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 
@@ -102,6 +93,16 @@ public class CommodityParam implements Serializable{
 	private String brandName;
 
 	private String commodityModelNo;
+
+	private String pass; // 0：不通过  1：通过j
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 
 	public String getBrandMid() {
 		return brandMid;
