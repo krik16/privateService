@@ -14,58 +14,74 @@ import java.util.Date;
 public interface MemberService {
 
     /**
-     * 获取会员用户信息
+     * 获取统一用户的基本信息
      *
-     * @param userId
-     * @param mallId
-     * @param platform
+     * @param userId      用户id
+     * @param mallId      商场id
+     * @param platform    平台
+     * @param serviceType 微信下单时对应的公众号类型
      * @return
      */
-    DubboVO<UserCenterVO> getMemberInfo(String userId, String mallId, String platform);
+    UserCenterVO getUserInfo(String userId, String mallId, String platform, Integer serviceType);
 
     /**
      * 扣减用户积分
      *
-     * @param credit
-     * @param userId
-     * @param mallId
-     * @param orderChanel
-     * @param orderNo
+     * @param credit      积分
+     * @param userId      用户id
+     * @param mallId      商场id
+     * @param orderChanel 订单渠道
+     * @param orderNo     订单号
+     * @param serviceType 微信下单时对应的公众号类型
      */
-    DubboVO decreaseCredit(int credit, String userId, String mallId, String orderChanel, String orderNo, String remark);
+    void decreaseCredit(int credit, String userId, String mallId, String orderChanel, String orderNo, String remark, Integer serviceType);
 
     /**
      * 返还用户积分
      *
-     * @param credit
-     * @param userId
-     * @param mallId
-     * @param orderChanel
-     * @param orderNo
+     * @param credit      积分
+     * @param userId      用户id
+     * @param mallId      商场id
+     * @param orderChanel 订单渠道
+     * @param orderNo     订单号
+     * @param remark      备注
+     * @param serviceType 微信下单时对应的公众号类型
      */
-    DubboVO increaseCredit(int credit, String userId, String mallId, String orderChanel, String orderNo, String remark);
+    void increaseCredit(int credit, String userId, String mallId, String orderChanel, String orderNo, String remark, Integer serviceType);
+
+    /**
+     * 返还用户积分
+     *
+     * @param userId       用户id
+     * @param mallId       商场id
+     * @param creditNumber 积分
+     * @param orderNo      订单号
+     * @param orderChannel 订单渠道
+     * @param remark       备注
+     */
+    void increaseCredit(String userId, String mallId, int creditNumber, String orderNo, String orderChannel, String remark);
 
     /**
      * 验证是否有权限验券
      *
-     * @param mallId
-     * @param shopId
-     * @param commodityType
+     * @param mallId        商场id
+     * @param shopId        店铺id
+     * @param commodityType 商品类型
+     * @param serviceType   微信下单时对应的公众号类型
      * @return
      */
-    DubboVO<Boolean> checkingCode(String mallId, String shopId, String commodityType);
+    boolean checkingCode(String mallId, String shopId, String commodityType, Integer serviceType);
 
     /**
      * 消费送积分
      *
-     * @param platform
-     * @param mallId
-     * @param serviceType
-     * @param userId
-     * @param payAmount
-     * @param payDate
+     * @param platform    平台
+     * @param mallId      商场id
+     * @param serviceType 微信下单时对应的公众号类型
+     * @param userId      用户id
+     * @param payAmount   支付金额
+     * @param payDate     支付时间
      * @return
      */
     DubboVO pushCreditMsg(Integer platform, String mallId, Integer serviceType, String userId, String orderNo, double payAmount, Date payDate);
-
 }

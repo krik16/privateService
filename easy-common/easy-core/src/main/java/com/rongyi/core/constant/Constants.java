@@ -1101,4 +1101,15 @@ public interface Constants {
 
     String USERCENTER_API_URL = "usercenter.url";
     String REDUCTION_API_URL ="reduction.url";
+
+    interface USERCENTER_TYPE{
+        // 扣减
+         String DEFAULT_TYPE_DECREASE = "2";
+        // 增加/返还
+        String DEFAULT_TYPE_INCREASE = "1";
+        // optype
+        String DEFAULT_OP_TYPE_INCREASE = "11";
+        // 扣减optype
+        String DEFAULT_OP_TYPE_DECREASE = "3";
+    }
 }
