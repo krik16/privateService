@@ -67,7 +67,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String commodityShopNumber;
 	private List<String> commodityPicList;//商品图片
 	private List<CommoditySpecVO> commoditySpecList;//商品规格信息
-	private String commodityCode;//商品编码
+	private String commodityCode;//商品条码
+	private String commodityBarCode; // 商品编码
 	private String commodityCommission;
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
@@ -458,6 +459,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setCommodityCode(String commodityCode) {
 		this.commodityCode = commodityCode;
 	}
+	public String getCommodityBarCode() { return commodityBarCode; }
+	public void setCommodityBarCode(String commodityBarCode) { this.commodityBarCode = commodityBarCode; }
 	public String getShopId() {
 		return shopId;
 	}
@@ -1281,6 +1284,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setCommodityDescription(commodity.getDescription());
 		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
 		vo.setCommodityCode(commodity.getCode());
+		vo.setCommodityBarCode(commodity.getBarCode());
 		vo.setCommodityPicList(commodity.getPicList());
 		vo.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
 		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
@@ -1290,8 +1294,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setSoldOutAt(commodity.getSoldOutAt());
 		vo.setSource(commodity.getSource());
 		vo.setStockStatus(commodity.getStockStatus());
-		vo.setReason(commodity.getReason());
-		// TODO 商品状态待上架通过定时任务刷新状态给app使用
 		vo.setCommodityStatus(commodity.getStatus());
 		vo.setCommodityCurrentPrice(commodity.getCurrentPrice().toString());
 		vo.setCommodityOriginalPrice(commodity.getOriginalPrice().toString());
@@ -1300,7 +1302,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setTemplateId(commodity.getTemplateId());
 		vo.setMallServiceIds(commodity.getMallServiceIds());
 		vo.setOnServiceIds(commodity.getOnServiceIds());
-		vo.setSubheading(commodity.getSubheading());
 		vo.setCommodityDetails(commodity.getCommodityDetails());
 
 		//默认值
@@ -1308,23 +1309,20 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setShopId("-1");
 		vo.setMallId("-1");
 
-	//	vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
-	//	vo.setProcessIdentity(userInfo.getIdentity());
-	//	vo.setMerchantId(userInfo.getBindingMid());
+		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
+		vo.setProcessIdentity(userInfo.getIdentity());
+		vo.setMerchantId(userInfo.getBindingMid());
 		if(null ==commodity.getId()){
-//			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
 		} else {
 			if(null != commodity.getCreateBy()) {
 				vo.setCreate_by(commodity.getCreateBy() + "");
 			}
-//			vo.setUpdate_by(userInfo.getId().toString());
+			vo.setUpdate_by(userInfo.getId().toString());
 		}
-		vo.setShelvesType(commodity.getShelvesType());
 
 		vo.setBrandMid(commodity.getBrandMid());
 		vo.setBrandName(commodity.getBrandName());
-
-		// TODO 海信页面是“商品条形码”，缺少
 
 		return vo;
 	}
