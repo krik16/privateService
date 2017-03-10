@@ -150,7 +150,7 @@ public class RefundBizz {
 
         Integer totalFee = wwpunchCardRefundReqData.getRefund_amount().multiply(new BigDecimal(100)).intValue();
         //初始化退款记录
-        PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, wwpunchCardRefundReqData.getTerminal_serialno(),
+        PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
                 totalFee, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, "", "");
         //发起退款
@@ -158,9 +158,9 @@ public class RefundBizz {
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getOrderid(),wwpunchCardRefundReqData.getTerminal_serialno(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("",wwpunchCardRefundReqData.getTerminal_serialno(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS",refundAmount,"","",
-                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
+                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,resData.getRefundid());
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
