@@ -146,14 +146,32 @@ public class WebankPayUnit {
         if (!result) {
             LOGGER.warn("微众支付宝刷卡用户超时未完成支付,需重新支付 orderId:{}", param.getOrderId());
             //调用撤销订单接口
+            WaReverseTradeReqData reverseTradeReqData = new WaReverseTradeReqData(param.getWbMerchantId(),param.getOrderId());
+            alipayReverseTrade(reverseTradeReqData);
             throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_REVERSE_SUCCESS);
         }else{
+            //将查询返回的结果转换为下单返回的结果
             resData = new WaPunchCardPayResData();
             resData.setCode(queryTradeResData.getCode());
             resData.setMsg(queryTradeResData.getMsg());
-          //  resData.set
+            resData.setTransactionTime(queryTradeResData.getTransactionTime());
+            resData.setBizSeqNo(queryTradeResData.getBizSeqNo());
+            resData.setSuccess(queryTradeResData.getSuccess());
+            resData.setTradeNo(queryTradeResData.getTradeNo());
+            resData.setOutTradeNo(queryTradeResData.getOutTradeNo());
+            resData.setRetCode(ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr());
+            resData.setBuyerLogonId(queryTradeResData.getBuyerLogonId());
+            resData.setTotalAmount(queryTradeResData.getTotalAmount());
+            resData.setReceiptAmount(queryTradeResData.getReceiptAmount());
+            resData.setBuyerPayAmount(queryTradeResData.getBuyerPayAmount());
+            resData.setPointAmount(queryTradeResData.getPointAmount());
+            resData.setInvoiceAmount(queryTradeResData.getInvoiceAmount());
+            resData.setGmtPayment(queryTradeResData.getSendPayDate());
+            resData.setStoreName(queryTradeResData.getStoreName());
+            resData.setBuyerUserId(queryTradeResData.getBuyerUserId());
+            resData.setExternalInfo(queryTradeResData.getExternalInfo());
         }
-        return null;
+        return resData;
     }
 
     /**
@@ -284,7 +302,7 @@ public class WebankPayUnit {
                 LOGGER.info("微众返回系统异常 再次调用查询接口查询实际支付状态");
                 resData = waitUserAlipayPaying(param, 1);
             }else if (!ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getRetCode())) {
-                throw new WebankException(resData.getRetCode(), resData.getRetMsg());
+                throw new WebankException(resData.getRetCode(), resData.getSubMsg());
             }
         } catch (WebankException | ParamNullException e) {
             throw e ;

@@ -107,7 +107,6 @@ public class WebankTest {
     @Test
     @Description("支付宝获取ticket")
     public void alipayGetTicket() {
-        init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         String token = "WLA0f-dGGlQHTVClazkxtmW6FX_nRhpUB01QpWs5MbZluhUWgTOVo4XvWHZuEqevzbjASf2bGbAjUISAu5pliXxh1g";
         webankPayUnit.alipayGetTicket(token);
@@ -119,8 +118,8 @@ public class WebankTest {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WaPunchCardPayParam param = new WaPunchCardPayParam();
-        param.setWbMerchantId("107075571030015");
-        param.setAuthCode("280108596765670998");
+        param.setWbMerchantId(wbMerchatId);
+        param.setAuthCode("287162303729376278");
         param.setTotalAmount(new BigDecimal("0.01").setScale(2));
         param.setOrderId(getOrderNO());
         param.setSubject("test");
