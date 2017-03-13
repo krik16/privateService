@@ -204,4 +204,17 @@ public interface CouponConstants {
         int PUSH=1;
         int IMPORT=0;
     }
+    //店铺是否可以验证卡券
+    interface COUPONSHOP_VARIFIABLE{
+        int YES = 0;//可验证
+        int NO = 1;//不可验证
+    }
+    //店铺关联卡券的状态
+    interface COUPONSHOP_STATUS{
+        int RELATED_SHOP = 0;//卡券关联的店铺
+        int GENERAL_SHOP = 1;//通用券的验证店铺
+        int ACTIVITY_SHOP = 2;//活动券的验证店铺
+        int CHILD_SHOP = 3;//活动券的验证店铺
+    }
+
 }

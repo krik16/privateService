@@ -422,8 +422,6 @@ public interface CommodityService {
 
     CommodityVO getCommodityDetail(String id);
 
-    Boolean setMerchantIdToServiceId();
-    
     public List<CommodityCategory> selectCommodityCategoryByids(List<String> commodityCategoryids);
     
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
@@ -433,4 +431,5 @@ public interface CommodityService {
     public Boolean updateCommodityStatus(String id, Integer status);
 
     List<HaiXinCommodityVO> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
+    
 }

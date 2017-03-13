@@ -345,11 +345,20 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
 				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
 				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
-				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
-				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
-				+ ", receiverName=" + receiverName+ ", memberName=" + memberName+ ", userName=" + userName
+				+ ", memberId=" + memberId + ", memberName=" + memberName
+				+ ", userName=" + userName + ", receiverProvinceName="
+				+ receiverProvinceName + ", receiverCityName="
+				+ receiverCityName + ", receiverDistrictName="
+				+ receiverDistrictName + ", receiverAddress=" + receiverAddress
+				+ ", receiverPhone=" + receiverPhone + ", receiverName="
+				+ receiverName + ", provinceId=" + provinceId + ", cityId="
+				+ cityId + ", districtId=" + districtId + ", business="
+				+ business + ", commodityType=" + commodityType + ", userType="
+				+ userType + ", exchangeType=" + exchangeType
+				+ ", deliveryType=" + deliveryType + ", totalCredit="
+				+ totalCredit + ", mallMid=" + mallMid + ", shopMid=" + shopMid
 				+ "]";
 	}
+	
 	
 }
