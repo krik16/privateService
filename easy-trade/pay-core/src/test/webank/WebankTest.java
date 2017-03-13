@@ -1,6 +1,5 @@
 package webank;
 
-import base.JUnit4Runner;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
@@ -8,10 +7,8 @@ import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.sun.org.glassfish.gmbal.Description;
-import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 
@@ -33,14 +30,14 @@ public class WebankTest {
         WwPunchCardPayParam param = new WwPunchCardPayParam();
         param.setMerchantCode("107100000000014");
         param.setTerminalCode("web");
-        param.setOrderNo(getOrderNO());
+        param.setOrderNo("0030854909440180122");
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
-        param.setProduct("测试");
-        param.setAuthCode("130054478622727117");
+        param.setProduct("test");
+        param.setAuthCode("130221386885030996");
 //        param.setOpenid("99999999999999");
 //        param.setSubAppid("000000000000");
-        param.setGoodsTag("测试商品");
-        param.setAttach("附加信息");
+//        param.setGoodsTag("测试商品");
+//        param.setAttach("附加信息");
         WwPunchCardResData resData = webankPayUnit.wechatPunchCardPay(param);
         System.out.println(resData+".....");
     }
@@ -182,8 +179,8 @@ public class WebankTest {
             configure.setWechatPunchCardRefundUrl("https://test-svrapi.webank.com/l/wbap-bbfront/nro");
             configure.setWechatPunchCardRefundQueryUrl("https://test-svrapi.webank.com/l/wbap-bbfront/nros");
 
-            configure.setWechatKeyStorePath("D:\\cert\\www.rongyi.com\\www.rongyi.com.p12");
-            configure.setWechatTrustStorePath("D:\\Users\\sujuan\\webank-trust.jks");
+            configure.setWechatKeyStorePath("C:\\rongyi\\work\\weBankCret\\www.rongyi.com\\www.rongyi.com.p12");
+            configure.setWechatTrustStorePath("C:\\rongyi\\webank-trust.jks");
             configure.setWechatKeyStorePwd("www.rongyi.com");
 
             configure.setAppId("W0000036");

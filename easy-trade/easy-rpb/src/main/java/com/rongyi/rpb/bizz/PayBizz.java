@@ -296,13 +296,19 @@ public class PayBizz {
         //查找支付记录
         PaymentEntity paymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(orderNo, payChannel);
 
+        //检查订单是否已支付完成
+        PaymentEntity finishPayment = paymentService.selectByOrderNumAndTradeType(orderNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,Constants.PAYMENT_STATUS.STAUS2,null);
+        if (finishPayment != null) {// 订单已完成支付
+            throw new TradePayException("-1", "此订单已成功支付,此次请求属于订单重复支付请求,请重新下单,重复订单号为:" + orderNo);
+        }
         //支付记录已存在
         if (paymentEntity != null) {
-            if (Constants.PAYMENT_STATUS.STAUS2 == paymentEntity.getStatus() && payChannel.equals(paymentEntity.getPayChannel())) {// 订单已完成支付后重新发起支付请求
-                throw new TradePayException("-1", "此订单已成功支付,此次请求属于订单重复支付请求,请重新下单,orderNo=" + orderNo);
-            }
             paymentEntity.setWechatMchId(wechatMchId);
             paymentEntity.setAliSellerId(aliSellerId);
+            paymentEntity.setRyMchId(ryMchVo.getRyMchId());
+            paymentEntity.setRyAppId(ryMchVo.getRyAppId());
+            paymentEntity.setSource(ryMchVo.getSource());
+            paymentEntity.setOrgChannel(ryMchVo.getOrgChannel());
             paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
             paymentEntity.setOrderPrice(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
             paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
