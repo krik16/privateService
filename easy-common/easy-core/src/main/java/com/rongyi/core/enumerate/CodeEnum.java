@@ -278,7 +278,12 @@ public enum CodeEnum {
 	ERROR_RYUSER_NOT_EXIST("1400001","该账号不存在"),
 	ERROR_RYUSER_STOP("1400002","停用理由不能为空"),
 	ERROR_RYUSER_START("1400003","该账号已存在，您无法启用当前账号"),
-	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复");
+	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复"),
+
+    /** 售后说明敏感词校验*/
+	ERROR_SERVICE_DESCRIPTION_REMARK_HAS_SENSITIVE_WORD("1500001", "您填写的售后说明备注不符合规范，请重新编辑"),
+    ERROR_SERVICE_DESCRIPTION_CONTENT_HAS_SENSITIVE_WORD("1500002", "您填写的售后说明内容不符合规范，请重新编辑");
+
 
 
     private String code; 
