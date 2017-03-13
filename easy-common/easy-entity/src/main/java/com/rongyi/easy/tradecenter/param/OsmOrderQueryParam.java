@@ -43,7 +43,16 @@ public class OsmOrderQueryParam implements Serializable
     private List<String> selfShopIds;//
     private List<String> selfGuideIds;//
     private List<String> orderNoList;//
+    private Integer deliveryType;//快递方式 1：自提 2：快递
 
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
 
     public Integer getGuideId() {
         return guideId;

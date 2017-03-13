@@ -65,8 +65,11 @@ public class SessionUserInfo implements Serializable{
     private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
     private Integer defaultTerminal;//默认终端 1 容易逛,2 微信,3 终端机
 	private Integer isOpenQrCode;
+
 	private Integer isAllowBindingWechat;//微信端展示,0显示,1不显示
 
+	private Integer accountSource;// 1:海信版 2:其他 不做处理
+	
 
 	public String getMallMid() {
 		return mallMid;
@@ -367,4 +370,36 @@ public class SessionUserInfo implements Serializable{
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
+
+	public Integer getAccountSource() {
+		return accountSource;
+	}
+
+	public void setAccountSource(Integer accountSource) {
+		this.accountSource = accountSource;
+	}
+
+	@Override
+	public String toString() {
+		return "SessionUserInfo [id=" + id + ", type=" + type + ", identity="
+				+ identity + ", isCooperation=" + isCooperation
+				+ ", userPhone=" + userPhone + ", userAccount=" + userAccount
+				+ ", userName=" + userName + ", userNickName=" + userNickName
+				+ ", createSource=" + createSource + ", brandId=" + brandId
+				+ ", brandMid=" + brandMid + ", groupId=" + groupId
+				+ ", groupMid=" + groupMid + ", mallId=" + mallId
+				+ ", mallMid=" + mallMid + ", shopId=" + shopId + ", shopMid="
+				+ shopMid + ", filialeId=" + filialeId + ", filialeMid="
+				+ filialeMid + ", parentShopId=" + parentShopId
+				+ ", parentShopMid=" + parentShopMid + ", grandpaShopId="
+				+ grandpaShopId + ", grandpaShopMid=" + grandpaShopMid
+				+ ", level=" + level + ", isChief=" + isChief + ", logo="
+				+ logo + ", theCompanyName=" + theCompanyName + ", address="
+				+ address + ", terminalType=" + terminalType
+				+ ", defaultTerminal=" + defaultTerminal + ", isOpenQrCode="
+				+ isOpenQrCode + ", isAllowBindingWechat="
+				+ isAllowBindingWechat + ", accountSource=" + accountSource
+				+ "]";
+	}
+	
 }

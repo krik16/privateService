@@ -53,6 +53,16 @@ public class MerchantOsmOrderVO implements Serializable{
     private String reveiveTime;//收货时间
     private BigDecimal merchantRedDiscount;//商家红包补贴金额
     private BigDecimal merchantRebateDiscount;//商家抵扣券补贴金额
+    private Integer deliveryType;//快递方式 1：自提 2：快递
+
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
 
     public Integer getOrderSource() {
         return orderSource;

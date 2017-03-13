@@ -15,6 +15,7 @@ public interface CommodityConstants {
         int GIFT = 1;
         int COUPON = 2;
         int COUPON_PARKING = 3;
+        int HAIXIN = 4;
     }
 
     interface ExchangeType {
