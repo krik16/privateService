@@ -30,6 +30,8 @@ public class CommodityParam implements Serializable{
 
 	private String code;//商品编码
 
+	private String barCode;//商品条形码（海信）
+
 	private String description;//商品描述
 
 	private String postage;//商品邮费
@@ -196,6 +198,10 @@ public class CommodityParam implements Serializable{
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+	public String getBarCode() { return barCode; }
+
+	public void setBarCode(String barCode) { this.barCode = barCode; }
 
 	public String getDescription() {
 		return description;

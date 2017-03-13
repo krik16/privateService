@@ -106,6 +106,17 @@ public class ShopEntity implements Serializable{
 	private String description_en ;
 	private Integer create_source ; //创建来源   0大运营  1商家后台  其它crm
 	private Integer update_source ; //修改来源  0大运营  1商家后台  其它crm
+
+	private String thirdParty;//第三来源
+	// 第三方来源参数
+	private String orgCode;//海信 组织编码
+	private String parentOrgCode;//
+	private String orgType;// 海信  0-自营店 1-加盟店 2-配送中心
+	private String isCenter;//  海信, 是否是企业组织  0否 1 是
+	private String isShowInWeiXin;//0显示,1不显示
+	//第三方来源参数
+
+
 	public ShopEntity() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -121,7 +132,9 @@ public class ShopEntity implements Serializable{
 				throw new Exception("id格式不对");
 			}
 		}
-		
+		if(StringUtils.isNotEmpty(param.getIsShowInWeiXin())){
+			this.isShowInWeiXin=param.getIsShowInWeiXin();
+		}
 		this.name = param.getName();
 		if(param.getShop_nature()!=null)
 			this.shop_nature = param.getShop_nature().toString();
@@ -252,7 +265,55 @@ public class ShopEntity implements Serializable{
 			}
 		}
 	}
-	
+
+	public String getIsShowInWeiXin() {
+		return isShowInWeiXin;
+	}
+
+	public void setIsShowInWeiXin(String isShowInWeiXin) {
+		this.isShowInWeiXin = isShowInWeiXin;
+	}
+
+	public String getThirdParty() {
+		return thirdParty;
+	}
+
+	public void setThirdParty(String thirdParty) {
+		this.thirdParty = thirdParty;
+	}
+
+	public String getParentOrgCode() {
+		return parentOrgCode;
+	}
+
+	public void setParentOrgCode(String parentOrgCode) {
+		this.parentOrgCode = parentOrgCode;
+	}
+
+	public String getOrgCode() {
+		return orgCode;
+	}
+
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
+	}
+
+	public String getOrgType() {
+		return orgType;
+	}
+
+	public void setOrgType(String orgType) {
+		this.orgType = orgType;
+	}
+
+	public String getIsCenter() {
+		return isCenter;
+	}
+
+	public void setIsCenter(String isCenter) {
+		this.isCenter = isCenter;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -581,7 +642,6 @@ public class ShopEntity implements Serializable{
 		this.parent_ids = parent_ids;
 	}
 
-
 	@Override
 	public String toString() {
 		return "ShopEntity{" +
@@ -632,6 +692,12 @@ public class ShopEntity implements Serializable{
 				", description_en='" + description_en + '\'' +
 				", create_source=" + create_source +
 				", update_source=" + update_source +
+				", thirdParty='" + thirdParty + '\'' +
+				", orgCode='" + orgCode + '\'' +
+				", parentOrgCode='" + parentOrgCode + '\'' +
+				", orgType='" + orgType + '\'' +
+				", isCenter='" + isCenter + '\'' +
+				", isShowInWeiXin='" + isShowInWeiXin + '\'' +
 				'}';
 	}
 }

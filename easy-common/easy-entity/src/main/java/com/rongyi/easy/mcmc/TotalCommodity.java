@@ -36,7 +36,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String category;//商品品类id
 	private Integer status;//状态  0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 
-	private String code;//商品编码
+	private String code;//商品条码（海信：商品编码）
+	private String barCode; // 商品条形码（海信）
 	private String description;//商品描述
 	private String postage;//商品邮费
 	private Integer stock;//商品库存
@@ -213,6 +214,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+	public String getBarCode() { return barCode; }
+
+	public void setBarCode(String barCode) { this.barCode = barCode; }
 
 	public String getDescription() {
 		return description;
@@ -794,6 +799,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
 			this.setName(param.getName());
 			this.setCode(param.getCode());
+			this.setBarCode(param.getBarCode());
 			this.setCategory(param.getCategory());
 			this.setCategoryIds(param.getCategoryIds());
 
@@ -831,20 +837,19 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 
 			this.setSource(param.getSource());
+
+			// TODO 待确定是否是这样的对应关系
+			this.setStock(param.getStock());
 			this.setStockStatus(param.getStockStatus());
 			this.setUpdateAt(new Date());
 			this.setUpdateBy(userInfo.getId());
 			this.setPurchaseCount(param.getPurchaseCount());
 			this.setTemplateId(param.getTemplateId());
-			this.setReason(param.getReason());
 			this.setMerchantId(userInfo.getBindingMid());
 			this.setCommodityDetails(param.getCommodityDetails());
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setAccountType(userInfo.getIdentity());
-			this.setSubheading(param.getSubheading());
-			this.setShelvesType(param.getShelvesType());
-			setFilialeMids(param.getCommoditySpeceParams(), this);
 
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
