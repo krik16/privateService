@@ -294,7 +294,7 @@ public class PayBizz {
     private PaymentEntity initPaymentEntity(RyMchVo ryMchVo, String orderNo, Integer totalFee, String aliSellerId, String wechatMchId, Integer payChannel, Integer orderType) {
 
         //查找支付记录
-        PaymentEntity paymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+        PaymentEntity paymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(orderNo, payChannel);
 
         //支付记录已存在
         if (paymentEntity != null) {
