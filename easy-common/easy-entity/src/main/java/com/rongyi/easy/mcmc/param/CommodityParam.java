@@ -28,9 +28,9 @@ public class CommodityParam implements Serializable{
 
 	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 5立即上架
 
-	private String code;//商品编码（海信：条形码）
+	private String code;//商品编码
 
-	private String barCode;//商品编码（海信）
+	private String barCode;//商品条形码（海信）
 
 	private String description;//商品描述
 

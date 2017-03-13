@@ -51,8 +51,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
 	private Integer status;//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
-	private String code;//商品条码
-	private String barCode; // 商品编码
+	private String code;//商品条码（海信：商品编码）
+	private String barCode; // 商品条形码（海信）
 	private String description;//商品描述
 	private String postage;//商品邮费
 	private Integer stock;//商品库存
