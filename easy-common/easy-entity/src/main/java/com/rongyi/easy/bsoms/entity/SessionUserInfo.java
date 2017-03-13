@@ -66,6 +66,8 @@ public class SessionUserInfo implements Serializable{
     private Integer defaultTerminal;//默认终端 1 容易逛,2 微信,3 终端机
 	private Integer isOpenQrCode;
 	private Integer isAllowBindingWechat;
+	private Integer industryId;  //行业ID
+    private Integer industryVersionId; //行业版本ID
 	private Integer accountSource;// 1:海信版 2:其他 不做处理
 	
 	public String getMallMid() {
@@ -368,6 +370,22 @@ public class SessionUserInfo implements Serializable{
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
 
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+
 	public Integer getAccountSource() {
 		return accountSource;
 	}
@@ -395,8 +413,9 @@ public class SessionUserInfo implements Serializable{
 				+ address + ", terminalType=" + terminalType
 				+ ", defaultTerminal=" + defaultTerminal + ", isOpenQrCode="
 				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + ", accountSource=" + accountSource
-				+ "]";
+				+ isAllowBindingWechat + ", industryId=" + industryId
+				+ ", industryVersionId=" + industryVersionId
+				+ ", accountSource=" + accountSource + "]";
 	}
 	
 }
