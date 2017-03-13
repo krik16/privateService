@@ -9,6 +9,7 @@ public class CommoditySpecColumnVo3 implements Serializable{
 
     private String id;
     private String name;
+    private Integer status;//-1 删除状态，0正常
 
     public String getId() {
         return id;
@@ -24,5 +25,13 @@ public class CommoditySpecColumnVo3 implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
