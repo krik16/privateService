@@ -18,7 +18,7 @@ public class SoapTest {
 
     public static void main(String  ...args) {
 
-        //服务的地址
+        //店铺服务的地址
         try {
             SoapTest soapTest = new SoapTest();
 
@@ -41,7 +41,7 @@ public class SoapTest {
             String result = SoapClientUtil.post(soap, wsUrl);
             String ss = SoapXmlUtil.parseSoapMessage(result);
 
-            System.out.println("解码后:" + soapTest.decode(ss));
+            System.out.println("解码后:====" + soapTest.decode(ss));
 
         } catch (Exception e) {
         }
@@ -58,14 +58,14 @@ public class SoapTest {
                 BASE64Decoder decoder = new  BASE64Decoder();
 
                 bt = decoder.decodeBuffer(new String(str));
-                System.out.println("11==="+new String(bt));
+               /* System.out.println("11==="+new String(bt));
 
                 System.out.println("gbk to UTF-8==="+new String(new String(bt).getBytes("gbk"), "UTF-8"));
-
+                System.out.println("gbk=="+new String(bt,"gbk"));
                 strResult= new String(bt,"UTF-8");
                 System.out.println("UTF-8=="+strResult);
                 System.out.println("UTF-8 to gbk ==="+new String(new String(bt).getBytes("UTF-8"), "gbk"));
-
+*/
 
 
 
@@ -76,8 +76,10 @@ public class SoapTest {
                 //strResult = new String(bt);
                 //strResult = new String(new BASE64Decoder().decodeBuffer(str));
 
-                strResult= new String(strResult.getBytes("GBK"), "UTF-8");
+                //strResult= new String(strResult.getBytes("GBK"), "UTF-8");
                 //  strResult=  new String(new BASE64Decoder().decodeBuffer(str),"ISO8859-1");
+
+                strResult= new String(bt,"gbk");
                 return strResult;
             }
             return strResult;
