@@ -36,7 +36,7 @@ public class SoapClientUtil {
         byte[] datas = readInputStream(httpConn.getInputStream());
         String result = new String(datas);
         httpConn.disconnect();
-        System.out.println("result:" + result);
+       // System.out.println("result:" + result);
         return result;
     }
 
