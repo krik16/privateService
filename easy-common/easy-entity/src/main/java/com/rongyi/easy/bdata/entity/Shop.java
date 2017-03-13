@@ -75,7 +75,45 @@ public class Shop implements Serializable {
     private String fID;
     private ObjectId parent_id; //上级店铺ID
     private List<ObjectId> parent_ids; //上级店铺ids
+    private String thirdParty;//第三来源
+    // 第三方来源参数,  非标准参数
+    private String orgCode;//海信 组织编码
+    private String orgType;// 海信  0-自营店 1-加盟店 2-配送中心
+    private String isCenter;//  海信, 是否是企业组织  0否 1 是
+    //第三方来源参数,  非标准参数
 
+
+    public String getThirdParty() {
+        return thirdParty;
+    }
+
+    public void setThirdParty(String thirdParty) {
+        this.thirdParty = thirdParty;
+    }
+
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
+
+    public String getOrgType() {
+        return orgType;
+    }
+
+    public void setOrgType(String orgType) {
+        this.orgType = orgType;
+    }
+
+    public String getIsCenter() {
+        return isCenter;
+    }
+
+    public void setIsCenter(String isCenter) {
+        this.isCenter = isCenter;
+    }
 
     public String getfID() {
         return fID;
