@@ -863,8 +863,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setMallServiceIds(param.getServiceIds());
 			this.setOnServiceIds(param.getServiceIds());
 
-			// TODO 海信页面是“商品条形码”，缺少
-
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}
