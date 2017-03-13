@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
+
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -431,5 +433,7 @@ public interface CommodityService {
     public Boolean updateCommodityStatus(String id, Integer status);
 
     List<HaiXinCommodityVO> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
+    
+    public Boolean setMerchantIdToServiceId();
     
 }
