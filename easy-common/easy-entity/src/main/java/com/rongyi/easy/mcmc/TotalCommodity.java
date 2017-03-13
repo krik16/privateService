@@ -36,8 +36,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String category;//商品品类id
 	private Integer status;//状态  0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 
-	private String code;//商品条码
-	private String barCode; // 商品编码
+	private String code;//商品条码（海信：商品编码）
+	private String barCode; // 商品条形码（海信）
 	private String description;//商品描述
 	private String postage;//商品邮费
 	private Integer stock;//商品库存
@@ -862,8 +862,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 			this.setMallServiceIds(param.getServiceIds());
 			this.setOnServiceIds(param.getServiceIds());
-
-			// TODO 海信页面是“商品条形码”，缺少
 
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
