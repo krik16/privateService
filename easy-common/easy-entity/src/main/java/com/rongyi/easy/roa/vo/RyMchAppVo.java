@@ -25,6 +25,8 @@ public class RyMchAppVo implements Serializable{
 
     private String publicKey;
 
+    private String notifyUrl;
+
     public String getRyMchId() {
         return ryMchId;
     }
@@ -88,5 +90,13 @@ public class RyMchAppVo implements Serializable{
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
     }
 }
