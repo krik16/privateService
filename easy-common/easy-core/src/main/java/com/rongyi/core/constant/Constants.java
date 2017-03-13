@@ -1112,4 +1112,12 @@ public interface Constants {
         // 扣减optype
         String DEFAULT_OP_TYPE_DECREASE = "3";
     }
+
+    /**
+     * 营销卡券订单
+     */
+    interface  MK_COUPON_ORDER{
+        // token
+        String token = "ab32bdcb85da2cb5";
+    }
 }

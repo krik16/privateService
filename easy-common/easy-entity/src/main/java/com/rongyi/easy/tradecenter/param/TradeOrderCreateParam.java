@@ -165,6 +165,9 @@ public class TradeOrderCreateParam implements Serializable {
      */
     private String buyerMessage;
 
+    // 扩展数据
+    private String extraInfo;
+
     /**
      * end
      */
@@ -485,6 +488,14 @@ public class TradeOrderCreateParam implements Serializable {
         this.buyerMessage = buyerMessage;
     }
 
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -522,6 +533,7 @@ public class TradeOrderCreateParam implements Serializable {
                 ", articleId=" + articleId +
                 ", articleType=" + articleType +
                 ", buyerMessage=" + buyerMessage +
+                ", extraInfo=" + extraInfo +
                 '}';
     }
 }

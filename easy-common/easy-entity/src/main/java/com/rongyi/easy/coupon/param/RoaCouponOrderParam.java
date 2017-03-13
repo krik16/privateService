@@ -1,7 +1,6 @@
 package com.rongyi.easy.coupon.param;
 
 import com.rongyi.core.common.util.JsonUtil;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -14,16 +13,21 @@ import java.util.Map;
  */
 public class RoaCouponOrderParam implements Serializable {
 
-    private String couponId; // 优惠券 ID
-    private Integer unitNum; // 用户下单量
+    private String buyerId; // 容易逛用户ID 或者会员ID
     private String buyerName; // 持有人
     private String buyerMobile; // 持有人手机
+    private String devId; //设备ID，购买优惠券时限购使用
+    private String couponId; // 优惠券 ID
+    private Integer unitNum; // 用户下单量
+    private String weixinAppId; ///< 微信标准版appid
+    private String openId; // 当下单渠道是“微网站”时，需传入openid
     private Integer orderSource; // 下单渠道, 0为摩生活，1为微网站，2为终端机，3其他
     private String tmStatus = "0"; //为1:手机用户登陆终端机领取优惠券状态
     private String mallId; // 商场对应的ID
-    private String openId; // 当下单渠道是“微网站”时，需传入openid
-    private String buyerId; // 摩生活对应的用户ID，只用“摩生活”下单的用户，才需要记录用户ID
-    private String devId; //设备ID，购买优惠券时限购使用
+    private String extraInfo;///< 扩展数据
+    private Integer ts; ///< 时间戳（秒）
+    private String sign; ///< 签名
+    // private Integer serviceType; // 商场类型
 
     /**
      * 将json字符串转换成RoaCouponOrderParam对象
@@ -61,8 +65,7 @@ public class RoaCouponOrderParam implements Serializable {
         if (map.get("tmStatus") != null) {
             param.setTmStatus(map.get("tmStatus").toString());
         }
-        if (map.get("devId") != null)
-        {
+        if (map.get("devId") != null) {
             param.setDevId(map.get("devId").toString());
         }
         return param;
@@ -148,19 +151,64 @@ public class RoaCouponOrderParam implements Serializable {
         this.devId = devId;
     }
 
+//    public Integer getServiceType() {
+//        return serviceType;
+//    }
+//
+//    public void setServiceType(Integer serviceType) {
+//        this.serviceType = serviceType;
+//    }
+
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    public Integer getTs() {
+        return ts;
+    }
+
+    public void setTs(Integer ts) {
+        this.ts = ts;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("couponId", couponId)
-                .append("unitNum", unitNum)
-                .append("buyerName", buyerName)
-                .append("buyerMobile", buyerMobile)
-                .append("orderSource", orderSource)
-                .append("tmStatus", tmStatus)
-                .append("mallId", mallId)
-                .append("openId", openId)
-                .append("buyerId", buyerId)
-                .append("devId", devId)
-                .toString();
+        return "RoaCouponOrderParam{" +
+                "buyerId='" + buyerId + '\'' +
+                ", buyerName='" + buyerName + '\'' +
+                ", buyerMobile='" + buyerMobile + '\'' +
+                ", devId='" + devId + '\'' +
+                ", couponId='" + couponId + '\'' +
+                ", unitNum=" + unitNum +
+                ", weixinAppId='" + weixinAppId + '\'' +
+                ", openId='" + openId + '\'' +
+                ", orderSource=" + orderSource +
+                ", tmStatus='" + tmStatus + '\'' +
+                ", mallId='" + mallId + '\'' +
+                ", extraInfo='" + extraInfo + '\'' +
+                ", ts=" + ts +
+                ", sign='" + sign + '\'' +
+//                ", serviceType=" + serviceType +
+                '}';
     }
 }
