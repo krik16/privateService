@@ -67,8 +67,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String commodityShopNumber;
 	private List<String> commodityPicList;//商品图片
 	private List<CommoditySpecVO> commoditySpecList;//商品规格信息
-	private String commodityCode;//商品条码（海信：商品编码）
-	private String commodityBarCode; // 商品条形码（海信）
+	private String commodityCode;//商品编码
+	private String commodityBarCode; //商品条形码
 	private String commodityCommission;
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
