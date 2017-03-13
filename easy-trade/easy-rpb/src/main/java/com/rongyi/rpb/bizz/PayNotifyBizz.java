@@ -149,7 +149,7 @@ public class PayNotifyBizz {
      *
      * @param paymentEntity PaymentEntity
      */
-    private void payNotifyThird(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
+    public void payNotifyThird(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
         try {
             sysnNotifyThird(paymentEntity, paymentLogInfo, ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr());
         } catch (TradeException e) {
@@ -260,14 +260,22 @@ public class PayNotifyBizz {
             map.put("tradeNo", paymentLogInfo.getTransactionId());
         }
         map.put("type", type);
+        map.put("payType",paymentEntity.getPayChannel());
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
         map.put("timeStamp", timeStamp);
         log.info("token={}", ryMchAppVo.getToken());
         String sign = TradePaySignUtil.getSignWithToken(map, ryMchAppVo.getToken());
         map.put("sign", sign);
+        //异步通知地址.优先获取下单接口传的地址
         String notifyUrl = redisService.get(paymentEntity.getPayNo() + paymentEntity.getOrderNum());
+
         if (StringUtils.isEmpty(notifyUrl)) {
-            throw new TradeException(TradeConstantEnum.EXCEPTION_ORDER_NOTIFY_URL_NULL.getCodeStr(), TradeConstantEnum.EXCEPTION_ORDER_NOTIFY_URL_NULL.getValueStr());
+            if(StringUtil.isNotEmpty(ryMchAppVo.getNotifyUrl())){
+                notifyUrl = ryMchAppVo.getNotifyUrl();
+            }else{
+                log.warn("支付通知异步地址不存在,通知失败...notifyUrl={}",notifyUrl);
+                return;
+            }
         }
         String result = HttpUtil.httpPOST(notifyUrl, map);
         log.info("容易网支付通知结果,result={}", result);

@@ -52,6 +52,8 @@ public class PayBizz {
     IRedisService redisService;
     @Autowired
     PayConfigInitUnit payConfigInitUnit;
+    @Autowired
+    PayNotifyBizz payNotifyBizz;
 
     /**
      * 微信扫码支付签名
@@ -186,6 +188,8 @@ public class PayBizz {
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
 
+        //发送异步通知
+        payNotifyBizz.payNotifyThird(paymentEntity,paymentLogInfo);
         return alipayTradePayResponse;
     }
 
@@ -277,6 +281,9 @@ public class PayBizz {
 
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        //发送异步通知
+        payNotifyBizz.payNotifyThird(paymentEntity,paymentLogInfo);
+
         return resData;
     }
 
