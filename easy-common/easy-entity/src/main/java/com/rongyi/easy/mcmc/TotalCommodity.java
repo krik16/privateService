@@ -857,6 +857,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setOnServiceIds(param.getServiceIds());
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("参数错误");
 		}
 	}
