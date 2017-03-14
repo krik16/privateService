@@ -26,6 +26,8 @@ public class CommoditySpecHaiXinVO implements  Serializable {
 	private String mallName;
 	private String shopMid;//对应商品所属店铺
 	private String shopName;//对应商品所属店铺
+	private String shopParentMid;//总店mongoID
+	private String shopParentName;//总店名称
 	private Integer merchantType;
 
 	public String getReferencePrice() {
@@ -138,6 +140,22 @@ public class CommoditySpecHaiXinVO implements  Serializable {
 		this.merchantType = merchantType;
 	}
 
+	public String getShopParentMid() {
+		return shopParentMid;
+	}
+
+	public void setShopParentMid(String shopParentMid) {
+		this.shopParentMid = shopParentMid;
+	}
+
+	public String getShopParentName() {
+		return shopParentName;
+	}
+
+	public void setShopParentName(String shopParentName) {
+		this.shopParentName = shopParentName;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecHaiXinVO{" +
@@ -158,6 +176,8 @@ public class CommoditySpecHaiXinVO implements  Serializable {
 				", mallName='" + mallName + '\'' +
 				", shopMid='" + shopMid + '\'' +
 				", shopName='" + shopName + '\'' +
+				", shopParentMid='" + shopParentMid + '\'' +
+				", shopParentName='" + shopParentName + '\'' +
 				", merchantType=" + merchantType +
 				'}';
 	}
