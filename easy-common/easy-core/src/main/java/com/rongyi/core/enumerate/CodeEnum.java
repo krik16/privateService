@@ -281,8 +281,8 @@ public enum CodeEnum {
 	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复"),
 
     /** 售后说明敏感词校验*/
-	ERROR_SERVICE_DESCRIPTION_REMARK_HAS_SENSITIVE_WORD("1500001", "您填写的售后说明备注不符合规范，请重新编辑"),
-    ERROR_SERVICE_DESCRIPTION_CONTENT_HAS_SENSITIVE_WORD("1500002", "您填写的售后说明内容不符合规范，请重新编辑");
+	ERROR_SERVICE_DESCRIPTION_REMARK_HAS_SENSITIVE_WORD("1500001", "商品敏感词过滤没有通过, 您填写的售后说明备注中存在敏感词"),
+    ERROR_SERVICE_DESCRIPTION_CONTENT_HAS_SENSITIVE_WORD("1500002", "商品敏感词过滤没有通过，您填写的售后说明内容中存在敏感词");
 
 
 
