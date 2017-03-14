@@ -328,18 +328,39 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	@Override
 	public String toString() {
-		return "SubmitOrderParam [parentOrderList=" + parentOrderList
-				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
-				+ ", devType=" + devType + ", source=" + source
-				+ ", platformRebateCode=" + platformRebateCode
-				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
-				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
-				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
-				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
-				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
-				+ ", receiverName=" + receiverName+ ", memberName=" + memberName
-				+ "]";
+		return "SubmitOrderParam{" +
+				"business=" + business +
+				", parentOrderList=" + parentOrderList +
+				", commodityCartIds=" + commodityCartIds +
+				", devId='" + devId + '\'' +
+				", devType='" + devType + '\'' +
+				", source='" + source + '\'' +
+				", platformRebateCode='" + platformRebateCode + '\'' +
+				", discountInfo=" + discountInfo +
+				", ifCart=" + ifCart +
+				", weixinAppId='" + weixinAppId + '\'' +
+				", orderChannel='" + orderChannel + '\'' +
+				", openId='" + openId + '\'' +
+				", phone='" + phone + '\'' +
+				", memberId='" + memberId + '\'' +
+				", memberName='" + memberName + '\'' +
+				", receiverProvinceName='" + receiverProvinceName + '\'' +
+				", receiverCityName='" + receiverCityName + '\'' +
+				", receiverDistrictName='" + receiverDistrictName + '\'' +
+				", receiverAddress='" + receiverAddress + '\'' +
+				", receiverPhone='" + receiverPhone + '\'' +
+				", receiverName='" + receiverName + '\'' +
+				", provinceId='" + provinceId + '\'' +
+				", cityId='" + cityId + '\'' +
+				", districtId='" + districtId + '\'' +
+				", commodityType=" + commodityType +
+				", userType=" + userType +
+				", exchangeType='" + exchangeType + '\'' +
+				", deliveryType='" + deliveryType + '\'' +
+				", totalCredit=" + totalCredit +
+				", mallMid='" + mallMid + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				"} " + super.toString();
 	}
-	
+
 }

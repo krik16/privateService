@@ -13,7 +13,9 @@ public class DistributorUserParam implements Serializable{
 	
 	private Integer currentPage;
 	
-	private String mallId;
+	private String mallId;//商场id
+	
+	private String shopId;//店铺id
 
 	public Integer getPageSize() {
 		return pageSize;
@@ -38,11 +40,20 @@ public class DistributorUserParam implements Serializable{
 	public void setMallId(String mallId) {
 		this.mallId = mallId;
 	}
+	
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
 
 	@Override
 	public String toString() {
 		return "DistributorUserParam [pageSize=" + pageSize + ", currentPage="
-				+ currentPage + ", mallId=" + mallId + "]";
+				+ currentPage + ", mallId=" + mallId + ", shopId=" + shopId
+				+ "]";
 	}
 	
 }

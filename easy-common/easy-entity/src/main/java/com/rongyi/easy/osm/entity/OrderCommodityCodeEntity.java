@@ -30,6 +30,8 @@ public class OrderCommodityCodeEntity implements Serializable {
     private int status;
     // 商品 类型
     private int commodityType;
+    // 微信下单时对应的公众号类型
+    private Integer serviceType;
 
     public int getCheckedUserId() {
         return checkedUserId;
@@ -143,6 +145,14 @@ public class OrderCommodityCodeEntity implements Serializable {
         this.commodityType = commodityType;
     }
 
+    public Integer getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(Integer serviceType) {
+        this.serviceType = serviceType;
+    }
+
     @Override
     public String toString() {
         return "OrderCommodityCodeEntity{" +
@@ -160,6 +170,7 @@ public class OrderCommodityCodeEntity implements Serializable {
                 ", useTime=" + useTime +
                 ", status=" + status +
                 ", commodityType=" + commodityType +
+                ", serviceType=" + serviceType +
                 '}';
     }
 }
