@@ -1,23 +1,44 @@
 package com.rongyi.easy.osm.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 /**
  * Created by yangyang on 2017/3/10.
  */
+@XmlType(propOrder = { "billNo", "orgCode" ,"place","pfcustCode","custName","custPhone","custAddr","depCode","date","time","staffCode","remark"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BillHead implements Serializable {
 
+    @XmlElement(name = "BILLNO")
     private String billNo;
+    @XmlElement(name = "ORGCODE")
     private String orgCode;
+    @XmlElement(name = "PLACE")
     private String place;
+    @XmlElement(name = "PFCUSTCODE")
     private String pfcustCode;
+    @XmlElement(name = "CUSTNAME")
     private String custName;
+    @XmlElement(name = "CUSTPHONE")
     private String custPhone;
+    @XmlElement(name = "CUSTADDR")
     private String custAddr;
+    @XmlElement(name = "DEPCODE")
     private String depCode;
+    @XmlElement(name = "DATA")
     private String date;
+    @XmlElement(name = "TIME")
     private String time;
+    @XmlElement(name = "STAFFCODE")
     private String staffCode;
+    @XmlElement(name = "REMARK")
     private String remark;
 
     public String getBillNo() {
@@ -114,5 +135,9 @@ public class BillHead implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
