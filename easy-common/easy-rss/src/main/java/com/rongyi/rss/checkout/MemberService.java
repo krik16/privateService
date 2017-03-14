@@ -79,7 +79,7 @@ public interface MemberService {
      * @param mallId      商场id
      * @param serviceType 微信下单时对应的公众号类型
      * @param userId      用户id
-     * @param payAmount   支付金额
+     * @param payAmount   支付金额（实付金额-运费）
      * @param payDate     支付时间
      * @return
      */
