@@ -106,7 +106,7 @@ public class RefundBizz {
 
         //初始化退款记录
         PaymentEntity refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo, refundFee, Constants.ORDER_TYPE.ORDER_TYPE_6, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, aliConfigure.getAppid(), "");
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, oldPaymentEntity.getAliSellerId(), "");
         //发起退款
         AlipayTradeRefundResponse alipayTradeRefundResponse = AliPayUnit.f2fPayRefund(oldPaymentEntity.getPayNo(), refundFee, refundPaymentEntity.getPayNo(), refundReason, "", aliConfigure);
         refundPaymentEntity.setFinishTime(new Date());
