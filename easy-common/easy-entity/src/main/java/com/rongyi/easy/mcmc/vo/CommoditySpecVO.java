@@ -8,6 +8,7 @@ import com.rongyi.easy.mcmc.CommoditySpec;
 import com.rongyi.easy.mcmc.param.CommoditySpecParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 
 
 public class CommoditySpecVO implements  Serializable {
@@ -38,6 +39,7 @@ public class CommoditySpecVO implements  Serializable {
 	private String referencePrice;
 
 	private String specColumnsMsg;
+	private List<ObjectId> columnIds;
 
 
 	public String getSpecColumnsMsg() {
@@ -180,6 +182,14 @@ public class CommoditySpecVO implements  Serializable {
 		this.referencePrice = referencePrice;
 	}
 
+	public List<ObjectId> getColumnIds() {
+		return columnIds;
+	}
+
+	public void setColumnIds(List<ObjectId> columnIds) {
+		this.columnIds = columnIds;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecVO{" +
@@ -203,6 +213,7 @@ public class CommoditySpecVO implements  Serializable {
 		this.setSpecOriginalPrice(param.getOriginalPrice());
 		this.setSpecCurrentPrice(param.getCurrentPrice());
 		this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
+		this.setColumnIds(param.getColumnIds());
 		this.setSpecTotalStock(Integer.toString(param.getStock()));
 		this.setSpecStock(Integer.toString(param.getRemain()));
 		this.setSpecPictureUrl(param.getPictureUrl());
