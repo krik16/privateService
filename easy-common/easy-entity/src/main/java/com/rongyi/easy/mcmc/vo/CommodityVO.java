@@ -21,6 +21,7 @@ import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import org.bson.types.ObjectId;
 
 
 public class CommodityVO  implements  Serializable, Cloneable {
@@ -33,6 +34,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
+	private List<ObjectId> commodityCategoryIds;//商品所属的品类列表（海信）
 	private String commodityCategory1;	//新增 一级类目ID(当前适用于getCommodityById)
 	private String commodityCategory2;	//新增 二级类目ID(当前适用于getCommodityById)
 	private String commodityCategoryName1;
@@ -503,6 +505,15 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setCommodityCategory(String commodityCategory) {
 		this.commodityCategory = commodityCategory;
 	}
+
+	public List<ObjectId> getCommodityCategoryIds() {
+		return commodityCategoryIds;
+	}
+
+	public void setCommodityCategoryIds(List<ObjectId> commodityCategoryIds) {
+		this.commodityCategoryIds = commodityCategoryIds;
+	}
+
 	public String getCommodityDescription() {
 		return commodityDescription;
 	}
@@ -1282,6 +1293,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
 		vo.setCommodityName(commodity.getName());
 		vo.setCommodityCategory(commodity.getCategory());
+		vo.setCommodityCategoryIds(commodity.getCategoryIds());
 		vo.setCommodityDescription(commodity.getDescription());
 		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
 		vo.setCommodityCode(commodity.getCode());
