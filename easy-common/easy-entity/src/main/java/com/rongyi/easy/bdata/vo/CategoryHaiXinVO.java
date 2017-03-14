@@ -1,28 +1,24 @@
-package com.rongyi.easy.roa.entity;
+package com.rongyi.easy.bdata.vo;
 
 import java.io.Serializable;
 
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-@Entity("category_haixin")
-public class CategoryHaiXinEntity implements Serializable {
+
+public class CategoryHaiXinVO implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-    private ObjectId id;
+	
+	private String id;
 	private String code;     //编码
 	private String name;     //名称
 	private String upperCode;//上级编码
 	private Integer level;   //级别
-	
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getCode() {
@@ -51,7 +47,7 @@ public class CategoryHaiXinEntity implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "CategoryHaiXinEntity [id=" + id + ", code=" + code + ", name="
+		return "CategoryHaiXinVO [id=" + id + ", code=" + code + ", name="
 				+ name + ", upperCode=" + upperCode + ", level=" + level + "]";
 	}
 	
