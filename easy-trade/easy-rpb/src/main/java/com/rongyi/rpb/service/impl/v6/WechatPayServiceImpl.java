@@ -21,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -74,13 +75,19 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            RefundResData refundResData = refundBizz.weChatRefund(orderNo, refundFee, wechatConfigure);
-            Map<String, Object> map = BeanMapUtils.toMap(refundResData);
+            RefundResData resData = refundBizz.weChatRefund(orderNo, refundFee, wechatConfigure);
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
 
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
-            map.put("payNo", refundResData.getOut_trade_no());
+            map.put("payNo", resData.getOut_trade_no());
+            //微众银行退款单号
+            map.put("tradeNo",resData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",new BigDecimal(resData.getTotal_fee()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",new BigDecimal(resData.getRefund_fee()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
 
             log.info("退款结果,map={}", map);
             return map;
@@ -109,6 +116,16 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", resData.getOut_trade_no());
+
+            //微众银行退款单号
+            map.put("tradeNo",resData.getTransaction_id());
+
+            //交易金额
+            map.put("totalAmount", new BigDecimal(resData.getRefund_fee_0()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",new BigDecimal(resData.getRefund_fee_0()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+            map.put("refundStatus","SUCCESS");
+
 
             log.info("退款结果,map={}", map);
             return map;
@@ -144,6 +161,10 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("orderNo", wechatPaySignData.getOrderNo());
             //容易网交易号
             map.put("payNo", punchCardPayResData.getOut_trade_no());
+            //微信交易号
+            map.put("tradeNo", punchCardPayResData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",wechatPaySignVo.getTotalFee());
 
             log.info("返回刷卡支付结果,map={}", map);
             return map;
@@ -172,6 +193,12 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", punchCardPayQueryResData.getOut_trade_no());
+            //微信流水号
+            map.put("tradeNo", punchCardPayQueryResData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",new BigDecimal(punchCardPayQueryResData.getTotal_fee()).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //交易状态
+            map.put("tradeStatus",ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
 
             log.info("订单查询结果,map={}", map);
             return map;
