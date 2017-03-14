@@ -1,5 +1,8 @@
 package com.rongyi.easy.rpb.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -158,4 +161,10 @@ public class AliPunchCardPayVo implements Serializable {
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
     }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
 }
