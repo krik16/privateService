@@ -120,6 +120,8 @@ public class RefundBizz {
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
 
+        alipayTradeRefundResponse.setRefundFee(oldPaymentEntity.getAmountMoney().toString());
+
         return alipayTradeRefundResponse;
 
     }

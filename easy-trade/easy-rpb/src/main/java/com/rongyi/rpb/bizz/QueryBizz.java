@@ -2,6 +2,7 @@ package com.rongyi.rpb.bizz;
 
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
@@ -11,6 +12,7 @@ import com.rongyi.pay.core.wechat.model.RefundQueryResData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class QueryBizz {
     PaymentService paymentService;
     @Autowired
     PayConfigInitUnit payConfigInitUnit;
+    @Autowired
+    PaymentLogInfoService paymentLogInfoService;
     /**
      * 微众微信刷卡支付订单查询
      *
@@ -160,6 +164,21 @@ public class QueryBizz {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         return oldPaymentEntity;
+    }
+    /**
+     *
+     * 支付结果事件查询
+     * @param payNo 付款单号
+     * @return PaymentLogInfo
+     */
+    public PaymentLogInfo queryPaymentLogInfo(String payNo) {
+
+        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+
+        if (paymentLogInfo == null) {
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
+        return paymentLogInfo;
     }
 
         /**

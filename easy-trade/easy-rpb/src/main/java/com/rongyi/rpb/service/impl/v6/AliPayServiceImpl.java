@@ -6,6 +6,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
@@ -91,6 +92,9 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", alipayTradeRefundResponse.getOutTradeNo());
+
+            //交易金额
+            map.put("totalAmount", new BigDecimal(alipayTradeRefundResponse.getRefundFee()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
             log.info("支付宝面对面支付退款,map={}", map);
             return map;
@@ -184,12 +188,23 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
 
             PaymentEntity paymentEntity = queryBizz.aliRefundQuery(orderNo, aliConfigure);
 
+            PaymentLogInfo paymentLogInfo = queryBizz.queryPaymentLogInfo(paymentEntity.getPayNo());
+
             Map<String, Object> map = BeanMapUtils.toMap(paymentEntity);
 
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", paymentEntity.getPayNo());
+
+            //微众银行退款单号
+            map.put("tradeNo",paymentLogInfo.getTrade_no());
+            //交易金额
+            map.put("totalAmount",paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+
+            map.put("refundStatus","SUCCESS");
 
             log.info("支付宝退款查询结果,map={}", map);
             return map;
