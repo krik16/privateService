@@ -1,6 +1,9 @@
 package com.rongyi.rss.bdata;
 
+import java.util.List;
+
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.roa.entity.CategoryHaiXinEntity;
 
 public interface CategoriesService {
 	/**
@@ -9,4 +12,10 @@ public interface CategoriesService {
 	 * @return
 	 */
 	public ResponseVO getVoListByParentId(String parentId);
+	
+	public String insertCategoryHaiXin(CategoryHaiXinEntity categoryHaiXin);
+	
+	public CategoryHaiXinEntity getCategoryHaiXinByCode(String code);
+	
+	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level);
 }
