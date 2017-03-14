@@ -202,11 +202,14 @@ public class CommoditySpecVO implements  Serializable {
 	public void setCommoditySpecInfo(CommoditySpecParam param) {
 		this.setSpecOriginalPrice(param.getOriginalPrice());
 		this.setSpecCurrentPrice(param.getCurrentPrice());
-		this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
 		this.setSpecTotalStock(Integer.toString(param.getStock()));
 		this.setSpecStock(Integer.toString(param.getRemain()));
 		this.setSpecPictureUrl(param.getPictureUrl());
 		this.setSku(param.getSku());
 		this.setReferencePrice(param.getReferencePrice());
+
+		if (CollectionUtils.isNotEmpty(param.getColumnIds())) {
+			this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
+		}
 	}
 }
