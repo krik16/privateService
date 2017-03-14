@@ -17,7 +17,6 @@ import java.net.URL;
 public class SoapTest {
 
     public static void main(String  ...args) {
-
         //测试功能
         try {
             SoapTest soapTest = new SoapTest();
@@ -27,6 +26,44 @@ public class SoapTest {
 
             //获取分类
             soapTest.getCategory();
+
+            //品牌
+
+            soapTest.getBrand();
+
+            //实时 商品信息
+            soapTest.getmcmc();
+        } catch (Exception e) {
+        }
+
+    }
+
+    //商品信息
+    public void getmcmc(){
+        try {
+            SoapTest soapTest = new SoapTest();
+            //请求体
+            String soap = "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:HsNavWebSrvIntf-IHsNavWebSrv\">\n" +
+                    "   <soapenv:Header/>\n" +
+                    "   <soapenv:Body>\n" +
+                    "      <urn:INavOperateIntf soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n" +
+                    "         <psOperateTypeCode xsi:type=\"xsd:int\">2006</psOperateTypeCode>\n" +
+                    "         <psDataType xsi:type=\"xsd:string\">0</psDataType>\n" +
+                    "         <psXMLData xsi:type=\"xsd:string\">\n" +
+                    "         <IMPORTDATA>\n" +
+                    "        <OPERATION>1</OPERATION>\n" +
+                    "        <ORGCODE>001</ORGCODE>\n" +
+                    "         <BARCODE>0101001</BARCODE>\n" +
+                    "        </IMPORTDATA>\n" +
+                    "         </psXMLData>\n" +
+                    "      </urn:INavOperateIntf>\n" +
+                    "   </soapenv:Body>\n" +
+                    "</soapenv:Envelope>";
+            URL wsUrl = new URL("http://192.168.1.218:8080/HsNavWebSrv.dll/soap/IHsNavWebSrv?psOperateTypeCode=2006");
+            String result = SoapClientUtil.post(soap, wsUrl);
+            String ss = SoapXmlUtil.parseSoapMessage(result);
+
+            System.out.println("商品实时信息:====" + soapTest.decode(ss));
         } catch (Exception e) {
         }
 
@@ -61,6 +98,36 @@ public class SoapTest {
 
     }
 
+
+
+    //下载分类信息
+    public void getBrand(){
+        try {
+            SoapTest soapTest = new SoapTest();
+            //请求体
+            String soap = "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:HsNavWebSrvIntf-IHsNavWebSrv\">\n" +
+                    "   <soapenv:Header/>\n" +
+                    "   <soapenv:Body>\n" +
+                    "      <urn:INavOperateIntf soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n" +
+                    "         <psOperateTypeCode xsi:type=\"xsd:int\">2026</psOperateTypeCode>\n" +
+                    "         <psDataType xsi:type=\"xsd:string\">0</psDataType>\n" +
+                    "         <psXMLData xsi:type=\"xsd:string\">\n" +
+                    "         <IMPORTDATA>\n" +
+                    "        <OPERATION>1</OPERATION>\n" +
+                    "        </IMPORTDATA>\n" +
+                    "         </psXMLData>\n" +
+                    "      </urn:INavOperateIntf>\n" +
+                    "   </soapenv:Body>\n" +
+                    "</soapenv:Envelope>";
+            URL wsUrl = new URL("http://192.168.1.218:8080/HsNavWebSrv.dll/soap/IHsNavWebSrv?psOperateTypeCode=2026");
+            String result = SoapClientUtil.post(soap, wsUrl);
+            String ss = SoapXmlUtil.parseSoapMessage(result);
+
+            System.out.println("下载品牌信息:====" + soapTest.decode(ss));
+        } catch (Exception e) {
+        }
+
+    }
 
 
     /**
