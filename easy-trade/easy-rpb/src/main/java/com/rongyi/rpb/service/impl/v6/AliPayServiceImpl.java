@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -157,6 +158,10 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", alipayTradeQueryResponse.getOutTradeNo());
+
+            map.put("tradeStatus","SUCCESS");
+            //交易金额
+            map.put("totalAmount", new BigDecimal(alipayTradeQueryResponse.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
             log.info("支付宝面对面支付查询结果,map={}", map);
             return map;

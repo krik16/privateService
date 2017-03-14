@@ -215,6 +215,10 @@ public class AliPayUnit {
         //检查参数
         ParamUnit.checkAliF2FRefundParam(outTradeNo, refundAmount, outRefundNo);
 
+        if(StringUtils.isEmpty(refundReason)){
+            refundReason = "申请退款";
+        }
+
         // 创建退款请求builder，设置请求参数
         AlipayTradeRefundRequestBuilder builder = new AlipayTradeRefundRequestBuilder()
                 .setOutTradeNo(outTradeNo)
