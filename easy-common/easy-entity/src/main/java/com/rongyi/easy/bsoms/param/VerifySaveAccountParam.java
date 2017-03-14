@@ -20,6 +20,8 @@ public class VerifySaveAccountParam  implements Serializable{
 	private String shopMid;
 	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private String synTarget;//终端类型
+	private Integer defaultTerminal ; //默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机'
 	public Integer getId() {
 		return id;
 	}
@@ -128,6 +130,18 @@ public class VerifySaveAccountParam  implements Serializable{
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
+	public String getSynTarget() {
+		return synTarget;
+	}
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
+	}
 	@Override
 	public String toString() {
 		return "VerifySaveAccountParam [id=" + id + ", verifyStatus="
@@ -138,7 +152,10 @@ public class VerifySaveAccountParam  implements Serializable{
 				+ ", validEndAtStamp=" + validEndAtStamp + ", bShowChiefInfo="
 				+ bShowChiefInfo + ", mallMid=" + mallMid + ", shopMid="
 				+ shopMid + ", isOpenQrCode=" + isOpenQrCode
-				+ ", isAllowBindingWechat=" + isAllowBindingWechat + "]";
+				+ ", isAllowBindingWechat=" + isAllowBindingWechat
+				+ ", synTarget=" + synTarget + ", defaultTerminal="
+				+ defaultTerminal + "]";
 	}
+	
 	
 }
