@@ -295,4 +295,12 @@ public interface PaymentService {
 	 * @return
 	 */
 	PaymentEntity selectByPayNoWithLock(String payNo, Integer payChannel, Integer tradeType, Integer status);
+
+	/**
+	 * 根据订单号批量查询支付记录
+	 * @param orderNoList 订单号列表
+	 * @param tradeType 交易类型 0:支付，1：退款
+	 * @return
+	 */
+	List<PaymentEntity> batchQueryByOrderNos(List<String> orderNoList,Integer tradeType);
 }

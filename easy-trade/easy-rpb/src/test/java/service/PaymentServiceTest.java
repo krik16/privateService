@@ -17,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PaymentServiceTest extends BaseTest {
 
@@ -299,6 +296,16 @@ public class PaymentServiceTest extends BaseTest {
     public void testPayNotify() {
         RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId("abcdef","123456789");
         System.err.println("mchId="+ryMchAppVo.getRyMchId());
+    }
+
+    @Test
+    public void testBatchQuery(){
+        List<String> orderNos = new ArrayList<>();
+        orderNos.add("502173832320019003");
+        orderNos.add("11111111");
+        orderNos.add("1031420954880142518");
+        List<PaymentEntity> list = paymentService.batchQueryByOrderNos(orderNos,0);
+        System.err.println("size="+list.size());
     }
 
 }

@@ -569,5 +569,27 @@
         for update
     </select>
 
+    <select id="batchQueryByOrderNos" resultMap="BaseResultMap"
+            parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from payment_order
+        where trade_type = #{tradeType,jdbcType=INTEGER}
+        and  order_no in
+        <foreach collection="orderNoList" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+        order by
+        instr(
+       <!-- <foreach collection="orderNoList" index="index" item="item" open="'"
+                       separator="," close="'">
+        #{item}
+        </foreach>-->
+        #{orderNoList}
+        ,CONCAT(order_no))
+
+    </select>
+
 </mapper>
 

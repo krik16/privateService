@@ -205,7 +205,7 @@ public class QueryBizz {
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 
         if (oldPaymentEntity == null) {
-            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
