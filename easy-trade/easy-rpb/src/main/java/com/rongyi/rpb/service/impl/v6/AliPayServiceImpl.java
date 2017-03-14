@@ -209,11 +209,13 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("支付宝退款查询结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.error("支付宝退款查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.error("支付宝退款查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
+            log.error("支付宝退款查询异常,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
         }
     }
