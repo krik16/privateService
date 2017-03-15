@@ -134,19 +134,20 @@ public class HttpsRequest implements IServiceRequest {
                 .loadKeyMaterial(keyStore, wechatConfigure.getCertPassword().toCharArray())
                 .build();
         // Allow TLSv1 protocol only
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-                sslcontext,
-                new String[]{"TLSv1"},
-                null,
-                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+                null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+//        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+//                sslcontext,
+//                new String[]{"TLSv1"},
+//                null,
+//                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
 
         HttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslsf)
                 .build();
 
         //根据默认超时限制初始化requestConfig
-        requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
-
+//        requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
         hasInit = true;
         return httpClient;
     }
