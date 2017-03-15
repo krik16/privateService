@@ -18,4 +18,6 @@ public interface CategoriesService {
 	public CategoryHaiXinEntity getCategoryHaiXinByCode(String code);
 	
 	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level);
+	
+	public List<CategoryHaiXinEntity> getCategoryHaiXinByIds(List<String> ids);
 }
