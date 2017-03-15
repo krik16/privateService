@@ -37,7 +37,6 @@ import java.util.Map.Entry;
 public class HttpUtil {
 	private static Logger	logger = LoggerFactory.getLogger(HttpUtil.class);
 	//HTTP请求器
-	private static CloseableHttpClient httpClient;
 	public static void main(String[] args) {
 		
 	}
@@ -48,7 +47,7 @@ public class HttpUtil {
 		URL u = null;
 		logger.info("send_url:" + url +",webankConfig:"+configure);
 		try {
-			init(configure);
+			CloseableHttpClient httpClient = init(configure);
 			HttpGet httpGet = new HttpGet(url);
 			HttpResponse httpResponse = httpClient.execute(httpGet);
 			HttpEntity httpEntity = httpResponse.getEntity();
@@ -304,7 +303,7 @@ public class HttpUtil {
 		logger.info("http请求 url:{},object:{}",url,object);
 		//请求器的配置
 	//	RequestConfig requestConfig;
-		init(configure);
+		CloseableHttpClient httpClient = init(configure);
 		Map<String,Object> map = Signature.objectToMap(object);
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		String result = null;
@@ -344,7 +343,7 @@ public class HttpUtil {
 		return result;
 	}
 
-	private static void init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+	private static CloseableHttpClient init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 		logger.info("webankConfigure=" + webankConfigure.toString());
 		String KEY_STORE_PASSWORD = webankConfigure.getWechatKeyStorePwd();
 		String KEY_STORE_TRUST_PASSWORD = "123456";
@@ -369,7 +368,7 @@ public class HttpUtil {
 				.build();
 		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
 				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
-		httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		return HttpClients.custom().setSSLSocketFactory(sslsf).build();
 		//HttpResponse response = httpclient.execute(httpPost);
 	}
 
