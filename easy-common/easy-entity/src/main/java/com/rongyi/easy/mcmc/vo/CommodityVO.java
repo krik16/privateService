@@ -35,6 +35,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String commodityName;
 	private String commodityCategory;
 	private List<ObjectId> commodityCategoryIds;//商品所属的品类列表（海信）
+	private List<String> commodityCategoryNames;//商品所属的品类名称列表（海信）
 	private String commodityCategory1;	//新增 一级类目ID(当前适用于getCommodityById)
 	private String commodityCategory2;	//新增 二级类目ID(当前适用于getCommodityById)
 	private String commodityCategoryName1;
@@ -512,6 +513,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	public void setCommodityCategoryIds(List<ObjectId> commodityCategoryIds) {
 		this.commodityCategoryIds = commodityCategoryIds;
+	}
+
+	public List<String> getCommodityCategoryNames() {
+		return commodityCategoryNames;
+	}
+
+	public void setCommodityCategoryNames(List<String> commodityCategoryNames) {
+		this.commodityCategoryNames = commodityCategoryNames;
 	}
 
 	public String getCommodityDescription() {
