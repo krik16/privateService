@@ -9,6 +9,7 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.activitymanage.vo.CommodityVO;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.malllife.constants.Constants;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
@@ -803,6 +804,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		try {
 
 			this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
+			this.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
 			this.setName(param.getName());
 			this.setCode(param.getCode());
 			this.setBarCode(param.getBarCode());
