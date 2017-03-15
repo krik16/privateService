@@ -22,21 +22,86 @@ public class SoapTest {
             SoapTest soapTest = new SoapTest();
 
             //获取店铺
-            soapTest.getShopInfo();
+            //soapTest.getShopInfo();
 
             //获取分类
-            soapTest.getCategory();
+            //soapTest.getCategory();
 
             //品牌
 
-            soapTest.getBrand();
+            //soapTest.getBrand();
 
             //实时 商品信息
-            soapTest.getmcmc();
+            //soapTest.getmcmc();
+
+            //订单
+            soapTest.sumbitOrder();
         } catch (Exception e) {
         }
 
     }
+
+
+
+    public void sumbitOrder(){
+        try {
+            SoapTest soapTest = new SoapTest();
+            //请求体
+            String soap = "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:HsNavWebSrvIntf-IHsNavWebSrv\">\n" +
+                    "   <soapenv:Header/>\n" +
+                    "   <soapenv:Body>\n" +
+                    "      <urn:INavOperateIntf soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n" +
+                    "         <psOperateTypeCode xsi:type=\"xsd:int\">2018</psOperateTypeCode>\n" +
+                    "         <psDataType xsi:type=\"xsd:string\">0</psDataType>\n" +
+                    "         <psXMLData xsi:type=\"xsd:string\">\n" +
+                    "        <IMPORTDATA>\n" +
+                    "    <OPERATION>1</OPERATION>\n" +
+                    "    <BILLHEAD>\n" +
+                    "        <BILLNO>1</BILLNO>\n" +
+                    "        <ORGCODE>001</ORGCODE>\n" +
+                    "        <PLACE>1</PLACE>\n" +
+                    "        <PFCUSTCODE>1</PFCUSTCODE>\n" +
+                    "        <CUSTNAME>1</CUSTNAME>\n" +
+                    "        <CUSTPHONE>15821658716</CUSTPHONE>\n" +
+                    "        <CUSTADDR>1</CUSTADDR>\n" +
+                    "        <DEPCODE>001</DEPCODE>\n" +
+                    "        <DATA>2017-03-14</DATA>\n" +
+                    "        <TIME>14:11:33</TIME>\n" +
+                    "        <STAFFCODE>001002005</STAFFCODE>\n" +
+                    "        <REMARK>1</REMARK>\n" +
+                    "    </BILLHEAD>\n" +
+                    "    <BILLBODY>\n" +
+                    "        <PLUDATA>\n" +
+                    "            <BILLNO>1</BILLNO>\n" +
+                    "            <SERIALNO>1</SERIALNO>\n" +
+                    "            <PLUCODE>1</PLUCODE>\n" +
+                    "            <PLUNAME>1</PLUNAME>\n" +
+                    "            <PFCOUNT>1</PFCOUNT>\n" +
+                    "            <PFPRICE>1</PFPRICE>\n" +
+                    "            <BARCODE>1</BARCODE>\n" +
+                    "        </PLUDATA>      \n" +
+                    "    </BILLBODY>\n" +
+                    "   </IMPORTDATA>\n" +
+                    "         </psXMLData>\n" +
+                    "      </urn:INavOperateIntf>\n" +
+                    "   </soapenv:Body>\n" +
+                    "</soapenv:Envelope>";
+            URL wsUrl = new URL("http://192.168.1.218:8080/HsNavWebSrv.dll/soap/IHsNavWebSrv?psOperateTypeCode=2018");
+            String result = SoapClientUtil.post(soap, wsUrl);
+            String ss = SoapXmlUtil.parseSoapMessage(result);
+
+            System.out.println("订单信息信息:====" + soapTest.decode(ss));
+        } catch (Exception e) {
+        }
+
+    }
+
+
+
+
+
+
+
 
     //商品信息
     public void getmcmc(){
