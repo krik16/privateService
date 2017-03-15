@@ -1,11 +1,14 @@
 package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SubmitOrderVO implements Serializable {
 
 	private List<String> parentOrderNumList;// 父订单号集合
+
+	private BigDecimal totalPrice;//实际需要支付价格
 
 	public List<String> getCouponCodeList() {
 		return couponCodeList;
@@ -25,4 +28,20 @@ public class SubmitOrderVO implements Serializable {
 		this.parentOrderNumList = parentOrderNumList;
 	}
 
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "SubmitOrderVO{" +
+				"parentOrderNumList=" + parentOrderNumList +
+				", totalPrice=" + totalPrice +
+				", couponCodeList=" + couponCodeList +
+				'}';
+	}
 }
