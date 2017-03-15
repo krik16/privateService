@@ -110,6 +110,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
 	private String brandName;
+	private Integer commodityRange;
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
 
 	public List<String> getMallServiceIds() {
 		return mallServiceIds;
