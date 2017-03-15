@@ -212,7 +212,9 @@ public class QueryBizz {
         if(refundPaymentEntity == null){
             throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
         }
-        return WeChatPayUnit.refundQuery(null,oldPaymentEntity.getPayNo(),null,wechatConfigure);
+        RefundQueryResData refundQueryResData = WeChatPayUnit.refundQuery(null,oldPaymentEntity.getPayNo(),null,wechatConfigure);
+        refundQueryResData.setTotalAmount(oldPaymentEntity.getAmountMoney());
+        return refundQueryResData;
 
     }
 

@@ -21,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -118,7 +119,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("tradeNo",resData.getTransaction_id());
 
             //交易金额
-            map.put("totalAmount", resData.getRefund_fee_0());
+            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)).toString());
             //退款金额
             map.put("refundAmount",resData.getRefund_fee_0());
             map.put("refundStatus","SUCCESS");
