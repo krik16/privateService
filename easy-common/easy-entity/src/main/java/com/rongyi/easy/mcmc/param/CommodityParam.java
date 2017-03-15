@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
@@ -478,5 +479,29 @@ public class CommodityParam implements Serializable{
 
 	public void setCommodityType(Integer commodityType) {
 		this.commodityType = commodityType;
+	}
+
+	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity){
+		CommodityParam commodityParam=new CommodityParam();
+
+		commodityParam.setType(1); //TODO
+		commodityParam.setName(haiXinCommodity.getPluName());
+		commodityParam.setCode(haiXinCommodity.getBarCode());
+		commodityParam.setCategory(haiXinCommodity.getClsCode());
+		commodityParam.setCategoryIds(new ArrayList<ObjectId>());
+		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
+		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
+		//TODO: referencePrice picList "distribution":  "description": "commodityDetails":
+
+
+		commodityParam.setStatus(4);
+		//todo
+		commodityParam.setSource(1);
+		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+
+		commodityParam.setBarCode(haiXinCommodity.getBarCode());
+		commodityParam.setDescription(haiXinCommodity.getRemark());
+
+		return  commodityParam;
 	}
 }
