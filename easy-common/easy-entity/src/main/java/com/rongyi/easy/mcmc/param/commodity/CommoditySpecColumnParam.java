@@ -12,9 +12,9 @@ import com.rongyi.easy.bsoms.param.BaseParam;
  *
  */
 public class CommoditySpecColumnParam implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String commoditySpecId;//规格id
@@ -22,6 +22,7 @@ public class CommoditySpecColumnParam implements Serializable{
     private Integer pageSize;//每页数量
 	private Integer currentPage;//当前页  从1开始
 	private Integer isDisabled;//1 或者null 查全部，2 查正常的
+	private Integer source;//1为商家后台请求，绕过权限判断
 	public String getCommoditySpecId() {
 		return commoditySpecId;
 	}
@@ -52,12 +53,21 @@ public class CommoditySpecColumnParam implements Serializable{
 	public void setIsDisabled(Integer isDisabled) {
 		this.isDisabled = isDisabled;
 	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecColumnParam [commoditySpecId=" + commoditySpecId
 				+ ", commoditySpecName=" + commoditySpecName + ", pageSize="
-				+ pageSize + ", currentPage=" + currentPage + ", isDisabled="
+				+ pageSize + ", currentPage=" + currentPage + ", isDisabled="+",source"+source
 				+ isDisabled + "]";
 	}
-	
+
 }
