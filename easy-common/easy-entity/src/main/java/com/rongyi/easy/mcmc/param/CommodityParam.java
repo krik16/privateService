@@ -2,6 +2,7 @@ package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -494,25 +495,27 @@ public class CommodityParam implements Serializable{
 	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity){
 		CommodityParam commodityParam=new CommodityParam();
 
-		commodityParam.setHaiXinId();
+		//commodityParam.setHaiXinId();
 		commodityParam.setType(1); //TODO
 		commodityParam.setName(haiXinCommodity.getPluName());
-		commodityParam.setCode(haiXinCommodity.getBarCode());
+		commodityParam.setCode(haiXinCommodity.getPluCode());
+		//根据传过来的ClsCode去找我们表里面的categoryId
 		commodityParam.setCategory(haiXinCommodity.getClsCode());
 		commodityParam.setCategoryIds(new ArrayList<ObjectId>());
+
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		//TODO: referencePrice picList "distribution":  "description": "commodityDetails":
-
-
+		String spec=haiXinCommodity.getSpec();
+		CommoditySpecParam commoditySpecParam=new CommoditySpecParam();
+		commoditySpecParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
+		commodityParam.setCommoditySpeceParams(Arrays.asList(commoditySpecParam));
 		commodityParam.setStatus(4);
 		//todo
 		commodityParam.setSource(1);
 		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
-
 		commodityParam.setBarCode(haiXinCommodity.getBarCode());
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-
+		commodityParam.setStock(haiXinCommodity.getCounts());
 		return  commodityParam;
 	}
 }
