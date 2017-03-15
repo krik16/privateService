@@ -7,12 +7,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -68,7 +68,7 @@ public class HttpsRequest implements IServiceRequest {
     public String sendPost(String url, Object xmlObj, WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
 //        if (!hasInit) {
-        CloseableHttpClient httpClient = init(wechatConfigure);
+        HttpClient httpClient = init(wechatConfigure);
 //        }
 
         String result = null;
@@ -107,7 +107,7 @@ public class HttpsRequest implements IServiceRequest {
         return result;
     }
 
-    private CloseableHttpClient init(WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    private HttpClient init(WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
         LOGGER.info("wechatConfigure=" + wechatConfigure.toString());
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         String cretFilePath = wechatConfigure.getCertLocalPath();
@@ -140,7 +140,7 @@ public class HttpsRequest implements IServiceRequest {
                 null,
                 SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
 
-        CloseableHttpClient httpClient = HttpClients.custom()
+        HttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslsf)
                 .build();
 
