@@ -11,7 +11,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -348,13 +347,13 @@ public class HttpUtil {
 		String KEY_STORE_PASSWORD = webankConfigure.getWechatKeyStorePwd();
 		String KEY_STORE_TRUST_PASSWORD = "123456";
 		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		KeyStore trustStore = KeyStore.getInstance("JKS");
+//		KeyStore trustStore = KeyStore.getInstance("JKS");
 		InputStream ksIn = new FileInputStream(webankConfigure.getWechatKeyStorePath());
 		InputStream tsIn = new FileInputStream(webankConfigure.getWechatTrustStorePath());
 		try {
 			keyStore.load(ksIn, KEY_STORE_PASSWORD.toCharArray());
-			trustStore.load(tsIn, KEY_STORE_TRUST_PASSWORD.toCharArray());
-			System.setProperty("javax.net.ssl.trustStore", webankConfigure.getWechatTrustStorePath());
+//			trustStore.load(tsIn, KEY_STORE_TRUST_PASSWORD.toCharArray());
+//			System.setProperty("javax.net.ssl.trustStore", webankConfigure.getWechatTrustStorePath());
 		} catch (Exception e) {
 			System.out.println("got a exception" + e.getMessage());
 		} finally {
@@ -364,7 +363,7 @@ public class HttpUtil {
 		SSLContext sslcontext = null;
 		sslcontext = SSLContexts.custom()
 				.loadKeyMaterial(keyStore, KEY_STORE_PASSWORD.toCharArray())
-				.loadTrustMaterial(trustStore, new TrustSelfSignedStrategy())
+//				.loadTrustMaterial(trustStore, new TrustSelfSignedStrategy())
 				.build();
 		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
 				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
