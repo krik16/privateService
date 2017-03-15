@@ -26,7 +26,22 @@ public interface ICashPayService {
      * @param ryMchVo 容易商户
      * @param orderNo 订单号
      * @param payType 支付方式
-     * @return
+     * @return map
      */
     Map<String, Object> cashPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType);
+
+    /**
+     *现金退款
+     * @param orderNo 订单号
+     * @param refundAmount 退款金额
+     * @return map
+     */
+    Map<String, Object> cashRefund(String orderNo, Integer refundAmount);
+
+    /**
+     * 现金退款查询
+     * @param orderNo 订单号
+     * @return map
+     */
+    Map<String, Object> cashRefundQuery(String orderNo);
 }
