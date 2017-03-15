@@ -101,6 +101,7 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
         }
     }
 
+    @Override
     public Map<String, Object> cashRefund(String orderNo, Integer refundAmount) {
         log.info("现金退款,orderNo={},refundAmount={}", orderNo, refundAmount);
         try {
@@ -116,6 +117,36 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             log.info("现金退款结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
+            log.error("现金退款失败,e={}", e.getMessage(), e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("现金退款失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("现金退款异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_CASH_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_CASH_REFUND_FAIL.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> cashRefundQuery(String orderNo) {
+        log.info("现金退款,orderNo={}", orderNo);
+        try {
+            PaymentEntity paymentEntityVo = queryBizz.cashRefundQueryOrder(orderNo);
+
+            PaymentLogInfo paymentLogInfo = queryBizz.queryPaymentLogInfo(paymentEntityVo.getPayNo());
+            Map<String, Object> map = BeanMapUtils.toMap(paymentEntityVo);
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //微众银行退款单号
+            map.put("tradeNo",paymentLogInfo.getTrade_no());
+            //交易金额
+            map.put("totalAmount", paymentEntityVo.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",paymentEntityVo.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            map.put("refundStatus","SUCCESS");
+            return map;
+    }  catch (WebankException | ParamNullException e) {
             log.error("现金退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {

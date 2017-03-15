@@ -240,16 +240,15 @@ public class QueryBizz {
      * 现金退款订单查询
      *
      * @param orderNo     订单号
-     * @param payType  支付方式(0:支付宝,1:微信,2:pos银行卡,3:现金)
      * @return PunchCardPayQueryResData
      */
-    public PaymentEntity cashRefundQueryOrder(String orderNo, Integer payType) {
+    public PaymentEntity cashRefundQueryOrder(String orderNo) {
 
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                payType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
 
         if (paymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
         }
         return paymentEntity;
     }
