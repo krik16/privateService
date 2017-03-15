@@ -41,7 +41,8 @@ public class HaiXinCommodity implements Serializable{
     private Integer KeepDays;//保质期天数
     private  String ClsCode;//品类编码
     private String Remark;//备注
-
+    private Integer IsRight;
+    
     public String getPluCode() {
         return PluCode;
     }
@@ -273,7 +274,16 @@ public class HaiXinCommodity implements Serializable{
     public void setRemark(String remark) {
         Remark = remark;
     }
-    //source 为1表示导入转化
+    
+    public Integer getIsRight() {
+		return IsRight;
+	}
+
+	public void setIsRight(Integer isRight) {
+		IsRight = isRight;
+	}
+
+	//source 为1表示导入转化
     public static CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity,Integer source){
         CommodityParam commodityParam=new CommodityParam();
         commodityParam.setSource(1); // 源：海信导入
