@@ -260,6 +260,7 @@ public class PayNotifyBizz {
             map.put("tradeNo", paymentLogInfo.getTransactionId());
         }
         map.put("type", type);
+        //支付方式
         map.put("payType",paymentEntity.getPayChannel());
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
         map.put("timeStamp", timeStamp);

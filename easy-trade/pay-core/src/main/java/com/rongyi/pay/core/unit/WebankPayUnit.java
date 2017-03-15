@@ -302,7 +302,7 @@ public class WebankPayUnit {
                 LOGGER.info("微众返回系统异常 再次调用查询接口查询实际支付状态");
                 resData = waitUserAlipayPaying(param, 1);
             }else if (!ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getRetCode())) {
-                throw new WebankException(resData.getRetCode(), resData.getSubMsg());
+                throw new WebankException(resData.getRetCode(), resData.getSubMsg() != null ? resData.getSubMsg() : resData.getRetMsg());
             }
         } catch (WebankException | ParamNullException e) {
             throw e ;

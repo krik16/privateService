@@ -235,7 +235,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
 
     @Override
     public Map<String, Object> webankAliRefund(String orderNo, Integer refundAmount, String refundReason, String weBankMchNo) {
-        log.info("微众支付宝刷卡支付查询,orderNo={},refundAmount={},refundReason={},weBankMchNo={}", orderNo, refundAmount,refundReason,weBankMchNo);
+        log.info("微众支付宝退款,orderNo={},refundAmount={},refundReason={},weBankMchNo={}", orderNo, refundAmount,refundReason,weBankMchNo);
         try {
             WaRefundResData resData = refundBizz.webankAliRefund(orderNo, refundAmount, weBankMchNo);
             Map<String, Object> map = BeanMapUtils.toMap(resData);

@@ -6,7 +6,10 @@ import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.CashPayVo;
+import com.rongyi.easy.rpb.vo.PosBankCardPayVo;
 import com.rongyi.easy.rpb.vo.RyMchVo;
+import com.rongyi.easy.rpb.vo.v6.PaymentEntityVo;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
@@ -28,6 +31,8 @@ import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.malllife.service.IRedisService;
+import com.rongyi.rss.rpb.OrderNoGenService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,6 +59,8 @@ public class PayBizz {
     PayConfigInitUnit payConfigInitUnit;
     @Autowired
     PayNotifyBizz payNotifyBizz;
+    @Autowired
+    OrderNoGenService orderNoGenService;
 
     /**
      * 微信扫码支付签名
@@ -189,7 +196,7 @@ public class PayBizz {
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
 
         //发送异步通知
-        payNotifyBizz.payNotifyThird(paymentEntity,paymentLogInfo);
+        payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         return alipayTradePayResponse;
     }
 
@@ -282,9 +289,62 @@ public class PayBizz {
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
         //发送异步通知
-        payNotifyBizz.payNotifyThird(paymentEntity,paymentLogInfo);
+        payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
 
         return resData;
+    }
+
+    /**
+     * 现金支付
+     *
+     * @param ryMchVo   容易商户信息
+     * @param cashPayVo 业务参数
+     * @param orderType 订单类型
+     * @return WwPunchCardResData
+     */
+    public PaymentEntityVo cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo,Integer orderType) {
+
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, cashPayVo.getOrderNo(), cashPayVo.getTotalAmount(), "", "",
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3, orderType);
+
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(orderNoGenService.getOrderNo("6"), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                "SUCCESS", cashPayVo.getTotalAmount(), "", "",
+                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        //发送异步通知
+        payNotifyBizz.payNotifyThird(paymentEntity,paymentLogInfo);
+
+        //设置返回对象
+        PaymentEntityVo paymentEntityVo = new PaymentEntityVo();
+        BeanUtils.copyProperties(paymentEntity,paymentEntityVo);
+        paymentEntityVo.setTradeNo(paymentLogInfo.getTrade_no());
+        return paymentEntityVo;
+    }
+
+    /**
+     * pos银行卡支付
+     *
+     * @param ryMchVo   容易商户信息
+     * @param posBankCardPayVo 业务参数
+     * @param orderType 订单类型
+     * @return WwPunchCardResData
+     */
+    public PaymentEntity posBankCardPay(RyMchVo ryMchVo, PosBankCardPayVo posBankCardPayVo,Integer orderType) {
+
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, posBankCardPayVo.getOrderNo(), posBankCardPayVo.getTotalAmount(), "", "",
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, orderType);
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, null);
+
+        return paymentEntity;
     }
 
 

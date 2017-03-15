@@ -185,7 +185,7 @@ public class QueryBizz {
      */
     public PaymentLogInfo queryPaymentLogInfo(String payNo) {
 
-        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 
         if (paymentLogInfo == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
@@ -216,6 +216,42 @@ public class QueryBizz {
         refundQueryResData.setTotalAmount(oldPaymentEntity.getAmountMoney());
         return refundQueryResData;
 
+    }
+
+    /**
+     * 现金支付订单查询
+     *
+     * @param orderNo     订单号
+     * @param payType  支付方式(0:支付宝,1:微信,2:pos银行卡,3:现金)
+     * @return PunchCardPayQueryResData
+     */
+    public PaymentEntity cashPayQueryOrder(String orderNo, Integer payType) {
+
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                payType);
+
+        if (paymentEntity == null) {
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
+        return paymentEntity;
+    }
+
+    /**
+     * 现金退款订单查询
+     *
+     * @param orderNo     订单号
+     * @param payType  支付方式(0:支付宝,1:微信,2:pos银行卡,3:现金)
+     * @return PunchCardPayQueryResData
+     */
+    public PaymentEntity cashRefundQueryOrder(String orderNo, Integer payType) {
+
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                payType);
+
+        if (paymentEntity == null) {
+            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
+        return paymentEntity;
     }
 
 }

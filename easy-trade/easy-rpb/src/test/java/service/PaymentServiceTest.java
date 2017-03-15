@@ -294,7 +294,7 @@ public class PaymentServiceTest extends BaseTest {
     @Test
 //    @Rollback(false)
     public void testPayNotify() {
-        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId("abcdef","123456789");
+        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId("666666666","aaaaaa");
         System.err.println("mchId="+ryMchAppVo.getRyMchId());
     }
 
