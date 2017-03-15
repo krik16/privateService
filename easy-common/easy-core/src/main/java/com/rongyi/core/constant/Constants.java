@@ -1120,4 +1120,22 @@ public interface Constants {
         // token
         String token = "ab32bdcb85da2cb5";
     }
+
+    /**
+     * 注册福利返回的异常
+     */
+    interface MK_REGISTERED_MSG {
+        /**
+         * 库存不足
+         */
+        String ERROR_STOCK_LOW = "库存不足";
+        /**
+         * 已失效或已下架
+         */
+        String ERROR_SOLDOUT = "已失效或已下架";
+        /**
+         * 系统异常
+         */
+        String ERROR_SYSTEM = "系统异常";
+    }
 }
