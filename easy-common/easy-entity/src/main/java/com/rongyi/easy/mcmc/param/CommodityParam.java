@@ -97,7 +97,17 @@ public class CommodityParam implements Serializable{
 
 	private String commodityModelNo;
 
-	private String pass; // 0：不通过  1：通过j
+	private String pass; // 0：不通过  1：通过
+
+	private String haiXinId;
+
+	public String getHaiXinId() {
+		return haiXinId;
+	}
+
+	public void setHaiXinId(String haiXinId) {
+		this.haiXinId = haiXinId;
+	}
 
 	public String getPass() {
 		return pass;
@@ -484,6 +494,7 @@ public class CommodityParam implements Serializable{
 	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity){
 		CommodityParam commodityParam=new CommodityParam();
 
+		commodityParam.setHaiXinId();
 		commodityParam.setType(1); //TODO
 		commodityParam.setName(haiXinCommodity.getPluName());
 		commodityParam.setCode(haiXinCommodity.getBarCode());
