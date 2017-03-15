@@ -115,6 +115,9 @@ public class HttpsRequest implements IServiceRequest {
         try {
             instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
             keyStore.load(instream, wechatConfigure.getCertPassword().toCharArray());//设置证书密码
+           String path = System.getProperty("javax.net.ssl.trustStore");
+            LOGGER.info("path={}",path);
+            System.clearProperty("javax.net.ssl.trustStore");
         } catch (IOException e) {
             LOGGER.error("证书文件获取失败,cretFilePath={}", cretFilePath);
             throw new WeChatException("-1", "证书文件获取失败");
@@ -141,11 +144,9 @@ public class HttpsRequest implements IServiceRequest {
 //                new String[]{"TLSv1"},
 //                null,
 //                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-
         HttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslsf)
                 .build();
-
         //根据默认超时限制初始化requestConfig
 //        requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
         hasInit = true;
