@@ -432,6 +432,6 @@ public interface CommodityService {
     public Boolean updateCommodityStatus(String id, Integer status);
 
     List<HaiXinCommodityVO> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
-    
-    
+
+    List<HaiXinCommodityVO> getTotalCommodityListForHaiXin(Map<String, Object> paramsMap);
 }
