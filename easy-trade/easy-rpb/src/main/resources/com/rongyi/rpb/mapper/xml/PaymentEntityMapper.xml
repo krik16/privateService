@@ -574,7 +574,7 @@
         select
         <include refid="Base_Column_List"/>
         from payment_order
-        where trade_type = #{tradeType,jdbcType=INTEGER}
+        where trade_type = #{tradeType,jdbcType=INTEGER} and status = 2
         and  order_no in
         <foreach collection="orderNoList" index="index" item="item" open="("
                  separator="," close=")">
