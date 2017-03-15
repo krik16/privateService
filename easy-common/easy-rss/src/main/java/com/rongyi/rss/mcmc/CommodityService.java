@@ -214,6 +214,8 @@ public interface CommodityService {
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
 
+    List<Commodity> getCommodityBySystemNumber(String systemNumber);
+
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
     public List<McmcCommodityDocument> getMcmcCommodityDocumentList(int skip,int pageSize) throws Exception;
@@ -429,9 +431,11 @@ public interface CommodityService {
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
 
-    public Boolean updateCommodityStatus(String id, Integer status);
+    public Boolean updateCommodityStatus(String id, Integer status, String reason);
 
     List<HaiXinCommodityVO> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
 
     List<HaiXinCommodityVO> getTotalCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+
 }
