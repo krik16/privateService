@@ -52,9 +52,6 @@ public class HttpsRequest implements IServiceRequest {
     //请求器的配置
     private RequestConfig requestConfig;
 
-    //HTTP请求器
-    private CloseableHttpClient httpClient;
-
     /**
      * 通过Https往API post xml数据
      *
@@ -71,7 +68,7 @@ public class HttpsRequest implements IServiceRequest {
     public String sendPost(String url, Object xmlObj, WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
 //        if (!hasInit) {
-        init(wechatConfigure);
+        CloseableHttpClient httpClient = init(wechatConfigure);
 //        }
 
         String result = null;
@@ -110,7 +107,7 @@ public class HttpsRequest implements IServiceRequest {
         return result;
     }
 
-    private void init(WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    private CloseableHttpClient init(WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
         LOGGER.info("wechatConfigure=" + wechatConfigure.toString());
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         String cretFilePath = wechatConfigure.getCertLocalPath();
@@ -143,7 +140,7 @@ public class HttpsRequest implements IServiceRequest {
                 null,
                 SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
 
-        httpClient = HttpClients.custom()
+        CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslsf)
                 .build();
 
@@ -151,6 +148,7 @@ public class HttpsRequest implements IServiceRequest {
         requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
 
         hasInit = true;
+        return httpClient;
     }
 
 
