@@ -42,6 +42,7 @@ public class HaiXinCommodity implements Serializable{
     private  String ClsCode;//品类编码
     private String Remark;//备注
     private Integer IsRight;
+    private Integer Status;//状态  暂定字段
     
     public String getPluCode() {
         return PluCode;
@@ -281,6 +282,14 @@ public class HaiXinCommodity implements Serializable{
 
 	public void setIsRight(Integer isRight) {
 		IsRight = isRight;
+	}
+
+	public Integer getStatus() {
+		return Status;
+	}
+
+	public void setStatus(Integer status) {
+		Status = status;
 	}
 
 	//source 为1表示导入转化
