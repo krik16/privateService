@@ -1118,6 +1118,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				"commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
+				", commodityCategoryIds=" + commodityCategoryIds +
+				", commodityCategoryNames=" + commodityCategoryNames +
 				", commodityCategory1='" + commodityCategory1 + '\'' +
 				", commodityCategory2='" + commodityCategory2 + '\'' +
 				", commodityCategoryName1='" + commodityCategoryName1 + '\'' +
@@ -1151,6 +1153,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", commodityPicList=" + commodityPicList +
 				", commoditySpecList=" + commoditySpecList +
 				", commodityCode='" + commodityCode + '\'' +
+				", commodityBarCode='" + commodityBarCode + '\'' +
 				", commodityCommission='" + commodityCommission + '\'' +
 				", brandMid='" + brandMid + '\'' +
 				", mallMid='" + mallMid + '\'' +
@@ -1322,9 +1325,12 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
-		vo.setMallServiceIds(commodity.getMallServiceIds());
-		vo.setOnServiceIds(commodity.getOnServiceIds());
 		vo.setCommodityDetails(commodity.getCommodityDetails());
+
+		// TODO total不存服务号，所以服务号在别处获取
+	//	vo.setMallServiceIds(commodity.getMallServiceIds());
+	//	vo.setOnServiceIds(commodity.getOnServiceIds());
+
 
 		//默认值
 		vo.setBrandId(-1);

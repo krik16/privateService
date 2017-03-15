@@ -569,6 +569,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", category='" + category + '\'' +
 				", status=" + status +
 				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
 				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
@@ -609,12 +610,17 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", shelvesType=" + shelvesType +
 				", locationIds=" + locationIds +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", accountType=" + accountType +
 				", merchantId='" + merchantId + '\'' +
 				", wechatInfoVos=" + wechatInfoVos +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
-				", mallServiceIds=" + mallServiceIds +
+				", brandName='" + brandName + '\'' +
+				", commodityRange=" + commodityRange +
 				'}';
 	}
 
@@ -864,8 +870,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
 
-			this.setMallServiceIds(param.getServiceIds());
-			this.setOnServiceIds(param.getServiceIds());
+			// TODO total不需要服务号
+		//	this.setMallServiceIds(param.getServiceIds());
+		//	this.setOnServiceIds(param.getServiceIds());
 
 		} catch (Exception e) {
 			e.printStackTrace();

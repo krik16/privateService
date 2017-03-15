@@ -987,11 +987,11 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setServiceDescriptionRemark(serviceDescriptionRemark);
 		return commodity;
 	}
+
 	@Override
 	public String toString() {
 		return "Commodity{" +
-				"activityEndTime=" + activityEndTime +
-				", id=" + id +
+				"id=" + id +
 				", type=" + type +
 				", liveId='" + liveId + '\'' +
 				", isSpot=" + isSpot +
@@ -1001,6 +1001,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", saleId=" + saleId +
 				", flashSaleId=" + flashSaleId +
 				", activityStartTime=" + activityStartTime +
+				", activityEndTime=" + activityEndTime +
 				", secKillSign='" + secKillSign + '\'' +
 				", name='" + name + '\'' +
 				", category='" + category + '\'' +
@@ -1035,6 +1036,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", brandId='" + brandId + '\'' +
 				", mallId='" + mallId + '\'' +
 				", categoryIds=" + categoryIds +
+				", customCategory=" + customCategory +
 				", freight=" + freight +
 				", terminalType=" + terminalType +
 				", registerAt=" + registerAt +
@@ -1048,21 +1050,55 @@ public class Commodity implements  Serializable,Cloneable{
 				", cPriceMax='" + cPriceMax + '\'' +
 				", cPriceMin='" + cPriceMin + '\'' +
 				", purchaseCount=" + purchaseCount +
+				", discount=" + discount +
 				", sort=" + sort +
+				", goodsSec=" + goodsSec +
 				", customCategoryIds=" + customCategoryIds +
-				", commodityModelNo=" +commodityModelNo+
-				",goodsParam=" + goodsParam +
-				",shopName=" + shopName +
-				",mallName=" + mallName +
-				",hotAreaName=" + hotAreaName +
-				",discount=" + discount +
-				",galleryPosition=" + galleryPosition +
-				",shelvesType=" + shelvesType +
-				", subheading=" + subheading+
-				", commodityDetails=" + commodityDetails+
-				", serviceDescription=" + serviceDescription+
-				", serviceDescriptionId=" + serviceDescriptionId+
-				", serviceDescriptionRemark=" + serviceDescriptionRemark+
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", goodsParam=" + goodsParam +
+				", commodityOffUserId=" + commodityOffUserId +
+				", commodityOffUserName='" + commodityOffUserName + '\'' +
+				", shopName='" + shopName + '\'' +
+				", mallName='" + mallName + '\'' +
+				", hotAreaName='" + hotAreaName + '\'' +
+				", galleryPosition=" + galleryPosition +
+				", shelvesType=" + shelvesType +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
+				", giftId='" + giftId + '\'' +
+				", sn='" + sn + '\'' +
+				", mappingId='" + mappingId + '\'' +
+				", commodityRange=" + commodityRange +
+				", activityId='" + activityId + '\'' +
+				", exchangeTypes='" + exchangeTypes + '\'' +
+				", pointType=" + pointType +
+				", buyType=" + buyType +
+				", deliveryTypes='" + deliveryTypes + '\'' +
+				", selfType=" + selfType +
+				", selfAddress='" + selfAddress + '\'' +
+				", selfRemark='" + selfRemark + '\'' +
+				", selfAddressId='" + selfAddressId + '\'' +
+				", selfExpireDate=" + selfExpireDate +
+				", tagIds=" + tagIds +
+				", selfTakeDays=" + selfTakeDays +
+				", couponStartDate=" + couponStartDate +
+				", couponEndDate=" + couponEndDate +
+				", locationIds=" + locationIds +
+				", accountType=" + accountType +
+				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
+				", groupMid='" + groupMid + '\'' +
+				", merchantId='" + merchantId + '\'' +
+				", merchantType=" + merchantType +
+				", freePostage='" + freePostage + '\'' +
+				", skus=" + skus +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", editAble='" + editAble + '\'' +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				'}';
 	}
 
