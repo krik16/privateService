@@ -9,6 +9,7 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.activitymanage.vo.CommodityVO;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.malllife.constants.Constants;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
@@ -568,6 +569,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", category='" + category + '\'' +
 				", status=" + status +
 				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
 				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
@@ -608,12 +610,17 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", shelvesType=" + shelvesType +
 				", locationIds=" + locationIds +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", accountType=" + accountType +
 				", merchantId='" + merchantId + '\'' +
 				", wechatInfoVos=" + wechatInfoVos +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
-				", mallServiceIds=" + mallServiceIds +
+				", brandName='" + brandName + '\'' +
+				", commodityRange=" + commodityRange +
 				'}';
 	}
 
@@ -803,6 +810,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		try {
 
 			this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
+			this.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
 			this.setName(param.getName());
 			this.setCode(param.getCode());
 			this.setBarCode(param.getBarCode());
@@ -862,8 +870,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
 
-			this.setMallServiceIds(param.getServiceIds());
-			this.setOnServiceIds(param.getServiceIds());
+			// TODO total不需要服务号
+		//	this.setMallServiceIds(param.getServiceIds());
+		//	this.setOnServiceIds(param.getServiceIds());
 
 		} catch (Exception e) {
 			e.printStackTrace();
