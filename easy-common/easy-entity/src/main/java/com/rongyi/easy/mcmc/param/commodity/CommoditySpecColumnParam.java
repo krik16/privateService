@@ -61,13 +61,12 @@ public class CommoditySpecColumnParam implements Serializable{
 	public void setSource(Integer source) {
 		this.source = source;
 	}
-
 	@Override
 	public String toString() {
 		return "CommoditySpecColumnParam [commoditySpecId=" + commoditySpecId
 				+ ", commoditySpecName=" + commoditySpecName + ", pageSize="
-				+ pageSize + ", currentPage=" + currentPage + ", isDisabled="+",source"+source
-				+ isDisabled + "]";
+				+ pageSize + ", currentPage=" + currentPage + ", isDisabled="
+				+ isDisabled + ", source=" + source + "]";
 	}
-
+	
 }
