@@ -12,15 +12,15 @@
 	<bean id="rpbService" class="com.rongyi.rpb.service.impl.RpbServiceImpl" />
 
 	<!--支付宝支付服务接口-->
-	<dubbo:service interface="com.rongyi.rss.rpb.IAliPayService" version="${dubbo.version}" timeout="60000" ref="aliPayService" />
+	<dubbo:service interface="com.rongyi.rss.rpb.IAliPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="aliPayService" />
 	<bean id="aliPayService" class="com.rongyi.rpb.service.impl.v6.AliPayServiceImpl" />
 
 	<!--微信支付服务接口-->
-	<dubbo:service interface="com.rongyi.rss.rpb.IWechatPayService" version="${dubbo.version}" timeout="60000" ref="wechatPayService" />
+	<dubbo:service interface="com.rongyi.rss.rpb.IWechatPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="wechatPayService" />
 	<bean id="wechatPayService" class="com.rongyi.rpb.service.impl.v6.WechatPayServiceImpl" />
 
-	<!--微信支付服务接口-->
-	<dubbo:service interface="com.rongyi.rss.rpb.IweBankService" version="${dubbo.version}" ref="weBankService" />
+	<!--微众支付服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.IweBankService" version="${dubbo.version}" timeout="60000" retries="0" ref="weBankService" />
 	<bean id="weBankService" class="com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl" />
 	<!--支付查询接口-->
 	<dubbo:service interface="com.rongyi.rss.rpb.IQueryService" version="${dubbo.version}" ref="queryService" />
