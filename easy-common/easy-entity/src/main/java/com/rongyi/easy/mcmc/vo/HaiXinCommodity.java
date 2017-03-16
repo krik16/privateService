@@ -3,6 +3,7 @@ package com.rongyi.easy.mcmc.vo;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
@@ -42,6 +43,7 @@ public class HaiXinCommodity implements Serializable{
     private  String ClsCode;//品类编码
     private String Remark;//备注
     private Integer IsRight;
+    private String PluStatus; // 商品状态（null：新品，0：正常，1：残损···2：淘汰，9：未审核）
     
     public String getPluCode() {
         return PluCode;
@@ -283,6 +285,14 @@ public class HaiXinCommodity implements Serializable{
 		IsRight = isRight;
 	}
 
+    public String getPluStatus() {
+        return PluStatus;
+    }
+
+    public void setPluStatus(String pluStatus) {
+        PluStatus = pluStatus;
+    }
+
     @Override
     public String toString() {
         return "HaiXinCommodity{" +
@@ -316,6 +326,22 @@ public class HaiXinCommodity implements Serializable{
                 ", ClsCode='" + ClsCode + '\'' +
                 ", Remark='" + Remark + '\'' +
                 ", IsRight=" + IsRight +
+                ", PluStatus='" + PluStatus + '\'' +
                 '}';
+    }
+
+    /**
+     * 判断海信导入的数据是否可用
+     * @param PluStatus
+     * @return
+     */
+    public boolean isOKAboutPluStatus (String PluStatus) {
+        if (StringUtils.isBlank(PluStatus)) {
+            return true;
+        }
+        if ("0".equals(PluStatus) || "1".equals(PluStatus)) {
+            return true;
+        }
+        return false;
     }
 }

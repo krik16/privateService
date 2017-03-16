@@ -538,8 +538,25 @@ public class CommodityParam implements Serializable{
 		commodityParam.setDescription(haiXinCommodity.getRemark());
 		commodityParam.setStock(haiXinCommodity.getCounts());
 
+		// 理想状况，继续使用我方的状态
+		Integer commodityStatus = commodityMongo.getStatus();
+		commodityParam.setStatus(commodityStatus);
+		if (haiXinCommodity.isOKAboutPluStatus(haiXinCommodity.getPluStatus())) { // 编辑时：如果海信数据是可用的，
+			// 且，我方的状态是“删除、下架”，则状态改为“待处理”
+			if (CommodityDataStatus.STATUS_COMMODITY_UNSHELVE == commodityStatus || CommodityDataStatus.STATUS_COMMODITY_DELETED == commodityStatus) {
+				commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
+			}
+		} else { // 编辑时：如果海信数据是不可用的，
+			if (CommodityDataStatus.STATUS_COMMODITY_PENDING == commodityStatus || CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING == commodityStatus) {
+				// 且，我方的状态是“待处理、待审核”，则状态改为“删除”
+				commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+			} else if (CommodityDataStatus.STATUS_COMMODITY_SHELVE == commodityStatus) {
+				// 且，我方的状态是“上架”，则状态改为“下架”
+				commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+			}
+		}
+
 		commodityParam.setId(commodityMongo.getSystemNumber());
-		commodityParam.setStatus(commodityMongo.getStatus());// TODO 待确定
 		commodityParam.setTerminalType(commodityMongo.getTerminalType());
 		commodityParam.setPostage(commodityMongo.getPostage());
 		commodityParam.setPicList(commodityMongo.getPicList());
