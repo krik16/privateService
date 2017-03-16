@@ -4,6 +4,7 @@ package com.rongyi.easy.mcmc.param;
 import java.io.Serializable;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.CommoditySpec;
 import org.bson.types.ObjectId;
 
 public class CommoditySpecParam implements  Serializable {
@@ -196,5 +197,15 @@ public class CommoditySpecParam implements  Serializable {
 				", referencePrice='" + referencePrice + '\'' +
 				", serviceIds=" + serviceIds +
 				'}';
+	}
+
+	public void setCommoditySpecParam(CommoditySpec commoditySpec) {
+		this.setOriginalPrice(commoditySpec.getOriginalPrice());
+		this.setCurrentPrice(commoditySpec.getCurrentPrice());
+		this.setStock(Integer.valueOf(commoditySpec.getTotal()));
+		this.setRemain(Integer.valueOf(commoditySpec.getStock()));
+		this.setPictureUrl(commoditySpec.getPictureUrl());
+		this.setReferencePrice(commoditySpec.getReferencePrice());
+		this.setColumnValues(commoditySpec.getColumnValues());
 	}
 }

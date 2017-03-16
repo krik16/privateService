@@ -6,7 +6,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.CommoditySpec;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
+import org.apache.commons.collections.CollectionUtils;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
@@ -492,29 +496,105 @@ public class CommodityParam implements Serializable{
 		this.commodityType = commodityType;
 	}
 
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity){
+	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, String shopMid){
 		CommodityParam commodityParam=new CommodityParam();
 
 		commodityParam.setType(1); //TODO
+		commodityParam.setSource(1);
+		commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
+		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+
 		commodityParam.setName(haiXinCommodity.getPluName());
 		commodityParam.setCode(haiXinCommodity.getPluCode());
-		//根据传过来的ClsCode去找我们表里面的categoryId
-		commodityParam.setCategory(haiXinCommodity.getClsCode());
-		commodityParam.setCategoryIds(new ArrayList<ObjectId>());
-
+		commodityParam.setBarCode(haiXinCommodity.getBarCode());
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		String spec=haiXinCommodity.getSpec();
-		CommoditySpecParam commoditySpecParam=new CommoditySpecParam();
-		commoditySpecParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
-		commodityParam.setCommoditySpeceParams(Arrays.asList(commoditySpecParam));
-		commodityParam.setStatus(4);
-		//todo
-		commodityParam.setSource(1);
-		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
-		commodityParam.setBarCode(haiXinCommodity.getBarCode());
 		commodityParam.setDescription(haiXinCommodity.getRemark());
 		commodityParam.setStock(haiXinCommodity.getCounts());
+
+		// TODO 规格详情：服务号怎么赋值
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, null, shopMid);
 		return  commodityParam;
+	}
+
+	/**
+	 * 海信导入：编辑
+	 * @param haiXinCommodity
+	 * @param commodityMongo
+	 * @return
+	 */
+	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
+														  List<CommoditySpec> commoditySpecs, String shopMid){
+		CommodityParam commodityParam=new CommodityParam();
+
+		//todo 以下取哪一方？
+		commodityParam.setType(1); // 含义：编辑，修改商品信息
+		commodityParam.setSource(1);
+		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+		commodityParam.setName(haiXinCommodity.getPluName());
+		commodityParam.setCode(haiXinCommodity.getPluCode());
+		commodityParam.setBarCode(haiXinCommodity.getBarCode());
+		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
+		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
+		commodityParam.setDescription(haiXinCommodity.getRemark());
+		commodityParam.setStock(haiXinCommodity.getCounts());
+
+		commodityParam.setId(commodityMongo.getSystemNumber());
+		commodityParam.setStatus(commodityMongo.getStatus());
+		commodityParam.setTerminalType(commodityMongo.getTerminalType());
+		commodityParam.setPostage(commodityMongo.getPostage());
+		commodityParam.setPicList(commodityMongo.getPicList());
+		commodityParam.setDistribution((commodityMongo.isSupportSelfPickup()?1:0)
+				+(commodityMongo.isSupportCourierDeliver()?2:0));
+		commodityParam.setFreight(commodityMongo.getFreight());
+		commodityParam.setCreateBy(Integer.valueOf(commodityMongo.getCreate_by()));
+		commodityParam.setRegisterAt(commodityMongo.getRegisterAt());
+		commodityParam.setSoldOutAt(commodityMongo.getSoldOutAt());
+
+		commodityParam.setStockStatus(commodityMongo.getStockStatus());
+		commodityParam.setPurchaseCount(commodityMongo.getPurchaseCount());
+		commodityParam.setTemplateId(commodityMongo.getTemplateId());
+		commodityParam.setCommodityDetails(commodityMongo.getCommodityDetails());
+		commodityParam.setBrandMid(commodityMongo.getBrandMid());
+		commodityParam.setBrandName(commodityMongo.getBrandName());
+
+		// TODO 规格(哪个优先级高)
+		if (CollectionUtils.isNotEmpty(commoditySpecs)) {
+			List<CommoditySpecParam> specParams = new ArrayList<>();
+			for (CommoditySpec spec : commoditySpecs) {
+				CommoditySpecParam specParam = new CommoditySpecParam();
+				specParam.setCommoditySpecParam(spec);
+				// TODO 怎么赋值
+				specParam.setType(4);
+				specParam.setShopMid(shopMid);
+				specParam.setServiceIds(commodityMongo.getMallServiceIds());
+				specParams.add(specParam);
+			}
+			commodityParam.setCommoditySpeceParams(specParams);
+		} else {
+			toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, commodityMongo.getMallServiceIds(), shopMid);
+		}
+		return  commodityParam;
+	}
+
+	/**
+	 * 从HaiXinCommodity、服务号、商铺ID等获取CommoditySpecParam所需信息，赋值到CommodityParam中
+	 * @param commodityParam
+	 * @param haiXinCommodity
+	 * @param serviceIds
+	 * @param shopMid
+	 */
+	private void toCommodityParamAboutSpecParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity,
+													 List<String> serviceIds, String shopMid) {
+		CommoditySpecParam specParam=new CommoditySpecParam();
+		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
+		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
+		specParam.setStock(haiXinCommodity.getCounts());
+		specParam.setRemain(haiXinCommodity.getCounts());
+		specParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
+		specParam.setType(4);
+		specParam.setShopMid(shopMid);
+		specParam.setServiceIds(serviceIds);
+		commodityParam.setCommoditySpeceParams(Arrays.asList(specParam));
 	}
 }
