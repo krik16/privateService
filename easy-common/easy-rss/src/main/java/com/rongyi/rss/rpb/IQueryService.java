@@ -19,4 +19,14 @@ public interface IQueryService {
      */
     List<PaymentEntity> batchQueryByOrderNos(List<String> orderNoList,Integer tradeType);
 
+    /**
+     * 查询订单支付数据
+     * @param orderNo 订单号
+     * @param tradeType 交易类型
+     * @param status 状态
+     * @param payChannel 支付类型
+     * @return
+     */
+    PaymentEntity queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel);
+
    }
