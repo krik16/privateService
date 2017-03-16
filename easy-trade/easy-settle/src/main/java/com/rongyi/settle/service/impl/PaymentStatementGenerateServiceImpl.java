@@ -93,7 +93,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                 settleEndDay = settleEndDay.plusDays(spacingDays);
 
 //                DateTime currentDateTime = new DateTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 DateTime currentDateTime = new DateTime(sdf.parse(sdf.format(new Date())));
                 while (settleDay.isBefore(settleEndDay)) {
                     // 判断今天是否处于固定间隔的日期上，通过从结算生成的开始时间（settleDay）开始累加固定间隔天数（spacingDays）的方式循环判断
