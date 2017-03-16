@@ -406,47 +406,6 @@ public class CommodityParam implements Serializable{
 		this.shelvesType = shelvesType;
 	}
 
-	@Override
-	public String toString() {
-		return "CommodityParam{" +
-				"category='" + category + '\'' +
-				", type=" + type +
-				", id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", description='" + description + '\'' +
-				", postage='" + postage + '\'' +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", picList=" + picList +
-				", categoryIds=" + categoryIds +
-				", customCategoryIds=" + customCategoryIds +
-				", distribution=" + distribution +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", stockStatus=" + stockStatus +
-				", commoditySpeceParams=" + commoditySpeceParams +
-				", stock=" + stock +
-				", remain=" + remain +
-				", hasSpec=" + hasSpec +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
-				", purchaseCount=" + purchaseCount +
-				", templateId=" + templateId +
-				", reason=" + reason+
-				", subheading=" + subheading+
-				", commodityDetails=" + commodityDetails+
-				", shelvesType=" + shelvesType+
-				", brandId=" + brandId+
-				", brandMid=" + brandMid+
-				", brandName=" + brandName+
-				", commodityModelNo=" + commodityModelNo+
-				", goodsParam=" + goodsParam+
-				", commodityType=" + commodityType+
-				'}';
-	}
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -597,5 +556,53 @@ public class CommodityParam implements Serializable{
 		specParam.setShopMid(shopMid);
 		specParam.setServiceIds(Arrays.asList(shopMid));
 		commodityParam.setCommoditySpeceParams(Arrays.asList(specParam));
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityParam{" +
+				"type=" + type +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", serviceIds=" + serviceIds +
+				", createBy=" + createBy +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", stockStatus=" + stockStatus +
+				", commoditySpeceParams=" + commoditySpeceParams +
+				", stock=" + stock +
+				", remain=" + remain +
+				", hasSpec=" + hasSpec +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				", reason='" + reason + '\'' +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
+				", source=" + source +
+				", shelvesType=" + shelvesType +
+				", brandId='" + brandId + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", brandName='" + brandName + '\'' +
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", pass='" + pass + '\'' +
+				", haiXinId='" + haiXinId + '\'' +
+				", goodsParam='" + goodsParam + '\'' +
+				", commodityType=" + commodityType +
+				'}';
 	}
 }
