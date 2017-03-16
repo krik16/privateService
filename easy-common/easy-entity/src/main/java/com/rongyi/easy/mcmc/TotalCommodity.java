@@ -835,24 +835,25 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 			this.setFreight(param.getFreight());
 
-			//商家后台修改商品不能改变来源
+			//商家后台修改商品不能改变来源（修改商品，source在service层取数据原source值）
+			this.setSource(param.getSource());
 			if(this.getId() == null) {
-				this.setSource(0);
 				this.setCreateAt(new Date());
 				this.setCreateBy(null == userInfo ? null : userInfo.getId());
 				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);//上架状态:待审核
+
+				// 新增：海信导入
+				if (null != param.getSource() && 1 == param.getSource()) {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
+				}
 			}  else {
 				this.setCreateBy(param.getCreateBy());
 				this.setTerminalType(param.getTerminalType());
 				this.setRegisterAt(param.getRegisterAt());
 				this.setSoldOutAt(param.getSoldOutAt());
 				this.setStatus(param.getStatus());
-			}
-
-			this.setSource(param.getSource());
-			if (1 == param.getSource()) {
-				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
 			}
 
 			this.setStock(param.getStock());

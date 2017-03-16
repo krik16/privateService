@@ -499,8 +499,8 @@ public class CommodityParam implements Serializable{
 	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, String shopMid){
 		CommodityParam commodityParam=new CommodityParam();
 
-		commodityParam.setType(1); //TODO
-		commodityParam.setSource(1);
+		commodityParam.setType(1);
+		commodityParam.setSource(1);// 海信导入
 		commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
 		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
 
@@ -512,8 +512,8 @@ public class CommodityParam implements Serializable{
 		commodityParam.setDescription(haiXinCommodity.getRemark());
 		commodityParam.setStock(haiXinCommodity.getCounts());
 
-		// TODO 规格详情：服务号怎么赋值
-		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, null, shopMid);
+		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
 		return  commodityParam;
 	}
 
@@ -524,12 +524,11 @@ public class CommodityParam implements Serializable{
 	 * @return
 	 */
 	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
-														  List<CommoditySpec> commoditySpecs, String shopMid){
+														  String shopMid){
 		CommodityParam commodityParam=new CommodityParam();
 
-		//todo 以下取哪一方？
 		commodityParam.setType(1); // 含义：编辑，修改商品信息
-		commodityParam.setSource(1);
+		commodityParam.setSource(1); // 海信导入
 		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
 		commodityParam.setName(haiXinCommodity.getPluName());
 		commodityParam.setCode(haiXinCommodity.getPluCode());
@@ -540,7 +539,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setStock(haiXinCommodity.getCounts());
 
 		commodityParam.setId(commodityMongo.getSystemNumber());
-		commodityParam.setStatus(commodityMongo.getStatus());
+		commodityParam.setStatus(commodityMongo.getStatus());// TODO 待确定
 		commodityParam.setTerminalType(commodityMongo.getTerminalType());
 		commodityParam.setPostage(commodityMongo.getPostage());
 		commodityParam.setPicList(commodityMongo.getPicList());
@@ -558,22 +557,8 @@ public class CommodityParam implements Serializable{
 		commodityParam.setBrandMid(commodityMongo.getBrandMid());
 		commodityParam.setBrandName(commodityMongo.getBrandName());
 
-		// TODO 规格(哪个优先级高)
-		if (CollectionUtils.isNotEmpty(commoditySpecs)) {
-			List<CommoditySpecParam> specParams = new ArrayList<>();
-			for (CommoditySpec spec : commoditySpecs) {
-				CommoditySpecParam specParam = new CommoditySpecParam();
-				specParam.setCommoditySpecParam(spec);
-				// TODO 怎么赋值
-				specParam.setType(4);
-				specParam.setShopMid(shopMid);
-				specParam.setServiceIds(commodityMongo.getMallServiceIds());
-				specParams.add(specParam);
-			}
-			commodityParam.setCommoditySpeceParams(specParams);
-		} else {
-			toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, commodityMongo.getMallServiceIds(), shopMid);
-		}
+		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
 		return  commodityParam;
 	}
 
@@ -581,11 +566,10 @@ public class CommodityParam implements Serializable{
 	 * 从HaiXinCommodity、服务号、商铺ID等获取CommoditySpecParam所需信息，赋值到CommodityParam中
 	 * @param commodityParam
 	 * @param haiXinCommodity
-	 * @param serviceIds
 	 * @param shopMid
 	 */
 	private void toCommodityParamAboutSpecParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity,
-													 List<String> serviceIds, String shopMid) {
+													 String shopMid) {
 		CommoditySpecParam specParam=new CommoditySpecParam();
 		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
@@ -594,7 +578,7 @@ public class CommodityParam implements Serializable{
 		specParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
 		specParam.setType(4);
 		specParam.setShopMid(shopMid);
-		specParam.setServiceIds(serviceIds);
+		specParam.setServiceIds(Arrays.asList(shopMid));
 		commodityParam.setCommoditySpeceParams(Arrays.asList(specParam));
 	}
 }

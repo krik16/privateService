@@ -198,14 +198,4 @@ public class CommoditySpecParam implements  Serializable {
 				", serviceIds=" + serviceIds +
 				'}';
 	}
-
-	public void setCommoditySpecParam(CommoditySpec commoditySpec) {
-		this.setOriginalPrice(commoditySpec.getOriginalPrice());
-		this.setCurrentPrice(commoditySpec.getCurrentPrice());
-		this.setStock(Integer.valueOf(commoditySpec.getTotal()));
-		this.setRemain(Integer.valueOf(commoditySpec.getStock()));
-		this.setPictureUrl(commoditySpec.getPictureUrl());
-		this.setReferencePrice(commoditySpec.getReferencePrice());
-		this.setColumnValues(commoditySpec.getColumnValues());
-	}
 }
