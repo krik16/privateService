@@ -28,6 +28,11 @@ public class UserRedenvelopWillExpireVO implements Serializable {
      */
     private String phone;
 
+    /**
+     * 将要过期的券数量,包括红包 抵扣券
+     */
+    private Integer num;
+
     public String getUserId() {
         return userId;
     }
@@ -60,6 +65,14 @@ public class UserRedenvelopWillExpireVO implements Serializable {
         this.phone = phone;
     }
 
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -67,6 +80,7 @@ public class UserRedenvelopWillExpireVO implements Serializable {
                 .append("redpacketCount", redpacketCount)
                 .append("rebateCount", rebateCount)
                 .append("phone", phone)
+                .append("num", num)
                 .toString();
     }
 }
