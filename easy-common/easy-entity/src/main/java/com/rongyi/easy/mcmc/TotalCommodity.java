@@ -825,13 +825,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setPicList(param.getPicList());
 			this.setSupportCourierDeliver(true);
 			this.setSupportSelfPickup(true);
-			switch(param.getDistribution()){
-				//配送方式 1表示到店自提2快递3表示支持两种方式
-				//supportCourierDeliver支持快递发货字段  true 是    false否
-				// supportSelfPickup支持到店自提  true 是    false否
-				case 2:this.setSupportSelfPickup(false);break;
-				case 1:this.setSupportCourierDeliver(false);break;
-				case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+			if (null != param.getDistribution()) {
+				switch(param.getDistribution()){
+					//配送方式 1表示到店自提2快递3表示支持两种方式
+					//supportCourierDeliver支持快递发货字段  true 是    false否
+					// supportSelfPickup支持到店自提  true 是    false否
+					case 2:this.setSupportSelfPickup(false);break;
+					case 1:this.setSupportCourierDeliver(false);break;
+					case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+				}
 			}
 			this.setFreight(param.getFreight());
 
