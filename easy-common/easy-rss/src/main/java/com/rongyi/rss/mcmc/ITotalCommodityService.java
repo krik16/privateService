@@ -44,4 +44,6 @@ public interface ITotalCommodityService {
 
 	public List<TotalCommodity>  findCommodityByCategoryId(Map<String,Object> paramMap);
 
+	Boolean updateTotalCommodityStatus(String id, Integer status, String reason);
+
 }
