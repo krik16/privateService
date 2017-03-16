@@ -455,9 +455,7 @@ public class CommodityParam implements Serializable{
 		this.commodityType = commodityType;
 	}
 
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, String shopMid){
-		CommodityParam commodityParam=new CommodityParam();
-
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, String shopMid){
 		commodityParam.setType(1);
 		commodityParam.setSource(1);// 海信导入
 		commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
@@ -473,7 +471,6 @@ public class CommodityParam implements Serializable{
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
-		return  commodityParam;
 	}
 
 	/**
@@ -482,9 +479,8 @@ public class CommodityParam implements Serializable{
 	 * @param commodityMongo
 	 * @return
 	 */
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
 														  String shopMid){
-		CommodityParam commodityParam=new CommodityParam();
 
 		commodityParam.setType(1); // 含义：编辑，修改商品信息
 		commodityParam.setSource(1); // 海信导入
@@ -535,7 +531,6 @@ public class CommodityParam implements Serializable{
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
-		return  commodityParam;
 	}
 
 	/**
