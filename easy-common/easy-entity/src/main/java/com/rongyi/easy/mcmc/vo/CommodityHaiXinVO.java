@@ -61,11 +61,12 @@ public class CommodityHaiXinVO implements  Serializable {
 	private String updateBy;
 	private String brandName;
 	private String brandMid;
-	private List<String> referencePriceList;
-	private List<String> originalPriceList;
-	private List<String> currentPriceList;
+	private List<String> referencePriceList; // 参考价集合
+	private List<String> originalPriceList; // 商品原价集合
+	private List<String> currentPriceList; // 商品现价集合
 
 	private String reason;
+	private String specName;
 
 	public Date getCreateAt() {
 		return createAt;
@@ -325,6 +326,14 @@ public class CommodityHaiXinVO implements  Serializable {
 		this.reason = reason;
 	}
 
+	public String getSpecName() {
+		return specName;
+	}
+
+	public void setSpecName(String specName) {
+		this.specName = specName;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityHaiXinVO{" +
@@ -368,6 +377,7 @@ public class CommodityHaiXinVO implements  Serializable {
 				", originalPriceList=" + originalPriceList +
 				", currentPriceList=" + currentPriceList +
 				", reason='" + reason + '\'' +
+				", specName='" + specName + '\'' +
 				'}';
 	}
 }

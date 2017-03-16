@@ -1,5 +1,6 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
 import org.bson.types.ObjectId;
@@ -40,7 +41,9 @@ public class HaiXinCommodity implements Serializable{
     private Integer KeepDays;//保质期天数
     private  String ClsCode;//品类编码
     private String Remark;//备注
-
+    private Integer IsRight;
+    private Integer Status;//状态  暂定字段
+    
     public String getPluCode() {
         return PluCode;
     }
@@ -272,28 +275,55 @@ public class HaiXinCommodity implements Serializable{
     public void setRemark(String remark) {
         Remark = remark;
     }
-    //source 为1表示导入转化
+    
+    public Integer getIsRight() {
+		return IsRight;
+	}
+
+	public void setIsRight(Integer isRight) {
+		IsRight = isRight;
+	}
+
+	public Integer getStatus() {
+		return Status;
+	}
+
+	public void setStatus(Integer status) {
+		Status = status;
+	}
+
+	//source 为1表示导入转化
     public static CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity,Integer source){
         CommodityParam commodityParam=new CommodityParam();
-
+        commodityParam.setSource(1); // 源：海信导入
+        commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING); // 待处理
+        commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4); // 终端：微信
         commodityParam.setType(1); //TODO
         commodityParam.setName(haiXinCommodity.getPluName());
-        commodityParam.setCode(haiXinCommodity.getBarCode());
+        commodityParam.setCode(haiXinCommodity.getPluCode()); // 商品编码
+        commodityParam.setBarCode(haiXinCommodity.getBarCode()); // 商品条形码
         commodityParam.setCategory(haiXinCommodity.getClsCode());
         commodityParam.setCategoryIds(new ArrayList<ObjectId>());
         commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
         commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
         //TODO: referencePrice picList "distribution":  "description": "commodityDetails":
 
-
-        commodityParam.setStatus(4);
-        //todo
-        commodityParam.setSource(1);
-        commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
-
-        commodityParam.setBarCode(haiXinCommodity.getBarCode());
         commodityParam.setDescription(haiXinCommodity.getRemark());
+        /*commodityParam.setPostage(); // 商品邮费
+        commodityParam.setPicList(); // 商品图片
+        commodityParam.setDistribution(); // 配送方式 1表示到店自提2快递3表示支持两种方式
+        commodityParam.setFreight(); // 1表示商家承担运费,0表示买家承担运费
+        commodityParam.setStock(); // 此为新增，则：当前库存=全部库存
+        commodityParam.setStockStatus(); // 0表示统一库存1表示分管库存
+        commodityParam.setPurchaseCount(); // 限购数量，0表示不限购
+        commodityParam.setTemplateId(); // 商城运费模版id
+        commodityParam.setCommodityDetails(); // 商品详情
+        commodityParam.setBrandMid(); // 品牌mongoID
+        commodityParam.setBrandName(); // 品牌名称
+        commodityParam.setServiceIds(); // 服务号（公众号）
 
+        // TODO 规格详情
+        commodityParam.setCommoditySpeceParams();*/
         return  commodityParam;
     }
 }

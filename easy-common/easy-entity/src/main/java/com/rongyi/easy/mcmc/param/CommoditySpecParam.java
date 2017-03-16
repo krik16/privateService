@@ -27,6 +27,7 @@ public class CommoditySpecParam implements  Serializable {
 	private String mallMid;
 	private Integer type; //0:集团 1:商场 4:店铺
 	private String referencePrice;//参考价
+	private List<String> serviceIds; //公众号
 
 
 	public Integer getType() {
@@ -165,6 +166,14 @@ public class CommoditySpecParam implements  Serializable {
 		this.referencePrice = referencePrice;
 	}
 
+	public List<String> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<String> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecParam{" +
@@ -185,6 +194,7 @@ public class CommoditySpecParam implements  Serializable {
 				", mallMid='" + mallMid + '\'' +
 				", type=" + type +
 				", referencePrice='" + referencePrice + '\'' +
+				", serviceIds=" + serviceIds +
 				'}';
 	}
 }
