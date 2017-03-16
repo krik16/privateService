@@ -11,6 +11,7 @@ import com.rongyi.easy.mcmc.CommoditySpec;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
@@ -468,6 +469,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
 		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setCreateBy(-1);
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
@@ -518,7 +520,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setDistribution((commodityMongo.isSupportSelfPickup()?1:0)
 				+(commodityMongo.isSupportCourierDeliver()?2:0));
 		commodityParam.setFreight(commodityMongo.getFreight());
-		commodityParam.setCreateBy(Integer.valueOf(commodityMongo.getCreate_by()));
+		commodityParam.setCreateBy(StringUtils.isBlank(commodityMongo.getCreate_by())?-1:Integer.valueOf(commodityMongo.getCreate_by()));
 		commodityParam.setRegisterAt(commodityMongo.getRegisterAt());
 		commodityParam.setSoldOutAt(commodityMongo.getSoldOutAt());
 
