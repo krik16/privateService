@@ -9,9 +9,9 @@ import java.util.List;
  *
  */
 public class SpecColumnParam implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String commoditySpecId;//规格id
@@ -21,7 +21,8 @@ public class SpecColumnParam implements Serializable{
 	private Integer createBy;//创建人id
 	private Integer updateBy;//修改人id
 	private List<SpecColumnClassificationParam> specColumnClassificationList;
-	
+	private Integer source;//1为商家后台请求，绕过权限判断
+
 	public String getCommoditySpecId() {
 		return commoditySpecId;
 	}
@@ -65,14 +66,23 @@ public class SpecColumnParam implements Serializable{
 			List<SpecColumnClassificationParam> specColumnClassificationList) {
 		this.specColumnClassificationList = specColumnClassificationList;
 	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "SpecColumnParam [commoditySpecId=" + commoditySpecId
 				+ ", commoditySpecName=" + commoditySpecName + ", description="
 				+ description + ", hasClassification=" + hasClassification
-				+ ", createBy=" + createBy + ", updateBy=" + updateBy
+				+ ", createBy=" + createBy + ", updateBy=" + updateBy+ ", source=" + source
 				+ ", specColumnClassificationList="
 				+ specColumnClassificationList + "]";
 	}
-	
+
 }
