@@ -1124,18 +1124,38 @@ public interface Constants {
     /**
      * 注册福利返回的异常
      */
-    interface MK_REGISTERED_MSG {
+    enum MK_REGISTERED_MSG {
         /**
          * 库存不足
          */
-        String ERROR_STOCK_LOW = "库存不足";
+        ERROR_STOCK_LOW("1015102", "库存不足"),
         /**
          * 已失效或已下架
          */
-        String ERROR_SOLDOUT = "已失效或已下架";
+        ERROR_SOLDOUT("1015104", "已失效或已下架"),
+        /**
+         * 已失效或已下架
+         */
+        ERROR_NOT_EXISTS("1015105", "已失效或已下架"),
         /**
          * 系统异常
          */
-        String ERROR_SYSTEM = "系统异常";
+        ERROR_SYSTEM("1015102", "系统异常");
+
+        private String code;
+        private String message;
+
+        private MK_REGISTERED_MSG(String code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }
