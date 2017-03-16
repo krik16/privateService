@@ -167,8 +167,7 @@ public class ShopSearchParam implements Serializable{
 	@Override
 	public String toString() {
 		return "ShopSearchParam{" +
-				"brand_id='" + brand_id + '\'' +
-				", keyword='" + keyword + '\'' +
+				"keyword='" + keyword + '\'' +
 				", distance=" + distance +
 				", coord_x='" + coord_x + '\'' +
 				", coord_y='" + coord_y + '\'' +
@@ -179,11 +178,13 @@ public class ShopSearchParam implements Serializable{
 				", sort='" + sort + '\'' +
 				", from=" + from +
 				", size=" + size +
+				", brand_id='" + brand_id + '\'' +
 				", zone_id='" + zone_id + '\'' +
 				", shop_id='" + shop_id + '\'' +
 				", commodityRequired=" + commodityRequired +
 				", mall_id='" + mall_id + '\'' +
 				", poi_type='" + poi_type + '\'' +
+				", parentShop_id='" + parentShop_id + '\'' +
 				", keywordList=" + keywordList +
 				'}';
 	}
