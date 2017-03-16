@@ -2,9 +2,11 @@ package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
@@ -96,7 +98,17 @@ public class CommodityParam implements Serializable{
 
 	private String commodityModelNo;
 
-	private String pass; // 0：不通过  1：通过j
+	private String pass; // 0：不通过  1：通过
+
+	private String haiXinId;
+
+	public String getHaiXinId() {
+		return haiXinId;
+	}
+
+	public void setHaiXinId(String haiXinId) {
+		this.haiXinId = haiXinId;
+	}
 
 	public String getPass() {
 		return pass;
@@ -478,5 +490,31 @@ public class CommodityParam implements Serializable{
 
 	public void setCommodityType(Integer commodityType) {
 		this.commodityType = commodityType;
+	}
+
+	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity){
+		CommodityParam commodityParam=new CommodityParam();
+
+		commodityParam.setType(1); //TODO
+		commodityParam.setName(haiXinCommodity.getPluName());
+		commodityParam.setCode(haiXinCommodity.getPluCode());
+		//根据传过来的ClsCode去找我们表里面的categoryId
+		commodityParam.setCategory(haiXinCommodity.getClsCode());
+		commodityParam.setCategoryIds(new ArrayList<ObjectId>());
+
+		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
+		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
+		String spec=haiXinCommodity.getSpec();
+		CommoditySpecParam commoditySpecParam=new CommoditySpecParam();
+		commoditySpecParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
+		commodityParam.setCommoditySpeceParams(Arrays.asList(commoditySpecParam));
+		commodityParam.setStatus(4);
+		//todo
+		commodityParam.setSource(1);
+		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+		commodityParam.setBarCode(haiXinCommodity.getBarCode());
+		commodityParam.setDescription(haiXinCommodity.getRemark());
+		commodityParam.setStock(haiXinCommodity.getCounts());
+		return  commodityParam;
 	}
 }

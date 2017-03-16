@@ -21,6 +21,7 @@ import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import org.bson.types.ObjectId;
 
 
 public class CommodityVO  implements  Serializable, Cloneable {
@@ -33,6 +34,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
+	private List<ObjectId> commodityCategoryIds;//商品所属的品类列表（海信）
 	private String commodityCategory1;	//新增 一级类目ID(当前适用于getCommodityById)
 	private String commodityCategory2;	//新增 二级类目ID(当前适用于getCommodityById)
 	private String commodityCategoryName1;
@@ -503,6 +505,15 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setCommodityCategory(String commodityCategory) {
 		this.commodityCategory = commodityCategory;
 	}
+
+	public List<ObjectId> getCommodityCategoryIds() {
+		return commodityCategoryIds;
+	}
+
+	public void setCommodityCategoryIds(List<ObjectId> commodityCategoryIds) {
+		this.commodityCategoryIds = commodityCategoryIds;
+	}
+
 	public String getCommodityDescription() {
 		return commodityDescription;
 	}
@@ -1098,6 +1109,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				"commodityId='" + commodityId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
+				", commodityCategoryIds=" + commodityCategoryIds +
 				", commodityCategory1='" + commodityCategory1 + '\'' +
 				", commodityCategory2='" + commodityCategory2 + '\'' +
 				", commodityCategoryName1='" + commodityCategoryName1 + '\'' +
@@ -1131,6 +1143,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", commodityPicList=" + commodityPicList +
 				", commoditySpecList=" + commoditySpecList +
 				", commodityCode='" + commodityCode + '\'' +
+				", commodityBarCode='" + commodityBarCode + '\'' +
 				", commodityCommission='" + commodityCommission + '\'' +
 				", brandMid='" + brandMid + '\'' +
 				", mallMid='" + mallMid + '\'' +
@@ -1279,9 +1292,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		}
 
 		CommodityVO vo = new CommodityVO();
-		vo.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
+		vo.setCommodityRange(commodity.getCommodityRange());
 		vo.setCommodityName(commodity.getName());
 		vo.setCommodityCategory(commodity.getCategory());
+		vo.setCommodityCategoryIds(commodity.getCategoryIds());
 		vo.setCommodityDescription(commodity.getDescription());
 		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
 		vo.setCommodityCode(commodity.getCode());
@@ -1301,25 +1315,27 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setPurchaseCount(commodity.getPurchaseCount());
 		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
 		vo.setTemplateId(commodity.getTemplateId());
-		vo.setMallServiceIds(commodity.getMallServiceIds());
-		vo.setOnServiceIds(commodity.getOnServiceIds());
 		vo.setCommodityDetails(commodity.getCommodityDetails());
+
+		// TODO total不存服务号，所以服务号在别处获取
+	//	vo.setMallServiceIds(commodity.getMallServiceIds());
+	//	vo.setOnServiceIds(commodity.getOnServiceIds());
+
 
 		//默认值
 		vo.setBrandId(-1);
 		vo.setShopId("-1");
 		vo.setMallId("-1");
 
-		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
-		vo.setProcessIdentity(userInfo.getIdentity());
-		vo.setMerchantId(userInfo.getBindingMid());
+		vo.setProcessIdentity(null == userInfo ? null : userInfo.getIdentity());
+		vo.setMerchantId(null == userInfo ? null : userInfo.getBindingMid());
 		if(null ==commodity.getId()){
-			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+			vo.setCreate_by(null == userInfo ? null : userInfo.getId().toString());//新增的时候设置创建者的id
 		} else {
 			if(null != commodity.getCreateBy()) {
 				vo.setCreate_by(commodity.getCreateBy() + "");
 			}
-			vo.setUpdate_by(userInfo.getId().toString());
+			vo.setUpdate_by(null == userInfo ? null : userInfo.getId().toString());
 		}
 
 		vo.setBrandMid(commodity.getBrandMid());

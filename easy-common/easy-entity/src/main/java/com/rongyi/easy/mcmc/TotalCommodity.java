@@ -9,6 +9,7 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.activitymanage.vo.CommodityVO;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.malllife.constants.Constants;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
@@ -110,6 +111,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
 	private String brandName;
+	private Integer commodityRange;
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
 
 	public List<String> getMallServiceIds() {
 		return mallServiceIds;
@@ -559,6 +569,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", category='" + category + '\'' +
 				", status=" + status +
 				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
 				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
@@ -599,12 +610,17 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", shelvesType=" + shelvesType +
 				", locationIds=" + locationIds +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", accountType=" + accountType +
 				", merchantId='" + merchantId + '\'' +
 				", wechatInfoVos=" + wechatInfoVos +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
-				", mallServiceIds=" + mallServiceIds +
+				", brandName='" + brandName + '\'' +
+				", commodityRange=" + commodityRange +
 				'}';
 	}
 
@@ -792,11 +808,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setTotalCommodityFromHaiXinParam(CommodityParam param, SessionUserInfo userInfo) {
 		try {
-			//老的商家后台数据默认是店长发布的商品
-			if(this.getIdentity() == null) {
-				this.setIdentity(Identity.SHOP);
-			}
+
 			this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
+			this.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
 			this.setName(param.getName());
 			this.setCode(param.getCode());
 			this.setBarCode(param.getBarCode());
@@ -825,7 +839,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			if(this.getId() == null) {
 				this.setSource(0);
 				this.setCreateAt(new Date());
-				this.setCreateBy(userInfo.getId());
+				this.setCreateBy(null == userInfo ? null : userInfo.getId());
 				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);//上架状态:待审核
 			}  else {
@@ -837,33 +851,31 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			}
 
 			this.setSource(param.getSource());
+			if (1 == param.getSource()) {
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
+			}
 
-			// TODO 待确定是否是这样的对应关系
 			this.setStock(param.getStock());
 			this.setStockStatus(param.getStockStatus());
 			this.setUpdateAt(new Date());
-			this.setUpdateBy(userInfo.getId());
+			this.setUpdateBy(null == userInfo ? null : userInfo.getId());
 			this.setPurchaseCount(param.getPurchaseCount());
 			this.setTemplateId(param.getTemplateId());
-			this.setMerchantId(userInfo.getBindingMid());
+			this.setMerchantId(null == userInfo ? null : userInfo.getBindingMid());
 			this.setCommodityDetails(param.getCommodityDetails());
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
-			this.setAccountType(userInfo.getIdentity());
+			this.setAccountType(null == userInfo ? null : userInfo.getIdentity());
 
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
 
-			//老的app数据identity为-100
-			// 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
-			if(!(this != null && this.getIdentity() != null && this.getIdentity() == -100)) {
-				this.setIdentity(userInfo.getIdentity());
-			}
-
-			this.setMallServiceIds(param.getServiceIds());
-			this.setOnServiceIds(param.getServiceIds());
+			// TODO total不需要服务号
+		//	this.setMallServiceIds(param.getServiceIds());
+		//	this.setOnServiceIds(param.getServiceIds());
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("参数错误");
 		}
 	}

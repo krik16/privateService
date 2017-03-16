@@ -29,6 +29,7 @@ public class CommoditySpecHaiXinVO implements  Serializable {
 	private String shopParentMid;//总店mongoID
 	private String shopParentName;//总店名称
 	private Integer merchantType;
+	private List<String> serviceIds; // 服务号
 
 	public String getReferencePrice() {
 		return referencePrice;
@@ -156,6 +157,14 @@ public class CommoditySpecHaiXinVO implements  Serializable {
 		this.shopParentName = shopParentName;
 	}
 
+	public List<String> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<String> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecHaiXinVO{" +
@@ -179,6 +188,7 @@ public class CommoditySpecHaiXinVO implements  Serializable {
 				", shopParentMid='" + shopParentMid + '\'' +
 				", shopParentName='" + shopParentName + '\'' +
 				", merchantType=" + merchantType +
+				", serviceIds=" + serviceIds +
 				'}';
 	}
 }
