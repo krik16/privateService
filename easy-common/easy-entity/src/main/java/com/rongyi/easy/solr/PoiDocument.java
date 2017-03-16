@@ -41,6 +41,15 @@ public class PoiDocument implements Serializable {
 	@Field("valid")
 	private String valid;
 
+	@Field("parent_id")
+	private String parent_id;
+
+	@Field("parent_ids")
+	private List<String> parent_ids;
+
+	@Field("wildcard_name")
+	private String wildcard_name;
+
 	@Field("var_poi_chinese")
 	private String var_poi_chinese;
 
@@ -199,6 +208,7 @@ public class PoiDocument implements Serializable {
 		if(StringUtils.isNotBlank(shop.getName())){
 			var_poi_chinese=shop.getName();
 			var_poi_chinese_str=shop.getName().toLowerCase();
+			wildcard_name=shop.getName();
 		}
 		if(StringUtils.isNotBlank(shop.getSlug()))
 			slug=shop.getSlug().replaceAll("-"," ");
@@ -218,8 +228,11 @@ public class PoiDocument implements Serializable {
 			brand_ids=shop.getBrand_id().toString();
 		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
 			valid="0";
-		else
-			valid=shop.getValid().toString();
+		else if(shop.getValid()==null){
+			valid="0";
+		}else {
+			valid = shop.getValid().toString();
+		}
 			//valid="1";/////////////////////////////////////////////////////////////////////
 
 		if(StringUtils.isNotBlank(shop.getTelephone())){
@@ -255,6 +268,13 @@ public class PoiDocument implements Serializable {
 		mall=0;
 		if(CollectionUtils.isNotEmpty(shop.getZone_ids()))
 			zone_ids= ListUtil.toStringList(shop.getZone_ids());
+
+		if(shop.getParent_id()!=null){
+			parent_id=shop.getParent_id().toString();
+		}
+		if(CollectionUtils.isNotEmpty(shop.getParent_ids()))
+			parent_ids= ListUtil.toStringList(shop.getParent_ids());
+
 	}
 
 
@@ -722,5 +742,27 @@ public class PoiDocument implements Serializable {
 		this.updated_at = updated_at;
 	}
 
+	public String getWildcard_name() {
+		return wildcard_name;
+	}
 
+	public void setWildcard_name(String wildcard_name) {
+		this.wildcard_name = wildcard_name;
+	}
+
+	public String getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(String parent_id) {
+		this.parent_id = parent_id;
+	}
+
+	public List<String> getParent_ids() {
+		return parent_ids;
+	}
+
+	public void setParent_ids(List<String> parent_ids) {
+		this.parent_ids = parent_ids;
+	}
 }
