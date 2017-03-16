@@ -258,7 +258,7 @@ public class WeBankPayServiceImpl  extends BaseServiceImpl implements IweBankSer
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝退款异常,e={}", e.getMessage(), e);
-            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_REFUND_FAIL.getValueStr());
         }
     }
 
