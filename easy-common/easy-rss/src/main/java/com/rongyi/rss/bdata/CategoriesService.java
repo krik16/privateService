@@ -17,6 +17,8 @@ public interface CategoriesService {
 	
 	public String insertCategoryHaiXin(CategoryHaiXinEntity categoryHaiXin);
 	
+	public boolean updateCategoryHaiXin(CategoryHaiXinEntity categoryHaiXin);
+	
 	public CategoryHaiXinEntity getCategoryHaiXinByCode(String code);
 	
 	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level);
