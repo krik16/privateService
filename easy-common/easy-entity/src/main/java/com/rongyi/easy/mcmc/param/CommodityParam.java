@@ -495,7 +495,6 @@ public class CommodityParam implements Serializable{
 	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity){
 		CommodityParam commodityParam=new CommodityParam();
 
-		//commodityParam.setHaiXinId();
 		commodityParam.setType(1); //TODO
 		commodityParam.setName(haiXinCommodity.getPluName());
 		commodityParam.setCode(haiXinCommodity.getPluCode());
