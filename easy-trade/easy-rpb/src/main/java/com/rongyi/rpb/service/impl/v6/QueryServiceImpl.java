@@ -20,4 +20,9 @@ public class QueryServiceImpl implements IQueryService{
     public List<PaymentEntity> batchQueryByOrderNos(List<String> orderNoList,Integer tradeType){
         return paymentService.batchQueryByOrderNos(orderNoList,tradeType);
     }
+
+    @Override
+    public PaymentEntity queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel) {
+        return paymentService.selectByOrderNumAndTradeType(orderNo,tradeType,status,payChannel);
+    }
 }
