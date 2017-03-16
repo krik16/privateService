@@ -42,7 +42,7 @@ public class HaiXinCommodity implements Serializable{
     private Integer KeepDays;//保质期天数
     private  String ClsCode;//品类编码
     private String Remark;//备注
-    private String IsRight;
+    private Integer IsRight;
     private String PluStatus; // 商品状态（null：新品，0：正常，1：残损···2：淘汰，9：未审核）
     
     public String getPluCode() {
@@ -277,11 +277,11 @@ public class HaiXinCommodity implements Serializable{
         Remark = remark;
     }
     
-    public String getIsRight() {
+    public Integer getIsRight() {
 		return IsRight;
 	}
 
-	public void setIsRight(String isRight) {
+	public void setIsRight(Integer isRight) {
 		IsRight = isRight;
 	}
 
