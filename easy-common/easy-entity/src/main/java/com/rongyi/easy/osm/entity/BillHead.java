@@ -32,7 +32,7 @@ public class BillHead implements Serializable {
     private String custAddr;
     @XmlElement(name = "DEPCODE")
     private String depCode;
-    @XmlElement(name = "DATA")
+    @XmlElement(name = "DATE")
     private String date;
     @XmlElement(name = "TIME")
     private String time;
