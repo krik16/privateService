@@ -155,4 +155,6 @@ public interface IShopService {
 	public List<String> locationIdsByid(Integer identity,String id);
 
 	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas) throws Exception;
+
+	ShopEntity getHaiXinSHop(String orgCode);
 }
