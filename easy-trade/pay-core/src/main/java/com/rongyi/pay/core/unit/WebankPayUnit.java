@@ -1,5 +1,6 @@
 package com.rongyi.pay.core.unit;
 
+import com.alipay.api.internal.util.StringUtils;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
@@ -364,6 +365,9 @@ public class WebankPayUnit {
             ParamUnit.checkWebankAlipayRefund(reqData, configure);
             WebankPayService  webankPayService = new WebankPayService();
             resData = webankPayService.alipayRefundTrade(reqData, configure);
+            if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
+                throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getSubMsg()) ? resData.getMsg() : resData.getSubMsg());
+            }
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {
