@@ -1227,7 +1227,7 @@ public class Commodity implements  Serializable,Cloneable{
 			if (StringUtils.isNotBlank(this.originalPrice) && StringUtils.isNotBlank(this.currentPrice)) {
 				this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
 			} else {
-				this.setDiscount((double)0);
+				this.setDiscount(Utils.calculateDiscount(null, null));
 			}
 			this.setBrandName(vo.getBrandName());
 			this.setBrandMid(vo.getBrandMid());
