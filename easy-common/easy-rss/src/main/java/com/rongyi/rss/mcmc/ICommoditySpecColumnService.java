@@ -12,45 +12,52 @@ import com.rongyi.easy.mcmc.param.commodity.SpecColumnParam;
 import com.rongyi.easy.mcmc.vo.commodity.CommoditySpecColumnDetailVO;
 
 public interface ICommoditySpecColumnService {
-	 public CommoditySpecColumn selectColumnById(String id);
+	
+	public CommoditySpecColumn selectColumnById(String id);
 
-	 public CommoditySpecColumn selectColumnByName(String name);
+	public CommoditySpecColumn selectColumnByName(String name);
 	 /**
 	  * 大运营后台规格列表
 	  * @param param
 	  * @return
 	  */
-	 public List<CommoditySpecColumn> selectSpecColumnByNameOrId(CommoditySpecColumnParam param);
+	public List<CommoditySpecColumn> selectSpecColumnByNameOrId(CommoditySpecColumnParam param);
 	 /**
 	  *
 	  * @param name    规格名称
 	  * @param desc    规格说明
 	  * @param hasClassification  是否含有分类
 	  */
-	 public void insertCommoditySpecColumn(SpecColumnParam param);
+	public void insertCommoditySpecColumn(SpecColumnParam param);
 	 /**
 	  * 大运营后台获取商品规格详情
 	  * @param commoditySpecId
 	  */
-	 public CommoditySpecColumnDetailVO getCommoditySpecColumnInfoById(String commoditySpecId);
+	public CommoditySpecColumnDetailVO getCommoditySpecColumnInfoById(String commoditySpecId);
 	 /**
 	  * 大运营后台编辑商品规格
 	  * @param param
 	  */
-	 public void editCommoditySpecColumn(SpecColumnParam param) throws Exception;
+	public void editCommoditySpecColumn(SpecColumnParam param) throws Exception;
 	 /**
 	  * 大运营后台删除商品规格
 	  * @param commoditySpecId
 	  */
-	 public ResponseData delCommoditySpecColumn(String commoditySpecId,Integer updateBy);
+	public ResponseData delCommoditySpecColumn(String commoditySpecId,Integer updateBy);
 	 /**
 	  * 获取商品规格总数
 	  * @param param
 	  * @return
 	  */
-	 public Integer getTotalSpecColumnCount(CommoditySpecColumnParam param);
+	public Integer getTotalSpecColumnCount(CommoditySpecColumnParam param);
 
-	 public List<CommodityCategory> findCategoryByColumnIds(List<ObjectId> columnIds);
+	public List<CommodityCategory> findCategoryByColumnIds(List<ObjectId> columnIds);
 
 	public List<CommoditySpecColumn> selectColumnByIds(List<ObjectId> ids);
+	/**
+	 * 根据父id集合查规格列表
+	 * @param parentId
+	 * @return
+	 */
+	public boolean hasClassification(ObjectId parentId);
 }
