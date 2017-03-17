@@ -575,7 +575,7 @@
         <include refid="Base_Column_List"/>
         from payment_order
         where trade_type = #{tradeType,jdbcType=INTEGER} and status = 2
-        and  order_no in
+        and  pay_no in
         <foreach collection="orderNoList" index="index" item="item" open="("
                  separator="," close=")">
             #{item}
@@ -587,7 +587,7 @@
         #{item}
         </foreach>-->
         #{orderNoList}
-        ,CONCAT(order_no))
+        ,CONCAT(pay_no))
 
     </select>
 
