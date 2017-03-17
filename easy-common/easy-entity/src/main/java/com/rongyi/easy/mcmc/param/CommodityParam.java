@@ -11,6 +11,7 @@ import com.rongyi.easy.mcmc.CommoditySpec;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
@@ -406,47 +407,6 @@ public class CommodityParam implements Serializable{
 		this.shelvesType = shelvesType;
 	}
 
-	@Override
-	public String toString() {
-		return "CommodityParam{" +
-				"category='" + category + '\'' +
-				", type=" + type +
-				", id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", description='" + description + '\'' +
-				", postage='" + postage + '\'' +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", picList=" + picList +
-				", categoryIds=" + categoryIds +
-				", customCategoryIds=" + customCategoryIds +
-				", distribution=" + distribution +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", stockStatus=" + stockStatus +
-				", commoditySpeceParams=" + commoditySpeceParams +
-				", stock=" + stock +
-				", remain=" + remain +
-				", hasSpec=" + hasSpec +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
-				", purchaseCount=" + purchaseCount +
-				", templateId=" + templateId +
-				", reason=" + reason+
-				", subheading=" + subheading+
-				", commodityDetails=" + commodityDetails+
-				", shelvesType=" + shelvesType+
-				", brandId=" + brandId+
-				", brandMid=" + brandMid+
-				", brandName=" + brandName+
-				", commodityModelNo=" + commodityModelNo+
-				", goodsParam=" + goodsParam+
-				", commodityType=" + commodityType+
-				'}';
-	}
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -496,9 +456,7 @@ public class CommodityParam implements Serializable{
 		this.commodityType = commodityType;
 	}
 
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, String shopMid){
-		CommodityParam commodityParam=new CommodityParam();
-
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, String shopMid){
 		commodityParam.setType(1);
 		commodityParam.setSource(1);// 海信导入
 		commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
@@ -510,11 +468,11 @@ public class CommodityParam implements Serializable{
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
+		commodityParam.setCreateBy(-1);
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
-		return  commodityParam;
 	}
 
 	/**
@@ -523,9 +481,8 @@ public class CommodityParam implements Serializable{
 	 * @param commodityMongo
 	 * @return
 	 */
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
 														  String shopMid){
-		CommodityParam commodityParam=new CommodityParam();
 
 		commodityParam.setType(1); // 含义：编辑，修改商品信息
 		commodityParam.setSource(1); // 海信导入
@@ -536,17 +493,34 @@ public class CommodityParam implements Serializable{
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
+
+		// 理想状况，继续使用我方的状态
+		Integer commodityStatus = commodityMongo.getStatus();
+		commodityParam.setStatus(commodityStatus);
+		if (haiXinCommodity.isOKAboutPluStatus(haiXinCommodity.getPluStatus())) { // 编辑时：如果海信数据是可用的，
+			// 且，我方的状态是“删除、下架”，则状态改为“待处理”
+			if (CommodityDataStatus.STATUS_COMMODITY_UNSHELVE == commodityStatus || CommodityDataStatus.STATUS_COMMODITY_DELETED == commodityStatus) {
+				commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
+			}
+		} else { // 编辑时：如果海信数据是不可用的，
+			if (CommodityDataStatus.STATUS_COMMODITY_PENDING == commodityStatus || CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING == commodityStatus) {
+				// 且，我方的状态是“待处理、待审核”，则状态改为“删除”
+				commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+			} else if (CommodityDataStatus.STATUS_COMMODITY_SHELVE == commodityStatus) {
+				// 且，我方的状态是“上架”，则状态改为“下架”
+				commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+			}
+		}
 
 		commodityParam.setId(commodityMongo.getSystemNumber());
-		commodityParam.setStatus(commodityMongo.getStatus());// TODO 待确定
 		commodityParam.setTerminalType(commodityMongo.getTerminalType());
 		commodityParam.setPostage(commodityMongo.getPostage());
 		commodityParam.setPicList(commodityMongo.getPicList());
 		commodityParam.setDistribution((commodityMongo.isSupportSelfPickup()?1:0)
 				+(commodityMongo.isSupportCourierDeliver()?2:0));
 		commodityParam.setFreight(commodityMongo.getFreight());
-		commodityParam.setCreateBy(Integer.valueOf(commodityMongo.getCreate_by()));
+		commodityParam.setCreateBy(StringUtils.isBlank(commodityMongo.getCreate_by())?-1:Integer.valueOf(commodityMongo.getCreate_by()));
 		commodityParam.setRegisterAt(commodityMongo.getRegisterAt());
 		commodityParam.setSoldOutAt(commodityMongo.getSoldOutAt());
 
@@ -559,7 +533,6 @@ public class CommodityParam implements Serializable{
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
-		return  commodityParam;
 	}
 
 	/**
@@ -573,12 +546,60 @@ public class CommodityParam implements Serializable{
 		CommoditySpecParam specParam=new CommoditySpecParam();
 		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		specParam.setStock(haiXinCommodity.getCounts());
-		specParam.setRemain(haiXinCommodity.getCounts());
+		specParam.setStock(haiXinCommodity.getCounts().intValue());
+		specParam.setRemain(haiXinCommodity.getCounts().intValue());
 		specParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
 		specParam.setType(4);
 		specParam.setShopMid(shopMid);
 		specParam.setServiceIds(Arrays.asList(shopMid));
 		commodityParam.setCommoditySpeceParams(Arrays.asList(specParam));
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityParam{" +
+				"type=" + type +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", serviceIds=" + serviceIds +
+				", createBy=" + createBy +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", stockStatus=" + stockStatus +
+				", commoditySpeceParams=" + commoditySpeceParams +
+				", stock=" + stock +
+				", remain=" + remain +
+				", hasSpec=" + hasSpec +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				", reason='" + reason + '\'' +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
+				", source=" + source +
+				", shelvesType=" + shelvesType +
+				", brandId='" + brandId + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", brandName='" + brandName + '\'' +
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", pass='" + pass + '\'' +
+				", haiXinId='" + haiXinId + '\'' +
+				", goodsParam='" + goodsParam + '\'' +
+				", commodityType=" + commodityType +
+				'}';
 	}
 }

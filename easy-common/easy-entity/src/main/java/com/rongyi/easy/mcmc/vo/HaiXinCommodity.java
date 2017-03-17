@@ -3,6 +3,7 @@ package com.rongyi.easy.mcmc.vo;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
@@ -26,9 +27,9 @@ public class HaiXinCommodity implements Serializable{
     private Double Price;//售价
     private Double PsPrice;//配送价
     private Double PfPrice;//批发价
-    private Integer GCount; //卖场库存数量
-    private Integer CCount;//仓库库存数量
-    private Integer Counts;//库存数量
+    private Double GCount; //卖场库存数量
+    private Double CCount;//仓库库存数量
+    private Double Counts;//库存数量
     private Double DMS;//日均销量
     private Integer TopStock;//最高库存
     private Integer LowStock;//最低库存
@@ -41,7 +42,8 @@ public class HaiXinCommodity implements Serializable{
     private Integer KeepDays;//保质期天数
     private  String ClsCode;//品类编码
     private String Remark;//备注
-    private String IsRight;
+    private Integer IsRight;
+    private String PluStatus; // 商品状态（null：新品，0：正常，1：残损···2：淘汰，9：未审核）
     
     public String getPluCode() {
         return PluCode;
@@ -155,27 +157,27 @@ public class HaiXinCommodity implements Serializable{
         PfPrice = pfPrice;
     }
 
-    public Integer getGCount() {
+    public Double getGCount() {
         return GCount;
     }
 
-    public void setGCount(Integer GCount) {
+    public void setGCount(Double GCount) {
         this.GCount = GCount;
     }
 
-    public Integer getCCount() {
+    public Double getCCount() {
         return CCount;
     }
 
-    public void setCCount(Integer CCount) {
+    public void setCCount(Double CCount) {
         this.CCount = CCount;
     }
 
-    public Integer getCounts() {
+    public Double getCounts() {
         return Counts;
     }
 
-    public void setCounts(Integer counts) {
+    public void setCounts(Double counts) {
         Counts = counts;
     }
 
@@ -274,14 +276,22 @@ public class HaiXinCommodity implements Serializable{
     public void setRemark(String remark) {
         Remark = remark;
     }
-    
-    public String getIsRight() {
+
+    public Integer getIsRight() {
 		return IsRight;
 	}
 
-	public void setIsRight(String isRight) {
+	public void setIsRight(Integer isRight) {
 		IsRight = isRight;
 	}
+
+	public String getPluStatus() {
+        return PluStatus;
+    }
+
+    public void setPluStatus(String pluStatus) {
+        PluStatus = pluStatus;
+    }
 
     @Override
     public String toString() {
@@ -316,6 +326,22 @@ public class HaiXinCommodity implements Serializable{
                 ", ClsCode='" + ClsCode + '\'' +
                 ", Remark='" + Remark + '\'' +
                 ", IsRight=" + IsRight +
+                ", PluStatus='" + PluStatus + '\'' +
                 '}';
+    }
+
+    /**
+     * 判断海信导入的数据是否可用
+     * @param PluStatus
+     * @return
+     */
+    public boolean isOKAboutPluStatus (String PluStatus) {
+        if (StringUtils.isBlank(PluStatus)) {
+            return true;
+        }
+        if ("0".equals(PluStatus) || "1".equals(PluStatus)) {
+            return true;
+        }
+        return false;
     }
 }
