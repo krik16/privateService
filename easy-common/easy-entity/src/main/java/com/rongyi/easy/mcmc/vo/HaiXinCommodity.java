@@ -3,6 +3,7 @@ package com.rongyi.easy.mcmc.vo;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
@@ -26,9 +27,9 @@ public class HaiXinCommodity implements Serializable{
     private Double Price;//售价
     private Double PsPrice;//配送价
     private Double PfPrice;//批发价
-    private Integer GCount; //卖场库存数量
-    private Integer CCount;//仓库库存数量
-    private Integer Counts;//库存数量
+    private Double GCount; //卖场库存数量
+    private Double CCount;//仓库库存数量
+    private Double Counts;//库存数量
     private Double DMS;//日均销量
     private Integer TopStock;//最高库存
     private Integer LowStock;//最低库存
@@ -42,7 +43,7 @@ public class HaiXinCommodity implements Serializable{
     private  String ClsCode;//品类编码
     private String Remark;//备注
     private Integer IsRight;
-    private Integer Status;//状态  暂定字段
+    private String PluStatus; // 商品状态（null：新品，0：正常，1：残损···2：淘汰，9：未审核）
     
     public String getPluCode() {
         return PluCode;
@@ -156,27 +157,27 @@ public class HaiXinCommodity implements Serializable{
         PfPrice = pfPrice;
     }
 
-    public Integer getGCount() {
+    public Double getGCount() {
         return GCount;
     }
 
-    public void setGCount(Integer GCount) {
+    public void setGCount(Double GCount) {
         this.GCount = GCount;
     }
 
-    public Integer getCCount() {
+    public Double getCCount() {
         return CCount;
     }
 
-    public void setCCount(Integer CCount) {
+    public void setCCount(Double CCount) {
         this.CCount = CCount;
     }
 
-    public Integer getCounts() {
+    public Double getCounts() {
         return Counts;
     }
 
-    public void setCounts(Integer counts) {
+    public void setCounts(Double counts) {
         Counts = counts;
     }
 
@@ -275,7 +276,7 @@ public class HaiXinCommodity implements Serializable{
     public void setRemark(String remark) {
         Remark = remark;
     }
-    
+
     public Integer getIsRight() {
 		return IsRight;
 	}
@@ -284,46 +285,63 @@ public class HaiXinCommodity implements Serializable{
 		IsRight = isRight;
 	}
 
-	public Integer getStatus() {
-		return Status;
-	}
+	public String getPluStatus() {
+        return PluStatus;
+    }
 
-	public void setStatus(Integer status) {
-		Status = status;
-	}
+    public void setPluStatus(String pluStatus) {
+        PluStatus = pluStatus;
+    }
 
-	//source 为1表示导入转化
-    public static CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity,Integer source){
-        CommodityParam commodityParam=new CommodityParam();
-        commodityParam.setSource(1); // 源：海信导入
-        commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING); // 待处理
-        commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4); // 终端：微信
-        commodityParam.setType(1); //TODO
-        commodityParam.setName(haiXinCommodity.getPluName());
-        commodityParam.setCode(haiXinCommodity.getPluCode()); // 商品编码
-        commodityParam.setBarCode(haiXinCommodity.getBarCode()); // 商品条形码
-        commodityParam.setCategory(haiXinCommodity.getClsCode());
-        commodityParam.setCategoryIds(new ArrayList<ObjectId>());
-        commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
-        commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-        //TODO: referencePrice picList "distribution":  "description": "commodityDetails":
+    @Override
+    public String toString() {
+        return "HaiXinCommodity{" +
+                "PluCode='" + PluCode + '\'' +
+                ", PluName='" + PluName + '\'' +
+                ", BarCode='" + BarCode + '\'' +
+                ", OrgCode='" + OrgCode + '\'' +
+                ", VendorCode='" + VendorCode + '\'' +
+                ", VendorName='" + VendorName + '\'' +
+                ", Spec='" + Spec + '\'' +
+                ", Unit='" + Unit + '\'' +
+                ", ProdArea='" + ProdArea + '\'' +
+                ", JPrice=" + JPrice +
+                ", OJPrice=" + OJPrice +
+                ", Price=" + Price +
+                ", PsPrice=" + PsPrice +
+                ", PfPrice=" + PfPrice +
+                ", GCount=" + GCount +
+                ", CCount=" + CCount +
+                ", Counts=" + Counts +
+                ", DMS=" + DMS +
+                ", TopStock=" + TopStock +
+                ", LowStock=" + LowStock +
+                ", JhCycle=" + JhCycle +
+                ", PsCycle=" + PsCycle +
+                ", ItemCnt=" + ItemCnt +
+                ", PluType='" + PluType + '\'' +
+                ", MngStock='" + MngStock + '\'' +
+                ", IsWeight='" + IsWeight + '\'' +
+                ", KeepDays=" + KeepDays +
+                ", ClsCode='" + ClsCode + '\'' +
+                ", Remark='" + Remark + '\'' +
+                ", IsRight=" + IsRight +
+                ", PluStatus='" + PluStatus + '\'' +
+                '}';
+    }
 
-        commodityParam.setDescription(haiXinCommodity.getRemark());
-        /*commodityParam.setPostage(); // 商品邮费
-        commodityParam.setPicList(); // 商品图片
-        commodityParam.setDistribution(); // 配送方式 1表示到店自提2快递3表示支持两种方式
-        commodityParam.setFreight(); // 1表示商家承担运费,0表示买家承担运费
-        commodityParam.setStock(); // 此为新增，则：当前库存=全部库存
-        commodityParam.setStockStatus(); // 0表示统一库存1表示分管库存
-        commodityParam.setPurchaseCount(); // 限购数量，0表示不限购
-        commodityParam.setTemplateId(); // 商城运费模版id
-        commodityParam.setCommodityDetails(); // 商品详情
-        commodityParam.setBrandMid(); // 品牌mongoID
-        commodityParam.setBrandName(); // 品牌名称
-        commodityParam.setServiceIds(); // 服务号（公众号）
-
-        // TODO 规格详情
-        commodityParam.setCommoditySpeceParams();*/
-        return  commodityParam;
+    /**
+     * 判断海信导入的数据是否可用
+     * @param PluStatus
+     * @return
+     */
+    public boolean isOKAboutPluStatus (String PluStatus) {
+        if (StringUtils.isBlank(PluStatus)) {
+            return true;
+        }
+        if ("0".equals(PluStatus) || "1".equals(PluStatus)) {
+            return true;
+        }
+        return false;
     }
 }

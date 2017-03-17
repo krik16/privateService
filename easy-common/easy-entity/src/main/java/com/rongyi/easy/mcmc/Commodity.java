@@ -1122,16 +1122,16 @@ public class Commodity implements  Serializable,Cloneable{
 					this.setoPriceMin(this.getOriginalPrice());
 				}
 			} else {
-				this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
-				this.setStock((Integer) specMap.get("specStock"));
-				this.setOriginalPrice(specMap.get("oMin").toString());
-				this.setCurrentPrice(specMap.get("lowest").toString());
-				this.setPrice(Double.valueOf(specMap.get("lowest").toString()));
-				this.setoPriceMax(specMap.get("oMax").toString());
-				this.setoPriceMin(specMap.get("oMin").toString());
-				this.setcPriceMin(specMap.get("lowest").toString());
-				this.setcPriceMax(specMap.get("cMax").toString());
-				this.setSkus((List<String>)specMap.get("skus"));
+				this.setoPriceOfLowestCPrice(null == specMap.get("oPrice")?null:specMap.get("oPrice").toString());
+				this.setStock(null == specMap.get("specStock")?null:(Integer) specMap.get("specStock"));
+				this.setOriginalPrice(null == specMap.get("oMin")?null:specMap.get("oMin").toString());
+				this.setCurrentPrice(null == specMap.get("lowest")?null:specMap.get("lowest").toString());
+				this.setPrice(null == specMap.get("lowest")?null:Double.valueOf(specMap.get("lowest").toString()));
+				this.setoPriceMax(null == specMap.get("oMax")?null:specMap.get("oMax").toString());
+				this.setoPriceMin(null == specMap.get("oMin")?null:specMap.get("oMin").toString());
+				this.setcPriceMin(null == specMap.get("lowest")?null:specMap.get("lowest").toString());
+				this.setcPriceMax(null == specMap.get("cMax")?null:specMap.get("cMax").toString());
+				this.setSkus(null == specMap.get("skus")?null:(List<String>)specMap.get("skus"));
 			}
 
 			this.setLocationIds(vo.getLocationIds());
@@ -1187,7 +1187,10 @@ public class Commodity implements  Serializable,Cloneable{
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
 			this.setGoodsParam(vo.getGoodsParam()); //商品参数
-			this.setIdentity(vo.getProcessIdentity()); //增加商品身份
+			if (null != vo.getProcessIdentity()) {
+				this.setIdentity(vo.getProcessIdentity()); //增加商品身份
+			}
+
 			this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
 			if (!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
@@ -1221,7 +1224,11 @@ public class Commodity implements  Serializable,Cloneable{
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
-			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
+			if (StringUtils.isNotBlank(this.originalPrice) && StringUtils.isNotBlank(this.currentPrice)) {
+				this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
+			} else {
+				this.setDiscount(Utils.calculateDiscount(null, null));
+			}
 			this.setBrandName(vo.getBrandName());
 			this.setBrandMid(vo.getBrandMid());
 			if (shopInfo != null) {
@@ -1237,7 +1244,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSubheading(vo.getSubheading());
 			this.setCommodityDetails(vo.getCommodityDetails());
 			this.setCommodityModelNo(vo.getCommodityModelNo());
-			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+			this.setSpecList(null == specMap.get("specIdList")?null:(List<ObjectId>) specMap.get("specIdList"));
 			this.setGroupMid(vo.getGroupMid());
 			this.setShelvesType(vo.getShelvesType());
 			this.setServiceDescriptionId(vo.getServiceDescriptionId());

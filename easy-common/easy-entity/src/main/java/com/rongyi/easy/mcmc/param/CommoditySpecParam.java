@@ -4,6 +4,7 @@ package com.rongyi.easy.mcmc.param;
 import java.io.Serializable;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.CommoditySpec;
 import org.bson.types.ObjectId;
 
 public class CommoditySpecParam implements  Serializable {

@@ -825,34 +825,37 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setPicList(param.getPicList());
 			this.setSupportCourierDeliver(true);
 			this.setSupportSelfPickup(true);
-			switch(param.getDistribution()){
-				//配送方式 1表示到店自提2快递3表示支持两种方式
-				//supportCourierDeliver支持快递发货字段  true 是    false否
-				// supportSelfPickup支持到店自提  true 是    false否
-				case 2:this.setSupportSelfPickup(false);break;
-				case 1:this.setSupportCourierDeliver(false);break;
-				case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+			if (null != param.getDistribution()) {
+				switch(param.getDistribution()){
+					//配送方式 1表示到店自提2快递3表示支持两种方式
+					//supportCourierDeliver支持快递发货字段  true 是    false否
+					// supportSelfPickup支持到店自提  true 是    false否
+					case 2:this.setSupportSelfPickup(false);break;
+					case 1:this.setSupportCourierDeliver(false);break;
+					case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+				}
 			}
 			this.setFreight(param.getFreight());
 
-			//商家后台修改商品不能改变来源
+			//商家后台修改商品不能改变来源（修改商品，source在service层取数据原source值）
+			this.setSource(param.getSource());
 			if(this.getId() == null) {
-				this.setSource(0);
 				this.setCreateAt(new Date());
 				this.setCreateBy(null == userInfo ? null : userInfo.getId());
 				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+
 				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);//上架状态:待审核
+
+				// 新增：海信导入
+				if (null != param.getSource() && 1 == param.getSource()) {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
+				}
 			}  else {
 				this.setCreateBy(param.getCreateBy());
 				this.setTerminalType(param.getTerminalType());
 				this.setRegisterAt(param.getRegisterAt());
 				this.setSoldOutAt(param.getSoldOutAt());
 				this.setStatus(param.getStatus());
-			}
-
-			this.setSource(param.getSource());
-			if (1 == param.getSource()) {
-				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
 			}
 
 			this.setStock(param.getStock());
