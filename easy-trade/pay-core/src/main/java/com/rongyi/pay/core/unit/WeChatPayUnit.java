@@ -253,7 +253,7 @@ public class WeChatPayUnit {
      * @param wechatConfigure 商户配置信息
      */
     private static void waitUserPaying(String orderNo, WechatConfigure wechatConfigure,PunchCardPayResData punchCardPayResData) {
-        int retryTimes = 10;
+        int retryTimes = 8;
         LOGGER.info("刷卡支付等待用户输入密码,最多等待{}s,orderNo={}", retryTimes*retryInterval/1000, orderNo);
 
         boolean result = false;//支付结果
