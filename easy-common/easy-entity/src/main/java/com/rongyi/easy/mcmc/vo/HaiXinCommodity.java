@@ -27,9 +27,9 @@ public class HaiXinCommodity implements Serializable{
     private Double Price;//售价
     private Double PsPrice;//配送价
     private Double PfPrice;//批发价
-    private Integer GCount; //卖场库存数量
-    private Integer CCount;//仓库库存数量
-    private Integer Counts;//库存数量
+    private Double GCount; //卖场库存数量
+    private Double CCount;//仓库库存数量
+    private Double Counts;//库存数量
     private Double DMS;//日均销量
     private Integer TopStock;//最高库存
     private Integer LowStock;//最低库存
@@ -157,27 +157,27 @@ public class HaiXinCommodity implements Serializable{
         PfPrice = pfPrice;
     }
 
-    public Integer getGCount() {
+    public Double getGCount() {
         return GCount;
     }
 
-    public void setGCount(Integer GCount) {
+    public void setGCount(Double GCount) {
         this.GCount = GCount;
     }
 
-    public Integer getCCount() {
+    public Double getCCount() {
         return CCount;
     }
 
-    public void setCCount(Integer CCount) {
+    public void setCCount(Double CCount) {
         this.CCount = CCount;
     }
 
-    public Integer getCounts() {
+    public Double getCounts() {
         return Counts;
     }
 
-    public void setCounts(Integer counts) {
+    public void setCounts(Double counts) {
         Counts = counts;
     }
 

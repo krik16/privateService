@@ -468,7 +468,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
 		commodityParam.setCreateBy(-1);
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
@@ -493,7 +493,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
 
 		// 理想状况，继续使用我方的状态
 		Integer commodityStatus = commodityMongo.getStatus();
@@ -546,8 +546,8 @@ public class CommodityParam implements Serializable{
 		CommoditySpecParam specParam=new CommoditySpecParam();
 		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		specParam.setStock(haiXinCommodity.getCounts());
-		specParam.setRemain(haiXinCommodity.getCounts());
+		specParam.setStock(haiXinCommodity.getCounts().intValue());
+		specParam.setRemain(haiXinCommodity.getCounts().intValue());
 		specParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
 		specParam.setType(4);
 		specParam.setShopMid(shopMid);
