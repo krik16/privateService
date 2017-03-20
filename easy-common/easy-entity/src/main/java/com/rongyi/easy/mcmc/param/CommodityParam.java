@@ -11,6 +11,7 @@ import com.rongyi.easy.mcmc.CommoditySpec;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
@@ -455,9 +456,7 @@ public class CommodityParam implements Serializable{
 		this.commodityType = commodityType;
 	}
 
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, String shopMid){
-		CommodityParam commodityParam=new CommodityParam();
-
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, String shopMid){
 		commodityParam.setType(1);
 		commodityParam.setSource(1);// 海信导入
 		commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
@@ -469,11 +468,11 @@ public class CommodityParam implements Serializable{
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
+		commodityParam.setCreateBy(-1);
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
-		return  commodityParam;
 	}
 
 	/**
@@ -482,9 +481,8 @@ public class CommodityParam implements Serializable{
 	 * @param commodityMongo
 	 * @return
 	 */
-	public CommodityParam haiXinCommodityToCommodityParam(HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
 														  String shopMid){
-		CommodityParam commodityParam=new CommodityParam();
 
 		commodityParam.setType(1); // 含义：编辑，修改商品信息
 		commodityParam.setSource(1); // 海信导入
@@ -495,7 +493,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts());
+		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
 
 		// 理想状况，继续使用我方的状态
 		Integer commodityStatus = commodityMongo.getStatus();
@@ -522,7 +520,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setDistribution((commodityMongo.isSupportSelfPickup()?1:0)
 				+(commodityMongo.isSupportCourierDeliver()?2:0));
 		commodityParam.setFreight(commodityMongo.getFreight());
-		commodityParam.setCreateBy(Integer.valueOf(commodityMongo.getCreate_by()));
+		commodityParam.setCreateBy(StringUtils.isBlank(commodityMongo.getCreate_by())?-1:Integer.valueOf(commodityMongo.getCreate_by()));
 		commodityParam.setRegisterAt(commodityMongo.getRegisterAt());
 		commodityParam.setSoldOutAt(commodityMongo.getSoldOutAt());
 
@@ -535,7 +533,6 @@ public class CommodityParam implements Serializable{
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
 		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
-		return  commodityParam;
 	}
 
 	/**
@@ -549,8 +546,8 @@ public class CommodityParam implements Serializable{
 		CommoditySpecParam specParam=new CommoditySpecParam();
 		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		specParam.setStock(haiXinCommodity.getCounts());
-		specParam.setRemain(haiXinCommodity.getCounts());
+		specParam.setStock(haiXinCommodity.getCounts().intValue());
+		specParam.setRemain(haiXinCommodity.getCounts().intValue());
 		specParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
 		specParam.setType(4);
 		specParam.setShopMid(shopMid);

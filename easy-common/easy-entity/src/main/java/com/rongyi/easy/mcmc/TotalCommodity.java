@@ -858,7 +858,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				this.setStatus(param.getStatus());
 			}
 
-			this.setStock(param.getStock());
+			this.setStock(param.getRemain()); // 当前库存
 			this.setStockStatus(param.getStockStatus());
 			this.setUpdateAt(new Date());
 			this.setUpdateBy(null == userInfo ? null : userInfo.getId());
