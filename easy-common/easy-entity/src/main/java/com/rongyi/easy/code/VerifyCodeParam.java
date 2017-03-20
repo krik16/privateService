@@ -65,7 +65,7 @@ public class VerifyCodeParam implements Serializable {
 
     private String modleId;
 
-    private Long timestamp;
+    private long timestamp;
 
     private String token;
 
