@@ -1,4 +1,4 @@
-package com.rongyi.easy.rpb.vo;
+package com.rongyi.easy.rpb.vo.v6;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

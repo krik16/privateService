@@ -1,6 +1,6 @@
 package com.rongyi.rss.rpb;
 
-import com.rongyi.easy.rpb.vo.PosBankCardPayVo;
+import com.rongyi.easy.rpb.vo.v6.PosBankCardPayVo;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 
 import java.util.Map;
@@ -16,10 +16,9 @@ public interface IPosBankCardPayService {
      * pos银行卡支付
      * @param ryMchVo 容易商户
      * @param posBankCardPayVo 支付参数
-     * @param orderType 订单类型
      * @return map
      */
-    Map<String, Object> posBankCardPay(RyMchVo ryMchVo, PosBankCardPayVo posBankCardPayVo, Integer orderType);
+    Map<String, Object> posBankCardPay(RyMchVo ryMchVo, PosBankCardPayVo posBankCardPayVo);
 
     /**
      * pos银行卡支付查询
