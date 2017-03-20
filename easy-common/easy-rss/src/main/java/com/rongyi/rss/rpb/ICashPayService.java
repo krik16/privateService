@@ -1,6 +1,6 @@
 package com.rongyi.rss.rpb;
 
-import com.rongyi.easy.rpb.vo.CashPayVo;
+import com.rongyi.easy.rpb.vo.v6.CashPayVo;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 
 import java.util.Map;
@@ -16,10 +16,9 @@ public interface ICashPayService {
      * 现金支付
      * @param ryMchVo 容易商户
      * @param cashPayVo 支付参数
-     * @param orderType 订单类型
      * @return map
      */
-    Map<String, Object> cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo,Integer orderType);
+    Map<String, Object> cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo);
 
     /**
      * 现金支付查询
