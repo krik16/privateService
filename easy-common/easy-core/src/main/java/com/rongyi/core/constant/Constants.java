@@ -1128,19 +1128,19 @@ public interface Constants {
         /**
          * 库存不足
          */
-        ERROR_STOCK_LOW("1015102", "库存不足"),
+        ERROR_STOCK_LOW("1015102", "赠送失败（库存不足）"),
         /**
          * 已失效或已下架
          */
-        ERROR_SOLDOUT("1015104", "已失效或已下架"),
+        ERROR_SOLDOUT("1015104", "赠送失败（已失效或已下架）"),
         /**
          * 已失效或已下架
          */
-        ERROR_NOT_EXISTS("1015105", "已失效或已下架"),
+        ERROR_NOT_EXISTS("1015105", "赠送失败（已失效或已下架）"),
         /**
          * 系统异常
          */
-        ERROR_SYSTEM("1015102", "系统异常");
+        ERROR_SYSTEM("1015102", "赠送失败（系统异常）");
 
         private String code;
         private String message;
