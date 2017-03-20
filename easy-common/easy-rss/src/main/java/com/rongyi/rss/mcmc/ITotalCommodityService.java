@@ -46,6 +46,4 @@ public interface ITotalCommodityService {
 
 	Boolean updateTotalCommodityStatus(String id, Integer status, String reason);
 
-	public TotalCommodity findByHaiXinCode(String code);
-
 }

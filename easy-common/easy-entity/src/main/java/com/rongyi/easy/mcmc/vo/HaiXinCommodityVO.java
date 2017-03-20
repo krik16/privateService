@@ -24,6 +24,15 @@ public class HaiXinCommodityVO implements Serializable {
     private String orgName;
     private Date updateAt;
     private Integer status;
+    private Boolean isEditable;
+
+    public Boolean getEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(Boolean editable) {
+        isEditable = editable;
+    }
 
     public Integer getStatus() {
         return status;

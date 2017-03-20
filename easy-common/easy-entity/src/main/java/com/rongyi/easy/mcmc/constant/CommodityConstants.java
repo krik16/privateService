@@ -43,4 +43,8 @@ public interface CommodityConstants {
         int DELIVERY = 2;
     }
 
+    interface Spec {
+        String HAIXIN_SPEC_NAME = "规格";
+    }
+
 }
