@@ -172,6 +172,8 @@ public class ParentOrderVO implements Serializable {
 	private List<CommentVO> comments;//卖家备注列表
 	// 满减金额
 	private BigDecimal reductionFee;
+	// 微信端商品总价（商品总价-折扣）
+	private BigDecimal commodityTotalAmount;
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -984,6 +986,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setReductionFee(BigDecimal reductionFee) {
 		this.reductionFee = reductionFee;
+	}
+
+	public BigDecimal getCommodityTotalAmount() {
+		return commodityTotalAmount;
+	}
+
+	public void setCommodityTotalAmount(BigDecimal commodityTotalAmount) {
+		this.commodityTotalAmount = commodityTotalAmount;
 	}
 
 	@Override
