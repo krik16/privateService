@@ -67,6 +67,20 @@ public class VerifyCodeParam implements Serializable {
 
     private Long timestamp;
 
+    private String token;
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public Integer getValidChannel() {
         return validChannel;
     }
@@ -211,6 +225,11 @@ public class VerifyCodeParam implements Serializable {
         sb.append(", terminal=").append(terminal);
         sb.append(", count=").append(count);
         sb.append(", platform=").append(platform);
+        sb.append(", validChannel=").append(validChannel);
+        sb.append(", sign='").append(sign).append('\'');
+        sb.append(", modleId='").append(modleId).append('\'');
+        sb.append(", timestamp=").append(timestamp);
+        sb.append(", token='").append(token).append('\'');
         sb.append('}');
         return sb.toString();
     }
