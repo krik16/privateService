@@ -35,18 +35,14 @@ public class QueryBizz {
      * 微众微信刷卡支付订单查询
      *
      * @param orderNo     订单号
-     * @param payType  支付方式(0:支付宝,1:微信)
      * @param weBankMchNo 微众商户号
      * @return PunchCardPayQueryResData
      */
-    public WwPunchCardResData webankWechatPunchCardPayQueryOrder(String orderNo, Integer payType, String weBankMchNo) {
+    public WwPunchCardResData webankWechatPunchCardPayQueryOrder(String orderNo, String weBankMchNo) {
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                payType);
 
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+
         WwPunchCardQueryOrderReqData reqData  = new WwPunchCardQueryOrderReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
         WwPunchCardResData resData = WebankPayUnit.wechatPunchCardPayQueryOrder(reqData);
@@ -63,24 +59,15 @@ public class QueryBizz {
      * 微众微信刷卡支付退款查询
      *
      * @param orderNo     订单号
-     * @param payType  支付方式(0:支付宝,1:微信)
      * @param weBankMchNo 微众商户号
      * @return PunchCardPayQueryResData
      */
-    public WwPunchCardRefundResData webankWechatPunchCardRefundQuery(String orderNo, Integer payType, String weBankMchNo) {
+    public WwPunchCardRefundResData webankWechatPunchCardRefundQuery(String orderNo, String weBankMchNo) {
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                payType);
 
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
-                payType);
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 
-        if (refundPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
-        }
+        baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 
         WwpunchCardRefundReqData reqData  = new WwpunchCardRefundReqData();
         reqData.setMerchant_code(weBankMchNo);
@@ -96,22 +83,16 @@ public class QueryBizz {
      * 微众支付宝刷卡支付订单查询
      *
      * @param orderNo     订单号
-     * @param payType  支付方式(0:支付宝,1:微信)
      * @param weBankMchNo 微众商户号
      * @return PunchCardPayQueryResData
      */
-    public WaQueryTradeResData weBankAliPunchCardPayQueryOrder(String orderNo, Integer payType, String weBankMchNo) {
+    public WaQueryTradeResData weBankAliPunchCardPayQueryOrder(String orderNo,String weBankMchNo) {
 
         //初始化设置支付宝ticket
         payConfigInitUnit.initAliTicket();
 
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                payType);
-
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
         WaQueryTradeReqData reqData  = new WaQueryTradeReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
         WaQueryTradeResData resData = WebankPayUnit.alipayQueryTrade(reqData);
@@ -126,26 +107,18 @@ public class QueryBizz {
      * 微众支付宝退款订单查询
      *
      * @param orderNo     订单号
-     * @param payType  支付方式(0:支付宝,1:微信)
      * @param weBankMchNo 微众商户号
      * @return PunchCardPayQueryResData
      */
-    public WaRefundQueryResData webankAliPunchCardRefundQuery(String orderNo, Integer payType, String weBankMchNo) {
+    public WaRefundQueryResData webankAliPunchCardRefundQuery(String orderNo, String weBankMchNo) {
 
         //初始化设置支付宝ticket
         payConfigInitUnit.initAliTicket();
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                payType);
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
-                payType);
-        if(refundPaymentEntity == null){
-            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
-        }
+        PaymentEntity refundPaymentEntity = baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+
         WaRefundQueryReqData reqData  = new WaRefundQueryReqData();
         reqData.setWbMerchantId(weBankMchNo);
         reqData.setOrderId(oldPaymentEntity.getPayNo());
@@ -164,17 +137,9 @@ public class QueryBizz {
      */
     public PaymentEntity aliRefundQuery(String orderNo,AliConfigure aliConfigure) {
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-        if(refundPaymentEntity == null){
-            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
-        }
+        baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
         return oldPaymentEntity;
     }
     /**
@@ -197,21 +162,14 @@ public class QueryBizz {
          * 微信退款订单查询
          *
          * @param orderNo     订单号
-         * @return PunchCardPayQueryResData
+         * @return PaymentEntity
          */
     public RefundQueryResData wechatRefundQuery(String orderNo,WechatConfigure wechatConfigure) {
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-        if(refundPaymentEntity == null){
-            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
-        }
+        baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+
         RefundQueryResData refundQueryResData = WeChatPayUnit.refundQuery(null,oldPaymentEntity.getPayNo(),null,wechatConfigure);
         refundQueryResData.setTotalAmount(oldPaymentEntity.getAmountMoney());
         return refundQueryResData;
@@ -222,10 +180,50 @@ public class QueryBizz {
      * 现金支付订单查询
      *
      * @param orderNo     订单号
-     * @param payType  支付方式(0:支付宝,1:微信,2:pos银行卡,3:现金)
+     * @return PaymentEntity
+     */
+    public PaymentEntity cashPayQueryOrder(String orderNo) {
+
+       return basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+    }
+
+    /**
+     * 现金退款订单查询
+     *
+     * @param orderNo     订单号
+     * @return PaymentEntity
+     */
+    public PaymentEntity cashRefundQueryOrder(String orderNo) {
+
+         return baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+    }
+
+
+    /**
+     * 银行卡支付订单查询
+     *
+     * @param orderNo     订单号
+     * @return PaymentEntity
+     */
+    public PaymentEntity posBankCardPayQueryOrder(String orderNo) {
+
+       return basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+    }
+
+    /**
+     * pos银行卡退款订单查询
+     *
+     * @param orderNo     订单号
      * @return PunchCardPayQueryResData
      */
-    public PaymentEntity cashPayQueryOrder(String orderNo, Integer payType) {
+    public PaymentEntity posBankCardRefundQueryOrder(String orderNo) {
+
+        return baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+    }
+
+
+
+    private PaymentEntity basePayQuery(String orderNo, Integer payType){
 
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 payType);
@@ -236,21 +234,14 @@ public class QueryBizz {
         return paymentEntity;
     }
 
-    /**
-     * 现金退款订单查询
-     *
-     * @param orderNo     订单号
-     * @return PunchCardPayQueryResData
-     */
-    public PaymentEntity cashRefundQueryOrder(String orderNo) {
+    private PaymentEntity baseRefundQuery(String orderNo, Integer payType){
 
-        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                payType);
 
-        if (paymentEntity == null) {
+        if (refundPayment == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
         }
-        return paymentEntity;
+        return refundPayment;
     }
-
 }
