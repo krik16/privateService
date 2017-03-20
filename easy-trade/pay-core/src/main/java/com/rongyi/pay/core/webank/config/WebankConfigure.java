@@ -8,6 +8,7 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class WebankConfigure extends BaseData{
 
+    private static final long serialVersionUID = -5637779923920190007L;
     //商户密钥key
     private String key ;
 
@@ -234,5 +235,18 @@ public class WebankConfigure extends BaseData{
 
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    @Override
+    public String toString() {
+        return "WebankConfigure{" +
+                "key='" + key + '\'' +
+                ", ticket='" + ticket + '\'' +
+                ", wechatKeyStorePath='" + wechatKeyStorePath + '\'' +
+                ", wechatTrustStorePath='" + wechatTrustStorePath + '\'' +
+                ", wechatKeyStorePwd='" + wechatKeyStorePwd + '\'' +
+                ", appId='" + appId + '\'' +
+                ", secret='" + secret + '\'' +
+                '}';
     }
 }

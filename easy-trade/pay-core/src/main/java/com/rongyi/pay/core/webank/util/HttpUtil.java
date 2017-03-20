@@ -45,7 +45,7 @@ public class HttpUtil {
 	public static String httpGET(String url ,WebankConfigure configure) throws Exception{
 		String result = "";
 		URL u = null;
-		logger.info("send_url:" + url +",webankConfig:"+configure);
+		logger.info("send_url:" + url);
 		try {
 			CloseableHttpClient httpClient = init(configure);
 			HttpGet httpGet = new HttpGet(url);
