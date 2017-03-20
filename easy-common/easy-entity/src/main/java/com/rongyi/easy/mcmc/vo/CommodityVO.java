@@ -1328,7 +1328,9 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setMallId("-1");
 
 		vo.setProcessIdentity(null == userInfo ? null : userInfo.getIdentity());
-		vo.setMerchantId(null == userInfo ? null : userInfo.getBindingMid());
+
+		// 海信导入的数据，userinfo为空
+		vo.setMerchantId(null == userInfo ? commodity.getMerchantId() : userInfo.getBindingMid());
 		if(null ==commodity.getId()){
 			vo.setCreate_by(null == userInfo ? null : userInfo.getId().toString());//新增的时候设置创建者的id
 		} else {

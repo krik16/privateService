@@ -30,6 +30,8 @@ public class CommoditySpecParam implements  Serializable {
 	private String referencePrice;//参考价
 	private List<String> serviceIds; //公众号
 
+	private String commodityId; // 海信导入：用于编辑
+
 
 	public Integer getType() {
 		return type;
@@ -175,6 +177,14 @@ public class CommoditySpecParam implements  Serializable {
 		this.serviceIds = serviceIds;
 	}
 
+	public String getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(String commodityId) {
+		this.commodityId = commodityId;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecParam{" +
@@ -196,6 +206,7 @@ public class CommoditySpecParam implements  Serializable {
 				", type=" + type +
 				", referencePrice='" + referencePrice + '\'' +
 				", serviceIds=" + serviceIds +
+				", commodityId='" + commodityId + '\'' +
 				'}';
 	}
 }

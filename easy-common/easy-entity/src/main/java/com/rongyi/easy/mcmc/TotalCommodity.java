@@ -849,6 +849,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				// 新增：海信导入
 				if (null != param.getSource() && 1 == param.getSource()) {
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
+					this.setCreateBy(-1);
 				}
 			}  else {
 				this.setCreateBy(param.getCreateBy());
@@ -864,7 +865,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setUpdateBy(null == userInfo ? null : userInfo.getId());
 			this.setPurchaseCount(param.getPurchaseCount());
 			this.setTemplateId(param.getTemplateId());
-			this.setMerchantId(null == userInfo ? null : userInfo.getBindingMid());
+
+			// 海信导入的数据，userinfo为空
+			this.setMerchantId(null == userInfo ? param.getMerchantId() : userInfo.getBindingMid());
 			this.setCommodityDetails(param.getCommodityDetails());
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
