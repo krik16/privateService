@@ -27,6 +27,10 @@
 	<dubbo:service interface="com.rongyi.rss.rpb.ICashPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="weBankService" />
 	<bean id="cashPayService" class="com.rongyi.rpb.service.impl.v6.CashPayServiceImpl" />
 
+	<!--pos银行卡服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.IPosBankCardPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="weBankService" />
+	<bean id="posBankCardPayService" class="com.rongyi.rpb.service.impl.v6.PosBankCardServiceImpl" />
+
 	<!--支付查询接口-->
 	<dubbo:service interface="com.rongyi.rss.rpb.IQueryService" version="${dubbo.version}" ref="queryService" />
 	<bean id="queryService" class="com.rongyi.rpb.service.impl.v6.QueryServiceImpl" />

@@ -9,6 +9,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.v6.CashPayVo;
 import com.rongyi.easy.rpb.vo.v6.PaymentEntityVo;
+import com.rongyi.easy.rpb.vo.v6.PosBankCardPayVo;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.ali.model.reqData.AliPunchCardPayReqData;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
@@ -331,14 +332,14 @@ public class PayBizz {
      * 现金支付
      *
      * @param ryMchVo   容易商户信息
-     * @param cashPayVo 业务参数
+     * @param posBankCardPayVo 业务参数
      * @param orderType 订单类型
      * @return WwPunchCardResData
      */
-    public PaymentEntity posBankCardPay(RyMchVo ryMchVo, CashPayVo cashPayVo,Integer orderType) {
+    public PaymentEntity posBankCardPay(RyMchVo ryMchVo, PosBankCardPayVo posBankCardPayVo,Integer orderType) {
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, cashPayVo.getOrderNo(), cashPayVo.getTotalAmount(), "", "",
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, posBankCardPayVo.getOrderNo(), posBankCardPayVo.getTotalAmount(), "", "",
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, orderType);
 
         //保存支付记录
