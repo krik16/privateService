@@ -48,4 +48,6 @@ public interface ITotalCommodityService {
 
 	public TotalCommodity findByHaiXinCode(String code);
 
+	public Long searchCommodityByCodeAndLocationId(String code,String locationId);
+
 }
