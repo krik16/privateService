@@ -6,6 +6,7 @@ import com.rongyi.core.framework.exception.CodeServiceException;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.code.StatisticsValidCountVO;
 import com.rongyi.easy.code.ValidCouponVO;
+import com.rongyi.easy.code.VerifyCodeParam;
 import com.rongyi.easy.code.WebValidVO;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
@@ -141,6 +142,12 @@ public interface ValidCodeService {
      */
     public WebValidVO validEventGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop,byte platform);
 
+    /**
+     * 万达BO 验券接口
+     * @param codeParam
+     * @return
+     */
+    boolean validWDCode(VerifyCodeParam codeParam) throws CodeServiceException;
 
 
     /**

@@ -22,7 +22,7 @@ public class VerifyCodeParam implements Serializable {
      */
     private String activityId;
     /**
-     * 0:卡券；1：邀请码；2：礼品码 4 活动奖品码
+     * 0:卡券；1：邀请码；2：礼品码 4 活动奖品码 5:BO应用券码
      */
     private Integer type;
 
@@ -57,6 +57,23 @@ public class VerifyCodeParam implements Serializable {
     private Integer count;
 
     private Integer platform;
+
+    //0:商家后台；1：摩店；2：轻应用;3 :积分POS；4：家得利验券；5：其他  6：BO 万达BO渠道验券
+    private Integer validChannel;
+
+    private String sign;
+
+    private String modleId;
+
+    private Long timestamp;
+
+    public Integer getValidChannel() {
+        return validChannel;
+    }
+
+    public void setValidChannel(Integer validChannel) {
+        this.validChannel = validChannel;
+    }
 
     public Integer getCount() {
         if (count == null) {
@@ -150,6 +167,34 @@ public class VerifyCodeParam implements Serializable {
 
     public void setTerminal(Integer terminal) {
         this.terminal = terminal;
+    }
+
+    public static Long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public String getModleId() {
+        return modleId;
+    }
+
+    public void setModleId(String modleId) {
+        this.modleId = modleId;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override
