@@ -69,10 +69,6 @@ public class VerifyCodeParam implements Serializable {
 
     private String token;
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public String getToken() {
         return token;
     }
