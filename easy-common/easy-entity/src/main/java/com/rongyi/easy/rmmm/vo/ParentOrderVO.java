@@ -170,6 +170,10 @@ public class ParentOrderVO implements Serializable {
 	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
 	private String selfCode;// 自提码
 	private List<CommentVO> comments;//卖家备注列表
+	private String shopProvinceName;// 店铺省名称
+	private String shopCityName;// 店铺市名称
+	private String shopAddress;//店铺详细地址
+	private String shopAreaName;//店铺区域名称
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -974,6 +978,38 @@ public class ParentOrderVO implements Serializable {
 
 	public void setBuyerNameByWeixin(String buyerNameByWeixin) {
 		this.buyerNameByWeixin = buyerNameByWeixin;
+	}
+
+	public String getShopProvinceName() {
+		return shopProvinceName;
+	}
+
+	public void setShopProvinceName(String shopProvinceName) {
+		this.shopProvinceName = shopProvinceName;
+	}
+
+	public String getShopCityName() {
+		return shopCityName;
+	}
+
+	public void setShopCityName(String shopCityName) {
+		this.shopCityName = shopCityName;
+	}
+
+	public String getShopAddress() {
+		return shopAddress;
+	}
+
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+
+	public String getShopAreaName() {
+		return shopAreaName;
+	}
+
+	public void setShopAreaName(String shopAreaName) {
+		this.shopAreaName = shopAreaName;
 	}
 
 	@Override

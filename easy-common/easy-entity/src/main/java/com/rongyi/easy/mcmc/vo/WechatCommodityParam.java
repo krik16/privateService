@@ -11,9 +11,19 @@ public class WechatCommodityParam implements Serializable{
 
     private Integer customCategoryId;
 
+    private String serviceId;
+
     private Integer currentPage;
 
     private Integer pageSize;
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
 
     public String getShopMid() {
         return shopMid;
@@ -52,6 +62,7 @@ public class WechatCommodityParam implements Serializable{
         return "WechatCommodityParam{" +
                 "customCategoryId=" + customCategoryId +
                 ", shopMid=" + shopMid +
+                ", serviceId=" + serviceId +
                 ", currentPage=" + currentPage +
                 ", pageSize=" + pageSize +
                 '}';
