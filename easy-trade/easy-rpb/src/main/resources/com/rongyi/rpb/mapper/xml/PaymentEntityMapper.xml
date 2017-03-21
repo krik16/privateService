@@ -575,17 +575,24 @@
         <include refid="Base_Column_List"/>
         from payment_order
         where trade_type = #{tradeType,jdbcType=INTEGER} and status = 2
-        and  pay_no in
-        <foreach collection="orderNoList" index="index" item="item" open="("
-                 separator="," close=")">
-            #{item}
-        </foreach>
+        <if test="tradeType == 0">
+            and  pay_no in
+            <foreach collection="orderNoList" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test=" tradeType == 1">
+            and order_no
+            in (select order_no from payment_order where trade_type = 0 and status = 2 and pay_no in
+              <foreach collection="orderNoList" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+            )
+        </if>
         order by
         instr(
-       <!-- <foreach collection="orderNoList" index="index" item="item" open="'"
-                       separator="," close="'">
-        #{item}
-        </foreach>-->
         #{orderNoList}
         ,CONCAT(pay_no))
 
