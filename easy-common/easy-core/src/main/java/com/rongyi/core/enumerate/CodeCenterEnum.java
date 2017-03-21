@@ -80,7 +80,9 @@ public enum CodeCenterEnum {
     ERROR_LIMIT_USERD(1000006, "卡券每日限用N张"),
     ERROR_BLANK(1000007, "券码为空"),
     ERROR_PARAMS(1000008, "参数不完整"),
-    ERROR_EXCEPTION(1000999, "服务异常"),
+    ERROR_EXCEPTION(4003, "非法请求"),
+    ERROR_UNEXIST(4004, "券码不存在"),
+    ERROR_EXPRIED(4005, "券过期"),
 
     ;
 
