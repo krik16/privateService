@@ -438,4 +438,6 @@ public interface CommodityService {
 
     Map<String, Object> getTotalCommodityListForHaiXin(Map<String, Object> paramsMap);
 
+    boolean updateSpecTotalStock(String specId, Integer stock);
+
 }
