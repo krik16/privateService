@@ -530,7 +530,7 @@ public class CommodityParam implements Serializable{
 			}
 		}
 
-		commodityParam.setId(commodityMongo.getSystemNumber());
+		//commodityParam.setId(commodityMongo.getSystemNumber());
 		commodityParam.setTerminalType(commodityMongo.getTerminalType());
 		commodityParam.setPostage(commodityMongo.getPostage());
 		commodityParam.setPicList(commodityMongo.getPicList());
