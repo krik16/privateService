@@ -1,5 +1,8 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,7 +24,9 @@ public class SearchParamsForWechat implements Serializable{
     private String displayStatus;
     private String category;
     private String type;
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date startTime;
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date endTime;
 
     private String brandId;

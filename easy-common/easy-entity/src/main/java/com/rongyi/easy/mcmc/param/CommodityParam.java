@@ -107,6 +107,8 @@ public class CommodityParam implements Serializable{
 
 	private String haiXinId;
 
+	private String merchantId; // 海信导入时，存入shopmid，用作权限控制
+
 	public String getHaiXinId() {
 		return haiXinId;
 	}
@@ -456,8 +458,17 @@ public class CommodityParam implements Serializable{
 		this.commodityType = commodityType;
 	}
 
-	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, String shopMid){
-		commodityParam.setType(1);
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
+
+	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, String shopMid,
+												String shopParentMid){
+		commodityParam.setType(1); // 必须赋值type=1，在后面要根据type做一定的判断（total的更新）
 		commodityParam.setSource(1);// 海信导入
 		commodityParam.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);
 		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
@@ -470,9 +481,15 @@ public class CommodityParam implements Serializable{
 		commodityParam.setDescription(haiXinCommodity.getRemark());
 		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
 		commodityParam.setCreateBy(-1);
+		if (StringUtils.isNotBlank(shopParentMid)) {
+			commodityParam.setMerchantId(shopParentMid);
+		} else {
+			commodityParam.setMerchantId(shopMid);
+		}
+
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
-		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid, null);
 	}
 
 	/**
@@ -482,7 +499,7 @@ public class CommodityParam implements Serializable{
 	 * @return
 	 */
 	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
-														  String shopMid){
+														  String shopMid, String shopParentMid){
 
 		commodityParam.setType(1); // 含义：编辑，修改商品信息
 		commodityParam.setSource(1); // 海信导入
@@ -513,7 +530,7 @@ public class CommodityParam implements Serializable{
 			}
 		}
 
-		commodityParam.setId(commodityMongo.getSystemNumber());
+		//commodityParam.setId(commodityMongo.getSystemNumber());
 		commodityParam.setTerminalType(commodityMongo.getTerminalType());
 		commodityParam.setPostage(commodityMongo.getPostage());
 		commodityParam.setPicList(commodityMongo.getPicList());
@@ -531,8 +548,14 @@ public class CommodityParam implements Serializable{
 		commodityParam.setBrandMid(commodityMongo.getBrandMid());
 		commodityParam.setBrandName(commodityMongo.getBrandName());
 
+		if (StringUtils.isNotBlank(shopParentMid)) {
+			commodityParam.setMerchantId(shopParentMid);
+		} else {
+			commodityParam.setMerchantId(shopMid);
+		}
+
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
-		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid);
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid, commodityMongo.getId().toString());
 	}
 
 	/**
@@ -542,8 +565,11 @@ public class CommodityParam implements Serializable{
 	 * @param shopMid
 	 */
 	private void toCommodityParamAboutSpecParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity,
-													 String shopMid) {
+													 String shopMid, String commodityId) {
 		CommoditySpecParam specParam=new CommoditySpecParam();
+		if (StringUtils.isNotBlank(commodityId)) {
+			specParam.setCommodityId(commodityId);
+		}
 		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
 		specParam.setStock(haiXinCommodity.getCounts().intValue());
@@ -598,6 +624,7 @@ public class CommodityParam implements Serializable{
 				", commodityModelNo='" + commodityModelNo + '\'' +
 				", pass='" + pass + '\'' +
 				", haiXinId='" + haiXinId + '\'' +
+				", merchantId='" + merchantId + '\'' +
 				", goodsParam='" + goodsParam + '\'' +
 				", commodityType=" + commodityType +
 				'}';

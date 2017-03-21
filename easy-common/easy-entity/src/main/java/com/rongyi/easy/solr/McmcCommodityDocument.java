@@ -609,8 +609,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setTerminalType(commodity.getTerminalType());
 		if(!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
 			List<String> category_ids = new ArrayList<>();
-			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
-				category_ids.add(categoryObjectId.toString());
+			if (CollectionUtils.isNotEmpty(commodity.getCategoryIds())) {
+				for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
+					category_ids.add(categoryObjectId.toString());
+				}
 			}
 			this.setCategory_ids(category_ids);
 			this.setBrandName(commodity.getBrandName());

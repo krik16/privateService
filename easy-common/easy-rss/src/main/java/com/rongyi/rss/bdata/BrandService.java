@@ -18,4 +18,7 @@ public interface BrandService {
 	public BrandHaiXinEntity getBrandHaiXinByCode(String code);
 	
 	public List<BrandHaiXinEntity> getBrandHaiXinListByCondition();
+
+	void  importHaiXinData(String url) throws Exception;
+
 }
