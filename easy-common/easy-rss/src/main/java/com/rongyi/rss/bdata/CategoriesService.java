@@ -24,4 +24,6 @@ public interface CategoriesService {
 	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level);
 	
 	public List<CategoryHaiXinEntity> getCategoryHaiXinByIds(List<ObjectId> ids);
+	
+	public void importHaiXinCategory(String url) throws Exception;
 }
