@@ -10,6 +10,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.rongyi.rpb.common.pay.ali.sign.AlipayConfig;
 import com.rongyi.rpb.common.pay.ali.sign.RSA;
+import org.apache.commons.lang.StringUtils;
 
 /* *
  *类名：AlipayNotify
@@ -111,6 +112,10 @@ public class AliAppPayNotify {
 		String inputLine = "";
 
 		try {
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
 			URL url = new URL(urlvalue);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
