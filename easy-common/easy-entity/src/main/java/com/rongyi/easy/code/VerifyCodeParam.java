@@ -61,21 +61,15 @@ public class VerifyCodeParam implements Serializable {
     //0:商家后台；1：摩店；2：轻应用;3 :积分POS；4：家得利验券；5：其他  6：BO 万达BO渠道验券
     private Integer validChannel;
 
-    private String sign;
+    private String signature;
 
-    private String modleId;
+    private String partnerId;
 
-    private long timestamp;
+    private Long ts;
 
-    private String token;
+    private String nonceStr;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+    private String storeId;
 
     public Integer getValidChannel() {
         return validChannel;
@@ -183,28 +177,44 @@ public class VerifyCodeParam implements Serializable {
         return serialVersionUID;
     }
 
-    public String getSign() {
-        return sign;
+    public String getSignature() {
+        return signature;
     }
 
-    public void setSign(String sign) {
-        this.sign = sign;
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
-    public String getModleId() {
-        return modleId;
+    public String getPartnerId() {
+        return partnerId;
     }
 
-    public void setModleId(String modleId) {
-        this.modleId = modleId;
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
+    public Long getTs() {
+        return ts;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setTs(Long ts) {
+        this.ts = ts;
+    }
+
+    public String getNonceStr() {
+        return nonceStr;
+    }
+
+    public void setNonceStr(String nonceStr) {
+        this.nonceStr = nonceStr;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
     @Override
@@ -222,10 +232,11 @@ public class VerifyCodeParam implements Serializable {
         sb.append(", count=").append(count);
         sb.append(", platform=").append(platform);
         sb.append(", validChannel=").append(validChannel);
-        sb.append(", sign='").append(sign).append('\'');
-        sb.append(", modleId='").append(modleId).append('\'');
-        sb.append(", timestamp=").append(timestamp);
-        sb.append(", token='").append(token).append('\'');
+        sb.append(", signature='").append(signature).append('\'');
+        sb.append(", partnerId='").append(partnerId).append('\'');
+        sb.append(", ts=").append(ts);
+        sb.append(", nonceStr='").append(nonceStr).append('\'');
+        sb.append(", storeId='").append(storeId).append('\'');
         sb.append('}');
         return sb.toString();
     }
