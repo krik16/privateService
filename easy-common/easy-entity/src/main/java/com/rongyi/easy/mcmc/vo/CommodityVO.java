@@ -1089,6 +1089,8 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
 		this.onServiceIds = commodity.getOnServiceIds();
 		this.setIfShowInWechat(isShowInWechat());
+
+		this.source = commodity.getSource();
 	}
 
 	private boolean isShowInWechat() {
