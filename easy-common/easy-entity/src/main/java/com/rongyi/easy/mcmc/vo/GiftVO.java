@@ -48,23 +48,14 @@ public class GiftVO implements Serializable {
     private String mallMid;
     private Date registerAt; //上架时间
     private Date soldOutAt; //下架时间
-    private String originalPrice;//商品原价
-    private String currentPrice;//商品现价
+    private Double price;
 
-    public String getOriginalPrice() {
-        return originalPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public String getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(String currentPrice) {
-        this.currentPrice = currentPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Date getUpdateAt() {
