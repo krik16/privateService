@@ -4,6 +4,7 @@ import com.rongyi.core.bean.DubboVO;
 import com.rongyi.easy.tradecenter.vo.UserCenterVO;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 会员服务
@@ -81,7 +82,19 @@ public interface MemberService {
      * @param userId      用户id
      * @param payAmount   支付金额（实付金额-运费）
      * @param payDate     支付时间
+     * @param activityId     活动id
+     * @param shopId     店铺id
      * @return
      */
-    DubboVO pushCreditMsg(Integer platform, String mallId, Integer serviceType, String userId, String orderNo, double payAmount, Date payDate);
+    DubboVO pushCreditMsg(Integer platform, String mallId, Integer serviceType, String userId, String orderNo, double payAmount, Date payDate, String activityId, String shopId);
+
+    /**
+     * 获取当前消费送积分
+     *
+     * @param platform    平台
+     * @param mallId      商场id
+     * @param shopId     店铺id
+     * @return {"consumeActivityId":"活动id"}
+     */
+    public DubboVO<Map<String,Object>> getCreditMsg(Integer platform, String mallId,String shopId);
 }
