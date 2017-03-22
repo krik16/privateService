@@ -14,7 +14,7 @@ public class WdCouponVO implements Serializable {
     //券码
     private String code;
     //验证时间
-    private Date verifyTime;
+    private Long verifyTime;
     //核销用户id
     private String puid;
     //核销用户的手机号
@@ -26,11 +26,11 @@ public class WdCouponVO implements Serializable {
     //店铺id
     private String storeId;
 
-    public Date getVerifyTime() {
+    public Long getVerifyTime() {
         return verifyTime;
     }
 
-    public void setVerifyTime(Date verifyTime) {
+    public void setVerifyTime(Long verifyTime) {
         this.verifyTime = verifyTime;
     }
 
