@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommoditySpec;
+import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.vo.HaiXinCommodity;
 import org.apache.commons.collections.CollectionUtils;
@@ -466,6 +467,22 @@ public class CommodityParam implements Serializable{
 		this.merchantId = merchantId;
 	}
 
+	public void haiXinTotalCommodityToCommodityParam(CommodityParam commodityParam, TotalCommodity totalCommodity){
+		commodityParam.setId(totalCommodity.getId().toString());
+		commodityParam.setBrandMid(totalCommodity.getBrandMid());
+		commodityParam.setBrandName(totalCommodity.getBrandName());
+		commodityParam.setDescription(totalCommodity.getDescription());// 海信导入：没有描述
+		commodityParam.setCommodityDetails(totalCommodity.getCommodityDetails());// 海信导入：没有详情
+		commodityParam.setPicList(totalCommodity.getPicList());// 海信导入：没有图片
+		commodityParam.setPostage(totalCommodity.getPostage());
+		commodityParam.setDistribution((totalCommodity.isSupportSelfPickup()?1:0)
+				+(totalCommodity.isSupportCourierDeliver()?2:0));
+		commodityParam.setFreight(totalCommodity.getFreight());
+		commodityParam.setStockStatus(totalCommodity.getStockStatus());
+		commodityParam.setPurchaseCount(totalCommodity.getPurchaseCount());
+		commodityParam.setTemplateId(totalCommodity.getTemplateId());
+	}
+
 	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, String shopMid,
 												String shopParentMid){
 		commodityParam.setType(1); // 必须赋值type=1，在后面要根据type做一定的判断（total的更新）
@@ -478,7 +495,6 @@ public class CommodityParam implements Serializable{
 		commodityParam.setBarCode(haiXinCommodity.getBarCode());
 		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
 		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		commodityParam.setDescription(haiXinCommodity.getRemark());
 		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
 		commodityParam.setCreateBy(-1);
 		if (StringUtils.isNotBlank(shopParentMid)) {
