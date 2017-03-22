@@ -175,6 +175,10 @@ public class AliPayUnit {
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
                 .setOutTradeNo(outTradeNo)
                 .setTradeNo(tradeNo);
+        //服务商模式收款
+        if(StringUtils.isNotBlank(aliConfigure.getAppAuthToken())){
+            builder.setAppAuthToken(aliConfigure.getAppAuthToken());
+        }
 
         AlipayF2FQueryResult result = tradeService.queryTradeResult(builder, aliConfigure);
         switch (result.getTradeStatus()) {
