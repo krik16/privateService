@@ -111,6 +111,15 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 	private Integer minStock;
 	private Integer maxStock;
 	private Integer type;
+	private Integer getTogether;  //是否聚合  0:不聚合  1：聚合
+
+	public Integer getGetTogether() {
+		return getTogether;
+	}
+
+	public void setGetTogether(Integer getTogether) {
+		this.getTogether = getTogether;
+	}
 
 	@NeedCheck(getFieldName = "type")
 	public Integer getType() {
@@ -520,6 +529,7 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", serviceId=" + serviceId +
 				", type=" + type +
 				", offset=" + offset +
+				", getTogether=" + getTogether +
 				"} " + super.toString();
 	}
 
