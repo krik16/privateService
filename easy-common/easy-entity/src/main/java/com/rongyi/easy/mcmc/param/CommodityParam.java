@@ -509,7 +509,7 @@ public class CommodityParam implements Serializable{
 		commodityParam.setBarCode(StringUtils.isNotBlank(haiXinCommodity.getBarCode())?haiXinCommodity.getBarCode():commodityMongo.getBarCode());
 		commodityParam.setOriginalPrice(null != haiXinCommodity.getPrice()?String.valueOf(haiXinCommodity.getPrice()):commodityMongo.getOriginalPrice());
 		commodityParam.setCurrentPrice(null != haiXinCommodity.getPrice()?String.valueOf(haiXinCommodity.getPrice()):commodityMongo.getCurrentPrice());
-		commodityParam.setDescription(StringUtils.isNotBlank(haiXinCommodity.getRemark())?haiXinCommodity.getRemark():commodityMongo.getDescription());
+		commodityParam.setDescription(commodityMongo.getDescription());
 		commodityParam.setStock(null != haiXinCommodity.getCounts()?haiXinCommodity.getCounts().intValue() : commodityMongo.getStock());
 
 		// 理想状况，继续使用我方的状态
@@ -545,8 +545,10 @@ public class CommodityParam implements Serializable{
 		commodityParam.setPurchaseCount(commodityMongo.getPurchaseCount());
 		commodityParam.setTemplateId(commodityMongo.getTemplateId());
 		commodityParam.setCommodityDetails(commodityMongo.getCommodityDetails());
-		commodityParam.setBrandMid(commodityMongo.getBrandMid());
-		commodityParam.setBrandName(commodityMongo.getBrandName());
+
+		// 外面已经赋值
+		/*commodityParam.setBrandMid(commodityMongo.getBrandMid());
+		commodityParam.setBrandName(commodityMongo.getBrandName());*/
 
 		if (StringUtils.isNotBlank(shopParentMid)) {
 			commodityParam.setMerchantId(shopParentMid);
