@@ -489,7 +489,7 @@ public class CommodityParam implements Serializable{
 
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
-		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid, null);
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid, null, null);
 	}
 
 	/**
@@ -499,18 +499,18 @@ public class CommodityParam implements Serializable{
 	 * @return
 	 */
 	public void haiXinCommodityToCommodityParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity, Commodity commodityMongo,
-														  String shopMid, String shopParentMid){
+														  String shopMid, String shopParentMid, CommoditySpec spec){
 
 		commodityParam.setType(1); // 含义：编辑，修改商品信息
 		commodityParam.setSource(1); // 海信导入
 		commodityParam.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
-		commodityParam.setName(haiXinCommodity.getPluName());
+		commodityParam.setName(StringUtils.isNotBlank(haiXinCommodity.getPluName())?haiXinCommodity.getPluName():commodityMongo.getName());
 		commodityParam.setCode(haiXinCommodity.getPluCode());
-		commodityParam.setBarCode(haiXinCommodity.getBarCode());
-		commodityParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
-		commodityParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		commodityParam.setDescription(haiXinCommodity.getRemark());
-		commodityParam.setStock(haiXinCommodity.getCounts().intValue());
+		commodityParam.setBarCode(StringUtils.isNotBlank(haiXinCommodity.getBarCode())?haiXinCommodity.getBarCode():commodityMongo.getBarCode());
+		commodityParam.setOriginalPrice(null != haiXinCommodity.getPrice()?String.valueOf(haiXinCommodity.getPrice()):commodityMongo.getOriginalPrice());
+		commodityParam.setCurrentPrice(null != haiXinCommodity.getPrice()?String.valueOf(haiXinCommodity.getPrice()):commodityMongo.getCurrentPrice());
+		commodityParam.setDescription(StringUtils.isNotBlank(haiXinCommodity.getRemark())?haiXinCommodity.getRemark():commodityMongo.getDescription());
+		commodityParam.setStock(null != haiXinCommodity.getCounts()?haiXinCommodity.getCounts().intValue() : commodityMongo.getStock());
 
 		// 理想状况，继续使用我方的状态
 		Integer commodityStatus = commodityMongo.getStatus();
@@ -555,7 +555,7 @@ public class CommodityParam implements Serializable{
 		}
 
 		// 生成CommoditySpecParam信息，并赋值到CommodityParam中
-		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid, commodityMongo.getId().toString());
+		toCommodityParamAboutSpecParam(commodityParam, haiXinCommodity, shopMid, commodityMongo.getId().toString(), spec);
 	}
 
 	/**
@@ -565,19 +565,25 @@ public class CommodityParam implements Serializable{
 	 * @param shopMid
 	 */
 	private void toCommodityParamAboutSpecParam(CommodityParam commodityParam, HaiXinCommodity haiXinCommodity,
-													 String shopMid, String commodityId) {
+													 String shopMid, String commodityId, CommoditySpec spec) {
 		CommoditySpecParam specParam=new CommoditySpecParam();
 		if (StringUtils.isNotBlank(commodityId)) {
 			specParam.setCommodityId(commodityId);
 		}
-		specParam.setOriginalPrice(String.valueOf(haiXinCommodity.getPrice()));
-		specParam.setCurrentPrice(String.valueOf(haiXinCommodity.getPrice()));
-		specParam.setStock(haiXinCommodity.getCounts().intValue());
-		specParam.setRemain(haiXinCommodity.getCounts().intValue());
+		specParam.setOriginalPrice(null != haiXinCommodity.getPrice()?String.valueOf(haiXinCommodity.getPrice()):spec.getOriginalPrice());
+		specParam.setCurrentPrice(null != haiXinCommodity.getPrice()?String.valueOf(haiXinCommodity.getPrice()):spec.getCurrentPrice());
+		specParam.setStock(null != haiXinCommodity.getCounts()?haiXinCommodity.getCounts().intValue():Integer.valueOf(spec.getTotal()));
+		specParam.setRemain(null != haiXinCommodity.getCounts()?haiXinCommodity.getCounts().intValue():Integer.valueOf(spec.getStock()));
 		specParam.setColumnValues(Arrays.asList(haiXinCommodity.getSpec()));
 		specParam.setType(4);
 		specParam.setShopMid(shopMid);
 		specParam.setServiceIds(Arrays.asList(shopMid));
+
+		if (null != spec) {
+			if (StringUtils.isBlank(haiXinCommodity.getSpec())) {
+				specParam.setColumnValues(spec.getColumnValues());
+			}
+		}
 		commodityParam.setCommoditySpeceParams(Arrays.asList(specParam));
 	}
 
