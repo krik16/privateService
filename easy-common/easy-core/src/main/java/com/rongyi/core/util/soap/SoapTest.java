@@ -32,10 +32,10 @@ public class SoapTest {
             //soapTest.getBrand();
 
             //实时 商品信息
-            //soapTest.getmcmc();
+            soapTest.getmcmc();
 
             //订单
-            soapTest.sumbitOrder();
+            //soapTest.sumbitOrder();
         } catch (Exception e) {
         }
 
@@ -118,7 +118,7 @@ public class SoapTest {
                     "         <IMPORTDATA>\n" +
                     "        <OPERATION>1</OPERATION>\n" +
                     "        <ORGCODE>001</ORGCODE>\n" +
-                    "         <BARCODE>0101001</BARCODE>\n" +
+                    "         <BARCODE>0801006</BARCODE>\n" +
                     "        </IMPORTDATA>\n" +
                     "         </psXMLData>\n" +
                     "      </urn:INavOperateIntf>\n" +
