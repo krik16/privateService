@@ -26,4 +26,11 @@ public interface CategoriesService {
 	public List<CategoryHaiXinEntity> getCategoryHaiXinByIds(List<ObjectId> ids);
 	
 	public void importHaiXinCategory(String url) throws Exception;
+	
+	/**
+	 * 根据id查询品类信息
+	 * @param ids
+	 * @return
+	 */
+	public CategoryHaiXinEntity getCategoryHaiXinById(ObjectId id);
 }

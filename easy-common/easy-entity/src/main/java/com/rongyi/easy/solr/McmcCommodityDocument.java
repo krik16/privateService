@@ -211,10 +211,20 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setCategory_ids(List<String> category_ids) {
 		this.category_ids = category_ids;
 		// 三级分类拆分成三个字段
-		if(CollectionUtils.isNotEmpty(category_ids)&&category_ids.size()>=3){
-			this.setCategory1_id(category_ids.get(0));
-			this.setCategory2_id(category_ids.get(1));
-			this.setCategory3_id(category_ids.get(2));
+		if(CollectionUtils.isNotEmpty(category_ids)){
+			if (category_ids.size()>=3) {
+				this.setCategory1_id(category_ids.get(0));
+				this.setCategory2_id(category_ids.get(1));
+				this.setCategory3_id(category_ids.get(2));
+			} else {
+				// 海信只有2级分类
+				if (category_ids.size()>=1) {
+					this.setCategory1_id(category_ids.get(0));
+				}
+				if (category_ids.size()>=2) {
+					this.setCategory2_id(category_ids.get(1));
+				}
+			}
 		}
 	}
 

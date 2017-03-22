@@ -440,4 +440,5 @@ public interface CommodityService {
 
     boolean updateSpecTotalStock(String specId, Integer stock);
 
+    List<CommodityCategoryVO> searchCategoryForHaiXin(CustomCategoryParam customCategoryParam);
 }
