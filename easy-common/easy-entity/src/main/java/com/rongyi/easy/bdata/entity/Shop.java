@@ -80,8 +80,17 @@ public class Shop implements Serializable {
     private String orgCode;//海信 组织编码
     private String orgType;// 海信  0-自营店 1-加盟店 2-配送中心
     private String isCenter;//  海信, 是否是企业组织  0否 1 是
+    private String isShowInWeiXin;//0显示,1不显示
     //第三方来源参数,  非标准参数
 
+
+    public String getIsShowInWeiXin() {
+        return isShowInWeiXin;
+    }
+
+    public void setIsShowInWeiXin(String isShowInWeiXin) {
+        this.isShowInWeiXin = isShowInWeiXin;
+    }
 
     public String getThirdParty() {
         return thirdParty;
