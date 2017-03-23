@@ -92,8 +92,9 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(9).setCellValue(this.convertRebateType(vo.getOperationRebateDiscount(),vo.getMerchantRebateDiscount()));
                     sheet.getRow(i + 2).getCell(10).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
                     // 新增满减+满减平台  start
-                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getReductionFee() == null ? "0" : vo.getReductionFee().toString());
-                    sheet.getRow(i + 2).getCell(12).setCellValue("商户");
+                    BigDecimal reductionFee = vo.getReductionFee() == null ? BigDecimal.ZERO : vo.getReductionFee();
+                    sheet.getRow(i + 2).getCell(11).setCellValue(reductionFee.toString());
+                    sheet.getRow(i + 2).getCell(12).setCellValue(reductionFee.compareTo(BigDecimal.ZERO) != 0 ? "商户" : "");
                     // end
                     sheet.getRow(i + 2).getCell(13).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
                     sheet.getRow(i + 2).getCell(14).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
