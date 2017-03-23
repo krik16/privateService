@@ -46,7 +46,7 @@ public interface ITotalCommodityService {
 
 	Boolean updateTotalCommodityStatus(String id, Integer status, String reason);
 
-	public List<TotalCommodity> findByHaiXinCode(String code);
+	public List<TotalCommodity> findByHaiXinCode(String code, String locationId);
 
 	public Long searchCommodityByCodeAndLocationId(String code,String locationId);
 

@@ -11,6 +11,15 @@ public class CustomCategoryVo implements Serializable{
 
     private String customCategoryName;
 
+    private String parentId;
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
 
     public String getCustomCategoryId() {
         return customCategoryId;
