@@ -15,11 +15,17 @@ public class RyMchAppVo implements Serializable{
 
     private String ryAppId;
 
+    private Integer bizType;
+
+    private String bizId;
+
     private String token;
 
     private String privateKey;
 
     private String publicKey;
+
+    private String notifyUrl;
 
     public String getRyMchId() {
         return ryMchId;
@@ -45,6 +51,23 @@ public class RyMchAppVo implements Serializable{
         this.ryAppId = ryAppId;
     }
 
+
+    public Integer getBizType() {
+        return bizType;
+    }
+
+    public void setBizType(Integer bizType) {
+        this.bizType = bizType;
+    }
+
+    public String getBizId() {
+        return bizId;
+    }
+
+    public void setBizId(String bizId) {
+        this.bizId = bizId;
+    }
+
     public String getToken() {
         return token;
     }
@@ -67,5 +90,13 @@ public class RyMchAppVo implements Serializable{
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
     }
 }

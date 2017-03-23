@@ -51,6 +51,14 @@ public interface IAliPayService {
     Map<String,Object> f2fPayQuery(String orderNo,AliConfigureVo aliConfigureVo) throws TradePayException;
 
     /**
+     * 支付宝退款结果查询
+     * @param orderNo 订单号
+     * @param aliConfigureVo 支付参数
+     * @return map
+     */
+    Map<String,Object> refundQuery(String orderNo,AliConfigureVo aliConfigureVo) throws TradePayException;
+
+    /**
      * 获取用户支付授权链接
      * @param storeId 商户id
      * @param scope 授权范围

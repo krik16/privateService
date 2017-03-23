@@ -32,6 +32,14 @@ public interface IWechatPayService {
     Map<String, Object> refund(String orderNo, int refundFee, WechatConfigureVo wechatConfigureVo) throws TradePayException;
 
     /**
+     * 微信退款查询
+     * orderNo 订单号
+     * refundFee 退款金额(单位分)
+     * wechatConfigureVo 支付参数
+     **/
+    Map<String, Object> refundQuery(String orderNo,WechatConfigureVo wechatConfigureVo) throws TradePayException;
+
+    /**
      * 刷卡支付
      *
      * @param ryMchVo   容易商户信息
