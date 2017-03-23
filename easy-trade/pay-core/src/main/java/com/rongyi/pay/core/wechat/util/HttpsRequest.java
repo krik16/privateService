@@ -5,14 +5,15 @@ import com.rongyi.pay.core.wechat.service.IServiceRequest;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -52,9 +53,6 @@ public class HttpsRequest implements IServiceRequest {
     //请求器的配置
     private RequestConfig requestConfig;
 
-    //HTTP请求器
-    private CloseableHttpClient httpClient;
-
     /**
      * 通过Https往API post xml数据
      *
@@ -71,7 +69,7 @@ public class HttpsRequest implements IServiceRequest {
     public String sendPost(String url, Object xmlObj, WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
 //        if (!hasInit) {
-        init(wechatConfigure);
+        HttpClient httpClient = init(wechatConfigure);
 //        }
 
         String result = null;
@@ -110,7 +108,7 @@ public class HttpsRequest implements IServiceRequest {
         return result;
     }
 
-    private void init(WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    private HttpClient init(WechatConfigure wechatConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
         LOGGER.info("wechatConfigure=" + wechatConfigure.toString());
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         String cretFilePath = wechatConfigure.getCertLocalPath();
@@ -118,6 +116,11 @@ public class HttpsRequest implements IServiceRequest {
         try {
             instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
             keyStore.load(instream, wechatConfigure.getCertPassword().toCharArray());//设置证书密码
+
+            //微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+            if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+                System.clearProperty("javax.net.ssl.trustStore");
+            }
         } catch (IOException e) {
             LOGGER.error("证书文件获取失败,cretFilePath={}", cretFilePath);
             throw new WeChatException("-1", "证书文件获取失败");
@@ -137,20 +140,20 @@ public class HttpsRequest implements IServiceRequest {
                 .loadKeyMaterial(keyStore, wechatConfigure.getCertPassword().toCharArray())
                 .build();
         // Allow TLSv1 protocol only
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-                sslcontext,
-                new String[]{"TLSv1"},
-                null,
-                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-
-        httpClient = HttpClients.custom()
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+                null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+//        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+//                sslcontext,
+//                new String[]{"TLSv1"},
+//                null,
+//                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+        HttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslsf)
                 .build();
-
         //根据默认超时限制初始化requestConfig
-        requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
-
+//        requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
         hasInit = true;
+        return httpClient;
     }
 
 

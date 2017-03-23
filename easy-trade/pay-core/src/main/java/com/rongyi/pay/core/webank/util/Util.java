@@ -1,5 +1,6 @@
 package com.rongyi.pay.core.webank.util;
 
+import com.google.gson.Gson;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.model.Result;
@@ -22,8 +23,10 @@ public class Util {
     public static Object getObjectFromString(String jsonStr,Class t) {
         Object obj = null;
         try {
-            JSONObject jsonobject = JSONObject.fromObject(jsonStr);
-            obj = JSONObject.toBean(jsonobject,t);
+            Gson gson = new Gson();
+            obj = gson.fromJson(jsonStr, t);
+//            JSONObject jsonObject = JSONObject.fromObject(jsonStr);
+//            obj = jsonObject.toBean(jsonObject, t);
         } catch (Exception e) {
             e.printStackTrace();
             throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_RES_FAIL);
@@ -34,7 +37,7 @@ public class Util {
     public static void main(String args[]) {
         WwPunchCardResData cardResData = new WwPunchCardResData();
         cardResData.setSign("asdfafdsff");
-        cardResData.setBank_type(new BigDecimal(999));
+        cardResData.setBank_type("999");
         cardResData.setFee_type("dfdfd");
         cardResData.setOpenid("dfdfdfdfdfdf");
         cardResData.setOrderid("335435454");

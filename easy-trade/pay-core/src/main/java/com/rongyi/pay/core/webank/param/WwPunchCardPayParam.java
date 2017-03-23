@@ -2,35 +2,59 @@ package com.rongyi.pay.core.webank.param;
 
 import com.rongyi.pay.core.util.BaseData;
 
+import java.math.BigDecimal;
+
 /**
  * 微众微信扫码支付参数
  * Created by sujuan on 2017/2/15.
  */
 public class WwPunchCardPayParam extends BaseData{
 
-    //终端号
-    private String terminalCode ;
+    //商户号 必填
+    private String merchantCode ;
 
-    //商户订单号
+    //终端号 必填
+    private String terminalCode = "web";
+
+    //商户订单号 必填
     private String orderNo;
+    
+    //金额（元）必填
+    private BigDecimal amount;
 
-    //金额
-    private String amount;
-
-    //产品
+    //产品   必填
     private String product;
+
+    //授权码 必填
+    private String authCode;
 
     //用户OpendId
     private String openid;
 
+    //商户appid
+    private String subAppid;
+
     //商品标记
     private String goodsTag;
 
-    //授权码
-    private String authCode;
-
     //附加信息
     private String attach ;
+
+    public String getMerchantCode() {
+        return merchantCode;
+    }
+
+    public void setMerchantCode(String merchantCode) {
+        this.merchantCode = merchantCode;
+    }
+
+    public String getSubAppid() {
+        return subAppid;
+    }
+
+    public void setSubAppid(String subAppid) {
+        this.subAppid = subAppid;
+    }
 
     public String getOrderNo() {
         return orderNo;
@@ -40,11 +64,11 @@ public class WwPunchCardPayParam extends BaseData{
         this.orderNo = orderNo;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

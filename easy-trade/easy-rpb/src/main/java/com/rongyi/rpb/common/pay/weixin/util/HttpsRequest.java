@@ -5,6 +5,7 @@ import com.rongyi.rpb.common.pay.weixin.service.IServiceRequest;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
@@ -70,6 +71,10 @@ public class HttpsRequest implements IServiceRequest {
         FileInputStream instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
         try {
             keyStore.load(instream, configure.getCertPassword().toCharArray());//设置证书密码
+            //微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+            if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+                System.clearProperty("javax.net.ssl.trustStore");
+            }
         } catch (CertificateException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
