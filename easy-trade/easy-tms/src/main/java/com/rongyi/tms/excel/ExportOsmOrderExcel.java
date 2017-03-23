@@ -104,14 +104,14 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(19).setCellValue(convertOrderSource(vo.getOrderSource(),vo.getOrderSourceForWeiXin(),vo.getOrderChannel()));
                     sheet.getRow(i + 2).getCell(20).setCellValue(convertPayChannel(vo.getPayChannel()));
                     sheet.getRow(i + 2).getCell(21).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(20).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(23).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(24).setCellValue(convertPaymentId(vo.getPaymentId()));
-                    sheet.getRow(i + 2).getCell(25).setCellValue(vo.getReceiverName());
-                    sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverPhone());
-                    sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverAddress());
-                    sheet.getRow(i + 2).getCell(28).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(23).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(24).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(25).setCellValue(convertPaymentId(vo.getPaymentId()));
+                    sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverName());
+                    sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverPhone());
+                    sheet.getRow(i + 2).getCell(28).setCellValue(vo.getReceiverAddress());
+                    sheet.getRow(i + 2).getCell(29).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
 
