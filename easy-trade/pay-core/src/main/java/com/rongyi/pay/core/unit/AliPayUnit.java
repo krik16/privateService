@@ -175,6 +175,10 @@ public class AliPayUnit {
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
                 .setOutTradeNo(outTradeNo)
                 .setTradeNo(tradeNo);
+        //服务商模式收款
+        if(StringUtils.isNotBlank(aliConfigure.getAppAuthToken())){
+            builder.setAppAuthToken(aliConfigure.getAppAuthToken());
+        }
 
         AlipayF2FQueryResult result = tradeService.queryTradeResult(builder, aliConfigure);
         switch (result.getTradeStatus()) {
@@ -214,6 +218,10 @@ public class AliPayUnit {
 
         //检查参数
         ParamUnit.checkAliF2FRefundParam(outTradeNo, refundAmount, outRefundNo);
+
+        if(StringUtils.isEmpty(refundReason)){
+            refundReason = "申请退款";
+        }
 
         // 创建退款请求builder，设置请求参数
         AlipayTradeRefundRequestBuilder builder = new AlipayTradeRefundRequestBuilder()

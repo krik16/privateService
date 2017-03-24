@@ -2,11 +2,17 @@ package com.rongyi.pay.core.webank.util;
 
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
+import com.rongyi.pay.core.webank.config.WebankConfigure;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -14,13 +20,12 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import javax.net.ssl.SSLContext;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,62 +37,35 @@ import java.util.Map.Entry;
  */
 public class HttpUtil {
 	private static Logger	logger = LoggerFactory.getLogger(HttpUtil.class);
+	//HTTP请求器
 	public static void main(String[] args) {
 		
 	}
-	
-	/**
-	 * http://192.168.1.130:8081/market/code/offer.action?key=iamrongyiboy&type=k99&channel=1
-	 * @param s
-	 * @return
-	 */
-	public static String getUrl2(String key, String type, String channel) {
-		String url1 = "http://192.168.1.130:8081/market/code/offer.action?key="+key+"&type="+type+"&channel="+channel+"";
-		String result = httpGET(url1);
-//		logger.info(">>>"+result);
-		return result;
-	}
-	
-	public static String getUrl3(String key, String type, String code) {
-		String url1 = "http://192.168.1.130:8081/market/code/check.action?key="+key+"&type="+type+"&code="+code+"";
-		String result = httpGET(url1);
-		logger.info(">>>"+result);
-		return result;
-	}
 
 	
-	public static String httpGET(String url) {
+	public static String httpGET(String url ,WebankConfigure configure) throws Exception{
+		String result = "";
 		URL u = null;
-		HttpURLConnection con = null;
 		logger.info("send_url:" + url);
 		try {
-			u = new URL(url);
-			con = (HttpURLConnection) u.openConnection();
-			con.setRequestMethod("GET"); 
-			con.setDoOutput(true);
-			con.setDoInput(true);
-			con.setUseCaches(false);
-			con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			CloseableHttpClient httpClient = init(configure);
+			HttpGet httpGet = new HttpGet(url);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			HttpEntity httpEntity = httpResponse.getEntity();
+
+			result = EntityUtils.toString(httpEntity, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
-		} finally {
-			if (con != null) {
-				con.disconnect();
+			throw e;
+		}finally {
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
 			}
+
 		}
-		StringBuffer buffer = new StringBuffer();
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-			String temp;
-			while ((temp = br.readLine()) != null) {
-				buffer.append(temp);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info("http请求报错哦！");
-		}
-		return buffer.toString();
+		return result;
 	}
 	
 	public static String httpPOST(String url, Map<String, String> params) {
@@ -211,7 +189,7 @@ public class HttpUtil {
 	 * @return 返回结果
 	 */
 	public static String httpPOSTJson(String url,Object obj) throws Exception{
-		logger.info("发送http请求 url:{},obj:{}",url,obj);
+		logger.info("发送http请求 url:{} , obj:{}",url,obj);
 		Map<String, String> params = objectToMap(obj);
 		logger.info("http请求参数 param:{}",params);
 		URL u = null;
@@ -265,6 +243,8 @@ public class HttpUtil {
 		return buffer.toString();
 	}
 
+
+
 	/**
 	 * 将bean将成map
 	 * @param obj bean对象
@@ -283,7 +263,7 @@ public class HttpUtil {
 			for (Field field : declaredFields) {
 				field.setAccessible(true);
 				Object value = field.get(obj);
-				if (value!=null) {
+				if (value!=null &&value!="") {
 					map.put(field.getName(), field.get(obj).toString());
 				}
 			}
@@ -324,5 +304,83 @@ public class HttpUtil {
 		}
         return respContent;
     }
+
+
+	public static String sendPostClient(String url, Object object ,WebankConfigure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+		logger.info("http请求 url:{},object:{}",url,object);
+		//请求器的配置
+	//	RequestConfig requestConfig;
+		CloseableHttpClient httpClient = init(configure);
+		Map<String,Object> map = Signature.objectToMap(object);
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		String result = null;
+
+		HttpPost httpPost = new HttpPost(url);
+
+		StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");//解决中文乱码问题
+		entity.setContentEncoding("UTF-8");
+		entity.setContentType("application/json");
+		httpPost.setEntity(entity);
+		logger.info("reqEntity:{}",jsonObject);
+
+////        System.err.println("post data:"+postDataXML);
+//		//得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
+//		StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
+//		httpPost.addHeader("Content-Type", "text/xml");
+//		httpPost.setEntity(postEntity);
+
+		//设置请求器的配置
+		//httpPost.setConfig(requestConfig);
+
+		try {
+			HttpResponse response = httpClient.execute(httpPost);
+
+			HttpEntity httpEntity = response.getEntity();
+
+			result = EntityUtils.toString(httpEntity, "UTF-8");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+			throw e;
+		} finally {
+			httpPost.abort();
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
+		}
+
+		return result;
+	}
+
+	private static CloseableHttpClient init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+		logger.info("webankConfigure=" + webankConfigure.toString());
+		String KEY_STORE_PASSWORD = webankConfigure.getWechatKeyStorePwd();
+		String KEY_STORE_TRUST_PASSWORD = "123456";
+		KeyStore keyStore = KeyStore.getInstance("PKCS12");
+		KeyStore trustStore = KeyStore.getInstance("JKS");
+		InputStream ksIn = new FileInputStream(webankConfigure.getWechatKeyStorePath());
+		InputStream tsIn = new FileInputStream(webankConfigure.getWechatTrustStorePath());
+		try {
+			keyStore.load(ksIn, KEY_STORE_PASSWORD.toCharArray());
+			trustStore.load(tsIn, KEY_STORE_TRUST_PASSWORD.toCharArray());
+			System.setProperty("javax.net.ssl.trustStore", webankConfigure.getWechatTrustStorePath());
+		} catch (Exception e) {
+			System.out.println("got a exception" + e.getMessage());
+		} finally {
+			ksIn.close();
+			tsIn.close();
+		}
+		SSLContext sslcontext = null;
+		sslcontext = SSLContexts.custom()
+				.loadKeyMaterial(keyStore, KEY_STORE_PASSWORD.toCharArray())
+				.loadTrustMaterial(trustStore, new TrustSelfSignedStrategy())
+				.build();
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+		return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		//HttpResponse response = httpclient.execute(httpPost);
+	}
 
 }

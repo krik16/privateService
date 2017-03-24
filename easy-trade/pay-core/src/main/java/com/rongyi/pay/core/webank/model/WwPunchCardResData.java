@@ -2,14 +2,13 @@ package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
 
-import java.math.BigDecimal;
-
 /**
  * 微众微信刷卡支付返回参数
  * Created by sujuan on 2017/2/22.
  */
 public class WwPunchCardResData extends BaseData{
 
+    private static final long serialVersionUID = -3225431755550963839L;
     //请求结果
     private Result result ;
 
@@ -26,10 +25,10 @@ public class WwPunchCardResData extends BaseData{
     private String trade_type ;
 
     //付款银行
-    private BigDecimal bank_type;
+    private String bank_type;
 
     //总金额
-    private BigDecimal total_fee ;
+    private String total_fee ;
 
     //现金券金额
     private String coupon_fee ;
@@ -92,19 +91,19 @@ public class WwPunchCardResData extends BaseData{
         this.trade_type = trade_type;
     }
 
-    public BigDecimal getBank_type() {
+    public String getBank_type() {
         return bank_type;
     }
 
-    public void setBank_type(BigDecimal bank_type) {
+    public void setBank_type(String bank_type) {
         this.bank_type = bank_type;
     }
 
-    public BigDecimal getTotal_fee() {
+    public String getTotal_fee() {
         return total_fee;
     }
 
-    public void setTotal_fee(BigDecimal total_fee) {
+    public void setTotal_fee(String total_fee) {
         this.total_fee = total_fee;
     }
 

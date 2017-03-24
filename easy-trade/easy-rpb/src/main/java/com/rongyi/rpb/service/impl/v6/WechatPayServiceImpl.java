@@ -1,7 +1,7 @@
 package com.rongyi.rpb.service.impl.v6;
 
 import com.rongyi.core.Exception.TradePayException;
-import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WechatConfigureVo;
 import com.rongyi.easy.rpb.vo.WechatPaySignVo;
@@ -12,16 +12,16 @@ import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.wechat.model.*;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.bizz.PayBizz;
+import com.rongyi.rpb.bizz.QueryBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rpb.common.BeanMapUtils;
 import com.rongyi.rss.rpb.IWechatPayService;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -29,7 +29,7 @@ import java.util.Map;
  * 2017/2/6 17:06
  **/
 @Service
-public class WechatPayServiceImpl implements IWechatPayService {
+public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayService {
 
     private static final Logger log = LoggerFactory.getLogger(WechatPayServiceImpl.class);
 
@@ -37,6 +37,8 @@ public class WechatPayServiceImpl implements IWechatPayService {
     PayBizz payBizz;
     @Autowired
     RefundBizz refundBizz;
+    @Autowired
+    QueryBizz queryBizz;
 
     @Override
     public Map<String, Object> getPaySign(RyMchVo ryMchVo,WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
@@ -73,13 +75,17 @@ public class WechatPayServiceImpl implements IWechatPayService {
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            RefundResData refundResData = refundBizz.weChatRefund(orderNo, refundFee, wechatConfigure);
-            Map<String, Object> map = BeanMapUtils.toMap(refundResData);
+            RefundResData resData = refundBizz.weChatRefund(orderNo, refundFee, wechatConfigure);
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
 
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
-            map.put("payNo", refundResData.getOut_trade_no());
+            map.put("payNo", resData.getOut_trade_no());
+            //微众银行退款单号
+            map.put("tradeNo",resData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",resData.getTotal_fee());
 
             log.info("退款结果,map={}", map);
             return map;
@@ -91,6 +97,44 @@ public class WechatPayServiceImpl implements IWechatPayService {
             throw e;
         } catch (Exception e) {
             log.error("退款异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> refundQuery(String orderNo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
+        log.info("微信退款查询,orderNo={},wechatConfigureVo={}", orderNo, wechatConfigureVo);
+        try {
+            //设置支付参数
+            WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
+            RefundQueryResData resData = queryBizz.wechatRefundQuery(orderNo, wechatConfigure);
+            Map<String, Object> map = BeanMapUtils.toMap(resData);
+
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", resData.getOut_trade_no());
+
+            //微众银行退款单号
+            map.put("tradeNo",resData.getTransaction_id());
+
+            //交易金额
+            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)).toString());
+            //退款金额
+            map.put("refundAmount",resData.getRefund_fee_0());
+            map.put("refundStatus","SUCCESS");
+
+
+            log.info("退款查询结果,map={}", map);
+            return map;
+        } catch (WeChatException | ParamNullException e) {
+            log.warn("退款查询失败，e={}",e.getMessage(),e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.warn("退款查询失败，e={}",e.getMessage(),e);
+            throw e;
+        } catch (Exception e) {
+            log.error("退款查询异常,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
         }
     }
@@ -115,6 +159,10 @@ public class WechatPayServiceImpl implements IWechatPayService {
             map.put("orderNo", wechatPaySignData.getOrderNo());
             //容易网交易号
             map.put("payNo", punchCardPayResData.getOut_trade_no());
+            //微信交易号
+            map.put("tradeNo", punchCardPayResData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",wechatPaySignVo.getTotalFee().toString());
 
             log.info("返回刷卡支付结果,map={}", map);
             return map;
@@ -143,6 +191,12 @@ public class WechatPayServiceImpl implements IWechatPayService {
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", punchCardPayQueryResData.getOut_trade_no());
+            //微信流水号
+            map.put("tradeNo", punchCardPayQueryResData.getTransaction_id());
+            //交易金额
+            map.put("totalAmount",punchCardPayQueryResData.getTotal_fee().toString());
+            //交易状态
+            map.put("tradeStatus",ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
 
             log.info("订单查询结果,map={}", map);
             return map;
@@ -188,17 +242,5 @@ public class WechatPayServiceImpl implements IWechatPayService {
         BeanUtils.copyProperties(wechatPaySignVo, wechatPaySignData);
         return wechatPaySignData;
     }
-    /**
-     * 检查入住商户参数
-     * @param ryMchVo 入住商户信息
-     */
-    private void checkMchParam(RyMchVo ryMchVo){
-        if(StringUtils.isEmpty(ryMchVo.getRyMchId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryMchId");
-        }
-        if(StringUtil.isEmpty(ryMchVo.getRyAppId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryAppId");
-        }
 
-    }
 }

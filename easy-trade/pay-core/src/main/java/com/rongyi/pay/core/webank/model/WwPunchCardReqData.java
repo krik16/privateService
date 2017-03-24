@@ -1,8 +1,9 @@
 package com.rongyi.pay.core.webank.model;
 
 import com.rongyi.pay.core.util.BaseData;
-import com.rongyi.pay.core.webank.config.WwConfigure;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+
+import java.math.BigDecimal;
 
 /**
  * 微众 微信刷卡支付总请求参数
@@ -10,6 +11,7 @@ import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
  */
 public class WwPunchCardReqData extends BaseData{
 
+    private static final long serialVersionUID = -2676624212814513193L;
     //商户号
     private String merchant_code;
 
@@ -19,8 +21,8 @@ public class WwPunchCardReqData extends BaseData{
     //商户订单号
     private String terminal_serialno;
 
-    //金额
-    private String amount;
+    //金额 元
+    private BigDecimal amount;
 
     //产品
     private String product ;
@@ -47,14 +49,14 @@ public class WwPunchCardReqData extends BaseData{
 
     }
 
-    public WwPunchCardReqData(WwPunchCardPayParam reqData, WwConfigure configure) {
-        setMerchant_code(configure.getMerchantCode());
+    public WwPunchCardReqData(WwPunchCardPayParam reqData) {
+        setMerchant_code(reqData.getMerchantCode());
         setTerminal_code(reqData.getTerminalCode());
         setTerminal_serialno(reqData.getOrderNo());
         setAmount(reqData.getAmount());
         setProduct(reqData.getProduct());
         setSub_openid(reqData.getOpenid());
-        setSub_appid(configure.getSubAppid());
+        setSub_appid(reqData.getSubAppid());
         setGoods_tag(reqData.getGoodsTag());
         setAuth_code(reqData.getAuthCode());
         setAttach(reqData.getAttach());
@@ -84,11 +86,11 @@ public class WwPunchCardReqData extends BaseData{
         this.terminal_serialno = terminal_serialno;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

@@ -2,6 +2,8 @@ package com.rongyi.pay.core.wechat.model;
 
 import com.rongyi.pay.core.util.BaseData;
 
+import java.math.BigDecimal;
+
 /**
  * 退款查询返回参数
  * conan
@@ -26,6 +28,7 @@ public class RefundQueryResData extends BaseData {
     private String transaction_id = "";
     private String out_trade_no = "";
     private int refund_count = 0;
+    private BigDecimal totalAmount;//支付金额
 
     //TODO 这里要用对象来装，因为有可能出现多个数据(默认使用退款单号查询退款结果，故只会查询查单条退款记录)
     private String out_refund_no_0 = "";
@@ -196,4 +199,11 @@ public class RefundQueryResData extends BaseData {
         this.refund_recv_accout_0 = refund_recv_accout_0;
     }
 
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 }

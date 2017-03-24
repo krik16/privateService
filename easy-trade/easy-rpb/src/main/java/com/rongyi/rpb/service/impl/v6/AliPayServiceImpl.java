@@ -5,6 +5,8 @@ import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
 import com.rongyi.easy.rpb.vo.AliPaySignVo;
 import com.rongyi.easy.rpb.vo.AliPunchCardPayVo;
@@ -18,15 +20,16 @@ import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.rpb.bizz.PayBizz;
+import com.rongyi.rpb.bizz.QueryBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rpb.common.BeanMapUtils;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +37,7 @@ import java.util.Map;
  * conan
  * 2017/2/7 17:05
  **/
-public class AliPayServiceImpl implements IAliPayService {
+public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService {
 
     private static final Logger log = LoggerFactory.getLogger(AliPayServiceImpl.class);
 
@@ -42,6 +45,8 @@ public class AliPayServiceImpl implements IAliPayService {
     PayBizz payBizz;
     @Autowired
     RefundBizz refundBizz;
+    @Autowired
+    QueryBizz queryBizz;
 
     @Override
     public Map<String, Object> getPaySign(RyMchVo ryMchVo,AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException{
@@ -88,6 +93,9 @@ public class AliPayServiceImpl implements IAliPayService {
             //容易网交易号
             map.put("payNo", alipayTradeRefundResponse.getOutTradeNo());
 
+            //交易金额
+            map.put("totalAmount", new BigDecimal(alipayTradeRefundResponse.getRefundFee()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+
             log.info("支付宝面对面支付退款,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
@@ -113,7 +121,7 @@ public class AliPayServiceImpl implements IAliPayService {
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(ryMchVo, aliPunchCardPayReqData, aliConfigure);
+            AlipayTradePayResponse alipayTradePayResponse = payBizz.aliPunchCardPay(ryMchVo, aliPunchCardPayReqData, aliConfigure,aliPunchCardPayVo.getOrderType());
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradePayResponse);
 
@@ -121,8 +129,8 @@ public class AliPayServiceImpl implements IAliPayService {
             map.put("orderNo", aliPunchCardPayVo.getOrderNo());
             //容易网交易号
             map.put("payNo", alipayTradePayResponse.getOutTradeNo());
-
-
+            //设置支付金额
+            map.put("totalAmount",aliPunchCardPayVo.getTotalAmount());
             log.info("支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
@@ -155,6 +163,10 @@ public class AliPayServiceImpl implements IAliPayService {
             //容易网交易号
             map.put("payNo", alipayTradeQueryResponse.getOutTradeNo());
 
+            map.put("tradeStatus","SUCCESS");
+            //交易金额
+            map.put("totalAmount", new BigDecimal(alipayTradeQueryResponse.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+
             log.info("支付宝面对面支付查询结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
@@ -163,6 +175,47 @@ public class AliPayServiceImpl implements IAliPayService {
             throw e;
         } catch (Exception e) {
             log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
+        }
+    }
+
+    @Override
+    public Map<String, Object> refundQuery(String orderNo, AliConfigureVo aliConfigureVo) throws TradePayException {
+        log.info("支付宝退款查询,orderNo={},aliConfigureVo={}", orderNo, aliConfigureVo);
+        try {
+            //初始化支付参数
+            AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
+
+            PaymentEntity paymentEntity = queryBizz.aliRefundQuery(orderNo, aliConfigure);
+
+            PaymentLogInfo paymentLogInfo = queryBizz.queryPaymentLogInfo(paymentEntity.getPayNo());
+
+            Map<String, Object> map = BeanMapUtils.toMap(paymentEntity);
+
+            //外部订单号
+            map.put("orderNo", orderNo);
+            //容易网交易号
+            map.put("payNo", paymentEntity.getPayNo());
+
+            //微众银行退款单号
+            map.put("tradeNo",paymentLogInfo.getTrade_no());
+            //交易金额
+            map.put("totalAmount",paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            //退款金额
+            map.put("refundAmount",paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+
+            map.put("refundStatus","SUCCESS");
+
+            log.info("支付宝退款查询结果,map={}", map);
+            return map;
+        } catch (AliPayException | ParamNullException e) {
+            log.error("支付宝退款查询失败,e={}", e.getMessage(), e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("支付宝退款查询失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("支付宝退款查询异常,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
         }
     }
@@ -255,17 +308,4 @@ public class AliPayServiceImpl implements IAliPayService {
         return aliPunchCardPayReqData;
     }
 
-    /**
-     * 检查入住商户参数
-     * @param ryMchVo 入住商户信息
-     */
-    private void checkMchParam(RyMchVo ryMchVo){
-        if(StringUtils.isEmpty(ryMchVo.getRyMchId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryMchId");
-        }
-        if(StringUtil.isEmpty(ryMchVo.getRyAppId())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"ryAppId");
-        }
-
-    }
 }
