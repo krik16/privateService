@@ -1,8 +1,6 @@
 package com.rongyi.easy.solr;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
@@ -641,11 +639,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityMallId(String.valueOf(mallId));
 
 		if(shopInfo != null) {
-			this.setZone_ids(shopInfo.getZoneIds());
+			this.setZone_ids(CollectionUtils.isNotEmpty(shopInfo.getZoneIds())?shopInfo.getZoneIds()
+					:Arrays.asList(shopInfo.getShopMid()));//海信商品没有省市区的信息
 			this.setPosition(shopInfo.getPositon());
 			this.setBrand_id(shopInfo.getBrandMid());
 		}
-
 		this.setCommodityRange(commodityVo.getCommodityRange());
 
 		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
