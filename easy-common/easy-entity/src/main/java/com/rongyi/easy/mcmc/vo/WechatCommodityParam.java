@@ -9,7 +9,7 @@ public class WechatCommodityParam implements Serializable{
 
     private String shopMid;
 
-    private Integer customCategoryId;
+    private String customCategoryId;
 
     private String serviceId;
 
@@ -33,11 +33,11 @@ public class WechatCommodityParam implements Serializable{
         this.shopMid = shopMid;
     }
 
-    public Integer getCustomCategoryId() {
+    public String getCustomCategoryId() {
         return customCategoryId;
     }
 
-    public void setCustomCategoryId(Integer customCategoryId) {
+    public void setCustomCategoryId(String customCategoryId) {
         this.customCategoryId = customCategoryId;
     }
 

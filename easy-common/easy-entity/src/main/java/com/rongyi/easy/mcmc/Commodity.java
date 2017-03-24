@@ -52,6 +52,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopMid;//店铺的mongoid
 	private Integer status;//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 	private String code;//商品编码
+	private String barCode; // 商品条形码
 	private String description;//商品描述
 	private String postage;//商品邮费
 	private Integer stock;//商品库存
@@ -198,6 +199,14 @@ public class Commodity implements  Serializable,Cloneable{
 	// 2商家后台商品运营可以编辑容易逛显示隐藏,
 	// 1,商家后台商品运营可以编辑容易逛，微信显示隐藏 ，
 	private String editAble="1";
+
+	public String getBarCode() {
+		return barCode;
+	}
+
+	public void setBarCode(String barCode) {
+		this.barCode = barCode;
+	}
 
 	public List<String> getSkus() {
 		return skus;
@@ -978,11 +987,11 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setServiceDescriptionRemark(serviceDescriptionRemark);
 		return commodity;
 	}
+
 	@Override
 	public String toString() {
 		return "Commodity{" +
-				"activityEndTime=" + activityEndTime +
-				", id=" + id +
+				"id=" + id +
 				", type=" + type +
 				", liveId='" + liveId + '\'' +
 				", isSpot=" + isSpot +
@@ -992,6 +1001,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", saleId=" + saleId +
 				", flashSaleId=" + flashSaleId +
 				", activityStartTime=" + activityStartTime +
+				", activityEndTime=" + activityEndTime +
 				", secKillSign='" + secKillSign + '\'' +
 				", name='" + name + '\'' +
 				", category='" + category + '\'' +
@@ -999,6 +1009,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", shopMid='" + shopMid + '\'' +
 				", status=" + status +
 				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
 				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
@@ -1025,6 +1036,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", brandId='" + brandId + '\'' +
 				", mallId='" + mallId + '\'' +
 				", categoryIds=" + categoryIds +
+				", customCategory=" + customCategory +
 				", freight=" + freight +
 				", terminalType=" + terminalType +
 				", registerAt=" + registerAt +
@@ -1038,21 +1050,55 @@ public class Commodity implements  Serializable,Cloneable{
 				", cPriceMax='" + cPriceMax + '\'' +
 				", cPriceMin='" + cPriceMin + '\'' +
 				", purchaseCount=" + purchaseCount +
+				", discount=" + discount +
 				", sort=" + sort +
+				", goodsSec=" + goodsSec +
 				", customCategoryIds=" + customCategoryIds +
-				", commodityModelNo=" +commodityModelNo+
-				",goodsParam=" + goodsParam +
-				",shopName=" + shopName +
-				",mallName=" + mallName +
-				",hotAreaName=" + hotAreaName +
-				",discount=" + discount +
-				",galleryPosition=" + galleryPosition +
-				",shelvesType=" + shelvesType +
-				", subheading=" + subheading+
-				", commodityDetails=" + commodityDetails+
-				", serviceDescription=" + serviceDescription+
-				", serviceDescriptionId=" + serviceDescriptionId+
-				", serviceDescriptionRemark=" + serviceDescriptionRemark+
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", goodsParam=" + goodsParam +
+				", commodityOffUserId=" + commodityOffUserId +
+				", commodityOffUserName='" + commodityOffUserName + '\'' +
+				", shopName='" + shopName + '\'' +
+				", mallName='" + mallName + '\'' +
+				", hotAreaName='" + hotAreaName + '\'' +
+				", galleryPosition=" + galleryPosition +
+				", shelvesType=" + shelvesType +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
+				", giftId='" + giftId + '\'' +
+				", sn='" + sn + '\'' +
+				", mappingId='" + mappingId + '\'' +
+				", commodityRange=" + commodityRange +
+				", activityId='" + activityId + '\'' +
+				", exchangeTypes='" + exchangeTypes + '\'' +
+				", pointType=" + pointType +
+				", buyType=" + buyType +
+				", deliveryTypes='" + deliveryTypes + '\'' +
+				", selfType=" + selfType +
+				", selfAddress='" + selfAddress + '\'' +
+				", selfRemark='" + selfRemark + '\'' +
+				", selfAddressId='" + selfAddressId + '\'' +
+				", selfExpireDate=" + selfExpireDate +
+				", tagIds=" + tagIds +
+				", selfTakeDays=" + selfTakeDays +
+				", couponStartDate=" + couponStartDate +
+				", couponEndDate=" + couponEndDate +
+				", locationIds=" + locationIds +
+				", accountType=" + accountType +
+				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
+				", groupMid='" + groupMid + '\'' +
+				", merchantId='" + merchantId + '\'' +
+				", merchantType=" + merchantType +
+				", freePostage='" + freePostage + '\'' +
+				", skus=" + skus +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", editAble='" + editAble + '\'' +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				'}';
 	}
 
@@ -1076,16 +1122,16 @@ public class Commodity implements  Serializable,Cloneable{
 					this.setoPriceMin(this.getOriginalPrice());
 				}
 			} else {
-				this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
-				this.setStock((Integer) specMap.get("specStock"));
-				this.setOriginalPrice(specMap.get("oMin").toString());
-				this.setCurrentPrice(specMap.get("lowest").toString());
-				this.setPrice(Double.valueOf(specMap.get("lowest").toString()));
-				this.setoPriceMax(specMap.get("oMax").toString());
-				this.setoPriceMin(specMap.get("oMin").toString());
-				this.setcPriceMin(specMap.get("lowest").toString());
-				this.setcPriceMax(specMap.get("cMax").toString());
-				this.setSkus((List<String>)specMap.get("skus"));
+				this.setoPriceOfLowestCPrice(null == specMap.get("oPrice")?null:specMap.get("oPrice").toString());
+				this.setStock(null == specMap.get("specStock")?null:(Integer) specMap.get("specStock"));
+				this.setOriginalPrice(null == specMap.get("oMin")?null:specMap.get("oMin").toString());
+				this.setCurrentPrice(null == specMap.get("lowest")?null:specMap.get("lowest").toString());
+				this.setPrice(null == specMap.get("lowest")?null:Double.valueOf(specMap.get("lowest").toString()));
+				this.setoPriceMax(null == specMap.get("oMax")?null:specMap.get("oMax").toString());
+				this.setoPriceMin(null == specMap.get("oMin")?null:specMap.get("oMin").toString());
+				this.setcPriceMin(null == specMap.get("lowest")?null:specMap.get("lowest").toString());
+				this.setcPriceMax(null == specMap.get("cMax")?null:specMap.get("cMax").toString());
+				this.setSkus(null == specMap.get("skus")?null:(List<String>)specMap.get("skus"));
 			}
 
 			this.setLocationIds(vo.getLocationIds());
@@ -1141,7 +1187,10 @@ public class Commodity implements  Serializable,Cloneable{
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
 			this.setGoodsParam(vo.getGoodsParam()); //商品参数
-			this.setIdentity(vo.getProcessIdentity()); //增加商品身份
+			if (null != vo.getProcessIdentity()) {
+				this.setIdentity(vo.getProcessIdentity()); //增加商品身份
+			}
+
 			this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
 			if (!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
@@ -1175,7 +1224,11 @@ public class Commodity implements  Serializable,Cloneable{
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
-			this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
+			if (StringUtils.isNotBlank(this.originalPrice) && StringUtils.isNotBlank(this.currentPrice)) {
+				this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
+			} else {
+				this.setDiscount(Utils.calculateDiscount(null, null));
+			}
 			this.setBrandName(vo.getBrandName());
 			this.setBrandMid(vo.getBrandMid());
 			if (shopInfo != null) {
@@ -1191,7 +1244,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSubheading(vo.getSubheading());
 			this.setCommodityDetails(vo.getCommodityDetails());
 			this.setCommodityModelNo(vo.getCommodityModelNo());
-			this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+			this.setSpecList(null == specMap.get("specIdList")?null:(List<ObjectId>) specMap.get("specIdList"));
 			this.setGroupMid(vo.getGroupMid());
 			this.setShelvesType(vo.getShelvesType());
 			this.setServiceDescriptionId(vo.getServiceDescriptionId());
@@ -1264,6 +1317,19 @@ public class Commodity implements  Serializable,Cloneable{
 				//this.setMallServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
 			}
+		}
+
+
+		// 海信
+		if (CommodityConstants.CommodityType.HAIXIN == vo.getCommodityRange()) {
+			this.setBarCode(vo.getCommodityBarCode());
+			this.setOnServiceIds(vo.getOnServiceIds());
+			this.setRegisterAt(vo.getRegisterAt());
+			this.setSoldOutAt(vo.getSoldOutAt());
+			this.setSold(0);
+			this.setStatus(vo.getCommodityStatus());
+			this.setTerminalType(vo.getTerminalType());
+			// TODO 暂定不处理type
 		}
 	}
 

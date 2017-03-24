@@ -58,6 +58,16 @@ public class ShopParam {
     private String	 filiale_id;//分公司id
     private String name_en ;       //店铺英文名
     private String description_en ;  //英文描述
+	private String isShowInWeiXin;//0不显示,1显示
+
+	public String getIsShowInWeiXin() {
+		return isShowInWeiXin;
+	}
+
+	public void setIsShowInWeiXin(String isShowInWeiXin) {
+		this.isShowInWeiXin = isShowInWeiXin;
+	}
+
 	public String getId() {
 		return id;
 	}
