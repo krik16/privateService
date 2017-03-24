@@ -64,7 +64,7 @@ public class WebankPayUnit {
      */
     private static WwPunchCardResData waitUserWechatPaying(WwPunchCardPayParam param) {
         WwPunchCardResData resData =null;
-        int retryTimes = 9;
+        int retryTimes = 6;
         boolean result = false;
         LOGGER.info("微众微信刷卡支付等待用户输入密码,最多等待{}s,param={},configure={}", retryTimes*retryInterval/1000, param,configure);
         //参数转换
@@ -107,7 +107,7 @@ public class WebankPayUnit {
     }
 
     private static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param) {
-        return waitUserAlipayPaying(param, 9);
+        return waitUserAlipayPaying(param, 6);
     }
 
     private static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param , int retryTimes) {

@@ -4,6 +4,7 @@ import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -45,7 +46,7 @@ public class HttpUtil {
 	public static String httpGET(String url ,WebankConfigure configure) throws Exception{
 		String result = "";
 		URL u = null;
-		logger.info("send_url:" + url +",webankConfig:"+configure);
+		logger.info("send_url:" + url);
 		try {
 			CloseableHttpClient httpClient = init(configure);
 			HttpGet httpGet = new HttpGet(url);
@@ -57,6 +58,12 @@ public class HttpUtil {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
 			throw e;
+		}finally {
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
+
 		}
 		return result;
 	}
@@ -338,6 +345,10 @@ public class HttpUtil {
 			throw e;
 		} finally {
 			httpPost.abort();
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
 		}
 
 		return result;

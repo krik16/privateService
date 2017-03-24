@@ -162,7 +162,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //微信交易号
             map.put("tradeNo", punchCardPayResData.getTransaction_id());
             //交易金额
-            map.put("totalAmount",wechatPaySignVo.getTotalFee());
+            map.put("totalAmount",wechatPaySignVo.getTotalFee().toString());
 
             log.info("返回刷卡支付结果,map={}", map);
             return map;
@@ -194,7 +194,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //微信流水号
             map.put("tradeNo", punchCardPayQueryResData.getTransaction_id());
             //交易金额
-            map.put("totalAmount",punchCardPayQueryResData.getTotal_fee());
+            map.put("totalAmount",punchCardPayQueryResData.getTotal_fee().toString());
             //交易状态
             map.put("tradeStatus",ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
 
