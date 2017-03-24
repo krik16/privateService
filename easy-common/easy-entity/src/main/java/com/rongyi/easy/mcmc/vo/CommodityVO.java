@@ -1203,7 +1203,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", price=" + price +
 				", selfTakeDays=" + selfTakeDays +
 				", subheading='" + subheading + '\'' +
-				", commodityDetails='" + commodityDetails + '\'' +
 				", ifShowInWechat=" + ifShowInWechat +
 				", isSpecDeleted=" + isSpecDeleted +
 				", groupMid='" + groupMid + '\'' +
