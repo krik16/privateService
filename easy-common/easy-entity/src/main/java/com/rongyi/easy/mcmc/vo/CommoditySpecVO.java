@@ -200,13 +200,28 @@ public class CommoditySpecVO implements  Serializable {
 	}
 
 	public void setCommoditySpecInfo(CommoditySpecParam param) {
+		this.setSpecId(param.getId());
 		this.setSpecOriginalPrice(param.getOriginalPrice());
 		this.setSpecCurrentPrice(param.getCurrentPrice());
-		this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
 		this.setSpecTotalStock(Integer.toString(param.getStock()));
 		this.setSpecStock(Integer.toString(param.getRemain()));
 		this.setSpecPictureUrl(param.getPictureUrl());
 		this.setSku(param.getSku());
 		this.setReferencePrice(param.getReferencePrice());
+		this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
+
+	}
+
+	public void setHaiXinCommoditySpecInfo(CommoditySpecParam param) {
+		this.setSpecId(param.getId());
+		this.setSpecOriginalPrice(param.getOriginalPrice());
+		this.setSpecCurrentPrice(param.getCurrentPrice());
+		this.setSpecTotalStock(Integer.toString(param.getStock()));
+		this.setSpecStock(Integer.toString(param.getRemain()));
+		this.setSpecPictureUrl(param.getPictureUrl());
+		this.setSku(param.getSku());
+		this.setReferencePrice(param.getReferencePrice());
+		this.setSpecColumnValues(new CommoditySpecColumnVO().getSpecColumnInfo(param));
+
 	}
 }

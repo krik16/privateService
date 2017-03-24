@@ -14,6 +14,7 @@ import com.rongyi.easy.mcmc.vo.CommodityPagePinTuanVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
 import com.rongyi.easy.mcmc.vo.SearchParamsForWechat;
 import com.rongyi.easy.solr.McmcCommodityDocument;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -103,4 +104,6 @@ public interface ICommodityService {
 	Map<String, List> updateSwitchStatusForCommodity(String commodityId, String terminalId, String switchStatus, boolean isYunYinAuth);
 
 	public boolean updateCommodityForOperate(CommodityParam commodityParam);
+	
+	public Commodity findByCodeAndShopMid(String code, String shopMid);
 }

@@ -129,6 +129,25 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
     // 微信下单时对应的公众号类型（商场公众号/店铺公众号，1：商场 4：店铺）
     private Integer serviceType ;
+    private Integer deliverId;//发货人id
+
+
+    public Integer getDeliverId() {
+        return deliverId;
+    }
+
+    public void setDeliverId(Integer deliverId) {
+        this.deliverId = deliverId;
+    }
+    private Integer isPush;//-1不需要推送
+
+    public Integer getIsPush() {
+        return isPush;
+    }
+
+    public void setIsPush(Integer isPush) {
+        this.isPush = isPush;
+    }
 
     public Byte getIsAlert() {
         return isAlert;

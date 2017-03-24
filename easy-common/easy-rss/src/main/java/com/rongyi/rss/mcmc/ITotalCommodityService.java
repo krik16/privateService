@@ -44,4 +44,10 @@ public interface ITotalCommodityService {
 
 	public List<TotalCommodity>  findCommodityByCategoryId(Map<String,Object> paramMap);
 
+	Boolean updateTotalCommodityStatus(String id, Integer status, String reason);
+
+	public List<TotalCommodity> findByHaiXinCode(String code, String locationId);
+
+	public Long searchCommodityByCodeAndLocationId(String code,String locationId);
+
 }
