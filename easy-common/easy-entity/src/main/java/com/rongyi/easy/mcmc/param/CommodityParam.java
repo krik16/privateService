@@ -615,7 +615,6 @@ public class CommodityParam implements Serializable{
 				", status=" + status +
 				", code='" + code + '\'' +
 				", barCode='" + barCode + '\'' +
-				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", originalPrice='" + originalPrice + '\'' +
 				", currentPrice='" + currentPrice + '\'' +
@@ -639,7 +638,6 @@ public class CommodityParam implements Serializable{
 				", templateId=" + templateId +
 				", reason='" + reason + '\'' +
 				", subheading='" + subheading + '\'' +
-				", commodityDetails='" + commodityDetails + '\'' +
 				", source=" + source +
 				", shelvesType=" + shelvesType +
 				", brandId='" + brandId + '\'' +
