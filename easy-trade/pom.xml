@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.rongyi</groupId>
 	<artifactId>easy-trade</artifactId>
-	<version>5.3.2-SNAPSHOT</version>
+	<version>5.3.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>easy-rpb</module>
@@ -419,7 +419,7 @@
 			<dependency>
 				<groupId>com.rongyi</groupId>
 				<artifactId>pay-core</artifactId>
-				<version>5.3.2-SNAPSHOT</version>
+				<version>5.3.6-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
