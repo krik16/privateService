@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class SubmitOrderVO implements Serializable {
+
 	// 父订单号集合
 	private List<String> parentOrderNumList;
 	// 电子会员卡券+商品的自提券码

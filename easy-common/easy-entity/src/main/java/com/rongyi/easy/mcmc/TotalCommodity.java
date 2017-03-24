@@ -9,6 +9,7 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.activitymanage.vo.CommodityVO;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.malllife.constants.Constants;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
@@ -36,7 +37,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String category;//商品品类id
 	private Integer status;//状态  0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 
-	private String code;//商品编码
+	private String code;//商品条码（海信：商品编码）
+	private String barCode; // 商品条形码（海信）
 	private String description;//商品描述
 	private String postage;//商品邮费
 	private Integer stock;//商品库存
@@ -109,6 +111,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> onServiceIds;
 	private List<String> offServiceIds;
 	private String brandName;
+	private Integer commodityRange;
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
 
 	public List<String> getMallServiceIds() {
 		return mallServiceIds;
@@ -213,6 +224,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+	public String getBarCode() { return barCode; }
+
+	public void setBarCode(String barCode) { this.barCode = barCode; }
 
 	public String getDescription() {
 		return description;
@@ -554,6 +569,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", category='" + category + '\'' +
 				", status=" + status +
 				", code='" + code + '\'' +
+				", barCode='" + barCode + '\'' +
 				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
@@ -594,12 +610,17 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", shelvesType=" + shelvesType +
 				", locationIds=" + locationIds +
 				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
 				", accountType=" + accountType +
 				", merchantId='" + merchantId + '\'' +
 				", wechatInfoVos=" + wechatInfoVos +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
-				", mallServiceIds=" + mallServiceIds +
+				", brandName='" + brandName + '\'' +
+				", commodityRange=" + commodityRange +
 				'}';
 	}
 
@@ -781,6 +802,86 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
 		} catch (Exception e) {
+			throw new RuntimeException("参数错误");
+		}
+	}
+
+	public void setTotalCommodityFromHaiXinParam(CommodityParam param, SessionUserInfo userInfo) {
+		try {
+
+			this.id=StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null;
+			this.setCommodityRange(CommodityConstants.CommodityType.HAIXIN);
+			this.setName(param.getName());
+			this.setCode(param.getCode());
+			this.setBarCode(param.getBarCode());
+			this.setCategory(param.getCategory());
+			this.setCategoryIds(param.getCategoryIds());
+
+			this.setCustomCategoryIds(param.getCustomCategoryIds());
+			this.setDescription(param.getDescription());
+			this.setPostage(param.getPostage());
+			this.setOriginalPrice(param.getOriginalPrice());
+			this.setCurrentPrice(param.getCurrentPrice());
+			this.setPicList(param.getPicList());
+			this.setSupportCourierDeliver(true);
+			this.setSupportSelfPickup(true);
+			if (null != param.getDistribution()) {
+				switch(param.getDistribution()){
+					//配送方式 1表示到店自提2快递3表示支持两种方式
+					//supportCourierDeliver支持快递发货字段  true 是    false否
+					// supportSelfPickup支持到店自提  true 是    false否
+					case 2:this.setSupportSelfPickup(false);break;
+					case 1:this.setSupportCourierDeliver(false);break;
+					case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+				}
+			}
+			this.setFreight(param.getFreight());
+
+			//商家后台修改商品不能改变来源（修改商品，source在service层取数据原source值）
+			this.setSource(param.getSource());
+			if(this.getId() == null) {
+				this.setCreateAt(new Date());
+				this.setCreateBy(null == userInfo ? null : userInfo.getId());
+				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_4);
+
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);//上架状态:待审核
+
+				// 新增：海信导入
+				if (null != param.getSource() && 1 == param.getSource()) {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_PENDING);//上架状态:待处理
+					this.setCreateBy(-1);
+				}
+			}  else {
+				this.setCreateBy(param.getCreateBy());
+				this.setTerminalType(param.getTerminalType());
+				this.setRegisterAt(param.getRegisterAt());
+				this.setSoldOutAt(param.getSoldOutAt());
+				this.setStatus(param.getStatus());
+			}
+
+			this.setStock(param.getRemain()); // 当前库存
+			this.setStockStatus(param.getStockStatus());
+			this.setUpdateAt(new Date());
+			this.setUpdateBy(null == userInfo ? null : userInfo.getId());
+			this.setPurchaseCount(param.getPurchaseCount());
+			this.setTemplateId(param.getTemplateId());
+
+			// 海信导入的数据，userinfo为空
+			this.setMerchantId(null == userInfo ? param.getMerchantId() : userInfo.getBindingMid());
+			this.setCommodityDetails(param.getCommodityDetails());
+			this.setBrandMid(param.getBrandMid());
+			this.setBrandName(param.getBrandName());
+			this.setAccountType(null == userInfo ? null : userInfo.getIdentity());
+
+			// 对应商品所属店铺MongoIds
+			setShopMids(param.getCommoditySpeceParams(), this);
+
+			// TODO total不需要服务号
+		//	this.setMallServiceIds(param.getServiceIds());
+		//	this.setOnServiceIds(param.getServiceIds());
+
+		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("参数错误");
 		}
 	}

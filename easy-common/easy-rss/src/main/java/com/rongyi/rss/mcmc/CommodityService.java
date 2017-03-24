@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
+
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -211,6 +213,8 @@ public interface CommodityService {
     public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
+
+    List<Commodity> getCommodityBySystemNumber(String systemNumber);
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
@@ -426,4 +430,15 @@ public interface CommodityService {
     
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
+
+    public Boolean updateCommodityStatus(String id, Integer status, String reason);
+
+    Map<String, Object> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+
+    Map<String, Object> getTotalCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+    boolean updateSpecTotalStock(String specId, Integer stock);
+
+    List<CustomCategoryVo> searchCategoryForHaiXin(CustomCategoryParam customCategoryParam);
 }

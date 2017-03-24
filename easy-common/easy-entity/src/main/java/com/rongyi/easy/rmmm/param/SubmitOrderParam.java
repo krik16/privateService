@@ -39,6 +39,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String phone;//用户手机号
 	private String memberId;//微信电子会员id
 	private String memberName;// 用户昵称
+	private String userName;//会员姓名
 
 	private String receiverProvinceName;//收货省市
 	private String receiverCityName;//收货城市
@@ -61,6 +62,15 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	// =======end=
 	// 活动类型，8：注册福利
 	private Integer activityType ;
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -338,40 +348,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	@Override
 	public String toString() {
-		return "SubmitOrderParam{" +
-				"activityType=" + activityType +
-				", parentOrderList=" + parentOrderList +
-				", commodityCartIds=" + commodityCartIds +
-				", devId='" + devId + '\'' +
-				", devType='" + devType + '\'' +
-				", source='" + source + '\'' +
-				", platformRebateCode='" + platformRebateCode + '\'' +
-				", discountInfo=" + discountInfo +
-				", ifCart=" + ifCart +
-				", weixinAppId='" + weixinAppId + '\'' +
-				", orderChannel='" + orderChannel + '\'' +
-				", openId='" + openId + '\'' +
-				", phone='" + phone + '\'' +
-				", memberId='" + memberId + '\'' +
-				", memberName='" + memberName + '\'' +
-				", receiverProvinceName='" + receiverProvinceName + '\'' +
-				", receiverCityName='" + receiverCityName + '\'' +
-				", receiverDistrictName='" + receiverDistrictName + '\'' +
-				", receiverAddress='" + receiverAddress + '\'' +
-				", receiverPhone='" + receiverPhone + '\'' +
-				", receiverName='" + receiverName + '\'' +
-				", provinceId='" + provinceId + '\'' +
-				", cityId='" + cityId + '\'' +
-				", districtId='" + districtId + '\'' +
-				", business=" + business +
-				", commodityType=" + commodityType +
-				", userType=" + userType +
-				", exchangeType='" + exchangeType + '\'' +
-				", deliveryType='" + deliveryType + '\'' +
-				", totalCredit=" + totalCredit +
-				", mallMid='" + mallMid + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				"} " + super.toString();
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
-
+	
 }

@@ -25,7 +25,7 @@ public class ImportInviteCodeParam implements Serializable{
     private String activityName;
 
     /**
-     * 活动类型，0：商家后台活动
+     * 活动类型，0：商家后台活动；1：营销；2：WD验券类型
      */
     private Integer activityTpye;
 

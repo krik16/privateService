@@ -132,6 +132,26 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer serviceType ;
     private String reductionActivityId;//满减活动Id
     private String reductionActivityName;//满减活动名称
+    private Integer deliverId;//发货人id
+    private Integer isPush;//-1不需要推送
+
+
+    public Integer getDeliverId() {
+        return deliverId;
+    }
+
+    public void setDeliverId(Integer deliverId) {
+        this.deliverId = deliverId;
+    }
+
+
+    public Integer getIsPush() {
+        return isPush;
+    }
+
+    public void setIsPush(Integer isPush) {
+        this.isPush = isPush;
+    }
 
     public Byte getIsAlert() {
         return isAlert;
