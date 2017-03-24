@@ -639,8 +639,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityMallId(String.valueOf(mallId));
 
 		if(shopInfo != null) {
-			this.setZone_ids(CollectionUtils.isNotEmpty(shopInfo.getZoneIds())?shopInfo.getZoneIds()
-					:Arrays.asList(shopInfo.getShopMid()));//海信商品没有省市区的信息
+			if(CollectionUtils.isNotEmpty(shopInfo.getZoneIds())){
+				this.setZone_ids(shopInfo.getZoneIds());
+			}else {
+				if(StringUtils.isNotBlank(shopInfo.getShopMid())){
+					this.setZone_ids(Arrays.asList(shopInfo.getShopMid()));//海信商品没有省市区的信息
+				}
+			}
 			this.setPosition(shopInfo.getPositon());
 			this.setBrand_id(shopInfo.getBrandMid());
 		}
