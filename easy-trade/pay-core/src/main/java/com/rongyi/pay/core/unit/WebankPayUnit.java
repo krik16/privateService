@@ -6,8 +6,10 @@ import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.pay.core.webank.service.WebankPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -421,11 +423,26 @@ public class WebankPayUnit {
         WaTicketResData resData = null;
         try {
             WebankPayService webankPayService  = new WebankPayService();
-            resData = webankPayService.alipayGetTicket(token,configure);
+            resData = webankPayService.alipayGetTicket(token, configure);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return  resData;
+    }
+
+    public static WwScanPayResData wechatScanPay(WwScanPayParam param) {
+        LOGGER.info("微众微信公众号支付param:{}",param);
+        WwScanPayResData resData = null;
+        try {
+            ParamUnit.checkWebankWechatScanPay(param);
+
+        } catch (WebankException | ParamNullException e) {
+            throw  e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_SYSTEM_ERROR);
+        }
+        return resData;
     }
 
 }

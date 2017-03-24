@@ -8,6 +8,7 @@ import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import org.apache.commons.lang.StringUtils;
@@ -344,5 +345,20 @@ public class ParamUnit {
         checkWebankMerchatCode(reqData.getWbMerchantId());
         if(StringUtils.isEmpty(reqData.getOrderId())&&StringUtils.isEmpty(reqData.getTradeNo()))
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "orderId");
+    }
+
+    public static void checkWebankWechatScanPay(WwScanPayParam param) {
+        checkWebankMerchatCode(param.getMchId());
+        if (StringUtils.isEmpty(param.getOutTradeNo())) {
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "outTradeNo");
+        }
+        if(StringUtils.isEmpty(param.getBody()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "body");
+        if(StringUtils.isEmpty(param.getSubOpenid()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "subOpenid");
+        if(StringUtils.isEmpty(param.getSubAppid()))
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "subAppid");
+        if(param.getTotalFee()<=0)
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY, "totalFee");
     }
 }

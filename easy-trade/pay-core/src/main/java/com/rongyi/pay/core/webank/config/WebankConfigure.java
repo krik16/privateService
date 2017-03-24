@@ -66,6 +66,18 @@ public class WebankConfigure extends BaseData{
     //appId的密钥
     private String secret ;
 
+    //微信公众号支付通知地址
+    private String wechatScanNotifyUrl ;
+
+    //支付宝C扫B支付通知地址
+    private String alipayScanNOtifyUrl ;
+
+    //微信公众号支付请求地址
+    private String wechatScanPayUrl ;
+
+    //支付宝c扫B请求地址
+    private String alipayScanPayUrl;
+
     private static WebankConfigure webankConfigure;
 
     private WebankConfigure(){}
@@ -235,6 +247,38 @@ public class WebankConfigure extends BaseData{
 
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    public String getWechatScanNotifyUrl() {
+        return wechatScanNotifyUrl;
+    }
+
+    public void setWechatScanNotifyUrl(String wechatScanNotifyUrl) {
+        this.wechatScanNotifyUrl = wechatScanNotifyUrl;
+    }
+
+    public String getAlipayScanNOtifyUrl() {
+        return alipayScanNOtifyUrl;
+    }
+
+    public void setAlipayScanNOtifyUrl(String alipayScanNOtifyUrl) {
+        this.alipayScanNOtifyUrl = alipayScanNOtifyUrl;
+    }
+
+    public String getWechatScanPayUrl() {
+        return wechatScanPayUrl;
+    }
+
+    public void setWechatScanPayUrl(String wechatScanPayUrl) {
+        this.wechatScanPayUrl = wechatScanPayUrl;
+    }
+
+    public String getAlipayScanPayUrl() {
+        return alipayScanPayUrl;
+    }
+
+    public void setAlipayScanPayUrl(String alipayScanPayUrl) {
+        this.alipayScanPayUrl = alipayScanPayUrl;
     }
 
     @Override
