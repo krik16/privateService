@@ -25,7 +25,7 @@ public interface IQueryService {
      * @param tradeType 交易类型
      * @param status 状态
      * @param payChannel 支付类型
-     * @return
+     * @return PaymentEntity
      */
     PaymentEntity queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel);
 
