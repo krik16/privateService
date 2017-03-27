@@ -1,5 +1,8 @@
 package com.rongyi.easy.rpb.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -52,6 +55,8 @@ public class AliPunchCardPayVo implements Serializable {
 
     // (推荐使用，相对时间) 支付超时时间，5m 5分钟
     private String timeoutExpress;
+
+    private Integer orderType;//订单类型
 
     public String getAppAuthToken() {
         return appAuthToken;
@@ -148,4 +153,18 @@ public class AliPunchCardPayVo implements Serializable {
     public void setTimeoutExpress(String timeoutExpress) {
         this.timeoutExpress = timeoutExpress;
     }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
 }

@@ -1060,4 +1060,102 @@ public interface Constants {
         // 店铺
         int SHOPTYPE = 4;
     }
+
+    /**
+     * 条件类型
+     */
+
+    interface ConditionType {
+        Integer AMOUNT = 1; // 按照金额
+        Integer COUNT = 2; //按照数量
+    }
+
+    /**
+     * 优惠方式
+     */
+
+    interface ReductionType {
+        Integer DECREASE = 1; // 减金
+        Integer PERCENT = 2; // d打折
+    }
+
+    /**
+     * 门槛类型1:指定门槛，2:逐级
+     */
+    interface RuleType {
+        Integer MAX_AMOUNT = 1;
+        Integer STEP_BY_STEP = 2;
+    }
+
+    /**
+     * PHP platform
+     */
+    interface RECHARGE_PLATFORM{
+        //操作渠道1:互动屏2:微信3:微商城 5:商家后台 6:POS
+        Integer SCREEN = 1;
+        Integer WECHAT = 2;
+        Integer WECHATMALL = 3;
+        Integer BSOMS = 5;
+        Integer POS = 6;
+    }
+
+    String USERCENTER_API_URL = "usercenter.url";
+    String REDUCTION_API_URL ="reduction.url";
+
+    interface USERCENTER_TYPE{
+        // 扣减
+         String DEFAULT_TYPE_DECREASE = "2";
+        // 增加/返还
+        String DEFAULT_TYPE_INCREASE = "1";
+        // optype
+        String DEFAULT_OP_TYPE_INCREASE = "11";
+        // 扣减optype
+        String DEFAULT_OP_TYPE_DECREASE = "3";
+    }
+
+    /**
+     * 营销卡券订单
+     */
+    interface  MK_COUPON_ORDER{
+        // token
+        String token = "ab32bdcb85da2cb5";
+    }
+
+    /**
+     * 注册福利返回的异常
+     */
+    enum MK_REGISTERED_MSG {
+        /**
+         * 库存不足
+         */
+        ERROR_STOCK_LOW("1015102", "赠送失败（库存不足）"),
+        /**
+         * 已失效或已下架
+         */
+        ERROR_SOLDOUT("1015104", "赠送失败（已失效或已下架）"),
+        /**
+         * 已失效或已下架
+         */
+        ERROR_NOT_EXISTS("1015105", "赠送失败（已失效或已下架）"),
+        /**
+         * 系统异常
+         */
+        ERROR_SYSTEM("1015102", "赠送失败（系统异常）");
+
+        private String code;
+        private String message;
+
+        private MK_REGISTERED_MSG(String code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
 }

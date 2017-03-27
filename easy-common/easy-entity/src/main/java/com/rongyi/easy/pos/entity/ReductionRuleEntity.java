@@ -27,6 +27,9 @@ public class ReductionRuleEntity implements Serializable {
     }
 
     public Integer getMaxFee() {
+        if (null == maxFee) {
+            return 0;
+        }
         return maxFee;
     }
 
