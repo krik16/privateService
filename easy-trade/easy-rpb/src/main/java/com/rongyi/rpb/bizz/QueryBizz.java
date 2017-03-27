@@ -53,9 +53,10 @@ public class QueryBizz {
 
         //检查是否支付是否成功
         if(!("0".equals(resData.getResult().getErrno()) && "1".equals(resData.getPayment()))
-                || !com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())){
+                && !com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())){
             throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         }
+
         resData.setTerminal_serialno(oldPaymentEntity.getPayNo());
         return resData;
     }
