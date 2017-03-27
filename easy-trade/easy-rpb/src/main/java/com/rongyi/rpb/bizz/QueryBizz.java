@@ -52,7 +52,7 @@ public class QueryBizz {
         WwPunchCardResData resData = WebankPayUnit.wechatPunchCardPayQueryOrder(reqData);
 
         //检查是否支付是否成功
-        if(!"0".equals(resData.getResult().getErrno()) || !"1".equals(resData.getPayment())
+        if(!("0".equals(resData.getResult().getErrno()) && "1".equals(resData.getPayment()))
                 || !com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())){
             throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         }
