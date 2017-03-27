@@ -24,6 +24,7 @@ import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.PunchCardPayResData;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
@@ -97,14 +98,19 @@ public class PayBizz {
      * @param wechatConfigure   支付参数
      * @return PunchCardPayResData
      */
-    public PunchCardPayResData wechatPunchCardPay(RyMchVo ryMchVo, WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
+    public PunchCardPayResData wechatPunchCardPay(RyMchVo ryMchVo, WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure, Integer orderType) {
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, Constants.ORDER_TYPE.ORDER_TYPE_6);
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
 
         //发起支付
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
-        PunchCardPayResData punchCardPayResData = WeChatPayUnit.punchCardPay(wechatPaySignData, wechatConfigure);
+        PunchCardPayResData punchCardPayResData;
+        if (ConstantEnum.PAY_NATIVE_0.getCodeInt().equals(ryMchVo.getNativePay())) {
+            punchCardPayResData = WeChatPayUnit.punchCardPay(wechatPaySignData, wechatConfigure);
+        }else{
+            punchCardPayResData = WeChatPayUnit.punchCardNativePay(wechatPaySignData, wechatConfigure);
+        }
 
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         paymentEntity.setFinishTime(new Date());
@@ -171,10 +177,10 @@ public class PayBizz {
      * @param ryMchVo                容易商户信息
      * @param aliPunchCardPayReqData 业务参数
      * @param aliConfigure           支付参数
-     * @param orderType           订单类型
+     * @param orderType              订单类型
      * @return AlipayTradePayResponse
      */
-    public AlipayTradePayResponse aliPunchCardPay(RyMchVo ryMchVo, AliPunchCardPayReqData aliPunchCardPayReqData, AliConfigure aliConfigure,Integer orderType) {
+    public AlipayTradePayResponse aliPunchCardPay(RyMchVo ryMchVo, AliPunchCardPayReqData aliPunchCardPayReqData, AliConfigure aliConfigure, Integer orderType) {
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, aliPunchCardPayReqData.getOrderNo(), aliPunchCardPayReqData.getTotalAmount(), aliPunchCardPayReqData.getSellerId(),
@@ -224,21 +230,26 @@ public class PayBizz {
      *
      * @param ryMchVo             容易商户信息
      * @param wwPunchCardPayParam 业务参数
-     * @param orderType 订单类型
+     * @param orderType           订单类型
      * @return WwPunchCardResData
      */
-    public WwPunchCardResData webankWechatPunchCardPay(RyMchVo ryMchVo, WwPunchCardPayParam wwPunchCardPayParam,Integer orderType) {
+    public WwPunchCardResData webankWechatPunchCardPay(RyMchVo ryMchVo, WwPunchCardPayParam wwPunchCardPayParam, Integer orderType) {
 
 
         Integer totalFee = wwPunchCardPayParam.getAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wwPunchCardPayParam.getOrderNo(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
 
         //支付流水号设置为微众商户单号
         wwPunchCardPayParam.setOrderNo(paymentEntity.getPayNo());
-        WwPunchCardResData wwPunchCardResData = WebankPayUnit.wechatPunchCardPay(wwPunchCardPayParam);
+        WwPunchCardResData wwPunchCardResData;
 
+        if (ConstantEnum.PAY_NATIVE_0.getCodeInt().equals(ryMchVo.getNativePay())) {
+            wwPunchCardResData = WebankPayUnit.wechatPunchCardPay(wwPunchCardPayParam);
+        } else {
+            wwPunchCardResData = WebankPayUnit.wechatPunchCardPayNative(wwPunchCardPayParam);
+        }
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         paymentEntity.setFinishTime(new Date());
 
@@ -260,10 +271,10 @@ public class PayBizz {
      *
      * @param ryMchVo             容易商户信息
      * @param waPunchCardPayParam 业务参数
-     * @param orderType 订单类型
+     * @param orderType           订单类型
      * @return WwPunchCardResData
      */
-    public WaPunchCardPayResData webankAliPunchCardPay(RyMchVo ryMchVo, WaPunchCardPayParam waPunchCardPayParam,Integer orderType) {
+    public WaPunchCardPayResData webankAliPunchCardPay(RyMchVo ryMchVo, WaPunchCardPayParam waPunchCardPayParam, Integer orderType) {
 
         //初始化设置支付宝ticket
         payConfigInitUnit.initAliTicket();
@@ -274,7 +285,15 @@ public class PayBizz {
 
         //支付流水号设置为微众商户单号
         waPunchCardPayParam.setOrderId(paymentEntity.getPayNo());
-        WaPunchCardPayResData resData = WebankPayUnit.alipayPunchCardPay(waPunchCardPayParam);
+        WaPunchCardPayResData resData;
+        //综合支付处理接口
+        if (ConstantEnum.PAY_NATIVE_0.getCodeInt().equals(ryMchVo.getNativePay())) {
+            resData = WebankPayUnit.alipayPunchCardPay(waPunchCardPayParam);
+        }
+        //原生支付接口
+        else {
+            resData = WebankPayUnit.alipayPunchCardPayNative(waPunchCardPayParam);
+        }
 
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         paymentEntity.setFinishTime(new Date());
@@ -302,7 +321,7 @@ public class PayBizz {
      * @param orderType 订单类型
      * @return WwPunchCardResData
      */
-    public PaymentEntityVo cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo,Integer orderType) {
+    public PaymentEntityVo cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo, Integer orderType) {
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, cashPayVo.getOrderNo(), cashPayVo.getTotalAmount(), "", "",
@@ -319,11 +338,11 @@ public class PayBizz {
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
         //发送异步通知
-        payNotifyBizz.payNotifyThird(paymentEntity,paymentLogInfo);
+        payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
 
         //设置返回对象
         PaymentEntityVo paymentEntityVo = new PaymentEntityVo();
-        BeanUtils.copyProperties(paymentEntity,paymentEntityVo);
+        BeanUtils.copyProperties(paymentEntity, paymentEntityVo);
         paymentEntityVo.setTradeNo(paymentLogInfo.getTrade_no());
         return paymentEntityVo;
     }
@@ -331,12 +350,12 @@ public class PayBizz {
     /**
      * pos银行卡支付
      *
-     * @param ryMchVo   容易商户信息
+     * @param ryMchVo          容易商户信息
      * @param posBankCardPayVo 业务参数
-     * @param orderType 订单类型
+     * @param orderType        订单类型
      * @return WwPunchCardResData
      */
-    public PaymentEntity posBankCardPay(RyMchVo ryMchVo, PosBankCardPayVo posBankCardPayVo,Integer orderType) {
+    public PaymentEntity posBankCardPay(RyMchVo ryMchVo, PosBankCardPayVo posBankCardPayVo, Integer orderType) {
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, posBankCardPayVo.getOrderNo(), posBankCardPayVo.getTotalAmount(), "", "",
@@ -357,7 +376,7 @@ public class PayBizz {
         PaymentEntity paymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(orderNo, payChannel);
 
         //检查订单是否已支付完成
-        PaymentEntity finishPayment = paymentService.selectByOrderNumAndTradeType(orderNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,Constants.PAYMENT_STATUS.STAUS2,null);
+        PaymentEntity finishPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, null);
         if (finishPayment != null) {// 订单已完成支付
             throw new TradePayException("-1", "此订单已成功支付,此次请求属于订单重复支付请求,请重新下单,重复订单号为:" + orderNo);
         }

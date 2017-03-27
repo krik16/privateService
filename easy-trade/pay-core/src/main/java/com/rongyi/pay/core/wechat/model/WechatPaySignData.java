@@ -27,6 +27,8 @@ public class WechatPaySignData extends BaseData {
 
     private String authCode;//用户支付二维码
 
+    private Integer orderType;//订单类型
+
 
     public String getOrderNo() {
         return orderNo;
@@ -98,5 +100,13 @@ public class WechatPaySignData extends BaseData {
 
     public void setAuthCode(String authCode) {
         this.authCode = authCode;
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
     }
 }

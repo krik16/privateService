@@ -7,8 +7,6 @@ import com.rongyi.pay.core.webank.model.Result;
 import com.rongyi.pay.core.webank.model.WwPunchCardResData;
 import net.sf.json.JSONObject;
 
-import java.math.BigDecimal;
-
 /**
  * 基础工具类
  * Created by sujuan on 2017/2/22.

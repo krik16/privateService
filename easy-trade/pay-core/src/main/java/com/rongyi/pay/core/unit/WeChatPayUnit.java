@@ -247,6 +247,50 @@ public class WeChatPayUnit {
     }
 
     /**
+     * 原生刷卡支付
+     **/
+    public static PunchCardPayResData punchCardNativePay(WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
+        LOGGER.info("微信原生刷卡支付,wechatPaySignData={},wechatConfigure={}", wechatPaySignData, wechatConfigure);
+        PunchCardPayResData punchCardPayResData;
+        String result = null;
+        try {
+            if (StringUtils.isEmpty(wechatPaySignData.getPayNo()) || null == wechatPaySignData.getTotalFee()
+                    || StringUtils.isEmpty(wechatPaySignData.getBody())) {
+                throw new ParamNullException();
+            }
+            //封装请求参数
+            PunchCardPayReqData punchCardPayReqData = new PunchCardPayReqData(wechatPaySignData.getAuthCode(), wechatPaySignData.getBody(), "",
+                    wechatPaySignData.getPayNo(), wechatPaySignData.getTotalFee(), "", "", "", "", "", wechatConfigure);
+            PunchCardPayService punchCardPayService = new PunchCardPayService();
+            //发起支付请求
+            result = punchCardPayService.request(punchCardPayReqData, wechatConfigure);
+            //处理支付结果
+            punchCardPayResData = (PunchCardPayResData) Util.getObjectFromXML(result, PunchCardPayResData.class);
+            LOGGER.info("punchCardPayResData={}", punchCardPayResData);
+            if ("FAIL".equals(punchCardPayResData.getReturn_code())) {//通信错误
+                throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
+            } else if ("FAIL".equals(punchCardPayResData.getResult_code())) {//业务错误
+                if ("USERPAYING".equals(punchCardPayResData.getErr_code())) {
+                    LOGGER.info("用户正在输入密码...");
+                    return punchCardPayResData;
+                } else {
+                    throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
+                }
+            } else if (!"SUCCESS".equals(punchCardPayResData.getReturn_code()) || !"SUCCESS".equals(punchCardPayResData.getResult_code())){
+                throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
+            }
+
+        } catch (WeChatException | ParamNullException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.error("刷卡失败,result={},e.getMessage={}", result, e.getMessage(), e);
+            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
+        }
+        LOGGER.info("支付结果,punchCardPayResData={}",punchCardPayResData);
+        return punchCardPayResData;
+    }
+
+    /**
      * 扫码支付等待用户支付处理
      *
      * @param orderNo   订单号
