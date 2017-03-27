@@ -53,6 +53,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private String reveiveTime;//收货时间
     private BigDecimal merchantRedDiscount;//商家红包补贴金额
     private BigDecimal merchantRebateDiscount;//商家抵扣券补贴金额
+    private BigDecimal reductionFee; ///< 满减金额
     private Integer deliveryType;//快递方式 1：自提 2：快递
 
 
@@ -377,6 +378,14 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setWeixinAppId(String weixinAppId) {
         this.weixinAppId = weixinAppId;
+    }
+
+    public BigDecimal getReductionFee() {
+        return reductionFee;
+    }
+
+    public void setReductionFee(BigDecimal reductionFee) {
+        this.reductionFee = reductionFee;
     }
 
     @Override

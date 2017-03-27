@@ -48,7 +48,15 @@ public class GiftVO implements Serializable {
     private String mallMid;
     private Date registerAt; //上架时间
     private Date soldOutAt; //下架时间
+    private Double price;
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public Date getUpdateAt() {
         return updateAt;

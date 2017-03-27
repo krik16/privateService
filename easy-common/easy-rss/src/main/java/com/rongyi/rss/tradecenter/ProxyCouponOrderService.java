@@ -85,6 +85,14 @@ public interface ProxyCouponOrderService {
     Map<String, Object> createCouponOrderInfo(RoaCouponOrderParam param);
 
     /**
+     * 创建营销活动类卡卷订单
+     *
+     * @param param
+     * @return
+     */
+    Map<String, Object> createCouponOrderForMK(RoaCouponOrderParam param);
+
+    /**
      * 优惠券批量订单删除（逻辑删除）
      *
      * @param orderNoStr

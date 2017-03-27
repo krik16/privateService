@@ -50,4 +50,6 @@ public interface ITotalCommodityService {
 
 	public Long searchCommodityByCodeAndLocationId(String code,String locationId);
 
+	public Map<String,Object> searchCommodityForManagement(Map<String,Object> paramMap,int pageSize);
+
 }

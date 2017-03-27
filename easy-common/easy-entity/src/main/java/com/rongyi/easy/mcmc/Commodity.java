@@ -1010,7 +1010,6 @@ public class Commodity implements  Serializable,Cloneable{
 				", status=" + status +
 				", code='" + code + '\'' +
 				", barCode='" + barCode + '\'' +
-				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
 				", sold=" + sold +
@@ -1064,7 +1063,6 @@ public class Commodity implements  Serializable,Cloneable{
 				", galleryPosition=" + galleryPosition +
 				", shelvesType=" + shelvesType +
 				", subheading='" + subheading + '\'' +
-				", commodityDetails='" + commodityDetails + '\'' +
 				", giftId='" + giftId + '\'' +
 				", sn='" + sn + '\'' +
 				", mappingId='" + mappingId + '\'' +
