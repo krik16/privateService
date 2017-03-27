@@ -3,6 +3,7 @@ package com.rongyi.settle.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -535,25 +536,32 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		for (DivideAccountVo vo : divideAccoutList) {
 			sheet.createRow(++titleRow);
 			int column = 0;
-			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getMallName());
-			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopMid());
-			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopName());
-			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getOrderNo());
-			sheet.getRow(titleRow).createCell(column++).setCellValue(DateUtils.formateDateFull(vo.getFinishTime()));
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getMallName());//商场名称
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopMid());//店铺id
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopName());//店铺名称
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getOrderNo());//订单号
+			sheet.getRow(titleRow).createCell(column++).setCellValue(DateUtils.formateDateFull(vo.getFinishTime()));//交易完成时间
 			Integer unitNum = 0;
-			String settleAmount = "";
 			Integer orderType = vo.getOrderType();
 			String orderTypeName = DivideAccountConstant.orderTypeMap.get(orderType);
+			BigDecimal rebateDiscountMer = vo.getRebateDiscountMer() != null ? vo.getRebateDiscountMer() : BigDecimal.ZERO;
+			BigDecimal hbDiscountMer = vo.getHbDiscountMer() != null ? vo.getHbDiscountMer() : BigDecimal.ZERO;
+			BigDecimal reductionFee = vo.getReductionFee() != null ? vo.getReductionFee() : BigDecimal.ZERO;
+			BigDecimal settleAmount = BigDecimal.ZERO;
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {
 				unitNum = vo.getTotalQuantity();
-				settleAmount = vo.getTotalAmount().toString();
+				settleAmount = vo.getTotalAmount();
 			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(vo.getOrderType())) {
 				unitNum = DivideAccountConstant.UNIT_NUM;
-				settleAmount = String.valueOf(AmountUtil.changFenToYuan(vo.getUnitPrice()));
+				settleAmount = BigDecimal.valueOf(vo.getUnitPrice()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
 			}
-			sheet.getRow(titleRow).createCell(column++).setCellValue(orderTypeName);
-			sheet.getRow(titleRow).createCell(column++).setCellValue(unitNum);
-			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount);
+			sheet.getRow(titleRow).createCell(column++).setCellValue(orderTypeName);//订单类型
+			sheet.getRow(titleRow).createCell(column++).setCellValue(unitNum);//商品数量
+			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.toString());//结算金额 = 订单金额 + 改价优惠 = 实际收入+ 使用抵扣券（商场补贴）+使用红包（商场补贴）+满减活动（商场补贴）
+			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.subtract(reductionFee).subtract(hbDiscountMer).subtract(rebateDiscountMer).toString());//实际收入= 实际支付金额 + 平台补贴金额（含抵扣券、红包、容颜值）
+			sheet.getRow(titleRow).createCell(column++).setCellValue(rebateDiscountMer.toString());//商家抵扣券补贴
+			sheet.getRow(titleRow).createCell(column++).setCellValue(hbDiscountMer.toString());//商家红包补贴
+			sheet.getRow(titleRow).createCell(column++).setCellValue(reductionFee.toString());//满减活动（商家补贴）
 		}
 	}
 

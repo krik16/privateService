@@ -657,6 +657,7 @@
 		<result column="total_amount" property="orderAmountTotal" jdbcType="DOUBLE" />
 		<result column="discount_amount" property="orderDiscountTotal" jdbcType="DOUBLE" />
 		<result column="hb_amount_mer" property="hbDiscountMerTotal" jdbcType="DOUBLE" />
+		<result column="reduction_fee" property="totalReductionFee" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="OrderDetailDtoMap" type="com.rongyi.settle.dto.OrderSettlementDetailDto">
@@ -682,6 +683,7 @@
 		<result column="buyer_phone" property="buyerPhone" jdbcType="VARCHAR" />
 		<result column="order_source" property="orderSource" jdbcType="VARCHAR" />
 		<result column="coupon_discount_type" property="couponDiscountType" jdbcType="VARCHAR" />
+		<result column="reduction_fee" property="reductionFee" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
@@ -818,7 +820,6 @@
 	<select id="selectForOrderTopDto" parameterType="java.util.Map" resultMap="OrderTopDtoMap">
 		SELECT
 		shop_name,
-		SUM(total_amount) AS total_amount,
 		'收入' AS income_type,
 		'商品订单' AS order_type,
 		COUNT(OFID) AS order_count,
@@ -826,28 +827,34 @@
 		SUM(score_amount) AS score_amount,
 		SUM(hb_amount_ope) AS hb_amount_ope,
 		SUM(hb_amount_mer) AS hb_amount_mer ,
-		0 AS discount_amount
+		0 AS discount_amount,
+		SUM(reduction_fee) AS reduction_fee
 		FROM (
 		SELECT
 		SI.id AS SID,
 		SI.shop_name,
 		OF.id AS OFID,
-		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
+		SUM(ODF.unit_price * ODF.quantity) - SUM(ODF.disconnt_fee + ODF.order_discount_fee) + OF.express_fee AS total_amount,
 		OF.score_discount + OF.order_score_discount AS score_amount,
-		case when  ODF.coupon_discount_type=0 || ODF.rebate_discount_type=0 then
+		(
+		SELECT
+			SUM(
+			CASE WHEN odf1.discount_amount &lt; (odf1.order_coupon_discount + odf1.coupon_discount) THEN  odf1.discount_amount
+			ELSE odf1.order_coupon_discount + odf1.coupon_discount END
+			)
+		FROM ry_osm.order_detail_form odf1
+		WHERE odf1.order_no = OF.order_no and  (odf1.coupon_discount_type=0 OR odf1.rebate_discount_type=0)
+		) as hb_amount_ope ,
+		(
+		SELECT
 		SUM(
-		case when ODF.discount_amount &lt; (ODF.order_coupon_discount + ODF.coupon_discount) then  ODF.discount_amount
-		else ODF.order_coupon_discount + ODF.coupon_discount end
+		CASE WHEN odf2.discount_amount &lt; (odf2.order_coupon_discount + odf2.coupon_discount) THEN  odf2.discount_amount
+		ELSE odf2.order_coupon_discount + odf2.coupon_discount END
 		)
-		else
-		0
-		end as hb_amount_ope ,
-		case when  ODF.coupon_discount_type=1 || ODF.rebate_discount_type=1  then
-		SUM(
-		case when ODF.discount_amount &lt; (ODF.order_coupon_discount + ODF.coupon_discount) then  ODF.discount_amount
-		else ODF.order_coupon_discount + ODF.coupon_discount end
-		)
-		else 0 end as hb_amount_mer
+		FROM ry_osm.order_detail_form odf2
+		WHERE odf2.order_no = OF.order_no and  (odf2.coupon_discount_type=1 OR odf2.rebate_discount_type=1)
+		) as hb_amount_mer ,
+		OF.reduction_fee
 		FROM
 		ry_osm.order_form OF
 		INNER JOIN
@@ -889,13 +896,25 @@
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
-		    B.discount_amount,
-			case when B.coupon_discount_type =0 || B.rebate_discount_type =0 THEN
-			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
-			else 0 end as coupon_discount ,
-			case when B.coupon_discount_type =1 || B.rebate_discount_type =1 THEN
-			SUM(B.coupon_discount) + SUM(B.order_coupon_discount)
-			else 0 end as coupon_discount_mer ,
+		    A.discount_amount,
+			(
+			SELECT
+				SUM(
+				CASE WHEN odf1.discount_amount &lt; (odf1.order_coupon_discount + odf1.coupon_discount) THEN  odf1.discount_amount
+				ELSE odf1.order_coupon_discount + odf1.coupon_discount END
+			)
+			FROM ry_osm.order_detail_form odf1
+			WHERE odf1.order_no = A.order_no and  (odf1.coupon_discount_type=0 OR odf1.rebate_discount_type=0)
+			) as coupon_discount ,
+			(
+			SELECT
+				SUM(
+				CASE WHEN odf2.discount_amount &lt; (odf2.order_coupon_discount + odf2.coupon_discount) THEN  odf2.discount_amount
+				ELSE odf2.order_coupon_discount + odf2.coupon_discount END
+			)
+			FROM ry_osm.order_detail_form odf2
+			WHERE odf2.order_no = A.order_no and  (odf2.coupon_discount_type=1 OR odf2.rebate_discount_type=1)
+			) as coupon_discount_mer ,
 			A.score_discount + A.order_score_discount AS score_discount,
 			CASE WHEN A.`status` = 2 THEN '待发货' WHEN A.`status` = 3 THEN '已发货' WHEN A.`status` = 4 THEN '确认收货'
 				WHEN (A.`status` > 4 AND H3.id IS NOT NULL) THEN '已完成'
@@ -909,14 +928,15 @@
 		 	D.mall_name,
 		 	E.shop_mid AS shop_id,
 		 	E.shop_name,
-			SUM(B.unit_price * quantity) - A.disconnt_fee + A.express_fee AS orig_price,
+			SUM(B.unit_price * B.quantity) - SUM(B.disconnt_fee + B.order_discount_fee) + A.express_fee AS orig_price,
 		 	A.total_amount AS pay_amount,
 		 	H2.create_at AS payment_time,
 		 	H3.create_at AS delivery_time,
 		 	H4.create_at AS receipt_time,
 		 	MUA.phone AS buyer_phone,
 			CASE A.order_source WHEN 0 THEN '微网站' WHEN 1 THEN '容易逛' WHEN 2 THEN '终端机' ELSE '其他' END AS order_source ,
-		   case A.coupon_discount_type WHEN 0 THEN '平台' WHEN 1 THEN '商家' end as coupon_discount_type
+		    case A.coupon_discount_type WHEN 0 THEN '平台' WHEN 1 THEN '商家' end as coupon_discount_type,
+		    A.reduction_fee AS reduction_fee
 		FROM
 			ry_osm.order_form A
 				LEFT JOIN ry_osm.order_detail_form B ON A.order_no = B.order_no
