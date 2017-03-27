@@ -53,6 +53,15 @@ public interface IweBankService {
     Map<String,Object> webankWechatRefundQuery(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
 
     /**
+     * 微众银行微信刷卡支付撤销
+     * @param orderNo 订单号
+     * @param payType 支付方式(0:支付宝,1:微信)
+     * @param weBankMchNo 微众商户号
+     * @return map
+     */
+    Map<String,Object> weBankWechatReverse(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
+
+    /**
      * 微众支付宝刷卡支付
      * @param ryMchVo 容易商户信息
      * @param waPunchCardVo 刷卡支付业务参数
@@ -89,4 +98,15 @@ public interface IweBankService {
      * @return map
      */
     Map<String,Object> webankAliRefundQuery(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
+
+
+    /**
+     * 微众银行支付宝刷卡支付撤销
+     * @param orderNo 订单号
+     * @param payType 支付方式(0:支付宝,1:微信)
+     * @return map
+     */
+    Map<String,Object> weBankAliReverse(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
+
+
 }
