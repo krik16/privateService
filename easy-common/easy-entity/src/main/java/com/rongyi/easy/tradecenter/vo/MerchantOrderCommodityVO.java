@@ -32,6 +32,7 @@ public class MerchantOrderCommodityVO implements Serializable
     private Integer couponDiscountType;//红包补贴类型 0：平台补贴 1：商家补贴
     private BigDecimal hongBaoDiscount;//红包抵扣金额
     private BigDecimal rebateDiscount;//抵扣券抵扣金额
+    private BigDecimal discountFee; ///< 卖家折扣（改）价
 
     public boolean isSupportCourierDeliver() {
         return supportCourierDeliver;
@@ -182,6 +183,14 @@ public class MerchantOrderCommodityVO implements Serializable
 
     public void setRebateDiscount(BigDecimal rebateDiscount) {
         this.rebateDiscount = rebateDiscount;
+    }
+
+    public BigDecimal getDiscountFee() {
+        return discountFee;
+    }
+
+    public void setDiscountFee(BigDecimal discountFee) {
+        this.discountFee = discountFee;
     }
 
     public String toString() {

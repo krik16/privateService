@@ -165,6 +165,9 @@ public class TradeOrderCreateParam implements Serializable {
      */
     private String buyerMessage;
 
+    // 扩展数据
+    private String extraInfo;
+
     /**
      * end
      */
@@ -485,10 +488,19 @@ public class TradeOrderCreateParam implements Serializable {
         this.buyerMessage = buyerMessage;
     }
 
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
-                "business=" + business +
+                "activityId='" + activityId + '\'' +
+                ", business=" + business +
                 ", unitId='" + unitId + '\'' +
                 ", unitNum=" + unitNum +
                 ", buyerId='" + buyerId + '\'' +
@@ -503,11 +515,18 @@ public class TradeOrderCreateParam implements Serializable {
                 ", openId='" + openId + '\'' +
                 ", devId='" + devId + '\'' +
                 ", code='" + code + '\'' +
-                ", activityId='" + activityId + '\'' +
                 ", activityName='" + activityName + '\'' +
                 ", couponCodes=" + couponCodes +
+                ", platformRebateCode='" + platformRebateCode + '\'' +
+                ", rebateDiscount=" + rebateDiscount +
+                ", hbSource=" + hbSource +
+                ", hbType=" + hbType +
+                ", idfa='" + idfa + '\'' +
+                ", articleId='" + articleId + '\'' +
+                ", articleType=" + articleType +
                 ", useHb=" + useHb +
                 ", useScore=" + useScore +
+                ", usePlatFormRebate=" + usePlatFormRebate +
                 ", discountWithOutScore=" + discountWithOutScore +
                 ", totalAmount=" + totalAmount +
                 ", payAmount=" + payAmount +
@@ -516,12 +535,10 @@ public class TradeOrderCreateParam implements Serializable {
                 ", discountBitMap=" + discountBitMap +
                 ", statusHold=" + statusHold +
                 ", nextStatusTime=" + nextStatusTime +
-                ", platformRebateCode=" + platformRebateCode +
-                ", weixinAppId=" + weixinAppId +
-                ", orderChannel=" + orderChannel +
-                ", articleId=" + articleId +
-                ", articleType=" + articleType +
-                ", buyerMessage=" + buyerMessage +
+                ", weixinAppId='" + weixinAppId + '\'' +
+                ", orderChannel='" + orderChannel + '\'' +
+                ", buyerMessage='" + buyerMessage + '\'' +
+                ", extraInfo='" + extraInfo + '\'' +
                 '}';
     }
 }
