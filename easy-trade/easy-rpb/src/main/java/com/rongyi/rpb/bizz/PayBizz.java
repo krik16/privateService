@@ -259,13 +259,16 @@ public class PayBizz {
 
             //保存支付记录
             saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+
+            //发送异步通知
+            payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
             //微众支付查询接口未返回
             wwPunchCardResData.setTerminal_serialno(paymentEntity.getPayNo());
         }
         //原生支付,直接返回客户端支付状态,异步循环处理用户支付中的情况,检测到用户已完成支付则更新支付状态
         else {
             wwPunchCardResData = WebankPayUnit.wechatPunchCardPayNative(wwPunchCardPayParam);
-            waitUserPaying(paymentEntity,wwPunchCardPayParam);
+            webankWechatWaitUserPaying(paymentEntity, wwPunchCardPayParam);
         }
 
         return wwPunchCardResData;
@@ -294,27 +297,27 @@ public class PayBizz {
         //综合支付处理接口
         if (ConstantEnum.PAY_NATIVE_0.getCodeInt().equals(ryMchVo.getNativePay())) {
             resData = WebankPayUnit.alipayPunchCardPay(waPunchCardPayParam);
+
+            paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+            paymentEntity.setFinishTime(new Date());
+
+            //支付结果返回金额计算
+            Integer totalAmount = new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
+            //初始化支付事件记录
+            PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                    "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
+                    0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+
+            //保存支付记录
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+            //发送异步通知
+            payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         }
         //原生支付接口
         else {
             resData = WebankPayUnit.alipayPunchCardPayNative(waPunchCardPayParam);
+            webankAliWaitUserPaying(paymentEntity,waPunchCardPayParam);
         }
-
-        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
-        paymentEntity.setFinishTime(new Date());
-
-        //支付结果返回金额计算
-        Integer totalAmount = new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
-        //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
-                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
-
-        //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
-        //发送异步通知
-        payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
-
         return resData;
     }
 
@@ -405,9 +408,9 @@ public class PayBizz {
 
 
     /**
-     * 原生支付接口调用，循环处理用户支付中的场景
+     * 微众微信原生支付接口调用，循环处理用户支付中的场景
      */
-    private void waitUserPaying(final PaymentEntity paymentEntity,final WwPunchCardPayParam wwPunchCardPayParam){
+    private void webankWechatWaitUserPaying(final PaymentEntity paymentEntity, final WwPunchCardPayParam wwPunchCardPayParam){
 
         final Thread thread = new Thread() {
             @Override
@@ -424,6 +427,38 @@ public class PayBizz {
 
                 //保存支付记录
                 saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+                //发送异步通知
+                payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
+            }
+        };
+        thread.start();
+
+    }
+
+
+    /**
+     * 微众支付宝原生支付接口调用，循环处理用户支付中的场景
+     */
+    private void webankAliWaitUserPaying(final PaymentEntity paymentEntity, final WaPunchCardPayParam waPunchCardPayParam){
+
+        final Thread thread = new Thread() {
+            @Override
+            public void run() {
+                WaPunchCardPayResData resData = WebankPayUnit.waitUserAlipayPaying(waPunchCardPayParam, 24);
+                paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+                paymentEntity.setFinishTime(new Date());
+
+                //支付结果返回金额计算
+                Integer totalAmount = new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
+                //初始化支付事件记录
+                PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                        "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
+                        0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+
+                //保存支付记录
+                saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+                //发送异步通知
+                payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
             }
         };
         thread.start();

@@ -142,7 +142,7 @@ public class WebankPayUnit {
         return waitUserAlipayPaying(param, 6);
     }
 
-    private static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param , int retryTimes) {
+    public static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param , int retryTimes) {
         boolean result = false;
         WaPunchCardPayResData resData ;
         WaQueryTradeResData queryTradeResData = new WaQueryTradeResData();
