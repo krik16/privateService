@@ -9,7 +9,7 @@ import com.rongyi.pay.core.wechat.util.RandomStringGenerator;
  * Created by sujuan on 2017/3/24.
  */
 public class WwScanPayReqData extends BaseData{
-    private static final long serialVersionUID = -8106527507519093905L;
+
     //接口类型
     private String Service ="pay.weixin.jspay";
 
@@ -50,7 +50,7 @@ public class WwScanPayReqData extends BaseData{
     private int total_fee ;
 
     //终端ID
-    private String mch_create_id = "127.0.0.1";
+    private String mch_create_ip = "218.1.20.94";
 
     //通知地址
     private String notify_url ;
@@ -196,12 +196,12 @@ public class WwScanPayReqData extends BaseData{
         this.total_fee = total_fee;
     }
 
-    public String getMch_create_id() {
-        return mch_create_id;
+    public String getMch_create_ip() {
+        return mch_create_ip;
     }
 
-    public void setMch_create_id(String mch_create_id) {
-        this.mch_create_id = mch_create_id;
+    public void setMch_create_ip(String mch_create_ip) {
+        this.mch_create_ip = mch_create_ip;
     }
 
     public String getNotify_url() {

@@ -6,10 +6,14 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.model.Result;
 import com.rongyi.pay.core.webank.model.WwPunchCardResData;
 import net.sf.json.JSONObject;
+import org.apache.commons.collections.set.MapBackedSet;
+import org.jdom.Namespace;
+import org.jdom.input.SAXBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,8 +21,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,7 +62,7 @@ public class Util {
         Object obj ;
         try {
             Gson gson = new Gson();
-            Map<String, Object> map = getMapFromXML(xmlStr);
+            Map<String, Object> map = getMapFromXml(xmlStr);
             String jsonStr =  gson.toJson(map);
             obj =getObjectFromString(jsonStr, t);
         } catch  (Exception e) {
@@ -96,21 +102,40 @@ public class Util {
         return map;
     }
 
+    public static Map<String,Object> getMapFromXml(String xmlString){
+        Map entity = new HashMap();
+        try {
+            // 创建一个新的字符串
+            StringReader read = new StringReader(xmlString);
+            // 创建新的输入源SAX 解析器将使用 InputSource 对象来确定如何读取 XML 输入
+            InputSource source = new InputSource(read);
+            // 创建一个新的SAXBuilder
+            SAXBuilder sb = new SAXBuilder();
+            // 通过输入源构造一个Document
+            org.jdom.Document doc = sb.build(source);
+            // 取的根元素
+            org.jdom.Element root = doc.getRootElement();
+            // System.out.println(root.getName());//输出根元素的名称（测试）
+            // 得到根元素所有子元素的集合
+            List jiedian = root.getChildren();
+            // 获得XML中的命名空间（XML中未定义可不写）
+            Namespace ns = root.getNamespace();
+            org.jdom.Element et = null;
+
+            for (int i = 0; i < jiedian.size(); i++) {
+                et = (org.jdom.Element) jiedian.get(i);// 循环依次得到子元素
+                entity.put(et.getName(), et.getText());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return entity;
+    }
+
     public static void main(String args[]) {
-        WwPunchCardResData cardResData = new WwPunchCardResData();
-        cardResData.setSign("asdfafdsff");
-        cardResData.setBank_type("999");
-        cardResData.setFee_type("dfdfd");
-        cardResData.setOpenid("dfdfdfdfdfdf");
-        cardResData.setOrderid("335435454");
-        Result result = new Result();
-        result.setErrmsg("SUCCESS");
-        result.setErrno("1");
-        cardResData.setResult(result);
-        JSONObject object = JSONObject.fromObject(cardResData);
-        String str = object.toString();
-        System.out.println(str);
-        WwPunchCardResData obj  =(WwPunchCardResData) getObjectFromString("",WwPunchCardResData.class);
-        System.out.println(obj);
+        String xmlStr = "<xml><appid>wx90bfe8ac7aa1338a</appid><version>2.0</version><charset>UTF-8</charset><sign_type>MD5</sign_type><status>1</status><message>签名不匹配</message></xml>";
+        Map<String, Object> map = getMapFromXml(xmlStr);
+        System.out.println(map);
     }
 }
