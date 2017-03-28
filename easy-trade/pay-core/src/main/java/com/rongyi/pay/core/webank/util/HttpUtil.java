@@ -360,13 +360,14 @@ public class HttpUtil {
 		//将要提交给API的数据对象转换成XML格式数据Post给API
 		String postDataXML = xStreamForRequestPostData.toXML(object);
 
+		postDataXML = postDataXML.replace("com.rongyi.pay.core.webank.model.req.WwScanPayReqData", "xml");
 		logger.info("postDataXML=" + postDataXML);
 //        System.err.println("post data:"+postDataXML);
 		//得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
 		StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
 		httpPost.addHeader("Content-Type", "text/xml");
 		httpPost.setEntity(postEntity);
-
+		logger.info("888888"+postEntity.toString());
 		try {
 			HttpResponse response = httpClient.execute(httpPost);
 

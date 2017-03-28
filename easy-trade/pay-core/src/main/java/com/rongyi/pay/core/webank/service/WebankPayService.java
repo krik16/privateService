@@ -1,15 +1,20 @@
 package com.rongyi.pay.core.webank.service;
 
+import com.rongyi.pay.core.unit.ParamUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.webank.model.req.WaScanPayReqData;
 import com.rongyi.pay.core.webank.model.req.WwScanPayReqData;
+import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
 import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
+import com.rongyi.pay.core.webank.param.WaScanPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.rongyi.pay.core.webank.util.Util;
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -166,13 +171,23 @@ public class WebankPayService {
     }
 
     public WwScanPayResData wechatScanPay(WwScanPayParam param, WebankConfigure configure) throws Exception{
-        LOGGER.info("微众微信公众号支付param:{}",param);
+        LOGGER.info("微众微信公众号支付param:{}", param);
         WwScanPayReqData reqData = new WwScanPayReqData(param, configure.getWechatScanNotifyUrl());
         String sign = Signature.getWechatSign(reqData, configure.getKey());
         reqData.setSign(sign);
         String result = HttpUtil.sendPostClientXml(configure.getWechatScanPayUrl(), reqData, configure);
         LOGGER.info("微众微信公众号支付返回结果result:{}",result);
-        return (WwScanPayResData)Util.getObjectFromXmlStr(result,WwScanPayResData.class);
+        return (WwScanPayResData)Util.getObjectFromXmlStr(result, WwScanPayResData.class);
+    }
+
+    public WaScanPayResData alipayScanPay(WaScanPayParam param, WebankConfigure configure) throws Exception{
+        LOGGER.info("微众支付宝扫码支付param:{}", param);
+        WaScanPayReqData reqData = new WaScanPayReqData();
+        BeanUtils.copyProperties(reqData,param);
+        String urlSuffix = getAliPayUrlSuffix(reqData, configure);
+        String result = HttpUtil.sendPostClient(configure.getAlipayScanPayUrl()+urlSuffix, reqData, configure);
+        LOGGER.info("微众支付宝扫码支付返回结果result:{}",result);
+        return (WaScanPayResData)Util.getObjectFromString(result,WaScanPayResData.class);
     }
 
 }
