@@ -228,7 +228,7 @@ public class WeChatPayUnit {
             } else if ("FAIL".equals(punchCardPayResData.getResult_code())) {//业务错误
                 if ("USERPAYING".equals(punchCardPayResData.getErr_code())) {
                     LOGGER.info("用户正在输入密码，等待中...");
-                    waitUserPaying(wechatPaySignData.getPayNo(), wechatConfigure,punchCardPayResData);
+                    waitUserPaying(wechatPaySignData.getPayNo(), wechatConfigure,punchCardPayResData,8);
                 } else {
                     throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
                 }
@@ -296,8 +296,7 @@ public class WeChatPayUnit {
      * @param orderNo   订单号
      * @param wechatConfigure 商户配置信息
      */
-    private static void waitUserPaying(String orderNo, WechatConfigure wechatConfigure,PunchCardPayResData punchCardPayResData) {
-        int retryTimes = 8;
+    public static void waitUserPaying(String orderNo, WechatConfigure wechatConfigure,PunchCardPayResData punchCardPayResData,Integer retryTimes) {
         LOGGER.info("刷卡支付等待用户输入密码,最多等待{}s,orderNo={}", retryTimes*retryInterval/1000, orderNo);
 
         boolean result = false;//支付结果

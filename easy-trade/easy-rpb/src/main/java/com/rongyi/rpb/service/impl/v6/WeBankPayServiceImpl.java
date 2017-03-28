@@ -265,14 +265,16 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             //第三方交易号
             map.put("tradeNo", resData.getTradeNo());
             //设置支付状态
-            if (com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(resData.getTradeStatus())
-                    || com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_05.getCodeStr().equals(resData.getTradeStatus())) {
+            if (com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(resData.getTradeStatus())) {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
             } else if (com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(resData.getTradeStatus())) {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
+            }else if(com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_05.getCodeStr().equals(resData.getTradeStatus())){
+                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_COLSE.getValueStr());
             } else {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
             }
+
             //交易金额
             map.put("totalAmount", new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
