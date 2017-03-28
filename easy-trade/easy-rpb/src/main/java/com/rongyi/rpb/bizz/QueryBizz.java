@@ -48,7 +48,8 @@ public class QueryBizz {
         WwPunchCardResData resData = WebankPayUnit.wechatPunchCardPayQueryOrder(reqData);
 
         //检查是否支付是否成功
-        if(!"0".equals(resData.getResult().getErrno()) || !"1".equals(resData.getPayment())){
+        if(!("0".equals(resData.getResult().getErrno()) && "1".equals(resData.getPayment()))
+                && !com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())){
             throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
         }
         resData.setTerminal_serialno(oldPaymentEntity.getPayNo());
@@ -96,12 +97,16 @@ public class QueryBizz {
         WaQueryTradeReqData reqData  = new WaQueryTradeReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
         WaQueryTradeResData resData = WebankPayUnit.alipayQueryTrade(reqData);
-        if(!"0".equals(resData.getCode()) && (!"02".equals(resData.getTradeStatus()) || !"05".equals(resData.getTradeStatus()))){
+        if(!"0".equals(resData.getCode()) ||
+                (!com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(resData.getTradeStatus()) &&
+                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(resData.getTradeStatus()) &&
+                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_05.getCodeStr().equals(resData.getTradeStatus()))){
             throw new TradePayException(resData.getCode(),resData.getMsg());
         }
         resData.setOutTradeNo(oldPaymentEntity.getPayNo());
         return resData;
     }
+
 
     /**
      * 微众支付宝退款订单查询

@@ -16,7 +16,7 @@ public class WwPunchCardReverseReqData extends BaseData{
     private String merchant_code;
 
     //终端号  必填
-    private String terminal_code;
+    private String terminal_code = "web";
 
     //重新生成的商户订单号 必填
     private String terminal_serialno ;
