@@ -166,6 +166,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	private List<String> offServiceIds;
 
 	private List<String> skus;
+	private String systemNumber;
 
 
 	public List<String> getMallServiceIds() {
@@ -961,6 +962,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.skus = skus;
 	}
 
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -1091,6 +1100,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.setIfShowInWechat(isShowInWechat());
 
 		this.source = commodity.getSource();
+		this.systemNumber=commodity.getSystemNumber();
 	}
 
 	private boolean isShowInWechat() {
