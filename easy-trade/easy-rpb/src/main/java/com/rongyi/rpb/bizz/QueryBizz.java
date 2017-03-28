@@ -117,10 +117,10 @@ public class QueryBizz {
         WaQueryTradeReqData reqData  = new WaQueryTradeReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
         WaQueryTradeResData resData = WebankPayUnit.alipayQueryTrade(reqData);
-        if(!"0".equals(resData.getCode()) && (
-                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(resData.getTradeStatus()) ||
-                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(resData.getTradeStatus())) ||
-                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_05.getCodeStr().equals(resData.getTradeStatus())){
+        if(!"0".equals(resData.getCode()) ||
+                (!com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(resData.getTradeStatus()) &&
+                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(resData.getTradeStatus()) &&
+                !com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_05.getCodeStr().equals(resData.getTradeStatus()))){
             throw new TradePayException(resData.getCode(),resData.getMsg());
         }
         resData.setOutTradeNo(oldPaymentEntity.getPayNo());
