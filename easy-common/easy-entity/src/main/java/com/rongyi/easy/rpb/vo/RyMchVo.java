@@ -21,6 +21,8 @@ public class RyMchVo implements Serializable {
 
     private Byte orgChannel;//服务商渠道(0:容易网,1:微众)
 
+    private Integer nativePay = 0;//0:综合支付服务 1:原生支付接口
+
     public String getRyMchId() {
         return ryMchId;
     }
@@ -52,6 +54,15 @@ public class RyMchVo implements Serializable {
     public void setOrgChannel(Byte orgChannel) {
         this.orgChannel = orgChannel;
     }
+
+    public Integer getNativePay() {
+        return nativePay;
+    }
+
+    public void setNativePay(Integer nativePay) {
+        this.nativePay = nativePay;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
