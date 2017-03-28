@@ -42,7 +42,7 @@ public class WebankPayUnit {
             //返回用户正在支付中
             if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())) {
                 //用户正在支付中  循环调用接口查询支付状态
-                resData= waitUserWechatPaying(param);
+                resData= waitUserWechatPaying(param,6);
             }
             //返回状态不是正在支付中 也没有支付成功 则失败 直接抛异常
             else if(!(ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())&&
@@ -95,9 +95,8 @@ public class WebankPayUnit {
     /**
      * 微众微信刷卡支付等待用户支付处理
      */
-    private static WwPunchCardResData waitUserWechatPaying(WwPunchCardPayParam param) {
+    public static WwPunchCardResData waitUserWechatPaying(WwPunchCardPayParam param,Integer retryTimes) {
         WwPunchCardResData resData =null;
-        int retryTimes = 6;
         boolean result = false;
         LOGGER.info("微众微信刷卡支付等待用户输入密码,最多等待{}s,param={},configure={}", retryTimes*retryInterval/1000, param,configure);
         //参数转换
