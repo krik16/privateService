@@ -230,7 +230,7 @@ public class QueryBizz {
 
     private PaymentEntity basePayQuery(String orderNo, Integer payType){
 
-        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null,
                 payType);
 
         if (paymentEntity == null) {
@@ -241,7 +241,7 @@ public class QueryBizz {
 
     private PaymentEntity baseRefundQuery(String orderNo, Integer payType){
 
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,null,
                 payType);
 
         if (refundPayment == null) {
