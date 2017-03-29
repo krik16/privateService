@@ -250,9 +250,9 @@ public class ExportOsmOrderExcel {
         String result = "其他";
         if (payChannel!=null){
             switch (payChannel){
-                case 1:
-                case 3: result = "支付宝"; break;
-                case 5: result = "微信"; break;
+                case 0: result = "支付宝"; break;
+                case 1: result = "微信"; break;
+                default: result = "其他"; break;
             }
         }
         return result;
