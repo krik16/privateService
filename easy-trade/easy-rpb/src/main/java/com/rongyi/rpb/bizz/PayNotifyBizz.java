@@ -8,6 +8,7 @@ import com.rongyi.core.util.TradePaySignUtil;
 import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
 import com.rongyi.pay.core.Exception.AliPayException;
 import com.rongyi.pay.core.Exception.WeChatException;
 import com.rongyi.rpb.Exception.TradeException;
@@ -96,6 +97,13 @@ public class PayNotifyBizz {
         } else {
             throw new WeChatException("通知结果异常,map=" + map);
         }
+    }
+
+    public void posBankSynPayNotify(PosBankSynNotifyDto dto){
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
+                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+        BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+        doPayNotify(paymentEntity.getPayNo(),payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
 
     }
 
