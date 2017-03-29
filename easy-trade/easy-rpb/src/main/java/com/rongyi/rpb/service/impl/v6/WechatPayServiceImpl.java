@@ -214,7 +214,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             if (ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getReturn_code()) &&
                     ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getResult_code())) {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            } else if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getErr_code())) {
+            } else if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getTrade_state())) {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
             } else {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
