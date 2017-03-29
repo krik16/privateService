@@ -499,6 +499,9 @@ public class SubOrderController extends BaseControllerV2 {
             if (null != paramsMap.get("timeType") && StringUtils.isBlank(paramsMap.get("timeType").toString())) {
                 paramsMap.remove("timeType");
             }
+            if (null != paramsMap.get("deliveryType") && StringUtils.isBlank(paramsMap.get("deliveryType").toString())) {
+                paramsMap.remove("deliveryType");
+            }
         }
     }
 

@@ -72,14 +72,29 @@ public class ExportOsmOrderExcel {
                 LOGGER.info("导出的商品订单数 szie={}",orderForms.size());
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 29; j++) {
+                    for (int j = 0; j <= 30; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
                 }
                 for (int i = 0; i < orderForms.size(); i++) {
                     OrderManagerVO vo = orderForms.get(i);
+                    String deliveryType = convertDeliveryType(vo.getDeliveryType());//快递方式
+                    String createAt = DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2);//下单时间
+                    String deleverAt = DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2);//发货时间
+                    String payAt = DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2);//付款时间
+                    String reveiveAt = DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2);//确认书后货时间
+                    if (CollectionUtils.isNotEmpty(vo.getOrderCommoditys())) {
+                        for (OrderManagerCommodityVO orderCommodity : vo.getOrderCommoditys()) {
+                            orderCommodity.setDeliveryType(deliveryType);
+                            orderCommodity.setCreateAt(createAt);
+                            orderCommodity.setDeleverAt(deleverAt);
+                            orderCommodity.setPayAt(payAt);
+                            orderCommodity.setReveiveAt(reveiveAt);
+                        }
+                    }
                     orderCommoditys.addAll(vo.getOrderCommoditys());
+
                     sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderCartNo());
                     sheet.getRow(i + 2).getCell(1).setCellValue(vo.getOrderNo());
                     sheet.getRow(i + 2).getCell(2).setCellValue(vo.getSellerAccount());
@@ -102,24 +117,25 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(16).setCellValue(vo.getActivityName());
                     sheet.getRow(i + 2).getCell(17).setCellValue(convertStatus(vo.getStatus()));
                     sheet.getRow(i + 2).getCell(18).setCellValue(convertActivityStatus(vo.getActivityStatus()));
-                    sheet.getRow(i + 2).getCell(19).setCellValue(convertOrderSource(vo.getOrderSource(),vo.getOrderSourceForWeiXin(),vo.getOrderChannel()));
+                    sheet.getRow(i + 2).getCell(19).setCellValue(convertOrderSource(vo.getOrderSource(), vo.getOrderSourceForWeiXin(), vo.getOrderChannel()));
                     sheet.getRow(i + 2).getCell(20).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(21).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(22).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(23).setCellValue(DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(24).setCellValue(DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(25).setCellValue(convertPaymentId(vo.getPaymentId()));
-                    sheet.getRow(i + 2).getCell(26).setCellValue(vo.getReceiverName());
-                    sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverPhone());
-                    sheet.getRow(i + 2).getCell(28).setCellValue(vo.getReceiverAddress());
-                    sheet.getRow(i + 2).getCell(29).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(21).setCellValue(deliveryType);
+                    sheet.getRow(i + 2).getCell(22).setCellValue(createAt);
+                    sheet.getRow(i + 2).getCell(23).setCellValue(payAt);
+                    sheet.getRow(i + 2).getCell(24).setCellValue(deleverAt);
+                    sheet.getRow(i + 2).getCell(25).setCellValue(reveiveAt);
+                    sheet.getRow(i + 2).getCell(26).setCellValue(convertPaymentId(vo.getPaymentId()));
+                    sheet.getRow(i + 2).getCell(27).setCellValue(vo.getReceiverName());
+                    sheet.getRow(i + 2).getCell(28).setCellValue(vo.getReceiverPhone());
+                    sheet.getRow(i + 2).getCell(29).setCellValue(vo.getReceiverAddress());
+                    sheet.getRow(i + 2).getCell(30).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
 
             XSSFSheet sheet2 = wb.getSheetAt(1);
             for (int i = 2; i <= orderCommoditys.size() + 2; i++) {
                 sheet2.createRow(i);
-                for (int j = 0; j <= 9; j++) {
+                for (int j = 0; j <= 14; j++) {
                     sheet2.getRow(i).createCell(j);
                     sheet2.getRow(i).getCell(j).setCellStyle(bodyStyle);
                 }
@@ -138,6 +154,11 @@ public class ExportOsmOrderExcel {
                     sheet2.getRow(i + 2).getCell(7).setCellValue(vo.getCommoditySpec());
                     sheet2.getRow(i + 2).getCell(8).setCellValue(vo.getUnitPrice());
                     sheet2.getRow(i + 2).getCell(9).setCellValue(vo.getCommodityNum());
+                    sheet2.getRow(i + 2).getCell(10).setCellValue(vo.getDeliveryType());
+                    sheet2.getRow(i + 2).getCell(11).setCellValue(vo.getCreateAt());
+                    sheet2.getRow(i + 2).getCell(12).setCellValue(vo.getPayAt());
+                    sheet2.getRow(i + 2).getCell(13).setCellValue(vo.getDeleverAt());
+                    sheet2.getRow(i + 2).getCell(14).setCellValue(vo.getReveiveAt());
                 }
             }
             String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
@@ -232,6 +253,17 @@ public class ExportOsmOrderExcel {
                 case 1:
                 case 3: result = "支付宝"; break;
                 case 5: result = "微信"; break;
+            }
+        }
+        return result;
+    }
+
+    private String convertDeliveryType(Integer deliveryType) {
+        String result = "";
+        if (deliveryType != null){
+            switch (deliveryType){
+                case 1: result = "自提"; break;
+                case 2: result = "快递"; break;
             }
         }
         return result;
