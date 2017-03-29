@@ -176,7 +176,7 @@ public class QueryBizz {
      */
     public PaymentEntity aliRefundQuery(String orderNo,AliConfigure aliConfigure) {
 
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
         if (oldPaymentEntity == null) {
