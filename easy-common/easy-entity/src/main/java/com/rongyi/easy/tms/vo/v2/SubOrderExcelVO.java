@@ -60,6 +60,8 @@ public class SubOrderExcelVO {
 
     private Integer timeType;//0:下单时间，1：付款时间，2：发货时间，3：完成时间
 
+    private Integer deliveryType;//配送方式 1：自提 2：快递
+
     public String getOrderCartNo() {
         return orderCartNo;
     }
@@ -243,6 +245,14 @@ public class SubOrderExcelVO {
 
     public void setTimeType(Integer timeType) {
         this.timeType = timeType;
+    }
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
     @Override
