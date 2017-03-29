@@ -360,7 +360,7 @@ public class WebankPayUnit {
             resData = webankPayService.alipayPunchCardPay(param, configure);
 
             if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode())) {
-                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL);
+                throw new WebankException(resData.getCode(),resData.getMsg() != null ? resData.getMsg() : ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr());
             }else if (ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getCodeStr().equals(resData.getRetCode())) {
                 LOGGER.info("微众返回系统异常 再次调用查询接口查询实际支付状态");
                 resData = waitUserAlipayPaying(param, 1);

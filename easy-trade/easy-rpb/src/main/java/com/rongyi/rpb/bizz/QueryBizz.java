@@ -1,6 +1,7 @@
 package com.rongyi.rpb.bizz;
 
 import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.WebankException;
@@ -54,7 +55,8 @@ public class QueryBizz {
         //检查是否支付是否成功
         if(!("0".equals(resData.getResult().getErrno()) && "1".equals(resData.getPayment()))
                 && !com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())){
-            throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
+            throw new WebankException(resData.getResult().getErrno(),
+                    StringUtil.isEmpty(resData.getResult().getErrmsg())? com.rongyi.pay.core.constants.ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr() : resData.getResult().getErrmsg());
         }
 
         resData.setTerminal_serialno(oldPaymentEntity.getPayNo());
