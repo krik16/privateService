@@ -1,11 +1,15 @@
 package com.rongyi.rpb.web.controller.v6;
 
+import com.rongyi.pay.core.ali.utils.Utils;
+import com.rongyi.rpb.bizz.PayNotifyBizz;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -18,6 +22,37 @@ import java.util.Map;
 public class WebankController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebankController.class);
+    @Autowired
+    PayNotifyBizz payNotifyBizz;
+
+    /**
+     * 微众支付宝扫码支付异步通知
+     */
+    @RequestMapping("/pay/notify")
+    public void alipayNotify(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.info("微众支付宝扫码支付异步通知start");
+        try {
+            Map<String, String> map = Utils.getRequestParams(request);
+            payNotifyBizz.webankAlipayNotify(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.info("微众支付宝扫码支付异步通知处理异常");
+        }
+    }
+
+    /**
+     * 微众微信公众号支付异步通知
+     */
+    @RequestMapping("/pay/notify")
+    public void wechatNotify(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.info("微众微信公众号支付异步通知start");
+        try {
+            Map<String, String> map = Utils.getRequestParams(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.info("微众微信公众号支付异步通知处理异常");
+        }
+    }
 
     @RequestMapping("statementDown")
     public void statementDown(HttpServletRequest request) {

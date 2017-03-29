@@ -45,7 +45,7 @@ public class WwScanQueryResData extends BaseData{
     private String sign ;
 
     /* 以下字段在status和result_code都为0时有返回 */
-    //交易状态
+    //交易状态 SUCCESS—支付成 REFUND—转入退款 NOTPAY—未支付 CLOSED—已关闭REVERSE—已冲正 REVOK—已撤销
     private String trade_state ;
 
     /* 以下字段在trade_state 为success是有返回 */

@@ -11,6 +11,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
 import com.rongyi.pay.core.Exception.AliPayException;
 import com.rongyi.pay.core.Exception.WeChatException;
+import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.common.pay.util.HttpUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
@@ -96,6 +97,43 @@ public class PayNotifyBizz {
             this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, openId, "");
         } else {
             throw new WeChatException("通知结果异常,map=" + map);
+        }
+    }
+
+    /**
+     * 微众支付宝通知
+     * @param map 通知参数
+     */
+    public void webankAlipayNotify(Map<String, String> map) {
+        log.info("微众支付宝通知内容,map={}",map);
+        if ("TRADE_SUCCESS".equals(map.get("tradeStatus"))) {
+            String payNo = map.get("orderId");
+            String tradeNo = map.get("tradeNo");
+            String buyerId = map.get("buyerId");
+            String buyerEmail = map.get("buyerLogonId");
+            BigDecimal payAmount = new BigDecimal(map.get("totalAmount"));
+
+            this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, buyerId, buyerEmail);
+        } else {
+            throw new WebankException("通知结果异常,map=" + map);
+        }
+    }
+
+    /**
+     * 微众微信通知
+     * @param map 通知参数
+     */
+    public void webankWechatNotify(Map<String, String> map) {
+        log.info("微众支付宝通知内容,map={}",map);
+        if ("0".equals(map.get("status"))&&"0".equals(map.get("result_code"))&&"0".equals(map.get("pay_result"))) {
+            String payNo = map.get("out_trade_no");
+            String tradeNo = map.get("transaction_id");
+            String openId = map.get("sub_openid");
+            BigDecimal payAmount = new BigDecimal(map.get("total_fee")).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+
+            this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, openId, "");
+        } else {
+            throw new WebankException("通知结果异常,map=" + map);
         }
     }
 

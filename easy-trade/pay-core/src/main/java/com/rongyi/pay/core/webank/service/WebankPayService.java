@@ -5,12 +5,11 @@ import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.model.req.WaScanPayReqData;
 import com.rongyi.pay.core.webank.model.req.WwScanPayReqData;
+import com.rongyi.pay.core.webank.model.req.WwScanQueryReqData;
 import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
 import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
-import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
-import com.rongyi.pay.core.webank.param.WaScanPayParam;
-import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
-import com.rongyi.pay.core.webank.param.WwScanPayParam;
+import com.rongyi.pay.core.webank.model.res.WwScanQueryResData;
+import com.rongyi.pay.core.webank.param.*;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.rongyi.pay.core.webank.util.Util;
@@ -178,6 +177,16 @@ public class WebankPayService {
         String result = HttpUtil.sendPostClientXml(configure.getWechatScanPayUrl(), reqData, configure);
         LOGGER.info("微众微信公众号支付返回结果result:{}",result);
         return (WwScanPayResData)Util.getObjectFromXmlStr(result, WwScanPayResData.class);
+    }
+
+    public WwScanQueryResData wechatScanQuery(WwScanQueryParam param, WebankConfigure configure) throws Exception{
+        LOGGER.info("微众微信公众号支付订单查询param:{}", param);
+        WwScanQueryReqData reqData = new WwScanQueryReqData(param);
+        String sign = Signature.getWechatSign(reqData, configure.getKey());
+        reqData.setSign(sign);
+        String result = HttpUtil.sendPostClientXml(configure.getWechatScanQueryUrl(), reqData, configure);
+        LOGGER.info("微众微信公众号订单查询返回结果result:{}",result);
+        return (WwScanQueryResData) Util.getObjectFromXmlStr(result, WwScanQueryResData.class);
     }
 
     public WaScanPayResData alipayScanPay(WaScanPayParam param, WebankConfigure configure) throws Exception{

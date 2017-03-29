@@ -4,10 +4,8 @@ import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
-import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
-import com.rongyi.pay.core.webank.param.WaScanPayParam;
-import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
-import com.rongyi.pay.core.webank.param.WwScanPayParam;
+import com.rongyi.pay.core.webank.model.res.WwScanQueryResData;
+import com.rongyi.pay.core.webank.param.*;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.sun.org.glassfish.gmbal.Description;
 import org.apache.commons.lang.StringUtils;
@@ -65,7 +63,7 @@ public class WebankTest {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData();
         reqData.setMerchant_code("107100000000014");
         reqData.setTerminal_code("web");
-        reqData.setO_terminal_serialno("1488610970424");
+        reqData.setO_terminal_serialno("1490775093186");
         reqData.setTerminal_serialno(getOrderNO());
         reqData.setAmount(new BigDecimal("10001").setScale(2, BigDecimal.ROUND_HALF_UP));
         WwPunchCardReverseResData resData = webankPayUnit.wechatPunchCardReverse(reqData);
@@ -192,6 +190,18 @@ public class WebankTest {
     }
 
     @Test
+    @Description("微信公众号支付订单查询")
+    public void wechatScanQuery() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WwScanQueryParam param = new WwScanQueryParam();
+        param.setOutTradeNo("1490775093186");
+        param.setMchId(merchantCode);
+        WwScanQueryResData resData = webankPayUnit.wechatScanQuery(param);
+        System.out.println(resData);
+    }
+
+    @Test
     @Description("支付宝扫码支付")
     public void alipayScanPay() {
         init();
@@ -234,7 +244,8 @@ public class WebankTest {
             //条码支付url
             configure.setWechatScanPayUrl(domain+"wbap-bbfront/AddOrder");
             configure.setWechatScanNotifyUrl("http://c.rongyi.com/ryoms/users/login");
-            configure.setAlipayScanPayUrl(domain+"api/acq/server/alipay/precreatetrade");
+            configure.setAlipayScanPayUrl(domain + "api/acq/server/alipay/precreatetrade");
+            configure.setWechatScanQueryUrl(domain+"wbap-bbfront/GetOrderStatus");
         }
     }
 
