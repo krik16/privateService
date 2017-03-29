@@ -281,7 +281,8 @@ abstract class AbsAlipayTradeService extends AbsAlipayService implements AlipayT
         return response != null &&
                 Constants.SUCCESS.equals(response.getCode()) &&
                 ("TRADE_SUCCESS".equals(response.getTradeStatus()) ||
-                        "TRADE_FINISHED".equals(response.getTradeStatus())
+                        "TRADE_FINISHED".equals(response.getTradeStatus()) ||
+                        "TRADE_CLOSE".equals(response.getTradeStatus())
                 );
     }
 
