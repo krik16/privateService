@@ -326,7 +326,7 @@ public class WebankPayUnit {
             resData = webankPayService.alipayPunchCardPay(param, configure);
 
             if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode())) {
-                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL);
+                throw new WebankException(resData.getCode(),StringUtils.isEmpty(resData.getMsg())?ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr():resData.getMsg());
             }else if ( ConstantEnum.WA_PUNCHCARDPAY_PAYING.getCodeStr().equals(resData.getRetCode())) {
                 //用户支付中  循环查询用户实际支付状态
                 resData = waitUserAlipayPaying(param);
@@ -484,7 +484,7 @@ public class WebankPayUnit {
         WaTicketResData resData = null;
         try {
             WebankPayService webankPayService  = new WebankPayService();
-            resData = webankPayService.alipayGetTicket(token,configure);
+            resData = webankPayService.alipayGetTicket(token, configure);
         } catch (Exception e) {
             e.printStackTrace();
         }
