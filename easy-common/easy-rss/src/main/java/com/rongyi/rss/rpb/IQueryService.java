@@ -1,6 +1,7 @@
 package com.rongyi.rss.rpb;
 
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.param.PaymentOrderParam;
 
 import java.util.List;
 
@@ -29,4 +30,8 @@ public interface IQueryService {
      */
     PaymentEntity queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel);
 
-   }
+
+    List<PaymentEntity> queryListByParam(PaymentOrderParam param);
+
+    Integer queryCountByParam(PaymentOrderParam paymentParam);
+}
