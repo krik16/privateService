@@ -81,8 +81,8 @@ public class ExportOsmOrderExcel {
                     OrderManagerVO vo = orderForms.get(i);
                     String deliveryType = convertDeliveryType(vo.getDeliveryType());//快递方式
                     String createAt = DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2);//下单时间
-                    String deleverAt = DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2);//发货时间
-                    String payAt = DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2);//付款时间
+                    String payAt = DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2);//付款时间
+                    String deleverAt = DateTool.date2String(vo.getDeleverAt(), DateTool.FORMAT_DATETIME2);//发货时间
                     String reveiveAt = DateTool.date2String(vo.getReveiveAt(), DateTool.FORMAT_DATETIME2);//确认书后货时间
                     if (CollectionUtils.isNotEmpty(vo.getOrderCommoditys())) {
                         for (OrderManagerCommodityVO orderCommodity : vo.getOrderCommoditys()) {
