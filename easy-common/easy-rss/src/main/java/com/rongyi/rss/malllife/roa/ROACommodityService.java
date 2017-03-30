@@ -280,4 +280,6 @@ public interface ROACommodityService {
     public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
 
     public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
+
+	public ResponseResult getCommoditySpecyList(List<String> cloumIds);
 }
