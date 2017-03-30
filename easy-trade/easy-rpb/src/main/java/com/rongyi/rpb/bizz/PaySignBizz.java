@@ -95,10 +95,9 @@ public class PaySignBizz extends BaseBizz{
      *
      * @param ryMchVo           容易商户信息
      * @param waScanPayParam 业务参数
-     * @param aliConfigure      支付参数
      * @return map
      */
-    public WaScanPayResData webankAliScanPaySign(RyMchVo ryMchVo, WaScanPayParam waScanPayParam, AliConfigure aliConfigure,Integer orderType) {
+    public WaScanPayResData webankAliScanPaySign(RyMchVo ryMchVo, WaScanPayParam waScanPayParam,Integer orderType) {
 
 
         Integer tatolAmount = new BigDecimal(waScanPayParam.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
@@ -109,9 +108,6 @@ public class PaySignBizz extends BaseBizz{
         //获取支付宝扫码支付签名
         waScanPayParam.setOrderId(paymentEntity.getPayNo());
         WaScanPayResData resData = WebankPayUnit.alipayScanPay(waScanPayParam);
-
-        //保存异步通知地址
-        redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), aliConfigure.getNotifyUrl());
 
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, null);
