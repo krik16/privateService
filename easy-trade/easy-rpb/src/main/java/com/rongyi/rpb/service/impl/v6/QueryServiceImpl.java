@@ -1,6 +1,7 @@
 package com.rongyi.rpb.service.impl.v6;
 
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rss.rpb.IQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,15 @@ public class QueryServiceImpl implements IQueryService{
     @Override
     public PaymentEntity queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel) {
         return paymentService.selectByOrderNumAndTradeType(orderNo,tradeType,status,payChannel);
+    }
+
+    @Override
+    public List<PaymentEntity> queryListByParam(PaymentOrderParam param) {
+        return paymentService.queryListByParam(param);
+    }
+
+    @Override
+    public Integer queryCountByParam(PaymentOrderParam paymentParam) {
+        return paymentService.queryCountByParam(paymentParam);
     }
 }

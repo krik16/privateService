@@ -3,6 +3,7 @@ package com.rongyi.rpb.service;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 
 import java.util.List;
@@ -303,4 +304,8 @@ public interface PaymentService {
 	 * @return
 	 */
 	List<PaymentEntity> batchQueryByOrderNos(List<String> orderNoList,Integer tradeType);
+
+	List<PaymentEntity> queryListByParam(PaymentOrderParam param);
+
+	Integer queryCountByParam(PaymentOrderParam paymentParam);
 }

@@ -598,5 +598,48 @@
 
     </select>
 
+
+    <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"/>
+        from payment_order
+        where source in (3,4) and trade_type in (0,1) and status = 2
+            <if test="orderNo != null and orderNo != ''">
+                and order_no = #{orderNo,jdbcType=VARCHAR}
+            </if>
+            <if test="payChannel != null and payChannel != ''">
+                and pay_channel = #{payChannel,jdbcType=INTEGER}
+            </if>
+            <if test="ryMchId != null and ryMchId != ''">
+                and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and create_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and create_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            </if>
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select  count(*)
+        from payment_order
+        where source in (3,4) and trade_type in (0,1) and status = 2
+        <if test="orderNo != null and orderNo != ''">
+            and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="payChannel != null and payChannel != ''">
+            and pay_channel = #{payChannel,jdbcType=INTEGER}
+        </if>
+        <if test="ryMchId != null and ryMchId != ''">
+            and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and create_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and create_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+        </if>
+    </select>
 </mapper>
 

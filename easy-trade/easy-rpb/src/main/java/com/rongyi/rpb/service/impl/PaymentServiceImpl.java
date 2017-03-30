@@ -9,6 +9,7 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
+import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.tms.vo.MQDrawParam;
 import com.rongyi.rpb.Exception.TradeException;
@@ -834,5 +835,31 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         params.put("orderNoList", orderNoList);
         params.put("tradeType", tradeType);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".batchQueryByOrderNos", params);
+    }
+
+    @Override
+    public List<PaymentEntity> queryListByParam(PaymentOrderParam param) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("orderNo", param.getOrderNo());
+        params.put("payChannel", param.getPayChannel());
+        params.put("startTime",param.getStartTime());
+        params.put("endTime",param.getEndTime());
+        params.put("ryMchId",param.getRyMchId());
+        params.put("pageSize",param.getPageSize());
+        params.put("startIndex",param.getStartIndex());
+        return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".queryListByParam", params);
+    }
+
+    @Override
+    public Integer queryCountByParam(PaymentOrderParam param) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("orderNo", param.getOrderNo());
+        params.put("payChannel", param.getPayChannel());
+        params.put("startTime",param.getStartTime());
+        params.put("endTime",param.getEndTime());
+        params.put("ryMchId",param.getRyMchId());
+        params.put("pageSize",param.getPageSize());
+        params.put("startIndex",param.getStartIndex());
+        return this.getBaseDao().count(PAYMENTENTITY_NAMESPACE + ".queryCountByParam", params);
     }
 }
