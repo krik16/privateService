@@ -90,6 +90,7 @@ public enum ConstantEnum {
 	WA_TRADESTATUS_05("05","交易结束，不可退款"),
 
 	WW_PUNCHCARDPAY_USERPAYING("USERPAYING","用户支付中"),
+	WW_PUNCHCARDPAY_REFUND("REFUND","已退款"),
 
 	WEBANK_PAYEMENT_0("0","未支付"),
 	WEBANK_PAYEMENT_1("1","已支付"),
