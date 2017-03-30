@@ -64,8 +64,10 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             log.info("返回签名结果,map={}", map);
             return map;
         } catch (WeChatException | ParamNullException e) {
+            log.warn("获取微信签名失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("获取微信签名失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("获取微信签名失败,e={}", e.getMessage(), e);
@@ -245,10 +247,10 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             reverseBizz.wechatOrderReverse(orderNo,payType,wechatConfigure);
             return new HashMap<>();
         } catch (WebankException | ParamNullException e) {
-            log.error("微信支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微信支付撤销失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微信支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微信支付撤销失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微信支付撤销异常,e={}", e.getMessage(), e);

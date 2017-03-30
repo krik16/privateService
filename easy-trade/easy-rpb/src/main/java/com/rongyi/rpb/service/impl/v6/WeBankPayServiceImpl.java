@@ -79,10 +79,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             log.info("微众微信刷卡支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众微信刷卡支付失败,e={}", e.getMessage(), e);
+            log.warn("微众微信刷卡支付失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信刷卡支付失败,e={}", e.getMessage(), e);
+            log.warn("微众微信刷卡支付失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信刷卡支付异常,e={}", e.getMessage(), e);
@@ -117,10 +117,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             log.info("微众微信刷卡支付查询结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众微信刷卡支付查询失败,e={}", e.getMessage(), e);
+            log.warn("微众微信刷卡支付查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信刷卡支付查询失败,e={}", e.getMessage(), e);
+            log.warn("微众微信刷卡支付查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信刷卡查询异常,e={}", e.getMessage(), e);
@@ -147,10 +147,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
 
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众微信退款失败,e={}", e.getMessage(), e);
+            log.warn("微众微信退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信退款失败,e={}", e.getMessage(), e);
+            log.warn("微众微信退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信退款异常,e={}", e.getMessage(), e);
@@ -178,10 +178,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             map.put("refundStatus", "SUCCESS");
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众微信退款失败,e={}", e.getMessage(), e);
+            log.warn("微众微信退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信退款失败,e={}", e.getMessage(), e);
+            log.warn("微众微信退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信退款异常,e={}", e.getMessage(), e);
@@ -198,10 +198,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             return BeanMapUtils.toMap(resData);
 
         } catch (WebankException | ParamNullException e) {
-            log.error("微众微信支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微众微信支付撤销失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微众微信支付撤销失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信支付撤销异常,e={}", e.getMessage(), e);
@@ -240,10 +240,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             log.info("微众支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝刷卡支付失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝刷卡支付异常,e={}", e.getMessage(), e);
@@ -281,10 +281,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             log.info("微众支付宝支付查询结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝刷卡查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝刷卡查询异常,e={}", e.getMessage(), e);
@@ -310,10 +310,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             log.info("微众支付宝支付退款结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝退款异常,e={}", e.getMessage(), e);
@@ -340,10 +340,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             map.put("refundStatus", "SUCCESS");
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众支付宝退款失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝退款异常,e={}", e.getMessage(), e);
@@ -360,10 +360,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             return BeanMapUtils.toMap(resData);
 
         } catch (WebankException | ParamNullException e) {
-            log.error("微众支付宝支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝支付撤销失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众支付宝支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝支付撤销失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝支付撤销异常,e={}", e.getMessage(), e);
