@@ -8,7 +8,9 @@ import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
+import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
 import com.rongyi.pay.core.webank.param.WaScanPayParam;
+import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.constants.ConstantUtil;
@@ -100,9 +102,9 @@ public class PaySignBizz extends BaseBizz{
     public WaScanPayResData webankAliScanPaySign(RyMchVo ryMchVo, WaScanPayParam waScanPayParam,Integer orderType) {
 
 
-        Integer tatolAmount = new BigDecimal(waScanPayParam.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
+        Integer totalAmount = new BigDecimal(waScanPayParam.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waScanPayParam.getOrderId(),tatolAmount, waScanPayParam.getSellerId(), "",
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waScanPayParam.getOrderId(), totalAmount, waScanPayParam.getSellerId(), "",
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType);
 
         //获取支付宝扫码支付签名
@@ -115,7 +117,25 @@ public class PaySignBizz extends BaseBizz{
         return resData;
     }
 
+    /**
+     * 微众微信公众号支付签名
+     * @param ryMchVo 容易网商户信息
+     * @param wwScanPayParam 业务参数
+     * @return 返回结果
+     */
 
+    public WwScanPayResData webankWechatScanPaySign(RyMchVo ryMchVo, WwScanPayParam wwScanPayParam, Integer orderType) {
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wwScanPayParam.getOutTradeNo(), wwScanPayParam.getTotalFee(), "",
+                wwScanPayParam.getWechatMchId(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
 
+        //获取公众号扫码支付签名
+        wwScanPayParam.setOutTradeNo(paymentEntity.getPayNo());
+        WwScanPayResData resData = WebankPayUnit.wechatScanPay(wwScanPayParam);
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, null);
+        return resData ;
+    }
 
 }

@@ -37,6 +37,9 @@ public class WwScanPayParam extends BaseData{
     //商品标记
     private String goodsTag ;
 
+    //收款商户微信账号id (请求微众接口不需要此参数 给初始化订单加的参数)
+    private String wechatMchId;
+
     public String getMchId() {
         return mchId;
     }
@@ -115,5 +118,13 @@ public class WwScanPayParam extends BaseData{
 
     public void setGoodsTag(String goodsTag) {
         this.goodsTag = goodsTag;
+    }
+
+    public String getWechatMchId() {
+        return wechatMchId;
+    }
+
+    public void setWechatMchId(String wechatMchId) {
+        this.wechatMchId = wechatMchId;
     }
 }

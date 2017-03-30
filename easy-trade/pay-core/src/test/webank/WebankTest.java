@@ -36,7 +36,7 @@ public class WebankTest {
         param.setOrderNo(getOrderNO());
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
         param.setProduct("test");
-        param.setAuthCode("130221386885030996");
+        param.setAuthCode("130190556687674221");
 //        param.setOpenid("99999999999999");
 //        param.setSubAppid("000000000000");
 //        param.setGoodsTag("测试商品");
@@ -90,7 +90,7 @@ public class WebankTest {
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WwpunchCardRefundReqData reqData = new WwpunchCardRefundReqData();
         reqData.setMerchant_code(merchantCode);
-        reqData.setTerminal_serialno("1488614365160");
+        reqData.setTerminal_serialno("1490860084481");
         WwPunchCardRefundResData resData = webankPayUnit.wechatPunchCardRefundQuery(reqData);
         System.out.println(resData);
     }
