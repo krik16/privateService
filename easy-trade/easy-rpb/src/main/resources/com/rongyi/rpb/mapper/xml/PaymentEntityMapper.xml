@@ -613,10 +613,10 @@
                 and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
             </if>
             <if test="startTime != null and startTime != ''">
-                and create_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+                and end_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
             <if test="endTime != null and endTime != ''">
-                and create_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+                and end_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
         limit #{startIndex},#{pageSize}
     </select>
@@ -635,10 +635,10 @@
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
         </if>
         <if test="startTime != null and startTime != ''">
-            and create_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            and end_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
         </if>
         <if test="endTime != null and endTime != ''">
-            and create_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            and end_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
         </if>
     </select>
 </mapper>
