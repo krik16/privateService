@@ -63,7 +63,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
             //获取签名
-            Map<String, Object> map = paySignBizz.aliScanPaySign(ryMchVo, aliScanPayReqData, aliConfigure);
+            Map<String, Object> map = paySignBizz.aliScanPaySign(ryMchVo, aliScanPayReqData, aliConfigure,aliPaySignVo.getOrderType());
             //外部订单号
             map.put("orderNo", aliPaySignVo.getOrderNo());
             log.info("支付宝扫码签名结果,map={}", map);

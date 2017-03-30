@@ -56,7 +56,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //获取微信支付签名
-            Map<String, Object> map = paySignBizz.wechatScanPaySign(ryMchVo, wechatPaySignData, wechatConfigure);
+            Map<String, Object> map = paySignBizz.wechatScanPaySign(ryMchVo, wechatPaySignData, wechatConfigure,wechatPaySignVo.getOrderType());
             //外部订单号
             map.put("orderNo", wechatPaySignVo.getOrderNo());
 
