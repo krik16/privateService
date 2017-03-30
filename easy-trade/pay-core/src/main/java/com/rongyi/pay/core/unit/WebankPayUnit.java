@@ -522,12 +522,18 @@ public class WebankPayUnit {
         return resData;
     }
 
+    /**
+     * 微众微信公众号支付订单查询
+     * @param param 请求参数
+     * @return 返回结果
+     */
     public static WwScanQueryResData wechatScanQuery(WwScanQueryParam param) {
-        LOGGER.info("微众微信公众号支付param:{}",param);
-        WwScanQueryResData resData = null;
+        LOGGER.info("微众微信公众号订单查询param:{}",param);
+        WwScanQueryResData resData ;
         try {
             ParamUnit.checkWebankWechatScanQuery(param);
-
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.wechatScanQuery(param, configure);
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
@@ -537,10 +543,14 @@ public class WebankPayUnit {
         return resData;
     }
 
-
+    /**
+     * 微众支付宝扫码支付 C扫B
+     * @param param 请求参数
+     * @return 返回结果
+     */
     public static WaScanPayResData alipayScanPay(WaScanPayParam param) {
         LOGGER.info("微众支付宝扫码支付param:{}",param);
-        WaScanPayResData resData=null ;
+        WaScanPayResData resData;
         try {
             ParamUnit.checkWebankAlipayScanPay(param);
             WebankPayService webankPayService = new WebankPayService();

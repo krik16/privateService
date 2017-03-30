@@ -1,6 +1,8 @@
 package com.rongyi.pay.core.webank.model.req;
 
 import com.rongyi.pay.core.util.BaseData;
+import com.rongyi.pay.core.webank.param.WwScanQueryParam;
+import com.rongyi.pay.core.wechat.util.RandomStringGenerator;
 
 /**
  * 微众微信公众号支付订单查询请求参数
@@ -36,6 +38,18 @@ public class WwScanQueryReqData extends BaseData{
 
     //签名
     private String sign ;
+
+    public WwScanQueryReqData(){
+
+    }
+
+    public WwScanQueryReqData(WwScanQueryParam param) {
+        setMch_id(param.getMchId());
+        setOut_trade_no(param.getOutTradeNo());
+        setOrderid(param.getOrderid());
+        setTransaction_id(param.getTransactionId());
+        setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
+    }
 
     public String getMch_id() {
         return mch_id;
