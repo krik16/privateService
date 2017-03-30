@@ -518,7 +518,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public String getTitle(String orderNum) {
-        return "容易网商品,订单号:" + orderNum;
+        return "容易逛商品,订单号:" + orderNum;
     }
 
     @Override
