@@ -1,13 +1,16 @@
 package com.rongyi.rpb.bizz;
 
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.ali.config.AliConfigure;
+import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.RefundQueryResData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.constants.ConstantEnum;
@@ -31,6 +34,44 @@ public class QueryBizz {
     PayConfigInitUnit payConfigInitUnit;
     @Autowired
     PaymentLogInfoService paymentLogInfoService;
+
+
+    /**
+     * 微信刷卡支付订单查询
+     *
+     * @param orderNo         订单号
+     * @param wechatConfigure 支付参数
+     * @return PunchCardPayQueryResData
+     */
+    public PunchCardPayQueryResData wechatPunchCardPayQueryOrder(String orderNo, WechatConfigure wechatConfigure) {
+
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+
+        if (oldPaymentEntity == null) {
+            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+        }
+        return WeChatPayUnit.punchCardPayQueryOrder(null, oldPaymentEntity.getPayNo(), wechatConfigure);
+    }
+
+    /**
+     * 支付宝面对面支付查询
+     *
+     * @param orderNo      订单号
+     * @param aliConfigure 支付参数
+     * @return AlipayTradeQueryResponse
+     */
+    public AlipayTradeQueryResponse aliF2FPayQuery(String orderNo, AliConfigure aliConfigure) {
+
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+
+        if (oldPaymentEntity == null) {
+            throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
+        }
+        return AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(), null, aliConfigure);
+
+    }
     /**
      * 微众微信刷卡支付订单查询
      *

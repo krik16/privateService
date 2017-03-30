@@ -12,10 +12,7 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.wechat.model.*;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
-import com.rongyi.rpb.bizz.PayBizz;
-import com.rongyi.rpb.bizz.QueryBizz;
-import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rpb.bizz.ReverseBizz;
+import com.rongyi.rpb.bizz.*;
 import com.rongyi.rss.rpb.IWechatPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +41,8 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
     QueryBizz queryBizz;
     @Autowired
     ReverseBizz reverseBizz;
+    @Autowired
+    PaySignBizz paySignBizz;
 
     @Override
     public Map<String, Object> getPaySign(RyMchVo ryMchVo, WechatPaySignVo wechatPaySignVo, WechatConfigureVo wechatConfigureVo) throws TradePayException {
@@ -57,7 +56,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
             //获取微信支付签名
-            Map<String, Object> map = payBizz.wechatScanPaySign(ryMchVo, wechatPaySignData, wechatConfigure);
+            Map<String, Object> map = paySignBizz.wechatScanPaySign(ryMchVo, wechatPaySignData, wechatConfigure);
             //外部订单号
             map.put("orderNo", wechatPaySignVo.getOrderNo());
 
@@ -200,7 +199,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
         //设置支付参数
         try {
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            PunchCardPayQueryResData resData = payBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
+            PunchCardPayQueryResData resData = queryBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
             Map<String, Object> map = BeanMapUtils.toMap(resData);
             //外部订单号
             map.put("orderNo", orderNo);
