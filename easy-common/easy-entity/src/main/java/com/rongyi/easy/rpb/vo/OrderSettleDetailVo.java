@@ -9,21 +9,21 @@ public class OrderSettleDetailVo implements Serializable {
     private Long couponUsed;
     private String orderNo;
     private Long payAmount;
-    private String payShopNo;
-    private Integer paymentChannel;
-    private String paymentNo;
+    private String payShopNo;//支付渠道商户号
+    private Integer paymentChannel;//支付渠道 1微众银行、2容易网服务商、3拉卡拉、4容易网
+    private String paymentNo;//支付渠道流水号
     private String cashName;
     private Long paymentTime;
     private Integer paymentType;
-    private String posNo;
+    private String posNo;//pos终端号
     private Long poundage;
     private Long realAmout;
-    private Long reductionUsed;
-    private String ryPaymentNo;
+    private Integer reductionUsed;
+    private String ryPaymentNo;//容易支付交易流水
     private Long scoreDiscount;
     private Integer scoreUsed;
-    private String shopName;
-    private String shopNo;
+    private String shopName;//商户名称
+    private String shopNo;//商户号
     private Integer status;
 
     public Long getCouponUsed() {
@@ -122,11 +122,11 @@ public class OrderSettleDetailVo implements Serializable {
         this.realAmout = realAmout;
     }
 
-    public Long getReductionUsed() {
+    public Integer getReductionUsed() {
         return reductionUsed;
     }
 
-    public void setReductionUsed(Long reductionUsed) {
+    public void setReductionUsed(Integer reductionUsed) {
         this.reductionUsed = reductionUsed;
     }
 
