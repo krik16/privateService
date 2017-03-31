@@ -3,6 +3,7 @@ package com.rongyi.rss.rpb;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WaPunchCardVo;
+import com.rongyi.easy.rpb.vo.WaScanPaySignVo;
 import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
 
 import java.util.Map;
@@ -107,6 +108,15 @@ public interface IweBankService {
      * @return map
      */
     Map<String,Object> weBankAliReverse(String orderNo,Integer payType,String weBankMchNo) throws TradePayException;
+
+
+    /**
+     * 微众支付宝支付查询
+     * @param ryMchVo 容易商户信息
+     * @param waScanPaySignVo 业务参数
+     * @return map
+     */
+    Map<String,Object> weBankAliScanPaySign(RyMchVo ryMchVo,WaScanPaySignVo waScanPaySignVo) throws TradePayException;
 
 
 }
