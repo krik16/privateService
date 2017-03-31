@@ -120,7 +120,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private String buyerName;//如果是微信用户昵称，昵称是编码之后的
     private OrderReserveEntity orderReserve;//超级团预约信息
-    private byte payChannel;//支付方式 1支付宝网页  3支付宝app  5微信
+    private byte payChannel;//支付方式 -1:其它 0:支付宝 1:微信
     private OrderCommodityCodeEntity orderCommodityCodeEntity;//订单自提码信息
 
     private BigDecimal merchantRedDiscount;//商家补贴红包金额
