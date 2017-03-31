@@ -65,6 +65,9 @@ public class OrderSettlementDetailVO {
 	/** 红包抵扣金额(商家) */
 	private Double hbDiscountMer;
 
+	/** 满减活动扣减金额 */
+	private Double reductionFee;
+
 	public String getOrderSource() {
 		return orderSource;
 	}
@@ -283,5 +286,13 @@ public class OrderSettlementDetailVO {
 
 	public void setHbDiscountMer(Double hbDiscountMer) {
 		this.hbDiscountMer = hbDiscountMer;
+	}
+
+	public Double getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(Double reductionFee) {
+		this.reductionFee = reductionFee;
 	}
 }

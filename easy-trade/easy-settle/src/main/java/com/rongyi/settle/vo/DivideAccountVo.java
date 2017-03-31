@@ -34,7 +34,10 @@ public class DivideAccountVo extends SmDivideAccount {
      * 订单总商品数
      */
     private Integer totalQuantity;
-    
+
+	/**
+	 * 结算金额 = 订单金额 + 改价优惠 = 实际收入+ 使用抵扣券（商场补贴）+使用红包（商场补贴）+满减活动（商场补贴）
+	 */
     private BigDecimal totalAmount;
     
     private String mallName;
@@ -42,6 +45,15 @@ public class DivideAccountVo extends SmDivideAccount {
     private String shopName;
     
     private Date finishTime;
+
+	/** 抵扣券抵扣金额(商家) */
+	private BigDecimal rebateDiscountMer;
+
+	/** 满减活动扣减金额 */
+	private BigDecimal reductionFee;
+
+	/** 红包抵扣金额(商家) */
+	private BigDecimal hbDiscountMer;
 	
 	public Integer getOrderId() {
 		return orderId;
@@ -167,5 +179,28 @@ public class DivideAccountVo extends SmDivideAccount {
 	public void setShopMid(String shopMid) {
 		this.shopMid = shopMid;
 	}
-	
+
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
+	}
+
+	public BigDecimal getHbDiscountMer() {
+		return hbDiscountMer;
+	}
+
+	public void setHbDiscountMer(BigDecimal hbDiscountMer) {
+		this.hbDiscountMer = hbDiscountMer;
+	}
+
+	public BigDecimal getRebateDiscountMer() {
+		return rebateDiscountMer;
+	}
+
+	public void setRebateDiscountMer(BigDecimal rebateDiscountMer) {
+		this.rebateDiscountMer = rebateDiscountMer;
+	}
 }
