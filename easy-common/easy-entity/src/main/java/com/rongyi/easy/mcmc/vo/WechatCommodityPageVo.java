@@ -12,6 +12,8 @@ public class WechatCommodityPageVo implements Serializable{
 
     private Long totalCount;
 
+    private List<CommodityVO> commodityVOList;
+
     public List<WechatCommodityVo> getWechatCommodityVoList() {
         return wechatCommodityVoList;
     }
@@ -26,5 +28,13 @@ public class WechatCommodityPageVo implements Serializable{
 
     public void setTotalCount(Long totalCount) {
         this.totalCount = totalCount;
+    }
+
+    public List<CommodityVO> getCommodityVOList() {
+        return commodityVOList;
+    }
+
+    public void setCommodityVOList(List<CommodityVO> commodityVOList) {
+        this.commodityVOList = commodityVOList;
     }
 }

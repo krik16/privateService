@@ -71,6 +71,19 @@ public enum CodeCenterEnum {
     JIADELI_ERROR_CORRECTCAUTH(1000011, "无冲正权限,不可冲正"),
     ERROR_COUPON_TYPE(1021353,"礼品券类型不对！！！"),
     ERROR_TRADE_RETURN(1021354,"查询交易信息失败！！！"),
+    //万达BO验券错误码
+    ERROR_USERD(1000001, "卡券已使用，重复验券"),
+    ERROR_UNSTATUS(1000002, "退款中、已退款、已过期"),
+    ERROR_CODE(1000003, "输入券码有误"),
+    ERROR_SHOPID(1000004, "非本店铺代金券券码"),
+    ERROR_UNSTART(1000005, "券未到使用时间"),
+    ERROR_LIMIT_USERD(1000006, "卡券每日限用N张"),
+    ERROR_BLANK(1000007, "券码为空"),
+    ERROR_PARAMS(1000008, "参数不完整"),
+    ERROR_EXCEPTION(4003, "非法请求"),
+    ERROR_UNEXIST(4004, "券码不存在"),
+    ERROR_EXPRIED(4005, "券过期"),
+
     ;
 
 

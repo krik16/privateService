@@ -961,7 +961,30 @@ public class DateUtil {
 		  }else{
 			  return false;
 		  }
-	  }
+	}
+
+	/**
+	 * 获得指定日期的前一天
+	 * @param specifiedDay
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getSpecifiedDayBefore(String specifiedDay){
+	//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		Date date=null;
+		try {
+			date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		c.setTime(date);
+		int day=c.get(Calendar.DATE);
+		c.set(Calendar.DATE,day-1);
+
+		String dayBefore=new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+		return dayBefore;
+	}
 
 	public static void main(String[] args) {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");

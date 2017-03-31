@@ -3,6 +3,7 @@ package com.rongyi.rss.shop;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bdata.entity.HaiXinShopData;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.shop.entity.ShopEntity;
@@ -60,4 +61,7 @@ public interface ROAShopService {
 	 * @return
 	 */
 	public Long searchShopCountByMallAreaIdAndType(String mallId,int type);
+
+
+	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas) throws Exception;
 }

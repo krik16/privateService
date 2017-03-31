@@ -7,6 +7,8 @@ import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.*;
 import com.rongyi.easy.osm.vo.*;
+import com.rongyi.easy.pos.param.ReductionParam;
+import com.rongyi.easy.pos.vo.ReductionActivityVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
@@ -144,7 +146,7 @@ public interface IOrderQueryService {
      */
     ParentOrderVO searchRYOrderDetail(Integer orderId) throws Exception;
 
-    PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap,int currentPage) throws Exception;
+    PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap, int currentPage) throws Exception;
 
     /**
      * 根据事件类型查找订单事件
@@ -299,10 +301,11 @@ public interface IOrderQueryService {
 
     /**
      * 查询商品订单列表数量（电子会员）
+     *
      * @param param
      * @return
      */
-   DubboVO<Map<String,Object>> listCountForUserCenter(OsmOrderQueryForUserCenterParam param);
+    DubboVO<Map<String, Object>> listCountForUserCenter(OsmOrderQueryForUserCenterParam param);
 
     /**
      * 查询商品订单详情（电子会员）
@@ -351,10 +354,19 @@ public interface IOrderQueryService {
      */
     DubboVO<OsmOrderCheckedCountForUserCenterVO> getCheckedCount(int type, String mallId, String shopId);
 
-	/**
-	 * 查询订单分销数据
-	 * @param params {"status":"1 支付成功,2 确认收货,3 订单取消","orderNo":"订单号"
-	 *               "type":"事件类型 2 支付成功,4 确认收货,7 超时未确认收货,6 超时未发货退款,23 卖家取消订单退款"}
-	 */
-	public Map<String, Object> getCommodityOrderPush(Map<String, Object> params);
+    /**
+     * 查询订单分销数据
+     *
+     * @param params {"status":"1 支付成功,2 确认收货,3 订单取消","orderNo":"订单号"
+     *               "type":"事件类型 2 支付成功,4 确认收货,7 超时未确认收货,6 超时未发货退款,23 卖家取消订单退款"}
+     */
+    public Map<String, Object> getCommodityOrderPush(Map<String, Object> params);
+
+    /**
+     * 获取微信满减订单列表
+     *
+     * @param param
+     * @return
+     */
+    DubboVO<ReductionActivityVO> listForReduction(ReductionParam param);
 }

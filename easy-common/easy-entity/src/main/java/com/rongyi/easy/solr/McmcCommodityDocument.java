@@ -1,8 +1,6 @@
 package com.rongyi.easy.solr;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
@@ -211,10 +209,20 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setCategory_ids(List<String> category_ids) {
 		this.category_ids = category_ids;
 		// 三级分类拆分成三个字段
-		if(CollectionUtils.isNotEmpty(category_ids)&&category_ids.size()>=3){
-			this.setCategory1_id(category_ids.get(0));
-			this.setCategory2_id(category_ids.get(1));
-			this.setCategory3_id(category_ids.get(2));
+		if(CollectionUtils.isNotEmpty(category_ids)){
+			if (category_ids.size()>=3) {
+				this.setCategory1_id(category_ids.get(0));
+				this.setCategory2_id(category_ids.get(1));
+				this.setCategory3_id(category_ids.get(2));
+			} else {
+				// 海信只有2级分类
+				if (category_ids.size()>=1) {
+					this.setCategory1_id(category_ids.get(0));
+				}
+				if (category_ids.size()>=2) {
+					this.setCategory2_id(category_ids.get(1));
+				}
+			}
 		}
 	}
 
@@ -609,8 +617,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setTerminalType(commodity.getTerminalType());
 		if(!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
 			List<String> category_ids = new ArrayList<>();
-			for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
-				category_ids.add(categoryObjectId.toString());
+			if (CollectionUtils.isNotEmpty(commodity.getCategoryIds())) {
+				for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
+					category_ids.add(categoryObjectId.toString());
+				}
 			}
 			this.setCategory_ids(category_ids);
 			this.setBrandName(commodity.getBrandName());
@@ -629,11 +639,16 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityMallId(String.valueOf(mallId));
 
 		if(shopInfo != null) {
-			this.setZone_ids(shopInfo.getZoneIds());
+			if(CollectionUtils.isNotEmpty(shopInfo.getZoneIds())){
+				this.setZone_ids(shopInfo.getZoneIds());
+			}else {
+				if(StringUtils.isNotBlank(shopInfo.getShopMid())){
+					this.setZone_ids(Arrays.asList(shopInfo.getShopMid()));//海信商品没有省市区的信息
+				}
+			}
 			this.setPosition(shopInfo.getPositon());
 			this.setBrand_id(shopInfo.getBrandMid());
 		}
-
 		this.setCommodityRange(commodityVo.getCommodityRange());
 
 		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {

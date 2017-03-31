@@ -1,5 +1,8 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,8 +24,38 @@ public class SearchParamsForWechat implements Serializable{
     private String displayStatus;
     private String category;
     private String type;
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date startTime;
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date endTime;
+
+    private String brandId;
+    private Integer status;
+    private String dateType;
+
+    public String getDateType() {
+        return dateType;
+    }
+
+    public void setDateType(String dateType) {
+        this.dateType = dateType;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public String getType() {
         return type;
@@ -150,12 +183,21 @@ public class SearchParamsForWechat implements Serializable{
                 "weAndTeStatus='" + weAndTeStatus + '\'' +
                 ", terminal='" + terminal + '\'' +
                 ", shopId='" + shopId + '\'' +
-                ", registerAt='" + registerAt + '\'' +
-                ", soldOutAt='" + soldOutAt + '\'' +
+                ", registerAt=" + registerAt +
+                ", soldOutAt=" + soldOutAt +
                 ", id='" + id + '\'' +
-                ", currpage='" + currpage + '\'' +
-                ",name='"+ name +'\''+
+                ", currpage=" + currpage +
                 ", pageSize=" + pageSize +
+                ", name='" + name + '\'' +
+                ", keyword='" + keyword + '\'' +
+                ", displayStatus='" + displayStatus + '\'' +
+                ", category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", brandId='" + brandId + '\'' +
+                ", status=" + status +
+                ", dateType=" + dateType +
                 '}';
     }
 }

@@ -7,16 +7,25 @@ import java.io.Serializable;
  */
 public class CustomCategoryVo implements Serializable{
 
-    private Integer customCategoryId;
+    private String customCategoryId;
 
     private String customCategoryName;
 
+    private String parentId;
 
-    public Integer getCustomCategoryId() {
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getCustomCategoryId() {
         return customCategoryId;
     }
 
-    public void setCustomCategoryId(Integer customCategoryId) {
+    public void setCustomCategoryId(String customCategoryId) {
         this.customCategoryId = customCategoryId;
     }
 
