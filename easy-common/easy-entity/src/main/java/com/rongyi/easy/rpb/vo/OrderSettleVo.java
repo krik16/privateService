@@ -15,7 +15,7 @@ public class OrderSettleVo implements Serializable {
     private Integer paymentType;
     private Long poundage;
     private Long realAmout;
-    private Long reductionUsed;
+    private Integer reductionUsed;
     private Long scoreDiscount;
     private Integer scoreUsed;
     private String shopName;
@@ -94,11 +94,11 @@ public class OrderSettleVo implements Serializable {
         this.realAmout = realAmout;
     }
 
-    public Long getReductionUsed() {
+    public Integer getReductionUsed() {
         return reductionUsed;
     }
 
-    public void setReductionUsed(Long reductionUsed) {
+    public void setReductionUsed(Integer reductionUsed) {
         this.reductionUsed = reductionUsed;
     }
 
