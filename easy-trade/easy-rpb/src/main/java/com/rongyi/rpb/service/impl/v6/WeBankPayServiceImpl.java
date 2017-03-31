@@ -4,17 +4,17 @@ import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.WaPunchCardVo;
+import com.rongyi.easy.rpb.vo.WaScanPaySignVo;
 import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
+import com.rongyi.pay.core.webank.param.WaScanPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
-import com.rongyi.rpb.bizz.PayBizz;
-import com.rongyi.rpb.bizz.QueryBizz;
-import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rpb.bizz.ReverseBizz;
+import com.rongyi.rpb.bizz.*;
 import com.rongyi.rss.rpb.IweBankService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -40,7 +41,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
     RefundBizz refundBizz;
 
     @Autowired
-    ReverseBizz reverseBizz;
+   ReverseBizz reverseBizz;
+
+    @Autowired
+    PaySignBizz paySignBizz;
 
     private static final Logger log = LoggerFactory.getLogger(WeBankPayServiceImpl.class);
 
@@ -371,6 +375,31 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
         }
     }
 
+    @Override
+    public Map<String, Object> weBankAliScanPaySign(RyMchVo ryMchVo, WaScanPaySignVo waScanPaySignVo) throws TradePayException {
+        log.info("微众支付宝扫码支付签名,waScanPaySignVo={}", waScanPaySignVo);
+        try {
+            WaScanPayParam waScanPayParam = getWaScanPayParam(waScanPaySignVo);
+
+            WaScanPayResData resData = paySignBizz.webankAliScanPaySign(ryMchVo, waScanPayParam, waScanPaySignVo.getOrderType());
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("aliPayQrCode", resData.getQrCode());
+            map.put("orderNo", resData.getOrderId());
+            return map;
+
+        } catch (WebankException | ParamNullException e) {
+            log.error("微众支付宝扫码支付签名失败,e={}", e.getMessage(), e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("微众支付宝扫码支付签名失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("微众支付宝扫码支付签名异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_RERVERSE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_RERVERSE_FAIL.getValueStr());
+        }
+    }
+
     //设置微众微信刷卡支付业务参数
     private WwPunchCardPayParam getWwPunchCardPayParam(WwPunchCardPayVo wwPunchCardPayVo) {
         WwPunchCardPayParam wwPunchCardPayParam = new WwPunchCardPayParam();
@@ -386,6 +415,15 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
         waPunchCardPayParam.setTotalAmount(new BigDecimal(waPunchCardVo.getTotalAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         waPunchCardPayParam.setOrderId(waPunchCardVo.getOrderNo());
         return waPunchCardPayParam;
+    }
+
+    //设置微众支付宝扫码支付业务参数
+    private WaScanPayParam getWaScanPayParam(WaScanPaySignVo waScanPaySignVo) {
+        WaScanPayParam waScanPayParam = new WaScanPayParam();
+        BeanUtils.copyProperties(waScanPaySignVo, waScanPayParam);
+        waScanPayParam.setOrderId(waScanPaySignVo.getOrderNo());
+        waScanPayParam.setTotalAmount(new BigDecimal(waScanPaySignVo.getTotalAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).toString());
+        return waScanPayParam;
     }
 
 
