@@ -85,7 +85,7 @@ public class AliPayUnit {
         sb.append(orderId); // orderId
         sb.append("\"&subject=\"");
         sb.append(title); // title
-        sb.append("\"&body=\"容易网商品");
+        sb.append("\"&body=\"容易逛商品");
         sb.append("");// title
         sb.append("\"&total_fee=\"");
         sb.append(totlePrice); // totlePrice
