@@ -1,10 +1,7 @@
 package com.rongyi.rss.rpb;
 
 import com.rongyi.core.Exception.TradePayException;
-import com.rongyi.easy.rpb.vo.RyMchVo;
-import com.rongyi.easy.rpb.vo.WaPunchCardVo;
-import com.rongyi.easy.rpb.vo.WaScanPaySignVo;
-import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
+import com.rongyi.easy.rpb.vo.*;
 
 import java.util.Map;
 
@@ -118,5 +115,6 @@ public interface IweBankService {
      */
     Map<String,Object> weBankAliScanPaySign(RyMchVo ryMchVo,WaScanPaySignVo waScanPaySignVo) throws TradePayException;
 
+    Map<String,Object> weBankWechatScanPaySign(RyMchVo ryMchVo,WwScanPaySignVo wwScanPaySignVo) throws TradePayException;
 
 }
