@@ -59,10 +59,10 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             log.info("现金支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("现金支付失败,e={}", e.getMessage(), e);
+            log.warn("现金支付失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("现金支付失败,e={}", e.getMessage(), e);
+            log.warn("现金支付失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("现金支付异常,e={}", e.getMessage(), e);
@@ -90,10 +90,10 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             log.info("现金支付查询结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
-            log.error("现金支付查询失败,e={}", e.getMessage(), e);
+            log.warn("现金支付查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("现金支付查询失败,e={}", e.getMessage(), e);
+            log.warn("现金支付查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("现金支付查询异常,e={}", e.getMessage(), e);
@@ -117,10 +117,10 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             log.info("现金退款结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
-            log.error("现金退款失败,e={}", e.getMessage(), e);
+            log.warn("现金退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("现金退款失败,e={}", e.getMessage(), e);
+            log.warn("现金退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("现金退款异常,e={}", e.getMessage(), e);
@@ -148,9 +148,10 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             return map;
     }  catch (WebankException | ParamNullException e) {
             log.error("现金退款查询失败,e={}", e.getMessage(), e);
+            log.warn("现金退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("现金退款查询失败,e={}", e.getMessage(), e);
+            log.warn("现金退款查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("现金退款查询异常,e={}", e.getMessage(), e);

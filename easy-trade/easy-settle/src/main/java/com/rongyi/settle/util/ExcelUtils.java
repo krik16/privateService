@@ -203,50 +203,52 @@ public class ExcelUtils {
 
             XSSFCell orderShopName = row18.createCell(1);
             orderShopName.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(1).getCellStyle());
-            orderShopName.setCellValue(orderTop.getShopName());
+            orderShopName.setCellValue(orderTop.getShopName());//店铺名称
 
             XSSFCell orderType = row18.createCell(2);
             orderType.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(2).getCellStyle());
-            orderType.setCellValue(orderTop.getOrderType());
+            orderType.setCellValue(orderTop.getOrderType());//订单类型
 
             XSSFCell incomeType = row18.createCell(3);
             incomeType.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(3).getCellStyle());
-            incomeType.setCellValue(orderTop.getIncomeType());
+            incomeType.setCellValue(orderTop.getIncomeType());//收入类型
 
             XSSFCell orderCount = row18.createCell(4);
             orderCount.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(4).getCellStyle());
             row18.createCell(5).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(5).getCellStyle());
-            orderCount.setCellValue(orderTop.getOrderCount());
+            orderCount.setCellValue(orderTop.getOrderCount());//订单数量
             orderCountSum += orderTop.getOrderCount() == null ? 0 : orderTop.getOrderCount();
 
             XSSFCell hbPrice = row18.createCell(6);
             hbPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(6).getCellStyle());
             row18.createCell(7).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(7).getCellStyle());
-            hbPrice.setCellValue(orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal());
+            hbPrice.setCellValue(orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal());//平台红包抵扣金额
             orderHbSum += orderTop.getHbDiscountOpeTotal() == null ? 0 : orderTop.getHbDiscountOpeTotal();
 
             XSSFCell scorePrice = row18.createCell(8);
             scorePrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(8).getCellStyle());
             row18.createCell(9).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(9).getCellStyle());
-            scorePrice.setCellValue(orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal());
+            scorePrice.setCellValue(orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal());//积分抵扣金额
             orderScoreSum += orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal();
 
             XSSFCell disCountPrice = row18.createCell(10);
             disCountPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(10).getCellStyle());
             row18.createCell(11).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(11).getCellStyle());
-            disCountPrice.setCellValue(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal());
+            disCountPrice.setCellValue(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal());//商品补贴金额
             orderDiscountSum += orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal();
 
             XSSFCell hbmerPrice = row18.createCell(12);
             hbmerPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(12).getCellStyle());
             row18.createCell(13).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(13).getCellStyle());
-            hbmerPrice.setCellValue(orderTop.getHbDiscountMerTotal() == null ? 0 : orderTop.getHbDiscountMerTotal());
-            orderHbmerPriceSum += orderTop.getHbDiscountMerTotal() == null ? 0 : orderTop.getHbDiscountMerTotal();
+            Double hbDiscountMerTotal = orderTop.getHbDiscountMerTotal() == null ? 0 : orderTop.getHbDiscountMerTotal();//商家红包抵扣券补贴金额
+            Double totalReductionFee = orderTop.getTotalReductionFee() == null ? 0 : orderTop.getTotalReductionFee();//商家满减金额
+            hbmerPrice.setCellValue(hbDiscountMerTotal + totalReductionFee);//商家补贴金额=抵扣券金额（商家补贴）+红包金额（商家补贴）+活动优惠（商家满减活动）
+            orderHbmerPriceSum += (hbDiscountMerTotal + totalReductionFee);
 
             XSSFCell totalPrice = row18.createCell(14);
             totalPrice.setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(14).getCellStyle());
             row18.createCell(15).setCellStyle(sheet.getRow(orderStartRow + 1 + i).getCell(15).getCellStyle());
-            totalPrice.setCellValue(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal());
+            totalPrice.setCellValue(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal());//商品订单总金额
             orderPriceSum += orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal();
         }
 
@@ -263,7 +265,7 @@ public class ExcelUtils {
         XSSFCell orderHbmerSumCell = row19.getCell(12);
         orderHbmerSumCell.setCellValue(orderHbmerPriceSum);
         XSSFCell orderPriceSumCell = row19.getCell(14);
-        orderPriceSumCell.setCellValue(orderPriceSum);
+        orderPriceSumCell.setCellValue(orderPriceSum);//小计商品订单总金额
 
         // 合计
         XSSFRow row20 = sheet.getRow(20 + offset);
@@ -402,55 +404,58 @@ public class ExcelUtils {
                 rowOrder.setHeightInPoints(16.50F);
 
                 XSSFCell orderDate = rowOrder.createCell(0);
-                orderDate.setCellValue(orderDetail.getCreateAt());
+                orderDate.setCellValue(orderDetail.getCreateAt());//订单生成时间
 
                 XSSFCell orderStatus = rowOrder.createCell(1);
-                orderStatus.setCellValue(orderDetail.getOrderStatus());
+                orderStatus.setCellValue(orderDetail.getOrderStatus());//订单状态
 
                 XSSFCell orderNo = rowOrder.createCell(2);
-                orderNo.setCellValue(orderDetail.getOrderNo());
+                orderNo.setCellValue(orderDetail.getOrderNo());//订单号
 
                 XSSFCell commodity = rowOrder.createCell(3);
-                commodity.setCellValue(orderDetail.getCommodityName());
+                commodity.setCellValue(orderDetail.getCommodityName());//商品名称
 
                 XSSFCell mall = rowOrder.createCell(4);
-                mall.setCellValue(orderDetail.getMallName());
+                mall.setCellValue(orderDetail.getMallName());//商场
 
                 XSSFCell shop = rowOrder.createCell(5);
-                shop.setCellValue(orderDetail.getShopName());
+                shop.setCellValue(orderDetail.getShopName());//店铺
 
                 XSSFCell price = rowOrder.createCell(6);
-                price.setCellValue(orderDetail.getOrigPrice());
+                price.setCellValue(orderDetail.getOrigPrice());//原价
 
                 XSSFCell pay = rowOrder.createCell(7);
-                pay.setCellValue(orderDetail.getPayAmount());
+                pay.setCellValue(orderDetail.getPayAmount());//支付金额
 
                 XSSFCell score = rowOrder.createCell(8);
-                score.setCellValue(orderDetail.getScoreDiscount());
+                score.setCellValue(orderDetail.getScoreDiscount());//积分抵扣金额
 
                 XSSFCell hb = rowOrder.createCell(9);
-                hb.setCellValue(orderDetail.getHbDiscountOpe());
+                hb.setCellValue(orderDetail.getHbDiscountOpe());//平台红包金额
 
                 XSSFCell hbDiscountType = rowOrder.createCell(10);
-                hbDiscountType.setCellValue(orderDetail.getHbDiscountMer());
+                hbDiscountType.setCellValue(orderDetail.getHbDiscountMer());//商家红包金额
 
-                XSSFCell channel = rowOrder.createCell(11);
-                channel.setCellValue(orderDetail.getPaymentChannel());
+                XSSFCell reduction = rowOrder.createCell(11);
+                reduction.setCellValue(orderDetail.getReductionFee());//满减活动优惠
 
-                XSSFCell payTime = rowOrder.createCell(12);
-                payTime.setCellValue(orderDetail.getPaymentTime());
+                XSSFCell channel = rowOrder.createCell(12);
+                channel.setCellValue(orderDetail.getPaymentChannel());//付款方式
 
-                XSSFCell dlvTime = rowOrder.createCell(13);
-                dlvTime.setCellValue(orderDetail.getDeliveryTime());
+                XSSFCell payTime = rowOrder.createCell(13);
+                payTime.setCellValue(orderDetail.getPaymentTime());//付款时间
 
-                XSSFCell rcptTime = rowOrder.createCell(14);
-                rcptTime.setCellValue(orderDetail.getReceiptTime());
+                XSSFCell dlvTime = rowOrder.createCell(14);
+                dlvTime.setCellValue(orderDetail.getDeliveryTime());//发货时间
 
-                XSSFCell phone = rowOrder.createCell(15);
-                phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));
+                XSSFCell rcptTime = rowOrder.createCell(15);
+                rcptTime.setCellValue(orderDetail.getReceiptTime());//确认收货时间
 
-                XSSFCell source = rowOrder.createCell(16);
-                source.setCellValue(orderDetail.getOrderSource());
+                XSSFCell phone = rowOrder.createCell(16);
+                phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));//买家手机号
+
+                XSSFCell source = rowOrder.createCell(17);
+                source.setCellValue(orderDetail.getOrderSource());//订单来源
             }
         }
 

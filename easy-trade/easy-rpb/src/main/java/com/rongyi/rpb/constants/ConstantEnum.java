@@ -69,6 +69,7 @@ public enum ConstantEnum {
 	EXCEPTION_REFUND_RECORED_NOT_EXIST("1019113","退款记录不存在"),
 	EXCEPTION_REVERSE_FAIL("1019114","撤销订单失败"),
 	EXCEPTION_POS_BANK_SYN_NTIFY_FAIL("1019115","同步支付通知处理失败"),
+	EXCEPTION_LIMIT_REVERSE("1019115","订单已完成支付,不允许撤销"),
 
 	ALI_PAY_TIME_EXPIRE_GOODS("60m","商品支付宝支付默认超时时间"),
 	ALI_PAY_TIME_EXPIRE_COUPONS("15m","代金券支付宝支付默认超时时间"),

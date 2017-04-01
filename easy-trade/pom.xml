@@ -53,6 +53,11 @@
 				<artifactId>easy-rss</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.rongyi</groupId>
+				<artifactId>pay-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- IBM MQ -->
 			<dependency>
@@ -771,6 +776,7 @@
 					<version>2.12</version>
 					<configuration>
 						<argLine>-XX:-UseSplitVerifier</argLine>
+						<skip>true</skip>
 					</configuration>
 				</plugin>
 
