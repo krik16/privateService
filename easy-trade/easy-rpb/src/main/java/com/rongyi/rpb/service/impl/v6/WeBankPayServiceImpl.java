@@ -1,19 +1,19 @@
 package com.rongyi.rpb.service.impl.v6;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.util.BeanMapUtils;
-import com.rongyi.easy.rpb.vo.RyMchVo;
-import com.rongyi.easy.rpb.vo.WaPunchCardVo;
-import com.rongyi.easy.rpb.vo.WaScanPaySignVo;
-import com.rongyi.easy.rpb.vo.WwPunchCardPayVo;
+import com.rongyi.easy.rpb.vo.*;
 import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.model.*;
 import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
+import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
 import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WaScanPayParam;
 import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.rpb.bizz.*;
 import com.rongyi.rss.rpb.IweBankService;
 import org.slf4j.Logger;
@@ -400,6 +400,28 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
         }
     }
 
+    @Override
+    public Map<String, Object> weBankWechatScanPaySign(RyMchVo ryMchVo, WwScanPaySignVo wwScanPaySignVo) throws TradePayException {
+        log.info("微众微信公众号支付签名,wwScanPaySignVo={}",wwScanPaySignVo);
+        try {
+            WwScanPayParam wwScanPayParam = getWwScanPayParam(wwScanPaySignVo);
+            WwScanPayResData resData = paySignBizz.webankWechatScanPaySign(ryMchVo, wwScanPayParam, wwScanPaySignVo.getOrderType());
+            Map<String,Object> map = new HashMap<>();
+            map =(Map) JSON.parse(resData.getPay_info());
+            map.put("orderNo", resData.getOut_trade_no());
+            return map;
+        } catch (WebankException | ParamNullException e) {
+            log.error("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
+            throw new TradePayException(e.getCode(), e.getMessage());
+        } catch (TradePayException e) {
+            log.error("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("微众微信公众号支付签名异常,e={}", e.getMessage(), e);
+            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
+        }
+    }
+
     //设置微众微信刷卡支付业务参数
     private WwPunchCardPayParam getWwPunchCardPayParam(WwPunchCardPayVo wwPunchCardPayVo) {
         WwPunchCardPayParam wwPunchCardPayParam = new WwPunchCardPayParam();
@@ -426,5 +448,12 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
         return waScanPayParam;
     }
 
+    //设置微众微信公众号支付业务参数
+    private WwScanPayParam getWwScanPayParam(WwScanPaySignVo wwScanPaySignVo) {
+        WwScanPayParam wwScanPayParam = new WwScanPayParam();
+        BeanUtils.copyProperties(wwScanPaySignVo, wwScanPayParam);
+        wwScanPayParam.setOutTradeNo(wwScanPaySignVo.getOrderNo());
+        return wwScanPayParam ;
+    }
 
 }
