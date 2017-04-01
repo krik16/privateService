@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 //@RunWith(JUnit4Runner.class)
 public class WebankTest {
 
-    String merchantCode  = "107100000000014";
+    String merchantCode  = "107290054110001";
     String wbMerchatId = "107075571030015";
     static String domain = "https://test-svrapi.webank.com/l/";
 //  String domain = "https://svrapi.webank.com/";
@@ -31,7 +31,7 @@ public class WebankTest {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WwPunchCardPayParam param = new WwPunchCardPayParam();
-        param.setMerchantCode("107100000000014");
+        param.setMerchantCode(merchantCode);
         param.setTerminalCode("web");
         param.setOrderNo(getOrderNO());
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
@@ -109,7 +109,7 @@ public class WebankTest {
     public void alipayGetTicket() {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
-        String token = "WLA0f-dGGlQHTVClazkxtmW6FX_nRhpUB01QpWs5MbZluhUH71FevYrd0O0J_KHsDY0WNVDbUC3uQuTX0rdCA8W2sw";
+        String token = "WLA0f-dGGlQHTVClazkxtmW6FX_nRhpUB01QpWs5MbZluhUWgTOVo4XvWHZuEqevzbjASf2bGbAjUISAu5pliXxh1g";
         webankPayUnit.alipayGetTicket(token);
     }
 
@@ -217,23 +217,22 @@ public class WebankTest {
     public static void init() {
         WebankConfigure configure = WebankConfigure.getInstance();
         if (StringUtils.isEmpty(configure.getKey())) {
-            configure.setKey("124123412342134321412342151521");
-      //      configure.setKey("IPW20161228WZMTHFCSYHLXGJZXCS");
-            configure.setWechatPunchCardPayUrl("https://test-svrapi.webank.com/l/wbap-bbfront/mao");
+            configure.setKey("rongyiwang170324");
+            configure.setWechatPunchCardPayUrl("https://svrapi.webank.com/wbap-bbfront/mao");
             configure.setWechatPunchCardPayQueryOrderUrl("https://test-svrapi.webank.com/l/wbap-bbfront/mgos");
-            configure.setWechatPunchCardPayReverseOrderUrl("https://test-svrapi.webank.com/l/wbap-bbfront/ro");
+            configure.setWechatPunchCardPayReverseOrderUrl("https://te st-svrapi.webank.com/l/wbap-bbfront/ro");
             configure.setWechatPunchCardRefundUrl("https://test-svrapi.webank.com/l/wbap-bbfront/nro");
             configure.setWechatPunchCardRefundQueryUrl("https://test-svrapi.webank.com/l/wbap-bbfront/nros");
 
-            configure.setWechatKeyStorePath("E:\\itemnew\\微众\\www.rongyi.com\\www.rongyi.com.p12");
-            configure.setWechatTrustStorePath("D:\\Users\\sujuan\\webank-trust_test.jks");
-            configure.setWechatKeyStorePwd("www.rongyi.com");
+            configure.setWechatKeyStorePath("E:\\itemnew\\微众\\微众生产环境证书\\rongyiwang\\rongyiwang.p12");
+            configure.setWechatTrustStorePath("D:\\Users\\sujuan\\webank-trust.jks");
+            configure.setWechatKeyStorePwd("App1234.");
 
             configure.setAppId("W0000036");
             configure.setSecret("mJBdgcPLLRYvJzZYmtEz97ekHGZaoGLFallg6JjOXcptcw6xOtU6JceY15sQH8mb");
             configure.setAlipayGetTokenUrl("https://l.test-svrapi.webank.com/api/oauth2/access_token");
             configure.setAlipayGetTicketUrl("https://l.test-svrapi.webank.com/api/oauth2/api_ticket");
-            configure.setTicket("UQeeIc5T2RHaPl5PdluW6BoqvqHyLbrsxDrAIKw4cGGxCxQSN04JLaFV9uC3nK7r");
+            configure.setTicket("VghGm11lygUvPVdM3Yy3k6PUsOo50p89Ln4mk93dyEIbTXCxU7Q7HdhPbyl0dhNN");
 
             configure.setAlipayPunchCardPayUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/pay");
             configure.setAlipayQueryTradeUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/querytrade");
@@ -242,10 +241,10 @@ public class WebankTest {
             configure.setAlipayRefundQueryUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/queryrefund");
 
             //条码支付url
-            configure.setWechatScanPayUrl(domain+"wbap-bbfront/AddOrder");
+            configure.setWechatScanPayUrl(domain + "wbap-bbfront/AddOrder");
             configure.setWechatScanNotifyUrl("http://c.rongyi.com/ryoms/users/login");
             configure.setAlipayScanPayUrl(domain + "api/acq/server/alipay/precreatetrade");
-            configure.setWechatScanQueryUrl(domain+"wbap-bbfront/GetOrderStatus");
+            configure.setWechatScanQueryUrl(domain + "wbap-bbfront/GetOrderStatus");
         }
     }
 
