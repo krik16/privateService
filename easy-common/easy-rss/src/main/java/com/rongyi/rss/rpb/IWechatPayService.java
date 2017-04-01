@@ -58,6 +58,15 @@ public interface IWechatPayService {
      */
     Map<String, Object> punchCardPayQueryOrder(String orderNo, WechatConfigureVo wechatConfigureVo) throws TradePayException;
 
+     /**
+     * 刷卡支付订单撤销
+     *
+     * @param orderNo           订单号
+     * @param wechatConfigureVo 支付参数
+     * @return map 查询结果
+     */
+    Map<String, Object> punchCardPayReverseOrder(String orderNo,Integer payType, WechatConfigureVo wechatConfigureVo) throws TradePayException;
+
 
     /**
      * 获取用户openId
