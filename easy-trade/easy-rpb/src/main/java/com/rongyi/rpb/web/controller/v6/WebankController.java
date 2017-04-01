@@ -43,7 +43,7 @@ public class WebankController {
     /**
      * 微众微信公众号支付异步通知
      */
-    @RequestMapping("/pay/notify")
+    @RequestMapping("/wechat/pay/notify")
     public void wechatNotify(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("微众微信公众号支付异步通知start");
         try {
