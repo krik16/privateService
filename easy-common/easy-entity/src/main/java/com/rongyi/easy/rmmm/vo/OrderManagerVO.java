@@ -59,6 +59,8 @@ public class OrderManagerVO implements Serializable {
 	private String receiverName;//收件人姓名
 	private String receiverPhone;//收件人电话
 	private String receiverAddress;//收件人地址
+	private BigDecimal reductionFee;// 满减金额
+	private Integer deliveryType = 0;//快递方式 1自提 2快递
 
 	private List<OrderManagerCommodityVO> orderCommoditys;
 
@@ -361,6 +363,22 @@ public class OrderManagerVO implements Serializable {
 
 	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
 		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
+	}
+
+	public Integer getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(Integer deliveryType) {
+		this.deliveryType = deliveryType;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by xuying on 2017/1/19.
@@ -16,6 +17,9 @@ public class WechatCommodityParam implements Serializable{
     private Integer currentPage;
 
     private Integer pageSize;
+
+    private List<String>  totalCommodityIds;
+
 
     public String getServiceId() {
         return serviceId;
@@ -55,6 +59,14 @@ public class WechatCommodityParam implements Serializable{
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public List<String> getTotalCommodityIds() {
+        return totalCommodityIds;
+    }
+
+    public void setTotalCommodityIds(List<String> totalCommodityIds) {
+        this.totalCommodityIds = totalCommodityIds;
     }
 
     @Override

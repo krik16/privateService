@@ -124,6 +124,9 @@ public class TradeOrder implements Serializable {
      * 促销券补贴类型 0：平台补贴 1：商家补贴
      */
     private Byte couponDiscountType;
+
+    // 扩展数据
+    private String extraInfo;
     /**
      * 元
      *
@@ -599,6 +602,14 @@ public class TradeOrder implements Serializable {
 
     public void setCouponStatus(Integer couponStatus) {
         this.couponStatus = couponStatus;
+    }
+
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
     }
 
     @Override

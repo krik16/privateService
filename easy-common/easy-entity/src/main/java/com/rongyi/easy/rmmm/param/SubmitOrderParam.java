@@ -60,6 +60,8 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String mallMid; // 商场ID
 	private String shopMid; // 店铺ID
 	// =======end=
+	// 活动类型，8：注册福利
+	private Integer activityType ;
 
 
 	public String getUserName() {
@@ -336,29 +338,17 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.memberName = memberName;
 	}
 
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
 	@Override
 	public String toString() {
-		return "SubmitOrderParam [parentOrderList=" + parentOrderList
-				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
-				+ ", devType=" + devType + ", source=" + source
-				+ ", platformRebateCode=" + platformRebateCode
-				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
-				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
-				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + ", memberName=" + memberName
-				+ ", userName=" + userName + ", receiverProvinceName="
-				+ receiverProvinceName + ", receiverCityName="
-				+ receiverCityName + ", receiverDistrictName="
-				+ receiverDistrictName + ", receiverAddress=" + receiverAddress
-				+ ", receiverPhone=" + receiverPhone + ", receiverName="
-				+ receiverName + ", provinceId=" + provinceId + ", cityId="
-				+ cityId + ", districtId=" + districtId + ", business="
-				+ business + ", commodityType=" + commodityType + ", userType="
-				+ userType + ", exchangeType=" + exchangeType
-				+ ", deliveryType=" + deliveryType + ", totalCredit="
-				+ totalCredit + ", mallMid=" + mallMid + ", shopMid=" + shopMid
-				+ "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
-	
 	
 }

@@ -22,6 +22,12 @@ public class WechatCommodityVo implements Serializable{
 
     private String originalPrice;
 
+    private String brandName;
+
+    private String code;
+
+    private String description;
+
 
     public String getCommodityId() {
         return commodityId;
@@ -69,6 +75,31 @@ public class WechatCommodityVo implements Serializable{
 
     public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
