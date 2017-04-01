@@ -570,7 +570,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", status=" + status +
 				", code='" + code + '\'' +
 				", barCode='" + barCode + '\'' +
-				", description='" + description + '\'' +
 				", postage='" + postage + '\'' +
 				", stock=" + stock +
 				", createAt=" + createAt +
@@ -605,7 +604,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", templateId=" + templateId +
 				", goodsSec=" + goodsSec +
 				", subheading='" + subheading + '\'' +
-				", commodityDetails='" + commodityDetails + '\'' +
 				", discount=" + discount +
 				", shelvesType=" + shelvesType +
 				", locationIds=" + locationIds +

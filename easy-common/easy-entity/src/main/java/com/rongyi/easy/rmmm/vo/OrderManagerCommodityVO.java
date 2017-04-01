@@ -24,6 +24,12 @@ public class OrderManagerCommodityVO  implements Serializable {
     private String orderCartNo;//母订单号
     private String orderNo;
 
+    private String deliveryType;//快递方式
+    private String createAt;//下单时间
+    private String deleverAt;//发货时间
+    private String payAt;//付款时间
+    private String reveiveAt;//确认书后货时间
+
     public String getCommodityName() {
         return commodityName;
     }
@@ -118,6 +124,46 @@ public class OrderManagerCommodityVO  implements Serializable {
 
     public void setSpecId(String specId) {
         this.specId = specId;
+    }
+
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getDeleverAt() {
+        return deleverAt;
+    }
+
+    public void setDeleverAt(String deleverAt) {
+        this.deleverAt = deleverAt;
+    }
+
+    public String getPayAt() {
+        return payAt;
+    }
+
+    public void setPayAt(String payAt) {
+        this.payAt = payAt;
+    }
+
+    public String getReveiveAt() {
+        return reveiveAt;
+    }
+
+    public void setReveiveAt(String reveiveAt) {
+        this.reveiveAt = reveiveAt;
     }
 
     @Override

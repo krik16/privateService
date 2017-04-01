@@ -53,6 +53,8 @@ public class SonOrderVO implements Serializable{
 	private Integer couponDiscountType;//红包补贴类型  0：平台补贴 1：商家补贴
 	private Integer rebateDiscountType;//抵扣券补贴类型  0：平台补贴 1：商家补贴
 	private BigDecimal discountAmount;//原价-卖家优惠
+	// 卖家满减金额
+	private BigDecimal reductionFee;
 
 	public boolean isIfOnDisplayAfterSales() {
 		return ifOnDisplayAfterSales;
@@ -279,10 +281,24 @@ public class SonOrderVO implements Serializable{
 		this.rebateDiscountType = rebateDiscountType;
 	}
 
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
+	}
+
 	@Override
 	public String toString() {
 		return "SonOrderVO{" +
-				"num='" + num + '\'' +
+				"appealTimes='" + appealTimes + '\'' +
+				", num='" + num + '\'' +
+				", integralDiscount=" + integralDiscount +
+				", commodityAmount=" + commodityAmount +
+				", voucherDiscount=" + voucherDiscount +
+				", hbDiscount=" + hbDiscount +
+				", commodityDiscount=" + commodityDiscount +
 				", specColumnValues=" + specColumnValues +
 				", commodityPic='" + commodityPic + '\'' +
 				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
@@ -291,19 +307,20 @@ public class SonOrderVO implements Serializable{
 				", sonOrderStatus='" + sonOrderStatus + '\'' +
 				", refundStatus='" + refundStatus + '\'' +
 				", commodityId='" + commodityId + '\'' +
+				", commodityNo='" + commodityNo + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", sonOrderId='" + sonOrderId + '\'' +
 				", applicationId='" + applicationId + '\'' +
-				", appealTimes='" + appealTimes + '\'' +
 				", refundTimes='" + refundTimes + '\'' +
 				", couponCode='" + couponCode + '\'' +
 				", discount='" + discount + '\'' +
 				", description='" + description + '\'' +
 				", liveName='" + liveName + '\'' +
-				", ifOnDisplayAfterSales='" + ifOnDisplayAfterSales + '\'' +
-				", couponDiscountType='" + couponDiscountType + '\'' +
-				", rebateDiscountType='" + rebateDiscountType + '\'' +
-				", discountAmount='" + discountAmount + '\'' +
+				", ifOnDisplayAfterSales=" + ifOnDisplayAfterSales +
+				", couponDiscountType=" + couponDiscountType +
+				", rebateDiscountType=" + rebateDiscountType +
+				", discountAmount=" + discountAmount +
+				", reductionFee=" + reductionFee +
 				'}';
 	}
 }
