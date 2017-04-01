@@ -138,26 +138,15 @@ public class SubOrderController extends BaseControllerV2 {
             BigDecimal rebateDiscountTotal = BigDecimal.ZERO;//抵扣券抵扣总金额
             BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
             rebateDiscountTotal = rebateDiscountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
-//            BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
             if (!CollectionUtils.isEmpty(sonOrderList)) {
                 //目前一个订单只会有一种商品，直播也是一个
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
                 for (SonOrderVO sonOrderVo : sonOrderList) {
                     hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
-//                    commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
-//                            .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
-
                     sonOrderVo.setHbDiscount(sonOrderVo.getDiscountAmount().compareTo(sonOrderVo.getHbDiscount()) <= 0 ?
                             sonOrderVo.getDiscountAmount() : sonOrderVo.getHbDiscount());
                     sonOrderVo.setVoucherDiscount(sonOrderVo.getDiscountAmount().compareTo(sonOrderVo.getVoucherDiscount()) <= 0 ?
                             sonOrderVo.getDiscountAmount() : sonOrderVo.getVoucherDiscount());
-//                    if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-//                        MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
-//                                .getCouponCode());
-//                        if (userCouponVO != null) {
-//                            userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-//                        }
-//                    }
                 }
             }
             //抵扣券合计
@@ -166,8 +155,6 @@ public class SubOrderController extends BaseControllerV2 {
             } else {
                 orderDetailVo.setDeductCouponAmount(rebateDiscountTotal.toString());
             }
-            //商品总价
-//            commidityTotalPice = commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : commidityTotalPice;
             orderDetailVo.setCommidityTotalPice(orderDetailVo.getDiscountAmount());
             //订单总价
             BigDecimal orderTotalPrice = orderDetailVo.getDiscountAmount().add(new BigDecimal(orderDetailVo.getCommodityPostage()));
@@ -321,10 +308,9 @@ public class SubOrderController extends BaseControllerV2 {
                 LOGGER.error("查询用户信息失败,message={}", e);
                 throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
             }
-            if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
-                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
+            if (userInfoVO != null && StringUtils.isNotBlank(userInfoVO.getUserId())) {
+                paramsMap.put("buyerId", userInfoVO.getUserId());
             }
-            paramsMap.put("buyerId", userInfoVO.getUserId());
         }
 
         if (paramsMap.containsKey("sellerAccount")) {
@@ -511,6 +497,9 @@ public class SubOrderController extends BaseControllerV2 {
         if (null != paramsMap) {
             if (null != paramsMap.get("timeType") && StringUtils.isBlank(paramsMap.get("timeType").toString())) {
                 paramsMap.remove("timeType");
+            }
+            if (null != paramsMap.get("deliveryType") && StringUtils.isBlank(paramsMap.get("deliveryType").toString())) {
+                paramsMap.remove("deliveryType");
             }
         }
     }

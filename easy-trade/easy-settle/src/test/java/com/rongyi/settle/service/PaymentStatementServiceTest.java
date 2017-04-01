@@ -3,6 +3,7 @@ package com.rongyi.settle.service;
 import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.settle.BaseTest;
 import com.rongyi.settle.constants.ConstantEnum;
+import com.rongyi.settle.service.impl.PaymentStatementGenerateServiceImpl;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ public class PaymentStatementServiceTest extends BaseTest{
 
     @Autowired
     ConfigShopService configShopService;
+    @Autowired
+    private PaymentStatementGenerateServiceImpl paymentStatementGenerateServiceImpl;
 
     @Test
     public void testStatus(){
@@ -55,6 +58,15 @@ public class PaymentStatementServiceTest extends BaseTest{
                 configShop.setShopId(shopId);
                 configShopService.insert(configShop);
             }
+        }
+    }
+
+    @Test
+    public void testGenerateForSchedule(){
+        try {
+            paymentStatementGenerateServiceImpl.generateForSchedule();
+        }catch(Exception e ){
+            e.printStackTrace();
         }
     }
 

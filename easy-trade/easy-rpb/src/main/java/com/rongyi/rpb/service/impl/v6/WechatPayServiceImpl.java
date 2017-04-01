@@ -63,8 +63,10 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             log.info("返回签名结果,map={}", map);
             return map;
         } catch (WeChatException | ParamNullException e) {
+            log.warn("获取微信签名失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("获取微信签名失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("获取微信签名失败,e={}", e.getMessage(), e);
@@ -123,7 +125,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("tradeNo", resData.getTransaction_id());
 
             //交易金额
-            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)).toString());
+            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)));
             //退款金额
             map.put("refundAmount", resData.getRefund_fee_0());
             map.put("refundStatus", "SUCCESS");
@@ -166,7 +168,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //微信交易号
             map.put("tradeNo", resData.getTransaction_id());
             //交易金额
-            map.put("totalAmount", wechatPaySignVo.getTotalFee().toString());
+            map.put("totalAmount", wechatPaySignVo.getTotalFee());
 
             //设置支付状态
             if (ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getReturn_code()) &&
@@ -208,13 +210,16 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //微信流水号
             map.put("tradeNo", resData.getTransaction_id());
             //交易金额
-            map.put("totalAmount", resData.getTotal_fee().toString());
+            map.put("totalAmount", resData.getTotal_fee());
             //设置支付状态
             if (ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getReturn_code()) &&
-                    ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getResult_code())) {
+                    ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getResult_code()) &&
+                    ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getTrade_state())) {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            } else if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getErr_code())) {
+            } else if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getTrade_state())) {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
+            } else if (ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr().equals(resData.getTrade_state())) {
+                map.put("tradeStatus", ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
             } else {
                 map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
             }
@@ -241,10 +246,10 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             reverseBizz.wechatOrderReverse(orderNo,payType,wechatConfigure);
             return new HashMap<>();
         } catch (WebankException | ParamNullException e) {
-            log.error("微信支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微信支付撤销失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微信支付撤销失败,e={}", e.getMessage(), e);
+            log.warn("微信支付撤销失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微信支付撤销异常,e={}", e.getMessage(), e);
