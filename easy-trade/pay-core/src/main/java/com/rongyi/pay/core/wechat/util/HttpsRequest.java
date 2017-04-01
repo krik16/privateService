@@ -122,7 +122,8 @@ public class HttpsRequest implements IServiceRequest {
                 System.clearProperty("javax.net.ssl.trustStore");
             }
         } catch (IOException e) {
-            LOGGER.error("证书文件获取失败,cretFilePath={}", cretFilePath);
+            LOGGER.error("证书文件获取失败,cretFilePath={},e={}", cretFilePath,e.getMessage());
+            e.printStackTrace();
             throw new WeChatException("-1", "证书文件获取失败");
         } catch (CertificateException e) {
             e.printStackTrace();

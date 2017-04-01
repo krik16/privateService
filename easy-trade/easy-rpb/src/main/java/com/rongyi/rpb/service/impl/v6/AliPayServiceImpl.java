@@ -66,11 +66,13 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("支付宝扫码签名结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("获取支付宝扫码支付签名失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("获取支付宝扫码支付签名失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            log.error("获取支付宝扫码支付签名失败,e={}", e.getMessage(), e);
+            log.error("获取支付宝扫码支付签名异常 ,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getValueStr());
         }
     }
@@ -99,11 +101,13 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("支付宝面对面支付退款,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("支付宝面对面支付退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("支付宝面对面支付退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            log.error("支付宝面对面支付退款失败,e={}", e.getMessage(), e);
+            log.error("支付宝面对面支付退款异常,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_ALI_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_REFUND_FAIL.getValueStr());
         }
     }
@@ -134,8 +138,10 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
@@ -170,8 +176,10 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("支付宝面对面支付查询结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
+            log.warn("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("支付宝面对面刷卡支付退款失败,e={}", e.getMessage(), e);
@@ -209,10 +217,10 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("支付宝退款查询结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
-            log.error("支付宝退款查询失败,e={}", e.getMessage(), e);
+            log.warn("支付宝退款查询失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("支付宝退款查询失败,e={}", e.getMessage(), e);
+            log.warn("支付宝退款查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("支付宝退款查询异常,e={}", e.getMessage(), e);
@@ -232,6 +240,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("获取支付宝用户支付链接结果,result={}", authUrl);
             return authUrl;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("获取支付宝用户支付链接结果失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
             log.error("获取支付宝用户支付链接结果失败,e={}", e.getMessage(), e);
@@ -254,6 +263,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("aliBuyerId", authorizeRespData.getAlipaySystemOauthTokenResponse().getUserId());
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("获取支付宝买家id结果失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
             log.error("获取支付宝买家id结果失败,e={}", e.getMessage(), e);
@@ -274,6 +284,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             log.info("返回结果,map={}",map);
             return map;
         } catch (AliPayException | ParamNullException e) {
+            log.warn("获取支付宝商户授权结果失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (Exception e) {
             log.error("获取支付宝商户授权结果失败,e={}", e.getMessage(), e);

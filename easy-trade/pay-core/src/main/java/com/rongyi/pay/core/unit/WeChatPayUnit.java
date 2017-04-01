@@ -228,7 +228,51 @@ public class WeChatPayUnit {
             } else if ("FAIL".equals(punchCardPayResData.getResult_code())) {//业务错误
                 if ("USERPAYING".equals(punchCardPayResData.getErr_code())) {
                     LOGGER.info("用户正在输入密码，等待中...");
-                    waitUserPaying(wechatPaySignData.getPayNo(), wechatConfigure,punchCardPayResData);
+                    waitUserPaying(wechatPaySignData.getPayNo(), wechatConfigure,punchCardPayResData,8);
+                } else {
+                    throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
+                }
+            } else if (!"SUCCESS".equals(punchCardPayResData.getReturn_code()) || !"SUCCESS".equals(punchCardPayResData.getResult_code())){
+                throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
+            }
+
+        } catch (WeChatException | ParamNullException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.error("刷卡失败,result={},e.getMessage={}", result, e.getMessage(), e);
+            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
+        }
+        LOGGER.info("支付结果,punchCardPayResData={}",punchCardPayResData);
+        return punchCardPayResData;
+    }
+
+    /**
+     * 原生刷卡支付
+     **/
+    public static PunchCardPayResData punchCardNativePay(WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure) {
+        LOGGER.info("微信原生刷卡支付,wechatPaySignData={},wechatConfigure={}", wechatPaySignData, wechatConfigure);
+        PunchCardPayResData punchCardPayResData;
+        String result = null;
+        try {
+            if (StringUtils.isEmpty(wechatPaySignData.getPayNo()) || null == wechatPaySignData.getTotalFee()
+                    || StringUtils.isEmpty(wechatPaySignData.getBody())) {
+                throw new ParamNullException();
+            }
+            //封装请求参数
+            PunchCardPayReqData punchCardPayReqData = new PunchCardPayReqData(wechatPaySignData.getAuthCode(), wechatPaySignData.getBody(), "",
+                    wechatPaySignData.getPayNo(), wechatPaySignData.getTotalFee(), "", "", "", "", "", wechatConfigure);
+            PunchCardPayService punchCardPayService = new PunchCardPayService();
+            //发起支付请求
+            result = punchCardPayService.request(punchCardPayReqData, wechatConfigure);
+            //处理支付结果
+            punchCardPayResData = (PunchCardPayResData) Util.getObjectFromXML(result, PunchCardPayResData.class);
+            LOGGER.info("punchCardPayResData={}", punchCardPayResData);
+            if ("FAIL".equals(punchCardPayResData.getReturn_code())) {//通信错误
+                throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_PUNCH_CARD_FAIL.getValueStr());
+            } else if ("FAIL".equals(punchCardPayResData.getResult_code())) {//业务错误
+                if ("USERPAYING".equals(punchCardPayResData.getErr_code())) {
+                    LOGGER.info("用户正在输入密码...");
+                    return punchCardPayResData;
                 } else {
                     throw new WeChatException(punchCardPayResData.getErr_code(), punchCardPayResData.getErr_code_des());
                 }
@@ -252,8 +296,7 @@ public class WeChatPayUnit {
      * @param orderNo   订单号
      * @param wechatConfigure 商户配置信息
      */
-    private static void waitUserPaying(String orderNo, WechatConfigure wechatConfigure,PunchCardPayResData punchCardPayResData) {
-        int retryTimes = 8;
+    public static void waitUserPaying(String orderNo, WechatConfigure wechatConfigure,PunchCardPayResData punchCardPayResData,Integer retryTimes) {
         LOGGER.info("刷卡支付等待用户输入密码,最多等待{}s,orderNo={}", retryTimes*retryInterval/1000, orderNo);
 
         boolean result = false;//支付结果

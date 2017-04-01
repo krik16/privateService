@@ -130,7 +130,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         else
             paymentEntityVO.setAmountMoney(new BigDecimal(0));
         paymentEntityVO.setCreateTime(DateUtil.getCurrDateTime());
-        paymentEntityVO.setTitle(getTitle(paymentEntityVO.getOrderNum()));
+        if (bodyMap.get("title") != null && StringUtils.isNotBlank(bodyMap.get("title").toString())) {
+            paymentEntityVO.setTitle(bodyMap.get("title").toString());
+        }else{
+            paymentEntityVO.setTitle(getTitle(paymentEntityVO.getOrderNum()));
+        }
         if (bodyMap.get("orderDetailNum") != null)
             paymentEntityVO.setOrderDetailNumArray(bodyMap.get("orderDetailNum").toString());
         else
@@ -311,7 +315,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         BeanUtils.copyProperties(paymentEntityVO, paySignData);
         BigDecimal totalFee = new BigDecimal(Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
         paySignData.setTotalFee(totalFee.intValue());
-        paySignData.setBody("容易网商品");
+        if(StringUtils.isNotBlank(paymentEntityVO.getTitle())){
+            paySignData.setBody(paymentEntityVO.getTitle());
+        }else{
+            paySignData.setBody("容易网商品");
+        }
         paySignData.setUesId(paymentEntityVO.getMallId());
         return paySignData;
     }
@@ -510,7 +518,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public String getTitle(String orderNum) {
-        return "容易网商品,订单号:" + orderNum;
+        return "容易逛商品,订单号:" + orderNum;
     }
 
     @Override

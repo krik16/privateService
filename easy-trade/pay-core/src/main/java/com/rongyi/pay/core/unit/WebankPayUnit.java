@@ -42,7 +42,40 @@ public class WebankPayUnit {
             //返回用户正在支付中
             if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())) {
                 //用户正在支付中  循环调用接口查询支付状态
-                resData= waitUserWechatPaying(param);
+                resData= waitUserWechatPaying(param,6);
+            }
+            //返回状态不是正在支付中 也没有支付成功 则失败 直接抛异常
+            else if(!(ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())&&
+                    ConstantEnum.WEBANK_PAYEMENT_1.getCodeStr().equals(resData.getPayment()))){
+                throw new WebankException(resData.getResult().getErrno(),"".equals(resData.getResult().getErrmsg())?ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr() :resData.getResult().getErrmsg());
+            }
+        } catch (WebankException | ParamNullException e) {
+            throw e ;
+        } catch (Exception e) {
+            LOGGER.info("微众微信刷卡失败 ,e.getMessage:{}", e.getMessage());
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL);
+        }
+        return resData;
+    }
+
+    /**
+     * 微众微信刷卡支付(原生接口,不处理支付中状态)
+     * @param param 业务请求参数
+     */
+    public static WwPunchCardResData wechatPunchCardPayNative(WwPunchCardPayParam param) {
+        LOGGER.info("微众原生刷卡支付 param:{},configure:{}",param,configure);
+        WwPunchCardResData resData ;
+        try {
+            //检查参数
+            ParamUnit.checkWebankWechatPunchCardPay(param, configure);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.wechatPunchCardPay(param, configure);
+            LOGGER.info("微众刷卡支付返回结果 resData:{}",resData);
+            //返回用户正在支付中
+            if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())) {
+                //用户正在支付中直接返回结果
+                return resData;
             }
             //返回状态不是正在支付中 也没有支付成功 则失败 直接抛异常
             else if(!(ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())&&
@@ -62,9 +95,8 @@ public class WebankPayUnit {
     /**
      * 微众微信刷卡支付等待用户支付处理
      */
-    private static WwPunchCardResData waitUserWechatPaying(WwPunchCardPayParam param) {
+    public static WwPunchCardResData waitUserWechatPaying(WwPunchCardPayParam param,Integer retryTimes) {
         WwPunchCardResData resData =null;
-        int retryTimes = 6;
         boolean result = false;
         LOGGER.info("微众微信刷卡支付等待用户输入密码,最多等待{}s,param={},configure={}", retryTimes*retryInterval/1000, param,configure);
         //参数转换
@@ -110,7 +142,7 @@ public class WebankPayUnit {
         return waitUserAlipayPaying(param, 6);
     }
 
-    private static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param , int retryTimes) {
+    public static WaPunchCardPayResData waitUserAlipayPaying(WaPunchCardPayParam param , int retryTimes) {
         boolean result = false;
         WaPunchCardPayResData resData ;
         WaQueryTradeResData queryTradeResData = new WaQueryTradeResData();
@@ -177,7 +209,6 @@ public class WebankPayUnit {
 
     /**
      * 微众微信刷卡调用冲正接口
-     * @param param
      */
     public static void waitWechatPunchCardReverse(WwPunchCardPayParam param ) {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData(param);
@@ -295,7 +326,7 @@ public class WebankPayUnit {
             resData = webankPayService.alipayPunchCardPay(param, configure);
 
             if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode())) {
-                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL);
+                throw new WebankException(resData.getCode(),StringUtils.isEmpty(resData.getMsg())?ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr():resData.getMsg());
             }else if ( ConstantEnum.WA_PUNCHCARDPAY_PAYING.getCodeStr().equals(resData.getRetCode())) {
                 //用户支付中  循环查询用户实际支付状态
                 resData = waitUserAlipayPaying(param);
@@ -313,6 +344,38 @@ public class WebankPayUnit {
         }
         return resData;
     }
+
+
+    /**
+     * 微众支付宝刷卡支付(原生结果返回，不处理支付中状态)
+     * @param param 请求参数
+     * @return 返回结果
+     */
+    public static WaPunchCardPayResData alipayPunchCardPayNative(WaPunchCardPayParam param) {
+        LOGGER.info("微众支付宝原生刷卡支付 param:{}",param);
+        WaPunchCardPayResData resData = null;
+        try {
+            ParamUnit.checkWebankAlipayPunchCardPay(param, configure);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.alipayPunchCardPay(param, configure);
+
+            if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode())) {
+                throw new WebankException(resData.getCode(),resData.getMsg() != null ? resData.getMsg() : ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getValueStr());
+            }else if (ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getCodeStr().equals(resData.getRetCode())) {
+                LOGGER.info("微众返回系统异常 再次调用查询接口查询实际支付状态");
+                resData = waitUserAlipayPaying(param, 1);
+            }else if (!ConstantEnum.WA_PUNCHCARDPAY_PAYING.getCodeStr().equals(resData.getRetCode()) && !ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getRetCode())) {
+                throw new WebankException(resData.getRetCode(), resData.getSubMsg() != null ? resData.getSubMsg() : resData.getRetMsg());
+            }
+        } catch (WebankException | ParamNullException e) {
+            throw e ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.info("系统异常，再次调用查询接口查询订单实际支付状态 orderId:{}", param.getOrderId());
+        }
+        return resData;
+    }
+
 
     /**
      * 微众支付宝订单查询
@@ -421,7 +484,7 @@ public class WebankPayUnit {
         WaTicketResData resData = null;
         try {
             WebankPayService webankPayService  = new WebankPayService();
-            resData = webankPayService.alipayGetTicket(token,configure);
+            resData = webankPayService.alipayGetTicket(token, configure);
         } catch (Exception e) {
             e.printStackTrace();
         }

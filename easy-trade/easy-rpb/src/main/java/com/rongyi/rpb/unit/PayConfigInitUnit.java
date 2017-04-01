@@ -227,7 +227,7 @@ public class PayConfigInitUnit {
                 ticketValue = ticket.getValue();
                 this.ticket = ticketValue;
                 redisService.set(ticketKey, ticketValue);
-                redisService.expire(ticketKey, 30 * 60);
+                redisService.expire(ticketKey, 20 * 60);
                 this.init();
             }else{
                 throw new TradePayException(ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getValueStr());
