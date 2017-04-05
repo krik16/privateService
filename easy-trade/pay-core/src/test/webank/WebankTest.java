@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 //@RunWith(JUnit4Runner.class)
 public class WebankTest {
 
-    String merchantCode  = "107290054110001";
+    String merchantCode  = "107290054110002";
     String wbMerchatId = "107075571030015";
     static String domain = "https://test-svrapi.webank.com/l/";
 //  String domain = "https://svrapi.webank.com/";
@@ -36,7 +36,7 @@ public class WebankTest {
         param.setOrderNo(getOrderNO());
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
         param.setProduct("test");
-        param.setAuthCode("130190556687674221");
+        param.setAuthCode("130026195640709141");
 //        param.setOpenid("99999999999999");
 //        param.setSubAppid("000000000000");
 //        param.setGoodsTag("测试商品");
