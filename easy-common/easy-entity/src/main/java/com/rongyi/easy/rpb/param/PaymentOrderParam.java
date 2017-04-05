@@ -76,11 +76,11 @@ public class PaymentOrderParam implements Serializable {
     }
 
     public Integer getStartIndex() {
-        return startIndex;
+        return (this.currentPage-1)* this.pageSize;
     }
 
     public void setStartIndex(Integer startIndex) {
-        this.startIndex = (this.currentPage-1)* this.pageSize;
+        this.startIndex = startIndex;
     }
 
     public Integer getTradeType() {

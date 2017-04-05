@@ -6,28 +6,27 @@ import java.io.Serializable;
  * Created by shaozhou on 2017/3/30.
  */
 public class OrderSettleVo implements Serializable {
-    private String cashName;
-    private Long couponUsed;
-    private String orderNo;
-    private Long payAmount;
-    private Integer paymentChannel;
-    private Long paymentTime;
-    private Integer paymentType;
-    private Long poundage;
-    private Long realAmout;
-    private Integer reductionUsed;
-    private Long scoreDiscount;
-    private Integer scoreUsed;
-    private String shopName;
-    private String shopNo;
-    private Integer status;
+    private String orderNo;//订单编号
+    private Long couponUsed;//卡券抵扣
+    private Long payAmount;//净收金额
+    private Integer paymentChannel;//支付渠道 0微众银行、1容易网服务商、2拉卡拉、3容易网
+    private Long paymentTime;//支付时间
+    private Integer paymentType;//支付方式 0:支付宝 1:微信
+    private Long poundage;//手续费
+    private Long realAmout;//订单总金额
+    private Integer reductionUsed;//满减金额
+    private Long scoreDiscount;//积分抵扣金额
+    private Integer scoreUsed;//积分抵扣
+    private String shopName;//商户名称
+    private String shopNo;//容易网商户号
+    private Integer status;//1已付款、2已退款
 
-    public String getCashName() {
-        return cashName;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setCashName(String cashName) {
-        this.cashName = cashName;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
     public Long getCouponUsed() {
@@ -36,14 +35,6 @@ public class OrderSettleVo implements Serializable {
 
     public void setCouponUsed(Long couponUsed) {
         this.couponUsed = couponUsed;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
     }
 
     public Long getPayAmount() {
@@ -145,9 +136,8 @@ public class OrderSettleVo implements Serializable {
     @Override
     public String toString() {
         return "OrderSettleVo{" +
-                "cashName='" + cashName + '\'' +
+                "orderNo='" + orderNo + '\'' +
                 ", couponUsed=" + couponUsed +
-                ", orderNo='" + orderNo + '\'' +
                 ", payAmount=" + payAmount +
                 ", paymentChannel=" + paymentChannel +
                 ", paymentTime=" + paymentTime +

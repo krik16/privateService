@@ -10,17 +10,17 @@ import java.io.Serializable;
  */
 public class PaymentOrderDetailForCmsVo implements Serializable {
     private String cashName;//收银商户名称
-    private Integer couponUsed;
+    private Integer couponUsed;//卡券抵扣
     private String orderNo;//订单编号
     private String contractNo;//合同号
-    private Long payAmount;
+    private Long payAmount;//余额支付
     private Long paymentTime;//支付时间
     private Long createTime;//下单时间
-    private Integer paymentType;
-    private Long realAmount;
-    private Long reductionUsed;
-    private Long scoreDiscount;
-    private String settleName;
+    private Integer paymentType;//支付方式（0:支付宝 1:微信 2:pos银行卡,3:现金）
+    private Long realAmount;//订单总额
+    private Long reductionUsed;//满减抵扣金额
+    private Long scoreDiscount;//积分抵扣
+    private String settleName;//结算对象
     private Integer status;// 0 已付款 1 已退款
     private String buyerNo;//买家账号
     private Integer shopScore;//获取积分
