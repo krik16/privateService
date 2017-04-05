@@ -607,5 +607,13 @@
 
     </select>
 
+	<update id="updateStatusList" parameterType="java.util.Map">
+		update payment_order set status = #{status}
+		and pay_no in 
+			<foreach collection="payNoList" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+	</update>
 </mapper>
 

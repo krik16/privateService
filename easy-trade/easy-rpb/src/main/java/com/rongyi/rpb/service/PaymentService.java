@@ -303,4 +303,11 @@ public interface PaymentService {
 	 * @return
 	 */
 	List<PaymentEntity> batchQueryByOrderNos(List<String> orderNoList,Integer tradeType);
+	
+	/**
+	 * @Description 批量更新支付流水状态 
+	 * @param payNoList
+	 * @param status
+	 */
+	Integer updateStatusList(List<String> payNoList,Integer status);
 }
