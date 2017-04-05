@@ -28,6 +28,8 @@ public class AliAuthParam implements Serializable{
 
     private String attach;//扩展参数
 
+    private Integer payChannel;//支付渠道 1:容易网，2：微众
+
     public String getAppAuthCode() {
         return appAuthCode;
     }
@@ -91,6 +93,14 @@ public class AliAuthParam implements Serializable{
 
     public void setAttach(String attach) {
         this.attach = attach;
+    }
+
+    public Integer getPayChannel() {
+        return payChannel;
+    }
+
+    public void setPayChannel(Integer payChannel) {
+        this.payChannel = payChannel;
     }
 
     @Override
