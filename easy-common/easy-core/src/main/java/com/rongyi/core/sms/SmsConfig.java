@@ -123,6 +123,7 @@ public class SmsConfig implements Serializable{
         public static final  int CHANNEL_YUNTONGXUN=101;
         public static final  int CHANNEL_HUAYI=4;
         public static final  int CHANNEL_HUAYI_MARKET=44;
+        public static final  int CHANNEL_DUOZHONG=6;//铎众
 
     }
 
