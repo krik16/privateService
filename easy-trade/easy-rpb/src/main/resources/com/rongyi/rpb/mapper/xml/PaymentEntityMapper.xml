@@ -602,7 +602,7 @@
     <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
         select  <include refid="Base_Column_List"/>
         from payment_order
-        where source in (3,4) and trade_type in (0,1) and status = 2
+        where source in (3,4)
             <if test="orderNo != null and orderNo != ''">
                 and order_no = #{orderNo,jdbcType=VARCHAR}
             </if>
@@ -614,6 +614,18 @@
             </if>
             <if test="ryMchId != null and ryMchId != ''">
                 and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+            </if>
+            <if test="tradeType != null and tradeType != -1">
+                and trade_type = #{tradeType,jdbcType=INTEGER}
+            </if>
+            <if test="tradeType == null || tradeType == '' || tradeType== -1">
+                and trade_type = in (0,1)
+            </if>
+            <if test="status != null and status != -1">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="status == null || status == '' || status == -1">
+                status = 2
             </if>
             <if test="startTime != null and startTime != ''">
                 and end_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
@@ -627,7 +639,7 @@
     <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
         select  count(*)
         from payment_order
-        where source in (3,4) and trade_type in (0,1) and status = 2
+        where source in (3,4)
         <if test="orderNo != null and orderNo != ''">
             and order_no = #{orderNo,jdbcType=VARCHAR}
         </if>
@@ -636,6 +648,21 @@
         </if>
         <if test="payerReconflag != null and payerReconflag != -1">
             and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
+        </if>
+        <if test="tradeType != null and tradeType != -1">
+            and trade_type = #{tradeType,jdbcType=INTEGER}
+        </if>
+        <if test="tradeType == null || tradeType == '' || tradeType== -1">
+            and trade_type = in (0,1)
+        </if>
+        <if test="status != null and status != -1">
+            and status = #{status,jdbcType=INTEGER}
+        </if>
+        <if test="status == null || status == '' || status == -1">
+            status = 2
+        </if>
+        <if test="ryMchId != null and ryMchId != ''">
+            and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
         </if>
         <if test="ryMchId != null and ryMchId != ''">
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
