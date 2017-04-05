@@ -16,6 +16,7 @@ import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
 import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.rpb.bizz.*;
 import com.rongyi.rss.rpb.IweBankService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -387,8 +388,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
         try {
             WwScanPayParam wwScanPayParam = getWwScanPayParam(wwScanPaySignVo);
             WwScanPayResData resData = paySignBizz.webankWechatScanPaySign(ryMchVo, wwScanPayParam, wwScanPaySignVo.getOrderType());
-            Map<String,Object> map = new HashMap<>();
-            map =(Map) JSON.parse(resData.getPay_info());
+            Map<String,Object> map =(Map<String,Object>) JSONObject.fromObject(resData.getPay_info());
             map.put("orderNo", resData.getOut_trade_no());
             return map;
         } catch (WebankException | ParamNullException e) {
