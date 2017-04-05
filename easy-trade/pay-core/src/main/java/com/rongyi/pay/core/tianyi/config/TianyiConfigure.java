@@ -47,6 +47,8 @@ public class TianyiConfigure extends BaseData {
 
     private String refundUrl;//退款接口url
 
+    private String refundBackUrl;//退款回调地址
+
 
 
     private static TianyiConfigure tianyiConfigure;
@@ -60,6 +62,13 @@ public class TianyiConfigure extends BaseData {
         return tianyiConfigure;
     }
 
+    public String getRefundBackUrl() {
+        return refundBackUrl;
+    }
+
+    public void setRefundBackUrl(String refundBackUrl) {
+        this.refundBackUrl = refundBackUrl;
+    }
 
     public String getPublicKeyUrl() {
         return publicKeyUrl;
