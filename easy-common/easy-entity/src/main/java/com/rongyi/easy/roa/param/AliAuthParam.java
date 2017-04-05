@@ -26,6 +26,8 @@ public class AliAuthParam implements Serializable{
 
     private String redirectUrl;// 支付宝回调地址
 
+    private String attach;//扩展参数
+
     public String getAppAuthCode() {
         return appAuthCode;
     }
@@ -81,6 +83,14 @@ public class AliAuthParam implements Serializable{
 
     public void setPayType(Integer payType) {
         this.payType = payType;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override
