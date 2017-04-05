@@ -22,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -384,7 +385,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             WaScanPayResData resData = paySignBizz.webankAliScanPaySign(ryMchVo, waScanPayParam, waScanPaySignVo.getOrderType());
 
             Map<String, Object> map = new HashMap<>();
-            map.put("aliPayQrCode", resData.getQrCode());
+            map.put("aliPayQrCode", URLEncoder.encode(resData.getQrCode(),"utf-8"));
             map.put("orderNo", resData.getOrderId());
             return map;
 
