@@ -7,6 +7,7 @@ import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.tianyi.param.ParamValidUtil;
 import com.rongyi.pay.core.tianyi.param.PublicKeyRes;
 import com.rongyi.pay.core.tianyi.param.TianyiOrderParam;
+import com.rongyi.pay.core.tianyi.param.TianyiResp;
 import com.rongyi.pay.core.tianyi.service.TianyiPayService;
 import com.rongyi.pay.core.tianyi.util.HttpUtil;
 import org.slf4j.Logger;
@@ -56,18 +57,12 @@ public class TianyiPayUnit {
         PublicKeyRes res = new PublicKeyRes();
         try {
             String responseStr = HttpUtil.doPost(configure.getPublicKeyUrl(), requestBody);
-            JSONObject respObj = JSONObject.parseObject(responseStr);
-            String isSuccess = respObj.getString("success");
-            String resultStr = respObj.getString("result");
-            if (Boolean.parseBoolean(isSuccess)) {
-                JSONObject resultObj = JSONObject.parseObject(resultStr);
-                res.setKeyIndex(resultObj.getString("keyIndex"));
-                res.setPubKey(resultObj.getString("pubKey"));
-                res.setSessionId(resultObj.getString("sessionId"));
-                res.setAesRandomId(resultObj.getString("aesIndex"));//todo
-                res.setWaitTime(resultObj.getString("waitTime"));//todo
+            TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
+            if (result != null && result.isSuccess()){
+                PublicKeyRes publicKeyRes = JSONObject.parseObject(result.toString(), PublicKeyRes.class);
+                return publicKeyRes;
             }
-           return res;
+            return null;
         }catch (Exception e){
             logger.info("翼支付获取公钥接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
