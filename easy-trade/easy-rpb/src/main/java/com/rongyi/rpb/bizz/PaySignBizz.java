@@ -15,6 +15,7 @@ import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.unit.PayConfigInitUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.malllife.service.IRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class PaySignBizz extends BaseBizz{
     SaveUnit saveUnit;
     @Autowired
     IRedisService redisService;
+    @Autowired
+    PayConfigInitUnit payConfigInitUnit;
 
     /**
      * 微信扫码支付签名
@@ -93,7 +96,7 @@ public class PaySignBizz extends BaseBizz{
 
 
     /**
-     * 支付宝扫码支付签名
+     * 微众支付宝扫码支付签名
      *
      * @param ryMchVo           容易商户信息
      * @param waScanPayParam 业务参数
@@ -101,6 +104,8 @@ public class PaySignBizz extends BaseBizz{
      */
     public WaScanPayResData webankAliScanPaySign(RyMchVo ryMchVo, WaScanPayParam waScanPayParam,Integer orderType) {
 
+        //初始化设置支付宝ticket
+        payConfigInitUnit.initAliTicket();
 
         Integer totalAmount = new BigDecimal(waScanPayParam.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
