@@ -26,7 +26,8 @@ public class BaseBizz {
     /**
      * 初始化支付记录信息
      */
-    protected PaymentEntity initPaymentEntity(RyMchVo ryMchVo, String orderNo, Integer totalFee, String aliSellerId, String wechatMchId, Integer payChannel, Integer orderType) {
+    protected PaymentEntity initPaymentEntity(RyMchVo ryMchVo, String orderNo, Integer totalFee, String aliSellerId, String wechatMchId,
+                                              Integer payChannel, Integer orderType,Integer paySence) {
 
         //查找支付记录
         PaymentEntity paymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(orderNo, payChannel);
@@ -47,9 +48,11 @@ public class BaseBizz {
             paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
             paymentEntity.setOrderPrice(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
             paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+            paymentEntity.setPayScene(payChannel);
         } else {
             //生成支付信息
-            paymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo, totalFee, orderType, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, payChannel, aliSellerId, wechatMchId);
+            paymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo, totalFee, orderType, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, payChannel,
+                    aliSellerId, wechatMchId,paySence);
         }
         return paymentEntity;
     }

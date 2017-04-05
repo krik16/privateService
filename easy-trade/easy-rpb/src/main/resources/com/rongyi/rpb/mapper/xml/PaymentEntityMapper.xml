@@ -117,7 +117,10 @@
                 source,
             </if>
             <if test="orgChannel != null">
-                org_channel
+                org_channel,
+            </if>
+            <if test="payScene != null">
+                pay_scene
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -194,7 +197,10 @@
                 #{source,jdbcType=TINYINT},
             </if>
             <if test="orgChannel != null">
-                #{orgChannel,jdbcType=TINYINT}
+                #{orgChannel,jdbcType=TINYINT},
+            </if>
+            <if test="payScene != null">
+                #{payScene,jdbcType=TINYINT}
             </if>
 
         </trim>
@@ -273,7 +279,10 @@
                 source = #{source,jdbcType=TINYINT},
             </if>
             <if test="orgChannel != null">
-                org_channel = #{orgChannel,jdbcType=TINYINT}
+                org_channel = #{orgChannel,jdbcType=TINYINT},
+            </if>
+            <if test="payScene != null">
+                pay_scene = #{payScene,jdbcType=TINYINT}
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}

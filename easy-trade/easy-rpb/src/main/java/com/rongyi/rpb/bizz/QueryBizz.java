@@ -3,6 +3,7 @@ package com.rongyi.rpb.bizz;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.WebankException;
@@ -11,6 +12,8 @@ import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.model.*;
+import com.rongyi.pay.core.webank.model.res.WwScanQueryResData;
+import com.rongyi.pay.core.webank.param.WwScanQueryParam;
 import com.rongyi.pay.core.wechat.model.PunchCardPayQueryResData;
 import com.rongyi.pay.core.wechat.model.RefundQueryResData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
@@ -21,6 +24,9 @@ import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * conan
@@ -73,17 +79,59 @@ public class QueryBizz {
         return AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(), null, aliConfigure);
 
     }
+
+    /**
+     * 微众支付查询接口(包含扫码和被扫)
+     * @param orderNo 订单号
+     * @param weBankMchNo 微众商户号
+     * @return map
+     * @throws Exception
+     */
+    public Map<String,Object> weBankWechatPayQueryOrder(String orderNo, String weBankMchNo) throws Exception {
+
+        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+
+        Map<String,Object> map;
+
+        if(ConstantEnum.PAY_SCENE_SCAN.getCodeInt().equals(oldPaymentEntity.getPayScene())){
+            WwScanQueryResData resData = webankWechatScanPayQueryOrder(weBankMchNo, oldPaymentEntity);
+            map = BeanMapUtils.toMap(resData);
+            //微信流水号
+            map.put("tradeNo", resData.getTransaction_id());
+            map.put("tradeStatus", resData.getTrade_state());
+        }else{
+            WwPunchCardResData resData =webankWechatPunchCardPayQueryOrder(weBankMchNo,oldPaymentEntity);
+             map = BeanMapUtils.toMap(resData);
+            //微信流水号
+            map.put("tradeNo", resData.getTransaction_id());
+            //设置支付状态
+            if (com.rongyi.pay.core.constants.ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno()) &&
+                    com.rongyi.pay.core.constants.ConstantEnum.WEBANK_PAYEMENT_1.getCodeStr().equals(resData.getPayment())) {
+                map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
+            } else if (com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())) {
+                map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
+            } else {
+                map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
+            }
+        }
+        //外部订单号
+        map.put("orderNo", orderNo);
+        //容易网交易号
+        map.put("payNo",oldPaymentEntity.getPayNo());
+        //交易金额
+        map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+
+        return map;
+
+    }
+
     /**
      * 微众微信刷卡支付订单查询
      *
-     * @param orderNo     订单号
      * @param weBankMchNo 微众商户号
      * @return PunchCardPayQueryResData
      */
-    public WwPunchCardResData webankWechatPunchCardPayQueryOrder(String orderNo, String weBankMchNo) {
-
-
-        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+    public WwPunchCardResData webankWechatPunchCardPayQueryOrder(String weBankMchNo,PaymentEntity oldPaymentEntity) {
 
         WwPunchCardQueryOrderReqData reqData  = new WwPunchCardQueryOrderReqData(weBankMchNo,oldPaymentEntity.getPayNo());
 
@@ -98,6 +146,31 @@ public class QueryBizz {
         resData.setTerminal_serialno(oldPaymentEntity.getPayNo());
         return resData;
     }
+
+
+      /**
+     * 微众微信扫码支付订单查询
+     *
+     * @param weBankMchNo 微众商户号
+     * @return WwScanQueryResData
+     */
+    public WwScanQueryResData webankWechatScanPayQueryOrder(String weBankMchNo,PaymentEntity oldPaymentEntity) {
+
+        WwScanQueryParam reqData  = new WwScanQueryParam();
+        reqData.setMchId(weBankMchNo);
+        reqData.setOutTradeNo(oldPaymentEntity.getPayNo());
+        WwScanQueryResData resData = WebankPayUnit.wechatScanQuery(reqData);
+
+        //检查是否支付是否成功
+        if(!("0".equals(resData.getStatus()) && "0".equals(resData.getResult_code()))){
+            throw new WebankException(resData.getErr_code(),
+                    StringUtil.isEmpty(resData.getErr_msg())? com.rongyi.pay.core.constants.ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr() : resData.getErr_msg());
+        }
+        resData.setOut_trade_no(oldPaymentEntity.getPayNo());
+        return resData;
+    }
+
+
 
     /**
      * 微众微信刷卡支付退款查询

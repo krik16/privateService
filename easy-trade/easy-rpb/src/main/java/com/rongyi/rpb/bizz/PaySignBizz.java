@@ -13,6 +13,7 @@ import com.rongyi.pay.core.webank.param.WaScanPayParam;
 import com.rongyi.pay.core.webank.param.WwScanPayParam;
 import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
@@ -50,7 +51,7 @@ public class PaySignBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "",
-                wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,orderType);
+                wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //获取微信支付签名
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
@@ -79,7 +80,7 @@ public class PaySignBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, aliScanPayReqData.getOrderNo(), aliScanPayReqData.getTotalAmount(), aliScanPayReqData.getSellerId(), "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
@@ -110,7 +111,7 @@ public class PaySignBizz extends BaseBizz{
         Integer totalAmount = new BigDecimal(waScanPayParam.getTotalAmount()).multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waScanPayParam.getOrderId(), totalAmount, waScanPayParam.getSellerId(), "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //获取支付宝扫码支付签名
         waScanPayParam.setOrderId(paymentEntity.getPayNo());
@@ -132,7 +133,7 @@ public class PaySignBizz extends BaseBizz{
     public WwScanPayResData webankWechatScanPaySign(RyMchVo ryMchVo, WwScanPayParam wwScanPayParam, Integer orderType) {
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wwScanPayParam.getOutTradeNo(), wwScanPayParam.getTotalFee(), "",
-                wwScanPayParam.getWechatMchId(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
+                wwScanPayParam.getWechatMchId(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //获取公众号扫码支付签名
         wwScanPayParam.setOutTradeNo(paymentEntity.getPayNo());

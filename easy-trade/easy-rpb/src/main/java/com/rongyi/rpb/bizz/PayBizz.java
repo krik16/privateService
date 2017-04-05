@@ -61,7 +61,8 @@ public class PayBizz extends BaseBizz{
     public PunchCardPayResData wechatPunchCardPay(RyMchVo ryMchVo, WechatPaySignData wechatPaySignData, WechatConfigure wechatConfigure, Integer orderType) {
 
         //初始化支付记录
-        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
+        PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
+                orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //发起支付
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
@@ -104,7 +105,7 @@ public class PayBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, aliPunchCardPayReqData.getOrderNo(), aliPunchCardPayReqData.getTotalAmount(), aliPunchCardPayReqData.getSellerId(),
-                "", Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType);
+                "", Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //发起支付
         aliPunchCardPayReqData.setPayNo(paymentEntity.getPayNo());
@@ -141,7 +142,7 @@ public class PayBizz extends BaseBizz{
         Integer totalFee = wwPunchCardPayParam.getAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wwPunchCardPayParam.getOrderNo(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //支付流水号设置为微众商户单号
         wwPunchCardPayParam.setOrderNo(paymentEntity.getPayNo());
@@ -194,7 +195,7 @@ public class PayBizz extends BaseBizz{
         Integer totalFee = waPunchCardPayParam.getTotalAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waPunchCardPayParam.getOrderId(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //支付流水号设置为微众商户单号
         waPunchCardPayParam.setOrderId(paymentEntity.getPayNo());
@@ -241,7 +242,7 @@ public class PayBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, cashPayVo.getOrderNo(), cashPayVo.getTotalAmount(), "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         paymentEntity.setFinishTime(new Date());
@@ -275,7 +276,7 @@ public class PayBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, posBankCardPayVo.getOrderNo(), posBankCardPayVo.getTotalAmount(), "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, orderType);
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, null);

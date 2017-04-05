@@ -22,7 +22,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,26 +98,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
     public Map<String, Object> weBankWechatPayQuery(RyMchVo ryMchVo, String orderNo, Integer payType, String weBankMchNo) {
         log.info("微众微信刷卡支付查询,ryMchVo={},orderNo={},payType={},weBankMchNo={}", ryMchVo, orderNo, payType, weBankMchNo);
         try {
-            WwPunchCardResData resData = queryBizz.webankWechatPunchCardPayQueryOrder(orderNo, weBankMchNo);
-
-            Map<String, Object> map = BeanMapUtils.toMap(resData);
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", resData.getTerminal_serialno());
-            //微信流水号
-            map.put("tradeNo", resData.getTransaction_id());
-            //交易金额
-            map.put("totalAmount", new BigDecimal(resData.getTotal_fee()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            //设置支付状态
-            if (ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno()) &&
-                    ConstantEnum.WEBANK_PAYEMENT_1.getCodeStr().equals(resData.getPayment())) {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            } else if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getResult().getErrno())) {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
-            } else {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
-            }
+            Map<String, Object> map = queryBizz.weBankWechatPayQueryOrder(orderNo, weBankMchNo);
             log.info("微众微信刷卡支付查询结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
@@ -385,7 +365,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             WaScanPayResData resData = paySignBizz.webankAliScanPaySign(ryMchVo, waScanPayParam, waScanPaySignVo.getOrderType());
 
             Map<String, Object> map = new HashMap<>();
-            map.put("aliPayQrCode", URLEncoder.encode(resData.getQrCode(),"utf-8"));
+            map.put("aliPayQrCode", resData.getQrCode());
             map.put("orderNo", resData.getOrderId());
             return map;
 

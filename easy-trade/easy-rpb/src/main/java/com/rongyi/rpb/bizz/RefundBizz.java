@@ -242,7 +242,7 @@ public class RefundBizz {
         //初始化退款记录
         return initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
                 refundAmount, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
-                payType, "", "");
+                payType, "", "",oldPaymentEntity.getPayScene());
     }
 
     public PaymentEntity basePayment(String orderNo,Integer payType){
