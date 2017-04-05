@@ -133,7 +133,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private String reductionActivityId;//满减活动Id
     private String reductionActivityName;//满减活动名称
     private Integer deliverId;//发货人id
-    private Integer isPush;//-1不需要推送
+    private Integer isPush;//：已推送，0：未推送，-1：不推送'
+    private BigDecimal refundDiscountOfficial;//平台分摊退款金额
+    private String chiefId;//主账号关联的店铺/商城ID
 
 
     public Integer getDeliverId() {
@@ -1023,6 +1025,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setReductionActivityName(String reductionActivityName) {
         this.reductionActivityName = reductionActivityName;
+    }
+
+    public BigDecimal getRefundDiscountOfficial() {
+        return refundDiscountOfficial;
+    }
+
+    public void setRefundDiscountOfficial(BigDecimal refundDiscountOfficial) {
+        this.refundDiscountOfficial = refundDiscountOfficial;
+    }
+
+    public String getChiefId() {
+        return chiefId;
+    }
+
+    public void setChiefId(String chiefId) {
+        this.chiefId = chiefId;
     }
 
     @Override
