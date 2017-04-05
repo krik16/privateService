@@ -45,6 +45,10 @@
 		<property name="alipayReverseTradeUrl" value="${WEBANK_ALI_PAY_REVERSE_TRADE_URL}"/>
 		<property name="alipayRefundUrl" value="${WEBANK_ALI_PAY_REFUND_URL}"/>
 		<property name="alipayRefundQueryUrl" value="${WEBANK_ALI_PAY_REFUND_QUERY_URL}"/>
+		<property name="wechatScanNotifyUrl" value="${WEBANK_WECHAT_SCAN_NOTIFY_URL}"/>
+		<property name="wechatScanPayUrl" value="${WEBANK_WECHAT_SACN_PAY_URL}"/>
+		<property name="wechatScanQueryUrl" value="${WEBANK_WECHAT_SCAN_QUERY_URL}"/>
+		<property name="alipayScanPayUrl" value="${WEBANK_ALI_PAY_SCAN_PAY_URL}"/>
 	</bean>
 
 	<bean id="logAdvice" class="com.rongyi.core.common.log.LogAopAdvice"/>
