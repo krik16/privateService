@@ -123,6 +123,7 @@ public class SmsConfig implements Serializable{
         public static final  int CHANNEL_YUNTONGXUN=101;
         public static final  int CHANNEL_HUAYI=4;
         public static final  int CHANNEL_HUAYI_MARKET=44;
+        public static final int CHANNEL_DUOZHONG = 6;   //铎众短信
 
     }
 
@@ -133,6 +134,7 @@ public class SmsConfig implements Serializable{
         public static final String SUCCESS="Success";//成功
         public static final  String FAILD="Faild";//失败
         public static final  String LIMIT_MSG="Limit";//发送超出限制
+        public static final String UNKNOWN = "UNKNOWN"; //未知状态
     }
 
 
