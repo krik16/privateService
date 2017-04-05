@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
+
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -90,7 +92,7 @@ public interface CommodityService {
      */
     public ResponseResult getCommodityById(String id, long shopId);
 
-    public ResponseResult getCommodityListByShopId(int identity,String id, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByShopId(int identity,String buyerId,String id, int orderBy, String keyword, int currentpage, int pagesize);
 
     public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
@@ -211,6 +213,8 @@ public interface CommodityService {
     public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
+
+    List<Commodity> getCommodityBySystemNumber(String systemNumber);
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
@@ -406,12 +410,11 @@ public interface CommodityService {
      * 批量下架商品
      * @param ids
      * @param shopId
-     * @param identity
      * @param reason
      * @param userName
      * @return
      */
-    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int identity,String reason, String userName);
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int userId,String reason, String userName);
 
     public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
 
@@ -428,4 +431,16 @@ public interface CommodityService {
 
     public ResponseResult getCommoditySpecyList(List<String> cloumIds);
 
+    public WechatCommodityPageVo listTotalCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
+
+    public Boolean updateCommodityStatus(String id, Integer status, String reason);
+
+    Map<String, Object> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+
+    Map<String, Object> getTotalCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+    boolean updateSpecTotalStock(String specId, Integer stock);
+
+    List<CustomCategoryVo> searchCategoryForHaiXin(CustomCategoryParam customCategoryParam);
 }

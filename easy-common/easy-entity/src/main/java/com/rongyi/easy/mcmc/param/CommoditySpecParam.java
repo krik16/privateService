@@ -4,6 +4,7 @@ package com.rongyi.easy.mcmc.param;
 import java.io.Serializable;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.CommoditySpec;
 import org.bson.types.ObjectId;
 
 public class CommoditySpecParam implements  Serializable {
@@ -27,6 +28,9 @@ public class CommoditySpecParam implements  Serializable {
 	private String mallMid;
 	private Integer type; //0:集团 1:商场 4:店铺
 	private String referencePrice;//参考价
+	private List<String> serviceIds; //公众号
+
+	private String commodityId; // 海信导入：用于编辑
 
 
 	public Integer getType() {
@@ -165,6 +169,22 @@ public class CommoditySpecParam implements  Serializable {
 		this.referencePrice = referencePrice;
 	}
 
+	public List<String> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<String> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
+	public String getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(String commodityId) {
+		this.commodityId = commodityId;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySpecParam{" +
@@ -185,6 +205,8 @@ public class CommoditySpecParam implements  Serializable {
 				", mallMid='" + mallMid + '\'' +
 				", type=" + type +
 				", referencePrice='" + referencePrice + '\'' +
+				", serviceIds=" + serviceIds +
+				", commodityId='" + commodityId + '\'' +
 				'}';
 	}
 }

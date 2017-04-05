@@ -28,6 +28,15 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
     private Date createAtEnd;
     private String freePostage;  // 0包邮 1不包邮
     private String mallMid;
+    private String deliveryTypes;
+
+    public String getDeliveryTypes() {
+        return deliveryTypes;
+    }
+
+    public void setDeliveryTypes(String deliveryTypes) {
+        this.deliveryTypes = deliveryTypes;
+    }
 
     public String getMallMid() {
         return mallMid;
@@ -158,6 +167,7 @@ public class SearchGiftParam extends PaginationParam implements Serializable {
                 ", createAtEnd=" + createAtEnd +
                 ", freePostage='" + freePostage + '\'' +
                 ", mallMid='" + mallMid + '\'' +
+                ", deliveryTypes='" + deliveryTypes + '\'' +
                 '}';
     }
 }

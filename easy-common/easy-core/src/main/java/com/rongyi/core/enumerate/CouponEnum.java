@@ -64,9 +64,12 @@ public enum  CouponEnum {
     VALID_COUPON_CODE_FAIL(1021229,"验券失败"),
     VALID_INVALID_UID(1021230,"必要参数uid 有误！"),
     VALID_INVALID_COUPONID(1021231,"必要参数couponId 有误！"),
-    VALID_INVALID_COUPONIDS(1021232,"必要参数 ids 有误！")
+    VALID_INVALID_COUPONIDS(1021232,"必要参数 ids 有误！"),
+    VALID_INVALID_SIGN(1021233,"签名错误"),
 
-
+    ERROR_MERCHANT_ERROR_ID(1021301,"mallId或shopId 参数不能都为空！"),
+    ERROR_MERCHANT_ERROR_PAGESIZE(1021302,"pageSize 参数不能为空！"),
+    ERROR_MERCHANT_ERROR_PAGENO(1021303,"pageNo 参数不能为空！"),
 
 
 

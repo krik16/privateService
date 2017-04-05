@@ -1,8 +1,8 @@
 package com.rongyi.rss.bdata;
 
-import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.bdata.entity.Shop;
 import com.rongyi.easy.bdata.vo.BrandVO;
+import com.rongyi.easy.roa.entity.BrandHaiXinEntity;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Map;
@@ -13,4 +13,15 @@ public interface BrandService {
 	BrandVO getBrandMoreInfo(String brandId);
 	
 	BrandVO getBrandByName(String name);
+	
+	public String saveBrandHaiXin(BrandHaiXinEntity brandHaiXin);
+	
+	public BrandHaiXinEntity getBrandHaiXinByCode(String code);
+	
+	public List<BrandHaiXinEntity> getBrandHaiXinListByCondition();
+
+	void  importHaiXinData(String url) throws Exception;
+
+	public BrandHaiXinEntity getBrandHaiXinById(ObjectId id);
+
 }

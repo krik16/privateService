@@ -22,7 +22,7 @@ public class VerifyCodeParam implements Serializable {
      */
     private String activityId;
     /**
-     * 0:卡券；1：邀请码；2：礼品码 4 活动奖品码
+     * 0:卡券；1：邀请码；2：礼品码 4 活动奖品码 5:BO应用券码
      */
     private Integer type;
 
@@ -57,6 +57,27 @@ public class VerifyCodeParam implements Serializable {
     private Integer count;
 
     private Integer platform;
+
+    //0:商家后台；1：摩店；2：轻应用;3 :积分POS；4：家得利验券；5：其他  6：BO 万达BO渠道验券
+    private Integer validChannel;
+
+    private String signature;
+
+    private String partnerId;
+
+    private Long ts;
+
+    private String nonceStr;
+
+    private String storeId;
+
+    public Integer getValidChannel() {
+        return validChannel;
+    }
+
+    public void setValidChannel(Integer validChannel) {
+        this.validChannel = validChannel;
+    }
 
     public Integer getCount() {
         if (count == null) {
@@ -152,6 +173,50 @@ public class VerifyCodeParam implements Serializable {
         this.terminal = terminal;
     }
 
+    public static Long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
+    }
+
+    public Long getTs() {
+        return ts;
+    }
+
+    public void setTs(Long ts) {
+        this.ts = ts;
+    }
+
+    public String getNonceStr() {
+        return nonceStr;
+    }
+
+    public void setNonceStr(String nonceStr) {
+        this.nonceStr = nonceStr;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("VerifyCodeParam{");
@@ -166,6 +231,12 @@ public class VerifyCodeParam implements Serializable {
         sb.append(", terminal=").append(terminal);
         sb.append(", count=").append(count);
         sb.append(", platform=").append(platform);
+        sb.append(", validChannel=").append(validChannel);
+        sb.append(", signature='").append(signature).append('\'');
+        sb.append(", partnerId='").append(partnerId).append('\'');
+        sb.append(", ts=").append(ts);
+        sb.append(", nonceStr='").append(nonceStr).append('\'');
+        sb.append(", storeId='").append(storeId).append('\'');
         sb.append('}');
         return sb.toString();
     }

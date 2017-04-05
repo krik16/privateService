@@ -55,7 +55,16 @@ public class ShopVO implements Serializable {
 	private String nameEn;      //店铺英文名
 	private String descriptionEn;  //英文描述
 	private Integer isEdit = 1; //是否可编译  0否 1是
-	
+	private String isShowInWeiXin;//0显示,1不显示
+
+	public String getIsShowInWeiXin() {
+		return isShowInWeiXin;
+	}
+
+	public void setIsShowInWeiXin(String isShowInWeiXin) {
+		this.isShowInWeiXin = isShowInWeiXin;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -349,42 +358,45 @@ public class ShopVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("name", name)
-				.append("shopNature", shopNature)
-				.append("shopType", shopType)
-				.append("number", number)
-				.append("brand", brand)
-				.append("brands", brands)
-				.append("icon", icon)
-				.append("categories", categories)
-				.append("exclusiveCategories", exclusiveCategories)
-				.append("tags", tags)
-				.append("mallName", mallName)
-				.append("mallId", mallId)
-				.append("businessDistrictId", businessDistrictId)
-				.append("businessDistrictName", businessDistrictName)
-				.append("areaVOs", areaVOs)
-				.append("address", address)
-				.append("moreFloors", moreFloors)
-				.append("shopNumber", shopNumber)
-				.append("businessStatus", businessStatus)
-				.append("businessHours", businessHours)
-				.append("photoUrls", photoUrls)
-				.append("openedTime", openedTime)
-				.append("telephone", telephone)
-				.append("headName", headName)
-				.append("headTelephone", headTelephone)
-				.append("description", description)
-				.append("valid", valid)
-				.append("reason", reason)
-				.append("createdAt", createdAt)
-				.append("updateBy", updateBy)
-				.append("updatedAt", updatedAt)
-				.append("filialeName", filialeName)
-				.append("nameEn",nameEn)
-				.append("descriptionEn",descriptionEn)
-				.toString();
+		return "ShopVO{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", shopNature=" + shopNature +
+				", shopType='" + shopType + '\'' +
+				", number='" + number + '\'' +
+				", brand=" + brand +
+				", brands=" + brands +
+				", icon='" + icon + '\'' +
+				", categories=" + categories +
+				", exclusiveCategories=" + exclusiveCategories +
+				", tags='" + tags + '\'' +
+				", mallName='" + mallName + '\'' +
+				", mallId='" + mallId + '\'' +
+				", businessDistrictId='" + businessDistrictId + '\'' +
+				", businessDistrictName='" + businessDistrictName + '\'' +
+				", areaVOs=" + areaVOs +
+				", address='" + address + '\'' +
+				", moreFloors=" + moreFloors +
+				", shopNumber='" + shopNumber + '\'' +
+				", businessStatus='" + businessStatus + '\'' +
+				", businessHours='" + businessHours + '\'' +
+				", photoUrls=" + photoUrls +
+				", openedTime='" + openedTime + '\'' +
+				", telephone='" + telephone + '\'' +
+				", headName='" + headName + '\'' +
+				", headTelephone='" + headTelephone + '\'' +
+				", description='" + description + '\'' +
+				", valid=" + valid +
+				", reason='" + reason + '\'' +
+				", createdAt='" + createdAt + '\'' +
+				", updateBy='" + updateBy + '\'' +
+				", updatedAt='" + updatedAt + '\'' +
+				", filialeName='" + filialeName + '\'' +
+				", changeAble=" + changeAble +
+				", nameEn='" + nameEn + '\'' +
+				", descriptionEn='" + descriptionEn + '\'' +
+				", isEdit=" + isEdit +
+				", isShowInWeiXin='" + isShowInWeiXin + '\'' +
+				'}';
 	}
 }

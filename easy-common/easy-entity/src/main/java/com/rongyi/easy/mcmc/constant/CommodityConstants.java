@@ -15,6 +15,7 @@ public interface CommodityConstants {
         int GIFT = 1;
         int COUPON = 2;
         int COUPON_PARKING = 3;
+        int HAIXIN = 4;
     }
 
     interface ExchangeType {
@@ -40,6 +41,10 @@ public interface CommodityConstants {
     interface DeliveryType {
         int SELF_PICK = 1;
         int DELIVERY = 2;
+    }
+
+    interface Spec {
+        String HAIXIN_SPEC_NAME = "规格";
     }
 
 }

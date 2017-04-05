@@ -81,6 +81,14 @@ public class CommoditySpecColumnVO implements  Serializable{
 	public List<CommoditySpecColumnVO> getSpecColumnInfo(CommoditySpecParam param) {
 		List<CommoditySpecColumnVO> list = new ArrayList<>();
 
+		if (CollectionUtils.isEmpty(param.getColumnIds())) {
+			for (String columnValue : param.getColumnValues()) {
+				CommoditySpecColumnVO specColumnVO = new CommoditySpecColumnVO();
+				specColumnVO.setColumnValue(columnValue);
+				list.add(specColumnVO);
+			}
+			return list;
+		}
 		//设置商品规格
 		for(int i=0; i< param.getColumnIds().size(); i++) {
 			CommoditySpecColumnVO specColumnVO = new CommoditySpecColumnVO();

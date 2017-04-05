@@ -19,7 +19,7 @@ import java.util.Map;
 public class MethodTimeAdvice implements MethodInterceptor {
 
     private final static Logger logger = Logger.getLogger(MethodTimeAdvice.class);
-    private final static int DEFAULT_MIN_TIME = 10;
+    private final static int DEFAULT_MIN_TIME = 300;
 
     /**
      * @see MethodInterceptor#invoke(MethodInvocation)
@@ -43,9 +43,9 @@ public class MethodTimeAdvice implements MethodInterceptor {
         }
         clock.stop(); //计时结束
         if (logger.isInfoEnabled()) {
-            // 减少打印 仅仅方法的时间大于10毫秒
+            // 减少打印 仅仅方法的时间大于指定毫秒
             if (DEFAULT_MIN_TIME < clock.getTime()) {
-                logger.info("******* 统计 | " + methodName + " | 执行时间：" + Util.getTimeString(clock.getTime()) + " *******");
+                logger.info("<<<<<<< 统计 | " + methodName + " | 执行时间：" + Util.getTimeString(clock.getTime()) + " >>>>>>>");
             }
         }
         return result;
