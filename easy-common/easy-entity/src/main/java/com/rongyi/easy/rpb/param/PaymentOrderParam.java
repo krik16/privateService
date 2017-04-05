@@ -15,9 +15,18 @@ public class PaymentOrderParam implements Serializable {
     private Integer currentPage;//当前页
     private Integer pageSize;//每页记录数
     private Integer startIndex;//
-    private Integer tradeType;//订单状态 0:已付款 1:已退款
+    private Integer tradeType;//0:消费 1:退款 -1全部
+    private Integer status;//0:待打款 1:款已打 2:款已到 -1全部
     private Integer payScene;//支付终端 1:移动pos设备,2:扫码支付 -1 全部
     private Integer payerReconflag;// 支付机构对账标志 0:未对账,1:对账一致,2:对账不一致
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public String getOrderNo() {
         return orderNo;
@@ -119,6 +128,7 @@ public class PaymentOrderParam implements Serializable {
                 ", pageSize=" + pageSize +
                 ", startIndex=" + startIndex +
                 ", tradeType=" + tradeType +
+                ", status=" + status +
                 ", payScene=" + payScene +
                 ", payerReconflag=" + payerReconflag +
                 '}';
