@@ -840,19 +840,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public List<PaymentEntity> queryListByParam(PaymentOrderParam param) {
         Map<String, Object> params = new HashMap<>();
-        params.put("orderNo", param.getOrderNo());
-        params.put("payChannel", param.getPayChannel());
-        params.put("startTime",param.getStartTime());
-        params.put("endTime",param.getEndTime());
-        params.put("ryMchId",param.getRyMchId());
-        params.put("pageSize",param.getPageSize());
-        params.put("startIndex",param.getStartIndex());
+        buildParamMap(params,param);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".queryListByParam", params);
     }
 
     @Override
     public Integer queryCountByParam(PaymentOrderParam param) {
         Map<String, Object> params = new HashMap<>();
+        buildParamMap(params,param);
+        return this.getBaseDao().count(PAYMENTENTITY_NAMESPACE + ".queryCountByParam", params);
+    }
+
+    private void buildParamMap(Map<String, Object> params, PaymentOrderParam param) {
         params.put("orderNo", param.getOrderNo());
         params.put("payChannel", param.getPayChannel());
         params.put("startTime",param.getStartTime());
@@ -860,6 +859,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         params.put("ryMchId",param.getRyMchId());
         params.put("pageSize",param.getPageSize());
         params.put("startIndex",param.getStartIndex());
-        return this.getBaseDao().count(PAYMENTENTITY_NAMESPACE + ".queryCountByParam", params);
+        params.put("payerReconflag",param.getPayerReconflag());
     }
 }

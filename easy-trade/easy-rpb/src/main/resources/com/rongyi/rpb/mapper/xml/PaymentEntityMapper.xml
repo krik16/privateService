@@ -609,6 +609,9 @@
             <if test="payChannel != null and payChannel != ''">
                 and pay_channel = #{payChannel,jdbcType=INTEGER}
             </if>
+            <if test="payerReconflag != null and payerReconflag != -1">
+                and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
+            </if>
             <if test="ryMchId != null and ryMchId != ''">
                 and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
             </if>
@@ -631,14 +634,17 @@
         <if test="payChannel != null and payChannel != ''">
             and pay_channel = #{payChannel,jdbcType=INTEGER}
         </if>
+        <if test="payerReconflag != null and payerReconflag != -1">
+            and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
+        </if>
         <if test="ryMchId != null and ryMchId != ''">
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
         </if>
         <if test="startTime != null and startTime != ''">
-            and end_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
         </if>
         <if test="endTime != null and endTime != ''">
-            and end_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            and end_at $lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
         </if>
     </select>
 </mapper>
