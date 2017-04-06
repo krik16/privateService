@@ -13,13 +13,14 @@ public class OrderSettleVo implements Serializable {
     private Long paymentTime;//支付时间
     private Integer paymentType;//支付方式 0:支付宝 1:微信
     private Long poundage;//手续费
-    private Long realAmout;//订单总金额
+    private Long realAmount;//订单总金额
     private Integer reductionUsed;//满减金额
     private Long scoreDiscount;//积分抵扣金额
     private Integer scoreUsed;//积分抵扣
     private String shopName;//商户名称
     private String shopNo;//容易网商户号
     private Integer status;//1已付款、2已退款
+    private Integer payTerminal;//支付终端 1pos 2扫码
 
     public String getOrderNo() {
         return orderNo;
@@ -77,12 +78,12 @@ public class OrderSettleVo implements Serializable {
         this.poundage = poundage;
     }
 
-    public Long getRealAmout() {
-        return realAmout;
+    public Long getRealAmount() {
+        return realAmount;
     }
 
-    public void setRealAmout(Long realAmout) {
-        this.realAmout = realAmout;
+    public void setRealAmount(Long realAmount) {
+        this.realAmount = realAmount;
     }
 
     public Integer getReductionUsed() {
@@ -133,6 +134,14 @@ public class OrderSettleVo implements Serializable {
         this.status = status;
     }
 
+    public Integer getPayTerminal() {
+        return payTerminal;
+    }
+
+    public void setPayTerminal(Integer payTerminal) {
+        this.payTerminal = payTerminal;
+    }
+
     @Override
     public String toString() {
         return "OrderSettleVo{" +
@@ -143,13 +152,14 @@ public class OrderSettleVo implements Serializable {
                 ", paymentTime=" + paymentTime +
                 ", paymentType=" + paymentType +
                 ", poundage=" + poundage +
-                ", realAmout=" + realAmout +
+                ", realAmount=" + realAmount +
                 ", reductionUsed=" + reductionUsed +
                 ", scoreDiscount=" + scoreDiscount +
                 ", scoreUsed=" + scoreUsed +
                 ", shopName='" + shopName + '\'' +
                 ", shopNo='" + shopNo + '\'' +
                 ", status=" + status +
+                ", payTerminal=" + payTerminal +
                 '}';
     }
 }
