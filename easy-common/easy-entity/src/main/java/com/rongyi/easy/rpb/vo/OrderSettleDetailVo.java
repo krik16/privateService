@@ -9,6 +9,7 @@ public class OrderSettleDetailVo implements Serializable {
     private Long couponUsed;
     private String orderNo;
     private Long payAmount;
+    private String ryShopNo;//容易商户号
     private String payShopNo;//支付渠道商户号
     private Integer paymentChannel;//支付渠道 1微众银行、2容易网服务商、3拉卡拉、4容易网
     private String paymentNo;//支付渠道流水号
@@ -178,12 +179,21 @@ public class OrderSettleDetailVo implements Serializable {
         this.status = status;
     }
 
+    public String getRyShopNo() {
+        return ryShopNo;
+    }
+
+    public void setRyShopNo(String ryShopNo) {
+        this.ryShopNo = ryShopNo;
+    }
+
     @Override
     public String toString() {
         return "OrderSettleDetailVo{" +
                 "couponUsed=" + couponUsed +
                 ", orderNo='" + orderNo + '\'' +
                 ", payAmount=" + payAmount +
+                ", ryShopNo='" + ryShopNo + '\'' +
                 ", payShopNo='" + payShopNo + '\'' +
                 ", paymentChannel=" + paymentChannel +
                 ", paymentNo='" + paymentNo + '\'' +
