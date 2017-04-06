@@ -7,6 +7,18 @@ package com.rongyi.easy.rpb.dto;
 public class PosBankSynNotifyDto extends BaseDto{
 
     private static final long serialVersionUID = -8528951045168028524L;
+
+
+    private String ryMchId;//容易网商户号
+
+    private String  ryAppId;//容易网应用号
+
+    private String source;//来源(0:容易逛,1:微信,2:终端屏,3:福利pos,4:外部渠道)
+
+    private String timeStamp;//时间戳
+
+    private String sign;//签名串
+
     private String orderNo;//订单号
 
     private  Long payAmount;//支付金额
@@ -66,5 +78,45 @@ public class PosBankSynNotifyDto extends BaseDto{
 
     public void setPaymentTypeStr(String paymentTypeStr) {
         this.paymentTypeStr = paymentTypeStr;
+    }
+
+    public String getRyMchId() {
+        return ryMchId;
+    }
+
+    public void setRyMchId(String ryMchId) {
+        this.ryMchId = ryMchId;
+    }
+
+    public String getRyAppId() {
+        return ryAppId;
+    }
+
+    public void setRyAppId(String ryAppId) {
+        this.ryAppId = ryAppId;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 }
