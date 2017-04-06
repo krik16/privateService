@@ -390,6 +390,8 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             WwScanPayResData resData = paySignBizz.webankWechatScanPaySign(ryMchVo, wwScanPayParam, wwScanPaySignVo.getOrderType());
             Map<String,Object> map =(Map<String,Object>) JSONObject.fromObject(resData.getPay_info());
             map.put("orderNo", resData.getOut_trade_no());
+            map.put("appSignature", map.get("paySign"));
+            map.remove("paySign");
             return map;
         } catch (WebankException | ParamNullException e) {
             log.error("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
