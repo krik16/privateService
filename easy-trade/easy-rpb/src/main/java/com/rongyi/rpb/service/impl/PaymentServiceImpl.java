@@ -9,6 +9,7 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
+import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.tms.vo.MQDrawParam;
 import com.rongyi.rpb.Exception.TradeException;
@@ -850,5 +851,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		params.put("payNoList", payNoList);
 		params.put("status", status);
 		return this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateStatusList", params);
+	}
+
+	public List<PaymentEntity> findList(PaymentOrderDto paymentOrderDto) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("payChannel", paymentOrderDto.getPayChannel());
+		params.put("tradeType", paymentOrderDto.getTradeType());
+		params.put("status", paymentOrderDto.getStatus());
+		params.put("endAt", paymentOrderDto.getEndAt());
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".findList", params);
 	}
 }
