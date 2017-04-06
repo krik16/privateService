@@ -95,6 +95,7 @@ public class CommodityBuyerVO implements Serializable {
     private List<String> categoryNames;
     private Integer templateRelevantGoodsCouponId;  //用作排序
     private List<String> onServiceIds;
+    private Integer isRefund;//是否可退货
 
     public Integer getTemplateRelevantGoodsCouponId() {
         return templateRelevantGoodsCouponId;
@@ -880,7 +881,15 @@ public class CommodityBuyerVO implements Serializable {
         this.serviceDescriptionId = serviceDescriptionId;
     }
 
-    public CommodityBuyerVO(Commodity commodity){
+    public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+
+	public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -1008,6 +1017,7 @@ public class CommodityBuyerVO implements Serializable {
         this.serviceDescription=commodity.getServiceDescription();
         this.serviceDescriptionId=commodity.getServiceDescriptionId();
         this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
+        this.isRefund = commodity.getIsRefund();//是否可退货
     }
 
     private boolean isShowInWechat() {
@@ -1021,78 +1031,77 @@ public class CommodityBuyerVO implements Serializable {
 
         return onIds.size() > 0;
     }
-
+    
     @Override
-    public String toString() {
-        return "CommodityBuyerVO{" +
-                "shopName='" + shopName + '\'' +
-                ", commodityPicList=" + commodityPicList +
-                ", commodityId='" + commodityId + '\'' +
-                ", commodityCode='" + commodityCode + '\'' +
-                ", commodityStock='" + commodityStock + '\'' +
-                ", commodityStatus=" + commodityStatus +
-                ", commodityAppStatus=" + commodityAppStatus +
-                ", commodityType=" + commodityType +
-                ", supportCourierDeliver=" + supportCourierDeliver +
-                ", supportSelfPickup=" + supportSelfPickup +
-                ", offlinePayment=" + offlinePayment +
-                ", onlinePayment=" + onlinePayment +
-                ", offlineRefund=" + offlineRefund +
-                ", onlineRefund=" + onlineRefund +
-                ", shopIM=" + shopIM +
-                ", bullId='" + bullId + '\'' +
-                ", distance=" + distance +
-                ", saleShopCount=" + saleShopCount +
-                ", watching=" + watching +
-                ", location=" + location +
-                ", systemNumber='" + systemNumber + '\'' +
-                ", activityType='" + activityType + '\'' +
-                ", commodityOPriceMax='" + commodityOPriceMax + '\'' +
-                ", commodityOPriceMin='" + commodityOPriceMin + '\'' +
-                ", commodityCPriceMax='" + commodityCPriceMax + '\'' +
-                ", commodityCPriceMin='" + commodityCPriceMin + '\'' +
-                ", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
-                ", commodityBrandName='" + commodityBrandName + '\'' +
-                ", securityDesc='" + securityDesc + '\'' +
-                ", securityIcon='" + securityIcon + '\'' +
-                ", isSale=" + isSale +
-                ", existEnd=" + existEnd +
-                ", existStart=" + existStart +
-                ", existProgress=" + existProgress +
-                ", activityStartAt=" + activityStartAt +
-                ", activityEndAt=" + activityEndAt +
-                ", activityStock=" + activityStock +
-                ", activityMinPrice='" + activityMinPrice + '\'' +
-                ", easyOrder='" + easyOrder + '\'' +
-                ", commodityPostage='" + commodityPostage + '\'' +
-                ", commodityDescription='" + commodityDescription + '\'' +
-                ", commodityName='" + commodityName + '\'' +
-                ", shopId='" + shopId + '\'' +
-                ", purchaseCount=" + purchaseCount +
-                ", shopMid='" + shopMid + '\'' +
-                ", isCollected=" + isCollected +
-                ", mallTip='" + mallTip + '\'' +
-                ", terminalType=" + terminalType +
-                ", isSpot=" + isSpot +
-                ", mallName='" + mallName + '\'' +
-                ", mallMid='" + mallMid + '\'' +
-                ", goodsParam=" + goodsParam +
-                ", discount=" + discount +
-                ", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-                ", galleryPosition=" + galleryPosition +
-                ", shelvesType=" + shelvesType +
-                ", subheading=" + subheading +
-                ", commodityDetails=" + commodityDetails +
-                ", ifShowInWechat=" + ifShowInWechat +
-                ", buyerCount=" + buyerCount +
-                ", totalBuycount=" + totalBuycount +
-                ", serviceDescription=" + serviceDescription +
-                ", serviceDescriptionId=" + serviceDescriptionId +
-                ", templateRelevantGoodsCouponId=" + templateRelevantGoodsCouponId +
-                '}';
-    }
-
-    public void setTip() {
+	public String toString() {
+		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
+				+ commodityPicList + ", commodityId=" + commodityId
+				+ ", commodityCode=" + commodityCode + ", commodityStock="
+				+ commodityStock + ", commodityStatus=" + commodityStatus
+				+ ", commodityAppStatus=" + commodityAppStatus
+				+ ", commodityType=" + commodityType
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup
+				+ ", offlinePayment=" + offlinePayment + ", onlinePayment="
+				+ onlinePayment + ", offlineRefund=" + offlineRefund
+				+ ", onlineRefund=" + onlineRefund + ", shopIM=" + shopIM
+				+ ", bullId=" + bullId + ", distance=" + distance
+				+ ", saleShopCount=" + saleShopCount + ", watching=" + watching
+				+ ", location=" + location + ", systemNumber=" + systemNumber
+				+ ", activityType=" + activityType
+				+ ", activityCommodityStock=" + activityCommodityStock
+				+ ", activityPrice=" + activityPrice + ", endAt=" + endAt
+				+ ", startAt=" + startAt + ", activityStatus=" + activityStatus
+				+ ", forceAttention=" + forceAttention + ", groupPeopleLimit="
+				+ groupPeopleLimit + ", activityCommodityDesc="
+				+ activityCommodityDesc + ", groupTotalNum=" + groupTotalNum
+				+ ", easyOrder=" + easyOrder + ", terminalType=" + terminalType
+				+ ", isSpot=" + isSpot + ", mallName=" + mallName
+				+ ", mallMid=" + mallMid + ", goodsParam=" + goodsParam
+				+ ", discount=" + discount + ", commodityCurrentPrice="
+				+ commodityCurrentPrice + ", galleryPosition="
+				+ galleryPosition + ", commodityOPriceMax="
+				+ commodityOPriceMax + ", commodityOPriceMin="
+				+ commodityOPriceMin + ", commodityCPriceMax="
+				+ commodityCPriceMax + ", commodityCPriceMin="
+				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityPostage=" + commodityPostage
+				+ ", commodityDescription=" + commodityDescription
+				+ ", commodityName=" + commodityName + ", shopId=" + shopId
+				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
+				+ ", commodityBrandName=" + commodityBrandName
+				+ ", isCollected=" + isCollected + ", mallTip=" + mallTip
+				+ ", brandLogo=" + brandLogo + ", shopLogo=" + shopLogo
+				+ ", weAndTeStatus=" + weAndTeStatus + ", securityDesc="
+				+ securityDesc + ", securityIcon=" + securityIcon + ", isSale="
+				+ isSale + ", existEnd=" + existEnd + ", existStart="
+				+ existStart + ", existProgress=" + existProgress
+				+ ", activityStartAt=" + activityStartAt + ", activityEndAt="
+				+ activityEndAt + ", activityStock=" + activityStock
+				+ ", activityMinPrice=" + activityMinPrice + ", registerAt="
+				+ registerAt + ", soldOutAt=" + soldOutAt + ", shelvesType="
+				+ shelvesType + ", categoryNames=" + categoryNames
+				+ ", templateRelevantGoodsCouponId="
+				+ templateRelevantGoodsCouponId + ", onServiceIds="
+				+ onServiceIds + ", isRefund=" + isRefund + ", subheading="
+				+ subheading + ", commodityDetails=" + commodityDetails
+				+ ", ifShowInWechat=" + ifShowInWechat + ", buyerCount="
+				+ buyerCount + ", totalBuycount=" + totalBuycount
+				+ ", groupPeopleMax=" + groupPeopleMax + ", groupStartAt="
+				+ groupStartAt + ", groupEndAt=" + groupEndAt + ", groupNum="
+				+ groupNum + ", activityRoundId=" + activityRoundId
+				+ ", groupStatus=" + groupStatus + ", ifSupportAdjustPrice="
+				+ ifSupportAdjustPrice + ", activityGroupDesc="
+				+ activityGroupDesc + ", activityCommodityStatus="
+				+ activityCommodityStatus + ", crowdFundingPrice="
+				+ crowdFundingPrice + ", skus=" + skus
+				+ ", serviceDescription=" + serviceDescription
+				+ ", serviceDescriptionId=" + serviceDescriptionId
+				+ ", serviceDescriptionRemark=" + serviceDescriptionRemark
+				+ "]";
+	}
+    
+	public void setTip() {
         this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
                 this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
     }

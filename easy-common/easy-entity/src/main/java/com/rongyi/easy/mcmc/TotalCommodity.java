@@ -679,7 +679,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
-		this.setIsRefund(commodity.getIsRefund());//是否可退货
+		//this.setIsRefund(commodity.getIsRefund());//是否可退货
 	}
 
 	public String getSubheading() {
@@ -787,6 +787,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
+			this.setIsRefund(param.getIsRefund());//是否可退货
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}
