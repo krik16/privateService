@@ -109,6 +109,8 @@ public class CommodityParam implements Serializable{
 	private String haiXinId;
 
 	private String merchantId; // 海信导入时，存入shopmid，用作权限控制
+	
+	private Integer isRefund;//是否可退货   0：不可退货 1：可退货
 
 	public String getHaiXinId() {
 		return haiXinId;
@@ -466,6 +468,14 @@ public class CommodityParam implements Serializable{
 	public void setMerchantId(String merchantId) {
 		this.merchantId = merchantId;
 	}
+	
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
 
 	public void haiXinTotalCommodityToCommodityParam(CommodityParam commodityParam, TotalCommodity totalCommodity){
 		commodityParam.setId(totalCommodity.getId().toString());
@@ -607,48 +617,30 @@ public class CommodityParam implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CommodityParam{" +
-				"type=" + type +
-				", id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", barCode='" + barCode + '\'' +
-				", postage='" + postage + '\'' +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", picList=" + picList +
-				", categoryIds=" + categoryIds +
-				", customCategoryIds=" + customCategoryIds +
-				", distribution=" + distribution +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", serviceIds=" + serviceIds +
-				", createBy=" + createBy +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", stockStatus=" + stockStatus +
-				", commoditySpeceParams=" + commoditySpeceParams +
-				", stock=" + stock +
-				", remain=" + remain +
-				", hasSpec=" + hasSpec +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
-				", purchaseCount=" + purchaseCount +
-				", templateId=" + templateId +
-				", reason='" + reason + '\'' +
-				", subheading='" + subheading + '\'' +
-				", source=" + source +
-				", shelvesType=" + shelvesType +
-				", brandId='" + brandId + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", brandName='" + brandName + '\'' +
-				", commodityModelNo='" + commodityModelNo + '\'' +
-				", pass='" + pass + '\'' +
-				", haiXinId='" + haiXinId + '\'' +
-				", merchantId='" + merchantId + '\'' +
-				", goodsParam='" + goodsParam + '\'' +
-				", commodityType=" + commodityType +
-				'}';
+		return "CommodityParam [type=" + type + ", id=" + id + ", name=" + name
+				+ ", category=" + category + ", status=" + status + ", code="
+				+ code + ", barCode=" + barCode + ", description="
+				+ description + ", postage=" + postage + ", originalPrice="
+				+ originalPrice + ", currentPrice=" + currentPrice
+				+ ", picList=" + picList + ", categoryIds=" + categoryIds
+				+ ", customCategoryIds=" + customCategoryIds
+				+ ", distribution=" + distribution + ", freight=" + freight
+				+ ", terminalType=" + terminalType + ", serviceIds="
+				+ serviceIds + ", createBy=" + createBy + ", registerAt="
+				+ registerAt + ", soldOutAt=" + soldOutAt + ", stockStatus="
+				+ stockStatus + ", commoditySpeceParams="
+				+ commoditySpeceParams + ", stock=" + stock + ", remain="
+				+ remain + ", hasSpec=" + hasSpec + ", weAndTeStatus="
+				+ weAndTeStatus + ", purchaseCount=" + purchaseCount
+				+ ", templateId=" + templateId + ", reason=" + reason
+				+ ", subheading=" + subheading + ", commodityDetails="
+				+ commodityDetails + ", source=" + source + ", shelvesType="
+				+ shelvesType + ", brandId=" + brandId + ", brandMid="
+				+ brandMid + ", brandName=" + brandName + ", commodityModelNo="
+				+ commodityModelNo + ", pass=" + pass + ", haiXinId="
+				+ haiXinId + ", merchantId=" + merchantId + ", isRefund="
+				+ isRefund + ", goodsParam=" + goodsParam + ", commodityType="
+				+ commodityType + "]";
 	}
+	
 }
