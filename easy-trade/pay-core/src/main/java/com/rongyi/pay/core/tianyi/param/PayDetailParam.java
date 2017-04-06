@@ -109,6 +109,18 @@ public class PayDetailParam extends BaseData {
     //免登录信息-token令牌-O
     private String key_tid;
 
+    //商户key
+    private String key;
+
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public String getService() {
         return service;
     }

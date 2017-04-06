@@ -10,7 +10,7 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class TianyiResp<T> extends BaseData {
 
-    private boolean success = true;
+    private boolean success = false;
     private String errorCode="";
     private String errorMsg="";
     private T result;

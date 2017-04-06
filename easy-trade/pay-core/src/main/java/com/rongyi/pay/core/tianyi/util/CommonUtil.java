@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class CommonUtil {
 
+
     /**
      * 将bean将成map
      * @param obj bean对象
@@ -42,4 +43,8 @@ public class CommonUtil {
         }
         return map;
     }
+
+
+
+
 }

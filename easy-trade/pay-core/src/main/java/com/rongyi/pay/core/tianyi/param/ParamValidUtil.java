@@ -16,6 +16,10 @@ public class ParamValidUtil {
     private static final String TRANSCODE = "01";
     private static final String ORDERCCY = "RMB";
     private static final String SERVICECODE = "05";
+    private static final String SERVICE = "mobile.securitypay.pay";
+    private static final String SIGNTYPE ="MD5";
+    private static final String USERLANGUAGE ="zh";
+    private static final String BUSITYPE ="04";
 
     /**
      * 校验下单参数
@@ -26,10 +30,9 @@ public class ParamValidUtil {
         if (param == null || configure == null){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"param or configure");
         }
-        if (StringUtils.isBlank(configure.getMerchantId())){
+        if (StringUtils.isBlank(param.getMerchantId())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantId");
         }
-        param.setMerchantId(configure.getMerchantId());
         if (StringUtils.isBlank(param.getOrderSeq())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderSeq");
         }
@@ -61,5 +64,125 @@ public class ParamValidUtil {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"riskControlInfo");
         }
 
+    }
+
+    public static void checkAndSetPayParam(PayDetailParam param, TianyiConfigure configure) {
+        if (param == null || configure == null){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"param or configure");
+        }
+        param.setService(SERVICE);
+        if (StringUtils.isBlank(param.getMerchantId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantId");
+        }
+        if (StringUtils.isBlank(param.getMerchantPwd())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantPwd");
+        }
+        if (StringUtils.isBlank(configure.getBeforeBackUrl())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"beforeMerchantUrl");
+        }
+        param.setBeforeMerchantUrl(configure.getBeforeBackUrl());
+        if (StringUtils.isBlank(configure.getBackMerchantUrl())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"backMerchantUrl");
+        }
+        param.setBackMerchantUrl(configure.getBackMerchantUrl());
+        param.setSignType(SIGNTYPE);
+        param.setUserLanguage(USERLANGUAGE);
+        param.setRemark("ed2hv12d");//todo
+        if (StringUtils.isBlank(param.getOrderSeq())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderSeq");
+        }
+        if (StringUtils.isBlank(param.getOrderReqTranseq())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderReqTranseq");
+        }
+        if (StringUtils.isBlank(param.getOrderTime())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderTime");
+        }
+        if (StringUtils.isBlank(param.getOrderAmount())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderAmount");
+        }
+        param.setCurType(ORDERCCY);
+        if (StringUtils.isBlank(param.getCurType())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"curType");
+        }
+        if (StringUtils.isBlank(param.getProductId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"productId");
+        }
+        if (StringUtils.isBlank(param.getProductDesc())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"productDesc");
+        }
+        if (StringUtils.isBlank(param.getSubject())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"subject");
+        }
+        if (StringUtils.isBlank(param.getProductAmount())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"productAmount");
+        }
+        if (StringUtils.isBlank(param.getAttachAmount())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"attachAmount");
+        }
+        if (StringUtils.isBlank(param.getCustomerId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"customerId");
+        }
+        if (StringUtils.isBlank(configure.getBusiType())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"busiType");
+        }
+        param.setBusiType(configure.getBusiType());
+        if (StringUtils.isBlank(configure.getSwtichacc())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"busiType");
+        }
+        param.setSwtichAcc(configure.getSwtichacc());
+        if (StringUtils.isBlank(param.getKey())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"key");
+        }
+    }
+
+    public static void checkTradeQueryParam(PayQueryParam param, TianyiConfigure configure) {
+        if (param == null || configure == null){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"param or configure");
+        }
+        if (StringUtils.isBlank(param.getMerchantId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantId");
+        }
+        if (StringUtils.isBlank(param.getOrderNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderNo");
+        }
+        if (StringUtils.isBlank(param.getOrderReqNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderReqNo");
+        }
+        if (StringUtils.isBlank(param.getOrderDate())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"orderDate");
+        }
+        if (StringUtils.isBlank(configure.getPayQueryUrl())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"payQueryUrl");
+        }
+    }
+
+    public static void checkTradeRefundParam(RefundParam param, TianyiConfigure configure) {
+        if (param == null || configure == null){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"param or configure");
+        }
+        if (StringUtils.isBlank(param.getMerchantId())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantId");
+        }
+        if (StringUtils.isBlank(param.getMerchantPwd())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantPwd");
+        }
+        if (StringUtils.isBlank(param.getOldOrderNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"oldOrderNo");
+        }
+        if (StringUtils.isBlank(param.getOldOrderReqNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"oldOrderReqNo");
+        }
+        if (StringUtils.isBlank(param.getRefundReqNo())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"refundReqNo");
+        }
+        if (StringUtils.isBlank(param.getRefundReqDate())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"refundReqDate");
+        }
+        if (StringUtils.isBlank(param.getTransAmt())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"transAmt");
+        }
+        if (StringUtils.isBlank(param.getChannel())){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"channel");
+        }
     }
 }

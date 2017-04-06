@@ -13,6 +13,9 @@ public class TianyiOrderParam extends BaseData {
     //商户字代码-O
     private String subMerchantId;
 
+    //商户key
+    private String key;
+
     //订单号-M
     private String orderSeq;
 
@@ -73,6 +76,14 @@ public class TianyiOrderParam extends BaseData {
     //风控信息-M
     private String riskControlInfo;
 
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getMerchantId() {
         return merchantId;

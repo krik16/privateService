@@ -10,12 +10,6 @@ public class TianyiConfigure extends BaseData {
 
     private String env;//环境地址 0 综测；1 准生产；2 生产 必填
 
-    private String merchantId;//商户代码
-
-    private String merkey;//商户key 必填
-
-    private String merchantPwd;//商户密码 必填
-
     private String beforeBackUrl;//前台回调地址
 
     private String backMerchantUrl;//后台回调地址
@@ -116,30 +110,6 @@ public class TianyiConfigure extends BaseData {
 
     public void setEnv(String env) {
         this.env = env;
-    }
-
-    public String getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public String getMerkey() {
-        return merkey;
-    }
-
-    public void setMerkey(String merkey) {
-        this.merkey = merkey;
-    }
-
-    public String getMerchantPwd() {
-        return merchantPwd;
-    }
-
-    public void setMerchantPwd(String merchantPwd) {
-        this.merchantPwd = merchantPwd;
     }
 
     public String getBeforeBackUrl() {

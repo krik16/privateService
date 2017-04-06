@@ -22,6 +22,16 @@ public class PayQueryParam extends BaseData {
     //mac校验域-M
     private String mac;
 
+    //商户key
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getMerchantId() {
         return merchantId;
