@@ -1111,7 +1111,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 		this.source = commodity.getSource();
 		this.systemNumber=commodity.getSystemNumber();
-		this.isRefund = commodity.getIsRefund();//是否可退货
+		this.isRefund = commodity.getIsRefund() == null ? 0 : commodity.getIsRefund();//是否可退货
 	}
 
 	private boolean isShowInWechat() {
