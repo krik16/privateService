@@ -1,5 +1,8 @@
 package com.rongyi.easy.osm.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -81,6 +84,8 @@ public class ApplicationFormEntity implements Serializable{
 
     /** 更新时间 */
     private Date updateAt;
+
+    private OrderEventEntity orderEvent;
 
     /**
      * 主键id
@@ -376,5 +381,18 @@ public class ApplicationFormEntity implements Serializable{
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public OrderEventEntity getOrderEvent() {
+        return orderEvent;
+    }
+
+    public void setOrderEvent(OrderEventEntity orderEvent) {
+        this.orderEvent = orderEvent;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
