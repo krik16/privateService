@@ -136,6 +136,11 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private String commodityName; // 商品（卡券）名称
     private String commoditySn; // 商品（礼品）编码
     private BigDecimal reductionFee;//满减金额
+    private BigDecimal refundDiscountOfficial;//平台分摊退款金额
+    private Integer isRefund;  // 是否可以退款，0：不可退款 1：可退款
+    private String complaintNo; // 当前申诉/维权单号
+    private String refundNo; // 当前退款单号
+    private String shopName ;  // 店铺名称
 
 
     public String getRefundDiscountInfo() {
@@ -692,6 +697,46 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     public void setReductionFee(BigDecimal reductionFee) {
         this.reductionFee = reductionFee;
+    }
+
+    public BigDecimal getRefundDiscountOfficial() {
+        return refundDiscountOfficial;
+    }
+
+    public void setRefundDiscountOfficial(BigDecimal refundDiscountOfficial) {
+        this.refundDiscountOfficial = refundDiscountOfficial;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
+    }
+
+    public String getComplaintNo() {
+        return complaintNo;
+    }
+
+    public void setComplaintNo(String complaintNo) {
+        this.complaintNo = complaintNo;
+    }
+
+    public Integer getIsRefund() {
+        return isRefund;
+    }
+
+    public void setIsRefund(Integer isRefund) {
+        this.isRefund = isRefund;
     }
 
     @Override
