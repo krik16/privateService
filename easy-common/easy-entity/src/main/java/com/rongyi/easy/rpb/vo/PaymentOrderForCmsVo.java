@@ -14,7 +14,7 @@ public class PaymentOrderForCmsVo implements Serializable {
     private String orderNo;//订单号
     private Long payAmount;//实际支付金额（分）
     private Long paymentTime;//支付时间
-    private Integer paymentType;//支付方式（0 银行卡 1 微信 2 支付宝 3 现金）
+    private Integer paymentType;//支付方式（0:支付宝 1:微信 2:pos银行卡,3:现金）
     private Long realAmount;//订单金额
     private Long reductionUsed;//满减金额
     private Long scoreDiscount;//积分抵扣金额
