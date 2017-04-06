@@ -29,14 +29,14 @@
         <result column="ry_app_id" property="ryAppId" jdbcType="VARCHAR"/>
         <result column="source" property="source" jdbcType="TINYINT"/>
         <result column="org_channel" property="orgChannel" jdbcType="TINYINT"/>
-
+        <result column="pay_scene" property="payScene" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
 		id, order_no,order_type,order_price,pay_no,pay_amount,
 		status,trade_type,create_at,
 		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
-		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel
+		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel,pay_scene
 	</sql>
 
     <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntity"
