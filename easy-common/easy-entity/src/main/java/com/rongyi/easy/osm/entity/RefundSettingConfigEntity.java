@@ -18,8 +18,10 @@ public class RefundSettingConfigEntity implements Serializable {
     private Integer status;
     // 售后、维权电话
     private String contactTel;
-    // 客户单笔订单下单商品可重复退款次数上限（单位：秒）
+    // 客户单笔订单下单商品可重复退款次数上限
     private Integer maxRefundCount;
+    // 最大申请申诉次数
+    private Integer maxComplaintCount;
     // 买家申请退款，店铺几天未处理自动退款（单位：秒）
     private Integer limitTimeForMoney;
     // 买家申请退货退款，店铺几天未处理自动退款（单位：秒）
@@ -139,6 +141,14 @@ public class RefundSettingConfigEntity implements Serializable {
         this.status = status;
     }
 
+    public Integer getMaxComplaintCount() {
+        return maxComplaintCount;
+    }
+
+    public void setMaxComplaintCount(Integer maxComplaintCount) {
+        this.maxComplaintCount = maxComplaintCount;
+    }
+
     @Override
     public String toString() {
         return "RefundSettingConfigEntity{" +
@@ -148,6 +158,7 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", status=" + status +
                 ", contactTel='" + contactTel + '\'' +
                 ", maxRefundCount=" + maxRefundCount +
+                ", maxComplaintCount=" + maxComplaintCount +
                 ", limitTimeForMoney=" + limitTimeForMoney +
                 ", limitTimeForCommodity=" + limitTimeForCommodity +
                 ", limitTimeForNonDelivery=" + limitTimeForNonDelivery +
