@@ -3,6 +3,9 @@ package com.rongyi.rss.malllife;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.malllife.vo.CommentsVO;
+import com.rongyi.easy.malllife.vo.FavourableVO;
+import com.rongyi.easy.malllife.vo.GroupVO;
 
 /*
  * Description:  
@@ -15,7 +18,7 @@ import java.util.Map;
 public interface IFavService {
 
 
-    public void insert(String userId, String contentId);
+    public String insert(String userId, String contentId);
 
     public void delete(String userId, String contentId);
 
@@ -25,4 +28,15 @@ public interface IFavService {
 
 
     public  List<GroupVO> listActivities(List<String> ids);
+
+    public FavourableVO updateShareNum(String activityId);
+
+    public List<CommentsVO> getComments(String commentable_id)throws Exception;
+
+    public String insertShop(String userId, String shopId);
+
+    public String insert(String userId, String contentId, String collectableType);
+
+    public void delete(String userId, String contentId, String collectableType);
+
 }
