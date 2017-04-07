@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -100,7 +98,7 @@ public class WebankController {
         LOGGER.info("parmMap:{}",paramMap);
         try {
             Map<String, String> map = Utils.getRequestParams(request);
-            payNotifyBizz.webankAlipayNotify(paramMap);
+            payNotifyBizz.  webankAlipayNotify(paramMap);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.info("微众支付宝扫码支付异步通知处理异常");

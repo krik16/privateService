@@ -9,6 +9,7 @@ import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
+import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.pay.core.Exception.AliPayException;
 import com.rongyi.pay.core.Exception.WeChatException;
 import com.rongyi.pay.core.Exception.WebankException;
@@ -103,7 +104,7 @@ public class PayNotifyBizz {
 
     /**
      * 微众支付宝通知
-     * @param map 通知参数
+     * @param paramMap 通知参数
      */
     public void webankAlipayNotify(Map<String, String> paramMap) {
         log.info("微众支付宝通知内容,map={}",paramMap);
@@ -148,8 +149,16 @@ public class PayNotifyBizz {
             return;
         }
         BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
-        doPayNotify(paymentEntity.getPayNo(),payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
+        //支付通知
+       if(dto.getType() != null && 0 == dto.getType()) {
 
+           doPayNotify(paymentEntity.getPayNo(), payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
+       }
+       //退款通知
+        else if(dto.getType() != null && 1 == dto.getType()){
+
+           doPosBankRefundNotify(dto,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+       }
     }
 
     /**
@@ -167,12 +176,12 @@ public class PayNotifyBizz {
         PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
         if (paymentEntity == null) {
             log.warn("此订单支付记录不存在,payNo={}", payNo);
-            throw new TradeException("支付记录不存在");
+            throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
 
         if (paymentEntity.getAmountMoney().compareTo(payAmount) != 0) {
             log.warn("支付金额不符payNo={},realAmount={},recordAmount={}", payNo, payAmount, paymentEntity.getAmountMoney());
-            throw new TradeException("支付金额不符");
+            throw new TradeException(ConstantEnum.EXCEPTION_AMOUNT_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_AMOUNT_FAIL.getValueStr());
         }
 
         //初始化支付事件记录
@@ -196,6 +205,49 @@ public class PayNotifyBizz {
         //通知第三方业务
         payNotifyThird(paymentEntity, paymentLogInfo);
     }
+
+    /**
+     * 处理pos银行卡退款通知
+     *
+     */
+    public void doPosBankRefundNotify(PosBankSynNotifyDto posBankSynNotifyDto,Integer payChannel) {
+        //获取支付信息
+        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNoAndPayChannelWithLock(posBankSynNotifyDto.getOrderNo(), payChannel);
+        if (oldPaymentEntity == null || oldPaymentEntity.getStatus() == null || Constants.PAYMENT_STATUS.STAUS2 != oldPaymentEntity.getStatus()) {
+            log.warn("此订单支付记录不存在,orderNo={}", posBankSynNotifyDto.getOrderNo());
+            throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
+        //获取支付信息
+        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(posBankSynNotifyDto.getOrderNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
+                Constants.PAYMENT_STATUS.STAUS2, payChannel);
+        if (refundPaymentEntity != null) {
+            log.warn("此订单已退款,无法再次退款,orderNo={}", posBankSynNotifyDto.getOrderNo());
+            throw new TradeException(ConstantEnum.EXCEPTION_REFUND_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_FAIL.getValueStr());
+        }
+
+        RyMchVo ryMchVo = new RyMchVo();
+        ryMchVo.setRyMchId(posBankSynNotifyDto.getRyMchId());
+        ryMchVo.setRyAppId(posBankSynNotifyDto.getRyAppId());
+        ryMchVo.setSource((byte)4);
+        ryMchVo.setOrgChannel(oldPaymentEntity.getOrgChannel());
+        //初始化退款记录
+        PaymentEntity paymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount().intValue(),oldPaymentEntity.getOrderType(),
+                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getPayChannel(),oldPaymentEntity.getAliSellerId(),oldPaymentEntity.getWechatMchId(),
+                oldPaymentEntity.getPayScene());
+
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //初始化退款事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(posBankSynNotifyDto.getPaymentNo(), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                "SUCCESS", posBankSynNotifyDto.getPayAmount().intValue(), "", "",
+                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
+
+        //保存退款记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+
+    }
+
 
     /**
      * 支付成功通知第三方
@@ -267,16 +319,16 @@ public class PayNotifyBizz {
      *
      * @param paymentEntity PaymentEntity
      */
-    private void refundNotifyThird(PaymentEntity paymentEntity) {
-        try {
-            notifyThird(paymentEntity, null, ConstantEnum.THIRD_NOTIFY_TYPE_2.getCodeStr());
-        } catch (ThirdException e) {
-            log.error("第三方退款结果处理失败，暂记录日志，不做业务处理,payNo={},errno={},errmsg={}", paymentEntity.getPayNo(), e.getCode(), e.getMessage());
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
-        }
-    }
+//    private void refundNotifyThird(PaymentEntity paymentEntity) {
+//        try {
+//            notifyThird(paymentEntity, null, ConstantEnum.THIRD_NOTIFY_TYPE_2.getCodeStr());
+//        } catch (ThirdException e) {
+//            log.error("第三方退款结果处理失败，暂记录日志，不做业务处理,payNo={},errno={},errmsg={}", paymentEntity.getPayNo(), e.getCode(), e.getMessage());
+//        } catch (Exception e) {
+//            log.error(e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
 
     /**
