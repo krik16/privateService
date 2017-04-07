@@ -39,4 +39,11 @@ public class QueryServiceImpl implements IQueryService{
     public Integer queryCountByParam(PaymentOrderParam paymentParam) {
         return paymentService.queryCountByParam(paymentParam);
     }
+
+    @Override
+    public PaymentEntity queryByPayNo(String payNo) {
+        logger.info("查询paymentOrder,payNo={}",payNo);
+        List<PaymentEntity> payments = paymentService.selectByPayNo(payNo);
+        return payments.get(0);
+    }
 }
