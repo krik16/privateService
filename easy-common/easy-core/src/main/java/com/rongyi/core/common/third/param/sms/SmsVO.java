@@ -36,6 +36,14 @@ public class SmsVO implements Serializable {
 
     private String remark;    //备注
 
+    private String url;
+
+    private String unitId;
+
+    private String username;
+
+    private String password;
+
     private Date createAt;
 
     private String createBy;
@@ -44,23 +52,27 @@ public class SmsVO implements Serializable {
 
     private String updateBy;
 
-    public SmsVO(SmsDto smsDto){
-        this.setId(smsDto.getId());
-        this.setChannel(smsDto.getChannel());
-        this.setPublicKey(smsDto.getPublicKey());
-        this.setPrivateKey(smsDto.getPrivateKey());
-        this.setToken(smsDto.getToken());
-        this.setIpLimit(smsDto.getIpLimit());
-        this.setIpWhiteList(smsDto.getIpWhiteList());
-        this.setSendChannel(smsDto.getSendChannel());
-        this.setSendType(smsDto.getSendType());
-        this.setIsDisabled(smsDto.getIsDisabled());
-        this.setSign(smsDto.getSign());
-        this.setRemark(smsDto.getRemark());
-        this.setCreateAt(smsDto.getCreateAt());
-        this.setCreateBy(smsDto.getCreateBy());
-        this.setUpdateAt(smsDto.getUpdateAt());
-        this.setUpdateBy(smsDto.getUpdateBy());
+    public SmsVO(SmsChannelDto smsChannelDto){
+        this.setId(smsChannelDto.getId());
+        this.setChannel(smsChannelDto.getChannel());
+        this.setPublicKey(smsChannelDto.getPublicKey());
+        this.setPrivateKey(smsChannelDto.getPrivateKey());
+        this.setToken(smsChannelDto.getToken());
+        this.setIpLimit(smsChannelDto.getIpLimit());
+        this.setIpWhiteList(smsChannelDto.getIpWhiteList());
+        this.setSendChannel(smsChannelDto.getSendChannel());
+        this.setSendType(smsChannelDto.getSendType());
+        this.setIsDisabled(smsChannelDto.getIsDisabled());
+        this.setSign(smsChannelDto.getSign());
+        this.setRemark(smsChannelDto.getRemark());
+        this.setUrl(smsChannelDto.getUrl());
+        this.setUnitId(smsChannelDto.getUnitId());
+        this.setUsername(smsChannelDto.getUsername());
+        this.setPassword(smsChannelDto.getPassword());
+        this.setCreateAt(smsChannelDto.getCreateAt());
+        this.setCreateBy(smsChannelDto.getCreateBy());
+        this.setUpdateAt(smsChannelDto.getUpdateAt());
+        this.setUpdateBy(smsChannelDto.getUpdateBy());
     }
 
     public int getId() {
@@ -157,6 +169,38 @@ public class SmsVO implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(String unitId) {
+        this.unitId = unitId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getCreateAt() {

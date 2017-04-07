@@ -43,6 +43,52 @@ public class SmsCommonParam implements Serializable{
 
     private String remark;    //备注
 
+    private String  jsessionid;//用户信息jsessionid
+    private String userId;
+    private Integer currentPage; //当前页数
+    private Integer offSet;
+    private Integer pageSize = 20;//每页显示数
+
+    private String url;
+
+    private String unitId;
+
+    private String username;
+
+    private String password;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(String unitId) {
+        this.unitId = unitId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getSign() {
         return sign;
     }
@@ -58,12 +104,6 @@ public class SmsCommonParam implements Serializable{
     public void setRemark(String remark) {
         this.remark = remark;
     }
-
-    private String  jsessionid;//用户信息jsessionid
-    private String userId;
-    private Integer currentPage; //当前页数
-    private Integer offSet;
-    private Integer pageSize = 20;//每页显示数
 
     public Integer getId() {
         return id;

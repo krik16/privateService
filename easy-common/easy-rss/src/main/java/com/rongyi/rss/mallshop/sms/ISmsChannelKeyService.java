@@ -1,5 +1,6 @@
 package com.rongyi.rss.mallshop.sms;
 
+import com.rongyi.core.common.third.param.sms.SmsChannelDto;
 import com.rongyi.core.common.third.param.sms.SmsCommonParam;
 import com.rongyi.core.common.third.param.sms.SmsDto;
 
@@ -14,11 +15,13 @@ public interface ISmsChannelKeyService {
 
     int delSmsChannel(SmsCommonParam param) throws Exception;
 
-    SmsDto getSmsChannelByKey(SmsCommonParam param) throws Exception;
+    SmsChannelDto getSmsChannelById(int id) throws Exception;
 
-    List<SmsDto> smsChannelList(SmsCommonParam param) throws Exception;
+    List<SmsChannelDto> smsChannelList(SmsCommonParam param) throws Exception;
 
     int getCount() throws Exception;
 
     int updateSmsChannel(SmsCommonParam param) throws Exception;
+
+    SmsChannelDto getSmsChannelByChannel(String channel) throws Exception;
 }
