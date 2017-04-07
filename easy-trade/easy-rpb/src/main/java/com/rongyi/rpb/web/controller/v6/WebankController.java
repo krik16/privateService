@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +56,7 @@ public class WebankController {
     }
 
     @RequestMapping("statementDown")
-    public void statementDown(HttpServletRequest request) {
+    public void statementDown(HttpServletRequest request , @RequestParam Map<String,Object> paramMap) {
 //        LOGGER.info("微众对账单通知下载");
 //        try {
 //            Map map =  request.getParameterMap();
@@ -93,6 +94,7 @@ public class WebankController {
 
 
         LOGGER.info("微众支付宝扫码支付异步通知start........");
+        LOGGER.info("parmMap:{}",paramMap);
         try {
             Map<String, String> map = Utils.getRequestParams(request);
             payNotifyBizz.webankAlipayNotify(map);
