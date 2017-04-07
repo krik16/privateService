@@ -42,4 +42,11 @@ public interface IQueryService {
      * @return
      */
     Integer queryCountByParam(PaymentOrderParam paymentParam);
+
+    /**
+     * 根据支付单号查询paymentOrder
+     * @param payNo
+     * @return
+     */
+    PaymentEntity queryByPayNo(String payNo);
 }

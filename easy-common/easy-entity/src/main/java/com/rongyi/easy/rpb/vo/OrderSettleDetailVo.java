@@ -27,6 +27,7 @@ public class OrderSettleDetailVo implements Serializable {
     private String shopNo;//商户号
     private Integer status;
     private Integer payTerminal;//支付终端 1移动pos 2扫码支付
+    private String oRyPayNo;//原商户订单号
 
     public Long getCouponUsed() {
         return couponUsed;
@@ -194,6 +195,14 @@ public class OrderSettleDetailVo implements Serializable {
 
     public void setPayTerminal(Integer payTerminal) {
         this.payTerminal = payTerminal;
+    }
+
+    public String getoRyPayNo() {
+        return oRyPayNo;
+    }
+
+    public void setoRyPayNo(String oRyPayNo) {
+        this.oRyPayNo = oRyPayNo;
     }
 
     @Override
