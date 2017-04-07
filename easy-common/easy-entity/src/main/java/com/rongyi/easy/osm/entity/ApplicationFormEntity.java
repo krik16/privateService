@@ -87,6 +87,8 @@ public class ApplicationFormEntity implements Serializable{
 
     private OrderEventEntity orderEvent;
 
+    private OrderFormExtraEntity receiveAddress;//退款收货地址
+
     /**
      * 主键id
      * @return id
@@ -389,6 +391,14 @@ public class ApplicationFormEntity implements Serializable{
 
     public void setOrderEvent(OrderEventEntity orderEvent) {
         this.orderEvent = orderEvent;
+    }
+
+    public OrderFormExtraEntity getReceiveAddress() {
+        return receiveAddress;
+    }
+
+    public void setReceiveAddress(OrderFormExtraEntity receiveAddress) {
+        this.receiveAddress = receiveAddress;
     }
 
     @Override

@@ -119,20 +119,18 @@ public interface OrderEventType {
     public static final String REFUND_CANNEL = "51";
     /** 商家同意退款*/
     public static final String SELLER_AGREE_REFUND = "52";
+    /** 商家同意退款退货申请*/
+    public static final String AGREE_REFUND_MONEY_AND_GOODS = "53";
     /** 商家拒绝退款*/
-    public static final String SELLER_REFUSE_REFUND = "53";
+    public static final String SELLER_REFUSE_REFUND = "54";
     /** 商家超时未拒绝自动退款 */
-    public static final String SELLER_AGREE_REFUND_TIMEOUT= "54";
+    public static final String SELLER_AGREE_REFUND_TIMEOUT= "55";
     /** 买家发货 */
-    public static final String BUYER_DELIVER_GOOD = "55";
+    public static final String BUYER_DELIVER_GOOD = "56";
     /** 卖家收货 */
-    public static final String SELLER_RECEIVE_GOOD = "56";
+    public static final String SELLER_RECEIVE_GOOD = "57";
     /** 卖家拒绝收货 */
-    public static final String SELLER_REFUSE_GOOD = "57";
-    /** 退款中 */
-    public static final String REFUND_REQUESTING = "58";
-    /** 已退款 */
-    public static final String REFUNDED = "59";
+    public static final String SELLER_REFUSE_GOOD = "58";
     
     
     public interface EventErrorCode {
