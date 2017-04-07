@@ -22,6 +22,7 @@ import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.lightning.RoaRyMchAppService;
 import com.rongyi.rss.malllife.service.IRedisService;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,9 +105,11 @@ public class PayNotifyBizz {
      * 微众支付宝通知
      * @param map 通知参数
      */
-    public void webankAlipayNotify(Map<String, String> map) {
-        log.info("微众支付宝通知内容,map={}",map);
-        if ("TRADE_SUCCESS".equals(map.get("tradeStatus"))) {
+    public void webankAlipayNotify(Map<String, String> paramMap) {
+        log.info("微众支付宝通知内容,map={}",paramMap);
+        Map<String,String> map =(Map<String,String>) JSONObject.fromObject(paramMap.get("data"));
+        log.info("微众支付宝通知data内容,map={}",map);
+        if ("01".equals(map.get("tradeStatus"))) {
             String payNo = map.get("orderId");
             String tradeNo = map.get("tradeNo");
             String buyerId = map.get("buyerId");
@@ -124,7 +127,7 @@ public class PayNotifyBizz {
      * @param map 通知参数
      */
     public void webankWechatNotify(Map<String, String> map) {
-        log.info("微众支付宝通知内容,map={}",map);
+        log.info("微众微信通知内容,map={}", map);
         if ("0".equals(map.get("status"))&&"0".equals(map.get("result_code"))&&"0".equals(map.get("pay_result"))) {
             String payNo = map.get("out_trade_no");
             String tradeNo = map.get("transaction_id");
@@ -140,6 +143,10 @@ public class PayNotifyBizz {
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
                 Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+        if(dto.getRyMchId() == null || !dto.getRyMchId().equals(paymentEntity.getRyMchId())){
+            log.warn("入住商户信息不匹配,不更新支付状态");
+            return;
+        }
         BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
         doPayNotify(paymentEntity.getPayNo(),payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
 
