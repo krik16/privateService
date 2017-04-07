@@ -43,6 +43,7 @@ public class OperateCommodityDetailVo implements Serializable{
     private Integer terminalType;  //显示终端
     private String brandName;  //品牌名称
     private String reason;
+    private Integer isRefund;//是否可退货
 
 
     public String getOriginalPrice() {
@@ -300,4 +301,12 @@ public class OperateCommodityDetailVo implements Serializable{
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
 }
