@@ -11,7 +11,7 @@ public class OrderSettleDetailVo implements Serializable {
     private Long payAmount;
     private String ryShopNo;//容易商户号
     private String payShopNo;//支付渠道商户号
-    private Integer paymentChannel;//支付渠道 1微众银行、2容易网服务商、3拉卡拉、4容易网
+    private Integer paymentChannel;//支付渠道 0微众银行、1容易网服务商、2拉卡拉、3容易网
     private String paymentNo;//支付渠道流水号
     private String cashName;
     private Long paymentTime;
@@ -26,6 +26,7 @@ public class OrderSettleDetailVo implements Serializable {
     private String shopName;//商户名称
     private String shopNo;//商户号
     private Integer status;
+    private Integer payTerminal;//支付终端 1移动pos 2扫码支付
 
     public Long getCouponUsed() {
         return couponUsed;
@@ -187,6 +188,14 @@ public class OrderSettleDetailVo implements Serializable {
         this.ryShopNo = ryShopNo;
     }
 
+    public Integer getPayTerminal() {
+        return payTerminal;
+    }
+
+    public void setPayTerminal(Integer payTerminal) {
+        this.payTerminal = payTerminal;
+    }
+
     @Override
     public String toString() {
         return "OrderSettleDetailVo{" +
@@ -210,6 +219,7 @@ public class OrderSettleDetailVo implements Serializable {
                 ", shopName='" + shopName + '\'' +
                 ", shopNo='" + shopNo + '\'' +
                 ", status=" + status +
+                ", payTerminal=" + payTerminal +
                 '}';
     }
 }
