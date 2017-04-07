@@ -36,6 +36,10 @@ public class RefundSettingConfigEntity implements Serializable {
     private Integer maxComplaintTime;
     // 退款间隔时间
     private Integer intevalRefundTime;
+    // JSON 格式内容
+    private String content;
+    // 1：退款/维权
+    private Integer configType;
 
     public String getChiefId() {
         return chiefId;
@@ -149,6 +153,17 @@ public class RefundSettingConfigEntity implements Serializable {
         this.maxComplaintCount = maxComplaintCount;
     }
 
+    public Integer getConfigType() {
+        configType = 1;
+        return configType;
+    }
+
+    public String getContent() {
+        // 需要每次生成，防止中间部分字段有变化
+        content = toJson();
+        return content;
+    }
+
     @Override
     public String toString() {
         return "RefundSettingConfigEntity{" +
@@ -166,6 +181,26 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", limitTimeForNonCofirm=" + limitTimeForNonCofirm +
                 ", maxComplaintTime=" + maxComplaintTime +
                 ", intevalRefundTime=" + intevalRefundTime +
+                ", configType=" + configType +
+                '}';
+    }
+
+    // 装换成JSON
+    private String toJson() {
+        return "{" +
+                "\"maxRefundCount\":" + maxRefundCount +
+                ", \"maxComplaintCount\":" + maxComplaintCount +
+                ", \"limitTimeForMoney\":" + limitTimeForMoney +
+                ", \"limitTimeForCommodity\":" + limitTimeForCommodity +
+                ", \"limitTimeForNonDelivery\":" + limitTimeForNonDelivery +
+                ", \"limitTimeForNonVisit\":" + limitTimeForNonVisit +
+                ", \"limitTimeForNonCofirm\":" + limitTimeForNonCofirm +
+                ", \"maxComplaintTime\":" + maxComplaintTime +
+                ", \"intevalRefundTime\":" + intevalRefundTime +
+                ", \"chiefId\":\"" + intevalRefundTime + "\"" +
+                ", \"id\":" + id +
+                ", \"status\":" + status +
+                ", \"contactTel\":\"" + contactTel + "\"" +
                 '}';
     }
 }

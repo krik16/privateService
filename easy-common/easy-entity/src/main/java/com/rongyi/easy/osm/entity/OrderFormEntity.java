@@ -136,7 +136,10 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer isPush;//：已推送，0：未推送，-1：不推送'
     private BigDecimal refundDiscountOfficial;//平台分摊退款金额
     private String chiefId;//主账号关联的店铺/商城ID
-
+    // ======= add by wangjh7 on 2017-04-06 新增退款快照信息
+    private RefundSettingConfigEntity refundSettingConfig;
+    // 微店对应的店铺名称
+    private String shopName;
 
     public Integer getDeliverId() {
         return deliverId;
@@ -1041,6 +1044,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setChiefId(String chiefId) {
         this.chiefId = chiefId;
+    }
+
+    public RefundSettingConfigEntity getRefundSettingConfig() {
+        return refundSettingConfig;
+    }
+
+    public void setRefundSettingConfig(RefundSettingConfigEntity refundSettingConfig) {
+        this.refundSettingConfig = refundSettingConfig;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
     @Override
