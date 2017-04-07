@@ -275,7 +275,7 @@ public class QueryBizz {
      */
     public PaymentLogInfo queryPaymentLogInfo(String payNo) {
 
-        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo,null);
 
         if (paymentLogInfo == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
