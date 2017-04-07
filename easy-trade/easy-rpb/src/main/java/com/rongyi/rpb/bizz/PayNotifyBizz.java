@@ -109,7 +109,7 @@ public class PayNotifyBizz {
         log.info("微众支付宝通知内容,map={}",paramMap);
         Map<String,String> map =(Map<String,String>) JSONObject.fromObject(paramMap.get("data"));
         log.info("微众支付宝通知data内容,map={}",map);
-        if ("TRADE_SUCCESS".equals(map.get("tradeStatus"))) {
+        if ("01".equals(map.get("tradeStatus"))) {
             String payNo = map.get("orderId");
             String tradeNo = map.get("tradeNo");
             String buyerId = map.get("buyerId");
@@ -127,7 +127,7 @@ public class PayNotifyBizz {
      * @param map 通知参数
      */
     public void webankWechatNotify(Map<String, String> map) {
-        log.info("微众支付宝通知内容,map={}", map);
+        log.info("微众微信通知内容,map={}", map);
         if ("0".equals(map.get("status"))&&"0".equals(map.get("result_code"))&&"0".equals(map.get("pay_result"))) {
             String payNo = map.get("out_trade_no");
             String tradeNo = map.get("transaction_id");
