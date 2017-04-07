@@ -29,6 +29,8 @@
         <result column="ry_app_id" property="ryAppId" jdbcType="VARCHAR"/>
         <result column="source" property="source" jdbcType="TINYINT"/>
         <result column="org_channel" property="orgChannel" jdbcType="TINYINT"/>
+        <result column="tianyi_pay_id" property="tianyiPayId" jdbcType="INTEGER"/>
+        <result column="attach" property="attach" jdbcType="VARCHAR"/>
 
     </resultMap>
 
