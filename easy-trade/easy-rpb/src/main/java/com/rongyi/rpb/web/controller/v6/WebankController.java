@@ -92,7 +92,7 @@ public class WebankController {
 //        }
 
 
-        LOGGER.info("微众支付宝扫码支付异步通知start");
+        LOGGER.info("微众支付宝扫码支付异步通知start........");
         try {
             Map<String, String> map = Utils.getRequestParams(request);
             payNotifyBizz.webankAlipayNotify(map);
