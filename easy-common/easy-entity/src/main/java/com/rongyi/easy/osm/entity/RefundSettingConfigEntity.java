@@ -15,31 +15,31 @@ public class RefundSettingConfigEntity implements Serializable {
     // 是否删除 0：未删除 1：删除
     private int isDeleted;
     // 状态（1：开启 0：关闭）
-    private Integer status;
+    private int status;
     // 售后、维权电话
     private String contactTel;
     // 客户单笔订单下单商品可重复退款次数上限
-    private Integer maxRefundCount;
+    private int maxRefundCount;
     // 最大申请申诉次数
-    private Integer maxComplaintCount;
+    private int maxComplaintCount;
     // 买家申请退款，店铺几天未处理自动退款（单位：秒）
-    private Integer limitTimeForMoney;
+    private int limitTimeForMoney;
     // 买家申请退货退款，店铺几天未处理自动退款（单位：秒）
-    private Integer limitTimeForCommodity;
+    private int limitTimeForCommodity;
     // 店铺同意退货退款后，买家几天未寄出退款商品视为放弃退款	（单位：秒）
-    private Integer limitTimeForNonDelivery;
+    private int limitTimeForNonDelivery;
     // 店铺同意退货退款后，买家几天未上门退货视为放弃退款（单位：秒）
-    private Integer limitTimeForNonVisit;
+    private int limitTimeForNonVisit;
     // 买家寄出退款商品后，店铺几天未确认收货，则自动退款（单位：秒）
-    private Integer limitTimeForNonCofirm;
+    private int limitTimeForNonCofirm;
     // 店铺拒绝接收退货后，允许买家几天内发起申诉（单位：秒）
-    private Integer maxComplaintTime;
+    private int maxComplaintTime;
     // 退款间隔时间
-    private Integer intevalRefundTime;
+    private int intevalRefundTime;
     // JSON 格式内容
     private String content;
     // 1：退款/维权
-    private Integer configType;
+    private int configType;
 
     public String getChiefId() {
         return chiefId;
@@ -65,11 +65,11 @@ public class RefundSettingConfigEntity implements Serializable {
         this.id = id;
     }
 
-    public Integer getIntevalRefundTime() {
+    public int getIntevalRefundTime() {
         return intevalRefundTime;
     }
 
-    public void setIntevalRefundTime(Integer intevalRefundTime) {
+    public void setIntevalRefundTime(int intevalRefundTime) {
         this.intevalRefundTime = intevalRefundTime;
     }
 
@@ -81,87 +81,92 @@ public class RefundSettingConfigEntity implements Serializable {
         this.isDeleted = isDeleted;
     }
 
-    public Integer getLimitTimeForCommodity() {
+    public int getLimitTimeForCommodity() {
         return limitTimeForCommodity;
     }
 
-    public void setLimitTimeForCommodity(Integer limitTimeForCommodity) {
+    public void setLimitTimeForCommodity(int limitTimeForCommodity) {
         this.limitTimeForCommodity = limitTimeForCommodity;
     }
 
-    public Integer getLimitTimeForMoney() {
+    public int getLimitTimeForMoney() {
         return limitTimeForMoney;
     }
 
-    public void setLimitTimeForMoney(Integer limitTimeForMoney) {
+    public void setLimitTimeForMoney(int limitTimeForMoney) {
         this.limitTimeForMoney = limitTimeForMoney;
     }
 
-    public Integer getLimitTimeForNonCofirm() {
+    public int getLimitTimeForNonCofirm() {
         return limitTimeForNonCofirm;
     }
 
-    public void setLimitTimeForNonCofirm(Integer limitTimeForNonCofirm) {
+    public void setLimitTimeForNonCofirm(int limitTimeForNonCofirm) {
         this.limitTimeForNonCofirm = limitTimeForNonCofirm;
     }
 
-    public Integer getLimitTimeForNonDelivery() {
+    public int getLimitTimeForNonDelivery() {
         return limitTimeForNonDelivery;
     }
 
-    public void setLimitTimeForNonDelivery(Integer limitTimeForNonDelivery) {
+    public void setLimitTimeForNonDelivery(int limitTimeForNonDelivery) {
         this.limitTimeForNonDelivery = limitTimeForNonDelivery;
     }
 
-    public Integer getLimitTimeForNonVisit() {
+    public int getLimitTimeForNonVisit() {
         return limitTimeForNonVisit;
     }
 
-    public void setLimitTimeForNonVisit(Integer limitTimeForNonVisit) {
+    public void setLimitTimeForNonVisit(int limitTimeForNonVisit) {
         this.limitTimeForNonVisit = limitTimeForNonVisit;
     }
 
-    public Integer getMaxComplaintTime() {
+    public int getMaxComplaintTime() {
         return maxComplaintTime;
     }
 
-    public void setMaxComplaintTime(Integer maxComplaintTime) {
+    public void setMaxComplaintTime(int maxComplaintTime) {
         this.maxComplaintTime = maxComplaintTime;
     }
 
-    public Integer getMaxRefundCount() {
+    public int getMaxRefundCount() {
         return maxRefundCount;
     }
 
-    public void setMaxRefundCount(Integer maxRefundCount) {
+    public void setMaxRefundCount(int maxRefundCount) {
         this.maxRefundCount = maxRefundCount;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public Integer getMaxComplaintCount() {
+    public int getMaxComplaintCount() {
         return maxComplaintCount;
     }
 
-    public void setMaxComplaintCount(Integer maxComplaintCount) {
+    public void setMaxComplaintCount(int maxComplaintCount) {
         this.maxComplaintCount = maxComplaintCount;
     }
 
-    public Integer getConfigType() {
-        configType = 1;
+    public int getConfigType() {
         return configType;
     }
 
     public String getContent() {
-        // 需要每次生成，防止中间部分字段有变化
-        content = toJson();
         return content;
+    }
+
+    public void setConfigType(int configType) {
+        this.configType = configType;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override
@@ -185,8 +190,10 @@ public class RefundSettingConfigEntity implements Serializable {
                 '}';
     }
 
-    // 装换成JSON
-    private String toJson() {
+    /**
+     * 装换成JSON
+     */
+    public String toJson() {
         return "{" +
                 "\"maxRefundCount\":" + maxRefundCount +
                 ", \"maxComplaintCount\":" + maxComplaintCount +
@@ -197,10 +204,31 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", \"limitTimeForNonCofirm\":" + limitTimeForNonCofirm +
                 ", \"maxComplaintTime\":" + maxComplaintTime +
                 ", \"intevalRefundTime\":" + intevalRefundTime +
-                ", \"chiefId\":\"" + intevalRefundTime + "\"" +
+                ", \"chiefId\":\"" + chiefId + "\"" +
                 ", \"id\":" + id +
                 ", \"status\":" + status +
+                ", \"isDeleted\":" + isDeleted +
+                ", \"configType\":" + configType +
                 ", \"contactTel\":\"" + contactTel + "\"" +
                 '}';
+    }
+
+    /**
+     * 初始化
+     */
+    public void init(String chiefId) {
+        this.chiefId = chiefId;
+        this.isDeleted = 1;
+        this.status = 0;///< 关闭状态
+        this.maxRefundCount = 5;
+        this.maxComplaintCount = 1;
+        this.limitTimeForMoney = 5 * 24 * 3600;
+        this.limitTimeForCommodity = 5 * 24 * 3600;
+        this.limitTimeForNonDelivery = 5 * 24 * 3600;
+        this.limitTimeForNonVisit = 7 * 24 * 3600;
+        this.limitTimeForNonCofirm = 9 * 24 * 3600;
+        this.maxComplaintTime = 3 * 24 * 3600;
+        this.intevalRefundTime = 24 * 3600;
+        this.configType = 1;
     }
 }
