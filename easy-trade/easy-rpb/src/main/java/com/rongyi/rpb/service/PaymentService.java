@@ -1,12 +1,14 @@
 package com.rongyi.rpb.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.dto.PaymentOrderDto;
+import com.rongyi.easy.rpb.entity.PaymentOrderEntity;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -310,4 +312,11 @@ public interface PaymentService {
 	 * @param status
 	 */
 	Integer updateStatusList(List<String> payNoList,Integer status);
+	
+	/**
+	 * @Description 查询支付列表 
+	 * @param date
+	 * @return
+	 */
+	List<PaymentEntity> findList(PaymentOrderDto paymentOrderDto);
 }
