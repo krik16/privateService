@@ -18,7 +18,7 @@ public class OrderSettleDetailVo implements Serializable {
     private Integer paymentType;
     private String posNo;//pos终端号
     private Long poundage;
-    private Long realAmout;
+    private Long realAmount;
     private Integer reductionUsed;
     private String ryPaymentNo;//容易支付交易流水
     private Long scoreDiscount;
@@ -116,12 +116,12 @@ public class OrderSettleDetailVo implements Serializable {
         this.poundage = poundage;
     }
 
-    public Long getRealAmout() {
-        return realAmout;
+    public Long getRealAmount() {
+        return realAmount;
     }
 
-    public void setRealAmout(Long realAmout) {
-        this.realAmout = realAmout;
+    public void setRealAmount(Long realAmount) {
+        this.realAmount = realAmount;
     }
 
     public Integer getReductionUsed() {
@@ -211,7 +211,7 @@ public class OrderSettleDetailVo implements Serializable {
                 ", paymentType=" + paymentType +
                 ", posNo='" + posNo + '\'' +
                 ", poundage=" + poundage +
-                ", realAmout=" + realAmout +
+                ", realAmount=" + realAmount +
                 ", reductionUsed=" + reductionUsed +
                 ", ryPaymentNo='" + ryPaymentNo + '\'' +
                 ", scoreDiscount=" + scoreDiscount +
