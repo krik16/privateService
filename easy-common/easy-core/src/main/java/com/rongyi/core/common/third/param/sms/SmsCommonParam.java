@@ -1,6 +1,9 @@
 package com.rongyi.core.common.third.param.sms;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /*
  * Description:  
@@ -12,7 +15,9 @@ import java.io.Serializable;
  */
 public class SmsCommonParam implements Serializable{
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
 
     private String channel;
 
@@ -33,6 +38,80 @@ public class SmsCommonParam implements Serializable{
     private String sendType;//发送类型  RYNTCSMS 通知类型 RYMARKSMS 营销类型
 
     private int isDisabled;//0 正常 1禁用，停止
+
+    private String sign;    //短信签名
+
+    private String remark;    //备注
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    private String  jsessionid;//用户信息jsessionid
+    private String userId;
+    private Integer currentPage; //当前页数
+    private Integer offSet;
+    private Integer pageSize = 20;//每页显示数
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getJsessionid() {
+        return jsessionid;
+    }
+
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getOffSet() {
+        return offSet;
+    }
+
+    public void setOffSet(Integer offSet) {
+        this.offSet = offSet;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public int getIsDisabled() {
         return isDisabled;
@@ -112,5 +191,10 @@ public class SmsCommonParam implements Serializable{
 
     public void setSendType(String sendType) {
         this.sendType = sendType;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

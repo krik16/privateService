@@ -1,6 +1,9 @@
 package com.rongyi.core.common.third.param.sms;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /*
  * Description:  
@@ -13,10 +16,11 @@ import java.io.Serializable;
 public class SmsDto
     implements Serializable
     {
-
         private static final long serialVersionUID = 1L;
 
-        private String channel;
+        private int id;     //id
+
+        private String channel;  //渠道
 
         private String privateKey; //不可修改
 
@@ -35,6 +39,74 @@ public class SmsDto
         private String sendType;//发送类型  RYNTCSMS 通知类型 RYMARKSMS 营销类型
 
         private int isDisabled;//0 正常 1禁用，停止
+
+        private String sign;    //短信签名
+
+        private String remark;    //备注
+
+        private Date createAt;
+
+        private String createBy;
+
+        private Date updateAt;
+
+        private String updateBy;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        public Date getCreateAt() {
+            return createAt;
+        }
+
+        public void setCreateAt(Date createAt) {
+            this.createAt = createAt;
+        }
+
+        public String getCreateBy() {
+            return createBy;
+        }
+
+        public void setCreateBy(String createBy) {
+            this.createBy = createBy;
+        }
+
+        public Date getUpdateAt() {
+            return updateAt;
+        }
+
+        public void setUpdateAt(Date updateAt) {
+            this.updateAt = updateAt;
+        }
+
+        public String getUpdateBy() {
+            return updateBy;
+        }
+
+        public void setUpdateBy(String updateBy) {
+            this.updateBy = updateBy;
+        }
 
         public String getChannel() {
             return channel;
@@ -116,5 +188,9 @@ public class SmsDto
             this.isDisabled = isDisabled;
         }
 
+        @Override
+        public String toString() {
+            return ReflectionToStringBuilder.toString(this);
+        }
 
     }
