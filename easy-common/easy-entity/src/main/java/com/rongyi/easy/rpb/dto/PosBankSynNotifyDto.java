@@ -31,6 +31,7 @@ public class PosBankSynNotifyDto extends BaseDto{
 
     private String paymentTypeStr;//付款类型 //支付方式    0 银行卡    1 微信    2 支付宝  3 现金 4 储值卡 5 积分退款
 
+    private Integer type;//0：支付，1:退款
 
     public String getOrderNo() {
         return orderNo;
@@ -118,5 +119,13 @@ public class PosBankSynNotifyDto extends BaseDto{
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
