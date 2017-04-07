@@ -21,6 +21,7 @@ public class RefundParam  implements Serializable {
     private BigDecimal refundAmount;//退款金额
     private String refundExplain;//退款说明
     private List<String> pics;//退款图片列表
+    private String refundNo;//退款单号
 
     public String getMemberId() {
         return memberId;
@@ -84,6 +85,14 @@ public class RefundParam  implements Serializable {
 
     public void setPics(List<String> pics) {
         this.pics = pics;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
     }
 
     @Override
