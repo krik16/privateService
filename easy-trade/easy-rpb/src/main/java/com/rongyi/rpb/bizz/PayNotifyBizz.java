@@ -22,6 +22,7 @@ import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.lightning.RoaRyMchAppService;
 import com.rongyi.rss.malllife.service.IRedisService;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,8 +105,10 @@ public class PayNotifyBizz {
      * 微众支付宝通知
      * @param map 通知参数
      */
-    public void webankAlipayNotify(Map<String, String> map) {
-        log.info("微众支付宝通知内容,map={}",map);
+    public void webankAlipayNotify(Map<String, String> paramMap) {
+        log.info("微众支付宝通知内容,map={}",paramMap);
+        Map<String,String> map =(Map<String,String>) JSONObject.fromObject(paramMap.get("data"));
+        log.info("微众支付宝通知data内容,map={}",map);
         if ("TRADE_SUCCESS".equals(map.get("tradeStatus"))) {
             String payNo = map.get("orderId");
             String tradeNo = map.get("tradeNo");
