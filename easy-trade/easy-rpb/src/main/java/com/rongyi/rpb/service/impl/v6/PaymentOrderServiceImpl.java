@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.rongyi.core.constant.PaymentOrderConst;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.rpb.service.PaymentService;
@@ -28,8 +29,8 @@ public class PaymentOrderServiceImpl extends BaseServiceImpl implements PaymentO
 		paymentOrderDto.setPayChannel(3);
 		paymentOrderDto.setStatus(2);
 		List<Integer> list = new ArrayList<>();
-		list.add(1);
-		list.add(0);
+		list.add(PaymentOrderConst.TRADE_TYPE_PAY);
+		list.add(PaymentOrderConst.TRADE_TYPE_REFUND);
 		paymentOrderDto.setTradeTypeList(list);
 		return paymentService.findList(paymentOrderDto);
 	}
