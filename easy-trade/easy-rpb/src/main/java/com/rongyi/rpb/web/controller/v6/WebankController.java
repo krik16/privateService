@@ -31,11 +31,11 @@ public class WebankController {
      * 微众支付宝扫码支付异步通知
      */
     @RequestMapping("/pay/notify")
-    public void alipayNotify(HttpServletRequest request, HttpServletResponse response) {
+    public void alipayNotify(HttpServletRequest request, HttpServletResponse response ,@RequestBody Map<String,String> paramMap) {
         LOGGER.info("微众支付宝扫码支付异步通知start");
         try {
             Map<String, String> map = Utils.getRequestParams(request);
-            payNotifyBizz.webankAlipayNotify(map);
+            payNotifyBizz.webankAlipayNotify(paramMap);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.info("微众支付宝扫码支付异步通知处理异常");
@@ -57,7 +57,7 @@ public class WebankController {
     }
 
     @RequestMapping("statementDown")
-    public void statementDown(HttpServletRequest request , @RequestBody Map<String,Object> paramMap) {
+    public void statementDown(HttpServletRequest request , @RequestBody Map<String,String> paramMap) {
 //        LOGGER.info("微众对账单通知下载");
 //        try {
 //            Map map =  request.getParameterMap();
@@ -98,7 +98,7 @@ public class WebankController {
         LOGGER.info("parmMap:{}",paramMap);
         try {
             Map<String, String> map = Utils.getRequestParams(request);
-            payNotifyBizz.webankAlipayNotify(map);
+            payNotifyBizz.webankAlipayNotify(paramMap);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.info("微众支付宝扫码支付异步通知处理异常");
