@@ -56,6 +56,7 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             //交易金额
             map.put("totalAmount",cashPayVo.getTotalAmount());
 
+            map.put("tradeStatus","SUCCESS");
             log.info("现金支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {

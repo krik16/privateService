@@ -846,10 +846,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
 	@Override
-	public Integer updateStatusList(List<String> payNoList, Integer status) {
+	public Integer updateStatusList(List<String> payNoList, Integer payerReconFlag) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("payNoList", payNoList);
-		params.put("status", status);
+		params.put("payerReconFlag", payerReconFlag);
 		return this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateStatusList", params);
 	}
 
