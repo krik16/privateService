@@ -19,7 +19,7 @@ public class CashPayVo implements Serializable {
     //金额（分）必填
     private Integer totalAmount;
 
-    //商品描述   必填
+    //商品描述  
     private String subject;
 
     private Integer orderType;
