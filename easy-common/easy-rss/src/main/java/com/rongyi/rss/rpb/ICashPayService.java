@@ -1,5 +1,6 @@
 package com.rongyi.rss.rpb;
 
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.easy.rpb.vo.v6.CashPayVo;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 
@@ -18,7 +19,7 @@ public interface ICashPayService {
      * @param cashPayVo 支付参数
      * @return map
      */
-    Map<String, Object> cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo);
+    Map<String, Object> cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo)  throws TradePayException;
 
     /**
      * 现金支付查询
@@ -27,7 +28,7 @@ public interface ICashPayService {
      * @param payType 支付方式
      * @return map
      */
-    Map<String, Object> cashPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType);
+    Map<String, Object> cashPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType)  throws TradePayException;
 
     /**
      *现金退款
@@ -35,12 +36,12 @@ public interface ICashPayService {
      * @param refundAmount 退款金额
      * @return map
      */
-    Map<String, Object> cashRefund(String orderNo, Integer refundAmount);
+    Map<String, Object> cashRefund(String orderNo, Integer refundAmount)  throws TradePayException;
 
     /**
      * 现金退款查询
      * @param orderNo 订单号
      * @return map
      */
-    Map<String, Object> cashRefundQuery(String orderNo);
+    Map<String, Object> cashRefundQuery(String orderNo)  throws TradePayException;
 }
