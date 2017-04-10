@@ -678,14 +678,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         if (SettleConstant.PayChannel.WECHAT.equals(payChannel)) {
             return "微信";
         }
-        if (SettleConstant.PayChannel.UNION.equals(payChannel)) {
-            return "银联";
+        if (SettleConstant.PayChannel.POSBANK.equals(payChannel)) {
+            return "pos银行卡";
         }
         if (SettleConstant.PayChannel.CASH.equals(payChannel)) {
             return "现金";
         }
-        if (SettleConstant.PayChannel.BANK.equals(payChannel)) {
-            return "银行卡";
+        if (SettleConstant.PayChannel.TIANYI.equals(payChannel)) {
+            return "翼支付";
         }
         return "支付宝";
     }
