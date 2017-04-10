@@ -60,7 +60,7 @@ public class TianyiPayService {
                 .append("&DIVDETAILS=").append(StringUtils.isBlank(param.getDivDetails()) ? "" : param.getDivDetails())//todo
                 .append("&ENCODETYPE=").append(param.getEncodeType())
                 .append("&MAC=").append(param.getMac())
-                .append("&SESSIONKEY=").append(StringUtils.isBlank(param.getSessionKey())?"":param.getSessionKey())
+//                .append("&SESSIONKEY=").append(StringUtils.isBlank(param.getSessionKey())?"":param.getSessionKey())
                 .append("&ATTACH=").append(StringUtils.isBlank(param.getAccach())?"":param.getAccach())
                 .append("&requestSystem=").append(param.getRequestSystem())
                 .append("&RISKCONTROLINFO=").append(param.getRiskControlInfo());

@@ -13,8 +13,8 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233135";
-    private static String ORDERTRANSEQL="20160830092048436461232233135";
+    private static String ORDERSEQ="20160830092048436461232233139";
+    private static String ORDERTRANSEQL="20160830092048436461232233139";
     private static String ORDERTIME="20160830092048";
     private static String ORDERVALIDITYTIME="20160830092048";
 
@@ -28,7 +28,7 @@ public class TianyiTest {
         param.setTianyiOrderParam(tianyiOrderParam);
         param.setPayDetailParam(payDetailParam);
         String s = TianyiPayUnit.tianyiPay(param);
-        System.out.println("weburl="+s);
+//        System.out.println("weburl="+s);
 
     }
 
@@ -112,7 +112,7 @@ public class TianyiTest {
         configure.setRiskControlInfo("风控提供");
         configure.setOrderUrl("https://webpaywg.bestpay.com.cn/order.action");
         configure.setPublicKeyUrl("https://capi.bestpay.com.cn/common/interface");
-        configure.setPayUrl("https://capi.bestpay.com.cn/geteway.pay");
+        configure.setPayUrl("https://capi.bestpay.com.cn/gateway.pay");
         configure.setCheckStandH5Url("");
         configure.setPayQueryUrl("https://capi.bestpay.com.cn/query/queryOrder");
         configure.setRefundUrl("https://capi.bestpay.com.cn/refund/commonRefund");
