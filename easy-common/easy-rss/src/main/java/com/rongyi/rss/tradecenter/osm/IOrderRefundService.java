@@ -32,6 +32,13 @@ public interface IOrderRefundService {
     public ResponseVO buyerDeleteRefund(RefundParam param);
 
     /**
+     * 卖家拒绝退款申请
+     * @param param={"refundNo":"退款单号","createId":"操作人id","createBy":"操作人","source":"1摩店 2商家后台","remark":"拒绝原因"}
+     * @return
+     */
+    public ResponseVO sellerRefuseRefundRequest(RefundParam param);
+
+    /**
      * 卖家同意退款
      * @param param={"refundNo":"退款单号","createId":"操作人id","createBy":"操作人","source":"1摩店 2商家后台"}
      * @return
