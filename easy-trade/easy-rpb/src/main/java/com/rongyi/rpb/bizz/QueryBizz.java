@@ -335,7 +335,14 @@ public class QueryBizz {
      */
     public PaymentEntity cashPayQueryOrder(String orderNo) {
 
-       return basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+       PaymentEntity paymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+        //to 此处是由于产品不合理的需求,在查询接口中返回退款状态而做的特殊处理，已退款强制设置支付状态为3表示已退款
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,null,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+        if(refundPayment != null && refundPayment.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
+            paymentEntity.setStatus(3);
+        }
+        return paymentEntity;
     }
 
     /**
@@ -358,7 +365,15 @@ public class QueryBizz {
      */
     public PaymentEntity posBankCardPayQueryOrder(String orderNo) {
 
-       return basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+       PaymentEntity paymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+
+        //to 此处是由于产品不合理的需求,在查询接口中返回退款状态而做的特殊处理，已退款强制设置支付状态为3表示已退款
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,null,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+        if(refundPayment != null && refundPayment.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
+            paymentEntity.setStatus(3);
+        }
+        return paymentEntity;
     }
 
     /**

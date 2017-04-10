@@ -81,7 +81,11 @@ public class PosBankCardServiceImpl extends BaseServiceImpl implements IPosBankC
             //交易金额
             map.put("totalAmount", paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             //交易状态
-            map.put("tradeStatus",ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
+            if(paymentEntity.getStatus() == 3){
+                map.put("tradeStatus","REFUND");
+            }else {
+                map.put("tradeStatus", ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
+            }
             log.info("pos银行卡支付查询结果,map={}", map);
             return map;
         }  catch (ParamNullException e) {
