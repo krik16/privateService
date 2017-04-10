@@ -44,11 +44,12 @@ public class WebankController {
      * 微众微信公众号支付异步通知
      */
     @RequestMapping("/wechat/pay/notify")
-    public void wechatNotify(HttpServletRequest request, HttpServletResponse response ) {
+    public void wechatNotify(HttpServletRequest request, HttpServletResponse response ,@RequestBody Map<String,Object> paramMap) {
         LOGGER.info("微众微信公众号支付异步通知start");
         try {
             Map<String, String> map = Utils.getRequestParams(request);
             LOGGER.info("map={}",map);
+            LOGGER.info("paramMap={}",paramMap);
             payNotifyBizz.webankWechatNotify(map);
         } catch (Exception e) {
             e.printStackTrace();
