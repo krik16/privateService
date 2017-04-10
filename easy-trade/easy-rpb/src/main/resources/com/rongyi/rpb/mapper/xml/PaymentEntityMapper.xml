@@ -608,7 +608,7 @@
     </select>
 
 	<update id="updateStatusList" parameterType="java.util.Map">
-		update payment_order set status = #{status}
+		update payment_order set payer_recon_flag = #{payerReconFlag}
 		and pay_no in 
 			<foreach collection="payNoList" index="index" item="item" open="("
                      separator="," close=")">

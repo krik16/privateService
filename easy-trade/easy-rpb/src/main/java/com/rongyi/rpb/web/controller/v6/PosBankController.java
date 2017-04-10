@@ -2,6 +2,7 @@ package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
+import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
 import com.rongyi.rpb.constants.ConstantEnum;
 import org.slf4j.Logger;
@@ -42,7 +43,10 @@ public class PosBankController {
             payNotifyBizz.posBankSynPayNotify(posBankSynNotifyDto);
             return ResponseVO.success();
 
-        } catch (Exception e) {
+        } catch (TradeException e){
+            log.warn("pos银行卡支付pos端同步结果通知失败e={}",e.getMessage(),e);
+            return ResponseVO.failure(Integer.valueOf(e.getCode()),e.getMessage());
+        }catch (Exception e) {
             log.error("pos银行卡支付pos端同步结果通知失败e={}", e.getMessage());
             e.printStackTrace();
         }
