@@ -46,4 +46,11 @@ public interface IOrderRefundQueryService {
 	 */
 	public DubboVO<Map<String, Object>> listRefundReasonAndType(String orderNo);
 
+	/**
+	 * 判断此店铺是否支持退款
+	 * @param shopId
+	 * @return
+	 */
+	public boolean refundSupportByShopId(String shopId);
+
 }
