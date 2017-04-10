@@ -50,14 +50,14 @@ public class TianyiPayService {
                 .append("&SERVICECODE=").append(param.getServiceCode())
                 .append("&PRODUCTID=").append(param.getProductId())
                 .append("&PRODUCTDESC=").append(StringUtils.isBlank(param.getProductDesc()) ? "" : param.getProductDesc())//下单金额单位分
-                .append("&LOGINNO=").append("")
-                .append("&PROVINCECODE=").append("")
-                .append("&CITYCODE=").append("")
+                .append("&LOGINNO=").append(StringUtils.isBlank(param.getLoginNo())?"":param.getLoginNo())
+                .append("&PROVINCECODE=").append(StringUtils.isBlank(param.getProvinceCode())?"":param.getProvinceCode())
+                .append("&CITYCODE=").append(StringUtils.isBlank(param.getCityCode())?"":param.getCityCode())
                 .append("&DIVDETAILS=").append(StringUtils.isBlank(param.getDivDetails()) ? "" : param.getDivDetails())//todo
                 .append("&ENCODETYPE=").append(param.getEncodeType())
                 .append("&MAC=").append(param.getMac())
-                .append("&SESSIONKEY=").append("")
-                .append("&ATTACH=").append("")
+                .append("&SESSIONKEY=").append(StringUtils.isBlank(param.getSessionKey())?"":param.getSessionKey())
+                .append("&ATTACH=").append(StringUtils.isBlank(param.getAccach())?"":param.getAccach())
                 .append("&requestSystem=").append(param.getRequestSystem())
                 .append("&RISKCONTROLINFO=").append(param.getRiskControlInfo());
         return perpareSignParam.toString();
