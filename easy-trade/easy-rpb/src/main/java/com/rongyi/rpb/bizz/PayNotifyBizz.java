@@ -145,8 +145,7 @@ public class PayNotifyBizz {
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
                 Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
         if(dto.getRyMchId() == null || !dto.getRyMchId().equals(paymentEntity.getRyMchId())){
-            log.warn("入住商户信息不匹配,不更新支付状态");
-            return;
+            throw  new TradeException(ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getCodeStr(),ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getValueStr());
         }
         BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
         //支付通知

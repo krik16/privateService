@@ -239,6 +239,13 @@ public class RefundBizz {
         //初始化退款入住商户信息
         RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
 
+        //查找订单退款记录
+        PaymentEntity oldRefundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                payType);
+
+        if (oldRefundPaymentEntity == null) {
+            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_FAIL.getValueStr());
+        }
         //初始化退款记录
         return initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
                 refundAmount, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,

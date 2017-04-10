@@ -401,7 +401,7 @@ public class QueryBizz {
      */
     private void updatePayment(PaymentEntity paymentEntity,String tradeNo,String buyerId,String buyerEmail){
 
-        log.info("paymentEntity={},tradeNo={}",paymentEntity,tradeNo);
+        log.info("检查是否已支付未更新状态,paymentEntity={},tradeNo={}",paymentEntity,tradeNo);
 
         if(paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
             //更新支付状态
