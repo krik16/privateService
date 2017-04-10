@@ -1,13 +1,13 @@
 package com.rongyi.core.util;
 
+import com.rongyi.core.common.third.md5.Md5Util;
+import com.rongyi.core.constant.Const;
+import org.apache.commons.lang.StringUtils;
+
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.rongyi.core.common.third.md5.Md5Util;
-import com.rongyi.core.constant.Const;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * 签名公共方法
@@ -297,5 +297,25 @@ public class Util {
 		/*params.put("source",1);
 		params.put("timeStamp",1515567178131l);*/
 		signValidateWithoutChannel(params,"dddd");
+	}
+
+	/**
+	 * 天转秒
+	 *
+	 * @param day
+	 * @return
+	 */
+	public static int toChgSecond(int day) {
+		return day * 24 * 3600;
+	}
+
+	/**
+	 * 秒转天
+	 *
+	 * @param second
+	 * @return
+	 */
+	public static int toChgDay(int second) {
+		return second / 24 / 3600;
 	}
 }
