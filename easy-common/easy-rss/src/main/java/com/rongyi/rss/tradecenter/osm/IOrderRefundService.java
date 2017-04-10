@@ -3,11 +3,20 @@ package com.rongyi.rss.tradecenter.osm;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.tradecenter.param.RefundParam;
 
+import java.util.Map;
+
 /**
  * @author chenjun
  * @date 2017/4/10 10:23
  */
 public interface IOrderRefundService {
+
+    /**
+     * 获取最大可退款金额
+     * @param param={"memberId":"买家id","orderNo":"订单号","sonOrderNo":"子订单号"}
+     * @return
+     */
+    public Map<String,Object> getMaxRefundAmount(RefundParam param);
 
     /**
      * 买家申请退款
