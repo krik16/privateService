@@ -5,13 +5,11 @@ import com.rongyi.pay.core.tianyi.param.PayDetailParam;
 import com.rongyi.pay.core.tianyi.param.PayQueryParam;
 import com.rongyi.pay.core.tianyi.param.RefundParam;
 import com.rongyi.pay.core.tianyi.param.TianyiOrderParam;
+import com.rongyi.pay.core.tianyi.util.CryptTool;
 import com.rongyi.pay.core.tianyi.util.HttpUtil;
-import com.rongyi.pay.core.wechat.util.MD5;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 /**
  * Created by yangyang on 2017/4/5.
@@ -20,11 +18,17 @@ public class TianyiPayService {
 
     private static final Logger logger = LoggerFactory.getLogger(TianyiPayService.class);
 
-    public static String getSign(TianyiOrderParam param, TianyiConfigure configure) {
-        return MD5.MD5Encode("MERCHANTID=" + param.getMerchantId() + "&ORDERSEQ=" + param.getOrderSeq() + "&ORDERREQTRANSEQ=" + param.getOrderReqTranseq() + "&ORDERREQTIME=" + param.getOrderReqTime() + "&RISKCONTROLINFO=" + param.getRiskControlInfo() + "&KEY=" + param.getKey());
+    public static String getSign(TianyiOrderParam param, TianyiConfigure configure) throws Exception {
+        return CryptTool.md5Digest(new StringBuilder().
+                append("MERCHANTID=").append(param.getMerchantId()).
+                append("&ORDERSEQ=").append(param.getOrderSeq()).
+                append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq()).
+                append("&ORDERREQTIME=").append(param.getOrderReqTime()).
+                append("&RISKCONTROLINFO=").append(param.getRiskControlInfo()).
+                append("&KEY=").append(param.getKey()).toString());
     }
 
-    public static String order(TianyiOrderParam param, TianyiConfigure configure) throws IOException {
+    public static String order(TianyiOrderParam param, TianyiConfigure configure) throws Exception {
         logger.info("TianyiPayService.order，param:{},configure:{}", param, configure);
         //生成签名
         String mac = getSign(param, configure);
@@ -92,7 +96,7 @@ public class TianyiPayService {
                 append(param.getUserLanguage()).toString();
     }
 
-    public static String getTradeRefundMac(RefundParam param) {
+    public static String getTradeRefundMac(RefundParam param) throws Exception {
         StringBuilder sb = new StringBuilder();//组装mac加密明文串
         sb.append("MERCHANTID=").append(param.getMerchantId());
         sb.append("&MERCHANTPWD=").append(param.getMerchantPwd());
@@ -103,6 +107,6 @@ public class TianyiPayService {
         sb.append("&TRANSAMT=").append(param.getTransAmt());
         sb.append("&LEDGERDETAIL=").append(param.getLedgerDetail());
         sb.append("&KEY=").append(param.getKey());//此处是商户的key
-        return MD5.MD5Encode(sb.toString());
+        return CryptTool.md5Digest(sb.toString());
     }
 }

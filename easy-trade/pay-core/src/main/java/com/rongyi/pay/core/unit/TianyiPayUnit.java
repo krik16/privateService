@@ -6,10 +6,7 @@ import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.tianyi.param.*;
 import com.rongyi.pay.core.tianyi.service.TianyiPayService;
-import com.rongyi.pay.core.tianyi.util.AES256;
-import com.rongyi.pay.core.tianyi.util.HttpUtil;
-import com.rongyi.pay.core.tianyi.util.RSA;
-import com.rongyi.pay.core.tianyi.util.SysConstants;
+import com.rongyi.pay.core.tianyi.util.*;
 import com.rongyi.pay.core.wechat.util.MD5;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -45,6 +42,9 @@ public class TianyiPayUnit {
             if (orderResult){
                 PublicKeyRes publicKey = getPublicKey(param.getTianyiOrderParam());
                 logger.info("翼支付总接口,publicKey="+publicKey);
+                if (publicKey == null){
+                    throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_PAY_FAIL);
+                }
                 String h5Url = getH5Url(param.getPayDetailParam(), publicKey);
                 if (StringUtils.isNotBlank(h5Url)){
                     return h5Url;
@@ -90,9 +90,9 @@ public class TianyiPayUnit {
         String requestBody = getReqParam();
         try {
             String responseStr = HttpUtil.doPost(configure.getPublicKeyUrl(), requestBody);
-            TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
-            if (result != null && result.isSuccess()) {
-                return JSONObject.parseObject(result.toString(), PublicKeyRes.class);
+            TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
+            if (result != null && result.isSuccess() && result.getResult() != null) {
+                return JSONObject.parseObject(result.getResult().toString(), PublicKeyRes.class);
             }
             return null;
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class TianyiPayUnit {
             String key = AES256.getStringRandom(32);
             String encryStr = AES256.AES_Encode(payStr, key);
             key = RSA.encrypt(key, publicKeyRes.getPubKey(), SysConstants.SYS_CHARSET);
-            String webUrl = configure.getPayUrl() + "/gateway.pay" + "?platform=wap_3.0" + "&encryStr=" + encryStr + "&keyIndex=" + publicKeyRes.getKeyIndex() + "&encryKey=" + key;
+            String webUrl = configure.getPayUrl() + "?platform=wap_3.0" + "&encryStr=" + encryStr + "&keyIndex=" + publicKeyRes.getKeyIndex() + "&encryKey=" + key;
             webUrl = webUrl.replaceAll("\\+", "%2B");
             logger.info("唤起H5收银台的url：" + webUrl);
             return webUrl;
@@ -205,7 +205,7 @@ public class TianyiPayUnit {
         return MD5.MD5Encode("MERCHANTID=" + param.getMerchantId() + "&ORDERREQNQ=" + param.getOrderReqNo() + "&ORDERDATE=" + param.getOrderDate() + "&KEY=" + param.getKey());
     }
 
-    private static String getSign(PayDetailParam param) {
+    private static String getSign(PayDetailParam param) throws Exception {
         StringBuilder md5Builder = new StringBuilder();
         md5Builder.append("SERVICE=").append("mobile.securitypay.pay")
                 .append("&MERCHANTID=").append(param.getMerchantId())
@@ -225,7 +225,7 @@ public class TianyiPayUnit {
                 .append("&SWTICHACC=").append(param.getSwtichAcc())
                 .append("&KEY=").append(param.getKey());
         logger.info("签名前原串：" + md5Builder.toString());
-        return MD5.MD5Encode(md5Builder.toString());
+        return CryptTool.md5Digest(md5Builder.toString());
     }
 
     private static String getReqParam() {

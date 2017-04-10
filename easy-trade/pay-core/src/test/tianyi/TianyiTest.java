@@ -13,8 +13,8 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233124";
-    private static String ORDERTRANSEQL="20160830092048436461232233124";
+    private static String ORDERSEQ="20160830092048436461232233135";
+    private static String ORDERTRANSEQL="20160830092048436461232233135";
     private static String ORDERTIME="20160830092048";
     private static String ORDERVALIDITYTIME="20160830092048";
 
@@ -68,6 +68,7 @@ public class TianyiTest {
         payDetailParam.setTid("");
         payDetailParam.setKey_index("");
         payDetailParam.setKey_tid("");
+        payDetailParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
         return payDetailParam;
     }
 
