@@ -131,7 +131,12 @@ public interface OrderEventType {
     public static final String SELLER_RECEIVE_GOOD = "57";
     /** 卖家拒绝收货 */
     public static final String SELLER_REFUSE_GOOD = "58";
-    
+
+    //维权事件
+    /** 申请申诉*/
+    public static final String COMPLAINT_APPALY = "60";
+    /** 买家取消申诉*/
+    public static final String COMPLAINT_CANCEL = "61";
     
     public interface EventErrorCode {
     	/**

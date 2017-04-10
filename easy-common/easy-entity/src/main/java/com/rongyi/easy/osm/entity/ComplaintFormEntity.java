@@ -6,7 +6,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ConplaitFormEntity implements Serializable {
+public class ComplaintFormEntity implements Serializable {
     /**  */
     private Integer id;
 
