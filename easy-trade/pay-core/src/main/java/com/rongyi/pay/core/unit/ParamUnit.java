@@ -130,9 +130,9 @@ public class ParamUnit {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"appId");
         }
 
-        if(StringUtils.isEmpty(authCode)){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"authCode");
-        }
+//        if(StringUtils.isEmpty(authCode)){
+//            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"authCode");
+//        }
 
     }
 
