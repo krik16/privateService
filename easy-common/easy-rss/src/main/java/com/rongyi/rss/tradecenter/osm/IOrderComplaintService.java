@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.tradecenter.param.ComplaintParam;
 import com.rongyi.easy.tradecenter.param.ComplaintResultParam;
 
@@ -32,6 +33,14 @@ public interface IOrderComplaintService {
      * @param param
      * @return
      */
-    String create(ComplaintParam param);
+    ResponseVO create(ComplaintParam param);
+
+    /**
+     * 取消申诉
+     *
+     * @param param
+     * @return
+     */
+    ResponseVO cancel(ComplaintParam param);
 
 }

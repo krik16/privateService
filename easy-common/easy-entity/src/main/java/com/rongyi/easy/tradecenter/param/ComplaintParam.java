@@ -15,6 +15,8 @@ public class ComplaintParam implements Serializable {
     private String memberId;
     // 退款单号
     private String refundNo;
+    //申诉单号
+    private String complaintNo;
     // 申诉原因
     private String remark;
     // 申诉凭证（多个用逗号分隔）
@@ -52,6 +54,14 @@ public class ComplaintParam implements Serializable {
         this.memberId = memberId;
     }
 
+    public String getComplaintNo() {
+        return complaintNo;
+    }
+
+    public void setComplaintNo(String complaintNo) {
+        this.complaintNo = complaintNo;
+    }
+
     @Override
     public String toString() {
         return "ComplaintParam{" +
@@ -59,6 +69,7 @@ public class ComplaintParam implements Serializable {
                 ", refundNo='" + refundNo + '\'' +
                 ", remark='" + remark + '\'' +
                 ", memberId='" + memberId + '\'' +
+                ", complaintNo='" + complaintNo + '\'' +
                 '}';
     }
 }
