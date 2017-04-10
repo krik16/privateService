@@ -2,6 +2,7 @@ package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.pay.core.ali.utils.Utils;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -45,13 +48,29 @@ public class WebankController {
      * 微众微信公众号支付异步通知
      */
     @RequestMapping("/wechat/pay/notify")
-    public void wechatNotify(HttpServletRequest request, HttpServletResponse response ,@RequestParam Map<String,Object> paramMap) {
+    public void wechatNotify(HttpServletRequest request, HttpServletResponse response ) {
         LOGGER.info("微众微信公众号支付异步通知start");
         try {
-            Map<String, String> map = Utils.getRequestParams(request);
-            LOGGER.info("map={}",map);
-            LOGGER.info("paramMap={}",paramMap);
-            payNotifyBizz.webankWechatNotify(map);
+//            Map<String, String> map = Utils.getRequestParams(request);
+//            LOGGER.info("map={}",map);
+//            LOGGER.info("paramMap={}",paramMap);
+            // 获取请求参数
+            String result = "";
+            InputStream inStream = null;
+            String resultJson = "";
+                inStream = request.getInputStream();
+                ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while ((len = inStream.read(buffer)) != -1) {
+                    outSteam.write(buffer, 0, len);
+                }
+                outSteam.close();
+                inStream.close();
+                resultJson = new String(outSteam.toByteArray(), "utf-8");
+                System.out.println("#######微众微信支付回调请求参数：#######"+resultJson);
+                Map<String,String> map =(Map<String,String>) JSONObject.fromObject(resultJson);
+                payNotifyBizz.webankWechatNotify(map);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.info("微众微信公众号支付异步通知处理异常");
