@@ -185,4 +185,10 @@ public class ParamValidUtil {
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"channel");
         }
     }
+
+    public static void checkAndSetTianyiParam(TianyiParam param, TianyiConfigure configure) {
+        if (param == null || param.getPayDetailParam() == null || param.getTianyiOrderParam() == null || configure == null){
+            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"param or configure or payDetailParam or  tianyiOrderParam is null");
+        }
+    }
 }

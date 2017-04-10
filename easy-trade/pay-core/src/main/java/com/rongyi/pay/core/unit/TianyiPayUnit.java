@@ -11,6 +11,7 @@ import com.rongyi.pay.core.tianyi.util.HttpUtil;
 import com.rongyi.pay.core.tianyi.util.RSA;
 import com.rongyi.pay.core.tianyi.util.SysConstants;
 import com.rongyi.pay.core.wechat.util.MD5;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,33 @@ public class TianyiPayUnit {
 
     //微众微信支付配置信息
     private static TianyiConfigure configure = TianyiConfigure.getInstance();
+
+
+    /**
+     * 翼支付总接口
+     *
+     * @param param
+     * @return
+     */
+    public static String tianyiPay(TianyiParam param) {
+        logger.info("翼支付总接口，param:{},config:{}", param, configure);
+        try {
+            ParamValidUtil.checkAndSetTianyiParam(param, configure);
+            boolean orderResult = order(param.getTianyiOrderParam());
+            if (orderResult){
+                PublicKeyRes publicKey = getPublicKey(param.getTianyiOrderParam());
+                logger.info("翼支付总接口,publicKey="+publicKey);
+                String h5Url = getH5Url(param.getPayDetailParam(), publicKey);
+                if (StringUtils.isNotBlank(h5Url)){
+                    return h5Url;
+                }
+            }
+        } catch (Exception e) {
+            logger.info("翼支付下单接口失败 ,e.getMessage:{}", e.getMessage());
+            e.printStackTrace();
+        }
+        throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_PAY_FAIL);
+    }
 
     /**
      * 翼支付下单接口
@@ -80,7 +108,7 @@ public class TianyiPayUnit {
      * @param param
      * @return
      */
-    public static PublicKeyRes getH5Url( PayDetailParam param, PublicKeyRes publicKeyRes) {
+    public static String getH5Url( PayDetailParam param, PublicKeyRes publicKeyRes) {
         logger.info("翼支付拼接url接口,param:{}", param);
         ParamValidUtil.checkAndSetPayParam(param, configure);
         try {
@@ -93,11 +121,11 @@ public class TianyiPayUnit {
             String webUrl = configure.getPayUrl() + "/gateway.pay" + "?platform=wap_3.0" + "&encryStr=" + encryStr + "&keyIndex=" + publicKeyRes.getKeyIndex() + "&encryKey=" + key;
             webUrl = webUrl.replaceAll("\\+", "%2B");
             logger.info("唤起H5收银台的url：" + webUrl);
-            return null;
+            return webUrl;
         } catch (Exception e) {
             logger.info("翼支付获取公钥接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
-            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_PUBLICKEY_FAIL);
+            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_GETH5_FAIL);
         }
     }
 
@@ -125,20 +153,20 @@ public class TianyiPayUnit {
         } catch (Exception e) {
             logger.info("翼支付交易查询接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
-            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_PUBLICKEY_FAIL);
+            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEQUERY_FAIL);
         }
     }
 
 
 
     /**
-     * 交易查询
+     * 交易退款
      *
      * @param param
      * @return
      */
-    public static boolean tradeRefund(RefundParam param, PublicKeyRes publicKeyRes) {
-        logger.info("翼支付交易查询接口,param:{}", param);
+    public static boolean tradeRefund(RefundParam param) {
+        logger.info("翼支付退款接口,param:{}", param);
         ParamValidUtil.checkTradeRefundParam(param, configure);
         try {
             //生成数字签名
@@ -152,15 +180,14 @@ public class TianyiPayUnit {
             }
             return false;
         } catch (Exception e) {
-            logger.info("翼支付交易查询接口 ,e.getMessage:{}", e.getMessage());
+            logger.info("翼支付退款接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
-            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_PUBLICKEY_FAIL);
+            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
         }
     }
 
     private static Map<String, String> getMap(RefundParam param, String mac) {
         Map<String, String> queryParam = new HashMap<String, String>();//组装请求参数
-
         queryParam.put("merchantId", param.getMerchantId());
         queryParam.put("merchantPwd", param.getMerchantPwd());
         queryParam.put("oldOrderNo", param.getOldOrderNo());
