@@ -77,7 +77,7 @@ public class RefundBizz {
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,refundResData.getRefund_id());
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity,paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
 
         return refundResData;
     }
@@ -139,9 +139,9 @@ public class RefundBizz {
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("",refundPaymentEntity.getPayNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS",refundAmount,"","",
-                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,resData.getRefundid());
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo("", refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                "SUCCESS", refundAmount, "", "",
+                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, resData.getRefundid());
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
@@ -197,9 +197,9 @@ public class RefundBizz {
      */
     public PaymentEntityVo cashRefund(String orderNo,Integer refundAmount){
 
-        PaymentEntity oldPaymentEntity = basePayment(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
+        PaymentEntity oldPaymentEntity = basePayment(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
 
-        PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3,oldPaymentEntity);
+        PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3, oldPaymentEntity);
 
         refundPaymentEntity.setFinishTime(new Date());
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
@@ -225,9 +225,9 @@ public class RefundBizz {
      */
     public PaymentEntity posBankCardPayRefund(String orderNo,Integer refundAmount){
 
-        PaymentEntity oldPaymentEntity = basePayment(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+        PaymentEntity oldPaymentEntity = basePayment(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
 
-        PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2,oldPaymentEntity);
+        PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, oldPaymentEntity);
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, null);
 
@@ -240,11 +240,16 @@ public class RefundBizz {
         RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
 
         //查找订单退款记录
-        PaymentEntity oldRefundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+        PaymentEntity oldRefundPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
                 payType);
 
-        if (oldRefundPaymentEntity == null) {
+        if (oldRefundPaymentEntity != null && oldRefundPaymentEntity.getStatus() == Constants.PAYMENT_STATUS.STAUS2) {
             throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_FAIL.getValueStr());
+        }
+        //未支付退款记录已存在，更新记录
+        if(oldRefundPaymentEntity != null){
+            oldRefundPaymentEntity.setAmountMoney(new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+            return oldRefundPaymentEntity;
         }
         //初始化退款记录
         return initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
