@@ -24,6 +24,8 @@ import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
 import com.rongyi.rpb.unit.SaveUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +39,8 @@ import java.util.Map;
  **/
 @Repository
 public class QueryBizz {
+
+    private static Logger log = LoggerFactory.getLogger(QueryBizz.class);
 
     @Autowired
     PaymentService paymentService;
@@ -141,7 +145,7 @@ public class QueryBizz {
 
         //检查是否支付成功状态
         if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(map.get("tradeStatus"))){
-            updatePayment(oldPaymentEntity, com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr(), "","");
+            updatePayment(oldPaymentEntity, com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr(), "", "");
         }
         return map;
 
@@ -396,6 +400,8 @@ public class QueryBizz {
      * 查询时检查是否已支付，如已支付，更新支付状态
      */
     private void updatePayment(PaymentEntity paymentEntity,String tradeNo,String buyerId,String buyerEmail){
+
+        log.info("paymentEntity={},tradeNo={}",paymentEntity,tradeNo);
 
         if(paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
             //更新支付状态
