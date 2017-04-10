@@ -13,6 +13,8 @@ public class ComplaintResultParam implements Serializable {
     private String remark;
     // 申诉操作（1：同意 2：拒绝）
     private Integer type;
+    private String userId;
+    private String userName;
 
     public String getComplaintNo() {
         return complaintNo;
@@ -36,6 +38,22 @@ public class ComplaintResultParam implements Serializable {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
