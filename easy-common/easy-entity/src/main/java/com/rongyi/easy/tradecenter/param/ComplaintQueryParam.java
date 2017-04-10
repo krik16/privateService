@@ -21,6 +21,7 @@ public class ComplaintQueryParam extends BaseQueryParam {
     private Date endDate;
     // 申诉状态（0：全部:1：申诉中、2：申诉成功:3：申诉失败:4：申诉关闭）
     private Integer status;
+    private String chiefId;
 
     public String getBuyerName() {
         return buyerName;
@@ -94,6 +95,14 @@ public class ComplaintQueryParam extends BaseQueryParam {
         this.status = status;
     }
 
+    public String getChiefId() {
+        return chiefId;
+    }
+
+    public void setChiefId(String chiefId) {
+        this.chiefId = chiefId;
+    }
+
     @Override
     public String toString() {
         return "ComplaintQueryParam{" +
@@ -106,6 +115,7 @@ public class ComplaintQueryParam extends BaseQueryParam {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", status=" + status +
+                ", chiefId='" + chiefId + '\'' +
                 "} " + super.toString();
     }
 }
