@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +45,7 @@ public class WebankController {
      * 微众微信公众号支付异步通知
      */
     @RequestMapping("/wechat/pay/notify")
-    public void wechatNotify(HttpServletRequest request, HttpServletResponse response ,@RequestBody Map<String,Object> paramMap) {
+    public void wechatNotify(HttpServletRequest request, HttpServletResponse response ,@RequestParam Map<String,Object> paramMap) {
         LOGGER.info("微众微信公众号支付异步通知start");
         try {
             Map<String, String> map = Utils.getRequestParams(request);
