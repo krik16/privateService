@@ -21,11 +21,14 @@ import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
+import com.rongyi.rpb.unit.SaveUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -41,6 +44,10 @@ public class QueryBizz {
     PayConfigInitUnit payConfigInitUnit;
     @Autowired
     PaymentLogInfoService paymentLogInfoService;
+    @Autowired
+    InitEntityUnit initEntityUnit;
+    @Autowired
+    SaveUnit saveUnit;
 
 
     /**
@@ -58,7 +65,14 @@ public class QueryBizz {
         if (oldPaymentEntity == null) {
             throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
         }
-        return WeChatPayUnit.punchCardPayQueryOrder(null, oldPaymentEntity.getPayNo(), wechatConfigure);
+        PunchCardPayQueryResData resData = WeChatPayUnit.punchCardPayQueryOrder(null, oldPaymentEntity.getPayNo(), wechatConfigure);
+
+        //检查是否支付成功状态
+        if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getTrade_state())){
+            updatePayment(oldPaymentEntity, resData.getTransaction_id(), resData.getOpenid(), resData.getOpenid());
+        }
+
+        return resData;
     }
 
     /**
@@ -76,7 +90,11 @@ public class QueryBizz {
         if (oldPaymentEntity == null) {
             throw new TradePayException("此订单支付记录不存在,orderNo={}", orderNo);
         }
-        return AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(), null, aliConfigure);
+        AlipayTradeQueryResponse resData = AliPayUnit.f2fPayQuery(oldPaymentEntity.getPayNo(), null, aliConfigure);
+
+        updatePayment(oldPaymentEntity, resData.getTradeNo(), resData.getBuyerUserId(), resData.getBuyerLogonId());
+
+        return resData;
 
     }
 
@@ -121,6 +139,10 @@ public class QueryBizz {
         //交易金额
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
+        //检查是否支付成功状态
+        if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(map.get("SUCCESS"))){
+            updatePayment(oldPaymentEntity, com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr(), "","");
+        }
         return map;
 
     }
@@ -275,7 +297,7 @@ public class QueryBizz {
      */
     public PaymentLogInfo queryPaymentLogInfo(String payNo) {
 
-        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo,null);
+        PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(payNo, null);
 
         if (paymentLogInfo == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
@@ -368,5 +390,24 @@ public class QueryBizz {
             throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
         }
         return refundPayment;
+    }
+
+    /**
+     * 查询时检查是否已支付，如已支付，更新支付状态
+     */
+    private void updatePayment(PaymentEntity paymentEntity,String tradeNo,String buyerId,String buyerEmail){
+
+        if(paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
+            //更新支付状态
+            paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+            paymentEntity.setFinishTime(new Date());
+            Integer totalFee = paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).intValue();
+            //初始化支付事件记录
+            PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(tradeNo, paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+                    "SUCCESS", totalFee, buyerId, buyerEmail,
+                    0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
+            //保存支付记录
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        }
     }
 }
