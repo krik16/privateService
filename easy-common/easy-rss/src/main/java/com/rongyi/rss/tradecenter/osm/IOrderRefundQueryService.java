@@ -3,9 +3,12 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.core.bean.DubboVO;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.vo.RefundVO;
+
+import java.util.Map;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -34,5 +37,13 @@ public interface IOrderRefundQueryService {
 	 * @throws Exception
 	 */
 	public ApplicationFormEntity selectById(Integer id) throws Exception;
+
+	/**
+	 * 获取退款原因和退款类型列表
+	 * 待发货状态只有仅退款选项，已发货状态需要根据订单快递方式展示
+	 * @param orderNo
+	 * @return
+	 */
+	public DubboVO<Map<String, Object>> listRefundReasonAndType(String orderNo);
 
 }
