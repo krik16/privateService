@@ -72,7 +72,7 @@ public class SmsConfig implements Serializable{
         public static final  String WEILAI="weilai";//福建未来无线信息技术有限公司
         public static final  String HUAYI="huayi";//宜春华宜嘉信传媒有限公司
         public static final String DUOZHONG = "duozhong"; //铎众短信接口
-        public static final String YUYIN = "yuying";  //语音短信接口
+        public static final String YUYIN = "yuyin";  //语音短信接口
 
     }
 

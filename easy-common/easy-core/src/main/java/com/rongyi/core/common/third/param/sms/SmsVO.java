@@ -1,5 +1,7 @@
 package com.rongyi.core.common.third.param.sms;
 
+import com.rongyi.core.common.third.md5.Md5Util;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import java.io.Serializable;
@@ -68,7 +70,10 @@ public class SmsVO implements Serializable {
         this.setUrl(smsChannelDto.getUrl());
         this.setUnitId(smsChannelDto.getUnitId());
         this.setUsername(smsChannelDto.getUsername());
-        this.setPassword(smsChannelDto.getPassword());
+        if(StringUtils.isNotBlank(smsChannelDto.getPassword())){
+            String password = Md5Util.EncoderByMd5(smsChannelDto.getPassword());
+            this.setPassword(password);
+        }
         this.setCreateAt(smsChannelDto.getCreateAt());
         this.setCreateBy(smsChannelDto.getCreateBy());
         this.setUpdateAt(smsChannelDto.getUpdateAt());
