@@ -1,6 +1,5 @@
 package com.rongyi.rpb.service.impl.v6;
 
-import com.alibaba.dubbo.common.json.JSON;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.vo.*;
@@ -97,7 +96,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
 
     @Override
     public Map<String, Object> weBankWechatPayQuery(RyMchVo ryMchVo, String orderNo, Integer payType, String weBankMchNo) {
-        log.info("微众微信刷卡支付查询,ryMchVo={},orderNo={},payType={},weBankMchNo={}", ryMchVo, orderNo, payType, weBankMchNo);
+        log.info("微众微信支付查询,ryMchVo={},orderNo={},payType={},weBankMchNo={}", ryMchVo, orderNo, payType, weBankMchNo);
         try {
             Map<String, Object> map = queryBizz.weBankWechatPayQueryOrder(orderNo, weBankMchNo);
             log.info("微众微信刷卡支付查询结果,map={}", map);
