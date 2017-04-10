@@ -68,7 +68,7 @@ public class QueryBizz {
         PunchCardPayQueryResData resData = WeChatPayUnit.punchCardPayQueryOrder(null, oldPaymentEntity.getPayNo(), wechatConfigure);
 
         //检查是否支付成功状态
-        if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(resData.getTrade_state())){
+        if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getTrade_state())){
             updatePayment(oldPaymentEntity, resData.getTransaction_id(), resData.getOpenid(), resData.getOpenid());
         }
 
@@ -140,7 +140,7 @@ public class QueryBizz {
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
         //检查是否支付成功状态
-        if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getCodeStr().equals(map.get("SUCCESS"))){
+        if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(map.get("tradeStatus"))){
             updatePayment(oldPaymentEntity, com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr(), "","");
         }
         return map;
