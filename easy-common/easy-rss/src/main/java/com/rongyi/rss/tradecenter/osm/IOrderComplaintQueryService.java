@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.core.bean.DubboVO;
 import com.rongyi.easy.osm.vo.ComplaintFormVO;
 import com.rongyi.easy.tradecenter.param.ComplaintQueryParam;
 
@@ -19,7 +20,7 @@ public interface IOrderComplaintQueryService {
      * @param param
      * @return
      */
-    public List<ComplaintFormVO> queryForList(ComplaintQueryParam param);
+    public DubboVO<List<ComplaintFormVO>> queryForList(ComplaintQueryParam param);
 
     /**
      * 获取申诉总数
@@ -27,5 +28,5 @@ public interface IOrderComplaintQueryService {
      * @param param
      * @return
      */
-    public int queryForCount(ComplaintQueryParam param);
+    public DubboVO<Integer> queryForCount(ComplaintQueryParam param);
 }

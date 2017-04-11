@@ -3,6 +3,7 @@ package com.rongyi.easy.tradecenter.param;
 import com.rongyi.easy.tradecenter.BaseQueryParam;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 申诉查询参数
@@ -22,6 +23,17 @@ public class ComplaintQueryParam extends BaseQueryParam {
     // 申诉状态（0：全部:1：申诉中、2：申诉成功:3：申诉失败:4：申诉关闭）
     private Integer status;
     private String chiefId;
+    private List<String> buyerIds;
+    private List<String> shopIds;
+    private List<String> guideIds;
+
+    public List<String> getBuyerIds() {
+        return buyerIds;
+    }
+
+    public void setBuyerIds(List<String> buyerIds) {
+        this.buyerIds = buyerIds;
+    }
 
     public String getBuyerName() {
         return buyerName;
@@ -103,19 +115,38 @@ public class ComplaintQueryParam extends BaseQueryParam {
         this.chiefId = chiefId;
     }
 
+    public List<String> getGuideIds() {
+        return guideIds;
+    }
+
+    public void setGuideIds(List<String> guideIds) {
+        this.guideIds = guideIds;
+    }
+
+    public List<String> getShopIds() {
+        return shopIds;
+    }
+
+    public void setShopIds(List<String> shopIds) {
+        this.shopIds = shopIds;
+    }
+
     @Override
     public String toString() {
         return "ComplaintQueryParam{" +
-                "buyerName='" + buyerName + '\'' +
+                "buyerIds=" + buyerIds +
                 ", complaintNo='" + complaintNo + '\'' +
                 ", orderNo='" + orderNo + '\'' +
                 ", refundNo='" + refundNo + '\'' +
                 ", commodityName='" + commodityName + '\'' +
                 ", shopName='" + shopName + '\'' +
+                ", buyerName='" + buyerName + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", status=" + status +
                 ", chiefId='" + chiefId + '\'' +
+                ", shopIds=" + shopIds +
+                ", guideIds=" + guideIds +
                 "} " + super.toString();
     }
 }
