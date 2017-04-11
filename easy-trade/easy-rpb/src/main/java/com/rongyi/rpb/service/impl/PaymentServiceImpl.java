@@ -368,7 +368,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentEntityVO.setTitle(getTitle(payNo));
         }
         insertList(paymentEntityList, paymentEntityVO, event, oldPayNo);
-//        orderFormNsyn.updateOrderPrice(paymentEntityVO.getOrderNum());
+        //TODO 翼支付退款时直接发起退款，退款接口封装到tianyiService中，此处调这个接口
         return paymentEntityVO;
     }
 
@@ -399,6 +399,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
                 paymentEntity.setPayChannel(historyPayment.getPayChannel());
                 paymentEntity.setWeixinMchId(historyPayment.getWeixinMchId());
+                paymentEntity.setTianyiPayId(historyPayment.getTianyiPayId());
             } else if (PaymentEventType.SEND_RED_BACK.equals(event.getType())) {// 微信发红包
                 paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8);
             }
