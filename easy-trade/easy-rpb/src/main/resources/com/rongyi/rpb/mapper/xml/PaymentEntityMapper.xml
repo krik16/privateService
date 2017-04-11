@@ -602,8 +602,7 @@
         </if>
         order by
         instr(
-        #{orderNoList}
-        ,CONCAT(pay_no))
+        pay_no,#{orderNoList}))
 
     </select>
 
