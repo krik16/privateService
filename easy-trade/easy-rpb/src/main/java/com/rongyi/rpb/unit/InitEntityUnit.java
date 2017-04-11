@@ -30,7 +30,7 @@ public class InitEntityUnit {
      * 初始化支付记录
      */
     public PaymentEntity initPaymentEntity(RyMchVo ryMchVo,String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
-                                           String aliSellerId,String wechatMchId){
+                                           String aliSellerId,String wechatMchId,Integer paySence){
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
         paymentEntity.setOrderNum(orderNo);
@@ -47,6 +47,7 @@ public class InitEntityUnit {
         paymentEntity.setRyAppId(ryMchVo.getRyAppId());
         paymentEntity.setSource(ryMchVo.getSource());
         paymentEntity.setOrgChannel(ryMchVo.getOrgChannel());
+        paymentEntity.setPayScene(paySence);
         log.info("初始化支付记录,paymentEntity={}",paymentEntity);
         return paymentEntity;
     }

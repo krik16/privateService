@@ -20,6 +20,7 @@ import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.AliPayUnit;
 import com.rongyi.rpb.bizz.PayBizz;
+import com.rongyi.rpb.bizz.PaySignBizz;
 import com.rongyi.rpb.bizz.QueryBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
 import com.rongyi.core.util.BeanMapUtils;
@@ -47,6 +48,8 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
     RefundBizz refundBizz;
     @Autowired
     QueryBizz queryBizz;
+    @Autowired
+    PaySignBizz paySignBizz;
 
     @Override
     public Map<String, Object> getPaySign(RyMchVo ryMchVo,AliPaySignVo aliPaySignVo, AliConfigureVo aliConfigureVo) throws TradePayException{
@@ -60,7 +63,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
             //获取签名
-            Map<String, Object> map = payBizz.aliScanPaySign(ryMchVo, aliScanPayReqData, aliConfigure);
+            Map<String, Object> map = paySignBizz.aliScanPaySign(ryMchVo, aliScanPayReqData, aliConfigure,aliPaySignVo.getOrderType());
             //外部订单号
             map.put("orderNo", aliPaySignVo.getOrderNo());
             log.info("支付宝扫码签名结果,map={}", map);
@@ -158,7 +161,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradeQueryResponse alipayTradeQueryResponse = payBizz.aliF2FPayQuery(orderNo, aliConfigure);
+            AlipayTradeQueryResponse alipayTradeQueryResponse = queryBizz.aliF2FPayQuery(orderNo, aliConfigure);
 
             Map<String, Object> map = BeanMapUtils.toMap(alipayTradeQueryResponse);
 

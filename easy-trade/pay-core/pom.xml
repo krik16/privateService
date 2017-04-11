@@ -8,6 +8,7 @@
     </parent>
     <artifactId>pay-core</artifactId>
     <packaging>jar</packaging>
+    <version>5.3.6-SNAPSHOT</version>
 
     <dependencies>
 
