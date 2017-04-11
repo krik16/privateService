@@ -140,6 +140,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private RefundSettingConfigEntity refundSettingConfig;
     // 微店对应的店铺名称
     private String shopName;
+    // 是否冻结 0：正常流程 1：冻结流程
+    private int isFreeze;
 
     public Integer getDeliverId() {
         return deliverId;
@@ -1073,5 +1075,13 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+    public int getIsFreeze() {
+        return isFreeze;
+    }
+
+    public void setIsFreeze(int isFreeze) {
+        this.isFreeze = isFreeze;
     }
 }
