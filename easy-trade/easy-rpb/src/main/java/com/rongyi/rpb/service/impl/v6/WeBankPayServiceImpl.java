@@ -370,10 +370,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             return map;
 
         } catch (WebankException | ParamNullException e) {
-            log.error("微众支付宝扫码支付签名失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝扫码支付签名失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众支付宝扫码支付签名失败,e={}", e.getMessage(), e);
+            log.warn("微众支付宝扫码支付签名失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝扫码支付签名异常,e={}", e.getMessage(), e);
@@ -393,10 +393,10 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             map.remove("paySign");
             return map;
         } catch (WebankException | ParamNullException e) {
-            log.error("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
+            log.warn("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.error("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
+            log.warn("微众微信公众号支付签名失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
             log.error("微众微信公众号支付签名异常,e={}", e.getMessage(), e);
