@@ -4,6 +4,7 @@ import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.TradeConstantEnum;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.core.util.TradePaySignUtil;
 import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -106,6 +107,7 @@ public class PayNotifyBizz {
      * 微众支付宝通知
      * @param paramMap 通知参数
      */
+    @SuppressWarnings("unchecked")
     public void webankAlipayNotify(Map<String, String> paramMap) {
         log.info("微众支付宝通知内容,map={}",paramMap);
         Map<String,String> map =(Map<String,String>) JSONObject.fromObject(paramMap.get("data"));
@@ -142,11 +144,19 @@ public class PayNotifyBizz {
     }
 
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
-        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
-                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
-        if(dto.getRyMchId() == null || !dto.getRyMchId().equals(paymentEntity.getRyMchId())){
+
+        //获取开放平台商户信息
+        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(dto.getRyMchId(), dto.getRyAppId());
+        if (ryMchAppVo == null) {
             throw  new TradeException(ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getCodeStr(),ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getValueStr());
         }
+
+        //验证签名
+        validateSign(dto,ryMchAppVo.getToken(),dto.getSign());
+
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
+                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+
         BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
         //支付通知
        if(dto.getType() != null && 0 == dto.getType()) {
@@ -218,8 +228,8 @@ public class PayNotifyBizz {
         }
         //获取支付信息
         PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(posBankSynNotifyDto.getOrderNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
-                Constants.PAYMENT_STATUS.STAUS2, payChannel);
-        if (refundPaymentEntity != null) {
+                null, payChannel);
+        if (refundPaymentEntity != null && Constants.PAYMENT_STATUS.STAUS2 == refundPaymentEntity.getStatus()) {
             log.warn("此订单已退款,无法再次退款,orderNo={}", posBankSynNotifyDto.getOrderNo());
             throw new TradeException(ConstantEnum.EXCEPTION_REFUND_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_FAIL.getValueStr());
         }
@@ -230,20 +240,22 @@ public class PayNotifyBizz {
         ryMchVo.setSource((byte)4);
         ryMchVo.setOrgChannel(oldPaymentEntity.getOrgChannel());
         //初始化退款记录
-        PaymentEntity paymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount().intValue(),oldPaymentEntity.getOrderType(),
-                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getPayChannel(),oldPaymentEntity.getAliSellerId(),oldPaymentEntity.getWechatMchId(),
-                oldPaymentEntity.getPayScene());
+        if(refundPaymentEntity == null) {
+            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount().intValue(), oldPaymentEntity.getOrderType(),
+                    Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, oldPaymentEntity.getPayChannel(), oldPaymentEntity.getAliSellerId(), oldPaymentEntity.getWechatMchId(),
+                    oldPaymentEntity.getPayScene());
+        }
 
-        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
-        paymentEntity.setFinishTime(new Date());
+        refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        refundPaymentEntity.setFinishTime(new Date());
 
         //初始化退款事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(posBankSynNotifyDto.getPaymentNo(), paymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(posBankSynNotifyDto.getPaymentNo(), refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS", posBankSynNotifyDto.getPayAmount().intValue(), "", "",
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
 
         //保存退款记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
 
     }
 
@@ -390,6 +402,27 @@ public class PayNotifyBizz {
         //删除异步通知地址
         redisService.expire(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), 1000);
         log.info("容易网支付通知结束");
-
     }
+
+    /**
+     * 请求签名验证
+     * @param o 请求参数对象
+     * @param token 商户token
+     */
+    private void validateSign(Object o,String token,String sign){
+        try {
+            Map<String, Object> map = BeanMapUtils.toMap(o);
+            map.remove("sign");
+            map.remove("nativePay");
+            Boolean result = TradePaySignUtil.signValidateWithToken(map, token, sign);
+            if(!result){
+                log.warn("验签失败,result={}", result);
+                throw new TradeException(ConstantEnum.EXC_SIGN_FAIL.getCodeStr(),ConstantEnum.EXC_SIGN_FAIL.getValueStr());
+            }
+        } catch (Exception e) {
+            log.error("验签失败,e={}", e.getMessage(), e);
+            throw new TradeException(ConstantEnum.EXC_SIGN_FAIL.getCodeStr(),ConstantEnum.EXC_SIGN_FAIL.getValueStr());
+        }
+    }
+
 }
