@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 申诉参数
+ * 买家申诉参数
  *
  * @author wangjh7
  * @date 2017-04-10
@@ -21,8 +21,6 @@ public class ComplaintParam implements Serializable {
     private String remark;
     // 申诉凭证（多个用逗号分隔）
     private List<String> pics;
-    private String userId;
-    private String userName;
 
     public List<String> getPics() {
         return pics;
@@ -64,22 +62,6 @@ public class ComplaintParam implements Serializable {
         this.complaintNo = complaintNo;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     @Override
     public String toString() {
         return "ComplaintParam{" +
@@ -88,8 +70,6 @@ public class ComplaintParam implements Serializable {
                 ", refundNo='" + refundNo + '\'' +
                 ", remark='" + remark + '\'' +
                 ", pics=" + pics +
-                ", userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
                 '}';
     }
 }

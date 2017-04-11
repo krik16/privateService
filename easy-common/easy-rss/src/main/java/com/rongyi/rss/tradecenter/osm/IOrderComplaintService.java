@@ -17,7 +17,7 @@ public interface IOrderComplaintService {
      *
      * @param param * @return
      */
-    void agree(ComplaintResultParam param);
+    DubboVO<String> agree(ComplaintResultParam param);
 
     /**
      * 拒绝申诉
@@ -25,7 +25,7 @@ public interface IOrderComplaintService {
      * @param param
      * @return
      */
-    void disAgree(ComplaintResultParam param);
+    DubboVO<String> disAgree(ComplaintResultParam param);
 
     /**
      * 发起申诉
