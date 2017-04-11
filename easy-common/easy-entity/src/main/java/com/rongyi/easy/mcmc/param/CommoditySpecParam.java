@@ -14,7 +14,7 @@ public class CommoditySpecParam implements  Serializable {
 	private String id;
 	private String originalPrice;//原价
 	private String currentPrice;//现价
-	private List<ObjectId> columnIds;//规格id
+	private List<String> columnIds;//规格id
 	private List<String> columnValues;//规格属性
 	private List<String> columnNotes;//规格备注
 	private String shopMid;//对应商品所属店铺MongoId
@@ -73,11 +73,11 @@ public class CommoditySpecParam implements  Serializable {
 		this.currentPrice = currentPrice;
 	}
 
-	public List<ObjectId> getColumnIds() {
+	public List<String> getColumnIds() {
 		return columnIds;
 	}
 
-	public void setColumnIds(List<ObjectId> columnIds) {
+	public void setColumnIds(List<String> columnIds) {
 		this.columnIds = columnIds;
 	}
 
