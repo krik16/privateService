@@ -7,7 +7,6 @@ import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.tianyi.param.*;
 import com.rongyi.pay.core.tianyi.service.TianyiPayService;
 import com.rongyi.pay.core.tianyi.util.*;
-import com.rongyi.pay.core.wechat.util.MD5;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 天翼支付接口
  * Created by yangyang on 2017/4/1.
  */
 public class TianyiPayUnit {
@@ -31,8 +31,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付总接口
      *
-     * @param param
-     * @return
+     * @param param 总请求参数，由调用方提供
+     * @return 返回h5url
      */
     public static String tianyiPay(TianyiParam param) {
         logger.info("翼支付总接口，param:{},config:{}", param, configure);
@@ -60,8 +60,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付下单接口
      *
-     * @param param
-     * @return
+     * @param param 下单参数
+     * @return 失败或成功
      */
     public static boolean order(TianyiOrderParam param) {
         logger.info("翼支付下单接口，param:{},config:{}", param, configure);
@@ -82,14 +82,17 @@ public class TianyiPayUnit {
     /**
      * 翼支付获取公钥接口
      *
-     * @param param
-     * @return
+     * @param param 下单参数
+     * @return 公钥对象
      */
     public static PublicKeyRes getPublicKey(TianyiOrderParam param) {
         logger.info("翼支付获取公钥接口,param:{}", param);
         String requestBody = getReqParam();
         try {
             String responseStr = HttpUtil.doPost(configure.getPublicKeyUrl(), requestBody);
+            if (StringUtils.isBlank(responseStr)){
+                return null;
+            }
             TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
             if (result != null && result.isSuccess() && result.getResult() != null) {
                 return JSONObject.parseObject(result.getResult().toString(), PublicKeyRes.class);
@@ -105,8 +108,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付拼接url
      *
-     * @param param
-     * @return
+     * @param param 支付详情参数
+     * @return String
      */
     public static String getH5Url( PayDetailParam param, PublicKeyRes publicKeyRes) {
         logger.info("翼支付拼接url接口,param:{}", param);
@@ -133,10 +136,10 @@ public class TianyiPayUnit {
     /**
      * 交易查询
      *
-     * @param param
-     * @return
+     * @param param 交易查询参数
+     * @return TianyiTradeQueryRes
      */
-    public static TianyiTradeQueryRes tradeQuery(PayQueryParam param, PublicKeyRes publicKeyRes) {
+    public static TianyiTradeQueryRes tradeQuery(PayQueryParam param) {
         logger.info("翼支付交易查询接口,param:{}", param);
         ParamValidUtil.checkTradeQueryParam(param, configure);
         try {
@@ -144,9 +147,9 @@ public class TianyiPayUnit {
             String mac = getTradeQuerySign(param);
             param.setMac(mac);
             String tradeQueryStr = TianyiPayService.getOrderQueryStr(param);
-            String responseStr = HttpUtil.doPost(configure.getPayQueryUrl(), tradeQueryStr);
-            TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
-            if (result.isSuccess() || result.getResult() != null){
+            String responseStr = HttpUtil.sendHttpRequest(configure.getPayQueryUrl(), tradeQueryStr);
+            TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
+            if (result != null && result.isSuccess()  && result.getResult() != null){
                 return JSONObject.parseObject(result.getResult().toString(), TianyiTradeQueryRes.class);
             }
             return null;
@@ -162,8 +165,8 @@ public class TianyiPayUnit {
     /**
      * 交易退款
      *
-     * @param param
-     * @return
+     * @param param 退款参数
+     * @return boolean
      */
     public static boolean tradeRefund(RefundParam param) {
         logger.info("翼支付退款接口,param:{}", param);
@@ -175,10 +178,7 @@ public class TianyiPayUnit {
             Map<String, String> queryParam = getMap(param, mac);
             String responseStr = HttpUtil.sendTradePost(queryParam, configure);
             TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
-            if (result.isSuccess()){
-                return true;
-            }
-            return false;
+            return result.isSuccess();
         } catch (Exception e) {
             logger.info("翼支付退款接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
@@ -201,8 +201,8 @@ public class TianyiPayUnit {
         return queryParam;
     }
 
-    public static String getTradeQuerySign(PayQueryParam param) {
-        return MD5.MD5Encode("MERCHANTID=" + param.getMerchantId() + "&ORDERREQNQ=" + param.getOrderReqNo() + "&ORDERDATE=" + param.getOrderDate() + "&KEY=" + param.getKey());
+    public static String getTradeQuerySign(PayQueryParam param) throws Exception {
+        return CryptTool.md5Digest("MERCHANTID=" + param.getMerchantId() +"&ORDERNO=" + param.getOrderNo() + "&ORDERREQNO=" + param.getOrderReqNo() + "&ORDERDATE=" + param.getOrderDate() + "&KEY=" + param.getKey());
     }
 
     private static String getSign(PayDetailParam param) throws Exception {
