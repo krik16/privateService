@@ -787,7 +787,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
-			this.setIsRefund(param.getIsRefund());//是否可退货
+			this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}
