@@ -137,6 +137,8 @@ public class PaymentEntity implements Serializable {
 	//json格式数据快照
 	private String attach ;
 
+	private Integer payScene;
+
 	/**
 	 * 主键id
 	 * 
@@ -468,6 +470,14 @@ public class PaymentEntity implements Serializable {
 
 	public void setOrgChannel(Byte orgChannel) {
 		this.orgChannel = orgChannel;
+	}
+
+	public Integer getPayScene() {
+		return payScene;
+	}
+
+	public void setPayScene(Integer payScene) {
+		this.payScene = payScene;
 	}
 
 	public Integer getTianyiPayId() {
