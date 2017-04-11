@@ -97,17 +97,6 @@ public class TianyiPayService {
     }
 
     public static String getTradeRefundMac(RefundParam param) throws Exception {
-        StringBuilder sb = new StringBuilder();//组装mac加密明文串
-        sb.append("MERCHANTID=").append(param.getMerchantId());
-        sb.append("&MERCHANTPWD=").append(param.getMerchantPwd());
-        sb.append("&OLDORDERNO=").append(param.getOldOrderNo());
-        sb.append("&OLDORDERREQNO=").append(param.getOldOrderReqNo());
-        sb.append("&REFUNDREQNO=").append(param.getRefundReqNo());
-        sb.append("&REFUNDREQDATE=").append(param.getRefundReqDate());
-        sb.append("&TRANSAMT=").append(param.getTransAmt());
-        sb.append("&LEDGERDETAIL=").append(param.getLedgerDetail());
-        sb.append("&KEY=").append(param.getKey());//此处是商户的key
-        System.out.println("str="+sb.toString());
-        return CryptTool.md5Digest(sb.toString());
+        return CryptTool.md5Digest("MERCHANTID=" + param.getMerchantId() + "&MERCHANTPWD=" + param.getMerchantPwd() + "&OLDORDERNO=" + param.getOldOrderNo() + "&OLDORDERREQNO=" + param.getOldOrderReqNo() + "&REFUNDREQNO=" + param.getRefundReqNo() + "&REFUNDREQDATE=" + param.getRefundReqDate() + "&TRANSAMT=" + param.getTransAmt() + "&LEDGERDETAIL=" + param.getLedgerDetail() + "&KEY=" + param.getKey());
     }
 }
