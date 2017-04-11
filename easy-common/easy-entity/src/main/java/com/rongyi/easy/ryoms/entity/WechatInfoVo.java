@@ -28,7 +28,9 @@ public class WechatInfoVo implements Serializable{
 	private String meiweiId;  		//美味不用等商场ID
 	private Integer isDeleted ;      //是否已删除  0正常 1已删除
 	List<MeiweiWechatVo> meiweiList ; //美味ID与商场对应关系
-	private WechatPayVo wechatPayVo;      //支付信息
+	private WechatPayVo wechatPayVo;      //微信支付信息
+	private WechatTianyiPayVo wechatTianyiPayVo ;  //天翼支付配置
+
 	public Integer getId() {
 		return id;
 	}
@@ -126,5 +128,13 @@ public class WechatInfoVo implements Serializable{
 
 	public void setPublicType(Integer publicType) {
 		this.publicType = publicType;
+	}
+
+	public WechatTianyiPayVo getWechatTianyiPayVo() {
+		return wechatTianyiPayVo;
+	}
+
+	public void setWechatTianyiPayVo(WechatTianyiPayVo wechatTianyiPayVo) {
+		this.wechatTianyiPayVo = wechatTianyiPayVo;
 	}
 }
