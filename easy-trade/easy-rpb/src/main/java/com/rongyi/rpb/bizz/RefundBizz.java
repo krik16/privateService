@@ -268,35 +268,35 @@ public class RefundBizz {
         return oldPaymentEntity;
     }
 
-    public void tianyiRefund(String orderNo,Integer refundAmount){
-        //查找订单支付记录
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-        //初始化退款入住商户信息
-        RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
-
-
-        //初始化退款记录
-        PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
-                refundAmount, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
-
-        refundPaymentEntity.setFinishTime(new Date());
-        refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
-
-        //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(orderNoGenService.getOrderNo("6"), refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS", refundAmount, "", "",
-                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
-
-        //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
-
-
-    }
+//    public void tianyiRefund(String orderNo,Integer refundAmount){
+//        //查找订单支付记录
+//        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+//                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
+//        if (oldPaymentEntity == null) {
+//            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+//        }
+//        //初始化退款入住商户信息
+//        RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
+//
+//
+//        //初始化退款记录
+////        PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
+////                refundAmount, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
+////                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
+//
+//        refundPaymentEntity.setFinishTime(new Date());
+//        refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+//
+//        //初始化支付事件记录
+//        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(orderNoGenService.getOrderNo("6"), refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
+//                "SUCCESS", refundAmount, "", "",
+//                0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
+//
+//        //保存记录
+//        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+//
+//
+//    }
 
     public RyMchVo initRefundRyMchVo(PaymentEntity paymentEntity){
         //初始化开放商户信息
