@@ -462,8 +462,8 @@ public class WeChatPayUnit {
         } catch (Exception e) {
             LOGGER.info("获取openId查询, result={}", result);
             e.printStackTrace();
-            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(),
-                    ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
+            throw new WeChatException(ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getCodeStr(),
+                    ConstantEnum.EXCEPTION_WEIXIN_OPENID_FAIL.getValueStr());
         }
     }
 }

@@ -9,6 +9,7 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
+import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.tms.vo.MQDrawParam;
 import com.rongyi.rpb.Exception.TradeException;
@@ -368,7 +369,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentEntityVO.setTitle(getTitle(payNo));
         }
         insertList(paymentEntityList, paymentEntityVO, event, oldPayNo);
-//        orderFormNsyn.updateOrderPrice(paymentEntityVO.getOrderNum());
+        //TODO 翼支付退款时直接发起退款，退款接口封装到tianyiService中，此处调这个接口
         return paymentEntityVO;
     }
 
@@ -399,6 +400,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
                 paymentEntity.setPayChannel(historyPayment.getPayChannel());
                 paymentEntity.setWeixinMchId(historyPayment.getWeixinMchId());
+                paymentEntity.setTianyiPayId(historyPayment.getTianyiPayId());
             } else if (PaymentEventType.SEND_RED_BACK.equals(event.getType())) {// 微信发红包
                 paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8);
             }
@@ -843,4 +845,21 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         params.put("tradeType", tradeType);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".batchQueryByOrderNos", params);
     }
+
+	@Override
+	public Integer updateStatusList(List<String> payNoList, Integer payerReconFlag) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("payNoList", payNoList);
+		params.put("payerReconFlag", payerReconFlag);
+		return this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateStatusList", params);
+	}
+
+	public List<PaymentEntity> findList(PaymentOrderDto paymentOrderDto) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("payChannel", paymentOrderDto.getPayChannel());
+		params.put("tradeType", paymentOrderDto.getTradeType());
+		params.put("status", paymentOrderDto.getStatus());
+		params.put("endAt", paymentOrderDto.getEndAt());
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".findList", params);
+	}
 }

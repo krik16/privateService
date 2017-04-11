@@ -3,8 +3,9 @@ package webank;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
-import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
-import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
+import com.rongyi.pay.core.webank.model.res.WwScanQueryResData;
+import com.rongyi.pay.core.webank.param.*;
 import com.rongyi.pay.core.webank.util.Signature;
 import com.sun.org.glassfish.gmbal.Description;
 import org.apache.commons.lang.StringUtils;
@@ -19,8 +20,10 @@ import java.math.BigDecimal;
 //@RunWith(JUnit4Runner.class)
 public class WebankTest {
 
-    String merchantCode  = "107100000000014";
+    String merchantCode  = "107290054110002";
     String wbMerchatId = "107075571030015";
+    static String domain = "https://test-svrapi.webank.com/l/";
+//  String domain = "https://svrapi.webank.com/";
 
     @Test
     @Description("微信刷卡支付")
@@ -28,12 +31,12 @@ public class WebankTest {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WwPunchCardPayParam param = new WwPunchCardPayParam();
-        param.setMerchantCode("107100000000014");
+        param.setMerchantCode(merchantCode);
         param.setTerminalCode("web");
-        param.setOrderNo("0030854909440180122");
+        param.setOrderNo(getOrderNO());
         param.setAmount(new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP));
         param.setProduct("test");
-        param.setAuthCode("130221386885030996");
+        param.setAuthCode("130026195640709141");
 //        param.setOpenid("99999999999999");
 //        param.setSubAppid("000000000000");
 //        param.setGoodsTag("测试商品");
@@ -60,7 +63,7 @@ public class WebankTest {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData();
         reqData.setMerchant_code("107100000000014");
         reqData.setTerminal_code("web");
-        reqData.setO_terminal_serialno("1488610970424");
+        reqData.setO_terminal_serialno("1490775093186");
         reqData.setTerminal_serialno(getOrderNO());
         reqData.setAmount(new BigDecimal("10001").setScale(2, BigDecimal.ROUND_HALF_UP));
         WwPunchCardReverseResData resData = webankPayUnit.wechatPunchCardReverse(reqData);
@@ -87,7 +90,7 @@ public class WebankTest {
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         WwpunchCardRefundReqData reqData = new WwpunchCardRefundReqData();
         reqData.setMerchant_code(merchantCode);
-        reqData.setTerminal_serialno("1488614365160");
+        reqData.setTerminal_serialno("1490860084481");
         WwPunchCardRefundResData resData = webankPayUnit.wechatPunchCardRefundQuery(reqData);
         System.out.println(resData);
     }
@@ -104,6 +107,7 @@ public class WebankTest {
     @Test
     @Description("支付宝获取ticket")
     public void alipayGetTicket() {
+        init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
         String token = "WLA0f-dGGlQHTVClazkxtmW6FX_nRhpUB01QpWs5MbZluhUWgTOVo4XvWHZuEqevzbjASf2bGbAjUISAu5pliXxh1g";
         webankPayUnit.alipayGetTicket(token);
@@ -128,7 +132,7 @@ public class WebankTest {
     public void alipayQueyrTrade() {
         init();
         WebankPayUnit webankPayUnit = new WebankPayUnit();
-        WaQueryTradeReqData reqData = new WaQueryTradeReqData(wbMerchatId, "1488771549778");
+        WaQueryTradeReqData reqData = new WaQueryTradeReqData(wbMerchatId, "1490686823004");
         WaQueryTradeResData resData = webankPayUnit.alipayQueryTrade(reqData);
         System.out.println(resData);
     }
@@ -169,19 +173,60 @@ public class WebankTest {
         System.out.println(resData);
     }
 
+    @Test
+    @Description("微信公众号支付")
+    public void wechatScanPay() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WwScanPayParam param = new WwScanPayParam();
+        param.setMchId(merchantCode);
+        param.setOutTradeNo(getOrderNO());
+        param.setBody("交易描述");
+        param.setSubAppid("wx6adc3ad9a28954bc");
+        param.setSubOpenid("o5XVuwq7HBFKaSHtlU1w2OrErAPM");
+        param.setTotalFee(1);
+        WwScanPayResData resData = webankPayUnit.wechatScanPay(param);
+        System.out.println(resData);
+    }
+
+    @Test
+    @Description("微信公众号支付订单查询")
+    public void wechatScanQuery() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WwScanQueryParam param = new WwScanQueryParam();
+        param.setOutTradeNo("1490775093186");
+        param.setMchId(merchantCode);
+        WwScanQueryResData resData = webankPayUnit.wechatScanQuery(param);
+        System.out.println(resData);
+    }
+
+    @Test
+    @Description("支付宝扫码支付")
+    public void alipayScanPay() {
+        init();
+        WebankPayUnit webankPayUnit = new WebankPayUnit();
+        WaScanPayParam payParam = new WaScanPayParam();
+        payParam.setWbMerchantId(wbMerchatId);
+        payParam.setOrderId(getOrderNO());
+        payParam.setSubject("海贼王手办");
+        payParam.setTotalAmount("0.01");
+        webankPayUnit.alipayScanPay(payParam);
+    }
+
     public static void init() {
         WebankConfigure configure = WebankConfigure.getInstance();
         if (StringUtils.isEmpty(configure.getKey())) {
-            configure.setKey("123");
-            configure.setWechatPunchCardPayUrl("https://test-svrapi.webank.com/l/wbap-bbfront/mao");
+            configure.setKey("rongyiwang170324");
+            configure.setWechatPunchCardPayUrl("https://svrapi.webank.com/wbap-bbfront/mao");
             configure.setWechatPunchCardPayQueryOrderUrl("https://test-svrapi.webank.com/l/wbap-bbfront/mgos");
-            configure.setWechatPunchCardPayReverseOrderUrl("https://test-svrapi.webank.com/l/wbap-bbfront/ro");
+            configure.setWechatPunchCardPayReverseOrderUrl("https://te st-svrapi.webank.com/l/wbap-bbfront/ro");
             configure.setWechatPunchCardRefundUrl("https://test-svrapi.webank.com/l/wbap-bbfront/nro");
             configure.setWechatPunchCardRefundQueryUrl("https://test-svrapi.webank.com/l/wbap-bbfront/nros");
 
-            configure.setWechatKeyStorePath("C:\\rongyi\\work\\weBankCret\\www.rongyi.com\\www.rongyi.com.p12");
-            configure.setWechatTrustStorePath("C:\\rongyi\\webank-trust.jks");
-            configure.setWechatKeyStorePwd("www.rongyi.com");
+            configure.setWechatKeyStorePath("E:\\itemnew\\微众\\微众生产环境证书\\rongyiwang\\rongyiwang.p12");
+            configure.setWechatTrustStorePath("D:\\Users\\sujuan\\webank-trust.jks");
+            configure.setWechatKeyStorePwd("App1234.");
 
             configure.setAppId("W0000036");
             configure.setSecret("mJBdgcPLLRYvJzZYmtEz97ekHGZaoGLFallg6JjOXcptcw6xOtU6JceY15sQH8mb");
@@ -194,6 +239,12 @@ public class WebankTest {
             configure.setAlipayReverseTradeUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/cancel");
             configure.setAlipayRefundUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/refund");
             configure.setAlipayRefundQueryUrl("https://l.test-svrapi.webank.com/api/acq/server/alipay/queryrefund");
+
+            //条码支付url
+            configure.setWechatScanPayUrl(domain + "wbap-bbfront/AddOrder");
+            configure.setWechatScanNotifyUrl("http://c.rongyi.com/ryoms/users/login");
+            configure.setAlipayScanPayUrl(domain + "api/acq/server/alipay/precreatetrade");
+            configure.setWechatScanQueryUrl(domain + "wbap-bbfront/GetOrderStatus");
         }
     }
 

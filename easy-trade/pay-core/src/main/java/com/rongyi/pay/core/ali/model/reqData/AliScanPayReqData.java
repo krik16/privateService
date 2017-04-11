@@ -218,4 +218,5 @@ public class AliScanPayReqData extends BaseData{
     public void setTimeoutExpress(String timeoutExpress) {
         this.timeoutExpress = timeoutExpress;
     }
+
 }
