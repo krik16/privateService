@@ -413,7 +413,6 @@ public class PayNotifyBizz {
         try {
             Map<String, Object> map = BeanMapUtils.toMap(o);
             map.remove("sign");
-            map.remove("nativePay");
             Boolean result = TradePaySignUtil.signValidateWithToken(map, token, sign);
             if(!result){
                 log.warn("验签失败,result={}", result);
