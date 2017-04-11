@@ -13,8 +13,8 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233139";
-    private static String ORDERTRANSEQL="20160830092048436461232233139";
+    private static String ORDERSEQ="20160830092048436461232233140";
+    private static String ORDERTRANSEQL="20160830092048436461232233140";
     private static String ORDERTIME="20160830092048";
     private static String ORDERVALIDITYTIME="20160830092048";
 

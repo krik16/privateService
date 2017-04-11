@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 天翼支付接口
  * Created by yangyang on 2017/4/1.
  */
 public class TianyiPayUnit {
@@ -31,8 +32,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付总接口
      *
-     * @param param
-     * @return
+     * @param param 总请求参数，由调用方提供
+     * @return 返回h5url
      */
     public static String tianyiPay(TianyiParam param) {
         logger.info("翼支付总接口，param:{},config:{}", param, configure);
@@ -60,8 +61,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付下单接口
      *
-     * @param param
-     * @return
+     * @param param 下单参数
+     * @return 失败或成功
      */
     public static boolean order(TianyiOrderParam param) {
         logger.info("翼支付下单接口，param:{},config:{}", param, configure);
@@ -82,8 +83,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付获取公钥接口
      *
-     * @param param
-     * @return
+     * @param param 下单参数
+     * @return 公钥对象
      */
     public static PublicKeyRes getPublicKey(TianyiOrderParam param) {
         logger.info("翼支付获取公钥接口,param:{}", param);
@@ -105,8 +106,8 @@ public class TianyiPayUnit {
     /**
      * 翼支付拼接url
      *
-     * @param param
-     * @return
+     * @param param 支付详情参数
+     * @return String
      */
     public static String getH5Url( PayDetailParam param, PublicKeyRes publicKeyRes) {
         logger.info("翼支付拼接url接口,param:{}", param);
@@ -133,8 +134,8 @@ public class TianyiPayUnit {
     /**
      * 交易查询
      *
-     * @param param
-     * @return
+     * @param param 交易查询参数
+     * @return TianyiTradeQueryRes
      */
     public static TianyiTradeQueryRes tradeQuery(PayQueryParam param, PublicKeyRes publicKeyRes) {
         logger.info("翼支付交易查询接口,param:{}", param);
@@ -162,8 +163,8 @@ public class TianyiPayUnit {
     /**
      * 交易退款
      *
-     * @param param
-     * @return
+     * @param param 退款参数
+     * @return boolean
      */
     public static boolean tradeRefund(RefundParam param) {
         logger.info("翼支付退款接口,param:{}", param);
@@ -175,10 +176,7 @@ public class TianyiPayUnit {
             Map<String, String> queryParam = getMap(param, mac);
             String responseStr = HttpUtil.sendTradePost(queryParam, configure);
             TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
-            if (result.isSuccess()){
-                return true;
-            }
-            return false;
+            return result.isSuccess();
         } catch (Exception e) {
             logger.info("翼支付退款接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
