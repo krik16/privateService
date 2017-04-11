@@ -172,7 +172,7 @@ public class PayNotifyBizz {
      */
     public void doPayNotify(String payNo, BigDecimal payAmount, String tradeNo, Integer payChannel, String buyerId, String buyerEmail) {
         //获取支付信息
-        PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
+        PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null);
         if (paymentEntity == null) {
             log.warn("此订单支付记录不存在,payNo={}", payNo);
             throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
