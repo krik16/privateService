@@ -71,6 +71,8 @@ public class ParentOrderVO implements Serializable {
 
 	private String closeReason;// 关闭原因
 
+	private String closeEventType;// 关闭事件  6:卖家超时未发货,23:卖家取消订单，34：拼团失败，36：超时支付成功退款
+
 	private String originalTotalPrice  = "0";// 原来的总价
 
 	private String buyerNickName;// 收货人昵称
@@ -1037,6 +1039,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setShopAreaName(String shopAreaName) {
 		this.shopAreaName = shopAreaName;
+	}
+
+	public String getCloseEventType() {
+		return closeEventType;
+	}
+
+	public void setCloseEventType(String closeEventType) {
+		this.closeEventType = closeEventType;
 	}
 
 	@Override

@@ -85,6 +85,9 @@ public class ApplicationFormEntity implements Serializable{
     /** 更新时间 */
     private Date updateAt;
 
+    /** 退款单据号 */
+    private String refundpayIds;
+
     private OrderEventEntity orderEvent;
 
     private OrderFormExtraEntity receiveAddress;//退款收货地址
@@ -399,6 +402,14 @@ public class ApplicationFormEntity implements Serializable{
 
     public void setReceiveAddress(OrderFormExtraEntity receiveAddress) {
         this.receiveAddress = receiveAddress;
+    }
+
+    public String getRefundpayIds() {
+        return refundpayIds;
+    }
+
+    public void setRefundpayIds(String refundpayIds) {
+        this.refundpayIds = refundpayIds;
     }
 
     @Override

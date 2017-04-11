@@ -108,7 +108,10 @@ public interface OrderEventType {
 
     /** 未确认收货超时，关闭订单*/
     public static final String UNCONFIRMED_RECEIPT_TIMEOUT = "35";
-    
+
+    /** 超时支付成功退款*/
+    public static final String PAY_TIMEOUT_AND_REFUND = "36";
+
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";
 
@@ -131,6 +134,8 @@ public interface OrderEventType {
     public static final String SELLER_RECEIVE_GOOD = "57";
     /** 卖家拒绝收货 */
     public static final String SELLER_REFUSE_GOOD = "58";
+    /** 退款成功事件 */
+    public static final String REFUND_SUCCESS = "59";
 
     //维权事件
     /** 申请申诉*/
