@@ -7,7 +7,6 @@ import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.tianyi.param.*;
 import com.rongyi.pay.core.tianyi.service.TianyiPayService;
 import com.rongyi.pay.core.tianyi.util.*;
-import com.rongyi.pay.core.wechat.util.MD5;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,6 +90,9 @@ public class TianyiPayUnit {
         String requestBody = getReqParam();
         try {
             String responseStr = HttpUtil.doPost(configure.getPublicKeyUrl(), requestBody);
+            if (StringUtils.isBlank(responseStr)){
+                return null;
+            }
             TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
             if (result != null && result.isSuccess() && result.getResult() != null) {
                 return JSONObject.parseObject(result.getResult().toString(), PublicKeyRes.class);
@@ -137,7 +139,7 @@ public class TianyiPayUnit {
      * @param param 交易查询参数
      * @return TianyiTradeQueryRes
      */
-    public static TianyiTradeQueryRes tradeQuery(PayQueryParam param, PublicKeyRes publicKeyRes) {
+    public static TianyiTradeQueryRes tradeQuery(PayQueryParam param) {
         logger.info("翼支付交易查询接口,param:{}", param);
         ParamValidUtil.checkTradeQueryParam(param, configure);
         try {
@@ -145,9 +147,9 @@ public class TianyiPayUnit {
             String mac = getTradeQuerySign(param);
             param.setMac(mac);
             String tradeQueryStr = TianyiPayService.getOrderQueryStr(param);
-            String responseStr = HttpUtil.doPost(configure.getPayQueryUrl(), tradeQueryStr);
-            TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
-            if (result.isSuccess() || result.getResult() != null){
+            String responseStr = HttpUtil.sendHttpRequest(configure.getPayQueryUrl(), tradeQueryStr);
+            TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
+            if (result != null && result.isSuccess()  && result.getResult() != null){
                 return JSONObject.parseObject(result.getResult().toString(), TianyiTradeQueryRes.class);
             }
             return null;
@@ -199,8 +201,8 @@ public class TianyiPayUnit {
         return queryParam;
     }
 
-    public static String getTradeQuerySign(PayQueryParam param) {
-        return MD5.MD5Encode("MERCHANTID=" + param.getMerchantId() + "&ORDERREQNQ=" + param.getOrderReqNo() + "&ORDERDATE=" + param.getOrderDate() + "&KEY=" + param.getKey());
+    public static String getTradeQuerySign(PayQueryParam param) throws Exception {
+        return CryptTool.md5Digest("MERCHANTID=" + param.getMerchantId() +"&ORDERNO=" + param.getOrderNo() + "&ORDERREQNO=" + param.getOrderReqNo() + "&ORDERDATE=" + param.getOrderDate() + "&KEY=" + param.getKey());
     }
 
     private static String getSign(PayDetailParam param) throws Exception {

@@ -1,9 +1,7 @@
 package tianyi;
 
 import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
-import com.rongyi.pay.core.tianyi.param.PayDetailParam;
-import com.rongyi.pay.core.tianyi.param.TianyiOrderParam;
-import com.rongyi.pay.core.tianyi.param.TianyiParam;
+import com.rongyi.pay.core.tianyi.param.*;
 import com.rongyi.pay.core.unit.TianyiPayUnit;
 import com.sun.org.glassfish.gmbal.Description;
 import org.junit.Test;
@@ -28,8 +26,21 @@ public class TianyiTest {
         param.setTianyiOrderParam(tianyiOrderParam);
         param.setPayDetailParam(payDetailParam);
         String s = TianyiPayUnit.tianyiPay(param);
-//        System.out.println("weburl="+s);
 
+    }
+
+    @Test
+    @Description("天翼支付查询")
+    public void testTianyiTradeQuery(){
+        init();
+        PayQueryParam payQueryParam = new PayQueryParam();
+        payQueryParam.setMerchantId("02310103030380547");
+        payQueryParam.setOrderNo(ORDERSEQ);
+        payQueryParam.setOrderReqNo(ORDERTRANSEQL);
+        payQueryParam.setOrderDate("20170411");//取交易当天日期
+        payQueryParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
+        TianyiTradeQueryRes tianyiTradeQueryRes = TianyiPayUnit.tradeQuery(payQueryParam);
+        System.out.println("tianyiTradeQueryRes="+tianyiTradeQueryRes);
     }
 
     private PayDetailParam getPayDetailParam(){
@@ -114,7 +125,7 @@ public class TianyiTest {
         configure.setPublicKeyUrl("https://capi.bestpay.com.cn/common/interface");
         configure.setPayUrl("https://capi.bestpay.com.cn/gateway.pay");
         configure.setCheckStandH5Url("");
-        configure.setPayQueryUrl("https://capi.bestpay.com.cn/query/queryOrder");
+        configure.setPayQueryUrl("https://webpaywg.bestpay.com.cn/query/queryOrder");
         configure.setRefundUrl("https://capi.bestpay.com.cn/refund/commonRefund");
         configure.setRefundBackUrl("");
 
