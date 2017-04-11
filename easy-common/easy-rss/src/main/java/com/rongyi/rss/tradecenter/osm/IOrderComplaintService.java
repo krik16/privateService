@@ -1,6 +1,6 @@
 package com.rongyi.rss.tradecenter.osm;
 
-import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.bean.DubboVO;
 import com.rongyi.easy.tradecenter.param.ComplaintParam;
 import com.rongyi.easy.tradecenter.param.ComplaintResultParam;
 
@@ -33,7 +33,7 @@ public interface IOrderComplaintService {
      * @param param
      * @return
      */
-    ResponseVO create(ComplaintParam param);
+    DubboVO<String> create(ComplaintParam param);
 
     /**
      * 取消申诉
@@ -41,6 +41,6 @@ public interface IOrderComplaintService {
      * @param param
      * @return
      */
-    ResponseVO cancel(ComplaintParam param);
+    DubboVO<String> cancel(ComplaintParam param);
 
 }
