@@ -21,7 +21,7 @@ public class PosBankSynNotifyDto extends BaseDto{
 
     private String orderNo;//订单号
 
-    private  Long payAmount;//支付金额
+    private  Integer payAmount;//支付金额
 
     private String paymentNo;//支付流水
 
@@ -41,11 +41,11 @@ public class PosBankSynNotifyDto extends BaseDto{
         this.orderNo = orderNo;
     }
 
-    public Long getPayAmount() {
+    public Integer getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Long payAmount) {
+    public void setPayAmount(Integer payAmount) {
         this.payAmount = payAmount;
     }
 
