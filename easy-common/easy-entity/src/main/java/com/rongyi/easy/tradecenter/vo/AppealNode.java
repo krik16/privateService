@@ -12,15 +12,15 @@ import java.io.Serializable;
 public class AppealNode implements Serializable{
     private static final long serialVersionUID = -766723992467732792L;
 
-    private long createAt;//申请时间
+    private long date;//申请时间
     private String nodeMessage;//节点描述
 
-    public long getCreateAt() {
-        return createAt;
+    public long getDate() {
+        return date;
     }
 
-    public void setCreateAt(long createAt) {
-        this.createAt = createAt;
+    public void setDate(long date) {
+        this.date = date;
     }
 
     public String getNodeMessage() {

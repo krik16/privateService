@@ -45,6 +45,7 @@ public class AppealAndSubOrderVO implements Serializable{
     private Integer activityType;//商品活动 0：普通、1：闪购、2：特卖、3：秒杀、4：拼团、5：超级团教育版、6：断码好货、8：注册福利
     private Integer activityStatus;//活动状态
     private Integer refundTimes;//退款已申请次数
+    private Integer appealTimes;//维权已申请次数已申请次数
     private String orderItemstatus;//子订单状态 0同父订单状态 1待退款 2已关闭 3维权中
 
     public String getShopId() {
@@ -293,6 +294,14 @@ public class AppealAndSubOrderVO implements Serializable{
 
     public void setActivityStatus(Integer activityStatus) {
         this.activityStatus = activityStatus;
+    }
+
+    public Integer getAppealTimes() {
+        return appealTimes;
+    }
+
+    public void setAppealTimes(Integer appealTimes) {
+        this.appealTimes = appealTimes;
     }
 
     @Override
