@@ -76,6 +76,19 @@ public class SmsConfig implements Serializable{
 
     }
 
+    //短信渠道key
+    public abstract class SMSCHANNEL_KEY {
+        public static final String JIANZHOU="jianzhou";//建周
+        public static final String JIANZHOU_MARKET="jianzhou_market";//建周营销
+        public static final  String CHUANGSHI="chuangshi";//创世华信
+        public static final  String CHUANGSHI_MARKET="chuangshi_market";//创世华信营销
+        public static final  String WEILAI="weilai";//福建未来无线信息技术有限公司
+        public static final  String HUAYI="huayi";//宜春华宜嘉信传媒有限公司
+        public static final String DUOZHONG = "duozhong"; //铎众短信接口
+        public static final String YUYIN = "yuyin";  //语音短信接口
+
+    }
+
 
 
 
