@@ -39,7 +39,7 @@ public class WebankController {
         try {
 //            Map<String, String> map = Utils.getRequestParams(request);
             payNotifyBizz.webankAlipayNotify(paramMap);
-            response.getWriter().print("success");
+            response.getWriter().print("ok");
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.info("微众支付宝扫码支付异步通知处理异常");
