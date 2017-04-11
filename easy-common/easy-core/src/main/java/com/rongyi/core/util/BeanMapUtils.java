@@ -86,6 +86,8 @@ public class BeanMapUtils {
                 Object value = field.get(obj);
                 if("sign".equals(field.getName()))
                     continue;
+                if("serialVersionUID".equals(field.getName()))
+                    continue;
                 if (value!=null&&value!="") {
                     map.put(field.getName(), field.get(obj) + "");
                 }
