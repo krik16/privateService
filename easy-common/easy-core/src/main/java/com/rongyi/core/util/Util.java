@@ -318,4 +318,21 @@ public class Util {
 	public static int toChgDay(int second) {
 		return second / 24 / 3600;
 	}
+
+	/**
+	 * 判断是否过期
+	 *
+	 * @param sDate  开始时间
+	 * @param second 叠加值
+	 * @param eDate  过期时间
+	 * @return
+	 */
+	public static boolean isExpired(Date sDate, int second, Date eDate) {
+		Long sts = sDate.getTime();
+		long ets = eDate.getTime();
+		if ((sts + second * 1000) > ets) {
+			return true;
+		}
+		return false;
+	}
 }

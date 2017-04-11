@@ -21,6 +21,8 @@ public class ComplaintParam implements Serializable {
     private String remark;
     // 申诉凭证（多个用逗号分隔）
     private List<String> pics;
+    private String userId;
+    private String userName;
 
     public List<String> getPics() {
         return pics;
@@ -62,14 +64,32 @@ public class ComplaintParam implements Serializable {
         this.complaintNo = complaintNo;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         return "ComplaintParam{" +
-                "pics='" + pics + '\'' +
+                "complaintNo='" + complaintNo + '\'' +
+                ", memberId='" + memberId + '\'' +
                 ", refundNo='" + refundNo + '\'' +
                 ", remark='" + remark + '\'' +
-                ", memberId='" + memberId + '\'' +
-                ", complaintNo='" + complaintNo + '\'' +
+                ", pics=" + pics +
+                ", userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }
