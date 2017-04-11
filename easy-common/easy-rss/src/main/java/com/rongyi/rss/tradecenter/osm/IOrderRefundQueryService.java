@@ -4,9 +4,13 @@
 package com.rongyi.rss.tradecenter.osm;
 
 import com.rongyi.core.bean.DubboVO;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.vo.RefundVO;
+import com.rongyi.easy.tradecenter.param.RefundQueryParam;
+import com.rongyi.easy.tradecenter.vo.AppealDetailVO;
+import com.rongyi.easy.tradecenter.vo.AppealVO;
 
 import java.util.Map;
 
@@ -52,5 +56,19 @@ public interface IOrderRefundQueryService {
 	 * @return
 	 */
 	public boolean refundSupportByShopId(String shopId);
+
+	/**
+	 * 查询退款单列表
+	 * @param param={"memberId":"买家id","currentPage":从1开始,"pageSize":10}
+	 * @return
+	 */
+	public ResponseVO listRefundForUser(RefundQueryParam param);
+
+	/**
+	 * 查询退款详情
+	 * @param refundNo
+	 * @return
+	 */
+	public DubboVO<AppealDetailVO> detailRefundForUser(String refundNo);
 
 }

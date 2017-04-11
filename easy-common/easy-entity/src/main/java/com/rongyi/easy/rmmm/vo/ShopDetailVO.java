@@ -19,6 +19,7 @@ public class ShopDetailVO implements Serializable{
 	private String shopName;// 店铺名字
 	private String berthNum;// 铺位号
 	private String shopMid;// shop mongoId
+	private String telephone;//店铺电话
 
 	public String getShopId() {
 		return shopId;
@@ -68,4 +69,11 @@ public class ShopDetailVO implements Serializable{
 		this.shopMid = shopMid;
 	}
 
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
 }
