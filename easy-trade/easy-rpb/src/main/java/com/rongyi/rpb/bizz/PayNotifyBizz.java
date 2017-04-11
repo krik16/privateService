@@ -411,8 +411,7 @@ public class PayNotifyBizz {
      */
     private void validateSign(Object o,String token,String sign){
         try {
-            Map<String, Object> map = BeanMapUtils.toMap(o);
-            map.remove("sign");
+            Map<String, Object> map = BeanMapUtils.objectToMapRemoveSign(o);
             Boolean result = TradePaySignUtil.signValidateWithToken(map, token, sign);
             if(!result){
                 log.warn("验签失败,result={}", result);
