@@ -43,6 +43,26 @@ public class TianyiTest {
         System.out.println("tianyiTradeQueryRes="+tianyiTradeQueryRes);
     }
 
+    @Test
+    @Description("翼支付退款")
+    public void testTianyiTradeRefund(){
+        init();
+        RefundParam refundParam = new RefundParam();
+        refundParam.setMerchantId("02310103030380547");
+        refundParam.setSubMerchantId("");
+        refundParam.setMerchantPwd("736685");
+        refundParam.setOldOrderNo(ORDERSEQ);
+        refundParam.setOldOrderReqNo(ORDERTRANSEQL);
+        refundParam.setRefundReqNo("3049696233697232932");
+        refundParam.setRefundReqDate("20160615");
+        refundParam.setTransAmt("1");
+        refundParam.setLedgerDetail("1");
+        refundParam.setChannel("05");
+        refundParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
+        boolean result = TianyiPayUnit.tradeRefund(refundParam);
+        System.out.println("tianyiTradeRefundRes="+result);
+    }
+
     private PayDetailParam getPayDetailParam(){
         PayDetailParam payDetailParam = new PayDetailParam();
         payDetailParam.setService("mobile.securitypay.pay");
@@ -52,7 +72,7 @@ public class TianyiTest {
         payDetailParam.setBeforeMerchantUrl("https://www.baidu.com");
         payDetailParam.setBackMerchantUrl("http://127.0.0.1:8080/wapBgNotice.action");
         payDetailParam.setSignType("MD5");
-//        payDetailParam.setSign("");
+//      payDetailParam.setSign("");
         payDetailParam.setWapChannel("");
         payDetailParam.setUserLanguage("zh");
         payDetailParam.setRemark("");
@@ -126,7 +146,7 @@ public class TianyiTest {
         configure.setPayUrl("https://capi.bestpay.com.cn/gateway.pay");
         configure.setCheckStandH5Url("");
         configure.setPayQueryUrl("https://webpaywg.bestpay.com.cn/query/queryOrder");
-        configure.setRefundUrl("https://capi.bestpay.com.cn/refund/commonRefund");
+        configure.setRefundUrl("https://webpaywg.bestpay.com.cn/refund/commonRefund");
         configure.setRefundBackUrl("");
 
     }

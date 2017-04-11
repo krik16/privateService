@@ -177,8 +177,11 @@ public class TianyiPayUnit {
             param.setMac(mac);
             Map<String, String> queryParam = getMap(param, mac);
             String responseStr = HttpUtil.sendTradePost(queryParam, configure);
-            TianyiResp result = (TianyiResp) JSONObject.parseObject(responseStr, TianyiResp.class).getResult();
-            return result.isSuccess();
+            if (StringUtils.isBlank(responseStr)){
+                throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
+            }
+            TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
+             return result != null && result.isSuccess();
         } catch (Exception e) {
             logger.info("翼支付退款接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();

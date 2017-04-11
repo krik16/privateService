@@ -107,6 +107,7 @@ public class TianyiPayService {
         sb.append("&TRANSAMT=").append(param.getTransAmt());
         sb.append("&LEDGERDETAIL=").append(param.getLedgerDetail());
         sb.append("&KEY=").append(param.getKey());//此处是商户的key
+        System.out.println("str="+sb.toString());
         return CryptTool.md5Digest(sb.toString());
     }
 }
