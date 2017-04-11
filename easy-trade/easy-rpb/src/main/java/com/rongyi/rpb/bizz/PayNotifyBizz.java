@@ -422,5 +422,4 @@ public class PayNotifyBizz {
             throw new TradeException(ConstantEnum.EXC_SIGN_FAIL.getCodeStr(),ConstantEnum.EXC_SIGN_FAIL.getValueStr());
         }
     }
-
 }
