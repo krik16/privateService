@@ -11,10 +11,11 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233140";
-    private static String ORDERTRANSEQL="20160830092048436461232233140";
-    private static String ORDERTIME="20160830092048";
-    private static String ORDERVALIDITYTIME="20160830092048";
+    private static String ORDERSEQ="20160830092048436461232233141";
+    private static String ORDERTRANSEQL="20160830092048436461232233141";
+    private static String ORDERTIME="20160830092049";
+    private static String ORDERVALIDITYTIME="20160830092049";
+    private static String REFUNDREQNO="3049696233697232933";
 
     @Test
     @Description("天翼支付")
@@ -53,7 +54,7 @@ public class TianyiTest {
         refundParam.setMerchantPwd("736685");
         refundParam.setOldOrderNo(ORDERSEQ);
         refundParam.setOldOrderReqNo(ORDERTRANSEQL);
-        refundParam.setRefundReqNo("3049696233697232932");
+        refundParam.setRefundReqNo(REFUNDREQNO);
         refundParam.setRefundReqDate("20160615");
         refundParam.setTransAmt("1");
         refundParam.setLedgerDetail("1");

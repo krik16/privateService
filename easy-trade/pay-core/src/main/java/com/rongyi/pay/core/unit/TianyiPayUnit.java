@@ -181,7 +181,10 @@ public class TianyiPayUnit {
                 throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
             }
             TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
-             return result != null && result.isSuccess();
+            if (result != null && result.isSuccess()){
+                return true;
+            }
+            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
         } catch (Exception e) {
             logger.info("翼支付退款接口 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
