@@ -1,6 +1,7 @@
 package com.rongyi.easy.osm.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 退款配置信息
@@ -40,6 +41,8 @@ public class RefundSettingConfigEntity implements Serializable {
     private String content;
     // 1：退款/维权
     private int configType;
+    // 创建时间
+    private Date createAt;
 
     public String getChiefId() {
         return chiefId;
@@ -169,6 +172,14 @@ public class RefundSettingConfigEntity implements Serializable {
         this.content = content;
     }
 
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
     @Override
     public String toString() {
         return "RefundSettingConfigEntity{" +
@@ -187,6 +198,7 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", maxComplaintTime=" + maxComplaintTime +
                 ", intevalRefundTime=" + intevalRefundTime +
                 ", configType=" + configType +
+                ", createAt=" + createAt +
                 '}';
     }
 
