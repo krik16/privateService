@@ -29,6 +29,7 @@ public class CommodityCategory extends MalllifeBaseParam  implements java.io.Ser
 	private boolean isPopular=false;//是否是热门分类 true表示热门分类
 	private String popularImg;//热门分类图片
 	private int sequence = 0; ///< 排序字段,数字越大越靠前
+	private Integer status=0;
 
 	public int getSequence() {
 		return sequence;
@@ -109,6 +110,14 @@ public class CommodityCategory extends MalllifeBaseParam  implements java.io.Ser
 		this.popularImg = popularImg;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityCategory{" +
@@ -123,6 +132,7 @@ public class CommodityCategory extends MalllifeBaseParam  implements java.io.Ser
 				", sequence=" + sequence +
 				", commodityCount=" + commodityCount +
 				", isPopular=" + isPopular +
+				", status=" + status +
 				", popularImg='" + popularImg + '\'' +
 				'}';
 	}

@@ -8,6 +8,7 @@ import com.rongyi.easy.mcmc.CommoditySpec;
 import com.rongyi.easy.mcmc.param.CommoditySpecParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 
 
 public class CommoditySpecVO implements  Serializable {

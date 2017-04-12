@@ -410,7 +410,6 @@ public interface CommodityService {
      * 批量下架商品
      * @param ids
      * @param shopId
-     * @param identity
      * @param reason
      * @param userName
      * @return
@@ -427,9 +426,12 @@ public interface CommodityService {
     CommodityVO getCommodityDetail(String id);
 
     public List<CommodityCategory> selectCommodityCategoryByids(List<String> commodityCategoryids);
-    
+
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
+    public ResponseResult getCommoditySpecyList(List<String> cloumIds);
+
+    public WechatCommodityPageVo listTotalCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
     public Boolean updateCommodityStatus(String id, Integer status, String reason);
 

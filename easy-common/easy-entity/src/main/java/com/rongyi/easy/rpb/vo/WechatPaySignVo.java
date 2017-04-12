@@ -31,6 +31,8 @@ public class WechatPaySignVo implements Serializable{
 
     private String authCode;//用户支付二维码
 
+    private Integer orderType;//订单类型
+
 
     public String getPayNo() {
         return payNo;
@@ -102,6 +104,14 @@ public class WechatPaySignVo implements Serializable{
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
     }
 
     @Override
