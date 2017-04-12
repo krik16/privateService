@@ -377,7 +377,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝扫码支付签名异常,e={}", e.getMessage(), e);
-            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_RERVERSE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_RERVERSE_FAIL.getValueStr());
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getValueStr());
         }
     }
 
