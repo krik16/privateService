@@ -617,6 +617,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
+				", mallServiceIds=" + mallServiceIds +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescription=" + serviceDescription +
+				", serviceDescriptionRemark=" + serviceDescriptionRemark +
 				", brandName='" + brandName + '\'' +
 				", commodityRange=" + commodityRange +
 				'}';
@@ -799,6 +803,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
+			this.setServiceDescriptionId(param.getServiceDescriptionId());
+			this.setServiceDescription(param.getServiceDescription());
+			this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());
+			this.setGoodsParam(Arrays.asList(param.getGoodsParam()));
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}

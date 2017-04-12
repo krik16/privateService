@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
 public class CommoditySpecColumnVO implements  Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 302492299841268843L;
 
@@ -24,9 +24,9 @@ public class CommoditySpecColumnVO implements  Serializable{
 	private String columnValue;
 	private String columnNote;//规格备注
 	private boolean isRequired;
-	
+
 	public CommoditySpecColumnVO(){
-		
+
 	}
 	public CommoditySpecColumnVO(CommoditySpecColumn specColumn){
 		if(specColumn != null){
@@ -93,7 +93,7 @@ public class CommoditySpecColumnVO implements  Serializable{
 		for(int i=0; i< param.getColumnIds().size(); i++) {
 			CommoditySpecColumnVO specColumnVO = new CommoditySpecColumnVO();
 
-			specColumnVO.setColumnId(param.getColumnIds().get(i).toString());
+			specColumnVO.setColumnId(param.getColumnIds().get(i));
 			specColumnVO.setColumnValue(param.getColumnValues().get(i));
 
 			if(CollectionUtils.isNotEmpty(param.getColumnNotes()) &&

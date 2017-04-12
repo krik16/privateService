@@ -167,6 +167,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	private List<String> skus;
 	private String systemNumber;
+	private Integer flag;//1表示发布商品，2表示复制新建商品
 
 
 	public List<String> getMallServiceIds() {
@@ -970,6 +971,14 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.systemNumber = systemNumber;
 	}
 
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -1101,6 +1110,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 		this.source = commodity.getSource();
 		this.systemNumber=commodity.getSystemNumber();
+		this.reason=commodity.getReason();
 	}
 
 	private boolean isShowInWechat() {
@@ -1213,6 +1223,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", price=" + price +
 				", selfTakeDays=" + selfTakeDays +
 				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
 				", ifShowInWechat=" + ifShowInWechat +
 				", isSpecDeleted=" + isSpecDeleted +
 				", groupMid='" + groupMid + '\'' +
@@ -1354,6 +1365,10 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setBrandMid(commodity.getBrandMid());
 		vo.setBrandName(commodity.getBrandName());
 
+		vo.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		vo.setServiceDescription(commodity.getServiceDescription());
+		vo.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+		vo.setGoodsParam(commodity.getGoodsParam());
 		return vo;
 	}
 
