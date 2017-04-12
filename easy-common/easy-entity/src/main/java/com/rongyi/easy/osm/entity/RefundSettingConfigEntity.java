@@ -14,7 +14,7 @@ public class RefundSettingConfigEntity implements Serializable {
     private String chiefId;
     // 是否删除 0：未删除 1：删除
     private int isDeleted;
-    // 状态（1：开启 0：关闭）
+    // 状态（0：开启 1：关闭）
     private int status;
     // 售后、维权电话
     private String contactTel;
@@ -219,7 +219,7 @@ public class RefundSettingConfigEntity implements Serializable {
     public void init(String chiefId) {
         this.chiefId = chiefId;
         this.isDeleted = 1;
-        this.status = 0;///< 关闭状态
+        this.status = 1;///< 关闭状态
         this.maxRefundCount = 5;
         this.maxComplaintCount = 1;
         this.limitTimeForMoney = 5 * 24 * 3600;
