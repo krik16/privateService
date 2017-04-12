@@ -26,19 +26,19 @@ public class TianyiOrderParam extends BaseData {
     private String orderReqTime;
 
     //交易代码-M
-    private String transCode;
+    private String transCode = "01";
 
-    //订单金额-M
+    //订单金额-M(单位分)
     private String orderAmt;
 
     //订单币种-O
     private String orderCcy;
 
     //接入渠道-O
-    private String serviceCode;
+    private String serviceCode ="05";
 
     //商品代码-M
-    private String productId;
+    private String productId = "04";
 
     //商品描述-M
     private String productDesc;
@@ -56,7 +56,7 @@ public class TianyiOrderParam extends BaseData {
     private String divDetails;
 
     //MAC字段的加密方式-M
-    private String encodeType;
+    private String encodeType = "1";
 
     //MAC验证信息-M
     private String mac;
@@ -71,7 +71,7 @@ public class TianyiOrderParam extends BaseData {
     private String accach;
 
     //请求来源-M
-    private String requestSystem;
+    private String requestSystem ="1";
 
     //风控信息-M
     private String riskControlInfo;

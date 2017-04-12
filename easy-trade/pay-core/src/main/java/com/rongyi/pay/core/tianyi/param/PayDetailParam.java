@@ -8,7 +8,7 @@ import com.rongyi.pay.core.util.BaseData;
 public class PayDetailParam extends BaseData {
 
     //接口名称-M
-    private String service;
+    private String service = "mobile.securitypay.pay";
 
     //签约商户号-M
     private String merchantId;
@@ -26,7 +26,7 @@ public class PayDetailParam extends BaseData {
     private String backMerchantUrl;
 
     //前面方式:MD5\RSA\CA-M
-    private String signType;
+    private String signType = "MD5";
 
     //MAC签名，请参见"8签名机制"-M
     private String sign;
@@ -35,7 +35,7 @@ public class PayDetailParam extends BaseData {
     private String wapChannel;
 
     //收银台语言-O
-    private String userLanguage;
+    private String userLanguage = "zh";
 
     //扩展字段-O
     private String remark;
@@ -56,10 +56,10 @@ public class PayDetailParam extends BaseData {
     private String orderAmount;
 
     //币种（默认填RMB）-M
-    private String curType;
+    private String curType = "RMB";
 
     //业务标识，默认值为04（纯业务支付）-M
-    private String productId;
+    private String productId = "04";
 
     //产品描述-M
     private String productDesc;
@@ -89,7 +89,7 @@ public class PayDetailParam extends BaseData {
     private String userIp;
 
     //业务类型，默认“04”-M
-    private String busiType;
+    private String busiType = "04";
 
     //是否可切换用户true/false-M
     private String swtichAcc;

@@ -31,7 +31,7 @@ public class RefundParam extends BaseData{
     //退款请求日期-M
     private String refundReqDate;
 
-    //退款交易金额-M
+    //退款交易金额-M(单位分，小于等于原订单金额)
     private String transAmt;
 
     //分账明细-O
