@@ -308,10 +308,9 @@ public class SubOrderController extends BaseControllerV2 {
                 LOGGER.error("查询用户信息失败,message={}", e);
                 throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
             }
-            if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
-                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
+            if (userInfoVO != null && StringUtils.isNotBlank(userInfoVO.getUserId())) {
+                paramsMap.put("buyerId", userInfoVO.getUserId());
             }
-            paramsMap.put("buyerId", userInfoVO.getUserId());
         }
 
         if (paramsMap.containsKey("sellerAccount")) {
@@ -498,6 +497,9 @@ public class SubOrderController extends BaseControllerV2 {
         if (null != paramsMap) {
             if (null != paramsMap.get("timeType") && StringUtils.isBlank(paramsMap.get("timeType").toString())) {
                 paramsMap.remove("timeType");
+            }
+            if (null != paramsMap.get("deliveryType") && StringUtils.isBlank(paramsMap.get("deliveryType").toString())) {
+                paramsMap.remove("deliveryType");
             }
         }
     }
