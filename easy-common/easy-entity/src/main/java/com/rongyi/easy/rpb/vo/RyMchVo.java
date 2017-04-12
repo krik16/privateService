@@ -19,7 +19,7 @@ public class RyMchVo implements Serializable {
 
     private Byte source;//来源(0:容易逛,1:微信,2:终端屏,3:福利pos,4:开放平台)
 
-    private Byte orgChannel;//服务商渠道(0:容易网,1:微众)
+    private Byte orgChannel;//服务商渠道(0:容易网,1:微众 2:天翼)
 
     private Integer nativePay = 0;//0:综合支付服务 1:原生支付接口
 

@@ -1,6 +1,8 @@
 package com.rongyi.rss.rpb;
 
 import com.rongyi.core.Exception.TradePayException;
+import com.rongyi.easy.rpb.vo.TianyiPayVo;
+import com.rongyi.easy.ryoms.entity.WechatTianyiPayVo;
 
 import java.util.Map;
 
@@ -9,6 +11,14 @@ import java.util.Map;
  * Created by sujuan on 2017/4/11.
  */
 public interface ItianyiPayService {
+
+    /**
+     * 天翼支付h5支付
+     * @param tianyiPayVo 请求参数
+     * @return 返回唤起H5收银台的url
+     * @throws TradePayException
+     */
+    Map<String,Object> h5Pay(WechatTianyiPayVo wechatTianyiPayVo ,TianyiPayVo tianyiPayVo) throws TradePayException ;
 
     /**
      * 普通支付退款
