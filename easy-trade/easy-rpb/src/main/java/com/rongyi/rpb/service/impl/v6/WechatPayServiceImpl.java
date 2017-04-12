@@ -125,7 +125,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             map.put("tradeNo", resData.getTransaction_id());
 
             //交易金额
-            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)));
+            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             //退款金额
             map.put("refundAmount", resData.getRefund_fee_0());
             map.put("refundStatus", "SUCCESS");
