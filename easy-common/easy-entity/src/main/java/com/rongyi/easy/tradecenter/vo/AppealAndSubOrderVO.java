@@ -47,6 +47,8 @@ public class AppealAndSubOrderVO implements Serializable{
     private Integer refundTimes;//退款已申请次数
     private Integer appealTimes;//维权已申请次数已申请次数
     private String orderItemstatus;//子订单状态 0同父订单状态 1待退款 2已关闭 3维权中
+    private String buyerPhone;//买家手机号
+    private String buyerId;//买家id
 
     public String getShopId() {
         return shopId;
@@ -302,6 +304,22 @@ public class AppealAndSubOrderVO implements Serializable{
 
     public void setAppealTimes(Integer appealTimes) {
         this.appealTimes = appealTimes;
+    }
+
+    public String getBuyerPhone() {
+        return buyerPhone;
+    }
+
+    public void setBuyerPhone(String buyerPhone) {
+        this.buyerPhone = buyerPhone;
+    }
+
+    public String getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(String buyerId) {
+        this.buyerId = buyerId;
     }
 
     @Override
