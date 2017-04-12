@@ -73,7 +73,8 @@ public enum ConstantEnum {
 	EXCEPTION_REFUND_FAIL("1019116","订单已退款完成，无法再次退款"),
 	EXCEPTION_AMOUNT_FAIL("1019117","金额不匹配"),
 	EXCEPTION_MCH_NOT_FOUND("1019118","商户信息不匹配"),
-	EXC_SIGN_FAIL(1181111,"签名验证失败"),
+	EXCEPTION_ORDER_REPAY("1019119","订单重复支付,商户需确认用户是否多次付款"),
+	EXC_SIGN_FAIL("1181111","签名验证失败"),
 
 	ALI_PAY_TIME_EXPIRE_GOODS("60m","商品支付宝支付默认超时时间"),
 	ALI_PAY_TIME_EXPIRE_COUPONS("15m","代金券支付宝支付默认超时时间"),

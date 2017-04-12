@@ -31,6 +31,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -321,7 +322,7 @@ public class QueryBizz {
 
         baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 
-        RefundQueryResData refundQueryResData = WeChatPayUnit.refundQuery(null,oldPaymentEntity.getPayNo(),null,wechatConfigure);
+        RefundQueryResData refundQueryResData = WeChatPayUnit.refundQuery(null, oldPaymentEntity.getPayNo(), null, wechatConfigure);
         refundQueryResData.setTotalAmount(oldPaymentEntity.getAmountMoney());
         return refundQueryResData;
 
@@ -337,7 +338,7 @@ public class QueryBizz {
 
        PaymentEntity paymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
         //to 此处是由于产品不合理的需求,在查询接口中返回退款状态而做的特殊处理，已退款强制设置支付状态为3表示已退款
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,null,
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL3);
         if(refundPayment != null && refundPayment.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
             paymentEntity.setStatus(3);
@@ -397,7 +398,23 @@ public class QueryBizz {
         if (paymentEntity == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
+
+        validateRePay(paymentEntity);
+
         return paymentEntity;
+    }
+
+    /**
+     * 检查已付款记录是否存在重复付款
+     */
+    private void validateRePay(PaymentEntity paymentEntity){
+        if(paymentEntity.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
+            List<PaymentEntity> list = paymentService.selectByOrderNum(paymentEntity.getOrderNum(), paymentEntity.getTradeType(), null, Constants.PAYMENT_STATUS.STAUS2);
+            if(list != null && list.size() > 1){
+                throw new TradePayException(ConstantEnum.EXCEPTION_ORDER_REPAY.getCodeStr(),ConstantEnum.EXCEPTION_ORDER_REPAY.getValueStr());
+            }
+        }
+
     }
 
     private PaymentEntity baseRefundQuery(String orderNo, Integer payType){

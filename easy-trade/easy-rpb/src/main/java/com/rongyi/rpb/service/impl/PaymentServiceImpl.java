@@ -428,7 +428,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         //验证请求付款记录是否已存在，如果存在，若有同一类型支付方式则返回原有数据，如果没有同一类型则创建一个订单号和付款单号同一个的付款记录，如果不存在则新建
         for (String orderNo : orderNumArray) {
             LOGGER.info("orderNum={},tradeType={},payChannel={}", orderNo, tradeType, payChannel);
-            List<PaymentEntity> list = selectByOrderNum(orderNo, tradeType, null);
+            List<PaymentEntity> list = selectByOrderNum(orderNo, tradeType, null,null);
             if (list != null && !list.isEmpty()) {
                 PaymentEntity paymentEntity = list.get(0);
                 PaymentEntity newPaymentEntity = new PaymentEntity();
@@ -549,11 +549,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType, Integer payChannel) {
+    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType, Integer payChannel,Integer status) {
         Map<String, Object> params = new HashMap<>();
         params.put("orderNum", orderNum);
         params.put("tradeType", tradeType);
         params.put("payChannel", payChannel);
+        params.put("status", status);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNum", params);
     }
 
