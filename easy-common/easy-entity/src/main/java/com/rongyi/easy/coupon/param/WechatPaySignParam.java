@@ -12,7 +12,7 @@ public class WechatPaySignParam implements Serializable {
      */
     private String orderNo;
     /**
-     * 支付类型 1：web页支付宝支付，3:手机支付宝支付，5：微信app支付
+     * 支付类型 1：web页支付宝支付，3:手机支付宝支付，5：微信app支付 6翼支付
      */
     private String payType;
     /**
@@ -42,6 +42,13 @@ public class WechatPaySignParam implements Serializable {
      * 商场id
      */
     private String mallId;
+
+    //商户类型 1商场 0店铺
+    private Integer merType ;
+
+    //商户ID or 店铺ID
+    private String merId;
+
 
     public String getOrderNo() {
         return orderNo;
@@ -107,12 +114,28 @@ public class WechatPaySignParam implements Serializable {
         this.mallId = mallId;
     }
 
+    public Integer getMerType() {
+        return merType;
+    }
+
+    public void setMerType(Integer merType) {
+        this.merType = merType;
+    }
+
+    public String getMerId() {
+        return merId;
+    }
+
+    public void setMerId(String merId) {
+        this.merId = merId;
+    }
+
     @Override
     public String toString() {
         return "WechatPaySignParam [orderNo=" + orderNo + ", payType="
                 + payType + ", appId=" + appId + ", openId=" + openId
                 + ", weixinPayType=" + weixinPayType + ", callBackUrl=" + callBackUrl
-                + ", merchantUrl=" + merchantUrl  + ", mallId=" + mallId + "]";
+                + ", merchantUrl=" + merchantUrl  + ", mallId=" + mallId  +",merType="+merType+ ",merId="+merId+ "]";
     }
 
 }
