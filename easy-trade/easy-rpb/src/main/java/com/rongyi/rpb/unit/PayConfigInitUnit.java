@@ -92,9 +92,11 @@ public class PayConfigInitUnit {
     //微众支付宝退款查询url
     private String alipayRefundQueryUrl;
 
-
     //支付宝c扫B请求地址
     private String alipayScanPayUrl;
+
+    //翼支付退款通知地址
+    private String tianyiRefundNotifyUrl;
 
     public void init(){
 
@@ -240,6 +242,14 @@ public class PayConfigInitUnit {
 
     public void setWechatScanQueryUrl(String wechatScanQueryUrl) {
         this.wechatScanQueryUrl = wechatScanQueryUrl;
+    }
+
+    public void setTianyiRefundNotifyUrl(String tianyiRefundNotifyUrl) {
+        this.tianyiRefundNotifyUrl = tianyiRefundNotifyUrl;
+    }
+
+    public String getTianyiRefundNotifyUrl() {
+        return tianyiRefundNotifyUrl;
     }
 
     /**
