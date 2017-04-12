@@ -43,6 +43,8 @@ public class RefundSettingConfigEntity implements Serializable {
     private int configType;
     // 创建时间
     private Date createAt;
+    // 创建人
+    private String createBy;
 
     public String getChiefId() {
         return chiefId;
@@ -180,6 +182,14 @@ public class RefundSettingConfigEntity implements Serializable {
         this.createAt = createAt;
     }
 
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
     @Override
     public String toString() {
         return "RefundSettingConfigEntity{" +
@@ -199,6 +209,7 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", intevalRefundTime=" + intevalRefundTime +
                 ", configType=" + configType +
                 ", createAt=" + createAt +
+                ", createBy=" + createBy +
                 '}';
     }
 
