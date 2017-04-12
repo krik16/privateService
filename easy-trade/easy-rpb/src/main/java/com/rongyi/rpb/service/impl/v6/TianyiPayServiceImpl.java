@@ -5,7 +5,7 @@ import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.rss.rpb.ITianyiPayService;
+import com.rongyi.rss.rpb.ItianyiPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Map;
  * conan
  * 2017/4/12 11:28
  **/
-public class TianyiPayServiceImpl implements ITianyiPayService {
+public class TianyiPayServiceImpl implements ItianyiPayService {
 
     @Autowired
     RefundBizz refundBizz;
