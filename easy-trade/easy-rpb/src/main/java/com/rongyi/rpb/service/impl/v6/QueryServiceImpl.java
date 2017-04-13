@@ -21,6 +21,7 @@ public class QueryServiceImpl implements IQueryService{
 
     @Override
     public List<PaymentEntity> batchQueryByOrderNos(List<String> orderNoList,Integer tradeType){
+        logger.info("orderNoList={},tradeType={}",orderNoList,tradeType);
         return paymentService.batchQueryByOrderNos(orderNoList,tradeType);
     }
 

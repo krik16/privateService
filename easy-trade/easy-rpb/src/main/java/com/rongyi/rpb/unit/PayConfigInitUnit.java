@@ -52,6 +52,16 @@ public class PayConfigInitUnit {
     //微众p12证书密码
     private String wechatKeyStorePwd;
 
+
+    //微信公众号支付通知地址
+    private String wechatScanNotifyUrl ;
+
+    //微信公众号支付请求地址
+    private String wechatScanPayUrl ;
+
+    //微信公众号订单查询请求地址
+    private String wechatScanQueryUrl ;
+
     //微众支付宝appId
     private String appId;
 
@@ -83,8 +93,8 @@ public class PayConfigInitUnit {
     private String alipayRefundQueryUrl;
 
 
-
-
+    //支付宝c扫B请求地址
+    private String alipayScanPayUrl;
 
     public void init(){
 
@@ -107,6 +117,9 @@ public class PayConfigInitUnit {
             configure.setWechatPunchCardPayReverseOrderUrl(this.wechatPunchCardPayReverseOrderUrl);
             configure.setWechatPunchCardRefundUrl(this.wechatPunchCardRefundUrl);
             configure.setWechatPunchCardRefundQueryUrl(this.wechatPunchCardRefundQueryUrl);
+            configure.setWechatScanNotifyUrl(this.wechatScanNotifyUrl);
+            configure.setWechatScanPayUrl(this.wechatScanPayUrl);
+            configure.setWechatScanQueryUrl(this.wechatScanQueryUrl);
 
             configure.setWechatKeyStorePath(this.wechatKeyStorePath);
             configure.setWechatTrustStorePath(this.wechatTrustStorePath);
@@ -122,6 +135,7 @@ public class PayConfigInitUnit {
             configure.setAlipayReverseTradeUrl(this.alipayReverseTradeUrl);
             configure.setAlipayRefundUrl(this.alipayRefundUrl);
             configure.setAlipayRefundQueryUrl(this.alipayRefundQueryUrl);
+            configure.setAlipayScanPayUrl(this.alipayScanPayUrl);
             log.info("初始化微众银行支付配置完成,config={}",configure);
         }
         configure.setTicket(this.ticket);
@@ -210,6 +224,22 @@ public class PayConfigInitUnit {
 
     public void setAlipayRefundQueryUrl(String alipayRefundQueryUrl) {
         this.alipayRefundQueryUrl = alipayRefundQueryUrl;
+    }
+
+    public void setWechatScanNotifyUrl(String wechatScanNotifyUrl) {
+        this.wechatScanNotifyUrl = wechatScanNotifyUrl;
+    }
+
+    public void setWechatScanPayUrl(String wechatScanPayUrl) {
+        this.wechatScanPayUrl = wechatScanPayUrl;
+    }
+
+    public void setAlipayScanPayUrl(String alipayScanPayUrl) {
+        this.alipayScanPayUrl = alipayScanPayUrl;
+    }
+
+    public void setWechatScanQueryUrl(String wechatScanQueryUrl) {
+        this.wechatScanQueryUrl = wechatScanQueryUrl;
     }
 
     /**

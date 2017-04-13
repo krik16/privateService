@@ -117,7 +117,10 @@
                 source,
             </if>
             <if test="orgChannel != null">
-                org_channel
+                org_channel,
+            </if>
+            <if test="payScene != null">
+                pay_scene
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -194,7 +197,10 @@
                 #{source,jdbcType=TINYINT},
             </if>
             <if test="orgChannel != null">
-                #{orgChannel,jdbcType=TINYINT}
+                #{orgChannel,jdbcType=TINYINT},
+            </if>
+            <if test="payScene != null">
+                #{payScene,jdbcType=TINYINT}
             </if>
 
         </trim>
@@ -273,7 +279,10 @@
                 source = #{source,jdbcType=TINYINT},
             </if>
             <if test="orgChannel != null">
-                org_channel = #{orgChannel,jdbcType=TINYINT}
+                org_channel = #{orgChannel,jdbcType=TINYINT},
+            </if>
+            <if test="payScene != null">
+                pay_scene = #{payScene,jdbcType=TINYINT}
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -407,7 +416,9 @@
         <if test="payChannel != null">
             and pay_channel = #{payChannel,jdbcType=INTEGER}
         </if>
-
+        <if test="status != null and status != ''">
+            and status =#{status,jdbcType=INTEGER}
+        </if>
     </select>
     <select id="selectByOrderNumAndTradeType" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
@@ -598,6 +609,33 @@
 
     </select>
 
+	<update id="updateStatusList" parameterType="java.util.Map">
+		update payment_order set payer_recon_flag = #{payerReconFlag}
+		and pay_no in 
+			<foreach collection="payNoList" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+	</update>
+	
+	 <select id="findList" resultMap="BaseResultMap"
+            parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from payment_order
+        where status = #{status}
+<!--           and trade_type = #{tradeType} -->
+          and pay_channel = #{payChannel}
+			<if test="tradeTypeList != null and tradeTypeList.size() > 0">
+				and trade_type in
+				 <foreach item="item" index="index" collection="tradeTypeList" open="("
+                 separator="," close=")">
+	            #{item}
+	            </foreach>
+			</if>
+          and DATE_FORMAT(end_at, '%Y-%m-%d') = DATE_FORMAT(#{endAt}, '%Y-%m-%d')
+          and source in(3,4)
+    </select>
 
     <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
         select  <include refid="Base_Column_List"/>
