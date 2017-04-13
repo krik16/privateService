@@ -429,6 +429,8 @@ public interface CommodityService {
 
     public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
+    public ResponseResult getCommoditySpecyList(List<String> cloumIds);
+
     public WechatCommodityPageVo listTotalCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
 
     public Boolean updateCommodityStatus(String id, Integer status, String reason);

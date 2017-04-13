@@ -104,6 +104,12 @@ public class CommodityParam implements Serializable{
 
 	private String commodityModelNo;
 
+	private String serviceDescription;//售后说明
+
+	private Integer serviceDescriptionId;
+
+	private String serviceDescriptionRemark;
+
 	private String pass; // 0：不通过  1：通过
 
 	private String haiXinId;
@@ -411,6 +417,75 @@ public class CommodityParam implements Serializable{
 	}
 
 
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityParam{" +
+				"category='" + category + '\'' +
+				", type=" + type +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", stockStatus=" + stockStatus +
+				", commoditySpeceParams=" + commoditySpeceParams +
+				", stock=" + stock +
+				", remain=" + remain +
+				", hasSpec=" + hasSpec +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				", reason=" + reason+
+				", subheading=" + subheading+
+				", commodityDetails=" + commodityDetails+
+				", shelvesType=" + shelvesType+
+				", brandId=" + brandId+
+				", brandMid=" + brandMid+
+				", brandName=" + brandName+
+				", commodityModelNo=" + commodityModelNo+
+				", goodsParam=" + goodsParam+
+				", commodityType=" + commodityType+
+				", serviceDescription=" + serviceDescription+
+				", serviceDescriptionId=" + serviceDescriptionId+
+				", serviceDescriptionRemark=" + serviceDescriptionRemark+
+				'}';
+	}
+
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -603,52 +678,5 @@ public class CommodityParam implements Serializable{
 			}
 		}
 		commodityParam.setCommoditySpeceParams(Arrays.asList(specParam));
-	}
-
-	@Override
-	public String toString() {
-		return "CommodityParam{" +
-				"type=" + type +
-				", id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", barCode='" + barCode + '\'' +
-				", postage='" + postage + '\'' +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", picList=" + picList +
-				", categoryIds=" + categoryIds +
-				", customCategoryIds=" + customCategoryIds +
-				", distribution=" + distribution +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", serviceIds=" + serviceIds +
-				", createBy=" + createBy +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", stockStatus=" + stockStatus +
-				", commoditySpeceParams=" + commoditySpeceParams +
-				", stock=" + stock +
-				", remain=" + remain +
-				", hasSpec=" + hasSpec +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
-				", purchaseCount=" + purchaseCount +
-				", templateId=" + templateId +
-				", reason='" + reason + '\'' +
-				", subheading='" + subheading + '\'' +
-				", source=" + source +
-				", shelvesType=" + shelvesType +
-				", brandId='" + brandId + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", brandName='" + brandName + '\'' +
-				", commodityModelNo='" + commodityModelNo + '\'' +
-				", pass='" + pass + '\'' +
-				", haiXinId='" + haiXinId + '\'' +
-				", merchantId='" + merchantId + '\'' +
-				", goodsParam='" + goodsParam + '\'' +
-				", commodityType=" + commodityType +
-				'}';
 	}
 }

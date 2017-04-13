@@ -1,9 +1,9 @@
 package com.rongyi.easy.roa.param;
 
-import java.io.Serializable;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /**
  * conan 2016/11/10 17:30
@@ -23,6 +23,8 @@ public class WechatAuthParam implements Serializable {
 	private Integer storeId;
 
 	private Integer state;
+
+	private String attach;//扩展参数
 
 	public Integer getMchInfoId() {
 		return mchInfoId;
@@ -70,6 +72,14 @@ public class WechatAuthParam implements Serializable {
 
 	public void setState(Integer state) {
 		this.state = state;
+	}
+
+	public String getAttach() {
+		return attach;
+	}
+
+	public void setAttach(String attach) {
+		this.attach = attach;
 	}
 
 	@Override
