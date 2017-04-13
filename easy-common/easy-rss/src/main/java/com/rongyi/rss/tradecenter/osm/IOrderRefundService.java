@@ -77,4 +77,11 @@ public interface IOrderRefundService {
      * @param param={"refundNo":"退款单号","createId":"操作人id","createBy":"操作人","source":"1摩店 2商家后台","remark":"拒绝原因"}
      */
     public ResponseVO sellerRefuseConfirmOrder(RefundParam param);
+
+    /**
+     * 提醒卖家收货
+     * @param param={"memberId":"买家id","refundNo":"退款单号"}
+     * @return
+     */
+    public ResponseVO remindSellerReceive(RefundParam param);
 }
