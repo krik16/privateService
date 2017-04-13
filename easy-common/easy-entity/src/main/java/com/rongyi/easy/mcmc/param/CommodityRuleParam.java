@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
+import com.rongyi.core.annotation.NeedCheck;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,11 +12,21 @@ public class CommodityRuleParam implements Serializable {
     private String keyword;
     private String buyerId;
     private String shopId;
+    private String shopMid;
     private Integer orderBy;
     private Integer currentPage;
     private Integer pageSize;
     private List<String> categoryIds;
     private Integer identity;
+
+    @NeedCheck(getFieldName = "shopMid")
+    public String getShopMid() {
+        return shopMid;
+    }
+
+    public void setShopMid(String shopMid) {
+        this.shopMid = shopMid;
+    }
 
     public String getKeyword() {
         return keyword;
