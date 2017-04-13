@@ -126,8 +126,6 @@ public interface OrderEventType {
     public static final String AGREE_REFUND_MONEY_AND_GOODS = "53";
     /** 商家拒绝退款*/
     public static final String SELLER_REFUSE_REFUND = "54";
-    /** 商家超时未拒绝自动退款 */
-    public static final String SELLER_AGREE_REFUND_TIMEOUT= "55";
     /** 买家发货 */
     public static final String BUYER_DELIVER_GOOD = "56";
     /** 卖家收货 */
