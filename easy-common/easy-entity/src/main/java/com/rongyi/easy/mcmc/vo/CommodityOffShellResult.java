@@ -13,6 +13,8 @@ public class CommodityOffShellResult implements Serializable{
 
     private String failReason;
 
+    private String commodityName;
+
     public String getCommodityId() {
         return commodityId;
     }
@@ -35,5 +37,13 @@ public class CommodityOffShellResult implements Serializable{
 
     public void setFailReason(String failReason) {
         this.failReason = failReason;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 }
