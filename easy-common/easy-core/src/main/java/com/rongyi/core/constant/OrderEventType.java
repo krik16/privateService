@@ -137,15 +137,27 @@ public interface OrderEventType {
     /** 退款成功事件 */
     public static final String REFUND_SUCCESS = "59";
 
+    // 退款超时事件
+    // 超时自动退款
+    public static final String REFUND_AGREE_MONEY_TIMEOUT = "60";
+    // 超时自动同意退货
+    public static final String REFUND_AGREE_GOODS_TIMEOUT = "61";
+    // 超时自动放弃退款（未发货、未上门）
+    public static final String REFUND_CANCEL_NON_DELIVERY_TIMEOUT = "62";
+    // 超时自动确认卖家（店铺）收货
+    public static final String SELLER_CONFIRM_TIMEOUT = "63";
+    // 超时自动关闭退款（卖家拒绝退款）
+    public static final String REFUND_CLOSED_TIMEOUT = "64";
+
     //维权事件
     /** 申请申诉*/
-    public static final String COMPLAINT_APPALY = "60";
+    public static final String COMPLAINT_APPALY = "70";
     /** 买家取消申诉*/
-    public static final String COMPLAINT_CANCEL = "61";
+    public static final String COMPLAINT_CANCEL = "71";
     /** 平台同意申诉*/
-    public static final String COMPLAINT_AGREE = "62";
+    public static final String COMPLAINT_AGREE = "72";
     /** 平台拒绝申诉*/
-    public static final String COMPLAINT_DISAGREE = "63";
+    public static final String COMPLAINT_DISAGREE = "73";
     
     public interface EventErrorCode {
     	/**
