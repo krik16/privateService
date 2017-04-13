@@ -138,6 +138,8 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("payNo", alipayTradePayResponse.getOutTradeNo());
             //设置支付金额
             map.put("totalAmount",aliPunchCardPayVo.getTotalAmount());
+            //支付状态
+            map.put("tradeStatus","SUCCESS");
             log.info("支付宝刷卡支付结果,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {

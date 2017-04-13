@@ -111,7 +111,7 @@ public interface PaymentService {
 
 	public abstract PaymentEntity selectByPrimaryKey(String id);
 
-	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType,Integer payChannel);
+	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType,Integer payChannel,Integer status);
 
 	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel);
 	
