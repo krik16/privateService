@@ -280,8 +280,12 @@ public class AliPayUnit {
         }
         authUrl.append("?app_id=");
         authUrl.append(aliConfigure.getAppid());
-        authUrl.append("&store_id=");
-        authUrl.append(storeId);
+        if(StringUtils.isNotEmpty(storeId)){
+            authUrl.append("&store_id=");
+            authUrl.append(storeId);
+            authUrl.append("&state=");
+            authUrl.append(storeId);
+        }
         if (StringUtils.isNotEmpty(scope)) {
             authUrl.append("&scope=");
             authUrl.append(scope);
