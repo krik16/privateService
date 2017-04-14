@@ -1,6 +1,7 @@
 package com.rongyi.core.common.third.param.sms;
 
 import com.rongyi.core.common.third.md5.Md5Util;
+import com.rongyi.core.common.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
@@ -208,8 +209,8 @@ public class SmsVO implements Serializable {
         this.password = password;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public String getCreateAt() {
+        return DateUtil.dateToString(createAt);
     }
 
     public void setCreateAt(Date createAt) {
@@ -224,8 +225,8 @@ public class SmsVO implements Serializable {
         this.createBy = createBy;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public String getUpdateAt() {
+        return DateUtil.dateToString(updateAt);
     }
 
     public void setUpdateAt(Date updateAt) {
