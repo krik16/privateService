@@ -657,13 +657,13 @@
                 and trade_type = #{tradeType,jdbcType=INTEGER}
             </if>
             <if test="tradeType == null || tradeType == '' || tradeType== -1">
-                and trade_type = in (0,1)
+                and trade_type in (0,1)
             </if>
             <if test="status != null and status != -1">
                 and status = #{status,jdbcType=INTEGER}
             </if>
             <if test="status == null || status == '' || status == -1">
-                status = 2
+                and status = 2
             </if>
             <if test="startTime != null and startTime != ''">
                 and end_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
@@ -691,13 +691,13 @@
             and trade_type = #{tradeType,jdbcType=INTEGER}
         </if>
         <if test="tradeType == null || tradeType == '' || tradeType== -1">
-            and trade_type = in (0,1)
+            and trade_type in (0,1)
         </if>
         <if test="status != null and status != -1">
             and status = #{status,jdbcType=INTEGER}
         </if>
         <if test="status == null || status == '' || status == -1">
-            status = 2
+            and status = 2
         </if>
         <if test="ryMchId != null and ryMchId != ''">
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
