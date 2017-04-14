@@ -71,6 +71,7 @@ public class TianyiPayUnit {
             if (responseStr != null && "00".equals((responseStr.split("&"))[0])) {
                 return true;
             }
+            logger.info("翼支付下单接口 error,responseStr="+responseStr);
         } catch (Exception e) {
             logger.info("翼支付下单接口失败 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
@@ -97,6 +98,7 @@ public class TianyiPayUnit {
             if (result != null && result.isSuccess() && result.getResult() != null) {
                 return JSONObject.parseObject(result.getResult().toString(), PublicKeyRes.class);
             }
+            logger.info("翼支付获取公钥接口 error,result="+result);
             return null;
         } catch (Exception e) {
             logger.info("翼支付获取公钥接口 ,e.getMessage:{}", e.getMessage());
@@ -152,6 +154,7 @@ public class TianyiPayUnit {
             if (result != null && result.isSuccess()  && result.getResult() != null){
                 return JSONObject.parseObject(result.getResult().toString(), TianyiTradeQueryRes.class);
             }
+            logger.info("翼支付交易查询接口 error,result="+result);
             return null;
         } catch (Exception e) {
             logger.info("翼支付交易查询接口 ,e.getMessage:{}", e.getMessage());
@@ -184,6 +187,7 @@ public class TianyiPayUnit {
             if (result != null && result.isSuccess()){
                 return true;
             }
+            logger.info("翼支付退款接口 error,result="+result);
             throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
         } catch (Exception e) {
             logger.info("翼支付退款接口 ,e.getMessage:{}", e.getMessage());
