@@ -142,6 +142,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private String refundNo; // 当前退款单号
     private String shopName ;  // 店铺名称
 
+    private ApplicationFormEntity updateAppeal;//
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -737,6 +739,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     public void setIsRefund(Integer isRefund) {
         this.isRefund = isRefund;
+    }
+
+    public ApplicationFormEntity getUpdateAppeal() {
+        return updateAppeal;
+    }
+
+    public void setUpdateAppeal(ApplicationFormEntity updateAppeal) {
+        this.updateAppeal = updateAppeal;
     }
 
     @Override

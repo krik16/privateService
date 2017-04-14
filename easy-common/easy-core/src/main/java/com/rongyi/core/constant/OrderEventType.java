@@ -127,13 +127,15 @@ public interface OrderEventType {
     /** 商家拒绝退款*/
     public static final String SELLER_REFUSE_REFUND = "54";
     /** 买家发货 */
-    public static final String BUYER_DELIVER_GOOD = "56";
+    public static final String BUYER_DELIVER_GOOD = "55";
     /** 卖家收货 */
-    public static final String SELLER_RECEIVE_GOOD = "57";
+    public static final String SELLER_RECEIVE_GOOD = "56";
     /** 卖家拒绝收货 */
-    public static final String SELLER_REFUSE_GOOD = "58";
+    public static final String SELLER_REFUSE_GOOD = "57";
     /** 退款成功事件 */
-    public static final String REFUND_SUCCESS = "59";
+    public static final String REFUND_SUCCESS = "58";
+    /** 退款关闭  比如取消订单导致退款关闭*/
+    public static final String REFUND_CLOSE = "59";
 
     // 退款超时事件
     // 超时自动退款
