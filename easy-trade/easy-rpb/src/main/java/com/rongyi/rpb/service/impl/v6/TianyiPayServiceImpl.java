@@ -14,6 +14,7 @@ import com.rongyi.pay.core.tianyi.param.TianyiOrderParam;
 import com.rongyi.pay.core.tianyi.param.TianyiParam;
 import com.rongyi.rpb.bizz.PaySignBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
+import com.rongyi.rpb.unit.PayConfigInitUnit;
 import com.rongyi.rss.rpb.ItianyiPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,12 +36,16 @@ public class TianyiPayServiceImpl implements ItianyiPayService {
     @Autowired
     PaySignBizz paySignBizz;
 
+    @Autowired
+    PayConfigInitUnit payConfigInitUnit;
+
     private static final Logger log = LoggerFactory.getLogger(TianyiPayServiceImpl.class);
 
     @Override
     public Map<String,Object> h5Pay(WechatTianyiPayVo wechatTianyiPayVo , TianyiPayVo tianyiPayVo) throws TradePayException {
         log.info("翼支付H5支付,wechatTianyiPayVo:{},tianyiPayVo:{}",wechatTianyiPayVo.toString(),tianyiPayVo.toString());
         try {
+            payConfigInitUnit.init();
             Map<String, Object> map = new HashMap<>();
             TianyiParam tianyiParam = getTianyiParam(wechatTianyiPayVo, tianyiPayVo);
             String result = paySignBizz.tianyiH5Pay(wechatTianyiPayVo, tianyiParam, tianyiPayVo.getOrderType(), tianyiPayVo.getSource());
@@ -92,6 +97,8 @@ public class TianyiPayServiceImpl implements ItianyiPayService {
         tianyiOrderParam.setOrderAmt(tianyiPayVo.getTotalAmount().toString());
         tianyiOrderParam.setProductDesc(subject);
         tianyiOrderParam.setOrderReqTime(orderReqTime);
+        //TODO
+        tianyiOrderParam.setRiskControlInfo("风控信息");
 
         payDetailParam.setMerchantId(wechatTianyiPayVo.getMerchatId());
         payDetailParam.setMerchantPwd(wechatTianyiPayVo.getMerchatPwd());
