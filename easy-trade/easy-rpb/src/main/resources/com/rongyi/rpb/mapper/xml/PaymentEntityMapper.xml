@@ -647,6 +647,9 @@
             <if test="payChannel != null and payChannel != ''">
                 and pay_channel = #{payChannel,jdbcType=INTEGER}
             </if>
+            <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+                and pay_channel in (0,1,2,3)
+            </if>
             <if test="payerReconflag != null and payerReconflag != -1">
                 and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
             </if>
@@ -666,10 +669,10 @@
                 and status = 2
             </if>
             <if test="startTime != null and startTime != ''">
-                and end_at $gt; STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+                and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
             <if test="endTime != null and endTime != ''">
-                and end_at $lt; STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+                and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
         order by create_at desc  limit #{startIndex},#{pageSize} 
     </select>
@@ -683,6 +686,9 @@
         </if>
         <if test="payChannel != null and payChannel != ''">
             and pay_channel = #{payChannel,jdbcType=INTEGER}
+        </if>
+        <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+                and pay_channel in (0,1,2,3)
         </if>
         <if test="payerReconflag != null and payerReconflag != -1">
             and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
@@ -709,7 +715,7 @@
             and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
         </if>
         <if test="endTime != null and endTime != ''">
-            and end_at $lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
         </if>
     </select>
 </mapper>
