@@ -83,7 +83,7 @@ public class PayDetailParam extends BaseData {
     private String accountId;
 
     //用户手机号-M
-    private String customerId;
+    private String customerId ="011113120892181";
 
     //用户IP-O
     private String userIp;

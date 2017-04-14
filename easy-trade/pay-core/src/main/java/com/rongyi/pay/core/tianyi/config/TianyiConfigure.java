@@ -16,7 +16,7 @@ public class TianyiConfigure extends BaseData {
 
     private String backMerchantUrl;//后台回调地址
 
-    private String swtichacc;//是否可以切换用户支付 true/false 必填
+    private String swtichacc = "true";//是否可以切换用户支付 true/false 必填
 
     private String productId = "04";//业务标识代码 必填 ,默认04
 
