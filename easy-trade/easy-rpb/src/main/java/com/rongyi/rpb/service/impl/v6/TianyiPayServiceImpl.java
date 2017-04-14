@@ -109,6 +109,7 @@ public class TianyiPayServiceImpl implements ItianyiPayService {
         payDetailParam.setProductDesc(subject);
         payDetailParam.setSubject(subject);
         payDetailParam.setProductAmount(orderAmount);
+        payDetailParam.setKey(wechatTianyiPayVo.getMerchatKey());
         tianyiParam.setPayDetailParam(payDetailParam);
         tianyiParam.setTianyiOrderParam(tianyiOrderParam);
         return tianyiParam ;
