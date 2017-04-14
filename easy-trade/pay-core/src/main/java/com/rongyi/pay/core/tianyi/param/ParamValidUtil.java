@@ -60,7 +60,7 @@ public class ParamValidUtil {
         param.setEncodeType(ENCODETYPE);
         param.setRequestSystem(RISKCONTROLINFO);
         param.setServiceCode(SERVICECODE);
-        if (StringUtils.isBlank(configure.getRiskControlInfo())){
+        if (StringUtils.isBlank(param.getRiskControlInfo())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"riskControlInfo");
         }
 
