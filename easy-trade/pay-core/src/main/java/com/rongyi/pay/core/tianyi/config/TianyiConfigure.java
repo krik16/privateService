@@ -18,7 +18,7 @@ public class TianyiConfigure extends BaseData {
 
     private String swtichacc;//是否可以切换用户支付 true/false 必填
 
-    private String productId;//业务标识代码 必填 ,默认04
+    private String productId = "04";//业务标识代码 必填 ,默认04
 
     private String busiType;//同为业务标识代码（两者具有不同的用途，但值相同）必填，默认04
 
