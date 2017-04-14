@@ -134,9 +134,8 @@ public class TianyiTest {
 
     private void init() {
         TianyiConfigure configure = TianyiConfigure.getInstance();
-        configure.setEnv("2");
         configure.setSwtichacc("true");
-        configure.setBeforeBackUrl("https://www.baidu.com");
+//        configure.setBeforeBackUrl("https://www.baidu.com");
         configure.setBackMerchantUrl("http://127.0.0.1:8080/wapBgNotice.action");
         configure.setProductId("04");
         configure.setBusiType("04");
