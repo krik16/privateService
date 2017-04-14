@@ -7,8 +7,15 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class TianyiConfigure extends BaseData {
 
+    private static final String ENV = "2";
+    private static final String USELANGUAGE = "zh";
+    private static final String ORDERURL = "https://webpaywg.bestpay.com.cn/order.action";
+    private static final String PUBLICKEYURL = "https://capi.bestpay.com.cn/common/interface";
+    private static final String PAYQUERYURL = "https://webpaywg.bestpay.com.cn/query/queryOrder";
+    private static final String REFUNDURL = "https://webpaywg.bestpay.com.cn/refund/commonRefund";
+    private static final String PAYURL = "https://capi.bestpay.com.cn/gateway.pay";
 
-    private String env;//环境地址 0 综测；1 准生产；2 生产 必填
+    private String env = ENV;//环境地址 0 综测；1 准生产；2 生产 必填
 
     private String beforeBackUrl;//前台回调地址
 
@@ -20,7 +27,7 @@ public class TianyiConfigure extends BaseData {
 
     private String busiType;//同为业务标识代码（两者具有不同的用途，但值相同）必填，默认04
 
-    private String userLanguage;//用户语言环境zh
+    private String userLanguage = USELANGUAGE;//用户语言环境zh
 
     //下面2个参数通过"短信验证码验证"接口获取（免登参数）
     private String keyIndex;//密钥索引
@@ -29,17 +36,17 @@ public class TianyiConfigure extends BaseData {
 
     private String riskControlInfo;//风控信息，翼支付风控组提供
 
-    private String orderUrl;//下单请求url
+    private String orderUrl = ORDERURL;//下单请求url
 
-    private String publicKeyUrl;//获取公钥接口url
+    private String publicKeyUrl = PUBLICKEYURL;//获取公钥接口url
 
-    private String payUrl;//支付接口url
+    private String payUrl = PAYURL;//支付接口url
 
     private String checkStandH5Url;//收银台H5url
 
-    private String payQueryUrl;//交易查询url
+    private String payQueryUrl = PAYQUERYURL;//交易查询url
 
-    private String refundUrl;//退款接口url
+    private String refundUrl = REFUNDURL;//退款接口url
 
     private String refundBackUrl;//退款回调地址
 
