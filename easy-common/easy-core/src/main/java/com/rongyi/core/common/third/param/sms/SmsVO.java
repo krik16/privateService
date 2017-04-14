@@ -202,7 +202,7 @@ public class SmsVO implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return "******";
     }
 
     public void setPassword(String password) {
