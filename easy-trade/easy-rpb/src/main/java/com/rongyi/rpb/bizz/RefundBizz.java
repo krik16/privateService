@@ -279,18 +279,12 @@ public class RefundBizz {
      */
     public void tianyiRefund(String orderNo,Integer refundAmount){
         //查找订单支付记录
-        PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
-        if (oldPaymentEntity == null) {
-            throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-        //初始化退款入住商户信息
-        RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
+        PaymentEntity oldPaymentEntity = basePayment(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
 
-        //初始化退款记录
-        PaymentEntity  refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo,
-                refundAmount, oldPaymentEntity.getOrderType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "",ConstantEnum.PAY_SCENE_WEB.getCodeInt());
+        //查找退款记录
+        PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, oldPaymentEntity);
+        //保存记录
+        saveUnit.updatePaymentEntity(refundPaymentEntity, null);
 
         //初始化翼支付请求参数
         RefundParam param = initTianyiRefundParam(refundAmount,oldPaymentEntity,refundPaymentEntity);

@@ -20,6 +20,7 @@ import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.*;
 import com.rongyi.rpb.web.controller.v5.WebPageAlipayController;
+import com.rongyi.rss.rpb.ItianyiPayService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -80,6 +81,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Autowired
     WeixinMchService weixinMchService;
+
+    @Autowired
+    ItianyiPayService tianyiPayService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
@@ -307,7 +311,24 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
 
         return bodyMap;
+    }
 
+    /**
+     * 检查是否是翼支付退款
+     */
+    private boolean isTianyiRefund(String orderNo,BigDecimal refundAmount,String type){
+        //退款事件
+        if (PaymentEventType.REFUND.equals(type)){
+            PaymentEntity paymentEntity = selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
+            if(paymentEntity != null){
+                LOGGER.info("发起翼支付退款,orderNo={}",orderNo);
+                Integer totalAmount =refundAmount.multiply(new BigDecimal(100)).intValue();
+                //调用翼支付退款接口
+                tianyiPayService.refund(orderNo,totalAmount);
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -328,6 +349,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
+        boolean isTianyiRefund = isTianyiRefund(paymentEntityVO.getOrderNum(),paymentEntityVO.getAmountMoney(),event.getType());
+        //翼支付退款直接返回
+        if(isTianyiRefund){
+            return paymentEntityVO;
+        }
         String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             Integer tradeType = Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0;
@@ -369,7 +395,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentEntityVO.setTitle(getTitle(payNo));
         }
         insertList(paymentEntityList, paymentEntityVO, event, oldPayNo);
-        //TODO 翼支付退款时直接发起退款，退款接口封装到tianyiService中，此处调这个接口
         return paymentEntityVO;
     }
 
@@ -429,7 +454,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         //验证请求付款记录是否已存在，如果存在，若有同一类型支付方式则返回原有数据，如果没有同一类型则创建一个订单号和付款单号同一个的付款记录，如果不存在则新建
         for (String orderNo : orderNumArray) {
             LOGGER.info("orderNum={},tradeType={},payChannel={}", orderNo, tradeType, payChannel);
-            List<PaymentEntity> list = selectByOrderNum(orderNo, tradeType, null);
+            List<PaymentEntity> list = selectByOrderNum(orderNo, tradeType, null,null);
             if (list != null && !list.isEmpty()) {
                 PaymentEntity paymentEntity = list.get(0);
                 PaymentEntity newPaymentEntity = new PaymentEntity();
@@ -550,11 +575,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType, Integer payChannel) {
+    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType, Integer payChannel,Integer status) {
         Map<String, Object> params = new HashMap<>();
         params.put("orderNum", orderNum);
         params.put("tradeType", tradeType);
         params.put("payChannel", payChannel);
+        params.put("status", status);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNum", params);
     }
 

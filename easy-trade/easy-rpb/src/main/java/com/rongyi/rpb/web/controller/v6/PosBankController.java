@@ -1,6 +1,8 @@
 package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.util.BeanMapUtils;
+import com.rongyi.core.util.TradePaySignUtil;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
 import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 /**
  * pos银行卡
@@ -52,4 +56,5 @@ public class PosBankController {
         }
         return ResponseVO.failure(ConstantEnum.EXCEPTION_POS_BANK_SYN_NTIFY_FAIL.getCodeInt(), ConstantEnum.EXCEPTION_POS_BANK_SYN_NTIFY_FAIL.getValueStr());
     }
+
 }
