@@ -335,4 +335,15 @@ public class Util {
 		}
 		return false;
 	}
+
+	/**
+	 * 连接2个字符串
+	 *
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
+	public static String joinString(String str1, Object str2) {
+		return str1 + "_" + str2;
+	}
 }
