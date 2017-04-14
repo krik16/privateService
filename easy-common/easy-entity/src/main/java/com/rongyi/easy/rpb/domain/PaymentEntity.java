@@ -131,6 +131,8 @@ public class PaymentEntity implements Serializable {
 
 	private Byte orgChannel;
 
+	private Integer payScene;
+
 	/**
 	 * 主键id
 	 * 
@@ -462,6 +464,14 @@ public class PaymentEntity implements Serializable {
 
 	public void setOrgChannel(Byte orgChannel) {
 		this.orgChannel = orgChannel;
+	}
+
+	public Integer getPayScene() {
+		return payScene;
+	}
+
+	public void setPayScene(Integer payScene) {
+		this.payScene = payScene;
 	}
 
 	@Override

@@ -13,7 +13,6 @@ package com.rongyi.core.common.third.rsa;
 
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.util.Base64Helper;
-import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.util.EasyMd5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -266,14 +265,14 @@ public class MalllifeRsaUtil {
 
 
                 //全民财富
-                
+
                 String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'1111','regiTime':'1442838385146'}";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,MallLifeThirdConfig.THIRD_RSACODER.PUBLIC_KEY_STR);
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr, MallLifeThirdConfig.THIRD_RSACODER.PRIVATE_KEY_STR);
                 System.out.println("解密后="+decryStr);
-                
+
 
                 //ToB 业务
                 String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
@@ -283,7 +282,7 @@ public class MalllifeRsaUtil {
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PRIVATEKEY"));
                 System.out.println("解密后="+decryStr);
-                 
+
 
           // String _PUBLICKEY="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCi4KQZzhKwZXrm3dSZwl34LSgHLc250Ch8BZDIQNr6FrOT/PxdQCotwrP3TfjTKSTRov+3A6GMztRvLWjpZK++MzNBmHUNObAfdSTGLbXZQwg0niXeef4C8ELINpF67uTcFNORcZ4az7AU4MgUNEYRD7JD83CP/tpPG+LFnLou9wIDAQAB";
 
@@ -298,15 +297,20 @@ public class MalllifeRsaUtil {
                System.out.println("解密后="+decryStr);
 
 */
-            	String mihou = "WUWxfG705iWOHpnKUbNwZ6xFkDQi+zkt6ZSIQ7d9wh9ZPo0nMjs56IlVsrlpt5QKQToXH0S7+yRYMHFKbZEzmwi7o5nGg2LMP2DyUax+/8VPyECrY0tZBXkyqDpwpAO25mfIroSXyiGb0Ic95kTDWchWCv1g3XuGD00oGutTBm8=";
-            	String decryStr=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
-                System.out.println("解密后1="+decryStr);
-                mihou = "X6O5/1DeBfC59YUX06o+MlEkb+hCyvEKj5KsccCCEm8Q5t4iV+1vxyXcsBuBWYMkQpYCSopV9vt2ifZwQ7STNYrkToIXpQolsXeW68lqo7VwkVvheXATa3zCy57cBi89jkc1rXtTbflAJfOmPeV9LkY5tmW9vX3NfrfQbMKCVGU=";
-                String decryStr2=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
-                System.out.println("解密后2="+decryStr2);
+//            	String mihou = "WUWxfG705iWOHpnKUbNwZ6xFkDQi+zkt6ZSIQ7d9wh9ZPo0nMjs56IlVsrlpt5QKQToXH0S7+yRYMHFKbZEzmwi7o5nGg2LMP2DyUax+/8VPyECrY0tZBXkyqDpwpAO25mfIroSXyiGb0Ic95kTDWchWCv1g3XuGD00oGutTBm8=";
+//            	String decryStr=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
+//                System.out.println("解密后1="+decryStr);
+//                mihou = "X6O5/1DeBfC59YUX06o+MlEkb+hCyvEKj5KsccCCEm8Q5t4iV+1vxyXcsBuBWYMkQpYCSopV9vt2ifZwQ7STNYrkToIXpQolsXeW68lqo7VwkVvheXATa3zCy57cBi89jkc1rXtTbflAJfOmPeV9LkY5tmW9vX3NfrfQbMKCVGU=";
+//                String decryStr2=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
+//                System.out.println("解密后2="+decryStr2);
                //System.out.println("=================="+(int)(200*0.01));
 
-
+                String userPayUrl = "http://fljf.dev.rongyi.com/scanpay/openpaygrant?state=";
+                String state = "orderNo=11111";
+                String encodeStr = MalllifeRsaUtil.encryptionStr(state, "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCOIfpdq2D+IlGxjSWJNIdis8E1xRNxA343wvZOWFMHotO55d973OD8TJBY8YMdI1SLj7B6RanAAxECA54vqTe/h9S95C1HVU1UlZKqTKWltatAK17zEiwZAC99BGRYY+Bz5mWfETa27RlOMHNkblyVF3KxJbJ2XS7BgYMgqFxSxwIDAQAB");
+                System.err.println("encodeStr="+encodeStr);
+                String decodeStr = MalllifeRsaUtil.decryptStr(encodeStr,"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAI4h+l2rYP4iUbGNJYk0h2KzwTXFE3EDfjfC9k5YUwei07nl33vc4PxMkFjxgx0jVIuPsHpFqcADEQIDni+pN7+H1L3kLUdVTVSVkqpMpaW1q0ArXvMSLBkAL30EZFhj4HPmZZ8RNrbtGU4wc2RuXJUXcrElsnZdLsGBgyCoXFLHAgMBAAECgYBnmuUBupctKJ8cKaMe7Kdzj0xbgZi2XLF4vCkG2uNLQanMbIAHre5iev0NmJ7WcpaCVO9zcaxXRuTy7ug0HcmAO8HikL2HzV1l2nYwoQagoEvr/rBG7Mc2Ov4Wk4tAScmARo7U99pPZfZDUUTjzQHRJJ/D057vZvQOdWt5fiNhQQJBAOrqFaSKbMjO/TrDeqnSQzmDDSULGXfnn+XQFvGc6s7nMPJIJWYmvCfFnzJyzkyBC7d3GFAbZ56eXwKrZUIqCm8CQQCa4++BomwOeEd+U770pc4CbIL2viNl7s1U0xjl58vIqml446VRNcuRs7/ByjMicvblPYH3YOVtwaKZoFP3SUkpAkA91d5akIFwHmQz6q7IMuu1INT98j0C/fpuAOd5NAfu7JZKwEjv6bRPd8qe+e9p3fIamgPRWlVdQGzcBAfEcdKLAkBrOaofSwqVBc0wddc20+WGpgoPuFcXBLcepriQx+O6OcakSquySZRwfEgeZtT5Xy7uSaNEVs7dKXRf967I/PHpAkBsv8SUC63K/gwiRfeJLtwZofXPa3kGzv/zfGdkZsBC4SN9M5VKi9UvJac1638VWoPsYfO9Nik5mhu0mYHhOej6");
+                System.err.println("decodeStr="+decodeStr);
             } catch (Exception e) {
                 e.printStackTrace();
             }

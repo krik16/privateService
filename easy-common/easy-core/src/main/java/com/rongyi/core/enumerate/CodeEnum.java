@@ -23,6 +23,7 @@ public enum CodeEnum {
     ERROR_DATABASE("-12", "数据库故障"),
     ERROR_PARAM("-13", "必要参数为空或不合法"),
     ERROR_PARAM_1301("-1301", "必填参数不能为空"),
+    FIAL_NO_AUTHORITY_PAYMENT("1098403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 
     ERROR_VERSION_180("-3180", "当前版本不支持注册，请升级到V1.70后的版本再注册"),
 
@@ -127,6 +128,8 @@ public enum CodeEnum {
 	ERROR_MCMC_OFFER_DATE("-7017","下架时间需大于上架时间"),
 	ERROR_MCMC_DATE("-7018","下架时间有误，请重新设置"),
 	ERROR_MCMC_REGIST_DATE("-7019","上架时间有误，请重新设置"),
+	ERROR_MCMC_COMMODITY_SPEC_DELETED("-7020", "商品规格不存在或已删除"),
+	ERROR_MCMC_COMMODITY_CATEGORY_SPEC("-7021", "此规格已关联商品类目，无法删除"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
@@ -275,7 +278,12 @@ public enum CodeEnum {
 	ERROR_RYUSER_NOT_EXIST("1400001","该账号不存在"),
 	ERROR_RYUSER_STOP("1400002","停用理由不能为空"),
 	ERROR_RYUSER_START("1400003","该账号已存在，您无法启用当前账号"),
-	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复");
+	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复"),
+
+    /** 售后说明敏感词校验*/
+	ERROR_SERVICE_DESCRIPTION_REMARK_HAS_SENSITIVE_WORD("1500001", "售后说明敏感词过滤没通过，售后说明的备注中存在敏感词"),
+    ERROR_SERVICE_DESCRIPTION_CONTENT_HAS_SENSITIVE_WORD("1500002", "售后说明敏感词过滤没通过，售后说明的说明中存在敏感词");
+
 
 
     private String code; 

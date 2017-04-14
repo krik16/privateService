@@ -569,7 +569,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setIsRefund(Integer isRefund) {
 		this.isRefund = isRefund;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "TotalCommodity [id=" + id + ", name=" + name + ", category="
@@ -788,6 +788,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
 			this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
+			this.setServiceDescriptionId(param.getServiceDescriptionId());
+			this.setServiceDescription(param.getServiceDescription());
+			this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());
+			this.setGoodsParam(Arrays.asList(param.getGoodsParam()));
 		} catch (Exception e) {
 			throw new RuntimeException("参数错误");
 		}

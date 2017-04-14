@@ -104,6 +104,12 @@ public class CommodityParam implements Serializable{
 
 	private String commodityModelNo;
 
+	private String serviceDescription;//售后说明
+
+	private Integer serviceDescriptionId;
+
+	private String serviceDescriptionRemark;
+
 	private String pass; // 0：不通过  1：通过
 
 	private String haiXinId;
@@ -413,6 +419,30 @@ public class CommodityParam implements Serializable{
 	}
 
 
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+	
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -637,7 +667,10 @@ public class CommodityParam implements Serializable{
 				+ commodityDetails + ", source=" + source + ", shelvesType="
 				+ shelvesType + ", brandId=" + brandId + ", brandMid="
 				+ brandMid + ", brandName=" + brandName + ", commodityModelNo="
-				+ commodityModelNo + ", pass=" + pass + ", haiXinId="
+				+ commodityModelNo + ", serviceDescription="
+				+ serviceDescription + ", serviceDescriptionId="
+				+ serviceDescriptionId + ", serviceDescriptionRemark="
+				+ serviceDescriptionRemark + ", pass=" + pass + ", haiXinId="
 				+ haiXinId + ", merchantId=" + merchantId + ", isRefund="
 				+ isRefund + ", goodsParam=" + goodsParam + ", commodityType="
 				+ commodityType + "]";

@@ -17,7 +17,7 @@ public class ServiceDescriptionParam implements Serializable {
     private String content;        //说明内容
     private int isDefault;     //是否默认
     private int currentPage  = 1; //当前页
-    private int  pageSize = 20; //分页大小
+    private int  pageSize ; //分页大小
     private int offset;
 
     public String getJsessionid() {

@@ -1,4 +1,4 @@
-package com.rongyi.easy.rpb.vo;
+package com.rongyi.easy.rpb.vo.v6;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -6,11 +6,11 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.io.Serializable;
 
 /**
- * 线下pos银行卡支付业务参数
+ * 线下现金支付业务参数
  * conan
  * 2017/2/27 13:49
  **/
-public class PosBankCardPayVo implements Serializable {
+public class CashPayVo implements Serializable {
     private static final long serialVersionUID = -216710226969259204L;
 
     //商户订单号 必填
@@ -19,7 +19,7 @@ public class PosBankCardPayVo implements Serializable {
     //金额（分）必填
     private Integer totalAmount;
 
-    //商品描述   必填
+    //商品描述  
     private String subject;
 
     private Integer orderType;

@@ -1,6 +1,9 @@
 package com.rongyi.rss.sensitivewords;
 
+import com.rongyi.easy.mcmc.vo.commodity.CommodityCheckSensitiveWordsVo;
+
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by xgq on 2016/1/21.
@@ -24,7 +27,14 @@ public interface SensitiveWordsFilterService {
      */
     public boolean checkSensitiveWords(String content, SensitiveWordsType type);
 
-    
+	/**
+	 * 批量校验是否包含敏感词
+	 * @param commodityCheckSensitiveWordsVoList
+	 * @return true表示包含敏感词；false表示不包含敏感词
+	 */
+	public boolean checkSensitiveWordsList(List<CommodityCheckSensitiveWordsVo> commodityCheckSensitiveWordsVoList);
+
+
     /**
      * 关键词过滤类型
      * @author liulei
@@ -56,7 +66,7 @@ public interface SensitiveWordsFilterService {
     	BUYER_INTRO(11, 			"买手简介"),
 		/** 关键词过滤类型：买手简介 **/
 		SMS_INTRO(12, 			"手机短信");
-    	
+
     	private int id;
 		private String name;
     	private SensitiveWordsType(int id, String name) {
@@ -75,12 +85,12 @@ public interface SensitiveWordsFilterService {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
 		@Override
 		public String toString() {
 			return "{id=" + id + ", name=" + name() + "}";
 		}
-		
+
 		/**
 		 * SensitiveWordsType枚举字典
 		 */
@@ -90,7 +100,7 @@ public interface SensitiveWordsFilterService {
 				wordsTypeDic.put(swt.getId(), swt);
 			}
 		}
-		
+
 		/**
 		 * 根据ID获取SensitiveWordsType对象
 		 * @param id	ID
