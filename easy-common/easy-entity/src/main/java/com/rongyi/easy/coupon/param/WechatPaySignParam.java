@@ -43,7 +43,7 @@ public class WechatPaySignParam implements Serializable {
      */
     private String mallId;
 
-    //商户类型 1商场 0店铺
+    //商户类型 1商场 4店铺
     private Integer merType ;
 
     //商户ID or 店铺ID
