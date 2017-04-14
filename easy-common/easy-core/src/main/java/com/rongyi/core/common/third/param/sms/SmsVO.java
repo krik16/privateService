@@ -92,6 +92,18 @@ public class SmsVO implements Serializable {
         return channel;
     }
 
+    public int getIpLimit() {
+        return ipLimit;
+    }
+
+    public String getSendType() {
+        return sendType;
+    }
+
+    public int getIsDisabled() {
+        return isDisabled;
+    }
+
     public void setChannel(String channel) {
         this.channel = channel;
     }
@@ -120,13 +132,6 @@ public class SmsVO implements Serializable {
         this.token = token;
     }
 
-    public String getIpLimit() {
-        if(0 == ipLimit){
-            return "正常";
-        }
-        return "受限";
-    }
-
     public void setIpLimit(int ipLimit) {
         this.ipLimit = ipLimit;
     }
@@ -147,24 +152,8 @@ public class SmsVO implements Serializable {
         this.sendChannel = sendChannel;
     }
 
-    public String getSendType() {
-        if("RYNTCSMS".equals(sendType)){
-            return "通知类型";
-        }else if("RYMARKSMS".equals(sendType)){
-            return "营销类型";
-        }
-        return "未知";
-    }
-
     public void setSendType(String sendType) {
         this.sendType = sendType;
-    }
-
-    public String getIsDisabled() {
-        if(0 == isDisabled){
-            return "正常";
-        }
-        return "禁用";
     }
 
     public void setIsDisabled(int isDisabled) {
