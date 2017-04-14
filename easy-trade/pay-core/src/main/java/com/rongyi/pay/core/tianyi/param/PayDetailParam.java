@@ -71,7 +71,7 @@ public class PayDetailParam extends BaseData {
     private String productAmount;
 
     //附加金额 如0.01-M
-    private String attachAmount;
+    private String attachAmount = "0";
 
     //附加信息-O
     private String attach;
