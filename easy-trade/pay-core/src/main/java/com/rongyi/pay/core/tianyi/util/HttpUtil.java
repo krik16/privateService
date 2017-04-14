@@ -1,6 +1,5 @@
 package com.rongyi.pay.core.tianyi.util;
 
-import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import org.apache.http.*;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -45,9 +44,9 @@ public class HttpUtil {
         return result;
     }
 
-    public static String sendTradePost(Map<String, String> queryParam, TianyiConfigure configure) throws IOException {
+    public static String sendTradePost( String refundUrl, Map<String, String> queryParam) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(configure.getRefundUrl());
+        HttpPost httpPost = new HttpPost(refundUrl);
         List<NameValuePair> paramList = new ArrayList<NameValuePair>();
         for (String key : queryParam.keySet()) {
             paramList.add(new BasicNameValuePair(key, queryParam.get(key)));

@@ -77,10 +77,9 @@ public class ParamValidUtil {
         if (StringUtils.isBlank(param.getMerchantPwd())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"merchantPwd");
         }
-        if (StringUtils.isBlank(configure.getBeforeBackUrl())){
+        if (StringUtils.isBlank(param.getBeforeMerchantUrl())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"beforeMerchantUrl");
         }
-        param.setBeforeMerchantUrl(configure.getBeforeBackUrl());
         if (StringUtils.isBlank(configure.getBackMerchantUrl())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"backMerchantUrl");
         }
@@ -122,10 +121,7 @@ public class ParamValidUtil {
         if (StringUtils.isBlank(param.getCustomerId())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"customerId");
         }
-        if (StringUtils.isBlank(configure.getBusiType())){
-            throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"busiType");
-        }
-        param.setBusiType(configure.getBusiType());
+        param.setBusiType(BUSITYPE);
         if (StringUtils.isBlank(configure.getSwtichacc())){
             throw new ParamNullException(ConstantEnum.EXCEPTION_PARAM_NULL_SPECIFY,"busiType");
         }

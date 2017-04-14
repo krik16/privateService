@@ -176,7 +176,7 @@ public class TianyiPayUnit {
             String mac = TianyiPayService.getTradeRefundMac(param);
             param.setMac(mac);
             Map<String, String> queryParam = getMap(param, mac);
-            String responseStr = HttpUtil.sendTradePost(queryParam, configure);
+            String responseStr = HttpUtil.sendTradePost(configure.getRefundUrl(), queryParam);
             if (StringUtils.isBlank(responseStr)){
                 throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
             }

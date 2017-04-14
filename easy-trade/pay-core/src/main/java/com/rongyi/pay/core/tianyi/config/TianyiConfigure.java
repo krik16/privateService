@@ -7,17 +7,12 @@ import com.rongyi.pay.core.util.BaseData;
  */
 public class TianyiConfigure extends BaseData {
 
-    private static final String ENV = "2";
     private static final String USELANGUAGE = "zh";
     private static final String ORDERURL = "https://webpaywg.bestpay.com.cn/order.action";
     private static final String PUBLICKEYURL = "https://capi.bestpay.com.cn/common/interface";
     private static final String PAYQUERYURL = "https://webpaywg.bestpay.com.cn/query/queryOrder";
     private static final String REFUNDURL = "https://webpaywg.bestpay.com.cn/refund/commonRefund";
     private static final String PAYURL = "https://capi.bestpay.com.cn/gateway.pay";
-
-    private String env = ENV;//环境地址 0 综测；1 准生产；2 生产 必填
-
-    private String beforeBackUrl;//前台回调地址
 
     private String backMerchantUrl;//后台回调地址
 
@@ -109,22 +104,6 @@ public class TianyiConfigure extends BaseData {
 
     public void setRefundUrl(String refundUrl) {
         this.refundUrl = refundUrl;
-    }
-
-    public String getEnv() {
-        return env;
-    }
-
-    public void setEnv(String env) {
-        this.env = env;
-    }
-
-    public String getBeforeBackUrl() {
-        return beforeBackUrl;
-    }
-
-    public void setBeforeBackUrl(String beforeBackUrl) {
-        this.beforeBackUrl = beforeBackUrl;
     }
 
     public String getBackMerchantUrl() {
