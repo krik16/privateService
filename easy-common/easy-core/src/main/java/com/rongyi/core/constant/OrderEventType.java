@@ -137,30 +137,32 @@ public interface OrderEventType {
     public static final String SELLER_REFUSE_GOOD = "57";
     /** 退款成功事件 */
     public static final String REFUND_SUCCESS = "58";
-    /** 退款关闭  比如取消订单导致退款关闭*/
-    public static final String REFUND_CLOSE = "59";
+    /** 取消订单导致退款关闭*/
+    public static final String REFUND_CLOSE_BY_CANCEL_ORDER = "59";
+    /** 申请退款导致旧退款单关闭*/
+    public static final String REFUND_CLOSE_BY_REQUEST_REFUND = "60";
 
     // 退款超时事件
     // 超时自动退款
-    public static final String REFUND_AGREE_MONEY_TIMEOUT = "60";
+    public static final String REFUND_AGREE_MONEY_TIMEOUT = "70";
     // 超时自动同意退货
-    public static final String REFUND_AGREE_GOODS_TIMEOUT = "61";
+    public static final String REFUND_AGREE_GOODS_TIMEOUT = "71";
     // 超时自动放弃退款（未发货、未上门）
-    public static final String REFUND_CANCEL_NON_DELIVERY_TIMEOUT = "62";
+    public static final String REFUND_CANCEL_NON_DELIVERY_TIMEOUT = "72";
     // 超时自动确认卖家（店铺）收货
-    public static final String SELLER_CONFIRM_TIMEOUT = "63";
+    public static final String SELLER_CONFIRM_TIMEOUT = "73";
     // 超时自动关闭退款（卖家拒绝退款）
-    public static final String REFUND_CLOSED_TIMEOUT = "64";
+    public static final String REFUND_CLOSED_TIMEOUT = "74";
 
     //维权事件
     /** 申请申诉*/
-    public static final String COMPLAINT_APPALY = "70";
+    public static final String COMPLAINT_APPALY = "80";
     /** 买家取消申诉*/
-    public static final String COMPLAINT_CANCEL = "71";
+    public static final String COMPLAINT_CANCEL = "81";
     /** 平台同意申诉*/
-    public static final String COMPLAINT_AGREE = "72";
+    public static final String COMPLAINT_AGREE = "82";
     /** 平台拒绝申诉*/
-    public static final String COMPLAINT_DISAGREE = "73";
+    public static final String COMPLAINT_DISAGREE = "83";
     
     public interface EventErrorCode {
     	/**
