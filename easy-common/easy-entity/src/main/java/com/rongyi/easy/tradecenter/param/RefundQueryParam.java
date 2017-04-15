@@ -25,8 +25,9 @@ public class RefundQueryParam implements Serializable {
     private String buyerName;
     private Date startDate;
     private Date endDate;
+    private Integer start;
     /**
-     * 退款状态（0：全部 1：退款申请中 2：待买家发货 3：待买家上门  4：待卖家收货 5退款中 6：退款关闭 7：退款已拒绝 8：退款关闭）
+     * 退款状态（0：全部 1：退款申请中 2：待买家发货 3：待买家上门  4：待卖家收货 5退款中 6：退款成功 7：退款已拒绝 8：退款关闭）
      */
     private Integer status;
     /**
@@ -172,6 +173,14 @@ public class RefundQueryParam implements Serializable {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
     }
 
     @Override

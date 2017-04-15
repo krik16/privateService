@@ -29,6 +29,8 @@ public class ComplaintFormVO implements Serializable {
     private String refundAmount;
     private String remark;
     private String imageUrl;
+    // 卖家店铺id
+    private String shopId;
     // 卖家店铺名称
     private String shopName;
     // 申诉时间
@@ -176,5 +178,37 @@ public class ComplaintFormVO implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    @Override
+    public String toString() {
+        return "ComplaintFormVO{" +
+                "buyerName='" + buyerName + '\'' +
+                ", buyerPhone='" + buyerPhone + '\'' +
+                ", commodityId='" + commodityId + '\'' +
+                ", commoditySpecId='" + commoditySpecId + '\'' +
+                ", commodityName='" + commodityName + '\'' +
+                ", complaintNo='" + complaintNo + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", refundNo='" + refundNo + '\'' +
+                ", refundAmount='" + refundAmount + '\'' +
+                ", remark='" + remark + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", resultBy='" + resultBy + '\'' +
+                ", resultRemark='" + resultRemark + '\'' +
+                ", resultStatus=" + resultStatus +
+                ", status=" + status +
+                '}';
     }
 }

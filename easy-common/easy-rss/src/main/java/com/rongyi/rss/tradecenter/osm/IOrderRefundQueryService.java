@@ -6,12 +6,13 @@ package com.rongyi.rss.tradecenter.osm;
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
+import com.rongyi.easy.osm.vo.RefundFormVO;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.vo.RefundVO;
 import com.rongyi.easy.tradecenter.param.RefundQueryParam;
 import com.rongyi.easy.tradecenter.vo.AppealDetailVO;
-import com.rongyi.easy.tradecenter.vo.AppealVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,4 +72,19 @@ public interface IOrderRefundQueryService {
 	 */
 	public DubboVO<AppealDetailVO> detailRefundForUser(String refundNo);
 
+	/**
+	 * 获取退款列表
+	 *
+	 * @param param
+	 * @return
+	 */
+	DubboVO<List<RefundFormVO>> queryForList(RefundQueryParam param);
+
+	/**
+	 * 获取退款总数
+	 *
+	 * @param param
+	 * @return
+	 */
+	DubboVO<Integer> queryForCount(RefundQueryParam param);
 }
