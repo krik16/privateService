@@ -112,6 +112,9 @@ public interface OrderEventType {
     /** 超时支付成功退款*/
     public static final String PAY_TIMEOUT_AND_REFUND = "36";
 
+    /** 退款成功关闭订单*/
+    public static final String CLOSE_ORDER_FOR_REFUND = "37";
+
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";
 
