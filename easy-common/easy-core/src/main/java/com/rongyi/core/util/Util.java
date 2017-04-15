@@ -331,9 +331,9 @@ public class Util {
 		Long sts = sDate.getTime();
 		long ets = eDate.getTime();
 		if ((sts + second * 1000) > ets) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
