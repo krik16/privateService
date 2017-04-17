@@ -1,9 +1,11 @@
 package com.rongyi.easy.osm.vo;
 
+import com.rongyi.easy.osm.entity.RefundEventEntity;
 import com.rongyi.easy.rmmm.vo.ExpressPushVO;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 退款列表
@@ -32,6 +34,8 @@ public class RefundFormDetailVO extends RefundFormVO implements Serializable {
     private String expressInfoId;
     // 物流
     private ExpressPushVO expressPushVO;
+    // 事件列表
+    private List<RefundEventEntity> eventList;
 
     public String getAppealComment() {
         return appealComment;
@@ -111,6 +115,14 @@ public class RefundFormDetailVO extends RefundFormVO implements Serializable {
 
     public void setNextStatusTime(Date nextStatusTime) {
         this.nextStatusTime = nextStatusTime;
+    }
+
+    public List<RefundEventEntity> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<RefundEventEntity> eventList) {
+        this.eventList = eventList;
     }
 
     @Override

@@ -40,7 +40,7 @@ public class RefundFormVO implements Serializable {
     // 时间
     private String createDate;
     /**
-     * 退款状态（0：全部 1：退款申请中 2：待买家发货 3：待买家上门  4：待卖家收货 5退款中 6：退款关闭 7：退款已拒绝 8：退款关闭）
+     * 退款状态（0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：待卖家收货 6：退款关闭）
      */
     private Integer status;
     /**
