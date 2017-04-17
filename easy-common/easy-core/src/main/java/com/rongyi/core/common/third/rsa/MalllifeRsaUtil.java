@@ -12,6 +12,7 @@ package com.rongyi.core.common.third.rsa;
 
 
 import com.rongyi.core.common.third.exception.ThirdException;
+import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.common.util.Base64Helper;
 import com.rongyi.core.util.EasyMd5Util;
 import org.slf4j.Logger;
@@ -305,12 +306,31 @@ public class MalllifeRsaUtil {
 //                System.out.println("解密后2="+decryStr2);
                //System.out.println("=================="+(int)(200*0.01));
 
-                String userPayUrl = "http://fljf.dev.rongyi.com/scanpay/openpaygrant?state=";
+              /*  String userPayUrl = "http://fljf.dev.rongyi.com/scanpay/openpaygrant?state=";
                 String state = "orderNo=11111";
                 String encodeStr = MalllifeRsaUtil.encryptionStr(state, "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCOIfpdq2D+IlGxjSWJNIdis8E1xRNxA343wvZOWFMHotO55d973OD8TJBY8YMdI1SLj7B6RanAAxECA54vqTe/h9S95C1HVU1UlZKqTKWltatAK17zEiwZAC99BGRYY+Bz5mWfETa27RlOMHNkblyVF3KxJbJ2XS7BgYMgqFxSxwIDAQAB");
                 System.err.println("encodeStr="+encodeStr);
                 String decodeStr = MalllifeRsaUtil.decryptStr(encodeStr,"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAI4h+l2rYP4iUbGNJYk0h2KzwTXFE3EDfjfC9k5YUwei07nl33vc4PxMkFjxgx0jVIuPsHpFqcADEQIDni+pN7+H1L3kLUdVTVSVkqpMpaW1q0ArXvMSLBkAL30EZFhj4HPmZZ8RNrbtGU4wc2RuXJUXcrElsnZdLsGBgyCoXFLHAgMBAAECgYBnmuUBupctKJ8cKaMe7Kdzj0xbgZi2XLF4vCkG2uNLQanMbIAHre5iev0NmJ7WcpaCVO9zcaxXRuTy7ug0HcmAO8HikL2HzV1l2nYwoQagoEvr/rBG7Mc2Ov4Wk4tAScmARo7U99pPZfZDUUTjzQHRJJ/D057vZvQOdWt5fiNhQQJBAOrqFaSKbMjO/TrDeqnSQzmDDSULGXfnn+XQFvGc6s7nMPJIJWYmvCfFnzJyzkyBC7d3GFAbZ56eXwKrZUIqCm8CQQCa4++BomwOeEd+U770pc4CbIL2viNl7s1U0xjl58vIqml446VRNcuRs7/ByjMicvblPYH3YOVtwaKZoFP3SUkpAkA91d5akIFwHmQz6q7IMuu1INT98j0C/fpuAOd5NAfu7JZKwEjv6bRPd8qe+e9p3fIamgPRWlVdQGzcBAfEcdKLAkBrOaofSwqVBc0wddc20+WGpgoPuFcXBLcepriQx+O6OcakSquySZRwfEgeZtT5Xy7uSaNEVs7dKXRf967I/PHpAkBsv8SUC63K/gwiRfeJLtwZofXPa3kGzv/zfGdkZsBC4SN9M5VKi9UvJac1638VWoPsYfO9Nik5mhu0mYHhOej6");
-                System.err.println("decodeStr="+decodeStr);
+                System.err.println("decodeStr="+decodeStr);*/
+
+
+                long times=System.currentTimeMillis();
+                 String str="{'phone':'15821659415','msgStr':'111111','sendType':'2'}";
+                String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCggDDJzpQUHuFEjjHd62zG0KyTi5fGfc17fh5ZTFEEPXrZtFQKGeGKRhcdRlgKlCEofyqGdaRebjwVlkoc/42y7oWp0gr15yX+B1YrMwxcZLaSMJgh3zckKsbZFusoCLsdIgcHJPWVZZimQ6m6mlrYr/XbYGC5JfXGR+BtDNMhdQIDAQAB";
+                String channel="YUZHIJIAN";
+                String token="2DE10E4D11EE025757B6AE6AA7AF3B9A";
+
+                String  data=  MalllifeRsaUtil.encryptionStr(str,pubKey);
+                String strSign="data="+data+"&timeStamp="+times+"&channel="+channel+"&token="+token;
+                String md5Sign= Md5Util.GetMD5Code(strSign);
+                System.out.println("data=" + data);
+                System.out.println("md5Sign="+md5Sign);
+                System.out.println("times=" + times);
+
+
+
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
