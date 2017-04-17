@@ -36,6 +36,7 @@ public class SonOrderVO implements Serializable{
 	private String commodityName;// 商品名称
 
 	private String sonOrderId;// 子订单id
+	private String sonOrderNo;// 子订单号
 
 	private String applicationId;// 退款或维权id
 
@@ -343,6 +344,14 @@ public class SonOrderVO implements Serializable{
 		this.complaintNo = complaintNo;
 	}
 
+	public String getSonOrderNo() {
+		return sonOrderNo;
+	}
+
+	public void setSonOrderNo(String sonOrderNo) {
+		this.sonOrderNo = sonOrderNo;
+	}
+
 	@Override
 	public String toString() {
 		return "SonOrderVO{" +
@@ -364,6 +373,7 @@ public class SonOrderVO implements Serializable{
 				", commodityNo='" + commodityNo + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", sonOrderId='" + sonOrderId + '\'' +
+				", sonOrderNo='" + sonOrderNo + '\'' +
 				", applicationId='" + applicationId + '\'' +
 				", refundTimes='" + refundTimes + '\'' +
 				", couponCode='" + couponCode + '\'' +
