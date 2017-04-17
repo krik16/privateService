@@ -11,8 +11,8 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233153";
-    private static String ORDERTRANSEQL="20160830092048436461232233153";
+    private static String ORDERSEQ="20160830092048436461232233155";
+    private static String ORDERTRANSEQL="20160830092048436461232233155";
     private static String ORDERTIME="20160830092049";
     private static String ORDERVALIDITYTIME="20160830092049";
     private static String REFUNDREQNO="3049696233697232933";
@@ -81,7 +81,7 @@ public class TianyiTest {
         payDetailParam.setOrderSeq(ORDERSEQ);
         payDetailParam.setOrderReqTranseq(ORDERTRANSEQL);
         payDetailParam.setOrderTime(ORDERTIME);
-        payDetailParam.setOrderValidityTime("");
+//        payDetailParam.setOrderValidityTime("");
         payDetailParam.setOrderAmount("0.01");
         payDetailParam.setCurType("RMB");
         payDetailParam.setProductId("04");

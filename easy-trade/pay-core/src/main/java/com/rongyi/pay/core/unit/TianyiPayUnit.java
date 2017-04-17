@@ -226,7 +226,7 @@ public class TianyiPayUnit {
                 .append("&ORDERSEQ=").append(param.getOrderSeq())
                 .append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq())
                 .append("&ORDERTIME=").append(param.getOrderTime())
-                .append("&ORDERVALIDITYTIME=").append(StringUtils.isBlank(StringUtils.isBlank(param.getOrderValidityTime())?"":param.getOrderValidityTime()))
+                .append("&ORDERVALIDITYTIME=").append(StringUtils.isBlank(param.getOrderValidityTime())?"":param.getOrderValidityTime())
                 .append("&CURTYPE=").append(param.getCurType())
                 .append("&ORDERAMOUNT=").append(param.getOrderAmount())
                 .append("&SUBJECT=").append(param.getSubject())
