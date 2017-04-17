@@ -11,8 +11,8 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233155";
-    private static String ORDERTRANSEQL="20160830092048436461232233155";
+    private static String ORDERSEQ="20160830092048436461232233158";
+    private static String ORDERTRANSEQL="20160830092048436461232233158";
     private static String ORDERTIME="20160830092049";
     private static String ORDERVALIDITYTIME="20160830092049";
     private static String REFUNDREQNO="3049696233697232933";
@@ -137,7 +137,7 @@ public class TianyiTest {
         TianyiConfigure configure = TianyiConfigure.getInstance();
         configure.setSwtichacc("true");
 //        configure.setBeforeBackUrl("https://www.baidu.com");
-        configure.setBackMerchantUrl("http://116.236.251.150:10096/easy-rpb/tianyi/refund/notify");
+        configure.setBackMerchantUrl("http://116.236.251.150:10096/easy-rpb/tianyi/h5pay/notify");
         configure.setProductId("04");
         configure.setBusiType("04");
         configure.setUserLanguage("ch");
@@ -148,7 +148,7 @@ public class TianyiTest {
         configure.setCheckStandH5Url("");
         configure.setPayQueryUrl("https://webpaywg.bestpay.com.cn/query/queryOrder");
         configure.setRefundUrl("https://webpaywg.bestpay.com.cn/refund/commonRefund");
-        configure.setRefundBackUrl("");
+        configure.setRefundBackUrl("http://116.236.251.150:10096/easy-rpb/tianyi/refund/notify");
 
     }
 }
