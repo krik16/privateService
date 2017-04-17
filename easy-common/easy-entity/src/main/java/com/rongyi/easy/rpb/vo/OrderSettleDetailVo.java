@@ -231,4 +231,19 @@ public class OrderSettleDetailVo implements Serializable {
                 ", payTerminal=" + payTerminal +
                 '}';
     }
+    
+    public static Integer convertPayType(Integer payChannel){
+    	Integer result = new Integer(0);
+    	if(payChannel!=null){
+    		if(payChannel ==0)
+    			result = 0;
+    		if(payChannel ==1){
+    			result =1;
+    		}
+    		if(payChannel ==2){ //现金
+    			result =3;
+    		} 		
+    	}
+    	return result;
+    }
 }

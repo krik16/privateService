@@ -22,7 +22,7 @@ public class OrderSettleVo implements Serializable {
     private Integer status;//1已付款、2已退款
     private Integer payTerminal;//支付终端 1pos 2扫码
     private String oRyPayNo;//原商户订单号
-
+    private Integer mchInfoId;//商户id
     public String getOrderNo() {
         return orderNo;
     }
@@ -151,7 +151,32 @@ public class OrderSettleVo implements Serializable {
         this.oRyPayNo = oRyPayNo;
     }
 
-    @Override
+    
+    
+    public Integer getMchInfoId() {
+		return mchInfoId;
+	}
+
+	public void setMchInfoId(Integer mchInfoId) {
+		this.mchInfoId = mchInfoId;
+	}
+    
+	
+	public static Integer convertPayType(Integer payChannel){
+    	Integer result = new Integer(0);
+    	if(payChannel!=null){
+    		if(payChannel ==0)
+    			result = 0;
+    		if(payChannel ==1){
+    			result =1;
+    		}
+    		if(payChannel ==2){ //现金
+    			result =3;
+    		} 		
+    	}
+    	return result;
+    }
+	@Override
     public String toString() {
         return "OrderSettleVo{" +
                 "orderNo='" + orderNo + '\'' +
@@ -169,6 +194,7 @@ public class OrderSettleVo implements Serializable {
                 ", shopNo='" + shopNo + '\'' +
                 ", status=" + status +
                 ", payTerminal=" + payTerminal +
+                ", mchInfoId=" + mchInfoId +
                 '}';
     }
 }
