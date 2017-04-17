@@ -143,6 +143,10 @@ public class PayNotifyBizz {
         }
     }
 
+    /**
+     * pos 银行卡支付通知
+     * @param dto 通知参数
+     */
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
 
         //获取开放平台商户信息
@@ -172,6 +176,24 @@ public class PayNotifyBizz {
 
            doPosBankRefundNotify(dto,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
        }
+    }
+
+
+    /**
+     *翼支付退款通知
+     * @param map 通知参数
+     */
+    public void tianyiRefundNotify(Map<String, String> map) {
+        log.info("翼支付退款内容,map={}",map);
+        if ("B".equals(map.get("transStatus"))) {
+            String refundNo = map.get("refundReqNo");
+            String tradeNo = map.get("ourTransNo");
+            Integer payAmount = Integer.valueOf(map.get("transAmt"));
+
+            this.doTianyiRefundNotify(refundNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, "", "");
+        } else {
+            throw new WebankException("通知结果异常,map=" + map);
+        }
     }
 
     /**
@@ -218,6 +240,42 @@ public class PayNotifyBizz {
         //通知第三方业务
         payNotifyThird(paymentEntity, paymentLogInfo);
     }
+    /**
+     * 处理退款通知
+     *
+     * @param payNo      付款单号
+     * @param payAmount  付款金额(单位元)
+     * @param tradeNo    交易流水号
+     * @param payChannel 支付渠道
+     * @param buyerId    买家id
+     * @param buyerEmail 买家账号
+     */
+    public void doTianyiRefundNotify(String payNo, Integer payAmount, String tradeNo, Integer payChannel, String buyerId, String buyerEmail) {
+        //获取支付信息
+        PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null);
+        if (paymentEntity == null) {
+            log.warn("此订单退款记录不存在,payNo={}", payNo);
+            throw new TradeException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
+        }
+
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(tradeNo, payNo, null, "SUCCESS", payAmount,
+                buyerId, buyerEmail, 0, Constants.EVENT_TYPE.EVENT_TYPE0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
+        //检查重复支付
+        boolean reNotify = paymentLogInfoService.validateByTradeNoAndPayNo(tradeNo,paymentEntity.getPayNo());
+
+        // 验证是否是重复通知
+        if (reNotify) {
+            log.info("此订单已完成支付,重复通知...payNo={}", paymentEntity.getPayNo());
+            return;
+        }
+        //更新付款状态
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+    }
 
     /**
      * 处理pos银行卡退款通知
@@ -245,7 +303,7 @@ public class PayNotifyBizz {
         ryMchVo.setOrgChannel(oldPaymentEntity.getOrgChannel());
         //初始化退款记录
         if(refundPaymentEntity == null) {
-            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount().intValue(), oldPaymentEntity.getOrderType(),
+            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount(), oldPaymentEntity.getOrderType(),
                     Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, oldPaymentEntity.getPayChannel(), oldPaymentEntity.getAliSellerId(), oldPaymentEntity.getWechatMchId(),
                     oldPaymentEntity.getPayScene());
         }
@@ -255,7 +313,7 @@ public class PayNotifyBizz {
 
         //初始化退款事件记录
         PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(posBankSynNotifyDto.getPaymentNo(), refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS", posBankSynNotifyDto.getPayAmount().intValue(), "", "",
+                "SUCCESS", posBankSynNotifyDto.getPayAmount(), "", "",
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
 
         //保存退款记录
