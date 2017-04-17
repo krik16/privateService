@@ -72,12 +72,16 @@ public class TianyiPayUnit {
                 return true;
             }
             logger.info("翼支付下单接口 error,responseStr="+responseStr);
+            assert responseStr != null;
+            if (StringUtils.isNotBlank(responseStr) && responseStr.split("&").length > 1){
+                throw new TianyiException(responseStr.split("&")[0],responseStr.split("&")[1]);
+            }
+            throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_ORDER_FAIL,responseStr);
         } catch (Exception e) {
             logger.info("翼支付下单接口失败 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();
             throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_ORDER_FAIL);
         }
-        return false;
     }
 
     /**
@@ -97,6 +101,8 @@ public class TianyiPayUnit {
             TianyiResp result = JSONObject.parseObject(responseStr, TianyiResp.class);
             if (result != null && result.isSuccess() && result.getResult() != null) {
                 return JSONObject.parseObject(result.getResult().toString(), PublicKeyRes.class);
+            }else if (result != null && !result.isSuccess()){
+                throw new TianyiException(result.getErrorCode(),result.getErrorMsg());
             }
             logger.info("翼支付获取公钥接口 error,result="+result);
             return null;
