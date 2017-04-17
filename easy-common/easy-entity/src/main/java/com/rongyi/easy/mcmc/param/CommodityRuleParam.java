@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
 import com.rongyi.core.annotation.NeedCheck;
+import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,11 +14,175 @@ public class CommodityRuleParam implements Serializable {
     private String buyerId;
     private String shopId;
     private String shopMid;
+    private List<String> shopIds;
+    private List<String> shopMids;
     private Integer orderBy;
     private Integer currentPage;
     private Integer pageSize;
+    private String category;
     private List<String> categoryIds;
     private Integer identity;
+    private Integer status;
+    private Integer statusType; //1:上架  2:上架和待上架 3:非删除
+    private String code;
+    private String brandId;
+    private String brandMid;
+    private List<String> brandIds;
+    private List<String> brandMids;
+    private String mallId;
+    private String mallMid;
+    private String type;
+    private String name;
+    private List<ObjectId> ids;
+    private String liveId;
+    private String create_by;
+    private Integer commodityRange;
+
+    public Integer getCommodityRange() {
+        return commodityRange;
+    }
+
+    public void setCommodityRange(Integer commodityRange) {
+        this.commodityRange = commodityRange;
+    }
+
+    public Integer getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(Integer statusType) {
+        this.statusType = statusType;
+    }
+
+    @NeedCheck(getFieldName = "shopMids")
+    public List<String> getShopMids() {
+        return shopMids;
+    }
+
+    public void setShopMids(List<String> shopMids) {
+        this.shopMids = shopMids;
+    }
+
+    @NeedCheck(getFieldName = "brandMid")
+    public String getBrandMid() {
+        return brandMid;
+    }
+
+    public void setBrandMid(String brandMid) {
+        this.brandMid = brandMid;
+    }
+
+    @NeedCheck(getFieldName = "brandMids")
+    public List<String> getBrandMids() {
+        return brandMids;
+    }
+
+    public void setBrandMids(List<String> brandMids) {
+        this.brandMids = brandMids;
+    }
+
+    @NeedCheck(getFieldName = "shopIds")
+    public List<String> getShopIds() {
+        return shopIds;
+    }
+
+    public void setShopIds(List<String> shopIds) {
+        this.shopIds = shopIds;
+    }
+
+    public List<String> getBrandIds() {
+        return brandIds;
+    }
+
+    public void setBrandIds(List<String> brandIds) {
+        this.brandIds = brandIds;
+    }
+
+    @NeedCheck(getFieldName = "create_by")
+    public String getCreate_by() {
+        return create_by;
+    }
+
+    public void setCreate_by(String create_by) {
+        this.create_by = create_by;
+    }
+
+    public String getLiveId() {
+        return liveId;
+    }
+
+    public void setLiveId(String liveId) {
+        this.liveId = liveId;
+    }
+
+    public List<ObjectId> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<ObjectId> ids) {
+        this.ids = ids;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @NeedCheck(getFieldName = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @NeedCheck(getFieldName = "mallMid")
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
+
+    @NeedCheck(getFieldName = "mallId")
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    @NeedCheck(getFieldName = "brandId")
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    @NeedCheck(getFieldName = "code")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     @NeedCheck(getFieldName = "shopMid")
     public String getShopMid() {
@@ -44,6 +209,7 @@ public class CommodityRuleParam implements Serializable {
         this.buyerId = buyerId;
     }
 
+    @NeedCheck(getFieldName = "shopId")
     public String getShopId() {
         return shopId;
     }
@@ -84,6 +250,7 @@ public class CommodityRuleParam implements Serializable {
         this.identity = identity;
     }
 
+    @NeedCheck(getFieldName = "categoryIds")
     public List<String> getCategoryIds() {
         return categoryIds;
     }
