@@ -40,9 +40,9 @@ public class WeChatPayController {
      **/
     @RequestMapping("/pay/notify")
     public void payNotify(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.info("微信支付异步通知开始");
         try {
             Map<String, String> requestMap = parseXml(request);
-            LOGGER.info("微信支付异步通知开始");
 
             payNotifyBizz.wechatPayNotify(requestMap);
 

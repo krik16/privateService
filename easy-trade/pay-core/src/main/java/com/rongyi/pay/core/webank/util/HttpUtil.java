@@ -3,6 +3,9 @@ package com.rongyi.pay.core.webank.util;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
@@ -321,16 +324,7 @@ public class HttpUtil {
 		entity.setContentEncoding("UTF-8");
 		entity.setContentType("application/json");
 		httpPost.setEntity(entity);
-		logger.info("reqEntity:{}",jsonObject);
-
-////        System.err.println("post data:"+postDataXML);
-//		//得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
-//		StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
-//		httpPost.addHeader("Content-Type", "text/xml");
-//		httpPost.setEntity(postEntity);
-
-		//设置请求器的配置
-		//httpPost.setConfig(requestConfig);
+		logger.info("reqEntity:{}", jsonObject);
 
 		try {
 			HttpResponse response = httpClient.execute(httpPost);
@@ -350,8 +344,49 @@ public class HttpUtil {
 				System.clearProperty("javax.net.ssl.trustStore");
 			}
 		}
-
 		return result;
+	}
+
+	public static String sendPostClientXml(String url,Object object ,WebankConfigure configure)throws Exception {
+		logger.info("以xml方式http请求url:{},object:{}",url,object);
+		CloseableHttpClient httpClient = init(configure);
+		String result = null;
+
+		HttpPost httpPost = new HttpPost(url);
+
+		//解决XStream对出现双下划线的bug
+		XStream xStreamForRequestPostData = new XStream(new DomDriver("UTF-8", new XmlFriendlyNameCoder("-_", "_")));
+
+		//将要提交给API的数据对象转换成XML格式数据Post给API
+		String postDataXML = xStreamForRequestPostData.toXML(object);
+
+		postDataXML = postDataXML.replace("com.rongyi.pay.core.webank.model.req.WwScanPayReqData", "xml");
+		logger.info("postDataXML=" + postDataXML);
+//        System.err.println("post data:"+postDataXML);
+		//得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
+		StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
+		httpPost.addHeader("Content-Type", "text/xml");
+		httpPost.setEntity(postEntity);
+		logger.info("888888"+postEntity.toString());
+		try {
+			HttpResponse response = httpClient.execute(httpPost);
+
+			HttpEntity httpEntity = response.getEntity();
+
+			result = EntityUtils.toString(httpEntity, "UTF-8");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+			throw e;
+		} finally {
+			httpPost.abort();
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
+		}
+		return result ;
 	}
 
 	private static CloseableHttpClient init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
