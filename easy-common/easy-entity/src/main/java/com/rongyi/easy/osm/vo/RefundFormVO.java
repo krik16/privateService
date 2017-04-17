@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @date 2017-04-15
  **/
 public class RefundFormVO implements Serializable {
+    private Integer id;
     // 买家名称
     private String buyerName;
     // 买家手机号码
@@ -227,10 +228,19 @@ public class RefundFormVO implements Serializable {
         this.refundTypeId = refundTypeId;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "RefundFormVO{" +
                 "buyerName='" + buyerName + '\'' +
+                ", id=" + id +
                 ", buyerPhone='" + buyerPhone + '\'' +
                 ", commodityId='" + commodityId + '\'' +
                 ", commoditySpecId='" + commoditySpecId + '\'' +
