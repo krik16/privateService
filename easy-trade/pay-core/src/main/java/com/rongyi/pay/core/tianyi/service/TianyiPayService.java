@@ -44,7 +44,7 @@ public class TianyiPayService {
         //下单请求参数
         StringBuilder perpareSignParam = new StringBuilder();
         perpareSignParam.append("MERCHANTID=").append(param.getMerchantId())
-                .append("&SUBMERCHANTID=").append(StringUtils.isBlank(param.getMerchantId()) ? "" : param.getMerchantId())
+                .append("&SUBMERCHANTID=").append(StringUtils.isBlank(param.getSubMerchantId()) ? "" : param.getSubMerchantId())
                 .append("&ORDERSEQ=").append(param.getOrderSeq())
                 .append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq())
                 .append("&ORDERREQTIME=").append(param.getOrderReqTime())
