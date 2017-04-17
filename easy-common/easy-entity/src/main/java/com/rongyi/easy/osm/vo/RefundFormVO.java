@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @date 2017-04-15
  **/
 public class RefundFormVO implements Serializable {
+    private Integer id;
     // 买家名称
     private String buyerName;
     // 买家手机号码
@@ -29,6 +30,8 @@ public class RefundFormVO implements Serializable {
     private String complaintNo;
     // 订单号
     private String orderNo;
+    // 子订单号
+    private String orderItemNo;
     // 退款单号
     private String refundNo;
     // 退款金额（单位：元）
@@ -40,7 +43,7 @@ public class RefundFormVO implements Serializable {
     // 时间
     private String createDate;
     /**
-     * 退款状态（0：全部 1：退款申请中 2：待买家发货 3：待买家上门  4：待卖家收货 5退款中 6：退款关闭 7：退款已拒绝 8：退款关闭）
+     * 退款状态（0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：待卖家收货 6：退款关闭）
      */
     private Integer status;
     /**
@@ -52,6 +55,15 @@ public class RefundFormVO implements Serializable {
      */
     private Integer complaintStatus;
     // 退款原因、关闭原因
+
+    public String getOrderItemNo() {
+        return orderItemNo;
+    }
+
+    public void setOrderItemNo(String orderItemNo) {
+        this.orderItemNo = orderItemNo;
+    }
+
     private String remark;
 
     // 换回字段
@@ -227,10 +239,19 @@ public class RefundFormVO implements Serializable {
         this.refundTypeId = refundTypeId;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "RefundFormVO{" +
                 "buyerName='" + buyerName + '\'' +
+                ", id=" + id +
                 ", buyerPhone='" + buyerPhone + '\'' +
                 ", commodityId='" + commodityId + '\'' +
                 ", commoditySpecId='" + commoditySpecId + '\'' +
@@ -240,6 +261,7 @@ public class RefundFormVO implements Serializable {
                 ", commoditySn='" + commoditySn + '\'' +
                 ", complaintNo='" + complaintNo + '\'' +
                 ", orderNo='" + orderNo + '\'' +
+                ", orderItemNo='" + orderItemNo + '\'' +
                 ", refundNo='" + refundNo + '\'' +
                 ", refundAmount='" + refundAmount + '\'' +
                 ", shopName='" + shopName + '\'' +

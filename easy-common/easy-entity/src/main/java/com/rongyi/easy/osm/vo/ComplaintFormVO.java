@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @date 2017-04-10
  **/
 public class ComplaintFormVO implements Serializable {
+    private Integer id;
     // 买家名称
     private String buyerName;
     // 买家手机号码
@@ -188,10 +189,19 @@ public class ComplaintFormVO implements Serializable {
         this.shopId = shopId;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ComplaintFormVO{" +
                 "buyerName='" + buyerName + '\'' +
+                ", id=" + id +
                 ", buyerPhone='" + buyerPhone + '\'' +
                 ", commodityId='" + commodityId + '\'' +
                 ", commoditySpecId='" + commoditySpecId + '\'' +
