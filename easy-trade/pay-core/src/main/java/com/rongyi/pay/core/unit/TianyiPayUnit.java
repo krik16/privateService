@@ -120,6 +120,7 @@ public class TianyiPayUnit {
             //生成数字签名
             String sign = getSign(param);
             String payStr = TianyiPayService.getPayStr(param, configure, sign);
+            logger.info("翼支付原始数据："+payStr);
             String key = AES256.getStringRandom(32);
             String encryStr = AES256.AES_Encode(payStr, key);
             key = RSA.encrypt(key, publicKeyRes.getPubKey(), SysConstants.SYS_CHARSET);
