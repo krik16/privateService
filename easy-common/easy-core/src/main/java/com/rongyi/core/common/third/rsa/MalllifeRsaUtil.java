@@ -315,10 +315,17 @@ public class MalllifeRsaUtil {
 
 
                 long times=System.currentTimeMillis();
-                 String str="{'phone':'15821659415','msgStr':'111111','sendType':'2'}";
-                String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCggDDJzpQUHuFEjjHd62zG0KyTi5fGfc17fh5ZTFEEPXrZtFQKGeGKRhcdRlgKlCEofyqGdaRebjwVlkoc/42y7oWp0gr15yX+B1YrMwxcZLaSMJgh3zckKsbZFusoCLsdIgcHJPWVZZimQ6m6mlrYr/XbYGC5JfXGR+BtDNMhdQIDAQAB";
-                String channel="YUZHIJIAN";
-                String token="2DE10E4D11EE025757B6AE6AA7AF3B9A";
+                 String str="{'phone':'15821659415','msgStr':'【容易网】你的验证码为88888','sendType':'1'}";
+
+                //php
+                String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
+                String channel="PHPPLATNTC";
+                String token="E8823AE54782C4YZJ914F24A5417E7F8";
+                //bbg
+
+               /* String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
+                String channel="BUBUGAONTC";
+                String token="E7723AE90732C4ACC914F24A82293638";*/
 
                 String  data=  MalllifeRsaUtil.encryptionStr(str,pubKey);
                 String strSign="data="+data+"&timeStamp="+times+"&channel="+channel+"&token="+token;
@@ -328,7 +335,10 @@ public class MalllifeRsaUtil {
                 System.out.println("times=" + times);
 
 
-
+                System.out.println("{\"data\":\"" + data+"\",");
+                System.out.println("\"sign\":\""+md5Sign+"\",");
+                System.out.println("\"timeStamp\":\"" + times+"\",");
+                System.out.println("\"channel\":\"" + channel+"\"}");
 
 
             } catch (Exception e) {
