@@ -1104,6 +1104,17 @@ public class CommodityBuyerVO implements Serializable {
         Long difference=date1.getTime()-date2.getTime();
         return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
     }
+    
+    public void warpCommodityBuyerVO(Commodity commodity){
+    	this.commodityId = commodity.getId().toHexString();
+    	this.commodityName = commodity.getName();
+    	this.commodityPicList = commodity.getPicList();
+    	this.commodityOPriceMax = commodity.getoPriceMax();
+    	this.commodityOPriceMin = commodity.getoPriceMin();
+    	this.commodityCPriceMax = commodity.getcPriceMax();
+    	this.commodityCPriceMin = commodity.getcPriceMin();
+    	this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
+    }
 
     public  static  void  main(String args[]){
         Date  a=new Date();
