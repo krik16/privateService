@@ -30,6 +30,8 @@ public class RefundFormVO implements Serializable {
     private String complaintNo;
     // 订单号
     private String orderNo;
+    // 子订单号
+    private String orderItemNo;
     // 退款单号
     private String refundNo;
     // 退款金额（单位：元）
@@ -53,6 +55,15 @@ public class RefundFormVO implements Serializable {
      */
     private Integer complaintStatus;
     // 退款原因、关闭原因
+
+    public String getOrderItemNo() {
+        return orderItemNo;
+    }
+
+    public void setOrderItemNo(String orderItemNo) {
+        this.orderItemNo = orderItemNo;
+    }
+
     private String remark;
 
     // 换回字段
@@ -250,6 +261,7 @@ public class RefundFormVO implements Serializable {
                 ", commoditySn='" + commoditySn + '\'' +
                 ", complaintNo='" + complaintNo + '\'' +
                 ", orderNo='" + orderNo + '\'' +
+                ", orderItemNo='" + orderItemNo + '\'' +
                 ", refundNo='" + refundNo + '\'' +
                 ", refundAmount='" + refundAmount + '\'' +
                 ", shopName='" + shopName + '\'' +
