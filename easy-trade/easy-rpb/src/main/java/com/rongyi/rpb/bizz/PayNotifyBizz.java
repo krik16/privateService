@@ -144,6 +144,23 @@ public class PayNotifyBizz {
     }
 
     /**
+     * 天翼h5支付通知
+     * @param paramMap
+     */
+    public void tianyiH5payNotify(Map<String, String> paramMap) {
+        log.info("天翼h5通知内容,map={}",paramMap);
+        if ("0000".equals(paramMap.get("RETNCODE"))) {
+            String payNo = paramMap.get("ORDERREQTRANSEQ");
+            String tradeNo = paramMap.get("UPTRANSEQ");
+            BigDecimal payAmount = new BigDecimal(paramMap.get("totalAmount"));
+
+            this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
+        } else {
+            throw new WebankException("通知结果异常,map=" + paramMap);
+        }
+    }
+
+    /**
      * pos 银行卡支付通知
      * @param dto 通知参数
      */
