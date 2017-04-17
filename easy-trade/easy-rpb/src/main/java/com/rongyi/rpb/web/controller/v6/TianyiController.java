@@ -30,14 +30,14 @@ public class TianyiController {
      */
     @RequestMapping("/h5pay/notify")
     public void payNotify(HttpServletRequest request,HttpServletResponse response) {
-        log.info("翼支付退款通知处理开始");
+        log.info("翼支付h5支付通知处理开始");
         try {
             Map<String, String> map = Utils.getRequestParams(request);
             payNotifyBizz.tianyiH5payNotify(map);
             response.getWriter().print("UPTRANSEQ_"+map.get("UPTRANSEQ"));
-            log.info("翼支付退款通知处理结束");
+            log.info("翼支付h5支付通知处理结束");
         } catch (Exception e) {
-            log.error("翼支付退款通知处理失败e={}", e.getMessage());
+            log.error("翼支付h5支付通知处理失败e={}", e.getMessage());
             e.printStackTrace();
         }
 
@@ -48,7 +48,7 @@ public class TianyiController {
      */
     @RequestMapping("/refund/notify")
     public void notify(HttpServletRequest request,HttpServletResponse response) {
-        log.info("翼支付h5支付通知处理开始");
+        log.info("翼支付退款通知处理开始");
         try {
             Map<String, String> map = Utils.getRequestParams(request);
             payNotifyBizz.tianyiRefundNotify(map);
