@@ -11,8 +11,8 @@ import org.junit.Test;
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233141";
-    private static String ORDERTRANSEQL="20160830092048436461232233141";
+    private static String ORDERSEQ="20160830092048436461232233150";
+    private static String ORDERTRANSEQL="20160830092048436461232233150";
     private static String ORDERTIME="20160830092049";
     private static String ORDERVALIDITYTIME="20160830092049";
     private static String REFUNDREQNO="3049696233697232933";
@@ -59,6 +59,7 @@ public class TianyiTest {
         refundParam.setTransAmt("1");
         refundParam.setLedgerDetail("1");
         refundParam.setChannel("05");
+        refundParam.setBgUrl("http://116.236.251.150:10096/easy-rpb/tianyi/refund/notify");
         refundParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
         boolean result = TianyiPayUnit.tradeRefund(refundParam);
         System.out.println("tianyiTradeRefundRes="+result);
@@ -110,7 +111,7 @@ public class TianyiTest {
         tianyiOrderParam.setSubMerchantId("");
         tianyiOrderParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
         tianyiOrderParam.setOrderSeq(ORDERSEQ);
-        tianyiOrderParam.setOrderReqTranseq(ORDERSEQ);
+        tianyiOrderParam.setOrderReqTranseq(ORDERTRANSEQL);
         tianyiOrderParam.setOrderReqTime(ORDERTIME);
         tianyiOrderParam.setTransCode("01");
         tianyiOrderParam.setOrderAmt("1");
@@ -136,7 +137,7 @@ public class TianyiTest {
         TianyiConfigure configure = TianyiConfigure.getInstance();
         configure.setSwtichacc("true");
 //        configure.setBeforeBackUrl("https://www.baidu.com");
-        configure.setBackMerchantUrl("http://127.0.0.1:8080/wapBgNotice.action");
+        configure.setBackMerchantUrl("http://116.236.251.150:10096/easy-rpb/tianyi/refund/notify");
         configure.setProductId("04");
         configure.setBusiType("04");
         configure.setUserLanguage("ch");
