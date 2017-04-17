@@ -317,7 +317,7 @@
 		of.reduction_fee reductionFee,
 		sum(af.refund_fee) refundFee,
 		sum(af.refund_express_fee) refundExpressFee,
-		sum(ROUND(af.refund_fee * odf.reduction_fee / odf.pay_amount, 2)) reductionRefundFee,
+		sum(ROUND((af.refund_fee - af.refund_express_fee) * odf.reduction_fee / odf.pay_amount, 2)) reductionRefundFee,
 		sum(odf.quantity) totalQuantity,
 		oe.create_at finishTime,
 		si.shop_name,
