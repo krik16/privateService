@@ -2,6 +2,7 @@ package com.rongyi.core.common.third.param.sms;
 
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.sms.SmsConfig;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
@@ -202,7 +203,7 @@ public class SmsVO implements Serializable {
     }
 
     public String getPassword() {
-        return "******";
+        return SmsConfig.PASSWORD;
     }
 
     public void setPassword(String password) {

@@ -24,7 +24,7 @@ public class SmsConfig implements Serializable{
 
     public static final String csURL="http://114.113.154.13/sms.aspx?action=overage";
 
-
+    public static final String PASSWORD = "******";         //返回前端的密码
 
     //短信内容
 
