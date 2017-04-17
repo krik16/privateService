@@ -54,7 +54,7 @@ public class RefundFormVO implements Serializable {
     // 退款原因、关闭原因
     private String remark;
 
-    // 查询字段
+    // 换回字段
     private Integer orderEventId;
     // 申请退款原因ID
     private Integer refundReasonId;
