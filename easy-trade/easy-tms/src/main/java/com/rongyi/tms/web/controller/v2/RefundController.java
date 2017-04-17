@@ -2,9 +2,9 @@ package com.rongyi.tms.web.controller.v2;
 
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.osm.vo.RefundFormDetailVO;
 import com.rongyi.easy.osm.vo.RefundFormVO;
-import com.rongyi.easy.rmmm.vo.ExpressDataVO;
-import com.rongyi.easy.rmmm.vo.ExpressPushVO;
+import com.rongyi.easy.tradecenter.param.RefundDetailParam;
 import com.rongyi.easy.tradecenter.param.RefundQueryParam;
 import com.rongyi.rss.tradecenter.osm.IOrderRefundQueryService;
 import com.rongyi.tms.constants.CodeEnum;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,6 +71,38 @@ public class RefundController extends BaseControllerV2 {
             LOG.error("获取申诉列表 e={}", e.getMessage(), e);
             e.printStackTrace();
             result = ResponseVO.failure(-1, CodeEnum.ERROR_SYSTEM.getMessage());
+        }
+        LOG.info(result.getMeta().toString());
+        return result;
+    }
+
+    /**
+     * 获取退款详情
+     */
+    @RequestMapping("/detail.htm")
+    @ResponseBody
+    public ResponseVO detail(@RequestBody RefundDetailParam param, HttpServletRequest request) {
+        ResponseVO result = ResponseVO.failure();
+        try {
+            LOG.info("获取退款详情 | param={}", param);
+            permissionCheck(request, "GOOD_ORDER_APPEAL");
+
+            if (null == param || StringUtils.isBlank(param.getRefundNo())) {
+                LOG.warn("param is null or refund no is null.");
+                result = ResponseVO.failure(13, CodeEnum.ERROR_PARAM.getMessage());
+                return result;
+            }
+            DubboVO<RefundFormDetailVO> dubboVO = orderRefundQueryService.detail(param.getRefundNo());
+            if (dubboVO.isSuccess()) {
+                // 成功
+                result = ResponseVO.success(dubboVO.getObject());
+            } else {
+                result = ResponseVO.failure(dubboVO.getCode(), dubboVO.getMessage());
+            }
+        } catch (Exception e) {
+            LOG.error("获取退款详情 e={}", e.getMessage(), e);
+            e.printStackTrace();
+            result = ResponseVO.failure(11, CodeEnum.ERROR_SYSTEM.getMessage());
         }
         LOG.info(result.getMeta().toString());
         return result;
