@@ -152,7 +152,7 @@ public class PayNotifyBizz {
         if ("0000".equals(paramMap.get("RETNCODE"))) {
             String payNo = paramMap.get("ORDERREQTRANSEQ");
             String tradeNo = paramMap.get("UPTRANSEQ");
-            BigDecimal payAmount = new BigDecimal(paramMap.get("totalAmount"));
+            BigDecimal payAmount = new BigDecimal(paramMap.get("ORDERAMOUNT"));
 
             this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
         } else {
