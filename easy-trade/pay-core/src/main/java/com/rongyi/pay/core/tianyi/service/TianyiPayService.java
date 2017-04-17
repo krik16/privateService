@@ -81,19 +81,33 @@ public class TianyiPayService {
 
     public static String getPayStr(PayDetailParam param, TianyiConfigure configure, String sign) {
         return new StringBuilder().append("MERCHANTID=").append(param.getMerchantId()).
-                append("&SUBMERCHANTID=").append("").append("&MERCHANTPWD=").append(param.getMerchantPwd()).
-                append("&ORDERSEQ=").append(param.getOrderSeq()).append("&ORDERAMOUNT=").append(param.getOrderAmount()).
-                append("&ORDERTIME=").append(param.getOrderTime()).append("&ORDERVALIDITYTIME=").append(param.getOrderValidityTime()).
-                append("&PRODUCTDESC=").append(param.getProductDesc()).append("&CUSTOMERID=").append(param.getCustomerId()).
-                append("&PRODUCTAMOUNT=").append(param.getProductAmount()).append("&ATTACHAMOUNT=").append(param.getAttachAmount()).
-                append("&CURTYPE=").append(param.getCurType()).append("&BEFOREMERCHANTURL=").append(param.getBeforeMerchantUrl()).
-                append("&BACKMERCHANTURL=").append(param.getBackMerchantUrl()).append("&ATTACH=").append("").append("&PRODUCTID=").
-                append(param.getProductId()).append("&USERIP=").append(param.getUserIp()).append("&DIVDETAILS=").append("").
-                append("&ACCOUNTID=").append(param.getAccountId()).append("&BUSITYPE=").append(param.getBusiType()).
-                append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq()).append("&SERVICE=").append(param.getService()).
-                append("&SIGNTYPE=").append(param.getSignType()).append("&SIGN=").append(sign).append("&SUBJECT=").
-                append(param.getSubject()).append("&SWTICHACC=").append(param.getSwtichAcc()).append("&USERLANGUAGE=").
-                append(param.getUserLanguage()).toString();
+                append("&SUBMERCHANTID=").append(StringUtils.isBlank(param.getSubmerchantId())?"":param.getSubmerchantId()).
+                append("&MERCHANTPWD=").append(param.getMerchantPwd()).
+                append("&ORDERSEQ=").append(param.getOrderSeq()).
+                append("&ORDERAMOUNT=").append(param.getOrderAmount()).
+                append("&ORDERTIME=").append(param.getOrderTime()).
+                append("&ORDERVALIDITYTIME=").append(StringUtils.isBlank(param.getOrderValidityTime())? "":param.getOrderValidityTime()).
+                append("&PRODUCTDESC=").append(param.getProductDesc()).
+                append("&CUSTOMERID=").append(param.getCustomerId()).
+                append("&PRODUCTAMOUNT=").append(param.getProductAmount()).
+                append("&ATTACHAMOUNT=").append(param.getAttachAmount()).
+                append("&CURTYPE=").append(param.getCurType()).
+                append("&BEFOREMERCHANTURL=").append(param.getBeforeMerchantUrl()).
+                append("&BACKMERCHANTURL=").append(param.getBackMerchantUrl()).
+                append("&ATTACH=").append(StringUtils.isBlank(param.getAttach())?"":param.getAttach()).
+                append("&PRODUCTID=").append(param.getProductId()).
+                append("&USERIP=").append(StringUtils.isBlank(param.getUserIp())?"":param.getUserIp()).
+                append("&DIVDETAILS=").append(StringUtils.isBlank(param.getDivDetails())?"":param.getDivDetails()).
+                append("&ACCOUNTID=").append(StringUtils.isBlank(param.getAccountId())?"":param.getAccountId()).
+                append("&BUSITYPE=").append(param.getBusiType()).
+                append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq()).
+                append("&SERVICE=").append(param.getService()).
+                append("&SIGNTYPE=").append(param.getSignType()).
+                append("&SIGN=").append(sign).
+                append("&SUBJECT=").append(param.getSubject()).
+                append("&SWTICHACC=").append(param.getSwtichAcc()).
+                append("&USERLANGUAGE=").append(param.getUserLanguage()).
+                toString();
     }
 
     public static String getTradeRefundMac(RefundParam param) throws Exception {
