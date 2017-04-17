@@ -24,7 +24,7 @@ public class SmsConfig implements Serializable{
 
     public static final String csURL="http://114.113.154.13/sms.aspx?action=overage";
 
-
+    public static final String PASSWORD = "******";         //返回前端的密码
 
     //短信内容
 
@@ -71,12 +71,10 @@ public class SmsConfig implements Serializable{
         public static final  String CHUANGSHI="chuangshi";//创世华信
         public static final  String WEILAI="weilai";//福建未来无线信息技术有限公司
         public static final  String HUAYI="huayi";//宜春华宜嘉信传媒有限公司
+        public static final String DUOZHONG = "duozhong"; //铎众短信接口
+        public static final String YUYIN = "yuyin";  //语音短信接口
 
     }
-
-
-
-
 
 
 
@@ -121,6 +119,7 @@ public class SmsConfig implements Serializable{
         public static final  int CHANNEL_YUNTONGXUN=101;
         public static final  int CHANNEL_HUAYI=4;
         public static final  int CHANNEL_HUAYI_MARKET=44;
+        public static final int CHANNEL_DUOZHONG = 6;   //铎众短信
 
     }
 
@@ -131,6 +130,7 @@ public class SmsConfig implements Serializable{
         public static final String SUCCESS="Success";//成功
         public static final  String FAILD="Faild";//失败
         public static final  String LIMIT_MSG="Limit";//发送超出限制
+        public static final String UNKNOWN = "UNKNOWN"; //未知状态
     }
 
 
