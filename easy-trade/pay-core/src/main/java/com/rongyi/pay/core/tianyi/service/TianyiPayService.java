@@ -24,7 +24,7 @@ public class TianyiPayService {
                 append("&ORDERSEQ=").append(param.getOrderSeq()).
                 append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq()).
                 append("&ORDERREQTIME=").append(param.getOrderReqTime()).
-                append("&RISKCONTROLINFO=").append(param.getRiskControlInfo()).
+                append("&RISKCONTROLINFO=").append(StringUtils.isBlank(param.getRiskControlInfo())?"":param.getRiskControlInfo()).
                 append("&KEY=").append(param.getKey()).toString());
     }
 
