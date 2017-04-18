@@ -95,5 +95,9 @@ public class ComplaintController extends BaseControllerV2 {
             param.setPageSize(DEFAULT_PAGE_SIZE);
         }
         param.setStart((param.getPageIndex() - 1) * param.getPageSize());
+        // 查询全部状态
+        if (new Integer(0).equals(param.getStatus())) {
+            param.setStatus(null);
+        }
     }
 }
