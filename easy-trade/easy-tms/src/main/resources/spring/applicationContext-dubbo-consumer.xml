@@ -81,5 +81,7 @@
 	<dubbo:reference interface="com.rongyi.rss.tradecenter.ITradeUserCodeService" id="iTradeUserCodeService" version="${dubbo.version}" check="false" />
 	<!-- 退款查询 -->
 	<dubbo:reference interface="com.rongyi.rss.tradecenter.osm.IOrderRefundQueryService" id="orderRefundQueryService" version="${dubbo.version}" check="false" />
+	<!-- 申诉查询 -->
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.osm.IOrderComplaintQueryService" id="orderComplaintQueryService" version="${dubbo.version}" check="false" />
 
 </beans>
