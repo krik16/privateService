@@ -24,7 +24,7 @@ public class TianyiPayService {
                 append("&ORDERSEQ=").append(param.getOrderSeq()).
                 append("&ORDERREQTRANSEQ=").append(param.getOrderReqTranseq()).
                 append("&ORDERREQTIME=").append(param.getOrderReqTime()).
-                append("&RISKCONTROLINFO=").append(StringUtils.isBlank(param.getRiskControlInfo())?"":param.getRiskControlInfo()).
+                append("&RISKCONTROLINFO=").append(StringUtils.isBlank(param.getRiskControlInfo()) ? "" : param.getRiskControlInfo()).
                 append("&KEY=").append(param.getKey()).toString());
     }
 
@@ -63,7 +63,7 @@ public class TianyiPayService {
 //                .append("&SESSIONKEY=").append(StringUtils.isBlank(param.getSessionKey())?"":param.getSessionKey())
                 .append("&ATTACH=").append(StringUtils.isBlank(param.getAccach()) ? "" : param.getAccach())
                 .append("&requestSystem=").append(param.getRequestSystem())
-                .append("&RISKCONTROLINFO=").append(param.getRiskControlInfo());
+                .append("&RISKCONTROLINFO=").append(StringUtils.isBlank(param.getRiskControlInfo())?"":param.getRiskControlInfo());
         return perpareSignParam.toString();
     }
 
@@ -111,6 +111,15 @@ public class TianyiPayService {
     }
 
     public static String getTradeRefundMac(RefundParam param) throws Exception {
-        return CryptTool.md5Digest("MERCHANTID=" + param.getMerchantId() + "&MERCHANTPWD=" + param.getMerchantPwd() + "&OLDORDERNO=" + param.getOldOrderNo() + "&OLDORDERREQNO=" + param.getOldOrderReqNo() + "&REFUNDREQNO=" + param.getRefundReqNo() + "&REFUNDREQDATE=" + param.getRefundReqDate() + "&TRANSAMT=" + param.getTransAmt() + "&LEDGERDETAIL=" + param.getLedgerDetail() + "&KEY=" + param.getKey());
+        return CryptTool.md5Digest(new StringBuilder().
+                append("MERCHANTID=").append(param.getMerchantId()).
+                append("&MERCHANTPWD=").append(param.getMerchantPwd()).
+                append("&OLDORDERNO=").append(param.getOldOrderNo()).
+                append("&OLDORDERREQNO=").append(param.getOldOrderReqNo()).
+                append("&REFUNDREQNO=").append(param.getRefundReqNo()).
+                append("&REFUNDREQDATE=").append(param.getRefundReqDate()).
+                append("&TRANSAMT=").append(param.getTransAmt()).
+                append("&LEDGERDETAIL=").append(StringUtils.isBlank(param.getLedgerDetail())?"":param.getLedgerDetail()).
+                append("&KEY=").append(param.getKey()).toString());
     }
 }
