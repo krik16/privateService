@@ -42,6 +42,8 @@ public class ComplaintFormVO implements Serializable {
     private String resultRemark;
     // 卖家处理状态：2：申诉成功、3：申诉失败
     private int resultStatus;
+    // 卖家处理状态时间
+    private String resultDate;
     // 买家申诉状态：1：申诉中、2：申诉成功、3：申诉失败、4：申诉关闭
     private int status;
 
@@ -197,6 +199,14 @@ public class ComplaintFormVO implements Serializable {
         this.id = id;
     }
 
+    public String getResultDate() {
+        return resultDate;
+    }
+
+    public void setResultDate(String resultDate) {
+        this.resultDate = resultDate;
+    }
+
     @Override
     public String toString() {
         return "ComplaintFormVO{" +
@@ -218,6 +228,7 @@ public class ComplaintFormVO implements Serializable {
                 ", resultBy='" + resultBy + '\'' +
                 ", resultRemark='" + resultRemark + '\'' +
                 ", resultStatus=" + resultStatus +
+                ", resultDate=" + resultDate +
                 ", status=" + status +
                 '}';
     }
