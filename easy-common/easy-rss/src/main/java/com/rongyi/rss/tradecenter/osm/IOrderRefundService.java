@@ -84,4 +84,12 @@ public interface IOrderRefundService {
      * @return
      */
     public ResponseVO remindSellerReceive(RefundParam param);
+
+    /**
+     * 卖家补发收货地址
+     *
+     * @param param={"refundNo":"退款单号"}
+     * @return
+     */
+    ResponseVO sellerSupplementAddr(RefundParam param);
 }

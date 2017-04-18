@@ -30,7 +30,7 @@ public class RefundParam  implements Serializable {
     private String receiverName;//退款单号
     private String receiverPhone;//退款单号
     private String remark;//退款单号
-    private int type;//（1：同意退款申请 2同意退货退款申请 3：拒绝退款/退货 4：确认收货 5：拒绝收货）
+    private int type;//（1：同意退款申请 2同意退货退款申请 3：拒绝退款/退货 4：确认收货 5：拒绝收货 6：补发地址）
     private String createId;//操作人id
     private String createBy;//操作人
     private Integer source = 1;//操作平台 1摩店 2商家后台

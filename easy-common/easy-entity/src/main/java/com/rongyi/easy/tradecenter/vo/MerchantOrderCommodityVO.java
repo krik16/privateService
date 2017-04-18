@@ -41,6 +41,8 @@ public class MerchantOrderCommodityVO implements Serializable
      * 对应的字符串
      **/
     private String refundStatusString;
+    // 退款单号
+    private String refundNo;
 
     public boolean isSupportCourierDeliver() {
         return supportCourierDeliver;
@@ -215,6 +217,14 @@ public class MerchantOrderCommodityVO implements Serializable
 
     public void setRefundStatusString(String refundStatusString) {
         this.refundStatusString = refundStatusString;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
     }
 
     public String toString() {
