@@ -208,7 +208,7 @@ public class PayNotifyBizz {
             String tradeNo = map.get("ourTransNo");
             Integer payAmount = Integer.valueOf(map.get("transAmt"));
 
-            this.doTianyiRefundNotify(refundNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, "", "");
+            this.doTianyiRefundNotify(refundNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
         } else {
             throw new TianyiException("通知结果异常,map=" + map);
         }
