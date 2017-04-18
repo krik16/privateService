@@ -1,10 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
@@ -1125,4 +1122,5 @@ public class CommodityBuyerVO implements Serializable {
         System.out.println(c.getTime() - a.getTime());
 
     }
+
 }

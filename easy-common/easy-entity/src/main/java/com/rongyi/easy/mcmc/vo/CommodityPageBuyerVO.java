@@ -1,6 +1,10 @@
 package com.rongyi.easy.mcmc.vo;
 
+import com.alibaba.dubbo.common.utils.CollectionUtils;
+import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.solr.param.CommoditySearchParam;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.util.List;
@@ -69,12 +73,26 @@ public class CommodityPageBuyerVO implements Serializable{
 				.toString();
 	}
 
-	public void wrapPaginationInfo(int totalCount, int from, int totalPage,
-									int pageSize, int currentPage) {
+	public void wrapPaginationInfo(int totalCount, int from, int pageSize, int currentPage) {
 		this.setTotalCount(totalCount);
 		this.setNextFrom(from);
-		this.setTotalPage(totalPage);
+		this.setTotalPage(calculateTotalPage(totalCount, pageSize));
 		this.setPageSize(pageSize);
 		this.setCurrentPage(currentPage);
+	}
+
+	private int calculateTotalPage(int totalCount, int pageSize) {
+		return (totalCount % pageSize == 0) ? totalCount / pageSize : totalCount / pageSize + 1;
+	}
+
+	private int getCommodityIndex(List<CommodityBuyerVO> commodityList) {
+		Assert.notNull(commodityList);
+		return (this.currentPage - 1) * this.pageSize + commodityList.size();
+	}
+
+	public void buildCommodityPageBuyerVO(List<CommodityBuyerVO> commodityVOList, int currentPage,
+											int pageSize, int totalCount){
+		this.setCommodityList(commodityVOList);
+		this.wrapPaginationInfo(totalCount, getCommodityIndex(commodityVOList), pageSize, currentPage);
 	}
 }

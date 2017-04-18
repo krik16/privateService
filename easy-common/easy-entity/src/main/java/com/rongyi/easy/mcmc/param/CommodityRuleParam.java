@@ -16,9 +16,9 @@ public class CommodityRuleParam implements Serializable {
     private String shopMid;
     private List<String> shopIds;
     private List<String> shopMids;
-    private Integer orderBy;
-    private Integer currentPage;
-    private Integer pageSize;
+    private Integer orderBy = 0;
+    private Integer currentPage = 1;
+    private Integer pageSize = 10;
     private String category;
     private List<String> categoryIds;
     private Integer identity;
@@ -115,6 +115,7 @@ public class CommodityRuleParam implements Serializable {
         this.liveId = liveId;
     }
 
+    @NeedCheck(getFieldName = "ids")
     public List<ObjectId> getIds() {
         return ids;
     }
