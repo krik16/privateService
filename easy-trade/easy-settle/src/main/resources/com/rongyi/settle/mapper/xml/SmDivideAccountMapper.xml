@@ -328,9 +328,8 @@
 		INNER JOIN ry_osm.order_event oe
 		ON of.order_no = oe.order_no
 		AND oe.type = 19
-		INNER JOIN ry_osm.order_detail_form
-		odf ON of.order_no = odf.order_no
-		LEFT JOIN appeal_form af ON odf.refund_no = af.refund_no AND af.`status` =  3
+		INNER JOIN ry_osm.order_detail_form odf ON of.order_no = odf.order_no
+		LEFT JOIN ry_osm.appeal_form af ON odf.refund_no = af.refund_no AND af.`status` =  3 AND odf.refund_no IS NOT NULL AND odf.refund_no != ''
 		INNER
 		JOIN ry_rmmm.shop_info si on si.id = of.weidian_id
 		WHERE
