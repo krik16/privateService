@@ -4,9 +4,8 @@ import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.osm.vo.ComplaintFormVO;
 import com.rongyi.easy.tradecenter.param.ComplaintQueryParam;
-import com.rongyi.rss.bdata.MerchantService;
 import com.rongyi.rss.tradecenter.osm.IOrderComplaintQueryService;
-import com.rongyi.rss.tradecenter.osm.IOrderComplaintService;
+import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.CodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +43,11 @@ public class ComplaintController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取申诉列表 | param={}", param);
-            permissionCheck(request, "ORDER_GOODS_APPEAL_VIEW");
+            try {
+                permissionCheck(request, "ORDER_GOODS_APPEAL_VIEW");
+            } catch (PermissionException e) {
+                return ResponseVO.failure(-1, e.getMessage());
+            }
             // 初始参数
             buildPrarm(param);
             DubboVO<Integer> dubboVO = orderComplaintQueryService.queryForCount(param);

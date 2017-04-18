@@ -7,6 +7,7 @@ import com.rongyi.easy.osm.vo.RefundFormVO;
 import com.rongyi.easy.tradecenter.param.RefundDetailParam;
 import com.rongyi.easy.tradecenter.param.RefundQueryParam;
 import com.rongyi.rss.tradecenter.osm.IOrderRefundQueryService;
+import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.CodeEnum;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -45,7 +46,11 @@ public class RefundController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取退款列表 | param={}", param);
-            permissionCheck(request, "ORDER_GOODS_REFUND_VIEW");
+            try {
+                permissionCheck(request, "ORDER_GOODS_REFUND_VIEW");
+            } catch (PermissionException e) {
+                return ResponseVO.failure(-1, e.getMessage());
+            }
             // 初始参数
             buildPrarm(param);
             DubboVO<Integer> dubboVO = orderRefundQueryService.queryForCount(param);
