@@ -7,6 +7,7 @@ import com.rongyi.easy.osm.vo.RefundFormVO;
 import com.rongyi.easy.tradecenter.param.RefundDetailParam;
 import com.rongyi.easy.tradecenter.param.RefundQueryParam;
 import com.rongyi.rss.tradecenter.osm.IOrderRefundQueryService;
+import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.CodeEnum;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +46,11 @@ public class RefundController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取退款列表 | param={}", param);
-            permissionCheck(request, "GOOD_ORDER_APPEAL");
+            try {
+                permissionCheck(request, "ORDER_GOODS_REFUND_VIEW");
+            } catch (PermissionException e) {
+                return ResponseVO.failure(-1, e.getMessage());
+            }
             // 初始参数
             buildPrarm(param);
             DubboVO<Integer> dubboVO = orderRefundQueryService.queryForCount(param);
@@ -62,7 +68,7 @@ public class RefundController extends BaseControllerV2 {
                         result = ResponseVO.failure(dubboVO.getCode(), dubboVO.getMessage());
                     }
                 } else {
-                    result = ResponseVO.success(null, param.getCurrentPage(), param.getPageSize(), total);
+                    result = ResponseVO.success(new ArrayList<>(), param.getCurrentPage(), param.getPageSize(), total);
                 }
             } else {
                 result = ResponseVO.failure(dubboVO.getCode(), dubboVO.getMessage());
@@ -85,7 +91,7 @@ public class RefundController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取退款详情 | param={}", param);
-            permissionCheck(request, "GOOD_ORDER_APPEAL");
+            permissionCheck(request, "ORDER_GOODS_REFUND_VIEW");
 
             if (null == param || StringUtils.isBlank(param.getRefundNo())) {
                 LOG.warn("param is null or refund no is null.");
