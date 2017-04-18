@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class ComplaintController extends BaseControllerV2 {
                         result = ResponseVO.failure(dubboVO.getCode(), dubboVO.getMessage());
                     }
                 } else {
-                    result = ResponseVO.success(null, param.getPageIndex(), param.getPageSize(), total);
+                    result = ResponseVO.success(new ArrayList<>(), param.getPageIndex(), param.getPageSize(), total);
                 }
             } else {
                 result = ResponseVO.failure(dubboVO.getCode(), dubboVO.getMessage());
