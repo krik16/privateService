@@ -43,7 +43,7 @@ public class ComplaintController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取申诉列表 | param={}", param);
-            permissionCheck(request, "GOOD_ORDER_APPEAL");
+            permissionCheck(request, "ORDER_GOODS_APPEAL_VIEW");
             // 初始参数
             buildPrarm(param);
             DubboVO<Integer> dubboVO = orderComplaintQueryService.queryForCount(param);

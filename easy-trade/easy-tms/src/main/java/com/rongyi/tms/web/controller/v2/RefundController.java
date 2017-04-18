@@ -44,7 +44,7 @@ public class RefundController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取退款列表 | param={}", param);
-            permissionCheck(request, "GOOD_ORDER_APPEAL");
+            permissionCheck(request, "ORDER_GOODS_REFUND_VIEW");
             // 初始参数
             buildPrarm(param);
             DubboVO<Integer> dubboVO = orderRefundQueryService.queryForCount(param);
@@ -85,7 +85,7 @@ public class RefundController extends BaseControllerV2 {
         ResponseVO result = ResponseVO.failure();
         try {
             LOG.info("获取退款详情 | param={}", param);
-            permissionCheck(request, "GOOD_ORDER_APPEAL");
+            permissionCheck(request, "ORDER_GOODS_REFUND_VIEW");
 
             if (null == param || StringUtils.isBlank(param.getRefundNo())) {
                 LOG.warn("param is null or refund no is null.");
