@@ -1,6 +1,7 @@
 package com.rongyi.pay.core.unit;
 
 import com.alibaba.fastjson.JSONObject;
+import com.rongyi.pay.core.Exception.ParamNullException;
 import com.rongyi.pay.core.Exception.TianyiException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
@@ -50,6 +51,10 @@ public class TianyiPayUnit {
                     return h5Url;
                 }
             }
+        }catch (TianyiException  | ParamNullException e){
+            logger.info("翼支付下单接口失败 ,e.getMessage:{}", e.getMessage());
+            e.printStackTrace();
+            throw e;
         } catch (Exception e) {
             logger.info("翼支付下单接口失败 ,e.getMessage:{}", e.getMessage());
             e.printStackTrace();

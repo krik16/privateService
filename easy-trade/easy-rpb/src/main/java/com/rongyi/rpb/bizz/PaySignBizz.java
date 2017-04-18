@@ -166,11 +166,10 @@ public class PaySignBizz extends BaseBizz{
         }
         tianyiParam.getTianyiOrderParam().setOrderReqTranseq(paymentEntity.getPayNo());
         tianyiParam.getPayDetailParam().setOrderReqTranseq(paymentEntity.getPayNo());
-        //获取h5支付url
-        String result = TianyiPayUnit.tianyiPay(tianyiParam);
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, null);
-        return result ;
+        //获取h5支付url
+        return TianyiPayUnit.tianyiPay(tianyiParam);
     }
 
 }
