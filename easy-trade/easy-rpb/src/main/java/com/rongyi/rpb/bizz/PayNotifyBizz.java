@@ -435,17 +435,13 @@ public class PayNotifyBizz {
     private void notifyThird(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo, String type) throws ThirdException, UnsupportedEncodingException {
         log.info("容易网支付通知开始,orderNo={},tradeNo={},type={}", paymentEntity.getOrderNum(), paymentLogInfo.getTrade_no(), type);
 
-        //支付通知如果是历史商品订单/卡券订单，不走新的http通知接口
+        //支付通知如果是历史商品订单/卡券订单/礼品订单，不走新的http通知接口
         if(paymentEntity.getOrderType() < 2) {
             paymentLogInfoService.paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(),
                     paymentEntity.getOrderNum(), paymentEntity.getOrderType(), paymentEntity.getPayChannel().toString());
             return;
         }
-        //积分商城订单需走历史通知接口
-        else if(paymentEntity.getOrderType() == 2){
-            weixinPayService.payNotifyThird(paymentEntity);
-        }
-        //获取商户在容易网的注册信息
+
         RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(paymentEntity.getRyMchId(), paymentEntity.getRyAppId());
         if (ryMchAppVo == null || StringUtil.isEmpty(ryMchAppVo.getToken())) {
             log.warn("ryMchId={},ryAppId={}",paymentEntity.getRyMchId(),paymentEntity.getRyAppId());
