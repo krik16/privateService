@@ -315,9 +315,9 @@ public class RefundBizz {
         refundParam.setOldOrderNo(paymentEntity.getOrderNum());
         refundParam.setOldOrderReqNo(paymentEntity.getPayNo());
         refundParam.setRefundReqNo(refundPayment.getPayNo());
-        refundParam.setRefundReqDate(DateUtil.getCurrentDateYYMMDD());
+        refundParam.setRefundReqDate(DateUtil.getCurrentDateYYYYMMDD());
         refundParam.setTransAmt(String.valueOf(totalAmount));
-        refundParam.setChannel("5");
+        refundParam.setChannel("05");
         refundParam.setBgUrl(payConfigInitUnit.getTianyiRefundNotifyUrl());
         return refundParam;
     }
