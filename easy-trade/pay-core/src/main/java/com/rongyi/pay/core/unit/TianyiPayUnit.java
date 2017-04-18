@@ -187,7 +187,6 @@ public class TianyiPayUnit {
             param.setMac(mac);
             param.setBgUrl(configure.getRefundBackUrl());
             Map<String, String> queryParam = getMap(param, mac);
-            System.out.println("param="+queryParam);
             String responseStr = HttpUtil.sendTradePost(configure.getRefundUrl(), queryParam);
             if (StringUtils.isBlank(responseStr)){
                 throw new TianyiException(ConstantEnum.EXCEPTION_TIANYI_TRADEREFUND_FAIL);
