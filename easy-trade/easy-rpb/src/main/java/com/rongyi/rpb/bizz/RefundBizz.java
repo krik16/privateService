@@ -309,9 +309,9 @@ public class RefundBizz {
     private RefundParam initTianyiRefundParam(Integer totalAmount,PaymentEntity paymentEntity,PaymentEntity refundPayment){
         JSONObject json = JSONObject.parseObject(paymentEntity.getAttach());
         RefundParam refundParam = new RefundParam();
-        refundParam.setMerchantId(String.valueOf(json.get("merchantId")));
-        refundParam.setKey(String.valueOf(json.get("key")));
-        refundParam.setMerchantPwd(String.valueOf(json.get("merchantPwd")));
+        refundParam.setMerchantId(String.valueOf(json.get("merchatId")));
+        refundParam.setKey(String.valueOf(json.get("merchatKey")));
+        refundParam.setMerchantPwd(String.valueOf(json.get("merchatPwd")));
         refundParam.setOldOrderNo(paymentEntity.getOrderNum());
         refundParam.setOldOrderReqNo(paymentEntity.getPayNo());
         refundParam.setRefundReqNo(refundPayment.getPayNo());
