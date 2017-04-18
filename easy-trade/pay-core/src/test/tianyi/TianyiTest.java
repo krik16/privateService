@@ -4,17 +4,20 @@ import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.tianyi.param.*;
 import com.rongyi.pay.core.unit.TianyiPayUnit;
 import com.sun.org.glassfish.gmbal.Description;
+import net.sf.json.JSONObject;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 /**
  * Created by yangyang on 2017/4/10.
  */
 public class TianyiTest {
 
-    private static String ORDERSEQ="20160830092048436461232233158";
-    private static String ORDERTRANSEQL="20160830092048436461232233158";
-    private static String ORDERTIME="20160830092049";
-    private static String ORDERVALIDITYTIME="20160830092049";
+    private static String ORDERSEQ="1041868855808152641";
+    private static String ORDERTRANSEQL="0041889687808152648";
+    private static String ORDERTIME="20170418032648";
+    private static String ORDERVALIDITYTIME="20170418032648";
     private static String REFUNDREQNO="3049696233697232933";
 
     @Test
@@ -38,7 +41,7 @@ public class TianyiTest {
         payQueryParam.setMerchantId("02310103030380547");
         payQueryParam.setOrderNo(ORDERSEQ);
         payQueryParam.setOrderReqNo(ORDERTRANSEQL);
-        payQueryParam.setOrderDate("20170411");//取交易当天日期
+        payQueryParam.setOrderDate("20170418");//取交易当天日期
         payQueryParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
         TianyiTradeQueryRes tianyiTradeQueryRes = TianyiPayUnit.tradeQuery(payQueryParam);
         System.out.println("tianyiTradeQueryRes="+tianyiTradeQueryRes);
@@ -63,6 +66,20 @@ public class TianyiTest {
         refundParam.setKey("5C8014544E835D3BCE562AEFCD6F7C81AD9F9C067937BA7A");
         boolean result = TianyiPayUnit.tradeRefund(refundParam);
         System.out.println("tianyiTradeRefundRes="+result);
+    }
+
+    @Test
+    public void testAmount(){
+        String totalPrice = "0.10";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("totalPrice","0.10");
+        Integer totalAmount = new BigDecimal(jsonObject.getString("totalPrice")).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).intValue();
+        System.out.println("result="+totalAmount);
+    }
+
+    @Test
+    public void testZhengze(){
+
     }
 
     private PayDetailParam getPayDetailParam(){
