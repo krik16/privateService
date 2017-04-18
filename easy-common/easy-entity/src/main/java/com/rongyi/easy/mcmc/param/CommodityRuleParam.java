@@ -10,6 +10,7 @@ import java.util.List;
  * Created by yaoyiwei on 2016/9/27.
  */
 public class CommodityRuleParam implements Serializable {
+    private String id;
     private String keyword;
     private String buyerId;
     private String shopId;
@@ -44,6 +45,58 @@ public class CommodityRuleParam implements Serializable {
     public String getSystemNumber() {
 		return systemNumber;
 	}
+    private Boolean picExists = false;
+    private Boolean notBuyer = false;
+    private String terminalType;
+    private List<String> terminalTypes;
+
+    public String getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(String terminalType) {
+        this.terminalType = terminalType;
+    }
+
+    public List<String> getTerminalTypes() {
+        return terminalTypes;
+    }
+
+    public void setTerminalTypes(List<String> terminalTypes) {
+        this.terminalTypes = terminalTypes;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Boolean getNotBuyer() {
+        return notBuyer;
+    }
+
+    public void setNotBuyer(Boolean notBuyer) {
+        this.notBuyer = notBuyer;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Boolean getPicExists() {
+        return picExists;
+    }
+
+    public void setPicExists(Boolean picExists) {
+        this.picExists = picExists;
+    }
 
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
