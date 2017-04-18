@@ -37,8 +37,19 @@ public class CommodityRuleParam implements Serializable {
     private String liveId;
     private String create_by;
     private Integer commodityRange;
+    private String systemNumber;
+    
+    
+    @NeedCheck(getFieldName = "systemNumber")
+    public String getSystemNumber() {
+		return systemNumber;
+	}
 
-    public Integer getCommodityRange() {
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+
+	public Integer getCommodityRange() {
         return commodityRange;
     }
 
