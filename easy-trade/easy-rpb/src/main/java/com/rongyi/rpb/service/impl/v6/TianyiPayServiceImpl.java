@@ -3,6 +3,8 @@ package com.rongyi.rpb.service.impl.v6;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.core.util.BeanMapUtils;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.TianyiPayVo;
 import com.rongyi.easy.ryoms.entity.WechatTianyiPayVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
@@ -69,8 +71,8 @@ public class TianyiPayServiceImpl implements ItianyiPayService {
     public Map<String, Object> refund(String orderNo, int refundAmount) throws TradePayException {
         log.info("翼支付退款,orderNo={},refundAmount={}",orderNo,refundAmount);
         try {
-            refundBizz.tianyiRefund(orderNo,refundAmount);
-            return new HashMap<>();
+            PaymentEntity paymentEntity = refundBizz.tianyiRefund(orderNo, refundAmount);
+            return BeanMapUtils.objectToMapRemoveSign(paymentEntity);
         } catch (WebankException | ParamNullException e) {
             log.warn("翼支付退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());

@@ -316,7 +316,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     /**
      * 检查是否是翼支付退款
      */
-    private boolean isTianyiRefund(String orderNo,BigDecimal refundAmount,String type){
+    private boolean isTianyiRefund(String orderNo,BigDecimal refundAmount,String type,String orderDetailNum){
         //退款事件
         if (PaymentEventType.REFUND.equals(type)){
             PaymentEntity paymentEntity = selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
@@ -324,7 +324,17 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info("发起翼支付退款,orderNo={}",orderNo);
                 Integer totalAmount =refundAmount.multiply(new BigDecimal(100)).intValue();
                 //调用翼支付退款接口
-                tianyiPayService.refund(orderNo,totalAmount);
+               Map<String,Object> map = tianyiPayService.refund(orderNo, totalAmount);
+                // 子订单是分成多条存入
+                if (StringUtils.isNotEmpty(orderDetailNum) && map.get("id") != null) {
+                    String[] detailNumArray = orderDetailNum.split(",");
+                    for (String detailNum : detailNumArray) {
+                        PaymentItemEntity paymentItemEntity = new PaymentItemEntity();
+                        paymentItemEntity.setDetailNum(detailNum);
+                        paymentItemEntity.setPaymentId(Integer.valueOf(map.get("id").toString()));
+                        paymentItemService.insert(paymentItemEntity);
+                    }
+                }
                 return true;
             }
         }
@@ -349,7 +359,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
-        boolean isTianyiRefund = isTianyiRefund(paymentEntityVO.getOrderNum(),paymentEntityVO.getAmountMoney(),event.getType());
+        boolean isTianyiRefund = isTianyiRefund(paymentEntityVO.getOrderNum(),paymentEntityVO.getAmountMoney(),event.getType(), paymentEntityVO.getOrderDetailNumArray());
         //翼支付退款直接返回
         if(isTianyiRefund){
             return paymentEntityVO;

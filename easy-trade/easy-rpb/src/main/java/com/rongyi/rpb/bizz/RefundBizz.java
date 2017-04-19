@@ -277,7 +277,7 @@ public class RefundBizz {
      * @param orderNo 订单号
      * @param refundAmount 退款金额
      */
-    public void tianyiRefund(String orderNo,Integer refundAmount){
+    public PaymentEntity tianyiRefund(String orderNo,Integer refundAmount){
         //查找订单支付记录
         PaymentEntity oldPaymentEntity = basePayment(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
 
@@ -294,6 +294,8 @@ public class RefundBizz {
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, null);
+
+        return refundPaymentEntity;
     }
 
     public RyMchVo initRefundRyMchVo(PaymentEntity paymentEntity){
