@@ -310,29 +310,6 @@ public class PayNotifyBizz {
 
 
     /**
-     * 退款通知
-     */
-    private void refundNotifyMq(PaymentEntity refundPaymentEntity) {
-        Map<String, Object> bodyMap = new HashMap<>();
-        bodyMap.put("orderNum", refundPaymentEntity.getOrderNum());
-        bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
-        bodyMap.put("paymentId", refundPaymentEntity.getPayNo());
-        List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(refundPaymentEntity.getId());
-        bodyMap.put("orderDetailNum", paymentItemService.getDetailNum(itemList));
-        MessageEvent event = new MessageEvent();
-        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == refundPaymentEntity.getOrderType())// 优惠券订单退款
-            event.setTarget(Constants.SOURCETYPE.COUPON);
-        else
-            // 商品订单
-            event.setTarget(Constants.SOURCETYPE.OSM);
-        event.setSource(Constants.SOURCETYPE.RPB);
-        event.setTimestamp(DateUtil.getCurrDateTime().getTime());
-        event.setType(PaymentEventType.REFUND);
-        event.setBody(bodyMap);
-        sender.convertAndSend(event);
-    }
-
-    /**
      * 处理pos银行卡退款通知
      *
      */
@@ -470,7 +447,7 @@ public class PayNotifyBizz {
         log.info("容易网支付通知开始,orderNo={},tradeNo={},type={}", paymentEntity.getOrderNum(), paymentLogInfo.getTrade_no(), type);
 
         //支付通知如果是历史商品订单/卡券订单/礼品订单，不走新的http通知接口
-        if(paymentEntity.getOrderType() < 2) {
+        if(paymentEntity.getOrderType() <= 2) {
             paymentLogInfoService.paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(),
                     paymentEntity.getOrderNum(), paymentEntity.getOrderType(), paymentEntity.getPayChannel().toString());
             return;
@@ -525,6 +502,30 @@ public class PayNotifyBizz {
         //删除异步通知地址
         redisService.expire(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), 1000);
         log.info("容易网支付通知结束");
+    }
+
+
+    /**
+     * 退款通知
+     */
+    private void refundNotifyMq(PaymentEntity refundPaymentEntity) {
+        Map<String, Object> bodyMap = new HashMap<>();
+        bodyMap.put("orderNum", refundPaymentEntity.getOrderNum());
+        bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
+        bodyMap.put("paymentId", refundPaymentEntity.getPayNo());
+        List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(refundPaymentEntity.getId());
+        bodyMap.put("orderDetailNum", paymentItemService.getDetailNum(itemList));
+        MessageEvent event = new MessageEvent();
+        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == refundPaymentEntity.getOrderType())// 优惠券订单退款
+            event.setTarget(Constants.SOURCETYPE.COUPON);
+        else
+            // 商品订单
+            event.setTarget(Constants.SOURCETYPE.OSM);
+        event.setSource(Constants.SOURCETYPE.RPB);
+        event.setTimestamp(DateUtil.getCurrDateTime().getTime());
+        event.setType(PaymentEventType.REFUND);
+        event.setBody(bodyMap);
+        sender.convertAndSend(event);
     }
 
     /**
