@@ -17,8 +17,6 @@ public class ControllerViewDownGroupVo implements Serializable{
     private String goodName;
     private String userName;
     private String userPhone;
-    private String userPosition;
-    private String userCompany;
     private Integer joinState;
 
 
@@ -100,21 +98,5 @@ public class ControllerViewDownGroupVo implements Serializable{
 
     public void setGoodName(String goodName) {
         this.goodName = goodName;
-    }
-
-    public String getUserPosition() {
-        return userPosition;
-    }
-
-    public void setUserPosition(String userPosition) {
-        this.userPosition = userPosition;
-    }
-
-    public String getUserCompany() {
-        return userCompany;
-    }
-
-    public void setUserCompany(String userCompany) {
-        this.userCompany = userCompany;
     }
 }
