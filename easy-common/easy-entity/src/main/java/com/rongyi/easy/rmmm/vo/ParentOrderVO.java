@@ -179,6 +179,8 @@ public class ParentOrderVO implements Serializable {
 	private String shopCityName;// 店铺市名称
 	private String shopAddress;//店铺详细地址
 	private String shopAreaName;//店铺区域名称
+	// 是否冻结 0：正常流程 1：冻结流程
+	private int isFreeze;
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -1047,6 +1049,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setCloseEventType(String closeEventType) {
 		this.closeEventType = closeEventType;
+	}
+
+	public int getIsFreeze() {
+		return isFreeze;
+	}
+
+	public void setIsFreeze(int isFreeze) {
+		this.isFreeze = isFreeze;
 	}
 
 	@Override
