@@ -37,10 +37,28 @@ public class CommodityRuleParam implements Serializable {
     private List<ObjectId> ids;
     private String liveId;
     private String create_by;
+    private String updateBy;
     private Integer commodityRange;
     private String systemNumber;
-    
-    
+    private Boolean noTemplate;
+
+    public Boolean getNoTemplate() {
+        return noTemplate;
+    }
+
+    public void setNoTemplate(Boolean noTemplate) {
+        this.noTemplate = noTemplate;
+    }
+
+    @NeedCheck(getFieldName = "updateBy")
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
     @NeedCheck(getFieldName = "systemNumber")
     public String getSystemNumber() {
 		return systemNumber;
