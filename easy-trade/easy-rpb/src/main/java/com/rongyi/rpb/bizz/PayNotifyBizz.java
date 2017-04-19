@@ -217,6 +217,9 @@ public class PayNotifyBizz {
             Integer payAmount = Integer.valueOf(map.get("transAmt"));
 
             this.doTianyiRefundNotify(refundNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
+        }else if("C".equals(map.get("transStatus"))){
+            //翼支付退款状态失败,此结果大部分是由于部分退款当天的通知是失败的情况导致的,忽略此通知,等待第二天的退款成功通知再更新退款状态
+            log.warn("翼支付退款状态失败,忽略,map={}",map);
         } else {
             throw new TianyiException("通知结果异常,map=" + map);
         }
