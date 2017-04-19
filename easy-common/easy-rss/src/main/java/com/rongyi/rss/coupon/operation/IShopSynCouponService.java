@@ -12,7 +12,7 @@ import java.util.List;
 public interface IShopSynCouponService {
 
     /**
-     * 店铺所属品牌信息修改 ，更新大运营新建的品牌类型的卡券所关联的店铺信息
+     * 店铺所属品牌信息修改 ，更新couponShop店铺名称
      * @param shopIds 有修改的店铺mids
      */
     public void synBrandCoupon(List<String> shopIds);
