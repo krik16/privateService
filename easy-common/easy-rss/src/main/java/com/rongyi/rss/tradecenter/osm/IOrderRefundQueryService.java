@@ -6,6 +6,7 @@ package com.rongyi.rss.tradecenter.osm;
 import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
+import com.rongyi.easy.osm.entity.OrderFormExtraEntity;
 import com.rongyi.easy.osm.vo.RefundFormDetailVO;
 import com.rongyi.easy.osm.vo.RefundFormVO;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
@@ -96,4 +97,12 @@ public interface IOrderRefundQueryService {
 	 * @return
 	 */
 	DubboVO<RefundFormDetailVO> detail(String refundNo);
+
+	/**
+	 * 获取最新的退款地址
+	 *
+	 * @param weidianId
+	 * @return
+	 */
+	DubboVO<OrderFormExtraEntity> getLasterAddresByWeidianId(String weidianId);
 }
