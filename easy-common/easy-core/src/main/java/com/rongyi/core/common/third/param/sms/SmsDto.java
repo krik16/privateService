@@ -1,6 +1,9 @@
 package com.rongyi.core.common.third.param.sms;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /*
  * Description:  
@@ -13,10 +16,9 @@ import java.io.Serializable;
 public class SmsDto
     implements Serializable
     {
-
         private static final long serialVersionUID = 1L;
 
-        private String channel;
+        private String channel;  //渠道
 
         private String privateKey; //不可修改
 
@@ -115,6 +117,5 @@ public class SmsDto
         public void setIsDisabled(int isDisabled) {
             this.isDisabled = isDisabled;
         }
-
 
     }
