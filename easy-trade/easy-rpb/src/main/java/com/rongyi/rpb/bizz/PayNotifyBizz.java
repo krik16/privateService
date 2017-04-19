@@ -3,11 +3,14 @@ package com.rongyi.rpb.bizz;
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.core.util.TradePaySignUtil;
+import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
 import com.rongyi.easy.rpb.vo.RyMchVo;
@@ -19,6 +22,8 @@ import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.common.pay.util.HttpUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.mq.Sender;
+import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.WeixinPayService;
@@ -35,10 +40,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * conan
@@ -63,6 +65,10 @@ public class PayNotifyBizz {
     RoaRyMchAppService roaRyMchAppService;
     @Autowired
     WeixinPayService weixinPayService;
+    @Autowired
+    PaymentItemService paymentItemService;
+    @Autowired
+    Sender sender;
 
     private static final Integer maxRetryTimes = 7;//最多重试次数
 
@@ -149,7 +155,6 @@ public class PayNotifyBizz {
 
     /**
      * 天翼h5支付通知
-     * @param paramMap
      */
     public void tianyiH5payNotify(Map<String, String> paramMap) {
         log.info("天翼h5通知内容,map={}",paramMap);
@@ -296,6 +301,32 @@ public class PayNotifyBizz {
 
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        //发送退款通知
+        refundNotifyMq(paymentEntity);
+    }
+
+
+    /**
+     * 退款通知
+     */
+    private void refundNotifyMq(PaymentEntity refundPaymentEntity) {
+        Map<String, Object> bodyMap = new HashMap<>();
+        bodyMap.put("orderNum", refundPaymentEntity.getOrderNum());
+        bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
+        bodyMap.put("paymentId", refundPaymentEntity.getPayNo());
+        List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(refundPaymentEntity.getId());
+        bodyMap.put("orderDetailNum", paymentItemService.getDetailNum(itemList));
+        MessageEvent event = new MessageEvent();
+        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == refundPaymentEntity.getOrderType())// 优惠券订单退款
+            event.setTarget(Constants.SOURCETYPE.COUPON);
+        else
+            // 商品订单
+            event.setTarget(Constants.SOURCETYPE.OSM);
+        event.setSource(Constants.SOURCETYPE.RPB);
+        event.setTimestamp(DateUtil.getCurrDateTime().getTime());
+        event.setType(PaymentEventType.REFUND);
+        event.setBody(bodyMap);
+        sender.convertAndSend(event);
     }
 
     /**
