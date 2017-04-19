@@ -39,17 +39,16 @@ public class CommodityRuleParam implements Serializable {
     private String create_by;
     private Integer commodityRange;
     private String systemNumber;
-    
+    private Boolean picExists = false;
+    private Boolean notBuyer = false;
+    private String terminalType;
+    private List<String> terminalTypes;
+    private String updateBy;
     
     @NeedCheck(getFieldName = "systemNumber")
     public String getSystemNumber() {
 		return systemNumber;
 	}
-    private Boolean picExists = false;
-    private Boolean notBuyer = false;
-    private String terminalType;
-    private List<String> terminalTypes;
-
     public String getTerminalType() {
         return terminalType;
     }
@@ -323,4 +322,12 @@ public class CommodityRuleParam implements Serializable {
     public void setCategoryIds(List<String> categoryIds) {
         this.categoryIds = categoryIds;
     }
+    
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
 }
