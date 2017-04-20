@@ -1,7 +1,5 @@
 package com.rongyi.easy.msgcenter.wx;
 
-import com.rongyi.easy.msgcenter.vo.WXMsgUnsetContent;
-
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

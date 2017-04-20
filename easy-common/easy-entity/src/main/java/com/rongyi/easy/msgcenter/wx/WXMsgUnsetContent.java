@@ -1,4 +1,4 @@
-package com.rongyi.easy.msgcenter.vo;
+package com.rongyi.easy.msgcenter.wx;
 
 import net.sf.json.JSONObject;
 
