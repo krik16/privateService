@@ -35,6 +35,7 @@ public class AppealDetailVO implements Serializable{
     private String merchantReceiveAddress;// 商家收货人地址
     private String operatePhone;// 平台客服维权电话
     private String merchantPhone;// 商家基础信息电话
+    private String appealComment;// 退款说明
     private long createAt;//申请时间
     private List<String> pics;//退款图片列表
     private List<AppealNode> nodeList;//退款节点
@@ -238,6 +239,14 @@ public class AppealDetailVO implements Serializable{
 
     public void setRefundCommodiyts(List<AppealCommodityVO> refundCommodiyts) {
         this.refundCommodiyts = refundCommodiyts;
+    }
+
+    public String getAppealComment() {
+        return appealComment;
+    }
+
+    public void setAppealComment(String appealComment) {
+        this.appealComment = appealComment;
     }
 
     @Override
