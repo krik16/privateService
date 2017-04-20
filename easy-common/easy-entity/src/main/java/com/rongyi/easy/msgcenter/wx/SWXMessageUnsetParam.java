@@ -7,15 +7,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * Description:标准版微信 消息参数
- * Author: 袁波
- * DATE: 2016/3/21 14:30
- * Package:com.rongyi.message.entity.dto
- * Project:easy-common
+ * Description:
+ * Author: yb
+ * DATE: 2017/4/20 14:12
+ * Package:com.rongyi.easy.msgcenter.wx
+ * Project:easy-market
  */
-public class SWXMessageParam extends SWXMessageBaseParam  implements Serializable {
-    private WXMsgContent arr;
-
+public class SWXMessageUnsetParam extends SWXMessageBaseParam implements Serializable {
+    private WXMsgUnsetContent arr;
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SWXMessageParam{");
@@ -30,14 +29,14 @@ public class SWXMessageParam extends SWXMessageBaseParam  implements Serializabl
 
     public String toPostParam() throws UnsupportedEncodingException {
         StringBuffer sb = new StringBuffer(super.toPostParam());
-        sb.append("arr=").append(URLEncoder.encode(JSONObject.fromObject(arr).toString(), "utf-8"));
+        sb.append("arr=").append(URLEncoder.encode(arr.toJsonString(), "utf-8"));
         return sb.toString();
     }
-    public WXMsgContent getArr() {
+    public WXMsgUnsetContent getArr() {
         return arr;
     }
 
-    public void setArr(WXMsgContent arr) {
+    public void setArr(WXMsgUnsetContent arr) {
         this.arr = arr;
     }
 

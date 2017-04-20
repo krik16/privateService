@@ -1,5 +1,6 @@
 package com.rongyi.rss.msgcenter;
 
+import com.rongyi.easy.msgcenter.wx.SWXMessageBaseParam;
 import com.rongyi.easy.msgcenter.wx.SWXMessageParam;
 
 /**
@@ -16,8 +17,13 @@ public interface WXPushMsgService {
      *  templateid  发送消息的模板
      *  url 消息点击的跳转的链接
      *  WXMsgContent 消息内容
-     * @param swxMessageParam
+     *  SWXMessageBaseParam 子类
+     *      SWXMessageParam 固定 keyword1...keyword5
+     *      SWXMessageUnsetParam 自定义参数名和值
+     * @param swxMessageBaseParam
      * @return
      */
-    public Boolean pushMsg(SWXMessageParam  swxMessageParam);
+    public Boolean pushMsg(SWXMessageBaseParam swxMessageBaseParam);
+
+
 }
