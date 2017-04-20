@@ -16,11 +16,13 @@ import com.rongyi.easy.entity.UserPopEntity;
  */
 public interface IUserPopService {
 	
+
 	/**
 	 * 添加弹窗记录
-	 * @param entity
+	 * @param userId
+	 * @param shopMid
 	 * @throws Exception
-	 */
+     */
 	public void addUserPop(String userId, String shopMid) throws Exception;
 	
 	/**
