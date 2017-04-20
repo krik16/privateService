@@ -12,9 +12,9 @@ public class ResponseResult2 implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** 返回对象类型数据 */
-	private Result result=new Result();
+	private Result result = new Result();
 
-	private Meta meta=new Meta();
+	private Meta meta = new Meta();
 	
 	public void setErrno(int errno) {
 		this.meta.setErrno(errno);
@@ -41,7 +41,7 @@ public class ResponseResult2 implements java.io.Serializable {
 		return meta;
 	}
 	@Deprecated
-	class Result implements java.io.Serializable {
+	public class Result implements java.io.Serializable {
 
 		private static final long serialVersionUID = 1L;
 		
@@ -113,7 +113,7 @@ public class ResponseResult2 implements java.io.Serializable {
 		}
 	}
 	@Deprecated
-	 class Meta implements java.io.Serializable {
+	public class Meta implements java.io.Serializable {
 
 		private static final long serialVersionUID = 1L;
 		/** 信息编码 */
