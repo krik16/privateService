@@ -263,4 +263,34 @@ public class SystemConfig implements Serializable{
         System.out.println("result==="+result);*/
     }
 
+
+
+    /**
+     * 如果是null，返回空字符
+     *
+     * @param str
+     * @return
+     */
+    public static String ifStringNull(String str) {
+        if (str == null) {
+            return "";
+        } else {
+            return str;
+        }
+    }
+
+    /**
+     * 如果是null，返回0
+     *
+     * @param
+     * @return
+     */
+    public static int ifIntegerNull(Integer in) {
+        if (in == null) {
+            return 0;
+        } else {
+            return in;
+        }
+    }
+
 }
