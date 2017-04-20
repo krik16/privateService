@@ -1,6 +1,6 @@
 package com.rongyi.easy.msgcenter.wx;
 
-import net.sf.json.JSONObject;
+import com.rongyi.easy.msgcenter.vo.WXMsgUnsetContent;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
