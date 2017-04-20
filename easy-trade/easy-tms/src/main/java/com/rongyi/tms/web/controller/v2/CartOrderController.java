@@ -8,7 +8,6 @@ import com.rongyi.easy.osm.vo.OrderCartFormVO;
 import com.rongyi.easy.tms.vo.v2.CartOrderExcelVO;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
-import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
@@ -40,9 +39,6 @@ public class CartOrderController extends BaseControllerV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CartOrderController.class);
 
     private static final int MAX_EXCEL_COUNT = 2000;
-
-    @Autowired
-    private IOrderQueryService iOrderQueryService;
 
     @Autowired
     private ROAMalllifeUserService roaMalllifeUserService;
@@ -145,7 +141,7 @@ public class CartOrderController extends BaseControllerV2 {
            warpToParamMap(paramsMap);
             PagingVO<OrderCartFormVO> pagingVO = iOrderCartService.searchListByMap(paramsMap);
             LOGGER.info("要导出的数据总数:totalCount={}",pagingVO.getRowCnt());
-            if (pagingVO != null && pagingVO.getRowCnt() <= MAX_EXCEL_COUNT)
+            if (pagingVO.getRowCnt() <= MAX_EXCEL_COUNT)
                 responseData = ResponseData.success();
         } catch (PermissionException e){
             LOGGER.error(e.getMessage());
