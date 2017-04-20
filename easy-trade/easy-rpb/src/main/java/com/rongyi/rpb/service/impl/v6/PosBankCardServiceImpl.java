@@ -110,7 +110,8 @@ public class PosBankCardServiceImpl extends BaseServiceImpl implements IPosBankC
             map.put("orderNo", orderNo);
             //交易金额
             map.put("totalAmount", paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            //退款状态
+            map.put("tradeStatus","SUCCESS");
             log.info("pos银行卡退款结果,map={}", map);
             return map;
         }  catch (ParamNullException e) {

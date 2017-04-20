@@ -29,6 +29,7 @@
         <result column="ry_app_id" property="ryAppId" jdbcType="VARCHAR"/>
         <result column="source" property="source" jdbcType="TINYINT"/>
         <result column="org_channel" property="orgChannel" jdbcType="TINYINT"/>
+        <result column="pay_scene" property="payScene" jdbcType="TINYINT"/>
         <result column="tianyi_pay_id" property="tianyiPayId" jdbcType="INTEGER"/>
         <result column="attach" property="attach" jdbcType="VARCHAR"/>
 
@@ -38,7 +39,7 @@
 		id, order_no,order_type,order_price,pay_no,pay_amount,
 		status,trade_type,create_at,
 		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
-		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel ,tianyi_pay_id,attach
+		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel ,pay_scene,tianyi_pay_id,attach
 	</sql>
 
     <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntity"
@@ -655,6 +656,88 @@
 			</if>
           and DATE_FORMAT(end_at, '%Y-%m-%d') = DATE_FORMAT(#{endAt}, '%Y-%m-%d')
           and source in(3,4)
+    </select>
+
+    <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"/>
+        from payment_order
+        where source in (3,4)
+            <if test="orderNo != null and orderNo != ''">
+                and order_no = #{orderNo,jdbcType=VARCHAR}
+            </if>
+            <if test="payChannel != null and payChannel != ''">
+                and pay_channel = #{payChannel,jdbcType=INTEGER}
+            </if>
+            <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+                and pay_channel in (0,1,2,3)
+            </if>
+            <if test="payerReconflag != null and payerReconflag != -1">
+                and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
+            </if>
+            <if test="ryMchId != null and ryMchId != ''">
+                and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+            </if>
+            <if test="tradeType != null and tradeType != -1">
+                and trade_type = #{tradeType,jdbcType=INTEGER}
+            </if>
+            <if test="tradeType == null || tradeType == '' || tradeType== -1">
+                and trade_type in (0,1)
+            </if>
+            <if test="status != null and status != -1">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="status == null || status == '' || status == -1">
+                and status = 2
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+            </if>
+        order by create_at desc  limit #{startIndex},#{pageSize} 
+    </select>
+
+    <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select  count(*)
+        from payment_order
+        where source in (3,4)
+        <if test="orderNo != null and orderNo != ''">
+            and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="payChannel != null and payChannel != ''">
+            and pay_channel = #{payChannel,jdbcType=INTEGER}
+        </if>
+        <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+                and pay_channel in (0,1,2,3)
+        </if>
+        <if test="payerReconflag != null and payerReconflag != -1">
+            and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
+        </if>
+        <if test="tradeType != null and tradeType != -1">
+            and trade_type = #{tradeType,jdbcType=INTEGER}
+        </if>
+        <if test="tradeType == null || tradeType == '' || tradeType== -1">
+            and trade_type in (0,1)
+        </if>
+        <if test="status != null and status != -1">
+            and status = #{status,jdbcType=INTEGER}
+        </if>
+        <if test="status == null || status == '' || status == -1">
+            and status = 2
+        </if>
+        <if test="ryMchId != null and ryMchId != ''">
+            and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+        </if>
+        <if test="ryMchId != null and ryMchId != ''">
+            and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+        </if>
     </select>
 </mapper>
 
