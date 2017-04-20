@@ -139,13 +139,6 @@ public class PaymentEntity implements Serializable {
 
 	private Integer payScene;
 
-	public Integer getPayScene() {
-		return payScene;
-	}
-
-	public void setPayScene(Integer payScene) {
-		this.payScene = payScene;
-	}
 
 	/**
 	 * 主键id
