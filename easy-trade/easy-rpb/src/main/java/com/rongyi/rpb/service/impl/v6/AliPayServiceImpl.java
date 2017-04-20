@@ -97,10 +97,10 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             map.put("orderNo", orderNo);
             //容易网交易号
             map.put("payNo", alipayTradeRefundResponse.getOutTradeNo());
-
             //交易金额
             map.put("totalAmount", new BigDecimal(alipayTradeRefundResponse.getRefundFee()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            //退款状态
+            map.put("tradeStatus","SUCCESS");
             log.info("支付宝面对面支付退款,map={}", map);
             return map;
         } catch (AliPayException | ParamNullException e) {
