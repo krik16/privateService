@@ -671,4 +671,23 @@ public class DateUtil {
 		}
 		return sb.toString();
 	}
+
+
+	public static String getLastDay() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1); //得到前一天
+		Date date = calendar.getTime();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		return df.format(date);
+	}
+
+	public static void main(String[] args){
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1); //得到前一天
+		Date date = calendar.getTime();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(df.format(date));
+		System.out.println(getLastDay());
+
+	}
 }

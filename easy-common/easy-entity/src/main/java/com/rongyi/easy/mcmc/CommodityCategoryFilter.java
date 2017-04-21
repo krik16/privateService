@@ -18,7 +18,9 @@ public class CommodityCategoryFilter implements  Serializable{
 	private static final long serialVersionUID = 8165600555842780949L;
 	@Id
 	private ObjectId id;
+	//shopid  brandId  mallid
 	private String filter_id;
+	// 1:店铺 2：品牌 3：商场
 	private int filter_type;
 	private List<ObjectId> category_list;
 	private Date createAt;

@@ -983,9 +983,11 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	}
 	public CommodityVO(Commodity commodity){
+		this.merchantId = commodity.getMerchantId();
 		this.commodityType = commodity.getType();//渠道  0商家，1买手
 		this.shopId = commodity.getShopId();
 		this.shopMid = commodity.getShopMid();//店铺mongoId
+		this.shopName = commodity.getShopName();
 		this.create_by = commodity.getCreate_by();//创建人
 		this.liveId = commodity.getLiveId();//直播id
 		this.liveStartTime = commodity.getLiveStartTime();//直播开始时间

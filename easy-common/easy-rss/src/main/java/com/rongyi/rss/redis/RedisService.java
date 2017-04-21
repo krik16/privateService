@@ -71,4 +71,17 @@ public interface RedisService {
      * @throws Exception
      */
     public Object getObject(String key ,Class c) throws Exception;
+
+    /**
+     * 在某段时间后消失
+     *
+     * @param key
+     * @param seconds
+     * @return
+     */
+    public Long expire(String key, int seconds) ;
+
+
+
+
 }

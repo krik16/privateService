@@ -1,10 +1,8 @@
 package com.rongyi.easy.mcmc.vo.commodity.new1;
 
 import com.rongyi.core.common.util.DateTool;
-import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.malllife.constants.Constants;
-import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
