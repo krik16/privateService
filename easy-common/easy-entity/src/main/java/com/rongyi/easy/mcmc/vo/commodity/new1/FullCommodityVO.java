@@ -1,7 +1,6 @@
 package com.rongyi.easy.mcmc.vo.commodity.new1;
 
-import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -10,24 +9,16 @@ import java.util.List;
  */
 public class FullCommodityVO {
 
-    private List<CommoditySpecVO> specVOs;
-    private CommodityVO commodityVO;
+    private List<CommodityVO> commodityVOs;
     private TotalCommodityVO totalCommodityVO;
+    private List<String> delCommodityIds;
 
-    public CommodityVO getCommodityVO() {
-        return commodityVO;
+    public List<CommodityVO> getCommodityVOs() {
+        return commodityVOs;
     }
 
-    public void setCommodityVO(CommodityVO commodityVO) {
-        this.commodityVO = commodityVO;
-    }
-
-    public List<CommoditySpecVO> getSpecVOs() {
-        return specVOs;
-    }
-
-    public void setSpecVOs(List<CommoditySpecVO> specVOs) {
-        this.specVOs = specVOs;
+    public void setCommodityVOs(List<CommodityVO> commodityVOs) {
+        this.commodityVOs = commodityVOs;
     }
 
     public TotalCommodityVO getTotalCommodityVO() {
@@ -36,5 +27,22 @@ public class FullCommodityVO {
 
     public void setTotalCommodityVO(TotalCommodityVO totalCommodityVO) {
         this.totalCommodityVO = totalCommodityVO;
+    }
+
+    public List<String> getDelCommodityIds() {
+        return delCommodityIds;
+    }
+
+    public void setDelCommodityIds(List<String> delCommodityIds) {
+        this.delCommodityIds = delCommodityIds;
+    }
+
+    @Override
+    public String toString() {
+        return "FullCommodityVO{" +
+                "commodityVOs=" + commodityVOs +
+                ", totalCommodityVO=" + totalCommodityVO.toString() +
+                ", delCommodityIds=" + delCommodityIds +
+                '}';
     }
 }

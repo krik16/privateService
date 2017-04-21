@@ -698,6 +698,83 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
 	}
 
+	/**
+	 * 重构：新vo
+	 * @param commodity
+	 * @param vo
+	 */
+	public void wrapTotalCommodityInfo(Commodity commodity, com.rongyi.easy.mcmc.vo.commodity.new1.CommodityVO vo) {
+		this.setName(commodity.getName());
+		this.setCategory(commodity.getCategory());
+		this.setStatus(commodity.getStatus());
+		this.setCode(commodity.getCode());
+		this.setDescription(commodity.getDescription());
+		this.setPostage(commodity.getPostage());
+		this.setStock(commodity.getStock());
+		this.setCommodityModelNo(commodity.getCommodityModelNo());
+		this.setGoodsParam(commodity.getGoodsParam());
+		this.setSkus(commodity.getSkus());
+
+		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
+			//totalCommodity总表显示时间区域
+			this.setOriginalPrice(commodity.getoPriceMin() +
+					(commodity.getoPriceMax().equals(commodity.getoPriceMin()) ?
+							"-" + commodity.getoPriceMax() : ""));
+			this.setCurrentPrice(commodity.getcPriceMin() +
+					(commodity.getcPriceMax().equals(commodity.getcPriceMin()) ?
+							"-" + commodity.getcPriceMax() : ""));
+		} else {
+			this.setCurrentPrice(commodity.getCurrentPrice());
+			this.setOriginalPrice(commodity.getOriginalPrice());
+		}
+
+		this.setCreateAt(commodity.getCreateAt());
+		this.setUpdateAt(commodity.getUpdateAt());
+		this.setCategoryIds(commodity.getCategoryIds());
+
+		this.setPicList(commodity.getPicList());
+		this.setFreight(0);//app默认买家承担运费
+		this.setTerminalType(commodity.getTerminalType());
+		this.setRegisterAt(commodity.getRegisterAt());
+		this.setSoldOutAt(commodity.getSoldOutAt());
+		this.setSource(commodity.getSource());
+		this.setStockStatus(commodity.getStockStatus());
+		this.setCommodityIds(new ArrayList<ObjectId>());
+		this.getCommodityIds().add(commodity.getId());
+		this.setBrandMid(commodity.getBrandMid());
+		this.setBrandName(commodity.getBrandName());
+		this.setFilialeMids(new ArrayList<String>());
+		this.getFilialeMids().add(commodity.getFilialeMid());
+		this.setShopMids(new ArrayList<String>());
+		this.getShopMids().add(commodity.getShopMid());
+
+		if (StringUtils.isNotBlank(vo.getCreate_by()) && vo.getCreate_by().matches("\\d+")) {
+			this.setUpdateBy(Integer.valueOf(vo.getCreate_by()));
+			this.setCreateBy(Integer.valueOf(vo.getCreate_by()));
+		}
+		this.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		this.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		this.setIdentity(commodity.getIdentity());
+		this.setTemplateId(commodity.getTemplateId());//总表写入模版id
+		if(CollectionUtils.isNotEmpty(commodity.getCustomCategoryIds())){
+			this.setCustomCategoryIds((commodity.getCustomCategoryIds()));
+		}
+		this.setReason(commodity.getReason());
+		this.setShelvesType(commodity.getShelvesType());
+		this.setSubheading(commodity.getSubheading());
+		this.setCommodityDetails(commodity.getCommodityDetails());
+
+		this.setLocationIds(commodity.getLocationIds());
+		this.setAccountType(commodity.getIdentity());
+		//this.setServiceIds(commodity.getServiceIds());
+		this.setMallServiceIds(commodity.getMallServiceIds());
+		this.setMerchantId(commodity.getMerchantId());
+		this.setShelvesType(commodity.getShelvesType());
+		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		this.setServiceDescription(commodity.getServiceDescription());
+		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+	}
+
 	public String getSubheading() {
 		return subheading;
 	}

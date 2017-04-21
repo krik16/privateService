@@ -1,6 +1,9 @@
 package com.rongyi.easy.mcmc.vo.commodity.new1;
 
+import com.rongyi.core.common.util.DateTool;
+import com.rongyi.core.constant.Identity;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
@@ -105,6 +108,8 @@ public class TotalCommodityVO implements Serializable, Cloneable {
     private List<String> offServiceIds;
     private String brandName;
     private Integer commodityRange;
+    private Integer updateType = 1; // 0：修改库存，1：修改商品。默认1
+    private Integer sourceParam = 0; // 本次数据来源。0：商家后台页面添加，1：海信导入，2：app摩店。默认0
 
     public ObjectId getId() {
         return id;
@@ -558,6 +563,87 @@ public class TotalCommodityVO implements Serializable, Cloneable {
         this.commodityRange = commodityRange;
     }
 
+    public Integer getUpdateType() {
+        return updateType;
+    }
+
+    public void setUpdateType(Integer updateType) {
+        this.updateType = updateType;
+    }
+
+    public Integer getSourceParam() {
+        return sourceParam;
+    }
+
+    public void setSourceParam(Integer sourceParam) {
+        this.sourceParam = sourceParam;
+    }
+
+    @Override
+    public String toString() {
+        return "TotalCommodityVO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", status=" + status +
+                ", code='" + code + '\'' +
+                ", barCode='" + barCode + '\'' +
+                ", description='" + description + '\'' +
+                ", postage='" + postage + '\'' +
+                ", stock=" + stock +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", originalPrice='" + originalPrice + '\'' +
+                ", currentPrice='" + currentPrice + '\'' +
+                ", updateBy=" + updateBy +
+                ", createBy=" + createBy +
+                ", picList=" + picList +
+                ", categoryIds=" + categoryIds +
+                ", customCategoryIds=" + customCategoryIds +
+                ", freight=" + freight +
+                ", terminalType=" + terminalType +
+                ", registerAt=" + registerAt +
+                ", soldOutAt=" + soldOutAt +
+                ", source=" + source +
+                ", stockStatus=" + stockStatus +
+                ", commodityIds=" + commodityIds +
+                ", specList=" + specList +
+                ", reason='" + reason + '\'' +
+                ", brandMid='" + brandMid + '\'' +
+                ", filialeMids=" + filialeMids +
+                ", shopMids=" + shopMids +
+                ", commodityModelNo='" + commodityModelNo + '\'' +
+                ", goodsParam=" + goodsParam +
+                ", supportCourierDeliver=" + supportCourierDeliver +
+                ", supportSelfPickup=" + supportSelfPickup +
+                ", identity=" + identity +
+                ", immediateOn=" + immediateOn +
+                ", skus=" + skus +
+                ", purchaseCount=" + purchaseCount +
+                ", templateId=" + templateId +
+                ", goodsSec=" + goodsSec +
+                ", subheading='" + subheading + '\'' +
+                ", commodityDetails='" + commodityDetails + '\'' +
+                ", discount=" + discount +
+                ", shelvesType=" + shelvesType +
+                ", locationIds=" + locationIds +
+                ", serviceIds=" + serviceIds +
+                ", mallServiceIds=" + mallServiceIds +
+                ", accountType=" + accountType +
+                ", merchantId='" + merchantId + '\'' +
+                ", wechatInfoVos=" + wechatInfoVos +
+                ", serviceDescriptionId=" + serviceDescriptionId +
+                ", serviceDescription='" + serviceDescription + '\'' +
+                ", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
+                ", onServiceIds=" + onServiceIds +
+                ", offServiceIds=" + offServiceIds +
+                ", brandName='" + brandName + '\'' +
+                ", commodityRange=" + commodityRange +
+                ", updateType=" + updateType +
+                ", sourceParam=" + sourceParam +
+                '}';
+    }
+
     public Double getDiscount() {
         try {
             if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
@@ -571,6 +657,93 @@ public class TotalCommodityVO implements Serializable, Cloneable {
             return 10.0;
         } catch(Exception e) {
             throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void setTotalCommodityFromParam(CommodityParam param, SessionUserInfo userInfo, Map<String, Object> skus) {
+        try {
+            //老的商家后台数据默认是店长发布的商品
+            this.setIdentity(CommodityUtil.resetIdentity(this.getIdentity(), userInfo.getIdentity()));
+            this.setId(StringUtils.isNotBlank(param.getId())?new ObjectId(param.getId()):null);
+            this.setName(param.getName());
+            this.setCode(param.getCode());
+            this.setCategory(param.getCategory());
+            this.setCategoryIds(param.getCategoryIds());
+            this.setCustomCategoryIds(param.getCustomCategoryIds());
+            this.setDescription(param.getDescription());
+            this.setPostage(param.getPostage());
+            this.setOriginalPrice(param.getOriginalPrice());
+            this.setCurrentPrice(param.getCurrentPrice());
+            this.setPicList(param.getPicList());
+            this.setSupportCourierDeliver(true);
+            this.setSupportSelfPickup(true);
+            switch(param.getDistribution()){
+                //配送方式 1表示到店自提2快递3表示支持两种方式
+                //supportCourierDeliver支持快递发货字段  true 是    false否
+                // supportSelfPickup支持到店自提  true 是    false否
+                case 2:this.setSupportSelfPickup(false);break;
+                case 1:this.setSupportCourierDeliver(false);break;
+                case 0:this.setSupportCourierDeliver(false);this.setSupportSelfPickup(false);
+            }
+            this.setFreight(param.getFreight());
+            this.setTerminalType(param.getTerminalType());
+            if(param.getStatus() != null && param.getStatus() == 5) {// 立即上架
+                this.setRegisterAt(DateTool.addTime(new Date(), 3));
+                this.setSoldOutAt(DateTool.addYears(this.getRegisterAt(), 1));
+                this.setImmediateOn(true);//表示前端是立即上架修改页面展示使用
+            } else {
+                this.setRegisterAt(param.getRegisterAt());
+                this.setSoldOutAt(param.getSoldOutAt());
+            }
+            this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);//上架状态
+            //商家后台修改商品不能改变来源
+            if(this.getId() == null) {
+                this.setSource(0);
+            }
+            this.setStockStatus(param.getStockStatus());
+            if(this.getId() == null) {
+                this.setCreateAt(new Date());
+            }
+            this.setUpdateAt(new Date());
+            this.setUpdateBy(userInfo.getId());
+            this.setPurchaseCount(param.getPurchaseCount());
+            this.setTemplateId(param.getTemplateId());
+            this.setReason(param.getReason());
+
+            setFilialeMids(param.getCommoditySpeceParams(), this);
+            setShopMids(param.getCommoditySpeceParams(), this);
+
+            this.setCreateBy((param.getId() == null) ? userInfo.getId() : param.getCreateBy());
+
+            if(CollectionUtils.isNotEmpty(skus.keySet())) {
+                this.setSkus(new ArrayList<>(skus.keySet()));
+            }
+
+            this.setAccountType(userInfo.getIdentity());
+            this.setMallServiceIds(param.getServiceIds());
+            if(param.getTerminalType() == 1 ||
+                    param.getTerminalType() == 3 ||
+                    param.getTerminalType() == 5 ||
+                    param.getTerminalType() == 7) {
+                this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+            }
+            this.setMerchantId(userInfo.getBindingMid());
+            this.setSource(param.getSource());
+            this.setSubheading(param.getSubheading());
+            this.setCommodityDetails(param.getCommodityDetails());
+
+            this.setShelvesType(param.getShelvesType());
+
+            this.setBrandMid(param.getBrandMid());
+            this.setBrandName(param.getBrandName());
+            this.setCommodityModelNo(param.getCommodityModelNo());
+            this.setServiceDescriptionId(param.getServiceDescriptionId());
+            this.setServiceDescription(param.getServiceDescription());
+            this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());
+            this.setGoodsParam(Arrays.asList(param.getGoodsParam()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("参数错误");
         }
     }
 
@@ -644,13 +817,15 @@ public class TotalCommodityVO implements Serializable, Cloneable {
             // 对应商品所属店铺MongoIds
             setShopMids(param.getCommoditySpeceParams(), this);
 
+            // 判断商品是“修改库存”，还是“编辑商品信息”，涉及到mcmc中商品总表是否更新commodityIds
+            this.setUpdateType(param.getType());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("参数错误");
         }
     }
 
-    private void setFilialeMids(List<CommoditySpecParam> commoditySpecParams, TotalCommodity totalCommodity) {
+    private void setFilialeMids(List<CommoditySpecParam> commoditySpecParams, TotalCommodityVO totalCommodityVO) {
         if(CollectionUtils.isNotEmpty(commoditySpecParams)){
             Set<String> set = new HashSet<>();
 
@@ -659,8 +834,7 @@ public class TotalCommodityVO implements Serializable, Cloneable {
                     set.add(commoditySpecParam.getFilialeMid());
                 }
             }
-
-            totalCommodity.setFilialeMids(new ArrayList<>(set));
+            totalCommodityVO.setFilialeMids(new ArrayList<>(set));
         }
     }
 
@@ -673,7 +847,6 @@ public class TotalCommodityVO implements Serializable, Cloneable {
                     set.add(commoditySpecParam.getShopMid());
                 }
             }
-
             totalCommodityVO.setShopMids(new ArrayList<>(set));
         }
     }

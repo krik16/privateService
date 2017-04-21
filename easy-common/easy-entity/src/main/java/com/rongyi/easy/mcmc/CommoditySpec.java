@@ -7,6 +7,7 @@ import java.util.*;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.OperateCommodityVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -220,4 +221,34 @@ public class CommoditySpec implements  Serializable {
 		this.setReferencePrice(vo.getReferencePrice());
 	}
 
+	/**
+	 * 重构：新vo
+	 * @param vo
+	 */
+	public void wrapSpecInfo(com.rongyi.easy.mcmc.vo.commodity.new1.CommoditySpecVO vo) {
+		// 编辑时，查出的spec的创建时间保留不变
+		if (null == this.createAt) {
+			this.setCreateAt(new Date());
+		}
+		this.setUpdateAt(new Date());
+		this.setOriginalPrice(vo.getSpecOriginalPrice());
+		this.setSku(vo.getSku());
+		this.setCurrentPrice(StringUtils.isNotBlank(vo.getSpecCurrentPrice()) ? vo.getSpecCurrentPrice() : vo.getSpecOriginalPrice());
+		if(vo.getSpecStock() == null || vo.getSpecStock().isEmpty()) {
+			vo.setSpecStock("99");
+		}
+		if (null != vo.getSpecId() && StringUtils.isNotBlank(getTotal()) && getTotal().matches("\\d+")
+				&& StringUtils.isNotBlank(vo.getSpecStock()) && vo.getSpecStock().matches("\\d+")
+				&& StringUtils.isNotBlank(getStock()) && getStock().matches("\\d+")) {
+			this.setTotal(String.valueOf(Integer.valueOf(getTotal())
+					+ Integer.valueOf(vo.getSpecStock())
+					- Integer.valueOf(getStock())));
+		} else {
+			this.setTotal(vo.getSpecStock());
+		}
+
+		this.setStock(vo.getSpecStock());
+		this.setPictureUrl(vo.getSpecPictureUrl());
+		this.setReferencePrice(vo.getReferencePrice());
+	}
 }

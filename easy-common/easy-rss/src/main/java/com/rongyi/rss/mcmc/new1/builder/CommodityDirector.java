@@ -19,7 +19,7 @@ public class CommodityDirector {
         this.userInfo = userInfo;
     }
 
-    public FullCommodityVO build(ICommodityBuilder builder) {
+    public FullCommodityVO build(ICommodityBuilder builder) throws Exception {
         return builder.buildFullCommodity(commodityParam, userInfo);
     }
 }

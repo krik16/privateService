@@ -1,0 +1,18 @@
+package com.rongyi.rss.mcmc.new1;
+
+import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.CommoditySpec;
+import com.rongyi.easy.mcmc.vo.commodity.new1.CommodityVO;
+
+import java.util.List;
+import java.util.Map;
+
+
+public interface ICommoditySpecService {
+	
+	public Map<String, Object> createSpec(CommodityVO commodityVo);
+
+	public Map<String, Object> editSpec(CommodityVO commodityVo);
+
+	public List<CommoditySpec> getSpecListByCommodityList(List<Commodity> commodityList);
+}
