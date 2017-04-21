@@ -6,9 +6,7 @@ import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
-import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
-import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.util.CommodityUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -101,7 +99,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer terminalType;// com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	@Field("systemNumber")
 	private String systemNumber;
-	@Field("discount")
+	//@Field("discount")
 	private Double discount;
 	@Field("brandName")
 	private String brandName;
@@ -120,8 +118,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer top; ///< 置顶排序
 	@Field("secKillSign")
 	private String secKillSign;
-	@Field("extend")
-	private String extend;
+	//@Field("extend")
+	//private String extend;
 
 	@Field("commodityModelNo")
 	private String commodityModelNo;//商品款号
@@ -273,6 +271,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setSold(Integer sold) {
 		this.sold = sold;
 	}
+
 
 	public Date getPublic_start() {
 		return public_start;
@@ -528,13 +527,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		return updateAt;
 	}
 
-	public String getExtend() {
+	/*public String getExtend() {
 		return extend;
 	}
 
 	public void setExtend(String extend) {
 		this.extend = extend;
-	}
+	}*/
 
 	public String getShopName() {
 		return shopName;
@@ -599,6 +598,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setServiceIds(List<Integer> serviceIds) {
 		this.serviceIds = serviceIds;
 	}
+
+
+
+
 
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
 								 long brandId, long mallId, CommodityShopInfo shopInfo,
@@ -704,6 +707,87 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setHotAreaName(commodity.getHotAreaName());
 			this.setMallName(commodity.getMallName());
 			this.setShopName(commodity.getShopName());
+
+			this.setUpdateAt(commodity.getUpdateAt());
 		}
 	}
+
+
+
+
+	/** commoditytoNewDocument
+	 * commodity 转成  document
+	 * @param commodity
+	 */
+	public void commoditytoNewDocument(Commodity commodity) {
+		if(commodity != null) {
+			this.setId(commodity.getId().toString());
+			this.setCommodityName(commodity.getName());//商品名字
+			this.setCommodityNameSubdiv(commodity.getName());//商品名字
+			this.setCommodityCode(commodity.getCode());//商品编码
+			this.setCommodityShopId(commodity.getShopId());//商品所在店铺 MySQL id
+			this.setCommodityBrandId(commodity.getBrandId());//商品关联品牌 MySQL id
+			this.setBrand_id(commodity.getBrandMid());
+			this.setCommodityMallId(commodity.getMallId());//商品所在商场 MySQL id
+
+            /*商品状态*/
+			this.setStatus(commodity.getStatus());
+			this.setSold(commodity.getSold());//销量
+			this.setPrice(commodity.getPrice());
+			this.setTerminalType(commodity.getTerminalType());
+			this.setMallServiceIds(commodity.getMallServiceIds());
+			this.setOnServiceIds(commodity.getOnServiceIds());
+			this.setOffServiceIds(commodity.getOffServiceIds());
+			this.setCommodityModelNo(commodity.getCommodityModelNo());
+
+			//商品总表ID
+			//this.setSystemNumber(commodity.getSystemNumber());
+			//库存进入solr
+			//this.setStock(commodity.getStock());
+			//this.setLocationIds(commodity.getLocationIds());
+			this.setBrandName(commodity.getBrandName());
+
+			this.setCommodityRange(commodity.getCommodityRange());
+			this.setType(commodity.getType());
+			//设置特卖
+			if (commodity.getSaleId() != null && commodity.getSaleId() != 0) {
+				this.setSaleId(commodity.getSaleId());
+				this.setSortPosition(9999);
+			}
+
+			//发布 更新时间
+			if(null!=commodity.getRegisterAt()){
+			 this.setPublic_start(commodity.getRegisterAt());//上架时间
+			}else{
+			 this.setPublic_start(commodity.getCreateAt());
+			}
+
+			this.setUpdateAt(commodity.getUpdateAt());
+
+			// 新增店铺名称、商场名称、商圈名称
+			this.setHotAreaName(commodity.getHotAreaName());
+			this.setMallName(commodity.getMallName());
+			this.setShopName(commodity.getShopName());
+
+            //买手商品
+			if(commodity.getType() == Identity.BUYER) {
+				this.setSpot(commodity.isSpot());
+				if(commodity.isSpot()) {
+					this.setStatus(commodity.getStatus());
+				} else {
+					// 买手&非现货 商品 临时状态: -1
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
+				}
+
+			}
+			//直播商品排序
+			this.setTop(commodity.getSort());
+
+
+
+
+		}
+	}
+
+
 }
