@@ -2,9 +2,12 @@ package com.rongyi.rpb.bizz;
 
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.RyMchVo;
+import com.rongyi.easy.ryoms.entity.WechatTianyiPayVo;
 import com.rongyi.pay.core.ali.config.AliConfigure;
 import com.rongyi.pay.core.ali.model.reqData.AliScanPayReqData;
+import com.rongyi.pay.core.tianyi.param.TianyiParam;
 import com.rongyi.pay.core.unit.AliPayUnit;
+import com.rongyi.pay.core.unit.TianyiPayUnit;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
@@ -19,6 +22,7 @@ import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.unit.PayConfigInitUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.malllife.service.IRedisService;
+import com.rongyi.rss.rpb.OrderNoGenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +42,8 @@ public class PaySignBizz extends BaseBizz{
     IRedisService redisService;
     @Autowired
     PayConfigInitUnit payConfigInitUnit;
+    @Autowired
+    OrderNoGenService orderNoGenService;
 
     /**
      * 微信扫码支付签名
@@ -142,6 +148,28 @@ public class PaySignBizz extends BaseBizz{
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, null);
         return resData ;
+    }
+
+    /**
+     * 翼支付获取唤起H5收银台url
+     * @param tianyiParam 业务请求参数
+     * @param orderType 订单类型
+     * @param source 来源
+     * @return 唤起h5收银台url
+     */
+    public String tianyiH5Pay(WechatTianyiPayVo wechatTianyiPayVo,TianyiParam tianyiParam, Integer orderType,Byte source) {
+        //初始化支付记录
+        PaymentEntity paymentEntity = initPaymentEntity(wechatTianyiPayVo, tianyiParam.getTianyiOrderParam().getOrderSeq(), Integer.parseInt(tianyiParam.getTianyiOrderParam().getOrderAmt()),
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt(), source);
+        if(paymentEntity.getId() != null){
+            paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
+        }
+        tianyiParam.getTianyiOrderParam().setOrderReqTranseq(paymentEntity.getPayNo());
+        tianyiParam.getPayDetailParam().setOrderReqTranseq(paymentEntity.getPayNo());
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, null);
+        //获取h5支付url
+        return TianyiPayUnit.tianyiPay(tianyiParam);
     }
 
 }

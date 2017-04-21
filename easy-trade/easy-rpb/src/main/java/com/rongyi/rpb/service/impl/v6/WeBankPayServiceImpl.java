@@ -129,7 +129,8 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             map.put("totalAmount", resData.getTotal_fee().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             //退款金额
             map.put("refundAmount", resData.getRefund_fee().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            //退款状态
+            map.put("tradeStatus","SUCCESS");
             return map;
         } catch (WebankException | ParamNullException e) {
             log.warn("微众微信退款失败,e={}", e.getMessage(), e);
@@ -291,7 +292,8 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             map.put("tradeNo", resData.getTradeNo());
             //交易金额
             map.put("totalAmount", new BigDecimal(resData.getRefundFee()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            //退款状态
+            map.put("tradeStatus","SUCCESS");
             log.info("微众支付宝支付退款结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
@@ -377,11 +379,12 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             throw e;
         } catch (Exception e) {
             log.error("微众支付宝扫码支付签名异常,e={}", e.getMessage(), e);
-            throw new TradePayException(ConstantEnum.EXCEPTION_WEIXIN_RERVERSE_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_RERVERSE_FAIL.getValueStr());
+            throw new TradePayException(ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getValueStr());
         }
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Map<String, Object> weBankWechatScanPaySign(RyMchVo ryMchVo, WwScanPaySignVo wwScanPaySignVo) throws TradePayException {
         log.info("微众微信公众号支付签名,wwScanPaySignVo={}",wwScanPaySignVo);
         try {

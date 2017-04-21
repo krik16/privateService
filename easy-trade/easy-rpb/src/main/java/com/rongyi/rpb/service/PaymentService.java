@@ -8,6 +8,7 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.easy.rpb.entity.PaymentOrderEntity;
+import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 
 /**
@@ -319,4 +320,8 @@ public interface PaymentService {
 	 * @return
 	 */
 	List<PaymentEntity> findList(PaymentOrderDto paymentOrderDto);
+
+	List<PaymentEntity> queryListByParam(PaymentOrderParam param);
+
+	Integer queryCountByParam(PaymentOrderParam paymentParam);
 }

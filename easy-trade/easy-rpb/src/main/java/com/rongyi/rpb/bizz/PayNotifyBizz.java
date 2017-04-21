@@ -3,23 +3,30 @@ package com.rongyi.rpb.bizz;
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.core.util.TradePaySignUtil;
+import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.roa.vo.RyMchAppVo;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.pay.core.Exception.AliPayException;
+import com.rongyi.pay.core.Exception.TianyiException;
 import com.rongyi.pay.core.Exception.WeChatException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.common.pay.util.HttpUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.mq.Sender;
+import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.service.WeixinPayService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import com.rongyi.rpb.unit.SaveUnit;
 import com.rongyi.rss.lightning.RoaRyMchAppService;
@@ -33,10 +40,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * conan
@@ -59,6 +63,12 @@ public class PayNotifyBizz {
     IRedisService redisService;
     @Autowired
     RoaRyMchAppService roaRyMchAppService;
+    @Autowired
+    WeixinPayService weixinPayService;
+    @Autowired
+    PaymentItemService paymentItemService;
+    @Autowired
+    Sender sender;
 
     private static final Integer maxRetryTimes = 7;//最多重试次数
 
@@ -143,6 +153,26 @@ public class PayNotifyBizz {
         }
     }
 
+    /**
+     * 天翼h5支付通知
+     */
+    public void tianyiH5payNotify(Map<String, String> paramMap) {
+        log.info("天翼h5通知内容,map={}",paramMap);
+        if ("0000".equals(paramMap.get("RETNCODE"))) {
+            String payNo = paramMap.get("ORDERREQTRANSEQ");
+            String tradeNo = paramMap.get("UPTRANSEQ");
+            BigDecimal payAmount = new BigDecimal(paramMap.get("ORDERAMOUNT"));
+
+            this.doPayNotify(payNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
+        } else {
+            throw new WebankException("通知结果异常,map=" + paramMap);
+        }
+    }
+
+    /**
+     * pos 银行卡支付通知
+     * @param dto 通知参数
+     */
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
 
         //获取开放平台商户信息
@@ -172,6 +202,27 @@ public class PayNotifyBizz {
 
            doPosBankRefundNotify(dto,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
        }
+    }
+
+
+    /**
+     *翼支付退款通知
+     * @param map 通知参数
+     */
+    public void tianyiRefundNotify(Map<String, String> map) {
+        log.info("翼支付退款内容,map={}",map);
+        if ("B".equals(map.get("transStatus"))) {
+            String refundNo = map.get("refundReqNo");
+            String tradeNo = map.get("ourTransNo");
+            Integer payAmount = Integer.valueOf(map.get("transAmt"));
+
+            this.doTianyiRefundNotify(refundNo, payAmount, tradeNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, "", "");
+        }else if("C".equals(map.get("transStatus"))){
+            //翼支付退款状态失败,此结果大部分是由于部分退款当天的通知是失败的情况导致的,忽略此通知,等待第二天的退款成功通知再更新退款状态
+            log.warn("翼支付退款状态失败,忽略,map={}",map);
+        } else {
+            throw new TianyiException("通知结果异常,map=" + map);
+        }
     }
 
     /**
@@ -218,6 +269,45 @@ public class PayNotifyBizz {
         //通知第三方业务
         payNotifyThird(paymentEntity, paymentLogInfo);
     }
+    /**
+     * 处理退款通知
+     *
+     * @param payNo      付款单号
+     * @param payAmount  付款金额(单位元)
+     * @param tradeNo    交易流水号
+     * @param payChannel 支付渠道
+     * @param buyerId    买家id
+     * @param buyerEmail 买家账号
+     */
+    public void doTianyiRefundNotify(String payNo, Integer payAmount, String tradeNo, Integer payChannel, String buyerId, String buyerEmail) {
+        //获取支付信息
+        PaymentEntity paymentEntity = paymentService.selectByPayNoWithLock(payNo, payChannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null);
+        if (paymentEntity == null) {
+            log.warn("此订单退款记录不存在,payNo={}", payNo);
+            throw new TradeException(ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_RECORED_NOT_EXIST.getValueStr());
+        }
+
+        //初始化支付事件记录
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(tradeNo, payNo, null, "SUCCESS", payAmount,
+                buyerId, buyerEmail, 0, Constants.EVENT_TYPE.EVENT_TYPE0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
+        //检查重复支付
+        boolean reNotify = paymentLogInfoService.validateByTradeNoAndPayNo(tradeNo,paymentEntity.getPayNo());
+
+        // 验证是否是重复通知
+        if (reNotify) {
+            log.info("此订单已完成支付,重复通知...payNo={}", paymentEntity.getPayNo());
+            return;
+        }
+        //更新付款状态
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        paymentEntity.setFinishTime(new Date());
+
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        //发送退款通知
+        refundNotifyMq(paymentEntity);
+    }
+
 
     /**
      * 处理pos银行卡退款通知
@@ -245,7 +335,7 @@ public class PayNotifyBizz {
         ryMchVo.setOrgChannel(oldPaymentEntity.getOrgChannel());
         //初始化退款记录
         if(refundPaymentEntity == null) {
-            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount().intValue(), oldPaymentEntity.getOrderType(),
+            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount(), oldPaymentEntity.getOrderType(),
                     Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, oldPaymentEntity.getPayChannel(), oldPaymentEntity.getAliSellerId(), oldPaymentEntity.getWechatMchId(),
                     oldPaymentEntity.getPayScene());
         }
@@ -255,7 +345,7 @@ public class PayNotifyBizz {
 
         //初始化退款事件记录
         PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(posBankSynNotifyDto.getPaymentNo(), refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS", posBankSynNotifyDto.getPayAmount().intValue(), "", "",
+                "SUCCESS", posBankSynNotifyDto.getPayAmount(), "", "",
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
 
         //保存退款记录
@@ -356,7 +446,13 @@ public class PayNotifyBizz {
     private void notifyThird(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo, String type) throws ThirdException, UnsupportedEncodingException {
         log.info("容易网支付通知开始,orderNo={},tradeNo={},type={}", paymentEntity.getOrderNum(), paymentLogInfo.getTrade_no(), type);
 
-        //获取商户在容易网的注册信息
+        //支付通知如果是历史商品订单/卡券订单/礼品订单，不走新的http通知接口
+        if(paymentEntity.getOrderType() <= 2) {
+            paymentLogInfoService.paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(),
+                    paymentEntity.getOrderNum(), paymentEntity.getOrderType(), paymentEntity.getPayChannel().toString());
+            return;
+        }
+
         RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(paymentEntity.getRyMchId(), paymentEntity.getRyAppId());
         if (ryMchAppVo == null || StringUtil.isEmpty(ryMchAppVo.getToken())) {
             log.warn("ryMchId={},ryAppId={}",paymentEntity.getRyMchId(),paymentEntity.getRyAppId());
@@ -406,6 +502,30 @@ public class PayNotifyBizz {
         //删除异步通知地址
         redisService.expire(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), 1000);
         log.info("容易网支付通知结束");
+    }
+
+
+    /**
+     * 退款通知
+     */
+    private void refundNotifyMq(PaymentEntity refundPaymentEntity) {
+        Map<String, Object> bodyMap = new HashMap<>();
+        bodyMap.put("orderNum", refundPaymentEntity.getOrderNum());
+        bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
+        bodyMap.put("paymentId", refundPaymentEntity.getPayNo());
+        List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(refundPaymentEntity.getId());
+        bodyMap.put("orderDetailNum", paymentItemService.getDetailNum(itemList));
+        MessageEvent event = new MessageEvent();
+        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == refundPaymentEntity.getOrderType())// 优惠券订单退款
+            event.setTarget(Constants.SOURCETYPE.COUPON);
+        else
+            // 商品订单
+            event.setTarget(Constants.SOURCETYPE.OSM);
+        event.setSource(Constants.SOURCETYPE.RPB);
+        event.setTimestamp(DateUtil.getCurrDateTime().getTime());
+        event.setType(PaymentEventType.REFUND);
+        event.setBody(bodyMap);
+        sender.convertAndSend(event);
     }
 
     /**

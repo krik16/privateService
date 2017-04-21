@@ -117,6 +117,9 @@ public class ExportCartOrderExcel {
                 case 5:
                     result = "微信";
                     break;
+                case 6:
+                    result = "翼支付";
+                    break;
             }
         }
         return result;

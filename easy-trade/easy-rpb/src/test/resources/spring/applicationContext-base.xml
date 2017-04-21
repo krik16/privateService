@@ -45,6 +45,7 @@
 		<property name="alipayReverseTradeUrl" value="${WEBANK_ALI_PAY_REVERSE_TRADE_URL}"/>
 		<property name="alipayRefundUrl" value="${WEBANK_ALI_PAY_REFUND_URL}"/>
 		<property name="alipayRefundQueryUrl" value="${WEBANK_ALI_PAY_REFUND_QUERY_URL}"/>
+		<property name="tianyiRefundNotifyUrl" value="${TIANYI_REFUND_NOTIFY_URL}"/>
 	</bean>
 
 	<bean id="logAdvice" class="com.rongyi.core.common.log.LogAopAdvice"/>

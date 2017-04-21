@@ -118,7 +118,8 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             map.put("tradeNo", paymentEntityVo.getTradeNo());
             //交易金额
             map.put("totalAmount", paymentEntityVo.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            //退款状态
+            map.put("tradeStatus","SUCCESS");
             log.info("现金退款结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {

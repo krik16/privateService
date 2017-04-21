@@ -9,6 +9,7 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
+import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.tms.vo.MQDrawParam;
@@ -20,6 +21,7 @@ import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.*;
 import com.rongyi.rpb.web.controller.v5.WebPageAlipayController;
+import com.rongyi.rss.rpb.ItianyiPayService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -80,6 +82,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Autowired
     WeixinMchService weixinMchService;
+
+    @Autowired
+    ItianyiPayService tianyiPayService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
@@ -307,7 +312,34 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
 
         return bodyMap;
+    }
 
+    /**
+     * 检查是否是翼支付退款
+     */
+    private boolean isTianyiRefund(String orderNo,BigDecimal refundAmount,String type,String orderDetailNum){
+        //退款事件
+        if (PaymentEventType.REFUND.equals(type)){
+            PaymentEntity paymentEntity = selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6);
+            if(paymentEntity != null){
+                LOGGER.info("发起翼支付退款,orderNo={}",orderNo);
+                Integer totalAmount =refundAmount.multiply(new BigDecimal(100)).intValue();
+                //调用翼支付退款接口
+               Map<String,Object> map = tianyiPayService.refund(orderNo, totalAmount);
+                // 子订单是分成多条存入
+                if (StringUtils.isNotEmpty(orderDetailNum) && map.get("id") != null) {
+                    String[] detailNumArray = orderDetailNum.split(",");
+                    for (String detailNum : detailNumArray) {
+                        PaymentItemEntity paymentItemEntity = new PaymentItemEntity();
+                        paymentItemEntity.setDetailNum(detailNum);
+                        paymentItemEntity.setPaymentId(Integer.valueOf(map.get("id").toString()));
+                        paymentItemService.insert(paymentItemEntity);
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -328,6 +360,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
+        boolean isTianyiRefund = isTianyiRefund(paymentEntityVO.getOrderNum(),paymentEntityVO.getAmountMoney(),event.getType(), paymentEntityVO.getOrderDetailNumArray());
+        //翼支付退款直接返回
+        if(isTianyiRefund){
+            return paymentEntityVO;
+        }
         String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             Integer tradeType = Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0;
@@ -369,7 +406,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentEntityVO.setTitle(getTitle(payNo));
         }
         insertList(paymentEntityList, paymentEntityVO, event, oldPayNo);
-//        orderFormNsyn.updateOrderPrice(paymentEntityVO.getOrderNum());
         return paymentEntityVO;
     }
 
@@ -400,6 +436,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
                 paymentEntity.setPayChannel(historyPayment.getPayChannel());
                 paymentEntity.setWeixinMchId(historyPayment.getWeixinMchId());
+                paymentEntity.setTianyiPayId(historyPayment.getTianyiPayId());
             } else if (PaymentEventType.SEND_RED_BACK.equals(event.getType())) {// 微信发红包
                 paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE8);
             }
@@ -844,6 +881,33 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         params.put("orderNoList", orderNoList);
         params.put("tradeType", tradeType);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".batchQueryByOrderNos", params);
+    }
+
+    @Override
+    public List<PaymentEntity> queryListByParam(PaymentOrderParam param) {
+        Map<String, Object> params = new HashMap<>();
+        buildParamMap(params,param);
+        return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".queryListByParam", params);
+    }
+
+    @Override
+    public Integer queryCountByParam(PaymentOrderParam param) {
+        Map<String, Object> params = new HashMap<>();
+        buildParamMap(params,param);
+        return this.getBaseDao().count(PAYMENTENTITY_NAMESPACE + ".queryCountByParam", params);
+    }
+
+    private void buildParamMap(Map<String, Object> params, PaymentOrderParam param) {
+        params.put("orderNo", param.getOrderNo());
+        params.put("payChannel", param.getPayChannel());
+        params.put("startTime",param.getStartTime());
+        params.put("endTime",param.getEndTime());
+        params.put("ryMchId",param.getRyMchId());
+        params.put("pageSize",param.getPageSize());
+        params.put("startIndex",param.getStartIndex());
+        params.put("payerReconflag",param.getPayerReconflag());
+        params.put("tradeType",param.getTradeType());
+        params.put("stutus",param.getStatus());
     }
 
 	@Override

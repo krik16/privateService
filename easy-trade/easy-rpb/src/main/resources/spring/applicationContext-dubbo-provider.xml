@@ -42,4 +42,8 @@
 	<!-- 支付流水接口 -->
 	<dubbo:service interface="com.rongyi.rss.rpb.PaymentOrderService" version="${dubbo.version}" timeout="60000" retries="0" ref="paymentOrderService" />
 	<bean id="paymentOrderService" class="com.rongyi.rpb.service.impl.v6.PaymentOrderServiceImpl" />
+
+	<!-- 天翼支付接口 -->
+	<dubbo:service interface="com.rongyi.rss.rpb.ItianyiPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="tianyiPayService" />
+	<bean id="tianyiPayService" class="com.rongyi.rpb.service.impl.v6.TianyiPayServiceImpl" />
 </beans>  
