@@ -483,7 +483,17 @@ public class DateUtil {
 		Date currentTime = new Date();
 		return formatter.format(currentTime);
 	}
-	
+
+	/**
+	 * 格式化当前时间  返回格式yyyyMMddHHmmss
+	 * @return
+	 */
+	public static String getCurrentDateyyyyMMddhhmmss() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");
+		Date currentTime = new Date();
+		return formatter.format(currentTime);
+	}
+
 	/**	
 	 * @Description: 格式化当前时间  返回格式yyyy-MM-dd HH:mm:ss:SSS
 	 * @return	
