@@ -665,10 +665,10 @@
             <if test="orderNo != null and orderNo != ''">
                 and order_no = #{orderNo,jdbcType=VARCHAR}
             </if>
-            <if test="payChannel != null and payChannel != ''">
+            <if test="payChannel != null  and payChannel != -1 ">
                 and pay_channel = #{payChannel,jdbcType=INTEGER}
             </if>
-            <if test="payChannel == null || payChannel == '' || payChannel == -1 || payChannel !=0 ">
+            <if test="payChannel == null || payChannel == -1 ">
                 and pay_channel in (0,1,2,3)
             </if>
             <if test="payerReconflag != null and payerReconflag != -1">
@@ -705,10 +705,10 @@
         <if test="orderNo != null and orderNo != ''">
             and order_no = #{orderNo,jdbcType=VARCHAR}
         </if>
-        <if test="payChannel != null and payChannel != ''">
+        <if test="payChannel != null and payChannel != -1">
             and pay_channel = #{payChannel,jdbcType=INTEGER}
         </if>
-        <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+        <if test="payChannel == null || payChannel == -1 ">
                 and pay_channel in (0,1,2,3)
         </if>
         <if test="payerReconflag != null and payerReconflag != -1">

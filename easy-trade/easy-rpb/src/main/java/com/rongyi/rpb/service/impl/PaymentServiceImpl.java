@@ -886,7 +886,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public List<PaymentEntity> queryListByParam(PaymentOrderParam param) {
         Map<String, Object> params = new HashMap<>();
-        buildParamMap(params,param);
+        buildParamMap(params,param);    
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".queryListByParam", params);
     }
 
