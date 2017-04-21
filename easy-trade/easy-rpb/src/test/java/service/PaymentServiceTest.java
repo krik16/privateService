@@ -251,7 +251,7 @@ public class PaymentServiceTest extends BaseTest {
 
     //	@Test
     public void testselectByOrderNum() {
-        List<PaymentEntity> list = paymentService.selectByOrderNum("120468903680153834", 0, 0);
+        List<PaymentEntity> list = paymentService.selectByOrderNum("120468903680153834", 0, 0,null);
         System.err.println("listSize=" + list.size());
     }
 

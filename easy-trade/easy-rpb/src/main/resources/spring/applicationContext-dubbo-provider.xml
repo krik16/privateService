@@ -22,6 +22,15 @@
 	<!--微众支付服务接口-->
 	<dubbo:service interface="com.rongyi.rss.rpb.IweBankService" version="${dubbo.version}" timeout="60000" retries="0" ref="weBankService" />
 	<bean id="weBankService" class="com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl" />
+
+	<!--现金支付服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.ICashPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="cashPayService" />
+	<bean id="cashPayService" class="com.rongyi.rpb.service.impl.v6.CashPayServiceImpl" />
+
+	<!--pos银行卡服务接口-->
+	<dubbo:service interface="com.rongyi.rss.rpb.IPosBankCardPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="posBankCardPayService" />
+	<bean id="posBankCardPayService" class="com.rongyi.rpb.service.impl.v6.PosBankCardServiceImpl" />
+
 	<!--支付查询接口-->
 	<dubbo:service interface="com.rongyi.rss.rpb.IQueryService" version="${dubbo.version}" ref="queryService" />
 	<bean id="queryService" class="com.rongyi.rpb.service.impl.v6.QueryServiceImpl" />
@@ -29,4 +38,12 @@
 	<!-- 微信批量退款定时任务 -->
 	 <dubbo:service interface="com.rongyi.rss.service.trigger.WeixinBatchRefundTrigger" version="${dubbo.version}" timeout="60000" ref="weixinBatchRefundTrigger" retries="0"/>
 	 <bean id="weixinBatchRefundTrigger" class="com.rongyi.rpb.service.impl.WeixinBatchRefundTriggerImpl" />
+	 
+	<!-- 支付流水接口 -->
+	<dubbo:service interface="com.rongyi.rss.rpb.PaymentOrderService" version="${dubbo.version}" timeout="60000" retries="0" ref="paymentOrderService" />
+	<bean id="paymentOrderService" class="com.rongyi.rpb.service.impl.v6.PaymentOrderServiceImpl" />
+
+	<!-- 天翼支付接口 -->
+	<dubbo:service interface="com.rongyi.rss.rpb.ItianyiPayService" version="${dubbo.version}" timeout="60000" retries="0" ref="tianyiPayService" />
+	<bean id="tianyiPayService" class="com.rongyi.rpb.service.impl.v6.TianyiPayServiceImpl" />
 </beans>  

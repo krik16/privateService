@@ -186,7 +186,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
             String[] orderNumArray = orderNums.split(",");
             String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
             for (String orderNum : orderNumArray) {
-                if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType) {// 商品订单
+                if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType || Constants.ORDER_TYPE.ORDER_TYPE_2 == orderType) {// 商品订单、礼品订单
                     target = Constants.SOURCETYPE.OSM;
                 }
                 MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNum, null, payChannel, buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
