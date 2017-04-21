@@ -668,7 +668,7 @@
             <if test="payChannel != null and payChannel != ''">
                 and pay_channel = #{payChannel,jdbcType=INTEGER}
             </if>
-            <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+            <if test="payChannel == null || payChannel == '' || payChannel == -1 || payChannel !=0 ">
                 and pay_channel in (0,1,2,3)
             </if>
             <if test="payerReconflag != null and payerReconflag != -1">
