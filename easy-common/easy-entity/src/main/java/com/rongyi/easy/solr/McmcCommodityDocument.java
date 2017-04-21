@@ -699,6 +699,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setMallServiceIds(commodity.getMallServiceIds());
 			this.setOnServiceIds(commodity.getOnServiceIds());
 			this.setOffServiceIds(commodity.getOffServiceIds());
+
+			// 新增店铺名称、商场名称、商圈名称
+			this.setHotAreaName(commodity.getHotAreaName());
+			this.setMallName(commodity.getMallName());
+			this.setShopName(commodity.getShopName());
 		}
 	}
 }

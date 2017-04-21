@@ -73,7 +73,9 @@ public enum AppErrorCode {
     ERROR_GET_COUPON(1068106,"领取红包失败"),
     /** 注册快捷登录邀请码错误提示 */
     ERROE_INVITE_CODE(1069100,"您输入了错误邀请码，请重新输入"),
-    ERROR_APPROVAL_CODE(1069101, "该用户已点赞");
+    ERROR_APPROVAL_CODE(1069101, "该用户已点赞"),
+
+    ERROR_INVALID_CHANNEL(1069102, "该渠道已存在");
 
 
 

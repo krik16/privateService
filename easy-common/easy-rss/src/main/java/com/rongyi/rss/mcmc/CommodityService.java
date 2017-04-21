@@ -443,4 +443,11 @@ public interface CommodityService {
     boolean updateSpecTotalStock(String specId, Integer stock);
 
     List<CustomCategoryVo> searchCategoryForHaiXin(CustomCategoryParam customCategoryParam);
+
+    /**
+     *
+     * @param commodity
+     * @return
+     */
+    public McmcCommodityDocument transferCommodityToMcmcCommodityDocument(Commodity commodity);
 }

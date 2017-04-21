@@ -4,6 +4,7 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -72,4 +73,26 @@ public class BeanMapUtils {
         }
         return returnMap;
     }
+
+    public static Map<String, Object> objectToMapRemoveSign(Object obj) throws IllegalAccessException{
+        if(obj == null){
+            return null;
+        }
+
+        Map<String, Object> map = new HashMap<>();
+            Field[] declaredFields = obj.getClass().getDeclaredFields();
+            for (Field field : declaredFields) {
+                field.setAccessible(true);
+                Object value = field.get(obj);
+                if("sign".equals(field.getName()))
+                    continue;
+                if("serialVersionUID".equals(field.getName()))
+                    continue;
+                if (value!=null&&value!="") {
+                    map.put(field.getName(), field.get(obj) + "");
+                }
+            }
+        return map;
+    }
+
 }
