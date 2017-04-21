@@ -25,6 +25,10 @@ public class ResponseResult2 implements java.io.Serializable {
 	public void setData(Object data) {
 		this.result.setData(data);
 	}
+	public Object getData() {
+		return result.getData();
+	}
+
 	public void setTotal_record(int total_record) {
 		this.result.setTotal_record(total_record);
 	}
