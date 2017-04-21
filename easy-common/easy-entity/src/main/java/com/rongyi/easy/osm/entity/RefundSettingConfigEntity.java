@@ -249,7 +249,7 @@ public class RefundSettingConfigEntity implements Serializable {
         this.limitTimeForCommodity = 5 * 24 * 3600;
         this.limitTimeForNonDelivery = 5 * 24 * 3600;
         this.limitTimeForNonVisit = 7 * 24 * 3600;
-        this.limitTimeForNonCofirm = 9 * 24 * 3600;
+        this.limitTimeForNonCofirm = 7 * 24 * 3600;
         this.maxComplaintTime = 3 * 24 * 3600;
         this.intevalRefundTime = 24 * 3600;
         this.configType = 1;
