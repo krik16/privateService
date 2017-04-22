@@ -575,7 +575,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			sheet.getRow(titleRow).createCell(column++).setCellValue(orderTypeName);//订单类型
 			sheet.getRow(titleRow).createCell(column++).setCellValue(unitNum);//商品数量
 			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.toString());//结算金额=订单总金额 - 改价优惠 + 邮费 -退款金额-满减补贴退回金额
-			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.subtract(reductionFee).subtract(hbDiscountMer).subtract(rebateDiscountMer).toString());//实际收入= 实际支付金额 + 平台补贴金额（含抵扣券、红包、容颜值）
+			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.add(reductionRefundFee).subtract(reductionFee).subtract(hbDiscountMer).subtract(rebateDiscountMer).toString());//实际收入= 实际支付金额 + 平台补贴金额（含抵扣券、红包、容颜值）
 			sheet.getRow(titleRow).createCell(column++).setCellValue(rebateDiscountMer.toString());//商家抵扣券补贴
 			sheet.getRow(titleRow).createCell(column++).setCellValue(hbDiscountMer.toString());//商家红包补贴
 			sheet.getRow(titleRow).createCell(column++).setCellValue(reductionFee.toString());//满减活动（商家补贴）
