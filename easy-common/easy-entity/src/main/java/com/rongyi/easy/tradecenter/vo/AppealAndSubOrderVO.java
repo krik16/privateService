@@ -50,6 +50,7 @@ public class AppealAndSubOrderVO implements Serializable{
     private String buyerPhone;//买家手机号
     private String buyerId;//买家id
     private String appealComment;// 退款说明
+    private int isFreeze;// 是否冻结 0：正常流程 1：冻结流程
 
     public String getShopId() {
         return shopId;
@@ -329,6 +330,14 @@ public class AppealAndSubOrderVO implements Serializable{
 
     public void setAppealComment(String appealComment) {
         this.appealComment = appealComment;
+    }
+
+    public int getIsFreeze() {
+        return isFreeze;
+    }
+
+    public void setIsFreeze(int isFreeze) {
+        this.isFreeze = isFreeze;
     }
 
     @Override
