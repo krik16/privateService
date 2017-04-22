@@ -22,6 +22,8 @@ public class ComplaintFormVO implements Serializable {
     private String commodityName;
     // 申诉单号
     private String complaintNo;
+    // 订单编号
+    private Integer orderId;
     // 订单号
     private String orderNo;
     // 退款单号
@@ -207,6 +209,14 @@ public class ComplaintFormVO implements Serializable {
         this.resultDate = resultDate;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         return "ComplaintFormVO{" +
@@ -217,6 +227,7 @@ public class ComplaintFormVO implements Serializable {
                 ", commoditySpecId='" + commoditySpecId + '\'' +
                 ", commodityName='" + commodityName + '\'' +
                 ", complaintNo='" + complaintNo + '\'' +
+                ", orderId=" + orderId +
                 ", orderNo='" + orderNo + '\'' +
                 ", refundNo='" + refundNo + '\'' +
                 ", refundAmount='" + refundAmount + '\'' +
@@ -228,7 +239,7 @@ public class ComplaintFormVO implements Serializable {
                 ", resultBy='" + resultBy + '\'' +
                 ", resultRemark='" + resultRemark + '\'' +
                 ", resultStatus=" + resultStatus +
-                ", resultDate=" + resultDate +
+                ", resultDate='" + resultDate + '\'' +
                 ", status=" + status +
                 '}';
     }

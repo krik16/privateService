@@ -28,6 +28,8 @@ public class RefundFormVO implements Serializable {
     private String commoditySn;
     // 申诉单号
     private String complaintNo;
+    // 订单ID
+    private Integer orderId;
     // 订单号
     private String orderNo;
     // 子订单号
@@ -247,6 +249,14 @@ public class RefundFormVO implements Serializable {
         this.id = id;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         return "RefundFormVO{" +
@@ -260,6 +270,7 @@ public class RefundFormVO implements Serializable {
                 ", commodityImage='" + commodityImage + '\'' +
                 ", commoditySn='" + commoditySn + '\'' +
                 ", complaintNo='" + complaintNo + '\'' +
+                ", orderId=" + orderId +
                 ", orderNo='" + orderNo + '\'' +
                 ", orderItemNo='" + orderItemNo + '\'' +
                 ", refundNo='" + refundNo + '\'' +
