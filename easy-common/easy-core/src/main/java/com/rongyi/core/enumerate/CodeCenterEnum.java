@@ -72,7 +72,7 @@ public enum CodeCenterEnum {
     JIADELI_ERROR_URL(1000012, "地址错误"),
     ERROR_COUPON_TYPE(1021353,"礼品券类型不对！！！"),
     ERROR_TRADE_RETURN(1021354,"查询交易信息失败！！！"),
-    SHANDE_ERROR_ACCOUNT(1000011, "未找到衫德账号信息"),
+    SHANDE_ERROR_ACCOUNT(1000011, "未找到杉德账号信息"),
     
     //万达BO验券错误码
     ERROR_USERD(1000001, "卡券已使用，重复验券"),
