@@ -19,6 +19,7 @@ public class WechatPayVo implements Serializable{
 	private Byte isRongyiPay;       //是否容易内部支付 0不是 1是
 	private String cretPath;        //证书路径
 	private String apiKey ;            //API密钥
+	private Integer isDisabled ;      //是否禁用 0未禁用 1已禁用
 	
 	public Integer getId() { 
 		return id;
@@ -61,5 +62,13 @@ public class WechatPayVo implements Serializable{
 	}
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+
+	public Integer getIsDisabled() {
+		return isDisabled;
+	}
+
+	public void setIsDisabled(Integer isDisabled) {
+		this.isDisabled = isDisabled;
 	}
 }
