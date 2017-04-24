@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface ICommodityHandler {
 
-    public List<String> saveCommodityAndTotal(FullCommodityVO fullCommodityVO) throws Exception;
+    public List<String> saveOrUpdate(FullCommodityVO fullCommodityVO) throws Exception;
 
 }
