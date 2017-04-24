@@ -344,6 +344,6 @@ public class Util {
 	 * @return
 	 */
 	public static String joinString(String str1, Object str2) {
-		return str1 + "_" + str2;
+		return "_" + str1 + "_" + str2;
 	}
 }
