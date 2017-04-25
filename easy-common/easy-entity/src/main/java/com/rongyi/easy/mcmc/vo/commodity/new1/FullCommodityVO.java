@@ -2,13 +2,15 @@ package com.rongyi.easy.mcmc.vo.commodity.new1;
 
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by yaoyiwei on 2017/4/11.
  */
-public class FullCommodityVO {
+public class FullCommodityVO implements Serializable {
 
+    private static final long serialVersionUID = 8138633144544500349L;
     private List<CommodityVO> commodityVOs;
     private TotalCommodityVO totalCommodityVO;
     private List<String> delCommodityIds;
