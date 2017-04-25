@@ -141,6 +141,8 @@ public interface OrderEventType {
     public static final String REFUND_CLOSE_BY_CANCEL_ORDER = "59";
     /** 申请退款导致旧退款单关闭*/
     public static final String REFUND_CLOSE_BY_REQUEST_REFUND = "60";
+    /** 商家拒绝导致退款关闭*/
+    public static final String REFUND_CLOSE_SELLER_REFUSE_REFUND = "61";
 
     // 退款超时事件
     // 超时自动退款

@@ -16,6 +16,7 @@ public class RefundParam  implements Serializable {
     private String memberId;//用户id
     private String orderNo;//订单号
     private String sonOrderNo;//子订单号
+    private String orderStatus;//订单状态
     private int refundReasonId;//退款原因id
     private int refundTypeId;//退款类型id
     private BigDecimal refundAmount;//退款金额
@@ -193,6 +194,14 @@ public class RefundParam  implements Serializable {
 
     public void setExpressName(String expressName) {
         this.expressName = expressName;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
