@@ -38,7 +38,7 @@ public interface ICommodityQueryService {
      * @return
      * @throws Exception
      */
-    public List<McmcCommodityDocument> getMcmcDocListByQueryParam(CommodityQueryParam commodityQueryParam) throws Exception;
+   // public List<McmcCommodityDocument> getMcmcDocListByQueryParam(CommodityQueryParam commodityQueryParam) throws Exception;
 
 
 }
