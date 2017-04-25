@@ -44,5 +44,12 @@ public interface ISmsLogInfoService {
      */
   public void updateFinalResult(SmsLogInfoDto smsLogInfoDto) throws Exception;
 
+  /**
+   *
+   * @param smsLogInfoDto 日志模型
+   * @return 查询数量
+   */
+  int selectCountByPhoneAndChannel(SmsLogInfoDto smsLogInfoDto);
+
 
 }
