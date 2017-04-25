@@ -142,4 +142,6 @@ public interface ShopService {
 	Shop getShopInfo(String id);
 
 	public void updateBaseData();
+
+	void  addOneLog(String shopId);
 }
