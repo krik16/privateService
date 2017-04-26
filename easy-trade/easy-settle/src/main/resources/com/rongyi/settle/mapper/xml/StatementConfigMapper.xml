@@ -417,14 +417,10 @@
                 and pbc.id &lt;&gt; #{excludeId}
             </if>
 
-            <!--检查关联或排除配置中店铺ID是否已存在-->
-            <if test="linkShopIds!=null and linkShopIds.size()>0">
-                and ((link_shop_op = 0 and sc.shop_id in
+            <!--检查配置中店铺ID是否已存在-->
+            <if test="linkShopIds!=null and linkShopIds.size()>0 ">
+                and sc.shop_id in
                 <foreach collection="linkShopIds" item="item" open="(" separator="," close=")">#{item}</foreach>
-                ) or
-                (link_shop_op = 1 and sc.shop_id not in
-                <foreach collection="linkShopIds" item="item" open="(" separator="," close=")">#{item}</foreach>
-                ))
             </if>
         </where>
     </select>
