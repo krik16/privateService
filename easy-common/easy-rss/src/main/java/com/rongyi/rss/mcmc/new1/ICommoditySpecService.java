@@ -10,9 +10,9 @@ import java.util.Map;
 
 public interface ICommoditySpecService {
 	
-	public Map<String, Object> createSpec(CommodityVO commodityVo);
+	public Map<String, Object> createSpec(CommodityVO commodityVo) throws Exception;
 
-	public Map<String, Object> editSpec(CommodityVO commodityVo);
+	public Map<String, Object> editSpec(CommodityVO commodityVo) throws Exception;
 
 	public List<CommoditySpec> getSpecListByCommodityList(List<Commodity> commodityList);
 }
