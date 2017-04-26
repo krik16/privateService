@@ -140,4 +140,8 @@ public interface ShopService {
 	public  void updateShopPhoto( ObjectId id,List<String> photos);
 
 	Shop getShopInfo(String id);
+
+	public void updateBaseData();
+
+	void  addOneLog(String shopId);
 }
