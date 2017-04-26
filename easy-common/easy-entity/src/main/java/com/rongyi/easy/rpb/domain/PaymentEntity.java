@@ -131,7 +131,14 @@ public class PaymentEntity implements Serializable {
 
 	private Byte orgChannel;
 
+	//天翼支付的配置ID
+	private Integer tianyiPayId;
+
+	//json格式数据快照
+	private String attach ;
+
 	private Integer payScene;
+
 
 	/**
 	 * 主键id
@@ -472,6 +479,22 @@ public class PaymentEntity implements Serializable {
 
 	public void setPayScene(Integer payScene) {
 		this.payScene = payScene;
+	}
+
+	public Integer getTianyiPayId() {
+		return tianyiPayId;
+	}
+
+	public void setTianyiPayId(Integer tianyiPayId) {
+		this.tianyiPayId = tianyiPayId;
+	}
+
+	public String getAttach() {
+		return attach;
+	}
+
+	public void setAttach(String attach) {
+		this.attach = attach;
 	}
 
 	@Override
