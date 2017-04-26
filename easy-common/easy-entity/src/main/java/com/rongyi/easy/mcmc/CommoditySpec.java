@@ -26,6 +26,7 @@ public class CommoditySpec implements  Serializable {
 	private String currentPrice;//规格现价
 	private List<ObjectId> columnIds;//规格id
 	private List<String> columnValues;//规格属性
+	private List<String> columnValueIds;//规格属性id
 	private List<String> columnNotes;//规格备注
 	private String extendColums;
 	private Date createAt;//创建时间
@@ -141,6 +142,14 @@ public class CommoditySpec implements  Serializable {
 		this.referencePrice = referencePrice;
 	}
 
+	public List<String> getColumnValueIds() {
+		return columnValueIds;
+	}
+
+	public void setColumnValueIds(List<String> columnValueIds) {
+		this.columnValueIds = columnValueIds;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -151,6 +160,8 @@ public class CommoditySpec implements  Serializable {
 				+ ((columnNotes == null) ? 0 : columnNotes.hashCode());
 		result = prime * result
 				+ ((columnValues == null) ? 0 : columnValues.hashCode());
+		result = prime * result
+				+ ((columnValueIds == null) ? 0 : columnValueIds.hashCode());
 		return result;
 	}
 
@@ -177,6 +188,11 @@ public class CommoditySpec implements  Serializable {
 			if (other.columnValues != null)
 				return false;
 		} else if (!columnValues.equals(other.columnValues))
+			return false;
+		if (columnValueIds == null) {
+			if (other.columnValueIds != null)
+				return false;
+		} else if (!columnValueIds.equals(other.columnValueIds))
 			return false;
 		return true;
 	}
