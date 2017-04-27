@@ -63,7 +63,8 @@ public class ParentOrderVO implements Serializable {
 
 	private String shopMid;// 店铺mongoId
 
-	private String shopLogo;// 店铺logo
+	private String shopLogo;// 店铺品牌logo
+	private String shopIcon;// 店铺自定义logo
 
 	private String isComment = "-1";// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
 
@@ -1057,6 +1058,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setIsFreeze(int isFreeze) {
 		this.isFreeze = isFreeze;
+	}
+
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
 	}
 
 	@Override
