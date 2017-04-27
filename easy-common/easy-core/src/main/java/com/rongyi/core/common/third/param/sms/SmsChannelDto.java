@@ -9,6 +9,11 @@ import java.util.Date;
  */
 public class SmsChannelDto extends SmsDto {
     private int id;     //id
+
+    private int limitNumber;  //限制次数
+
+    private String phoneWhiteList; //手机号白名单
+
     private String sign;    //短信签名
 
     private String remark;    //备注
@@ -40,6 +45,22 @@ public class SmsChannelDto extends SmsDto {
         this.setSendType(smsDto.getSendType());
         this.setIpLimit(smsDto.getIpLimit());
         this.setIpWhiteList(smsDto.getIpWhiteList());
+    }
+
+    public int getLimitNumber() {
+        return limitNumber;
+    }
+
+    public void setLimitNumber(int limitNumber) {
+        this.limitNumber = limitNumber;
+    }
+
+    public String getPhoneWhiteList() {
+        return phoneWhiteList;
+    }
+
+    public void setPhoneWhiteList(String phoneWhiteList) {
+        this.phoneWhiteList = phoneWhiteList;
     }
 
     public String getUrl() {
