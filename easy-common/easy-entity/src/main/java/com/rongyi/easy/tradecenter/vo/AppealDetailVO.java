@@ -18,6 +18,7 @@ public class AppealDetailVO implements Serializable{
     private String shopId;// 店铺mysqlId
     private String shopMid;// 店铺monogId
     private String shopLogo;// 店铺logo
+    private String shopIcon;// 店铺自定义logo
     private String shopAddress;// 店铺地址
     private Integer refundStatus;// 退款状态 0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：带卖家收货 6：退款关闭
     private Integer complaintStatus;// 维权状态 1：申诉中、2：申诉成功、3：申诉失败、4：申诉关闭
@@ -247,6 +248,14 @@ public class AppealDetailVO implements Serializable{
 
     public void setAppealComment(String appealComment) {
         this.appealComment = appealComment;
+    }
+
+    public String getShopIcon() {
+        return shopIcon;
+    }
+
+    public void setShopIcon(String shopIcon) {
+        this.shopIcon = shopIcon;
     }
 
     @Override
