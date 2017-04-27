@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 
 import com.rongyi.easy.malllife.constants.Constants;
-import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
-import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.roa.vo.GroupMemberVO;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -898,7 +895,7 @@ public class CommodityBuyerVO implements Serializable {
         }else{
             this.commodityPostage = "0.0";
         }
-        if(commodity.isSpot()){
+        if(commodity.getIsSpot()){
             this.isSpot = 1;//现货
         }else{
             this.isSpot = 0;//非现货

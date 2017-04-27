@@ -4,12 +4,10 @@ import com.rongyi.core.common.util.DateTool;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.param.CommodityParam;
-import com.rongyi.easy.mcmc.vo.commodity.new1.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.GiftPaymentVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -1004,7 +1002,7 @@ public class CommodityVO implements  Serializable, Cloneable {
 		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
-		this.isSpot = commodity.isSpot() ? 1 : 0;
+		this.isSpot = commodity.getIsSpot() ? 1 : 0;
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try {

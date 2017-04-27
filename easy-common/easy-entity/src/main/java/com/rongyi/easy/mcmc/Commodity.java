@@ -13,7 +13,6 @@ import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.util.CommodityUtil;
-import com.rongyi.easy.mcmc.vo.WechatSwitch;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -21,7 +20,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -438,7 +436,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setType(int type) {
 		this.type = type;
 	}
-	public boolean isSpot() {
+	public boolean getIsSpot() {
 		return isSpot;
 	}
 	public void setIsSpot(boolean isSpot) {
@@ -1630,7 +1628,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setMallName(source.getMallName());
 		commodity.setHotAreaName(source.getHotAreaName());
 		//commodity.setLiveId(source.getLiveId());
-		commodity.setIsSpot(source.isSpot());
+		commodity.setIsSpot(source.getIsSpot());
 		//commodity.setLiveStartTime(source.getLiveStartTime());
 		//commodity.setLiveEndTime(source.getLiveEndTime());
 		commodity.setLockedStock(source.getLockedStock());

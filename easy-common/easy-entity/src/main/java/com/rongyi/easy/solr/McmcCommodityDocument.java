@@ -656,10 +656,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
-			this.setSpot(commodity.isSpot());
+			this.setSpot(commodity.getIsSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
 			this.setTerminalType(commodity.getTerminalType());
-			if(commodity.isSpot()) {
+			if(commodity.getIsSpot()) {
 				this.setStatus(commodity.getStatus());
 			} else {
 				// 买手&非现货 商品 临时状态: -1
@@ -771,8 +771,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
             //买手商品
 			if(commodity.getType() == Identity.BUYER) {
-				this.setSpot(commodity.isSpot());
-				if(commodity.isSpot()) {
+				this.setSpot(commodity.getIsSpot());
+				if(commodity.getIsSpot()) {
 					this.setStatus(commodity.getStatus());
 				} else {
 					// 买手&非现货 商品 临时状态: -1
