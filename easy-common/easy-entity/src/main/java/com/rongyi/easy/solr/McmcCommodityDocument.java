@@ -717,18 +717,32 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	/** commoditytoNewDocument
 	 * commodity 转成  document
+	 *
 	 * @param commodity
 	 */
 	public void commoditytoNewDocument(Commodity commodity) {
 		if(commodity != null) {
+
 			this.setId(commodity.getId().toString());
 			this.setCommodityName(commodity.getName());//商品名字
 			this.setCommodityNameSubdiv(commodity.getName());//商品名字
+
+			//【1】过滤条件
 			this.setCommodityCode(commodity.getCode());//商品编码
 			this.setCommodityShopId(commodity.getShopId());//商品所在店铺 MySQL id
 			this.setCommodityBrandId(commodity.getBrandId());//商品关联品牌 MySQL id
 			this.setBrand_id(commodity.getBrandMid());
 			this.setCommodityMallId(commodity.getMallId());//商品所在商场 MySQL id
+			this.setCreateBy(commodity.getCreate_by()); //createBy
+
+			//【2】排序条件（整理ing）
+			this.setDiscount(commodity.getDiscount());
+
+
+
+			//【3】分组查询条件 （整理ing）
+			//商品总表ID（查询分组使用）
+			this.setSystemNumber(commodity.getSystemNumber());
 
             /*商品状态*/
 			this.setStatus(commodity.getStatus());
@@ -740,10 +754,15 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setOffServiceIds(commodity.getOffServiceIds());
 			this.setCommodityModelNo(commodity.getCommodityModelNo());
 
-			//商品总表ID
-			//this.setSystemNumber(commodity.getSystemNumber());
-			//库存进入solr
-			//this.setStock(commodity.getStock());
+
+
+			//直播商品,查询所有直播商品
+			this.setSaleId(commodity.getSaleId());
+			//特卖商品
+			this.setFlashSaleId(commodity.getFlashSaleId());
+
+
+			// this.setStock(commodity.getStock());
 			//this.setLocationIds(commodity.getLocationIds());
 			this.setBrandName(commodity.getBrandName());
 
