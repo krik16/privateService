@@ -441,7 +441,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public boolean isSpot() {
 		return isSpot;
 	}
-	public void setSpot(boolean isSpot) {
+	public void setIsSpot(boolean isSpot) {
 		this.isSpot = isSpot;
 	}
 	public Date getLiveStartTime() {
@@ -1295,7 +1295,7 @@ public class Commodity implements  Serializable,Cloneable{
 				}
 
 				if (vo.getIsSpot() == 1) {
-					this.setSpot(true);
+					this.setIsSpot(true);
 					if (this.getStock() <= 0) {
 						this.setStatus(0);
 					} else {
@@ -1307,7 +1307,7 @@ public class Commodity implements  Serializable,Cloneable{
 						}
 					}
 				} else {
-					this.setSpot(false);
+					this.setIsSpot(false);
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
 				}
 				this.setType(CommodityType.BULL.getValue());
@@ -1532,7 +1532,7 @@ public class Commodity implements  Serializable,Cloneable{
 				}
 
 				if (vo.getIsSpot() == 1) {
-					this.setSpot(true);
+					this.setIsSpot(true);
 					if (this.getStock() <= 0) {
 						this.setStatus(0);
 					} else {
@@ -1544,7 +1544,7 @@ public class Commodity implements  Serializable,Cloneable{
 						}
 					}
 				} else {
-					this.setSpot(false);
+					this.setIsSpot(false);
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
 				}
 				this.setType(CommodityType.BULL.getValue());
@@ -1630,7 +1630,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setMallName(source.getMallName());
 		commodity.setHotAreaName(source.getHotAreaName());
 		//commodity.setLiveId(source.getLiveId());
-		commodity.setSpot(source.isSpot());
+		commodity.setIsSpot(source.isSpot());
 		//commodity.setLiveStartTime(source.getLiveStartTime());
 		//commodity.setLiveEndTime(source.getLiveEndTime());
 		commodity.setLockedStock(source.getLockedStock());
