@@ -6,8 +6,10 @@ import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.*;
-import com.rongyi.pay.core.webank.param.WaPunchCardPayParam;
-import com.rongyi.pay.core.webank.param.WwPunchCardPayParam;
+import com.rongyi.pay.core.webank.model.res.WaScanPayResData;
+import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
+import com.rongyi.pay.core.webank.model.res.WwScanQueryResData;
+import com.rongyi.pay.core.webank.param.*;
 import com.rongyi.pay.core.webank.service.WebankPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -209,6 +211,7 @@ public class WebankPayUnit {
 
     /**
      * 微众微信刷卡调用冲正接口
+     * @param param 请求参数
      */
     public static void waitWechatPunchCardReverse(WwPunchCardPayParam param ) {
         WwPunchCardReverseReqData reqData = new WwPunchCardReverseReqData(param);
@@ -425,7 +428,7 @@ public class WebankPayUnit {
         LOGGER.info("微众支付宝退款 reqData:{}",reqData);
         WaRefundResData resData = null;
         try {
-            ParamUnit.checkWebankAlipayRefund(reqData, configure);
+            ParamUnit.checkWebankAlipayRefund(reqData);
             WebankPayService  webankPayService = new WebankPayService();
             resData = webankPayService.alipayRefundTrade(reqData, configure);
             if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
@@ -448,7 +451,7 @@ public class WebankPayUnit {
         LOGGER.info("微众支付宝退款查询 reqData:{}",reqData);
         WaRefundQueryResData resData = null ;
         try {
-            ParamUnit.checkWebankAlipayRefundQuery(reqData, configure);
+            ParamUnit.checkWebankAlipayRefundQuery(reqData);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.alipayRefundTradeQuery(reqData, configure);
         } catch (WebankException | ParamNullException e) {
@@ -461,7 +464,7 @@ public class WebankPayUnit {
 
     /**
      * 微众支付宝获取token (用于获取签名所需的ticket)
-     * @return
+     * @return 返回结果
      */
     public static WaAccessTokenResData alipayGetToken() {
         LOGGER.info("微众支付宝获取token");
@@ -489,6 +492,81 @@ public class WebankPayUnit {
             e.printStackTrace();
         }
         return  resData;
+    }
+
+    /**
+     * 微众微信公众号支付
+     * @param param 请求参数
+     * @return 返回结果
+     */
+    public static WwScanPayResData wechatScanPay(WwScanPayParam param) {
+        LOGGER.info("微众微信公众号支付param:{}",param);
+        WwScanPayResData resData;
+        try {
+            ParamUnit.checkWebankWechatScanPay(param);
+            WebankPayService webankPayService  = new WebankPayService();
+            resData = webankPayService.wechatScanPay(param, configure);
+            if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getStatus())) {
+                throw new WebankException(resData.getStatus(),
+                        StringUtils.isEmpty(resData.getMessage()) ? ConstantEnum.EXCEPTION_SYSTEM_ERROR.getValueStr():resData.getMessage());
+            }else if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult_code())) {
+                throw new WebankException(resData.getResult_code(),
+                        StringUtils.isEmpty(resData.getErr_msg()) ? ConstantEnum.EXCEPTION_SYSTEM_ERROR.getValueStr() : resData.getErr_msg());
+            }
+        } catch (WebankException | ParamNullException e) {
+            throw  e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_SYSTEM_ERROR);
+        }
+        return resData;
+    }
+
+    /**
+     * 微众微信公众号支付订单查询
+     * @param param 请求参数
+     * @return 返回结果
+     */
+    public static WwScanQueryResData wechatScanQuery(WwScanQueryParam param) {
+        LOGGER.info("微众微信公众号订单查询param:{}",param);
+        WwScanQueryResData resData ;
+        try {
+            ParamUnit.checkWebankWechatScanQuery(param);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.wechatScanQuery(param, configure);
+        } catch (WebankException | ParamNullException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_SYSTEM_ERROR);
+        }
+        return resData;
+    }
+
+    /**
+     * 微众支付宝扫码支付 C扫B
+     * @param param 请求参数
+     * @return 返回结果
+     */
+    public static WaScanPayResData alipayScanPay(WaScanPayParam param) {
+        LOGGER.info("微众支付宝扫码支付param:{}",param);
+        WaScanPayResData resData;
+        try {
+            ParamUnit.checkWebankAlipayScanPay(param);
+            WebankPayService webankPayService = new WebankPayService();
+            resData = webankPayService.alipayScanPay(param, configure);
+            if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode())) {
+                throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getMsg()) ? ConstantEnum.EXCEPTION_SYSTEM_ERROR.getValueStr() : resData.getMsg());
+            }else if (!ConstantEnum.WA_SCANPAY_SYSERR.getCodeStr().equals(resData.getRetCode())) {
+                throw new WebankException(resData.getRetCode(), StringUtils.isEmpty(resData.getSubMsg()) ? ConstantEnum.EXCEPTION_SYSTEM_ERROR.getValueStr(): resData.getSubMsg());
+            }
+        } catch (WebankException | ParamNullException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_SYSTEM_ERROR);
+        }
+        return resData;
     }
 
 }

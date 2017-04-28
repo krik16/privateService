@@ -2,6 +2,7 @@ package com.rongyi.rpb.unit;
 
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.pay.core.constants.ConstantEnum;
+import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.WaAccessTokenResData;
@@ -52,6 +53,16 @@ public class PayConfigInitUnit {
     //微众p12证书密码
     private String wechatKeyStorePwd;
 
+
+    //微信公众号支付通知地址
+    private String wechatScanNotifyUrl ;
+
+    //微信公众号支付请求地址
+    private String wechatScanPayUrl ;
+
+    //微信公众号订单查询请求地址
+    private String wechatScanQueryUrl ;
+
     //微众支付宝appId
     private String appId;
 
@@ -82,14 +93,21 @@ public class PayConfigInitUnit {
     //微众支付宝退款查询url
     private String alipayRefundQueryUrl;
 
+    //支付宝c扫B请求地址
+    private String alipayScanPayUrl;
 
+    //翼支付退款通知地址
+    private String tianyiRefundNotifyUrl;
 
-
-
+    //翼支付通知地址
+    private String tianyiPayNotifyUrl;
     public void init(){
 
         //初始化微众相关配置
         initWwConfigure();
+
+        //初始化天翼配置
+        initTianConfig() ;
     }
 
     private WebankConfigure initWwConfigure(){
@@ -107,6 +125,9 @@ public class PayConfigInitUnit {
             configure.setWechatPunchCardPayReverseOrderUrl(this.wechatPunchCardPayReverseOrderUrl);
             configure.setWechatPunchCardRefundUrl(this.wechatPunchCardRefundUrl);
             configure.setWechatPunchCardRefundQueryUrl(this.wechatPunchCardRefundQueryUrl);
+            configure.setWechatScanNotifyUrl(this.wechatScanNotifyUrl);
+            configure.setWechatScanPayUrl(this.wechatScanPayUrl);
+            configure.setWechatScanQueryUrl(this.wechatScanQueryUrl);
 
             configure.setWechatKeyStorePath(this.wechatKeyStorePath);
             configure.setWechatTrustStorePath(this.wechatTrustStorePath);
@@ -122,11 +143,21 @@ public class PayConfigInitUnit {
             configure.setAlipayReverseTradeUrl(this.alipayReverseTradeUrl);
             configure.setAlipayRefundUrl(this.alipayRefundUrl);
             configure.setAlipayRefundQueryUrl(this.alipayRefundQueryUrl);
+            configure.setAlipayScanPayUrl(this.alipayScanPayUrl);
             log.info("初始化微众银行支付配置完成,config={}",configure);
         }
         configure.setTicket(this.ticket);
         return configure;
 
+    }
+
+    private TianyiConfigure initTianConfig() {
+        TianyiConfigure tianyiConfigure = TianyiConfigure.getInstance();
+        if (StringUtils.isEmpty(tianyiConfigure.getBackMerchantUrl())) {
+            tianyiConfigure.setBackMerchantUrl(this.tianyiPayNotifyUrl);
+            tianyiConfigure.setRefundBackUrl(this.tianyiRefundNotifyUrl);
+        }
+        return tianyiConfigure;
     }
 
     public void setWebankKey(String webankKey) {
@@ -210,6 +241,34 @@ public class PayConfigInitUnit {
 
     public void setAlipayRefundQueryUrl(String alipayRefundQueryUrl) {
         this.alipayRefundQueryUrl = alipayRefundQueryUrl;
+    }
+
+    public void setWechatScanNotifyUrl(String wechatScanNotifyUrl) {
+        this.wechatScanNotifyUrl = wechatScanNotifyUrl;
+    }
+
+    public void setWechatScanPayUrl(String wechatScanPayUrl) {
+        this.wechatScanPayUrl = wechatScanPayUrl;
+    }
+
+    public void setAlipayScanPayUrl(String alipayScanPayUrl) {
+        this.alipayScanPayUrl = alipayScanPayUrl;
+    }
+
+    public void setWechatScanQueryUrl(String wechatScanQueryUrl) {
+        this.wechatScanQueryUrl = wechatScanQueryUrl;
+    }
+
+    public void setTianyiRefundNotifyUrl(String tianyiRefundNotifyUrl) {
+        this.tianyiRefundNotifyUrl = tianyiRefundNotifyUrl;
+    }
+
+    public void setTianyiPayNotifyUrl(String tianyiPayNotifyUrl) {
+        this.tianyiPayNotifyUrl = tianyiPayNotifyUrl;
+    }
+
+    public String getTianyiRefundNotifyUrl() {
+        return tianyiRefundNotifyUrl;
     }
 
     /**

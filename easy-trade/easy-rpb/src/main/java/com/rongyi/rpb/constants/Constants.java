@@ -69,6 +69,7 @@ public interface Constants {
 		int PAY_CHANNEL1 = 1;// 微信
 		int PAY_CHANNEL2 = 2;// pos线下银行卡
 		int PAY_CHANNEL3 = 3;// 现金
+		int PAY_CHANNEL6 = 6;// 翼支付
 	}
 
 	interface PAYMENT_PAY_CHANNEL_STR {

@@ -4,7 +4,7 @@ import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
-import com.rongyi.easy.rpb.vo.CashPayVo;
+import com.rongyi.easy.rpb.vo.v6.CashPayVo;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.rpb.vo.v6.PaymentEntityVo;
 import com.rongyi.pay.core.Exception.ParamNullException;
@@ -41,13 +41,13 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
     private static final Logger log = LoggerFactory.getLogger(CashPayServiceImpl.class);
 
     @Override
-    public Map<String, Object> cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo,Integer orderType) {
+    public Map<String, Object> cashPay(RyMchVo ryMchVo, CashPayVo cashPayVo) {
         log.info("现金支付,ryMchVo={},cashPayVo={}", ryMchVo, cashPayVo);
         try {
             //检查开放商户信息
             checkMchParam(ryMchVo);
 
-            PaymentEntityVo paymentEntityVo = payBizz.cashPay(ryMchVo, cashPayVo,orderType);
+            PaymentEntityVo paymentEntityVo = payBizz.cashPay(ryMchVo, cashPayVo,cashPayVo.getOrderType());
 
             Map<String, Object> map = BeanMapUtils.toMap(paymentEntityVo);
 
@@ -56,6 +56,7 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             //交易金额
             map.put("totalAmount",cashPayVo.getTotalAmount());
 
+            map.put("tradeStatus","SUCCESS");
             log.info("现金支付结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
@@ -74,7 +75,7 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
     public Map<String, Object> cashPayQuery(RyMchVo ryMchVo, String orderNo,Integer payType) {
         log.info("现金支付查询,ryMchVo={},orderNo={},payType={}", ryMchVo, orderNo,payType);
         try {
-            PaymentEntity paymentEntity = queryBizz.cashPayQueryOrder(orderNo, payType);
+            PaymentEntity paymentEntity = queryBizz.cashPayQueryOrder(orderNo);
 
             PaymentLogInfo paymentLogInfo = queryBizz.queryPaymentLogInfo(paymentEntity.getPayNo());
 
@@ -86,7 +87,11 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             //交易金额
             map.put("totalAmount", paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             //交易状态
-            map.put("tradeStatus",ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
+            if(paymentEntity.getStatus() == 3){
+                map.put("tradeStatus","REFUND");
+            }else {
+                map.put("tradeStatus", ConstantEnum.WW_PUNCHCARDPAY_SUCCESS.getCodeStr());
+            }
             log.info("现金支付查询结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
@@ -113,7 +118,8 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             map.put("tradeNo", paymentEntityVo.getTradeNo());
             //交易金额
             map.put("totalAmount", paymentEntityVo.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            //退款状态
+            map.put("tradeStatus","SUCCESS");
             log.info("现金退款结果,map={}", map);
             return map;
         }  catch (WebankException | ParamNullException e) {
@@ -130,7 +136,7 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
 
     @Override
     public Map<String, Object> cashRefundQuery(String orderNo) {
-        log.info("现金退款,orderNo={}", orderNo);
+        log.info("现金退款查询,orderNo={}", orderNo);
         try {
             PaymentEntity paymentEntityVo = queryBizz.cashRefundQueryOrder(orderNo);
 
@@ -147,13 +153,14 @@ public class CashPayServiceImpl extends BaseServiceImpl implements ICashPayServi
             map.put("refundStatus","SUCCESS");
             return map;
     }  catch (WebankException | ParamNullException e) {
+            log.error("现金退款查询失败,e={}", e.getMessage(), e);
             log.warn("现金退款失败,e={}", e.getMessage(), e);
             throw new TradePayException(e.getCode(), e.getMessage());
         } catch (TradePayException e) {
-            log.warn("现金退款失败,e={}", e.getMessage(), e);
+            log.warn("现金退款查询失败,e={}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            log.error("现金退款异常,e={}", e.getMessage(), e);
+            log.error("现金退款查询异常,e={}", e.getMessage(), e);
             throw new TradePayException(ConstantEnum.EXCEPTION_CASH_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_CASH_REFUND_FAIL.getValueStr());
         }
     }

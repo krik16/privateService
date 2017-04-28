@@ -59,7 +59,7 @@ public class Signature {
         }
         int size = list.size();
         String[] arrayToSort = list.toArray(new String[size]);
-        Arrays.sort(arrayToSort, String.CASE_INSENSITIVE_ORDER);
+        Arrays.sort(arrayToSort);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
             sb.append(arrayToSort[i]);

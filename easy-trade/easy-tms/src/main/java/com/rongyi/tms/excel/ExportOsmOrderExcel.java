@@ -6,7 +6,6 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.easy.rmmm.vo.OrderManagerCommodityVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
-import com.rongyi.easy.tradecenter.vo.MerchantOsmOrderVO;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.util.Num;
 import org.apache.commons.collections.CollectionUtils;
@@ -252,6 +251,7 @@ public class ExportOsmOrderExcel {
             switch (payChannel){
                 case 0: result = "支付宝"; break;
                 case 1: result = "微信"; break;
+                case 6: result = "翼支付"; break;
                 default: result = "其他"; break;
             }
         }

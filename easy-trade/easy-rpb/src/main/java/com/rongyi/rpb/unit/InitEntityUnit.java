@@ -30,7 +30,8 @@ public class InitEntityUnit {
      * 初始化支付记录
      */
     public PaymentEntity initPaymentEntity(RyMchVo ryMchVo,String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
-                                           String aliSellerId,String wechatMchId){
+                                           String aliSellerId,String wechatMchId,Integer paySence) {
+
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
         paymentEntity.setOrderNum(orderNo);
@@ -47,9 +48,35 @@ public class InitEntityUnit {
         paymentEntity.setRyAppId(ryMchVo.getRyAppId());
         paymentEntity.setSource(ryMchVo.getSource());
         paymentEntity.setOrgChannel(ryMchVo.getOrgChannel());
+        paymentEntity.setPayScene(paySence);
         log.info("初始化支付记录,paymentEntity={}",paymentEntity);
         return paymentEntity;
     }
+
+    /**
+     * 初始化支付记录(天翼支付)
+     */
+    public PaymentEntity initPaymentEntity(Integer tianyiPayId,String orderNo,Integer totalFee,Integer orderType,Integer tradeType,Integer payChannel,
+                                           Integer paySence,String attach,byte source){
+        PaymentEntity paymentEntity = new PaymentEntity();
+        paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
+        paymentEntity.setOrderNum(orderNo);
+        paymentEntity.setOrderType(orderType);
+        paymentEntity.setOrderPrice(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+        paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+        paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+        paymentEntity.setTradeType(tradeType);
+        paymentEntity.setCreateTime(new Date());
+        paymentEntity.setPayChannel(payChannel);
+        paymentEntity.setSource(source);
+        paymentEntity.setOrgChannel((byte)2);
+        paymentEntity.setPayScene(paySence);
+        paymentEntity.setAttach(attach);
+        paymentEntity.setTianyiPayId(tianyiPayId);
+        log.info("初始化支付记录,paymentEntity={}",paymentEntity);
+        return paymentEntity;
+    }
+
 
     /**
      * 初始化支付事件记录
