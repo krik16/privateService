@@ -129,7 +129,6 @@ public class DivideAccountController extends BaseController {
 
 	/**
 	 * 导出商场所有店铺分账详情列表
-	 * @param divideAccountDto
 	 */
 	@RequestMapping(value = "/exportAll", method = RequestMethod.GET)
 	public void exportAll(Integer divideAccountId, HttpServletRequest request, HttpServletResponse response) {
@@ -149,8 +148,6 @@ public class DivideAccountController extends BaseController {
 
 	/**
 	 * 填充分页参数
-	 * @param pageSize
-	 * @param currentPage
 	 * @param divideAccountDto
 	 */
 	public void fillPaginate(DivideAccountDto divideAccountDto) {

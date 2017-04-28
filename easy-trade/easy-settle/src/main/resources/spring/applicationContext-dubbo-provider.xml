@@ -12,7 +12,6 @@
     <dubbo:protocol host="${dubbo.host}" name="dubbo" port="${dubbo.port}" dispatcher="all" threadpool="fixed" threads="800"/>
     <!-- 配置超时时间 -->
     <dubbo:consumer timeout="${dubbo.timeout}" />
-    <dubbo:monitor protocol="registry"/>
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.rongyi.rss.settle.PaymentStatementGenerateService" version="${dubbo.version}" ref="paymentStatementGenerateService" retries="0" />
