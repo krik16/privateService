@@ -1,8 +1,5 @@
 package com.rongyi.rss.activitymanage;
 
-import java.util.Date;
-import java.util.List;
-
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
@@ -13,6 +10,9 @@ import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
 import com.rongyi.easy.activitymanage.param.PingtuanActivityVo;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.vo.*;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 活动后台管理接口
@@ -249,4 +249,8 @@ public interface ActivityService {
      * @return
      */
     public List<SaleCommodityTop> saleCommodityTopList(Integer ActivityId);
+
+    boolean saveOrupdateActivityInfo(ActivityInfo activityInfo);
+
+    boolean saveOrupdateSecKillConfig(SecKillConfigEntity configEntity);
 }

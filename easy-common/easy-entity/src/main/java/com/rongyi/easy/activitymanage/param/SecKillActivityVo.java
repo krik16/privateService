@@ -17,11 +17,11 @@ public class SecKillActivityVo implements Serializable{
 
     private String activityTitle;
 
+    private String subTitle;
+
     private Integer cancelTime;//订单取消时间，超过多少时间订单自动取消,单位：分钟
 
     private String description;//活动说明
-
-    private Integer secKillConfigId;
 
     private Date startAt;
 
@@ -39,8 +39,26 @@ public class SecKillActivityVo implements Serializable{
 
     private String sharePic;
 
-    private String mallId;//商场id或者店铺id
+    private String mallId;//商场id
 
+    private String shopId;//店铺id
+
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
 
     public Integer getActivityId() {
         return activityId;
@@ -80,14 +98,6 @@ public class SecKillActivityVo implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getSecKillConfigId() {
-        return secKillConfigId;
-    }
-
-    public void setSecKillConfigId(Integer secKillConfigId) {
-        this.secKillConfigId = secKillConfigId;
     }
 
     public Date getStartAt() {
