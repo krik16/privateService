@@ -43,6 +43,8 @@ public class OperateCommodityDetailVo implements Serializable{
     private Integer terminalType;  //显示终端
     private String brandName;  //品牌名称
     private String reason;
+    
+    private Integer isRefund;//是否可退货
     private List<String> referencePriceList;//参考价
     private List<String> originalPriceList;//原价
     private List<String> currentPriceList;//现价
@@ -51,7 +53,6 @@ public class OperateCommodityDetailVo implements Serializable{
     private Integer serviceDescriptionId;
 
     private String serviceDescriptionRemark;
-
 
 
     public String getOriginalPrice() {
@@ -310,6 +311,14 @@ public class OperateCommodityDetailVo implements Serializable{
         this.reason = reason;
     }
 
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+	
     public List<String> getReferencePriceList() {
         return referencePriceList;
     }
