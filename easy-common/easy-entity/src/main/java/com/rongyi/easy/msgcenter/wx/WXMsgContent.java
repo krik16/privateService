@@ -10,6 +10,8 @@ import java.io.Serializable;
  * Project:easy-common
  */
 public class WXMsgContent implements Serializable {
+
+    private static final long serialVersionUID = -389909749168087963L;
     private String first;
     private String keyword1;
     private String keyword2;

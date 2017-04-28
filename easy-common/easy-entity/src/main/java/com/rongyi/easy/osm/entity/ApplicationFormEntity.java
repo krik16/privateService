@@ -1,6 +1,10 @@
 package com.rongyi.easy.osm.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ApplicationFormEntity implements Serializable{
@@ -27,20 +31,11 @@ public class ApplicationFormEntity implements Serializable{
     /** 图片列表（以";"隔开） */
     private String picUrls;
 
-    /** 状态 1申请退款 2商家拒绝处理 3已退款  4申请维权 5维权中 6维权结束 7放弃退款 8放弃维权*/
+    /** 状态 0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：带卖家收货 6：退款关闭*/
     private Integer status;
-
-    /** 拒绝退款理由 */
-    private String rejectReason;
-
-    /** 维权结论 */
-    private String appealResult;
 
     /** 创建时间 */
     private Date createAt;
-
-    /** 商家处理退款时间 */
-    private Date sellerTime;
 
     /** 物流信息主键id */
     private String expressInfoId;
@@ -51,17 +46,53 @@ public class ApplicationFormEntity implements Serializable{
     /** 退款类型id */
     private Long refundTypeId;
 
-    /** 官方介入时间 */
-    private Date agentCreateAt;
-
-    /** 官方描述 */
-    private String agentComment;
-
     /** 维权结束时间 */
     private Date endAt;
 
     /** 退款或维权说明 */
     private String appealComment;
+
+    /** 退款单号' */
+    private String refundNo;
+
+    /** 退款金额 */
+    private BigDecimal refundFee;
+
+    /** 退款邮费金额 */
+    private BigDecimal refundExpressFee;
+
+    /** 退款来源 0：系统 1：用户'*/
+    private Integer refundSource;
+
+    /** 当前退款事件ID'*/
+    private Integer orderEventId;
+
+    /** 下次处理时间' */
+    private Date nextStatusTime;
+
+    /** 是否删除（买家）0 未删除 1 删除*/
+    private Integer buyerDeleteFlag;
+
+    /** 寄回地址ID*/
+    private Integer extraId;
+
+    /** 退款或维权说明 */
+    private String buyerName;
+
+    /** 申诉状态（1：申诉中、2：申诉成功、3：申诉失败、4：申诉关闭）*/
+    private Integer complaintStatus;
+
+    /** 更新时间 */
+    private Date updateAt;
+
+    /** 退款单据号 */
+    private String refundpayIds;
+
+    private OrderEventEntity orderEvent;
+
+    private OrderEventEntity orderEvent2;
+
+    private OrderFormExtraEntity receiveAddress;//退款收货地址
 
     /**
      * 主键id
@@ -176,38 +207,6 @@ public class ApplicationFormEntity implements Serializable{
     }
 
     /**
-     * 拒绝退款理由
-     * @return rejectReason
-     */
-    public String getRejectReason() {
-        return rejectReason;
-    }
-
-    /**
-     * 拒绝退款理由
-     * @param rejectReason
-     */
-    public void setRejectReason(String rejectReason) {
-        this.rejectReason = rejectReason;
-    }
-
-    /**
-     * 维权结论
-     * @return appealResult
-     */
-    public String getAppealResult() {
-        return appealResult;
-    }
-
-    /**
-     * 维权结论
-     * @param appealResult
-     */
-    public void setAppealResult(String appealResult) {
-        this.appealResult = appealResult;
-    }
-
-    /**
      * 创建时间
      * @return createAt
      */
@@ -221,22 +220,6 @@ public class ApplicationFormEntity implements Serializable{
      */
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
-    }
-
-    /**
-     * 商家处理退款时间
-     * @return sellerTime
-     */
-    public Date getSellerTime() {
-        return sellerTime;
-    }
-
-    /**
-     * 商家处理退款时间
-     * @param sellerTime
-     */
-    public void setSellerTime(Date sellerTime) {
-        this.sellerTime = sellerTime;
     }
 
     /**
@@ -288,38 +271,6 @@ public class ApplicationFormEntity implements Serializable{
     }
 
     /**
-     * 官方介入时间
-     * @return agentCreateAt
-     */
-    public Date getAgentCreateAt() {
-        return agentCreateAt;
-    }
-
-    /**
-     * 官方介入时间
-     * @param agentCreateAt
-     */
-    public void setAgentCreateAt(Date agentCreateAt) {
-        this.agentCreateAt = agentCreateAt;
-    }
-
-    /**
-     * 官方描述
-     * @return agentComment
-     */
-    public String getAgentComment() {
-        return agentComment;
-    }
-
-    /**
-     * 官方描述
-     * @param agentComment
-     */
-    public void setAgentComment(String agentComment) {
-        this.agentComment = agentComment;
-    }
-
-    /**
      * 维权结束时间
      * @return endAt
      */
@@ -349,5 +300,130 @@ public class ApplicationFormEntity implements Serializable{
      */
     public void setAppealComment(String appealComment) {
         this.appealComment = appealComment;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
+    }
+
+    public BigDecimal getRefundFee() {
+        return refundFee;
+    }
+
+    public void setRefundFee(BigDecimal refundFee) {
+        this.refundFee = refundFee;
+    }
+
+    public BigDecimal getRefundExpressFee() {
+        return refundExpressFee;
+    }
+
+    public void setRefundExpressFee(BigDecimal refundExpressFee) {
+        this.refundExpressFee = refundExpressFee;
+    }
+
+    public Integer getRefundSource() {
+        return refundSource;
+    }
+
+    public void setRefundSource(Integer refundSource) {
+        this.refundSource = refundSource;
+    }
+
+    public Integer getOrderEventId() {
+        return orderEventId;
+    }
+
+    public void setOrderEventId(Integer orderEventId) {
+        this.orderEventId = orderEventId;
+    }
+
+    public Date getNextStatusTime() {
+        return nextStatusTime;
+    }
+
+    public void setNextStatusTime(Date nextStatusTime) {
+        this.nextStatusTime = nextStatusTime;
+    }
+
+    public Integer getBuyerDeleteFlag() {
+        return buyerDeleteFlag;
+    }
+
+    public void setBuyerDeleteFlag(Integer buyerDeleteFlag) {
+        this.buyerDeleteFlag = buyerDeleteFlag;
+    }
+
+    public Integer getExtraId() {
+        return extraId;
+    }
+
+    public void setExtraId(Integer extraId) {
+        this.extraId = extraId;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public Integer getComplaintStatus() {
+        return complaintStatus;
+    }
+
+    public void setComplaintStatus(Integer complaintStatus) {
+        this.complaintStatus = complaintStatus;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public OrderEventEntity getOrderEvent() {
+        return orderEvent;
+    }
+
+    public void setOrderEvent(OrderEventEntity orderEvent) {
+        this.orderEvent = orderEvent;
+    }
+
+    public OrderFormExtraEntity getReceiveAddress() {
+        return receiveAddress;
+    }
+
+    public void setReceiveAddress(OrderFormExtraEntity receiveAddress) {
+        this.receiveAddress = receiveAddress;
+    }
+
+    public String getRefundpayIds() {
+        return refundpayIds;
+    }
+
+    public void setRefundpayIds(String refundpayIds) {
+        this.refundpayIds = refundpayIds;
+    }
+
+    public OrderEventEntity getOrderEvent2() {
+        return orderEvent2;
+    }
+
+    public void setOrderEvent2(OrderEventEntity orderEvent2) {
+        this.orderEvent2 = orderEvent2;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

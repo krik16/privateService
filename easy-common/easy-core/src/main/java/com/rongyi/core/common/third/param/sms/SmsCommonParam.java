@@ -31,6 +31,10 @@ public class SmsCommonParam implements Serializable{
 
     private String ipWhiteList; //ip白名单
 
+    private int limitNumber;  //限制次数
+
+    private String phoneWhiteList; //手机号白名单
+
     private int opType;//0 查询 1抛入 2修改，3修改ip限制
 
     private String sendChannel; //发送渠道
@@ -207,6 +211,22 @@ public class SmsCommonParam implements Serializable{
 
     public void setIpWhiteList(String ipWhiteList) {
         this.ipWhiteList = ipWhiteList;
+    }
+
+    public int getLimitNumber() {
+        return limitNumber;
+    }
+
+    public void setLimitNumber(int limitNumber) {
+        this.limitNumber = limitNumber;
+    }
+
+    public String getPhoneWhiteList() {
+        return phoneWhiteList;
+    }
+
+    public void setPhoneWhiteList(String phoneWhiteList) {
+        this.phoneWhiteList = phoneWhiteList;
     }
 
     public int getOpType() {

@@ -10,7 +10,8 @@ public class WebchatMerchatInfoVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String shopId;//店铺mysqlId
 	private String shopMid;//店铺mongoId
-	private String shopLogo;//店铺logo
+	private String shopLogo;//店铺品牌logo
+	private String shopIcon;//店铺自定义logo
 	private String shopName;//店铺名称
 	private String mallId;//店铺所属商场id（mongoId）
 	private String mallName;//商场名称
@@ -64,6 +65,15 @@ public class WebchatMerchatInfoVO implements Serializable{
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
+
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
+	}
+
 	@Override
 	public String toString() {
 		return "WebchatMerchatInfoVO [shopId=" + shopId + ", shopMid="

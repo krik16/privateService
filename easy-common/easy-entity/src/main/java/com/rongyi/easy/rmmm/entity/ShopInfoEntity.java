@@ -35,12 +35,34 @@ public class ShopInfoEntity implements Serializable{
     /** 总评分 */
     private Integer totalScore;
 
+    /**商场Mongo ID**/
+    private String mallMid;
+
+    /**分公司id**/
+    private Integer filialeId;
+
     /**
      * 主键
      * @return id
      */
     public Integer getId() {
         return id;
+    }
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
+
+    public Integer getFilialeId() {
+        return filialeId;
+    }
+
+    public void setFilialeId(Integer filialeId) {
+        this.filialeId = filialeId;
     }
 
     /**

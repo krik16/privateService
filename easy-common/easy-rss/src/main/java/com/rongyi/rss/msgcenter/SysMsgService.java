@@ -1,6 +1,7 @@
 package com.rongyi.rss.msgcenter;
 
 import com.rongyi.easy.msgcenter.MessageDTO;
+import com.rongyi.easy.msgcenter.RefundMsgDTO;
 import com.rongyi.easy.msgcenter.UserMsgDTO;
 
 /**
@@ -22,5 +23,13 @@ public interface SysMsgService {
      * @param userMsgDTO
      */
     public void createUserSysMsg(UserMsgDTO userMsgDTO);
+
+    /**
+     * 退款/维权 类卖家消息接口
+     * @param refundMsgDTO
+     * @return true 创建成功；false 创建失败
+     * @throws Exception
+     */
+    public boolean createRefundSysMsg(RefundMsgDTO refundMsgDTO) throws Exception;
 
 }

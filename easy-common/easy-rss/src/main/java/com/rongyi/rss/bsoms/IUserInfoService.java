@@ -9,7 +9,9 @@ import com.rongyi.easy.bsoms.entity.CertifiedCheckInfo;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.param.VerifySaveAccountParam;
+import com.rongyi.easy.bsoms.vo.BsUserVO;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
+import com.rongyi.easy.bsoms.vo.UserBindingVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
 import com.rongyi.easy.roa.vo.distributor.UserInfoForDistributorVO;
@@ -374,4 +376,22 @@ public interface IUserInfoService {
 	 * 修改账号资金状态
 	 */
 	public int updateUsersFunds(Integer userId,Integer fundStatus) throws Exception;
+	
+	public UserBindingVO getBindingMIdByshopId(Integer shopId) throws Exception;
+	/**
+	 * 根据店铺id获取总店/所属商场下具有权限值的账号列表
+	 * @param shopId
+	 * @param authValue  'GOOD_ORDER_APPEAL'
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BsUserVO> getHasAppealAuthAccountListByShopId(Integer shopId, String authValue) throws Exception;
+	/**
+	 * 根据店铺id查询所有具有退款单列表菜单权限的帐号列表
+	 * @param shopId
+	 * @param authValue 'GOOD_ORDER_REFUND'
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BsUserVO> getHashRefundAccountListByShopId(Integer shopId, String authValue) throws Exception;
 }

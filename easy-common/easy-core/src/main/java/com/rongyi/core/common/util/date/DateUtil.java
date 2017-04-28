@@ -104,6 +104,35 @@ public abstract class DateUtil {
   public static String format(Date date, String pattern) {
     return new SimpleDateFormat(pattern).format(date);
   }
+
+  /**
+   * 根据所秒数,计算相差的时间并以**天**:**返回
+   * @return String
+   */
+  public static String getBeapartDate(long m) {
+    String beapartdate;
+    int nDay = java.lang.Math.abs((int) m / (24 * 60 * 60));
+    int nHour = java.lang.Math.abs((int) (m - nDay * 24 * 60 * 60) / (60 * 60));
+    int nMinute = java.lang.Math.abs((int) (m - nDay * 24 * 60 * 60 - nHour * 60 * 60) / 60);
+    int remainSeconds = java.lang.Math.abs((int) (m - nDay * 24 * 60 * 60 - nHour * 60 * 60) % 60);
+    if(remainSeconds > 0){
+      nMinute += 1;
+    }
+    String hour = nHour + "";
+    String minute = nMinute + "";
+    if (nHour < 10) {
+      hour = "0" + hour;
+    }
+    if (nMinute < 10) {
+      minute = "0" + minute;
+    }
+    if (nDay > 0) {
+      beapartdate = nDay + "天" + hour + "时" + minute + "分";
+    } else {
+      beapartdate = hour + "时" + minute + "分";
+    }
+    return beapartdate;
+  }
   
 
 }
