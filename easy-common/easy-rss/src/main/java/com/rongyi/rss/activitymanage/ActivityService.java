@@ -253,4 +253,8 @@ public interface ActivityService {
     boolean saveOrupdateActivityInfo(ActivityInfo activityInfo);
 
     boolean saveOrupdateSecKillConfig(SecKillConfigEntity configEntity);
+
+    SecKillConfigEntity selectSecKillConfigByActivityId(Integer activityId);
+
+    boolean updateActivityInfo(ActivityInfo activityInfo);
 }
