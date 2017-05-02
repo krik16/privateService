@@ -15,6 +15,10 @@ import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.*;
 import com.rongyi.easy.tradecenter.param.OsmOrderQueryForUserCenterParam;
+import com.rongyi.easy.tradecenter.param.QueryForActivityParam;
+import com.rongyi.easy.tradecenter.param.StatisticalForActivityParam;
+import com.rongyi.easy.tradecenter.vo.QueryForActivityVO;
+import com.rongyi.easy.tradecenter.vo.StatisticalForActivityVO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -369,4 +373,28 @@ public interface IOrderQueryService {
      * @return
      */
     DubboVO<ReductionActivityVO> listForReduction(ReductionParam param);
+
+    /**
+     * 单项活动统计
+     *
+     * @param param
+     * @return
+     */
+    DubboVO<StatisticalForActivityVO> statisticalForActivity(StatisticalForActivityParam param);
+
+    /**
+     * 单项活动查询数据
+     *
+     * @param param
+     * @return
+     */
+    DubboVO<List<QueryForActivityVO>> listForActivity(QueryForActivityParam param);
+
+    /**
+     * 单项活动查询总数
+     *
+     * @param param
+     * @return
+     */
+    DubboVO<Integer> listCountForActivity(QueryForActivityParam param);
 }
