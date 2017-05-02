@@ -43,6 +43,7 @@
 	<result column="is_suspended" property="isSuspended" jdbcType="INTEGER" />
 	<result column="is_open_qr_code" property="isOpenQrCode" jdbcType="INTEGER" />
     <result column="is_allow_binding_wechat" property="isAllowBindingWechat" jdbcType="INTEGER" /> 
+    <result column="shop_num" property="shopNum" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

@@ -101,6 +101,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
     private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private Integer shopNum = 0;//店铺数量
 
     public Integer getId() {
 		return id;
@@ -484,6 +485,14 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
+	
+	public Integer getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
 
 	@Override
 	public String toString() {
@@ -512,8 +521,9 @@ public class RmmmUserInfoEntity implements Serializable{
 				+ chiefId + ", terminalType=" + terminalType
 				+ ", defaultTerminal=" + defaultTerminal + ", isSuspended="
 				+ isSuspended + ", isOpenQrCode=" + isOpenQrCode
-				+ ", isAllowBindingWechat=" + isAllowBindingWechat + "]";
+				+ ", isAllowBindingWechat=" + isAllowBindingWechat
+				+ ", shopNum=" + shopNum + "]";
 	}
-
+	
 }
 

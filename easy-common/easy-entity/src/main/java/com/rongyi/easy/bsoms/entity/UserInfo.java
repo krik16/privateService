@@ -90,7 +90,8 @@ public class UserInfo implements Serializable{
     private Integer isSuspended;//资金账号是否冻结  0正常，1冻结
     private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
-
+	private Integer shopNum;//店铺数量
+	
     public String getStopReason() {
 		return stopReason;
 	}
@@ -496,6 +497,14 @@ public class UserInfo implements Serializable{
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
+	
+	public Integer getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
 
 	@Override
 	public String toString() {
@@ -526,7 +535,7 @@ public class UserInfo implements Serializable{
 				+ ", defaultTerminal=" + defaultTerminal + ", chiefId="
 				+ chiefId + ", isSuspended=" + isSuspended + ", isOpenQrCode="
 				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + "]";
+				+ isAllowBindingWechat + ", shopNum=" + shopNum + "]";
 	}
 	
 }
