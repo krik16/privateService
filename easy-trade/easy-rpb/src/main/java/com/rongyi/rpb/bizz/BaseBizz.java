@@ -2,6 +2,7 @@ package com.rongyi.rpb.bizz;
 
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentEntityExt;
 import com.rongyi.easy.rpb.vo.RyMchVo;
@@ -71,6 +72,10 @@ public class BaseBizz {
         if (paymentEntityId != null) {
             paymentEntityExt = paymentEntityExtMapper.selectByPaymentOrderId(paymentEntityId);
         }
+        if(StringUtil.isEmpty(extend)){
+            return null;
+        }
+
         String[] extendArray = extend.split("__");
         //记录已存在
         if (paymentEntityExt == null) {
