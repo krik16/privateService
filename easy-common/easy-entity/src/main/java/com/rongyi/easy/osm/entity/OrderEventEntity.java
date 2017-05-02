@@ -30,6 +30,14 @@ public class OrderEventEntity implements Serializable{
     /** 订单事件类型 */
     private String type;
 
+    private String complaintNo; // 当前申诉/维权单号
+    private String refundNo; // 当前退款单号
+    private String orderItemNo ;  // 小订单号
+    private String createId ;  // 操作人id
+    private String createBy ;  // 操作人
+    private Integer userType ;  // 操作人类型，0：系统 1：平台 2：商家 3：用
+    private String remark ;  // 备注信息、原因
+
     /**
      * 主键id
      * @return id
@@ -140,5 +148,61 @@ public class OrderEventEntity implements Serializable{
      */
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getComplaintNo() {
+        return complaintNo;
+    }
+
+    public void setComplaintNo(String complaintNo) {
+        this.complaintNo = complaintNo;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
+    }
+
+    public String getOrderItemNo() {
+        return orderItemNo;
+    }
+
+    public void setOrderItemNo(String orderItemNo) {
+        this.orderItemNo = orderItemNo;
+    }
+
+    public String getCreateId() {
+        return createId;
+    }
+
+    public void setCreateId(String createId) {
+        this.createId = createId;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

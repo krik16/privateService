@@ -18,6 +18,8 @@ public class MyOrderCountVO implements Serializable{
 	private int unDeliverCount;//待发货数量
 	private int unReceiveCount2;//待收货数量（不包括待发货数量）
 	private int finishedCount;//完成订单数
+	private int refundCount;//退款单数量
+	private int closeCount;//已关闭订单数量（包括确认收货和已关闭订单数量
 
 	public int getUnDeliverCount() {
 		return unDeliverCount;
@@ -73,6 +75,22 @@ public class MyOrderCountVO implements Serializable{
 
 	public void setFinishedCount(int finishedCount) {
 		this.finishedCount = finishedCount;
+	}
+
+	public int getRefundCount() {
+		return refundCount;
+	}
+
+	public void setRefundCount(int refundCount) {
+		this.refundCount = refundCount;
+	}
+
+	public int getCloseCount() {
+		return closeCount;
+	}
+
+	public void setCloseCount(int closeCount) {
+		this.closeCount = closeCount;
 	}
 
 	@Override

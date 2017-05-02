@@ -13,7 +13,8 @@ public class ShopMallVO implements Serializable {
 
 	private String shopId;// 店铺mysqlid
 	private String shopName;// 店铺名字
-	private String shopLogo;//店铺logo
+	private String shopLogo;//店铺品牌logo
+	private String shopIcon;//店铺自定义logo
 	private String shopMid;// shop mongoId
 	private String mallId;// 商场mysqlid
 	private String mallName;// 商场名字
@@ -174,12 +175,21 @@ public class ShopMallVO implements Serializable {
 		this.brandName = brandName;
 	}
 
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
+	}
+
 	@Override
 	public String toString() {
 		return "ShopMallVO{" +
 				"shopId='" + shopId + '\'' +
 				", shopName='" + shopName + '\'' +
 				", shopMid='" + shopMid + '\'' +
+				", shopIcon='" + shopIcon + '\'' +
 				", mallId='" + mallId + '\'' +
 				", mallName='" + mallName + '\'' +
 				", mallMid='" + mallMid + '\'' +
