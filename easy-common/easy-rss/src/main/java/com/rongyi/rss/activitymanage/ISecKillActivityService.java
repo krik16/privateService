@@ -14,18 +14,18 @@ import java.util.List;
 public interface ISecKillActivityService {
 
     /**
-     * 秒杀活动详情
+     * 活动详情(不包含场次和商品)
      * @param activityId
      * @return
      */
     public SecKillActivityVO detailActivityForSecKill(int activityId);
 
     /**
-     * 秒杀活动场次列表
+     * 秒杀活动详情(包含场次和商品)
      * @param activityId
      * @return
      */
-    public List<SecKillActivitySessionVO> listActivitySessionForSecKill(int activityId);
+    public SecKillActivityVO detailActivityAndSessionForSecKill(int activityId);
 
     /**
      * 活动商品详情

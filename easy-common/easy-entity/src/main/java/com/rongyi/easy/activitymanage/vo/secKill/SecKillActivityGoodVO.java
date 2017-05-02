@@ -13,26 +13,25 @@ public class SecKillActivityGoodVO implements Serializable{
 
     private static final long serialVersionUID = 1161397220809932455L;
 
-    private int activityCommodityId;//活动商品主键id
+    private Integer activityCommodityId;//活动商品主键id
     private int activityCommodityStatus;//2:审核通过，6 商品下线 7活动结束
     private int activityCommodityStock;//剩余库存
     private int activityCommodityTotalStock;//总库存
-    private double activityPrice;//总库存
-    private double commodityCPriceMax;//商品最高现价
-    private double commodityOPriceMax;//商品最高原价
-    private String commodityId;//分享描述
-    private String commodityName;//分享描述
+    private double activityPrice;//最低现价
+    private String commodityOPriceMax;//商品最高原价
+    private String commodityId;//商品id
+    private String commodityName;//商品名称
     private String commodityPic;//商品图片
 
     public int getActivityCommodityId() {
         return activityCommodityId;
     }
 
-    public void setActivityCommodityId(int activityCommodityId) {
+    public void setActivityCommodityId(Integer activityCommodityId) {
         this.activityCommodityId = activityCommodityId;
     }
 
-    public int getActivityCommodityStatus() {
+    public Integer getActivityCommodityStatus() {
         return activityCommodityStatus;
     }
 
@@ -64,19 +63,11 @@ public class SecKillActivityGoodVO implements Serializable{
         this.activityPrice = activityPrice;
     }
 
-    public double getCommodityCPriceMax() {
-        return commodityCPriceMax;
-    }
-
-    public void setCommodityCPriceMax(double commodityCPriceMax) {
-        this.commodityCPriceMax = commodityCPriceMax;
-    }
-
-    public double getCommodityOPriceMax() {
+    public String getCommodityOPriceMax() {
         return commodityOPriceMax;
     }
 
-    public void setCommodityOPriceMax(double commodityOPriceMax) {
+    public void setCommodityOPriceMax(String commodityOPriceMax) {
         this.commodityOPriceMax = commodityOPriceMax;
     }
 

@@ -24,6 +24,7 @@ public class SecKillGoodVO implements Serializable{
     private Integer activityCommodityStatus;//商品审核状态：待审核[0] 未通过[1] 已通过[2] 6下线 7活动结束
     private Date activitySessionStartAt;//场次开始时间
     private Date activitySessionEndAt;//场次结束时间
+    private double goodPrice;//价格:元
 
     private List<SecKillGoodSpecVO> specs;//商品规格列表
 
@@ -105,6 +106,14 @@ public class SecKillGoodVO implements Serializable{
 
     public void setActivityId(Integer activityId) {
         this.activityId = activityId;
+    }
+
+    public double getGoodPrice() {
+        return goodPrice;
+    }
+
+    public void setGoodPrice(double goodPrice) {
+        this.goodPrice = goodPrice;
     }
 
     @Override
