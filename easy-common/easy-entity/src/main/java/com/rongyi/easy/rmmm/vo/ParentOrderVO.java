@@ -63,13 +63,16 @@ public class ParentOrderVO implements Serializable {
 
 	private String shopMid;// 店铺mongoId
 
-	private String shopLogo;// 店铺logo
+	private String shopLogo;// 店铺品牌logo
+	private String shopIcon;// 店铺自定义logo
 
 	private String isComment = "-1";// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
 
 	private String closeType = "0";// 父订单关闭类型 (0完成 1关闭)
 
 	private String closeReason;// 关闭原因
+
+	private String closeEventType;// 关闭事件  6:卖家超时未发货,23:卖家取消订单，34：拼团失败，36：超时支付成功退款
 
 	private String originalTotalPrice  = "0";// 原来的总价
 
@@ -177,6 +180,8 @@ public class ParentOrderVO implements Serializable {
 	private String shopCityName;// 店铺市名称
 	private String shopAddress;//店铺详细地址
 	private String shopAreaName;//店铺区域名称
+	// 是否冻结 0：正常流程 1：冻结流程
+	private int isFreeze;
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -1037,6 +1042,30 @@ public class ParentOrderVO implements Serializable {
 
 	public void setShopAreaName(String shopAreaName) {
 		this.shopAreaName = shopAreaName;
+	}
+
+	public String getCloseEventType() {
+		return closeEventType;
+	}
+
+	public void setCloseEventType(String closeEventType) {
+		this.closeEventType = closeEventType;
+	}
+
+	public int getIsFreeze() {
+		return isFreeze;
+	}
+
+	public void setIsFreeze(int isFreeze) {
+		this.isFreeze = isFreeze;
+	}
+
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
 	}
 
 	@Override

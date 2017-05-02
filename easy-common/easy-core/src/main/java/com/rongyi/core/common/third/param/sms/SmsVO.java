@@ -30,6 +30,10 @@ public class SmsVO implements Serializable {
 
     private String ipWhiteList; //ip白名单
 
+    private int limitNumber;  //限制次数
+
+    private String phoneWhiteList; //手机号白名单
+
     private String sendChannel; //发送渠道
 
     private String sendType;//发送类型  RYNTCSMS 通知类型 RYMARKSMS 营销类型
@@ -64,6 +68,8 @@ public class SmsVO implements Serializable {
         this.setToken(smsChannelDto.getToken());
         this.setIpLimit(smsChannelDto.getIpLimit());
         this.setIpWhiteList(smsChannelDto.getIpWhiteList());
+        this.setLimitNumber(smsChannelDto.getLimitNumber());
+        this.setPhoneWhiteList(smsChannelDto.getPhoneWhiteList());
         this.setSendChannel(smsChannelDto.getSendChannel());
         this.setSendType(smsChannelDto.getSendType());
         this.setIsDisabled(smsChannelDto.getIsDisabled());
@@ -96,6 +102,22 @@ public class SmsVO implements Serializable {
 
     public int getIpLimit() {
         return ipLimit;
+    }
+
+    public int getLimitNumber() {
+        return limitNumber;
+    }
+
+    public void setLimitNumber(int limitNumber) {
+        this.limitNumber = limitNumber;
+    }
+
+    public String getPhoneWhiteList() {
+        return phoneWhiteList;
+    }
+
+    public void setPhoneWhiteList(String phoneWhiteList) {
+        this.phoneWhiteList = phoneWhiteList;
     }
 
     public String getSendType() {

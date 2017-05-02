@@ -133,8 +133,15 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private String reductionActivityId;//满减活动Id
     private String reductionActivityName;//满减活动名称
     private Integer deliverId;//发货人id
-    private Integer isPush;//-1不需要推送
-
+    private Integer isPush;//：已推送，0：未推送，-1：不推送'
+    private BigDecimal refundDiscountOfficial;//平台分摊退款金额
+    private String chiefId;//主账号关联的店铺/商城ID
+    // ======= add by wangjh7 on 2017-04-06 新增退款快照信息
+    private RefundSettingConfigEntity refundSettingConfig;
+    // 微店对应的店铺名称
+    private String shopName;
+    // 是否冻结 0：正常流程 1：冻结流程
+    private int isFreeze;
 
     public Integer getDeliverId() {
         return deliverId;
@@ -1025,6 +1032,38 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.reductionActivityName = reductionActivityName;
     }
 
+    public BigDecimal getRefundDiscountOfficial() {
+        return refundDiscountOfficial;
+    }
+
+    public void setRefundDiscountOfficial(BigDecimal refundDiscountOfficial) {
+        this.refundDiscountOfficial = refundDiscountOfficial;
+    }
+
+    public String getChiefId() {
+        return chiefId;
+    }
+
+    public void setChiefId(String chiefId) {
+        this.chiefId = chiefId;
+    }
+
+    public RefundSettingConfigEntity getRefundSettingConfig() {
+        return refundSettingConfig;
+    }
+
+    public void setRefundSettingConfig(RefundSettingConfigEntity refundSettingConfig) {
+        this.refundSettingConfig = refundSettingConfig;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
     @Override
     public int compareTo(OrderFormEntity o) {
         if(o == null){
@@ -1036,5 +1075,13 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+    public int getIsFreeze() {
+        return isFreeze;
+    }
+
+    public void setIsFreeze(int isFreeze) {
+        this.isFreeze = isFreeze;
     }
 }

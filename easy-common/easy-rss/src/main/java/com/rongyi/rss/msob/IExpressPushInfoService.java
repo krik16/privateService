@@ -10,7 +10,7 @@ public interface IExpressPushInfoService {
 	
 	/**
 	 * 获取快递100推送的信息
-	 * @param expressOrderId 物流信息主键id   source 1是容易逛  2 是商家后台
+	 * @param expressOrderId 物流信息主键id   source 1是容易逛  2 是商家后台 3：客户端查看订单退款物流 4：商家查看订单退款物流
 	 * @return
 	 * @throws Exception
 	 */

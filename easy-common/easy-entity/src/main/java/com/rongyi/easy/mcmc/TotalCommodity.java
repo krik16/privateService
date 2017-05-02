@@ -112,6 +112,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> offServiceIds;
 	private String brandName;
 	private Integer commodityRange;
+	private Integer isRefund;//是否可退货 0:不可退货，1：可退货
 
 	public Integer getCommodityRange() {
 		return commodityRange;
@@ -560,70 +561,52 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
 		this.serviceDescriptionRemark = serviceDescriptionRemark;
 	}
+	
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
 
 	@Override
 	public String toString() {
-		return "TotalCommodity{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", barCode='" + barCode + '\'' +
-				", postage='" + postage + '\'' +
-				", stock=" + stock +
-				", createAt=" + createAt +
-				", updateAt=" + updateAt +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", updateBy=" + updateBy +
-				", createBy=" + createBy +
-				", picList=" + picList +
-				", categoryIds=" + categoryIds +
-				", customCategoryIds=" + customCategoryIds +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", source=" + source +
-				", stockStatus=" + stockStatus +
-				", commodityIds=" + commodityIds +
-				", specList=" + specList +
-				", reason='" + reason + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", filialeMids=" + filialeMids +
-				", shopMids=" + shopMids +
-				", commodityModelNo='" + commodityModelNo + '\'' +
-				", goodsParam=" + goodsParam +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", identity=" + identity +
-				", immediateOn=" + immediateOn +
-				", skus=" + skus +
-				", purchaseCount=" + purchaseCount +
-				", templateId=" + templateId +
-				", goodsSec=" + goodsSec +
-				", subheading='" + subheading + '\'' +
-				", discount=" + discount +
-				", shelvesType=" + shelvesType +
-				", locationIds=" + locationIds +
-				", serviceIds=" + serviceIds +
-				", mallServiceIds=" + mallServiceIds +
-				", accountType=" + accountType +
-				", merchantId='" + merchantId + '\'' +
-				", wechatInfoVos=" + wechatInfoVos +
-				", serviceDescriptionId=" + serviceDescriptionId +
-				", serviceDescription='" + serviceDescription + '\'' +
-				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
-				", onServiceIds=" + onServiceIds +
-				", offServiceIds=" + offServiceIds +
-				", mallServiceIds=" + mallServiceIds +
-				", serviceDescriptionId=" + serviceDescriptionId +
-				", serviceDescription=" + serviceDescription +
-				", serviceDescriptionRemark=" + serviceDescriptionRemark +
-				", brandName='" + brandName + '\'' +
-				", commodityRange=" + commodityRange +
-				'}';
+		return "TotalCommodity [id=" + id + ", name=" + name + ", category="
+				+ category + ", status=" + status + ", code=" + code
+				+ ", barCode=" + barCode + ", description=" + description
+				+ ", postage=" + postage + ", stock=" + stock + ", createAt="
+				+ createAt + ", updateAt=" + updateAt + ", originalPrice="
+				+ originalPrice + ", currentPrice=" + currentPrice
+				+ ", updateBy=" + updateBy + ", createBy=" + createBy
+				+ ", picList=" + picList + ", categoryIds=" + categoryIds
+				+ ", customCategoryIds=" + customCategoryIds + ", freight="
+				+ freight + ", terminalType=" + terminalType + ", registerAt="
+				+ registerAt + ", soldOutAt=" + soldOutAt + ", source="
+				+ source + ", stockStatus=" + stockStatus + ", commodityIds="
+				+ commodityIds + ", specList=" + specList + ", reason="
+				+ reason + ", brandMid=" + brandMid + ", filialeMids="
+				+ filialeMids + ", shopMids=" + shopMids
+				+ ", commodityModelNo=" + commodityModelNo + ", goodsParam="
+				+ goodsParam + ", supportCourierDeliver="
+				+ supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", identity=" + identity
+				+ ", immediateOn=" + immediateOn + ", skus=" + skus
+				+ ", purchaseCount=" + purchaseCount + ", templateId="
+				+ templateId + ", goodsSec=" + goodsSec + ", subheading="
+				+ subheading + ", commodityDetails=" + commodityDetails
+				+ ", discount=" + discount + ", shelvesType=" + shelvesType
+				+ ", locationIds=" + locationIds + ", serviceIds=" + serviceIds
+				+ ", mallServiceIds=" + mallServiceIds + ", accountType="
+				+ accountType + ", merchantId=" + merchantId
+				+ ", wechatInfoVos=" + wechatInfoVos
+				+ ", serviceDescriptionId=" + serviceDescriptionId
+				+ ", serviceDescription=" + serviceDescription
+				+ ", serviceDescriptionRemark=" + serviceDescriptionRemark
+				+ ", onServiceIds=" + onServiceIds + ", offServiceIds="
+				+ offServiceIds + ", brandName=" + brandName
+				+ ", commodityRange=" + commodityRange + ", isRefund="
+				+ isRefund + "]";
 	}
 
 	public void wrapTotalCommodityInfo(Commodity commodity, com.rongyi.easy.mcmc.vo.CommodityVO vo) {
@@ -696,6 +679,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+		//this.setIsRefund(commodity.getIsRefund());//是否可退货
 	}
 
 	public String getSubheading() {
@@ -803,6 +787,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
+			this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
 			this.setServiceDescriptionId(param.getServiceDescriptionId());
 			this.setServiceDescription(param.getServiceDescription());
 			this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());

@@ -167,6 +167,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	private List<String> skus;
 	private String systemNumber;
+	private Integer isRefund;//是否可以退货，0：不可退货 1：可退货
 	private Integer flag;//1表示发布商品，2表示复制新建商品
 
 
@@ -970,6 +971,15 @@ public class CommodityVO  implements  Serializable, Cloneable {
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
+	
+	
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
 
 	public Integer getFlag() {
 		return flag;
@@ -1110,6 +1120,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 		this.source = commodity.getSource();
 		this.systemNumber=commodity.getSystemNumber();
+		this.isRefund = commodity.getIsRefund() == null ? 0 : commodity.getIsRefund();//是否可退货
 		this.reason=commodity.getReason();
 	}
 
@@ -1305,6 +1316,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setBrandMid(commodity.getBrandMid());
 		vo.setBrandName(commodity.getBrandName());
 		vo.setCommodityModelNo(commodity.getCommodityModelNo());
+		vo.setIsRefund(commodity.getIsRefund());//是否可退货
 		return vo;
 	}
 
