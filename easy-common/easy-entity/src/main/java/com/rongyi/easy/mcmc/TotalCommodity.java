@@ -672,11 +672,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	}
 
 	/**
-	 * 重构：新vo
+	 * 重构：
 	 * @param commodity
-	 * @param vo
 	 */
-	public void wrapTotalCommodityInfo(Commodity commodity, com.rongyi.easy.mcmc.vo.commodity.new1.CommodityVO vo) {
+	public void wrapTotalCommodityInfo(Commodity commodity) {
 		this.setName(commodity.getName());
 		this.setCategory(commodity.getCategory());
 		this.setStatus(commodity.getStatus());
@@ -688,7 +687,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setGoodsParam(commodity.getGoodsParam());
 		this.setSkus(commodity.getSkus());
 
-		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
+		if(CollectionUtils.isNotEmpty(commodity.getSpecList())) {
 			//totalCommodity总表显示时间区域
 			this.setOriginalPrice(commodity.getoPriceMin() +
 					(commodity.getoPriceMax().equals(commodity.getoPriceMin()) ?
@@ -721,9 +720,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setShopMids(new ArrayList<String>());
 		this.getShopMids().add(commodity.getShopMid());
 
-		if (StringUtils.isNotBlank(vo.getCreate_by()) && vo.getCreate_by().matches("\\d+")) {
-			this.setUpdateBy(Integer.valueOf(vo.getCreate_by()));
-			this.setCreateBy(Integer.valueOf(vo.getCreate_by()));
+		if (StringUtils.isNotBlank(commodity.getCreate_by()) && commodity.getCreate_by().matches("\\d+")) {
+			this.setUpdateBy(Integer.valueOf(commodity.getCreate_by()));
+			this.setCreateBy(Integer.valueOf(commodity.getCreate_by()));
 		}
 		this.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
 		this.setSupportSelfPickup(commodity.isSupportSelfPickup());

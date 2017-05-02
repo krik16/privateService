@@ -8,5 +8,4 @@ public interface ITotalCommodityService {
 
 	public TotalCommodity buildTotalCommodityOfMc(Commodity commodity) throws Exception;
 
-	public String createTotalCommodity(Commodity commodity, CommodityVO commodityVo) throws Exception;
 }
