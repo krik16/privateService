@@ -78,6 +78,8 @@ public class CommodityVO2 implements  Serializable {
 	private String serviceDescriptionRemark;
 
 	private String reason;
+	
+	private Integer isRefund;//是否可退货  0:否，1:可退货
 
 	public Date getCreateAt() {
 		return createAt;
@@ -375,6 +377,14 @@ public class CommodityVO2 implements  Serializable {
 		this.reason = reason;
 	}
 
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+	
 	public String getServiceDescription() {
 		return serviceDescription;
 	}

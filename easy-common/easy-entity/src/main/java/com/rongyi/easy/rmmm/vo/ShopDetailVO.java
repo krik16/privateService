@@ -15,10 +15,12 @@ public class ShopDetailVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String shopId;// 店铺mysqlid
 	private String shopLogo;// 店铺logo
+	private String shopIcon;// 店铺自定义logo
 	private String address;// 店铺地址
 	private String shopName;// 店铺名字
 	private String berthNum;// 铺位号
 	private String shopMid;// shop mongoId
+	private String telephone;//店铺电话
 
 	public String getShopId() {
 		return shopId;
@@ -68,4 +70,19 @@ public class ShopDetailVO implements Serializable{
 		this.shopMid = shopMid;
 	}
 
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
+	}
 }
