@@ -7,7 +7,7 @@
 			">
 
 
-	<bean id="sqlSessionFactoryRpb" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
@@ -20,11 +20,11 @@
 		<property name="basePackage" value="com.rongyi.rpb.mapper" />
 	</bean>
 
-	<bean id="sqlSessionFactory" class="com.rongyi.rpb.sql.MutilSessionFactory">
+	<!--<bean id="sqlSessionFactory" class="com.rongyi.rpb.sql.MutilSessionFactory">
 		<property name="sqlSessionFactory">
 			<ref bean="sqlSessionFactoryRpb" />
 		</property>
-	</bean>
+	</bean>-->
 	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> <property 
 		name="basePackage" value="com.rongyi.rpb" /> <property name="sqlSessionFactory" 
 		ref="sqlSessionFactory" /> </bean> -->
