@@ -12,6 +12,7 @@ import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.v6.PaymentEntityVo;
 import com.rongyi.easy.tms.vo.MQDrawParam;
 import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
@@ -848,7 +849,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public List<PaymentEntity> queryListByParam(PaymentOrderParam param) {
+    public List<PaymentEntityVo> queryListByParam(PaymentOrderParam param) {
         Map<String, Object> params = new HashMap<>();
         buildParamMap(params,param);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".queryListByParam", params);
