@@ -36,6 +36,9 @@
 		<result column="rebateDiscountMer" property="rebateDiscountMer" jdbcType="DECIMAL" />
 		<result column="reductionFee" property="reductionFee" jdbcType="DECIMAL" />
 		<result column="hbDiscountMer" property="hbDiscountMer" jdbcType="DECIMAL" />
+		<result column="refundFee" property="refundFee" jdbcType="DECIMAL" />
+		<result column="refundExpressFee" property="refundExpressFee" jdbcType="DECIMAL" />
+		<result column="reductionRefundFee" property="reductionRefundFee" jdbcType="DECIMAL" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -312,6 +315,9 @@
 		WHERE odf2.order_no = of.order_no and  odf2.coupon_discount_type=1
 		) as hbDiscountMer ,
 		of.reduction_fee reductionFee,
+		sum(af.refund_fee) refundFee,
+		sum(af.refund_express_fee) refundExpressFee,
+		sum(ROUND((af.refund_fee - af.refund_express_fee) * odf.reduction_fee / odf.pay_amount, 2)) reductionRefundFee,
 		sum(odf.quantity) totalQuantity,
 		oe.create_at finishTime,
 		si.shop_name,
@@ -322,8 +328,8 @@
 		INNER JOIN ry_osm.order_event oe
 		ON of.order_no = oe.order_no
 		AND oe.type = 19
-		INNER JOIN ry_osm.order_detail_form
-		odf ON of.order_no = odf.order_no
+		INNER JOIN ry_osm.order_detail_form odf ON of.order_no = odf.order_no
+		LEFT JOIN ry_osm.appeal_form af ON odf.refund_no = af.refund_no AND af.`status` =  3 AND odf.refund_no IS NOT NULL AND odf.refund_no != ''
 		INNER
 		JOIN ry_rmmm.shop_info si on si.id = of.weidian_id
 		WHERE

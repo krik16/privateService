@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 public class BaseControllerV2 {
 
     @Autowired
-   private AccessService accessService;
+    private AccessService accessService;
+
+    protected final static int DEFAULT_PAGE_SIZE = 10;
 
     /**
      * 权限验证
