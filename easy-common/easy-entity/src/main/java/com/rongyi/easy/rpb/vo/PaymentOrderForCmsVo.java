@@ -20,6 +20,7 @@ public class PaymentOrderForCmsVo implements Serializable {
     private Long scoreDiscount;//积分抵扣金额
     private String settleName;//结算对象
     private Integer status;//
+    private String posNo;//收款设备号
 
     public String getCashName() {
         return cashName;
@@ -107,6 +108,14 @@ public class PaymentOrderForCmsVo implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 
     @Override

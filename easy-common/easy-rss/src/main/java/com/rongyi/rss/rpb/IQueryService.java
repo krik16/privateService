@@ -2,6 +2,7 @@ package com.rongyi.rss.rpb;
 
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.param.PaymentOrderParam;
+import com.rongyi.easy.rpb.vo.v6.PaymentEntityVo;
 
 import java.util.List;
 
@@ -28,14 +29,14 @@ public interface IQueryService {
      * @param payChannel 支付类型
      * @return PaymentEntity
      */
-    PaymentEntity queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel);
+    PaymentEntityVo queryByOrderNoAndTradeType(String orderNo, Integer tradeType, Integer status, Integer payChannel);
 
     /**
      * 查询订单列表数据
      * @param param
      * @return
      */
-    List<PaymentEntity> queryListByParam(PaymentOrderParam param);
+    List<PaymentEntityVo> queryListByParam(PaymentOrderParam param);
     /**
      * 查询订单总记录数
      * @param paymentParam
