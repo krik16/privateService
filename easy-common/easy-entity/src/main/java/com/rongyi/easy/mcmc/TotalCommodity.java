@@ -486,21 +486,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.goodsSec = goodsSec;
 	}
 
-	public Double getDiscount() {
-		try {
-			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-				ddf1.setMaximumFractionDigits(2);
-				Double currentPrice = Double.valueOf(this.currentPrice);
-				Double originalPrice = Double.valueOf(this.originalPrice);
-
-				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
-			}
-			return 10.0;
-		} catch(Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
-	}
 
 	public String getCommodityModelNo() {
 		return commodityModelNo;
@@ -516,6 +501,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
+	}
+
+	public Double getDiscount() {
+		return discount;
 	}
 
 	public void setDiscount(Double discount) {
