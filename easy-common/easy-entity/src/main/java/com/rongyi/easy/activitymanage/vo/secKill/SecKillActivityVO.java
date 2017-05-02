@@ -15,7 +15,7 @@ public class SecKillActivityVO implements Serializable{
 
     private static final long serialVersionUID = -5409159193112132863L;
 
-    private int activityId;//活动id
+    private Integer activityId;//活动id
     private String activityName;//活动名称
     private Integer activityStatus;//1:未开始，2：进行中，3：活动已结束
     private String relevanceId;//活动属于什么类型人创建的关联id 如商场id，店铺id，品牌
@@ -28,15 +28,15 @@ public class SecKillActivityVO implements Serializable{
     private String shareTitle;//分享标题
     private String sharePic;//分享图片
     private String shareDesc;//分享描述
-    private SecKillPic pics;//秒杀轮播图
+    private List<SecKillPic> pics;//秒杀轮播图
     private Integer type;//活动类型 7秒杀 8普通拼团,9电商版拼团，10教育版拼团
     private List<SecKillActivitySessionVO> activitySessions;//秒杀活动场次
 
-    public int getActivityId() {
+    public Integer getActivityId() {
         return activityId;
     }
 
-    public void setActivityId(int activityId) {
+    public void setActivityId(Integer activityId) {
         this.activityId = activityId;
     }
 
@@ -136,11 +136,11 @@ public class SecKillActivityVO implements Serializable{
         this.shareDesc = shareDesc;
     }
 
-    public SecKillPic getPics() {
+    public List<SecKillPic> getPics() {
         return pics;
     }
 
-    public void setPics(SecKillPic pics) {
+    public void setPics(List<SecKillPic> pics) {
         this.pics = pics;
     }
 

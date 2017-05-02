@@ -13,27 +13,18 @@ public class SecKillGoodSpecVO implements Serializable{
 
     private static final long serialVersionUID = 6136565841261086534L;
 
-    private String activityGoodsId;//活动商品关联表id
-    private String goodId;//商品id
+    private Integer activityGoodsId;//活动商品关联表id
     private String goodSpecId;//商品规格id
     private double goodPrice;//价格:元
     private int joinCount;//拼团参与库存
     private int remainCount;//剩余库存
 
-    public String getActivityGoodsId() {
+    public Integer getActivityGoodsId() {
         return activityGoodsId;
     }
 
-    public void setActivityGoodsId(String activityGoodsId) {
+    public void setActivityGoodsId(Integer activityGoodsId) {
         this.activityGoodsId = activityGoodsId;
-    }
-
-    public String getGoodId() {
-        return goodId;
-    }
-
-    public void setGoodId(String goodId) {
-        this.goodId = goodId;
     }
 
     public String getGoodSpecId() {

@@ -34,6 +34,12 @@ public interface ISecKillActivityService {
     public SecKillGoodVO detailActivityGoodForSecKill(int activityGoodId);
 
     /**
+     * 活动商品详情
+     * @return
+     */
+    public SecKillGoodVO detailActivityGoodForSecKill(int activityGoodId, String specId);
+
+    /**
      * 查询秒杀活动商品状态
      * @return
      */

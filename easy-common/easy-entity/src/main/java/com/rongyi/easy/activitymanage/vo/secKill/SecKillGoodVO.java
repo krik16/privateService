@@ -15,12 +15,12 @@ public class SecKillGoodVO implements Serializable{
 
     private static final long serialVersionUID = 193121478095342066L;
 
-    private int activityId;//活动id
-    private String activityCommodityId;//活动商品关联表id
+    private Integer activityId;//活动id
+    private Integer activityCommodityId;//活动商品关联表id
     private String goodId;//商品id
     private String goodName;//商品/卡券名称
     private String goodDesc;//商品描述
-    private int limitNum;//限购数量
+    private int limitNum;//限购数量 0表示不限购
     private Integer activityCommodityStatus;//商品审核状态：待审核[0] 未通过[1] 已通过[2] 6下线 7活动结束
     private Date activitySessionStartAt;//场次开始时间
     private Date activitySessionEndAt;//场次结束时间
@@ -67,11 +67,11 @@ public class SecKillGoodVO implements Serializable{
         this.activityCommodityStatus = activityCommodityStatus;
     }
 
-    public String getActivityCommodityId() {
+    public Integer getActivityCommodityId() {
         return activityCommodityId;
     }
 
-    public void setActivityCommodityId(String activityCommodityId) {
+    public void setActivityCommodityId(Integer activityCommodityId) {
         this.activityCommodityId = activityCommodityId;
     }
 
@@ -99,11 +99,11 @@ public class SecKillGoodVO implements Serializable{
         this.specs = specs;
     }
 
-    public int getActivityId() {
+    public Integer getActivityId() {
         return activityId;
     }
 
-    public void setActivityId(int activityId) {
+    public void setActivityId(Integer activityId) {
         this.activityId = activityId;
     }
 
