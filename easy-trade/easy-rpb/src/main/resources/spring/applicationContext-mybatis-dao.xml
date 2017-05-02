@@ -16,6 +16,9 @@
 		</property>
 	</bean>
 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.rongyi.rpb.mapper" />
+	</bean>
 
 	<bean id="sqlSessionFactory" class="com.rongyi.rpb.sql.MutilSessionFactory">
 		<property name="sqlSessionFactory">

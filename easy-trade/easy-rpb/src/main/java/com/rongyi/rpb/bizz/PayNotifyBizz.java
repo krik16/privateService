@@ -213,7 +213,7 @@ public class PayNotifyBizz {
         paymentEntity.setFinishTime(new Date());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
 
         //通知第三方业务
         payNotifyThird(paymentEntity, paymentLogInfo);
@@ -245,7 +245,7 @@ public class PayNotifyBizz {
         ryMchVo.setOrgChannel(oldPaymentEntity.getOrgChannel());
         //初始化退款记录
         if(refundPaymentEntity == null) {
-            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount().intValue(), oldPaymentEntity.getOrderType(),
+            refundPaymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, posBankSynNotifyDto.getOrderNo(), posBankSynNotifyDto.getPayAmount(), oldPaymentEntity.getOrderType(),
                     Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, oldPaymentEntity.getPayChannel(), oldPaymentEntity.getAliSellerId(), oldPaymentEntity.getWechatMchId(),
                     oldPaymentEntity.getPayScene());
         }
@@ -255,11 +255,11 @@ public class PayNotifyBizz {
 
         //初始化退款事件记录
         PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(posBankSynNotifyDto.getPaymentNo(), refundPaymentEntity.getPayNo(), Constants.REPLAY_FLAG.REPLAY_FLAG3,
-                "SUCCESS", posBankSynNotifyDto.getPayAmount().intValue(), "", "",
+                "SUCCESS", posBankSynNotifyDto.getPayAmount(), "", "",
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
 
         //保存退款记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
     }
 

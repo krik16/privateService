@@ -451,7 +451,7 @@ public class QueryBizz {
                     "SUCCESS", totalFee, buyerId, buyerEmail,
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
             //保存支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         }
     }
 }

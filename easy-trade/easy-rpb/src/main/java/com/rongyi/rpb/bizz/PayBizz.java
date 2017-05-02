@@ -79,11 +79,11 @@ public class PayBizz extends BaseBizz{
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
             //保存支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         } else {
             punchCardPayResData = WeChatPayUnit.punchCardNativePay(wechatPaySignData, wechatConfigure);
             //保存未支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, null);
+            saveUnit.updatePaymentEntity(paymentEntity, null,null);
             //循环查询支付状态
             wechatWaitUserPaying(paymentEntity, wechatConfigure, punchCardPayResData);
         }
@@ -120,7 +120,7 @@ public class PayBizz extends BaseBizz{
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
 
         //发送异步通知
         payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
@@ -161,7 +161,7 @@ public class PayBizz extends BaseBizz{
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
             //保存支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
 
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
@@ -172,7 +172,7 @@ public class PayBizz extends BaseBizz{
         else {
             wwPunchCardResData = WebankPayUnit.wechatPunchCardPayNative(wwPunchCardPayParam);
             //保存未支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, null);
+            saveUnit.updatePaymentEntity(paymentEntity, null,null);
             //循环查询支付状态
             webankWechatWaitUserPaying(paymentEntity, wwPunchCardPayParam);
         }
@@ -215,7 +215,7 @@ public class PayBizz extends BaseBizz{
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
             //保存支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         }
@@ -223,7 +223,7 @@ public class PayBizz extends BaseBizz{
         else {
             resData = WebankPayUnit.alipayPunchCardPayNative(waPunchCardPayParam);
             //保存未支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, null);
+            saveUnit.updatePaymentEntity(paymentEntity, null,null);
             //循环查询支付状态
             webankAliWaitUserPaying(paymentEntity, waPunchCardPayParam);
         }
@@ -253,7 +253,7 @@ public class PayBizz extends BaseBizz{
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         //发送异步通知
         payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
 
@@ -279,7 +279,7 @@ public class PayBizz extends BaseBizz{
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, null);
+        saveUnit.updatePaymentEntity(paymentEntity, null,null);
         return paymentEntity;
     }
 
@@ -360,7 +360,7 @@ public class PayBizz extends BaseBizz{
         paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         paymentEntity.setFinishTime(new Date());
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         //发送异步通知
         payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
 
