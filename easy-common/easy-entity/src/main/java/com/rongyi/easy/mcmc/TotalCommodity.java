@@ -112,6 +112,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> offServiceIds;
 	private String brandName;
 	private Integer commodityRange;
+	private Integer isRefund;//是否可退货 0:不可退货，1：可退货
 
 	public Integer getCommodityRange() {
 		return commodityRange;
@@ -485,21 +486,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.goodsSec = goodsSec;
 	}
 
-	public Double getDiscount() {
-		try {
-			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-				ddf1.setMaximumFractionDigits(2);
-				Double currentPrice = Double.valueOf(this.currentPrice);
-				Double originalPrice = Double.valueOf(this.originalPrice);
-
-				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
-			}
-			return 10.0;
-		} catch(Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
-	}
 
 	public String getCommodityModelNo() {
 		return commodityModelNo;
@@ -515,6 +501,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
+	}
+
+	public Double getDiscount() {
+		return discount;
 	}
 
 	public void setDiscount(Double discount) {
@@ -560,70 +550,52 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
 		this.serviceDescriptionRemark = serviceDescriptionRemark;
 	}
+	
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
 
 	@Override
 	public String toString() {
-		return "TotalCommodity{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", barCode='" + barCode + '\'' +
-				", postage='" + postage + '\'' +
-				", stock=" + stock +
-				", createAt=" + createAt +
-				", updateAt=" + updateAt +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", updateBy=" + updateBy +
-				", createBy=" + createBy +
-				", picList=" + picList +
-				", categoryIds=" + categoryIds +
-				", customCategoryIds=" + customCategoryIds +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", source=" + source +
-				", stockStatus=" + stockStatus +
-				", commodityIds=" + commodityIds +
-				", specList=" + specList +
-				", reason='" + reason + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", filialeMids=" + filialeMids +
-				", shopMids=" + shopMids +
-				", commodityModelNo='" + commodityModelNo + '\'' +
-				", goodsParam=" + goodsParam +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", identity=" + identity +
-				", immediateOn=" + immediateOn +
-				", skus=" + skus +
-				", purchaseCount=" + purchaseCount +
-				", templateId=" + templateId +
-				", goodsSec=" + goodsSec +
-				", subheading='" + subheading + '\'' +
-				", discount=" + discount +
-				", shelvesType=" + shelvesType +
-				", locationIds=" + locationIds +
-				", serviceIds=" + serviceIds +
-				", mallServiceIds=" + mallServiceIds +
-				", accountType=" + accountType +
-				", merchantId='" + merchantId + '\'' +
-				", wechatInfoVos=" + wechatInfoVos +
-				", serviceDescriptionId=" + serviceDescriptionId +
-				", serviceDescription='" + serviceDescription + '\'' +
-				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
-				", onServiceIds=" + onServiceIds +
-				", offServiceIds=" + offServiceIds +
-				", mallServiceIds=" + mallServiceIds +
-				", serviceDescriptionId=" + serviceDescriptionId +
-				", serviceDescription=" + serviceDescription +
-				", serviceDescriptionRemark=" + serviceDescriptionRemark +
-				", brandName='" + brandName + '\'' +
-				", commodityRange=" + commodityRange +
-				'}';
+		return "TotalCommodity [id=" + id + ", name=" + name + ", category="
+				+ category + ", status=" + status + ", code=" + code
+				+ ", barCode=" + barCode + ", description=" + description
+				+ ", postage=" + postage + ", stock=" + stock + ", createAt="
+				+ createAt + ", updateAt=" + updateAt + ", originalPrice="
+				+ originalPrice + ", currentPrice=" + currentPrice
+				+ ", updateBy=" + updateBy + ", createBy=" + createBy
+				+ ", picList=" + picList + ", categoryIds=" + categoryIds
+				+ ", customCategoryIds=" + customCategoryIds + ", freight="
+				+ freight + ", terminalType=" + terminalType + ", registerAt="
+				+ registerAt + ", soldOutAt=" + soldOutAt + ", source="
+				+ source + ", stockStatus=" + stockStatus + ", commodityIds="
+				+ commodityIds + ", specList=" + specList + ", reason="
+				+ reason + ", brandMid=" + brandMid + ", filialeMids="
+				+ filialeMids + ", shopMids=" + shopMids
+				+ ", commodityModelNo=" + commodityModelNo + ", goodsParam="
+				+ goodsParam + ", supportCourierDeliver="
+				+ supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", identity=" + identity
+				+ ", immediateOn=" + immediateOn + ", skus=" + skus
+				+ ", purchaseCount=" + purchaseCount + ", templateId="
+				+ templateId + ", goodsSec=" + goodsSec + ", subheading="
+				+ subheading + ", commodityDetails=" + commodityDetails
+				+ ", discount=" + discount + ", shelvesType=" + shelvesType
+				+ ", locationIds=" + locationIds + ", serviceIds=" + serviceIds
+				+ ", mallServiceIds=" + mallServiceIds + ", accountType="
+				+ accountType + ", merchantId=" + merchantId
+				+ ", wechatInfoVos=" + wechatInfoVos
+				+ ", serviceDescriptionId=" + serviceDescriptionId
+				+ ", serviceDescription=" + serviceDescription
+				+ ", serviceDescriptionRemark=" + serviceDescriptionRemark
+				+ ", onServiceIds=" + onServiceIds + ", offServiceIds="
+				+ offServiceIds + ", brandName=" + brandName
+				+ ", commodityRange=" + commodityRange + ", isRefund="
+				+ isRefund + "]";
 	}
 
 	public void wrapTotalCommodityInfo(Commodity commodity, com.rongyi.easy.mcmc.vo.CommodityVO vo) {
@@ -696,14 +668,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+		//this.setIsRefund(commodity.getIsRefund());//是否可退货
 	}
 
 	/**
-	 * 重构：新vo
+	 * 重构：
 	 * @param commodity
-	 * @param vo
 	 */
-	public void wrapTotalCommodityInfo(Commodity commodity, com.rongyi.easy.mcmc.vo.commodity.new1.CommodityVO vo) {
+	public void wrapTotalCommodityInfo(Commodity commodity) {
 		this.setName(commodity.getName());
 		this.setCategory(commodity.getCategory());
 		this.setStatus(commodity.getStatus());
@@ -715,7 +687,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setGoodsParam(commodity.getGoodsParam());
 		this.setSkus(commodity.getSkus());
 
-		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
+		if(CollectionUtils.isNotEmpty(commodity.getSpecList())) {
 			//totalCommodity总表显示时间区域
 			this.setOriginalPrice(commodity.getoPriceMin() +
 					(commodity.getoPriceMax().equals(commodity.getoPriceMin()) ?
@@ -748,9 +720,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setShopMids(new ArrayList<String>());
 		this.getShopMids().add(commodity.getShopMid());
 
-		if (StringUtils.isNotBlank(vo.getCreate_by()) && vo.getCreate_by().matches("\\d+")) {
-			this.setUpdateBy(Integer.valueOf(vo.getCreate_by()));
-			this.setCreateBy(Integer.valueOf(vo.getCreate_by()));
+		if (StringUtils.isNotBlank(commodity.getCreate_by()) && commodity.getCreate_by().matches("\\d+")) {
+			this.setUpdateBy(Integer.valueOf(commodity.getCreate_by()));
+			this.setCreateBy(Integer.valueOf(commodity.getCreate_by()));
 		}
 		this.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
 		this.setSupportSelfPickup(commodity.isSupportSelfPickup());
@@ -880,6 +852,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 			this.setBrandMid(param.getBrandMid());
 			this.setBrandName(param.getBrandName());
 			this.setCommodityModelNo(param.getCommodityModelNo());
+			this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
 			this.setServiceDescriptionId(param.getServiceDescriptionId());
 			this.setServiceDescription(param.getServiceDescription());
 			this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());

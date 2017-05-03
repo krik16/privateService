@@ -52,4 +52,6 @@ public interface ITotalCommodityService {
 
 	public Map<String,Object> searchCommodityForManagement(Map<String,Object> paramMap,int pageSize);
 
+	public Map<String,Object> searchCommodityCountForManagement(Map<String,Object> paramMap);
+
 }

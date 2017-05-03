@@ -42,7 +42,7 @@ public class ShopEntity implements Serializable{
 //    private String slug;
 //    private String subtitle;
     private String tags;
-//    private String telephone;
+    private String telephone;//店铺电话
 //    private String terminal_shop;
 //    private String token;
 //    private Date updated_at;
@@ -217,12 +217,12 @@ public class ShopEntity implements Serializable{
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-//	public String getTelephone() {
-//		return telephone;
-//	}
-//	public void setTelephone(String telephone) {
-//		this.telephone = telephone;
-//	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
 //	public String getTerminal_shop() {
 //		return terminal_shop;
 //	}

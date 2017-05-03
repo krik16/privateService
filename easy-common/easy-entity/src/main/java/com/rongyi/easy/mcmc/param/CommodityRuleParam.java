@@ -24,7 +24,7 @@ public class CommodityRuleParam implements Serializable {
     private List<String> categoryIds;
     private Integer identity;
     private Integer status;
-    private Integer statusType; //1:上架  2:上架和待上架 3:非删除
+    private Integer statusType = 1; //1:上架  2:上架和待上架 3:非删除
     private String code;
     private String brandId;
     private String brandMid;
@@ -249,6 +249,7 @@ public class CommodityRuleParam implements Serializable {
         this.code = code;
     }
 
+    @NeedCheck(getFieldName = "status")
     public Integer getStatus() {
         return status;
     }

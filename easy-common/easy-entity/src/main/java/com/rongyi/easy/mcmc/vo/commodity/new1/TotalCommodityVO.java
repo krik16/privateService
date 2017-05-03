@@ -445,6 +445,10 @@ public class TotalCommodityVO implements Serializable, Cloneable {
         this.commodityDetails = commodityDetails;
     }
 
+    public Double getDiscount() {
+        return discount;
+    }
+
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
@@ -640,22 +644,6 @@ public class TotalCommodityVO implements Serializable, Cloneable {
                 ", updateType=" + updateType +
                 ", sourceParam=" + sourceParam +
                 '}';
-    }
-
-    public Double getDiscount() {
-        try {
-            if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-                NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-                ddf1.setMaximumFractionDigits(2);
-                Double currentPrice = Double.valueOf(this.currentPrice);
-                Double originalPrice = Double.valueOf(this.originalPrice);
-
-                return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
-            }
-            return 10.0;
-        } catch(Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
     }
 
     public void setTotalCommodityFromParam(CommodityParam param, SessionUserInfo userInfo, Map<String, Object> skus) {
