@@ -1,10 +1,7 @@
 package com.rongyi.easy.tradecenter.vo;
 
-import com.rongyi.easy.osm.entity.SubStatisticalForActivityEntity;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 活动返回参数
@@ -17,9 +14,13 @@ public class QueryForActivityVO implements Serializable {
     private Integer activityId;
     // 活动类型，参考（普通0、闪购1、特卖2、秒杀3、拼团4、超级团教育版5、断码好货6）
     private Integer activityType;
+    // 活动名称
+    private String activityName;
+    // 订单ID
+    private Integer orderId;
     // 订单号
     private String orderNo;
-    // 订单状态
+    // 订单状态 1:待支付 2：待发货 3：待收货 4：已完成 5：已关闭
     private String orderStatus;
     // 买家手机号码
     private String buyerPhone;
@@ -134,11 +135,29 @@ public class QueryForActivityVO implements Serializable {
         this.payAmount = payAmount;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
     @Override
     public String toString() {
         return "QueryForActivityVO{" +
                 "activityId=" + activityId +
                 ", activityType=" + activityType +
+                ", activityName='" + activityName + '\'' +
+                ", orderId=" + orderId +
                 ", orderNo='" + orderNo + '\'' +
                 ", orderStatus='" + orderStatus + '\'' +
                 ", buyerPhone='" + buyerPhone + '\'' +

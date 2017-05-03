@@ -373,28 +373,4 @@ public interface IOrderQueryService {
      * @return
      */
     DubboVO<ReductionActivityVO> listForReduction(ReductionParam param);
-
-    /**
-     * 单项活动统计
-     *
-     * @param param
-     * @return
-     */
-    DubboVO<StatisticalForActivityVO> statisticalForActivity(StatisticalForActivityParam param);
-
-    /**
-     * 单项活动查询数据
-     *
-     * @param param
-     * @return
-     */
-    DubboVO<List<QueryForActivityVO>> listForActivity(QueryForActivityParam param);
-
-    /**
-     * 单项活动查询总数
-     *
-     * @param param
-     * @return
-     */
-    DubboVO<Integer> listCountForActivity(QueryForActivityParam param);
 }

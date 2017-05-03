@@ -28,7 +28,7 @@ public class QueryForActivityParam extends BaseQueryParam implements Serializabl
     // 订单号
     private String orderNo;
     // 订单状态
-    private String orderStatus;
+    private Integer orderStatus;
 
     public Integer getActivityId() {
         return activityId;
@@ -86,11 +86,11 @@ public class QueryForActivityParam extends BaseQueryParam implements Serializabl
         this.orderNo = orderNo;
     }
 
-    public String getOrderStatus() {
+    public Integer getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
 
