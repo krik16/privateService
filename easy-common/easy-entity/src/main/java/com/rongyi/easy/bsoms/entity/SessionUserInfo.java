@@ -23,45 +23,25 @@ public class SessionUserInfo implements Serializable{
     private String userNickName;
 
     private Integer createSource;
-    
     private Integer brandId;
-    
     private String brandMid;
-
     private Integer groupId;
-    
     private String groupMid;
-
     private Integer mallId;
-    
     private String mallMid;
-
     private Integer shopId;
-    
     private String shopMid;
-    
     private Integer filialeId;
-    
     private String filialeMid;
-
 	private Integer parentShopId;
-
 	private String parentShopMid;
-
 	private Integer grandpaShopId;
-
 	private String grandpaShopMid;
-
 	private Integer level;  //账号层级 1 2 3
-
 	private Integer isChief; //是否主账号  0否 1是
-
     private String logo = "http://rongyi.b0.upaiyun.com/commodity/text/201601051202219059.png";  //logo图片地址
-    
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
-    
     private String address ;  //用户所属公司地址
-    
     private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
     private Integer defaultTerminal;//默认终端 1 容易逛,2 微信,3 终端机
 	private Integer isOpenQrCode;
@@ -69,8 +49,9 @@ public class SessionUserInfo implements Serializable{
     private Integer industryVersionId; //行业版本ID
 	private Integer isAllowBindingWechat;//微信端展示,0显示,1不显示
 	private Integer accountSource;// 1:海信版 2:其他 不做处理
+	private Integer chiefId;//主账号id
+	private Integer roleId;//分销商标识  -1
 	
-
 	public String getMallMid() {
 		return mallMid;
 	}
@@ -78,9 +59,7 @@ public class SessionUserInfo implements Serializable{
 	public void setMallMid(String mallMid) {
 		this.mallMid = mallMid;
 	}
-
-
-
+	
 	public String getBrandMid() {
 		return brandMid;
 	}
@@ -96,9 +75,7 @@ public class SessionUserInfo implements Serializable{
 	public void setBrandId(Integer brandId) {
 		this.brandId = brandId;
 	}
-
-
-
+	
 	public Integer getMallId() {
 		return mallId;
 	}
@@ -395,6 +372,22 @@ public class SessionUserInfo implements Serializable{
 		this.accountSource = accountSource;
 	}
 
+	public Integer getChiefId() {
+		return chiefId;
+	}
+
+	public void setChiefId(Integer chiefId) {
+		this.chiefId = chiefId;
+	}
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
 	@Override
 	public String toString() {
 		return "SessionUserInfo [id=" + id + ", type=" + type + ", identity="
@@ -405,18 +398,18 @@ public class SessionUserInfo implements Serializable{
 				+ ", brandMid=" + brandMid + ", groupId=" + groupId
 				+ ", groupMid=" + groupMid + ", mallId=" + mallId
 				+ ", mallMid=" + mallMid + ", shopId=" + shopId + ", shopMid="
-				+ shopMid + ", filialeId=" + filialeId + ", filialeMid="
-				+ filialeMid + ", parentShopId=" + parentShopId
+				+ shopMid + ", parentShopId=" + parentShopId
 				+ ", parentShopMid=" + parentShopMid + ", grandpaShopId="
 				+ grandpaShopId + ", grandpaShopMid=" + grandpaShopMid
 				+ ", level=" + level + ", isChief=" + isChief + ", logo="
 				+ logo + ", theCompanyName=" + theCompanyName + ", address="
 				+ address + ", terminalType=" + terminalType
 				+ ", defaultTerminal=" + defaultTerminal + ", isOpenQrCode="
-				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + ", industryId=" + industryId
+				+ isOpenQrCode + ", industryId=" + industryId
 				+ ", industryVersionId=" + industryVersionId
-				+ ", accountSource=" + accountSource + "]";
+				+ ", isAllowBindingWechat=" + isAllowBindingWechat
+				+ ", accountSource=" + accountSource + ", chiefId=" + chiefId
+				+ ", roleId=" + roleId + "]";
 	}
 	
 }
