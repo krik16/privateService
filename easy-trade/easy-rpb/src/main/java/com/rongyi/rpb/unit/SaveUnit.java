@@ -30,12 +30,11 @@ public class SaveUnit {
 
 
         try {
-            int paymentId = 0;
             //支付记录
             if(paymentEntity != null && paymentEntity.getId() != null && paymentEntity.getId() > 0){
-                paymentId = paymentService.updateByPrimaryKeySelective(paymentEntity);
+                paymentService.updateByPrimaryKeySelective(paymentEntity);
             }else if(paymentEntity != null){
-                paymentId = paymentService.insert(paymentEntity);
+                paymentService.insert(paymentEntity);
             }
             //支付事件记录
             if(paymentLogInfo != null){
@@ -44,10 +43,10 @@ public class SaveUnit {
             //扩展表记录
             if(paymentEntityExt != null){
                 if(paymentEntityExt.getId() == null){
-                    if(paymentEntityExt.getPaymentOrderId() == null) {
-                        paymentEntityExt.setPaymentOrderId(paymentId);
+                    if(paymentEntityExt.getPaymentOrderId() == null && paymentEntity != null) {
+                        paymentEntityExt.setPaymentOrderId(paymentEntity.getId());
                     }
-                    paymentEntityExtMapper.insert(paymentEntityExt);
+                    paymentEntityExtMapper.insertSelective(paymentEntityExt);
                 }else {
                     paymentEntityExtMapper.updateByPrimaryKey(paymentEntityExt);
                 }
