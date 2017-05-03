@@ -533,14 +533,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public Map<String, String> insert(PaymentEntity paymentEntity) {
-        Map<String, String> map = new HashMap<>();
-        try {
-            this.getBaseDao().insertBySql(PAYMENTENTITY_NAMESPACE + ".insert", paymentEntity);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
-        }
-        return map;
+    public int insert(PaymentEntity paymentEntity) {
+        return this.getBaseDao().insertBySql(PAYMENTENTITY_NAMESPACE + ".insert", paymentEntity);
     }
 
     @Override

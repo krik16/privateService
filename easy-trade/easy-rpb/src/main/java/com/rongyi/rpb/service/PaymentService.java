@@ -109,7 +109,7 @@ public interface PaymentService {
 
 	public abstract List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tredeType);
 
-	public abstract Map<String, String> insert(PaymentEntity paymentEntity);
+	int insert(PaymentEntity paymentEntity);
 
 	public abstract PaymentEntity selectByPrimaryKey(String id);
 
