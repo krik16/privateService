@@ -1,6 +1,7 @@
 package com.rongyi.easy.osm.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ public class SubStatisticalForActivityEntity implements Serializable {
     // 成交数
     private Integer volume;
     // 成交额
-    private Float payAmount;
+    private BigDecimal payAmount;
 
     public String getCommodityId() {
         return commodityId;
@@ -43,11 +44,11 @@ public class SubStatisticalForActivityEntity implements Serializable {
         this.volume = volume;
     }
 
-    public Float getPayAmount() {
+    public BigDecimal getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Float payAmount) {
+    public void setPayAmount(BigDecimal payAmount) {
         this.payAmount = payAmount;
     }
 
