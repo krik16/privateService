@@ -28,7 +28,7 @@ public class SonOrderVO implements Serializable{
 
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
-	private String refundStatus = "0";// 退款状态
+	private String refundStatus;// 退款状态 0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：带卖家收货 6：退款关闭
 
 	private String commodityId;// 商品id
 	private String commodityNo;// 商品编号
@@ -36,6 +36,7 @@ public class SonOrderVO implements Serializable{
 	private String commodityName;// 商品名称
 
 	private String sonOrderId;// 子订单id
+	private String sonOrderNo;// 子订单号
 
 	private String applicationId;// 退款或维权id
 
@@ -55,6 +56,12 @@ public class SonOrderVO implements Serializable{
 	private BigDecimal discountAmount;//原价-卖家优惠
 	// 卖家满减金额
 	private BigDecimal reductionFee;
+	private Integer complaintStatus;// 维权状态 1：申诉中、2：申诉成功、3：申诉失败、4：申诉关闭
+	private Integer refundType;// 退款类型 1：仅退款'，3：快递退货退款'，7：到店退货退款'
+	private String refundNo;// 退款单号
+	private boolean whetherCanRefund;// 是否可以退款" true：可以，false:不可以
+	private boolean whetherCanComplaint;// 是否可以申诉" true：可以，false:不可以
+	private String complaintNo;// 维权单号
 
 	public boolean isIfOnDisplayAfterSales() {
 		return ifOnDisplayAfterSales;
@@ -289,6 +296,62 @@ public class SonOrderVO implements Serializable{
 		this.reductionFee = reductionFee;
 	}
 
+	public Integer getComplaintStatus() {
+		return complaintStatus;
+	}
+
+	public void setComplaintStatus(Integer complaintStatus) {
+		this.complaintStatus = complaintStatus;
+	}
+
+	public Integer getRefundType() {
+		return refundType;
+	}
+
+	public void setRefundType(Integer refundType) {
+		this.refundType = refundType;
+	}
+
+	public String getRefundNo() {
+		return refundNo;
+	}
+
+	public void setRefundNo(String refundNo) {
+		this.refundNo = refundNo;
+	}
+
+	public boolean isWhetherCanRefund() {
+		return whetherCanRefund;
+	}
+
+	public void setWhetherCanRefund(boolean whetherCanRefund) {
+		this.whetherCanRefund = whetherCanRefund;
+	}
+
+	public boolean isWhetherCanComplaint() {
+		return whetherCanComplaint;
+	}
+
+	public void setWhetherCanComplaint(boolean whetherCanComplaint) {
+		this.whetherCanComplaint = whetherCanComplaint;
+	}
+
+	public String getComplaintNo() {
+		return complaintNo;
+	}
+
+	public void setComplaintNo(String complaintNo) {
+		this.complaintNo = complaintNo;
+	}
+
+	public String getSonOrderNo() {
+		return sonOrderNo;
+	}
+
+	public void setSonOrderNo(String sonOrderNo) {
+		this.sonOrderNo = sonOrderNo;
+	}
+
 	@Override
 	public String toString() {
 		return "SonOrderVO{" +
@@ -310,6 +373,7 @@ public class SonOrderVO implements Serializable{
 				", commodityNo='" + commodityNo + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", sonOrderId='" + sonOrderId + '\'' +
+				", sonOrderNo='" + sonOrderNo + '\'' +
 				", applicationId='" + applicationId + '\'' +
 				", refundTimes='" + refundTimes + '\'' +
 				", couponCode='" + couponCode + '\'' +
