@@ -3,6 +3,7 @@ package com.rongyi.easy.tradecenter.vo;
 import com.rongyi.easy.osm.entity.SubStatisticalForActivityEntity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -21,15 +22,15 @@ public class StatisticalForActivityVO implements Serializable {
     // 总成交数
     private Integer totalVolume;
     // 总成交额
-    private Float totalPayAmount;
+    private BigDecimal totalPayAmount;
     // 子项统计
     private List<SubStatisticalForActivityEntity> list;
 
-    public Float getTotalPayAmount() {
+    public BigDecimal getTotalPayAmount() {
         return totalPayAmount;
     }
 
-    public void setTotalPayAmount(Float totalPayAmount) {
+    public void setTotalPayAmount(BigDecimal totalPayAmount) {
         this.totalPayAmount = totalPayAmount;
     }
 

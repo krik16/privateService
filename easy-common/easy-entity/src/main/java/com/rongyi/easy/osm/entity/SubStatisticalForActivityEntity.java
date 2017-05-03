@@ -1,6 +1,7 @@
 package com.rongyi.easy.osm.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,16 +13,12 @@ import java.util.Date;
 public class SubStatisticalForActivityEntity implements Serializable {
     // 商品Id
     private String commodityId;
-    // 商品规格
-    private String getCommoditySpecId;
     // 下单数
     private Integer count;
     // 成交数
     private Integer volume;
     // 成交额
-    private Float payAmount;
-    // 下单日期
-    private Date createDate;
+    private BigDecimal payAmount;
 
     public String getCommodityId() {
         return commodityId;
@@ -39,22 +36,6 @@ public class SubStatisticalForActivityEntity implements Serializable {
         this.count = count;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getGetCommoditySpecId() {
-        return getCommoditySpecId;
-    }
-
-    public void setGetCommoditySpecId(String getCommoditySpecId) {
-        this.getCommoditySpecId = getCommoditySpecId;
-    }
-
     public Integer getVolume() {
         return volume;
     }
@@ -63,11 +44,11 @@ public class SubStatisticalForActivityEntity implements Serializable {
         this.volume = volume;
     }
 
-    public Float getPayAmount() {
+    public BigDecimal getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Float payAmount) {
+    public void setPayAmount(BigDecimal payAmount) {
         this.payAmount = payAmount;
     }
 
@@ -75,11 +56,9 @@ public class SubStatisticalForActivityEntity implements Serializable {
     public String toString() {
         return "SubStatisticalForActivityEntity{" +
                 "commodityId='" + commodityId + '\'' +
-                ", getCommoditySpecId='" + getCommoditySpecId + '\'' +
                 ", count=" + count +
                 ", volume=" + volume +
                 ", payAmount=" + payAmount +
-                ", createDate=" + createDate +
                 '}';
     }
 }
