@@ -34,7 +34,10 @@ public class ActivityGoodsDetail implements Serializable {
     private String activityPrice;//活动价，是个范围
     private Integer status;//2已编辑8未编辑
     private String shopName;//店铺名称
-    private Integer limitNum;//没人限购数量
+    private String sessionName;//场次名称
+    private String sessionId;//场次id
+    private String sessionDate;//场次日期
+    private Integer limitNum;//限购数量
     private List<GoodsSku> goodsSkuList = Lists.newArrayList();
 
     @Override
@@ -63,6 +66,31 @@ public class ActivityGoodsDetail implements Serializable {
                 .append("joinEndAt", joinEndAt)
                 .append("expectTotalAmount", expectTotalAmount)
                 .toString();
+    }
+
+
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public void setSessionDate(String sessionDate) {
+        this.sessionDate = sessionDate;
     }
 
     public Integer getLimitNum() {

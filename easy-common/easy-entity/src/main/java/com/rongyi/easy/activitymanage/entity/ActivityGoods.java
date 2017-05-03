@@ -136,10 +136,7 @@ public class ActivityGoods implements Serializable {
     private String subTitle;//副标题
     private Integer supModPrice;//是否支持按成团人数调价
     private String expectTotalAmount;//期望的金额
-    private String sessionName;//场次名称
-    private String sessionId;//场次id
-    private String sessionDate;//场次日期
-    private Integer limitNum;//限购数量
+
 
 
 
@@ -211,38 +208,6 @@ public class ActivityGoods implements Serializable {
         return categoryStr;
     }
 
-
-    public String getSessionName() {
-        return sessionName;
-    }
-
-    public void setSessionName(String sessionName) {
-        this.sessionName = sessionName;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public String getSessionDate() {
-        return sessionDate;
-    }
-
-    public void setSessionDate(String sessionDate) {
-        this.sessionDate = sessionDate;
-    }
-
-    public Integer getLimitNum() {
-        return limitNum;
-    }
-
-    public void setLimitNum(Integer limitNum) {
-        this.limitNum = limitNum;
-    }
 
     public Integer getGroupMaxNum() {
         return groupMaxNum;
