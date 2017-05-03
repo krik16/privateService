@@ -43,7 +43,7 @@ public class FullCommodityVO implements Serializable {
     public String toString() {
         return "FullCommodityVO{" +
                 "commodityVOs=" + commodityVOs +
-                ", totalCommodityVO=" + totalCommodityVO.toString() +
+                ", totalCommodityVO=" + totalCommodityVO +
                 ", delCommodityIds=" + delCommodityIds +
                 '}';
     }
