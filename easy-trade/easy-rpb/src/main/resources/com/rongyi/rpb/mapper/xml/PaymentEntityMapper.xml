@@ -645,6 +645,7 @@
     <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMapVo">
         select  <include refid="Base_Column_List"/>,mch_info_id,store_id,pos_no
         from payment_order
+        left join payment_order_ext
         where source in (3,4)
             <if test="orderNo != null and orderNo != ''">
                 and order_no = #{orderNo,jdbcType=VARCHAR}
