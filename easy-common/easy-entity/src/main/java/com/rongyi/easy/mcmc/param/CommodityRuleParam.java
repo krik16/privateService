@@ -249,6 +249,7 @@ public class CommodityRuleParam implements Serializable {
         this.code = code;
     }
 
+    @NeedCheck(getFieldName = "status")
     public Integer getStatus() {
         return status;
     }
