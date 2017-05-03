@@ -170,6 +170,8 @@ public class CommodityBuyerVO implements Serializable {
     private String serviceDescription;   //售后说明内容
     private Integer serviceDescriptionId;  //售后说明id
     private String serviceDescriptionRemark;   //售后说明备注
+    private Long activitySessionStartAt;// 微信秒杀场次开始时间
+    private Long activitySessionEndAt;//微信秒杀场次结束时间
 
     public String getServiceDescriptionRemark() {
         return serviceDescriptionRemark;
@@ -889,7 +891,23 @@ public class CommodityBuyerVO implements Serializable {
 		this.isRefund = isRefund;
 	}
 
-	public CommodityBuyerVO(Commodity commodity){
+    public Long getActivitySessionStartAt() {
+        return activitySessionStartAt;
+    }
+
+    public void setActivitySessionStartAt(Long activitySessionStartAt) {
+        this.activitySessionStartAt = activitySessionStartAt;
+    }
+
+    public Long getActivitySessionEndAt() {
+        return activitySessionEndAt;
+    }
+
+    public void setActivitySessionEndAt(Long activitySessionEndAt) {
+        this.activitySessionEndAt = activitySessionEndAt;
+    }
+
+    public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();

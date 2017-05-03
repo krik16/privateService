@@ -17,6 +17,8 @@ public class SecKillActivityParam implements Serializable{
 
     private Integer activityId;//拼团活动id
     private List<Integer> activityCommodityIds;//秒杀活动商品主键id集合
+    private String commodityId;//商品id
+    private String specId;//商品规格id
 
     public Integer getActivityId() {
         return activityId;
@@ -32,6 +34,22 @@ public class SecKillActivityParam implements Serializable{
 
     public void setActivityCommodityIds(List<Integer> activityCommodityIds) {
         this.activityCommodityIds = activityCommodityIds;
+    }
+
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public String getSpecId() {
+        return specId;
+    }
+
+    public void setSpecId(String specId) {
+        this.specId = specId;
     }
 
     @Override

@@ -29,7 +29,7 @@ public class SecKillActivityVO implements Serializable{
     private String sharePic;//分享图片
     private String shareDesc;//分享描述
     private List<SecKillPic> pics;//秒杀轮播图
-    private Integer type;//活动类型 7秒杀 8普通拼团,9电商版拼团，10教育版拼团
+    private Integer type;//活动类型 7秒杀 8普通拼团,9电商版拼团，10教育版拼团 11 微信秒杀
     private List<SecKillActivitySessionVO> activitySessions;//秒杀活动场次
 
     public Integer getActivityId() {

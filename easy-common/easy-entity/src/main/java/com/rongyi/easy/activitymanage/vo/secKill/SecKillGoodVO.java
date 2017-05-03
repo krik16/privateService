@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.vo.secKill;
 
+import com.rongyi.easy.activitymanage.vo.groupBuy.GoodSpecInfo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -25,8 +26,10 @@ public class SecKillGoodVO implements Serializable{
     private Date activitySessionStartAt;//场次开始时间
     private Date activitySessionEndAt;//场次结束时间
     private double goodPrice;//价格:元
+    private int activityCommodityStock;//活动商品库存
+    private int activityCommodityTotalStock;//活动商品总库存
 
-    private List<SecKillGoodSpecVO> specs;//商品规格列表
+    private List<GoodSpecInfo> specs;//商品规格列表
 
     public String getGoodId() {
         return goodId;
@@ -92,14 +95,6 @@ public class SecKillGoodVO implements Serializable{
         this.activitySessionEndAt = activitySessionEndAt;
     }
 
-    public List<SecKillGoodSpecVO> getSpecs() {
-        return specs;
-    }
-
-    public void setSpecs(List<SecKillGoodSpecVO> specs) {
-        this.specs = specs;
-    }
-
     public Integer getActivityId() {
         return activityId;
     }
@@ -114,6 +109,30 @@ public class SecKillGoodVO implements Serializable{
 
     public void setGoodPrice(double goodPrice) {
         this.goodPrice = goodPrice;
+    }
+
+    public int getActivityCommodityStock() {
+        return activityCommodityStock;
+    }
+
+    public void setActivityCommodityStock(int activityCommodityStock) {
+        this.activityCommodityStock = activityCommodityStock;
+    }
+
+    public int getActivityCommodityTotalStock() {
+        return activityCommodityTotalStock;
+    }
+
+    public void setActivityCommodityTotalStock(int activityCommodityTotalStock) {
+        this.activityCommodityTotalStock = activityCommodityTotalStock;
+    }
+
+    public List<GoodSpecInfo> getSpecs() {
+        return specs;
+    }
+
+    public void setSpecs(List<GoodSpecInfo> specs) {
+        this.specs = specs;
     }
 
     @Override
