@@ -23,6 +23,7 @@ public class SecKillActivityVO implements Serializable{
     private String activityTitle;//活动标题
     private String activitySubTitle;//活动副标题
     private Integer activitySubType;//秒杀类型：1单场次，2多场次
+    private Integer cancelTime;//订单取消时间，超过多少时间订单自动取消,单位：分钟
     private long startAt;//活动开始时间
     private long endAt;//活动结束时间
     private String shareTitle;//分享标题
@@ -158,6 +159,14 @@ public class SecKillActivityVO implements Serializable{
 
     public void setActivitySessions(List<SecKillActivitySessionVO> activitySessions) {
         this.activitySessions = activitySessions;
+    }
+
+    public Integer getCancelTime() {
+        return cancelTime;
+    }
+
+    public void setCancelTime(Integer cancelTime) {
+        this.cancelTime = cancelTime;
     }
 
     @Override
