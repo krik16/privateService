@@ -3,7 +3,6 @@ package com.rongyi.easy.activitymanage.param;
 
 import com.google.inject.internal.Lists;
 import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
-import com.rongyi.easy.mcmc.vo.CommoditySpecSimpleVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -29,12 +28,17 @@ public class GoodsSku implements Serializable {
     private String specId;//规格id
     private List<CommoditySpecColumnVO> specColumns = Lists.newArrayList();
     private Integer remainStock;//商品中剩余库存（非活动）
+    private String columnValues;
+
+
+
 
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("currentPrice", currentPrice)
+                .append("columnValues", columnValues)
                 .append("joinCount", joinCount)
                 .append("sku", sku)
                 .append("spec", spec)
@@ -48,6 +52,14 @@ public class GoodsSku implements Serializable {
                 .append("stockCount", stockCount)
                 .append("id", id)
                 .toString();
+    }
+
+    public String getColumnValues() {
+        return columnValues;
+    }
+
+    public void setColumnValues(String columnValues) {
+        this.columnValues = columnValues;
     }
 
     public Integer getStockCount() {

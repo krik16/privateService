@@ -1,7 +1,6 @@
 package com.rongyi.easy.activitymanage.param;
 
 import com.google.inject.internal.Lists;
-import com.rongyi.easy.activitymanage.param.GoodsSku;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -34,12 +33,15 @@ public class ActivityGoodsDetail implements Serializable {
     private String remainStock;//剩余库存
     private String activityPrice;//活动价，是个范围
     private Integer status;//2已编辑8未编辑
+    private String shopName;//店铺名称
+    private Integer limitNum;//没人限购数量
     private List<GoodsSku> goodsSkuList = Lists.newArrayList();
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("activityId", activityId)
+                .append("shopName", shopName)
                 .append("desc", desc)
                 .append("goodsId", goodsId)
                 .append("groupNum", groupNum)
@@ -61,6 +63,22 @@ public class ActivityGoodsDetail implements Serializable {
                 .append("joinEndAt", joinEndAt)
                 .append("expectTotalAmount", expectTotalAmount)
                 .toString();
+    }
+
+    public Integer getLimitNum() {
+        return limitNum;
+    }
+
+    public void setLimitNum(Integer limitNum) {
+        this.limitNum = limitNum;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
     public String getExpectTotalAmount() {
