@@ -762,8 +762,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setFlashSaleId(commodity.getFlashSaleId());
 
 
-			// this.setStock(commodity.getStock());
-			//this.setLocationIds(commodity.getLocationIds());
+			 this.setStock(commodity.getStock());
+			this.setLocationIds(commodity.getLocationIds());
 			this.setBrandName(commodity.getBrandName());
 
 			this.setCommodityRange(commodity.getCommodityRange());
