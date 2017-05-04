@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activity.entity.GroupStockParam;
+import com.rongyi.easy.activity.entity.QuerySecKillGoods;
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.vo.secKill.SecKillActivitySessionVO;
 import com.rongyi.easy.activitymanage.vo.secKill.SecKillActivityVO;
@@ -27,6 +28,13 @@ public interface ISecKillActivityService {
      * @return
      */
     public SecKillActivityVO detailActivityAndSessionForSecKill(int activityId);
+
+    /**
+     * 查询活动商品数据
+     * @param querySecKillGoods
+     * @return
+     */
+    public List<ActivityGoods> getResActivityGoods(QuerySecKillGoods querySecKillGoods);
 
     /**
      * 活动商品详情
