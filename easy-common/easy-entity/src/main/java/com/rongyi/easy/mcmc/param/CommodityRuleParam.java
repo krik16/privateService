@@ -40,7 +40,7 @@ public class CommodityRuleParam implements Serializable {
     private String updateBy;
     private Integer commodityRange;
     private String systemNumber;
-    private Boolean noTemplate;
+    private Boolean noTemplate = false;
     private Boolean picExists = false;
     private Boolean notBuyer = false;
     private String terminalType;
