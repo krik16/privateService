@@ -4,6 +4,7 @@ import com.rongyi.easy.osm.entity.SubStatisticalForActivityEntity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,6 +74,21 @@ public class StatisticalForActivityVO implements Serializable {
 
     public void setTotalVolume(Integer totalVolume) {
         this.totalVolume = totalVolume;
+    }
+
+    /**
+     * 初始化
+     *
+     * @param activityId
+     * @param activityType
+     */
+    public void init(Integer activityId, Integer activityType) {
+        this.activityId = activityId;
+        this.activityType = activityType;
+        this.totalCount = 0;
+        this.totalPayAmount = new BigDecimal(0);
+        this.totalVolume = 0;
+        this.list = new ArrayList<>();
     }
 
     @Override
