@@ -158,4 +158,6 @@ public interface IShopService {
 
 	ShopEntity getHaiXinShop(String orgCode);
 	List<String> getHaiXinShopCode();
+
+	boolean shopHasBindAccount(String shopMid);
 }

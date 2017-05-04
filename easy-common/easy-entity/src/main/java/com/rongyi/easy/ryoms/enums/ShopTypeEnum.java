@@ -6,24 +6,25 @@ import java.util.List;
 /**
  * Created by WUH on 2017/4/27.
  * 店铺类型枚举
+ * 注意：类型实体定义的店铺类型是shop_nature
  */
 public enum ShopTypeEnum {
-    NORMAL_SHOP(0, "普通店"),
-    TAX_FREE(1, "免税店"),
-    SHOPPE(2, "专柜"),
-    DISCOUNT_SHOP(3, "折扣店"),
-    FLAGSHIP_SHOP(4, "旗舰店"),
-    FRANCHISEE(5, "加盟店");
+    NORMAL_SHOP("0", "普通店"),
+    TAX_FREE("1", "免税店"),
+    SHOPPE("2", "专柜"),
+    DISCOUNT_SHOP("3", "折扣店"),
+    FLAGSHIP_SHOP("4", "旗舰店"),
+    FRANCHISEE("5", "加盟店");
 
-    ShopTypeEnum(int code, String name){
+    ShopTypeEnum(String code, String name){
         this.code = code;
         this.name = name;
     }
 
-    private int code;
+    private String code;
     private String name;
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -38,5 +39,13 @@ public enum ShopTypeEnum {
             shopList.add(shopType.getName());
         }
         return shopList;
+    }
+
+    @Override
+    public String toString() {
+        return "ShopTypeEnum{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

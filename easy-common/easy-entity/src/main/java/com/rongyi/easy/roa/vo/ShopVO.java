@@ -3,6 +3,7 @@ package com.rongyi.easy.roa.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.bson.types.ObjectId;
 
 public class ShopVO implements Serializable {
@@ -35,6 +36,15 @@ public class ShopVO implements Serializable {
 	private String filialeName;
 	private List<ObjectId> custom_category_ids;
 	private String mall_id;//输入商场id
+    private boolean hasBindAccount;
+
+    public boolean isHasBindAccount() {
+        return hasBindAccount;
+    }
+
+    public void setHasBindAccount(boolean hasBindAccount) {
+        this.hasBindAccount = hasBindAccount;
+    }
 
     public String getId() {
         return id;
@@ -256,13 +266,6 @@ public class ShopVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ShopVO [id=" + id + ", name=" + name + ", iconUrl=" + iconUrl + ", shopType=" + shopType
-				+ ", shopNature=" + shopNature + ", status=" + status + ", recommend=" + recommend + ", valid=" + valid
-				+ ", position=" + position + ", address=" + address + ", telephone=" + telephone
-				+ ", averageConsumption=" + averageConsumption + ", businessHours=" + businessHours + ", description="
-				+ description + ", brandId=" + brandId + ", brandName=" + brandName + ", categories=" + categories
-				+ ", terminalImgs=" + terminalImgs + ", hasCoupons=" + hasCoupons + ", location=" + location
-				+ ", filiale_id=" + filiale_id + ", brand_id=" + brand_id + ", zone_ids=" + zone_ids + ", filialeId="
-				+ filialeId + ", filialeName=" + filialeName + ", custom_category_ids=" + custom_category_ids + "]";
+		return ReflectionToStringBuilder.toString(this);
 	}
 }
