@@ -149,7 +149,7 @@ public interface ShopService {
 
 	Zones getZonesByNameAndType(String name, ZonesTypeEnum type);
 
-	long getChildShopCount(String parentId, ShopNatureEnum shopNature);
+	long getChildShopCount(Map<String, Object> paramMap);
 
 	boolean isRepeat(Map<String,Object> paramMap);
 }
