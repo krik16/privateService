@@ -737,6 +737,7 @@ public class TotalCommodityVO implements Serializable, Cloneable {
             this.setServiceDescription(param.getServiceDescription());
             this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());
             this.setGoodsParam(Arrays.asList(param.getGoodsParam()));
+            this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("参数错误");
@@ -815,6 +816,7 @@ public class TotalCommodityVO implements Serializable, Cloneable {
 
             // 判断商品是“修改库存”，还是“编辑商品信息”，涉及到mcmc中商品总表是否更新commodityIds
             this.setUpdateType(param.getType());
+            this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("参数错误");
