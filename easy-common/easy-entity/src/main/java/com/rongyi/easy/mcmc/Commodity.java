@@ -1531,6 +1531,8 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setTerminalType(vo.getTerminalType());
 			// TODO 暂定不处理type
 		}
+
+		this.setIsRefund(vo.getIsRefund());//是否可退货
 	}
 
 	public void setActivityInfoToCommodity(GoodsInAppList goods) {

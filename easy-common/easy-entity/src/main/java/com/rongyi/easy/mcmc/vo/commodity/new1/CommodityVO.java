@@ -165,6 +165,8 @@ public class CommodityVO implements  Serializable, Cloneable {
 	private Integer flag;//1表示发布商品，2表示复制新建商品
 	private CommodityFunctionParamVO functionParamVO; // 发布、编辑商品时，方法参数详情类
 
+	private Integer isRefund;//是否可以退货，0：不可退货 1：可退货
+
 
 	public List<String> getMallServiceIds() {
 		return mallServiceIds;
@@ -983,13 +985,23 @@ public class CommodityVO implements  Serializable, Cloneable {
 		this.functionParamVO = functionParamVO;
 	}
 
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+
 	public CommodityVO(){
 
 	}
 	public CommodityVO(Commodity commodity){
+		this.merchantId = commodity.getMerchantId();
 		this.commodityType = commodity.getType();//渠道  0商家，1买手
 		this.shopId = commodity.getShopId();
 		this.shopMid = commodity.getShopMid();//店铺mongoId
+		this.shopName = commodity.getShopName();
 		this.create_by = commodity.getCreate_by();//创建人
 		this.liveId = commodity.getLiveId();//直播id
 		this.liveStartTime = commodity.getLiveStartTime();//直播开始时间
@@ -1114,6 +1126,7 @@ public class CommodityVO implements  Serializable, Cloneable {
 
 		this.source = commodity.getSource();
 		this.systemNumber=commodity.getSystemNumber();
+		this.isRefund = commodity.getIsRefund() == null ? 0 : commodity.getIsRefund();//是否可退货
 		this.reason=commodity.getReason();
 	}
 
@@ -1242,6 +1255,10 @@ public class CommodityVO implements  Serializable, Cloneable {
 				", onServiceIds=" + onServiceIds +
 				", offServiceIds=" + offServiceIds +
 				", skus=" + skus +
+				", systemNumber='" + systemNumber + '\'' +
+				", flag=" + flag +
+				", functionParamVO=" + functionParamVO +
+				", isRefund=" + isRefund +
 				", activityStartTime=" + activityStartTime +
 				", activityEndTime=" + activityEndTime +
 				", serviceDescription='" + serviceDescription + '\'' +
@@ -1333,6 +1350,7 @@ public class CommodityVO implements  Serializable, Cloneable {
 		this.setServiceDescription(param.getServiceDescription());
 		this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());
 		this.setGoodsParam(Arrays.asList(param.getGoodsParam()));
+		this.setIsRefund(param.getIsRefund());//是否可退货
 	}
 
 	public void setHaiXinCommodityVOFromTotalCommodity(CommodityParam param, SessionUserInfo userInfo){
@@ -1407,13 +1425,7 @@ public class CommodityVO implements  Serializable, Cloneable {
 		this.setServiceDescription(param.getServiceDescription());
 		this.setServiceDescriptionRemark(param.getServiceDescriptionRemark());
 		this.setGoodsParam(Arrays.asList(param.getGoodsParam()));
+		this.setIsRefund(param.getIsRefund());//是否可退货
 	}
 
-	private boolean judgeShelvesType(Date date1,Date date2){
-        if(null ==date1 || null ==date2){
-            return false;
-        }
-        Long difference=date1.getTime()-date2.getTime();
-        return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
-    }
 }

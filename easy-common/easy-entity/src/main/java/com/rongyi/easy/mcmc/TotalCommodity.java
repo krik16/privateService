@@ -745,6 +745,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+		//this.setIsRefund(commodity.getIsRefund() == null ? 0 : commodity.getIsRefund());//是否可退货 摩店发布时不考虑
 	}
 
 	public String getSubheading() {
@@ -931,7 +932,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
-
+			this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
 			// TODO total不需要服务号
 		//	this.setMallServiceIds(param.getServiceIds());
 		//	this.setOnServiceIds(param.getServiceIds());

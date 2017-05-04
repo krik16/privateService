@@ -1375,6 +1375,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setServiceDescription(commodity.getServiceDescription());
 		vo.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
 		vo.setGoodsParam(commodity.getGoodsParam());
+		vo.setIsRefund(commodity.getIsRefund());//是否可退货
 		return vo;
 	}
 

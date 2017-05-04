@@ -108,6 +108,7 @@ public class TotalCommodityVO implements Serializable, Cloneable {
     private Integer commodityRange;
     private Integer updateType = 1; // 0：修改库存，1：修改商品。默认1
     private Integer sourceParam = 0; // 本次数据来源。0：商家后台页面添加，1：海信导入，2：app摩店。默认0
+    private Integer isRefund;//是否可退货 0:不可退货，1：可退货
 
     public ObjectId getId() {
         return id;
@@ -581,6 +582,14 @@ public class TotalCommodityVO implements Serializable, Cloneable {
         this.sourceParam = sourceParam;
     }
 
+    public Integer getIsRefund() {
+        return isRefund;
+    }
+
+    public void setIsRefund(Integer isRefund) {
+        this.isRefund = isRefund;
+    }
+
     @Override
     public String toString() {
         return "TotalCommodityVO{" +
@@ -643,6 +652,7 @@ public class TotalCommodityVO implements Serializable, Cloneable {
                 ", commodityRange=" + commodityRange +
                 ", updateType=" + updateType +
                 ", sourceParam=" + sourceParam +
+                ", isRefund=" + isRefund +
                 '}';
     }
 
