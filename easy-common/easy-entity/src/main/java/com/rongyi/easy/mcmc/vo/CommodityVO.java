@@ -1147,7 +1147,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", commodityCategory2='" + commodityCategory2 + '\'' +
 				", commodityCategoryName1='" + commodityCategoryName1 + '\'' +
 				", commodityCategoryName2='" + commodityCategoryName2 + '\'' +
-				", commodityDescription='" + commodityDescription + '\'' +
 				", commodityPostage='" + commodityPostage + '\'' +
 				", commodityStock='" + commodityStock + '\'' +
 				", commoditySold='" + commoditySold + '\'' +
