@@ -3,8 +3,10 @@ package com.rongyi.rss.bdata;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bdata.entity.Photo;
 import com.rongyi.easy.bdata.entity.Shop;
+import com.rongyi.easy.bdata.entity.Zones;
+import com.rongyi.easy.bdata.enums.ZonesTypeEnum;
 import com.rongyi.easy.bdata.vo.ShopVO;
-import com.rongyi.easy.ryoms.entity.RyUserInfo;
+import com.rongyi.easy.ryoms.enums.ShopNatureEnum;
 import com.rongyi.easy.ryoms.param.ShopParam;
 
 import java.util.List;
@@ -144,4 +146,10 @@ public interface ShopService {
 	public void updateBaseData();
 
 	void  addOneLog(String shopId);
+
+	Zones getZonesByNameAndType(String name, ZonesTypeEnum type);
+
+	long getChildShopCount(Map<String, Object> paramMap);
+
+	boolean isRepeat(Map<String,Object> paramMap);
 }
