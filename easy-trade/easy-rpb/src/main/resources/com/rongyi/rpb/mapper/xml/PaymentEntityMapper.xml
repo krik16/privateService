@@ -31,7 +31,7 @@
         <result column="org_channel" property="orgChannel" jdbcType="TINYINT"/>
         <result column="pay_scene" property="payScene" jdbcType="TINYINT"/>
     </resultMap>
-    <resultMap id="BaseResultMapVo" type="com.rongyi.easy.rpb.vo.v6.PaymentEntityVo">
+    <resultMap id="BaseResultMapVo" type="com.rongyi.easy.rpb.vo.v6.PaymentEntityVo" extends="BaseResultMap">
         <result column="mch_info_id" property="mchInfoId" jdbcType="VARCHAR"/>
         <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
         <result column="pos_no" property="posNo" jdbcType="VARCHAR"/>
