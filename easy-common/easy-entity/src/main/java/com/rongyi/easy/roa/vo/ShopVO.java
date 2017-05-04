@@ -36,7 +36,7 @@ public class ShopVO implements Serializable {
 	private String filialeName;
 	private List<ObjectId> custom_category_ids;
 	private String mall_id;//输入商场id
-    private boolean hasBindAccount;
+    private boolean hasBindAccount;   //是否已绑定账户
 
     public boolean isHasBindAccount() {
         return hasBindAccount;
