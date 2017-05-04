@@ -55,6 +55,9 @@ public interface ActivityService {
      */
     boolean saveActivityGoods(ActivityGoods activityGoods);
 
+
+    public Integer insertActivityGoods(ActivityGoods activityGoods);
+
     /**
      * 更新商品
      * @param activityGoods
@@ -257,4 +260,8 @@ public interface ActivityService {
     SecKillConfigEntity selectSecKillConfigByActivityId(Integer activityId);
 
     boolean updateActivityInfo(ActivityInfo activityInfo);
+
+    public  List<ActivityGoodsSpec> selectByActivityGoodsIds(List<Integer> activityGoodsIds);
+
+    public  boolean batchInsertActivityGoodsSpec(List<ActivityGoodsSpec> activityGoodsSpecs, Integer activityGoodsId);
 }
