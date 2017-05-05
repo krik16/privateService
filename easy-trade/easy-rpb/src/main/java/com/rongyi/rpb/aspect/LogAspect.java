@@ -14,8 +14,8 @@ public class LogAspect {
 
 	private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
-	@Pointcut("execution(* com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl.webankAliPunchCardPay(..))" +
-			"|| execution(* com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl.webankAliPunchCardPay(..))")
+	@Pointcut("execution(* com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl.*(..)) " +
+			"||execution(* com.rongyi.rpb.service.impl.v6.WechatPayServiceImpl.*(..))")
 	public void aspect() {
 
 	}

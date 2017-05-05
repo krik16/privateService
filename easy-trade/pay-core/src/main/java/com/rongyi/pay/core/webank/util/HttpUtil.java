@@ -428,6 +428,6 @@ public class HttpUtil {
 	 */
 	private static void datePrint(String sendUrl,long begin){
 		long end = System.nanoTime();
-		logger.info("sendUrl:{}:{}ms",sendUrl, (end - begin) / 1000000);
+		logger.info("接口耗时:{}:{}ms",sendUrl, (end - begin) / 1000000);
 	}
 }
