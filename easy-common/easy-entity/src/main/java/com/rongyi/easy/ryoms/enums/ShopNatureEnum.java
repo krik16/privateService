@@ -10,9 +10,10 @@ import java.util.Map;
 public enum ShopNatureEnum {
 
     MALL_SHOP("0", "商场店铺"),
-    SHOP_COUNTERS("1", "商场专柜"),
+    MALL_COUNTERS("1", "商场专柜"),
     CURBSIDE_SHOP("2", "街边店"),
-    CHAIN_SHOP("3", "连锁总店");
+    SPECIAL_SHOP("3", "特卖店"),
+    CHAIN_SHOP("4", "连锁总店");
 
     private String code;
 
