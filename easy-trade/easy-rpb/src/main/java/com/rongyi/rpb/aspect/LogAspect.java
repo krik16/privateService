@@ -14,7 +14,8 @@ public class LogAspect {
 
 	private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
-	@Pointcut("execution(* com.rongyi.pay.core.unit..*(..)) ")
+	@Pointcut("execution(* com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl.webankAliPunchCardPay(..))" +
+			"|| execution(* com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl.webankAliPunchCardPay(..))")
 	public void aspect() {
 
 	}
@@ -26,7 +27,7 @@ public class LogAspect {
 		long begin = System.nanoTime();
 		Object o = pjp.proceed();
 		long end = System.nanoTime();
-		log.info("{}:{}",pjp.getTarget().getClass()+"."+pjp.getSignature().getName(),(end-begin)/1000000);
+		log.info("{}:{}ms", pjp.getTarget().getClass() + "." + pjp.getSignature().getName(), (end - begin) / 1000000);
 		return o;
 	}
 }

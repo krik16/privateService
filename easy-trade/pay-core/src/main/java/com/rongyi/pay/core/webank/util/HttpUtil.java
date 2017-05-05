@@ -311,6 +311,7 @@ public class HttpUtil {
 
 	public static String sendPostClient(String url, Object object ,WebankConfigure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 		logger.info("http请求 url:{},object:{}",url,object);
+		long start = System.nanoTime();
 		//请求器的配置
 	//	RequestConfig requestConfig;
 		CloseableHttpClient httpClient = init(configure);
@@ -344,11 +345,13 @@ public class HttpUtil {
 				System.clearProperty("javax.net.ssl.trustStore");
 			}
 		}
+		datePrint(url,start);
 		return result;
 	}
 
 	public static String sendPostClientXml(String url,Object object ,WebankConfigure configure)throws Exception {
 		logger.info("以xml方式http请求url:{},object:{}",url,object);
+		long start = System.nanoTime();
 		CloseableHttpClient httpClient = init(configure);
 		String result = null;
 
@@ -386,6 +389,7 @@ public class HttpUtil {
 				System.clearProperty("javax.net.ssl.trustStore");
 			}
 		}
+		datePrint(url,start);
 		return result ;
 	}
 
@@ -418,4 +422,12 @@ public class HttpUtil {
 		//HttpResponse response = httpclient.execute(httpPost);
 	}
 
+
+	/**
+	 * 方法耗时
+	 */
+	private static void datePrint(String sendUrl,long begin){
+		long end = System.nanoTime();
+		logger.info("sendUrl:{}:{}ms",sendUrl, (end - begin) / 1000000);
+	}
 }
