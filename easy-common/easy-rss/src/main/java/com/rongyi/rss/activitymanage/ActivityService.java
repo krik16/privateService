@@ -264,4 +264,7 @@ public interface ActivityService {
     public  List<ActivityGoodsSpec> selectByActivityGoodsIds(List<Integer> activityGoodsIds);
 
     public  boolean batchInsertActivityGoodsSpec(List<ActivityGoodsSpec> activityGoodsSpecs, Integer activityGoodsId);
+
+
+    boolean selectIfAvaSession(ActivityGoods activityGoods);
 }
