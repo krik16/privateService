@@ -40,6 +40,8 @@ public class CommodityVO1 implements  Serializable {
 	private String createBy;
 	private List<String> skus;
 
+	private String merchantName; // 商户名称
+
 	public List<String> getSkus() {
 		return skus;
 	}
@@ -205,5 +207,13 @@ public class CommodityVO1 implements  Serializable {
 
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
+	}
+
+	public String getMerchantName() {
+		return merchantName;
+	}
+
+	public void setMerchantName(String merchantName) {
+		this.merchantName = merchantName;
 	}
 }
