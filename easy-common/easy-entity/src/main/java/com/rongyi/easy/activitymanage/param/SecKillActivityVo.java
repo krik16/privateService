@@ -13,6 +13,8 @@ public class SecKillActivityVo implements Serializable{
 
     private Integer activityId;
 
+    private Integer secKillConfigId;
+
     private String name;
 
     private String activityTitle;
@@ -43,6 +45,14 @@ public class SecKillActivityVo implements Serializable{
 
     private String shopId;//店铺id
 
+
+    public Integer getSecKillConfigId() {
+        return secKillConfigId;
+    }
+
+    public void setSecKillConfigId(Integer secKillConfigId) {
+        this.secKillConfigId = secKillConfigId;
+    }
 
     public String getShopId() {
         return shopId;

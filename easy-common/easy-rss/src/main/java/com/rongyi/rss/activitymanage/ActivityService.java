@@ -253,7 +253,7 @@ public interface ActivityService {
      */
     public List<SaleCommodityTop> saleCommodityTopList(Integer ActivityId);
 
-    boolean saveOrupdateActivityInfo(ActivityInfo activityInfo);
+    Integer saveOrupdateActivityInfo(ActivityInfo activityInfo);
 
     boolean saveOrupdateSecKillConfig(SecKillConfigEntity configEntity);
 
