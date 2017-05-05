@@ -51,6 +51,7 @@ public class SessionUserInfo implements Serializable{
 	private Integer accountSource;// 1:海信版 2:其他 不做处理
 	private Integer chiefId;//主账号id
 	private Integer roleId;//分销商标识  -1
+	private Integer shopNum;//店铺数量[仅对店铺总部主账号生效]
 	
 	public String getMallMid() {
 		return mallMid;
@@ -388,6 +389,14 @@ public class SessionUserInfo implements Serializable{
 		this.roleId = roleId;
 	}
 
+	public Integer getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
+
 	@Override
 	public String toString() {
 		return "SessionUserInfo [id=" + id + ", type=" + type + ", identity="
@@ -398,7 +407,8 @@ public class SessionUserInfo implements Serializable{
 				+ ", brandMid=" + brandMid + ", groupId=" + groupId
 				+ ", groupMid=" + groupMid + ", mallId=" + mallId
 				+ ", mallMid=" + mallMid + ", shopId=" + shopId + ", shopMid="
-				+ shopMid + ", parentShopId=" + parentShopId
+				+ shopMid + ", filialeId=" + filialeId + ", filialeMid="
+				+ filialeMid + ", parentShopId=" + parentShopId
 				+ ", parentShopMid=" + parentShopMid + ", grandpaShopId="
 				+ grandpaShopId + ", grandpaShopMid=" + grandpaShopMid
 				+ ", level=" + level + ", isChief=" + isChief + ", logo="
@@ -409,7 +419,7 @@ public class SessionUserInfo implements Serializable{
 				+ ", industryVersionId=" + industryVersionId
 				+ ", isAllowBindingWechat=" + isAllowBindingWechat
 				+ ", accountSource=" + accountSource + ", chiefId=" + chiefId
-				+ ", roleId=" + roleId + "]";
+				+ ", roleId=" + roleId + ", shopNum=" + shopNum + "]";
 	}
 	
 }
