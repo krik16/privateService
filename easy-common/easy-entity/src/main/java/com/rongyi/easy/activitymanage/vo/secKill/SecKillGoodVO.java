@@ -5,7 +5,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,8 +22,8 @@ public class SecKillGoodVO implements Serializable{
     private String goodDesc;//商品描述
     private int limitNum;//限购数量 0表示不限购
     private Integer activityCommodityStatus;//商品审核状态：待审核[0] 未通过[1] 已通过[2] 6下线 7活动结束
-    private Date activitySessionStartAt;//场次开始时间
-    private Date activitySessionEndAt;//场次结束时间
+    private long activitySessionStartAt;//场次开始时间
+    private long activitySessionEndAt;//场次结束时间
     private double goodPrice;//价格:元
     private int activityCommodityStock;//活动商品库存
     private int activityCommodityTotalStock;//活动商品总库存
@@ -79,19 +78,19 @@ public class SecKillGoodVO implements Serializable{
         this.activityCommodityId = activityCommodityId;
     }
 
-    public Date getActivitySessionStartAt() {
+    public long getActivitySessionStartAt() {
         return activitySessionStartAt;
     }
 
-    public void setActivitySessionStartAt(Date activitySessionStartAt) {
+    public void setActivitySessionStartAt(long activitySessionStartAt) {
         this.activitySessionStartAt = activitySessionStartAt;
     }
 
-    public Date getActivitySessionEndAt() {
+    public long getActivitySessionEndAt() {
         return activitySessionEndAt;
     }
 
-    public void setActivitySessionEndAt(Date activitySessionEndAt) {
+    public void setActivitySessionEndAt(long activitySessionEndAt) {
         this.activitySessionEndAt = activitySessionEndAt;
     }
 
