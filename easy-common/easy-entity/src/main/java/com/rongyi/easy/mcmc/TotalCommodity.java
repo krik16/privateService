@@ -47,6 +47,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Date updateAt;//数据更新日期
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
+	private String referencePrice;
 	private Integer updateBy;//修改人
 	private Integer createBy;//创建者
 
@@ -113,6 +114,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String brandName;
 	private Integer commodityRange;
 	private Integer isRefund;//是否可退货 0:不可退货，1：可退货
+
+	public String getReferencePrice() {
+		return referencePrice;
+	}
+
+	public void setReferencePrice(String referencePrice) {
+		this.referencePrice = referencePrice;
+	}
 
 	public Integer getCommodityRange() {
 		return commodityRange;
