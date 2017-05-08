@@ -45,6 +45,16 @@ public class SecKillActivityVo implements Serializable{
 
     private String shopId;//店铺id
 
+    private Integer status;
+
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Integer getSecKillConfigId() {
         return secKillConfigId;
