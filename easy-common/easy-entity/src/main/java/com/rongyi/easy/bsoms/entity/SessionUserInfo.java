@@ -215,7 +215,7 @@ public class SessionUserInfo implements Serializable{
 			return brandId;
 		}else if (getIdentity() == 3) {
 			return filialeId;
-		}else if (getIdentity() == 4 || getIdentity() == 5) {
+		}else if (getIdentity() == 4 || getIdentity() == 5 || getIdentity() == 8) {
 			return shopId;
 		}
 		return null;
@@ -229,7 +229,7 @@ public class SessionUserInfo implements Serializable{
 			return brandMid;
 		}else if (getIdentity() == 3) {
 			return filialeMid;
-		}else if (getIdentity() == 4 || getIdentity() == 5) {
+		}else if (getIdentity() == 4 || getIdentity() == 5 || getIdentity() == 8) {
 			return shopMid;
 		}
 		return null;
