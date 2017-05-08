@@ -91,6 +91,7 @@ public class UserInfo implements Serializable{
     private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
 	private Integer shopNum;//店铺数量
+	private boolean isChainShop;//是否是连锁分店
 	
     public String getStopReason() {
 		return stopReason;
@@ -505,6 +506,14 @@ public class UserInfo implements Serializable{
 	public void setShopNum(Integer shopNum) {
 		this.shopNum = shopNum;
 	}
+	
+	public boolean isChainShop() {
+		return isChainShop;
+	}
+
+	public void setChainShop(boolean isChainShop) {
+		this.isChainShop = isChainShop;
+	}
 
 	@Override
 	public String toString() {
@@ -535,7 +544,8 @@ public class UserInfo implements Serializable{
 				+ ", defaultTerminal=" + defaultTerminal + ", chiefId="
 				+ chiefId + ", isSuspended=" + isSuspended + ", isOpenQrCode="
 				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + ", shopNum=" + shopNum + "]";
+				+ isAllowBindingWechat + ", shopNum=" + shopNum
+				+ ", isChainShop=" + isChainShop + "]";
 	}
 	
 }

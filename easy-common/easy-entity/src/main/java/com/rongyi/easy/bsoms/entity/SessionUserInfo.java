@@ -52,6 +52,7 @@ public class SessionUserInfo implements Serializable{
 	private Integer chiefId;//主账号id
 	private Integer roleId;//分销商标识  -1
 	private Integer shopNum;//店铺数量[仅对店铺总部主账号生效]
+	private boolean isChainShop;//是否是连锁分店
 	
 	public String getMallMid() {
 		return mallMid;
@@ -397,6 +398,14 @@ public class SessionUserInfo implements Serializable{
 		this.shopNum = shopNum;
 	}
 
+	public boolean isChainShop() {
+		return isChainShop;
+	}
+
+	public void setChainShop(boolean isChainShop) {
+		this.isChainShop = isChainShop;
+	}
+
 	@Override
 	public String toString() {
 		return "SessionUserInfo [id=" + id + ", type=" + type + ", identity="
@@ -419,7 +428,8 @@ public class SessionUserInfo implements Serializable{
 				+ ", industryVersionId=" + industryVersionId
 				+ ", isAllowBindingWechat=" + isAllowBindingWechat
 				+ ", accountSource=" + accountSource + ", chiefId=" + chiefId
-				+ ", roleId=" + roleId + ", shopNum=" + shopNum + "]";
+				+ ", roleId=" + roleId + ", shopNum=" + shopNum
+				+ ", isChainShop=" + isChainShop + "]";
 	}
 	
 }
