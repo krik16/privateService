@@ -1,5 +1,7 @@
 package com.rongyi.easy.ryoms.enums;
 
+import com.rongyi.core.constant.PropertyDate;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +54,15 @@ public enum ShopNatureEnum {
             throw new NullPointerException("未找到正确的枚举类");
         }
         return shopNature;
+    }
+
+    public static PropertyDate[] getKeyValueMap(){
+        ShopNatureEnum[] shopNatureEnums = ShopNatureEnum.values();
+        PropertyDate[] propertyDates = new PropertyDate[shopNatureEnums.length];
+        for(int i = 0; i < shopNatureEnums.length; i++){
+            propertyDates[i] = new PropertyDate(shopNatureEnums[i].getCode(), shopNatureEnums[i].getName());
+        }
+        return propertyDates;
     }
 
 }
