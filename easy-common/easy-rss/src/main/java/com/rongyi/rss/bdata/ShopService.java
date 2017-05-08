@@ -151,5 +151,13 @@ public interface ShopService {
 
 	long getChildShopCount(Map<String, Object> paramMap);
 
+	List<Shop> getChildShopList(Map<String, Object> paramMap);
+
 	boolean isRepeat(Map<String,Object> paramMap);
+
+	boolean updateShopNature(String id, ShopNatureEnum shopNature);
+
+	String copyInsert(Shop shop);
+
+	boolean updateRelation(String id, String parentId);
 }

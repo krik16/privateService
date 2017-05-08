@@ -13,7 +13,7 @@ public enum ShopNatureEnum {
     MALL_COUNTERS("1", "商场专柜"),
     CURBSIDE_SHOP("2", "街边店"),
     SPECIAL_SHOP("3", "特卖店"),
-    CHAIN_SHOP("4", "连锁总店");
+    CHAIN_SHOP("4", "连锁总部");
 
     private String code;
 
