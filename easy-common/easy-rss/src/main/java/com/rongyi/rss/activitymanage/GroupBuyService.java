@@ -251,4 +251,11 @@ public interface GroupBuyService {
 	 * @return
 	 */
 	public GroupInfo getGroupInfoByAIdAndGoodId(Integer activityId,String commodityId);
+
+	/**
+	 * 清理结束的场次
+	 */
+	public void cleanEndSession();
+
+
 }

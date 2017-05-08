@@ -25,7 +25,16 @@ public class QuerySecKillGoods implements Serializable {
     private Integer fromWeixin;//微信端调用
     private String sessionId;//场次id
     private String sessionDate;//changci riqi
+    private Integer endSesssionStatus;//场次结束状态1
 
+
+    public Integer getEndSesssionStatus() {
+        return endSesssionStatus;
+    }
+
+    public void setEndSesssionStatus(Integer endSesssionStatus) {
+        this.endSesssionStatus = endSesssionStatus;
+    }
 
     public String getSessionDate() {
         return sessionDate;
@@ -72,6 +81,7 @@ public class QuerySecKillGoods implements Serializable {
                 .append("goodsCode", goodsCode)
                 .append("goodsStatus", goodsStatus)
                 .append("sessionId", sessionId)
+                .append("endSesssionStatus", endSesssionStatus)
                 .toString();
     }
 
