@@ -20,7 +20,7 @@
 			http://www.springframework.org/schema/util 
 			http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 	<!-- aop事物配置 -->
-	<tx:annotation-driven proxy-target-class="true"/>
+	<tx:annotation-driven proxy-target-class="false"/>
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice" pointcut="execution(* *..service.*Service.*(..))" order="100"/>
 		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.rongyi.rpb.unit.SaveUnit.updatePaymentEntity(..))" order="200"/>
