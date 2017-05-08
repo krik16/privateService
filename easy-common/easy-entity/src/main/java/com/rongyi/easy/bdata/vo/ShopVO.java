@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.bdata.dto.CustomCategoryDto;
 
 public class ShopVO implements Serializable {
@@ -50,6 +52,46 @@ public class ShopVO implements Serializable {
 	private String updateUser ;   //最后修改者
 	private String nameEn;  //店铺英文名
 	private String descriptionEn; //英文描述
+	private String fID;
+	private String parentId; //上级店铺ID
+
+	private List<String> parentIds; //上级店铺ids
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public List<String> getParentIds() {
+		return parentIds;
+	}
+
+	public void setParentIds(List<String> parentIds) {
+		this.parentIds = parentIds;
+	}
+
+	public String getfID() {
+		return fID;
+	}
+
+	public void setfID(String fID) {
+		this.fID = fID;
+	}
+
+	private List<ObjectId> zone_ids;//
+
+	
+	public List<ObjectId> getZone_ids() {
+		return zone_ids;
+	}
+
+	public void setZone_ids(List<ObjectId> zone_ids) {
+		this.zone_ids = zone_ids;
+
+	}
 
 	public String getBusinessStatusReason() {
 		return businessStatusReason;

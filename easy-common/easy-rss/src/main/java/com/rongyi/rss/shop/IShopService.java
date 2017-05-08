@@ -3,6 +3,7 @@ package com.rongyi.rss.shop;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bdata.entity.HaiXinShopData;
 import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
 import org.bson.types.ObjectId;
@@ -148,4 +149,13 @@ public interface IShopService {
 	public String selectNameByIds(List<String> ids);
 
 	public  List<String> selectShopsByName(String name);
+
+	public String selectGroupIdByMallMid(String shopMid);
+
+	public List<String> locationIdsByid(Integer identity,String id);
+
+	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas) throws Exception;
+
+	ShopEntity getHaiXinShop(String orgCode);
+	List<String> getHaiXinShopCode();
 }

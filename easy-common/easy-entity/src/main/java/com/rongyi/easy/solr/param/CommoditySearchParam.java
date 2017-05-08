@@ -16,6 +16,7 @@ import java.util.Map;
 
 import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 
 /**
  * 商品查询参数类
@@ -109,6 +110,48 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	private Integer minStock;
 	private Integer maxStock;
+	private Integer type;
+	private Integer getTogether;  //是否聚合  0:不聚合  1：聚合
+
+	public Integer getGetTogether() {
+		return getTogether;
+	}
+
+	public void setGetTogether(Integer getTogether) {
+		this.getTogether = getTogether;
+	}
+
+	@NeedCheck(getFieldName = "type")
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	private String serviceId;//微信服务号id
+
+	private Integer offset;
+
+	public Integer getOffset() {
+		return offset;
+	}
+
+	public void setOffset(Integer offset) {
+		this.offset = offset;
+	}
+
+	private String commodityName;//商品名称
+
+	@NeedCheck(getFieldName = "commodityName")
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
 
 	public String getCouponId() {
 		return couponId;
@@ -442,6 +485,14 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.minStock = minStock;
 	}
 
+	public String getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam{" +
@@ -475,6 +526,10 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", couponId='" + couponId + '\'' +
 				", commodityMaxMinValues=" + commodityMaxMinValues +
 				", galleryPosition=" + galleryPosition +
+				", serviceId=" + serviceId +
+				", type=" + type +
+				", offset=" + offset +
+				", getTogether=" + getTogether +
 				"} " + super.toString();
 	}
 

@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CommoditySpecVO1 implements  Serializable {
-	
+
 	private static final long serialVersionUID = -3491400779856182500L;
-	
+
 	private String originalPrice;//原价
 	private String currentPrice;//现价
 	private List<String> columnNames;//规格名字
@@ -19,7 +19,18 @@ public class CommoditySpecVO1 implements  Serializable {
 	private String systemNumber;//系统编号
 	private String pictureUrl;//规格图片
 	private String sku;
-	
+	private String id;
+
+	private String referencePrice;
+
+	public String getReferencePrice() {
+		return referencePrice;
+	}
+
+	public void setReferencePrice(String referencePrice) {
+		this.referencePrice = referencePrice;
+	}
+
 	public String getOriginalPrice() {
 		return originalPrice;
 	}
@@ -32,8 +43,8 @@ public class CommoditySpecVO1 implements  Serializable {
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
-	
-	
+
+
 	public List<String> getColumnNames() {
 		return columnNames;
 	}
@@ -46,8 +57,8 @@ public class CommoditySpecVO1 implements  Serializable {
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
-	
-	
+
+
 	public int getRemain() {
 		return remain;
 	}
@@ -90,6 +101,12 @@ public class CommoditySpecVO1 implements  Serializable {
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-	
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

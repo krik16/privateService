@@ -16,7 +16,9 @@ import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
 import com.rongyi.easy.solr.param.ShopSearchParam;
 import com.rongyi.easy.solr.result.ShopSearchIdsResult;
+import com.rongyi.easy.solr.result.ShopSearchInfo;
 import com.rongyi.easy.solr.result.ShopSearchResult;
+import com.rongyi.easy.solr.result.ShopSearchResultAndTotalCount;
 
 import java.util.List;
 
@@ -57,6 +59,8 @@ public interface ShopSolrService {
 	 * @return
 	 */
 	public ShopSearchIdsResult selectShopIndexByName(ShopSearchParam input);
+
+	List<ShopDocument> searchShop(ShopSearchParam input);
 	
 	/**
 	 * 店铺管理后台更新poi索引
@@ -99,4 +103,7 @@ public interface ShopSolrService {
 	 * @date 2016-05-05
 	 */
 	public void setPOITip();
+
+
+	List<ShopSearchInfo>  poiSearchShopChild(ShopSearchParam input);
 }

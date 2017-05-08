@@ -2,6 +2,8 @@ package com.rongyi.easy.rmmm.param;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +38,8 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String openId;//微信openId
 	private String phone;//用户手机号
 	private String memberId;//微信电子会员id
+	private String memberName;// 用户昵称
+	private String userName;//会员姓名
 
 	private String receiverProvinceName;//收货省市
 	private String receiverCityName;//收货城市
@@ -46,6 +50,27 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String provinceId;//收货省市id
 	private String cityId;//收货城市id
 	private String districtId;//收货区县id
+	private Integer business;//订单类型（0普通、1积分商城）
+	//=======start= add by wangjh7 at 2016-11-23
+	private Integer commodityType; //商品类型，0：普通商品 1：商品类礼品券 2：卡券类礼品券 3：停车券
+	private Integer userType; // 用户类型（0：容易逛 1：电子会员）
+	private String exchangeType; // 兑换类型（1：兑换 2：换购）
+	private String deliveryType; // 快递方式 1：自提 2：快递"
+	private Integer totalCredit; // 总积分
+	private String mallMid; // 商场ID
+	private String shopMid; // 店铺ID
+	// =======end=
+	// 活动类型，8：注册福利
+	private Integer activityType ;
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -241,20 +266,89 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.districtId = districtId;
 	}
 
+	public Integer getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(Integer business) {
+		this.business = business;
+	}
+
+	public Integer getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(Integer commodityType) {
+		this.commodityType = commodityType;
+	}
+
+	public String getExchangeType() {
+		return exchangeType;
+	}
+
+	public void setExchangeType(String exchangeType) {
+		this.exchangeType = exchangeType;
+	}
+
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
+
+	public String getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(String deliveryType) {
+		this.deliveryType = deliveryType;
+	}
+
+	public Integer getTotalCredit() {
+		return totalCredit;
+	}
+
+	public void setTotalCredit(Integer totalCredit) {
+		this.totalCredit = totalCredit;
+	}
+
+	public String getMallMid() {
+		return mallMid;
+	}
+
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
 	@Override
 	public String toString() {
-		return "SubmitOrderParam [parentOrderList=" + parentOrderList
-				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
-				+ ", devType=" + devType + ", source=" + source
-				+ ", platformRebateCode=" + platformRebateCode
-				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
-				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
-				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
-				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
-				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
-				+ ", receiverName=" + receiverName
-				+ "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 	
 }

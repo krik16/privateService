@@ -8,14 +8,18 @@
 */
 package com.rongyi.rss.ryoms.advert;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.ryoms.advert.entity.AdPoolSearch;
 import com.rongyi.easy.ryoms.advert.entity.ConfigEntity;
 import com.rongyi.easy.ryoms.advert.param.ConfigSearchParam;
+import com.rongyi.easy.ryoms.advert.vo.AdPoolDetail;
 import com.rongyi.easy.ryoms.advert.vo.CityVO;
 import com.rongyi.easy.ryoms.advert.vo.ConfigVO;
 import com.rongyi.easy.ryoms.advert.vo.ReasonVO;
+import redis.clients.jedis.BinaryClient;
 
 /**
  * @Description: 参数配置管理接口
@@ -131,4 +135,24 @@ public interface ConfigService {
 	boolean checkExistConfig(Map<String, Object> checkConfigMap);
 
 	void addList(List<ConfigEntity> configList);
+
+	int updateConfigPoolInfo(ConfigEntity entity);
+
+	int updateConfigPoolIsAllowPlayBatch(ConfigEntity entity);
+
+	List<ConfigVO> getNeedUpdatePoolData();
+	List<ConfigVO> getNeedUpdateBlack();
+
+	AdPoolDetail getAdPoolDetail(int id,Date begin,Date end);
+
+
+	List<AdPoolDetail> queryAdPool(AdPoolSearch param);
+	int  queryAdPoolCount(AdPoolSearch param);
+	List<Map<String,Object>> adPoolItemAdInfo(AdPoolSearch param);
+
+
+	List<AdPoolDetail> queryAdPoolForExcel(AdPoolSearch param);
+
+
+
 }

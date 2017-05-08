@@ -72,10 +72,10 @@ public class SystemConfig implements Serializable{
             "/v5/shop/getShop.htm"
     });
 
-    public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5");
+    public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5","smallApp");
 
 
-    public static final List<String> mdUaList = Arrays.asList("Android", "IOS");
+    public static final List<String> mdUaList = Arrays.asList("Android", "IOS","smallApp");
 
     public static final List<String> cityList = Arrays.asList("北京","上海","天津","重庆");
     public static String buildPictureUrl(String userId, String headImg) {
@@ -261,6 +261,36 @@ public class SystemConfig implements Serializable{
 
         boolean result=Pattern.compile(regEx).matcher(str).find();
         System.out.println("result==="+result);*/
+    }
+
+
+
+    /**
+     * 如果是null，返回空字符
+     *
+     * @param str
+     * @return
+     */
+    public static String ifStringNull(String str) {
+        if (str == null) {
+            return "";
+        } else {
+            return str;
+        }
+    }
+
+    /**
+     * 如果是null，返回0
+     *
+     * @param
+     * @return
+     */
+    public static int ifIntegerNull(Integer in) {
+        if (in == null) {
+            return 0;
+        } else {
+            return in;
+        }
     }
 
 }

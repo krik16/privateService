@@ -18,16 +18,21 @@ public class MerchantOsmOrderVO implements Serializable{
     private String orderNo;//订单编号
     private String createTime;//下单时间
     private String paymentTime;//支付时间
+    private String shopId;//店铺mysqlid
     private String shopName;//店铺名称
     private String commodityNum;//商品种类数
     private  String guideName;//导购名称
     private Integer guideId;//导购id
-    private Integer orderSource;//导购id
+    private Integer orderSource;//0为微网站，1为容易逛，2为终端机，3其他
+    private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
+    private String weixinAppId;//
     private Byte payChannel;//导购id
     private String buyerAccount;//买家账号
+    private String buyerNameByWeixin;//标准微信下单昵称 需要解码
     private String buyerNickName;//买家账号
     private String paymentAmount;//订单实际支付金额 元
     private String discountAmount;//订单优惠金额 元
+    private BigDecimal discountAmountByChange;//卖家折扣之后的金额
     private BigDecimal expressPrice;//邮费 元
     private BigDecimal integralAmount;//积分优惠
     private String integralNum= "0";//积分数
@@ -39,11 +44,26 @@ public class MerchantOsmOrderVO implements Serializable{
     private String expressInfoChangeFlg;//"物流信息是否允许修改 0：不允许 1：允许 "
     private List<MerchantOrderCommodityVO> commodityList;//订单下的商品列表
     private String createTimeStr;   //格式化下单时间  （今天 12:06:55）
-    private String orderChannel; //下单渠道
+    private String orderChannel; //下单渠道 SmallProgram ：小程序
     private Integer activityType;//活动类型 0不参与活动 3秒杀 4拼团
     private Long activityRoundId;//活动场次
     private String activityName;//活动名称
     private String activityStatus;//活动状态
+    private String deleverTime;//发货时间
+    private String reveiveTime;//收货时间
+    private BigDecimal merchantRedDiscount;//商家红包补贴金额
+    private BigDecimal merchantRebateDiscount;//商家抵扣券补贴金额
+    private BigDecimal reductionFee; ///< 满减金额
+    private Integer deliveryType;//快递方式 1：自提 2：快递
+
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
 
     public Integer getOrderSource() {
         return orderSource;
@@ -272,11 +292,6 @@ public class MerchantOsmOrderVO implements Serializable{
         this.activityName = activityName;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
-    }
-
 	public String getCreateTimeStr() {
 		return createTimeStr;
 	}
@@ -292,4 +307,89 @@ public class MerchantOsmOrderVO implements Serializable{
     public void setCreateTimeStr(String createTimeStr) {
 		this.createTimeStr = createTimeStr;
 	}
+
+    public String getBuyerNameByWeixin() {
+        return buyerNameByWeixin;
+    }
+
+    public void setBuyerNameByWeixin(String buyerNameByWeixin) {
+        this.buyerNameByWeixin = buyerNameByWeixin;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public BigDecimal getDiscountAmountByChange() {
+        return discountAmountByChange;
+    }
+
+    public void setDiscountAmountByChange(BigDecimal discountAmountByChange) {
+        this.discountAmountByChange = discountAmountByChange;
+    }
+
+    public String getDeleverTime() {
+        return deleverTime;
+    }
+
+    public void setDeleverTime(String deleverTime) {
+        this.deleverTime = deleverTime;
+    }
+
+    public String getReveiveTime() {
+        return reveiveTime;
+    }
+
+    public void setReveiveTime(String reveiveTime) {
+        this.reveiveTime = reveiveTime;
+    }
+
+    public BigDecimal getMerchantRedDiscount() {
+        return merchantRedDiscount;
+    }
+
+    public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+        this.merchantRedDiscount = merchantRedDiscount;
+    }
+
+    public BigDecimal getMerchantRebateDiscount() {
+        return merchantRebateDiscount;
+    }
+
+    public void setMerchantRebateDiscount(BigDecimal merchantRebateDiscount) {
+        this.merchantRebateDiscount = merchantRebateDiscount;
+    }
+
+    public String getOrderSourceForWeiXin() {
+        return orderSourceForWeiXin;
+    }
+
+    public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
+        this.orderSourceForWeiXin = orderSourceForWeiXin;
+    }
+
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    public BigDecimal getReductionFee() {
+        return reductionFee;
+    }
+
+    public void setReductionFee(BigDecimal reductionFee) {
+        this.reductionFee = reductionFee;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
 }

@@ -23,6 +23,7 @@ public enum CodeEnum {
     ERROR_DATABASE("-12", "数据库故障"),
     ERROR_PARAM("-13", "必要参数为空或不合法"),
     ERROR_PARAM_1301("-1301", "必填参数不能为空"),
+    FIAL_NO_AUTHORITY_PAYMENT("1098403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 
     ERROR_VERSION_180("-3180", "当前版本不支持注册，请升级到V1.70后的版本再注册"),
 
@@ -47,7 +48,7 @@ public enum CodeEnum {
     
     /**扫码错误信息*/
     ERROR_RECEIVECOUPONMSG("-1125","亲，手慢了，奖品被抢光了……"),
-    ERROR_RECEIVECOUPONMSGCOUNT("-1129","对不去你的领取次数超过了限制"),
+    ERROR_RECEIVECOUPONMSGCOUNT("-1129","抱歉，您的领取次数超过了限制"),
     /** 验证码无效或已过期 */
     ERROR_VERIFICATION_CODE("-1106","验证码无效或已过期 "),
     
@@ -124,6 +125,11 @@ public enum CodeEnum {
 	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新编辑"),
 	ERROR_MCMC_COMMODITY_LPINTUAN("-7016", "拼团商品无法操作"),
+	ERROR_MCMC_OFFER_DATE("-7017","下架时间需大于上架时间"),
+	ERROR_MCMC_DATE("-7018","下架时间有误，请重新设置"),
+	ERROR_MCMC_REGIST_DATE("-7019","上架时间有误，请重新设置"),
+	ERROR_MCMC_COMMODITY_SPEC_DELETED("-7020", "商品规格不存在或已删除"),
+	ERROR_MCMC_COMMODITY_CATEGORY_SPEC("-7021", "此规格已关联商品类目，无法删除"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
@@ -264,7 +270,21 @@ public enum CodeEnum {
 
     ERROR_EXIST_PASSWORD("1300000", "虚拟账户未设置提现密码"),
     SUCCESS_EXIST_PASSWORD("1300001", "虚拟账户已设置提现密码"),
-	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
+    DRAW_AMOUNT_LOW("1300002", "提现金额不能小于0元"),
+	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务"),
+
+    ERROR_TAG_EXISTED("-111111", "标签名称已存在"),
+	/** 内部员工账号相关提示  */
+	ERROR_RYUSER_NOT_EXIST("1400001","该账号不存在"),
+	ERROR_RYUSER_STOP("1400002","停用理由不能为空"),
+	ERROR_RYUSER_START("1400003","该账号已存在，您无法启用当前账号"),
+	ERROR_RYUSER_ACCOUNT("1400004","账号名称不能重复"),
+
+    /** 售后说明敏感词校验*/
+	ERROR_SERVICE_DESCRIPTION_REMARK_HAS_SENSITIVE_WORD("1500001", "售后说明敏感词过滤没通过，售后说明的备注中存在敏感词"),
+    ERROR_SERVICE_DESCRIPTION_CONTENT_HAS_SENSITIVE_WORD("1500002", "售后说明敏感词过滤没通过，售后说明的说明中存在敏感词");
+
+
 
     private String code; 
     private String message; 

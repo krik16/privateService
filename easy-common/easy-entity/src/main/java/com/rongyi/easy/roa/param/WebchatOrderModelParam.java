@@ -24,6 +24,8 @@ public class WebchatOrderModelParam implements Serializable{
 	
 	private String expressOrderInfoId;//物流信息主键id
 
+	private String source;//1:订单物流，3：订单退款物流，默认1
+
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
 	}
@@ -64,12 +66,21 @@ public class WebchatOrderModelParam implements Serializable{
 		this.memberId = memberId;
 	}
 
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "WebchatOrderModelParam [orderModelId=" + orderModelId
 				+ ", memberId=" + memberId + ", orderNum=" + orderNum
 				+ ", orderNums=" + orderNums 
 				+ ", expressOrderInfoId=" + expressOrderInfoId 
+				+ ", source=" + source
 				+ "]";
 	}
 	

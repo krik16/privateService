@@ -27,6 +27,8 @@ public class CouponCommodityParam implements Serializable{
     private Integer type;
     private Double begDiscount;
     private Double endDiscount;
+    //  1：容易逛
+    private String terminalType;
 
     @Override
     public String toString() {
@@ -44,6 +46,7 @@ public class CouponCommodityParam implements Serializable{
         sb.append(", type=").append(type);
         sb.append(", begDiscount=").append(begDiscount);
         sb.append(", endDiscount=").append(endDiscount);
+        sb.append(", terminalType=").append(terminalType);
         sb.append('}');
         return sb.toString();
     }
@@ -142,6 +145,14 @@ public class CouponCommodityParam implements Serializable{
 
     public void setShopMids(List<String> shopMids) {
         this.shopMids = shopMids;
+    }
+
+    public String getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(String terminalType) {
+        this.terminalType = terminalType;
     }
 
     public CouponCommodityParam(String commodityId, String commodityName, String categoryId, String brandId, String shopId) {

@@ -9,6 +9,8 @@
     <result column="shop_mid" property="shopMid" jdbcType="VARCHAR" />
     <result column="score_total_no" property="scoreTotalNo" jdbcType="INTEGER" />
     <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="parent_shop_id" property="parentShopId" jdbcType="INTEGER" />
+    <result column="grandpa_shop_id" property="grandpaShopId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

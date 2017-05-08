@@ -3,12 +3,14 @@ package com.rongyi.easy.activitymanage.param;
 import java.io.Serializable;
 
 public class ActivityParam implements Serializable{
-    
+
 	private static final long serialVersionUID = 6383826849485417919L;
 
 	private String startDt;
 
     private String oId;
+
+	private String endDt;
 
 	public String getStartDt() {
 		return startDt;
@@ -31,5 +33,11 @@ public class ActivityParam implements Serializable{
 		return "ActivityParam [startDt=" + startDt + ", oId=" + oId + "]";
 	}
 
-	
+	public String getEndDt() {
+		return endDt;
+	}
+
+	public void setEndDt(String endDt) {
+		this.endDt = endDt;
+	}
 }

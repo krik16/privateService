@@ -1,6 +1,7 @@
 package com.rongyi.easy.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class BrandEntity implements Serializable{
 	private String key_tags;// 关键标签，shop需要
 	private List<String> aliases;
 	private List<ObjectId> category_ids;
+	private List<String > category_idsStr;
 	private String valid;
 	private Date created_at;
 	private Date updated_at;
@@ -30,6 +32,16 @@ public class BrandEntity implements Serializable{
 	private String keyTags; // 关键标签，shop需要.数据库里面是key_tags
 	private String categories_tags;// 品类
 	private String merlog_pic; //商家后台Logo图片
+
+	public List<String> getCategory_idsStr() {
+		List<String> result=new ArrayList<>();
+		if(null!=category_ids &&category_ids.size()>0) {
+			for (ObjectId objectId : category_ids) {
+				result.add(objectId.toString());
+			}
+		}
+		return  result;
+	}
 
 	public String getMerlog_pic() {
 		return merlog_pic;

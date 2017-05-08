@@ -42,8 +42,14 @@ public interface ITotalCommodityService {
 
 	public Map<String ,Object> findListForWechat(Map<String, Object> params);
 
-	public String updateCommodityWeAndTeStatus(String id, String type, String terminalType, String weAndTeStatus);
-
 	public List<TotalCommodity>  findCommodityByCategoryId(Map<String,Object> paramMap);
+
+	Boolean updateTotalCommodityStatus(String id, Integer status, String reason);
+
+	public List<TotalCommodity> findByHaiXinCode(String code, String locationId);
+
+	public Long searchCommodityByCodeAndLocationId(String code,String locationId);
+
+	public Map<String,Object> searchCommodityForManagement(Map<String,Object> paramMap,int pageSize);
 
 }

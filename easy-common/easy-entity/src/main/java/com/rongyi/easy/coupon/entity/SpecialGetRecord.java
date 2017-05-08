@@ -13,6 +13,8 @@ public class SpecialGetRecord {
 
     private Integer count;
 
+    private String activity;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class SpecialGetRecord {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 }

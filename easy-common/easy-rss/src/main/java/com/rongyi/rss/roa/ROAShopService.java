@@ -82,4 +82,14 @@ public interface ROAShopService {
     List<ShopVO> getSimpleShopsByIds(List<ObjectId> shopIds);
 
     public List<ShopVO> getShopsByObjectIds(List<ObjectId> shopIds);
+
+    /**
+     * 根据条件查询店铺列表
+     * @param paramMap 参数
+     *               parentIds
+     * @param currpage 页码 从1开始第一页
+     * @param pageSize 显示行数
+     * @return
+     */
+    List<ShopVO> searchShop(Map<String, Object> paramMap, int currpage, int pageSize);
 }

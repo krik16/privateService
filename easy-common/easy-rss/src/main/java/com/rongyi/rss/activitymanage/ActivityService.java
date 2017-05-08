@@ -20,6 +20,8 @@ import com.rongyi.easy.activitymanage.vo.*;
  */
 public interface ActivityService {
 
+
+
     /**
      * 新建活动
      * @param activityInfo
@@ -238,6 +240,13 @@ public interface ActivityService {
     public boolean cleanActivityById(Integer activityId,String userName,Integer status);
 
     public List<ActivityGoods> selectGoodsInPinTuan(List<String> goodIds);
+    
+    public List<ActivityGoods> getSuperActivityGoods(QuerySecKillGoods querySecKillGoods);
 
-
+    /**
+     * 根据特卖活动模版id查询置顶商品
+     * @param ActivityId
+     * @return
+     */
+    public List<SaleCommodityTop> saleCommodityTopList(Integer ActivityId);
 }

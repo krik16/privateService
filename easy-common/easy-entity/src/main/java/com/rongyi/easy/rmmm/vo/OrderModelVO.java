@@ -24,10 +24,13 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String userName;// 导购姓名
 	private String userPhone;// 导购电话
 	private String shopName;// 店铺名称
-	private String shopLogo;//店铺logo
+	private String shopLogo;//店铺品牌logo
+	private String shopIcon;// 店铺自定义logo
 	private String mallName;// 商场名称
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
+	private String areaName;//区域名称
+	private String shopAdress;//店铺详细地址
 	private Integer guideType;// 1是导购 2是买手
 	private Integer rebateNum = 0;// 可使用抵扣券数量
 	
@@ -224,6 +227,30 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 		this.shopMid = shopMid;
 	}
 
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public String getShopAdress() {
+		return shopAdress;
+	}
+
+	public void setShopAdress(String shopAdress) {
+		this.shopAdress = shopAdress;
+	}
+
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderModelVO [orderModelId=" + orderModelId + ", provinceId="
@@ -238,6 +265,9 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 				+ ", couponTotalDiscount=" + couponTotalDiscount + ", shopMid="
 				+ shopMid + ", platformRebateCode=" + platformRebateCode
 				+ ", rebateDiscount=" + rebateDiscount
-				+ ", rebateOriginalPrice=" + rebateOriginalPrice + "]";
+				+ ", rebateOriginalPrice=" + rebateOriginalPrice
+				+ ", areaName=" + areaName
+				+ ", shopAdress=" + shopAdress
+				+ "]";
 	}
 }

@@ -1,6 +1,7 @@
 package com.rongyi.core.framework.redis.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -124,5 +125,30 @@ public class RedisServiceImpl<T, E> implements RedisService{
 				return connection.ping();
 			}
 		});
+	}
+
+	@Override
+	public Set<byte[]> keys(final String keyPattern)
+	{
+		Set<byte[]> res;
+		try {
+			res = redisTemplate.execute(new RedisCallback<Set<byte[]>>() {
+				@Override
+				public Set<byte[]> doInRedis(RedisConnection redisConnection) throws DataAccessException {
+					byte[] keyPatternByte;
+					try {
+						keyPatternByte = keyPattern.getBytes(redisCode);
+					} catch (UnsupportedEncodingException e) {
+						return null;
+					}
+					Set keySet = redisConnection.keys(keyPatternByte);
+					return keySet;
+				}
+			});
+		} catch (Exception e)
+		{
+			res = null;
+		}
+		return res;
 	}
 }

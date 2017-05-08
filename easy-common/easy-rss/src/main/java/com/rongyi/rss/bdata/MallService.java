@@ -3,6 +3,7 @@ package com.rongyi.rss.bdata;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bdata.entity.Area;
 import com.rongyi.easy.bdata.vo.CustomCategoryVO;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bdata.entity.CustomCategory;
@@ -99,6 +100,8 @@ public interface MallService {
      * @return
      */
     ResponseVO getArea(Integer type, String parentId);
+
+	ResponseVO getAreaS(Integer type, List<String> parentIds);
     
     /**
      * 根据商场名称 模糊匹配查询商场列表
@@ -198,4 +201,6 @@ public interface MallService {
 	
 	CustomCategoryVO getCustomCateParantByChildId(String customCateId);
 
+
+	 List<Area> getAreaByIdAndType(String id,String type);
 }

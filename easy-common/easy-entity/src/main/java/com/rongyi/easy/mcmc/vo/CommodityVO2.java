@@ -6,19 +6,20 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.entity.CommodityCustomCategoryEntity;
+import com.rongyi.easy.ryoms.entity.WechatInfoVo;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mongodb.morphia.annotations.Entity;
 
 import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
 public class CommodityVO2 implements  Serializable {
-	
+
 	private static final long serialVersionUID = -3022699601318372490L;
-	
+
 	private String id;//系统编号
 	private String name;//商品名称
-	
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理
 	private String code;//商品编码
 	private Integer stock;//商品库存（包括卖出的商品和锁定的商品）
 	private Integer remain;//商品剩余量
@@ -47,13 +48,102 @@ public class CommodityVO2 implements  Serializable {
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date soldOutAt;//下架时间
 
+	@JsonSerialize(using=JsonDateSerializer.class)
+	private Date createAt; //创建时间
+
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 
 	private boolean immediateOn = false;//true表示设置是立即上架
 	private Integer templateId;//邮费模版id
 	private Integer purchaseCount;
 	private List<String> mallMids;//商品对应店铺所在的商场
+	private String subheading;  //副标题
 
+	private String commodityDetails; //商品详情
+	private List<WechatInfoVo> wechatInfoVos;
+	private List<String> serviceIds;
+	private String commodityModelNo;//商品款号
+	private List<String> goodsParam;//商品参数
+	private String createBy;
+	private String updateBy;
+	private String brandName;
+	private String brandMid;
+	private List<String> referencePriceList;
+	private List<String> originalPriceList;
+	private List<String> currentPriceList;
+	private String serviceDescription;//售后说明
+
+	private Integer serviceDescriptionId;
+
+	private String serviceDescriptionRemark;
+
+	private String reason;
+	
+	private Integer isRefund;//是否可退货  0:否，1:可退货
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
+	public List<String> getGoodsParam() {
+		return goodsParam;
+	}
+
+	public void setGoodsParam(List<String> goodsParam) {
+		this.goodsParam = goodsParam;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
+	public List<String> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<String> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
+	public List<WechatInfoVo> getWechatInfoVos() {
+		return wechatInfoVos;
+	}
+
+	public void setWechatInfoVos(List<WechatInfoVo> wechatInfoVos) {
+		this.wechatInfoVos = wechatInfoVos;
+	}
 
 	public String getId() {
 		return id;
@@ -245,5 +335,93 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setMallMids(List<String> mallMids) {
 		this.mallMids = mallMids;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
+	public String getBrandMid() {
+		return brandMid;
+	}
+
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+
+	public List<String> getReferencePriceList() {
+		return referencePriceList;
+	}
+
+	public void setReferencePriceList(List<String> referencePriceList) {
+		this.referencePriceList = referencePriceList;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+	
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
+	public List<String> getOriginalPriceList() {
+		return originalPriceList;
+	}
+
+	public void setOriginalPriceList(List<String> originalPriceList) {
+		this.originalPriceList = originalPriceList;
+	}
+
+	public List<String> getCurrentPriceList() {
+		return currentPriceList;
+	}
+
+	public void setCurrentPriceList(List<String> currentPriceList) {
+		this.currentPriceList = currentPriceList;
 	}
 }

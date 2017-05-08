@@ -1,11 +1,14 @@
 package com.rongyi.rss.mcmc;
 
+import com.rongyi.core.bean.DubboVO;
+import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
@@ -17,18 +20,29 @@ import com.rongyi.easy.mcmc.param.CommodityGalleryPositionParam;
 import com.rongyi.easy.mcmc.param.CommodityRuleParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
-
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
-import com.rongyi.easy.roa.param.SelfCommodityParam;
-import com.rongyi.easy.solr.McmcCommodityDocument;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
+import com.rongyi.easy.solr.McmcCommodityDocument;
+import com.rongyi.easy.roa.param.SelfCommodityParam;
+import com.rongyi.easy.solr.McmcCommodityDocument;
+import com.rongyi.easy.roa.param.CommoditySpecParam;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
+
+import org.bson.types.ObjectId;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public interface CommodityService {
 
@@ -37,6 +51,14 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
+
+    /**
+     * 根据商品ids获取商品列表
+     *
+     * @param commodityId
+     * @return
+     */
+    public DubboVO<List<CommodityVO>> getCommoditySpecListById(List<ObjectId> commodityId);
 
     /**
      * 获取规格详情
@@ -55,6 +77,14 @@ public interface CommodityService {
     public List<CommoditySpecVO> getSpecList(List<String> specIds);
 
     /**
+     * 获取指定时间之后的商品规格
+     * @param specIds
+     * @param timeAfter
+     * @return
+     */
+    public List<CommoditySpecVO> getSpecList(List<String> specIds,Date timeAfter);
+
+    /**
      * 查询店铺的商品
      * @param id
      * @param shopId
@@ -62,9 +92,9 @@ public interface CommodityService {
      */
     public ResponseResult getCommodityById(String id, long shopId);
 
-    public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByShopId(int identity,String buyerId,String id, int orderBy, String keyword, int currentpage, int pagesize);
 
-    public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize);
+    public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy, String keyword, int currentpage, int pagesize,List<String> shopIds,List<String> brandIds);
 
     public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage, int pagesize, String liveId, int isEdit);
 
@@ -75,6 +105,10 @@ public interface CommodityService {
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
     public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, String userName);
+
+    public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
+
+    public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason, String userName);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -180,6 +214,8 @@ public interface CommodityService {
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
 
+    List<Commodity> getCommodityBySystemNumber(String systemNumber);
+
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
     public List<McmcCommodityDocument> getMcmcCommodityDocumentList(int skip,int pageSize) throws Exception;
@@ -216,6 +252,9 @@ public interface CommodityService {
      * @return
      */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+
+    public ResponseVO deleteCommodityAuth(String commodityId, Long shopId, Integer userId);
 
     /**
      * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
@@ -297,6 +336,14 @@ public interface CommodityService {
 
     List<Commodity> selectCommoditiesByIds(List<ObjectId> ids);
 
+    /**
+     *
+     * @param ids
+     * @param isNotSkillCommdity true 返回没有秒杀商品
+     * @return
+     */
+    List<Commodity> selectCommoditiesByIds(List<ObjectId> ids,boolean isNotSkillCommdity);
+
     ResponseVO revertCommodityGalleryPosition(List<CommodityGalleryPositionParam> commodityGalleryPositionParamList,String bullerId,String shopMid);
 
     /**
@@ -359,4 +406,41 @@ public interface CommodityService {
      * @return true commodity is overtime, false otherwise;
      */
     List<String> isCommodityOvertime(PinTuanCommodityParam param);
+    /**
+     * 批量下架商品
+     * @param ids
+     * @param shopId
+     * @param reason
+     * @param userName
+     * @return
+     */
+    public ResponseResult commoditysOffShelves(List<String> ids, long shopId, int userId,String reason, String userName);
+
+    public List<BrandsVo> getCommodityBrandByBuyer(String buyerId);
+
+    public List<ShopsVo> getCommodityShopsByBuyer(String buyerId);
+
+
+    public List<CommodityVO> getCommoditySpecsInfoByIds(List<CommoditySpecParam> commoditySpecIds);
+
+    CommodityVO getCommodityDetail(String id);
+
+    public List<CommodityCategory> selectCommodityCategoryByids(List<String> commodityCategoryids);
+
+    public WechatCommodityPageVo listCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
+
+    public ResponseResult getCommoditySpecyList(List<String> cloumIds);
+
+    public WechatCommodityPageVo listTotalCommodityByShopMid(WechatCommodityParam wechatCommodityParam);
+
+    public Boolean updateCommodityStatus(String id, Integer status, String reason);
+
+    Map<String, Object> searchCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+
+    Map<String, Object> getTotalCommodityListForHaiXin(Map<String, Object> paramsMap);
+
+    boolean updateSpecTotalStock(String specId, Integer stock);
+
+    List<CustomCategoryVo> searchCategoryForHaiXin(CustomCategoryParam customCategoryParam);
 }

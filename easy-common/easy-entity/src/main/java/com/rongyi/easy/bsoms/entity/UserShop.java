@@ -22,6 +22,10 @@ public class UserShop implements Serializable{
 
     private Integer userId;
 
+    private Integer parentShopId;
+    
+    private Integer grandpaShopId;
+    
     public Integer getId() {
         return id;
     }
@@ -93,4 +97,21 @@ public class UserShop implements Serializable{
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+	public Integer getParentShopId() {
+		return parentShopId;
+	}
+
+	public void setParentShopId(Integer parentShopId) {
+		this.parentShopId = parentShopId;
+	}
+
+	public Integer getGrandpaShopId() {
+		return grandpaShopId;
+	}
+
+	public void setGrandpaShopId(Integer grandpaShopId) {
+		this.grandpaShopId = grandpaShopId;
+	}
+
 }

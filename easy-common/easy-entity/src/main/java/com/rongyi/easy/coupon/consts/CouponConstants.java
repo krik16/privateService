@@ -93,6 +93,7 @@ public interface CouponConstants {
         Integer REBATE = 1;
         Integer REDENVELOPE = 2;
         Integer ACTIVITY = 3;
+        Integer OUTCOUPON = 4;
     }
 
 
@@ -106,12 +107,13 @@ public interface CouponConstants {
     }
 
     /**
-     * 券码类型：抵扣券[01] 代金券[02] 红包[03]
+     * 券码类型：抵扣券[01] 代金券[02] 红包[03] 外部到出券【04】
      */
     interface CouponCodeType {
         String REBATE = "01";
         String VOUCHER = "02";
         String REDENVELOPE = "03";
+        String OUTCOUPON = "04";
     }
 
     /**
@@ -170,6 +172,15 @@ public interface CouponConstants {
         Integer STAND_CUT = 1;
     }
 
+    /**
+     * 促销券补贴类型
+     * 平台补贴[0] 商家补贴[1]
+     */
+    interface SubsidyType {
+        int OPERATION = 0;
+        int MERCHANT = 1;
+    }
+
     interface USERREDENVELOP_ACTIVITY_TYPE{
         int FPG=0;//翻牌购
         int TS=1;//推送
@@ -193,4 +204,17 @@ public interface CouponConstants {
         int PUSH=1;
         int IMPORT=0;
     }
+    //店铺是否可以验证卡券
+    interface COUPONSHOP_VARIFIABLE{
+        int YES = 0;//可验证
+        int NO = 1;//不可验证
+    }
+    //店铺关联卡券的状态
+    interface COUPONSHOP_STATUS{
+        int RELATED_SHOP = 0;//卡券关联的店铺
+        int GENERAL_SHOP = 1;//通用券的验证店铺
+        int ACTIVITY_SHOP = 2;//活动券的验证店铺
+        int CHILD_SHOP = 3;//活动券的验证店铺
+    }
+
 }

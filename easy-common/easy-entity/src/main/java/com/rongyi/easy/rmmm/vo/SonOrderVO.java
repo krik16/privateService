@@ -28,7 +28,7 @@ public class SonOrderVO implements Serializable{
 
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
-	private String refundStatus = "0";// 退款状态
+	private String refundStatus;// 退款状态 0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：带卖家收货 6：退款关闭
 
 	private String commodityId;// 商品id
 	private String commodityNo;// 商品编号
@@ -36,6 +36,7 @@ public class SonOrderVO implements Serializable{
 	private String commodityName;// 商品名称
 
 	private String sonOrderId;// 子订单id
+	private String sonOrderNo;// 子订单号
 
 	private String applicationId;// 退款或维权id
 
@@ -50,7 +51,18 @@ public class SonOrderVO implements Serializable{
 	private String description;// 全场红包/店铺红包
 	private String liveName;//直播名
 	private boolean ifOnDisplayAfterSales = false;//是否显示申请售后按钮,true显示 false不显示
-	
+	private Integer couponDiscountType;//红包补贴类型  0：平台补贴 1：商家补贴
+	private Integer rebateDiscountType;//抵扣券补贴类型  0：平台补贴 1：商家补贴
+	private BigDecimal discountAmount;//原价-卖家优惠
+	// 卖家满减金额
+	private BigDecimal reductionFee;
+	private Integer complaintStatus;// 维权状态 1：申诉中、2：申诉成功、3：申诉失败、4：申诉关闭
+	private Integer refundType;// 退款类型 1：仅退款'，3：快递退货退款'，7：到店退货退款'
+	private String refundNo;// 退款单号
+	private boolean whetherCanRefund;// 是否可以退款" true：可以，false:不可以
+	private boolean whetherCanComplaint;// 是否可以申诉" true：可以，false:不可以
+	private String complaintNo;// 维权单号
+
 	public boolean isIfOnDisplayAfterSales() {
 		return ifOnDisplayAfterSales;
 	}
@@ -252,10 +264,104 @@ public class SonOrderVO implements Serializable{
 		this.description = description;
 	}
 
+	public Integer getCouponDiscountType() {
+		return couponDiscountType;
+	}
+
+	public void setCouponDiscountType(Integer couponDiscountType) {
+		this.couponDiscountType = couponDiscountType;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
+	public Integer getRebateDiscountType() {
+		return rebateDiscountType;
+	}
+
+	public void setRebateDiscountType(Integer rebateDiscountType) {
+		this.rebateDiscountType = rebateDiscountType;
+	}
+
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
+	}
+
+	public Integer getComplaintStatus() {
+		return complaintStatus;
+	}
+
+	public void setComplaintStatus(Integer complaintStatus) {
+		this.complaintStatus = complaintStatus;
+	}
+
+	public Integer getRefundType() {
+		return refundType;
+	}
+
+	public void setRefundType(Integer refundType) {
+		this.refundType = refundType;
+	}
+
+	public String getRefundNo() {
+		return refundNo;
+	}
+
+	public void setRefundNo(String refundNo) {
+		this.refundNo = refundNo;
+	}
+
+	public boolean isWhetherCanRefund() {
+		return whetherCanRefund;
+	}
+
+	public void setWhetherCanRefund(boolean whetherCanRefund) {
+		this.whetherCanRefund = whetherCanRefund;
+	}
+
+	public boolean isWhetherCanComplaint() {
+		return whetherCanComplaint;
+	}
+
+	public void setWhetherCanComplaint(boolean whetherCanComplaint) {
+		this.whetherCanComplaint = whetherCanComplaint;
+	}
+
+	public String getComplaintNo() {
+		return complaintNo;
+	}
+
+	public void setComplaintNo(String complaintNo) {
+		this.complaintNo = complaintNo;
+	}
+
+	public String getSonOrderNo() {
+		return sonOrderNo;
+	}
+
+	public void setSonOrderNo(String sonOrderNo) {
+		this.sonOrderNo = sonOrderNo;
+	}
+
 	@Override
 	public String toString() {
 		return "SonOrderVO{" +
-				"num='" + num + '\'' +
+				"appealTimes='" + appealTimes + '\'' +
+				", num='" + num + '\'' +
+				", integralDiscount=" + integralDiscount +
+				", commodityAmount=" + commodityAmount +
+				", voucherDiscount=" + voucherDiscount +
+				", hbDiscount=" + hbDiscount +
+				", commodityDiscount=" + commodityDiscount +
 				", specColumnValues=" + specColumnValues +
 				", commodityPic='" + commodityPic + '\'' +
 				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
@@ -264,16 +370,21 @@ public class SonOrderVO implements Serializable{
 				", sonOrderStatus='" + sonOrderStatus + '\'' +
 				", refundStatus='" + refundStatus + '\'' +
 				", commodityId='" + commodityId + '\'' +
+				", commodityNo='" + commodityNo + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", sonOrderId='" + sonOrderId + '\'' +
+				", sonOrderNo='" + sonOrderNo + '\'' +
 				", applicationId='" + applicationId + '\'' +
-				", appealTimes='" + appealTimes + '\'' +
 				", refundTimes='" + refundTimes + '\'' +
 				", couponCode='" + couponCode + '\'' +
 				", discount='" + discount + '\'' +
 				", description='" + description + '\'' +
 				", liveName='" + liveName + '\'' +
-				", ifOnDisplayAfterSales='" + ifOnDisplayAfterSales + '\'' +
+				", ifOnDisplayAfterSales=" + ifOnDisplayAfterSales +
+				", couponDiscountType=" + couponDiscountType +
+				", rebateDiscountType=" + rebateDiscountType +
+				", discountAmount=" + discountAmount +
+				", reductionFee=" + reductionFee +
 				'}';
 	}
 }

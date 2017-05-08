@@ -132,5 +132,16 @@ public interface ShopService {
 	public List<ShopVO> getMallShops(String mallId);
 
 	public List<ShopVO> getMallNormallShops(String mallId);
+	
+	public String insertVirtualShop(String mallId, String shopId, String brandId);
 
+	ResponseVO getShopAndChildRenShops(String shopId,String childShopName,Integer currentPage,Integer pageSize );
+
+	public  void updateShopPhoto( ObjectId id,List<String> photos);
+
+	Shop getShopInfo(String id);
+
+	public void updateBaseData();
+
+	void  addOneLog(String shopId);
 }

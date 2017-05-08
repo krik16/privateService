@@ -2,10 +2,7 @@ package com.rongyi.rss.tradecenter.osm;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.rmmm.param.OrderDealedParam;
-import com.rongyi.easy.rmmm.param.RequestPaymentParam;
-import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
-import com.rongyi.easy.rmmm.param.SubmitOrderParam;
+import com.rongyi.easy.rmmm.param.*;
 import com.rongyi.easy.rmmm.param.user.OrderAddressParam;
 
 import java.util.List;
@@ -131,12 +128,31 @@ public interface IOrderService {
 	 */
 	ResponseVO changeBuyerAddress(OrderAddressParam param);
 
-	/**
+/*	*//**
 	 * 修改拼团状态
 	 * @param activityId 活动id
 	 * @param activityRoundId 团编号
 	 * @param status 团状态
 	 * @throws Exception
-	 */
+	 *//*
+	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;*/
 	void pintuanActivityStatusChange(Integer activityId, Long activityRoundId, Integer status) throws Exception;
+
+	/**
+	 * 商品券码核销
+	 *
+	 * @param couponCode 券码
+	 * @param mallId 核销人对应的mallId
+	 * @param shopId 核销人对应的shopId
+	 * @param checkUserId 核销人
+	 * @return
+	 */
+	ResponseVO checkingCode(String couponCode, String mallId, String shopId, Integer checkUserId);
+
+	/**
+	 * 添加卖家备注
+	 * @param param
+	 * @return
+	 */
+	ResponseVO addComment(OrderCommentParam param);
 }

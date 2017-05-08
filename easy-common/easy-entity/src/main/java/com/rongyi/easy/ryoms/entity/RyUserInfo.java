@@ -1,7 +1,6 @@
 package com.rongyi.easy.ryoms.entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.util.Date;
 
 public class RyUserInfo implements Serializable{

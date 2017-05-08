@@ -3,15 +3,18 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseResult2;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.activitymanage.param.PinTuanCommodityParam;
 import com.rongyi.easy.mcmc.constant.EPOIType;
+import com.rongyi.easy.mcmc.param.CommodityParam;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import com.rongyi.easy.mcmc.vo.CommodityPagePinTuanVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
 import com.rongyi.easy.mcmc.vo.SearchParamsForWechat;
 import com.rongyi.easy.solr.McmcCommodityDocument;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -80,11 +83,27 @@ public interface ICommodityService {
 
 	public Map<String,Object> searchCommodityForOperate(Map<String,Object> paramMap,int pageSize);
 
+
 	public List<Commodity> searchCommodityByUserId(Integer userId,Integer pageCount);
 
 	public Long searchCommodityByUserIdTotalCount(Integer userId);
 
 	public boolean deleteCommodityByUserId(List<String> userFromCommodityIds);
 
-	//public List<McmcCommodityDocument>  selectByIds(List<String> ids);
+
+	/**
+	 * 更新商品终端的显示与隐藏
+	 *
+	 * @param commodityId
+	 * @param terminalId 终端id
+	 * @param switchStatus show or hide
+	 * @param isYunYinAuth 是否是大运营操作
+	 *
+	 * @return
+	 */
+	Map<String, List> updateSwitchStatusForCommodity(String commodityId, String terminalId, String switchStatus, boolean isYunYinAuth);
+
+	public boolean updateCommodityForOperate(CommodityParam commodityParam);
+	
+	public Commodity findByCodeAndShopMid(String code, String shopMid);
 }

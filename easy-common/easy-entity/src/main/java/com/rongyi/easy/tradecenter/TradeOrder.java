@@ -1,6 +1,8 @@
 package com.rongyi.easy.tradecenter;
 
 import com.rongyi.core.common.util.JsonUtil;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -112,6 +114,19 @@ public class TradeOrder implements Serializable {
      * 下单渠道
      */
     private String orderChannel;
+
+    // 用户类型
+    private Integer userType ;
+
+    private Integer couponStatus;//卡券状态  0待付款 2已取消 5已退款 9未核销 10已核销
+
+    /**
+     * 促销券补贴类型 0：平台补贴 1：商家补贴
+     */
+    private Byte couponDiscountType;
+
+    // 扩展数据
+    private String extraInfo;
     /**
      * 元
      *
@@ -563,5 +578,42 @@ public class TradeOrder implements Serializable {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public Byte getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(Byte couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public Integer getCouponStatus() {
+        return couponStatus;
+    }
+
+    public void setCouponStatus(Integer couponStatus) {
+        this.couponStatus = couponStatus;
+    }
+
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

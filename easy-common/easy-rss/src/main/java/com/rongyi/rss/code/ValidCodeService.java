@@ -1,11 +1,10 @@
 package com.rongyi.rss.code;
 
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.CodeServiceException;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
-import com.rongyi.easy.code.StatisticsValidCountVO;
-import com.rongyi.easy.code.ValidCouponVO;
-import com.rongyi.easy.code.WebValidVO;
+import com.rongyi.easy.code.*;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
 import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
@@ -76,7 +75,7 @@ public interface ValidCodeService {
      * @param platform 验证平台 。0：商家平台；1：摩店；2：轻应用
      * @return
      */
-    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,String identity,byte platform) throws CodeServiceException;
+    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,Integer userId,String identity,byte platform) throws CodeServiceException;
 
     /**
      * 统计各个类型的总验码数量和当天验码数
@@ -140,6 +139,21 @@ public interface ValidCodeService {
      */
     public WebValidVO validEventGiftCode(String code, SessionUserInfo sessionUserInfo,Boolean isSuperShop,byte platform);
 
+    /**
+     * 万达BO 验券接口
+     * @param codeParam
+     * @return
+     */
+    boolean validWDCode(VerifyCodeParam codeParam) throws CodeServiceException;
+
+
+    /**
+     * 万达 查询订单接口
+     * @param codeParam
+     * @return
+     * @throws CodeServiceException
+     */
+    WdCouponVO queryWDCoupon(VerifyCodeParam codeParam) throws CodeServiceException;
 
 
     /**
@@ -149,4 +163,19 @@ public interface ValidCodeService {
      * @return
      */
     ValidCouponVO validSearchEventGift(String code, String mallMid);
+
+    /**
+     * 家得利验码接口
+     * @param validUser
+     * @param identity
+     * @param code
+     * @param mallId
+     * @param shopId
+     * @param platform
+     * @param bizCode
+     * @param deviceNo
+     * @return
+     * @throws CodeServiceException
+     */
+    ResponseVO validJiadeliCouponCode(String code, String mallId, String shopId, Integer userId, byte platform, int count, String bizCode, String deviceNo) throws CodeServiceException;
 }

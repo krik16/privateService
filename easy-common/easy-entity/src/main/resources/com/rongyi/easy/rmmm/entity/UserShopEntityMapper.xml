@@ -11,6 +11,11 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
     <result column="filiale_id" property="branchCompanyId" jdbcType="INTEGER" />
+    
+    <result column="first_shop_id" property="firstShopId" jdbcType="INTEGER" />
+    <result column="second_shop_id" property="secondShopId" jdbcType="INTEGER" />
+    <result column="third_shop_id" property="thirdShopId" jdbcType="INTEGER" />
+    
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

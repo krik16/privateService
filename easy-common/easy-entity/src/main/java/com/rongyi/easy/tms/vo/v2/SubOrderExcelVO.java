@@ -1,5 +1,8 @@
 package com.rongyi.easy.tms.vo.v2;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +40,7 @@ public class SubOrderExcelVO {
 
     private Integer status;
 
-    private Integer shopId;
+    private String shopId;
 
     private String sellerAccount;
 
@@ -48,6 +51,16 @@ public class SubOrderExcelVO {
     private String commodityId;
 
     private String createAt;
+
+    private String commodityName;
+
+    private String activityType;
+
+    private String activityName;
+
+    private Integer timeType;//0:下单时间，1：付款时间，2：发货时间，3：完成时间
+
+    private Integer deliveryType;//配送方式 1：自提 2：快递
 
     public String getOrderCartNo() {
         return orderCartNo;
@@ -161,11 +174,11 @@ public class SubOrderExcelVO {
         this.status = status;
     }
 
-    public Integer getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(Integer shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
@@ -202,29 +215,49 @@ public class SubOrderExcelVO {
         this.userPhone = userPhone;
     }
 
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Integer getTimeType() {
+        return timeType;
+    }
+
+    public void setTimeType(Integer timeType) {
+        this.timeType = timeType;
+    }
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
     @Override
     public String toString() {
-        return "SubOrderExcelVO{" +
-                "orderCartNo='" + orderCartNo + '\'' +
-                ", commodityNo='" + commodityNo + '\'' +
-                ", createAtBegin=" + createAtBegin +
-                ", createAtEnd=" + createAtEnd +
-                ", guideType=" + guideType +
-                ", mallId='" + mallId + '\'' +
-                ", orderNo='" + orderNo + '\'' +
-                ", orderSource=" + orderSource +
-                ", amountType='" + amountType + '\'' +
-                ", realAmountBegin=" + realAmountBegin +
-                ", realAmountEnd=" + realAmountEnd +
-                ", payChannel=" + payChannel +
-                ", status=" + status +
-                ", shopId=" + shopId +
-                ", sellerAccount='" + sellerAccount + '\'' +
-                ", username='" + username + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", commodityId='" + commodityId + '\'' +
-                ", createAt=" + createAt +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
     public Map<String,Object> toMap(){

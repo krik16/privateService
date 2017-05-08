@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TradeValidRecord implements Serializable {
-    private Integer id;
+    
+	private static final long serialVersionUID = 5169397150273037615L;
+
+	private Integer id;
 
     private Integer orderId;
 
@@ -41,6 +44,10 @@ public class TradeValidRecord implements Serializable {
     private Date updateAt;
 
     private String mongoId;
+
+    private Integer isDelete;
+
+    private String comment;//备注信息
 
     public Integer getId() {
         return id;
@@ -193,4 +200,22 @@ public class TradeValidRecord implements Serializable {
     public void setMongoId(String mongoId) {
         this.mongoId = mongoId;
     }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+
 }

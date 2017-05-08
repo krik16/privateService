@@ -13,67 +13,26 @@ import java.net.URLEncoder;
  * Package:com.rongyi.message.entity.dto
  * Project:easy-common
  */
-public class SWXMessageParam implements Serializable {
-    private String openid;
-    private String mallid;
-    private String templateid;
-    private String url;
+public class SWXMessageParam extends SWXMessageBaseParam  implements Serializable {
     private WXMsgContent arr;
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SWXMessageParam{");
-        sb.append("openid='").append(openid).append('\'');
-        sb.append(", mallid='").append(mallid).append('\'');
-        sb.append(", templateid='").append(templateid).append('\'');
-        sb.append(", url='").append(url).append('\'');
-        sb.append(", arr=").append(arr);
+        sb.append("openid='").append(getOpenid()).append('\'');
+        sb.append(", mallid='").append(getMallid()).append('\'');
+        sb.append(", templateid='").append(getTemplateid()).append('\'');
+        sb.append(", url='").append(getUrl()).append('\'');
+        sb.append("arr=").append(arr);
         sb.append('}');
         return sb.toString();
     }
 
     public String toPostParam() throws UnsupportedEncodingException {
-        StringBuffer sb = new StringBuffer();
-        sb.append("openid=").append(URLEncoder.encode(openid, "utf-8")).append('&');
-        sb.append("mallid=").append(URLEncoder.encode(mallid, "utf-8")).append('&');
-        sb.append("templateid=").append(URLEncoder.encode(templateid, "utf-8")).append('&');
-        sb.append("url=").append(URLEncoder.encode(url, "utf-8")).append('&');
+        StringBuffer sb = new StringBuffer(super.toPostParam());
         sb.append("arr=").append(URLEncoder.encode(JSONObject.fromObject(arr).toString(), "utf-8"));
         return sb.toString();
     }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public String getMallid() {
-        return mallid;
-    }
-
-    public void setMallid(String mallid) {
-        this.mallid = mallid;
-    }
-
-    public String getTemplateid() {
-        return templateid;
-    }
-
-    public void setTemplateid(String templateid) {
-        this.templateid = templateid;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public WXMsgContent getArr() {
         return arr;
     }

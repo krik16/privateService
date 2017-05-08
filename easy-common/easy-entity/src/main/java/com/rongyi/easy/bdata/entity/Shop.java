@@ -20,45 +20,44 @@ public class Shop implements Serializable {
 	@Id
 	private ObjectId id;
 	private Integer activity_count;
-	private String address;
+	private String address;//详情地址
 	private List<String> applied_card_type_ids;
-	private String average_consumption;
-	private ObjectId brand_id;
-	private Integer business_status;
-	private List<ObjectId> category_ids;
+	private String average_consumption;//平均消费
+	private ObjectId brand_id;//主营品牌
+	private Integer business_status;//商场营业状态  0正常营业  1即将营业  2暂停营业  3停止营业   4待处理
+	private List<ObjectId> category_ids;//店铺分类
 	private Integer comment_count;
-	private List<String> coordinate;
+	private List<String> coordinate;//室内座标
 	private List<String> door_coordinate;
 	private Date created_at;
 	private String crypted_password;
-	private String description;
-	private List<Double> location;
+	private String description;//店铺描述
+	private List<Double> location;//经纬度  
 	private String name;
 	private String name_temp;
 	private String old_code;
 	private Integer old_id;
-	private Integer operator_id;
-	private Integer rank;
-	private Integer shop_nature;
-	private String shop_number;
-	private String shop_type;
+	private Integer operator_id;//操作者ID
+	private Integer rank;//评分
+	private Integer shop_nature;//店铺类型   0普通店   1免税店  2专柜  3折扣  4旗舰
+	private String shop_number;//铺位号
+	private String shop_type;//店铺性质    0商场商铺  1商场专柜  2街边店 3特卖店
 	private String slug;
 	private String subtitle;
-	private String tags;
-	private String telephone;
+	private String tags;//店铺标签
+	private String telephone;//店铺电话
 	private String terminal_shop;
 	private String token;
 	private Date updated_at;
-	private Integer valid;
+	private Integer valid;//店铺状态   0正常  1隐藏  2删除
 	private ObjectId zone_id;
 	private List<ObjectId> zone_ids;
-	private Integer recommend;
-	private String business_hours;
+	private Integer recommend;//0不置顶  1置顶
+	private String business_hours;//营业时间
 	private List<String> watcher_ids;
-	private List<ObjectId> parent_ids;
-	private ObjectId filiale_id;   
-    private List<ObjectId> custom_category_ids;
-    private String qrcode_pic;
+	private ObjectId filiale_id;//分公司ID
+    private List<ObjectId> custom_category_ids;//商场自定义分类
+    private String qrcode_pic;//二维码
     private List<String> photo_urls;//图片地址
 
     private String valid_reason ;//隐藏理由 
@@ -73,7 +72,65 @@ public class Shop implements Serializable {
     private int moreFloors = 0;//0不跨楼，1跨楼
     private String name_en;    //店铺英文名
     private String description_en ; //店铺英文介绍
+    private String fID;
+    private ObjectId parent_id; //上级店铺ID
+    private List<ObjectId> parent_ids; //上级店铺ids
+    private String thirdParty;//第三来源
+    // 第三方来源参数,  非标准参数
+    private String orgCode;//海信 组织编码
+    private String orgType;// 海信  0-自营店 1-加盟店 2-配送中心
+    private String isCenter;//  海信, 是否是企业组织  0否 1 是
+    private String isShowInWeiXin;//0显示,1不显示
+    //第三方来源参数,  非标准参数
 
+
+    public String getIsShowInWeiXin() {
+        return isShowInWeiXin;
+    }
+
+    public void setIsShowInWeiXin(String isShowInWeiXin) {
+        this.isShowInWeiXin = isShowInWeiXin;
+    }
+
+    public String getThirdParty() {
+        return thirdParty;
+    }
+
+    public void setThirdParty(String thirdParty) {
+        this.thirdParty = thirdParty;
+    }
+
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
+
+    public String getOrgType() {
+        return orgType;
+    }
+
+    public void setOrgType(String orgType) {
+        this.orgType = orgType;
+    }
+
+    public String getIsCenter() {
+        return isCenter;
+    }
+
+    public void setIsCenter(String isCenter) {
+        this.isCenter = isCenter;
+    }
+
+    public String getfID() {
+        return fID;
+    }
+
+    public void setfID(String fID) {
+        this.fID = fID;
+    }
 
     public ObjectId getId() {
         return id;
@@ -503,6 +560,14 @@ public class Shop implements Serializable {
 
     public String getDescription_en() {
         return description_en;
+    }
+
+    public ObjectId getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(ObjectId parent_id) {
+        this.parent_id = parent_id;
     }
 
     public void setDescription_en(String description_en) {

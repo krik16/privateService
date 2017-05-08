@@ -314,6 +314,31 @@ public class DateUtil {
 	}
 
 	/**
+	 * 比较2个时间的日期大小
+	 * @param data1 小的时间
+	 * @param data2   大的时间
+	 * @return
+	 */
+	public static int compareToDate(Date data1, Date data2){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		int day = 0;
+		try {
+			data1 = sdf.parse(sdf.format(data1));
+			data2 = sdf.parse(sdf.format(data2));
+			if(data2.getTime() > data1.getTime()){
+				day = 1;
+			}else if (data2.getTime() < data1.getTime()){
+				day = -1;
+			}else{
+				day = 0;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return day;
+	}
+	/**
 	 * 计算两个日期之间相差的天数
 	 * @param smdate 较小的时间
 	 * @param bdate 较大的时间
@@ -458,7 +483,17 @@ public class DateUtil {
 		Date currentTime = new Date();
 		return formatter.format(currentTime);
 	}
-	
+
+	/**
+	 * 格式化当前时间  返回格式yyyyMMddHHmmss
+	 * @return
+	 */
+	public static String getCurrentDateyyyyMMddhhmmss() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");
+		Date currentTime = new Date();
+		return formatter.format(currentTime);
+	}
+
 	/**	
 	 * @Description: 格式化当前时间  返回格式yyyy-MM-dd HH:mm:ss:SSS
 	 * @return	
@@ -924,6 +959,41 @@ public class DateUtil {
 		sb.append("Z");
 
 		return sb.toString();
+	}
+	
+	public static boolean compareDateEquals(Date oldDate, Date newDate) {
+		  if(oldDate == null && newDate == null){
+			  return true;
+		  }else if(oldDate == null && newDate != null || oldDate != null && newDate == null){
+			  return false;
+		  }else if(oldDate.equals(newDate)){
+			  return true;
+		  }else{
+			  return false;
+		  }
+	}
+
+	/**
+	 * 获得指定日期的前一天
+	 * @param specifiedDay
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getSpecifiedDayBefore(String specifiedDay){
+	//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		Date date=null;
+		try {
+			date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		c.setTime(date);
+		int day=c.get(Calendar.DATE);
+		c.set(Calendar.DATE,day-1);
+
+		String dayBefore=new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+		return dayBefore;
 	}
 
 	public static void main(String[] args) {

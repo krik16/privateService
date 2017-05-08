@@ -11,6 +11,8 @@ public class SpecialCoupon {
 
     private Date createAt;
 
+    private String activity;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class SpecialCoupon {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 }

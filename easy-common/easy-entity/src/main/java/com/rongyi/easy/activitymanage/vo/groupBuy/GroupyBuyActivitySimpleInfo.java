@@ -13,9 +13,9 @@ import java.util.Date;
  *
  */
 public class GroupyBuyActivitySimpleInfo implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 3830153074986577580L;
 
@@ -29,37 +29,57 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 	 */
 	private int activityId;
 	private String mallId;
-	
-	
+
+
 	private Date begin;
-	
+
 	private Date end;
-	
+
 	/***
 	 * 订单自动关闭时间:分钟
 	 */
 	private int orderCloseTime;
-	
+
 	/***
 	 * 成团有效时间:分钟
 	 */
 	private int groupCloseTime;
-	
-	
+
+
 	/***
 	 * 强制关注
 	 */
 	private boolean isForceFollow;
-	
-	
+
+
 	private String shareTitle;
-	
+
 	private String sharePic;
-	
+
 	private String shareContent;
 
 	private Integer status;//活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3],强制下线[4]
 
+	private String activityTitle;//活动页面标题
+	private String pics;//轮播图片
+	private Integer type;//活动类型 8普通拼团,9电商版拼团，10教育版拼团
+	
+	
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getPics() {
+		return pics;
+	}
+
+	public void setPics(String pics) {
+		this.pics = pics;
+	}
 
 	public Integer getStatus() {
 		return status;
@@ -172,6 +192,13 @@ public class GroupyBuyActivitySimpleInfo implements Serializable{
 		this.shareContent = shareContent;
 	}
 
+	public String getActivityTitle() {
+		return activityTitle;
+	}
+
+	public void setActivityTitle(String activityTitle) {
+		this.activityTitle = activityTitle;
+	}
 
 	@Override
 	public String toString() {

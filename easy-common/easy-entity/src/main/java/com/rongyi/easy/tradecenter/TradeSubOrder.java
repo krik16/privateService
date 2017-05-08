@@ -85,6 +85,11 @@ public class TradeSubOrder implements Serializable {
     //文章id
     private String articleId;
 
+    // 兑换类型（1：兑换 2：换购）
+    private int exchangeType;
+    // 积分支付部分
+    private int partOfCredit ;
+
     public Integer getId() {
         return id;
     }
@@ -401,5 +406,21 @@ public class TradeSubOrder implements Serializable {
 
     public void setArticleId(String articleId) {
         this.articleId = articleId;
+    }
+
+    public int getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(int exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
+    public int getPartOfCredit() {
+        return partOfCredit;
+    }
+
+    public void setPartOfCredit(int partOfCredit) {
+        this.partOfCredit = partOfCredit;
     }
 }

@@ -23,17 +23,23 @@ public class QuerySecKillGoods implements Serializable {
     private String goodsCode;
     private Integer offset;
     private List<Integer> goodsStatus = Lists.newArrayList();//多个活动状态
+    private Integer superPintuanSort;//超级团排序使用  1:教育版排序
+    private Integer fromWeixin;//微信端调用
+    public Integer getSuperPintuanSort() {
+		return superPintuanSort;
+	}
 
-    public Integer getFromWeixin() {
+	public void setSuperPintuanSort(Integer superPintuanSort) {
+		this.superPintuanSort = superPintuanSort;
+	}
+
+	public Integer getFromWeixin() {
         return fromWeixin;
     }
 
     public void setFromWeixin(Integer fromWeixin) {
         this.fromWeixin = fromWeixin;
     }
-
-    private Integer fromWeixin;//微信端调用
-
 
     @Override
     public String toString() {

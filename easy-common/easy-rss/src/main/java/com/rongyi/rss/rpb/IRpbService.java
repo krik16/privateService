@@ -7,7 +7,7 @@
  **/
 package com.rongyi.rss.rpb;
 
-import com.rongyi.core.Exception.TradeException;
+import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -108,7 +108,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月24日下午5:46:02
 	 **/
-	Map<String, Object> refund(MessageEvent event) throws TradeException;
+	Map<String, Object> refund(MessageEvent event) throws TradePayException;
 
 	/**
 	 * @Description: 查询付款记录
@@ -195,5 +195,12 @@ public interface IRpbService {
 	 *  Author: kejun
 	 **/
 	RefundStatusVO getRefundStatus(RefundQueryParamVO refundQueryParamVO);
+
+	/**
+	 * 根据商户ID删除服务号支付信息
+	 * @param userId 商户ID
+	 * @return 返回结果
+	 */
+	ResponseData delWeixinMchByUserId(String userId);
 
 }

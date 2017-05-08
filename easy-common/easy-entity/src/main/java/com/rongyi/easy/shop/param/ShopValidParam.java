@@ -16,13 +16,22 @@ public class ShopValidParam implements Serializable{
 	private String shopNumber; //铺位号
 	private String address ;   //详细地址
 	private String shopId;  //店铺ID
-	
+	private Integer shopType = 1;  //店铺类型 2街边店
+
 	@Override
-	public String toString(){
-		return "[name:"+name+",businessId:"+businessId+",floorId:"+floorId+",lastFloorId:"+lastFloorId
-				+",shopNumber:"+shopNumber+",address:"+address;
+	public String toString() {
+		return "ShopValidParam{" +
+				"name='" + name + '\'' +
+				", businessId='" + businessId + '\'' +
+				", floorId='" + floorId + '\'' +
+				", lastFloorId='" + lastFloorId + '\'' +
+				", shopNumber='" + shopNumber + '\'' +
+				", address='" + address + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopType=" + shopType +
+				'}';
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -66,5 +75,13 @@ public class ShopValidParam implements Serializable{
 
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
+	}
+
+	public Integer getShopType() {
+		return shopType;
+	}
+
+	public void setShopType(Integer shopType) {
+		this.shopType = shopType;
 	}
 }

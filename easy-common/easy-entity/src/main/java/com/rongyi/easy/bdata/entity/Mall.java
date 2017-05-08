@@ -81,6 +81,15 @@ public class Mall implements Serializable {
     private String businessStatusReason;
     private String ename;
     private String description_en;
+    private  Integer dailyPeople ;//日均人流量
+
+    public Integer getDailyPeople() {
+        return dailyPeople;
+    }
+
+    public void setDailyPeople(Integer dailyPeople) {
+        this.dailyPeople = dailyPeople;
+    }
    
    
 

@@ -22,7 +22,7 @@ public enum AppErrorCode {
     FAILURE(-1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
     USER_ISNOT_LOGIN(21,"请重新登录"),
     PARAMETER_ISNULL(1060001,"必要参数不能为空"),
-    ERROR_MALLLIFEEXCEPTION(1060011,""),
+    ERROR_MALLLIFEEXCEPTION(1060011,"系统异常"),
     /** 用户导购聊天记录  */
     ERROR_SAVE_USERGUIDECHAT(1062001,"修改或者插入用户导购聊天记录失败"),
     ERROR_GUIDE_ISDISABLED(1062002,"此店铺休息中，无法为您服务"),
@@ -36,6 +36,7 @@ public enum AppErrorCode {
     ERROR_WELFARE_NOTPAY(1065007, "未支付或者支付失败，无法获取福袋"),
     ERROR_WELFARE_ISPAY(1065008, "你已参与过支付，无法再支付!"),
     ERROR_USER_NOTEXIST(1062003,"用户信息不存在"),
+    ERROR_ACTIVITY_END(1062004,"活动已经结束!!!"),
 
     /** 购物车相关  后4位区间  6001---7000*/
     ERROR_COMMODITY_NOTFOUND(1066001,"商品不存在"),
@@ -70,7 +71,11 @@ public enum AppErrorCode {
     ERROR_RED_PASSWORD(1068104,"红包密码错误请重新输入"),
     ERROR_RED_PASSWORD_ULTRALIMIT(1068105,"抱歉您错误输入超限，请明天再试"),
     ERROR_GET_COUPON(1068106,"领取红包失败"),
-    ;
+    /** 注册快捷登录邀请码错误提示 */
+    ERROE_INVITE_CODE(1069100,"您输入了错误邀请码，请重新输入"),
+    ERROR_APPROVAL_CODE(1069101, "该用户已点赞"),
+
+    ERROR_INVALID_CHANNEL(1069102, "该渠道已存在");
 
 
 

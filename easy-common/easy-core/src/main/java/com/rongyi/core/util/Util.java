@@ -1,19 +1,13 @@
 package com.rongyi.core.util;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.constant.Const;
 import org.apache.commons.lang.StringUtils;
+
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 签名公共方法
@@ -22,7 +16,25 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class Util {
-
+	
+	/*public static void main(String[] args) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("channel", "013");
+		params.put("st", "bhn5S4+n5v5D6034WwIsjNkRqjyO32jelaPaL5iBPI0M/RWTrRSHT9a/5JJAHxZeaP9wJnnmztbpxqanVeShTnJL1AgDgNV1fVjidXXsya0jHunoq2KjwTANC57JJP4gQS79Jl2ElJM2LNsJnVqG8FS6bVNKayUOFu0QNSvMweA");
+		
+		Collection<String> keyset = params.keySet();
+		List<String> list = new ArrayList<>(keyset);
+		//对key键值按字典升序排序
+		Collections.sort(list);
+		String sb = new String();
+		for (int i = 0; i < list.size(); i++) {
+			sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+		}
+		sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+		System.out.println(sb);
+		String md5Sign = Md5Util.GetMD5Code(sb.toString());
+		System.out.println(md5Sign);
+	}*/
 	/**
 	 * 签名判断
 	 * @param params
@@ -39,6 +51,30 @@ public class Util {
 				sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
 			}
 			sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get(params.get("channel")));
+			String md5Sign = Md5Util.GetMD5Code(sb.toString());
+			if (md5Sign.equals(sign)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 签名判断
+	 * @param params
+	 * @return
+	 */
+	public static Boolean signValidateWithoutChannel(HashMap<String, Object> params, String sign) {
+		if (params.size() > 0) {
+			Collection<String> keyset = params.keySet();
+			List<String> list = new ArrayList<>(keyset);
+			//对key键值按字典升序排序
+			Collections.sort(list);
+			String sb = new String();
+			for (int i = 0; i < list.size(); i++) {
+				sb = sb.concat(list.get(i)).concat("=").concat(String.valueOf(params.get(list.get(i)))).concat("&");
+			}
+			sb = sb.concat("token=").concat(Const.CHANNEL_TOKEN.get("pos"));
 			String md5Sign = Md5Util.GetMD5Code(sb.toString());
 			if (md5Sign.equals(sign)) {
 				return true;
@@ -76,6 +112,18 @@ public class Util {
 	 */
 	public static boolean isEmpty(String str) {
 		if (null == str || "".equals(str) || "".equals(str.trim())) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean IntegerIsEmpty(Integer intger) {
+		if (null == intger || intger == 0) {
 			return true;
 		}
 		return false;
@@ -212,5 +260,90 @@ public class Util {
 		} else {
 			return ts + "（毫秒）";
 		}
+	}
+
+	public static void main(String[] args) {
+		HashMap<String,Object> params = new HashMap<>();
+		//会员查询接口
+		/*params.put("verificationCode","294376");
+		params.put("timeStamp",1515567178131l);*/
+
+		//积分消费获取验证码接口
+		/*params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945111");
+		params.put("serialNumber","201701110945111");
+		params.put("timeStamp",1515567178131l);*/
+
+		//积分消费并同步订单接口
+		params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945111");
+		params.put("serialNumber","201701110945111");
+		params.put("timeStamp",1515567178131l);
+		params.put("verificationCode","850163");
+
+		//订单冲正接口
+		/*params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945004");
+		params.put("serialNumber","201701110945004");
+		params.put("timeStamp",1515567178131l);*/
+
+		//退换货接口参数
+		/*params.put("cardNumber","15000388436");
+		params.put("orderNumber","401201607250945005");
+		params.put("serialNumber","201701120945003");
+		params.put("timeStamp", 1515567178131l);*/
+
+		//渠道列表参数
+		/*params.put("source",1);
+		params.put("timeStamp",1515567178131l);*/
+		signValidateWithoutChannel(params,"dddd");
+	}
+
+	/**
+	 * 天转秒
+	 *
+	 * @param day
+	 * @return
+	 */
+	public static int toChgSecond(int day) {
+		return day * 24 * 3600;
+	}
+
+	/**
+	 * 秒转天
+	 *
+	 * @param second
+	 * @return
+	 */
+	public static int toChgDay(int second) {
+		return second / 24 / 3600;
+	}
+
+	/**
+	 * 判断是否过期
+	 *
+	 * @param sDate  开始时间
+	 * @param second 叠加值
+	 * @param eDate  过期时间
+	 * @return
+	 */
+	public static boolean isExpired(Date sDate, int second, Date eDate) {
+		Long sts = sDate.getTime();
+		long ets = eDate.getTime();
+		if ((sts + second * 1000) > ets) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 连接2个字符串
+	 *
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
+	public static String joinString(String str1, Object str2) {
+		return "_" + str1 + "_" + str2;
 	}
 }

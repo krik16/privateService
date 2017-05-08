@@ -28,7 +28,10 @@ public class SalerDeliveryParam extends BaseParam implements Serializable {
 	
 	private String expressInfoId;//物流信息主键id
 
-	private Integer source = 1;//操作平台 1摩店 2商家后台
+	private Integer source = 1;//操作平台 1摩店 2商家后台 3php
+
+	private String address;//快递地址
+	private String refundNo;//退款单号
 
 	public String getExpressInfoId() {
 		return expressInfoId;
@@ -104,10 +107,29 @@ public class SalerDeliveryParam extends BaseParam implements Serializable {
 		this.source = source;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getRefundNo() {
+		return refundNo;
+	}
+
+	public void setRefundNo(String refundNo) {
+		this.refundNo = refundNo;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerDeliveryParam [type=" + type + ", orderNum=" + orderNum + ", logisticsBillId=" + logisticsBillId
 				+ ", expressName=" + expressName + ", expressId=" + expressId + ", ticketPicList=" + ticketPicList + ", userId="
-				+ userId + ", expressInfoId=" + expressInfoId + ",source"+source+"]";
+				+ userId + ", expressInfoId=" + expressInfoId + ",source"+source
+				+ ",refundNo"+refundNo
+				+ ",address"+address
+				+"]";
 	}
 }

@@ -105,10 +105,66 @@ public interface OrderEventType {
 
     /** 拼团失败*/
     public static final String PINTUAN_FAIL = "34";
-    
+
+    /** 未确认收货超时，关闭订单*/
+    public static final String UNCONFIRMED_RECEIPT_TIMEOUT = "35";
+
+    /** 超时支付成功退款*/
+    public static final String PAY_TIMEOUT_AND_REFUND = "36";
+
+    /** 退款成功关闭订单*/
+    public static final String CLOSE_ORDER_FOR_REFUND = "37";
+
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";
-    
+
+    //以上退款事件不用
+    /** 申请退款*/
+    public static final String REQUEST_REFUND = "50";
+    /** 买家取消退款*/
+    public static final String REFUND_CANNEL = "51";
+    /** 商家同意退款*/
+    public static final String SELLER_AGREE_REFUND = "52";
+    /** 商家同意退款退货申请*/
+    public static final String AGREE_REFUND_MONEY_AND_GOODS = "53";
+    /** 商家拒绝退款*/
+    public static final String SELLER_REFUSE_REFUND = "54";
+    /** 买家发货 */
+    public static final String BUYER_DELIVER_GOOD = "55";
+    /** 卖家收货 */
+    public static final String SELLER_RECEIVE_GOOD = "56";
+    /** 卖家拒绝收货 */
+    public static final String SELLER_REFUSE_GOOD = "57";
+    /** 退款成功事件 */
+    public static final String REFUND_SUCCESS = "58";
+    /** 取消订单导致退款关闭*/
+    public static final String REFUND_CLOSE_BY_CANCEL_ORDER = "59";
+    /** 申请退款导致旧退款单关闭*/
+    public static final String REFUND_CLOSE_BY_REQUEST_REFUND = "60";
+    /** 商家拒绝导致退款关闭*/
+    public static final String REFUND_CLOSE_SELLER_REFUSE_REFUND = "61";
+
+    // 退款超时事件
+    // 超时自动退款
+    public static final String REFUND_AGREE_MONEY_TIMEOUT = "70";
+    // 超时自动同意退货
+    public static final String REFUND_AGREE_GOODS_TIMEOUT = "71";
+    // 超时自动放弃退款（未发货、未上门）
+    public static final String REFUND_CANCEL_NON_DELIVERY_TIMEOUT = "72";
+    // 超时自动确认卖家（店铺）收货
+    public static final String SELLER_CONFIRM_TIMEOUT = "73";
+    // 超时自动关闭退款（卖家拒绝退款）
+    public static final String REFUND_CLOSED_TIMEOUT = "74";
+
+    //维权事件
+    /** 申请申诉*/
+    public static final String COMPLAINT_APPALY = "80";
+    /** 买家取消申诉*/
+    public static final String COMPLAINT_CANCEL = "81";
+    /** 平台同意申诉*/
+    public static final String COMPLAINT_AGREE = "82";
+    /** 平台拒绝申诉*/
+    public static final String COMPLAINT_DISAGREE = "83";
     
     public interface EventErrorCode {
     	/**

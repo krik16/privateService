@@ -17,8 +17,8 @@ public class RmmmUserInfoEntity implements Serializable{
     /** 用户头像logo */
     private String userLogo;
 
-    /** 角色ID  */
-    private Integer roleId;
+    /** 角色ID    */
+    private Integer roleId;  //-1 分销商
 
     /** 电话号码 */
     private String userPhone;
@@ -85,6 +85,23 @@ public class RmmmUserInfoEntity implements Serializable{
     private String jsessionid; //用户摩店登录标识
     private Integer isOrdering;//是否接单状态   0是  1否
     private Date updateOrderingAt;//更新接单状态的时间
+    
+    private Integer industryId;//行业id
+	private Integer industryVersionId;//行业版本id
+	private Integer childAccountNum;//子账号数量0
+	private Date validStartAt;//有效期开始时间
+	private Date validEndAt;//有效期结束时间
+	private String contractCode;//合同号
+	private String synTarget;//设置终端 是[1]、否[0] ，第一位为容易逛
+	private Integer isChief;//是否主账号，默认 
+	private Integer level;//层级 1级 2级 3级
+    private Integer chiefId; //主账号ID
+	private String terminalType;//终端类型:1 容易逛,2 微信,3 终端机,多个以逗号隔开
+	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机
+    private Integer isSuspended;//资金账户：是否冻结  0正常  1冻结
+    private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
+	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+
     public Integer getId() {
 		return id;
 	}
@@ -347,6 +364,156 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setUpdateOrderingAt(Date updateOrderingAt) {
 		this.updateOrderingAt = updateOrderingAt;
 	}
+
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	public Integer getIndustryVersionId() {
+		return industryVersionId;
+	}
+
+	public void setIndustryVersionId(Integer industryVersionId) {
+		this.industryVersionId = industryVersionId;
+	}
+
+	public Integer getChildAccountNum() {
+		return childAccountNum;
+	}
+
+	public void setChildAccountNum(Integer childAccountNum) {
+		this.childAccountNum = childAccountNum;
+	}
+
+	public Date getValidStartAt() {
+		return validStartAt;
+	}
+
+	public void setValidStartAt(Date validStartAt) {
+		this.validStartAt = validStartAt;
+	}
+
+	public Date getValidEndAt() {
+		return validEndAt;
+	}
+
+	public void setValidEndAt(Date validEndAt) {
+		this.validEndAt = validEndAt;
+	}
+
+	public String getContractCode() {
+		return contractCode;
+	}
+
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+
+	public String getSynTarget() {
+		return synTarget;
+	}
+
+	public void setSynTarget(String synTarget) {
+		this.synTarget = synTarget;
+	}
+
+	public Integer getIsChief() {
+		return isChief;
+	}
+
+	public void setIsChief(Integer isChief) {
+		this.isChief = isChief;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+    public Integer getChiefId() {
+        return chiefId;
+    }
+
+    public void setChiefId(Integer chiefId) {
+        this.chiefId = chiefId;
+    }
+
+	public String getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
+	}
+
+	public Integer getDefaultTerminal() {
+		return defaultTerminal;
+	}
+
+	public void setDefaultTerminal(Integer defaultTerminal) {
+		this.defaultTerminal = defaultTerminal;
+	}
+
+	public Integer getIsSuspended() {
+		return isSuspended;
+	}
+
+	public void setIsSuspended(Integer isSuspended) {
+		this.isSuspended = isSuspended;
+	}
 	
+	public Integer getIsOpenQrCode() {
+		return isOpenQrCode;
+	}
+
+	public void setIsOpenQrCode(Integer isOpenQrCode) {
+		this.isOpenQrCode = isOpenQrCode;
+	}
+
+	public Integer getIsAllowBindingWechat() {
+		return isAllowBindingWechat;
+	}
+
+	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
+		this.isAllowBindingWechat = isAllowBindingWechat;
+	}
+
+	@Override
+	public String toString() {
+		return "RmmmUserInfoEntity [id=" + id + ", userLogo=" + userLogo
+				+ ", roleId=" + roleId + ", userPhone=" + userPhone
+				+ ", userAccount=" + userAccount + ", userPwd=" + userPwd
+				+ ", userName=" + userName + ", userNickName=" + userNickName
+				+ ", userStatus=" + userStatus + ", accountId=" + accountId
+				+ ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt
+				+ ", version=" + version + ", isDisabled=" + isDisabled
+				+ ", deviceUuid=" + deviceUuid + ", cardId=" + cardId
+				+ ", userIMCount=" + userIMCount + ", devId=" + devId
+				+ ", type=" + type + ", identity=" + identity
+				+ ", isCooperation=" + isCooperation + ", memo=" + memo
+				+ ", createSource=" + createSource + ", stopReason="
+				+ stopReason + ", sharCode=" + sharCode + ", userDesc="
+				+ userDesc + ", pushId=" + pushId + ", useCode=" + useCode
+				+ ", jsessionid=" + jsessionid + ", isOrdering=" + isOrdering
+				+ ", updateOrderingAt=" + updateOrderingAt + ", industryId="
+				+ industryId + ", industryVersionId=" + industryVersionId
+				+ ", childAccountNum=" + childAccountNum + ", validStartAt="
+				+ validStartAt + ", validEndAt=" + validEndAt
+				+ ", contractCode=" + contractCode + ", synTarget=" + synTarget
+				+ ", isChief=" + isChief + ", level=" + level + ", chiefId="
+				+ chiefId + ", terminalType=" + terminalType
+				+ ", defaultTerminal=" + defaultTerminal + ", isSuspended="
+				+ isSuspended + ", isOpenQrCode=" + isOpenQrCode
+				+ ", isAllowBindingWechat=" + isAllowBindingWechat + "]";
+	}
+
 }
 

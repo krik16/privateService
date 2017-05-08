@@ -1,12 +1,12 @@
 package com.rongyi.easy.activitymanage.vo.groupBuy;
 
 import com.rongyi.easy.util.NumberUtils;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -33,12 +33,10 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	private String goodId;
 	
 	/***
-	 * 商品desc
+	 * 商品desc   开团说明
 	 * 
 	 */
 	private String desc;
-	
-	
 	/***
 	 * 商品名
 	 */
@@ -48,43 +46,179 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 	 * 成团人数  :3人团   5 人团
 	 */
 	private int  groupPeopleLimit;
-	
-
+	/**
+	 * 最大成团人数
+	 */
+	private Integer groupPeopleMaxLimit;
 	/***
 	 * 排序
 	 */
 	private int  level;
-	
-	
-	
 	/***
 	 * 开团限制次数
 	 */
 	private int  openGroupLimit;
-	
-	
 	/***
 	 * 参团限制次数
 	 */
 	private int  joinGroupLimit;
-	
-	
-	
 	/***
 	 * 商品规格列表
 	 */
 	private List<GoodSpecInfo> specs;
-	
-	
 	/***
 	 * 商品已参团次数,已有多少人参团，起始数字为50-200之间随机生成，活动发布成功后显示，之后按PV数累计
 	 */
 	private int groupedCount;
-
 	/**
 	 * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
 	 */
 	private Integer status;
+	private Integer groupStatus;//团状态  团状态:0等待发起人支付,1开团失败,2进行中,3成功,4人数不够自动失败,5活动下线,团失败  
+	private Long goodsStartAt;//商品开始时间
+	private Long goodsEndAt;//商品结束时间
+	private Long groupStartAt;//团开始时间
+	private Long groupEndAt;//团结束时间
+	private String expectTotalAmount;//众筹价
+	private boolean supModPrice;//true是，false否
+	private int joinGroupNum;//参团人数
+	private Long groupId;//团id
+	private String subTitle;//副标题
+	private String commodityPic;//商品图片
+    private List<String> commodityPicList;//商品图片集合
+    private Double originalPrice;//商品原价
+    private Double currentPrice;//商品现价
+    private Double activityPrice;//商品活动最低价
+    // 拼团剩余库存
+    private Integer remainStock;
+	
+    
+	public Double getCurrentPrice() {
+		return currentPrice;
+	}
+
+	public void setCurrentPrice(Double currentPrice) {
+		this.currentPrice = currentPrice;
+	}
+
+	public List<String> getCommodityPicList() {
+		return commodityPicList;
+	}
+
+	public void setCommodityPicList(List<String> commodityPicList) {
+		this.commodityPicList = commodityPicList;
+	}
+
+	public Double getOriginalPrice() {
+		return originalPrice;
+	}
+
+	public void setOriginalPrice(Double originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+
+	public Double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(Double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
+	public Integer getRemainStock() {
+		return remainStock;
+	}
+
+	public void setRemainStock(Integer remainStock) {
+		this.remainStock = remainStock;
+	}
+
+	public String getCommodityPic() {
+		return commodityPic;
+	}
+
+	public void setCommodityPic(String commodityPic) {
+		this.commodityPic = commodityPic;
+	}
+
+	public int getJoinGroupNum() {
+		return joinGroupNum;
+	}
+
+	public void setJoinGroupNum(int joinGroupNum) {
+		this.joinGroupNum = joinGroupNum;
+	}
+
+	public Long getGoodsStartAt() {
+		return goodsStartAt;
+	}
+
+	public void setGoodsStartAt(Long goodsStartAt) {
+		this.goodsStartAt = goodsStartAt;
+	}
+
+	public Long getGoodsEndAt() {
+		return goodsEndAt;
+	}
+
+	public void setGoodsEndAt(Long goodsEndAt) {
+		this.goodsEndAt = goodsEndAt;
+	}
+
+	public boolean isSupModPrice() {
+		return supModPrice;
+	}
+
+	public void setSupModPrice(boolean supModPrice) {
+		this.supModPrice = supModPrice;
+	}
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getExpectTotalAmount() {
+		return expectTotalAmount;
+	}
+
+	public void setExpectTotalAmount(String expectTotalAmount) {
+		this.expectTotalAmount = expectTotalAmount;
+	}
+
+	public Integer getGroupStatus() {
+		return groupStatus;
+	}
+
+	public void setGroupStatus(Integer groupStatus) {
+		this.groupStatus = groupStatus;
+	}
+
+	public Long getGroupStartAt() {
+		return groupStartAt;
+	}
+
+	public void setGroupStartAt(Long groupStartAt) {
+		this.groupStartAt = groupStartAt;
+	}
+
+	public Long getGroupEndAt() {
+		return groupEndAt;
+	}
+
+	public void setGroupEndAt(Long groupEndAt) {
+		this.groupEndAt = groupEndAt;
+	}
 
 	public double getMinActivityPrice(List<GoodSpecInfo> specs) {
 		Assert.notNull(specs);
@@ -104,6 +238,13 @@ public class GroupBuyGoodSimpleInfo implements Serializable {
 		return remainStock;
 	}
 
+	public Integer getGroupPeopleMaxLimit() {
+		return groupPeopleMaxLimit;
+	}
+
+	public void setGroupPeopleMaxLimit(Integer groupPeopleMaxLimit) {
+		this.groupPeopleMaxLimit = groupPeopleMaxLimit;
+	}
 
 	public Integer getStatus() {
 		return status;

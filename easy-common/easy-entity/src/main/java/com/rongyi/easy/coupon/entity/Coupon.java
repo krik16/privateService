@@ -10,7 +10,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -46,7 +45,7 @@ public class Coupon implements Serializable {
     private String name;
 
     /**
-     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3]
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3] ,外部导出券[4]
      */
     private Integer couponType;
 
@@ -156,7 +155,7 @@ public class Coupon implements Serializable {
 
     /**
      * 关联类型
-     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];导购[4]（商家后台导购建的券）
      * 平台促销券 ：全场[0]，品牌[1]，商场[2]，店铺[3]、分类[4]，信息[5]
      */
     private Integer relatedType;
@@ -257,7 +256,7 @@ public class Coupon implements Serializable {
     private Boolean isDeleted;
 
     /**
-     * 第一位表示微信，第二位表示终端。0：不能操作是否显示；1：隐藏；2：显示
+     * 第一位表示微信，第二位表示终端 第三位表示容易逛。0：不能操作是否显示；1：隐藏；2：显示
      */
     private String showChannel;
 
@@ -270,14 +269,6 @@ public class Coupon implements Serializable {
     private List<CouponCategory> listCouponCategorys;
 
     
-
-	public List<CouponCategory> getListCouponCategorys() {
-		return listCouponCategorys;
-	}
-
-    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
-        this.listCouponCategorys = listCouponCategorys;
-    }
 
 
 	/**
@@ -297,13 +288,7 @@ public class Coupon implements Serializable {
      */
 //    private CouponMall couponMall;
 
-    public List<CouponBrand> getCouponBrands() {
-		return couponBrands;
-	}
 
-	public void setCouponBrands(List<CouponBrand> couponBrands) {
-		this.couponBrands = couponBrands;
-	}
 
 	/**
      * 代金券关联的店铺
@@ -315,6 +300,8 @@ public class Coupon implements Serializable {
      */
     private List<CouponMall> couponMalls;
 
+    private List<CouponWechat> wechats;
+
 
     /**
      * 优惠方式 平台抵扣券 0：满减 ；1：立减。商家抵扣券：1 满减；2：立减
@@ -325,7 +312,6 @@ public class Coupon implements Serializable {
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
     private List<CouponCommodity> couponCommodities;
-
 
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
@@ -376,6 +362,11 @@ public class Coupon implements Serializable {
      * 活动券关联表中，券的状态
      */
     private Integer activityStatus;
+
+    /**
+     * 补贴类型(0:平台补贴,1:商家补贴)
+     */
+    private Byte subsidyType;
 
     public Integer getActivityStatus() {
         return activityStatus;
@@ -435,6 +426,29 @@ public class Coupon implements Serializable {
 
     public Integer getOrigPrice() {
         return origPrice;
+    }
+
+    public List<CouponCategory> getListCouponCategorys() {
+        return listCouponCategorys;
+    }
+
+    public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+        this.listCouponCategorys = listCouponCategorys;
+    }
+    public List<CouponBrand> getCouponBrands() {
+        return couponBrands;
+    }
+
+    public void setCouponBrands(List<CouponBrand> couponBrands) {
+        this.couponBrands = couponBrands;
+    }
+
+    public List<CouponWechat> getWechats() {
+        return wechats;
+    }
+
+    public void setWechats(List<CouponWechat> wechats) {
+        this.wechats = wechats;
     }
 
     public double getOrigPrice2Double() {
@@ -988,6 +1002,14 @@ public class Coupon implements Serializable {
         this.thirdCouponType = thirdCouponType;
     }
 
+    public Byte getSubsidyType() {
+        return subsidyType;
+    }
+
+    public void setSubsidyType(Byte subsidyType) {
+        this.subsidyType = subsidyType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -1054,6 +1076,8 @@ public class Coupon implements Serializable {
                 .append("couponBrands", couponBrands)
                 .append("activityStatus", activityStatus)
                 .append("thirdCouponType", thirdCouponType)
+                .append("wechats", wechats)
+                .append("subsidyType", subsidyType)
                 .toString();
     }
 

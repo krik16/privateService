@@ -78,12 +78,44 @@ public class ConfigVO implements Serializable {
 	
 	private Integer mall_inner_330;//商场内页
 	private Integer ry_inner_330;//容易网内页
-	
-	
-	
-	
 
+	private String businessDistrictId;
+	private Integer isAllowPlay;
 
+	private Integer isAllowPack;
+	private  Long  fee;
+
+	public String getBusinessDistrictId() {
+		return businessDistrictId;
+	}
+
+	public void setBusinessDistrictId(String businessDistrictId) {
+		this.businessDistrictId = businessDistrictId;
+	}
+
+	public Integer getIsAllowPlay() {
+		return isAllowPlay;
+	}
+
+	public void setIsAllowPlay(Integer isAllowPlay) {
+		this.isAllowPlay = isAllowPlay;
+	}
+
+	public Integer getIsAllowPack() {
+		return isAllowPack;
+	}
+
+	public void setIsAllowPack(Integer isAllowPack) {
+		this.isAllowPack = isAllowPack;
+	}
+
+	public Long getFee() {
+		return fee;
+	}
+
+	public void setFee(Long fee) {
+		this.fee = fee;
+	}
 
 	public Integer getMall_inner_330() {
 		return mall_inner_330;
@@ -540,7 +572,6 @@ public class ConfigVO implements Serializable {
 		this.address = address;
 	}
 
-	
 
 	@Override
 	public String toString() {
@@ -581,7 +612,12 @@ public class ConfigVO implements Serializable {
 				", ry_banner_318_home_b=" + ry_banner_318_home_b +
 				", mall_banner_318_home_d=" + mall_banner_318_home_d +
 				", ry_banner_318_home_d=" + ry_banner_318_home_d +
-				
+				", mall_inner_330=" + mall_inner_330 +
+				", ry_inner_330=" + ry_inner_330 +
+				", businessDistrictId='" + businessDistrictId + '\'' +
+				", isAllowPlay=" + isAllowPlay +
+				", isAllowPack=" + isAllowPack +
+				", fee=" + fee +
 				", address='" + address + '\'' +
 				'}';
 	}

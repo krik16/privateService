@@ -73,11 +73,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     /**促销券抵扣金额*/
     private BigDecimal couponDiscount;
 
-    /**促销券来源 1：平台 2：商家*/
+    /**促销券来源 0：平台 1：商家*/
     private Integer couponSource;
 
-    /**促销券类型 1：满减 2：立减*/
+    /**促销券类型 0：满减 1：立减*/
     private Integer couponType;
+
+    /**红包补贴类型 0：平台补贴 1：商家补贴*/
+    private Integer couponDiscountType;
 
     /**实际支付金额*/
     private BigDecimal payAmount;
@@ -94,6 +97,9 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     /**大订单抵扣券分摊优惠金额*/
     private BigDecimal orderCouponDiscount;
 
+    /**分摊抵扣券补贴类型 0：平台补贴 1：商家补贴*/
+    private Integer rebateDiscountType;
+
     private BigDecimal discountAmount;//原价-卖家优惠
 
     private BigDecimal rebateAmount;//discount_amount-红包抵扣券
@@ -104,7 +110,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private Integer activityLimitNum;//关联商品的活动限购数
 
-    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3  拼团4
+    private Integer activityType;//商品活动 0：普通、1：闪购、2：特卖、3：秒杀、4：拼团、5：超级团教育版、6：断码好货、8：注册福利
 
     private BigDecimal disconntFee;//商品折扣
 
@@ -122,6 +128,21 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private Long activityRoundId;//活动场次id
 
     private BigDecimal unitOrigPrice;//商品价格（不含活动折扣）
+
+    private String promoterId;//推广人id
+
+    private Integer exchangeType ;  // 兑换类型，1：兑换 2：换购'
+
+    private String commodityName; // 商品（卡券）名称
+    private String commoditySn; // 商品（礼品）编码
+    private BigDecimal reductionFee;//满减金额
+    private BigDecimal refundDiscountOfficial;//平台分摊退款金额
+    private Integer isRefund;  // 是否可以退款，0：不可退款 1：可退款
+    private String complaintNo; // 当前申诉/维权单号
+    private String refundNo; // 当前退款单号
+    private String shopName ;  // 店铺名称
+
+    private ApplicationFormEntity updateAppeal;//
 
 
     public String getRefundDiscountInfo() {
@@ -619,10 +640,114 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.activityRoundId = activityRoundId;
     }
 
+    public String getPromoterId() {
+        return promoterId;
+    }
+
+    public void setPromoterId(String promoterId) {
+        this.promoterId = promoterId;
+    }
+
     @Override
 	public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
+
+    public Integer getCouponDiscountType() {
+        return couponDiscountType;
+    }
+
+    public void setCouponDiscountType(Integer couponDiscountType) {
+        this.couponDiscountType = couponDiscountType;
+    }
+
+    public Integer getRebateDiscountType() {
+        return rebateDiscountType;
+    }
+
+    public void setRebateDiscountType(Integer rebateDiscountType) {
+        this.rebateDiscountType = rebateDiscountType;
+    }
+
+    public Integer getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(Integer exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public String getCommoditySn() {
+        return commoditySn;
+    }
+
+    public void setCommoditySn(String commoditySn) {
+        this.commoditySn = commoditySn;
+    }
+
+    public BigDecimal getReductionFee() {
+        return reductionFee;
+    }
+
+    public void setReductionFee(BigDecimal reductionFee) {
+        this.reductionFee = reductionFee;
+    }
+
+    public BigDecimal getRefundDiscountOfficial() {
+        return refundDiscountOfficial;
+    }
+
+    public void setRefundDiscountOfficial(BigDecimal refundDiscountOfficial) {
+        this.refundDiscountOfficial = refundDiscountOfficial;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
+    }
+
+    public String getComplaintNo() {
+        return complaintNo;
+    }
+
+    public void setComplaintNo(String complaintNo) {
+        this.complaintNo = complaintNo;
+    }
+
+    public Integer getIsRefund() {
+        return isRefund;
+    }
+
+    public void setIsRefund(Integer isRefund) {
+        this.isRefund = isRefund;
+    }
+
+    public ApplicationFormEntity getUpdateAppeal() {
+        return updateAppeal;
+    }
+
+    public void setUpdateAppeal(ApplicationFormEntity updateAppeal) {
+        this.updateAppeal = updateAppeal;
+    }
 
     @Override
     public int compareTo(OrderDetailFormEntity o) {

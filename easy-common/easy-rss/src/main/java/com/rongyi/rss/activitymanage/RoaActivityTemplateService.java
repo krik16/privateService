@@ -2,13 +2,11 @@ package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.vo.QueryGoodCouponParam;
-import com.rongyi.easy.activitymanage.entity.ActivityGoods;
-import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
-import com.rongyi.easy.activitymanage.entity.TemplateRound;
-import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
+import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
 import com.rongyi.easy.activitymanage.vo.ActivityListVO;
 import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
+import com.rongyi.easy.solr.param.CommoditySearchParam;
 
 import java.util.List;
 
@@ -170,4 +168,87 @@ public interface RoaActivityTemplateService {
      * @return
      */
     public boolean deleteTemplateRoundByActivityTemplateId(Integer id);
+
+    /**
+     * 获取可用的特卖商品id
+     * @return
+     */
+    public  List<TemplateRelevantGoodsCoupon> selectCommodityIdsInActive();
+
+    /**
+     * 查看特卖卡卷列表
+     */
+    public List<TemplateRelevantGoodsCoupon> selectLabelListByActivityId(Integer id);
+
+    /**
+     * 根据ids 查询活动
+     * @param ids
+     * @return
+     */
+    public List<ActivityTemplate> getActivityDetailByIds(List<Integer> ids);
+
+    /**
+     * 批量保存
+     * @param goodsDetailSyncs
+     * @return
+     */
+    public boolean batchInsertGoodsDetailSync(List<GoodsDetailSync> goodsDetailSyncs);
+
+    /**
+     * 批量保存
+     * @param specSyncEntityList
+     * @return
+     */
+    public boolean batchInsertGoodsSpecSync(List<SpecSyncEntity> specSyncEntityList);
+
+
+    /**
+     * 批量更新
+     * @param goodsDetailSyncs
+     * @return
+     */
+    public boolean batchUpdateGoodsDetailSync(List<GoodsDetailSync> goodsDetailSyncs);
+
+
+    /**
+     *
+     * @param specSyncEntityList
+     * @param activityTempalteId
+     * @return
+     */
+    public boolean batchUpdateSpceDetailSync(List<SpecSyncEntity> specSyncEntityList);
+
+
+    /**
+     * 删除
+     * @param activityTemplateId
+     * @return
+     */
+    public boolean deleteGoodsDetailSyncByActivityTemplateId(Integer activityTemplateId);
+
+    /**
+     *
+     * @param activityTemplateId
+     * @return
+     */
+    public boolean deleteGoodsSpecByActivityTemplateId(Integer activityTemplateId);
+
+    /**
+     * 根据模版id查询商品
+     * @param id
+     * @return
+     */
+    public  List<GoodsDetailSync> searchByActivityTemplateId(Integer id);
+
+
+    /**
+     *
+     * @param ids
+     * @return
+     */
+    public List<Integer> selectInActiveByActivityTemplateId(List<Integer> ids);
+
+    public List<GoodsDetailSync> selectInActiveGoodsByActivityTemplateId(List<Integer> ids);
+
+    public List<GoodsDetailSync> searchCommodityByParam(CommoditySearchParam commoditySearchParam);
 }

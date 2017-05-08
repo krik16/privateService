@@ -121,10 +121,10 @@ public class ActivityGoods implements Serializable {
      * 描述
      */
     private String desc;
-    private Integer groupNum;
-    private Integer openGroupLimit;
-    private Integer joinGroupLimit;
-    private Integer sortNum;
+    private Integer groupNum;//成团人数
+    private Integer openGroupLimit;//开团次数限制
+    private Integer joinGroupLimit;//参团次数限制
+    private Integer sortNum;//排序index
     private String remainStock;
     private String activityPrice;
     //开团起始人数（随机数）
@@ -132,6 +132,11 @@ public class ActivityGoods implements Serializable {
     private String enrollSource;//0大运营后台 1摩店
 
     private ActivityGoodsRule activityGoodsRule;
+
+    private Integer groupMaxNum;//最大成团人数
+    private String subTitle;//副标题
+    private Integer supModPrice;//是否支持按成团人数调价
+    private String expectTotalAmount;//期望的金额
 
     /**
      * 商品图片合集(用户摩店报名详情)
@@ -194,6 +199,41 @@ public class ActivityGoods implements Serializable {
             categoryStr = StringUtils.join(categoryList, " > ");
         }
         return categoryStr;
+    }
+
+
+
+
+    public Integer getGroupMaxNum() {
+        return groupMaxNum;
+    }
+
+    public void setGroupMaxNum(Integer groupMaxNum) {
+        this.groupMaxNum = groupMaxNum;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public Integer getSupModPrice() {
+        return supModPrice;
+    }
+
+    public void setSupModPrice(Integer supModPrice) {
+        this.supModPrice = supModPrice;
+    }
+
+    public String getExpectTotalAmount() {
+        return expectTotalAmount;
+    }
+
+    public void setExpectTotalAmount(String expectTotalAmount) {
+        this.expectTotalAmount = expectTotalAmount;
     }
 
     public String getRejectReason() {

@@ -14,6 +14,12 @@ public class ShopInfoEntity implements Serializable{
     /** 店铺名称 */
     private String shopName;
 
+    /** 上级店铺ID  **/
+    private Integer parentShopId;
+
+    /**  上上级店铺ID **/
+    private Integer grandpaShopId;
+
     /** 店铺所属商场名称 */
     private Integer mallId;
 
@@ -29,12 +35,34 @@ public class ShopInfoEntity implements Serializable{
     /** 总评分 */
     private Integer totalScore;
 
+    /**商场Mongo ID**/
+    private String mallMid;
+
+    /**分公司id**/
+    private Integer filialeId;
+
     /**
      * 主键
      * @return id
      */
     public Integer getId() {
         return id;
+    }
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
+    }
+
+    public Integer getFilialeId() {
+        return filialeId;
+    }
+
+    public void setFilialeId(Integer filialeId) {
+        this.filialeId = filialeId;
     }
 
     /**
@@ -139,5 +167,21 @@ public class ShopInfoEntity implements Serializable{
      */
     public void setTotalScore(Integer totalScore) {
         this.totalScore = totalScore;
+    }
+
+    public Integer getParentShopId() {
+        return parentShopId;
+    }
+
+    public void setParentShopId(Integer parentShopId) {
+        this.parentShopId = parentShopId;
+    }
+
+    public Integer getGrandpaShopId() {
+        return grandpaShopId;
+    }
+
+    public void setGrandpaShopId(Integer grandpaShopId) {
+        this.grandpaShopId = grandpaShopId;
     }
 }

@@ -75,4 +75,11 @@ public class MallAddressVO implements Serializable{
 		this.bussiness_id = bussiness_id;
 	}
 	
+	public String getFullAddress(){
+		if(this.pro == null && this.city == null && this.area == null && this.bussiness == null && this.address == null){
+			return null;
+		}
+		return this.pro + this.city + this.area + this.bussiness + this.address;
+	}
+	
 }

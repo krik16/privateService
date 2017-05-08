@@ -36,7 +36,41 @@ public class Floor implements Serializable {
     private String fmap;//fmap图--商家后台用的
     private String aliasename;
     private String aliasname;
+    private String   tmap;//图聚版地图
+    private Integer system_status;//1 隐藏 0正常
+    private String thirdFloorId;//第三方楼层id
 
+    public String getThirdFloorId() {
+        return thirdFloorId;
+    }
+
+    public void setThirdFloorId(String thirdFloorId) {
+        this.thirdFloorId = thirdFloorId;
+    }
+
+    public Integer getSystem_status() {
+        return system_status;
+    }
+
+    public void setSystem_status(Integer system_status) {
+        this.system_status = system_status;
+    }
+
+    public String getTmap() {
+        return tmap;
+    }
+
+    public void setTmap(String tmap) {
+        this.tmap = tmap;
+    }
+
+    public String getFullTmap() {
+        if (StringUtils.isNotBlank(tmap)) {
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + tmap;
+        } else {
+            return null;
+        }
+    }
 
     public String getAliasename() {
         return aliasename;
@@ -146,10 +180,20 @@ public class Floor implements Serializable {
 
     public String getFullNavigation_pic() {
         if (StringUtils.isNotBlank(navigation_pic)) {
-            //Calendar calendar = Calendar.getInstance();
-            //calendar.setTime(created_at);
-            //return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + id + "/" + navigation_pic;
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (new Date(created_at.toString()).getYear()+1900) + "/" + (new Date(created_at.toString()).getMonth() + 1) + "/" + id + "/" + navigation_pic;
+            try {
+                System.out.println(1);
+                System.out.println(created_at.toString());
+                System.out.println(2);
+                System.out.println(created_at.getYear());
+                System.out.println(3);
+                System.out.println(created_at.getYear() + 1900);
+            }catch (Exception e){
+                System.out.println("getFullNavigation_pic error");
+                System.out.println(e.getStackTrace());
+            }
+//            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (new Date(created_at.toString()).getYear()+1900) + "/" + (new Date(created_at.toString()).getMonth() + 1) + "/" + id + "/" + navigation_pic;
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (created_at.getYear()+1900) + "/" + (created_at.getMonth() + 1) + "/" + id + "/" + navigation_pic;
+
         } else {
             return null;
         }
@@ -218,6 +262,8 @@ public class Floor implements Serializable {
                 ", fmap='" + fmap + '\'' +
                 ", aliasename='" + aliasename + '\'' +
                 ", aliasname='" + aliasname + '\'' +
+                ", tmap='" + tmap + '\'' +
+                ", system_status=" + system_status +
                 '}';
     }
 }

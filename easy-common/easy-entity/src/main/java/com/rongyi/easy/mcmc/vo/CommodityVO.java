@@ -1,15 +1,30 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.malllife.constants.Constants;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.mcmc.TotalCommodity;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.mcmc.param.CommodityParam;
+import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
+import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
+import com.rongyi.easy.roa.vo.ShopVO;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import org.bson.types.ObjectId;
 
 
-public class CommodityVO  implements  Serializable {
+public class CommodityVO  implements  Serializable, Cloneable {
 
 	/**
 	 *
@@ -19,6 +34,7 @@ public class CommodityVO  implements  Serializable {
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
+	private List<ObjectId> commodityCategoryIds;//商品所属的品类列表（海信）
 	private String commodityCategory1;	//新增 一级类目ID(当前适用于getCommodityById)
 	private String commodityCategory2;	//新增 二级类目ID(当前适用于getCommodityById)
 	private String commodityCategoryName1;
@@ -28,7 +44,7 @@ public class CommodityVO  implements  Serializable {
 	private String commodityStock;
 	private String commoditySold;
 	private String commodityPubDate;
-	private int commodityStatus;
+	private Integer commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架 1上架 3待上架)
 
 	private String commodityOPriceMax;//我是最高原价”,
@@ -44,6 +60,8 @@ public class CommodityVO  implements  Serializable {
 	private String create_by; // 创建人
 	private String update_by;//修改人
 	private String liveId; // 直播Id
+	private Integer saleId;
+	private Integer flashSaleId;
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
 	private String shopId;//店铺mysql Id
@@ -52,6 +70,7 @@ public class CommodityVO  implements  Serializable {
 	private List<String> commodityPicList;//商品图片
 	private List<CommoditySpecVO> commoditySpecList;//商品规格信息
 	private String commodityCode;//商品编码
+	private String commodityBarCode; //商品条形码
 	private String commodityCommission;
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
@@ -78,7 +97,6 @@ public class CommodityVO  implements  Serializable {
 	private Integer templateId;//邮费模版id
 	private Integer sort;
 	private String mallName;
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
@@ -87,7 +105,227 @@ public class CommodityVO  implements  Serializable {
 	private Long updateAt;
 	private Integer galleryPosition;//1,2,3分别对应橱窗1,2,3
 	private boolean inActivity; //是否参加活动
+	private Integer shelvesType;//1:立即上架，手动下架,2:定时上下架
+	private boolean offerShelves;//是否可下架  true是；false否
 
+	// 礼品id mysql id 兼容老数据
+	private String giftId;
+	// 礼品编号
+	private String sn;
+	// 礼品所属id
+	private String mappingId;
+	// 商品类型(0:商品, 1:礼品)
+	private Integer commodityRange = CommodityConstants.CommodityType.COMMODITY;
+	// 兑换类型（1.兑换，2.换购）
+	private String exchangeTypes;
+	// 积分设置类型（1.同一设置 2.按等级设置）
+	private Integer pointType;
+	// 换购类型（1.同一设置 2.按等级设置）
+	private Integer buyType;
+	// 配送方式（1.自提 2.快递）
+	private String deliveryTypes;
+	// 自提类型（1.公共设施 2.指定店铺）
+	private Integer selfType;
+	// 自提地点
+	private String selfAddress;
+	// 自提地点备注
+	private String selfRemark;
+	// 自提地点id
+	private String selfAddressId;
+	// 自提期限
+	private Date selfExpireDate;
+	// 卡券开始时间
+	private Date couponStartDate;
+	// 卡券过期时间
+	private Date couponEndDate;
+	// 标签列表
+	private List<String> tagIds;
+	// 支付方式列表
+	private List<String> paymentIds;
+	// 商品兑换规则
+	private List<GiftPaymentVO> paymentVOs;
+	private String platform;
+	private Double price;
+	private Integer selfTakeDays;
+
+	private String subheading;  //副标题
+	private String commodityDetails; //商品详情
+	private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+	private boolean isSpecDeleted=false;//下单页面判断规则是否被删除
+
+	private String groupMid;
+	private List<String> locationIds;//商品记录发到集团或者商场或者店铺集合
+	private Integer accountType;
+	private List<Integer> serviceIds;//微信公众号ids
+	private List<String> mallServiceIds;
+	private String merchantId;  //商户id
+	private Integer merchantType; //商户类型 0:集团 1：商场 4：店铺
+	private List<String> categoryNames;
+	private String freePostage;  // 0包邮 1不包邮
+	private List<String> onServiceIds;
+	private List<String> offServiceIds;
+
+	private List<String> skus;
+	private String systemNumber;
+	private Integer isRefund;//是否可以退货，0：不可退货 1：可退货
+	private Integer flag;//1表示发布商品，2表示复制新建商品
+
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
+
+	public String getFreePostage() {
+		return freePostage;
+	}
+
+	public void setFreePostage(String freePostage) {
+		this.freePostage = freePostage;
+	}
+
+	public Integer getSelfTakeDays() {
+		return selfTakeDays;
+	}
+
+	public void setSelfTakeDays(Integer selfTakeDays) {
+		this.selfTakeDays = selfTakeDays;
+	}
+
+	public Integer getFlashSaleId() {
+		return flashSaleId;
+	}
+
+	public void setFlashSaleId(Integer flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
+
+	public Integer getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
+	private Date activityStartTime;
+	private Date activityEndTime;
+
+	private String serviceDescription;//售后说明
+	private Integer serviceDescriptionId;//售后说明id
+	private String serviceDescriptionRemark;   //售后说明备注
+
+	public String getServiceDescriptionRemark() {
+		return serviceDescriptionRemark;
+	}
+
+	public void setServiceDescriptionRemark(String serviceDescriptionRemark) {
+		this.serviceDescriptionRemark = serviceDescriptionRemark;
+	}
+
+	public List<String> getCategoryNames() {
+		return categoryNames;
+	}
+
+	public void setCategoryNames(List<String> categoryNames) {
+		this.categoryNames = categoryNames;
+	}
+
+	public Integer getMerchantType() {
+		return merchantType;
+	}
+
+	public void setMerchantType(Integer merchantType) {
+		this.merchantType = merchantType;
+	}
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
+
+
+	public String getGroupMid() {
+		return groupMid;
+	}
+
+	public void setGroupMid(String groupMid) {
+		this.groupMid = groupMid;
+	}
+
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
+	public boolean isOfferShelves() {
+		return offerShelves;
+	}
+	public void setOfferShelves(boolean offerShelves) {
+		this.offerShelves = offerShelves;
+	}
+	public Integer getShelvesType() {
+		return shelvesType;
+	}
+	public void setShelvesType(Integer shelvesType) {
+		this.shelvesType = shelvesType;
+	}
 	public Integer getGalleryPosition() {
 		return galleryPosition;
 	}
@@ -202,10 +440,10 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityShopNumber(String commodityShopNumber) {
 		this.commodityShopNumber = commodityShopNumber;
 	}
-	public int getCommodityStatus() {
+	public Integer getCommodityStatus() {
 		return commodityStatus;
 	}
-	public void setCommodityStatus(int commodityStatus) {
+	public void setCommodityStatus(Integer commodityStatus) {
 		this.commodityStatus = commodityStatus;
 	}
 	public String getShopMid() {
@@ -226,6 +464,8 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityCode(String commodityCode) {
 		this.commodityCode = commodityCode;
 	}
+	public String getCommodityBarCode() { return commodityBarCode; }
+	public void setCommodityBarCode(String commodityBarCode) { this.commodityBarCode = commodityBarCode; }
 	public String getShopId() {
 		return shopId;
 	}
@@ -268,6 +508,15 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityCategory(String commodityCategory) {
 		this.commodityCategory = commodityCategory;
 	}
+
+	public List<ObjectId> getCommodityCategoryIds() {
+		return commodityCategoryIds;
+	}
+
+	public void setCommodityCategoryIds(List<ObjectId> commodityCategoryIds) {
+		this.commodityCategoryIds = commodityCategoryIds;
+	}
+
 	public String getCommodityDescription() {
 		return commodityDescription;
 	}
@@ -346,12 +595,6 @@ public class CommodityVO  implements  Serializable {
 	public void setSource(Integer source) {
 		this.source = source;
 	}
-	/*public Integer getDistribution() {
-		return distribution;
-	}
-	public void setDistribution(Integer distribution) {
-		this.distribution = distribution;
-	}*/
 	public Integer getFreight() {
 		return freight;
 	}
@@ -466,12 +709,6 @@ public class CommodityVO  implements  Serializable {
 	public void setPurchaseCount(Integer purchaseCount){
 		this.purchaseCount = purchaseCount;
 	}
-	public String getWeAndTeStatus() {
-		return weAndTeStatus;
-	}
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
 	public String getCommodityModelNo() {
 		return commodityModelNo;
 	}
@@ -511,6 +748,247 @@ public class CommodityVO  implements  Serializable {
 		this.inActivity = inActivity;
 	}
 
+	public List<GiftPaymentVO> getPaymentVOs() {
+		return paymentVOs;
+	}
+
+	public void setPaymentVOs(List<GiftPaymentVO> paymentVOs) {
+		this.paymentVOs = paymentVOs;
+	}
+
+	public String getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(String giftId) {
+		this.giftId = giftId;
+	}
+
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
+	public String getMappingId() {
+		return mappingId;
+	}
+
+	public void setMappingId(String mappingId) {
+		this.mappingId = mappingId;
+	}
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
+
+	public String getExchangeTypes() {
+		return exchangeTypes;
+	}
+
+	public void setExchangeTypes(String exchangeTypes) {
+		this.exchangeTypes = exchangeTypes;
+	}
+
+	public Integer getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(Integer pointType) {
+		this.pointType = pointType;
+	}
+
+	public Integer getBuyType() {
+		return buyType;
+	}
+
+	public void setBuyType(Integer buyType) {
+		this.buyType = buyType;
+	}
+
+	public String getDeliveryTypes() {
+		return deliveryTypes;
+	}
+
+	public void setDeliveryTypes(String deliveryTypes) {
+		this.deliveryTypes = deliveryTypes;
+	}
+
+	public Integer getSelfType() {
+		return selfType;
+	}
+
+	public void setSelfType(Integer selfType) {
+		this.selfType = selfType;
+	}
+
+	public String getSelfAddress() {
+		return selfAddress;
+	}
+
+	public void setSelfAddress(String selfAddress) {
+		this.selfAddress = selfAddress;
+	}
+
+	public String getSelfRemark() {
+		return selfRemark;
+	}
+
+	public void setSelfRemark(String selfRemark) {
+		this.selfRemark = selfRemark;
+	}
+
+	public String getSelfAddressId() {
+		return selfAddressId;
+	}
+
+	public void setSelfAddressId(String selfAddressId) {
+		this.selfAddressId = selfAddressId;
+	}
+
+	public Date getSelfExpireDate() {
+		return selfExpireDate;
+	}
+
+	public void setSelfExpireDate(Date selfExpireDate) {
+		this.selfExpireDate = selfExpireDate;
+	}
+
+	public List<String> getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(List<String> tagIds) {
+		this.tagIds = tagIds;
+	}
+
+	public List<String> getPaymentIds() {
+		return paymentIds;
+	}
+
+	public void setPaymentIds(List<String> paymentIds) {
+		this.paymentIds = paymentIds;
+	}
+
+	public Date getCouponEndDate() {
+		return couponEndDate;
+	}
+
+	public void setCouponEndDate(Date couponEndDate) {
+		this.couponEndDate = couponEndDate;
+	}
+
+	public Date getCouponStartDate() {
+		return couponStartDate;
+	}
+
+	public void setCouponStartDate(Date couponStartDate) {
+		this.couponStartDate = couponStartDate;
+	}
+
+	public String getSubheading() {
+		return subheading;
+	}
+
+	public void setSubheading(String subheading) {
+		this.subheading = subheading;
+	}
+
+	public String getCommodityDetails() {
+		return commodityDetails;
+	}
+
+	public void setCommodityDetails(String commodityDetails) {
+		this.commodityDetails = commodityDetails;
+	}
+
+	public boolean isIfShowInWechat() {
+        return ifShowInWechat;
+    }
+
+    public void setIfShowInWechat(boolean ifShowInWechat) {
+        this.ifShowInWechat = ifShowInWechat;
+    }
+
+	public boolean isSpecDeleted() {
+		return isSpecDeleted;
+	}
+
+	public void setIsSpecDeleted(boolean isSpecDeleted) {
+		this.isSpecDeleted = isSpecDeleted;
+	}
+
+	public Integer getServiceDescriptionId() {
+		return serviceDescriptionId;
+	}
+
+	public void setServiceDescriptionId(Integer serviceDescriptionId) {
+		this.serviceDescriptionId = serviceDescriptionId;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
+
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
+
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+	
+	
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -527,35 +1005,27 @@ public class CommodityVO  implements  Serializable {
 		this.commodityCategory = commodity.getCategory();
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
+		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
-		if(commodity.isSpot()){
-			this.isSpot = 1;//现货
-		}else{
-			this.isSpot = 0;//非现货
-		}
+		this.isSpot = commodity.isSpot() ? 1 : 0;
+
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
-			try{
-				double postage = Double.parseDouble(commodity.getPostage());
+			try {
 				this.commodityPostage = commodity.getPostage();
-			}catch(Exception e){
+			} catch(Exception e){
 				this.commodityPostage = "0.0";
 			}
-		}else{
+		} else {
 			this.commodityPostage = "0.0";
 		}
-//		this.commodityPostage = commodity.getPostage();
 		this.commodityStock = String.valueOf(commodity.getStock());
 		this.commoditySold = String.valueOf(commodity.getSold());
 		this.commodityPubDate = commodity.getCreateAt().toString();
 		this.commodityOriginalPrice = commodity.getOriginalPrice();
 		this.commodityCurrentPrice = commodity.getCurrentPrice();
 		this.commodityPicList = commodity.getPicList();
-		if(commodity.getCode() !=null){
-			this.commodityCode = commodity.getCode();
-		}else{
-			this.commodityCode = "";
-		}
+		this.commodityCode = (commodity.getCode() != null) ? commodity.getCode() : "";
 		this.commodityStatus = commodity.getStatus();
 		this.commodityShopNumber = "";
 		if(commodity.getShopNum() != null){
@@ -569,6 +1039,9 @@ public class CommodityVO  implements  Serializable {
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.registerAt = commodity.getRegisterAt();
 		this.soldOutAt = commodity.getSoldOutAt();
+		//立即上架，手动下架的上下架时间只查为30年，其他的为定时上下架
+		this.shelvesType = (null == commodity.getShelvesType()) ? 2 : commodity.getShelvesType();
+
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		// 商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -599,6 +1072,27 @@ public class CommodityVO  implements  Serializable {
 			this.activityType = "0";
 		}
 
+		// 当前是秒杀商品
+		if ("3".equals(this.activityType)) {
+			long nowTime = new Date().getTime();
+			// 商品处于上架状态
+			if (this.commodityAppStatus == 1) {
+				if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
+					// 秒杀未开始
+					this.commodityAppStatus = 3;
+				} else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
+					// 秒杀已结束
+					this.commodityAppStatus = 4;
+				}
+			}
+		}
+		if(null !=commodity.getActivityStartTime() ){
+			this.setActivityStartTime(commodity.getActivityStartTime());
+		}
+		if( null !=commodity.getActivityEndTime()){
+			this.setActivityEndTime(commodity.getActivityEndTime());
+		}
+
 		this.terminalType = commodity.getTerminalType();
 		this.sort = commodity.getSort();//排序
 		this.update_by = commodity.getUpdate_by();//修改人
@@ -607,58 +1101,294 @@ public class CommodityVO  implements  Serializable {
 		this.updateAt=commodity.getUpdateAt().getTime();
 		//默认返回非橱窗商品的值设置为0
 		this.galleryPosition=commodity.getGalleryPosition()==null || commodity.getGalleryPosition()==0 ?0:MAX_GALLERY_POSITION-commodity.getGalleryPosition();
+
+		this.couponStartDate = commodity.getCouponStartDate();
+		this.couponEndDate = commodity.getCouponEndDate();
+		this.selfExpireDate = commodity.getSelfExpireDate();
+		this.selfTakeDays = commodity.getSelfTakeDays();
+		this.commodityRange = commodity.getCommodityRange();
+		this.sn = commodity.getSn();
+		this.identity = commodity.getIdentity();
+		this.subheading=commodity.getSubheading();
+		this.commodityDetails=commodity.getCommodityDetails();
+		this.setSelfAddressId(commodity.getSelfAddressId());
+		this.serviceDescriptionId=commodity.getServiceDescriptionId();
+		this.serviceDescription=commodity.getServiceDescription();
+		this.serviceDescriptionRemark=commodity.getServiceDescriptionRemark();
+		this.onServiceIds = commodity.getOnServiceIds();
+		this.setIfShowInWechat(isShowInWechat());
+
+		this.source = commodity.getSource();
+		this.systemNumber=commodity.getSystemNumber();
+		this.isRefund = commodity.getIsRefund() == null ? 0 : commodity.getIsRefund();//是否可退货
+		this.reason=commodity.getReason();
 	}
+
+	private boolean isShowInWechat() {
+		if(CollectionUtils.isEmpty(getOnServiceIds())) {
+			return false;
+		}
+
+		List<String> onIds = getOnServiceIds();
+		onIds.remove(Constants.ServiceId.APP_RONG_YI_GUANG);
+		onIds.remove(Constants.ServiceId.TERMINAL_SCREEN);
+
+		return onIds.size() > 0;
+	}
+
 	@Override
 	public String toString() {
-		return "CommodityVO [commodityId=" + commodityId + ", commodityName="
-				+ commodityName + ", commodityCategory=" + commodityCategory
-				+ ", commodityCategory1=" + commodityCategory1
-				+ ", commodityCategory2=" + commodityCategory2
-				+ ", commodityCategoryName1=" + commodityCategoryName1
-				+ ", commodityCategoryName2=" + commodityCategoryName2
-				+ ", commodityDescription=" + commodityDescription
-				+ ", commodityPostage=" + commodityPostage
-				+ ", commodityStock=" + commodityStock + ", commoditySold="
-				+ commoditySold + ", commodityPubDate=" + commodityPubDate
-				+ ", commodityStatus=" + commodityStatus
-				+ ", commodityAppStatus=" + commodityAppStatus
-				+ ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin
-				+ ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin
-				+ ", commodityOPOfLCP=" + commodityOPOfLCP + ", commodityType="
-				+ commodityType + ", isSpot=" + isSpot + ", liveStartTime="
-				+ liveStartTime + ", liveEndTime=" + liveEndTime
-				+ ", create_by=" + create_by + ", update_by=" + update_by
-				+ ", liveId=" + liveId + ", commodityOriginalPrice="
-				+ commodityOriginalPrice + ", commodityCurrentPrice="
-				+ commodityCurrentPrice + ", shopId=" + shopId + ", shopMid="
-				+ shopMid + ", commodityShopNumber=" + commodityShopNumber
-				+ ", commodityPicList=" + commodityPicList
-				+ ", commoditySpecList=" + commoditySpecList
-				+ ", commodityCode=" + commodityCode + ", commodityCommission="
-				+ commodityCommission + ", brandMid=" + brandMid + ", mallMid="
-				+ mallMid + ", shopName=" + shopName
-				+ ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup + ", registerAt="
-				+ registerAt + ", soldOutAt=" + soldOutAt + ", source="
-				+ source + ", freight=" + freight + ", terminalType="
-				+ terminalType + ", stockStatus=" + stockStatus + ", reason="
-				+ reason + ", mallId=" + mallId + ", brandName=" + brandName
-				+ ", shopNum=" + shopNum + ", brandId=" + brandId
-				+ ", filialeMid=" + filialeMid + ", identity=" + identity
-				+ ", processIdentity=" + processIdentity + ", activityType="
-				+ activityType + ", purchaseCount=" + purchaseCount
-				+ ", templateId=" + templateId + ", sort=" + sort
-				+ ", mallName=" + mallName + ", weAndTeStatus=" + weAndTeStatus
-				+ ", customCategoryIds=" + customCategoryIds
-				+ ", commodityModelNo=" + commodityModelNo
-				+ ", activityId=" + activityId
-				+ ", activityPrice=" + activityPrice
-				+", goodsParam="+ goodsParam
-				+", galleryPosition="+ galleryPosition
-				+"]";
-
+		return "CommodityVO{" +
+				"commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", commodityCategoryIds=" + commodityCategoryIds +
+				", commodityCategory1='" + commodityCategory1 + '\'' +
+				", commodityCategory2='" + commodityCategory2 + '\'' +
+				", commodityCategoryName1='" + commodityCategoryName1 + '\'' +
+				", commodityCategoryName2='" + commodityCategoryName2 + '\'' +
+				", commodityDescription='" + commodityDescription + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", commodityStock='" + commodityStock + '\'' +
+				", commoditySold='" + commoditySold + '\'' +
+				", commodityPubDate='" + commodityPubDate + '\'' +
+				", commodityStatus=" + commodityStatus +
+				", commodityAppStatus=" + commodityAppStatus +
+				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
+				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
+				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
+				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
+				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
+				", commodityType=" + commodityType +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", update_by='" + update_by + '\'' +
+				", liveId='" + liveId + '\'' +
+				", saleId=" + saleId +
+				", flashSaleId=" + flashSaleId +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", commodityShopNumber='" + commodityShopNumber + '\'' +
+				", commodityPicList=" + commodityPicList +
+				", commoditySpecList=" + commoditySpecList +
+				", commodityCode='" + commodityCode + '\'' +
+				", commodityBarCode='" + commodityBarCode + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopName='" + shopName + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", stockStatus=" + stockStatus +
+				", reason='" + reason + '\'' +
+				", mallId='" + mallId + '\'' +
+				", brandName='" + brandName + '\'' +
+				", shopNum='" + shopNum + '\'' +
+				", brandId=" + brandId +
+				", filialeMid='" + filialeMid + '\'' +
+				", identity=" + identity +
+				", processIdentity=" + processIdentity +
+				", activityType='" + activityType + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				", sort=" + sort +
+				", mallName='" + mallName + '\'' +
+				", customCategoryIds=" + customCategoryIds +
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", goodsParam=" + goodsParam +
+				", activityId=" + activityId +
+				", activityPrice=" + activityPrice +
+				", updateAt=" + updateAt +
+				", galleryPosition=" + galleryPosition +
+				", inActivity=" + inActivity +
+				", shelvesType=" + shelvesType +
+				", offerShelves=" + offerShelves +
+				", giftId='" + giftId + '\'' +
+				", sn='" + sn + '\'' +
+				", mappingId='" + mappingId + '\'' +
+				", commodityRange=" + commodityRange +
+				", exchangeTypes='" + exchangeTypes + '\'' +
+				", pointType=" + pointType +
+				", buyType=" + buyType +
+				", deliveryTypes='" + deliveryTypes + '\'' +
+				", selfType=" + selfType +
+				", selfAddress='" + selfAddress + '\'' +
+				", selfRemark='" + selfRemark + '\'' +
+				", selfAddressId='" + selfAddressId + '\'' +
+				", selfExpireDate=" + selfExpireDate +
+				", couponStartDate=" + couponStartDate +
+				", couponEndDate=" + couponEndDate +
+				", tagIds=" + tagIds +
+				", paymentIds=" + paymentIds +
+				", paymentVOs=" + paymentVOs +
+				", platform='" + platform + '\'' +
+				", price=" + price +
+				", selfTakeDays=" + selfTakeDays +
+				", subheading='" + subheading + '\'' +
+				", commodityDetails='" + commodityDetails + '\'' +
+				", ifShowInWechat=" + ifShowInWechat +
+				", isSpecDeleted=" + isSpecDeleted +
+				", groupMid='" + groupMid + '\'' +
+				", locationIds=" + locationIds +
+				", accountType=" + accountType +
+				", serviceIds=" + serviceIds +
+				", mallServiceIds=" + mallServiceIds +
+				", merchantId='" + merchantId + '\'' +
+				", merchantType=" + merchantType +
+				", categoryNames=" + categoryNames +
+				", freePostage='" + freePostage + '\'' +
+				", onServiceIds=" + onServiceIds +
+				", offServiceIds=" + offServiceIds +
+				", skus=" + skus +
+				", activityStartTime=" + activityStartTime +
+				", activityEndTime=" + activityEndTime +
+				", serviceDescription='" + serviceDescription + '\'' +
+				", serviceDescriptionId=" + serviceDescriptionId +
+				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
+				'}';
 	}
 
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+	public CommodityVO getCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
+		if(commodity == null) {
+			return null;
+		}
+
+		CommodityVO vo = new CommodityVO();
+		vo.setCommodityRange(CommodityConstants.CommodityType.COMMODITY);
+		vo.setCommodityName(commodity.getName());
+		vo.setCommodityCategory(commodity.getCategory());
+		vo.setCommodityDescription(commodity.getDescription());
+		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
+		vo.setCommodityCode(commodity.getCode());
+		vo.setCommodityPicList(commodity.getPicList());
+		vo.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		vo.setFreight(commodity.getFreight());
+		vo.setTerminalType(commodity.getTerminalType());
+		vo.setRegisterAt(commodity.getRegisterAt());
+		vo.setSoldOutAt(commodity.getSoldOutAt());
+		vo.setSource(commodity.getSource());
+		vo.setStockStatus(commodity.getStockStatus());
+		vo.setReason(commodity.getReason());
+		//商品状态待上架通过定时任务刷新状态给app使用
+		vo.setCommodityStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
+		vo.setCommodityCurrentPrice(commodity.getCurrentPrice().toString());
+		vo.setCommodityOriginalPrice(commodity.getOriginalPrice().toString());
+		vo.setPurchaseCount(commodity.getPurchaseCount());
+		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
+		vo.setTemplateId(commodity.getTemplateId());
+		vo.setMallServiceIds(commodity.getMallServiceIds());
+		vo.setOnServiceIds(commodity.getOnServiceIds());
+		vo.setSubheading(commodity.getSubheading());
+		vo.setCommodityDetails(commodity.getCommodityDetails());
+
+		//默认值
+		vo.setBrandId(-1);
+		vo.setShopId("-1");
+		vo.setMallId("-1");
+
+		vo.setIdentity(userInfo.getIdentity());//增加商品身份信息
+		vo.setProcessIdentity(userInfo.getIdentity());
+		vo.setMerchantId(userInfo.getBindingMid());
+		if(null ==commodity.getId()){
+			vo.setCreate_by(userInfo.getId().toString());//新增的时候设置创建者的id
+		} else {
+			if(null != commodity.getCreateBy()) {
+				vo.setCreate_by(commodity.getCreateBy() + "");
+			}
+			vo.setUpdate_by(userInfo.getId().toString());
+		}
+		vo.setShelvesType(commodity.getShelvesType());
+
+		vo.setBrandMid(commodity.getBrandMid());
+		vo.setBrandName(commodity.getBrandName());
+		vo.setCommodityModelNo(commodity.getCommodityModelNo());
+		vo.setIsRefund(commodity.getIsRefund());//是否可退货
+		return vo;
+	}
+
+	public CommodityVO getHaiXinCommodityVOFromTotalCommodity(TotalCommodity commodity, SessionUserInfo userInfo){
+		if(commodity == null) {
+			return null;
+		}
+
+		CommodityVO vo = new CommodityVO();
+		vo.setCommodityRange(commodity.getCommodityRange());
+		vo.setCommodityName(commodity.getName());
+		vo.setCommodityCategory(commodity.getCategory());
+		vo.setCommodityCategoryIds(commodity.getCategoryIds());
+		vo.setCommodityDescription(commodity.getDescription());
+		vo.setCommodityPostage(commodity.getPostage() != null ? commodity.getPostage().toString() : "0");
+		vo.setCommodityCode(commodity.getCode());
+		vo.setCommodityBarCode(commodity.getBarCode());
+		vo.setCommodityPicList(commodity.getPicList());
+		vo.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		vo.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		vo.setFreight(commodity.getFreight());
+		vo.setTerminalType(commodity.getTerminalType());
+		vo.setRegisterAt(commodity.getRegisterAt());
+		vo.setSoldOutAt(commodity.getSoldOutAt());
+		vo.setSource(commodity.getSource());
+		vo.setStockStatus(commodity.getStockStatus());
+		vo.setCommodityStatus(commodity.getStatus());
+		vo.setCommodityCurrentPrice(commodity.getCurrentPrice().toString());
+		vo.setCommodityOriginalPrice(commodity.getOriginalPrice().toString());
+		vo.setPurchaseCount(commodity.getPurchaseCount());
+		vo.setCustomCategoryIds(commodity.getCustomCategoryIds());
+		vo.setTemplateId(commodity.getTemplateId());
+		vo.setCommodityDetails(commodity.getCommodityDetails());
+
+		// TODO total不存服务号，所以服务号在别处获取
+	//	vo.setMallServiceIds(commodity.getMallServiceIds());
+	//	vo.setOnServiceIds(commodity.getOnServiceIds());
+
+
+		//默认值
+		vo.setBrandId(-1);
+		vo.setShopId("-1");
+		vo.setMallId("-1");
+
+		vo.setProcessIdentity(null == userInfo ? null : userInfo.getIdentity());
+
+		// 海信导入的数据，userinfo为空
+		vo.setMerchantId(null == userInfo ? commodity.getMerchantId() : userInfo.getBindingMid());
+		if(null ==commodity.getId()){
+			vo.setCreate_by(null == userInfo ? null : userInfo.getId().toString());//新增的时候设置创建者的id
+		} else {
+			if(null != commodity.getCreateBy()) {
+				vo.setCreate_by(commodity.getCreateBy() + "");
+			}
+			vo.setUpdate_by(null == userInfo ? null : userInfo.getId().toString());
+		}
+
+		vo.setBrandMid(commodity.getBrandMid());
+		vo.setBrandName(commodity.getBrandName());
+
+		vo.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		vo.setServiceDescription(commodity.getServiceDescription());
+		vo.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+		vo.setGoodsParam(commodity.getGoodsParam());
+		return vo;
+	}
+
+	private boolean judgeShelvesType(Date date1,Date date2){
+        if(null ==date1 || null ==date2){
+            return false;
+        }
+        Long difference=date1.getTime()-date2.getTime();
+        return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
+    }
 }

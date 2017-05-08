@@ -1,7 +1,5 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 
 public class CouponShop implements Serializable {
@@ -36,9 +34,41 @@ public class CouponShop implements Serializable {
     private String mallId;//商场id
     private String mallName;//商场名称
     /**
-     * 1:通用券；2：活动券
+     * 0:可验证；1：不可验证
+     */
+    private Integer verifiable;
+    /**
+     * 0:卡券与店铺的关联关系
+     * 1:通用券指定的验证店铺的关联关系
+     * 2：活动券指定验证店铺的关联关系
+     * 3：店铺新建卡券，卡券与父级店铺之间的关联关系
      */
     private Integer status;
+
+
+    public CouponShop(String couponId, String shopId) {
+
+        this.couponId = couponId;
+        this.shopId = shopId;
+    }
+
+    public CouponShop(String couponId, String shopId, String shopName) {
+        this.couponId = couponId;
+        this.shopId = shopId;
+        this.shopName = shopName;
+    }
+
+    public CouponShop(String couponId, String shopId, String shopName,Integer verifiable) {
+        this.couponId = couponId;
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.verifiable = verifiable;
+    }
+
+
+    public CouponShop() {
+
+    }
 
     public Object getObject1() {
         return object1;
@@ -90,7 +120,6 @@ public class CouponShop implements Serializable {
     public void setMallName(String mallName) {
         this.mallName = mallName;
     }
-
 
     public String getShopAddress() {
         return shopAddress;
@@ -148,24 +177,10 @@ public class CouponShop implements Serializable {
         this.shopName = shopName;
     }
 
-    public CouponShop(String couponId, String shopId) {
 
-        this.couponId = couponId;
-        this.shopId = shopId;
-    }
-
-    public CouponShop(String couponId, String shopId, String shopName) {
-        this.couponId = couponId;
-        this.shopId = shopId;
-        this.shopName = shopName;
-    }
-
-    public CouponShop() {
-
-    }
 
     public Integer getStatus() {
-        return status;
+        return status == null ? 0 : status;
     }
 
     public void setStatus(Integer status) {
@@ -178,6 +193,14 @@ public class CouponShop implements Serializable {
 
     public void setTelePhone(String telePhone) {
         this.telePhone = telePhone;
+    }
+
+    public Integer getVerifiable() {
+        return verifiable==null?0:verifiable;
+    }
+
+    public void setVerifiable(Integer verifiable) {
+        this.verifiable = verifiable;
     }
 
     @Override
@@ -197,6 +220,7 @@ public class CouponShop implements Serializable {
         sb.append(", brandCname='").append(brandCname).append('\'');
         sb.append(", mallId='").append(mallId).append('\'');
         sb.append(", mallName='").append(mallName).append('\'');
+        sb.append(", verifiable='").append(verifiable).append('\'');
         sb.append('}');
         return sb.toString();
     }

@@ -1,5 +1,8 @@
 package com.rongyi.easy.tradecenter.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,8 +32,31 @@ public class OsmOrderQueryParam implements Serializable
     private Integer activityType;// 活动类型
     private List<String> commodityMidList;// 商品ID集合
     private Integer activityRoundId;// 活动场次ID
-    private String commoditySpecMid;// 产品规格ID
     private Integer orderSource;// 购买终端
+
+    private List<String> weidianIds;//店铺id集合
+    private List<String> commodityIds;//商品id集合
+    private List<String> guideIds;//导购id集合
+    private List<String> buyerIds;//买家id集合
+    private Integer recordStart;//起始
+    private Integer pageSize;//
+    private List<String> selfShopIds;//
+    private List<String> selfGuideIds;//
+    private List<String> orderNoList;//
+    private Integer deliveryType;//快递方式 1：自提 2：快递
+    /**
+     * 退款状态（0：全部 1：退款申请中 2：待买家发货 3：待买家上门  4：待卖家收货 5退款中 6：退款成功 7：退款已拒绝 8：退款关闭）
+     */
+    private Integer refundStatus;
+
+
+    public Integer getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Integer deliveryType) {
+        this.deliveryType = deliveryType;
+    }
 
     public Integer getGuideId() {
         return guideId;
@@ -192,29 +218,88 @@ public class OsmOrderQueryParam implements Serializable
         this.orderSource = orderSource;
     }
 
+    public List<String> getWeidianIds() {
+        return weidianIds;
+    }
+
+    public void setWeidianIds(List<String> weidianIds) {
+        this.weidianIds = weidianIds;
+    }
+
+    public List<String> getCommodityIds() {
+        return commodityIds;
+    }
+
+    public void setCommodityIds(List<String> commodityIds) {
+        this.commodityIds = commodityIds;
+    }
+
+    public List<String> getGuideIds() {
+        return guideIds;
+    }
+
+    public void setGuideIds(List<String> guideIds) {
+        this.guideIds = guideIds;
+    }
+
+    public List<String> getBuyerIds() {
+        return buyerIds;
+    }
+
+    public void setBuyerIds(List<String> buyerIds) {
+        this.buyerIds = buyerIds;
+    }
+
+    public Integer getRecordStart() {
+        return recordStart;
+    }
+
+    public void setRecordStart(Integer recordStart) {
+        this.recordStart = recordStart;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public List<String> getSelfShopIds() {
+        return selfShopIds;
+    }
+
+    public void setSelfShopIds(List<String> selfShopIds) {
+        this.selfShopIds = selfShopIds;
+    }
+
+    public List<String> getSelfGuideIds() {
+        return selfGuideIds;
+    }
+
+    public void setSelfGuideIds(List<String> selfGuideIds) {
+        this.selfGuideIds = selfGuideIds;
+    }
+
+    public List<String> getOrderNoList() {
+        return orderNoList;
+    }
+
+    public void setOrderNoList(List<String> orderNoList) {
+        this.orderNoList = orderNoList;
+    }
+
+    public Integer getRefundStatus() {
+        return refundStatus;
+    }
+
+    public void setRefundStatus(Integer refundStatus) {
+        this.refundStatus = refundStatus;
+    }
+
     @Override
     public String toString() {
-        return "OsmOrderQueryParam{" +
-                "orderStatus='" + orderStatus + '\'' +
-                ", createOrderBegin='" + createOrderBegin + '\'' +
-                ", createOrderEnd='" + createOrderEnd + '\'' +
-                ", orderNo='" + orderNo + '\'' +
-                ", commodityNo='" + commodityNo + '\'' +
-                ", commodityName='" + commodityName + '\'' +
-                ", buyerAccount='" + buyerAccount + '\'' +
-                ", weidianName='" + weidianName + '\'' +
-                ", guideName='" + guideName + '\'' +
-                ", currentPage='" + currentPage + '\'' +
-                ", sizePerPage='" + sizePerPage + '\'' +
-                ", commodityStatus='" + commodityStatus + '\'' +
-                ", guideId=" + guideId +
-                ", activityStatus=" + activityStatus +
-                ", activityName=" + activityName +
-                ", activityType=" + activityType +
-                ", commodityMidList=" + commodityMidList +
-                ", activityRoundId=" + activityRoundId +
-                ", activityType=" + activityType +
-                ", orderSource=" + orderSource +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

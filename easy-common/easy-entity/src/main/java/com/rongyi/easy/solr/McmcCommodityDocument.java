@@ -1,21 +1,25 @@
 package com.rongyi.easy.solr;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
+import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
+import com.rongyi.easy.util.CommodityUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
 import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class McmcCommodityDocument implements java.io.Serializable{
 
@@ -99,8 +103,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String systemNumber;
 	@Field("discount")
 	private Double discount;
-	@Field("weAndTeStatus")
-	private String weAndTeStatus;
 	@Field("brandName")
 	private String brandName;
 	@Field("updateAt")
@@ -116,7 +118,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String hotAreaName; ///< 商圈名称
 	@Field("top")
 	private Integer top; ///< 置顶排序
-
 	@Field("secKillSign")
 	private String secKillSign;
 	@Field("extend")
@@ -126,6 +127,43 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityModelNo;//商品款号
 	@Field("stock")
 	private Integer stock;
+	@Field("commodityRange")
+	private Integer commodityRange;
+
+	@Field("locationIds")
+	private List<String> locationIds;
+	@Field("serviceIds")
+	private List<Integer> serviceIds;
+	@Field("mallServiceIds")
+	private List<String> mallServiceIds;
+	@Field("onServiceIds")
+	private List<String> onServiceIds;
+	@Field("offServiceIds")
+	private List<String> offServiceIds;
+
+	public List<String> getMallServiceIds() {
+		return mallServiceIds;
+	}
+
+	public void setMallServiceIds(List<String> mallServiceIds) {
+		this.mallServiceIds = mallServiceIds;
+	}
+
+	public List<String> getOnServiceIds() {
+		return onServiceIds;
+	}
+
+	public void setOnServiceIds(List<String> onServiceIds) {
+		this.onServiceIds = onServiceIds;
+	}
+
+	public List<String> getOffServiceIds() {
+		return offServiceIds;
+	}
+
+	public void setOffServiceIds(List<String> offServiceIds) {
+		this.offServiceIds = offServiceIds;
+	}
 
 	public Double getPrice() {
 		return price;
@@ -171,10 +209,20 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setCategory_ids(List<String> category_ids) {
 		this.category_ids = category_ids;
 		// 三级分类拆分成三个字段
-		if(CollectionUtils.isNotEmpty(category_ids)&&category_ids.size()>=3){
-			this.setCategory1_id(category_ids.get(0));
-			this.setCategory2_id(category_ids.get(1));
-			this.setCategory3_id(category_ids.get(2));
+		if(CollectionUtils.isNotEmpty(category_ids)){
+			if (category_ids.size()>=3) {
+				this.setCategory1_id(category_ids.get(0));
+				this.setCategory2_id(category_ids.get(1));
+				this.setCategory3_id(category_ids.get(2));
+			} else {
+				// 海信只有2级分类
+				if (category_ids.size()>=1) {
+					this.setCategory1_id(category_ids.get(0));
+				}
+				if (category_ids.size()>=2) {
+					this.setCategory2_id(category_ids.get(1));
+				}
+			}
 		}
 	}
 
@@ -273,6 +321,16 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setGalleryPosition(Integer galleryPosition) {
 		this.galleryPosition = galleryPosition;
 	}
+
+
+	public Integer getCommodityRange() {
+		return commodityRange;
+	}
+
+	public void setCommodityRange(Integer commodityRange) {
+		this.commodityRange = commodityRange;
+	}
+
 
 	public McmcCommodityDocument(){
 
@@ -446,14 +504,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.systemNumber = systemNumber;
 	}
 
-	public String getWeAndTeStatus() {
-		return weAndTeStatus;
-	}
-
-	public void setWeAndTeStatus(String weAndTeStatus) {
-		this.weAndTeStatus = weAndTeStatus;
-	}
-
 	public String getSecKillSign() {
 		return secKillSign;
 	}
@@ -534,6 +584,22 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.stock = stock;
 	}
 
+	public List<String> getLocationIds() {
+		return locationIds;
+	}
+
+	public void setLocationIds(List<String> locationIds) {
+		this.locationIds = locationIds;
+	}
+
+	public List<Integer> getServiceIds() {
+		return serviceIds;
+	}
+
+	public void setServiceIds(List<Integer> serviceIds) {
+		this.serviceIds = serviceIds;
+	}
+
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
 								 long brandId, long mallId, CommodityShopInfo shopInfo,
 								 List<Double> positions, List<String> zoneIds, String brandMid) {
@@ -549,13 +615,16 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setPrice(commodity.getPrice());
 		this.setStatus(commodity.getStatus());
 		this.setTerminalType(commodity.getTerminalType());
-		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
-		List<String> category_ids = new ArrayList<>();
-		for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
-			category_ids.add(categoryObjectId.toString());
+		if(!CommodityUtil.isGiftType(commodity.getCommodityRange())) {
+			List<String> category_ids = new ArrayList<>();
+			if (CollectionUtils.isNotEmpty(commodity.getCategoryIds())) {
+				for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
+					category_ids.add(categoryObjectId.toString());
+				}
+			}
+			this.setCategory_ids(category_ids);
+			this.setBrandName(commodity.getBrandName());
 		}
-		this.setCategory_ids(category_ids);
-		this.setBrandName(commodity.getBrandName());
 		this.setUpdateAt(commodity.getUpdateAt());
 
 		if (commodity.getSaleId() != null && commodity.getSaleId() != 0) {
@@ -563,9 +632,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 			this.setSortPosition(9999);
 		}
 
-		if(commodity.getSource() == 0){//商家后台发布商品，默认下架
-			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
-		}
 		this.setSystemNumber(commodity.getSystemNumber());
 		this.setDiscount(commodity.getDiscount());
 
@@ -573,21 +639,23 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.setCommodityMallId(String.valueOf(mallId));
 
 		if(shopInfo != null) {
-			this.setZone_ids(shopInfo.getZoneIds());
+			if(CollectionUtils.isNotEmpty(shopInfo.getZoneIds())){
+				this.setZone_ids(shopInfo.getZoneIds());
+			}else {
+				if(StringUtils.isNotBlank(shopInfo.getShopMid())){
+					this.setZone_ids(Arrays.asList(shopInfo.getShopMid()));//海信商品没有省市区的信息
+				}
+			}
 			this.setPosition(shopInfo.getPositon());
 			this.setBrand_id(shopInfo.getBrandMid());
 		}
+		this.setCommodityRange(commodityVo.getCommodityRange());
 
-		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
-			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
-		}
-
-		if(commodityVo.getProcessIdentity() == Identity.BUYER) {
+		if(commodityVo.getProcessIdentity() != null && commodityVo.getProcessIdentity() == Identity.BUYER) {
 			// 买手相关字段
 			this.setSpot(commodity.isSpot());
 			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
 			this.setTerminalType(commodity.getTerminalType());
-			this.setWeAndTeStatus(commodity.getWeAndTeStatus());
 			if(commodity.isSpot()) {
 				this.setStatus(commodity.getStatus());
 			} else {
@@ -605,5 +673,32 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		//库存进入solr
 		this.setStock(commodity.getStock());
 		this.setCommodityModelNo(commodity.getCommodityModelNo());
+
+		this.setLocationIds(commodity.getLocationIds());
+		//this.setServiceIds(commodity.getServiceIds());
+		this.setMallServiceIds(commodity.getMallServiceIds());
+		this.setOnServiceIds(commodity.getOnServiceIds());
+	}
+
+	public void toDocument(Commodity commodity) {
+		if(commodity != null) {
+			this.setId(commodity.getId().toString());
+			this.setCommodityName(commodity.getName());//商品名字
+			this.setCommodityNameSubdiv(commodity.getName());//商品名字
+			this.setCommodityCode(commodity.getCode());//商品编码
+			this.setCommodityShopId(commodity.getShopId());//商品所在店铺 MySQL id
+			this.setCommodityBrandId(commodity.getBrandId());//商品关联品牌 MySQL id
+			this.setBrand_id(commodity.getBrandMid());
+			this.setCommodityMallId(commodity.getMallId());//商品所在商场 MySQL id
+            /*商品状态*/
+			this.setStatus(commodity.getStatus());
+			this.setSold(commodity.getSold());//销量
+			this.setPublic_start(commodity.getRegisterAt());//上架时间
+			this.setPrice(commodity.getPrice());
+			this.setTerminalType(commodity.getTerminalType());
+			this.setMallServiceIds(commodity.getMallServiceIds());
+			this.setOnServiceIds(commodity.getOnServiceIds());
+			this.setOffServiceIds(commodity.getOffServiceIds());
+		}
 	}
 }

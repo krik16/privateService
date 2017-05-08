@@ -82,6 +82,9 @@ public class ResponseVO implements java.io.Serializable {
         return new ResponseVO(ResponseVO.SUCCESS, new Result(data, null));
     }
 
+
+
+
     /**
      * 分页成功返回值对象
      *
@@ -94,6 +97,8 @@ public class ResponseVO implements java.io.Serializable {
     public static <T> ResponseVO success(T data, Integer currentPage, Integer pageSize, Integer totalCount) {
         return new ResponseVO(ResponseVO.SUCCESS, data, currentPage, pageSize, totalCount);
     }
+
+
 
 
     /**
@@ -116,6 +121,14 @@ public class ResponseVO implements java.io.Serializable {
     public static ResponseVO failure(int errno, String msg) {
         return new ResponseVO(new Meta(errno, msg), null);
     }
+
+
+
+
+    public static <T> ResponseVO redRebate(int errno, String msg,T data) {
+        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+    }
+
 
     /**
      * 失败码/失败信息回值对象
@@ -343,10 +356,13 @@ public class ResponseVO implements java.io.Serializable {
     public static void main(String[] args) {
 
 
-        System.out.println(JSONObject.fromObject(ResponseVO.success()));
-        System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
+       // System.out.println(JSONObject.fromObject(ResponseVO.success()));
+     //   System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
         System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回对象集合List<Object>", 1, 10, 200)));
-        System.out.println(JSONObject.fromObject(ResponseVO.failure()));
-        System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
+       // System.out.println(JSONObject.fromObject(ResponseVO.failure()));
+      //  System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
+
+
+
     }
 }

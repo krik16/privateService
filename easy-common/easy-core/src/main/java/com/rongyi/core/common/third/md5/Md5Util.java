@@ -63,6 +63,36 @@ package com.rongyi.core.common.third.md5;/*
             }
             return resultString;
         }
+
+    /**利用MD5进行加密
+     * @param str  待加密的字符串
+     * @return  加密后的字符串
+     */
+    public static String EncoderByMd5(String str) {
+
+        String re = null;
+        byte encrypt[];
+        try {
+            byte[] tem = str.getBytes();
+            MessageDigest md5 = MessageDigest.getInstance("md5");
+            md5.reset();
+            md5.update(tem);
+            encrypt = md5.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte t : encrypt) {
+                String s = Integer.toHexString(t & 0xFF);
+                if (s.length() == 1) {
+                    s = "0" + s;
+                }
+                sb.append(s);
+            }
+            re = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return re;
+    }
+
         public static void main(String[] args) {
             Md5Util getMD5 = new Md5Util();
             System.out.println(getMD5.GetMD5Code("yuzhijian"));

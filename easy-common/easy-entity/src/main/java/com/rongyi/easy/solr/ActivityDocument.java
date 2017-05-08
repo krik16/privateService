@@ -3,6 +3,7 @@ package com.rongyi.easy.solr;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wangzehui on 2016/1/26.
@@ -63,6 +64,17 @@ public class ActivityDocument implements Serializable{
     private String secKillSign;
     private Date activityStartTime;
     private Date activityEndTime;
+
+    private List<String> serviceIds;
+
+
+    public List<String> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<String> serviceIds) {
+        this.serviceIds = serviceIds;
+    }
 
     public String getBrand_ids() {
         return brand_ids;

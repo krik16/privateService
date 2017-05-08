@@ -5,6 +5,7 @@ import com.rongyi.easy.activitymanage.param.GoodsSku;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +19,12 @@ public class ActivityGoodsDetail implements Serializable {
     private String desc;
     private String goodsId;
     private Integer groupNum;
+    private Integer groupMaxNum;//最大成团人数
+    private String subTitle;//副标题
+    private Integer supModPrice;//是否支持按成团人数调价
+    private String expectTotalAmount;//期望的金额
+    private Date joinStartAt;
+    private Date joinEndAt;
     private Integer joinGroupLimit;
     private String name;
     private Integer openGroupLimit;
@@ -47,9 +54,62 @@ public class ActivityGoodsDetail implements Serializable {
                 .append("activityPrice", activityPrice)
                 .append("status", status)
                 .append("commodityPic", commodityPic)
+                .append("groupMaxNum", groupMaxNum)
+                .append("subTitle", subTitle)
+                .append("supModPrice", supModPrice)
+                .append("joinStartAt", joinStartAt)
+                .append("joinEndAt", joinEndAt)
+                .append("expectTotalAmount", expectTotalAmount)
                 .toString();
     }
 
+    public String getExpectTotalAmount() {
+        return expectTotalAmount;
+    }
+
+    public void setExpectTotalAmount(String expectTotalAmount) {
+        this.expectTotalAmount = expectTotalAmount;
+    }
+
+    public Date getJoinStartAt() {
+        return joinStartAt;
+    }
+
+    public void setJoinStartAt(Date joinStartAt) {
+        this.joinStartAt = joinStartAt;
+    }
+
+    public Date getJoinEndAt() {
+        return joinEndAt;
+    }
+
+    public void setJoinEndAt(Date joinEndAt) {
+        this.joinEndAt = joinEndAt;
+    }
+
+    public Integer getGroupMaxNum() {
+        return groupMaxNum;
+    }
+
+    public void setGroupMaxNum(Integer groupMaxNum) {
+        this.groupMaxNum = groupMaxNum;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public Integer getSupModPrice() {
+        return supModPrice;
+    }
+
+    public void setSupModPrice(Integer supModPrice) {
+        this.supModPrice = supModPrice;
+    }
 
     public String getCommodityPic() {
         return commodityPic;

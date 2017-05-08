@@ -28,7 +28,7 @@ public class OrderCartFormVO extends OrderCartFormEntity {
     /**
      * 购物车订单包含的所有商品信息
      */
-    private List<CommodityVO> commodityVOs;
+//    private List<CommodityVO> commodityVOs;
 
     public Date getPayAt() {
         return payAt;
@@ -38,13 +38,13 @@ public class OrderCartFormVO extends OrderCartFormEntity {
         this.payAt = payAt;
     }
 
-    public List<CommodityVO> getCommodityVOs() {
-        return commodityVOs;
-    }
-
-    public void setCommodityVOs(List<CommodityVO> commodityVOs) {
-        this.commodityVOs = commodityVOs;
-    }
+//    public List<CommodityVO> getCommodityVOs() {
+//        return commodityVOs;
+//    }
+//
+//    public void setCommodityVOs(List<CommodityVO> commodityVOs) {
+//        this.commodityVOs = commodityVOs;
+//    }
 
     public String getEventType() {
         return eventType;

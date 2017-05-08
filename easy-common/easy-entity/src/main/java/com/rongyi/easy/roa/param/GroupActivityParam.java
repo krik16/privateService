@@ -16,6 +16,7 @@ public class GroupActivityParam implements Serializable{
 	private Integer currentPage = 1;
 	private Integer pageSize = 20;
 	private String memberId;//微信用户id
+	private Integer activityType;//0:普通拼团，1：超级团教育版，默认0
 	
 	public String getMallMid() {
 		return mallMid;
@@ -59,6 +60,15 @@ public class GroupActivityParam implements Serializable{
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupActivityParam [activityId=" + activityId

@@ -12,6 +12,16 @@ public class ControllerViewDownVo implements Serializable{
 
     private Integer totalCount;
 
+    private Integer type;//8普通团，10超级团
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public List<ControllerViewDownGroupVo> getControllerViewDownGroupVoList() {
         return controllerViewDownGroupVoList;
     }

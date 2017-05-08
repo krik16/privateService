@@ -1,5 +1,8 @@
 package com.rongyi.easy.rmmm.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -60,7 +63,8 @@ public class ParentOrderVO implements Serializable {
 
 	private String shopMid;// 店铺mongoId
 
-	private String shopLogo;// 店铺logo
+	private String shopLogo;// 店铺品牌logo
+	private String shopIcon;// 店铺自定义logo
 
 	private String isComment = "-1";// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
 
@@ -68,9 +72,12 @@ public class ParentOrderVO implements Serializable {
 
 	private String closeReason;// 关闭原因
 
+	private String closeEventType;// 关闭事件  6:卖家超时未发货,23:卖家取消订单，34：拼团失败，36：超时支付成功退款
+
 	private String originalTotalPrice  = "0";// 原来的总价
 
 	private String buyerNickName;// 收货人昵称
+	private String buyerNameByWeixin;// 微信昵称
 	private String buyerPhone;// 买家手机号（买家账号）
 	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String nickName;// 导购昵称
@@ -120,10 +127,69 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal commidityTotalPice;//商品总价
 
 	private BigDecimal orderTotalPrice;//订单总价
+	private BigDecimal discountAmount;//订单总价-折扣
 	
 	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
 	private Long groupEndAt;//团结束时间，单位：毫秒
 	private Long nextCloseTime;//待付款订单预计关闭剩余时间，单位：秒
+
+	private String activityName;// 活动名称
+
+	private Integer activityType;// 活动类型 0不参与，3秒杀，4拼团,5超级团教育版
+
+	private Integer activityStatus;// 活动状态
+
+	private Long activityRoundId;// 活动编号
+
+	private Integer activityId;// 订单来源
+
+	private Integer orderSource;// 订单来源
+
+	private Integer shopNum = 0;//店铺数量
+
+	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
+	/**
+	 *是否是购物车订单
+	 */
+	private boolean isCartOrder;
+
+	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
+
+	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
+
+	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
+	private String reserveName;//预约人姓名
+	private String reservePhone;//预约人手机号
+	private String reserveCompany;//预约人公司
+	private String reservePost;//预约人职称
+	private String activityCommodityDesc;//超级团商品副标题
+	private String weixinAppId;//
+	private BigDecimal totalPriceToSeller;// 卖家实收款
+	private BigDecimal merchantRedDiscount;//商家补贴红包金额
+	private BigDecimal operationRedDiscount;//平台补贴红包金额
+	private BigDecimal merchantRebateDiscount;//商家补贴抵扣券金额
+	private BigDecimal operationRebateDiscount;//平台补贴抵扣券金额
+	private String orderChannel;//下单渠道 SmallProgram:小程序
+	private String orderSourceForWeiXin;// 订单渠道微信来源     1 微商城 ，2 标准微信
+	private String selfCode;// 自提码
+	private List<CommentVO> comments;//卖家备注列表
+	private BigDecimal reductionFee;// 满减金额
+	private BigDecimal commodityTotalAmount;// 微信端商品总价（商品总价-折扣）
+	private BigDecimal realAmount;//商品总价
+	private String shopProvinceName;// 店铺省名称
+	private String shopCityName;// 店铺市名称
+	private String shopAddress;//店铺详细地址
+	private String shopAreaName;//店铺区域名称
+	// 是否冻结 0：正常流程 1：冻结流程
+	private int isFreeze;
+
+	public String getActivityCommodityDesc() {
+		return activityCommodityDesc;
+	}
+
+	public void setActivityCommodityDesc(String activityCommodityDesc) {
+		this.activityCommodityDesc = activityCommodityDesc;
+	}
 
 	public Long getGroupEndAt() {
 		return groupEndAt;
@@ -148,18 +214,6 @@ public class ParentOrderVO implements Serializable {
 	public void setIfPayment(boolean ifPayment) {
 		this.ifPayment = ifPayment;
 	}
-
-	private String activityName;// 活动名称
-
-	private Integer activityType;// 活动类型
-
-	private Integer activityStatus;// 活动状态
-
-	private Long activityRoundId;// 活动编号
-
-	private Integer activityId;// 订单来源
-
-	private Integer orderSource;// 订单来源
 
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
@@ -237,8 +291,6 @@ public class ParentOrderVO implements Serializable {
 		this.userAccount = userAccount;
 	}
 
-	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
-
 	public BigDecimal getPayAmount() {
 		return payAmount;
 	}
@@ -247,17 +299,7 @@ public class ParentOrderVO implements Serializable {
 		this.payAmount = payAmount;
 	}
 
-	private Integer shopNum = 0;//店铺数量
 
-	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
-	/**
-	 *是否是购物车订单
-	 */
-	private boolean isCartOrder;
-	
-	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
-	
-	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
 
 	public boolean isIfOnDisplay() {
 		return ifOnDisplay;
@@ -818,77 +860,216 @@ public class ParentOrderVO implements Serializable {
 		this.activityId = activityId;
 	}
 
+	public String getReserveName() {
+		return reserveName;
+	}
+
+	public void setReserveName(String reserveName) {
+		this.reserveName = reserveName;
+	}
+
+	public String getReservePhone() {
+		return reservePhone;
+	}
+
+	public void setReservePhone(String reservePhone) {
+		this.reservePhone = reservePhone;
+	}
+
+	public String getReserveCompany() {
+		return reserveCompany;
+	}
+
+	public void setReserveCompany(String reserveCompany) {
+		this.reserveCompany = reserveCompany;
+	}
+
+	public String getReservePost() {
+		return reservePost;
+	}
+
+	public void setReservePost(String reservePost) {
+		this.reservePost = reservePost;
+	}
+
+	public BigDecimal getMerchantRedDiscount() {
+		return merchantRedDiscount;
+	}
+
+	public void setMerchantRedDiscount(BigDecimal merchantRedDiscount) {
+		this.merchantRedDiscount = merchantRedDiscount;
+	}
+
+	public BigDecimal getOperationRedDiscount() {
+		return operationRedDiscount;
+	}
+
+	public void setOperationRedDiscount(BigDecimal operationRedDiscount) {
+		this.operationRedDiscount = operationRedDiscount;
+	}
+
+	public BigDecimal getMerchantRebateDiscount() {
+		return merchantRebateDiscount;
+	}
+
+	public void setMerchantRebateDiscount(BigDecimal merchantRebateDiscount) {
+		this.merchantRebateDiscount = merchantRebateDiscount;
+	}
+
+	public BigDecimal getOperationRebateDiscount() {
+		return operationRebateDiscount;
+	}
+
+	public void setOperationRebateDiscount(BigDecimal operationRebateDiscount) {
+		this.operationRebateDiscount = operationRebateDiscount;
+	}
+
+	public String getOrderChannel() {
+		return orderChannel;
+	}
+
+	public void setOrderChannel(String orderChannel) {
+		this.orderChannel = orderChannel;
+	}
+
+	public String getOrderSourceForWeiXin() {
+		return orderSourceForWeiXin;
+	}
+
+	public void setOrderSourceForWeiXin(String orderSourceForWeiXin) {
+		this.orderSourceForWeiXin = orderSourceForWeiXin;
+	}
+
+	public String getWeixinAppId() {
+		return weixinAppId;
+	}
+
+	public void setWeixinAppId(String weixinAppId) {
+		this.weixinAppId = weixinAppId;
+	}
+
+	public BigDecimal getTotalPriceToSeller() {
+		return totalPriceToSeller;
+	}
+
+	public void setTotalPriceToSeller(BigDecimal totalPriceToSeller) {
+		this.totalPriceToSeller = totalPriceToSeller;
+	}
+
+	public String getSelfCode() {
+		return selfCode;
+	}
+
+	public void setSelfCode(String selfCode) {
+		this.selfCode = selfCode;
+	}
+
+	public List<CommentVO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentVO> comments) {
+		this.comments = comments;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
+	public String getBuyerNameByWeixin() {
+		return buyerNameByWeixin;
+	}
+
+	public void setBuyerNameByWeixin(String buyerNameByWeixin) {
+		this.buyerNameByWeixin = buyerNameByWeixin;
+	}
+
+	public BigDecimal getReductionFee() {
+		return reductionFee;
+	}
+
+	public void setReductionFee(BigDecimal reductionFee) {
+		this.reductionFee = reductionFee;
+	}
+
+	public BigDecimal getCommodityTotalAmount() {
+		return commodityTotalAmount;
+	}
+
+	public void setCommodityTotalAmount(BigDecimal commodityTotalAmount) {
+		this.commodityTotalAmount = commodityTotalAmount;
+	}
+
+	public BigDecimal getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(BigDecimal realAmount) {
+		this.realAmount = realAmount;
+	}
+
+	public String getShopProvinceName() {
+		return shopProvinceName;
+	}
+
+	public void setShopProvinceName(String shopProvinceName) {
+		this.shopProvinceName = shopProvinceName;
+	}
+
+	public String getShopCityName() {
+		return shopCityName;
+	}
+
+	public void setShopCityName(String shopCityName) {
+		this.shopCityName = shopCityName;
+	}
+
+	public String getShopAddress() {
+		return shopAddress;
+	}
+
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+
+	public String getShopAreaName() {
+		return shopAreaName;
+	}
+
+	public void setShopAreaName(String shopAreaName) {
+		this.shopAreaName = shopAreaName;
+	}
+
+	public String getCloseEventType() {
+		return closeEventType;
+	}
+
+	public void setCloseEventType(String closeEventType) {
+		this.closeEventType = closeEventType;
+	}
+
+	public int getIsFreeze() {
+		return isFreeze;
+	}
+
+	public void setIsFreeze(int isFreeze) {
+		this.isFreeze = isFreeze;
+	}
+
+	public String getShopIcon() {
+		return shopIcon;
+	}
+
+	public void setShopIcon(String shopIcon) {
+		this.shopIcon = shopIcon;
+	}
+
 	@Override
 	public String toString() {
-		return "ParentOrderVO{" +
-				"orderId='" + orderId + '\'' +
-				", mallName='" + mallName + '\'' +
-				", activityName='" + activityName + '\'' +
-				", activityType='" + activityType + '\'' +
-				", activityStatus='" + activityStatus + '\'' +
-				", activityRoundId='" + activityRoundId + '\'' +
-				", orderSource='" + orderSource + '\'' +
-				", brandName='" + brandName + '\'' +
-				", shopName='" + shopName + '\'' +
-				", shopIM=" + shopIM +
-				", totalPrice='" + totalPrice + '\'' +
-				", parentOrderStatus='" + parentOrderStatus + '\'' +
-				", nextStatusTime='" + nextStatusTime + '\'' +
-				", sonOrderList=" + sonOrderList +
-				", consignee='" + consignee + '\'' +
-				", phone='" + phone + '\'' +
-				", address='" + address + '\'' +
-				", provinceName='" + provinceName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", districtName='" + districtName + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", comment='" + comment + '\'' +
-				", payTime='" + payTime + '\'' +
-				", commitOrderTime='" + commitOrderTime + '\'' +
-				", deliverTime='" + deliverTime + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", shopLogo='" + shopLogo + '\'' +
-				", isComment='" + isComment + '\'' +
-				", closeType='" + closeType + '\'' +
-				", closeReason='" + closeReason + '\'' +
-				", originalTotalPrice='" + originalTotalPrice + '\'' +
-				", buyerNickName='" + buyerNickName + '\'' +
-				", buyerPhone='" + buyerPhone + '\'' +
-				", receiveType='" + receiveType + '\'' +
-				", nickName='" + nickName + '\'' +
-				", imId='" + imId + '\'' +
-				", userLogo='" + userLogo + '\'' +
-				", userName='" + userName + '\'' +
-				", userPhone='" + userPhone + '\'' +
-				", guideId='" + guideId + '\'' +
-				", guideType=" + guideType +
-				", receiveTime='" + receiveTime + '\'' +
-				", cancelTime='" + cancelTime + '\'' +
-				", closeTime='" + closeTime + '\'' +
-				", statusRoute='" + statusRoute + '\'' +
-				", platformRebateAmount='" + platformRebateAmount + '\'' +
-				", expressBillId='" + expressBillId + '\'' +
-				", expressName='" + expressName + '\'' +
-				", discountFee=" + discountFee +
-				", score='" + score + '\'' +
-				", scoreDeduction='" + scoreDeduction + '\'' +
-				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
-				", liveName='" + liveName + '\'' +
-				", orderScoreDiscount=" + orderScoreDiscount +
-				", orderRebateDiscount=" + orderRebateDiscount +
-				", createAt=" + createAt +
-				", changePriceFlag='" + changePriceFlag + '\'' +
-				", shopNum=" + shopNum +
-				", totalHongBaoAmount=" + totalHongBaoAmount +
-				", isCartOrder=" + isCartOrder +
-				", expressOrderInfoId=" + expressOrderInfoId +
-				", ifOnDisplayExpress=" + ifOnDisplayExpress +
-				", newPayAmount=" + newPayAmount +
-				", ifPayment=" + ifPayment +
-				", groupEndAt=" + groupEndAt +
-				", nextCloseTime=" + nextCloseTime +
-				'}';
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
 	}
 }

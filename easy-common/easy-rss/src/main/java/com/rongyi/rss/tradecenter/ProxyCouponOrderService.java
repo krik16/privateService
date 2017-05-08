@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter;
 
+import com.rongyi.core.bean.DubboVO;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
@@ -82,6 +83,14 @@ public interface ProxyCouponOrderService {
      * @return
      */
     Map<String, Object> createCouponOrderInfo(RoaCouponOrderParam param);
+
+    /**
+     * 创建营销活动类卡卷订单
+     *
+     * @param param
+     * @return
+     */
+    Map<String, Object> createCouponOrderForMK(RoaCouponOrderParam param);
 
     /**
      * 优惠券批量订单删除（逻辑删除）

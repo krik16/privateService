@@ -29,6 +29,8 @@ public class HomePageContentNewVO implements Serializable  {
     private BenefitVO benefit;
     /**潮人攻略*/
     private TrendsetterVO trendsetter;
+    /**断码好货*/
+    private ShortSizeHomeVO shortSizeHome;
 
     public TrendsetterVO getTrendsetter() {
         return trendsetter;
@@ -94,6 +96,14 @@ public class HomePageContentNewVO implements Serializable  {
         this.benefit = benefit;
     }
 
+    public ShortSizeHomeVO getShortSizeHome() {
+        return shortSizeHome;
+    }
+
+    public void setShortSizeHome(ShortSizeHomeVO shortSizeHome) {
+        this.shortSizeHome = shortSizeHome;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -105,6 +115,7 @@ public class HomePageContentNewVO implements Serializable  {
                 .append("dailySale", dailySale)
                 .append("benefit", benefit)
                 .append("trendsetterVO", trendsetter)
+                .append("shortSizeHome", shortSizeHome)
                 .toString();
     }
 }
