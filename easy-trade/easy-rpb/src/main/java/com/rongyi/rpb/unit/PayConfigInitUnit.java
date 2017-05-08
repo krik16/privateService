@@ -2,6 +2,7 @@ package com.rongyi.rpb.unit;
 
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.pay.core.constants.ConstantEnum;
+import com.rongyi.pay.core.tianyi.config.TianyiConfigure;
 import com.rongyi.pay.core.unit.WebankPayUnit;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.model.WaAccessTokenResData;
@@ -92,14 +93,21 @@ public class PayConfigInitUnit {
     //微众支付宝退款查询url
     private String alipayRefundQueryUrl;
 
-
     //支付宝c扫B请求地址
     private String alipayScanPayUrl;
 
+    //翼支付退款通知地址
+    private String tianyiRefundNotifyUrl;
+
+    //翼支付通知地址
+    private String tianyiPayNotifyUrl;
     public void init(){
 
         //初始化微众相关配置
         initWwConfigure();
+
+        //初始化天翼配置
+        initTianConfig() ;
     }
 
     private WebankConfigure initWwConfigure(){
@@ -141,6 +149,15 @@ public class PayConfigInitUnit {
         configure.setTicket(this.ticket);
         return configure;
 
+    }
+
+    private TianyiConfigure initTianConfig() {
+        TianyiConfigure tianyiConfigure = TianyiConfigure.getInstance();
+        if (StringUtils.isEmpty(tianyiConfigure.getBackMerchantUrl())) {
+            tianyiConfigure.setBackMerchantUrl(this.tianyiPayNotifyUrl);
+            tianyiConfigure.setRefundBackUrl(this.tianyiRefundNotifyUrl);
+        }
+        return tianyiConfigure;
     }
 
     public void setWebankKey(String webankKey) {
@@ -240,6 +257,18 @@ public class PayConfigInitUnit {
 
     public void setWechatScanQueryUrl(String wechatScanQueryUrl) {
         this.wechatScanQueryUrl = wechatScanQueryUrl;
+    }
+
+    public void setTianyiRefundNotifyUrl(String tianyiRefundNotifyUrl) {
+        this.tianyiRefundNotifyUrl = tianyiRefundNotifyUrl;
+    }
+
+    public void setTianyiPayNotifyUrl(String tianyiPayNotifyUrl) {
+        this.tianyiPayNotifyUrl = tianyiPayNotifyUrl;
+    }
+
+    public String getTianyiRefundNotifyUrl() {
+        return tianyiRefundNotifyUrl;
     }
 
     /**

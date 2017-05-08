@@ -160,6 +160,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	private List<DivideAccountVo> findOrderList(DivideAccountDto divideAccountDto) {
 		// 查询前一天B端商品订单
 		List<DivideAccountVo> productOrderList = this.initProductOrderList(divideAccountDto);
+		//计算商品订单结算金额 = 原价-折扣+邮费-退款-商场补贴退款金额
+		this.calculationTotalAmount(productOrderList);
 		// 查询前一天B端卡券订单
 		List<DivideAccountVo> tradeOrderList = this.initTradeOrderList(divideAccountDto);
 		// 筛选出非通用券订单
@@ -168,6 +170,20 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		productOrderList.addAll(tradeOrderList);
 
 		return this.initExportInfo(productOrderList);
+	}
+
+	/**
+	 * 计算商品订单结算金额 = 原价-折扣+邮费-退款-商场补贴退款金额
+	 */
+	private void calculationTotalAmount(List<DivideAccountVo> productOrderList) {
+		if (CollectionUtils.isNotEmpty(productOrderList)) {
+			for (DivideAccountVo vo : productOrderList) {
+				BigDecimal refundFee = vo.getRefundFee() != null ? vo.getRefundFee() : BigDecimal.ZERO;//退款金额 （包含邮费）
+				BigDecimal reductionRefundFee = vo.getReductionRefundFee() != null ? vo.getReductionRefundFee() : BigDecimal.ZERO;//满减补贴退回金额
+				BigDecimal settleAmount = vo.getTotalAmount();
+				vo.setTotalAmount(settleAmount.subtract(refundFee).subtract(reductionRefundFee));
+			}
+		}
 	}
 
 	/**
@@ -357,8 +373,6 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	/**
 	 * @Description 填充分账信息，分账详情信息
 	 * @param divideAccountList
-	 * @param smDivideAccountList
-	 * @param smDivideAccountDetailList
 	 */
 	private void doBatchAddSmDivideAccount(List<DivideAccountVo> divideAccountList) {
 		if (CollectionUtils.isNotEmpty(divideAccountList)) {// 商品、卡券订单集合
@@ -547,6 +561,9 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			BigDecimal rebateDiscountMer = vo.getRebateDiscountMer() != null ? vo.getRebateDiscountMer() : BigDecimal.ZERO;
 			BigDecimal hbDiscountMer = vo.getHbDiscountMer() != null ? vo.getHbDiscountMer() : BigDecimal.ZERO;
 			BigDecimal reductionFee = vo.getReductionFee() != null ? vo.getReductionFee() : BigDecimal.ZERO;
+			BigDecimal refundFee = vo.getRefundFee() != null ? vo.getRefundFee() : BigDecimal.ZERO;//退款金额 （包含邮费）
+			BigDecimal refundExpressFee = vo.getRefundExpressFee() != null ? vo.getRefundExpressFee() : BigDecimal.ZERO;//退的邮费金额
+			BigDecimal reductionRefundFee = vo.getReductionRefundFee() != null ? vo.getReductionRefundFee() : BigDecimal.ZERO;//满减补贴退回金额
 			BigDecimal settleAmount = BigDecimal.ZERO;
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {
 				unitNum = vo.getTotalQuantity();
@@ -557,11 +574,18 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			}
 			sheet.getRow(titleRow).createCell(column++).setCellValue(orderTypeName);//订单类型
 			sheet.getRow(titleRow).createCell(column++).setCellValue(unitNum);//商品数量
-			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.toString());//结算金额 = 订单金额 + 改价优惠 = 实际收入+ 使用抵扣券（商场补贴）+使用红包（商场补贴）+满减活动（商场补贴）
-			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.subtract(reductionFee).subtract(hbDiscountMer).subtract(rebateDiscountMer).toString());//实际收入= 实际支付金额 + 平台补贴金额（含抵扣券、红包、容颜值）
+			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.toString());//结算金额=订单总金额 - 改价优惠 + 邮费 -退款金额-满减补贴退回金额
+			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount.add(reductionRefundFee).subtract(reductionFee).subtract(hbDiscountMer).subtract(rebateDiscountMer).toString());//实际收入= 实际支付金额 + 平台补贴金额（含抵扣券、红包、容颜值）
 			sheet.getRow(titleRow).createCell(column++).setCellValue(rebateDiscountMer.toString());//商家抵扣券补贴
 			sheet.getRow(titleRow).createCell(column++).setCellValue(hbDiscountMer.toString());//商家红包补贴
 			sheet.getRow(titleRow).createCell(column++).setCellValue(reductionFee.toString());//满减活动（商家补贴）
+			sheet.getRow(titleRow).createCell(column++).setCellValue("0");//积分抵扣（商场补贴
+			sheet.getRow(titleRow).createCell(column++).setCellValue(refundFee.subtract(refundExpressFee).toString());//退款金额
+			sheet.getRow(titleRow).createCell(column++).setCellValue(refundExpressFee.toString());//退运费金额
+			sheet.getRow(titleRow).createCell(column++).setCellValue(reductionRefundFee.toString());//满减活动退回
+			sheet.getRow(titleRow).createCell(column++).setCellValue("0");//抵扣券退回
+			sheet.getRow(titleRow).createCell(column++).setCellValue("0");//红包退回
+			sheet.getRow(titleRow).createCell(column++).setCellValue("0");//积分退回
 		}
 	}
 

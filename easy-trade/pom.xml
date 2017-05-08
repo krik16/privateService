@@ -13,7 +13,6 @@
 		<module>easy-anti-cheat</module>
 		<module>easy-settle</module>
 		<module>pay-core</module>
-		
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

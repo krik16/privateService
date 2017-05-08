@@ -48,9 +48,9 @@ public interface SettleConstant {
 	interface PayChannel {
 		Byte ZHIFUBAO = 0;// 支付宝
 		Byte WECHAT = 1;// 微信
-		Byte UNION = 2;// 银联
-		Byte CASH = 3;// 现金x
-		Byte BANK = 4; //银行卡
+		Byte POSBANK = 2;// POS银行卡
+		Byte CASH = 3;// 现金
+		Byte TIANYI = 6; //翼支付
 	}
 
 	interface LinkType {

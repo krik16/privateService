@@ -54,7 +54,10 @@ public class DivideAccountVo extends SmDivideAccount {
 
 	/** 红包抵扣金额(商家) */
 	private BigDecimal hbDiscountMer;
-	
+	private BigDecimal refundFee;//退款金额 包含邮费
+	private BigDecimal refundExpressFee;//退的邮费金额
+	private BigDecimal reductionRefundFee;//满减补贴退回金额
+
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -198,6 +201,30 @@ public class DivideAccountVo extends SmDivideAccount {
 
 	public BigDecimal getRebateDiscountMer() {
 		return rebateDiscountMer;
+	}
+
+	public BigDecimal getRefundFee() {
+		return refundFee;
+	}
+
+	public void setRefundFee(BigDecimal refundFee) {
+		this.refundFee = refundFee;
+	}
+
+	public BigDecimal getRefundExpressFee() {
+		return refundExpressFee;
+	}
+
+	public void setRefundExpressFee(BigDecimal refundExpressFee) {
+		this.refundExpressFee = refundExpressFee;
+	}
+
+	public BigDecimal getReductionRefundFee() {
+		return reductionRefundFee;
+	}
+
+	public void setReductionRefundFee(BigDecimal reductionRefundFee) {
+		this.reductionRefundFee = reductionRefundFee;
 	}
 
 	public void setRebateDiscountMer(BigDecimal rebateDiscountMer) {

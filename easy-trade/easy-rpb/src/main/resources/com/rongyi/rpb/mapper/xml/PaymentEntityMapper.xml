@@ -30,6 +30,9 @@
         <result column="source" property="source" jdbcType="TINYINT"/>
         <result column="org_channel" property="orgChannel" jdbcType="TINYINT"/>
         <result column="pay_scene" property="payScene" jdbcType="TINYINT"/>
+        <result column="tianyi_pay_id" property="tianyiPayId" jdbcType="INTEGER"/>
+        <result column="attach" property="attach" jdbcType="VARCHAR"/>
+
     </resultMap>
     <resultMap id="BaseResultMapVo" type="com.rongyi.easy.rpb.vo.v6.PaymentEntityVo" extends="BaseResultMap">
         <result column="mch_info_id" property="mchInfoId" jdbcType="VARCHAR"/>
@@ -41,7 +44,7 @@
 		id, order_no,order_type,order_price,pay_no,pay_amount,
 		status,trade_type,create_at,
 		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
-		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel,pay_scene
+		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel ,pay_scene,tianyi_pay_id,attach
 	</sql>
 
     <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntity"
@@ -125,7 +128,13 @@
                 org_channel,
             </if>
             <if test="payScene != null">
-                pay_scene
+                pay_scene ,
+            </if>
+            <if test="tianyiPayId != null">
+                tianyi_pay_id ,
+            </if>
+            <if test="attach != null">
+                attach ,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -205,7 +214,13 @@
                 #{orgChannel,jdbcType=TINYINT},
             </if>
             <if test="payScene != null">
-                #{payScene,jdbcType=TINYINT}
+                #{payScene,jdbcType=TINYINT} ,
+            </if>
+            <if test="tianyiPayId != null">
+                #{tianyiPayId,jdbcType=VARCHAR} ,
+            </if>
+            <if test="attach != null">
+                #{attach,jdbcType=VARCHAR} ,
             </if>
 
         </trim>
@@ -287,7 +302,13 @@
                 org_channel = #{orgChannel,jdbcType=TINYINT},
             </if>
             <if test="payScene != null">
-                pay_scene = #{payScene,jdbcType=TINYINT}
+                pay_scene = #{payScene,jdbcType=TINYINT} ,
+            </if>
+            <if test="tianyiPayId != null">
+                tianyi_pay_id = #{tianyiPayId,jdbcType=VARCHAR} ,
+            </if>
+            <if test="attach != null">
+                attach = #{attach,jdbcType=VARCHAR} ,
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -654,10 +675,10 @@
             <if test="orderNo != null and orderNo != ''">
                 and order_no = #{orderNo,jdbcType=VARCHAR}
             </if>
-            <if test="payChannel != null and payChannel != ''">
+            <if test="payChannel != null  and payChannel != -1 ">
                 and pay_channel = #{payChannel,jdbcType=INTEGER}
             </if>
-            <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+            <if test="payChannel == null || payChannel == -1 ">
                 and pay_channel in (0,1,2,3)
             </if>
             <if test="payerReconflag != null and payerReconflag != -1">
@@ -694,10 +715,10 @@
         <if test="orderNo != null and orderNo != ''">
             and order_no = #{orderNo,jdbcType=VARCHAR}
         </if>
-        <if test="payChannel != null and payChannel != ''">
+        <if test="payChannel != null and payChannel != -1">
             and pay_channel = #{payChannel,jdbcType=INTEGER}
         </if>
-        <if test="payChannel == null || payChannel == '' || payChannel == -1 ">
+        <if test="payChannel == null || payChannel == -1 ">
                 and pay_channel in (0,1,2,3)
         </if>
         <if test="payerReconflag != null and payerReconflag != -1">
