@@ -303,7 +303,7 @@ public class PayNotifyBizz {
         paymentEntity.setFinishTime(new Date());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         //发送退款通知
         refundNotifyMq(paymentEntity);
     }

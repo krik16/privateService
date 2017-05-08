@@ -284,7 +284,7 @@ public class RefundBizz {
         //查找退款记录
         PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, oldPaymentEntity);
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, null);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, null,null);
 
         //初始化翼支付请求参数
         RefundParam param = initTianyiRefundParam(refundAmount,oldPaymentEntity,refundPaymentEntity);
@@ -293,7 +293,7 @@ public class RefundBizz {
         TianyiPayUnit.tradeRefund(param);
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, null);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, null,null);
 
         return refundPaymentEntity;
     }
