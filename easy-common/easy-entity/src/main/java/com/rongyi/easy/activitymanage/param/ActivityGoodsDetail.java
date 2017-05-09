@@ -2,6 +2,7 @@ package com.rongyi.easy.activitymanage.param;
 
 import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -42,30 +43,7 @@ public class ActivityGoodsDetail implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("activityId", activityId)
-                .append("shopName", shopName)
-                .append("desc", desc)
-                .append("goodsId", goodsId)
-                .append("groupNum", groupNum)
-                .append("joinGroupLimit", joinGroupLimit)
-                .append("name", name)
-                .append("id", id)
-                .append("openGroupLimit", openGroupLimit)
-                .append("sortNum", sortNum)
-                .append("createUser", createUser)
-                .append("updateUser", updateUser)
-                .append("remainStock", remainStock)
-                .append("activityPrice", activityPrice)
-                .append("status", status)
-                .append("commodityPic", commodityPic)
-                .append("groupMaxNum", groupMaxNum)
-                .append("subTitle", subTitle)
-                .append("supModPrice", supModPrice)
-                .append("joinStartAt", joinStartAt)
-                .append("joinEndAt", joinEndAt)
-                .append("expectTotalAmount", expectTotalAmount)
-                .toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
 
