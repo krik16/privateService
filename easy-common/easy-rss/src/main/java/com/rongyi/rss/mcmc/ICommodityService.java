@@ -113,4 +113,6 @@ public interface ICommodityService {
 	public boolean updateCommodityForOperate(CommodityParam commodityParam);
 	
 	public Commodity findByCodeAndShopMid(String code, String shopMid);
+
+	void refreshCommodity(List<String> shopMids);
 }
