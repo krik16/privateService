@@ -10,6 +10,7 @@ public class JudgeShopVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String shopMid;//店铺id
 	private Boolean isChainShop;//是否是连锁店铺
+	private boolean singleShopAccount;//是否是单店铺账号
 	public String getShopMid() {
 		return shopMid;
 	}
@@ -22,10 +23,17 @@ public class JudgeShopVO implements Serializable{
 	public void setIsChainShop(Boolean isChainShop) {
 		this.isChainShop = isChainShop;
 	}
+	public boolean isSingleShopAccount() {
+		return singleShopAccount;
+	}
+	public void setSingleShopAccount(boolean singleShopAccount) {
+		this.singleShopAccount = singleShopAccount;
+	}
 	@Override
 	public String toString() {
 		return "JudgeShopVO [shopMid=" + shopMid + ", isChainShop="
-				+ isChainShop + "]";
+				+ isChainShop + ", singleShopAccount=" + singleShopAccount
+				+ "]";
 	}
 	
 }
