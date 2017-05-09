@@ -15,4 +15,8 @@ public interface ICommoditySpecService {
 	public Map<String, Object> editSpec(CommodityVO commodityVo) throws Exception;
 
 	public List<CommoditySpec> getSpecListByCommodityList(List<Commodity> commodityList);
+
+	public List<String> getColumnValueIdsByValues(List<String> valueList);
+
+	public List<String> getColumnValuesByValueIds(List<String> valueIdList);
 }
