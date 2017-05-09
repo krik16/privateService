@@ -53,6 +53,7 @@ public class SessionUserInfo implements Serializable{
 	private Integer roleId;//分销商标识  -1
 	private Integer shopNum;//店铺数量[仅对店铺总部主账号生效]
 	private boolean isChainShop;//是否是连锁分店
+	private boolean singleShopAccount;//是否是单店铺账号
 	
 	public String getMallMid() {
 		return mallMid;
@@ -215,7 +216,7 @@ public class SessionUserInfo implements Serializable{
 			return brandId;
 		}else if (getIdentity() == 3) {
 			return filialeId;
-		}else if (getIdentity() == 4 || getIdentity() == 5) {
+		}else if (getIdentity() == 4 || getIdentity() == 5 || getIdentity() == 8) {
 			return shopId;
 		}
 		return null;
@@ -229,7 +230,7 @@ public class SessionUserInfo implements Serializable{
 			return brandMid;
 		}else if (getIdentity() == 3) {
 			return filialeMid;
-		}else if (getIdentity() == 4 || getIdentity() == 5) {
+		}else if (getIdentity() == 4 || getIdentity() == 5 || getIdentity() == 8) {
 			return shopMid;
 		}
 		return null;
@@ -406,6 +407,14 @@ public class SessionUserInfo implements Serializable{
 		this.isChainShop = isChainShop;
 	}
 
+	public boolean isSingleShopAccount() {
+		return singleShopAccount;
+	}
+
+	public void setSingleShopAccount(boolean singleShopAccount) {
+		this.singleShopAccount = singleShopAccount;
+	}
+
 	@Override
 	public String toString() {
 		return "SessionUserInfo [id=" + id + ", type=" + type + ", identity="
@@ -429,7 +438,8 @@ public class SessionUserInfo implements Serializable{
 				+ ", isAllowBindingWechat=" + isAllowBindingWechat
 				+ ", accountSource=" + accountSource + ", chiefId=" + chiefId
 				+ ", roleId=" + roleId + ", shopNum=" + shopNum
-				+ ", isChainShop=" + isChainShop + "]";
+				+ ", isChainShop=" + isChainShop + ", singleShopAccount="
+				+ singleShopAccount + "]";
 	}
 	
 }
