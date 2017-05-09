@@ -155,6 +155,8 @@ public interface ShopService {
 
 	boolean isRepeat(Map<String,Object> paramMap);
 
+	List<Shop> getShopListByShopNatureAndAddress(Map<String,Object> paramMap);
+
 	boolean updateShopNature(String id, ShopNatureEnum shopNature);
 
 	String copyInsert(Shop shop);
