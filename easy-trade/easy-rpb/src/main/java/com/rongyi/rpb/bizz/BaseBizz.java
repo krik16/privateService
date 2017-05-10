@@ -2,10 +2,13 @@ package com.rongyi.rpb.bizz;
 
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentEntityExt;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.ryoms.entity.WechatTianyiPayVo;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.mapper.PaymentEntityExtMapper;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
 import net.sf.json.JSONObject;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * conan
@@ -25,6 +29,8 @@ public class BaseBizz {
     PaymentService paymentService;
     @Autowired
     InitEntityUnit initEntityUnit;
+    @Autowired
+    PaymentEntityExtMapper paymentEntityExtMapper;
     /**
      * 初始化支付记录信息
      */
@@ -95,6 +101,39 @@ public class BaseBizz {
                     paySence,jsonObject.toString(),source);
         }
         return paymentEntity;
+    }
+
+    /**
+     * 初始化支付扩展表信息
+     */
+    protected PaymentEntityExt initPaymentEntityExt(String extend,Integer paymentEntityId) {
+        PaymentEntityExt paymentEntityExt = null;
+        //查找扩展表记录
+        if (paymentEntityId != null) {
+            paymentEntityExt = paymentEntityExtMapper.selectByPaymentOrderId(paymentEntityId);
+        }
+        if(StringUtil.isEmpty(extend)){
+            return null;
+        }
+
+        String[] extendArray = extend.split("__");
+        //记录已存在
+        if (paymentEntityExt == null) {
+            paymentEntityExt = new PaymentEntityExt();
+            paymentEntityExt.setPaymentOrderId(paymentEntityId);
+        }
+        if(extendArray.length > 0){
+            paymentEntityExt.setMchInfoId(extendArray[0]);
+        }
+        if(extendArray.length > 1){
+            paymentEntityExt.setStoreId(extendArray[1]);
+        }
+        if(extendArray.length > 2){
+            paymentEntityExt.setPosNo(extendArray[2]);
+        }
+        paymentEntityExt.setCreateAt(new Date());
+
+        return paymentEntityExt;
     }
 
 }

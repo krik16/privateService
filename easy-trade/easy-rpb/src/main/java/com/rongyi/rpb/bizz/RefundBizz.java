@@ -81,7 +81,7 @@ public class RefundBizz {
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,refundResData.getRefund_id());
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
         return refundResData;
     }
@@ -112,7 +112,7 @@ public class RefundBizz {
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,alipayTradeRefundResponse.getOpenId());
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
         alipayTradeRefundResponse.setRefundFee(oldPaymentEntity.getAmountMoney().toString());
 
@@ -148,7 +148,7 @@ public class RefundBizz {
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, resData.getRefundid());
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
         resData.setRefund_fee(new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         resData.setTotal_fee(oldPaymentEntity.getAmountMoney());
@@ -188,7 +188,7 @@ public class RefundBizz {
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
         return resData;
 
@@ -214,7 +214,7 @@ public class RefundBizz {
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
         PaymentEntityVo paymentEntityVo = new PaymentEntityVo();
         BeanUtils.copyProperties(refundPaymentEntity,paymentEntityVo);
@@ -233,7 +233,7 @@ public class RefundBizz {
 
         PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, oldPaymentEntity);
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, null);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, null,null);
 
         return refundPaymentEntity;
 
@@ -284,7 +284,7 @@ public class RefundBizz {
         //查找退款记录
         PaymentEntity refundPaymentEntity = baseRefund(orderNo, refundAmount, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL6, oldPaymentEntity);
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, null);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, null,null);
 
         //初始化翼支付请求参数
         RefundParam param = initTianyiRefundParam(refundAmount,oldPaymentEntity,refundPaymentEntity);
@@ -293,7 +293,7 @@ public class RefundBizz {
         TianyiPayUnit.tradeRefund(param);
 
         //保存记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, null);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, null,null);
 
         return refundPaymentEntity;
     }

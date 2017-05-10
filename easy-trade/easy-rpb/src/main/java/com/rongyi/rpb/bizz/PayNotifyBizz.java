@@ -264,7 +264,7 @@ public class PayNotifyBizz {
         paymentEntity.setFinishTime(new Date());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
 
         //通知第三方业务
         payNotifyThird(paymentEntity, paymentLogInfo);
@@ -303,7 +303,7 @@ public class PayNotifyBizz {
         paymentEntity.setFinishTime(new Date());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         //发送退款通知
         refundNotifyMq(paymentEntity);
     }
@@ -349,7 +349,7 @@ public class PayNotifyBizz {
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, "");
 
         //保存退款记录
-        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo);
+        saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
     }
 

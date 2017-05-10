@@ -34,6 +34,11 @@
         <result column="attach" property="attach" jdbcType="VARCHAR"/>
 
     </resultMap>
+    <resultMap id="BaseResultMapVo" type="com.rongyi.easy.rpb.vo.v6.PaymentEntityVo" extends="BaseResultMap">
+        <result column="mch_info_id" property="mchInfoId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="pos_no" property="posNo" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <sql id="Base_Column_List">
 		id, order_no,order_type,order_price,pay_no,pay_amount,
@@ -658,9 +663,14 @@
           and source in(3,4)
     </select>
 
-    <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select  <include refid="Base_Column_List"/>
-        from payment_order
+    <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMapVo">
+        select
+        po.id, order_no,order_type,order_price,pay_no,pay_amount,
+        status,trade_type,po.create_at,
+        end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
+        ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel,pay_scene,mch_info_id,store_id,pos_no
+        from payment_order po
+        left join payment_order_ext poe on po.id = poe.payment_order_id
         where source in (3,4)
             <if test="orderNo != null and orderNo != ''">
                 and order_no = #{orderNo,jdbcType=VARCHAR}
@@ -695,7 +705,7 @@
             <if test="endTime != null and endTime != ''">
                 and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
-        order by create_at desc  limit #{startIndex},#{pageSize} 
+        order by po.create_at desc  limit #{startIndex},#{pageSize}
     </select>
 
     <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">

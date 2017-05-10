@@ -1,6 +1,7 @@
 package com.rongyi.rpb.bizz;
 
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentEntityExt;
 import com.rongyi.easy.rpb.vo.RyMchVo;
 import com.rongyi.easy.ryoms.entity.WechatTianyiPayVo;
 import com.rongyi.pay.core.ali.config.AliConfigure;
@@ -59,6 +60,9 @@ public class PaySignBizz extends BaseBizz{
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "",
                 wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
+        //初始化扩展记录
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wechatPaySignData.getExtend(), paymentEntity.getId());
+
         //获取微信支付签名
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
         Map<String, Object> map = WeChatPayUnit.getPaySign(wechatPaySignData, wechatConfigure, ConstantUtil.NOTIFY_ADDRESS_V6.WEIXIN_NOTIFY_URL_V6);
@@ -67,7 +71,7 @@ public class PaySignBizz extends BaseBizz{
         redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), wechatConfigure.getNotifyUrl());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, null);
+        saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
 
         return map;
 
@@ -88,6 +92,9 @@ public class PaySignBizz extends BaseBizz{
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, aliScanPayReqData.getOrderNo(), aliScanPayReqData.getTotalAmount(), aliScanPayReqData.getSellerId(), "",
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
+        //初始化扩展记录
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(aliScanPayReqData.getExtend(), paymentEntity.getId());
+
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
         Map<String, Object> map = AliPayUnit.getScanPaySign(aliScanPayReqData, aliConfigure, ConstantUtil.NOTIFY_ADDRESS_V6.ALI_NOTIFY_URL_V6);
@@ -96,7 +103,7 @@ public class PaySignBizz extends BaseBizz{
         redisService.set(paymentEntity.getPayNo() + paymentEntity.getOrderNum(), aliConfigure.getNotifyUrl());
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, null);
+        saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
 
         return map;
     }
@@ -119,12 +126,15 @@ public class PaySignBizz extends BaseBizz{
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waScanPayParam.getOrderId(), totalAmount, waScanPayParam.getSellerId(), "",
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
+        //初始化扩展记录
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waScanPayParam.getExtend(), paymentEntity.getId());
+
         //获取支付宝扫码支付签名
         waScanPayParam.setOrderId(paymentEntity.getPayNo());
         WaScanPayResData resData = WebankPayUnit.alipayScanPay(waScanPayParam);
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, null);
+        saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
 
         return resData;
     }
@@ -141,12 +151,15 @@ public class PaySignBizz extends BaseBizz{
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wwScanPayParam.getOutTradeNo(), wwScanPayParam.getTotalFee(), "",
                 wwScanPayParam.getWechatMchId(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
+        //初始化扩展记录
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wwScanPayParam.getExtend(), paymentEntity.getId());
+
         //获取公众号扫码支付签名
         wwScanPayParam.setOutTradeNo(paymentEntity.getPayNo());
         WwScanPayResData resData = WebankPayUnit.wechatScanPay(wwScanPayParam);
 
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, null);
+        saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
         return resData ;
     }
 
@@ -167,7 +180,7 @@ public class PaySignBizz extends BaseBizz{
         tianyiParam.getTianyiOrderParam().setOrderReqTranseq(paymentEntity.getPayNo());
         tianyiParam.getPayDetailParam().setOrderReqTranseq(paymentEntity.getPayNo());
         //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, null);
+        saveUnit.updatePaymentEntity(paymentEntity, null,null);
         //获取h5支付url
         return TianyiPayUnit.tianyiPay(tianyiParam);
     }

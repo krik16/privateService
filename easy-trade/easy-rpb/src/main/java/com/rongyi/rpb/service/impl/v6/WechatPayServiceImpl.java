@@ -10,7 +10,10 @@ import com.rongyi.pay.core.Exception.WeChatException;
 import com.rongyi.pay.core.Exception.WebankException;
 import com.rongyi.pay.core.constants.ConstantEnum;
 import com.rongyi.pay.core.unit.WeChatPayUnit;
-import com.rongyi.pay.core.wechat.model.*;
+import com.rongyi.pay.core.wechat.model.GetOpenIdResData;
+import com.rongyi.pay.core.wechat.model.PunchCardPayResData;
+import com.rongyi.pay.core.wechat.model.RefundResData;
+import com.rongyi.pay.core.wechat.model.WechatPaySignData;
 import com.rongyi.pay.core.wechat.util.WechatConfigure;
 import com.rongyi.rpb.bizz.*;
 import com.rongyi.rss.rpb.IWechatPayService;
@@ -20,7 +23,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -114,24 +116,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            RefundQueryResData resData = queryBizz.wechatRefundQuery(orderNo, wechatConfigure);
-            Map<String, Object> map = BeanMapUtils.toMap(resData);
-
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", resData.getOut_trade_no());
-
-            //微众银行退款单号
-            map.put("tradeNo", resData.getTransaction_id());
-
-            //交易金额
-            map.put("totalAmount", resData.getTotalAmount().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            //退款金额
-            map.put("refundAmount", resData.getRefund_fee_0());
-            map.put("refundStatus", "SUCCESS");
-
-
+            Map<String, Object> map = queryBizz.wechatRefundQuery(orderNo, wechatConfigure);
             log.info("退款查询结果,map={}", map);
             return map;
         } catch (WeChatException | ParamNullException e) {
@@ -202,29 +187,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
         //设置支付参数
         try {
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);
-            PunchCardPayQueryResData resData = queryBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
-            Map<String, Object> map = BeanMapUtils.toMap(resData);
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", resData.getOut_trade_no());
-            //微信流水号
-            map.put("tradeNo", resData.getTransaction_id());
-            //交易金额
-            map.put("totalAmount", resData.getTotal_fee());
-            //设置支付状态
-            if (ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getReturn_code()) &&
-                    ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getResult_code()) &&
-                    ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(resData.getTrade_state())) {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            } else if (ConstantEnum.WW_PUNCHCARDPAY_USERPAYING.getCodeStr().equals(resData.getTrade_state())) {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
-            } else if (ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr().equals(resData.getTrade_state())) {
-                map.put("tradeStatus", ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
-            } else {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
-            }
-
+            Map<String, Object> map = queryBizz.wechatPunchCardPayQueryOrder(orderNo, wechatConfigure);
             log.info("订单查询结果,map={}", map);
             return map;
         } catch (WeChatException e) {
