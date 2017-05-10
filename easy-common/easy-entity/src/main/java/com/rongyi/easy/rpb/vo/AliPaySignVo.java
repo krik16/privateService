@@ -9,7 +9,7 @@ import java.io.Serializable;
  * conan
  * 2017/2/7 17:08
  **/
-public class AliPaySignVo implements Serializable {
+public class AliPaySignVo extends BaseBizVo implements Serializable {
 
     private static final long serialVersionUID = -825461632805396552L;
     //支付授权码

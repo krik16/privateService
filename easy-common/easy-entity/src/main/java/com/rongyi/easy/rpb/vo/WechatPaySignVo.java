@@ -10,7 +10,7 @@ import java.io.Serializable;
  * conan
  * 2016/10/11 14:49
  **/
-public class WechatPaySignVo implements Serializable{
+public class WechatPaySignVo extends BaseBizVo implements Serializable{
 
     private static final long serialVersionUID = 2797291649752395523L;
     private String orderNo;//订单号
