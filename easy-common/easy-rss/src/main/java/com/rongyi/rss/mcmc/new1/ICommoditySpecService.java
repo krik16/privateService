@@ -18,5 +18,5 @@ public interface ICommoditySpecService {
 
 	public List<String> getColumnValueIdsByValues(List<String> valueList);
 
-	public List<String> getColumnValuesByValueIds(List<String> valueIdList);
+	public List<String> getColumnValuesByValueIds(List<String> valueIdList, List<String> columnValueList);
 }
