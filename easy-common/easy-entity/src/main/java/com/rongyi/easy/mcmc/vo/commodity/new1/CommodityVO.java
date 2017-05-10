@@ -1388,7 +1388,7 @@ public class CommodityVO implements  Serializable, Cloneable {
 				this.setCreate_by("-1");
 			}
 		}  else {
-			this.setCreate_by(param.getCreateBy().toString());
+			this.setCreate_by(null != param.getCreateBy() ? param.getCreateBy().toString() : "-1");
 			this.setTerminalType(param.getTerminalType());
 			this.setRegisterAt(param.getRegisterAt());
 			this.setSoldOutAt(param.getSoldOutAt());
