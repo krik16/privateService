@@ -48,4 +48,14 @@ public enum ShopTypeEnum {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    public static ShopTypeEnum getShopTypeByName(String name){
+        ShopTypeEnum[] shopTypes = ShopTypeEnum.values();
+        for(ShopTypeEnum shopType: shopTypes){
+            if(shopType.getName().equals(name)){
+                return shopType;
+            }
+        }
+        return null;
+    }
 }
