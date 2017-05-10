@@ -161,6 +161,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> onServiceIds; // 标记为打开的服务号
 	private List<String> offServiceIds; // 被大运营标记为关闭的服务号
 	private String weAndTeStatus;
+	private Integer isRefund;//是否可以退货，0：不可退货 1：可退货
 
 	public List<String> getMallServiceIds() {
 		return mallServiceIds;
@@ -923,6 +924,14 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setEditAble(String editAble) {
 		this.editAble = editAble;
 	}
+	
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
 
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
@@ -987,117 +996,74 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setServiceDescriptionRemark(serviceDescriptionRemark);
 		return commodity;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Commodity{" +
-				"id=" + id +
-				", type=" + type +
-				", liveId='" + liveId + '\'' +
-				", isSpot=" + isSpot +
-				", liveStartTime=" + liveStartTime +
-				", liveEndTime=" + liveEndTime +
-				", create_by='" + create_by + '\'' +
-				", saleId=" + saleId +
-				", flashSaleId=" + flashSaleId +
-				", activityStartTime=" + activityStartTime +
-				", activityEndTime=" + activityEndTime +
-				", secKillSign='" + secKillSign + '\'' +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", barCode='" + barCode + '\'' +
-				", postage='" + postage + '\'' +
-				", stock=" + stock +
-				", sold=" + sold +
-				", lockedStock=" + lockedStock +
-				", createAt=" + createAt +
-				", updateAt=" + updateAt +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", oPriceOfLowestCPrice='" + oPriceOfLowestCPrice + '\'' +
-				", brandName='" + brandName + '\'' +
-				", mallMid='" + mallMid + '\'' +
-				", shopNum='" + shopNum + '\'' +
-				", filialeMid='" + filialeMid + '\'' +
-				", update_by='" + update_by + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", identity=" + identity +
-				", templateId=" + templateId +
-				", picList=" + picList +
-				", specList=" + specList +
-				", price=" + price +
-				", brandId='" + brandId + '\'' +
-				", mallId='" + mallId + '\'' +
-				", categoryIds=" + categoryIds +
-				", customCategory=" + customCategory +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", source=" + source +
-				", stockStatus=" + stockStatus +
-				", systemNumber='" + systemNumber + '\'' +
-				", reason='" + reason + '\'' +
-				", oPriceMax='" + oPriceMax + '\'' +
-				", oPriceMin='" + oPriceMin + '\'' +
-				", cPriceMax='" + cPriceMax + '\'' +
-				", cPriceMin='" + cPriceMin + '\'' +
-				", purchaseCount=" + purchaseCount +
-				", discount=" + discount +
-				", sort=" + sort +
-				", goodsSec=" + goodsSec +
-				", customCategoryIds=" + customCategoryIds +
-				", commodityModelNo='" + commodityModelNo + '\'' +
-				", goodsParam=" + goodsParam +
-				", commodityOffUserId=" + commodityOffUserId +
-				", commodityOffUserName='" + commodityOffUserName + '\'' +
-				", shopName='" + shopName + '\'' +
-				", mallName='" + mallName + '\'' +
-				", hotAreaName='" + hotAreaName + '\'' +
-				", galleryPosition=" + galleryPosition +
-				", shelvesType=" + shelvesType +
-				", subheading='" + subheading + '\'' +
-				", giftId='" + giftId + '\'' +
-				", sn='" + sn + '\'' +
-				", mappingId='" + mappingId + '\'' +
-				", commodityRange=" + commodityRange +
-				", activityId='" + activityId + '\'' +
-				", exchangeTypes='" + exchangeTypes + '\'' +
-				", pointType=" + pointType +
-				", buyType=" + buyType +
-				", deliveryTypes='" + deliveryTypes + '\'' +
-				", selfType=" + selfType +
-				", selfAddress='" + selfAddress + '\'' +
-				", selfRemark='" + selfRemark + '\'' +
-				", selfAddressId='" + selfAddressId + '\'' +
-				", selfExpireDate=" + selfExpireDate +
-				", tagIds=" + tagIds +
-				", selfTakeDays=" + selfTakeDays +
-				", couponStartDate=" + couponStartDate +
-				", couponEndDate=" + couponEndDate +
-				", locationIds=" + locationIds +
-				", accountType=" + accountType +
-				", serviceIds=" + serviceIds +
-				", mallServiceIds=" + mallServiceIds +
-				", groupMid='" + groupMid + '\'' +
-				", merchantId='" + merchantId + '\'' +
-				", merchantType=" + merchantType +
-				", freePostage='" + freePostage + '\'' +
-				", skus=" + skus +
-				", onServiceIds=" + onServiceIds +
-				", offServiceIds=" + offServiceIds +
-				", weAndTeStatus='" + weAndTeStatus + '\'' +
-				", editAble='" + editAble + '\'' +
-				", serviceDescription='" + serviceDescription + '\'' +
-				", serviceDescriptionId=" + serviceDescriptionId +
-				", serviceDescriptionRemark='" + serviceDescriptionRemark + '\'' +
-				'}';
+		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId
+				+ ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
+				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
+				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
+				+ ", activityStartTime=" + activityStartTime
+				+ ", activityEndTime=" + activityEndTime + ", secKillSign="
+				+ secKillSign + ", name=" + name + ", category=" + category
+				+ ", shopId=" + shopId + ", shopMid=" + shopMid + ", status="
+				+ status + ", code=" + code + ", barCode=" + barCode
+				+ ", description=" + description + ", postage=" + postage
+				+ ", stock=" + stock + ", sold=" + sold + ", lockedStock="
+				+ lockedStock + ", createAt=" + createAt + ", updateAt="
+				+ updateAt + ", originalPrice=" + originalPrice
+				+ ", currentPrice=" + currentPrice + ", oPriceOfLowestCPrice="
+				+ oPriceOfLowestCPrice + ", brandName=" + brandName
+				+ ", mallMid=" + mallMid + ", shopNum=" + shopNum
+				+ ", filialeMid=" + filialeMid + ", update_by=" + update_by
+				+ ", brandMid=" + brandMid + ", supportCourierDeliver="
+				+ supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", identity=" + identity
+				+ ", templateId=" + templateId + ", picList=" + picList
+				+ ", specList=" + specList + ", price=" + price + ", brandId="
+				+ brandId + ", mallId=" + mallId + ", categoryIds="
+				+ categoryIds + ", customCategory=" + customCategory
+				+ ", freight=" + freight + ", terminalType=" + terminalType
+				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt
+				+ ", source=" + source + ", stockStatus=" + stockStatus
+				+ ", systemNumber=" + systemNumber + ", reason=" + reason
+				+ ", oPriceMax=" + oPriceMax + ", oPriceMin=" + oPriceMin
+				+ ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin
+				+ ", purchaseCount=" + purchaseCount + ", discount=" + discount
+				+ ", sort=" + sort + ", goodsSec=" + goodsSec
+				+ ", customCategoryIds=" + customCategoryIds
+				+ ", commodityModelNo=" + commodityModelNo + ", goodsParam="
+				+ goodsParam + ", commodityOffUserId=" + commodityOffUserId
+				+ ", commodityOffUserName=" + commodityOffUserName
+				+ ", shopName=" + shopName + ", mallName=" + mallName
+				+ ", hotAreaName=" + hotAreaName + ", galleryPosition="
+				+ galleryPosition + ", shelvesType=" + shelvesType
+				+ ", subheading=" + subheading + ", commodityDetails="
+				+ commodityDetails + ", giftId=" + giftId + ", sn=" + sn
+				+ ", mappingId=" + mappingId + ", commodityRange="
+				+ commodityRange + ", activityId=" + activityId
+				+ ", exchangeTypes=" + exchangeTypes + ", pointType="
+				+ pointType + ", buyType=" + buyType + ", deliveryTypes="
+				+ deliveryTypes + ", selfType=" + selfType + ", selfAddress="
+				+ selfAddress + ", selfRemark=" + selfRemark
+				+ ", selfAddressId=" + selfAddressId + ", selfExpireDate="
+				+ selfExpireDate + ", tagIds=" + tagIds + ", selfTakeDays="
+				+ selfTakeDays + ", couponStartDate=" + couponStartDate
+				+ ", couponEndDate=" + couponEndDate + ", locationIds="
+				+ locationIds + ", accountType=" + accountType
+				+ ", serviceIds=" + serviceIds + ", mallServiceIds="
+				+ mallServiceIds + ", groupMid=" + groupMid + ", merchantId="
+				+ merchantId + ", merchantType=" + merchantType
+				+ ", freePostage=" + freePostage + ", skus=" + skus
+				+ ", onServiceIds=" + onServiceIds + ", offServiceIds="
+				+ offServiceIds + ", weAndTeStatus=" + weAndTeStatus
+				+ ", isRefund=" + isRefund + ", editAble=" + editAble
+				+ ", serviceDescription=" + serviceDescription
+				+ ", serviceDescriptionId=" + serviceDescriptionId
+				+ ", serviceDescriptionRemark=" + serviceDescriptionRemark
+				+ "]";
 	}
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
@@ -1157,6 +1123,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
 		this.setType(CommodityType.GUIDE.getValue());
 		this.setShelvesType(vo.getShelvesType());
+		this.setIsRefund(vo.getIsRefund());//是否可退货
 		//发布商品的逻辑有修改，魔店发布的商品不再是默认上下架时间为1年(立即上架是1年)
 		// null == vo.getShelvesType() 版本兼容
 		if (this.getSource() == 2
@@ -1416,6 +1383,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setServiceDescriptionId(source.getServiceDescriptionId());
 		commodity.setServiceDescription(source.getServiceDescription());
 		commodity.setServiceDescriptionRemark(source.getServiceDescriptionRemark());
+		commodity.setIsRefund(source.getIsRefund());//是否可退货
 		return commodity;
 	}
 }
