@@ -291,6 +291,9 @@ public class PayConfigInitUnit {
             }else{
                 throw new TradePayException(ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getCodeStr(),ConstantEnum.EXCEPTION_WEBANK_ALI_TICKET_FAIL.getValueStr());
             }
+        }else{
+            this.ticket = ticketValue;
+            this.initWwConfigure();
         }
     }
 }
