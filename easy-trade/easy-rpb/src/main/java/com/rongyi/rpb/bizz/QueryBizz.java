@@ -326,7 +326,7 @@ public class QueryBizz {
 
         PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-        PaymentEntity refundPayment = baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+//        PaymentEntity refundPayment = baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
         Map<String, Object> map = new HashMap<>();
         //外部订单号
@@ -336,7 +336,7 @@ public class QueryBizz {
         //交易金额
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
-        if(!refundPayment.getStatus().equals(Constants.PAYMENT_STATUS.STAUS2)){
+        if(!oldPaymentEntity.getStatus().equals(Constants.PAYMENT_STATUS.STAUS2)){
 
             WaQueryTradeReqData reqData = new WaQueryTradeReqData(weBankMchNo, oldPaymentEntity.getPayNo());
 
