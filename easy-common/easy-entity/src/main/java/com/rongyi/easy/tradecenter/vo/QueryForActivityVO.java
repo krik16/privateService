@@ -37,7 +37,7 @@ public class QueryForActivityVO implements Serializable {
     // 支付金额
     private float payAmount;
     // 下单时间
-    private Date createDate;
+    private long createDate;
 
     public Integer getActivityId() {
         return activityId;
@@ -95,11 +95,11 @@ public class QueryForActivityVO implements Serializable {
         this.commoditySpecName = commoditySpecName;
     }
 
-    public Date getCreateDate() {
+    public long getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(long createDate) {
         this.createDate = createDate;
     }
 
