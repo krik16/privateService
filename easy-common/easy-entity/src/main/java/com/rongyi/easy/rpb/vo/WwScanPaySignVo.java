@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 微众微信公众号支付请求参数
  * Created by sujuan on 2017/4/1.
  */
-public class WwScanPaySignVo implements Serializable {
+public class WwScanPaySignVo extends BaseBizVo implements Serializable {
     private static final long serialVersionUID = 3046512617078974023L;
     //商户号 必传
     private String mchId;
