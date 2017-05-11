@@ -7,11 +7,16 @@ package com.rongyi.rss.ryoms;
 public interface IDataMigrationService {
 
     /**
-     * 数据迁移接口
+     * 数据迁移接口（无商场）
      * @param id 原id
      */
     void process(String id);
 
+    /**
+     * 数据迁移（有商场）
+     * @param id id
+     */
+    void processMallShop(String id);
     /**
      * 根据原店铺id获取新店铺id
      * @param id 原id
