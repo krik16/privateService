@@ -10,7 +10,7 @@ public class SessionUserInfo implements Serializable{
 
     private Integer type;
 
-    private Integer identity;
+    private Integer identity;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手,8连锁总部
 
     private Integer isCooperation;
 
