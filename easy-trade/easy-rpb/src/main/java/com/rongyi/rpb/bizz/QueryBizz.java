@@ -326,7 +326,13 @@ public class QueryBizz {
 
         PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-//        PaymentEntity refundPayment = baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        //微众支付存在一个坑，如果退款完成之后不调用退款查询接口直接调用支付查询接口返回的是支付成功，只要调用一次退款查询接口后再次调用就会提示原交易已退货
+        //此处特殊处理下，在支付查询时检查是否已退款，如已退款则直接返回已退款状态
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        if (refundPayment != null) {
+            throw new WebankException("1", "原交易已退货");
+        }
 
         Map<String, Object> map = new HashMap<>();
         //外部订单号
