@@ -161,5 +161,5 @@ public interface ShopService {
 
 	String copyInsert(Shop shop);
 
-	boolean updateRelation(String id, String parentId);
+	boolean updateRelation(String id, String parentId, List<String> parentIds);
 }
