@@ -423,7 +423,7 @@
 			<dependency>
 				<groupId>com.rongyi</groupId>
 				<artifactId>pay-core</artifactId>
-				<version>5.6.5-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>

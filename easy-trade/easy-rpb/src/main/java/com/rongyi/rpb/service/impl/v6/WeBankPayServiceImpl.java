@@ -148,20 +148,8 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
     public Map<String, Object> webankWechatRefundQuery(String orderNo, Integer payType, String weBankMchNo) {
         log.info("微众微信退款查询,orderNo={},payType={},weBankMchNo={}", orderNo, payType, weBankMchNo);
         try {
-            WwPunchCardRefundResData resData = queryBizz.webankWechatPunchCardRefundQuery(orderNo, weBankMchNo);
-            Map<String, Object> map = BeanMapUtils.toMap(resData);
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", resData.getPayNo());
-            //微众银行退款单号
-            map.put("tradeNo", resData.getRefundid());
-
-            //交易金额
-            map.put("totalAmount", resData.getTotal_fee().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            //退款金额
-            map.put("refundAmount", resData.getRefund_fee().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            map.put("refundStatus", "SUCCESS");
+            Map<String, Object> map = queryBizz.webankWechatPunchCardRefundQuery(orderNo, weBankMchNo);
+            log.info("微众微信退款返回结果,map={}",map);
             return map;
         } catch (WebankException | ParamNullException e) {
             log.warn("微众微信退款失败,e={}", e.getMessage(), e);
@@ -241,29 +229,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
     public Map<String, Object> weBankAliPayQuery(RyMchVo ryMchVo, String orderNo, Integer payType, String weBankMchNo) {
         log.info("微众支付宝刷卡支付查询,ryMchVo={},orderNo={},payType={},weBankMchNo={}", ryMchVo, orderNo, payType, weBankMchNo);
         try {
-            WaQueryTradeResData resData = queryBizz.weBankAliPunchCardPayQueryOrder(orderNo, weBankMchNo);
-
-            Map<String, Object> map = BeanMapUtils.toMap(resData);
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", resData.getOutTradeNo());
-            //第三方交易号
-            map.put("tradeNo", resData.getTradeNo());
-            //设置支付状态
-            if (com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_01.getCodeStr().equals(resData.getTradeStatus())) {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            } else if (com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(resData.getTradeStatus())) {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_PAYING.getValueStr());
-            }else if(com.rongyi.pay.core.constants.ConstantEnum.WA_TRADESTATUS_05.getCodeStr().equals(resData.getTradeStatus())){
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_COLSE.getValueStr());
-            } else {
-                map.put("tradeStatus", ConstantEnum.WA_PUNCHCARDPAY_SYSERR.getValueStr());
-            }
-
-            //交易金额
-            map.put("totalAmount", new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-
+            Map<String, Object> map = queryBizz.weBankAliPunchCardPayQueryOrder(orderNo, weBankMchNo);
             log.info("微众支付宝支付查询结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
@@ -312,19 +278,8 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
     public Map<String, Object> webankAliRefundQuery(String orderNo, Integer payType, String weBankMchNo) {
         log.info("微众支付宝退款查询,orderNo={},payType={},weBankMchNo={}", orderNo, payType, weBankMchNo);
         try {
-            WaRefundQueryResData resData = queryBizz.webankAliPunchCardRefundQuery(orderNo, weBankMchNo);
-            Map<String, Object> map = BeanMapUtils.toMap(resData);
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", resData.getOutTradeNo());
-            //微众银行退款单号
-            map.put("tradeNo", resData.getTradeNo());
-            //交易金额
-            map.put("totalAmount", new BigDecimal(resData.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            //退款金额
-            map.put("refundAmount", new BigDecimal(resData.getRefundAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            map.put("refundStatus", "SUCCESS");
+            Map<String,Object> map = queryBizz.webankAliPunchCardRefundQuery(orderNo, weBankMchNo);
+            log.info("微众支付宝退款查询结果,map={}", map);
             return map;
         } catch (WebankException | ParamNullException e) {
             log.warn("微众支付宝退款失败,e={}", e.getMessage(), e);

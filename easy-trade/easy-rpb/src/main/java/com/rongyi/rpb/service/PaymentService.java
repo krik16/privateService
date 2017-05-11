@@ -10,6 +10,7 @@ import com.rongyi.easy.rpb.dto.PaymentOrderDto;
 import com.rongyi.easy.rpb.entity.PaymentOrderEntity;
 import com.rongyi.easy.rpb.param.PaymentOrderParam;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.v6.PaymentEntityVo;
 
 /**
  * @Author: 柯军
@@ -108,7 +109,7 @@ public interface PaymentService {
 
 	public abstract List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tredeType);
 
-	public abstract Map<String, String> insert(PaymentEntity paymentEntity);
+	int insert(PaymentEntity paymentEntity);
 
 	public abstract PaymentEntity selectByPrimaryKey(String id);
 
@@ -321,7 +322,7 @@ public interface PaymentService {
 	 */
 	List<PaymentEntity> findList(PaymentOrderDto paymentOrderDto);
 
-	List<PaymentEntity> queryListByParam(PaymentOrderParam param);
+	List<PaymentEntityVo> queryListByParam(PaymentOrderParam param);
 
 	Integer queryCountByParam(PaymentOrderParam paymentParam);
 }

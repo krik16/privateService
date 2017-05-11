@@ -1,10 +1,10 @@
 package com.rongyi.rpb.service.impl.v6;
 
 import com.alipay.api.response.AlipayTradePayResponse;
-import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
+import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.AliConfigureVo;
@@ -23,7 +23,6 @@ import com.rongyi.rpb.bizz.PayBizz;
 import com.rongyi.rpb.bizz.PaySignBizz;
 import com.rongyi.rpb.bizz.QueryBizz;
 import com.rongyi.rpb.bizz.RefundBizz;
-import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.rss.rpb.IAliPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -163,20 +162,7 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            AlipayTradeQueryResponse alipayTradeQueryResponse = queryBizz.aliF2FPayQuery(orderNo, aliConfigure);
-
-            Map<String, Object> map = BeanMapUtils.toMap(alipayTradeQueryResponse);
-
-            map.remove("fundBillList");
-
-            //外部订单号
-            map.put("orderNo", orderNo);
-            //容易网交易号
-            map.put("payNo", alipayTradeQueryResponse.getOutTradeNo());
-
-            map.put("tradeStatus","SUCCESS");
-            //交易金额
-            map.put("totalAmount", new BigDecimal(alipayTradeQueryResponse.getTotalAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+            Map<String, Object> map = queryBizz.aliF2FPayQuery(orderNo, aliConfigure);
 
             log.info("支付宝面对面支付查询结果,map={}", map);
             return map;
