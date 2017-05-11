@@ -63,7 +63,7 @@ public class CommodityWebVO implements Serializable, CommodityDataStatus {
 		this.descrite=commodity.getDescription();
 		this.typeName = (commodity.getType() == 1 ? "买手" : "商家");
 		if (commodity.getType() == 1) {
-			this.spotName = (commodity.isSpot() ? "自采" : "非自采");
+			this.spotName = (commodity.getIsSpot() ? "自采" : "非自采");
 		} else {
 			this.spotName = "";
 		}

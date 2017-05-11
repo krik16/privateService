@@ -43,4 +43,12 @@ public class CommoditySpecColumnParam extends BaseParam implements Serializable{
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
 	}
+
+	@Override
+	public String toString() {
+		return "CommoditySpecColumnParam{" +
+				"categoryId='" + categoryId + '\'' +
+				", commodityId='" + commodityId + '\'' +
+				'}';
+	}
 }

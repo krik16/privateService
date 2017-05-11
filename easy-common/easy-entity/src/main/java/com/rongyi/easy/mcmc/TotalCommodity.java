@@ -47,6 +47,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Date updateAt;//数据更新日期
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
+	private String referencePrice;
 	private Integer updateBy;//修改人
 	private Integer createBy;//创建者
 
@@ -113,6 +114,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String brandName;
 	private Integer commodityRange;
 	private Integer isRefund;//是否可退货 0:不可退货，1：可退货
+
+	public String getReferencePrice() {
+		return referencePrice;
+	}
+
+	public void setReferencePrice(String referencePrice) {
+		this.referencePrice = referencePrice;
+	}
 
 	public Integer getCommodityRange() {
 		return commodityRange;
@@ -486,21 +495,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.goodsSec = goodsSec;
 	}
 
-	public Double getDiscount() {
-		try {
-			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-				ddf1.setMaximumFractionDigits(2);
-				Double currentPrice = Double.valueOf(this.currentPrice);
-				Double originalPrice = Double.valueOf(this.originalPrice);
-
-				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
-			}
-			return 10.0;
-		} catch(Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
-	}
 
 	public String getCommodityModelNo() {
 		return commodityModelNo;
@@ -516,6 +510,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
+	}
+
+	public Double getDiscount() {
+		return discount;
 	}
 
 	public void setDiscount(Double discount) {
@@ -680,6 +678,83 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.setServiceDescription(commodity.getServiceDescription());
 		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
 		//this.setIsRefund(commodity.getIsRefund());//是否可退货
+	}
+
+	/**
+	 * 重构：
+	 * @param commodity
+	 */
+	public void wrapTotalCommodityInfo(Commodity commodity) {
+		this.setName(commodity.getName());
+		this.setCategory(commodity.getCategory());
+		this.setStatus(commodity.getStatus());
+		this.setCode(commodity.getCode());
+		this.setDescription(commodity.getDescription());
+		this.setPostage(commodity.getPostage());
+		this.setStock(commodity.getStock());
+		this.setCommodityModelNo(commodity.getCommodityModelNo());
+		this.setGoodsParam(commodity.getGoodsParam());
+		this.setSkus(commodity.getSkus());
+
+		if(CollectionUtils.isNotEmpty(commodity.getSpecList())) {
+			//totalCommodity总表显示时间区域
+			this.setOriginalPrice(commodity.getoPriceMin() +
+					(commodity.getoPriceMax().equals(commodity.getoPriceMin()) ?
+							"-" + commodity.getoPriceMax() : ""));
+			this.setCurrentPrice(commodity.getcPriceMin() +
+					(commodity.getcPriceMax().equals(commodity.getcPriceMin()) ?
+							"-" + commodity.getcPriceMax() : ""));
+		} else {
+			this.setCurrentPrice(commodity.getCurrentPrice());
+			this.setOriginalPrice(commodity.getOriginalPrice());
+		}
+
+		this.setCreateAt(commodity.getCreateAt());
+		this.setUpdateAt(commodity.getUpdateAt());
+		this.setCategoryIds(commodity.getCategoryIds());
+
+		this.setPicList(commodity.getPicList());
+		this.setFreight(0);//app默认买家承担运费
+		this.setTerminalType(commodity.getTerminalType());
+		this.setRegisterAt(commodity.getRegisterAt());
+		this.setSoldOutAt(commodity.getSoldOutAt());
+		this.setSource(commodity.getSource());
+		this.setStockStatus(commodity.getStockStatus());
+		this.setCommodityIds(new ArrayList<ObjectId>());
+		this.getCommodityIds().add(commodity.getId());
+		this.setBrandMid(commodity.getBrandMid());
+		this.setBrandName(commodity.getBrandName());
+		this.setFilialeMids(new ArrayList<String>());
+		this.getFilialeMids().add(commodity.getFilialeMid());
+		this.setShopMids(new ArrayList<String>());
+		this.getShopMids().add(commodity.getShopMid());
+
+		if (StringUtils.isNotBlank(commodity.getCreate_by()) && commodity.getCreate_by().matches("\\d+")) {
+			this.setUpdateBy(Integer.valueOf(commodity.getCreate_by()));
+			this.setCreateBy(Integer.valueOf(commodity.getCreate_by()));
+		}
+		this.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		this.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		this.setIdentity(commodity.getIdentity());
+		this.setTemplateId(commodity.getTemplateId());//总表写入模版id
+		if(CollectionUtils.isNotEmpty(commodity.getCustomCategoryIds())){
+			this.setCustomCategoryIds((commodity.getCustomCategoryIds()));
+		}
+		this.setReason(commodity.getReason());
+		this.setShelvesType(commodity.getShelvesType());
+		this.setSubheading(commodity.getSubheading());
+		this.setCommodityDetails(commodity.getCommodityDetails());
+
+		this.setLocationIds(commodity.getLocationIds());
+		this.setAccountType(commodity.getIdentity());
+		//this.setServiceIds(commodity.getServiceIds());
+		this.setMallServiceIds(commodity.getMallServiceIds());
+		this.setMerchantId(commodity.getMerchantId());
+		this.setShelvesType(commodity.getShelvesType());
+		this.setServiceDescriptionId(commodity.getServiceDescriptionId());
+		this.setServiceDescription(commodity.getServiceDescription());
+		this.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
+		//this.setIsRefund(commodity.getIsRefund() == null ? 0 : commodity.getIsRefund());//是否可退货 摩店发布时不考虑
 	}
 
 	public String getSubheading() {
@@ -866,7 +941,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 			// 对应商品所属店铺MongoIds
 			setShopMids(param.getCommoditySpeceParams(), this);
-
+			this.setIsRefund(param.getIsRefund() == null ? 0 : param.getIsRefund());//是否可退货
 			// TODO total不需要服务号
 		//	this.setMallServiceIds(param.getServiceIds());
 		//	this.setOnServiceIds(param.getServiceIds());
