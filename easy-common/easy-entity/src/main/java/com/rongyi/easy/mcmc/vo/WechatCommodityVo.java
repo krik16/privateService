@@ -10,7 +10,12 @@ import java.util.List;
  */
 public class WechatCommodityVo implements Serializable{
 
-    private String commodityId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String commodityId;
 
     private String commodityName;
 

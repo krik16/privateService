@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -49,4 +51,20 @@ public class CommodityPageVO  implements  Serializable{
 		this.commodityList = commodityList;
 	}
 
+	public void wrapPaginationInfo(int totalCount, int pageSize, int currentPage) {
+		this.setTotalCount(totalCount);
+		this.setTotalPage(calculateTotalPage(totalCount, pageSize));
+		this.setPageSize(pageSize);
+		this.setCurrentPage(currentPage);
+	}
+
+	private int calculateTotalPage(int totalCount, int pageSize) {
+		return (totalCount % pageSize == 0) ? totalCount / pageSize : totalCount / pageSize + 1;
+	}
+
+	public void buildCommodityPageBuyerVO(List<CommodityVO> commodityVOList, int currentPage,
+										  int pageSize, int totalCount){
+		this.setCommodityList(commodityVOList);
+		this.wrapPaginationInfo(totalCount, pageSize, currentPage);
+	}
 }
