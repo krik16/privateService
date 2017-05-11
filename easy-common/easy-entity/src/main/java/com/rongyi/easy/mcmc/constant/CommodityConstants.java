@@ -47,4 +47,16 @@ public interface CommodityConstants {
         String HAIXIN_SPEC_NAME = "规格";
     }
 
+
+    /**
+     * 商品 更新 Solr_Index操作状态
+     */
+    interface CommodityIndexOp{
+        int Add_Index = 0;//添加
+        int Update_Index = 1;//更新
+        int Del_Index=2;//删除
+
+
+    }
+
 }

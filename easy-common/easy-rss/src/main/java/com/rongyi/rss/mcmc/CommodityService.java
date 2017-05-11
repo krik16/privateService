@@ -98,10 +98,6 @@ public interface CommodityService {
 
     public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage, int pagesize, String liveId, int isEdit);
 
-    public String publishCommodity(CommodityVO commodityvo, long shopId, long brandId, long mallId, String mallMid, String brandName, String shopNum, CommodityShopInfo shopInfo);
-
-    public String publishCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid, String brandName, String brandMid, String shopNum, List<Double> position, List<String> zone_ids);
-
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
     public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, String userName);
@@ -109,10 +105,6 @@ public interface CommodityService {
     public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
 
     public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason, String userName);
-
-    public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
-
-    public String editCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid, String brandName, String brandMid, String shopNum, List<Double> position, List<String> zone_ids);
 
     public ResponseResult updateCommodityPics(String id, List<String> picList, long shopId, int identity);
 
@@ -443,4 +435,11 @@ public interface CommodityService {
     boolean updateSpecTotalStock(String specId, Integer stock);
 
     List<CustomCategoryVo> searchCategoryForHaiXin(CustomCategoryParam customCategoryParam);
+
+    /**
+     *
+     * @param commodity
+     * @return
+     */
+    public McmcCommodityDocument transferCommodityToMcmcCommodityDocument(Commodity commodity);
 }

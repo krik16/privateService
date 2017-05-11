@@ -10,7 +10,7 @@ import java.io.Serializable;
  * conan
  * 2017/3/6 14:15
  **/
-public class WaScanPaySignVo implements Serializable{
+public class WaScanPaySignVo extends BaseBizVo implements Serializable{
     private static final long serialVersionUID = -5841080118584970083L;
     //商户号 必传
     private String wbMerchantId;
