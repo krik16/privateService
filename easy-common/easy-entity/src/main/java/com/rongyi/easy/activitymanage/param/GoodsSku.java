@@ -4,6 +4,7 @@ package com.rongyi.easy.activitymanage.param;
 import com.google.inject.internal.Lists;
 import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,22 +37,7 @@ public class GoodsSku implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("currentPrice", currentPrice)
-                .append("columnValues", columnValues)
-                .append("joinCount", joinCount)
-                .append("sku", sku)
-                .append("spec", spec)
-                .append("allocationCount", allocationCount)
-                .append("specId", specId)
-                .append("activityPrice", activityPrice)
-                .append("activityGoodsId", activityGoodsId)
-                .append("specSimpleVOs", specColumns)
-                .append("remainStock", remainStock)
-                .append("addCount", addCount)
-                .append("stockCount", stockCount)
-                .append("id", id)
-                .toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
     public String getColumnValues() {

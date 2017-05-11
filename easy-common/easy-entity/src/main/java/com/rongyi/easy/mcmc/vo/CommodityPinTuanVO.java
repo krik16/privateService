@@ -4,6 +4,7 @@ import com.rongyi.easy.activitymanage.vo.groupBuy.GroupBuyGoodSimpleInfo;
 import com.rongyi.easy.mcmc.Commodity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +38,43 @@ public class CommodityPinTuanVO implements Serializable {
     private String shopMid;//店铺mongoId
     private String shopName;//店铺名称
     private String subTitle;//副标题
+    private String commodityModelNo; //款号
+    private Integer status;//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
+    private Date registerAt;//上架时间
+    private Date soldOutAt;//下架时间
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getRegisterAt() {
+        return registerAt;
+    }
+
+    public void setRegisterAt(Date registerAt) {
+        this.registerAt = registerAt;
+    }
+
+    public Date getSoldOutAt() {
+        return soldOutAt;
+    }
+
+    public void setSoldOutAt(Date soldOutAt) {
+        this.soldOutAt = soldOutAt;
+    }
+
     public CommodityPinTuanVO(){}
 
     public CommodityPinTuanVO(Builder builder) {
