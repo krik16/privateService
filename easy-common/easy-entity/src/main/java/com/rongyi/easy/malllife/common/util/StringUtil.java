@@ -174,4 +174,8 @@ public class StringUtil {
 
     }
 
+	public static Boolean isValidObjectId(String id) {
+		return StringUtils.isNotBlank(id) || id.matches("[\\da-z-A-Z]{24}");
+	}
+
 }

@@ -58,12 +58,6 @@ public interface ROACommodityService {
 	public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage,
 			int pagesize, String liveId, int isEdit);
 
-	public String publishCommodity(CommodityVO commodityvo, long shopId, String shopMid, long brandId, long mallId,
-			String mallMid, String brandName, String shopNum);
-
-	public String publishCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
-			String brandName,String brandMid,String shopNum, List<Double> position, List<String> zone_ids);
-
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
@@ -71,11 +65,6 @@ public interface ROACommodityService {
 	public ResponseResult commodityToShelvesAuth(String id, long shopId, Integer userId);
 
 	public ResponseResult commodityOffShelvesAuth(String id, long shopId, Integer userId,String reason);
-
-	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
-
-	public String editCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
-			String brandName,String brandMid,String shopNum, List<Double> position, List<String> zone_ids);
 
 	public ResponseResult updateCommodityPics(String id, List<String> picList, long shopId, int identity);
 
@@ -181,20 +170,12 @@ public interface ROACommodityService {
 
 	/**
 	 * 根据商场获取品类列表(有商品的品类列表)
-	 * @param mallId		商场ID
-	 * @param showParent	是否显示父级
-	 * @param pageSize		分页条数
-	 * @param page			当前页
 	 * @return
 	 */
 	public ResponseVO getCommodityCategorysByMall(SearchCommodityCategoryParam param);
 
 	/**
 	 * 根据商场获取品牌列表(有商品的品牌列表)
-	 * @param mallId		商场ID
-	 * @param keyword		搜索关键字（匹配品牌名称）
-	 * @param pageSize		分页条数
-	 * @param page			当前页
 	 * @return
 	 */
 	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
@@ -272,7 +253,6 @@ public interface ROACommodityService {
      * 批量下架商品
      * @param ids
      * @param shopId
-     * @param identity
      * @param reason
      * @param userName
      * @return

@@ -18,7 +18,11 @@
         <slf4j.version>1.7.5</slf4j.version>
        <!-- <logback.version>1.0.11</logback.version>-->
         <drools.version>6.1.0.Final</drools.version>
+<<<<<<< HEAD
         <parent.project.version>5.6.0-SNAPSHOT</parent.project.version>
+=======
+        <parent.project.version>5.6.2-SNAPSHOT</parent.project.version>
+>>>>>>> remotes/origin/develop
         <!-- mybatis generator -->
         <mybatis.generator.configFile>${basedir}/src/main/resources/maven_build/generatorConfig.xml
         </mybatis.generator.configFile>

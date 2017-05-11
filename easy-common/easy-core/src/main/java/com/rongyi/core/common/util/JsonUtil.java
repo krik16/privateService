@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -43,8 +45,22 @@ public class JsonUtil {
             e.printStackTrace();   
         }   
         return JSONObject.toBean(jsonObject, clazz);   
-    }   
-       
+    }
+
+
+
+    public static Object getdocBean(String jsonString, Class<?> clazz){
+        try{
+            return  JSON.parseObject(jsonString, clazz);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
     /**  
      * 从一个JSON 对象字符格式中得到一个java对象，其中beansList是一类的集合，形如：  
      * {"id" : idValue, "name" : nameValue, "aBean" : {"aBeanId" : aBeanIdValue, ...},  
@@ -293,6 +309,31 @@ public class JsonUtil {
             }   
             return value == null ? null : value.toString();   
         }  
+    }
+
+
+
+    public static void main(String[] agrs){
+
+        Long millis =  1472617513000L;
+
+
+        Date date = new Date(millis);
+        System.out.println(JSON.toJSONString(date));
+
+        System.out.println( JSON.toJSONString(new Date(millis), SerializerFeature.WriteDateUseDateFormat));
+
+
+
+        String aoString = "{\"public_start\":1452074237760,\"id\":1}";
+
+        TestBean   ao = JSON.parseObject(aoString, TestBean.class);
+        setDataFormat2JAVA();
+        System.out.println("1111=="+ao.getPublic_start());
+
+
+
+
     }
     
 }  
