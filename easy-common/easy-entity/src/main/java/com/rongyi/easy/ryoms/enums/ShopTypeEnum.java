@@ -58,4 +58,14 @@ public enum ShopTypeEnum {
         }
         return null;
     }
+
+    public static ShopTypeEnum getShopTypeByCode(String code){
+        ShopTypeEnum[] shopTypes = ShopTypeEnum.values();
+        for(ShopTypeEnum shopType: shopTypes){
+            if(shopType.getCode().equals(code)){
+                return shopType;
+            }
+        }
+        throw new RuntimeException("未找到对应的店铺类型");
+    }
 }
