@@ -89,8 +89,10 @@ public class StatementBizz implements InitializingBean {
 		FileOutputStream fos = new FileOutputStream(fileName);
 		String line = null;
 		// 自行调整charset即可
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "GBK"));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"));
+		BufferedReader br = new BufferedReader(
+				new InputStreamReader(is, propertyConfigurer.getProperty("WEBANK_INPUT_CHARSET")));
+		BufferedWriter bw = new BufferedWriter(
+				new OutputStreamWriter(fos, propertyConfigurer.getProperty("WEBANK_OUTPUT_CHARSET")));
 		while ((line = br.readLine()) != null) {
 			bw.write(line);
 			bw.newLine();
