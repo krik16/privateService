@@ -418,4 +418,21 @@ public class HttpUtil {
 		//HttpResponse response = httpclient.execute(httpPost);
 	}
 
+	public static InputStream httpGet(String url ,WebankConfigure configure) throws Exception{
+		InputStream is = null;
+		logger.info("send_url:" + url);
+		try {
+			CloseableHttpClient httpClient = init(configure);
+			HttpGet httpGet = new HttpGet(url);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			HttpEntity httpEntity = httpResponse.getEntity();
+
+			is = httpEntity.getContent();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+			throw e;
+		}
+		return is;
+	}
 }

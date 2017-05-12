@@ -80,6 +80,9 @@ public class WebankConfigure extends BaseData{
 
     private static WebankConfigure webankConfigure;
 
+    // 微众对账单下载
+    private String webankStatementUrl;
+    
     private WebankConfigure(){}
 
     public static synchronized WebankConfigure getInstance() {
@@ -281,7 +284,15 @@ public class WebankConfigure extends BaseData{
         this.wechatScanQueryUrl = wechatScanQueryUrl;
     }
 
-    @Override
+    public String getWebankStatementUrl() {
+		return webankStatementUrl;
+	}
+
+	public void setWebankStatementUrl(String webankStatementUrl) {
+		this.webankStatementUrl = webankStatementUrl;
+	}
+
+	@Override
     public String toString() {
         return "WebankConfigure{" +
                 "key='" + key + '\'' +
@@ -291,6 +302,7 @@ public class WebankConfigure extends BaseData{
                 ", wechatKeyStorePwd='" + wechatKeyStorePwd + '\'' +
                 ", appId='" + appId + '\'' +
                 ", secret='" + secret + '\'' +
+                ", webankStatementUrl='" + webankStatementUrl + '\'' +
                 '}';
     }
 }

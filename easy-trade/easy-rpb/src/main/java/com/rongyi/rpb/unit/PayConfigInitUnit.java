@@ -101,6 +101,9 @@ public class PayConfigInitUnit {
 
     //翼支付通知地址
     private String tianyiPayNotifyUrl;
+    
+    // 微众对账单下载
+    private String webankStatementUrl;
     public void init(){
 
         //初始化微众相关配置
@@ -144,6 +147,7 @@ public class PayConfigInitUnit {
             configure.setAlipayRefundUrl(this.alipayRefundUrl);
             configure.setAlipayRefundQueryUrl(this.alipayRefundQueryUrl);
             configure.setAlipayScanPayUrl(this.alipayScanPayUrl);
+            configure.setWebankStatementUrl(this.webankStatementUrl);
             log.info("初始化微众银行支付配置完成,config={}",configure);
         }
         configure.setTicket(this.ticket);
@@ -271,7 +275,11 @@ public class PayConfigInitUnit {
         return tianyiRefundNotifyUrl;
     }
 
-    /**
+    public void setWebankStatementUrl(String webankStatementUrl) {
+		this.webankStatementUrl = webankStatementUrl;
+	}
+
+	/**
      * 初始化支付宝ticket
      */
     public void initAliTicket(){
