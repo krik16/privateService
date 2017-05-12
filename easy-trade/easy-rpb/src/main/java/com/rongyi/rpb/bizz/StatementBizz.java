@@ -15,6 +15,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.utils.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +29,8 @@ import com.rongyi.rpb.util.FTPHelper;
 
 @Repository
 public class StatementBizz implements InitializingBean {
+
+	private static final Logger log = LoggerFactory.getLogger(StatementBizz.class);
 
 	@Autowired
 	private PropertyConfigurer propertyConfigurer;
@@ -78,22 +82,23 @@ public class StatementBizz implements InitializingBean {
 	}
 
 	private void writeFile(InputStream is, String fileName) throws IOException {
+		log.info("保存对账单，路径：" + fileName);
 		// upload
 		// FtpUtil.uploadFile(ftpHelper, is, fileName, "utf-8");
-		
+
 		FileOutputStream fos = new FileOutputStream(fileName);
 		String line = null;
-        // 自行调整charset即可
-        BufferedReader br = new BufferedReader (new InputStreamReader (is, "GBK"));
-        BufferedWriter bw = new BufferedWriter (new OutputStreamWriter (fos, "utf-8"));
-        while (( line = br.readLine () ) != null)
-        {
-            bw.write (line);
-            bw.newLine ();
-        }
-        bw.flush ();
-        bw.close ();
-        br.close ();
+		// 自行调整charset即可
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "GBK"));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"));
+		while ((line = br.readLine()) != null) {
+			bw.write(line);
+			bw.newLine();
+		}
+		bw.flush();
+		bw.close();
+		br.close();
+		log.info("保存对账单结束");
 	}
 
 	@Override
