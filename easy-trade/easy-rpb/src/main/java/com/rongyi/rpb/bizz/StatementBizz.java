@@ -1,7 +1,12 @@
 package com.rongyi.rpb.bizz;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,7 +24,6 @@ import com.rongyi.easy.rpb.dto.SendDto;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.rpb.util.FTPHelper;
-import com.rongyi.rpb.util.FtpUtil;
 
 @Repository
 public class StatementBizz implements InitializingBean {
@@ -33,6 +37,7 @@ public class StatementBizz implements InitializingBean {
 	static {
 		TO_ADRS_SET.add("wudi@rongyi.com");
 	}
+
 	/**
 	 * @Description 接受对账单文件流, 并写入到服务器
 	 */
@@ -41,7 +46,7 @@ public class StatementBizz implements InitializingBean {
 		String url = MessageFormat.format(propertyConfigurer.getProperty("WEBANK_STATEMENT_URL"),
 				paramMap.get("app_id"), paramMap.get("token"), paramMap.get("file_id"), "1.0.0");
 		String DateStr = DateUtils.formatDate(new Date(), "yyyyMMdd");
-		String fileName = "webank-" + DateStr + ".txt";
+		String fileName = propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-" + DateStr + ".txt";
 		try {
 			InputStream is = HttpUtil.httpGet(url, WebankConfigure.getInstance());
 
@@ -74,7 +79,21 @@ public class StatementBizz implements InitializingBean {
 
 	private void writeFile(InputStream is, String fileName) throws IOException {
 		// upload
-		FtpUtil.uploadFile(ftpHelper, is, fileName, "utf-8");
+		// FtpUtil.uploadFile(ftpHelper, is, fileName, "utf-8");
+		
+		FileOutputStream fos = new FileOutputStream(fileName);
+		String line = null;
+        // 自行调整charset即可
+        BufferedReader br = new BufferedReader (new InputStreamReader (is, "GBK"));
+        BufferedWriter bw = new BufferedWriter (new OutputStreamWriter (fos, "utf-8"));
+        while (( line = br.readLine () ) != null)
+        {
+            bw.write (line);
+            bw.newLine ();
+        }
+        bw.flush ();
+        bw.close ();
+        br.close ();
 	}
 
 	@Override
