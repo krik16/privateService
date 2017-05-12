@@ -23,7 +23,7 @@ public class SendMail implements SendProvider {
 	public void send(SendDto sendDto) {
 		log.info("发送邮件！！！");
 		try {
-			emailUnit.sendAttachmentEmail(SUBJECT, FROM_ADRS, sendDto.getToAddsSet(), sendDto.getFileName(),
+			emailUnit.sendAttachmentEmail(SUBJECT, FROM_ADRS, sendDto.getToAddsSet(), "",
 					sendDto.getFileNameList());
 		} catch (Exception e) {
 			log.error("发送邮件异常: sendDto: " + sendDto.toString(), e);

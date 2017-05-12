@@ -66,19 +66,22 @@ public class StatementBizz implements InitializingBean {
 		this.syncSendMail(sendDto);
 	}
 
-	// 异步发送邮件
+	// 发送邮件，异步存在问题：文件没有写入就发送
 	private void syncSendMail(final SendDto sendDto) {
-		new Thread() {
-			public void run() {
-				this.sendMail(sendDto);
-			}
-
-			// 发送邮件
-			private void sendMail(SendDto sendDto) {
-				SendProvider sendMail = SendFactory.sendMail();
-				sendMail.send(sendDto);
-			}
-		}.start();
+//		new Thread() {
+//			public void run() {
+//				this.sendMail(sendDto);
+//			}
+//
+//			// 发送邮件
+//			private void sendMail(SendDto sendDto) {
+//				SendProvider sendMail = SendFactory.sendMail();
+//				sendMail.send(sendDto);
+//			}
+//		}.start();
+		
+		SendProvider sendMail = SendFactory.sendMail();
+		sendMail.send(sendDto);
 	}
 
 	private void writeFile(InputStream is, String fileName) throws IOException {

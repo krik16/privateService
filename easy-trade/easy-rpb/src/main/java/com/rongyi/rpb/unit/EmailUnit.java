@@ -73,6 +73,7 @@ public class EmailUnit {
         // 附件
         if (filenames != null)
             for (String filename : filenames) {
+            	LOGGER.info("发送附件：" + filename);
                 FileSystemResource file = new FileSystemResource(new File(filename));
                 helper.addAttachment(file.getFilename(), file);
             }
