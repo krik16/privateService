@@ -267,4 +267,6 @@ public interface ActivityService {
 
 
     boolean selectIfAvaSession(ActivityGoods activityGoods);
+
+    public ActivityGoods selectGoodsByPreId(Integer id);
 }
