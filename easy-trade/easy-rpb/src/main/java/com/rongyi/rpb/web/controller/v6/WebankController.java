@@ -1,22 +1,24 @@
 package com.rongyi.rpb.web.controller.v6;
 
-import com.rongyi.pay.core.ali.utils.Utils;
-import com.rongyi.rpb.bizz.PayNotifyBizz;
-import net.sf.json.JSONObject;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import com.rongyi.rpb.bizz.PayNotifyBizz;
+import com.rongyi.rpb.bizz.StatementBizz;
+
+import net.sf.json.JSONObject;
 
 /**
  * 微众通知处理
@@ -29,6 +31,8 @@ public class WebankController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebankController.class);
     @Autowired
     PayNotifyBizz payNotifyBizz;
+    @Autowired
+    StatementBizz statementBizz;
 
     /**
      * 微众支付宝扫码支付异步通知
@@ -78,51 +82,31 @@ public class WebankController {
 
     @RequestMapping("statementDown")
     public void statementDown(HttpServletRequest request , @RequestBody Map<String,String> paramMap) {
-//        LOGGER.info("微众对账单通知下载");
-//        try {
-//            Map map =  request.getParameterMap();
-//            LOGGER.info("微众对账单通知下载map:{}",map);
-//
-//            String sign = request.getParameter("sign");
-//            String nonce = request.getParameter("nonce");
-//            String timestamp = request.getParameter("timestamp");
-//            LOGGER.info("sign:{},nonce:{},timestamp:{}",sign,nonce,timestamp);
-//            String body = request.getParameter("body");
-//            LOGGER.info("body:{}",body);
-//            String Body = request.getParameter("Body");
-//            LOGGER.info("Body:{}",Body);
-//            String jsonString = request.getParameter("JsonString");
-//            LOGGER.info("jsonString:{}", jsonString);
-//
-//
-//
-//            Enumeration e =  request.getAttributeNames();
-//            LOGGER.info("e:{}",e);
-//            Object sign1 = request.getAttribute("sign");
-//            Object nonce1 = request.getAttribute("nonce");
-//            Object timestamp1 = request.getAttribute("timestamp");
-//            LOGGER.info("sign1:{},nonce1:{},timestamp1:{}",sign1,nonce1,timestamp1);
-//            Object body1 = request.getAttribute("body");
-//            LOGGER.info("body1:{}",body1);
-//            Object Body1 = request.getAttribute("Body");
-//            LOGGER.info("Body1:{}",Body1);
-//            Object jsonString1 = request.getAttribute("JsonString");
-//            LOGGER.info("jsonString1:{}", jsonString1);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-        LOGGER.info("微众支付宝扫码支付异步通知start........");
-        LOGGER.info("parmMap:{}",paramMap);
+        LOGGER.info("微众对账单通知下载");
         try {
-            Map<String, String> map = Utils.getRequestParams(request);
-            payNotifyBizz.  webankAlipayNotify(paramMap);
+//            Map<?, ?> map =  request.getParameterMap();
+            LOGGER.info("微众对账单通知下载map:{}",paramMap);
+            this.validStatmentDown(paramMap);
+
+            // 下载对账单，并将对账单发给运营人员
+            statementBizz.writeStatementFile(paramMap);
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.info("微众支付宝扫码支付异步通知处理异常");
         }
-
+    }
+    
+    /**
+     * @Description 校验微众参数 
+     * @param paramMap
+     */
+    private void validStatmentDown(Map<String,String> paramMap) {
+      String app_id = paramMap.get("app_id");
+      String file_id = paramMap.get("file_id");
+      String token = paramMap.get("token");
+      String version = paramMap.get("version");
+      if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id) 
+    		  || StringUtils.isBlank(token) ||StringUtils.isBlank(version)) {
+    	  throw new RuntimeException("微众回调接口参数异常, paramMap = " + paramMap.toString());
+      }
     }
 }
