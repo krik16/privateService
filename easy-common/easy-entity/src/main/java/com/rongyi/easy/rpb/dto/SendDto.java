@@ -36,5 +36,4 @@ public class SendDto extends BaseDto {
 	public void setToAddsSet(Set<String> toAddsSet) {
 		this.toAddsSet = toAddsSet;
 	}
-
 }
