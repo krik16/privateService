@@ -126,7 +126,7 @@ public interface ActivityService {
 
 
 
-
+    public boolean deleteByActivityId(Integer activityId);
 
 
 
