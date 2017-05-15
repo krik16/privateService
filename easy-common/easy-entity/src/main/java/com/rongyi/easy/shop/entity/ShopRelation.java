@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 @Entity(value="shopRelation",noClassnameStored=true)
-public class ShopRelationEntity implements Serializable {
+public class ShopRelation implements Serializable {
 
     @JsonSerialize(using=JsonObjectIdSerializer.class)
     @Id
@@ -22,7 +22,7 @@ public class ShopRelationEntity implements Serializable {
     private String shopMid;
     private String importUrl;
 
-    public ShopRelationEntity(String shopMid, String importUrl) {
+    public ShopRelation(String shopMid, String importUrl) {
         this.shopMid = shopMid;
         this.importUrl = importUrl;
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.bdata.entity.HaiXinShopData;
-import com.rongyi.easy.shop.entity.ShopRelationEntity;
+import com.rongyi.easy.shop.entity.ShopRelation;
 import com.rongyi.easy.shop.param.HaiXinShopRelationParam;
 import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
@@ -166,7 +166,7 @@ public interface IShopService {
 
 	String findUrlByShopMid(String shopMid);
 
-	List<ShopRelationEntity> findAllRelations();
+	List<ShopRelation> findAllRelations();
 
 	String getHaiXinShopParentId(String shopMid);
 }
