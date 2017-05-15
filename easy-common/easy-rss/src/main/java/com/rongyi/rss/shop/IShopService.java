@@ -167,4 +167,6 @@ public interface IShopService {
 	String findUrlByShopMid(String shopMid);
 
 	List<ShopRelationEntity> findAllRelations();
+
+	String getHaiXinShopParentId(String shopMid);
 }
