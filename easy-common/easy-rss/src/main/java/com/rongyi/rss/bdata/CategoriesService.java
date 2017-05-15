@@ -21,7 +21,7 @@ public interface CategoriesService {
 	
 	public CategoryHaiXinEntity getCategoryHaiXinByCode(String code, String shopMid);
 	
-	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level);
+	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level, String shopMid);
 	
 	public List<CategoryHaiXinEntity> getCategoryHaiXinByIds(List<ObjectId> ids);
 	
