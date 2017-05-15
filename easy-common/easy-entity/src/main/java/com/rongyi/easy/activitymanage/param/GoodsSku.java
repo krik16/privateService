@@ -30,6 +30,8 @@ public class GoodsSku implements Serializable {
     private List<CommoditySpecColumnVO> specColumns = Lists.newArrayList();
     private Integer remainStock;//商品中剩余库存（非活动）
     private String columnValues;
+    private String strStock;//库存统计：秒杀中剩余库存/总库存
+
 
 
 
@@ -38,6 +40,15 @@ public class GoodsSku implements Serializable {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+
+    public String getStrStock() {
+        return strStock;
+    }
+
+    public void setStrStock(String strStock) {
+        this.strStock = strStock;
     }
 
     public String getColumnValues() {
