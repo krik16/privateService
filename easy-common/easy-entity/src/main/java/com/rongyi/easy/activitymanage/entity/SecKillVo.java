@@ -20,6 +20,17 @@ public class SecKillVo implements Serializable {
 
     private Date endAt;
 
+    private Integer limitNum;
+
+
+    public Integer getLimitNum() {
+        return limitNum;
+    }
+
+    public void setLimitNum(Integer limitNum) {
+        this.limitNum = limitNum;
+    }
+
     private List<ActivityGoodsDetail> activityGoodsDetailList = Lists.newArrayList();
 
     public String getSessionId() {
