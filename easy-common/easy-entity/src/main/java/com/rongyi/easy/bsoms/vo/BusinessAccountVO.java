@@ -538,17 +538,18 @@ public class BusinessAccountVO implements Serializable {
 	}
 	
 	public String getBindingMid(){
-		if(getIdentity() == 0){
+		if(getIdentity().equals(0)){
 			return groupMid;
-		}else if(getIdentity() == 1){
+		}else if(getIdentity().equals(1)){
 			return mallMid;
-		}else if(getIdentity() == 2){
+		}else if(getIdentity().equals(2)){
 			return brandMid;
-		}else if (getIdentity() == 3) {
+		}else if (getIdentity().equals(3)) {
 			return null;
-		}else if (getIdentity() == 4 || getIdentity() == 5 || getIdentity() == 8) {
+		}else if (getIdentity().equals(4) || getIdentity().equals(5) || getIdentity().equals(8)) {
 			return shopMid;
 		}
+		
 		return null;
 	}
 	
