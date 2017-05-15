@@ -91,13 +91,13 @@ public class HttpUtil {
 		return buffer.toString();
 	}
 	
-	public static String httpPOST(String url, Map<String, String> params) {
+	public static String httpPOST(String url, Map<String, Object> params) {
 		URL u = null;
 		HttpURLConnection con = null;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		String param = "";
 		if (params != null) {
-			for (Entry<String, String> e : params.entrySet()) {
+			for (Entry<String, Object> e : params.entrySet()) {
 				sb.append(e.getKey());
 				sb.append("=");
 				sb.append(e.getValue());
