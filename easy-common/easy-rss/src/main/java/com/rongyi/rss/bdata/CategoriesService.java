@@ -19,13 +19,13 @@ public interface CategoriesService {
 	
 	public boolean updateCategoryHaiXin(CategoryHaiXinEntity categoryHaiXin);
 	
-	public CategoryHaiXinEntity getCategoryHaiXinByCode(String code);
+	public CategoryHaiXinEntity getCategoryHaiXinByCode(String code, String shopMid);
 	
 	public List<CategoryHaiXinEntity> getCategoryHaiXinListByUpperCode(String upperCode, Integer level);
 	
 	public List<CategoryHaiXinEntity> getCategoryHaiXinByIds(List<ObjectId> ids);
 	
-	public void importHaiXinCategory(String url) throws Exception;
+	public void importHaiXinCategory(String url, String shopMid) throws Exception;
 	
 	/**
 	 * 根据id查询品类信息
