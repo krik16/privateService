@@ -22,6 +22,8 @@ public class ShopRelation implements Serializable {
     private String shopMid;
     private String importUrl;
 
+    public ShopRelation() {}
+
     public ShopRelation(String shopMid, String importUrl) {
         this.shopMid = shopMid;
         this.importUrl = importUrl;
