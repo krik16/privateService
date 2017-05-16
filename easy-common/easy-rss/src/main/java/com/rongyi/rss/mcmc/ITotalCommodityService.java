@@ -54,4 +54,6 @@ public interface ITotalCommodityService {
 
 	public Map<String,Object> searchCommodityCountForManagement(Map<String,Object> paramMap);
 
+	public Map<String,Object> searchTotalCommodityForWechat(Map<String,Object> paramMap,int pageSize);
+
 }
