@@ -2,6 +2,8 @@ package com.rongyi.easy.activitymanage.entity;
 
 import com.google.inject.internal.Lists;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsDetail;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +23,11 @@ public class SecKillVo implements Serializable {
     private Date endAt;
 
     private Integer limitNum;
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
 
 
     public Integer getLimitNum() {
