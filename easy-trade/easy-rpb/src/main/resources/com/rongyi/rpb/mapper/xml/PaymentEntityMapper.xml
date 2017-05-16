@@ -699,6 +699,9 @@
             <if test="status == null || status == '' || status == -1">
                 and status = 2
             </if>
+            <if test="payScene != null">
+                and pay_scene = #{payScene}
+            </if>
             <if test="startTime != null and startTime != ''">
                 and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
@@ -739,8 +742,8 @@
         <if test="ryMchId != null and ryMchId != ''">
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
         </if>
-        <if test="ryMchId != null and ryMchId != ''">
-            and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+        <if test="payScene != null">
+            and pay_scene = #{payScene}
         </if>
         <if test="startTime != null and startTime != ''">
             and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
