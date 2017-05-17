@@ -136,4 +136,26 @@ public class BaseBizz {
         return paymentEntityExt;
     }
 
+
+    /**
+     * 初始化支付扩展表信息
+     */
+    protected PaymentEntityExt initPaymentEntityExt(String mchInfoId,String storeId,String posNo,Integer paymentEntityId) {
+        PaymentEntityExt paymentEntityExt = null;
+        //查找扩展表记录
+        if (paymentEntityId != null) {
+            paymentEntityExt = paymentEntityExtMapper.selectByPaymentOrderId(paymentEntityId);
+        }
+        //记录不存在
+        if (paymentEntityExt == null) {
+            paymentEntityExt = new PaymentEntityExt();
+            paymentEntityExt.setPaymentOrderId(paymentEntityId);
+        }
+        paymentEntityExt.setMchInfoId(mchInfoId);
+        paymentEntityExt.setStoreId(storeId);
+        paymentEntityExt.setPosNo(posNo);
+        paymentEntityExt.setCreateAt(new Date());
+
+        return paymentEntityExt;
+    }
 }
