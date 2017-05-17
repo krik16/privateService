@@ -18,21 +18,23 @@ public class RSACoderTest {
 	public static void main(String[] args) throws Exception {
 		Map<String, Object> keyMap = RSACoder.initKey();
 
-		String publicKey = RSACoder.getPublicKey(keyMap);
+
+
+
+		/*String publicKey = RSACoder.getPublicKey(keyMap);
 		String privateKey = RSACoder.getPrivateKey(keyMap);
 		System.err.println("公钥: \n\r" + publicKey);
 		System.err.println("私钥： \n\r" + privateKey);
 		System.err.println("公钥加密——私钥解密");
 		String inputStr = "19860227";
 		byte[] data = inputStr.getBytes();
-//		String publicKey_ = "";
 		byte[] encodedData = RSACoder.encryptByPublicKey(data, publicKey);
 		String outputStr = new String(encodedData);
 		System.err.println("加密前: " + inputStr + "\n\r" + "加密后: " + outputStr);
 		byte[] decodedData = RSACoder.decryptByPrivateKey(encodedData, privateKey);
 
 		String outputStr2 = new String(decodedData);
-		System.err.println("加密前: " + inputStr + "\n\r" + "解密后: " + outputStr2);
+		System.err.println("加密前: " + inputStr + "\n\r" + "解密后: " + outputStr2);*/
 
 	}
 	

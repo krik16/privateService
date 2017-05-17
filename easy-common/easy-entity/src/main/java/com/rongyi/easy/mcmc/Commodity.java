@@ -13,7 +13,6 @@ import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.util.CommodityUtil;
-import com.rongyi.easy.mcmc.vo.WechatSwitch;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -21,7 +20,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -439,10 +437,10 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setType(int type) {
 		this.type = type;
 	}
-	public boolean isSpot() {
+	public boolean getIsSpot() {
 		return isSpot;
 	}
-	public void setSpot(boolean isSpot) {
+	public void setIsSpot(boolean isSpot) {
 		this.isSpot = isSpot;
 	}
 	public Date getLiveStartTime() {
@@ -1262,7 +1260,7 @@ public class Commodity implements  Serializable,Cloneable{
 				}
 
 				if (vo.getIsSpot() == 1) {
-					this.setSpot(true);
+					this.setIsSpot(true);
 					if (this.getStock() <= 0) {
 						this.setStatus(0);
 					} else {
@@ -1274,7 +1272,7 @@ public class Commodity implements  Serializable,Cloneable{
 						}
 					}
 				} else {
-					this.setSpot(false);
+					this.setIsSpot(false);
 					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
 				}
 				this.setType(CommodityType.BULL.getValue());
@@ -1296,6 +1294,250 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setTerminalType(vo.getTerminalType());
 			// TODO 暂定不处理type
 		}
+	}
+
+	/**
+	 * 重构，新包下的vo
+	 * @param vo
+	 * @param brandId
+	 * @param mallId
+	 * @param mallMid
+	 * @param shopNum
+	 * @param specMap
+	 */
+	public void wrapCommodityInfo(com.rongyi.easy.mcmc.vo.commodity.new1.CommodityVO vo, long brandId, long mallId, String mallMid,
+								  String shopNum, Map specMap) {
+		if(!CommodityUtil.isGiftType(vo.getCommodityRange())) {
+			if (specMap == null) {
+				this.setStock(Integer.valueOf(vo.getCommodityStock()));
+				this.setOriginalPrice(vo.getCommodityOriginalPrice());
+				this.setCurrentPrice((vo.getCommodityCurrentPrice() != null
+						&& !vo.getCommodityCurrentPrice().isEmpty()) ?
+						vo.getCommodityCurrentPrice() :
+						vo.getCommodityOriginalPrice());
+				if (null != this.getCurrentPrice()) {
+					this.setPrice(Double.parseDouble(this.getCurrentPrice()));
+					this.setcPriceMax(this.getCurrentPrice());
+					this.setcPriceMin(this.getCurrentPrice());
+				}
+				if (null != this.getOriginalPrice()) {
+					this.setoPriceMax(this.getOriginalPrice());
+					this.setoPriceMin(this.getOriginalPrice());
+				}
+			} else {
+				this.setoPriceOfLowestCPrice(null == specMap.get("oPriceOfLowestCPrice")?null:specMap.get("oPriceOfLowestCPrice").toString());
+				this.setStock(null == specMap.get("specStock")?null:(Integer) specMap.get("specStock"));
+				this.setOriginalPrice(null == specMap.get("oMin")?null:specMap.get("oMin").toString());
+				this.setCurrentPrice(null == specMap.get("lowest")?null:specMap.get("lowest").toString());
+				this.setPrice(null == specMap.get("lowest")?null:Double.valueOf(specMap.get("lowest").toString()));
+				this.setoPriceMax(null == specMap.get("oMax")?null:specMap.get("oMax").toString());
+				this.setoPriceMin(null == specMap.get("oMin")?null:specMap.get("oMin").toString());
+				this.setcPriceMin(null == specMap.get("lowest")?null:specMap.get("lowest").toString());
+				this.setcPriceMax(null == specMap.get("cMax")?null:specMap.get("cMax").toString());
+				this.setSkus(null == specMap.get("skus")?null:(List<String>)specMap.get("skus"));
+			}
+
+			this.setLocationIds(vo.getLocationIds());
+			this.setAccountType(vo.getIdentity());
+			this.setMallServiceIds(vo.getMallServiceIds());
+			this.setMerchantId(vo.getMerchantId());
+			this.setMerchantType(vo.getMerchantType());
+			if(vo.getTerminalType() == 1 ||
+					vo.getTerminalType() == 3 ||
+					vo.getTerminalType() == 5 ||
+					vo.getTerminalType() == 7) {
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+			}
+		}
+
+		this.setCode(vo.getCommodityCode());
+		this.setName(vo.getCommodityName());
+		this.setCategory(vo.getCommodityCategory());
+		this.setDescription(vo.getCommodityDescription());
+		this.setShopId(vo.getShopId());
+		this.setSupportCourierDeliver(vo.isSupportCourierDeliver());//是否支持快递发货
+		this.setPostage((vo.getCommodityPostage() == null) ? "0.0" : vo.getCommodityPostage());
+		this.setRegisterAt(vo.getRegisterAt());
+		this.setSoldOutAt(vo.getSoldOutAt());
+		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
+		this.setType(CommodityType.GUIDE.getValue());
+		this.setShelvesType(vo.getShelvesType());
+		//发布商品的逻辑有修改，魔店发布的商品不再是默认上下架时间为1年(立即上架是1年)
+		// null == vo.getShelvesType() 版本兼容
+		if (this.getSource() == 2
+				&& ((2 == vo.getShelvesType() && null == vo.getRegisterAt() && null == vo.getSoldOutAt())
+				|| vo.getShelvesType() == 1)) {
+			this.setRegisterAt(new Date());//设置默认上下架时间
+			this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
+		}
+		this.setSold(0);
+		if (this.getStock() == null || this.getStock() <= 0) {
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+		} else {
+			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
+			if (null != vo.getSource() && vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+			} else {
+				Integer status = vo.getCommodityStatus();//变为int数据的包装类方便进行空判断
+				if (null != status) {
+					this.setStatus(vo.getCommodityStatus());
+				} else {
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+				}
+			}
+		}
+
+		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
+			this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
+			if(CollectionUtils.isNotEmpty(vo.getGoodsParam()) &&
+					(!vo.getGoodsParam().get(0).isEmpty() || vo.getGoodsParam().get(0) != null)) {
+				this.setGoodsParam(vo.getGoodsParam()); //商品参数
+			} else {
+				this.setGoodsParam(Arrays.asList("")); //商品参数
+			}
+			if (null != vo.getProcessIdentity()) {
+				this.setIdentity(vo.getProcessIdentity()); //增加商品身份
+			}
+
+			this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
+
+			if (!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
+				this.setSupportCourierDeliver(true);
+				this.setSupportSelfPickup(true);
+			}
+			//1表示商家承担运费,0表示买家承担运费
+			this.setFreight((vo.getFreight() != null) ? vo.getFreight() : 0);
+		}
+		//上架终端：
+		// 1.表示容易逛
+		// 2.表示互动屏
+		// 3.表示容易逛和互动屏
+		// 4.表示微商
+		// 5.微商,容易逛
+		// 6.微商,互动屏
+		// 7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+
+		this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_7);
+
+		//0表示统一库存1表示分管库存默认是分管库存
+		this.setStockStatus((vo.getStockStatus() != null) ? vo.getStockStatus() : 1);
+		this.setReason(vo.getReason());
+		this.setPicList(vo.getCommodityPicList());
+		this.setCreateAt(new Date());
+		this.setUpdateAt(new Date());
+		this.setCreate_by(vo.getCreate_by());
+		this.setUpdate_by(vo.getCreate_by());
+		this.setTemplateId(vo.getTemplateId());
+		this.setCommodityRange(vo.getCommodityRange());
+		//设置限购数量
+		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
+		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
+			if (StringUtils.isNotBlank(this.originalPrice) && StringUtils.isNotBlank(this.currentPrice)) {
+				this.setDiscount(Utils.calculateDiscount(Double.valueOf(this.originalPrice), Double.valueOf(this.currentPrice)));
+			} else {
+				this.setDiscount(Utils.calculateDiscount(null, null));
+			}
+			this.setBrandName(vo.getBrandName());
+			this.setBrandMid(vo.getBrandMid());
+			this.setShopMid(vo.getShopMid());
+
+			this.setCommodityModelNo(vo.getCommodityModelNo());
+			this.setBrandId(String.valueOf(brandId));
+			this.setMallId(String.valueOf(mallId));
+			this.setMallMid(mallMid);
+			this.setShopNum(shopNum);
+			this.setSubheading(vo.getSubheading());
+			this.setCommodityDetails(vo.getCommodityDetails());
+			this.setCommodityModelNo(vo.getCommodityModelNo());
+			this.setSpecList(null == specMap.get("specIdList")?null:(List<ObjectId>) specMap.get("specIdList"));
+			this.setGroupMid(vo.getGroupMid());
+			this.setShelvesType(vo.getShelvesType());
+			this.setServiceDescriptionId(vo.getServiceDescriptionId());
+			this.setServiceDescription(vo.getServiceDescription());
+			this.setServiceDescriptionRemark(vo.getServiceDescriptionRemark());
+		}
+
+		if (CommodityUtil.isGiftType(vo.getCommodityRange())) {
+			this.setGiftId(vo.getGiftId());
+			this.setStock(Integer.parseInt(vo.getCommodityStock()));
+			this.setSn(vo.getSn());
+			this.setMappingId(vo.getMappingId());
+			this.setActivityId(vo.getActivityId() + "");
+			this.setExchangeTypes(vo.getExchangeTypes());
+			this.setPointType(vo.getPointType());
+			this.setBuyType(vo.getBuyType());
+			this.setDeliveryTypes(vo.getDeliveryTypes());
+			this.setSelfType(vo.getSelfType());
+			this.setSelfAddress(vo.getSelfAddress());
+			this.setSelfRemark(vo.getSelfRemark());
+			this.setSelfAddressId(vo.getSelfAddressId());
+			this.setTagIds(vo.getTagIds());
+			this.setSelfTakeDays(vo.getSelfTakeDays());
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_CHECK_PENDING);
+			this.setCouponStartDate(vo.getCouponStartDate());
+			this.setCouponEndDate(vo.getCouponEndDate());
+			this.setPrice(vo.getPrice());
+			this.setOriginalPrice(vo.getPrice() + "");
+			this.setCurrentPrice(vo.getPrice() + "");
+			this.setFreePostage(vo.getFreePostage());
+			this.setMallMid(vo.getMallMid());
+		}
+
+		// 买手&非现货 商品 临时状态: -1
+		if (null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
+			//魔店买手发布的商品，上架终端默认只有容易逛
+			if (2 == this.getSource()) {
+				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_1);
+			} else {
+				this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_1);
+			}
+
+			// 买手&非现货 商品 临时状态: -1
+			if (null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
+				//魔店买手发布的商品，上架终端默认只有容易逛
+				if (2 == this.getSource()) {
+					this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_1);
+				} else {
+					this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_1);
+				}
+
+				if (vo.getIsSpot() == 1) {
+					this.setIsSpot(true);
+					if (this.getStock() <= 0) {
+						this.setStatus(0);
+					} else {
+						//APP端发布商品时，把商品状态更改为已删除，等待图片上传成功后，把商品状态更改为上架
+						if ((vo.getSource() == null || vo.getSource() == 2) && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+							this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+						} else {
+							this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+						}
+					}
+				} else {
+					this.setIsSpot(false);
+					this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
+				}
+				this.setType(CommodityType.BULL.getValue());
+				this.setShopMid(vo.getShopMid());
+				//this.setMallServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+				this.setOnServiceIds(Arrays.asList(Constants.ServiceId.APP_RONG_YI_GUANG));
+			}
+		}
+
+
+		// 海信
+		if (CommodityConstants.CommodityType.HAIXIN == vo.getCommodityRange()) {
+			this.setBarCode(vo.getCommodityBarCode());
+			this.setOnServiceIds(vo.getOnServiceIds());
+			this.setRegisterAt(vo.getRegisterAt());
+			this.setSoldOutAt(vo.getSoldOutAt());
+			this.setSold(0);
+			this.setStatus(vo.getCommodityStatus());
+			this.setTerminalType(vo.getTerminalType());
+			// TODO 暂定不处理type
+		}
+
+		this.setIsRefund(vo.getIsRefund());//是否可退货
 	}
 
 	public void setActivityInfoToCommodity(GoodsInAppList goods) {
@@ -1360,7 +1602,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setMallName(source.getMallName());
 		commodity.setHotAreaName(source.getHotAreaName());
 		//commodity.setLiveId(source.getLiveId());
-		commodity.setSpot(source.isSpot());
+		commodity.setIsSpot(source.getIsSpot());
 		//commodity.setLiveStartTime(source.getLiveStartTime());
 		//commodity.setLiveEndTime(source.getLiveEndTime());
 		commodity.setLockedStock(source.getLockedStock());

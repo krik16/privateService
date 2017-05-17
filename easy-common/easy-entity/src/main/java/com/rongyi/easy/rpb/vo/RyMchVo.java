@@ -23,6 +23,8 @@ public class RyMchVo implements Serializable {
 
     private Integer nativePay = 0;//0:综合支付服务 1:原生支付接口
 
+    private String token;//商户加密token
+
     public String getRyMchId() {
         return ryMchId;
     }
@@ -61,6 +63,14 @@ public class RyMchVo implements Serializable {
 
     public void setNativePay(Integer nativePay) {
         this.nativePay = nativePay;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
