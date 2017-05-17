@@ -112,24 +112,22 @@ public class BaseBizz {
         if (paymentEntityId != null) {
             paymentEntityExt = paymentEntityExtMapper.selectByPaymentOrderId(paymentEntityId);
         }
-        if(StringUtil.isEmpty(extend)){
-            return null;
-        }
-
-        String[] extendArray = extend.split("__");
-        //记录已存在
         if (paymentEntityExt == null) {
             paymentEntityExt = new PaymentEntityExt();
+        }
+        if(StringUtil.isNotEmpty(extend)){
+            String[] extendArray = extend.split("__");
+            //记录已存在
             paymentEntityExt.setPaymentOrderId(paymentEntityId);
-        }
-        if(extendArray.length > 0){
-            paymentEntityExt.setMchInfoId(extendArray[0]);
-        }
-        if(extendArray.length > 1){
-            paymentEntityExt.setStoreId(extendArray[1]);
-        }
-        if(extendArray.length > 2){
-            paymentEntityExt.setPosNo(extendArray[2]);
+            if(extendArray.length > 0){
+                paymentEntityExt.setMchInfoId(extendArray[0]);
+            }
+            if(extendArray.length > 1){
+                paymentEntityExt.setStoreId(extendArray[1]);
+            }
+            if(extendArray.length > 2){
+                paymentEntityExt.setPosNo(extendArray[2]);
+            }
         }
         paymentEntityExt.setCreateAt(new Date());
         paymentEntityExt.setMemo(memo);
