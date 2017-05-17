@@ -33,6 +33,8 @@ public class WechatPaySignVo extends BaseBizVo implements Serializable{
 
     private Integer orderType;//订单类型
 
+    private String memo ; //备注
+
 
     public String getPayNo() {
         return payNo;
@@ -112,6 +114,14 @@ public class WechatPaySignVo extends BaseBizVo implements Serializable{
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     @Override
