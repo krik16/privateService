@@ -74,6 +74,20 @@ public class MessageEvent implements Serializable{
         return event;
     }
 
+
+	public static MessageEvent messageToDocEvent(String message) {
+		MessageEvent event = new MessageEvent();
+		Map<String, Object> eventMap = JsonUtil.getMapFromJson(message);
+		event.setBody(eventMap.get("body"));
+		event.setSource((eventMap.get("source") != null) ? eventMap.get("source").toString() : null);
+		event.setTarget((eventMap.get("target") != null) ? eventMap.get("target").toString() : null);
+		/*if (eventMap.get("timestamp") != null)
+			event.setTimestamp(Long.valueOf(eventMap.get("timestamp").toString()));*/
+		event.setType((eventMap.get("type") != null) ? eventMap.get("type").toString() : null);
+		return event;
+	}
+
+
     /**
      * @Description: mq消息发送
      * @param bodyMap

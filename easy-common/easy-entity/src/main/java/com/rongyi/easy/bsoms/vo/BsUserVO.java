@@ -18,6 +18,7 @@ public class BsUserVO implements Serializable{
     private Integer level;   //等级  1 2 3
     private Integer chiefId;  //主账号id
     private Integer isAllowBindingWechat;//是否允许分店绑定微信 0否，1是
+    
 	public Integer getId() {
 		return id;
 	}

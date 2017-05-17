@@ -26,4 +26,13 @@ public class BrandsVo implements Serializable{
     public void setBrandName(String brandName) {
         this.brandName = brandName;
     }
+    
+    public BrandsVo(){
+    	
+    }
+    
+    public BrandsVo(String brandId, String brandName){
+    	this.brandId = brandId;
+    	this.brandName = brandName;
+    }
 }
