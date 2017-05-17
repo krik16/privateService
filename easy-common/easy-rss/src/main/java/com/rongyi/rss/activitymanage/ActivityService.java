@@ -271,4 +271,6 @@ public interface ActivityService {
     public ActivityGoods selectGoodsByPreId(Integer id);
 
     boolean updateActivityGoodsByActIdSessionId(ActivityGoods activityGoods);
+
+    boolean selectIfUpdateession(ActivityGoods activityGoods);
 }
