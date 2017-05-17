@@ -90,6 +90,10 @@ public class ExportOsmOrderExcel {
                             orderCommodity.setDeleverAt(deleverAt);
                             orderCommodity.setPayAt(payAt);
                             orderCommodity.setReveiveAt(reveiveAt);
+                            // 复制订单的收货人、电话、地址信息
+                            orderCommodity.setReceiverAddress(vo.getReceiverAddress());
+                            orderCommodity.setReceiverName(vo.getReceiverName());
+                            orderCommodity.setReceiverPhone(vo.getReceiverPhone());
                         }
                     }
                     orderCommoditys.addAll(vo.getOrderCommoditys());
@@ -134,7 +138,7 @@ public class ExportOsmOrderExcel {
             XSSFSheet sheet2 = wb.getSheetAt(1);
             for (int i = 2; i <= orderCommoditys.size() + 2; i++) {
                 sheet2.createRow(i);
-                for (int j = 0; j <= 14; j++) {
+                for (int j = 0; j <= 17; j++) {
                     sheet2.getRow(i).createCell(j);
                     sheet2.getRow(i).getCell(j).setCellStyle(bodyStyle);
                 }
@@ -158,6 +162,9 @@ public class ExportOsmOrderExcel {
                     sheet2.getRow(i + 2).getCell(12).setCellValue(vo.getPayAt());
                     sheet2.getRow(i + 2).getCell(13).setCellValue(vo.getDeleverAt());
                     sheet2.getRow(i + 2).getCell(14).setCellValue(vo.getReveiveAt());
+                    sheet2.getRow(i + 2).getCell(15).setCellValue(vo.getReceiverName());
+                    sheet2.getRow(i + 2).getCell(16).setCellValue(vo.getReceiverAddress());
+                    sheet2.getRow(i + 2).getCell(17).setCellValue(vo.getReceiverPhone());
                 }
             }
             String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
