@@ -902,7 +902,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         params.put("startIndex",param.getStartIndex());
         params.put("payerReconflag",param.getPayerReconflag());
         params.put("tradeType",param.getTradeType());
-        params.put("stutus",param.getStatus());
+        params.put("status",param.getStatus());
         params.put("payScene",param.getPayScene());
     }
 
