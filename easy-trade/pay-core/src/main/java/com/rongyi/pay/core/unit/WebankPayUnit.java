@@ -278,15 +278,17 @@ public class WebankPayUnit {
             ParamUnit.checkWebankWechatPunchCardRefund(reqData);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardRefund(reqData, configure);
+            //由于微众在调用退款接口的时候，即使成功也不会更新订单状态，需要再调一次查询接口才会更新
+            reqData.setRefund_amount(null);
+            resData =  webankPayService.wechatPunchCardRefundQuery(reqData, configure);
             //检查是否退款成功
             if(resData.getResult() == null){
                 throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREFUND_FAIL);
             }else if(!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())) {
                 throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
+            }else if (!"1".equals(resData.getRefundment())) {
+                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREFUND_FAIL);
             }
-            //由于微众在调用退款接口的时候，即使成功也不会更新订单状态，需要再调一次查询接口才会更新
-            reqData.setRefund_amount(null);
-            webankPayService.wechatPunchCardRefundQuery(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
@@ -435,12 +437,21 @@ public class WebankPayUnit {
             ParamUnit.checkWebankAlipayRefund(reqData);
             WebankPayService  webankPayService = new WebankPayService();
             resData = webankPayService.alipayRefundTrade(reqData, configure);
-            if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
-                throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getSubMsg()) ? resData.getMsg() : resData.getSubMsg());
-            }
+//            if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
+//                throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getSubMsg()) ? resData.getMsg() : resData.getSubMsg());
+//            }
+            //由于微众退款接口即使成功也不会更新订单状态，需要再调一次查询的接口才会更新
             WaRefundQueryReqData waRefundQueryReqData = new WaRefundQueryReqData();
-            BeanUtils.copyProperties(waRefundQueryReqData,reqData);
-            webankPayService.alipayRefundTradeQuery(waRefundQueryReqData,configure);
+            BeanUtils.copyProperties(waRefundQueryReqData, reqData);
+            WaRefundQueryResData waRefundQueryResData = webankPayService.alipayRefundTradeQuery(waRefundQueryReqData, configure);
+            if (!waRefundQueryResData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
+                throw new WebankException(waRefundQueryResData.getCode(), waRefundQueryResData.getMsg());
+            }
+            //设置rpb中需要用到的参数
+            resData.setCode(ConstantEnum.WEBANK_CODE_0.getCodeStr());
+            resData.setOutTradeNo(reqData.getOutRequestNo());
+            resData.setRefundFee(waRefundQueryResData.getRefundAmount());
+            resData.setTradeNo(waRefundQueryResData.getTradeNo());
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {
