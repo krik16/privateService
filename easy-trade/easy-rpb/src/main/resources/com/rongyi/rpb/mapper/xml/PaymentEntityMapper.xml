@@ -708,7 +708,10 @@
             <if test="endTime != null and endTime != ''">
                 and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
-        order by po.create_at desc  limit #{startIndex},#{pageSize}
+        order by po.create_at desc
+        <if test="startIndex !=null and pageSize !=null">
+            limit #{startIndex},#{pageSize}
+        </if>
     </select>
 
     <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
