@@ -7,7 +7,7 @@ public class CodeGetRecord {
 
     private String code;
 
-    private Date createAt;
+    private Date createAt; 
 
     private String userId;
 

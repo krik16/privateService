@@ -28,7 +28,14 @@ public class OrderManagerCommodityVO  implements Serializable {
     private String createAt;//下单时间
     private String deleverAt;//发货时间
     private String payAt;//付款时间
-    private String reveiveAt;//确认书后货时间
+    private String reveiveAt;//确认收货时间
+    // 收货人
+    private String receiverName;
+    // 收货地址
+    private String receiverAddress;
+    // 收货电话
+    private String receiverPhone;
+
 
     public String getCommodityName() {
         return commodityName;
@@ -164,6 +171,30 @@ public class OrderManagerCommodityVO  implements Serializable {
 
     public void setReveiveAt(String reveiveAt) {
         this.reveiveAt = reveiveAt;
+    }
+
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
+
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
     @Override

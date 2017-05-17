@@ -118,7 +118,7 @@ public class GiftDetailVO extends GiftVO implements Serializable {
                 ", selfAddress='" + selfAddress + '\'' +
                 ", selfRemark='" + selfRemark + '\'' +
                 ", selfAddressId='" + selfAddressId + '\'' +
-                ", description='" + description + '\'' +
+             //   ", description='" + description + '\'' +
                 ", selfTakeDays=" + selfTakeDays +
                 "} " + super.toString();
     }
