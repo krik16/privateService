@@ -85,7 +85,9 @@ public class PaymentOrderParam implements Serializable {
     }
 
     public Integer getStartIndex() {
-        return (this.currentPage-1)*this.pageSize;
+        if(this.currentPage!=null && this.pageSize!=null){
+            return (this.currentPage-1)*this.pageSize;
+        }else return null;
     }
 
     public void setStartIndex(Integer startIndex) {
