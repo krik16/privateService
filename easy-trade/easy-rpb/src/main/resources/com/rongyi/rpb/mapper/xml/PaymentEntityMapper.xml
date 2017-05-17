@@ -637,7 +637,7 @@
 
 	<update id="updateStatusList" parameterType="java.util.Map">
 		update payment_order set payer_recon_flag = #{payerReconFlag}
-		and pay_no in 
+		where pay_no in
 			<foreach collection="payNoList" index="index" item="item" open="("
                      separator="," close=")">
                 #{item}
@@ -699,13 +699,19 @@
             <if test="status == null || status == '' || status == -1">
                 and status = 2
             </if>
+            <if test="payScene != null">
+                and pay_scene = #{payScene}
+            </if>
             <if test="startTime != null and startTime != ''">
                 and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
             <if test="endTime != null and endTime != ''">
                 and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
-        order by po.create_at desc  limit #{startIndex},#{pageSize}
+        order by po.create_at desc
+        <if test="startIndex !=null and pageSize !=null">
+            limit #{startIndex},#{pageSize}
+        </if>
     </select>
 
     <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
@@ -739,8 +745,8 @@
         <if test="ryMchId != null and ryMchId != ''">
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
         </if>
-        <if test="ryMchId != null and ryMchId != ''">
-            and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
+        <if test="payScene != null">
+            and pay_scene = #{payScene}
         </if>
         <if test="startTime != null and startTime != ''">
             and end_at &gt;= STR_TO_DATE(#{startTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
