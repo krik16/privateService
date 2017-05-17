@@ -11,6 +11,7 @@ import com.rongyi.pay.core.webank.model.res.WwScanPayResData;
 import com.rongyi.pay.core.webank.model.res.WwScanQueryResData;
 import com.rongyi.pay.core.webank.param.*;
 import com.rongyi.pay.core.webank.service.WebankPayService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -283,6 +284,9 @@ public class WebankPayUnit {
             }else if(!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())) {
                 throw new WebankException(resData.getResult().getErrno(), resData.getResult().getErrmsg());
             }
+            //由于微众在调用退款接口的时候，即使成功也不会更新订单状态，需要再调一次查询接口才会更新
+            reqData.setRefund_amount(null);
+            webankPayService.wechatPunchCardRefundQuery(reqData, configure);
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
@@ -434,6 +438,9 @@ public class WebankPayUnit {
             if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
                 throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getSubMsg()) ? resData.getMsg() : resData.getSubMsg());
             }
+            WaRefundQueryReqData waRefundQueryReqData = new WaRefundQueryReqData();
+            BeanUtils.copyProperties(waRefundQueryReqData,reqData);
+            webankPayService.alipayRefundTradeQuery(waRefundQueryReqData,configure);
         } catch (WebankException | ParamNullException e) {
             throw e ;
         } catch (Exception e) {
