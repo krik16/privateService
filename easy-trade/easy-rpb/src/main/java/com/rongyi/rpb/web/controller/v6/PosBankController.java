@@ -1,8 +1,6 @@
 package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.core.util.BeanMapUtils;
-import com.rongyi.core.util.TradePaySignUtil;
 import com.rongyi.easy.rpb.dto.PosBankSynNotifyDto;
 import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
 
 /**
  * pos银行卡
@@ -33,7 +29,7 @@ public class PosBankController {
     PayNotifyBizz payNotifyBizz;
 
     /**
-     * pos银行卡支付同步通知
+     * pos银行卡支付同步通知(提供到开放平台，此接口不更新支付状态)
      *
      * @param posBankSynNotifyDto 参数
      * @return ResponseVO
@@ -42,6 +38,31 @@ public class PosBankController {
     @ResponseBody
     public ResponseVO synPayNotify(@RequestBody PosBankSynNotifyDto posBankSynNotifyDto) {
         log.info("pos银行卡支付pos端同步结果通知,posBankSynNotifyDto={}", posBankSynNotifyDto);
+        try {
+
+            payNotifyBizz.posBankSynPayNotifyNone(posBankSynNotifyDto);
+            return ResponseVO.success();
+
+        } catch (TradeException e){
+            log.warn("pos银行卡支付pos端同步结果通知失败e={}",e.getMessage(),e);
+            return ResponseVO.failure(Integer.valueOf(e.getCode()),e.getMessage());
+        }catch (Exception e) {
+            log.error("pos银行卡支付pos端同步结果通知失败e={}", e.getMessage());
+            e.printStackTrace();
+        }
+        return ResponseVO.failure(ConstantEnum.EXCEPTION_POS_BANK_SYN_NTIFY_FAIL.getCodeInt(), ConstantEnum.EXCEPTION_POS_BANK_SYN_NTIFY_FAIL.getValueStr());
+    }
+
+    /**
+     * pos银行卡支付同步通知
+     *
+     * @param posBankSynNotifyDto 参数
+     * @return ResponseVO
+     */
+    @RequestMapping(value = "/inner/synPayNotify", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseVO innerSynPayNotify(@RequestBody PosBankSynNotifyDto posBankSynNotifyDto) {
+        log.info("pos银行卡支付pos端同步结果通知（更新支付状态）,posBankSynNotifyDto={}", posBankSynNotifyDto);
         try {
 
             payNotifyBizz.posBankSynPayNotify(posBankSynNotifyDto);
@@ -56,5 +77,4 @@ public class PosBankController {
         }
         return ResponseVO.failure(ConstantEnum.EXCEPTION_POS_BANK_SYN_NTIFY_FAIL.getCodeInt(), ConstantEnum.EXCEPTION_POS_BANK_SYN_NTIFY_FAIL.getValueStr());
     }
-
 }

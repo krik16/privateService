@@ -170,11 +170,35 @@ public class PayNotifyBizz {
     }
 
     /**
+     * pos 银行卡支付通知(开放平台使用，不更新支付状态)
+     * @param dto 通知参数
+     */
+    public void posBankSynPayNotifyNone(PosBankSynNotifyDto dto){
+
+        posPayValidate(dto);
+    }
+
+    /**
      * pos 银行卡支付通知
      * @param dto 通知参数
      */
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
 
+        PaymentEntity paymentEntity = posPayValidate(dto);
+        BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+        //支付通知
+       if(dto.getType() != null && 0 == dto.getType()) {
+           doPayNotify(paymentEntity.getPayNo(), payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
+       }
+       //退款通知
+        else if(dto.getType() != null && 1 == dto.getType()){
+
+           doPosBankRefundNotify(dto,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+       }
+    }
+
+
+    private PaymentEntity posPayValidate(PosBankSynNotifyDto dto){
         //获取开放平台商户信息
         RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(dto.getRyMchId(), dto.getRyAppId());
         if (ryMchAppVo == null) {
@@ -190,20 +214,8 @@ public class PayNotifyBizz {
         if(paymentEntity == null){
             throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
-
-        BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
-        //支付通知
-       if(dto.getType() != null && 0 == dto.getType()) {
-
-           doPayNotify(paymentEntity.getPayNo(), payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
-       }
-       //退款通知
-        else if(dto.getType() != null && 1 == dto.getType()){
-
-           doPosBankRefundNotify(dto,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
-       }
+        return paymentEntity;
     }
-
 
     /**
      *翼支付退款通知
