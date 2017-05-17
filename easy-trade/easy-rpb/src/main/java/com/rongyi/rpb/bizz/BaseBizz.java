@@ -106,7 +106,7 @@ public class BaseBizz {
     /**
      * 初始化支付扩展表信息
      */
-    protected PaymentEntityExt initPaymentEntityExt(String extend,Integer paymentEntityId) {
+    protected PaymentEntityExt initPaymentEntityExt(String extend,Integer paymentEntityId,String memo) {
         PaymentEntityExt paymentEntityExt = null;
         //查找扩展表记录
         if (paymentEntityId != null) {
@@ -132,7 +132,7 @@ public class BaseBizz {
             paymentEntityExt.setPosNo(extendArray[2]);
         }
         paymentEntityExt.setCreateAt(new Date());
-
+        paymentEntityExt.setMemo(memo);
         return paymentEntityExt;
     }
 

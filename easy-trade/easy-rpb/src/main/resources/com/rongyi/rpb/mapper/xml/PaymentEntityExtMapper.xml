@@ -9,9 +9,10 @@
     <result column="pos_no" property="posNo" jdbcType="VARCHAR" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="memo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, payment_order_id, mch_info_id, store_id, pos_no, create_at, update_at
+    id, payment_order_id, mch_info_id, store_id, pos_no, memo, create_at, update_at
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,10 +26,10 @@
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntityExt" >
     insert into payment_order_ext (id, payment_order_id, mch_info_id, 
-      store_id, pos_no, create_at, 
+      store_id, pos_no, memo,create_at,
       update_at)
     values (#{id,jdbcType=INTEGER}, #{paymentOrderId,jdbcType=INTEGER}, #{mchInfoId,jdbcType=VARCHAR}, 
-      #{storeId,jdbcType=VARCHAR}, #{posNo,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{storeId,jdbcType=VARCHAR}, #{posNo,jdbcType=VARCHAR},  #{memo,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP},
       #{updateAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.rpb.domain.PaymentEntityExt" >
@@ -48,6 +49,9 @@
       </if>
       <if test="posNo != null" >
         pos_no,
+      </if>
+      <if test="memo != null" >
+        memo,
       </if>
       <if test="createAt != null" >
         create_at,
@@ -72,6 +76,9 @@
       <if test="posNo != null" >
         #{posNo,jdbcType=VARCHAR},
       </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
       <if test="createAt != null" >
         #{createAt,jdbcType=TIMESTAMP},
       </if>
@@ -86,6 +93,7 @@
       mch_info_id = #{mchInfoId,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=VARCHAR},
       pos_no = #{posNo,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
       create_at = #{createAt,jdbcType=TIMESTAMP},
       update_at = #{updateAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

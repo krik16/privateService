@@ -29,6 +29,8 @@ public class WechatPaySignData extends BaseData {
 
     private Integer orderType;//订单类型
 
+    private String memo ;     //备注
+
 
     public String getOrderNo() {
         return orderNo;
@@ -108,5 +110,13 @@ public class WechatPaySignData extends BaseData {
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }
