@@ -36,6 +36,13 @@ public class WaPunchCardPayParam extends BaseData {
     //订单描述
     private String body ;
 
+    private String mchInfoId;//商户id
+
+    private String storeId;//门店id
+
+    private String posNo;//设备号
+
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -108,4 +115,27 @@ public class WaPunchCardPayParam extends BaseData {
         this.body = body;
     }
 
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
 }

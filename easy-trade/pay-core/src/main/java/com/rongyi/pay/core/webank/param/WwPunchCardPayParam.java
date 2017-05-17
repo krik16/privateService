@@ -40,6 +40,12 @@ public class WwPunchCardPayParam extends BaseData{
     //附加信息
     private String attach ;
 
+    private String mchInfoId;//商户号
+
+    private String storeId;//门店号
+
+    private String posNo;//设备号
+
     public String getMerchantCode() {
         return merchantCode;
     }
@@ -118,5 +124,29 @@ public class WwPunchCardPayParam extends BaseData{
 
     public void setTerminalCode(String terminalCode) {
         this.terminalCode = terminalCode;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 }

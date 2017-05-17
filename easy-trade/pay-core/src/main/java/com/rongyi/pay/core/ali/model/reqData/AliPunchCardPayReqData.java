@@ -76,6 +76,11 @@ public class AliPunchCardPayReqData extends BaseData{
     // (推荐使用，相对时间) 支付超时时间，5m 5分钟
     private String timeoutExpress;
 
+
+    private String mchInfoId;//商户号
+
+    private String posNo;//设备号
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -218,5 +223,21 @@ public class AliPunchCardPayReqData extends BaseData{
 
     public void setTimeoutExpress(String timeoutExpress) {
         this.timeoutExpress = timeoutExpress;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 }
