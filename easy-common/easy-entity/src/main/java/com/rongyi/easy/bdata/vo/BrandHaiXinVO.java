@@ -14,6 +14,16 @@ public class BrandHaiXinVO implements Serializable{
 	private String brandCode;//品牌编码
 	private String brandName;//品牌名称
 	private String remark;//备注
+	private String shopMid;
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+
 	public String getId() {
 		return id;
 	}

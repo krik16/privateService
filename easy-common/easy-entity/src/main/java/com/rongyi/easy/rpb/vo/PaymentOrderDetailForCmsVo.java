@@ -26,6 +26,7 @@ public class PaymentOrderDetailForCmsVo implements Serializable {
     private Integer shopScore;//获取积分
     private String paymentNo;//支付交易流水
     private String cardName;//积分商名称
+    private String posNo;//收银pos
 
     public String getCashName() {
         return cashName;
@@ -161,6 +162,14 @@ public class PaymentOrderDetailForCmsVo implements Serializable {
 
     public void setCardName(String cardName) {
         this.cardName = cardName;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 
     @Override

@@ -136,7 +136,7 @@ public interface GroupBuyService {
 	 * @param paymentResult--是否支付成功
 	 * @return
 	 */
-	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult) throws Exception;
+	boolean noticePaymentResult(int activityId,long groupId,String goodId,String goodSpecId,String userId,String orderNo,boolean paymentResult,String userName, String userPhone, String userPosition, String userCompany) throws Exception;
 
 
 

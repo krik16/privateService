@@ -86,6 +86,8 @@ public class OrderDetailVO implements Serializable {
     private List<CouponShop> couponShops;//适用店铺列表
 
     private List<CouponMall> couponMalls;
+    // 支付价格
+    private BigDecimal payAmount;
 
     public Integer getTradeStatus() {
         return tradeStatus;
@@ -321,6 +323,14 @@ public class OrderDetailVO implements Serializable {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public BigDecimal getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(BigDecimal payAmount) {
+        this.payAmount = payAmount;
     }
 
     @Override

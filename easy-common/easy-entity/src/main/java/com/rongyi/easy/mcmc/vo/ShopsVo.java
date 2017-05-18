@@ -26,4 +26,13 @@ public class ShopsVo implements Serializable{
     public void setShopName(String shopName) {
         this.shopName = shopName;
     }
+    
+    public ShopsVo(){
+    	
+    }
+    
+    public ShopsVo(String shopId, String shopName){
+    	this.shopId = shopId;
+    	this.shopName = shopName;
+    }
 }

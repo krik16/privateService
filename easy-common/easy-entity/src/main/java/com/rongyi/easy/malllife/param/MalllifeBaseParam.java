@@ -24,9 +24,17 @@ public class MalllifeBaseParam implements Serializable {
     private Integer currentPage; //当前页数
     private Integer pageSize = 20;//每页显示数
 
+    private Integer offset = 0;  //偏移量
     // 设备号
     private String uuId;
 
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffSet(Integer offset) {
+        this.offset = offset;
+    }
 
     public String getJsessionid() {
         return jsessionid;

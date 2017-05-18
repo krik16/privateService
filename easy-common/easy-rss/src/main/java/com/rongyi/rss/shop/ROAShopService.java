@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.bdata.entity.HaiXinShopData;
+import com.rongyi.easy.shop.param.HaiXinShopRelationParam;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.shop.entity.ShopEntity;
@@ -63,5 +64,11 @@ public interface ROAShopService {
 	public Long searchShopCountByMallAreaIdAndType(String mallId,int type);
 
 
-	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas) throws Exception;
+	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas, String url) throws Exception;
+
+	public void addShopRelationshipForHaiXin(HaiXinShopRelationParam param);
+
+	String findShopMidByUrl(String url);
+
+	String findUrlByShopMid(String shopMid);
 }
