@@ -20,8 +20,8 @@ public interface IShopSearchSolrService {
 
     /**
      * 根据
-     * @param shopNatures 店铺性质
+     * @param searchParam 分页查询
      * @return shopList
      */
-    ShopSearchResult searchShopByType(List<String> shopNatures, boolean excludeItsChildren);
+    ShopSearchResult searchShopByType(ShopSearchParam searchParam, boolean excludeItsChildren);
 }
