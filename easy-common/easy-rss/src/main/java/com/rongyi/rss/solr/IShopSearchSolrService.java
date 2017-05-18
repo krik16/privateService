@@ -2,6 +2,7 @@ package com.rongyi.rss.solr;
 
 import com.rongyi.easy.solr.param.ShopSearchParam;
 import com.rongyi.easy.solr.result.ShopSearchResult;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -16,12 +17,12 @@ public interface IShopSearchSolrService {
      * @param idList 需要去除的id集合， 若idList为空，则表示查询所有
      * @return shopList
      */
-    ShopSearchResult excludeSpecifiedIfNecessary(List<String> idList, ShopSearchParam searchParam);
+    ShopSearchResult excludeSpecifiedIfNecessary(List<ObjectId> idList, ShopSearchParam searchParam);
 
     /**
      * 根据
-     * @param searchParam 分页查询
+     * @param excludeShopNatures 不分页
      * @return shopList
      */
-    ShopSearchResult searchShopByType(ShopSearchParam searchParam, boolean excludeItsChildren);
+    ShopSearchResult searchShopByType(List<String> excludeShopNatures, boolean excludeItsChildren);
 }
