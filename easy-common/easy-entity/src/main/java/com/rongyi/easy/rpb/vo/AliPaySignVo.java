@@ -48,7 +48,11 @@ public class AliPaySignVo extends BaseBizVo implements Serializable {
     // (推荐使用，相对时间) 支付超时时间，5m 5分钟
     private String timeoutExpress;
 
-    private Integer orderType;//
+    private Integer orderType;//订单类型
+
+    private String posNo;//设备号
+
+    private String extend;//扩展参数
 
     public String getAppAuthToken() {
         return appAuthToken;
@@ -136,6 +140,24 @@ public class AliPaySignVo extends BaseBizVo implements Serializable {
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    @Override
+    public String getExtend() {
+        return extend;
+    }
+
+    @Override
+    public void setExtend(String extend) {
+        this.extend = extend;
     }
 
     @Override

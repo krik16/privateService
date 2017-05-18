@@ -30,6 +30,8 @@ public class CashPayVo implements Serializable {
 
     private String posNo;//设备号
 
+    private String extend;//扩展字段
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -84,6 +86,14 @@ public class CashPayVo implements Serializable {
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getExtend() {
+        return extend;
+    }
+
+    public void setExtend(String extend) {
+        this.extend = extend;
     }
 
     @Override
