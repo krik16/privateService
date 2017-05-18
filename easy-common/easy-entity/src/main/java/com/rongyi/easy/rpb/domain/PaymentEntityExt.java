@@ -13,6 +13,12 @@ public class PaymentEntityExt {
 
     private String posNo;
 
+    private String subject;
+
+    private String body;
+
+    private String attach;
+
     private Date createAt;
 
     private Date updateAt;
@@ -55,6 +61,30 @@ public class PaymentEntityExt {
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     public Date getCreateAt() {

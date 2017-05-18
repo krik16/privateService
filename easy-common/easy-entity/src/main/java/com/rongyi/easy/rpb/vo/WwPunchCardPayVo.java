@@ -39,6 +39,12 @@ public class WwPunchCardPayVo  implements Serializable {
     //商品标记
     private String goodsTag;
 
+    //订单标题
+    private String subject;
+
+    //订单描述
+    private String body;
+
     //附加信息
     private String attach ;
 
@@ -161,6 +167,22 @@ public class WwPunchCardPayVo  implements Serializable {
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override

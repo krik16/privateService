@@ -19,8 +19,14 @@ public class CashPayVo implements Serializable {
     //金额（分）必填
     private Integer totalAmount;
 
-    //商品描述  
+    //订单标题
     private String subject;
+
+    //订单描述
+    private String body;
+
+    //附加信息
+    private String attach;
 
     private Integer orderType;
 
@@ -94,6 +100,22 @@ public class CashPayVo implements Serializable {
 
     public void setExtend(String extend) {
         this.extend = extend;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override
