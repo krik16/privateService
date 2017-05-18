@@ -201,13 +201,11 @@ public class QueryBizz {
 
         if (ConstantEnum.PAY_SCENE_SCAN.getCodeInt().equals(oldPaymentEntity.getPayScene())) {
             WwScanQueryResData resData = webankWechatScanPayQueryOrder(weBankMchNo, oldPaymentEntity);
-            map = BeanMapUtils.toMap(resData);
             //微信流水号
             map.put("tradeNo", resData.getTransaction_id());
             map.put("tradeStatus", resData.getTrade_state());
         } else {
             WwPunchCardResData resData = webankWechatPunchCardPayQueryOrder(weBankMchNo, oldPaymentEntity);
-            map = BeanMapUtils.toMap(resData);
             //微信流水号
             map.put("tradeNo", resData.getTransaction_id());
             //设置支付状态
@@ -316,8 +314,6 @@ public class QueryBizz {
             if (!"1".equals(resData.getRefundment())) {
                 map.put("refundStatus", "FAIL");
             }
-            resData.setPayNo(oldPaymentEntity.getPayNo());
-
             //微众银行退款单号
             map.put("tradeNo", resData.getRefundid());
         } else {
