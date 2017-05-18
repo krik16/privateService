@@ -465,6 +465,20 @@
 			<groupId>com.rongyi</groupId>
 			<artifactId>pay-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jxls</groupId>
+			<artifactId>jxls-core</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
