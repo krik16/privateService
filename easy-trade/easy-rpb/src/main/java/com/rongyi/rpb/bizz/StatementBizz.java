@@ -39,10 +39,10 @@ public class StatementBizz implements InitializingBean {
 
 	private FTPHelper ftpHelper;
 
-	private static Set<String> TO_ADRS_SET = new HashSet<>();
+	/*private static Set<String> TO_ADRS_SET = new HashSet<>();
 	static {
 		TO_ADRS_SET.add("chenguohui@rongyi.com");
-	}
+	}*/
 
 	/**
 	 * @Description 接受对账单文件流, 并写入到服务器
@@ -62,6 +62,12 @@ public class StatementBizz implements InitializingBean {
 			return;
 		}
 		SendDto sendDto = new SendDto();
+		Set<String> TO_ADRS_SET = new HashSet<>();
+		String sendUser = propertyConfigurer.getProperty("WEBANK_STATEMENT_EMAILSENDUSER");
+		String [] sendUserStr = sendUser.split(";");
+		for(String send :sendUserStr){
+			TO_ADRS_SET.add(send);
+		}
 		sendDto.setToAddsSet(TO_ADRS_SET);
 		List<String> fileNameList = new ArrayList<>();
 		fileNameList.add(fileName);
