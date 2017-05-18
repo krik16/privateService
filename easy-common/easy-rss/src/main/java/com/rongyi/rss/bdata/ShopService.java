@@ -12,6 +12,7 @@ import com.rongyi.easy.ryoms.param.ShopParam;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.solr.param.ShopSearchParam;
 import org.bson.types.ObjectId;
 
 /**
@@ -162,4 +163,6 @@ public interface ShopService {
 	String copyInsert(Shop shop);
 
 	boolean updateRelation(String id, String parentId, List<String> parentIds);
+
+	ResponseVO getAllExcludeSpecified(ShopSearchParam searchParam, boolean excludeItsChildren);
 }
