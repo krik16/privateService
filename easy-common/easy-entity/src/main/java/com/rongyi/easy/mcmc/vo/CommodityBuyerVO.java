@@ -93,6 +93,16 @@ public class CommodityBuyerVO implements Serializable {
     private String commodityModelNo;
     private String totalStock;
 
+    private String referencePrice; // 销售价
+
+    public String getReferencePrice() {
+        return referencePrice;
+    }
+
+    public void setReferencePrice(String referencePrice) {
+        this.referencePrice = referencePrice;
+    }
+
     public String getCommodityModelNo() {
         return commodityModelNo;
     }
