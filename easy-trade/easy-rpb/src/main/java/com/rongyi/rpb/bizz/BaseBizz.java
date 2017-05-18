@@ -140,7 +140,8 @@ public class BaseBizz {
     /**
      * 初始化支付扩展表信息
      */
-    protected PaymentEntityExt initPaymentEntityExt(String mchInfoId,String storeId,String posNo,Integer paymentEntityId,String extend) {
+    protected PaymentEntityExt initPaymentEntityExt(String mchInfoId,String storeId,String posNo,String subject,
+                                                    String body,String attach,Integer paymentEntityId,String extend) {
         PaymentEntityExt paymentEntityExt = null;
         //查找扩展表记录
         if (paymentEntityId != null) {
@@ -151,6 +152,7 @@ public class BaseBizz {
             paymentEntityExt = new PaymentEntityExt();
             paymentEntityExt.setPaymentOrderId(paymentEntityId);
         }
+        //特殊定义扩展信息
         if(StringUtil.isNotEmpty(extend)){
             String[] extendArray = extend.split("__");
             if(extendArray.length > 0){
@@ -163,9 +165,18 @@ public class BaseBizz {
                 paymentEntityExt.setPosNo(extendArray[2]);
             }
         }
-        paymentEntityExt.setMchInfoId(mchInfoId);
-        paymentEntityExt.setStoreId(storeId);
-        paymentEntityExt.setPosNo(posNo);
+        if(StringUtil.isNotEmpty(mchInfoId)) {
+            paymentEntityExt.setMchInfoId(mchInfoId);
+        }
+        if(StringUtil.isNotEmpty(storeId)) {
+            paymentEntityExt.setStoreId(storeId);
+        }
+        if(StringUtil.isNotEmpty(posNo)) {
+            paymentEntityExt.setPosNo(posNo);
+        }
+        paymentEntityExt.setSubject(subject);
+        paymentEntityExt.setBody(body);
+        paymentEntityExt.setAttach(attach);
         paymentEntityExt.setCreateAt(new Date());
         return paymentEntityExt;
     }

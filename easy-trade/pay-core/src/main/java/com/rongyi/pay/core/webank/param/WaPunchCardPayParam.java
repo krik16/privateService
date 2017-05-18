@@ -36,6 +36,9 @@ public class WaPunchCardPayParam extends BaseData {
     //订单描述
     private String body ;
 
+    //附加信息
+    private String attach;
+
     private String mchInfoId;//商户id
 
     private String storeId;//门店id
@@ -137,5 +140,13 @@ public class WaPunchCardPayParam extends BaseData {
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 }
