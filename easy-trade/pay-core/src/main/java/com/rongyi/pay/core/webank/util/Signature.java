@@ -173,7 +173,7 @@ public class Signature {
             for (Field field : declaredFields) {
                 field.setAccessible(true);
                 Object value = field.get(obj);
-                if("sign".equals(field.getName()))
+                if("sign".equals(field.getName())||"serialVersionUID".equals(field.getName()))
                     continue;
                 if (value!=null&&value!="") {
                     map.put(field.getName(), field.get(obj) + "");
@@ -204,6 +204,8 @@ public class Signature {
             for (Field field : declaredFields) {
                 field.setAccessible(true);
                 Object value = field.get(obj);
+                if("serialVersionUID".equals(field.getName()))
+                    continue;
                 if (value!=null&&value!="") {
                     map.put(field.getName(), field.get(obj)+"");
                 }

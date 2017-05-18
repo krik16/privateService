@@ -296,7 +296,9 @@ public class QueryBizz {
             reqData.setTerminal_serialno(oldPaymentEntity.getPayNo());
 
             WwPunchCardRefundResData resData = WebankPayUnit.wechatPunchCardRefundQuery(reqData);
-
+            if (!"1".equals(resData.getRefundment())) {
+                map.put("refundStatus", "FAIL");
+            }
             resData.setPayNo(oldPaymentEntity.getPayNo());
 
             //微众银行退款单号
