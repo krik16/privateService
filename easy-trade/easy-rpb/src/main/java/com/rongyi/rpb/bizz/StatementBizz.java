@@ -41,7 +41,7 @@ public class StatementBizz implements InitializingBean {
 
 	private static Set<String> TO_ADRS_SET = new HashSet<>();
 	static {
-		TO_ADRS_SET.add("wudi@rongyi.com");
+		TO_ADRS_SET.add("chenguohui@rongyi.com");
 	}
 
 	/**
