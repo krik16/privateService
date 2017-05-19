@@ -1,8 +1,5 @@
 package com.rongyi.rss.activitymanage;
 
-import java.util.Date;
-import java.util.List;
-
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
@@ -13,6 +10,9 @@ import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
 import com.rongyi.easy.activitymanage.param.PingtuanActivityVo;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.vo.*;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 活动后台管理接口
@@ -54,6 +54,9 @@ public interface ActivityService {
      * @author Leon
      */
     boolean saveActivityGoods(ActivityGoods activityGoods);
+
+
+    public Integer insertActivityGoods(ActivityGoods activityGoods);
 
     /**
      * 更新商品
@@ -123,7 +126,7 @@ public interface ActivityService {
 
 
 
-
+    public boolean deleteByActivityId(Integer activityId);
 
 
 
@@ -249,4 +252,25 @@ public interface ActivityService {
      * @return
      */
     public List<SaleCommodityTop> saleCommodityTopList(Integer ActivityId);
+
+    Integer saveOrupdateActivityInfo(ActivityInfo activityInfo);
+
+    boolean saveOrupdateSecKillConfig(SecKillConfigEntity configEntity);
+
+    SecKillConfigEntity selectSecKillConfigByActivityId(Integer activityId);
+
+    boolean updateActivityInfo(ActivityInfo activityInfo);
+
+    public  List<ActivityGoodsSpec> selectByActivityGoodsIds(List<Integer> activityGoodsIds);
+
+    public  boolean batchInsertActivityGoodsSpec(List<ActivityGoodsSpec> activityGoodsSpecs, Integer activityGoodsId);
+
+
+    boolean selectIfAvaSession(ActivityGoods activityGoods);
+
+    public ActivityGoods selectGoodsByPreId(Integer id);
+
+    boolean updateActivityGoodsByActIdSessionId(ActivityGoods activityGoods);
+
+    boolean selectIfUpdateession(ActivityGoods activityGoods);
 }

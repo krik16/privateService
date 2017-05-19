@@ -1389,7 +1389,11 @@ public class Commodity implements  Serializable,Cloneable{
 
 		if (!CommodityUtil.isGiftType(vo.getCommodityRange())) {
 			this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
-			this.setGoodsParam(vo.getGoodsParam()); //商品参数
+			if(CollectionUtils.isNotEmpty(vo.getGoodsParam())) {
+				this.setGoodsParam(vo.getGoodsParam()); //商品参数
+			} else {
+				this.setGoodsParam(Arrays.asList("")); //商品参数
+			}
 			if (null != vo.getProcessIdentity()) {
 				this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 			}

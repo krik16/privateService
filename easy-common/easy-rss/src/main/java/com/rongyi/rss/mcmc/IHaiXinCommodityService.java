@@ -5,5 +5,5 @@ package com.rongyi.rss.mcmc;
  */
 public interface IHaiXinCommodityService {
 
-    void importCommodity(String code, String startDate, String endDate, boolean updateAll);
+    void importCommodity(String url, String code, String startDate, String endDate, boolean updateAll, String shopMidCenter);
 }

@@ -1,6 +1,8 @@
 package com.rongyi.easy.activitymanage.param;
 
 import com.google.inject.internal.Lists;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,28 +12,6 @@ import java.util.List;
  * Created by xuying on 2016/10/17.
  */
 public class PingtuanActivityVo implements Serializable{
-    @Override
-    public String toString() {
-        return "PingtuanActivityVo{" +
-                "activityId=" + activityId +
-                ", pintuanConfigId=" + pintuanConfigId +
-                ", name='" + name + '\'' +
-                ", startAt=" + startAt +
-                ", endAt=" + endAt +
-                ", description='" + description + '\'' +
-                ", pic='" + pic + '\'' +
-                ", activeTime=" + activeTime +
-                ", cancelTime=" + cancelTime +
-                ", forceAttention=" + forceAttention +
-                ", shareTitle='" + shareTitle + '\'' +
-                ", shareDesc='" + shareDesc + '\'' +
-                ", sharePic='" + sharePic + '\'' +
-                ", mallId='" + mallId + '\'' +
-                ", pics='" + pics + '\'' +
-                ", type='" + type + '\'' +
-                ", activityGoodsDetails=" + activityGoodsDetails +
-                '}';
-    }
 
 
     private Integer activityId;
@@ -222,5 +202,10 @@ public class PingtuanActivityVo implements Serializable{
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

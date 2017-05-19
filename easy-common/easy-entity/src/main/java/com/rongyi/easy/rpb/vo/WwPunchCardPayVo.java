@@ -44,6 +44,13 @@ public class WwPunchCardPayVo  implements Serializable {
 
     private Integer orderType;
 
+
+    private String mchInfoId;//商户号
+
+    private String storeId;//门店号
+
+    private String posNo;//设备号
+
     public String getMerchantCode() {
         return merchantCode;
     }
@@ -131,6 +138,31 @@ public class WwPunchCardPayVo  implements Serializable {
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
     }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
