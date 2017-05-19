@@ -36,6 +36,8 @@ public class StatementBizz implements InitializingBean {
 
 	@Autowired
 	private PropertyConfigurer propertyConfigurer;
+	@Autowired
+	private SendFactory sendFactory;
 
 	private FTPHelper ftpHelper;
 
@@ -90,7 +92,7 @@ public class StatementBizz implements InitializingBean {
 //			}
 //		}.start();
 		
-		SendProvider sendMail = SendFactory.sendMail();
+		SendProvider sendMail = sendFactory.sendMail();
 		sendMail.send(sendDto);
 	}
 
