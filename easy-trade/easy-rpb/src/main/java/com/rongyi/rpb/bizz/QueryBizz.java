@@ -423,7 +423,7 @@ public class QueryBizz {
             //微众银行退款单号
             map.put("tradeNo", resData.getTradeNo());
         }else{
-            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
+            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(refundPaymentEntity.getPayNo());
             //第三方流水号
             if (paymentLogInfo != null) {
                 if (StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
