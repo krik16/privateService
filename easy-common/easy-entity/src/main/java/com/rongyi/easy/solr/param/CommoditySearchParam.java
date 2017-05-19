@@ -113,6 +113,16 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 	private Integer type;
 	private Integer getTogether;  //是否聚合  0:不聚合  1：聚合
 
+	private List<String> commodityIds;
+
+	public List<String> getCommodityIds() {
+		return commodityIds;
+	}
+
+	public void setCommodityIds(List<String> commodityIds) {
+		this.commodityIds = commodityIds;
+	}
+
 	public Integer getGetTogether() {
 		return getTogether;
 	}
