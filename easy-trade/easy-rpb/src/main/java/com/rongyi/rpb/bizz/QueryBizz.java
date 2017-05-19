@@ -305,9 +305,11 @@ public class QueryBizz {
             //微众银行退款单号
             map.put("tradeNo", resData.getRefundid());
         } else {
-            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
+            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(refundPayment.getPayNo());
             //第三方流水号
-            if (paymentLogInfo != null) {
+            if(StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                map.put("tradeNo", paymentLogInfo.getTransactionId());
+            }else{
                 map.put("tradeNo", paymentLogInfo.getTrade_no());
             }
         }
@@ -424,7 +426,11 @@ public class QueryBizz {
             PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
             //第三方流水号
             if (paymentLogInfo != null) {
-                map.put("tradeNo", paymentLogInfo.getTrade_no());
+                if (StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                    map.put("tradeNo", paymentLogInfo.getTransactionId());
+                } else {
+                    map.put("tradeNo", paymentLogInfo.getTrade_no());
+                }
             }
         }
         return map;
@@ -492,7 +498,11 @@ public class QueryBizz {
             PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
             //第三方流水号
             if (paymentLogInfo != null) {
-                map.put("tradeNo", paymentLogInfo.getTrade_no());
+                if(StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                    map.put("tradeNo", paymentLogInfo.getTransactionId());
+                }else{
+                    map.put("tradeNo", paymentLogInfo.getTrade_no());
+                }
             }
         }
         return map;
