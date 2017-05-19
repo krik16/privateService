@@ -63,7 +63,7 @@ public class PayBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
-                orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
+                orderType, ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //发起支付
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
@@ -155,7 +155,7 @@ public class PayBizz extends BaseBizz{
         Integer totalFee = wwPunchCardPayParam.getAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wwPunchCardPayParam.getOrderNo(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType, ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //支付流水号设置为微众商户单号
         wwPunchCardPayParam.setOrderNo(paymentEntity.getPayNo());
@@ -214,7 +214,7 @@ public class PayBizz extends BaseBizz{
         Integer totalFee = waPunchCardPayParam.getTotalAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waPunchCardPayParam.getOrderId(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //支付流水号设置为微众商户单号
         waPunchCardPayParam.setOrderId(paymentEntity.getPayNo());
@@ -235,7 +235,7 @@ public class PayBizz extends BaseBizz{
 
             //初始化扩展记录
             PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waPunchCardPayParam.getMchInfoId(),
-                    waPunchCardPayParam.getStoreId(),waPunchCardPayParam.getPosNo(),paymentEntity.getId());
+                    waPunchCardPayParam.getStoreId(), waPunchCardPayParam.getPosNo(), paymentEntity.getId());
 
             //保存支付记录
             saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
@@ -255,6 +255,7 @@ public class PayBizz extends BaseBizz{
             //循环查询支付状态
             webankAliWaitUserPaying(paymentEntity, waPunchCardPayParam);
         }
+        resData.setOutTradeNo(paymentEntity.getPayNo());
         return resData;
     }
 
