@@ -255,7 +255,7 @@ public class WeBankPayServiceImpl extends BaseServiceImpl implements IweBankServ
             //容易网交易号
             map.put("payNo", resData.getOutTradeNo());
             //微众银行退款单号
-            map.put("tradeNo", resData.getTradeNo());
+            map.put("tradeNo", resData.getOpenId());
             //交易金额
             map.put("totalAmount", new BigDecimal(resData.getRefundFee()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             //退款状态

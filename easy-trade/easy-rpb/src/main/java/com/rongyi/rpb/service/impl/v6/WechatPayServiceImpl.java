@@ -89,9 +89,9 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
-            map.put("payNo", resData.getOut_trade_no());
+            map.put("payNo", resData.getOut_refund_no());
             //微众银行退款单号
-            map.put("tradeNo", resData.getTransaction_id());
+            map.put("tradeNo", resData.getRefund_id());
             //交易金额
             map.put("totalAmount", resData.getTotal_fee());
             //退款状态
