@@ -7,18 +7,9 @@ import org.springframework.stereotype.Repository;
 public class SendFactory {
 
 	@Autowired
-	private static SendMail sendMail;
+	private SendMail sendMail;
 
-	public static SendProvider sendMail() {
+	public SendProvider sendMail() {
 		return sendMail;
 	}
-
-	public static SendMail getSendMail() {
-		return sendMail;
-	}
-
-	public void setSendMail(SendMail sendMail) {
-		SendFactory.sendMail = sendMail;
-	}
-	
 }
