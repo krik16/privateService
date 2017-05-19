@@ -164,5 +164,5 @@ public interface ShopService {
 
 	boolean updateRelation(String id, String parentId, List<String> parentIds);
 
-	ResponseVO getAllExcludeSpecified(List<String> excludeShopNatures, ShopSearchParam searchParam, boolean excludeItsChildren);
+	ResponseVO getAllExcludeSpecified(List<String> shopNatures, ShopSearchParam searchParam, boolean excludeItsChildren);
 }
