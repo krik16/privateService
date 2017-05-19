@@ -17,7 +17,6 @@ public class SendFactory {
 		return sendMail;
 	}
 
-	@Autowired
 	public void setSendMail(SendMail sendMail) {
 		SendFactory.sendMail = sendMail;
 	}
