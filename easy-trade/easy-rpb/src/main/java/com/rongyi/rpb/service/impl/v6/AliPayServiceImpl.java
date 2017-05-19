@@ -187,23 +187,27 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
             //初始化支付参数
             AliConfigure aliConfigure = getAliConfigure(aliConfigureVo);
 
-            PaymentEntity paymentEntity = queryBizz.aliRefundQuery(orderNo, aliConfigure);
+            PaymentEntity refundPayment = queryBizz.aliRefundQuery(orderNo, aliConfigure);
 
-            PaymentLogInfo paymentLogInfo = queryBizz.queryPaymentLogInfo(paymentEntity.getPayNo());
+            PaymentLogInfo paymentLogInfo = queryBizz.queryPaymentLogInfo(refundPayment.getPayNo());
 
-            Map<String, Object> map = BeanMapUtils.toMap(paymentEntity);
+            Map<String, Object> map = BeanMapUtils.toMap(refundPayment);
 
             //外部订单号
             map.put("orderNo", orderNo);
             //容易网交易号
-            map.put("payNo", paymentEntity.getPayNo());
+            map.put("payNo", refundPayment.getPayNo());
 
             //微众银行退款单号
-            map.put("tradeNo",paymentLogInfo.getTrade_no());
+            if(StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                map.put("tradeNo",paymentLogInfo.getTransactionId());
+            }else{
+                map.put("tradeNo",paymentLogInfo.getTrade_no());
+            }
             //交易金额
-            map.put("totalAmount",paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            map.put("totalAmount", refundPayment.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             //退款金额
-            map.put("refundAmount",paymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP).toString());
+            map.put("refundAmount", refundPayment.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
 
             map.put("refundStatus","SUCCESS");
 

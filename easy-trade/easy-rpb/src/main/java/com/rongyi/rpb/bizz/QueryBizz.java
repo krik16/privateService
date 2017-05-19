@@ -445,10 +445,9 @@ public class QueryBizz {
      */
     public PaymentEntity aliRefundQuery(String orderNo, AliConfigure aliConfigure) {
 
-        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-        baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-        return oldPaymentEntity;
+      return baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
     }
 
     /**
