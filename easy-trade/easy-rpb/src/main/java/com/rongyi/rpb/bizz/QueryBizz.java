@@ -3,7 +3,6 @@ package com.rongyi.rpb.bizz;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
-import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.WebankException;
@@ -170,14 +169,6 @@ public class QueryBizz {
     public Map<String, Object> weBankWechatPayQueryOrder(String orderNo, String weBankMchNo) throws Exception {
 
         PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-
-        //微众支付存在一个坑，如果退款完成之后不调用退款查询接口直接调用支付查询接口返回的是支付成功，只要调用一次退款查询接口后再次调用就会提示原交易已退货
-        //此处特殊处理下，在支付查询时检查是否已退款，如已退款则直接返回已退款状态
-//        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-//                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-//        if (refundPayment != null) {
-//            throw new WebankException("1", "原交易已退货");
-//        }
         Map<String, Object> map = new HashMap<>();
 
         //外部订单号
@@ -196,10 +187,7 @@ public class QueryBizz {
             }
             //设置支付状态
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            return map;
-        }
-
-        if (ConstantEnum.PAY_SCENE_SCAN.getCodeInt().equals(oldPaymentEntity.getPayScene())) {
+        }else  if (ConstantEnum.PAY_SCENE_SCAN.getCodeInt().equals(oldPaymentEntity.getPayScene())) {
             WwScanQueryResData resData = webankWechatScanPayQueryOrder(weBankMchNo, oldPaymentEntity);
             //微信流水号
             map.put("tradeNo", resData.getTransaction_id());
@@ -340,14 +328,6 @@ public class QueryBizz {
         payConfigInitUnit.initAliTicket();
 
         PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-
-        //微众支付存在一个坑，如果退款完成之后不调用退款查询接口直接调用支付查询接口返回的是支付成功，只要调用一次退款查询接口后再次调用就会提示原交易已退货
-        //此处特殊处理下，在支付查询时检查是否已退款，如已退款则直接返回已退款状态
-//        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-//                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-//        if (refundPayment != null) {
-//            throw new WebankException("1", "原交易已退货");
-//        }
 
         Map<String, Object> map = new HashMap<>();
         //外部订单号
