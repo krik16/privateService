@@ -12,6 +12,15 @@ public class HaiXinCommodityImport implements Serializable {
     private String startDate;
     private String endDate;
     private boolean updateAll;
+    private String shopMid;
+
+    public String getShopMid() {
+        return shopMid;
+    }
+
+    public void setShopMid(String shopMid) {
+        this.shopMid = shopMid;
+    }
 
     public String getUrl() {
         return url;
@@ -61,6 +70,7 @@ public class HaiXinCommodityImport implements Serializable {
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", updateAll=" + updateAll +
+                ", shopMid='" + shopMid + '\'' +
                 '}';
     }
 }

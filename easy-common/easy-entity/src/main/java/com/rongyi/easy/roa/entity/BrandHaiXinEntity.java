@@ -18,7 +18,16 @@ public class BrandHaiXinEntity implements Serializable{
 	private String brandCode;//品牌编码
 	private String brandName;//品牌名称
 	private String remark;//备注
-	
+	private String shopMid; //我们自己新增的总店id,多个商户的时候作为区分标识
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}

@@ -13,6 +13,8 @@ public class GoodSpecInfo implements Serializable{
 	 */
 	private static final long serialVersionUID = -3017144665036364356L;
 
+	private Integer activityGoodsId;//活动商品关联表id
+
 
 	/***
 	 * 商品id
@@ -98,5 +100,13 @@ public class GoodSpecInfo implements Serializable{
 
 	public void setGoodGroupPrice(double goodGroupPrice) {
 		this.goodGroupPrice = goodGroupPrice;
+	}
+
+	public Integer getActivityGoodsId() {
+		return activityGoodsId;
+	}
+
+	public void setActivityGoodsId(Integer activityGoodsId) {
+		this.activityGoodsId = activityGoodsId;
 	}
 }

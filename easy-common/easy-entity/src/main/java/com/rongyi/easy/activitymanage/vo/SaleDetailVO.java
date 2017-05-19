@@ -38,6 +38,15 @@ public class SaleDetailVO implements Serializable {
     private Integer associateCoupon;//是否关联卡卷
     private String desc;//描述
 
+    private Object reserveField;  //预留字段
+
+    public Object getReserveField() {
+        return reserveField;
+    }
+
+    public void setReserveField(Object reserveField) {
+        this.reserveField = reserveField;
+    }
 
     public String getDesc() {
         return desc;
