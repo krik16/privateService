@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SendFactory {
 
+	@Autowired
 	private static SendMail sendMail;
 
 	public static SendProvider sendMail() {
