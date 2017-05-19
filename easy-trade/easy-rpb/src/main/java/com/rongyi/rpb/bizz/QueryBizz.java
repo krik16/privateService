@@ -290,7 +290,7 @@ public class QueryBizz {
         map.put("refundAmount", refundPayment.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
         map.put("refundStatus", "SUCCESS");
         //容易网交易号
-        map.put("payNo", oldPaymentEntity.getPayNo());
+        map.put("payNo", refundPayment.getPayNo());
 
         if (!refundPayment.getStatus().equals(Constants.PAYMENT_STATUS.STAUS2)) {
 
@@ -407,7 +407,7 @@ public class QueryBizz {
         //外部订单号
         map.put("orderNo", orderNo);
         //容易网交易号
-        map.put("payNo", oldPaymentEntity.getPayNo());
+        map.put("payNo", refundPaymentEntity.getPayNo());
         //交易金额
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
         //退款金额
@@ -483,7 +483,7 @@ public class QueryBizz {
         //外部订单号
         map.put("orderNo", orderNo);
         //容易网交易号
-        map.put("payNo", oldPaymentEntity.getPayNo());
+        map.put("payNo", refundPaymentEntity.getPayNo());
          //交易金额
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
         //退款金额
