@@ -7,7 +7,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -138,6 +137,10 @@ public class ActivityGoods implements Serializable {
     private Integer supModPrice;//是否支持按成团人数调价
     private String expectTotalAmount;//期望的金额
 
+
+
+
+
     /**
      * 商品图片合集(用户摩店报名详情)
      */
@@ -156,6 +159,10 @@ public class ActivityGoods implements Serializable {
      * 退回原因
      */
     private String rejectReason;
+    private String sessionId;//场次id
+    private String sessionName;//场次名称
+    private String sessionDate;//场次日期
+    private Integer limitNum;//限购数量 0表示不限购
 
     /**
      * 商品规格
@@ -200,8 +207,6 @@ public class ActivityGoods implements Serializable {
         }
         return categoryStr;
     }
-
-
 
 
     public Integer getGroupMaxNum() {
@@ -560,6 +565,38 @@ public class ActivityGoods implements Serializable {
         this.sortNum = sortNum;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public void setSessionDate(String sessionDate) {
+        this.sessionDate = sessionDate;
+    }
+
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
+    public Integer getLimitNum() {
+        return limitNum;
+    }
+
+    public void setLimitNum(Integer limitNum) {
+        this.limitNum = limitNum;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -604,6 +641,10 @@ public class ActivityGoods implements Serializable {
                 .append("groupRandomNum", groupRandomNum)
                 .append("enrollSource", enrollSource)
                 .append("stockCount", stockCount)
+                .append("sessionId", sessionId)
+                .append("sessionName", sessionName)
+                .append("sessionDate", sessionDate)
+                .append("limitNum", limitNum)
                 .toString();
     }
 }

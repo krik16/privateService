@@ -36,6 +36,26 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
 
     private List<ObjectId> commodityIds;
 
+    private String shopName;
+
+    private String commodityModelNo;
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
+
     public String getShopId() {
         return shopId;
     }
@@ -142,10 +162,13 @@ public class PinTuanCommodityParam extends MalllifeBaseParam implements Serializ
                 ", endStock=" + endStock +
                 ", startAt=" + startAt +
                 ", endAt=" + endAt +
-                ", mallId=" + mallId +
-                ", shopId=" + shopId +
-                ", isSingleSpec=" + isSingleSpec +
                 ", activityId='" + activityId + '\'' +
+                ", mallId='" + mallId + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", isSingleSpec=" + isSingleSpec +
+                ", commodityIds=" + commodityIds +
+                ", shopName='" + shopName + '\'' +
+                ", commodityModelNo='" + commodityModelNo + '\'' +
                 '}';
     }
 }
