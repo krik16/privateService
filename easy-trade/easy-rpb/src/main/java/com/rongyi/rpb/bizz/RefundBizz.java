@@ -116,6 +116,8 @@ public class RefundBizz {
 
         alipayTradeRefundResponse.setRefundFee(oldPaymentEntity.getAmountMoney().toString());
 
+        alipayTradeRefundResponse.setOutTradeNo(refundPaymentEntity.getPayNo());
+
         return alipayTradeRefundResponse;
 
     }
