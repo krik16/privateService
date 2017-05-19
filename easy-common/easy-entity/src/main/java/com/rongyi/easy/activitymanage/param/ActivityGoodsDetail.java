@@ -1,8 +1,8 @@
 package com.rongyi.easy.activitymanage.param;
 
 import com.google.inject.internal.Lists;
-import com.rongyi.easy.activitymanage.param.GoodsSku;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -34,33 +34,57 @@ public class ActivityGoodsDetail implements Serializable {
     private String remainStock;//剩余库存
     private String activityPrice;//活动价，是个范围
     private Integer status;//2已编辑8未编辑
+    private String shopName;//店铺名称
+    private String sessionName;//场次名称
+    private String sessionId;//场次id
+    private String sessionDate;//场次日期
+    private Integer limitNum;//限购数量
     private List<GoodsSku> goodsSkuList = Lists.newArrayList();
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("activityId", activityId)
-                .append("desc", desc)
-                .append("goodsId", goodsId)
-                .append("groupNum", groupNum)
-                .append("joinGroupLimit", joinGroupLimit)
-                .append("name", name)
-                .append("id", id)
-                .append("openGroupLimit", openGroupLimit)
-                .append("sortNum", sortNum)
-                .append("createUser", createUser)
-                .append("updateUser", updateUser)
-                .append("remainStock", remainStock)
-                .append("activityPrice", activityPrice)
-                .append("status", status)
-                .append("commodityPic", commodityPic)
-                .append("groupMaxNum", groupMaxNum)
-                .append("subTitle", subTitle)
-                .append("supModPrice", supModPrice)
-                .append("joinStartAt", joinStartAt)
-                .append("joinEndAt", joinEndAt)
-                .append("expectTotalAmount", expectTotalAmount)
-                .toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public void setSessionDate(String sessionDate) {
+        this.sessionDate = sessionDate;
+    }
+
+    public Integer getLimitNum() {
+        return limitNum;
+    }
+
+    public void setLimitNum(Integer limitNum) {
+        this.limitNum = limitNum;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
     public String getExpectTotalAmount() {

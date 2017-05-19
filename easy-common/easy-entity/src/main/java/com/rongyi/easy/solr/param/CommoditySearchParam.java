@@ -134,15 +134,6 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	private String serviceId;//微信服务号id
 
-	private Integer offset;
-
-	public Integer getOffset() {
-		return offset;
-	}
-
-	public void setOffset(Integer offset) {
-		this.offset = offset;
-	}
 
 	private String commodityName;//商品名称
 
@@ -545,7 +536,6 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", getTogether=" + getTogether +
 				", commodityModelNo='" + commodityModelNo + '\'' +
 				", serviceId='" + serviceId + '\'' +
-				", offset=" + offset +
 				", commodityName='" + commodityName + '\'' +
 				'}';
 	}

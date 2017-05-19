@@ -10,7 +10,7 @@ public class PingTuanViewConUpParams implements Serializable{
 
     private Integer activityId;
 
-    private Integer flag;//(0全部 1当天 2昨天）
+    private Integer flag;//	-1：使用时间筛选，(0全部 1当天 2昨天）
 
     private Integer currentPageUp;
 

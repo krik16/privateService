@@ -1,11 +1,9 @@
 package com.rongyi.easy.activity.entity;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import java.io.Serializable;
 import com.google.inject.internal.Lists;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,6 +23,27 @@ public class QuerySecKillGoods implements Serializable {
     private List<Integer> goodsStatus = Lists.newArrayList();//多个活动状态
     private Integer superPintuanSort;//超级团排序使用  1:教育版排序
     private Integer fromWeixin;//微信端调用
+    private String sessionId;//场次id
+    private String sessionDate;//changci riqi
+    private Integer endSesssionStatus;//场次结束状态1
+
+
+    public Integer getEndSesssionStatus() {
+        return endSesssionStatus;
+    }
+
+    public void setEndSesssionStatus(Integer endSesssionStatus) {
+        this.endSesssionStatus = endSesssionStatus;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public void setSessionDate(String sessionDate) {
+        this.sessionDate = sessionDate;
+    }
+
     public Integer getSuperPintuanSort() {
 		return superPintuanSort;
 	}
@@ -41,6 +60,14 @@ public class QuerySecKillGoods implements Serializable {
         this.fromWeixin = fromWeixin;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -53,6 +80,8 @@ public class QuerySecKillGoods implements Serializable {
                 .append("status", status)
                 .append("goodsCode", goodsCode)
                 .append("goodsStatus", goodsStatus)
+                .append("sessionId", sessionId)
+                .append("endSesssionStatus", endSesssionStatus)
                 .toString();
     }
 

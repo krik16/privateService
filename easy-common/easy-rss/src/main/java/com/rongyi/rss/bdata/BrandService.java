@@ -16,11 +16,11 @@ public interface BrandService {
 	
 	public String saveBrandHaiXin(BrandHaiXinEntity brandHaiXin);
 	
-	public BrandHaiXinEntity getBrandHaiXinByCode(String code);
+	public BrandHaiXinEntity getBrandHaiXinByCode(String code, String shopMid);
 	
-	public List<BrandHaiXinEntity> getBrandHaiXinListByCondition();
+	public List<BrandHaiXinEntity> getBrandHaiXinListByCondition(String shopMid);
 
-	void  importHaiXinData(String url) throws Exception;
+	void  importHaiXinData(String url, String shopMid) throws Exception;
 
 	public BrandHaiXinEntity getBrandHaiXinById(ObjectId id);
 
