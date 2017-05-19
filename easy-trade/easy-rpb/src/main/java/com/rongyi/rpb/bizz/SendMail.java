@@ -9,7 +9,7 @@ import com.rongyi.easy.rpb.dto.SendDto;
 import com.rongyi.rpb.unit.EmailUnit;
 
 @Repository
-public class SendMail implements SendProvider {
+public class SendMail{
 
 	private static final Logger log = LoggerFactory.getLogger(SendMail.class);
 
@@ -19,7 +19,6 @@ public class SendMail implements SendProvider {
 	@Autowired
 	private EmailUnit emailUnit;
 
-	@Override
 	public void send(SendDto sendDto) {
 		log.info("发送邮件！！！");
 		try {

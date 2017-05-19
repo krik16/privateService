@@ -1,20 +1,10 @@
 package com.rongyi.rpb.bizz;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.rongyi.core.common.PropertyConfigurer;
+import com.rongyi.easy.rpb.dto.SendDto;
+import com.rongyi.pay.core.webank.config.WebankConfigure;
+import com.rongyi.pay.core.webank.util.HttpUtil;
+import com.rongyi.rpb.util.FTPHelper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.utils.DateUtils;
 import org.slf4j.Logger;
@@ -23,11 +13,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.rongyi.core.common.PropertyConfigurer;
-import com.rongyi.easy.rpb.dto.SendDto;
-import com.rongyi.pay.core.webank.config.WebankConfigure;
-import com.rongyi.pay.core.webank.util.HttpUtil;
-import com.rongyi.rpb.util.FTPHelper;
+import java.io.*;
+import java.text.MessageFormat;
+import java.util.*;
 
 @Repository
 public class StatementBizz implements InitializingBean {
@@ -37,7 +25,7 @@ public class StatementBizz implements InitializingBean {
 	@Autowired
 	private PropertyConfigurer propertyConfigurer;
 	@Autowired
-	private SendFactory sendFactory;
+	private SendMail sendMail;
 
 	private FTPHelper ftpHelper;
 
@@ -92,7 +80,6 @@ public class StatementBizz implements InitializingBean {
 //			}
 //		}.start();
 		
-		SendProvider sendMail = sendFactory.sendMail();
 		sendMail.send(sendDto);
 	}
 
