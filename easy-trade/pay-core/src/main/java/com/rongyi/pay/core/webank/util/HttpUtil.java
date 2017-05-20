@@ -444,6 +444,12 @@ public class HttpUtil {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
 			throw e;
+		}finally {
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
+
 		}
 		return is;
 	}
