@@ -77,16 +77,30 @@ public class WebankController {
         }
     }
 
-    @RequestMapping("statementDown")
-    public void statementDown(HttpServletRequest request , @RequestBody Map<String,String> paramMap) {
+    @RequestMapping("/statementDown")
+    public void statementDown(HttpServletRequest request) {
         LOGGER.info("微众对账单通知下载");
         try {
-//            Map<?, ?> map =  request.getParameterMap();
-            LOGGER.info("微众对账单通知下载map:{}",paramMap);
-            this.validStatmentDown(paramMap);
+            // 获取请求参数
+            InputStream inStream ;
+            String resultJson ;
+            inStream = request.getInputStream();
+            ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = inStream.read(buffer)) != -1) {
+                outSteam.write(buffer, 0, len);
+            }
+            outSteam.close();
+            inStream.close();
+            resultJson = new String(outSteam.toByteArray(), "utf-8");
+            LOGGER.info("微众对账单通知下载map:{}", resultJson);
+            JSONObject jsonObject = JSONObject.fromObject(resultJson);
+            JSONObject data = jsonObject.getJSONObject("data");
+            this.validStatmentDown(data);
 
             // 下载对账单，并将对账单发给运营人员
-            statementBizz.writeStatementFile(paramMap);
+            statementBizz.writeStatementFile(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,17 +108,15 @@ public class WebankController {
     
     /**
      * @Description 校验微众参数 
-     * @param paramMap
+     * @param data
      */
-    private void validStatmentDown(Map<String,String> paramMap) {
-        JSONObject data = JSONObject.fromObject(paramMap.get("data"));
+    private void validStatmentDown(JSONObject data) {
       String app_id = data.getString("app_id");
       String file_id = data.getString("file_id");
-      String token = data.getString("token");
-      String version = data.getString("version");
-      if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id) 
-    		  || StringUtils.isBlank(token) ||StringUtils.isBlank(version)) {
-    	  throw new RuntimeException("微众回调接口参数异常, paramMap = " + paramMap.toString());
+        String token = data.getString("token");
+        if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id)
+    		  || StringUtils.isBlank(token)) {
+    	  throw new RuntimeException("微众回调接口参数异常, paramMap = " + data.toString());
       }
     }
 }

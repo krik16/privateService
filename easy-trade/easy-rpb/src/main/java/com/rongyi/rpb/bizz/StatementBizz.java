@@ -5,6 +5,7 @@ import com.rongyi.easy.rpb.dto.SendDto;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.util.HttpUtil;
 import com.rongyi.rpb.util.FTPHelper;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.utils.DateUtils;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class StatementBizz implements InitializingBean {
 	/**
 	 * @Description 接受对账单文件流, 并写入到服务器
 	 */
-	public void writeStatementFile(Map<String, String> paramMap) {
+	public void writeStatementFile(JSONObject paramMap) {
 		// 调用微众获取对账单请求
 		String url = MessageFormat.format(propertyConfigurer.getProperty("WEBANK_STATEMENT_URL"),
 				paramMap.get("app_id"), paramMap.get("token"), paramMap.get("file_id"), "1.0.0");
