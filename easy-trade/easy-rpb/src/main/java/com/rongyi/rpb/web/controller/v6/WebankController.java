@@ -1,15 +1,9 @@
 package com.rongyi.rpb.web.controller.v6;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
+import com.rongyi.rpb.bizz.StatementBizz;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Map;
-import com.rongyi.rpb.bizz.PayNotifyBizz;
-import com.rongyi.rpb.bizz.StatementBizz;
-
-import net.sf.json.JSONObject;
 
 /**
  * 微众通知处理
@@ -107,10 +97,11 @@ public class WebankController {
      * @param paramMap
      */
     private void validStatmentDown(Map<String,String> paramMap) {
-      String app_id = paramMap.get("app_id");
-      String file_id = paramMap.get("file_id");
-      String token = paramMap.get("token");
-      String version = paramMap.get("version");
+        JSONObject data = JSONObject.fromObject(paramMap.get("data"));
+      String app_id = data.getString("app_id");
+      String file_id = data.getString("file_id");
+      String token = data.getString("token");
+      String version = data.getString("version");
       if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id) 
     		  || StringUtils.isBlank(token) ||StringUtils.isBlank(version)) {
     	  throw new RuntimeException("微众回调接口参数异常, paramMap = " + paramMap.toString());
