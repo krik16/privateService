@@ -1,6 +1,6 @@
 package com.rongyi.rss.solr;
 
-import com.rongyi.easy.solr.param.ShopSearchParam;
+import com.rongyi.easy.bdata.param.ShopSearchParam;
 import com.rongyi.easy.solr.result.ShopSearchResult;
 import org.bson.types.ObjectId;
 
