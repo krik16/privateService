@@ -51,6 +51,7 @@
 		<property name="alipayScanPayUrl" value="${WEBANK_ALI_PAY_SCAN_PAY_URL}"/>
 		<property name="tianyiRefundNotifyUrl" value="${TIANYI_REFUND_NOTIFY_URL}"/>
 		<property name="tianyiPayNotifyUrl" value="${TIANYI_PAY_NOTIFY_URL}"/>
+		<property name="webankStatementUrl" value="${WEBANK_STATEMENT_URL}"/>
 	</bean>
 
 	<bean id="logAdvice" class="com.rongyi.core.common.log.LogAopAdvice"/>

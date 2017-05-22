@@ -38,6 +38,7 @@
         <result column="mch_info_id" property="mchInfoId" jdbcType="VARCHAR"/>
         <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
         <result column="pos_no" property="posNo" jdbcType="VARCHAR"/>
+        <result column="memo" property="memo" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -668,7 +669,7 @@
         po.id, order_no,order_type,order_price,pay_no,pay_amount,
         status,trade_type,po.create_at,
         end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
-        ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel,pay_scene,mch_info_id,store_id,pos_no
+        ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel,pay_scene,mch_info_id,store_id,pos_no,poe.memo
         from payment_order po
         left join payment_order_ext poe on po.id = poe.payment_order_id
         where source in (3,4)

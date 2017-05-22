@@ -107,7 +107,7 @@ public class RefundBizz {
         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 
         //初始化支付事件记录
-        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(alipayTradeRefundResponse.getTradeNo(),alipayTradeRefundResponse.getOutTradeNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
+        PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(alipayTradeRefundResponse.getTradeNo(),refundPaymentEntity.getPayNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS",refundFee,alipayTradeRefundResponse.getBuyerUserId(),alipayTradeRefundResponse.getBuyerLogonId(),
                 0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,alipayTradeRefundResponse.getOpenId());
 
@@ -115,6 +115,8 @@ public class RefundBizz {
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
 
         alipayTradeRefundResponse.setRefundFee(oldPaymentEntity.getAmountMoney().toString());
+
+        alipayTradeRefundResponse.setOutTradeNo(refundPaymentEntity.getPayNo());
 
         return alipayTradeRefundResponse;
 
@@ -152,7 +154,7 @@ public class RefundBizz {
 
         resData.setRefund_fee(new BigDecimal(refundAmount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
         resData.setTotal_fee(oldPaymentEntity.getAmountMoney());
-        resData.setPayNo(oldPaymentEntity.getPayNo());
+        resData.setPayNo(refundPaymentEntity.getPayNo());
         return resData;
 
     }
@@ -185,11 +187,11 @@ public class RefundBizz {
         //初始化支付事件记录
         PaymentLogInfo paymentLogInfo = initEntityUnit.initPaymentLogInfo(resData.getTradeNo(),refundPaymentEntity.getPayNo(),Constants.REPLAY_FLAG.REPLAY_FLAG3,
                 "SUCCESS",resultRefundFee,"","",
-                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,"");
+                0,0,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,resData.getOpenId());
 
         //保存记录
         saveUnit.updatePaymentEntity(refundPaymentEntity, paymentLogInfo,null);
-
+        resData.setOutTradeNo(refundPaymentEntity.getPayNo());
         return resData;
 
     }
