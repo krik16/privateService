@@ -17,12 +17,12 @@ public interface IShopSearchSolrService {
      * @param idList 需要去除的id集合， 若idList为空，则表示查询所有
      * @return shopList
      */
-    ShopSearchResult excludeSpecifiedIfNecessary(List<ObjectId> idList, ShopSearchParam searchParam);
+    ShopSearchResult queryShopExcludeSpecified(List<String> idList, ShopSearchParam searchParam);
 
     /**
      * 根据
-     * @param shopNatures 不分页
+     * @param searchParam
      * @return shopList
      */
-    ShopSearchResult searchShopByType(List<String> shopNatures, boolean includeItsChildren);
+    ShopSearchResult searchShopByType(ShopSearchParam searchParam, boolean includeItsChildren);
 }
