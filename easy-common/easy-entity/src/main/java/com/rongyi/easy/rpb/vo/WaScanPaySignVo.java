@@ -36,6 +36,9 @@ public class WaScanPaySignVo extends BaseBizVo implements Serializable{
     //订单类型 6:福利订单,7:开放平台
     private Integer orderType;
 
+    //备注
+    private String memo ;
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -98,6 +101,14 @@ public class WaScanPaySignVo extends BaseBizVo implements Serializable{
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     @Override
