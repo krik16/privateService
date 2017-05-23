@@ -163,6 +163,8 @@ public interface IShopService {
 	List<String> getHaiXinShopCode();
 
 	boolean shopHasBindAccount(String shopMid);
+
+	boolean mallHasBindAccount(String mallMid);
 	
 	public void addShopRelationshipForHaiXin(HaiXinShopRelationParam param);
 
