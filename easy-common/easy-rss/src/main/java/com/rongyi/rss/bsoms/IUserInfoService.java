@@ -401,4 +401,10 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public String selectShopMIdByUserId(Integer userId) throws Exception;
+	/**
+	 * 根据店铺mongoId查询店铺主账号信息
+	 * @param shopMId
+	 * @return
+	 */
+	public UserInfo getChiefAccountByShopMId(String shopMId);
 }
