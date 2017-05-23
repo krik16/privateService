@@ -54,6 +54,9 @@ public class AliPaySignVo extends BaseBizVo implements Serializable {
 
     private String extend;//扩展参数
 
+    //备注
+    private String  memo ;
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -140,6 +143,14 @@ public class AliPaySignVo extends BaseBizVo implements Serializable {
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     public String getPosNo() {

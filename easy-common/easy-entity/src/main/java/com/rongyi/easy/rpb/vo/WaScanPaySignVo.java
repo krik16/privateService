@@ -42,6 +42,9 @@ public class WaScanPaySignVo extends BaseBizVo implements Serializable{
 
     private String extend;//扩展参数
 
+    //备注
+    private String memo ;
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -130,6 +133,14 @@ public class WaScanPaySignVo extends BaseBizVo implements Serializable{
     @Override
     public void setExtend(String extend) {
         this.extend = extend;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     @Override

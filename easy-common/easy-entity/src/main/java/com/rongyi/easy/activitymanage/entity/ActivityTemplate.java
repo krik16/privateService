@@ -19,7 +19,7 @@ public class ActivityTemplate implements Serializable{
     private Integer activityRuleId;
     /**活动规则的名字*/
     private String activityRuleName;
-  /**模版类型 1代表标准模版  2代表特殊模版*/
+  /**模版类型 1代表标准模版  2代表特殊模版 3断码好货*/
     private Byte templateType;
     /**活动名称*/
     private String name;
@@ -42,7 +42,7 @@ public class ActivityTemplate implements Serializable{
     private String activityUrl;
     /**活动类型 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖*/
     private Integer activityType;
-   /**模版类型 模版的选择：0.签到送积分-移动端 1.签到送积分-互动屏 2.抽奖类活动(翻牌购)-移动端 3.抽奖类活动(翻牌购)-互动屏 4.商品/卡券限时活动-移动端 5.商品/卡券限时活动-互动屏 6.商品/卡券通用活动-移动端 7.商品/卡券通用活动-互动端 8.闪购-移动端 9.特卖-移动端*/
+   /**模版类型 模版的选择：0.签到送积分-移动端 1.签到送积分-互动屏 2.抽奖类活动(翻牌购)-移动端 3.抽奖类活动(翻牌购)-互动屏 4.商品/卡券限时活动-移动端 5.商品/卡券限时活动-互动屏 6.商品/卡券通用活动-移动端 7.商品/卡券通用活动-互动端 8.闪购-移动端 9.特卖-移动端 10.专场，11.拼单活动 12.断码好货*/
     private Integer moduleType;
    /**适用终端 0移动端，1互动屏，2，ipad*/
     private Byte publishTerminal;
