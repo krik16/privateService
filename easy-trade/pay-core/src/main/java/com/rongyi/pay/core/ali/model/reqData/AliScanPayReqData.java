@@ -75,6 +75,9 @@ public class AliScanPayReqData extends BaseData{
     // (推荐使用，相对时间) 支付超时时间，5m 5分钟
     private String timeoutExpress;
 
+    //备注
+    private String memo ;
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -219,4 +222,11 @@ public class AliScanPayReqData extends BaseData{
         this.timeoutExpress = timeoutExpress;
     }
 
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 }

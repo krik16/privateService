@@ -437,9 +437,10 @@ public class WebankPayUnit {
             ParamUnit.checkWebankAlipayRefund(reqData);
             WebankPayService  webankPayService = new WebankPayService();
             resData = webankPayService.alipayRefundTrade(reqData, configure);
-//            if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr())) {
-//                throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getSubMsg()) ? resData.getMsg() : resData.getSubMsg());
-//            }
+            //此处判断还是需要加上，如果不加，同一笔订单多次调用退款接口会返回退款成功逻辑
+            if (!resData.getCode().equals(ConstantEnum.WEBANK_CODE_0.getCodeStr()) && !"10000".equals(resData.getRetCode())) {
+                throw new WebankException(resData.getCode(), StringUtils.isEmpty(resData.getSubMsg()) ? resData.getMsg() : resData.getSubMsg());
+            }
             //由于微众退款接口即使成功也不会更新订单状态，需要再调一次查询的接口才会更新
             WaRefundQueryReqData waRefundQueryReqData = new WaRefundQueryReqData();
             BeanUtils.copyProperties(waRefundQueryReqData, reqData);

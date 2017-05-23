@@ -61,7 +61,7 @@ public class PaySignBizz extends BaseBizz{
                 wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //初始化扩展记录
-        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wechatPaySignData.getExtend(), paymentEntity.getId());
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wechatPaySignData.getExtend(), paymentEntity.getId(),wechatPaySignData.getMemo());
 
         //获取微信支付签名
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
@@ -93,7 +93,7 @@ public class PaySignBizz extends BaseBizz{
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //初始化扩展记录
-        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(aliScanPayReqData.getExtend(), paymentEntity.getId());
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(aliScanPayReqData.getExtend(), paymentEntity.getId(),aliScanPayReqData.getMemo());
 
         //获取支付宝扫码支付签名
         aliScanPayReqData.setPayNo(paymentEntity.getPayNo());
@@ -127,7 +127,7 @@ public class PaySignBizz extends BaseBizz{
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //初始化扩展记录
-        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waScanPayParam.getExtend(), paymentEntity.getId());
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waScanPayParam.getExtend(), paymentEntity.getId(),waScanPayParam.getMemo());
 
         //获取支付宝扫码支付签名
         waScanPayParam.setOrderId(paymentEntity.getPayNo());
@@ -152,7 +152,7 @@ public class PaySignBizz extends BaseBizz{
                 wwScanPayParam.getWechatMchId(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //初始化扩展记录
-        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wwScanPayParam.getExtend(), paymentEntity.getId());
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wwScanPayParam.getExtend(), paymentEntity.getId(),wwScanPayParam.getMemo());
 
         //获取公众号扫码支付签名
         wwScanPayParam.setOutTradeNo(paymentEntity.getPayNo());

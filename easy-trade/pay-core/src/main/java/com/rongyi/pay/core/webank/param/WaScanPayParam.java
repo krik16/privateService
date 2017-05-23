@@ -34,6 +34,9 @@ public class WaScanPayParam extends BaseData{
     //对交易或者商品的描述
     private String body ;
 
+    //备注
+    private String memo ;
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -104,5 +107,13 @@ public class WaScanPayParam extends BaseData{
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

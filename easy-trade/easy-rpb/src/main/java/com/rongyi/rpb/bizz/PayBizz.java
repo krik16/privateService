@@ -63,7 +63,7 @@ public class PayBizz extends BaseBizz{
 
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, wechatPaySignData.getOrderNo(), wechatPaySignData.getTotalFee(), "", wechatConfigure.getMchID(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
-                orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
+                orderType, ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //初始化扩展记录
         PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wechatPaySignData.getMchInfoId(), wechatPaySignData.getStoreId(), wechatPaySignData.getPosNo(),
@@ -204,7 +204,7 @@ public class PayBizz extends BaseBizz{
         Integer totalFee = waPunchCardPayParam.getTotalAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, waPunchCardPayParam.getOrderId(), totalFee, "", "",
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_POS.getCodeInt());
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
         //初始化扩展记录
         PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waPunchCardPayParam.getMchInfoId(),
@@ -239,6 +239,7 @@ public class PayBizz extends BaseBizz{
             //循环查询支付状态
             webankAliWaitUserPaying(paymentEntity, waPunchCardPayParam);
         }
+        resData.setOutTradeNo(paymentEntity.getPayNo());
         return resData;
     }
 

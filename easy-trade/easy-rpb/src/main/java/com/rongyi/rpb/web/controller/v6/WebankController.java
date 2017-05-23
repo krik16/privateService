@@ -1,7 +1,9 @@
 package com.rongyi.rpb.web.controller.v6;
 
 import com.rongyi.rpb.bizz.PayNotifyBizz;
+import com.rongyi.rpb.bizz.StatementBizz;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class WebankController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebankController.class);
     @Autowired
     PayNotifyBizz payNotifyBizz;
+    @Autowired
+    StatementBizz statementBizz;
 
     /**
      * 微众支付宝扫码支付异步通知
@@ -73,53 +77,46 @@ public class WebankController {
         }
     }
 
-    @RequestMapping("statementDown")
-    public void statementDown(HttpServletRequest request , @RequestBody Map<String,String> paramMap) {
+    @RequestMapping("/statementDown")
+    public void statementDown(HttpServletRequest request) {
         LOGGER.info("微众对账单通知下载");
-//        try {
-            Map map =  request.getParameterMap();
-            LOGGER.info("微众对账单通知下载map:{}",map);
-//
-//            String sign = request.getParameter("sign");
-//            String nonce = request.getParameter("nonce");
-//            String timestamp = request.getParameter("timestamp");
-//            LOGGER.info("sign:{},nonce:{},timestamp:{}",sign,nonce,timestamp);
-//            String body = request.getParameter("body");
-//            LOGGER.info("body:{}",body);
-//            String Body = request.getParameter("Body");
-//            LOGGER.info("Body:{}",Body);
-//            String jsonString = request.getParameter("JsonString");
-//            LOGGER.info("jsonString:{}", jsonString);
-//
-//
-//
-//            Enumeration e =  request.getAttributeNames();
-//            LOGGER.info("e:{}",e);
-//            Object sign1 = request.getAttribute("sign");
-//            Object nonce1 = request.getAttribute("nonce");
-//            Object timestamp1 = request.getAttribute("timestamp");
-//            LOGGER.info("sign1:{},nonce1:{},timestamp1:{}",sign1,nonce1,timestamp1);
-//            Object body1 = request.getAttribute("body");
-//            LOGGER.info("body1:{}",body1);
-//            Object Body1 = request.getAttribute("Body");
-//            LOGGER.info("Body1:{}",Body1);
-//            Object jsonString1 = request.getAttribute("JsonString");
-//            LOGGER.info("jsonString1:{}", jsonString1);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-//        LOGGER.info("微众支付宝扫码支付异步通知start........");
-        LOGGER.info("parmMap:{}",paramMap);
         try {
-//            Map<String, String> map = Utils.getRequestParams(request);
-//            payNotifyBizz.  webankAlipayNotify(paramMap);
+            // 获取请求参数
+            InputStream inStream ;
+            String resultJson ;
+            inStream = request.getInputStream();
+            ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = inStream.read(buffer)) != -1) {
+                outSteam.write(buffer, 0, len);
+            }
+            outSteam.close();
+            inStream.close();
+            resultJson = new String(outSteam.toByteArray(), "utf-8");
+            LOGGER.info("微众对账单通知下载map:{}", resultJson);
+            JSONObject jsonObject = JSONObject.fromObject(resultJson);
+            JSONObject data = jsonObject.getJSONObject("data");
+            this.validStatmentDown(data);
+
+            // 下载对账单，并将对账单发给运营人员
+            statementBizz.writeStatementFile(data);
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.info("微众支付宝扫码支付异步通知处理异常");
         }
-
+    }
+    
+    /**
+     * @Description 校验微众参数 
+     * @param data
+     */
+    private void validStatmentDown(JSONObject data) {
+      String app_id = data.getString("app_id");
+      String file_id = data.getString("file_id");
+        String token = data.getString("token");
+        if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id)
+    		  || StringUtils.isBlank(token)) {
+    	  throw new RuntimeException("微众回调接口参数异常, paramMap = " + data.toString());
+      }
     }
 }
