@@ -27,7 +27,7 @@ public class TradePaySignUtil {
             Collections.sort(list);
             String sb = "";
             for (String aList : list) {
-                if(StringUtils.isNotEmpty(String.valueOf(params.get(aList)))) {
+                if(StringUtils.isNotEmpty(String.valueOf(params.get(aList))) && !"null".equals(String.valueOf(params.get(aList)))) {
                     sb = sb.concat(aList).concat("=").concat(String.valueOf(params.get(aList))).concat("&");
                 }
             }
