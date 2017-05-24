@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class UserInfoVo implements Serializable{
     private Integer id;
-    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购 8总部连锁
     private String shopId;
     private String  mallId;
     private String groupId;

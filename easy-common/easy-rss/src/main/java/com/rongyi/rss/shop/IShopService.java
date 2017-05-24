@@ -159,7 +159,13 @@ public interface IShopService {
 	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas, String url) throws Exception;
 
 	ShopEntity getHaiXinShop(String orgCode);
+	
 	List<String> getHaiXinShopCode();
+
+	boolean shopHasBindAccount(String shopMid);
+
+	boolean mallHasBindAccount(String mallMid);
+	
 	public void addShopRelationshipForHaiXin(HaiXinShopRelationParam param);
 
 	String findShopMidByUrl(String url);

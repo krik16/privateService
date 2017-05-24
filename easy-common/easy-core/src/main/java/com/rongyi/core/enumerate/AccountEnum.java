@@ -57,7 +57,8 @@ public enum AccountEnum {
 	ERROR_PHONE_EXIST(1090043,"手机号已存在，你无法使用此手机号"),
 	ERROR_AOOUNT_EXIST(1090044,"该账号已存在，你无法启用该账号"),
 	ERROR_PHONE_START(1090045,"该手机号已关联其他账号，你无法启用该账号"),
-	ERROR_NICKNAME_EXIST(1090046,"该昵称已关联其他账号，你无法启用该账号")
+	ERROR_NICKNAME_EXIST(1090046,"该昵称已关联其他账号，你无法启用该账号"),
+	ERROR_ACCOUNT_STOP(1090023, "此商户已停用，无法创建")
 	;
    
 

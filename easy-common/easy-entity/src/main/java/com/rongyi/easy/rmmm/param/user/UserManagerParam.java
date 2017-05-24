@@ -31,7 +31,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String  invitCode;//":"邀请码" //验证判断
     private String  pswd;  //":"密码"
     private AccountParam account;//账号信息
-
+    
     private String shopId;//商铺Id
     private String mallId;//商场Id
     private String brandId;//品牌Id
@@ -40,35 +40,28 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String branchCompanyId;//分公司id
     private String userName;//用户姓名
     private String cardId;//身份证号
-	private Integer type = 1;//商家类型：0商场、1品牌    private Integer roleType=2;//角色类型
+	private Integer type = 1;//商家类型：0商场、1品牌 、2买手、9虚拟账号
 	private Integer roleType=2;//角色类型 @Deprecated
     private List<AccountParam> accountList;//账号信息
-	private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+	private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购、6买手、8连锁总部
     private Integer isCooperation = 0;//是否合作(给店长、导购用) 0否 1是
     private String memo;//备注
     private Integer createSource = 3;//账号创建来源：0大运营、1商家后台、3App 4 导购升级
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
-
-
 	private String userDesc;//买手描述
-	private int flag=0;//操作参数 1升级功能
+	private int flag = 0;//操作参数 1升级功能
+	
 	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
 	private int defaultAccount ;  //资金账号默认   1默认支付宝  2默认银行卡
 	private String jsessionid ;//摩店登录标识
-
 	private String shareCode;//邀请码
-
 	private String faceImg;    //身份证正面照
-
 	private String backImg;   //身份证背面照
-
 	private String workImg;    //工作证照
-
 	private String otherImg;   //其它照片
 	private Boolean isOrdering;//是否接单状态  true:是，false:否
-
 	//行业版账号2016年10月28日10:50:17
 	private Integer industryId;//行业id
 	private Integer industryVersionId;//行业版本id
@@ -84,6 +77,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private Integer defaultTerminal;//默认终端:1 容易逛,2 微信,3 终端机,0 无默认终端
 	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private Integer shopNum = 0;//店铺数量 默认值0[不限制店铺数量]
     public Integer getId() {
 		return id;
 	}
@@ -500,6 +494,12 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
+	public Integer getShopNum() {
+		return shopNum;
+	}
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
 	@Override
 	public String toString() {
 		return "UserManagerParam [id=" + id + ", userAccount=" + userAccount
@@ -530,7 +530,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 				+ settleOrgStrategy + ", chiefId=" + chiefId
 				+ ", defaultTerminal=" + defaultTerminal + ", isOpenQrCode="
 				+ isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + "]";
+				+ isAllowBindingWechat + ", shopNum=" + shopNum + "]";
 	}
 	
 }

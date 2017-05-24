@@ -3,13 +3,16 @@ package com.rongyi.rss.bdata;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bdata.entity.Photo;
 import com.rongyi.easy.bdata.entity.Shop;
+import com.rongyi.easy.bdata.entity.Zones;
+import com.rongyi.easy.bdata.enums.ZonesTypeEnum;
 import com.rongyi.easy.bdata.vo.ShopVO;
-import com.rongyi.easy.ryoms.entity.RyUserInfo;
+import com.rongyi.easy.ryoms.enums.ShopNatureEnum;
 import com.rongyi.easy.ryoms.param.ShopParam;
 
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.solr.param.ShopSearchParam;
 import org.bson.types.ObjectId;
 
 /**
@@ -144,4 +147,22 @@ public interface ShopService {
 	public void updateBaseData();
 
 	void  addOneLog(String shopId);
+
+	Zones getZonesByNameAndType(String name, ZonesTypeEnum type);
+
+	long getChildShopCount(Map<String, Object> paramMap);
+
+	List<Shop> getChildShopList(Map<String, Object> paramMap);
+
+	boolean isRepeat(Map<String,Object> paramMap);
+
+	List<Shop> getShopListByShopNatureAndAddress(Map<String,Object> paramMap);
+
+	boolean updateShopNature(String id, ShopNatureEnum shopNature);
+
+	String copyInsert(Shop shop);
+
+	boolean updateRelation(String id, String parentId, List<String> parentIds);
+
+//	ResponseVO getAllExcludeSpecified(List<String> shopNatures, ShopSearchParam searchParam, boolean excludeItsChildren);
 }

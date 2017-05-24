@@ -33,6 +33,13 @@ public class CouponRejectRecord implements Serializable {
      */
     private Date createAt;
 
+    private Integer status;
+
+    /**
+     * 操作人
+     */
+    private String createUser;
+
     public Integer getId() {
         return id;
     }
@@ -73,12 +80,34 @@ public class CouponRejectRecord implements Serializable {
         this.createAt = createAt;
     }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CouponRejectRecord [id=").append(id).append(", couponId=").append(couponId).append(", reason=")
-				.append(reason).append(", type=").append(type).append(", createAt=").append(createAt).append("]");
-		return builder.toString();
-	}
-    
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CouponRejectRecord{");
+        sb.append("id=").append(id);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", reason='").append(reason).append('\'');
+        sb.append(", type=").append(type);
+        sb.append(", createAt=").append(createAt);
+        sb.append(", status=").append(status);
+        sb.append(", createUser='").append(createUser).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

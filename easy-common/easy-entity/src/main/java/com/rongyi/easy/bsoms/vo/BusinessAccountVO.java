@@ -87,6 +87,8 @@ public class BusinessAccountVO implements Serializable {
 	private Integer defaultTerminal;//默认终端:0 无默认终端,1 容易逛,2 微信,3 终端机
 	private Integer isOpenQrCode;//是否开放用户专属二维码  0:否,1:是
 	private Integer isAllowBindingWechat ;//是否允许分店绑定微信  0:否,1:是
+	private Integer shopNum;//店铺数量
+	
 	public String getMerchantAddress() {
 		return merchantAddress;
 	}
@@ -527,21 +529,30 @@ public class BusinessAccountVO implements Serializable {
 	public void setIsAllowBindingWechat(Integer isAllowBindingWechat) {
 		this.isAllowBindingWechat = isAllowBindingWechat;
 	}
-
+	
+	public Integer getShopNum() {
+		return shopNum;
+	}
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
+	
 	public String getBindingMid(){
-		if(getIdentity() == 0){
+		if(getIdentity().equals(0)){
 			return groupMid;
-		}else if(getIdentity() == 1){
+		}else if(getIdentity().equals(1)){
 			return mallMid;
-		}else if(getIdentity() == 2){
+		}else if(getIdentity().equals(2)){
 			return brandMid;
-		}else if (getIdentity() == 3) {
+		}else if (getIdentity().equals(3)) {
 			return null;
-		}else if (getIdentity() == 4 || getIdentity() == 5) {
+		}else if (getIdentity().equals(4) || getIdentity().equals(5) || getIdentity().equals(8)) {
 			return shopMid;
 		}
+		
 		return null;
 	}
+	
 	@Override
 	public String toString() {
 		return "BusinessAccountVO [id=" + id + ", userLogo=" + userLogo
@@ -582,7 +593,7 @@ public class BusinessAccountVO implements Serializable {
 				+ ", merchantAddress=" + merchantAddress + ", terminalType="
 				+ terminalType + ", defaultTerminal=" + defaultTerminal
 				+ ", isOpenQrCode=" + isOpenQrCode + ", isAllowBindingWechat="
-				+ isAllowBindingWechat + "]";
+				+ isAllowBindingWechat + ", shopNum=" + shopNum + "]";
 	}
 	
 }

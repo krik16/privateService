@@ -29,6 +29,15 @@ public class ShopSearchParam implements Serializable{
 	private String mall_id;  //商场id
 	private String poi_type; //店铺：0 商场：1
 	private String parentShop_id;//主店铺id
+	private List<String> excludeShopNatures; //店铺性质
+
+	public List<String> getExcludeShopNatures() {
+		return excludeShopNatures;
+	}
+
+	public void setExcludeShopNatures(List<String> excludeShopNatures) {
+		this.excludeShopNatures = excludeShopNatures;
+	}
 
 	public String getParentShop_id() {
 		return parentShop_id;
