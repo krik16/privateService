@@ -84,6 +84,8 @@ public class PayBizz extends BaseBizz{
 
             //保存支付记录
             saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
+            //发送异步通知
+            payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         } else {
             punchCardPayResData = WeChatPayUnit.punchCardNativePay(wechatPaySignData, wechatConfigure);
             //保存未支付记录
