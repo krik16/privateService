@@ -207,9 +207,9 @@ public class PayNotifyBizz {
 
         //验证签名
         validateSign(dto,ryMchAppVo.getToken(),dto.getSign());
-
+        //兼容微信支付宝支付
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
-                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
+                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, null);
 
         if(paymentEntity == null){
             throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
