@@ -47,6 +47,8 @@ public class WwScanPaySignVo extends BaseBizVo implements Serializable {
 
     private String extend;//扩展参数
 
+    private String mchInfoId;
+
     public String getMchId() {
         return mchId;
     }
@@ -158,4 +160,11 @@ public class WwScanPaySignVo extends BaseBizVo implements Serializable {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
 }

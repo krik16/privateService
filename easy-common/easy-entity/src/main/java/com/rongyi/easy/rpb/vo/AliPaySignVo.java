@@ -57,6 +57,8 @@ public class AliPaySignVo extends BaseBizVo implements Serializable {
     //备注
     private String  memo ;
 
+    private String mchInfoId;
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -169,6 +171,14 @@ public class AliPaySignVo extends BaseBizVo implements Serializable {
     @Override
     public void setExtend(String extend) {
         this.extend = extend;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
     }
 
     @Override
