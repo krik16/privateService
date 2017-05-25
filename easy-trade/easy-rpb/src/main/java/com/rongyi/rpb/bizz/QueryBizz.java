@@ -3,7 +3,6 @@ package com.rongyi.rpb.bizz;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.rongyi.core.Exception.TradePayException;
 import com.rongyi.core.common.util.StringUtil;
-import com.rongyi.core.util.BeanMapUtils;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.pay.core.Exception.WebankException;
@@ -106,6 +105,12 @@ public class QueryBizz {
             }
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
         }
+        //显示退款状态
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+        if(refundPayment != null){
+            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
+        }
         return map;
     }
 
@@ -143,7 +148,12 @@ public class QueryBizz {
                 map.put("tradeNo", paymentLogInfo.getTrade_no());
             }
         }
-
+        //显示退款状态
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        if(refundPayment != null){
+            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
+        }
         return map;
 
     }
@@ -159,14 +169,6 @@ public class QueryBizz {
     public Map<String, Object> weBankWechatPayQueryOrder(String orderNo, String weBankMchNo) throws Exception {
 
         PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-
-        //微众支付存在一个坑，如果退款完成之后不调用退款查询接口直接调用支付查询接口返回的是支付成功，只要调用一次退款查询接口后再次调用就会提示原交易已退货
-        //此处特殊处理下，在支付查询时检查是否已退款，如已退款则直接返回已退款状态
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-        if (refundPayment != null) {
-            throw new WebankException("1", "原交易已退货");
-        }
         Map<String, Object> map = new HashMap<>();
 
         //外部订单号
@@ -185,18 +187,13 @@ public class QueryBizz {
             }
             //设置支付状态
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
-            return map;
-        }
-
-        if (ConstantEnum.PAY_SCENE_SCAN.getCodeInt().equals(oldPaymentEntity.getPayScene())) {
+        }else  if (ConstantEnum.PAY_SCENE_SCAN.getCodeInt().equals(oldPaymentEntity.getPayScene())) {
             WwScanQueryResData resData = webankWechatScanPayQueryOrder(weBankMchNo, oldPaymentEntity);
-            map = BeanMapUtils.toMap(resData);
             //微信流水号
             map.put("tradeNo", resData.getTransaction_id());
             map.put("tradeStatus", resData.getTrade_state());
         } else {
             WwPunchCardResData resData = webankWechatPunchCardPayQueryOrder(weBankMchNo, oldPaymentEntity);
-            map = BeanMapUtils.toMap(resData);
             //微信流水号
             map.put("tradeNo", resData.getTransaction_id());
             //设置支付状态
@@ -213,6 +210,12 @@ public class QueryBizz {
         //检查是否支付成功状态
         if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(map.get("tradeStatus"))) {
             updatePayment(oldPaymentEntity, com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr(), "", "");
+        }
+        //显示退款状态
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+        if(refundPayment != null){
+            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
         }
         return map;
 
@@ -287,7 +290,7 @@ public class QueryBizz {
         map.put("refundAmount", refundPayment.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
         map.put("refundStatus", "SUCCESS");
         //容易网交易号
-        map.put("payNo", oldPaymentEntity.getPayNo());
+        map.put("payNo", refundPayment.getPayNo());
 
         if (!refundPayment.getStatus().equals(Constants.PAYMENT_STATUS.STAUS2)) {
 
@@ -299,14 +302,14 @@ public class QueryBizz {
             if (!"1".equals(resData.getRefundment())) {
                 map.put("refundStatus", "FAIL");
             }
-            resData.setPayNo(oldPaymentEntity.getPayNo());
-
             //微众银行退款单号
             map.put("tradeNo", resData.getRefundid());
         } else {
-            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
+            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(refundPayment.getPayNo());
             //第三方流水号
-            if (paymentLogInfo != null) {
+            if(StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                map.put("tradeNo", paymentLogInfo.getTransactionId());
+            }else{
                 map.put("tradeNo", paymentLogInfo.getTrade_no());
             }
         }
@@ -327,14 +330,6 @@ public class QueryBizz {
         payConfigInitUnit.initAliTicket();
 
         PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-
-        //微众支付存在一个坑，如果退款完成之后不调用退款查询接口直接调用支付查询接口返回的是支付成功，只要调用一次退款查询接口后再次调用就会提示原交易已退货
-        //此处特殊处理下，在支付查询时检查是否已退款，如已退款则直接返回已退款状态
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-        if (refundPayment != null) {
-            throw new WebankException("1", "原交易已退货");
-        }
 
         Map<String, Object> map = new HashMap<>();
         //外部订单号
@@ -381,6 +376,12 @@ public class QueryBizz {
             }
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
         }
+        //显示退款状态
+        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        if(refundPayment != null){
+            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
+        }
 
         return map;
     }
@@ -406,7 +407,7 @@ public class QueryBizz {
         //外部订单号
         map.put("orderNo", orderNo);
         //容易网交易号
-        map.put("payNo", oldPaymentEntity.getPayNo());
+        map.put("payNo", refundPaymentEntity.getPayNo());
         //交易金额
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
         //退款金额
@@ -422,10 +423,14 @@ public class QueryBizz {
             //微众银行退款单号
             map.put("tradeNo", resData.getTradeNo());
         }else{
-            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
+            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(refundPaymentEntity.getPayNo());
             //第三方流水号
             if (paymentLogInfo != null) {
-                map.put("tradeNo", paymentLogInfo.getTrade_no());
+                if (StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                    map.put("tradeNo", paymentLogInfo.getTransactionId());
+                } else {
+                    map.put("tradeNo", paymentLogInfo.getTrade_no());
+                }
             }
         }
         return map;
@@ -440,10 +445,9 @@ public class QueryBizz {
      */
     public PaymentEntity aliRefundQuery(String orderNo, AliConfigure aliConfigure) {
 
-        PaymentEntity oldPaymentEntity = basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+        basePayQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
 
-        baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-        return oldPaymentEntity;
+      return baseRefundQuery(orderNo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
     }
 
     /**
@@ -478,7 +482,7 @@ public class QueryBizz {
         //外部订单号
         map.put("orderNo", orderNo);
         //容易网交易号
-        map.put("payNo", oldPaymentEntity.getPayNo());
+        map.put("payNo", refundPaymentEntity.getPayNo());
          //交易金额
         map.put("totalAmount", oldPaymentEntity.getAmountMoney().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
         //退款金额
@@ -490,10 +494,14 @@ public class QueryBizz {
             //微众银行退款单号
             map.put("tradeNo", resData.getTransaction_id());
         }else{
-            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(oldPaymentEntity.getPayNo());
+            PaymentLogInfo paymentLogInfo = queryPaymentLogInfo(refundPaymentEntity.getPayNo());
             //第三方流水号
             if (paymentLogInfo != null) {
-                map.put("tradeNo", paymentLogInfo.getTrade_no());
+                if(StringUtil.isNotEmpty(paymentLogInfo.getTransactionId())) {
+                    map.put("tradeNo", paymentLogInfo.getTransactionId());
+                }else{
+                    map.put("tradeNo", paymentLogInfo.getTrade_no());
+                }
             }
         }
         return map;

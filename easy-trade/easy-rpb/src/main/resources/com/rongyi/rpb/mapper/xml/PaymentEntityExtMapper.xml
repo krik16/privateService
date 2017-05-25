@@ -12,9 +12,10 @@
     <result column="attach" property="attach" jdbcType="VARCHAR" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, payment_order_id, mch_info_id, store_id, pos_no, create_at, update_at
+    id, payment_order_id, mch_info_id, store_id, pos_no, memo, create_at, update_at
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,10 +29,10 @@
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntityExt" >
     insert into payment_order_ext (id, payment_order_id, mch_info_id, 
-      store_id, pos_no,subject,body,attach, create_at,
+      store_id, pos_no,memo,subject,body,attach, create_at,
       update_at)
     values (#{id,jdbcType=INTEGER}, #{paymentOrderId,jdbcType=INTEGER}, #{mchInfoId,jdbcType=VARCHAR}, 
-      #{storeId,jdbcType=VARCHAR}, #{posNo,jdbcType=VARCHAR},
+      #{storeId,jdbcType=VARCHAR}, #{posNo,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR},
       #{subject,jdbcType=VARCHAR},#{body,jdbcType=VARCHAR},#{attach,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP},
       #{updateAt,jdbcType=TIMESTAMP})
   </insert>
@@ -52,6 +53,9 @@
       </if>
       <if test="posNo != null" >
         pos_no,
+      </if>
+      <if test="memo != null" >
+        memo,
       </if>
       <if test="subject != null" >
         subject,
@@ -85,6 +89,9 @@
       <if test="posNo != null" >
         #{posNo,jdbcType=VARCHAR},
       </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
       <if test="subject != null" >
         #{subject,jdbcType=VARCHAR},
       </if>
@@ -108,6 +115,7 @@
       mch_info_id = #{mchInfoId,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=VARCHAR},
       pos_no = #{posNo,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
       subject = #{subject,jdbcType=VARCHAR},
       body = #{body,jdbcType=VARCHAR},
       attach = #{attach,jdbcType=VARCHAR},

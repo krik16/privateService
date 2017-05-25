@@ -430,4 +430,27 @@ public class HttpUtil {
 		long end = System.nanoTime();
 		logger.info("接口耗时:{}:{}ms",sendUrl, (end - begin) / 1000000);
 	}
+	public static InputStream httpGet(String url ,WebankConfigure configure) throws Exception{
+		InputStream is = null;
+		logger.info("send_url:" + url);
+		try {
+			CloseableHttpClient httpClient = init(configure);
+			HttpGet httpGet = new HttpGet(url);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			HttpEntity httpEntity = httpResponse.getEntity();
+
+			is = httpEntity.getContent();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+			throw e;
+		}finally {
+			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+				System.clearProperty("javax.net.ssl.trustStore");
+			}
+
+		}
+		return is;
+	}
 }
