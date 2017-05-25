@@ -303,9 +303,11 @@ public class AliPayServiceImpl extends BaseServiceImpl implements IAliPayService
         if (StringUtil.isEmpty(aliPaySignVo.getSellerId())) {
             aliScanPayReqData.setSellerId(aliConfigureVo.getPid());
         }
-//        if(StringUtil.isEmpty(aliPaySignVo.getStoreId())){
-//            aliScanPayReqData.setStoreId("storeId");
-//        }
+        if(StringUtil.isEmpty(aliPaySignVo.getStoreId())){
+           if(StringUtil.isNotEmpty(aliPaySignVo.getExtend())&&aliPaySignVo.getExtend().split("__").length>1) {
+               aliScanPayReqData.setStoreId(aliPaySignVo.getExtend().split("__")[1]);
+           }
+        }
         return aliScanPayReqData;
     }
 
