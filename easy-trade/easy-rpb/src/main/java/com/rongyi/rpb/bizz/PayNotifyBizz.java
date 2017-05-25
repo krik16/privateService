@@ -185,9 +185,9 @@ public class PayNotifyBizz {
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
 
         PaymentEntity paymentEntity = posPayValidate(dto);
-        BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
         //支付通知
        if(dto.getType() != null && 0 == dto.getType()) {
+           BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
            doPayNotify(paymentEntity.getPayNo(), payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
        }
        //退款通知
