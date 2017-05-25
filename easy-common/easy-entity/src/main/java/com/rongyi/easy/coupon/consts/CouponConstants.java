@@ -65,6 +65,8 @@ public interface CouponConstants {
         Integer BRAND = 1;
         Integer MALL = 2;
         Integer SHOP = 3;
+        Integer GUID = 4;
+        Integer CHAIN = 5;
     }
 
     /**

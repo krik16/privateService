@@ -71,6 +71,8 @@ public class VerifyCodeParam implements Serializable {
 
     private String storeId;
 
+    private String wid;
+
     public Integer getValidChannel() {
         return validChannel;
     }
@@ -217,6 +219,14 @@ public class VerifyCodeParam implements Serializable {
         this.storeId = storeId;
     }
 
+    public String getWid() {
+        return wid;
+    }
+
+    public void setWid(String wid) {
+        this.wid = wid;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("VerifyCodeParam{");
@@ -237,6 +247,7 @@ public class VerifyCodeParam implements Serializable {
         sb.append(", ts=").append(ts);
         sb.append(", nonceStr='").append(nonceStr).append('\'');
         sb.append(", storeId='").append(storeId).append('\'');
+        sb.append(", wid='").append(wid).append('\'');
         sb.append('}');
         return sb.toString();
     }

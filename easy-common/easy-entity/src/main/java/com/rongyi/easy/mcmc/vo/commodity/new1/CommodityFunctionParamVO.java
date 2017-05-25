@@ -19,6 +19,7 @@ public class CommodityFunctionParamVO implements  Serializable, Cloneable {
 	private CommodityShopInfo shopInfo;
 	private String brandMid;
 	private boolean isBuyer = false; // 是否是买手。默认非买手
+	private boolean sourceParamIsApp = false; // 本次操作的来源: 是否app。默认false
 
 	public String getShopId() {
 		return shopId;
@@ -92,6 +93,14 @@ public class CommodityFunctionParamVO implements  Serializable, Cloneable {
 		isBuyer = buyer;
 	}
 
+	public boolean isSourceParamIsApp() {
+		return sourceParamIsApp;
+	}
+
+	public void setSourceParamIsApp(boolean sourceParamIsApp) {
+		this.sourceParamIsApp = sourceParamIsApp;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityFunctionParamVO{" +
@@ -104,6 +113,7 @@ public class CommodityFunctionParamVO implements  Serializable, Cloneable {
 				", shopInfo=" + shopInfo +
 				", brandMid='" + brandMid + '\'' +
 				", isBuyer=" + isBuyer +
+				", sourceParamIsApp=" + sourceParamIsApp +
 				'}';
 	}
 }

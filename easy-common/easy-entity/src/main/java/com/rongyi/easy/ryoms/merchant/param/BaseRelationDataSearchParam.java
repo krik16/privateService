@@ -6,7 +6,7 @@ public class BaseRelationDataSearchParam implements Serializable {
 	
 	private static final long serialVersionUID = 6456986268364671739L;
 	
-	private String type;//group集团  mall商场 shop店铺
+	private String type;//group集团  mall商场 shop店铺 chainShop连锁总店
 	private String name;
 	private String mid;//id
 	private int currentPage = 0;//当前页

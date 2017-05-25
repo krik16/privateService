@@ -13,6 +13,8 @@ public class PaymentEntityExt {
 
     private String posNo;
 
+    private String memo ;
+
     private Date createAt;
 
     private Date updateAt;
@@ -71,5 +73,13 @@ public class PaymentEntityExt {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }
