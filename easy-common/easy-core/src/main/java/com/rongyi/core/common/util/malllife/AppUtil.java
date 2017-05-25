@@ -154,6 +154,13 @@ public class AppUtil{
         return m.matches();
     }
 
+    public static boolean isSpecialTelephoneNo(String phoneNo){
+        String regex = "^400\\-?\\d{3}\\-?\\d{4}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(phoneNo);
+        return m.matches();
+    }
+
     /**
      * 判断手机号
      * @param mobiles

@@ -394,4 +394,17 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public List<BsUserVO> getHashRefundAccountListByShopId(Integer shopId, String authValue) throws Exception;
+	/**
+	 * 根据用户id查询店铺mongoId
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public String selectShopMIdByUserId(Integer userId) throws Exception;
+	/**
+	 * 根据店铺mongoId查询店铺主账号信息
+	 * @param shopMId
+	 * @return
+	 */
+	public UserInfo getChiefAccountByShopMId(String shopMId);
 }

@@ -90,6 +90,34 @@ public class CommodityBuyerVO implements Serializable {
     private Integer templateRelevantGoodsCouponId;  //用作排序
     private List<String> onServiceIds;
     private Boolean isRefund;//是否可退货   true可退 ，false 不可退
+    private String commodityModelNo;
+    private String totalStock;
+
+    private String referencePrice; // 销售价
+
+    public String getReferencePrice() {
+        return referencePrice;
+    }
+
+    public void setReferencePrice(String referencePrice) {
+        this.referencePrice = referencePrice;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
+
+    public String getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(String totalStock) {
+        this.totalStock = totalStock;
+    }
 
     public Integer getTemplateRelevantGoodsCouponId() {
         return templateRelevantGoodsCouponId;
@@ -1035,6 +1063,8 @@ public class CommodityBuyerVO implements Serializable {
         }else{
         	this.isRefund = false;
         }
+
+        this.commodityModelNo = commodity.getCommodityModelNo();
     }
 
     private boolean isShowInWechat() {
