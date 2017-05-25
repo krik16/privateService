@@ -139,7 +139,7 @@ public class BaseBizz {
      * 初始化支付扩展表信息
      */
     protected PaymentEntityExt initPaymentEntityExt(String mchInfoId,String storeId,String posNo,String subject,
-                                                    String body,String attach,Integer paymentEntityId,String extend) {
+                                                    String body,String attach,Integer paymentEntityId,String extend,String memo) {
         PaymentEntityExt paymentEntityExt = null;
         //查找扩展表记录
         if (paymentEntityId != null) {
@@ -176,6 +176,7 @@ public class BaseBizz {
         paymentEntityExt.setBody(body);
         paymentEntityExt.setAttach(attach);
         paymentEntityExt.setCreateAt(new Date());
+        paymentEntityExt.setMemo(memo);
         return paymentEntityExt;
     }
 }

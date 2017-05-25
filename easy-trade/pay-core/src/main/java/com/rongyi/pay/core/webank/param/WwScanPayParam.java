@@ -50,6 +50,9 @@ public class WwScanPayParam extends BaseData{
     //支付备注
     private String memo ;
 
+    //商户id
+    private String mchInfoId;
+
     public String getMchId() {
         return mchId;
     }
@@ -170,5 +173,13 @@ public class WwScanPayParam extends BaseData{
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
     }
 }

@@ -37,6 +37,10 @@ public class WaScanPayParam extends BaseData{
     //备注
     private String memo ;
 
+    private String mchInfoId;
+
+    private String storeId;//门店号
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -115,5 +119,21 @@ public class WaScanPayParam extends BaseData{
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 }
