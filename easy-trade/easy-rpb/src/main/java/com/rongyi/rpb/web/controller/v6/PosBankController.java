@@ -67,7 +67,6 @@ public class PosBankController {
 
             payNotifyBizz.posBankSynPayNotify(posBankSynNotifyDto);
             return ResponseVO.success();
-
         } catch (TradeException e){
             log.warn("pos银行卡支付pos端同步结果通知失败e={}",e.getMessage(),e);
             return ResponseVO.failure(Integer.valueOf(e.getCode()),e.getMessage());
