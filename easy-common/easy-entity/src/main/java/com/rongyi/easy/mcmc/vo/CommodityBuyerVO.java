@@ -94,6 +94,7 @@ public class CommodityBuyerVO implements Serializable {
     private String totalStock;
 
     private String referencePrice; // 销售价
+    private String shopAddress;//商城地址
 
     public String getReferencePrice() {
         return referencePrice;
@@ -929,7 +930,15 @@ public class CommodityBuyerVO implements Serializable {
         this.activitySessionEndAt = activitySessionEndAt;
     }
 
-    public CommodityBuyerVO(Commodity commodity){
+    public String getShopAddress() {
+		return shopAddress;
+	}
+
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+
+	public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
         this.commodityId = commodity.getId().toString();
@@ -1079,7 +1088,7 @@ public class CommodityBuyerVO implements Serializable {
         return onIds.size() > 0;
     }
     
-    @Override
+	@Override
 	public String toString() {
 		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
 				+ commodityPicList + ", commodityId=" + commodityId
@@ -1130,8 +1139,11 @@ public class CommodityBuyerVO implements Serializable {
 				+ shelvesType + ", categoryNames=" + categoryNames
 				+ ", templateRelevantGoodsCouponId="
 				+ templateRelevantGoodsCouponId + ", onServiceIds="
-				+ onServiceIds + ", isRefund=" + isRefund + ", subheading="
-				+ subheading + ", commodityDetails=" + commodityDetails
+				+ onServiceIds + ", isRefund=" + isRefund
+				+ ", commodityModelNo=" + commodityModelNo + ", totalStock="
+				+ totalStock + ", referencePrice=" + referencePrice
+				+ ", shopAddress=" + shopAddress + ", subheading=" + subheading
+				+ ", commodityDetails=" + commodityDetails
 				+ ", ifShowInWechat=" + ifShowInWechat + ", buyerCount="
 				+ buyerCount + ", totalBuycount=" + totalBuycount
 				+ ", groupPeopleMax=" + groupPeopleMax + ", groupStartAt="
@@ -1145,9 +1157,10 @@ public class CommodityBuyerVO implements Serializable {
 				+ ", serviceDescription=" + serviceDescription
 				+ ", serviceDescriptionId=" + serviceDescriptionId
 				+ ", serviceDescriptionRemark=" + serviceDescriptionRemark
-				+ "]";
+				+ ", activitySessionStartAt=" + activitySessionStartAt
+				+ ", activitySessionEndAt=" + activitySessionEndAt + "]";
 	}
-    
+
 	public void setTip() {
         this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
                 this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
