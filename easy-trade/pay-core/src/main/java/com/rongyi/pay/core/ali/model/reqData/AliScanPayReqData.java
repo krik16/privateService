@@ -80,6 +80,8 @@ public class AliScanPayReqData extends BaseData{
 
     private String mchInfoId ;
 
+    private String posNo ;
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -238,5 +240,13 @@ public class AliScanPayReqData extends BaseData{
 
     public void setMchInfoId(String mchInfoId) {
         this.mchInfoId = mchInfoId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 }
