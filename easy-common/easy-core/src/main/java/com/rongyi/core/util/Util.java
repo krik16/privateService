@@ -305,8 +305,18 @@ public class Util {
 	 * @param day
 	 * @return
 	 */
-	public static int toChgSecond(int day) {
+	public static int d2Second(int day) {
 		return day * 24 * 3600;
+	}
+
+	/**
+	 * 分转秒
+	 *
+	 * @param minute
+	 * @return
+	 */
+	public static int m2Second(int minute) {
+		return minute * 60;
 	}
 
 	/**
@@ -315,8 +325,18 @@ public class Util {
 	 * @param second
 	 * @return
 	 */
-	public static int toChgDay(int second) {
+	public static int s2Day(int second) {
 		return second / 24 / 3600;
+	}
+
+	/**
+	 * 秒转分钟
+	 *
+	 * @param second
+	 * @return
+	 */
+	public static int s2Minute(int second) {
+		return second / 60;
 	}
 
 	/**
