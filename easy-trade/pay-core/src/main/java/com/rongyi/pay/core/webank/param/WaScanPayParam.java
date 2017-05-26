@@ -41,6 +41,8 @@ public class WaScanPayParam extends BaseData{
 
     private String storeId;//门店号
 
+    private String posNo;
+
     public String getWbMerchantId() {
         return wbMerchantId;
     }
@@ -135,5 +137,13 @@ public class WaScanPayParam extends BaseData{
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 }

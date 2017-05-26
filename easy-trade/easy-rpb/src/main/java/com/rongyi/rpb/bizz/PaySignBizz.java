@@ -129,7 +129,7 @@ public class PaySignBizz extends BaseBizz{
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType, ConstantEnum.PAY_SCENE_SCAN.getCodeInt());
 
         //初始化扩展记录
-        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waScanPayParam.getMchInfoId(),waScanPayParam.getStoreId(),"",waScanPayParam.getSubject(),waScanPayParam.getBody(),
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(waScanPayParam.getMchInfoId(),waScanPayParam.getStoreId(),waScanPayParam.getPosNo(),waScanPayParam.getSubject(),waScanPayParam.getBody(),
                 "", paymentEntity.getId(),waScanPayParam.getExtend(),waScanPayParam.getMemo());
 
         //获取支付宝扫码支付签名
