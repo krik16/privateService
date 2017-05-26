@@ -23,7 +23,9 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
@@ -63,9 +65,9 @@ public class HttpUtil {
 			throw e;
 		}finally {
 			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
-			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
-				System.clearProperty("javax.net.ssl.trustStore");
-			}
+//			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+//				System.clearProperty("javax.net.ssl.trustStore");
+//			}
 
 		}
 		return result;
@@ -338,12 +340,13 @@ public class HttpUtil {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
 			throw e;
-		} finally {
+		}
+		finally {
 			httpPost.abort();
 			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
-			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
-				System.clearProperty("javax.net.ssl.trustStore");
-			}
+//			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+//				System.clearProperty("javax.net.ssl.trustStore");
+//			}
 		}
 		datePrint(url,start);
 		return result;
@@ -382,12 +385,13 @@ public class HttpUtil {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
 			throw e;
-		} finally {
+		}
+		finally {
 			httpPost.abort();
 			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
-			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
-				System.clearProperty("javax.net.ssl.trustStore");
-			}
+//			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+//				System.clearProperty("javax.net.ssl.trustStore");
+//			}
 		}
 		datePrint(url,start);
 		return result ;
@@ -404,22 +408,33 @@ public class HttpUtil {
 		try {
 			keyStore.load(ksIn, KEY_STORE_PASSWORD.toCharArray());
 			trustStore.load(tsIn, KEY_STORE_TRUST_PASSWORD.toCharArray());
-			System.setProperty("javax.net.ssl.trustStore", webankConfigure.getWechatTrustStorePath());
+			//将证书写入系统 ，会影响其它支付宝与微信的证书  去掉换一种方式
+//			System.setProperty("javax.net.ssl.trustStore", webankConfigure.getWechatTrustStorePath());
 		} catch (Exception e) {
 			System.out.println("got a exception" + e.getMessage());
 		} finally {
 			ksIn.close();
 			tsIn.close();
 		}
-		SSLContext sslcontext = null;
-		sslcontext = SSLContexts.custom()
-				.loadKeyMaterial(keyStore, KEY_STORE_PASSWORD.toCharArray())
-				.loadTrustMaterial(trustStore, new TrustSelfSignedStrategy())
-				.build();
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+//		SSLContext sslcontext = null;
+//		sslcontext = SSLContexts.custom()
+//				.loadKeyMaterial(keyStore, KEY_STORE_PASSWORD.toCharArray())
+//				.loadTrustMaterial(trustStore, new TrustSelfSignedStrategy())
+//				.build();
+//		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+//				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+//		return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+
+		SSLContext sslcontext = SSLContext.getInstance("TLS");
+		TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+		trustManagerFactory.init(trustStore);
+		KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+		keyManagerFactory.init(keyStore, KEY_STORE_PASSWORD.toCharArray());
+		sslcontext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1"},
 				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 		return HttpClients.custom().setSSLSocketFactory(sslsf).build();
-		//HttpResponse response = httpclient.execute(httpPost);
+
 	}
 
 
@@ -444,13 +459,14 @@ public class HttpUtil {
 			e.printStackTrace();
 			logger.info("http请求报错哦！");
 			throw e;
-		}finally {
-			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
-			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
-				System.clearProperty("javax.net.ssl.trustStore");
-			}
-
 		}
+//		finally {
+//			//微众支付是个坑，需要加载javax.net.ssl.trustStore这个属性,是基于整个JVM的,微信这边是不需要这个的，所有要去除这个属性
+//			if(StringUtils.isNotEmpty(System.getProperty("javax.net.ssl.trustStore"))) {
+//				System.clearProperty("javax.net.ssl.trustStore");
+//			}
+//
+//		}
 		return is;
 	}
 }
