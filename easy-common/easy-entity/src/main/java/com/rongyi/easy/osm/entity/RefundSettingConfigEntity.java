@@ -303,8 +303,8 @@ public class RefundSettingConfigEntity implements Serializable {
         this.intevalRefundTime = 24 * 3600;
         this.configType = 1;
         this.maxTimeoutForOrderClose = 1 * 60;
-        this.maxTimeoutForOrderCofirm = 10 * 24 * 60 * 60;
-        this.maxTimeoutForOrderDelivery = 10 * 24 * 60 * 60;
+        this.maxTimeoutForOrderCofirm = 7 * 24 * 60 * 60;
+        this.maxTimeoutForOrderDelivery = 7 * 24 * 60 * 60;
         this.maxTimeoutForOrderPayment = 60 * 60;
     }
 }
