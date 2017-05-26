@@ -40,8 +40,6 @@ public class WaScanPaySignVo extends BaseBizVo implements Serializable{
 
     private String posNo;//设备号
 
-    private String extend;//扩展参数
-
     //备注
     private String memo ;
 
@@ -125,16 +123,6 @@ public class WaScanPaySignVo extends BaseBizVo implements Serializable{
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
-    }
-
-    @Override
-    public String getExtend() {
-        return extend;
-    }
-
-    @Override
-    public void setExtend(String extend) {
-        this.extend = extend;
     }
 
     public String getMemo() {
