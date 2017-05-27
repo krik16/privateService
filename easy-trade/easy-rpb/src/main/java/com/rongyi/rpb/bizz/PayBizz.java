@@ -116,7 +116,7 @@ public class PayBizz extends BaseBizz{
 
         //初始化扩展记录
         PaymentEntityExt paymentEntityExt = initPaymentEntityExt(aliPunchCardPayReqData.getMchInfoId(), aliPunchCardPayReqData.getStoreId(), aliPunchCardPayReqData.getPosNo(),
-                aliPunchCardPayReqData.getSubject(),aliPunchCardPayReqData.getBody(),aliPunchCardPayReqData.getAttach(), paymentEntity.getId(),aliPunchCardPayReqData.getExtend(),"");
+                aliPunchCardPayReqData.getSubject(), aliPunchCardPayReqData.getBody(), aliPunchCardPayReqData.getAttach(), paymentEntity.getId(), aliPunchCardPayReqData.getExtend(), "");
         //保存支付记录
         saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
 
@@ -133,7 +133,7 @@ public class PayBizz extends BaseBizz{
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
         //保存已支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo, null);
         //发送异步通知
         payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         return alipayTradePayResponse;
@@ -166,7 +166,9 @@ public class PayBizz extends BaseBizz{
 
         //综合支付
         if (ConstantEnum.PAY_NATIVE_0.getCodeInt().equals(ryMchVo.getNativePay())) {
+
             wwPunchCardResData = WebankPayUnit.wechatPunchCardPay(wwPunchCardPayParam);
+
             paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
             paymentEntity.setFinishTime(new Date());
 
@@ -236,7 +238,7 @@ public class PayBizz extends BaseBizz{
                     "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
             //保存已支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo, null);
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         }
