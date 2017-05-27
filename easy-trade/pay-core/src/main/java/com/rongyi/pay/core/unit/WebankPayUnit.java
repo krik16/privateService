@@ -172,7 +172,7 @@ public class WebankPayUnit {
                         ConstantEnum.WA_TRADESTATUS_03.getCodeStr().equals(queryTradeResData.getTradeStatus()))){
                    //查询到支付结果异常时最多查询三次返回异常信息
                     if(i > 3) {
-                        throw new WebankException(queryTradeResData.getCode(), queryTradeResData.getMsg());
+                        throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARD_FAIL.getCodeStr(),ConstantEnum.WA_TRADESTATUS_02.getValueStr());
                     }
                 }
                 if(i!=retryTimes)
