@@ -17,65 +17,36 @@ public class ParentOrderVO implements Serializable {
 	private String paymentIdList;// 支付流水号
 	private String couponCodes;// 券码（多个逗号隔开）
 	private Byte payChannel;// 券码（多个逗号隔开）
-
 	private String mallName;// 商场名称
-
 	private String brandName;// 品牌名称
-
 	private String shopName;// 店铺名称
-
 	private List<String> shopIM;// 店铺可用IM账号
-
 	private String totalPrice = "0";// 总价
 	private BigDecimal payAmount = new BigDecimal(0);// 实际支付价格
-
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
-
 	private String nextStatusTime;// 预计进入下一状态的时间
-
 	private List<SonOrderVO> sonOrderList;// 子订单
-
 	private String consignee;// 收件人姓名
-
 	private String phone;// 收件人电话
-
 	private String address;// 邮寄地址
-
 	private String provinceName;// 省名称
-
 	private String cityName;// 市名称
-
 	private String districtName;// 区名称
-
 	private String commodityPostage = "0";// 运费
-
 	private String orderNum;// 订单编号
-
 	private String comment;// 买家备注
-
 	private String payTime;// 付款时间
-
 	private String commitOrderTime;// 提交订单时间
-
 	private String deliverTime;// 发货时间
-
 	private String shopId;// 店铺mysql的id
-
 	private String shopMid;// 店铺mongoId
-
 	private String shopLogo;// 店铺品牌logo
 	private String shopIcon;// 店铺自定义logo
-
 	private String isComment = "-1";// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
-
 	private String closeType = "0";// 父订单关闭类型 (0完成 1关闭)
-
 	private String closeReason;// 关闭原因
-
 	private String closeEventType;// 关闭事件  6:卖家超时未发货,23:卖家取消订单，34：拼团失败，36：超时支付成功退款
-
 	private String originalTotalPrice  = "0";// 原来的总价
-
 	private String buyerNickName;// 收货人昵称
 	private String buyerNameByWeixin;// 微信昵称
 	private String buyerPhone;// 买家手机号（买家账号）
@@ -99,64 +70,38 @@ public class ParentOrderVO implements Serializable {
 	 * 
 	 * private String expressName;// 物流名称
 	 */
-
 	private String expressBillId;// 物流单号ID
-
 	private String expressName;// 物流名称
 	private BigDecimal discountFee = BigDecimal.valueOf(0.00);// 商品折扣价
-
 	private String score = "0";// 使用的颜值
 	private String scoreDeduction = "0";// 颜值抵扣金额
 	private String DeductCouponAmount = "0";// 抵扣券实际抵扣价格
-
 	private String liveName;//直播名
-
 	private BigDecimal orderScoreDiscount = BigDecimal.valueOf(0.00);//购物车分摊的积分优惠
 	private BigDecimal orderCouponDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
 	private BigDecimal couponDiscount = BigDecimal.valueOf(0.00);//非购物车订单抵扣券抵扣金额
-
 	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
-
 	private Date createAt;//创建时间
-	
 	private String expressOrderInfoId;//物流信息主键id
 	private boolean ifOnDisplayExpress = false;//true显示查看物流按钮 false不显示
-
 	private BigDecimal newPayAmount;//支付金额新字段（payAmount字段只有在状态不等于1和5的情况下才会赋值，无法通用，新加字段）
-
 	private BigDecimal commidityTotalPice;//商品总价
-
 	private BigDecimal orderTotalPrice;//订单总价
 	private BigDecimal discountAmount;//订单总价-折扣
-	
 	private boolean ifPayment;//true：表示支付成功过，false:表示未支付过
 	private Long groupEndAt;//团结束时间，单位：毫秒
 	private Long nextCloseTime;//待付款订单预计关闭剩余时间，单位：秒
-
 	private String activityName;// 活动名称
-
 	private Integer activityType;// 活动类型 0不参与，3秒杀，4拼团,5超级团教育版
-
 	private Integer activityStatus;// 活动状态
-
 	private Long activityRoundId;// 活动编号
-
 	private Integer activityId;// 订单来源
-
 	private Integer orderSource;// 订单来源
-
 	private Integer shopNum = 0;//店铺数量
-
 	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
-	/**
-	 *是否是购物车订单
-	 */
-	private boolean isCartOrder;
-
+	private boolean isCartOrder;// 是否是购物车订单
 	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
-
 	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
-
 	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
 	private String reserveName;//预约人姓名
 	private String reservePhone;//预约人手机号
@@ -180,8 +125,7 @@ public class ParentOrderVO implements Serializable {
 	private String shopCityName;// 店铺市名称
 	private String shopAddress;//店铺详细地址
 	private String shopAreaName;//店铺区域名称
-	// 是否冻结 0：正常流程 1：冻结流程
-	private int isFreeze;
+	private int isFreeze; ///< 是否冻结 0：正常流程 1：冻结流程
 
 	public String getActivityCommodityDesc() {
 		return activityCommodityDesc;
@@ -298,8 +242,6 @@ public class ParentOrderVO implements Serializable {
 	public void setPayAmount(BigDecimal payAmount) {
 		this.payAmount = payAmount;
 	}
-
-
 
 	public boolean isIfOnDisplay() {
 		return ifOnDisplay;
@@ -592,7 +534,6 @@ public class ParentOrderVO implements Serializable {
 	public void setExpressName(String expressName) {
 		this.expressName = expressName;
 	}
-
 
 	public String getNickName() {
 		return nickName;
