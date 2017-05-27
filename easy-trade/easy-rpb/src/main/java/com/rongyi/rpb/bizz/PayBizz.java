@@ -67,10 +67,13 @@ public class PayBizz extends BaseBizz{
 
         //初始化扩展记录
         PaymentEntityExt paymentEntityExt = initPaymentEntityExt(wechatPaySignData.getMchInfoId(), wechatPaySignData.getStoreId(), wechatPaySignData.getPosNo(),
-                wechatPaySignData.getSubject(), wechatPaySignData.getBody(), wechatPaySignData.getAttach(), paymentEntity.getId(), wechatPaySignData.getExtend(),wechatPaySignData.getMemo());
+                wechatPaySignData.getSubject(), wechatPaySignData.getBody(), wechatPaySignData.getAttach(), paymentEntity.getId(), wechatPaySignData.getExtend(), wechatPaySignData.getMemo());
         //发起支付
         wechatPaySignData.setPayNo(paymentEntity.getPayNo());
         PunchCardPayResData punchCardPayResData;
+        //保存未支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, null, paymentEntityExt);
+
         if (ConstantEnum.PAY_NATIVE_0.getCodeInt().equals(ryMchVo.getNativePay())) {
             punchCardPayResData = WeChatPayUnit.punchCardPay(wechatPaySignData, wechatConfigure);
 
@@ -82,14 +85,12 @@ public class PayBizz extends BaseBizz{
                     punchCardPayResData.getResult_code(), punchCardPayResData.getTotal_fee(), punchCardPayResData.getOpenid(), punchCardPayResData.getOpenid(),
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
-            //保存支付记录
+            //保存已支付记录
             saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         } else {
             punchCardPayResData = WeChatPayUnit.punchCardNativePay(wechatPaySignData, wechatConfigure);
-            //保存未支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
             //循环查询支付状态
             wechatWaitUserPaying(paymentEntity, wechatConfigure, punchCardPayResData);
         }
@@ -113,6 +114,12 @@ public class PayBizz extends BaseBizz{
         PaymentEntity paymentEntity = initPaymentEntity(ryMchVo, aliPunchCardPayReqData.getOrderNo(), aliPunchCardPayReqData.getTotalAmount(), aliPunchCardPayReqData.getSellerId(),
                 "", Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, orderType,ConstantEnum.PAY_SCENE_POS.getCodeInt());
 
+        //初始化扩展记录
+        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(aliPunchCardPayReqData.getMchInfoId(), aliPunchCardPayReqData.getStoreId(), aliPunchCardPayReqData.getPosNo(),
+                aliPunchCardPayReqData.getSubject(),aliPunchCardPayReqData.getBody(),aliPunchCardPayReqData.getAttach(), paymentEntity.getId(),aliPunchCardPayReqData.getExtend(),"");
+        //保存支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
+
         //发起支付
         aliPunchCardPayReqData.setPayNo(paymentEntity.getPayNo());
         AlipayTradePayResponse alipayTradePayResponse = AliPayUnit.punchCardPay(aliPunchCardPayReqData, aliConfigure);
@@ -125,12 +132,8 @@ public class PayBizz extends BaseBizz{
                 "SUCCESS", aliPunchCardPayReqData.getTotalAmount(), alipayTradePayResponse.getBuyerUserId(), alipayTradePayResponse.getBuyerLogonId(),
                 0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
-        //初始化扩展记录
-        PaymentEntityExt paymentEntityExt = initPaymentEntityExt(aliPunchCardPayReqData.getMchInfoId(), aliPunchCardPayReqData.getStoreId(), aliPunchCardPayReqData.getPosNo(),
-                aliPunchCardPayReqData.getSubject(),aliPunchCardPayReqData.getBody(),aliPunchCardPayReqData.getAttach(), paymentEntity.getId(),aliPunchCardPayReqData.getExtend(),"");
-        //保存支付记录
-        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
-
+        //保存已支付记录
+        saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
         //发送异步通知
         payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         return alipayTradePayResponse;
@@ -146,7 +149,6 @@ public class PayBizz extends BaseBizz{
      * @return WwPunchCardResData
      */
     public WwPunchCardResData webankWechatPunchCardPay(RyMchVo ryMchVo, WwPunchCardPayParam wwPunchCardPayParam, Integer orderType) {
-
 
         Integer totalFee = wwPunchCardPayParam.getAmount().multiply(new BigDecimal(100)).intValue();
         //初始化支付记录
@@ -174,7 +176,7 @@ public class PayBizz extends BaseBizz{
                     "SUCCESS", payAmount, wwPunchCardResData.getOpenid(), wwPunchCardResData.getOpenid(),
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
             //更新为已支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
 
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
@@ -234,15 +236,13 @@ public class PayBizz extends BaseBizz{
                     "SUCCESS", totalAmount, resData.getBuyerUserId(), resData.getBuyerLogonId(),
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
             //保存已支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         }
         //原生支付接口
         else {
             resData = WebankPayUnit.alipayPunchCardPayNative(waPunchCardPayParam);
-            //保存未支付记录
-           // saveUnit.updatePaymentEntity(paymentEntity, null,paymentEntityExt);
             //循环查询支付状态
             webankAliWaitUserPaying(paymentEntity, waPunchCardPayParam);
         }
