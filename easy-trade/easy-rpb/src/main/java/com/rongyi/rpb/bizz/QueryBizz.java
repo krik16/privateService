@@ -209,7 +209,7 @@ public class QueryBizz {
 
         //检查是否支付成功状态
         if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(map.get("tradeStatus"))) {
-            updatePayment(oldPaymentEntity, com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr(), "", "");
+            updatePayment(oldPaymentEntity, String.valueOf(map.get("tradeNo")), "", "");
         }
         //显示退款状态
         PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
