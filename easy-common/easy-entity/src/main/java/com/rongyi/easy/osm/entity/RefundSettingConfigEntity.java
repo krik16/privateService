@@ -45,6 +45,14 @@ public class RefundSettingConfigEntity implements Serializable {
     private Date createAt;
     // 创建人
     private String createBy;
+    // 订单确认收货到交易成功时间
+    private int maxTimeoutForOrderClose;
+    // 系统默认订单确认收货时间
+    private int maxTimeoutForOrderCofirm;
+    // 卖家超时未发货订单关闭时间
+    private int maxTimeoutForOrderDelivery;
+    // 买家逾期未支付订单关闭时间
+    private int maxTimeoutForOrderPayment;
 
     public String getChiefId() {
         return chiefId;
@@ -190,6 +198,38 @@ public class RefundSettingConfigEntity implements Serializable {
         this.createBy = createBy;
     }
 
+    public int getMaxTimeoutForOrderClose() {
+        return maxTimeoutForOrderClose;
+    }
+
+    public void setMaxTimeoutForOrderClose(int maxTimeoutForOrderClose) {
+        this.maxTimeoutForOrderClose = maxTimeoutForOrderClose;
+    }
+
+    public int getMaxTimeoutForOrderCofirm() {
+        return maxTimeoutForOrderCofirm;
+    }
+
+    public void setMaxTimeoutForOrderCofirm(int maxTimeoutForOrderCofirm) {
+        this.maxTimeoutForOrderCofirm = maxTimeoutForOrderCofirm;
+    }
+
+    public int getMaxTimeoutForOrderDelivery() {
+        return maxTimeoutForOrderDelivery;
+    }
+
+    public void setMaxTimeoutForOrderDelivery(int maxTimeoutForOrderDelivery) {
+        this.maxTimeoutForOrderDelivery = maxTimeoutForOrderDelivery;
+    }
+
+    public int getMaxTimeoutForOrderPayment() {
+        return maxTimeoutForOrderPayment;
+    }
+
+    public void setMaxTimeoutForOrderPayment(int maxTimeoutForOrderPayment) {
+        this.maxTimeoutForOrderPayment = maxTimeoutForOrderPayment;
+    }
+
     @Override
     public String toString() {
         return "RefundSettingConfigEntity{" +
@@ -207,9 +247,14 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", limitTimeForNonCofirm=" + limitTimeForNonCofirm +
                 ", maxComplaintTime=" + maxComplaintTime +
                 ", intevalRefundTime=" + intevalRefundTime +
+                ", content='" + content + '\'' +
                 ", configType=" + configType +
                 ", createAt=" + createAt +
-                ", createBy=" + createBy +
+                ", createBy='" + createBy + '\'' +
+                ", maxTimeoutForOrderClose=" + maxTimeoutForOrderClose +
+                ", maxTimeoutForOrderCofirm=" + maxTimeoutForOrderCofirm +
+                ", maxTimeoutForOrderDelivery=" + maxTimeoutForOrderDelivery +
+                ", maxTimeoutForOrderPayment=" + maxTimeoutForOrderPayment +
                 '}';
     }
 
@@ -233,6 +278,10 @@ public class RefundSettingConfigEntity implements Serializable {
                 ", \"isDeleted\":" + isDeleted +
                 ", \"configType\":" + configType +
                 ", \"contactTel\":\"" + contactTel + "\"" +
+                ", \"maxTimeoutForOrderClose\":" + maxTimeoutForOrderClose +
+                ", \"maxTimeoutForOrderCofirm\":" + maxTimeoutForOrderCofirm +
+                ", \"maxTimeoutForOrderDelivery\":" + maxTimeoutForOrderDelivery +
+                ", \"maxTimeoutForOrderPayment\":" + maxTimeoutForOrderPayment +
                 '}';
     }
 
@@ -253,5 +302,9 @@ public class RefundSettingConfigEntity implements Serializable {
         this.maxComplaintTime = 3 * 24 * 3600;
         this.intevalRefundTime = 24 * 3600;
         this.configType = 1;
+        this.maxTimeoutForOrderClose = 1 * 60;
+        this.maxTimeoutForOrderCofirm = 10 * 24 * 60 * 60;
+        this.maxTimeoutForOrderDelivery = 10 * 24 * 60 * 60;
+        this.maxTimeoutForOrderPayment = 60 * 60;
     }
 }
