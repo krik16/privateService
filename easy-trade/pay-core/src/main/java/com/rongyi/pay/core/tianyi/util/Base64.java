@@ -276,12 +276,9 @@ public final class Base64 {
         return newSize;
     }
 
-    /**
-     * mainº¯Êý£¬²âÊÔÈë¿Ú
-     * @param args
-     */
+
     public static void main(String args[]) {
-        System.out.println(Base64.encode("ÎÒÊÇÕÅÅô·É£¬ÄãºÃ°¡£¡".getBytes()));
+        System.out.println(Base64.encode("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½".getBytes()));
         System.out.println(new String(Base64.decode("5oiR5piv5byg6bmP6aOe77yM5L2g5aW95ZWK77yB")));
 
         System.out.println(new String(Base64.decode("MTExMTExMQ==")));
