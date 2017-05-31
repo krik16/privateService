@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class AES256 {
 
-    /** �����㷨 */
+    /** 加密算法 */
     static final String KEY_ALGORITHM = "AES";
 
     static final String CIPHER_ALGORITHM_CBC = "AES/CBC/PKCS5Padding";
@@ -23,7 +23,7 @@ public class AES256 {
     public static byte[] ivBytes = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
     /**
-     * AES����
+     * AES加密
      *
      * @param str
      * @param key
@@ -42,7 +42,7 @@ public class AES256 {
     }
 
     /**
-     * AES����
+     * AES解密
      *
      * @param str
      * @param key
@@ -59,19 +59,19 @@ public class AES256 {
         return new String(cipher.doFinal(textBytes), SysConstants.SYS_CHARSET);
     }
 
-    //�������34λ���ֺ���ĸ
+    //生成随机34位数字和字母
     public static String getStringRandom(int length) {
 
         String val = "";
         Random random = new Random();
 
-        //����length����ʾ���ɼ�λ�����
+        //参数length，表示生成几位随机数
         for(int i = 0; i < length; i++) {
 
             String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
-            //�����ĸ��������
+            //输出字母还是数字
             if( "char".equalsIgnoreCase(charOrNum) ) {
-                //����Ǵ�д��ĸ����Сд��ĸ
+                //输出是大写字母还是小写字母
                 int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
                 val += (char)(random.nextInt(26) + temp);
             } else if( "num".equalsIgnoreCase(charOrNum) ) {
@@ -84,7 +84,7 @@ public class AES256 {
 
     public static void main(String[] args) throws Exception{
 
-        // ����Ϊ34λ
+        // 必须为34位
         String key = "abcdefghijklmnopqrstuvwxyz123456";
 
         String plainText;
@@ -92,7 +92,7 @@ public class AES256 {
         String decodeText;
         // Encrypt
 //        plainText  = "imcore.net";
-        plainText = "{bankCode:1,title:\\\"��ã�����\\\",addtime:\\\"2010-05-03\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\",title:\\\"��ã�����\\\"}";
+        plainText = "{bankCode:1,title:\\\"你好，朋友\\\",addtime:\\\"2010-05-03\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\",title:\\\"你好，朋友\\\"}";
         encodeText = AES256.AES_Encode(plainText, key);
         System.out.println("AES256_Encode : "+encodeText);
 

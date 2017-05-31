@@ -276,9 +276,12 @@ public final class Base64 {
         return newSize;
     }
 
-
+    /**
+     * main函数，测试入口
+     * @param args
+     */
     public static void main(String args[]) {
-        System.out.println(Base64.encode("���������ɣ���ð���".getBytes()));
+        System.out.println(Base64.encode("我是张鹏飞，你好啊！".getBytes()));
         System.out.println(new String(Base64.decode("5oiR5piv5byg6bmP6aOe77yM5L2g5aW95ZWK77yB")));
 
         System.out.println(new String(Base64.decode("MTExMTExMQ==")));
