@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class AES256 {
 
-    /** ¼ÓÃÜËã·¨ */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨ */
     static final String KEY_ALGORITHM = "AES";
 
     static final String CIPHER_ALGORITHM_CBC = "AES/CBC/PKCS5Padding";
@@ -23,7 +23,7 @@ public class AES256 {
     public static byte[] ivBytes = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
     /**
-     * AES¼ÓÃÜ
+     * AESï¿½ï¿½ï¿½ï¿½
      *
      * @param str
      * @param key
@@ -42,7 +42,7 @@ public class AES256 {
     }
 
     /**
-     * AES½âÃÜ
+     * AESï¿½ï¿½ï¿½ï¿½
      *
      * @param str
      * @param key
@@ -59,19 +59,19 @@ public class AES256 {
         return new String(cipher.doFinal(textBytes), SysConstants.SYS_CHARSET);
     }
 
-    //Éú³ÉËæ»ú34Î»Êý×ÖºÍ×ÖÄ¸
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½34Î»ï¿½ï¿½ï¿½Öºï¿½ï¿½ï¿½Ä¸
     public static String getStringRandom(int length) {
 
         String val = "";
         Random random = new Random();
 
-        //²ÎÊýlength£¬±íÊ¾Éú³É¼¸Î»Ëæ»úÊý
+        //ï¿½ï¿½ï¿½ï¿½lengthï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½É¼ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½
         for(int i = 0; i < length; i++) {
 
             String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
-            //Êä³ö×ÖÄ¸»¹ÊÇÊý×Ö
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if( "char".equalsIgnoreCase(charOrNum) ) {
-                //Êä³öÊÇ´óÐ´×ÖÄ¸»¹ÊÇÐ¡Ð´×ÖÄ¸
+                //ï¿½ï¿½ï¿½ï¿½Ç´ï¿½Ð´ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½Ð¡Ð´ï¿½ï¿½Ä¸
                 int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
                 val += (char)(random.nextInt(26) + temp);
             } else if( "num".equalsIgnoreCase(charOrNum) ) {
@@ -84,7 +84,7 @@ public class AES256 {
 
     public static void main(String[] args) throws Exception{
 
-        // ±ØÐëÎª34Î»
+        // ï¿½ï¿½ï¿½ï¿½Îª34Î»
         String key = "abcdefghijklmnopqrstuvwxyz123456";
 
         String plainText;
@@ -92,7 +92,7 @@ public class AES256 {
         String decodeText;
         // Encrypt
 //        plainText  = "imcore.net";
-        plainText = "{bankCode:1,title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",addtime:\\\"2010-05-03\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\",title:\\\"ÄãºÃ£¬ÅóÓÑ\\\"}";
+        plainText = "{bankCode:1,title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",addtime:\\\"2010-05-03\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\",title:\\\"ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½\\\"}";
         encodeText = AES256.AES_Encode(plainText, key);
         System.out.println("AES256_Encode : "+encodeText);
 
