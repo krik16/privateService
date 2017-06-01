@@ -24,4 +24,7 @@ public interface Identity {
     int SHOPPERS = 5;
     /** 身份类型：买手 **/
     int BUYER = 6;
+
+    /** 身份类型：连锁总部 **/
+    int CHAIN = 8;
 }

@@ -1,7 +1,5 @@
 package com.rongyi.easy.coupon.vo.merchant;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 
 /**
@@ -10,12 +8,45 @@ import java.io.Serializable;
  * Created at 2015/8/19 16:19.
  */
 public class StatisticsCountVO implements Serializable{
+
     /**全部*/
     private Integer total;
     /**已发布/审核成功*/
     private Integer done;
     /**待发布/待审核*/
     private Integer wait;
+    /**已结束/审核失败*/
+    private Integer overed;
+
+    private Integer stopped;
+
+    private Integer uncheck;
+
+    private Integer checkFailed;
+
+    public Integer getStopped() {
+        return stopped;
+    }
+
+    public void setStopped(Integer stopped) {
+        this.stopped = stopped;
+    }
+
+    public Integer getUncheck() {
+        return uncheck;
+    }
+
+    public void setUncheck(Integer uncheck) {
+        this.uncheck = uncheck;
+    }
+
+    public Integer getCheckFailed() {
+        return checkFailed;
+    }
+
+    public void setCheckFailed(Integer checkFailed) {
+        this.checkFailed = checkFailed;
+    }
 
     public Integer getOvered() {
         return overed;
@@ -24,9 +55,6 @@ public class StatisticsCountVO implements Serializable{
     public void setOvered(Integer overed) {
         this.overed = overed;
     }
-
-    /**已结束/审核失败*/
-    private Integer overed;
 
     public Integer getTotal() {
         return total;
@@ -61,7 +89,16 @@ public class StatisticsCountVO implements Serializable{
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("total", total).append("done", done).append("wait", wait).append("overed", overed).toString();
+        final StringBuffer sb = new StringBuffer("StatisticsCountVO{");
+        sb.append("total=").append(total);
+        sb.append(", done=").append(done);
+        sb.append(", wait=").append(wait);
+        sb.append(", overed=").append(overed);
+        sb.append(", stopped=").append(stopped);
+        sb.append(", uncheck=").append(uncheck);
+        sb.append(", checkFailed=").append(checkFailed);
+        sb.append('}');
+        return sb.toString();
     }
 
     public StatisticsCountVO() {

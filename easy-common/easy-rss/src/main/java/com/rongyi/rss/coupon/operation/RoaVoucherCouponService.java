@@ -76,6 +76,19 @@ public interface RoaVoucherCouponService {
      */
     boolean submitVerify(List<String> ids, Integer status, String reason);
 
+
+    /**
+     * @param ids    代金券id
+     * @param status 审核状态 ：待审核[0] 未通过[1] 已通过[2]
+     * @param reason 未通过原因
+     * @param updateUser 操作人
+     * @return 成功：true 失败：false
+     * @Description:审核代金券
+     * @author:lqy
+     */
+    boolean submitVerify(List<String> ids, Integer status,
+                         String reason ,String updateUser) throws Exception;
+
     /**
      * 卡券发布时没有选择集团、品牌、商场下的店铺，审核通过时，关联卡券对应类型下所有的店铺
      *
@@ -92,7 +105,6 @@ public interface RoaVoucherCouponService {
     int relationMalls(Coupon coupon);
 
     /**
-     * >>>>>>> develop-yuzhijian
      * param ids    代金券id
      * param reason 下架原因
      * return 成功：true 失败：false
@@ -100,6 +112,16 @@ public interface RoaVoucherCouponService {
      * author:lqy
      */
     boolean submitOffStock(List<String> ids, String reason);
+
+    /**
+     * >>>>>>> develop-yuzhijian
+     * param ids    代金券id
+     * param reason 下架原因
+     * return 成功：true 失败：false
+     * Description:下架代金券
+     * author:lqy
+     */
+    boolean submitOffStock(List<String> ids, String reason,String updateUser);
 
     /**
      * param id 代金券id
