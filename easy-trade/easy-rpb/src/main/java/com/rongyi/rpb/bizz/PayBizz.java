@@ -86,7 +86,7 @@ public class PayBizz extends BaseBizz{
                     0, 0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, "");
 
             //保存已支付记录
-            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,paymentEntityExt);
+            saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo,null);
             //发送异步通知
             payNotifyBizz.payNotifyThird(paymentEntity, paymentLogInfo);
         } else {
