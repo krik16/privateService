@@ -129,5 +129,6 @@
     <include refid="Base_Column_List" />
     from payment_order_ext
     where payment_order_id = #{paymentOrderId,jdbcType=INTEGER}
+    order by create_at desc limit 0,1
   </select>
 </mapper>
