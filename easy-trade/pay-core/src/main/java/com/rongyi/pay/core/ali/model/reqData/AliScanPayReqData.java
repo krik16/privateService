@@ -78,6 +78,10 @@ public class AliScanPayReqData extends BaseData{
     //备注
     private String memo ;
 
+    private String mchInfoId ;
+
+    private String posNo ;
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -228,5 +232,21 @@ public class AliScanPayReqData extends BaseData{
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
     }
 }

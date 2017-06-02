@@ -224,6 +224,7 @@ public class WechatPayServiceImpl extends BaseServiceImpl implements IWechatPayS
     @Override
     @SuppressWarnings("unchecked")
     public Map<String, Object> getOpenId(String code, String state, WechatConfigureVo wechatConfigureVo) throws TradePayException {
+        log.info("getOpenId,code:{},state:{},wechatConfigureVo:{}",code,state,wechatConfigureVo);
         try {
             //设置支付参数
             WechatConfigure wechatConfigure = getWechatConfigure(wechatConfigureVo);

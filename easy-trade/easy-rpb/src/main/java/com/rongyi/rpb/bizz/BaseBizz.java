@@ -11,6 +11,7 @@ import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mapper.PaymentEntityExtMapper;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.InitEntityUnit;
+import com.rongyi.rss.rpb.OrderNoGenService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,9 @@ public class BaseBizz {
     InitEntityUnit initEntityUnit;
     @Autowired
     PaymentEntityExtMapper paymentEntityExtMapper;
+
+    @Autowired
+    OrderNoGenService orderNoGenService;
     /**
      * 初始化支付记录信息
      */
@@ -57,6 +61,7 @@ public class BaseBizz {
             paymentEntity.setAmountMoney(new BigDecimal(totalFee).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
             paymentEntity.setPayScene(paySence);
             paymentEntity.setPayChannel(payChannel);
+            paymentEntity.setPayNo(orderNoGenService.getOrderNo("0"));
         } else {
             //生成支付信息
             paymentEntity = initEntityUnit.initPaymentEntity(ryMchVo, orderNo, totalFee, orderType, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, payChannel,
@@ -138,7 +143,8 @@ public class BaseBizz {
     /**
      * 初始化支付扩展表信息
      */
-    protected PaymentEntityExt initPaymentEntityExt(String mchInfoId,String storeId,String posNo,Integer paymentEntityId) {
+    protected PaymentEntityExt initPaymentEntityExt(String mchInfoId,String storeId,String posNo,String subject,
+                                                    String body,String attach,Integer paymentEntityId,String extend,String memo) {
         PaymentEntityExt paymentEntityExt = null;
         //查找扩展表记录
         if (paymentEntityId != null) {
@@ -149,11 +155,33 @@ public class BaseBizz {
             paymentEntityExt = new PaymentEntityExt();
             paymentEntityExt.setPaymentOrderId(paymentEntityId);
         }
-        paymentEntityExt.setMchInfoId(mchInfoId);
-        paymentEntityExt.setStoreId(storeId);
-        paymentEntityExt.setPosNo(posNo);
+        //特殊定义扩展信息
+        if(StringUtil.isNotEmpty(extend)){
+            String[] extendArray = extend.split("__");
+            if(extendArray.length > 0){
+                paymentEntityExt.setMchInfoId(extendArray[0]);
+            }
+            if(extendArray.length > 1){
+                paymentEntityExt.setStoreId(extendArray[1]);
+            }
+            if(extendArray.length > 2){
+                paymentEntityExt.setPosNo(extendArray[2]);
+            }
+        }
+        if(StringUtil.isNotEmpty(mchInfoId)) {
+            paymentEntityExt.setMchInfoId(mchInfoId);
+        }
+        if(StringUtil.isNotEmpty(storeId)) {
+            paymentEntityExt.setStoreId(storeId);
+        }
+        if(StringUtil.isNotEmpty(posNo)) {
+            paymentEntityExt.setPosNo(posNo);
+        }
+        paymentEntityExt.setSubject(subject);
+        paymentEntityExt.setBody(body);
+        paymentEntityExt.setAttach(attach);
         paymentEntityExt.setCreateAt(new Date());
-
+        paymentEntityExt.setMemo(memo);
         return paymentEntityExt;
     }
 }

@@ -170,31 +170,24 @@ public class PayNotifyBizz {
     }
 
     /**
+     * pos 银行卡支付通知(开放平台使用，不更新支付状态)
+     * @param dto 通知参数
+     */
+    public void posBankSynPayNotifyNone(PosBankSynNotifyDto dto){
+
+        posPayValidate(dto);
+    }
+
+    /**
      * pos 银行卡支付通知
      * @param dto 通知参数
      */
     public void posBankSynPayNotify(PosBankSynNotifyDto dto){
 
-        //获取开放平台商户信息
-        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(dto.getRyMchId(), dto.getRyAppId());
-        if (ryMchAppVo == null) {
-            throw  new TradeException(ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getCodeStr(),ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getValueStr());
-        }
-
-        //验证签名
-        validateSign(dto,ryMchAppVo.getToken(),dto.getSign());
-
-        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
-                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2);
-
-        if(paymentEntity == null){
-            throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
-        }
-
-        BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+        PaymentEntity paymentEntity = posPayValidate(dto);
         //支付通知
        if(dto.getType() != null && 0 == dto.getType()) {
-
+           BigDecimal payAmount = new BigDecimal(dto.getPayAmount()).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
            doPayNotify(paymentEntity.getPayNo(), payAmount, dto.getPaymentNo(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, dto.getAccountNo(), dto.getAccountNo());
        }
        //退款通知
@@ -204,6 +197,25 @@ public class PayNotifyBizz {
        }
     }
 
+
+    private PaymentEntity posPayValidate(PosBankSynNotifyDto dto){
+        //获取开放平台商户信息
+        RyMchAppVo ryMchAppVo = roaRyMchAppService.getByMchIdAndAppId(dto.getRyMchId(), dto.getRyAppId());
+        if (ryMchAppVo == null) {
+            throw  new TradeException(ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getCodeStr(),ConstantEnum.EXCEPTION_MCH_NOT_FOUND.getValueStr());
+        }
+
+        //验证签名
+        validateSign(dto,ryMchAppVo.getToken(),dto.getSign());
+        //兼容微信支付宝支付
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(dto.getOrderNo(),
+                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, null);
+
+        if(paymentEntity == null){
+            throw new TradeException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
+        }
+        return paymentEntity;
+    }
 
     /**
      *翼支付退款通知

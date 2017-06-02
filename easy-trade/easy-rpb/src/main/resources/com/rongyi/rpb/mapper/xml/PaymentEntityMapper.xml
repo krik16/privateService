@@ -666,7 +666,7 @@
 
     <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMapVo">
         select
-        po.id, order_no,order_type,order_price,pay_no,pay_amount,
+        DISTINCT(po.id), order_no,order_type,order_price,pay_no,pay_amount,
         status,trade_type,po.create_at,
         end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
         ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel,pay_scene,mch_info_id,store_id,pos_no,poe.memo
@@ -709,7 +709,7 @@
             <if test="endTime != null and endTime != ''">
                 and end_at &lt;= STR_TO_DATE(#{endTime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
             </if>
-        order by po.create_at desc
+        order by po.create_at desc,po.id desc
         <if test="startIndex !=null and pageSize !=null">
             limit #{startIndex},#{pageSize}
         </if>

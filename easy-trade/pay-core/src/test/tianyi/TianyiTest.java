@@ -79,7 +79,8 @@ public class TianyiTest {
 
     @Test
     public void testZhengze(){
-
+        String str ="123";
+        String intern = str.intern();
     }
 
     private PayDetailParam getPayDetailParam(){

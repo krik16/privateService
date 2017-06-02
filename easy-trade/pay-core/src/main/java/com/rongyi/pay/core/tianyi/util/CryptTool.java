@@ -11,11 +11,11 @@ public class CryptTool {
             "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
     /**
-     * ×ª»»×Ö½ÚÊı×éÎª16½øÖÆ×Ö´®
+     * è½¬æ¢å­—èŠ‚æ•°ç»„ä¸º16è¿›åˆ¶å­—ä¸²
      *
      * @param b
-     *            ×Ö½ÚÊı×é
-     * @return 16½øÖÆ×Ö´®
+     *            å­—èŠ‚æ•°ç»„
+     * @return 16è¿›åˆ¶å­—ä¸²
      */
 
     public static String byteArrayToHexString(byte[] b) {
@@ -36,7 +36,7 @@ public class CryptTool {
     }
 
     /**
-     * MD5 ÕªÒª¼ÆËã(byte[]).
+     * MD5 æ‘˜è¦è®¡ç®—(byte[]).
      *
      * @param src
      *            byte[]
@@ -51,7 +51,7 @@ public class CryptTool {
     }
 
     /**
-     * MD5 ÕªÒª¼ÆËã(String).
+     * MD5 æ‘˜è¦è®¡ç®—(String).
      *
      * @param src
      *            String

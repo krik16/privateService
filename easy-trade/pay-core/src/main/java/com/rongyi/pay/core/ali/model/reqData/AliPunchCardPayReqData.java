@@ -81,6 +81,8 @@ public class AliPunchCardPayReqData extends BaseData{
 
     private String posNo;//设备号
 
+    private String attach;//附加信息
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -239,5 +241,13 @@ public class AliPunchCardPayReqData extends BaseData{
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 }

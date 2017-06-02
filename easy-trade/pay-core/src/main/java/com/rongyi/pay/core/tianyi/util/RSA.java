@@ -20,35 +20,35 @@ import java.util.Map;
  */
 public class RSA {
 
-    /** RSA:¼ÓÃÜËã·¨ */
+    /** RSA:åŠ å¯†ç®—æ³• */
     public static final String  KEY_ALGORITHM =             "RSA";
 
     public static final String  KEY_ALGORITHM_RSA_NONE =             "RSA/ECB/PKCS1Padding";
 
-    /** SHA1WithRSA:ÓÃSHAËã·¨½øĞĞÇ©Ãû£¬ÓÃRSAËã·¨½øĞĞ¼ÓÃÜ */
+    /** SHA1WithRSA:ç”¨SHAç®—æ³•è¿›è¡Œç­¾åï¼Œç”¨RSAç®—æ³•è¿›è¡ŒåŠ å¯† */
     public static final String  SIGN_ALGORITHMS =           "SHAWithRSA";
 
-    /** ¹«Ô¿KEY*/
+    /** å…¬é’¥KEY*/
     public static final String  PUB_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCx2zk90WzGIzGjl7opxIFdoinxyp+pjvN1wC0OTrGk6o/c0RyrmQstu690IJPXu/6urLmB7/T2Iy/UUvSkqwzL7oX6D7llTjyR4MQjwvPVy7JZR2WYu1dvPgQn++/DVBuFDtfYW6pRlIi27iPxXyQ3ozAfHo5biR5nNelhu0lnVQIDAQAB";
 
-    /** ¿é¼ÓÃÜµÄ´óĞ¡£¬ÊÇ²»ÒªÌ«´ó£¬·ñÔòĞ§ÂÊ»áµÍ */
+    /** å—åŠ å¯†çš„å¤§å°ï¼Œæ˜¯ä¸è¦å¤ªå¤§ï¼Œå¦åˆ™æ•ˆç‡ä¼šä½ */
     private static final int    KEY_SIZE =                  1024;
 
-    /** »ñÈ¡¹«Ô¿µÄkey */
+    /** è·å–å…¬é’¥çš„key */
     private static final String PUBLIC_KEY =                "RSAPublicKey";
 
-    /** »ñÈ¡Ë½Ô¿µÄkey */
+    /** è·å–ç§é’¥çš„key */
     private static final String PRIVATE_KEY =               "RSAPrivateKey";
 
-    /** RSA×î´ó¼ÓÃÜÃ÷ÎÄ´óĞ¡ */
+    /** RSAæœ€å¤§åŠ å¯†æ˜æ–‡å¤§å° */
     private static final int    MAX_ENCRYPT_BLOCK =         117;
 
-    /** RSA×î´ó½âÃÜÃÜÎÄ´óĞ¡ */
+    /** RSAæœ€å¤§è§£å¯†å¯†æ–‡å¤§å° */
     private static final int    MAX_DECRYPT_BLOCK =         128;
 
 
     /**
-     * * Éú³ÉÃÜÔ¿¶Ô *
+     * * ç”Ÿæˆå¯†é’¥å¯¹ *
      *
      * @return KeyPair *
      * @throws Exception
@@ -61,7 +61,7 @@ public class RSA {
     }
 
     /**
-     * * Éú³É¹«Ô¿ *
+     * * ç”Ÿæˆå…¬é’¥ *
      *
      * @param keyPair *
      * @return RSAPublicKey *
@@ -74,7 +74,7 @@ public class RSA {
     }
 
     /**
-     * * Éú³ÉË½Ô¿ *
+     * * ç”Ÿæˆç§é’¥ *
      *
      * @param keyPair *
      * @return RSAPublicKey *
@@ -87,7 +87,7 @@ public class RSA {
     }
 
     /**
-     * * Éú³É¹«Ë½Ô¿¶Ô *
+     * * ç”Ÿæˆå…¬ç§é’¥å¯¹ *
      *
      * @return Map *
      * @throws Exception
@@ -101,12 +101,12 @@ public class RSA {
     }
 
     /**
-     * ÓÃË½Ô¿¶ÔĞÅÏ¢Éú³ÉÊı×ÖÇ©Ãû
+     * ç”¨ç§é’¥å¯¹ä¿¡æ¯ç”Ÿæˆæ•°å­—ç­¾å
      *
-     * @param content                ´ıÇ©ÃûÊı¾İ
-     * @param privateKey             Ë½Ô¿(BASE64±àÂë)
-     * @param input_charset          ±àÂë¸ñÊ½
-     * @return                       Ç©ÃûÖµ
+     * @param content                å¾…ç­¾åæ•°æ®
+     * @param privateKey             ç§é’¥(BASE64ç¼–ç )
+     * @param input_charset          ç¼–ç æ ¼å¼
+     * @return                       ç­¾åå€¼
      */
     public static String sign(String content, String privateKey, String input_charset) throws Exception {
         PKCS8EncodedKeySpec priPKCS8 	= new PKCS8EncodedKeySpec( Base64.decode(privateKey) );
@@ -121,13 +121,13 @@ public class RSA {
     }
 
     /**
-     * ÓÃ¹«Ô¿¶ÔĞÅÏ¢RSAÑéÇ©Ãû¼ì²é
+     * ç”¨å…¬é’¥å¯¹ä¿¡æ¯RSAéªŒç­¾åæ£€æŸ¥
      *
-     * @param content                ´ıÇ©ÃûÊı¾İ
-     * @param sign                   Ç©ÃûÖµ
-     * @param yzf_public_key         ¹«Ô¿
-     * @param input_charset          ±àÂë¸ñÊ½
-     * @return                       ²¼¶ûÖµ
+     * @param content                å¾…ç­¾åæ•°æ®
+     * @param sign                   ç­¾åå€¼
+     * @param yzf_public_key         å…¬é’¥
+     * @param input_charset          ç¼–ç æ ¼å¼
+     * @return                       å¸ƒå°”å€¼
      */
     public static boolean verify(String content, String sign, String yzf_public_key, String input_charset) throws Exception {
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
@@ -143,11 +143,11 @@ public class RSA {
     }
 
     /**
-     * Ê¹ÓÃ¹«Ô¿RSA¼ÓÃÜ
-     * @param content               Ã÷ÎÄ
-     * @param yzf_public_key        ¹«Ô¿
-     * @param input_charset         ±àÂë¸ñÊ½
-     * @return                      ½âÃÜºóµÄ×Ö·û´®
+     * ä½¿ç”¨å…¬é’¥RSAåŠ å¯†
+     * @param content               æ˜æ–‡
+     * @param yzf_public_key        å…¬é’¥
+     * @param input_charset         ç¼–ç æ ¼å¼
+     * @return                      è§£å¯†åçš„å­—ç¬¦ä¸²
      */
     public static String encrypt(String content, String yzf_public_key, String input_charset) throws Exception {
 
@@ -159,7 +159,7 @@ public class RSA {
             Cipher cipher = Cipher.getInstance(KEY_ALGORITHM_RSA_NONE);
             cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 
-            // ÉèÖÃ±àÂë¸ñÊ½
+            // è®¾ç½®ç¼–ç æ ¼å¼
             InputStream ins = new ByteArrayInputStream(content.getBytes(input_charset));
             writer = new ByteArrayOutputStream();
 
@@ -194,11 +194,11 @@ public class RSA {
     }
 
     /**
-     * Ê¹ÓÃË½Ô¿RSA½âÃÜ
-     * @param content ÃÜÎÄ
-     * @param private_key ÉÌ»§Ë½Ô¿
-     * @param input_charset ±àÂë¸ñÊ½
-     * @return ½âÃÜºóµÄ×Ö·û´®
+     * ä½¿ç”¨ç§é’¥RSAè§£å¯†
+     * @param content å¯†æ–‡
+     * @param private_key å•†æˆ·ç§é’¥
+     * @param input_charset ç¼–ç æ ¼å¼
+     * @return è§£å¯†åçš„å­—ç¬¦ä¸²
      */
     public static String decrypt(String content, String private_key, String input_charset) throws Exception {
         PrivateKey prikey = getPrivateKey(private_key);
@@ -208,7 +208,7 @@ public class RSA {
 
         InputStream ins = new ByteArrayInputStream(Base64.decode(content));
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
-        //rsa½âÃÜµÄ×Ö½Ú´óĞ¡×î¶àÊÇ128£¬½«ĞèÒª½âÃÜµÄÄÚÈİ£¬°´128Î»²ğ¿ª½âÃÜ
+        //rsaè§£å¯†çš„å­—èŠ‚å¤§å°æœ€å¤šæ˜¯128ï¼Œå°†éœ€è¦è§£å¯†çš„å†…å®¹ï¼ŒæŒ‰128ä½æ‹†å¼€è§£å¯†
         byte[] buf = new byte[MAX_DECRYPT_BLOCK];
         int bufl;
 
@@ -230,9 +230,9 @@ public class RSA {
     }
 
     /**
-     * µÃµ½Ë½Ô¿
+     * å¾—åˆ°ç§é’¥
      *
-     * @param key ÃÜÔ¿×Ö·û´®£¨¾­¹ıbase64±àÂë£©
+     * @param key å¯†é’¥å­—ç¬¦ä¸²ï¼ˆç»è¿‡base64ç¼–ç ï¼‰
      * @throws Exception
      */
     public static PrivateKey getPrivateKey(String key) throws Exception {
@@ -249,9 +249,9 @@ public class RSA {
     }
 
     /**
-     * µÃµ½¹«Ô¿
+     * å¾—åˆ°å…¬é’¥
      *
-     * @param key ¼ÓÃÜ×Ö·û´®£¨¾­¹ıbase64±àÂë£©
+     * @param key åŠ å¯†å­—ç¬¦ä¸²ï¼ˆç»è¿‡base64ç¼–ç ï¼‰
      * @throws Exception
      */
     public static PublicKey getPublicKey(String key) throws Exception {
@@ -272,27 +272,27 @@ public class RSA {
     public static void main(String args[]) {
         try {
 //            RSAKeyInfo rsaKeyInfo = RSA.generateRSAKey();
-//            String pubKey = rsaKeyInfo.getPubKey();         // ¹«Ô¿
-//            String privKey = rsaKeyInfo.getPrivKey();       // Ë½Ô¿
+//            String pubKey = rsaKeyInfo.getPubKey();         // å…¬é’¥
+//            String privKey = rsaKeyInfo.getPrivKey();       // ç§é’¥
 //
 //            System.out.print(pubKey + "\n" + privKey);
 //
-//            String content = "ÎÒ½ĞÕÅÅô·É";
+//            String content = "æˆ‘å«å¼ é¹é£";
 //
 //            String encryStr = RSA.encrypt(content, pubKey, SysConstants.SYS_CHARSET);
 //
-//            System.out.println("¼ÓÃÜ½á¹û£º" + encryStr);
+//            System.out.println("åŠ å¯†ç»“æœï¼š" + encryStr);
 //
 //            String decryptStr = RSA.decrypt(encryStr, privKey, SysConstants.SYS_CHARSET);
 //
-//            System.out.println("½âÃÜ½á¹û£º" + decryptStr);
+//            System.out.println("è§£å¯†ç»“æœï¼š" + decryptStr);
 
             String encryStr = "VxhK8Ku73TltoujAl0mE9J8O2tgsFvDQc3CuSJWv/L9MtLBom3XgPd8KngJMlaV7wKafK5JsR9g0zSYCjKOpi26FaBEGPI8yfXvR7s+MDZ0dEvdcuvqYcSccS7jwLm1H5ZFZT1f/Vytxw4/cjGafcZm+BAV6BzeJz6sskMRT2S4=";
 
             String privKey = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALHbOT3RbMYjMaOXuinEgV2iKfHKn6mO83XALQ5OsaTqj9zRHKuZCy27r3Qgk9e7/q6suYHv9PYjL9RS9KSrDMvuhfoPuWVOPJHgxCPC89XLsllHZZi7V28+BCf778NUG4UO19hbqlGUiLbuI/FfJDejMB8ejluJHmc16WG7SWdVAgMBAAECgYEAmfYICzdrTenRYqhJgzaUNhXW8XRR2lng7yG43xXIOdbDSofKpdEKGEDMlV5OHQakZVkoDQ9Honq7QLW/CXz4yW71iAK8SFn22LGKxzdSgPZkGmVZ+ZKDPjmKg9QyzI8VbHWKuIHCD0iJgaN7SF5B1CtsGRs66f+aNTLyLLr2QAECQQDWtXfjJi0keQ13mLpAYfc7e7dX0zna5zqkUbA2q1JYPG8j9GIJ/j3NrUUJbhFiBEJUX5BYtP7zXOXA8/QNqvtVAkEA1A9vRllNQNEiAG3ZlvVSh3RXWPsVDQkerzWKBlMvQZIa+eQ/Q9o+b0tOvvt1IIvwaSXpqBEcpC09vzfjoNy8AQJBAMNUmFr4Uj1KO6xAL8F+3pMo/CVULuAtWLZA8tTpi6JmaJ4HKGH7AHLrXVE052+KfGWSAxoQn5j7PLILvk3o7XkCQDcG4ksQ9Tjyi64s0x+W/RllGR1f2fCOA0ZX0D8f6s1LCnD5x2jmAvmCQybPvW76oSHH0r/n4NTBYJpz+D9PyAECQG+WZ/QoXpyHiRr1JUdjq2BX7+EA8hsC6+pmBzOnRzbOxWxmlfMNC5gzhhOyAVMdQM8UaRgKBOSsqsWz6artj1Y=";
             String decryptStr = RSA.decrypt(encryStr, privKey, SysConstants.SYS_CHARSET);
 //
-            System.out.println("½âÃÜ½á¹û£º" + decryptStr);
+            System.out.println("è§£å¯†ç»“æœï¼š" + decryptStr);
 
 //            String public_exponent = "010001";
 //            String modulus = "009e1b8381423dbbf9bbfa2d963755f6752928f8793a1d966170a3ffb9bad061d096ec9c2d7129f3639c17af17a2d8ee30de94afec1da9533a4e4d00331c31f67a967b9c3d98545e210615a7ff1c5a02dbdefbfffac0c7507240160f076d21ec78b4e6f2b47918d8a47ca195b223343626dd638f0cc8ebf0d21966e51ead24652f";

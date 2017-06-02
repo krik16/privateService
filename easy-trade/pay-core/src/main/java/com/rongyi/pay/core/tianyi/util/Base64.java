@@ -277,11 +277,11 @@ public final class Base64 {
     }
 
     /**
-     * mainº¯Êı£¬²âÊÔÈë¿Ú
+     * mainå‡½æ•°ï¼Œæµ‹è¯•å…¥å£
      * @param args
      */
     public static void main(String args[]) {
-        System.out.println(Base64.encode("ÎÒÊÇÕÅÅô·É£¬ÄãºÃ°¡£¡".getBytes()));
+        System.out.println(Base64.encode("æˆ‘æ˜¯å¼ é¹é£ï¼Œä½ å¥½å•Šï¼".getBytes()));
         System.out.println(new String(Base64.decode("5oiR5piv5byg6bmP6aOe77yM5L2g5aW95ZWK77yB")));
 
         System.out.println(new String(Base64.decode("MTExMTExMQ==")));

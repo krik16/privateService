@@ -96,7 +96,7 @@ public class WebankController {
             resultJson = new String(outSteam.toByteArray(), "utf-8");
             LOGGER.info("微众对账单通知下载map:{}", resultJson);
             JSONObject jsonObject = JSONObject.fromObject(resultJson);
-            JSONObject data = jsonObject.getJSONObject("data");
+            JSONObject data = JSONObject.fromObject(jsonObject.getString("data"));
             this.validStatmentDown(data);
 
             // 下载对账单，并将对账单发给运营人员
