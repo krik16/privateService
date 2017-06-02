@@ -19,7 +19,11 @@ public class WechatPaySignVo extends BaseBizVo implements Serializable{
 
     private Integer totalFee; //支付金额，单位分
 
+    private String subject;//订单标题
+
     private String body;//商品描述
+
+    private String attach;//附加信息
 
     private String timeStart;//支付有效时间开始值
 
@@ -151,6 +155,22 @@ public class WechatPaySignVo extends BaseBizVo implements Serializable{
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override

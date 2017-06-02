@@ -33,6 +33,9 @@ public class WaPunchCardVo implements Serializable{
     //订单描述
     private String body ;
 
+    //附加信息
+    private String attach;
+
     private String notifyUrl;//异步通知地址，刷卡支付非必填
 
     private Integer orderType;//默认开放平台订单类型
@@ -137,6 +140,14 @@ public class WaPunchCardVo implements Serializable{
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override

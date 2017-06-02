@@ -62,6 +62,8 @@ public class AliPunchCardPayVo implements Serializable {
 
     private String posNo;//设备号
 
+    private String attach;//附加信息
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -180,6 +182,14 @@ public class AliPunchCardPayVo implements Serializable {
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override
