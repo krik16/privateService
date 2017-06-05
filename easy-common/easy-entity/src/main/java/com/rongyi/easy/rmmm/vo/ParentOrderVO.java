@@ -125,7 +125,6 @@ public class ParentOrderVO implements Serializable {
     private String shopCityName;// 店铺市名称
     private String shopAddress;//店铺详细地址
     private String shopAreaName;//店铺区域名称
-    private String shopPhone;///< 店铺电话
     private int isFreeze; ///< 是否冻结 0：正常流程 1：冻结流程
 
     public String getActivityCommodityDesc() {
@@ -1006,14 +1005,6 @@ public class ParentOrderVO implements Serializable {
 
     public void setShopIcon(String shopIcon) {
         this.shopIcon = shopIcon;
-    }
-
-    public String getShopPhone() {
-        return shopPhone;
-    }
-
-    public void setShopPhone(String shopPhone) {
-        this.shopPhone = shopPhone;
     }
 
     @Override
