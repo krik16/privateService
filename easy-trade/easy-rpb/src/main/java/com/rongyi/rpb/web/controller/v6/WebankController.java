@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -96,11 +99,11 @@ public class WebankController {
             resultJson = new String(outSteam.toByteArray(), "utf-8");
             LOGGER.info("微众对账单通知下载map:{}", resultJson);
             JSONObject jsonObject = JSONObject.fromObject(resultJson);
-            JSONObject data = JSONObject.fromObject(jsonObject.getString("data"));
+            final JSONObject data = JSONObject.fromObject(jsonObject.getString("data"));
             this.validStatmentDown(data);
 
             // 下载对账单，并将对账单发给运营人员
-            statementBizz.writeStatementFile(data);
+            statementBizz.synStatementFile(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,12 +114,21 @@ public class WebankController {
      * @param data
      */
     private void validStatmentDown(JSONObject data) {
-      String app_id = data.getString("app_id");
-      String file_id = data.getString("file_id");
+        String app_id = data.getString("app_id");
+        String file_id = data.getString("file_id");
         String token = data.getString("token");
+        String workDate = data.getString("work_date");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date yes = calendar.getTime();
+        String yesDate = format.format(yes);
+        LOGGER.info("yesDate={}",yesDate);
         if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id)
-    		  || StringUtils.isBlank(token)) {
-    	  throw new RuntimeException("微众回调接口参数异常, paramMap = " + data.toString());
-      }
+              || StringUtils.isBlank(token) || StringUtils.isBlank(workDate)
+                ||!yesDate.equals(workDate)) {
+          throw new RuntimeException("微众回调接口参数异常, paramMap = " + data.toString());
+        }
     }
 }
