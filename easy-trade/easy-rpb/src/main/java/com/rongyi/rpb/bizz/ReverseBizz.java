@@ -82,9 +82,9 @@ public class ReverseBizz {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
         //去掉支付成功不允许撤销的限制
-//        if(oldPaymentEntity.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
-//            throw new TradePayException(ConstantEnum.EXCEPTION_LIMIT_REVERSE.getCodeStr(),ConstantEnum.EXCEPTION_LIMIT_REVERSE.getValueStr());
-//        }
+        if(oldPaymentEntity.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
+            throw new TradePayException(ConstantEnum.EXCEPTION_LIMIT_REVERSE.getCodeStr(),ConstantEnum.EXCEPTION_LIMIT_REVERSE.getValueStr());
+        }
         WaReverseTradeReqData reqData = new WaReverseTradeReqData();
         reqData.setWbMerchantId(weBankMchNo);
         reqData.setOrderId(oldPaymentEntity.getPayNo());
@@ -105,9 +105,9 @@ public class ReverseBizz {
         if (oldPaymentEntity == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
-//        if(oldPaymentEntity.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
-//            throw new TradePayException(ConstantEnum.EXCEPTION_LIMIT_REVERSE.getCodeStr(),ConstantEnum.EXCEPTION_LIMIT_REVERSE.getValueStr());
-//        }
+        if(oldPaymentEntity.getStatus() == Constants.PAYMENT_STATUS.STAUS2){
+            throw new TradePayException(ConstantEnum.EXCEPTION_LIMIT_REVERSE.getCodeStr(),ConstantEnum.EXCEPTION_LIMIT_REVERSE.getValueStr());
+        }
         WeChatPayUnit.reverseOrder(orderNo, wechatConfigure);
     }
 
