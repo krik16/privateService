@@ -461,7 +461,7 @@ public class HttpUtil {
 		cm.setMaxTotal(200);
 		// 将每个路由基础的连接增加到50
 		cm.setDefaultMaxPerRoute(50);
-		HttpHost localhost = new HttpHost("192.168.1.98",6000);
+		HttpHost localhost = new HttpHost("http://192.168.1.98",6000);
 		cm.setMaxPerRoute(new HttpRoute(localhost), 80);
 
 		return HttpClients.custom().setConnectionManager(cm).setSSLSocketFactory(sslsf).build();
