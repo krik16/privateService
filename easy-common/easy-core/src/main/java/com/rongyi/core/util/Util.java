@@ -366,4 +366,43 @@ public class Util {
 	public static String joinString(String str1, Object str2) {
 		return "_" + str1 + "_" + str2;
 	}
+
+	/**
+	 * 获取订单来源对应名称
+	 *
+	 * @param source
+	 * @param weixinAppId
+	 * @return
+	 */
+	public static String getOrderSourceName(Integer source, String weixinAppId) {
+		String sourceName = "其他";
+		switch (source) {
+			case 0:
+				if (StringUtils.isNotBlank(weixinAppId)) {
+					sourceName = "微商城";
+				} else {
+					sourceName = "容易逛";
+				}
+				break;
+			case 1:
+				sourceName = "容易逛";
+				break;
+			case 2:
+				sourceName = "终端机";
+				break;
+			case 3:
+				sourceName = "其他";
+				break;
+			case 4:
+				sourceName = "微商城";
+				break;
+			case 5:
+				sourceName = "微信小程序";
+				break;
+			default:
+				break;
+
+		}
+		return sourceName;
+	}
 }
