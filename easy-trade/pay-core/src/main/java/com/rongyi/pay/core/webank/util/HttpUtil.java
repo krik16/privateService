@@ -407,8 +407,8 @@ public class HttpUtil {
 
 	private static RequestConfig getRequestConfig() {
 		 return RequestConfig.custom()
-				.setConnectTimeout(45000).setConnectionRequestTimeout(5000)
-				.setSocketTimeout(45000).build();
+				.setConnectTimeout(10000).setConnectionRequestTimeout(10000)
+				.setSocketTimeout(25000).build();
 	}
 
 	private static CloseableHttpClient init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
@@ -461,8 +461,7 @@ public class HttpUtil {
 		cm.setMaxTotal(200);
 		// 将每个路由基础的连接增加到50
 		cm.setDefaultMaxPerRoute(50);
-		HttpHost localhost = new HttpHost("http://192.168.1.98",6000);
-		cm.setMaxPerRoute(new HttpRoute(localhost), 80);
+
 
 		return HttpClients.custom().setConnectionManager(cm).setSSLSocketFactory(sslsf).build();
 
