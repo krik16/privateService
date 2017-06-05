@@ -407,7 +407,7 @@ public class HttpUtil {
 
 	private static RequestConfig getRequestConfig() {
 		 return RequestConfig.custom()
-				.setConnectTimeout(10000).setConnectionRequestTimeout(5000)
+				.setConnectTimeout(10000).setConnectionRequestTimeout(10000)
 				.setSocketTimeout(25000).build();
 	}
 
@@ -458,7 +458,7 @@ public class HttpUtil {
 
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
 		// 将最大连接数增加到200
-		cm.setMaxTotal(100);
+		cm.setMaxTotal(200);
 		// 将每个路由基础的连接增加到50
 		cm.setDefaultMaxPerRoute(50);
 
