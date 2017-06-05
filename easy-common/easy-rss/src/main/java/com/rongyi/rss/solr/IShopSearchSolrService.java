@@ -25,4 +25,6 @@ public interface IShopSearchSolrService {
      * @return shopList
      */
     ShopSearchResult searchShopByType(ShopSearchParam searchParam, boolean includeItsChildren);
+
+    ShopSearchResult queryShop(ShopSearchParam searchParam);
 }
