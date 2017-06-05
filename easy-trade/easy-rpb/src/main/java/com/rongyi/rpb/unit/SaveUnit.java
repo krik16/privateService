@@ -30,12 +30,14 @@ public class SaveUnit {
 
 
         try {
+            log.info("支付请求写入数据库orderNum:{},payNo:{}",paymentEntity.getOrderNum(),paymentEntity.getPayNo());
             //支付记录
             if(paymentEntity != null && paymentEntity.getId() != null && paymentEntity.getId() > 0){
                 paymentService.updateByPrimaryKeySelective(paymentEntity);
             }else if(paymentEntity != null){
                 paymentService.insert(paymentEntity);
             }
+            log.info("支付请求写入数据库完成orderNum:{},payNo:{}",paymentEntity.getOrderNum(),paymentEntity.getPayNo());
             //支付事件记录
             if(paymentLogInfo != null){
                 paymentLogInfoService.insert(paymentLogInfo);
