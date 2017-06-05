@@ -11,14 +11,20 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -322,7 +328,7 @@ public class HttpUtil {
 		String result = null;
 
 		HttpPost httpPost = new HttpPost(url);
-
+		httpPost.setConfig(getRequestConfig());
 		StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");//解决中文乱码问题
 		entity.setContentEncoding("UTF-8");
 		entity.setContentType("application/json");
@@ -359,7 +365,7 @@ public class HttpUtil {
 		String result = null;
 
 		HttpPost httpPost = new HttpPost(url);
-
+		httpPost.setConfig(getRequestConfig());
 		//解决XStream对出现双下划线的bug
 		XStream xStreamForRequestPostData = new XStream(new DomDriver("UTF-8", new XmlFriendlyNameCoder("-_", "_")));
 
@@ -395,6 +401,12 @@ public class HttpUtil {
 		}
 		datePrint(url,start);
 		return result ;
+	}
+
+	private static RequestConfig getRequestConfig() {
+		 return RequestConfig.custom()
+				.setConnectTimeout(45000).setConnectionRequestTimeout(5000)
+				.setSocketTimeout(45000).build();
 	}
 
 	private static CloseableHttpClient init(WebankConfigure webankConfigure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
@@ -433,7 +445,22 @@ public class HttpUtil {
 		sslcontext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
 		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1"},
 				null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
-		return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+
+		/**
+		 * 设置http请求相关信息
+		 */
+		Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+				.register("http", PlainConnectionSocketFactory.INSTANCE)
+				.register("https", sslsf)
+				.build();
+
+		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
+		// 将最大连接数增加到200
+		cm.setMaxTotal(200);
+		// 将每个路由基础的连接增加到20
+		cm.setDefaultMaxPerRoute(50);
+
+		return HttpClients.custom().setConnectionManager(cm).setSSLSocketFactory(sslsf).build();
 
 	}
 
