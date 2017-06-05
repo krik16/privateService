@@ -1,7 +1,9 @@
 package com.rongyi.rpb.web.controller.v6;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
 import com.rongyi.rpb.bizz.StatementBizz;
+import com.rongyi.rpb.constants.ConstantEnum;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -81,7 +83,7 @@ public class WebankController {
     }
 
     @RequestMapping("/statementDown")
-    public void statementDown(HttpServletRequest request) {
+    public ResponseVO statementDown(HttpServletRequest request) {
         LOGGER.info("微众对账单通知下载");
         try {
             // 获取请求参数
@@ -101,11 +103,12 @@ public class WebankController {
             JSONObject jsonObject = JSONObject.fromObject(resultJson);
             final JSONObject data = JSONObject.fromObject(jsonObject.getString("data"));
             this.validStatmentDown(data);
-
             // 下载对账单，并将对账单发给运营人员
             statementBizz.synStatementFile(data);
+            return ResponseVO.success();
         } catch (Exception e) {
             e.printStackTrace();
+            return ResponseVO.failure();
         }
     }
     
