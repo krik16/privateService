@@ -12,7 +12,6 @@ package com.rongyi.core.common.third.rsa;
 
 
 import com.rongyi.core.common.third.exception.ThirdException;
-import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.common.util.Base64Helper;
 import com.rongyi.core.util.EasyMd5Util;
 import org.slf4j.Logger;
@@ -238,9 +237,9 @@ public class MalllifeRsaUtil {
         try {
             Map<String, Object> keyMap;
             try {
-/*
-             String json =    decryptStr("c3cNDk0uQ55Jw5Dm2jvSMwFPiCA9HqmF7j9E8PqLRM28dX0C3YaAof66lQD3R22+UuYdZ/Rdi3T1ndNTQMHIHV34MhzGBU65Z1izJXiQFZm9TYR+atun3p7xznl0dLGQ+Ma6lWju4qKEmKdFoYw/yXdvqHdE18AkACE7s9MoVcA=FPoLiYZYK6bv6eKz9trIvkt8lkUrW49nNUhPmAMnIFMWqz6ruUTXHFv1X5xi4XLSXeQt2//ugb+5j4IzZEcsYNAzKfYSjk1j2hm04bFTH6nV2UAQG5fXcu8qH9CAtjJ+Qkpxdzplhza7SRn8Nm+/yoVfT51urBInPXtmVGxlSjw=", TradeConstantEnum.PRIVATE_KEY.getValueStr());
-                System.out.println(json);
+
+            /* String json =    decryptStr("c3cNDk0uQ55Jw5Dm2jvSMwFPiCA9HqmF7j9E8PqLRM28dX0C3YaAof66lQD3R22+UuYdZ/Rdi3T1ndNTQMHIHV34MhzGBU65Z1izJXiQFZm9TYR+atun3p7xznl0dLGQ+Ma6lWju4qKEmKdFoYw/yXdvqHdE18AkACE7s9MoVcA=FPoLiYZYK6bv6eKz9trIvkt8lkUrW49nNUhPmAMnIFMWqz6ruUTXHFv1X5xi4XLSXeQt2//ugb+5j4IzZEcsYNAzKfYSjk1j2hm04bFTH6nV2UAQG5fXcu8qH9CAtjJ+Qkpxdzplhza7SRn8Nm+/yoVfT51urBInPXtmVGxlSjw=", TradeConstantEnum.PRIVATE_KEY.getValueStr());
+                System.out.println(json);*/
                 //生成 公钥 私钥
                  keyMap = initKey();
                 String publicKey =  getPublicKey(keyMap);
@@ -265,11 +264,11 @@ public class MalllifeRsaUtil {
                 System.out.println("解密后="+decryStr);
 
 
-                //全民财富
+            /* *//*   //全民财富
 
                 String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'1111','regiTime':'1442838385146'}";
                 System.out.println("加密前="+jsonStr);
-                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,MallLifeThirdConfig.THIRD_RSACODER.PUBLIC_KEY_STR);
+                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr, MallLifeThirdConfig.THIRD_RSACODER.PUBLIC_KEY_STR);
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr, MallLifeThirdConfig.THIRD_RSACODER.PRIVATE_KEY_STR);
                 System.out.println("解密后="+decryStr);
@@ -279,25 +278,25 @@ public class MalllifeRsaUtil {
                 String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
                   jsonStr="{'phone':'15821659415',";
                 System.out.println("加密前="+jsonStr);
-                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
+                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr, SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PRIVATEKEY"));
                 System.out.println("解密后="+decryStr);
-
+*/
 
           // String _PUBLICKEY="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCi4KQZzhKwZXrm3dSZwl34LSgHLc250Ch8BZDIQNr6FrOT/PxdQCotwrP3TfjTKSTRov+3A6GMztRvLWjpZK++MzNBmHUNObAfdSTGLbXZQwg0niXeef4C8ELINpF67uTcFNORcZ4az7AU4MgUNEYRD7JD83CP/tpPG+LFnLou9wIDAQAB";
 
-                String jsonStr="{'phone':'15821659415','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+               // String jsonStr="{'phone':'15821659415','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
 
                // publicKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyzPD5iGFNMfo2FIeuR7LSSlxfg2pE4LPiBZ3k\\n7RSmbJilNkUi5uePUiQ3MJZA2qvxjS9T845ONJbFzmoP5Ue7Yf4Hj1ZJdwVqeli3T6FPb36VVupy\\nsu+Xwq93yC5Ilqv2tslL6DpMMxUpB0T+OOplIYGVEiWyrbzR5n8pevB/wwIDAQAB\\n";
               //  privateKey="MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALLM8PmIYU0x+jYUh65HstJKXF+D\\nakTgs+IFneTtFKZsmKU2RSLm549SJDcwlkDaq/GNL1Pzjk40lsXOag/lR7th/gePVkl3BWp6WLdP\\noU9vfpVW6nKy75fCr3fILkiWq/a2yUvoOkwzFSkHRP446mUhgZUSJbKtvNHmfyl68H/DAgMBAAEC\\ngYAcIBrD1c0gfH0UZrRVGNgrNiFDsQNVZFdHdYS5zwVRjIGSc2/6poHETLJ/r/fiqcMkUwYf2Y8I\\nBEO3R9ntOC7JKqSSQeG+502ruhNExSa6IYpjUxH8rgXTKZq+38/ahvcfqlugyxAqedjcAx+pksdg\\nTWTQPqAcstF4Bwq819AqqQJBAOCZTGsem5zIA9jmoZrJKCRYb7GaKh9znd9A8uNhcSCW3fPoKukD\\nmJdua3zxlvcl6KWOx6KV/e7Aomj/YvEmF38CQQDLzHWl/jJiHCYyOGCkGEOyCu8NWtGaQEYW1m6U\\nhdyIGEJ32kV1fiG9ltnZmYnQIm0eU48+bvfx6aoG2r2PWlm9AkEAlwNcF3ZICR2PQKqppCp2vCFe\\nUFso0Wbqkm7YITymVNQ7vkCvgWbylXcf/K1v5RNvHsomvtH9ICgTy2dT/nKvPwJBAKGI/C+IHpNZ\\nUIU53o/yk6XJuNVTCRREocl0Sc37lGNjJzwsjCWmxkOqEB7D7lJFF0yUWtPXzTu4RAaO1vWLXdkC\\nQQC1XKpNrUFN33JscnEk3Q2JE3yb4QbxFJyLi2tXOECOCx4bgSqRVWLCNmbTvvPAM3VDJXS6yclh\\nct7gRpGfeC98\\n";
-                System.out.println("加密前="+jsonStr);
-                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,publicKey);
-                System.out.println("加密后="+encryStr);
-                String decryStr=MalllifeRsaUtil.decryptStr(encryStr,privateKey);
-               System.out.println("解密后="+decryStr);
+                //System.out.println("加密前="+jsonStr);
+                //String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,publicKey);
+               // System.out.println("加密后="+encryStr);
+               // String decryStr=MalllifeRsaUtil.decryptStr(encryStr,privateKey);
+               //System.out.println("解密后="+decryStr);
 
-*/
+
 //            	String mihou = "WUWxfG705iWOHpnKUbNwZ6xFkDQi+zkt6ZSIQ7d9wh9ZPo0nMjs56IlVsrlpt5QKQToXH0S7+yRYMHFKbZEzmwi7o5nGg2LMP2DyUax+/8VPyECrY0tZBXkyqDpwpAO25mfIroSXyiGb0Ic95kTDWchWCv1g3XuGD00oGutTBm8=";
 //            	String decryStr=MalllifeRsaUtil.decryptStr(mihou,"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAI0xRtzlnI582e7ydzcS6nwd+GgzOkW9rPmOCa1zAb/zy0nybjSh1NowEIzYigUimrZTd8xIXpncqbR9WPX7D32crrR2BqXIRu4Kez+YYvJKwl6Lzw2wz9gcgsNLwNTmBbXyQoKnC87AvkPd2omJbaMjxr0Dlrs+cSNq0nO8y7b/AgMBAAECgYBaPSpLOD0tHEK1YyYqft564TTIdCVEOYv6G3u37Y8qvYgqBNXGsb+2i42oVyUvTwSOjx474+0CbXPRNWPMIt+st1jvxdeXEv5nQXDIyhZutmcgc0JI7QbD/dvxivH2yHFQtlh/NOA7niAj27mm8K1P5+h5EEDCOrhWSIpNW5Nz4QJBAMbaocJodJ+betNKwGl9fTF7F7QOMbcbZ3rsHMd2szAoL5lT5LtzuyaNcN/jVQd9VZ6nB5uJAPj+8H8NXomwVJkCQQC1xJQumqEcm7E3BJ/szso0+mvgy1u3gN/WlBMt+zrKdiqvLMCgiDHtUCQrkBgyEVodeihgsjGmkmCuVIcseg9XAkAgqdb6RQgrE3H4dQXoDgnbb9mz5MT7y8+SnGgZx4Clf2RaLjKbK+Zo7cDFteTIpyjCN7ODM9zqCY5dgEewHDu5AkEAj7tdbajKg6O9s4LNr2Up0lC/Y2eLJAUde0FmFTMXHyfnwtOBkq9/w2de4q+z4kuEVdDWAviFeHFBUDj5FruCSwJBAITyP/nAVY7NOiiVrguKQSUuoxqUKZJhC9CmPaPJbwhcos7qfxkJwhG4beJoN7IiuNvZ3PaP+g8rOQZJ4EljG2g=");
 //                System.out.println("解密后1="+decryStr);
@@ -314,18 +313,18 @@ public class MalllifeRsaUtil {
                 System.err.println("decodeStr="+decodeStr);*/
 
 
-                long times=System.currentTimeMillis();
-                 String str="{'phone':'15821659415','msgStr':'【容易网】你的验证码为88888','sendType':'1'}";
+             /*   long times=System.currentTimeMillis();
+                 String str="{'phone':'15821659415','msgStr':'【容易网】你的验证码为88888','sendType':'1'}";*/
 
-                //php
+              /*  //php
                 String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
                 String channel="PHPPLATNTC";
                 String token="E8823AE54782C4YZJ914F24A5417E7F8";
                 //bbg
 
-               /* String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
+               *//* String pubKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
                 String channel="BUBUGAONTC";
-                String token="E7723AE90732C4ACC914F24A82293638";*/
+                String token="E7723AE90732C4ACC914F24A82293638";*//*
 
                 String  data=  MalllifeRsaUtil.encryptionStr(str,pubKey);
                 String strSign="data="+data+"&timeStamp="+times+"&channel="+channel+"&token="+token;
@@ -338,7 +337,7 @@ public class MalllifeRsaUtil {
                 System.out.println("{\"data\":\"" + data+"\",");
                 System.out.println("\"sign\":\""+md5Sign+"\",");
                 System.out.println("\"timeStamp\":\"" + times+"\",");
-                System.out.println("\"channel\":\"" + channel+"\"}");
+                System.out.println("\"channel\":\"" + channel+"\"}");*/
 
 
             } catch (Exception e) {

@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class RyMchAppVo implements Serializable{
 
     private static final long serialVersionUID = 2130814086344407716L;
+
+    private Integer id;
     private String ryMchId;
 
     private String ryMchName;
@@ -98,5 +100,13 @@ public class RyMchAppVo implements Serializable{
 
     public void setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

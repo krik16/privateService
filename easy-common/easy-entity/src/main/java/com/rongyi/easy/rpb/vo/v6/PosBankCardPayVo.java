@@ -19,8 +19,14 @@ public class PosBankCardPayVo implements Serializable {
     //金额（分）必填
     private Integer totalAmount;
 
-    //商品描述   必填
+    //订单标题   必填
     private String subject;
+
+    //订单描述
+    private String body;
+
+    //附加信息
+    private String attach;
 
     private Integer orderType;
 
@@ -29,6 +35,8 @@ public class PosBankCardPayVo implements Serializable {
     private String storeId;//门店号
 
     private String posNo;//设备号
+
+    private String extend;//扩展字段
 
     public String getOrderNo() {
         return orderNo;
@@ -84,6 +92,30 @@ public class PosBankCardPayVo implements Serializable {
 
     public void setPosNo(String posNo) {
         this.posNo = posNo;
+    }
+
+    public String getExtend() {
+        return extend;
+    }
+
+    public void setExtend(String extend) {
+        this.extend = extend;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override

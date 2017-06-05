@@ -17,6 +17,8 @@ import java.util.Map;
 import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 商品查询参数类
@@ -112,9 +114,17 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 	private Integer maxStock;
 	private Integer type;
 	private Integer getTogether;  //是否聚合  0:不聚合  1：聚合
-
 	private String commodityModelNo;
 
+	private List<String> commodityIds;
+
+	public List<String> getCommodityIds() {
+		return commodityIds;
+	}
+
+	public void setCommodityIds(List<String> commodityIds) {
+		this.commodityIds = commodityIds;
+	}
 	public Integer getGetTogether() {
 		return getTogether;
 	}
@@ -539,4 +549,13 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", commodityName='" + commodityName + '\'' +
 				'}';
 	}
+	public boolean hasNoCondition(){
+		if(StringUtils.isBlank(this.getMinPrice()) && StringUtils.isBlank(this.getMaxPrice())
+				&& StringUtils.isBlank(this.getCommodityCategory())
+				&& CollectionUtils.isEmpty(this.getBrandMids())){
+			return true;
+		}
+		return false;
+	}
+
 }
