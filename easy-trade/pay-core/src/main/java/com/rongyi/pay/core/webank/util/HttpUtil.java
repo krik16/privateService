@@ -9,6 +9,7 @@ import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
@@ -16,6 +17,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -457,8 +459,10 @@ public class HttpUtil {
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
 		// 将最大连接数增加到200
 		cm.setMaxTotal(200);
-		// 将每个路由基础的连接增加到20
+		// 将每个路由基础的连接增加到50
 		cm.setDefaultMaxPerRoute(50);
+		HttpHost localhost = new HttpHost("http://test.rongy.com");
+		cm.setMaxPerRoute(new HttpRoute(localhost), 80);
 
 		return HttpClients.custom().setConnectionManager(cm).setSSLSocketFactory(sslsf).build();
 
