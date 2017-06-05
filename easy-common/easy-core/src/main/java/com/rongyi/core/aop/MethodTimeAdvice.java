@@ -21,7 +21,7 @@ public class MethodTimeAdvice implements MethodInterceptor {
     /**
      * @see MethodInterceptor#invoke(MethodInvocation)
      */
-    public Object invoke(MethodInvocation invocation) {
+    public Object invoke(MethodInvocation invocation) throws Throwable {
         StopWatch clock = new StopWatch();
         clock.start(); //计时开始
         Object result = null;
@@ -30,11 +30,7 @@ public class MethodTimeAdvice implements MethodInterceptor {
         //方法名
         String methodName = invocation.getMethod().getName();
         methodName = className + "." + methodName;
-        try {
-            //返回结果
-            result = invocation.proceed();
-        } catch (Throwable e) {
-        }
+        result = invocation.proceed();
         clock.stop(); //计时结束
         if (logger.isInfoEnabled()) {
             // 减少打印 仅仅方法的时间大于指定毫秒
