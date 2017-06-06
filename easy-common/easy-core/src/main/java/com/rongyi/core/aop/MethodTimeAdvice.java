@@ -35,9 +35,9 @@ public class MethodTimeAdvice implements MethodInterceptor {
         if (logger.isInfoEnabled()) {
             // 减少打印 仅仅方法的时间大于指定毫秒
             if (DEFAULT_MIN_TIME < clock.getTime()) {
-                logger.info("<<<<<<< Method [ " + methodName + " ] consumed times = " + Util.getTimeString(clock.getTime()) + "（MS） >>>>>>>");
+                logger.info("<<<<<<< Method [ " + methodName + " ] consumed times = " + Util.getTimeString(clock.getTime()) + " >>>>>>>");
             } else {
-                logger.debug("<<<<<<< Method [ " + methodName + " ] consumed times = " + Util.getTimeString(clock.getTime()) + "（MS） >>>>>>>");
+                logger.debug("<<<<<<< Method [ " + methodName + " ] consumed times = " + Util.getTimeString(clock.getTime()) + " >>>>>>>");
             }
         }
         return result;
