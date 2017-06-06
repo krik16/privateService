@@ -38,20 +38,14 @@ public class StatementBizz implements InitializingBean {
 	/**
 	 * @Description 接受对账单文件流, 并写入到服务器
 	 */
-	public void writeStatementFile(JSONObject paramMap) {
+	public void writeStatementFile(JSONObject paramMap) throws Exception{
 		// 调用微众获取对账单请求
 		String url = MessageFormat.format(propertyConfigurer.getProperty("WEBANK_STATEMENT_URL"),
 				paramMap.get("app_id"), paramMap.get("token"), paramMap.get("file_id"), "1.0.0");
 		String DateStr = DateUtils.formatDate(new Date(), "yyyyMMdd");
 		String fileName = propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-" + DateStr + ".txt";
-		try {
-			InputStream is = HttpUtil.httpGet(url, WebankConfigure.getInstance());
-
-			this.writeFile(is, fileName);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
+		InputStream is = HttpUtil.httpGet(url, WebankConfigure.getInstance());
+		this.writeFile(is, fileName);
 		SendDto sendDto = new SendDto();
 		Set<String> TO_ADRS_SET = new HashSet<>();
 		String sendUser = propertyConfigurer.getProperty("WEBANK_STATEMENT_EMAILSENDUSER");
@@ -117,5 +111,32 @@ public class StatementBizz implements InitializingBean {
 		String password = propertyConfigurer.getProperty("ftp.password");
 		String remotePath = propertyConfigurer.getProperty("ftp.path");
 		ftpHelper = new FTPHelper(url, Integer.parseInt(port), username, password, remotePath);
+	}
+
+	public void synStatementFile(final JSONObject data) {
+		new Thread() {
+			public void run() {
+				boolean flag = true;
+				try {
+					writeStatementFile(data);
+					flag = false;
+					return;
+				} catch (Exception e) {
+					e.printStackTrace();
+					for(int i=0 ;i<10;i++){
+						try {
+							if(flag){
+								Thread.sleep(5000);
+								writeStatementFile(data);
+								flag = false;
+								return;
+							}else return;
+						} catch (Exception e1) {
+						}
+					}
+				}
+			}
+		}.start();
+
 	}
 }
