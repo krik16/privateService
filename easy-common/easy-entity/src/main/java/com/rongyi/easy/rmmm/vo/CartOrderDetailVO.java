@@ -6,26 +6,15 @@ import java.util.List;
 
 public class CartOrderDetailVO extends PageVO implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private List<ParentOrderVO> orderList;//中订单详情列表
-
 	private BigDecimal rebateDiscount = BigDecimal.valueOf(0.0);// 抵扣券金额
-
 	private String rebateName;// 抵扣券名称
-
 	private BigDecimal scoreDiscount = BigDecimal.valueOf(0.0);// 积分抵扣金额
-
 	private Integer score = 0;// 使用积分
-
 	private BigDecimal realAmount  = BigDecimal.valueOf(0.0);// 总价
-
 	private BigDecimal payAmount = BigDecimal.valueOf(0.0);// 应付价
-	
-	
 	private String orderNum;// 订单编号
 	private String consignee;// 收件人姓名
 	private String phone;// 收件人电话
