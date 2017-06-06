@@ -9,66 +9,38 @@ import java.util.Date;
 
 public class OrderCartFormEntity implements Serializable {
     private Integer id;
-
     private String orderNo;//订单号
-
     private String rebateCode;//抵扣券code
-
     private BigDecimal rebateDiscount;//抵扣金额
-
     private Integer rebateSource;//促销券来源 0：平台 1：商家
-
     private Integer rebateType;//促销券类型 0：满减 1：立减
-
     private Integer rebateDiscountType;//促销券补贴类型 0：平台补贴 1：商家补贴
-
     private BigDecimal couponRequirement;//抵扣满金额
-
     private String discountInfo;//积分
-
     private BigDecimal scoreDiscount;//积分抵扣金额
-
     private BigDecimal realAmount;//总价
-
     private BigDecimal discountAmount;//原价-卖家优惠
-
     private BigDecimal rebateAmount;//discount_amount-红包抵扣券
-
     private BigDecimal scoreAmount;//rebate_amount - 积分
-
     private BigDecimal payAmount;//实付价
-
     private Long statusHoldMs;//下一次状态时间
-
     private Date nextStatusTime;//下一次状态时间
-
     private String buyerId;//买家id
-
     private String paymentIdList;//支付id
-
     private Date createAt;//订单生成时间
-
     private Date updateAt;//订单更新时间
-
     private Byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
-
     private BigDecimal expressFee;
-
     private Byte isAlert;//是否已发送支付提醒 (0否 1是)
-
     private Byte payChannel;//1支付宝网页  3支付宝app  5微信
-
     private String userPhone;//用户手机
-
     private OrderEventEntity orderEvent;
 
-    public OrderEventEntity getOrderEvent()
-    {
+    public OrderEventEntity getOrderEvent() {
         return orderEvent;
     }
 
-    public void setOrderEvent(OrderEventEntity orderEvent)
-    {
+    public void setOrderEvent(OrderEventEntity orderEvent) {
         this.orderEvent = orderEvent;
     }
 
@@ -232,53 +204,43 @@ public class OrderCartFormEntity implements Serializable {
         this.expressFee = expressFee;
     }
 
-    public BigDecimal getDiscountAmount()
-    {
+    public BigDecimal getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(BigDecimal discountAmount)
-    {
+    public void setDiscountAmount(BigDecimal discountAmount) {
         this.discountAmount = discountAmount;
     }
 
-    public BigDecimal getRebateAmount()
-    {
+    public BigDecimal getRebateAmount() {
         return rebateAmount;
     }
 
-    public void setRebateAmount(BigDecimal rebateAmount)
-    {
+    public void setRebateAmount(BigDecimal rebateAmount) {
         this.rebateAmount = rebateAmount;
     }
 
-    public BigDecimal getScoreAmount()
-    {
+    public BigDecimal getScoreAmount() {
         return scoreAmount;
     }
 
-    public void setScoreAmount(BigDecimal scoreAmount)
-    {
+    public void setScoreAmount(BigDecimal scoreAmount) {
         this.scoreAmount = scoreAmount;
     }
 
-    public Byte getPayChannel()
-    {
+    public Byte getPayChannel() {
         return payChannel;
     }
 
-    public void setPayChannel(Byte payChannel)
-    {
+    public void setPayChannel(Byte payChannel) {
         this.payChannel = payChannel;
     }
 
-    public String getUserPhone()
-    {
+    public String getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(String userPhone)
-    {
+    public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
 

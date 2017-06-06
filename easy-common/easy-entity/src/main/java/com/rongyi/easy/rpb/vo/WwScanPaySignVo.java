@@ -41,6 +41,11 @@ public class WwScanPaySignVo extends BaseBizVo implements Serializable {
     //备注
     private String memo ;
 
+    private String storeId;//门店号
+
+    private String posNo;//设备号
+
+    private String mchInfoId;
 
     public String getMchId() {
         return mchId;
@@ -122,9 +127,32 @@ public class WwScanPaySignVo extends BaseBizVo implements Serializable {
         this.memo = memo;
     }
 
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
 }

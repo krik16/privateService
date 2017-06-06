@@ -11,12 +11,12 @@ import java.util.regex.Pattern;
 
 /**
  * 签名公共方法
- * 
+ *
  * @author xiaobo
  *
  */
 public class Util {
-	
+
 	/*public static void main(String[] args) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("channel", "013");
@@ -82,14 +82,14 @@ public class Util {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 判断时间是否超过2秒
 	 * @param time 请求时间
 	 * @return
 	 */
 	public static boolean timeValidate(long time) {
-		try {			
+		try {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(new Date(time));
 			calendar.add(Calendar.SECOND, Const.REQUEST_TIME_OUT);
@@ -105,7 +105,7 @@ public class Util {
 
 	/**
 	 * 判断字符串是否为空
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param str
 	 * @return true：空 false：非空
@@ -116,9 +116,9 @@ public class Util {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public class Util {
 
 	/**
 	 * 判断字符串是否不为空
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param str
 	 * @return true：非空 false：空
@@ -142,7 +142,7 @@ public class Util {
 
 	/**
 	 * 判断Object对象是否为空
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param obj
 	 * @return true：空 false：非空
@@ -156,7 +156,7 @@ public class Util {
 
 	/**
 	 * 判断Object对象是否不为空
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param obj
 	 * @return true：非空 false：空
@@ -167,7 +167,7 @@ public class Util {
 
 	/**
 	 * 判断List对象是否为空
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param str
 	 * @return true：空 false：非空
@@ -181,7 +181,7 @@ public class Util {
 
 	/**
 	 * 判断List对象是否不为空
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param str
 	 * @return true：非空 false：空
@@ -192,7 +192,7 @@ public class Util {
 
 	/**
 	 * 判断是否是（纯）数字字符串
-	 * 
+	 *
 	 * @author wangjianhua
 	 * @param str
 	 * @return
@@ -366,4 +366,43 @@ public class Util {
 	public static String joinString(String str1, Object str2) {
 		return "_" + str1 + "_" + str2;
 	}
+
+    /**
+     * 获取订单来源对应名称
+     *
+     * @param source
+     * @param weixinAppId
+     * @return
+     */
+    public static String getOrderSourceName(Integer source, String weixinAppId) {
+        String sourceName = "其他";
+        switch (source) {
+            case 0:
+                if (StringUtils.isNotBlank(weixinAppId)) {
+                    sourceName = "微商城";
+                } else {
+                    sourceName = "容易逛";
+                }
+                break;
+            case 1:
+                sourceName = "容易逛";
+                break;
+            case 2:
+                sourceName = "终端机";
+                break;
+            case 3:
+                sourceName = "其他";
+                break;
+            case 4:
+                sourceName = "微商城";
+                break;
+            case 5:
+                sourceName = "微信小程序";
+                break;
+            default:
+                break;
+
+        }
+        return sourceName;
+    }
 }
