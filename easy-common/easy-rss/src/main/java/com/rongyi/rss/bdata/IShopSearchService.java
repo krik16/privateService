@@ -23,6 +23,10 @@ public interface IShopSearchService {
 
     ResponseVO queryShop(ShopSearchParam searchParam);
 
+    ResponseVO queryShopVO(ShopSearchParam searchParam);
+
+    int queryShopCount(ShopSearchParam searchParam);
+
     ResponseVO queryShopExcludeSpecified(ShopSearchParam specifiedParam, List<Shop> needExcludeIds);
 
 
