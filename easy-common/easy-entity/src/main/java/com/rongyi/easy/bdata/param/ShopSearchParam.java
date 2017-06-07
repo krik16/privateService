@@ -18,7 +18,7 @@ public class ShopSearchParam extends BaseParam {
     private List<String> shopNatures; //店铺性质 0商场商铺  1商场专柜  2街边店 3特卖店  4连锁总部
     private List<Integer> shopTypes;  //店铺类型   0普通店   1免税店  2专柜  3折扣  4旗舰 5加盟店
     private List<Integer> validList;   //店铺状态   0正常  1隐藏  2删除 3待处理
-    private Integer businessStatus; //营业状态  0正常营业  1即将营业  2暂停营业  3停止营业   4待处理
+    private Integer businessStatus; //营业状态  0正常营业  1即将营业  2暂停营业  3停止营业 4待处理
     private List<String> parentIds;
 
     //商场信息
