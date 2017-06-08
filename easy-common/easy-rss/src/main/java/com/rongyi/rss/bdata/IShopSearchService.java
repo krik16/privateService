@@ -15,11 +15,17 @@ import java.util.List;
  */
 public interface IShopSearchService {
 
+    Shop getShopById(String id);
+
     List<Shop> getShopByNature(ShopSearchParam searchParam, boolean includeItsChildren);
 
     List<Shop> getChildShop(ShopSearchParam searchParam);
 
-    List<Shop> queryShop(ShopSearchParam searchParam);
+    ResponseVO queryShop(ShopSearchParam searchParam);
+
+    ResponseVO queryShopVO(ShopSearchParam searchParam);
+
+    int queryShopCount(ShopSearchParam searchParam);
 
     ResponseVO queryShopExcludeSpecified(ShopSearchParam specifiedParam, List<Shop> needExcludeIds);
 
