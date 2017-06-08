@@ -22,6 +22,8 @@ public class PaymentOrderForCmsVo implements Serializable {
     private Integer status;//
     private String posNo;//收款设备号
     private String memo ;//备注
+    private Integer source;//订单来源 3 pos订单 4 开发平台订单
+    private String ryMchId;//商家rymchId
 
     public String getCashName() {
         return cashName;
@@ -125,6 +127,22 @@ public class PaymentOrderForCmsVo implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public Integer getSource() {
+        return source;
+    }
+
+    public void setSource(Integer source) {
+        this.source = source;
+    }
+
+    public String getRyMchId() {
+        return ryMchId;
+    }
+
+    public void setRyMchId(String ryMchId) {
+        this.ryMchId = ryMchId;
     }
 
     @Override
