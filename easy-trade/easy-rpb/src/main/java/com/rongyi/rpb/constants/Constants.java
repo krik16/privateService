@@ -35,9 +35,9 @@ public interface Constants {
 	}
 
 	interface PAYMENT_STATUS {
-		int STAUS0 = 0;// 待打款
+		int STAUS0 = 0;// 待打款 (撤销记录：0发起撤销)
 		int STAUS1 = 1;// 款已打
-		int STAUS2 = 2;// 款已到
+		int STAUS2 = 2;// 款已到 （撤销记录：2撤销成功）
 	}
 
 	interface PAYMENT_STATUS_STR {
@@ -56,6 +56,7 @@ public interface Constants {
 		int TRADE_TYPE6 = 6;//重复支付退款
 		int TRADE_TYPE7 = 7;//对账单付款
 		int TRADE_TYPE8 = 8;//发红包给用户
+		int TRADE_TYPE9 = 9;//撤销
 	}
 
 	interface PAYMENT_TRADE_TYPE_STR {
