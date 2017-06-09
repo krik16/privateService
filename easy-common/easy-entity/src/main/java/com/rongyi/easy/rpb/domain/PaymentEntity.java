@@ -139,6 +139,9 @@ public class PaymentEntity implements Serializable {
 
 	private Integer payScene;
 
+	//标记撤销是否产生退款 0否 1是
+	private Integer isRefund;
+
 
 	/**
 	 * 主键id
@@ -495,6 +498,14 @@ public class PaymentEntity implements Serializable {
 
 	public void setAttach(String attach) {
 		this.attach = attach;
+	}
+
+	public Integer getIsRefund() {
+		return isRefund;
+	}
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
 	}
 
 	@Override
