@@ -45,7 +45,7 @@
 		id, order_no,order_type,order_price,pay_no,pay_amount,
 		status,trade_type,create_at,
 		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id,
-		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel ,pay_scene,tianyi_pay_id,attach
+		ali_seller_id,wechat_mch_id,ry_mch_id,ry_app_id,source,org_channel ,pay_scene,tianyi_pay_id,attach,is_refund
 	</sql>
 
     <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntity"
@@ -137,6 +137,9 @@
             <if test="attach != null">
                 attach ,
             </if>
+            <if test="isRefund != null">
+                is_refund ,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="payNo != null">
@@ -223,7 +226,9 @@
             <if test="attach != null">
                 #{attach,jdbcType=VARCHAR} ,
             </if>
-
+            <if test="isRefund != null">
+                #{isRefund,jdbcType=TINYINT} ,
+            </if>
         </trim>
     </insert>
 
@@ -310,6 +315,9 @@
             </if>
             <if test="attach != null">
                 attach = #{attach,jdbcType=VARCHAR} ,
+            </if>
+            <if test="isRefund != null">
+                is_refund = #{isRefund,jdbcType=TINYINT} ,
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
