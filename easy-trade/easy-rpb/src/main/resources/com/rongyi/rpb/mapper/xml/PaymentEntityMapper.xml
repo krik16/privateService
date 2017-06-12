@@ -696,7 +696,7 @@
             <if test="ryMchId != null and ryMchId != ''">
                 and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
             </if>
-            <if test="tradeType != null and tradeType != -1">
+            <!--<if test="tradeType != null and tradeType != -1">
                 and trade_type = #{tradeType,jdbcType=INTEGER}
             </if>
             <if test="tradeType == null || tradeType == '' || tradeType== -1">
@@ -707,6 +707,27 @@
             </if>
             <if test="status == null || status == '' || status == -1">
                 and status = 2
+            </if>-->
+            <if test="tradeType == 1 and tradeType == 0">
+                and trade_type = #{tradeType,jdbcType=INTEGER}
+                <if test="status != null and status != -1">
+                    and status = #{status,jdbcType=INTEGER}
+                </if>
+                <if test="status == null || status == '' || status == -1">
+                    and status = 2
+                </if>
+            </if>
+            <if test="tradeType == 9">
+                and trade_type = #{tradeType,jdbcType=INTEGER}
+                and is_refund = 1
+            </if>
+            <if test="tradeType == null || tradeType == '' || tradeType== -1">
+                <if test="status != null and status != -1">
+                    and trade_type in (0,1) and status = #{status,jdbcType=INTEGER}
+                </if>
+                <if test="status == null || status == '' || status == -1">
+                    and ((trade_type in (0,1) and status = 2) or (trade_type =9 and is_refund = 1))
+                </if>
             </if>
             <if test="payScene != null">
                 and pay_scene = #{payScene}
@@ -734,12 +755,12 @@
             and pay_channel = #{payChannel,jdbcType=INTEGER}
         </if>
         <if test="payChannel == null || payChannel == -1 ">
-                and pay_channel in (0,1,2,3)
+            and pay_channel in (0,1,2,3)
         </if>
         <if test="payerReconflag != null and payerReconflag != -1">
             and payer_recon_flag = #{payerReconflag,jdbcType=INTEGER}
         </if>
-        <if test="tradeType != null and tradeType != -1">
+        <!--<if test="tradeType != null and tradeType != -1">
             and trade_type = #{tradeType,jdbcType=INTEGER}
         </if>
         <if test="tradeType == null || tradeType == '' || tradeType== -1">
@@ -750,6 +771,27 @@
         </if>
         <if test="status == null || status == '' || status == -1">
             and status = 2
+        </if>-->
+        <if test="tradeType == 1 and tradeType == 0">
+            and trade_type = #{tradeType,jdbcType=INTEGER}
+            <if test="status != null and status != -1">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="status == null || status == '' || status == -1">
+                and status = 2
+            </if>
+        </if>
+        <if test="tradeType == 9">
+            and trade_type = #{tradeType,jdbcType=INTEGER}
+            and is_refund = 1
+        </if>
+        <if test="tradeType == null || tradeType == '' || tradeType== -1">
+            <if test="status != null and status != -1">
+                and trade_type in (0,1) and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="status == null || status == '' || status == -1">
+                and ((trade_type in (0,1) and status = 2) or (trade_type =9 and is_refund = 1))
+            </if>
         </if>
         <if test="ryMchId != null and ryMchId != ''">
             and ry_mch_id = #{ryMchId,jdbcType=VARCHAR}
