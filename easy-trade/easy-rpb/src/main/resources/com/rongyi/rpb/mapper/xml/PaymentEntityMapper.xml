@@ -474,6 +474,28 @@
 
     </select>
 
+    <select id="selectByOrderNumAndTradeTypeAndStatus" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from payment_order
+        where order_no = #{orderNum,jdbcType=VARCHAR}
+        <if test="tradeTypes != null and tradeTypes != ''">
+            and trade_type in
+            <foreach collection="tradeTypes" item="tradeType" open="(" close=")" separator=",">
+                #{tradeType,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="status != null">
+            and status =#{status,jdbcType=INTEGER}
+        </if>
+        <if test="payChannel != null">
+            and pay_channel =#{payChannel,jdbcType=INTEGER}
+        </if>
+        limit 0,1
+
+    </select>
+
     <delete id="deleteByPayNo" parameterType="java.lang.String">
 		delete from
 		payment_order where pay_no = #{payNo,jdbcType=VARCHAR}

@@ -266,6 +266,9 @@ public class WebankPayUnit {
             ParamUnit.checkWebankWechatPunchCardReverse(reqData);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardReverse(reqData, configure);
+            if (ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())) {
+                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREVERSE_FAIL);
+            }
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
@@ -435,10 +438,15 @@ public class WebankPayUnit {
             ParamUnit.checkWebankAlipayReverseTrade(reqData, configure);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.alipayReverseTrade(reqData, configure);
+            if (!(ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getCode()) && ConstantEnum.WA_REVERSE_SUCCESS.getCodeStr().equals(resData.getRetCode()))) {
+                throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREVERSE_FAIL);
+            }
         } catch (WebankException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREVERSE_FAIL);
+
         }
         return resData;
     }

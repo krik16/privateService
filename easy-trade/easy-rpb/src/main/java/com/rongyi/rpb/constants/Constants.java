@@ -169,4 +169,9 @@ public interface Constants {
 		String SUCCESS = "SUCCESS";
 		String FAIL = "FAIL";
 	}
+
+	interface IS_REFUND{
+		int no = 0;
+		int yes = 1;
+	}
 }
