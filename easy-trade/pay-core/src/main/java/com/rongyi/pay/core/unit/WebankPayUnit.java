@@ -266,7 +266,7 @@ public class WebankPayUnit {
             ParamUnit.checkWebankWechatPunchCardReverse(reqData);
             WebankPayService webankPayService = new WebankPayService();
             resData = webankPayService.wechatPunchCardReverse(reqData, configure);
-            if (ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())) {
+            if (!ConstantEnum.WEBANK_CODE_0.getCodeStr().equals(resData.getResult().getErrno())) {
                 throw new WebankException(ConstantEnum.EXCEPTION_WEBANK_PUNCHCARDREVERSE_FAIL);
             }
         } catch (WebankException | ParamNullException e) {
