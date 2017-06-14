@@ -155,6 +155,14 @@ public class ReverseBizz {
         //初始化退款入住商户信息
         RyMchVo ryMchVo = initRefundRyMchVo(oldPaymentEntity);
 
+        //查询订单是否已退款，已退款不可再撤销
+        PaymentEntity refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
+                payType);
+
+        if (refundPaymentEntity != null) {
+            throw new TradePayException(ConstantEnum.EXCEPTION_REVERSE_ISREFUND.getCodeStr(),ConstantEnum.EXCEPTION_REVERSE_ISREFUND.getValueStr());
+        }
+
         //查找订单撤销记录
         PaymentEntity oldReversePaymentEntity = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE9, null,
                 payType);
