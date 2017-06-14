@@ -28,6 +28,16 @@ public class MallVO implements Serializable{
 	private String icon;//商场ICOn：图片logoURl
 	private String merlog_pic ;//商家后台Logo
 	private String mall_level;//商场级别 A、B、C、S、SS
+	private boolean hasBindAccount;   //是否已绑定账户
+
+	public boolean isHasBindAccount() {
+		return hasBindAccount;
+	}
+
+	public void setHasBindAccount(boolean hasBindAccount) {
+		this.hasBindAccount = hasBindAccount;
+	}
+
 	public String getIcon() {
 		return icon;
 	}

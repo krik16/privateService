@@ -332,6 +332,20 @@ public class StringUtil {
 
 		return prestr;
 	}
+
+	/**
+	 * 判断给定字符串的长度是否合适
+	 * @param original 原始字符
+	 * @param minLength 最短长度
+	 * @param maxLength 最长长度
+	 * @return fit
+	 */
+	public static boolean lengthIsSuitable(String original, int minLength, int maxLength){
+		if (original == null){
+			return false;
+		}
+		return original.trim().length() >= minLength && original.trim().length() <= maxLength;
+	}
 	
 	/**
 	 * 随机产生数字加字母的组合

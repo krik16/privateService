@@ -14,7 +14,7 @@ public interface ITotalCommodityService {
 
 	public TotalCommodity  findByTotalCommodityId(String id);
 
-	public void updateTotalCommodity(TotalCommodity toalCommodity);
+	public boolean updateTotalCommodity(TotalCommodity toalCommodity);
 
 	public boolean updateOrDeleteCommodity(List<ObjectId> ids,Integer type,String reason,Integer userId);
 
@@ -51,5 +51,9 @@ public interface ITotalCommodityService {
 	public Long searchCommodityByCodeAndLocationId(String code,String locationId);
 
 	public Map<String,Object> searchCommodityForManagement(Map<String,Object> paramMap,int pageSize);
+
+	public Map<String,Object> searchCommodityCountForManagement(Map<String,Object> paramMap);
+
+	public Map<String,Object> searchTotalCommodityForWechat(Map<String,Object> paramMap,int pageSize);
 
 }

@@ -22,7 +22,16 @@ public class CategoryHaiXinEntity implements Serializable {
 	private Integer level;   //级别
 	private Date createAt;   //创建时间
 	private Date updateAt;   //修改时间
-	
+	private String shopMid;
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}

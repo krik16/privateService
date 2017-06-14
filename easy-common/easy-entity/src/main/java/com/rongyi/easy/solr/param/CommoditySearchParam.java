@@ -17,6 +17,8 @@ import java.util.Map;
 import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import com.rongyi.easy.mcmc.constant.CommodityConstants;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 商品查询参数类
@@ -112,7 +114,17 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 	private Integer maxStock;
 	private Integer type;
 	private Integer getTogether;  //是否聚合  0:不聚合  1：聚合
+	private String commodityModelNo;
 
+	private List<String> commodityIds;
+
+	public List<String> getCommodityIds() {
+		return commodityIds;
+	}
+
+	public void setCommodityIds(List<String> commodityIds) {
+		this.commodityIds = commodityIds;
+	}
 	public Integer getGetTogether() {
 		return getTogether;
 	}
@@ -132,15 +144,6 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 
 	private String serviceId;//微信服务号id
 
-	private Integer offset;
-
-	public Integer getOffset() {
-		return offset;
-	}
-
-	public void setOffset(Integer offset) {
-		this.offset = offset;
-	}
 
 	private String commodityName;//商品名称
 
@@ -382,6 +385,15 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 		this.zoneId = zoneId;
 	}
 
+	@NeedCheck(getFieldName = "commodityModelNo")
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
 	@NeedCheck(getFieldName = "commodityCode")
 	public String getCommodityCode() {
 		return commodityCode;
@@ -496,11 +508,12 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 	@Override
 	public String toString() {
 		return "CommoditySearchParam{" +
-				"brandId='" + brandId + '\'' +
-				", id='" + id + '\'' +
+				"id='" + id + '\'' +
+				", ids=" + ids +
 				", brandMids=" + brandMids +
 				", keyword='" + keyword + '\'' +
 				", shopId='" + shopId + '\'' +
+				", brandId='" + brandId + '\'' +
 				", mallId='" + mallId + '\'' +
 				", commodityCategory='" + commodityCategory + '\'' +
 				", sortBy='" + sortBy + '\'' +
@@ -524,13 +537,25 @@ public class CommoditySearchParam extends MalllifeBaseParam implements Serializa
 				", shopList=" + shopList +
 				", categoryList=" + categoryList +
 				", couponId='" + couponId + '\'' +
+				", saleIds=" + saleIds +
 				", commodityMaxMinValues=" + commodityMaxMinValues +
 				", galleryPosition=" + galleryPosition +
-				", serviceId=" + serviceId +
+				", minStock=" + minStock +
+				", maxStock=" + maxStock +
 				", type=" + type +
-				", offset=" + offset +
 				", getTogether=" + getTogether +
-				"} " + super.toString();
+				", commodityModelNo='" + commodityModelNo + '\'' +
+				", serviceId='" + serviceId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				'}';
+	}
+	public boolean hasNoCondition(){
+		if(StringUtils.isBlank(this.getMinPrice()) && StringUtils.isBlank(this.getMaxPrice())
+				&& StringUtils.isBlank(this.getCommodityCategory())
+				&& CollectionUtils.isEmpty(this.getBrandMids())){
+			return true;
+		}
+		return false;
 	}
 
 }

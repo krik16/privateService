@@ -64,6 +64,7 @@ public class SalerParentOrderVO implements Serializable {
 	private boolean ifOnDisplayExpress = false;//true显示查看物流按钮 false不显示
 	private String newContextByKuaidi100;// 当前最新推送的一条物流信息
 	private String newTimeByKuaidi100;// 当前最新推送的一条物流信息的时间
+	private Integer isFreeze ;///< 是否冻结
 
 	public boolean isIfSupportByKuaidi100() {
 		return ifSupportByKuaidi100;
@@ -436,6 +437,14 @@ public class SalerParentOrderVO implements Serializable {
 		this.orderChannel = orderChannel;
 	}
 
+	public Integer getIsFreeze() {
+		return isFreeze;
+	}
+
+	public void setIsFreeze(Integer isFreeze) {
+		this.isFreeze = isFreeze;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerParentOrderVO [status=" + status + ", totalPrice="
@@ -467,6 +476,7 @@ public class SalerParentOrderVO implements Serializable {
 				+ ", totalPriceToSeller=" + totalPriceToSeller
 				+ ", orderSourceForWeiXin=" + orderSourceForWeiXin
 				+ ", orderChannel=" + orderChannel
+				+ ", isFreeze=" + isFreeze
 				+"]";
 	}
 

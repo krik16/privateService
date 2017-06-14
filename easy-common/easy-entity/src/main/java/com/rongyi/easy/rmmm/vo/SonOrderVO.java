@@ -9,53 +9,35 @@ import java.util.List;
 public class SonOrderVO implements Serializable{
 
 	private String num;// 下单数量
-
 	private BigDecimal integralDiscount;//积分抵扣
 	private BigDecimal commodityAmount;//子订单商品总价
 	private BigDecimal voucherDiscount;//平台促销券抵扣
 	private BigDecimal hbDiscount;//红包抵扣
 	private BigDecimal commodityDiscount;//单个订单明细折扣
-
 	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
-
 	private String commodityPic;// 商品图片
-
 	private String commodityCurrentPrice = "0";// 商品现价
-
 	private String commodityOriginalPrice = "0";// 商品原价
-	
 	private BigDecimal realAmount = BigDecimal.valueOf(0.0);// 子订单实际价格
-
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
-
 	private String refundStatus;// 退款状态 0：申请退款 1：退款中 2：拒绝退款 3：已退款 4：待买家发货 5：带卖家收货 6：退款关闭
-
 	private String commodityId;// 商品id
 	private String commodityNo;// 商品编号
-
 	private String commodityName;// 商品名称
-
 	private String sonOrderId;// 子订单id
 	private String sonOrderNo;// 子订单号
-
 	private String applicationId;// 退款或维权id
-
 	private String appealTimes;// 维权次数
-
 	private String refundTimes;// 退款次数
-
 	private String couponCode;// 卡券码
-
 	private String discount = "0";// 抵扣金额
-
 	private String description;// 全场红包/店铺红包
 	private String liveName;//直播名
 	private boolean ifOnDisplayAfterSales = false;//是否显示申请售后按钮,true显示 false不显示
 	private Integer couponDiscountType;//红包补贴类型  0：平台补贴 1：商家补贴
 	private Integer rebateDiscountType;//抵扣券补贴类型  0：平台补贴 1：商家补贴
 	private BigDecimal discountAmount;//原价-卖家优惠
-	// 卖家满减金额
-	private BigDecimal reductionFee;
+	private BigDecimal reductionFee;///< 卖家满减金额
 	private Integer complaintStatus;// 维权状态 1：申诉中、2：申诉成功、3：申诉失败、4：申诉关闭
 	private Integer refundType;// 退款类型 1：仅退款'，3：快递退货退款'，7：到店退货退款'
 	private String refundNo;// 退款单号

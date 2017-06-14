@@ -22,6 +22,10 @@ public class UserScanPaySignParam{
 
     private String aliBuyerId;//支付宝买家id
 
+    private String extend;//扩展字段（多个字段含义用"__"分隔开）
+
+    private String memo ; //备注
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -68,6 +72,22 @@ public class UserScanPaySignParam{
 
     public void setAliBuyerId(String aliBuyerId) {
         this.aliBuyerId = aliBuyerId;
+    }
+
+    public String getExtend() {
+        return extend;
+    }
+
+    public void setExtend(String extend) {
+        this.extend = extend;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     @Override

@@ -265,4 +265,39 @@ public class HttpsConnection {
 
 		return charset;
 	}
+	
+	public static BufferedReader doGetBufferedReader(String url) throws Exception {
+		return doGetBufferedReader(url, null, null, 5000, 5000);
+	}
+	public static BufferedReader doGetBufferedReader(String url, String ctype, String authorizationType, int connectTimeout, int readTimeout) throws Exception {
+		BufferedReader br = null;
+		HttpsURLConnection conn = null;
+		InputStream is = null;
+		try {
+			SSLContext ctx = SSLContext.getInstance("SSL", "SunJSSE");
+			ctx.init(new KeyManager[0], new TrustManager[] { new DefaultTrustManager() }, new SecureRandom());
+			SSLContext.setDefault(ctx);
+            
+			conn = getConnection(new URL(null, url, new Handler()), METHOD_GET, ctype, authorizationType);
+			
+			conn.setRequestProperty("Content-Type","application/octet-stream");
+			
+            conn.connect();
+			String charset = getResponseCharset(conn.getContentType());
+			
+			is = conn.getInputStream();
+			br =  new BufferedReader(new InputStreamReader(is, charset));
+		} catch (Exception e) {
+				log.error("doGet REQUEST_RESPONSE_ERROR, URL = " + url, e);
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+			}
+			if (is != null) {
+				is.close();
+			}
+		}
+		return br;
+	}
+	
 }

@@ -1,7 +1,6 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -10,17 +9,10 @@ import com.rongyi.easy.mcmc.constant.CommodityConstants;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.mcmc.TotalCommodity;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
-import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
-import com.rongyi.easy.mcmc.param.CommodityParam;
-import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
-import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
-import com.rongyi.easy.roa.vo.ShopVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
 
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import org.bson.types.ObjectId;
 
 
@@ -993,9 +985,11 @@ public class CommodityVO  implements  Serializable, Cloneable {
 
 	}
 	public CommodityVO(Commodity commodity){
+		this.merchantId = commodity.getMerchantId();
 		this.commodityType = commodity.getType();//渠道  0商家，1买手
 		this.shopId = commodity.getShopId();
 		this.shopMid = commodity.getShopMid();//店铺mongoId
+		this.shopName = commodity.getShopName();
 		this.create_by = commodity.getCreate_by();//创建人
 		this.liveId = commodity.getLiveId();//直播id
 		this.liveStartTime = commodity.getLiveStartTime();//直播开始时间
@@ -1008,7 +1002,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		this.brandName=commodity.getBrandName();
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
-		this.isSpot = commodity.isSpot() ? 1 : 0;
+		this.isSpot = commodity.getIsSpot() ? 1 : 0;
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try {
@@ -1147,7 +1141,6 @@ public class CommodityVO  implements  Serializable, Cloneable {
 				", commodityCategory2='" + commodityCategory2 + '\'' +
 				", commodityCategoryName1='" + commodityCategoryName1 + '\'' +
 				", commodityCategoryName2='" + commodityCategoryName2 + '\'' +
-				", commodityDescription='" + commodityDescription + '\'' +
 				", commodityPostage='" + commodityPostage + '\'' +
 				", commodityStock='" + commodityStock + '\'' +
 				", commoditySold='" + commoditySold + '\'' +
@@ -1381,6 +1374,7 @@ public class CommodityVO  implements  Serializable, Cloneable {
 		vo.setServiceDescription(commodity.getServiceDescription());
 		vo.setServiceDescriptionRemark(commodity.getServiceDescriptionRemark());
 		vo.setGoodsParam(commodity.getGoodsParam());
+		vo.setIsRefund(commodity.getIsRefund());//是否可退货
 		return vo;
 	}
 

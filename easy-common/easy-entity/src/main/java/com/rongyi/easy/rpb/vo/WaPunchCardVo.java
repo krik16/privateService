@@ -33,9 +33,18 @@ public class WaPunchCardVo implements Serializable{
     //订单描述
     private String body ;
 
+    //附加信息
+    private String attach;
+
     private String notifyUrl;//异步通知地址，刷卡支付非必填
 
     private Integer orderType;//默认开放平台订单类型
+
+    private String mchInfoId;//商户号
+
+    private String storeId;//门店号
+
+    private String posNo;//设备号
 
     public String getWbMerchantId() {
         return wbMerchantId;
@@ -108,6 +117,39 @@ public class WaPunchCardVo implements Serializable{
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
     }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);

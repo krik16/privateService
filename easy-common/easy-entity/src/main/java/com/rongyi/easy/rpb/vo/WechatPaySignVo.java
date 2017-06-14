@@ -10,7 +10,7 @@ import java.io.Serializable;
  * conan
  * 2016/10/11 14:49
  **/
-public class WechatPaySignVo implements Serializable{
+public class WechatPaySignVo extends BaseBizVo implements Serializable{
 
     private static final long serialVersionUID = 2797291649752395523L;
     private String orderNo;//订单号
@@ -19,7 +19,11 @@ public class WechatPaySignVo implements Serializable{
 
     private Integer totalFee; //支付金额，单位分
 
+    private String subject;//订单标题
+
     private String body;//商品描述
+
+    private String attach;//附加信息
 
     private String timeStart;//支付有效时间开始值
 
@@ -32,6 +36,13 @@ public class WechatPaySignVo implements Serializable{
     private String authCode;//用户支付二维码
 
     private Integer orderType;//订单类型
+
+    private String memo ; //备注
+    private String mchInfoId;//商户号
+
+    private String storeId;//门店号
+
+    private String posNo;//设备号
 
 
     public String getPayNo() {
@@ -112,6 +123,54 @@ public class WechatPaySignVo implements Serializable{
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override

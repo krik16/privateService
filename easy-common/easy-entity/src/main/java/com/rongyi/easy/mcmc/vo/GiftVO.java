@@ -279,7 +279,7 @@ public class GiftVO implements Serializable {
         return "GiftVO{" +
                 "id='" + id + '\'' +
                 ", code='" + code + '\'' +
-                ", picList=" + picList +
+          //      ", picList=" + picList +
                 ", name='" + name + '\'' +
                 ", paymentVOs=" + paymentVOs +
                 ", stock=" + stock +

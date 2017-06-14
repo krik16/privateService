@@ -34,9 +34,9 @@ import net.sf.json.JSONObject;
 public class HttpUtil {
 	private static Logger	logger = LoggerFactory.getLogger(HttpUtil.class);
 	public static void main(String[] args) {
-		
+
 	}
-	
+
 	/**
 	 * http://192.168.1.130:8081/market/code/offer.action?key=iamrongyiboy&type=k99&channel=1
 	 * @param s
@@ -48,7 +48,7 @@ public class HttpUtil {
 //		logger.info(">>>"+result);
 		return result;
 	}
-	
+
 	public static String getUrl3(String key, String type, String code) {
 		String url1 = "http://192.168.1.130:8081/market/code/check.action?key="+key+"&type="+type+"&code="+code+"";
 		String result = httpGET(url1);
@@ -56,7 +56,7 @@ public class HttpUtil {
 		return result;
 	}
 
-	
+
 	public static String httpGET(String url) {
 		URL u = null;
 		HttpURLConnection con = null;
@@ -64,7 +64,7 @@ public class HttpUtil {
 		try {
 			u = new URL(url);
 			con = (HttpURLConnection) u.openConnection();
-			con.setRequestMethod("GET"); 
+			con.setRequestMethod("GET");
 			con.setDoOutput(true);
 			con.setDoInput(true);
 			con.setUseCaches(false);
@@ -90,7 +90,7 @@ public class HttpUtil {
 		}
 		return buffer.toString();
 	}
-	
+
 	public static String httpPOST(String url, Map<String, String> params) {
 		URL u = null;
 		HttpURLConnection con = null;
@@ -110,8 +110,8 @@ public class HttpUtil {
 		try {
 			u = new URL(url);
 			con = (HttpURLConnection) u.openConnection();
-			
-			con.setRequestMethod("POST"); 
+
+			con.setRequestMethod("POST");
 			con.setDoOutput(true);
 			con.setDoInput(true);
 			con.setUseCaches(false);
@@ -144,7 +144,7 @@ public class HttpUtil {
 		}
 		return buffer.toString();
 	}
-	
+
 	/**
 	 * post请求，传输json格式的参数
 	 * @param url
@@ -152,75 +152,75 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static String httpPOSTJson(String url, Map<String, String> params) {
-        URL u = null;
-        HttpURLConnection con = null;
-        StringBuffer sb = new StringBuffer();
-        String param = "";
-        if (params != null) {
-            for (Entry<String, String> e : params.entrySet()) {
-                sb.append(e.getValue());
-                sb.append("&");
-            }
-            param = sb.substring(0, sb.length() - 1);
-        }
-        logger.info("send_url:" + url);
-        logger.info("send_data:" + param);
-        try {
-            u = new URL(url);
-            con = (HttpURLConnection) u.openConnection();
-            
-            con.setRequestMethod("POST"); 
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setUseCaches(false);
-            con.setRequestProperty("Content-Type", "application/json");
-            OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
-            osw.write(param);
-            osw.flush();
-            osw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.info("http请求报错哦！");
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
+		URL u = null;
+		HttpURLConnection con = null;
+		StringBuffer sb = new StringBuffer();
+		String param = "";
+		if (params != null) {
+			for (Entry<String, String> e : params.entrySet()) {
+				sb.append(e.getValue());
+				sb.append("&");
+			}
+			param = sb.substring(0, sb.length() - 1);
+		}
+		logger.info("send_url:" + url);
+		logger.info("send_data:" + param);
+		try {
+			u = new URL(url);
+			con = (HttpURLConnection) u.openConnection();
 
-        StringBuffer buffer = new StringBuffer();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-            String temp;
-            while ((temp = br.readLine()) != null) {
-                buffer.append(temp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.info("http请求报错哦！");
-        }
-        return buffer.toString();
-    }
-	
+			con.setRequestMethod("POST");
+			con.setDoOutput(true);
+			con.setDoInput(true);
+			con.setUseCaches(false);
+			con.setRequestProperty("Content-Type", "application/json");
+			OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
+			osw.write(param);
+			osw.flush();
+			osw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+		} finally {
+			if (con != null) {
+				con.disconnect();
+			}
+		}
+
+		StringBuffer buffer = new StringBuffer();
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+			String temp;
+			while ((temp = br.readLine()) != null) {
+				buffer.append(temp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("http请求报错哦！");
+		}
+		return buffer.toString();
+	}
+
 	public static String httpPostWithJSON(String url, JSONObject jsonObject) {
-		 
-        HttpPost httpPost = new HttpPost(url);
-        CloseableHttpClient client = HttpClients.createDefault();
-        String respContent = null;
-        
+
+		HttpPost httpPost = new HttpPost(url);
+		CloseableHttpClient client = HttpClients.createDefault();
+		String respContent = null;
+
 //        json方式
-        StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");//解决中文乱码问题    
-        entity.setContentEncoding("UTF-8");    
-        entity.setContentType("application/json");    
-        httpPost.setEntity(entity);
-        System.out.println();
-        
-        HttpResponse resp;
+		StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");//解决中文乱码问题
+		entity.setContentEncoding("UTF-8");
+		entity.setContentType("application/json");
+		httpPost.setEntity(entity);
+		System.out.println();
+
+		HttpResponse resp;
 		try {
 			resp = client.execute(httpPost);
-			 if(resp.getStatusLine().getStatusCode() == 200) {
-	            HttpEntity he = resp.getEntity();
-	            respContent = EntityUtils.toString(he,"UTF-8");
-	        }
+			if(resp.getStatusLine().getStatusCode() == 200) {
+				HttpEntity he = resp.getEntity();
+				respContent = EntityUtils.toString(he,"UTF-8");
+			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -228,7 +228,7 @@ public class HttpUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return respContent;
-    }
+		return respContent;
+	}
 
 }

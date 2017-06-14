@@ -1059,6 +1059,8 @@ public interface Constants {
     interface SERVICE_TYPE {
         // 店铺
         int SHOPTYPE = 4;
+        // 总部
+        int HEAD_TYPE = 8;
     }
 
     /**

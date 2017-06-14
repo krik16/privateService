@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.bdata.entity.HaiXinShopData;
+import com.rongyi.easy.shop.entity.ShopRelation;
+import com.rongyi.easy.shop.param.HaiXinShopRelationParam;
 import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
 import org.bson.types.ObjectId;
@@ -154,8 +156,23 @@ public interface IShopService {
 
 	public List<String> locationIdsByid(Integer identity,String id);
 
-	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas) throws Exception;
+	public void importHaixinShop(List<HaiXinShopData> haiXinShopDatas, String url) throws Exception;
 
 	ShopEntity getHaiXinShop(String orgCode);
+	
 	List<String> getHaiXinShopCode();
+
+	boolean shopHasBindAccount(String shopMid);
+
+	boolean mallHasBindAccount(String mallMid);
+	
+	public void addShopRelationshipForHaiXin(HaiXinShopRelationParam param);
+
+	String findShopMidByUrl(String url);
+
+	String findUrlByShopMid(String shopMid);
+
+	List<ShopRelation> findAllRelations();
+
+	String getHaiXinShopParentId(String shopMid);
 }

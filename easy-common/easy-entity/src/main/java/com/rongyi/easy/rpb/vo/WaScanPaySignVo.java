@@ -10,7 +10,7 @@ import java.io.Serializable;
  * conan
  * 2017/3/6 14:15
  **/
-public class WaScanPaySignVo implements Serializable{
+public class WaScanPaySignVo extends BaseBizVo implements Serializable{
     private static final long serialVersionUID = -5841080118584970083L;
     //商户号 必传
     private String wbMerchantId;
@@ -35,6 +35,15 @@ public class WaScanPaySignVo implements Serializable{
 
     //订单类型 6:福利订单,7:开放平台
     private Integer orderType;
+
+    private String storeId;//门店号
+
+    private String posNo;//设备号
+
+    //备注
+    private String memo ;
+
+    private String mchInfoId;
 
     public String getWbMerchantId() {
         return wbMerchantId;
@@ -98,6 +107,38 @@ public class WaScanPaySignVo implements Serializable{
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
     }
 
     @Override

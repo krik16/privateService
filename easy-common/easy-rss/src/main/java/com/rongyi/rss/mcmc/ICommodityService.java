@@ -37,6 +37,13 @@ public interface ICommodityService {
 	 */
 	public Long searchCommodityCount(Map<String,Object> paramMap);
 
+	/**
+	 * 导出：商品列表查询
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Commodity> searchCommodityForExport(Map<String,Object> paramMap);
+
 	public boolean updateOrDeleteCommodity(List<String> ids,Integer type,String reason,Integer userId);
 
 	public String insertCommodity(Commodity commodity);
@@ -106,4 +113,6 @@ public interface ICommodityService {
 	public boolean updateCommodityForOperate(CommodityParam commodityParam);
 	
 	public Commodity findByCodeAndShopMid(String code, String shopMid);
+
+	void refreshCommodity(List<String> shopMids);
 }

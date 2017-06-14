@@ -58,6 +58,12 @@ public class AliPunchCardPayVo implements Serializable {
 
     private Integer orderType;//订单类型
 
+    private String mchInfoId;//商户号
+
+    private String posNo;//设备号
+
+    private String attach;//附加信息
+
     public String getAppAuthToken() {
         return appAuthToken;
     }
@@ -160,6 +166,30 @@ public class AliPunchCardPayVo implements Serializable {
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    public String getAttach() {
+        return attach;
+    }
+
+    public void setAttach(String attach) {
+        this.attach = attach;
     }
 
     @Override

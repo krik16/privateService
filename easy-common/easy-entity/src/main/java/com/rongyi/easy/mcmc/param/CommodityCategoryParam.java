@@ -92,12 +92,12 @@ public class CommodityCategoryParam {
 	@Override
 	public String toString() {
 		return "CommodityCategoryParam{" +
-				"categoryParamList=" + categoryParamList +
-				", id='" + id + '\'' +
+				"id='" + id + '\'' +
 				", type=" + type +
-				", popularImg=" + popularImg +
+				", popularImg='" + popularImg + '\'' +
 				", popular=" + popular +
-				", flag="+flag+
+				", categoryParamList=" + categoryParamList +
+				", flag='" + flag + '\'' +
 				'}';
 	}
 }

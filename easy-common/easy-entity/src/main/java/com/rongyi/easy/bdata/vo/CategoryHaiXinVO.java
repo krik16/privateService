@@ -15,6 +15,16 @@ public class CategoryHaiXinVO implements Serializable{
 	private String name;     //名称
 	private String upperCode;//上级编码
 	private Integer level;   //级别
+	private String shopMid;
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+
 	public String getId() {
 		return id;
 	}

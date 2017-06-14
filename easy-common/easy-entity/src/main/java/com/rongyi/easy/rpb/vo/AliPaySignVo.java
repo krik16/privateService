@@ -9,7 +9,7 @@ import java.io.Serializable;
  * conan
  * 2017/2/7 17:08
  **/
-public class AliPaySignVo implements Serializable {
+public class AliPaySignVo extends BaseBizVo implements Serializable {
 
     private static final long serialVersionUID = -825461632805396552L;
     //支付授权码
@@ -48,7 +48,14 @@ public class AliPaySignVo implements Serializable {
     // (推荐使用，相对时间) 支付超时时间，5m 5分钟
     private String timeoutExpress;
 
-    private Integer orderType;//
+    private Integer orderType;//订单类型
+
+    private String posNo;//设备号
+
+    //备注
+    private String  memo ;
+
+    private String mchInfoId;
 
     public String getAppAuthToken() {
         return appAuthToken;
@@ -136,6 +143,30 @@ public class AliPaySignVo implements Serializable {
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
     }
 
     @Override

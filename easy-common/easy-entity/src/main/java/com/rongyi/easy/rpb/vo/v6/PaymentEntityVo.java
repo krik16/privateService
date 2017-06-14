@@ -14,11 +14,51 @@ public class PaymentEntityVo extends PaymentEntity implements Serializable{
 
     private String tradeNo;
 
+    private String mchInfoId;//入驻商户id
+
+    private String storeId;//门店id
+
+    private String posNo;//设备号
+
+    private String memo ;//备注
+
     public String getTradeNo() {
         return tradeNo;
     }
 
     public void setTradeNo(String tradeNo) {
         this.tradeNo = tradeNo;
+    }
+
+    public String getMchInfoId() {
+        return mchInfoId;
+    }
+
+    public void setMchInfoId(String mchInfoId) {
+        this.mchInfoId = mchInfoId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPosNo() {
+        return posNo;
+    }
+
+    public void setPosNo(String posNo) {
+        this.posNo = posNo;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

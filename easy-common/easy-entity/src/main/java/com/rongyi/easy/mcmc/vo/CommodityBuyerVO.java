@@ -1,17 +1,11 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.rongyi.easy.malllife.constants.Constants;
-import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
-import net.sf.json.JSONObject;
 
 import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.roa.vo.GroupMemberVO;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -96,6 +90,72 @@ public class CommodityBuyerVO implements Serializable {
     private Integer templateRelevantGoodsCouponId;  //用作排序
     private List<String> onServiceIds;
     private Boolean isRefund;//是否可退货   true可退 ，false 不可退
+    private String commodityModelNo;
+    private String totalStock;
+
+    private String referencePrice; // 销售价
+    private String subheading;  //副标题
+
+    private String commodityDetails; //商品详情
+
+    private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
+    private long buyerCount;//用户已购买数量   （只有限购商品才有值）
+    private int totalBuycount;//用户购买数量（是虚假数据）
+
+    //超级团参数
+    private int  groupPeopleMax;//最大成团人数，0表示没有最大成团人数
+
+    private Long groupStartAt;// 超级团教育版 团开始时间
+
+    private Long groupEndAt;//超级团教育版 团结束时间
+
+    private int groupNum;//超级团教育版 参团人数
+
+    private String activityRoundId;//超级团教育版团编号，用来参团，如果超级团未开团，则没有团编号
+
+    private int groupStatus; //团状态,0：拼团中，1：成功不可以参团，2：失败，3：未开始,4成功但仍可以参团
+
+    private boolean ifSupportAdjustPrice;//是否支持按成团人数调价，true:支持，false:不支持
+
+    private String activityGroupDesc;//开团说明,
+
+    private int activityCommodityStatus;//活动商品状态2成功，其它失效
+    private String crowdFundingPrice;//众筹价
+
+    private List<String> skus;
+
+    private String serviceDescription;   //售后说明内容
+    private Integer serviceDescriptionId;  //售后说明id
+    private String serviceDescriptionRemark;   //售后说明备注
+    private Long activitySessionStartAt;// 微信秒杀场次开始时间
+    private Long activitySessionEndAt;//微信秒杀场次结束时间
+    
+    private String shopAddress;//商城地址
+    private String shopPhone;//店铺电话
+    
+    public String getReferencePrice() {
+        return referencePrice;
+    }
+
+    public void setReferencePrice(String referencePrice) {
+        this.referencePrice = referencePrice;
+    }
+
+    public String getCommodityModelNo() {
+        return commodityModelNo;
+    }
+
+    public void setCommodityModelNo(String commodityModelNo) {
+        this.commodityModelNo = commodityModelNo;
+    }
+
+    public String getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(String totalStock) {
+        this.totalStock = totalStock;
+    }
 
     public Integer getTemplateRelevantGoodsCouponId() {
         return templateRelevantGoodsCouponId;
@@ -137,39 +197,7 @@ public class CommodityBuyerVO implements Serializable {
 		this.soldOutAt = soldOutAt;
 	}
 
-    private String subheading;  //副标题
-
-    private String commodityDetails; //商品详情
-
-    private boolean ifShowInWechat;//是否在微信端展示，true是，false不是
-    private long buyerCount;//用户已购买数量   （只有限购商品才有值）
-    private int totalBuycount;//用户购买数量（是虚假数据）
-
-    //超级团参数
-    private int  groupPeopleMax;//最大成团人数，0表示没有最大成团人数
-
-    private Long groupStartAt;// 超级团教育版 团开始时间
-
-    private Long groupEndAt;//超级团教育版 团结束时间
-
-    private int groupNum;//超级团教育版 参团人数
-
-    private String activityRoundId;//超级团教育版团编号，用来参团，如果超级团未开团，则没有团编号
-
-    private int groupStatus; //团状态,0：拼团中，1：成功不可以参团，2：失败，3：未开始,4成功但仍可以参团
-
-    private boolean ifSupportAdjustPrice;//是否支持按成团人数调价，true:支持，false:不支持
-
-    private String activityGroupDesc;//开团说明,
-
-    private int activityCommodityStatus;//活动商品状态2成功，其它失效
-    private String crowdFundingPrice;//众筹价
-
-    private List<String> skus;
-
-    private String serviceDescription;   //售后说明内容
-    private Integer serviceDescriptionId;  //售后说明id
-    private String serviceDescriptionRemark;   //售后说明备注
+    
 
     public String getServiceDescriptionRemark() {
         return serviceDescriptionRemark;
@@ -889,6 +917,38 @@ public class CommodityBuyerVO implements Serializable {
 		this.isRefund = isRefund;
 	}
 
+    public Long getActivitySessionStartAt() {
+        return activitySessionStartAt;
+    }
+
+    public void setActivitySessionStartAt(Long activitySessionStartAt) {
+        this.activitySessionStartAt = activitySessionStartAt;
+    }
+
+    public Long getActivitySessionEndAt() {
+        return activitySessionEndAt;
+    }
+
+    public void setActivitySessionEndAt(Long activitySessionEndAt) {
+        this.activitySessionEndAt = activitySessionEndAt;
+    }
+
+    public String getShopAddress() {
+		return shopAddress;
+	}
+
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+
+	public String getShopPhone() {
+		return shopPhone;
+	}
+
+	public void setShopPhone(String shopPhone) {
+		this.shopPhone = shopPhone;
+	}
+
 	public CommodityBuyerVO(Commodity commodity){
         if(commodity.getDiscount()!=null)
             this.discount=commodity.getDiscount();
@@ -910,7 +970,7 @@ public class CommodityBuyerVO implements Serializable {
         }else{
             this.commodityPostage = "0.0";
         }
-        if(commodity.isSpot()){
+        if(commodity.getIsSpot()){
             this.isSpot = 1;//现货
         }else{
             this.isSpot = 0;//非现货
@@ -1023,6 +1083,8 @@ public class CommodityBuyerVO implements Serializable {
         }else{
         	this.isRefund = false;
         }
+
+        this.commodityModelNo = commodity.getCommodityModelNo();
     }
 
     private boolean isShowInWechat() {
@@ -1037,7 +1099,7 @@ public class CommodityBuyerVO implements Serializable {
         return onIds.size() > 0;
     }
     
-    @Override
+	@Override
 	public String toString() {
 		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
 				+ commodityPicList + ", commodityId=" + commodityId
@@ -1088,24 +1150,29 @@ public class CommodityBuyerVO implements Serializable {
 				+ shelvesType + ", categoryNames=" + categoryNames
 				+ ", templateRelevantGoodsCouponId="
 				+ templateRelevantGoodsCouponId + ", onServiceIds="
-				+ onServiceIds + ", isRefund=" + isRefund + ", subheading="
-				+ subheading + ", commodityDetails=" + commodityDetails
-				+ ", ifShowInWechat=" + ifShowInWechat + ", buyerCount="
-				+ buyerCount + ", totalBuycount=" + totalBuycount
-				+ ", groupPeopleMax=" + groupPeopleMax + ", groupStartAt="
-				+ groupStartAt + ", groupEndAt=" + groupEndAt + ", groupNum="
-				+ groupNum + ", activityRoundId=" + activityRoundId
-				+ ", groupStatus=" + groupStatus + ", ifSupportAdjustPrice="
-				+ ifSupportAdjustPrice + ", activityGroupDesc="
-				+ activityGroupDesc + ", activityCommodityStatus="
-				+ activityCommodityStatus + ", crowdFundingPrice="
-				+ crowdFundingPrice + ", skus=" + skus
+				+ onServiceIds + ", isRefund=" + isRefund
+				+ ", commodityModelNo=" + commodityModelNo + ", totalStock="
+				+ totalStock + ", referencePrice=" + referencePrice
+				+ ", subheading=" + subheading + ", commodityDetails="
+				+ commodityDetails + ", ifShowInWechat=" + ifShowInWechat
+				+ ", buyerCount=" + buyerCount + ", totalBuycount="
+				+ totalBuycount + ", groupPeopleMax=" + groupPeopleMax
+				+ ", groupStartAt=" + groupStartAt + ", groupEndAt="
+				+ groupEndAt + ", groupNum=" + groupNum + ", activityRoundId="
+				+ activityRoundId + ", groupStatus=" + groupStatus
+				+ ", ifSupportAdjustPrice=" + ifSupportAdjustPrice
+				+ ", activityGroupDesc=" + activityGroupDesc
+				+ ", activityCommodityStatus=" + activityCommodityStatus
+				+ ", crowdFundingPrice=" + crowdFundingPrice + ", skus=" + skus
 				+ ", serviceDescription=" + serviceDescription
 				+ ", serviceDescriptionId=" + serviceDescriptionId
 				+ ", serviceDescriptionRemark=" + serviceDescriptionRemark
+				+ ", activitySessionStartAt=" + activitySessionStartAt
+				+ ", activitySessionEndAt=" + activitySessionEndAt
+				+ ", shopAddress=" + shopAddress + ", shopPhone=" + shopPhone
 				+ "]";
 	}
-    
+
 	public void setTip() {
         this.setMallTip(StringUtils.isNotBlank(this.getMallName()) ?
                 this.getMallName() : (StringUtils.isNotBlank(this.getShopName()) ? this.getShopName() : null));
@@ -1118,6 +1185,17 @@ public class CommodityBuyerVO implements Serializable {
         Long difference=date1.getTime()-date2.getTime();
         return Math.abs(difference)<24*60*60*1000;//上下架时间相差一天
     }
+    
+    public void warpCommodityBuyerVO(Commodity commodity){
+    	this.commodityId = commodity.getId().toHexString();
+    	this.commodityName = commodity.getName();
+    	this.commodityPicList = commodity.getPicList();
+    	this.commodityOPriceMax = commodity.getoPriceMax();
+    	this.commodityOPriceMin = commodity.getoPriceMin();
+    	this.commodityCPriceMax = commodity.getcPriceMax();
+    	this.commodityCPriceMin = commodity.getcPriceMin();
+    	this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
+    }
 
     public  static  void  main(String args[]){
         Date  a=new Date();
@@ -1128,4 +1206,5 @@ public class CommodityBuyerVO implements Serializable {
         System.out.println(c.getTime() - a.getTime());
 
     }
+
 }

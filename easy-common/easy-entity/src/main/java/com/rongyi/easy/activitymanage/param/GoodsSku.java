@@ -3,8 +3,8 @@ package com.rongyi.easy.activitymanage.param;
 
 import com.google.inject.internal.Lists;
 import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
-import com.rongyi.easy.mcmc.vo.CommoditySpecSimpleVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,25 +29,34 @@ public class GoodsSku implements Serializable {
     private String specId;//规格id
     private List<CommoditySpecColumnVO> specColumns = Lists.newArrayList();
     private Integer remainStock;//商品中剩余库存（非活动）
+    private String columnValues;
+    private String strStock;//库存统计：秒杀中剩余库存/总库存
+
+
+
+
 
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("currentPrice", currentPrice)
-                .append("joinCount", joinCount)
-                .append("sku", sku)
-                .append("spec", spec)
-                .append("allocationCount", allocationCount)
-                .append("specId", specId)
-                .append("activityPrice", activityPrice)
-                .append("activityGoodsId", activityGoodsId)
-                .append("specSimpleVOs", specColumns)
-                .append("remainStock", remainStock)
-                .append("addCount", addCount)
-                .append("stockCount", stockCount)
-                .append("id", id)
-                .toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+
+    public String getStrStock() {
+        return strStock;
+    }
+
+    public void setStrStock(String strStock) {
+        this.strStock = strStock;
+    }
+
+    public String getColumnValues() {
+        return columnValues;
+    }
+
+    public void setColumnValues(String columnValues) {
+        this.columnValues = columnValues;
     }
 
     public Integer getStockCount() {
