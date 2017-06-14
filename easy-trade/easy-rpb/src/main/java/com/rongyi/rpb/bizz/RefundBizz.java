@@ -271,6 +271,13 @@ public class RefundBizz {
         if (oldPaymentEntity == null) {
             throw new TradePayException(ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_PAY_RECORED_NOT_EXIST.getValueStr());
         }
+
+        //查找订单撤销记录
+        PaymentEntity reversePaymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE9, Constants.PAYMENT_STATUS.STAUS2,
+                payType);
+        if (reversePaymentEntity != null) {
+            throw new TradePayException(ConstantEnum.EXCEPTION_REFUND_REVERSE_SUCCESS.getCodeStr(),ConstantEnum.EXCEPTION_REFUND_REVERSE_SUCCESS.getValueStr());
+        }
         return oldPaymentEntity;
     }
 
