@@ -70,7 +70,7 @@ public class WechatConfigure {
     public static String REFUND_QUERY_API = "https://api.mch.weixin.qq.com/pay/refundquery";
 
     //5）撤销API
-    public static String REVERSE_API = "https://api.mch.weixin.qq.com/pay/closeorder";
+    public static String REVERSE_API = "https://api.mch.weixin.qq.com/secapi/pay/reverse";
 
     //6）下载对账单API
     public static String DOWNLOAD_BILL_API = "https://api.mch.weixin.qq.com/pay/downloadbill";
