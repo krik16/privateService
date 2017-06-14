@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * conan
@@ -79,6 +80,7 @@ public class ReverseBizz {
 
         //保存撤销成功记录
         reversePaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        reversePaymentEntity.setFinishTime(new Date());
         saveUnit.updatePaymentEntity(reversePaymentEntity,null,null);
         return resData;
     }
@@ -112,6 +114,7 @@ public class ReverseBizz {
 
         //保存撤销成功记录
         reversePaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        reversePaymentEntity.setFinishTime(new Date());
         saveUnit.updatePaymentEntity(reversePaymentEntity, null,null);
         return resData;
     }
@@ -138,6 +141,7 @@ public class ReverseBizz {
 
         //保存撤销记录
         reversePaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+        reversePaymentEntity.setFinishTime(new Date());
         saveUnit.updatePaymentEntity(reversePaymentEntity, null, null);
     }
 
