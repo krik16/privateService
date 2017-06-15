@@ -366,7 +366,7 @@ public class QueryBizz {
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
         }
         //查询是否有退款或撤销操作
-        queryOrderTradeStatus(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,map);
+        queryOrderTradeStatus(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,map);
         return map;
     }
 
