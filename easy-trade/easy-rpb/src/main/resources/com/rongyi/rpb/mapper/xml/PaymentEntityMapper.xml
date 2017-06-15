@@ -659,6 +659,13 @@
             </foreach>
             )
         </if>
+        <if test="tradeType == 9">
+            and is_refund =1 and  pay_no in
+            <foreach collection="orderNoList" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         order by
         instr(
         #{orderNoList}
