@@ -8,13 +8,12 @@
 
 package com.rongyi.core.common.util;
 
+import org.apache.poi.ss.usermodel.Workbook;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.poi.ss.usermodel.Workbook;
 
 /**	
  * @Author:  柯军
@@ -35,9 +34,27 @@ public class ExcelUtil {
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName); 
         wb.write(response.getOutputStream()); 
         response.getOutputStream().flush(); 
-        response.getOutputStream().close(); 
+        response.getOutputStream().close();
     }
 
+
+    public static void exportSSHExcel(HttpServletResponse response, Workbook wb,
+                                   String fileName) {
+        try{
+            // 如果文件名有中文，必须URL编码
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+            response.reset();
+            // ContentType 可以不设置
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+            response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+            wb.write(response.getOutputStream());
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
     public static void exportSSHFExl(HttpServletResponse response, Workbook wb,
                                      String fileName) throws IOException {
         OutputStream os = null;
