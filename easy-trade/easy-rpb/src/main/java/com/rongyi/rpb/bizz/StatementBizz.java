@@ -48,7 +48,7 @@ public class StatementBizz implements InitializingBean {
 		if(type == Constants.STATEMENT_DOWN_TYPE.NORMAL){
 			fileName= propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-" + DateStr + ".txt";
 		}else {
-			fileName= propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-oneyard" + DateStr + ".txt";
+			fileName= propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-oneyard-" + DateStr + ".txt";
 		}
 		InputStream is = HttpUtil.httpGet(url, WebankConfigure.getInstance());
 		this.writeFile(is, fileName);
