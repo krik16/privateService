@@ -174,4 +174,9 @@ public interface Constants {
 		int no = 0;
 		int yes = 1;
 	}
+
+	interface STATEMENT_DOWN_TYPE{
+		int NORMAL = 1;
+		int YIHUYIMA = 2;
+	}
 }
