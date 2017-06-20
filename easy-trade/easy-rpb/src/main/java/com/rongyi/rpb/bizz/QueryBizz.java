@@ -29,10 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * conan
@@ -105,12 +102,8 @@ public class QueryBizz {
             }
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
         }
-        //显示退款状态
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-        if(refundPayment != null){
-            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
-        }
+        //查询是否有退款或撤销操作
+        queryOrderTradeStatus(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,map);
         return map;
     }
 
@@ -211,12 +204,8 @@ public class QueryBizz {
         if (com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr().equals(map.get("tradeStatus"))) {
             updatePayment(oldPaymentEntity, String.valueOf(map.get("tradeNo")), "", "");
         }
-        //显示退款状态
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-        if(refundPayment != null){
-            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
-        }
+        //查询是否有退款或撤销操作
+        queryOrderTradeStatus(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,map);
         return map;
 
     }
@@ -376,13 +365,8 @@ public class QueryBizz {
             }
             map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WA_PUNCHCARDPAY_SUCCESS.getValueStr());
         }
-        //显示退款状态
-        PaymentEntity refundPayment = paymentService.selectByOrderNumAndTradeType(oldPaymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
-        if(refundPayment != null){
-            map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
-        }
-
+        //查询是否有退款或撤销操作
+        queryOrderTradeStatus(orderNo,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,map);
         return map;
     }
 
@@ -627,4 +611,21 @@ public class QueryBizz {
             saveUnit.updatePaymentEntity(paymentEntity, paymentLogInfo, null);
         }
     }
+
+    private void queryOrderTradeStatus(String orderNum,Integer payChannel,Map<String, Object> map) {
+        List<Integer> tradeTypes = new ArrayList<>();
+        tradeTypes.add(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+        tradeTypes.add(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE9);
+        //显示退款状态
+        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeTypeAndStatus(orderNum, tradeTypes, Constants.PAYMENT_STATUS.STAUS2,
+                payChannel);
+        if (paymentEntity != null) {
+            if (paymentEntity.getTradeType().equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1)) {
+                map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REFUND.getCodeStr());
+            }else if (paymentEntity.getTradeType().equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE9)) {
+                map.put("tradeStatus", com.rongyi.pay.core.constants.ConstantEnum.WW_PUNCHCARDPAY_REVERSE.getCodeStr());
+            }
+        }
+    }
+
 }

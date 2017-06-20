@@ -4,6 +4,7 @@ import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.rpb.bizz.PayNotifyBizz;
 import com.rongyi.rpb.bizz.StatementBizz;
 import com.rongyi.rpb.constants.ConstantEnum;
+import com.rongyi.rpb.constants.Constants;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -106,14 +107,49 @@ public class WebankController {
             final JSONObject data = JSONObject.fromObject(jsonObject.getString("data"));
             this.validStatmentDown(data);
             // 下载对账单，并将对账单发给运营人员
-            statementBizz.synStatementFile(data);
+            statementBizz.synStatementFile(data, Constants.STATEMENT_DOWN_TYPE.NORMAL);
             return ResponseVO.success();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.failure();
         }
     }
-    
+
+    /**
+     * 一户一码对账单下载通知接口
+     * @param request
+     * @return
+     */
+    @RequestMapping("/oneyardStamentDown")
+    @ResponseBody
+    public ResponseVO oneYardStamentDown(HttpServletRequest request) {
+        LOGGER.info("一户一码微众对账单通知下载");
+        try {
+            // 获取请求参数
+            InputStream inStream ;
+            String resultJson ;
+            inStream = request.getInputStream();
+            ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = inStream.read(buffer)) != -1) {
+                outSteam.write(buffer, 0, len);
+            }
+            outSteam.close();
+            inStream.close();
+            resultJson = new String(outSteam.toByteArray(), "utf-8");
+            LOGGER.info("一户一码微众对账单通知下载map:{}", resultJson);
+            JSONObject jsonObject = JSONObject.fromObject(resultJson);
+            final JSONObject data = JSONObject.fromObject(jsonObject.getString("data"));
+            this.validStatmentDown(data);
+            // 下载对账单，并将对账单发给运营人员
+            statementBizz.synStatementFile(data,Constants.STATEMENT_DOWN_TYPE.YIHUYIMA);
+            return ResponseVO.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.failure();
+        }
+    }
     /**
      * @Description 校验微众参数 
      * @param data
@@ -123,16 +159,8 @@ public class WebankController {
         String file_id = data.getString("file_id");
         String token = data.getString("token");
         String workDate = data.getString("work_date");
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        Date yes = calendar.getTime();
-        String yesDate = format.format(yes);
-        LOGGER.info("yesDate={}",yesDate);
         if (StringUtils.isBlank(app_id) || StringUtils.isBlank(file_id)
-              || StringUtils.isBlank(token) || StringUtils.isBlank(workDate)
-                ||!yesDate.equals(workDate)) {
+              || StringUtils.isBlank(token) || StringUtils.isBlank(workDate)) {
           throw new RuntimeException("微众回调接口参数异常, paramMap = " + data.toString());
         }
     }

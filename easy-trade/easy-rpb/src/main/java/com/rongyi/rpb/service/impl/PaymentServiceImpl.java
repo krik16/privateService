@@ -922,4 +922,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		params.put("endAt", paymentOrderDto.getEndAt());
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".findList", params);
 	}
+
+    @Override
+    public PaymentEntity selectByOrderNumAndTradeTypeAndStatus(String orderNum, List<Integer> tradeTypes, Integer status, Integer payChannel) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("orderNum", orderNum);
+        params.put("tradeTypes", tradeTypes);
+        params.put("status", status);
+        params.put("payChannel", payChannel);
+        return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNumAndTradeTypeAndStatus", params);
+    }
 }

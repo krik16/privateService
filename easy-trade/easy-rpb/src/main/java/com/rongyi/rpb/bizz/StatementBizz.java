@@ -4,6 +4,7 @@ import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.easy.rpb.dto.SendDto;
 import com.rongyi.pay.core.webank.config.WebankConfigure;
 import com.rongyi.pay.core.webank.util.HttpUtil;
+import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.util.FTPHelper;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -38,12 +39,17 @@ public class StatementBizz implements InitializingBean {
 	/**
 	 * @Description 接受对账单文件流, 并写入到服务器
 	 */
-	public void writeStatementFile(JSONObject paramMap) throws Exception{
+	public void writeStatementFile(JSONObject paramMap,int type) throws Exception{
 		// 调用微众获取对账单请求
 		String url = MessageFormat.format(propertyConfigurer.getProperty("WEBANK_STATEMENT_URL"),
 				paramMap.get("app_id"), paramMap.get("token"), paramMap.get("file_id"), "1.0.0");
 		String DateStr = DateUtils.formatDate(new Date(), "yyyyMMdd");
-		String fileName = propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-" + DateStr + ".txt";
+		String fileName ="";
+		if(type == Constants.STATEMENT_DOWN_TYPE.NORMAL){
+			fileName= propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-" + DateStr + ".txt";
+		}else {
+			fileName= propertyConfigurer.getProperty("WEBANK_SAVE_PATH") + "webank-oneyard-" + DateStr + ".txt";
+		}
 		InputStream is = HttpUtil.httpGet(url, WebankConfigure.getInstance());
 		this.writeFile(is, fileName);
 		SendDto sendDto = new SendDto();
@@ -113,12 +119,12 @@ public class StatementBizz implements InitializingBean {
 		ftpHelper = new FTPHelper(url, Integer.parseInt(port), username, password, remotePath);
 	}
 
-	public void synStatementFile(final JSONObject data) {
+	public void synStatementFile(final JSONObject data,final int type) {
 		new Thread() {
 			public void run() {
 				boolean flag = true;
 				try {
-					writeStatementFile(data);
+					writeStatementFile(data,type);
 					flag = false;
 					return;
 				} catch (Exception e) {
@@ -127,7 +133,7 @@ public class StatementBizz implements InitializingBean {
 						try {
 							if(flag){
 								Thread.sleep(5000);
-								writeStatementFile(data);
+								writeStatementFile(data,type);
 								flag = false;
 								return;
 							}else return;

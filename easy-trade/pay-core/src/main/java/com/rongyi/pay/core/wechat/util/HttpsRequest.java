@@ -104,7 +104,7 @@ public class HttpsRequest implements IServiceRequest {
         } finally {
             httpPost.abort();
         }
-
+        LOGGER.info("result={}",result);
         return result;
     }
 

@@ -325,4 +325,6 @@ public interface PaymentService {
 	List<PaymentEntityVo> queryListByParam(PaymentOrderParam param);
 
 	Integer queryCountByParam(PaymentOrderParam paymentParam);
+
+	PaymentEntity selectByOrderNumAndTradeTypeAndStatus(String orderNum, List<Integer> tradeTypes, Integer status, Integer payChannel);
 }
