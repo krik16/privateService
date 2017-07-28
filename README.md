@@ -1,0 +1,2 @@
+# privateService
+private service base
