@@ -8,11 +8,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>easy-rpb</module>
-		<module>easy-tms</module>
-		<module>easy-virtual-account</module>
-		<module>easy-anti-cheat</module>
-		<module>easy-settle</module>
-		<module>pay-core</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,54 +46,6 @@
 				<groupId>com.rongyi</groupId>
 				<artifactId>easy-rss</artifactId>
 				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.rongyi</groupId>
-				<artifactId>pay-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<!-- IBM MQ -->
-			<dependency>
-				<groupId>com.ibm</groupId>
-				<artifactId>ibm-mq</artifactId>
-				<version>7.5.0.3</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.ibm</groupId>
-				<artifactId>ibm-mqjms</artifactId>
-				<version>7.5.0.3</version>
-			</dependency>
-			<dependency>
-				<groupId>com.ibm</groupId>
-				<artifactId>ibm-mq-jmqi</artifactId>
-				<version>7.5.0.3</version>
-			</dependency>
-			<dependency>
-				<groupId>com.ibm</groupId>
-				<artifactId>ibm-dhbcore</artifactId>
-				<version>7.5.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.resource</groupId>
-				<artifactId>connector</artifactId>
-				<version>1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.ibm</groupId>
-				<artifactId>ibm-mq-commonservices</artifactId>
-				<version>7.5.0.3</version>
-			</dependency>
-			<dependency>
-				<groupId>com.ibm</groupId>
-				<artifactId>ibm-mq-headers</artifactId>
-				<version>7.5.0.3</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.jms</groupId>
-				<artifactId>jms</artifactId>
-				<version>1.1</version>
 			</dependency>
 
 			<!-- spring start -->
@@ -141,12 +88,6 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-tx</artifactId>
-				<version>${org.springframework.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-jms</artifactId>
 				<version>${org.springframework.version}</version>
 			</dependency>
 
@@ -210,7 +151,7 @@
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis-ehcache</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.1</version>
 			</dependency>
 
 			<dependency>
@@ -234,64 +175,20 @@
 			</dependency>
 			<!-- jstl end -->
 
-			<!-- mysql的数据库驱动�? -->
+			<!-- mysql的数据库驱动 -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>5.1.26</version>
 			</dependency>
-			<!-- oracle jdbc driver start -->
-			<dependency>
-				<groupId>com.oracle</groupId>
-				<artifactId>ojdbc6</artifactId>
-				<version>11.2.0.1.0</version>
-			</dependency>
-			<!-- oracle jdbc driver end -->
-			<!-- rabbitMQ -->
-			<dependency>
-				<groupId>com.rabbitmq</groupId>
-				<artifactId>amqp-client</artifactId>
-				<version>3.4.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.amqp</groupId>
-				<artifactId>spring-rabbit</artifactId>
-				<version>1.4.5.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.amqp</groupId>
-				<artifactId>spring-amqp</artifactId>
-				<version>1.4.5.RELEASE</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.retry</groupId>
-				<artifactId>spring-retry</artifactId>
-				<version>1.1.2.RELEASE</version>
-			</dependency>
-
-			<!-- mongo start -->
-			<dependency>
-				<groupId>org.mongodb</groupId>
-				<artifactId>mongo-java-driver</artifactId>
-				<!-- <version>2.11.4</version> -->
-				<version>3.0.2</version>
-			</dependency>
-			<!-- <dependency> <groupId>org.mongodb.morphia</groupId> <artifactId>morphia</artifactId> 
-				<version>0.104</version> </dependency> -->
-			<dependency>
-				<groupId>org.mongodb.morphia</groupId>
-				<artifactId>morphia</artifactId>
-				<version>0.111</version>
-			</dependency>
-			<!-- mongo end -->
 
 			<dependency>
 				<groupId>org.htmlparser</groupId>
 				<artifactId>htmlparser</artifactId>
 				<version>2.1</version>
 			</dependency>
-			<!-- 日志打印 log4j�? -->
+
+			<!-- 日志打印 log4j -->
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
@@ -414,18 +311,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>net.sf.json-lib</groupId>
-				<artifactId>json-lib</artifactId>
-				<version>2.3</version>
-				<classifier>jdk15</classifier>
-			</dependency>
-
-			<dependency>
-				<groupId>com.rongyi</groupId>
-				<artifactId>pay-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpcore</artifactId>
 				<version>4.4</version>
@@ -435,67 +320,13 @@
 				<artifactId>httpclient</artifactId>
 				<version>4.5.3</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.solr</groupId>
-				<artifactId>solr-core</artifactId>
-				<version>4.1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.solr</groupId>
-				<artifactId>solr-solrj</artifactId>
-				<version>4.1.0</version>
-			</dependency>
-			<!-- 加密 -->
-			<dependency>
-				<groupId>com.blemall</groupId>
-				<artifactId>member-sign</artifactId>
-				<version>1.0.0</version>
-			</dependency>
+
 			<dependency>
 				<groupId>commons-httpclient</groupId>
 				<artifactId>commons-httpclient</artifactId>
 				<version>3.1</version>
 			</dependency>
 
-			<!-- dubbo start -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>dubbo</artifactId>
-				<version>2.5.3</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
-				<groupId>com.github.sgroschupf</groupId>
-				<artifactId>zkclient</artifactId>
-				<version>0.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.zookeeper</groupId>
-				<artifactId>zookeeper</artifactId>
-				<version>3.3.6</version>
-				<exclusions>
-					<exclusion>
-						<groupId>log4j</groupId>
-						<artifactId>log4j</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<!-- dubbo end -->
-
-			<!-- quartz start -->
-			<dependency>
-				<groupId>org.quartz-scheduler</groupId>
-				<artifactId>quartz</artifactId>
-				<version>2.2.1</version>
-			</dependency>
-			<!-- quartz end -->
 
 			<!-- Spring 文件上传的包 -->
 			<dependency>
@@ -509,46 +340,6 @@
 				<artifactId>commons-io</artifactId>
 				<version>2.4</version>
 			</dependency>
-			<!-- 建周短信平台 -->
-			<dependency>
-				<groupId>com.jianzhou</groupId>
-				<artifactId>jzsms</artifactId>
-				<version>1.0.0</version>
-			</dependency>
-			<!-- Redis Start -->
-			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-redis</artifactId>
-				<version>1.0.2.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>redis.clients</groupId>
-				<artifactId>jedis</artifactId>
-				<version>2.1.0</version>
-			</dependency>
-
-			<!-- drools start -->
-			<dependency>
-				<groupId>org.drools</groupId>
-				<artifactId>drools-core</artifactId>
-				<version>${drools.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.drools</groupId>
-				<artifactId>drools-compiler</artifactId>
-				<version>${drools.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.drools</groupId>
-				<artifactId>drools-persistence-jpa</artifactId>
-				<version>${drools.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jbpm</groupId>
-				<artifactId>jbpm-persistence-jpa</artifactId>
-				<version>${drools.version}</version>
-			</dependency>
-			<!-- drools end -->
 
 			<!-- TestNG/Mockito -->
 			<dependency>
@@ -569,17 +360,6 @@
 				<version>1.1.39</version>
 			</dependency>
 
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>druid</artifactId>
-				<version>1.0.14</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.googlecode.log4jdbc</groupId>
-				<artifactId>log4jdbc</artifactId>
-				<version>1.2</version>
-			</dependency>
 			<dependency>
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
@@ -629,7 +409,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 			<id>rongyi-repositories</id>
-			<url>http://192.168.1.101:8081/nexus/content/groups/rongyi-repositories/</url>
+			<url>http://10.66.1.40:8081/nexus/content/groups/rongyi-repositories/</url>
 		</repository>
 	</repositories>
 
@@ -639,7 +419,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 			<id>rongyi-repositories</id>
-			<url>http://192.168.1.101:8081/nexus/content/groups/rongyi-repositories/</url>
+			<url>http://10.66.1.40:8081/nexus/content/groups/rongyi-repositories/</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -647,12 +427,12 @@
 		<repository>
 			<id>rongyi-releases</id>
 			<name>Nexus Release Repository</name>
-			<url>http://192.168.1.101:8081/nexus/content/repositories/rongyi-releases/</url>
+			<url>http://10.66.1.40:8081/nexus/content/repositories/rongyi-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>rongyi-snapshots</id>
 			<name>Nexus Snapshot Repository</name>
-			<url>http://192.168.1.101:8081/nexus/content/repositories/rongyi-snapshots/</url>
+			<url>http://10.66.1.40:8081/nexus/content/repositories/rongyi-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -715,17 +495,6 @@
 					</dependencies>
 				</plugin>
 
-				<!-- tomcat -->
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.0</version>
-					<configuration>
-						<url>http://192.168.1.60:8080/manager/html</url>
-						<server>rao</server>
-						<path>/roa</path>
-					</configuration>
-				</plugin>
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -779,16 +548,6 @@
 					</configuration>
 				</plugin>
 
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>2.5.2</version>
-					<configuration>
-						<findbugsXmlOutput>true</findbugsXmlOutput>
-						<!--<findbugsXmlWithMessages>true</findbugsXmlWithMessages> -->
-						<xmlOutput>true</xmlOutput>
-					</configuration>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>

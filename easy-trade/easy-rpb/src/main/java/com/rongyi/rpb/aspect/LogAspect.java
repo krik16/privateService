@@ -1,22 +1,15 @@
 package com.rongyi.rpb.aspect;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
-@Aspect
+/*@Component
+@Aspect*/
 public class LogAspect {
 
 	private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
-
-	@Pointcut("execution(* com.rongyi.rpb.service.impl.v6.WeBankPayServiceImpl.*(..)) " +
-			"||execution(* com.rongyi.rpb.service.impl.v6.WechatPayServiceImpl.*(..))" +
-			"||execution(* com.rongyi.rpb.service.impl.v6.AliPayServiceImpl.*(..))")
+/*
+	@Pointcut("")
 	public void aspect() {
 
 	}
@@ -30,5 +23,5 @@ public class LogAspect {
 		long end = System.nanoTime();
 		log.info("{}:{}ms", pjp.getTarget().getClass() + "." + pjp.getSignature().getName(), (end - begin) / 1000000);
 		return o;
-	}
+	}*/
 }
